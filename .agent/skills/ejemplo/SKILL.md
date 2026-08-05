@@ -5,7 +5,7 @@ description: Transcribe ejemplos y ejercicios resueltos expuestos en imágenes o
 
 # Skill: Ejemplo (`/ejemplo`)
 
-Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejercicios matemáticos resueltos y transcribirlos en sintaxis Typst utilizando el paquete `@preview/frame-it:1.0.0`.
+Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejercicios matemáticos resueltos y transcribirlos en sintaxis Typst utilizando el paquete `@preview/frame-it:2.0.0`.
 
 ## Documentación y Referencias de `frame-it`
 - **Repositorio oficial de `frame-it`:** https://github.com/marc-thieme/frame-it
@@ -20,7 +20,7 @@ Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejerc
 - El archivo donde se guardan los ejemplos acumulados es [`apuntes-typst/ejemplos.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/ejemplos.typ).
 - Si el archivo no existe, crearlo incorporando las importaciones y la configuración inicial de marcos:
   ```typst
-  #import "@preview/frame-it:1.0.0": *
+  #import "@preview/frame-it:2.0.0": *
   #import "utils.typ": *
 
   #let (ejemplo, solucion) = frames(

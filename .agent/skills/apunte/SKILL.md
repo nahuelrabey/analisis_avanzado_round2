@@ -1,15 +1,15 @@
 ---
 name: apunte
-description: Transcribe apuntes expuestos en imágenes o fotos (teoremas, definiciones, lemas, corolarios, axiomas y ejemplos) al archivo Typst (`apuntes-typst/apuntes.typ`) utilizando la librería `frame-it`. Se activa mediante el comando `/apunte` o cuando el usuario comparte la foto de un concepto matemático para apuntar.
+description: Transcribe apuntes expuestos en imágenes o fotos (teoremas, proposiciones, definiciones, lemas, corolarios, axiomas y ejemplos) al archivo Typst (`apuntes-typst/apuntes.typ`) utilizando la librería `frame-it`. Se activa mediante el comando `/apunte` o cuando el usuario comparte la foto de un concepto matemático para apuntar.
 ---
 
 # Skill: Apunte (`/apunte`)
 
-Esta skill instruye al agente sobre cómo procesar imágenes de contenido matemático (teoremas, definiciones, lemas, corolarios, axiomas, ejemplos) y transcribirlos en sintaxis Typst utilizando el paquete `@preview/frame-it:1.0.0`.
+Esta skill instruye al agente sobre cómo procesar imágenes de contenido matemático (teoremas, proposiciones, definiciones, lemas, corolarios, axiomas, ejemplos) y transcribirlos en sintaxis Typst utilizando el paquete `@preview/frame-it:2.0.0`.
 
 ## Documentación y Referencias de `frame-it`
 - **Repositorio oficial de `frame-it`:** https://github.com/marc-thieme/frame-it
-- `frame-it` provee bloques y marcos preconfigurados o personalizables para diferentes tipos de entornos (teorema, definición, lema, corolario, axioma, ejemplo, demostración/prueba).
+- `frame-it` provee bloques y marcos preconfigurados o personalizables para diferentes tipos de entornos (teorema, proposición, definición, lema, corolario, axioma, ejemplo, demostración/prueba).
 - Al consultar estilos o variantes de marcos, revisar la documentación oficial o consultar la URL mediante `read_url_content`.
 
 ---
@@ -20,12 +20,13 @@ Esta skill instruye al agente sobre cómo procesar imágenes de contenido matem�
 - El archivo donde se guardan los apuntes acumulados es [`apuntes-typst/apuntes.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/apuntes.typ).
 - Si el archivo no existe, crearlo incorporando los imports y entornos iniciales:
   ```typst
-  #import "@preview/frame-it:1.0.0": *
+  #import "@preview/frame-it:2.0.0": *
   #import "utils.typ": *
 
-  #let (definicion, teorema, lema, corolario, ejemplo, axioma, demostracion) = frames(
+  #let (definicion, teorema, proposicion, lema, corolario, ejemplo, axioma, demostracion) = frames(
     definicion: ("Definición", blue),
     teorema: ("Teorema", purple),
+    proposicion: ("Proposición", rgb("#8b5cf6")),
     lema: ("Lema", teal),
     corolario: ("Corolario", orange),
     ejemplo: ("Ejemplo", green),
@@ -40,6 +41,7 @@ Esta skill instruye al agente sobre cómo procesar imágenes de contenido matem�
 - Inspeccionar la foto o imagen provista por el usuario.
 - Clasificar el tipo de concepto:
   - **Teorema** (`#teorema[...]`)
+  - **Proposición** (`#proposicion[...]`)
   - **Definición** (`#definicion[...]`)
   - **Lema** (`#lema[...]`)
   - **Corolario** (`#corolario[...]`)
@@ -55,7 +57,7 @@ Esta skill instruye al agente sobre cómo procesar imágenes de contenido matem�
   - Transcribir únicamente el concepto expuesto en la imagen y esperar a que el usuario agregue más detalles si lo desea.
 
 ### 4. Estructura y Formateo Typst con `frame-it`
-- Encapsular cada concepto en su marco adecuado de `frame-it` (`definicion`, `teorema`, `lema`, `corolario`, `axioma`, `ejemplo`).
+- Encapsular cada concepto en su marco adecuado de `frame-it` (`definicion`, `teorema`, `proposicion`, `lema`, `corolario`, `axioma`, `ejemplo`).
 - Asegurar que la notación matemática, símbolos, subíndices, integrales, límites y funciones estén correctamente adaptados a la sintaxis nativa de Typst (`$ ... $`).
 
 ### 5. Actualización del Archivo
