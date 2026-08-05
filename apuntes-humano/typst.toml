@@ -1,0 +1,4 @@
+[package]
+name = "apuntes-humano"
+version = "0.1.0"
+entrypoint = "clases/apuntes_1.typ"
