@@ -1,14 +1,14 @@
 ## Recursos para la materia
+- [Notas de la materia](https://drive.google.com/file/d/1PKorPfFJlqERXqSZzE1O9uixfBP8hKMN/view?usp=drive_link)
+- [Apuntes de Nico](https://github.com/Nikomaes/An-lisis-Avanzado)
 
 ## Plan de Trabajo para Estudiar Análisis avanzado.
 
 ### Fase 1 Recavar Información
 Ordenadas de mayor importancia a menor importancia. No debo caer en "obsesionarme" con libros que la cátedra no usa, y que generan más "ruido" que aportes. Me voy a enfocar en el contenido escrito por los docentes, y en la medida que no entienda consultar la bibliografía recomendada.
 
-1. Pasar en limpio los apuntes de las clases grabadas en pandemia.
-2. Pasar en limpio las notas de los docentes.
-3. Pasar en limpio las guías resueltas por compañeros.
-4. Apuntes de libros
+1. Leer las notas de la materia
+2. Pasar en limpio ejercicios vistos en clases - Apuntes de Nico y clases viejas
 
 Resolución de conflictos entre dos guías resueltas con diferentes métodos: 
 1. Consultar un matemático amigo

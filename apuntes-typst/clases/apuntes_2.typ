@@ -1,4 +1,4 @@
-#import "../utils.typ": recta
+#import "../utils.typ": recta, sublema
 
 = Sucesiones y cardinales
 
@@ -72,11 +72,13 @@ $
 abs(a_(n_k) - L) >= epsilon
 $
 
-[_Dem_: Si $(a_n)_n$ no converge a $L$, entonces existe $epsilon > 0$ tal que para todo $n in NN$ existe $n_0 >= n$ tal que $abs(a_(n_0) - L) >= epsilon$.
-- Si $n = 1$, existe $n_1 >= 1$ tal que $abs(a_(n_1) - L) >= epsilon$.
-- Si $n = n_1 + 1$, existe $n_2 >= n_1 + 1$ tal que $abs(a_(n_2) - L) >= epsilon$.
-- Recursivamente, habiendo elegido $n_1 < n_2 < ... < n_k$ tales que $abs(a_(n_k) - L) >= epsilon$, poniendo $n = n_k + 1$, vemos que existe $n_(k+1) > n_k + 1$ tal que $abs(a_(n_(k+1)) - L) >= epsilon$. \
-Por construcción, $(a_(n_k))_k$ cumple lo pedido.]
+#sublema(titulo: "Lema auxiliar: Construcción de la subsucesión mala")[
+  Si $(a_n)_n$ no converge a $L$, entonces existe $epsilon > 0$ tal que para todo $n in NN$ existe $n_0 >= n$ tal que $abs(a_(n_0) - L) >= epsilon$.
+  - Si $n = 1$, existe $n_1 >= 1$ tal que $abs(a_(n_1) - L) >= epsilon$.
+  - Si $n = n_1 + 1$, existe $n_2 >= n_1 + 1$ tal que $abs(a_(n_2) - L) >= epsilon$.
+  - Recursivamente, habiendo elegido $n_1 < n_2 < ... < n_k$ tales que $abs(a_(n_k) - L) >= epsilon$, poniendo $n = n_k + 1$, vemos que existe $n_(k+1) > n_k + 1$ tal que $abs(a_(n_(k+1)) - L) >= epsilon$. \
+  Por construcción, $(a_(n_k))_k$ cumple lo pedido.
+]
 
 Como $NN = {3k : k in NN} union.sq {3k+1 : k in NN_0} union.sq {3k+2 : k in NN_0}$, en alguno de los tres conjuntos hay infinitos $n_k$'s. Por lo tanto existe una subsucesión $(a_(n_(k_j)))_j$ tal que $n_(k_j) in {3k + a : k in NN}$ para algún $a in {0, 1, 2}$. Pero entonces $a_(n_(k_j)) -> L$. \
 Por lo tanto, existe $j_0 in NN$ tal que para todo $j > j_0$,

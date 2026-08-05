@@ -16,3 +16,18 @@
     content((x, 0.5 * dir), lbl)
   }
 })
+
+/// Caja destacada para lemas auxiliares o justificaciones técnicas intermedias.
+/// Uso: #sublema(titulo: "Lema auxiliar")[Texto...]
+#let sublema(titulo: "Detalle técnico", cuerpo) = block(
+  fill: rgb("#f8fafc"),
+  stroke: (left: 3.5pt + rgb("#475569")),
+  inset: (x: 12pt, y: 10pt),
+  radius: (right: 4pt),
+  width: 100%,
+)[
+  #text(weight: "bold", fill: rgb("#334155"))[#titulo] \
+  #v(2pt)
+  #cuerpo
+]
+
