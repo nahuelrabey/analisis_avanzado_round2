@@ -2,9 +2,20 @@
 #import "utils.typ": *
 
 #let (desafio, solucion) = frames(
-  desafio: ("Desafío", orange),
-  solucion: ("Solución", gray),
+  desafio: ("Desafío", rgb("#d97706")),
+  solucion: ("Solución", rgb("#475569")),
 )
+
+#show figure.where(kind: "frame"): set figure(numbering: none)
+
+#show grid.cell: it => {
+  if it.fill != none {
+    set text(fill: white, weight: "bold")
+    it
+  } else {
+    it
+  }
+}
 
 #show: frame-style(styles.boxy)
 

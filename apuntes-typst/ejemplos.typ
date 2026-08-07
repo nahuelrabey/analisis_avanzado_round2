@@ -2,9 +2,20 @@
 #import "utils.typ": *
 
 #let (ejemplo, solucion) = frames(
-  ejemplo: ("Ejemplo", green),
-  solucion: ("Solución", gray),
+  ejemplo: ("Ejemplo", rgb("#059669")),
+  solucion: ("Solución", rgb("#475569")),
 )
+
+#show figure.where(kind: "frame"): set figure(numbering: none)
+
+#show grid.cell: it => {
+  if it.fill != none {
+    set text(fill: white, weight: "bold")
+    it
+  } else {
+    it
+  }
+}
 
 #show: frame-style(styles.boxy)
 

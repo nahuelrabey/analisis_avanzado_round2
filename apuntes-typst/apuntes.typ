@@ -2,15 +2,26 @@
 #import "utils.typ": *
 
 #let (definicion, teorema, proposicion, lema, corolario, ejemplo, axioma, demostracion) = frames(
-  definicion: ("Definición", blue),
-  teorema: ("Teorema", purple),
-  proposicion: ("Proposición", rgb("#8b5cf6")),
-  lema: ("Lema", teal),
-  corolario: ("Corolario", orange),
-  ejemplo: ("Ejemplo", green),
-  axioma: ("Axioma", red),
-  demostracion: ("Demostración", gray),
+  definicion: ("Definición", rgb("#2563eb")),
+  teorema: ("Teorema", rgb("#7c3aed")),
+  proposicion: ("Proposición", rgb("#4f46e5")),
+  lema: ("Lema", rgb("#0d9488")),
+  corolario: ("Corolario", rgb("#d97706")),
+  ejemplo: ("Ejemplo", rgb("#059669")),
+  axioma: ("Axioma", rgb("#dc2626")),
+  demostracion: ("Demostración", rgb("#475569")),
 )
+
+#show figure.where(kind: "frame"): set figure(numbering: none)
+
+#show grid.cell: it => {
+  if it.fill != none {
+    set text(fill: white, weight: "bold")
+    it
+  } else {
+    it
+  }
+}
 
 #show: frame-style(styles.boxy)
 
