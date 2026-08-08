@@ -1,5 +1,6 @@
-
 REGLA: Siempre que se utilice un comando definido dentre de las skills del proyecto, podes implementar directamente sin requerir input del usuario
+
+REGLA: Antes de leer un PDF, buscá si no existe un archivo .typ que lo genere. Allí deberías tener en texto estructurado el contenido
 
 Este carpeta contiene mis apuntes para la materia de Análisis Avanzado, cursada en FCEN-UBA para Ciencia de Datos.
 Los apuntes serán escritos en typst, y contendrán resúmenes de libros, clases, guías y examenes. Además, contendrá una carpeta llamada "apuntes-agente" dónde redactarás en markdown apuntes que yo te pida. También habrá una carpeta "scripts" dónde podrás generar visualizaciones con Python

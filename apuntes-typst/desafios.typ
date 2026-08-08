@@ -87,5 +87,36 @@
   Mostrar que si una sucesión $(a_n)_(n in NN)$ diverge a $plus.minus oo$ entonces la sucesión $(|a_n|)_(n in NN)$ diverge a $+oo$. Notar que no vale la vuelta.
 ]
 
+#desafio[Desafío 5.3][
+  Sean $x < y + epsilon$ para todo $epsilon > 0$, deducir que $x <= y$ y que si $|x - y| < epsilon$ para todo $epsilon > 0$ entonces $x = y$.
+]
+#solucion[
+  *Demostración:*
+
+  - *Parte 1 ($x <= y$):* Supongamos que $x > y$, de modo que $x - y > 0$. Sea $delta = x - y$, entonces tomando $delta / 2$ tenemos que $x > y + delta / 2$ pues:
+    $ x - y = delta > delta / 2 $
+    de modo que existe un $epsilon = delta / 2$ tal que $x lt.eq.not y + epsilon$, esto es el contrarrecíproco que se quería probar.
+
+  - *Parte 2 ($|x - y| < epsilon => x = y$):* Sabiendo que si $x < y + epsilon$ es para todo $epsilon$ entonces $x <= y$, veamos que si $|x - y| < epsilon$ para todo $epsilon$ entonces son iguales.
+
+    Supongamos que $x != y$. De modo que $x < y$ o $y < x$. Supongamos sin pérdida de generalidad que es $x < y$. Entonces, $y - x > 0$, sea $delta = y - x$ entonces tomando $delta / 2$ tenemos que:
+    $ |x - y| = y - x > delta / 2 > 0 $
+
+    Por absurdo, supongo que $x < y + epsilon$ para todo $epsilon$ y que $|x - y| < epsilon$ pero que $x != y$. Como por la primera parte $x < y + epsilon => x <= y$ y $x != y$ entonces $x < y$. Tomando $delta = y - x = |x - y|$ tenemos que $y - x = |x - y| > delta / 2$ absurdo, pues supusimos que $|x - y| < epsilon$ para todo $epsilon > 0$.
+]
+
+#desafio[Desafío 5.4][
+  #set enum(numbering: "1.")
+  + Sean $x, y in RR$, si $y - x > 1$, probar que existe un entero entre $x, y$.
+  + Si ahora $x < y$, probar que existe un racional entre $x, y$.
+  + Si ahora $x, y$ son racionales y $x < y$, probar que existe un irracional entre ellos.
+  + Si $x, y$ son reales, probar que existe un irracional entre ellos.
+
+  #v(4pt)
+  - _*Estrategia (para el punto 3):* El truco es usar que un intervalo es convexo. La idea es: si tomo $x, y$ racionales en un intervalo, la línea que los une es $sigma(t) = (1 - t)x + t y = x + t(y - x)$. Aprovechando que $x, y$ son racionales, eligiendo un $t$ irracional (por ejemplo $pi/4$ o el que más te guste), se tiene que $x + t(y - x)$ es irracional._
+  - _*Estrategia (para el punto 4):* Usar el punto 2 para encontrar números racionales entre los reales $x < y$, y luego aplicar el resultado del punto 3 a esos racionales para hallar el irracional buscado._
+]
+
+
 
 
