@@ -69,3 +69,23 @@
 #desafio[Supremo de $A = {r in QQ : r^2 < 2}$ en $RR$][
   Sea $A = {r in QQ : r^2 < 2}$. Probar que el supremo (en $RR$) de este conjunto es $s = sqrt(2)$.
 ]
+
+
+#desafio[Equivalencia del Axioma de Completitud (Deducción desde el Teorema 2)][
+  Suponiendo como cierto el Teorema 2 (todo conjunto $A subset.eq RR$ no vacío y acotado inferiormente tiene ínfimo en $RR$), deducir el Axioma de Completitud (todo conjunto acotado superiormente y no vacío de $RR$ tiene supremo en $RR$).
+]
+
+#desafio[Ejercicio 2 (Ínfimo del conjunto de cotas superiores)][
+  Sea $A subset.eq RR$ no vacío y acotado superiormente. Sea $C = {"cotas superiores de " A}$. Probar que:
+
+  #set enum(numbering: "1.")
+  + $C != nothing$ y acotado inferiormente.
+  + $op("ínf")(C) = op("sup")(A)$.
+]
+
+#desafio[Ejercicio 3 (Divergencia del valor absoluto)][
+  Mostrar que si una sucesión $(a_n)_(n in NN)$ diverge a $plus.minus oo$ entonces la sucesión $(|a_n|)_(n in NN)$ diverge a $+oo$. Notar que no vale la vuelta.
+]
+
+
+

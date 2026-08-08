@@ -18,15 +18,27 @@ Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejerc
 
 ### 1. Preparación del Archivo Destino
 - El archivo donde se guardan los ejemplos acumulados es [`apuntes-typst/ejemplos.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/ejemplos.typ).
-- Si el archivo no existe, crearlo incorporando las importaciones y la configuración inicial de marcos:
+- Si el archivo no existe, crearlo incorporando las importaciones y la configuración inicial de marcos independientes:
   ```typst
   #import "@preview/frame-it:2.0.0": *
   #import "utils.typ": *
 
-  #let (ejemplo, solucion) = frames(
-    ejemplo: ("Ejemplo", green),
-    solucion: ("Solución", gray),
+  #let (ejemplo, estrategia, resolucion) = frames(
+    ejemplo: ("Ejemplo", rgb("#059669")),
+    estrategia: ("Estrategia", rgb("#d97706")),
+    resolucion: ("Resolución", rgb("#475569")),
   )
+
+  #show figure.where(kind: "frame"): set figure(numbering: none)
+
+  #show grid.cell: it => {
+    if it.fill != none {
+      set text(fill: white, weight: "bold")
+      it
+    } else {
+      it
+    }
+  }
 
   #show: frame-style(styles.boxy)
 
@@ -35,18 +47,28 @@ Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejerc
 
 ### 2. Procesamiento de la Imagen
 - Inspeccionar la foto o imagen provista por el usuario.
-- Identificar el título/nombre del ejemplo, conjunto o función analizada, hipótesis y notación matemática.
+- Separar claramente el contenido en 3 componentes independientes al mismo nivel (sin marcos anidados):
+  1. **`#ejemplo[Título][...]`**: (Obligatorio) Enunciado o planteo del problema.
+  2. **`#estrategia[...]`**: (Opcional) Intuiciones, resúmenes de enfoque o notas orientativas.
+  3. **`#resolucion[...]`**: (Opcional) Desarrollo, demostración o resolución paso a paso.
 
 ### 3. Manejo Riguroso de Resoluciones y Explicaciones
 - **Si la imagen INCLUYE resolución o desarrollo:**
-  - Transcribirla fielmente dentro del cuerpo del ejemplo o usando la estructura de lista/marco correspondiente.
+  - Transcribirla fielmente dentro del bloque `#resolucion[...]`.
 - **Si la imagen NO INCLUYE resolución:**
   - **REGLA ESTRICTA:** **NO INVENTAR NI GENERAR DEMOSTRACIONES O RESOLUCIONES COMPLEMENTARIAS**.
-  - Transcribir únicamente el enunciado del ejemplo expuesto en la imagen.
+  - Omitir el bloque `#resolucion[...]` y transcribir únicamente el enunciado en `#ejemplo[...]` (y `#estrategia[...]` si se incluyó alguna pista).
 
 ### 4. Estructura y Formateo Typst con `frame-it`
-- Encapsular cada ejemplo en `#ejemplo[Título/Nombre][#ejemplo-body]`.
+- Escribir las cajas consecutivamente (como bloques hermanos):
+  ```typst
+  #ejemplo[Título][Enunciado...]
+
+  #estrategia[Notas de enfoque...] // Opcional
+
+  #resolucion[Demostración...]     // Opcional
+  ```
 - Asegurar que la notación matemática, símbolos, subíndices, integrales, límites y funciones estén correctamente adaptados a la sintaxis nativa de Typst (`$ ... $`).
 
 ### 5. Actualización del Archivo
-- Añadir el nuevo ejemplo al final de [`apuntes-typst/ejemplos.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/ejemplos.typ), preservando todo el contenido existente.
+- Añadir los nuevos bloques al final de [`apuntes-typst/ejemplos.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/ejemplos.typ), preservando todo el contenido existente.
