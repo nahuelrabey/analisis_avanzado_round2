@@ -117,6 +117,77 @@
   - _*Estrategia (para el punto 4):* Usar el punto 2 para encontrar números racionales entre los reales $x < y$, y luego aplicar el resultado del punto 3 a esos racionales para hallar el irracional buscado._
 ]
 
+#desafio[Existencia de un número natural intermedio][
+  Sean $n, m in NN$ dos números naturales tales que $n > m$ y su distancia es estrictamente mayor a uno ($n - m > 1$).
 
+  Demostrar que existe un número natural $t in NN$ comprendido estrictamente entre ambos, es decir:
+  $ m < t < n $
+]
+#solucion[
+  Demostración por absurdo.
 
+  Nuestra hipótesis es que $n>m$ y $n-m>1$. Supongamos que $exists.not t in NN : m < t < n$. Por lo tanto $m<n$, y cómo no hay ningún número entre ellos, debe ocurrir que $n$ es el siguiente de $m$, por lo tanto $n = m+1$. Entonces $n-m = m+1-m =1$ ¡Absurdo! Pues nuestra hipótesis pedía que $n-m>1$. Por lo tanto, debe existir $t in NN$ tal que $m < t < n$
+]
+
+#desafio[Ejemplo 3.1.7][
+  La sucesión $(a_n) = (0, 2, 0, 2, ..., 0, 2, ...)$ no converge al número $0$.
+]
+#solucion[
+  *Demostración por absurdo:*
+
+  Supongamos por el absurdo que $(a_n)$ converge a $0$, es decir, $\lim_(n -> oo) a_n = 0$.
+
+  Por definición de límite, para todo $epsilon > 0$, existe un $n_0 in NN$ tal que para todo $n >= n_0$ se cumple:
+  $ |a_n - 0| = |a_n| < epsilon $
+
+  Como la afirmación debe cumplirse para todo $epsilon > 0$, elegimos en particular $epsilon = 1 > 0$.
+
+  Por lo tanto, debe existir algún $n_0 in NN$ tal que para todo $n >= n_0$ se satisface $|a_n| < 1$.
+
+  Sin embargo, para cualquier $n_0 in NN$, siempre existe un índice par $n >= n_0$ (por ejemplo, $n = 2 n_0$). Para todo elemento par de esta sucesión, se cumple $a_n = 2$.
+
+  Sustituyendo en la desigualdad del límite obtenemos:
+  $ |a_n| = |2| = 2 < 1 $
+
+  ¡Absurdo! (pues $2 < 1$ es falso).
+
+  Por lo tanto, la suposición inicial es falsa y concluimos que la sucesión $(a_n)$ *no converge al número 0*.
+]
+
+#desafio[Ejercicio 4 (Álgebra de límites en el infinito)][
+  Considerando las propiedades del Álgebra de límites para sucesiones reales $a_n -> a$ y $b_n -> b$:
+
+  #set enum(numbering: "a)")
+  + $lim_(n -> oo) (c · a_n) = c · a$ para todo $c in RR$.
+  + $lim_(n -> oo) (a_n + b_n) = a + b$.
+  + $lim_(n -> oo) (a_n b_n) = a b$.
+  + Si $b != 0$, entonces $lim_(n -> oo) (a_n / b_n) = a / b$.
+  + Si $a_n <= b_n$ para todo $n >= n_0$ entonces $a <= b$.
+
+  Determinar cuáles de las anteriores propiedades siguen valiendo si tomamos $a = plus.minus oo$ y $b in RR$, o si $a = -oo$ y $b = +oo$.
+]
+
+#desafio[Ejercicio 5 (No acotación vs. Divergencia a infinito)][
+  Decidir si es verdadera o falsa la siguiente afirmación:
+
+  Si $(a_n)_(n in NN)$ no está acotada entonces $(a_n)_(n in NN)$ diverge a $plus.minus oo$.
+]
+
+#desafio[Ejercicio 6 - Ítem b (Conservación de signo para límites negativos)][
+  Sea $(a_n)_(n in NN)$ una sucesión de números reales tal que $a_n -> a$.
+
+  Supongamos que $a < 0$. Probar que existe un $n_0 in NN$ tal que $a_n <= a/2$ para todo $n >= n_0$.
+]
+
+#desafio[Álgebra de Límites - Ítem b (Límite de la suma de sucesiones)][
+  Sean $(a_n)_(n in NN)$ y $(b_n)_(n in NN)$ dos sucesiones reales tales que $lim_(n -> oo) a_n = a$ y $lim_(n -> oo) b_n = b$, con $a, b in RR$.
+
+  Probar que $lim_(n -> oo) (a_n + b_n) = a + b$.
+]
+
+#desafio[Álgebra de Límites - Ítem e (Preservación del orden al límite)][
+  Sean $(a_n)_(n in NN)$ y $(b_n)_(n in NN)$ dos sucesiones reales tales que $lim_(n -> oo) a_n = a$ y $lim_(n -> oo) b_n = b$, con $a, b in RR$.
+
+  Si $a_n <= b_n$ para todo $n >= n_0$, probar que $a <= b$.
+]
 
