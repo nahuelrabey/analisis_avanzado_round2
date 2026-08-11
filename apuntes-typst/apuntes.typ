@@ -188,17 +188,18 @@
 #demostracion[
   Vamos a probar la doble implicación.
 
-  - *($=>$)* Supongamos que $s = op("sup")(A)$. Entonces $s$ es una cota superior de $A$ por definición de supremo. Veamos que cumple la condición b) de la Proposición: sea $epsilon > 0$. Queremos probar que existe $a_epsilon in A$ tal que $s - epsilon < a_epsilon$.
+  - *($=>$)* _(La estrategia sale por contradicción: ¿qué pasa si no existe $a_epsilon$?)_
 
-    _(La estrategia sale por contradicción: ¿qué pasa si no existe $a_epsilon$?)_
+    Supongamos que $s = op("sup")(A)$. Entonces $s$ es una cota superior de $A$ por definición de supremo. Veamos que cumple la condición b) de la Proposición: sea $epsilon > 0$. Queremos probar que existe $a_epsilon in A$ tal que $s - epsilon < a_epsilon$.
 
     Si no existe tal elemento, se debe cumplir que
     $ a <= s - epsilon "para todo elemento" a in A => s - epsilon "es cota superior de" A. $
     Pero $s - epsilon$ sería entonces una cota superior de $A$ más chica que $s$ que es el supremo de $A$. Esto es un absurdo.
 
-  - *(<=)* Supongamos ahora que $s$ es un elemento de $RR$ que cumple las dos condiciones de la Proposición y veamos que $s$ debe ser el supremo de $A$. Es decir, veamos que $s$ cumple la Definición 2. Sabemos que $s$ es cota superior, veamos que es la menor de las cotas superiores. Sea $t < s$. Entonces $s - t = epsilon > 0$.
+  - *($arrow.l.double$)* _(La estrategia es que podemos construir $t < s$ para cualquier $epsilon > 0$, y como existe $a_epsilon in A$, podemos ver que $t < a_epsilon$ siempre, por lo que $t$ no puede ser cota superior.)_
 
-    _(La estrategia es que podemos construir $t < s$ para cualquier $epsilon > 0$, y como existe $a_epsilon in A$, podemos ver que $t < a_epsilon$ siempre, por lo que $t$ no puede ser cota superior.)_
+    Supongamos ahora que $s$ es un elemento de $RR$ que cumple las dos condiciones de la Proposición y veamos que $s$ debe ser el supremo de $A$. Es decir, veamos que $s$ cumple la Definición 2. Sabemos que $s$ es cota superior, veamos que es la menor de las cotas superiores. Sea $t < s$. Entonces $s - t = epsilon > 0$.
+
 
     Por b), sabemos que debe existir $a_epsilon in A$ tal que $s - epsilon < a_epsilon$. Reemplazando,
     $ s - epsilon = s - (s - t) = t < a_epsilon. $

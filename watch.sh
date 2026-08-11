@@ -1,25 +1,30 @@
 #!/usr/bin/env bash
 
-# Script para monitorear y compilar automáticamente los tres documentos Typst:
-# - apuntes-typst/apuntes.typ -> apuntes-typst/apuntes.pdf
-# - apuntes-typst/ejemplos.typ -> apuntes-typst/ejemplos.pdf
-# - apuntes-typst/desafios.typ -> apuntes-typst/desafios.pdf
+# Script para monitorear y compilar automáticamente todos los documentos Typst en apuntes-typst/
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_DIR="$DIR/apuntes-typst"
+OUT_DIR="$DIR/pdf"
+
+mkdir -p "$OUT_DIR"
 
 echo "====================================================="
 echo " Observando y compilando documentos Typst en vivo..."
-echo " - $TARGET_DIR/apuntes.typ"
-echo " - $TARGET_DIR/ejemplos.typ"
-echo " - $TARGET_DIR/desafios.typ"
-echo " Presiona Ctrl+C para detener."
 echo "====================================================="
 
 trap 'kill $(jobs -p) 2>/dev/null' EXIT INT TERM
 
-typst watch "$TARGET_DIR/apuntes.typ" "$TARGET_DIR/apuntes.pdf" &
-typst watch "$TARGET_DIR/ejemplos.typ" "$TARGET_DIR/ejemplos.pdf" &
-typst watch "$TARGET_DIR/desafios.typ" "$TARGET_DIR/desafios.pdf" &
+# Buscar todos los archivos .typ en apuntes-typst/ excluyendo utilidades (utils.typ)
+find "$TARGET_DIR" -type f -name "*.typ" ! -name "utils.typ" | sort | while read -r file; do
+    rel_path="${file#$TARGET_DIR/}"
+    pdf_out="$OUT_DIR/${rel_path%.typ}.pdf"
+    mkdir -p "$(dirname "$pdf_out")"
+    echo " - $rel_path -> pdf/${rel_path%.typ}.pdf"
+    typst watch --root "$TARGET_DIR" "$file" "$pdf_out" &
+done
+
+echo "====================================================="
+echo " Presiona Ctrl+C para detener."
+echo "====================================================="
 
 wait

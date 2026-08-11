@@ -1,4 +1,5 @@
 #import "../utils.typ": *
+#show: frame-style(styles.boxy)
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
@@ -78,3 +79,82 @@
   #set enum(numbering: "(a)")
   + Si $(x_(2k))_(k in NN)$ y $(x_(2k-1))_(k in NN)$ son convergentes, y sus límites coinciden, entonces $(x_n)_(n in NN)$ es convergente.
   + Si $(x_(2k))_(k in NN)$, $(x_(2k-1))_(k in NN)$ y $(x_(3k))_(k in NN)$ son convergentes, entonces $(x_n)_(n in NN)$ es convergente.
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 1][
+  Pruebe que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deduzca que si $|x - y| < epsilon$ para todo $epsilon > 0$, entonces $x = y$.
+]
+
+#solucion[Propuesta 1][
+  Demostración por contrarrecíproco. Si $forall epsilon > 0 : x < y + epsilon => x <= y$, debe ser verdadero también que $x > y => exists epsilon > 0 : x >= y + epsilon$.
+
+  Notemos que si $x > y$, entonces $x - y > 0$. Podemos llamar $delta = x - y$. En particular, $x >= y + delta$. Por lo tanto, hemos encontrado $epsilon = delta$ que cumple $x >= y + epsilon$. Habiendo demostrado que el contrarrecíproco vale, el recíproco también debe valer.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 2 (a)][
+  Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$.
+]
+
+#solucion[Propuesta 1][
+  Por el Principio de Arquímedes sabemos que $exists n in ZZ : x < n <= x + 1$. Además, $y - x > 1 => y > x + 1$. Juntando ambas desigualdades tenemos que:
+  $ x < n <= x + 1 < y $
+  Encontramos un entero entre $x$ e $y$, tal como queríamos ver.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 2 (b)][
+  Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un racional entre $x$ e $y$.
+]
+
+#solucion[Propuesta 1][
+  Como $x < y$, sabemos que $y - x > 0$. Por el Principio de Arquímedes $exists n in NN : y - x > 1/n => y n - x n > 1$. Por el punto anterior (2a), $exists m in ZZ : x n < m < y n => x < m/n < y$. Hemos encontrado un racional entre dos números reales.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 2 (c)][
+  Sean $x, y in QQ$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
+]
+
+#solucion[Propuesta 1][
+  Como $x < y => y - x > 0$. Por el Principio de Arquímedes $exists n in NN : y - x > 1/n => y n - x n > 1$. Como $sqrt(2) > 1$, tenemos $sqrt(2) n y - sqrt(2) n x > sqrt(2) > 1$.
+
+  Por lo tanto, utilizando el resultado del punto 2 (a), existe $m in ZZ$ tal que:
+  $
+    sqrt(2) n x < m < sqrt(2) n y \
+    x < sqrt(2)/2 dot m / n < y
+  $
+  Como $sqrt(2)/2 in RR backslash QQ$ y $m/n in QQ$ (con $m/n != 0$), resulta que $sqrt(2)/2 dot m/n in RR backslash QQ$. Con esto hemos hallado un número irracional estrictamente entre $x$ e $y$.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 2 (d)][
+  Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
+]
+
+#solucion[Propuesta 1][
+  Por el punto 2 (b) podemos hallar racionales $q_1, q_2 in QQ$ tales que $x < q_1 < q_2 < y$. Luego, por el punto 2 (c), como $q_1, q_2 in QQ$ con $q_1 < q_2$, sabemos que existe un irracional $z in RR backslash QQ$ tal que:
+  $ q_1 < z < q_2 $
+  Por transitividad del orden, concluimos que $x < q_1 < z < q_2 < y$, es decir, $x < z < y$. Por lo tanto, hemos encontrado un número irracional entre los reales $x$ e $y$.
+]
+
+
+
+
+
+

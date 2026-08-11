@@ -1,5 +1,16 @@
 #import "@preview/cetz:0.4.0"
 #import "@preview/cetz-plot:0.1.2": plot
+#import "@preview/frame-it:2.0.0": *
+
+#let (enunciado, solucion, duda) = frames(
+  enunciado: ("Enunciado", rgb("#0284c7")),
+  solucion: ("Solución", rgb("#15803d")),
+  duda: ("Consulta Docente", rgb("#dc2626")),
+)
+
+#show figure.where(kind: "frame"): set figure(numbering: none)
+#show: frame-style(styles.boxy)
+
 
 /// Dibuja una recta numérica sencilla con marcas y etiquetas ajustables.
 /// Uso: #recta([$m'$], ([$m$], "arriba"), [$x$], [$m'+1$])

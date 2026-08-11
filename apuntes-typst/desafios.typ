@@ -191,3 +191,9 @@
   Si $a_n <= b_n$ para todo $n >= n_0$, probar que $a <= b$.
 ]
 
+#desafio[Existencia de un entero en $(x, x + 1]$][
+  Demostrar que, usando el Principio de Arquímedes, para todo $x in RR$ existe $n in ZZ$ tal que:
+  $ x < n <= x + 1 $
+]
+
+

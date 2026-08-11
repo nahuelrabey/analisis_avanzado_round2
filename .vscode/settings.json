@@ -1,0 +1,4 @@
+{
+  "tinymist.outputPath": "$root/pdf/$dir/$name.pdf"
+}
+
