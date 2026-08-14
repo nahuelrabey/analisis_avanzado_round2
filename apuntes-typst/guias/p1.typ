@@ -11,17 +11,27 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
+#progreso[
+  *Resueltos:* ejercicios 1 a 6 completos --- 15 de los 28 ítems de la guía. Van marcados con #hecho en la lista de abajo.
+
+  *Transcritos en este archivo:* Ej. 1, Ej. 2 (a--d) y Ej. 6 (a--b). Los ejercicios 3, 4 y 5 están resueltos pero todavía sin pasar en limpio: usá `/guia` cuando quieras incorporarlos.
+
+  *Lo que sigue:* el Ej. 7 (punto fijo vía supremo) es lo último de la guía que se apoya sólo en el Cap. 1. Del Ej. 8 al 15 todo es sucesiones, así que conviene cerrar antes los pasos 2--4 de ese capítulo.
+]
+
+#v(8pt)
+
 #set enum(numbering: "1.")
 
-+ Pruebe que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deduzca que si $|x - y| < epsilon$ para todo $epsilon > 0$, entonces $x = y$.
++ Pruebe que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deduzca que si $|x - y| < epsilon$ para todo $epsilon > 0$, entonces $x = y$. #hecho
 
 + #set enum(numbering: "(a)")
-  + Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$.
-  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un racional entre $x$ e $y$.
-  + Sean $x, y in QQ$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
-  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
+  + Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$. #hecho
+  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un racional entre $x$ e $y$. #hecho
+  + Sean $x, y in QQ$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$. #hecho
+  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$. #hecho
 
-+ Sea $A subset.eq RR$ no vacío y acotado inferiormente. Pruebe la siguiente equivalencia:
++ Sea $A subset.eq RR$ no vacío y acotado inferiormente. Pruebe la siguiente equivalencia: #hecho
   $ i = op("ínf") A <=> cases(
     i <= a "para todo " a in A,,
     "para todo " epsilon > 0 "existe " a in A "tal que " i <= a < i + epsilon.
@@ -32,22 +42,22 @@
   #grid(
     columns: (1fr, 1fr),
     row-gutter: 10pt,
-    [+ $(a, b]$],
-    [+ $B union \{0\}$],
-    [+ $B = \{1/2^n : n in NN\}$],
-    [+ $\{x^2 - x - 1 : x in RR\}$]
+    [+ $(a, b]$ #hecho],
+    [+ $B union \{0\}$ #hecho],
+    [+ $B = \{1/2^n : n in NN\}$ #hecho],
+    [+ $\{x^2 - x - 1 : x in RR\}$ #hecho]
   )
 
 + Sean $A subset.eq B subset.eq RR$, con $A != nothing$. Pruebe las siguientes afirmaciones:
   #set enum(numbering: "(a)")
-  + Si $B$ está acotado superiormente, entonces $A$ también lo está, y $op("sup") A <= op("sup") B$.
-  + Si $B$ está acotado inferiormente, entonces $A$ también lo está, e $op("ínf") B <= op("ínf") A$.
-  + Si $A$ no está acotado, entonces $B$ tampoco lo está.
+  + Si $B$ está acotado superiormente, entonces $A$ también lo está, y $op("sup") A <= op("sup") B$. #hecho
+  + Si $B$ está acotado inferiormente, entonces $A$ también lo está, e $op("ínf") B <= op("ínf") A$. #hecho
+  + Si $A$ no está acotado, entonces $B$ tampoco lo está. #hecho
 
 + Dados un conjunto de números reales $A$ y $c in RR$, denotamos $c A = \{c a : a in A\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Pruebe las siguientes afirmaciones:
   #set enum(numbering: "(a)")
-  + Si $A$ está acotado superiormente, entonces $-A$ está acotado inferiormente e $op("ínf")(-A) = -op("sup") A$.
-  + Si $c > 0$ y $A$ está acotado superiormente, entonces $c A$ está acotado superiormente y $op("sup")(c A) = c op("sup")(A)$.
+  + Si $A$ está acotado superiormente, entonces $-A$ está acotado inferiormente e $op("ínf")(-A) = -op("sup") A$. #hecho
+  + Si $c > 0$ y $A$ está acotado superiormente, entonces $c A$ está acotado superiormente y $op("sup")(c A) = c op("sup")(A)$. #hecho
 
 + Sea $f : [a, b] -> [a, b]$ creciente. Supongamos que $f(a) > a$. Sea
   $ x_0 = op("sup")(\{x in [a, b] : f(x) > x\}). $
@@ -151,6 +161,46 @@
   Por el punto 2 (b) podemos hallar racionales $q_1, q_2 in QQ$ tales que $x < q_1 < q_2 < y$. Luego, por el punto 2 (c), como $q_1, q_2 in QQ$ con $q_1 < q_2$, sabemos que existe un irracional $z in RR backslash QQ$ tal que:
   $ q_1 < z < q_2 $
   Por transitividad del orden, concluimos que $x < q_1 < z < q_2 < y$, es decir, $x < z < y$. Por lo tanto, hemos encontrado un número irracional entre los reales $x$ e $y$.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 6 (a)][
+  Dado un conjunto $A subset.eq RR$ acotado superiormente, pruebe que $-A = \{(-1)a : a in A\}$ está acotado inferiormente e $op("ínf")(-A) = -op("sup")(A)$.
+]
+
+#solucion[Propuesta 1][
+  Como $A$ está acotado superiormente, $exists c in RR : a <= c, forall a in A$. Por lo tanto, $-c <= -a, forall -a in -A$ (pues $forall a in A$ se tiene $-a in -A$ y $forall -a in -A$ se tiene $a in A$). Es decir, $exists tilde(c) = -c in RR : tilde(c) <= -a, forall -a in -A$, con lo cual $-A$ está acotado inferiormente.
+
+  _(Nota: Denotamos por $O(A)$ al conjunto de cotas superiores de $A$ y por $Omega(A)$ al conjunto de cotas inferiores de $A$)_.
+
+  Más aún, para todo $c in RR$ tal que $a <= c, forall a in A$, existe $tilde(c) = -c$ que es cota inferior de $-A$. Y recíprocamente, para todo $tilde(c) in RR$ tal que $tilde(c) <= -a, forall -a in -A$, podemos encontrar $c = -tilde(c)$ tal que $a <= c, forall a in A$. Es decir, $-O(A) = Omega(-A)$: el conjunto de cotas superiores de $A$ reflejado es igual al conjunto de cotas inferiores de $-A$.
+
+  Como $A$ está acotado superiormente, por el Axioma de Completitud existe $s = op("sup")(A)$. Luego, para todo $t in O(A)$ se cumple $s <= t$, por lo cual $-t <= -s$. Como $-O(A) = Omega(-A)$, se tiene que para todo $k in Omega(-A)$ vale $k <= -s$. Además, $-s$ es cota inferior de $-A$, por lo que es la mayor de todas las cotas inferiores. Concluimos que:
+  $ -s = -op("sup")(A) = op("ínf")(-A) $
+]
+
+#duda[Consulta para docentes][
+  ¿Es necesario demostrar rigurosamente la igualdad de conjuntos de cotas $-O(A) = Omega(-A)$ paso a paso o alcanza con argumentar la biyección mediante el cambio de signo $c |-> -c$?
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+#enunciado[Ejercicio 6 (b)][
+  Sean $c > 0$ y $A subset.eq RR$ acotado superiormente. Pruebe que $c A$ está acotado superiormente y $op("sup")(c A) = c op("sup")(A)$.
+]
+
+#solucion[Propuesta 1][
+  Como $A$ está acotado superiormente, $exists k in RR : a <= k, forall a in A$. Como $c > 0$, multiplicando por $c$ obtenemos $c a <= c k$, por lo que hemos encontrado $tilde(k) = c k$ tal que $c a <= tilde(k), forall c a in c A$. Por lo tanto, $c A$ está acotado superiormente.
+
+  Más aún, para todo $k in RR$ tal que $a <= k, forall a in A$, podemos construir $tilde(k) = c k$ cota superior de $c A$. Recíprocamente, para todo $tilde(k) in RR$ tal que $c a <= tilde(k), forall c a in c A$, podemos definir $k = tilde(k)/c$ (dado que $c > 0$), resultando $a <= k, forall a in A$. Es decir, $c O(A) = O(c A)$.
+
+  Dado que $A$ está acotado superiormente, por el Axioma de Completitud existe $s = op("sup")(A)$. Sabemos que $s <= t, forall t in O(A)$, de donde $c s <= c t$. Como $c O(A) = O(c A)$, se tiene que $c s <= tilde(t), forall tilde(t) in O(c A)$. Dado que $c s$ es cota superior de $c A$ y es menor o igual a cualquier otra cota superior de $c A$, es el supremo de $c A$:
+  $ op("sup")(c A) = c s = c op("sup")(A) $
 ]
 
 

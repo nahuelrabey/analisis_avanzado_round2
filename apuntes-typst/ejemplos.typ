@@ -1,24 +1,19 @@
 #import "@preview/frame-it:2.0.0": *
 #import "utils.typ": *
 
-#let (ejemplo, estrategia, resolucion) = frames(
-  ejemplo: ("Ejemplo", rgb("#059669")),
-  estrategia: ("Estrategia", rgb("#d97706")),
-  resolucion: ("Resolución", rgb("#475569")),
-)
-
 #show figure.where(kind: "frame"): set figure(numbering: none)
+#show figure.where(kind: "frame"): set block(breakable: true)
+#show: frame-style(styles.boxy)
 
 #show grid.cell: it => {
   if it.fill != none {
-    set text(fill: white, weight: "bold")
+    set text(fill: white, weight: "bold", style: "italic")
     it
   } else {
     it
   }
 }
 
-#show: frame-style(styles.boxy)
 
 // --- Archivo Acumulativo de Ejemplos ---
 

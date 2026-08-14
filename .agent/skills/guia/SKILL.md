@@ -59,3 +59,19 @@ Inspeccionar la imagen o texto enviado y extraer:
 
 ### 5. Actualización del Archivo
 - Añadir la transcripción al final del archivo correspondiente [`apuntes-typst/guias/p{N}.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/guias/), preservando todo el contenido previo.
+
+### 6. Marcado de Progreso (obligatorio)
+Las guías llevan el registro de qué ejercicios están resueltos. Ambas marcas están definidas en [`apuntes-typst/utils.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/utils.typ):
+
+- **`#hecho`**: marca compacta (✓ verde) que se agrega *al final* del ítem correspondiente en la lista de enunciados del comienzo del archivo. Se marca un ítem por cada sub-ítem resuelto ((a), (b), ...), no el ejercicio entero.
+  ```typst
+  + Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$. #hecho
+  ```
+- **`#progreso[...]`**: panel ubicado debajo del encabezado de la guía, con tres líneas: *Resueltos* (cuáles y cuántos ítems sobre el total), *Transcritos en este archivo* (y cuáles quedan sin pasar en limpio) y *Lo que sigue*.
+
+Al transcribir un ejercicio con `/guia`:
+1. Agregar `#hecho` a los ítems recién transcritos que aún no lo tengan.
+2. Actualizar el panel `#progreso[...]` (si la guía todavía no lo tiene, crearlo).
+3. Si el avance modifica el punto en que está el usuario dentro del plan, avisarle para actualizar la sección *"Estado actual"* de [`apuntes-typst/plan_de_trabajo.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/plan_de_trabajo.typ).
+
+**Cuidado:** un ejercicio puede estar resuelto sin estar transcrito. `#hecho` marca *resuelto*; el panel `#progreso` es el que aclara qué falta pasar en limpio.

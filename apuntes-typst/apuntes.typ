@@ -1,111 +1,100 @@
 #import "@preview/frame-it:2.0.0": *
 #import "utils.typ": *
-
-#let (definicion, teorema, proposicion, lema, corolario, ejemplo, axioma, demostracion) = frames(
-  definicion: ("Definición", rgb("#2563eb")),
-  teorema: ("Teorema", rgb("#7c3aed")),
-  proposicion: ("Proposición", rgb("#4f46e5")),
-  lema: ("Lema", rgb("#0d9488")),
-  corolario: ("Corolario", rgb("#d97706")),
-  ejemplo: ("Ejemplo", rgb("#059669")),
-  axioma: ("Axioma", rgb("#dc2626")),
-  demostracion: ("Demostración", rgb("#475569")),
-)
-
 #show figure.where(kind: "frame"): set figure(numbering: none)
+#show figure.where(kind: "frame"): set block(breakable: true)
+#show: frame-style(styles.boxy)
 
 #show grid.cell: it => {
   if it.fill != none {
-    set text(fill: white, weight: "bold")
+    set text(fill: white, weight: "bold", style: "italic")
     it
   } else {
     it
   }
 }
-
-#show: frame-style(styles.boxy)
-
-// --- Diccionario de Contadores Individuales por Cajita ---
-#let contadores-repaso = (
-  "Conjunto Acotado Superiormente": 1,
-  "Supremo": 1,
-  "Completitud": 1,
-  "Principio de Arquímedes": 1,
-  "Principio de Arquímedes 2": 1,
-  "Densidad de ℚ": 1,
-  "Densidad deℚ": 1,
-  "Equivalencia de supremo": 0,
-  "Máximo": 0,
-  "Caracterización de Supremo y Máximo": 0,
-  "Conjunto Acotado Inferiormente": 0,
-  "Ínfimo": 0,
-  "Completitud en términos de ínfimos": 0,
-  "Equivalencia de Ínfimo": 0,
-  "Mínimo": 0,
-  "Caracterización de Ínfimo y Mínimo": 0,
-  "Sucesiones": 0,
-  "Convergencia de Sucesiones": 0,
-  "Divergencia de Sucesiones": 0,
-  "Unicidad del límite": 0,
-  "Álgebra de límites": 0,
-  "Sucesión Acotada": 0,
-  "Toda sucesión convergente está acotada": 0,
-  "Sucesión Monótona": 0,
-  "Convergencia de sucesiones monótonas crecientes": 0,
-)
-
-// --- Página de Autoevaluación / Repaso Activo ---
-
-#align(center)[
-  #text(18pt, weight: "bold", fill: rgb("#1e293b"))[Registro de Autoevaluación] \
-  #v(4pt)
-  #text(10pt, fill: rgb("#64748b"), style: "italic")[Cantidad de veces completado correctamente sin mirar]
-]
-#v(1.5em)
-
-#context {
-  let frames-found = query(figure.where(kind: "frame")).filter(it => it.supplement != [Demostración])
-  
-  let extract-text(it) = {
-    if type(it) == str { it }
-    else if type(it) != content { "" }
-    else if it.has("text") { it.text }
-    else if it.has("children") { it.children.map(extract-text).join("") }
-    else if it.has("body") { extract-text(it.body) }
-    else { "" }
-  }
-
-  for item in frames-found {
-    let supp = item.supplement
-    let cap = item.caption.body
-    let page-num = item.location().page()
-    
-    let children = cap.fields().at("children", default: ())
-    let raw-title = children.filter(c => not (type(c) == content and c.has("value"))).map(extract-text).join("").trim()
-    
-    // Normalizar espacios intermedios para búsqueda limpia en diccionario
-    let title-clean = raw-title.split().join(" ")
-    let count = contadores-repaso.at(title-clean, default: 0)
-    
-    let is-done = count > 0
-    let box-stroke = if is-done { 0.7pt + rgb("#2563eb") } else { 0.7pt + rgb("#94a3b8") }
-    let box-fill = if is-done { rgb("#eff6ff") } else { none }
-    let text-color = if is-done { rgb("#2563eb") } else { rgb("#94a3b8") }
-
-    grid(
-      columns: (auto, auto, 1fr, auto),
-      gutter: 8pt,
-      align: (left + horizon, left + horizon, bottom, right + horizon),
-      [#box(width: 18pt, height: 13pt, stroke: box-stroke, radius: 3pt, fill: box-fill)[#align(center + horizon)[#text(8.5pt, fill: text-color, weight: "bold")[#count]]]],
-      [*#supp:* #cap],
-      box(width: 100%, repeat[.#h(3pt)]),
-      [pág. #page-num]
-    )
-    v(6pt)
-  }
-}
-
-#pagebreak()
+//
+//
+// // --- Diccionario de Contadores Individuales por Cajita ---
+// #let contadores-repaso = (
+//   "Conjunto Acotado Superiormente": 1,
+//   "Supremo": 1,
+//   "Completitud": 1,
+//   "Principio de Arquímedes": 1,
+//   "Principio de Arquímedes 2": 1,
+//   "Densidad de ℚ": 1,
+//   "Densidad deℚ": 1,
+//   "Equivalencia de supremo": 0,
+//   "Máximo": 0,
+//   "Caracterización de Supremo y Máximo": 0,
+//   "Conjunto Acotado Inferiormente": 0,
+//   "Ínfimo": 0,
+//   "Completitud en términos de ínfimos": 0,
+//   "Equivalencia de Ínfimo": 0,
+//   "Mínimo": 0,
+//   "Caracterización de Ínfimo y Mínimo": 0,
+//   "Sucesiones": 0,
+//   "Convergencia de Sucesiones": 0,
+//   "Divergencia de Sucesiones": 0,
+//   "Unicidad del límite": 0,
+//   "Álgebra de límites": 0,
+//   "Sucesión Acotada": 0,
+//   "Toda sucesión convergente está acotada": 0,
+//   "Sucesión Monótona": 0,
+//   "Convergencia de sucesiones monótonas crecientes": 0,
+// )
+//
+// // --- Página de Autoevaluación / Repaso Activo ---
+//
+// #align(center)[
+//   #text(18pt, weight: "bold", fill: rgb("#1e293b"))[Registro de Autoevaluación] \
+//   #v(4pt)
+//   #text(10pt, fill: rgb("#64748b"), style: "italic")[Cantidad de veces completado correctamente sin mirar]
+// ]
+// #v(1.5em)
+//
+// #context {
+//   let frames-found = query(figure.where(kind: "frame")).filter(it => it.supplement != [demo] and it.supplement != [estrategia] and it.supplement != [Demostración] and it.supplement != [Estrategia] and it.caption != none)
+//   
+//   let extract-text(it) = {
+//     if type(it) == str { it }
+//     else if type(it) != content { "" }
+//     else if it.has("text") { it.text }
+//     else if it.has("children") { it.children.map(extract-text).join("") }
+//     else if it.has("body") { extract-text(it.body) }
+//     else { "" }
+//   }
+//
+//   for item in frames-found {
+//     let supp = item.supplement
+//     let cap = item.caption.body
+//     let page-num = item.location().page()
+//     
+//     let children = cap.fields().at("children", default: ())
+//     let raw-title = children.filter(c => not (type(c) == content and c.has("value"))).map(extract-text).join("").trim()
+//     
+//     // Normalizar espacios intermedios para búsqueda limpia en diccionario
+//     let title-clean = raw-title.split().join(" ")
+//     let count = contadores-repaso.at(title-clean, default: 0)
+//     
+//     let is-done = count > 0
+//     let box-stroke = if is-done { 0.7pt + rgb("#2563eb") } else { 0.7pt + rgb("#94a3b8") }
+//     let box-fill = if is-done { rgb("#eff6ff") } else { none }
+//     let text-color = if is-done { rgb("#2563eb") } else { rgb("#94a3b8") }
+//
+//     grid(
+//       columns: (auto, auto, 1fr, auto),
+//       gutter: 8pt,
+//       align: (left + horizon, left + horizon, bottom, right + horizon),
+//       [#box(width: 18pt, height: 13pt, stroke: box-stroke, radius: 3pt, fill: box-fill)[#align(center + horizon)[#text(8.5pt, fill: text-color, weight: "bold")[#count]]]],
+//       [*#supp:* #cap],
+//       box(width: 100%, repeat[.#h(3pt)]),
+//       [pág. #page-num]
+//     )
+//     v(6pt)
+//   }
+// }
+//
+// #pagebreak()
 
 // --- Apuntes Matemáticos ---
 
@@ -169,41 +158,61 @@
   Un esquema geométrico sería el siguiente, donde entendemos que $epsilon$ es lo que nos corremos hacia la izquierda del supremo:
 
   #align(center)[
-    #box(width: 70%, [
-      #align(center)[$ overbrace(#h(60pt), epsilon) $]
-      #v(-6pt)
-      #line(length: 100%, stroke: 0.8pt)
-      #v(-12pt)
-      #grid(
-        columns: (1fr, 1fr, 1fr),
-        align: center,
-        [$s - epsilon$],
-        [$bullet \ a_epsilon$],
-        [$s$]
-      )
-    ])
+    #cetz.canvas({
+      import cetz.draw: *
+
+      // Línea principal del eje real
+      line((0, 0), (7, 0), stroke: 1.2pt + rgb("#334155"))
+
+      // Guías verticales punteadas entre s - epsilon y a_epsilon
+      line((1.5, 0), (1.5, 0.7), stroke: (dash: "dashed", paint: rgb("#94a3b8"), thickness: 0.8pt))
+      line((4.0, 0), (4.0, 0.7), stroke: (dash: "dashed", paint: rgb("#94a3b8"), thickness: 0.8pt))
+
+      // Marcas verticales (ticks) en s - epsilon y s
+      line((1.5, -0.2), (1.5, 0.2), stroke: 1.5pt + rgb("#1e293b"))
+      line((5.5, -0.2), (5.5, 0.2), stroke: 1.5pt + rgb("#1e293b"))
+
+      // Punto a_epsilon exactamente centrado SOBRE la línea real
+      circle((4.0, 0), radius: 0.10, fill: rgb("#2563eb"), stroke: 1pt + rgb("#1d4ed8"))
+
+      // Etiquetas inferiores
+      content((1.5, -0.55), text(size: 11pt, weight: "medium")[$s - epsilon$])
+      content((4.0, -0.55), text(size: 11pt, weight: "bold", fill: rgb("#2563eb"))[$a_epsilon$])
+      content((5.5, -0.55), text(size: 11pt, weight: "medium")[$s$])
+
+      // Cota de distancia epsilon desde s - epsilon hasta a_epsilon
+      line((1.5, 0.65), (4.0, 0.65), stroke: 1pt + rgb("#475569"), mark: (start: "|", end: "|"))
+      content((2.75, 1.0), text(size: 12pt, weight: "bold", fill: rgb("#0f172a"))[$epsilon$])
+    })
   ]
 ]
 
-#demostracion[
-  Vamos a probar la doble implicación.
+Vamos a probar la doble implicación. Antes de avanzar vamos a llamar
 
-  - *($=>$)* _(La estrategia sale por contradicción: ¿qué pasa si no existe $a_epsilon$?)_
+- def 1 : $forall t " cota superioor " => s <= t$
+- def 2 : $forall epsilon > 0 =>  exists a_epsilon in A : s-epsilon < a_epsilon < s$
 
-    Supongamos que $s = op("sup")(A)$. Entonces $s$ es una cota superior de $A$ por definición de supremo. Veamos que cumple la condición b) de la Proposición: sea $epsilon > 0$. Queremos probar que existe $a_epsilon in A$ tal que $s - epsilon < a_epsilon$.
+#estrategia[Por contradicción][
+  La estrategia sale por contradicción: ¿qué pasa si no existe $a_epsilon$?
+]
+#demostracion[def 1 $=>$ def 2][
+  Sean $s = op("sup")(A)$ y $epsilon > 0$. Supongamos que no existe $a_epsilon in A$ tal que $s - epsilon < a_epsilon$. Por lo tanto, debe cumplirse que
 
-    Si no existe tal elemento, se debe cumplir que
-    $ a <= s - epsilon "para todo elemento" a in A => s - epsilon "es cota superior de" A. $
-    Pero $s - epsilon$ sería entonces una cota superior de $A$ más chica que $s$ que es el supremo de $A$. Esto es un absurdo.
+$ forall a in A: a < s - epsilon => s - epsilon "es cota superior de" A $
 
-  - *($arrow.l.double$)* _(La estrategia es que podemos construir $t < s$ para cualquier $epsilon > 0$, y como existe $a_epsilon in A$, podemos ver que $t < a_epsilon$ siempre, por lo que $t$ no puede ser cota superior.)_
+Pero $s - epsilon$ sería entonces una cota superior de $A$ más chica que $s$ que es el supremo de $A$. Esto es absurdo, por lo tanto debe existir $a_epsilon in A: s-epsilon < a_epsilon < s$.
 
-    Supongamos ahora que $s$ es un elemento de $RR$ que cumple las dos condiciones de la Proposición y veamos que $s$ debe ser el supremo de $A$. Es decir, veamos que $s$ cumple la Definición 2. Sabemos que $s$ es cota superior, veamos que es la menor de las cotas superiores. Sea $t < s$. Entonces $s - t = epsilon > 0$.
+]
+#estrategia[Contrarrecíproco][
+  - Contrarrecíproco: $ t "cota superior " <=> forall a in A: a <= t $ es equivalente a decir que $ exists a in A: t < a <=> t "no es cota superior" $.
+  - Construyo $t > s$, encuentro $epsilon$, veo que $t < a_epsilon$ y por lo tanto no es cota superior. Uso contrarrecíproco y fin.
+]
+#demostracion[def 2 $=>$ def 1][
+  Sabemos que $s$ es cota superior, veamos que es la menor de las cotas superiores. Sea $t < s$, podemos construir $epsilon = s - t > 0$.
 
-
-    Por b), sabemos que debe existir $a_epsilon in A$ tal que $s - epsilon < a_epsilon$. Reemplazando,
-    $ s - epsilon = s - (s - t) = t < a_epsilon. $
-    Esto nos dice que $t$ no puede ser cota superior de $A$. Es decir, que *toda cota superior de $A$ debe ser mayor o igual a $s$*, que es lo que queríamos probar.
+  Por _def 2_, sabemos que debe existir $a_epsilon in A$ tal que $s - epsilon < a_epsilon$. Reemplazando,
+  $ s - epsilon = s - (s - t) = t < a_epsilon. $
+  Esto nos dice que $t$ no puede ser cota superior de $A$. Es decir, que *toda cota superior de $A$ debe ser mayor o igual a $s$*, que es lo que queríamos probar.
 ]
 
 #definicion[Máximo][3][
@@ -214,10 +223,12 @@
   Sea $A subset.eq RR$ un conjunto acotado superiormente y no vacío. Si $t$ es una cota superior y $t in A$ entonces $t = op("sup")(A)$ (y también es el máximo).
 ]
 
+#estrategia[
+  Intentá encontrar que $t<=s and t>=s$
+]
+
 #demostracion[
   Por el Axioma de Completitud sabemos que existe $s = op("sup")(A)$. Queremos probar que $s = t$.
-
-  _(Estrategia: como $t$ es cota superior y $s = op("sup")(A)$, por definición de supremo se tiene $t >= s$. Por otro lado, como $t in A$ y $s$ es cota superior, se tiene $t <= s$. Al cumplirse $t >= s$ y $t <= s$, se concluye $t = s$.)_
 
   Como $t$ es cota superior de $A$ y $s = op("sup")(A)$, se debe cumplir que $t >= s$. Por otro lado, como $t in A$ tenemos que $t <= s$, dado que, en particular, $s$ es cota superior de $A$. Podemos concluir entonces que $t = s$.
 ]
@@ -258,12 +269,45 @@
   + para todo $epsilon > 0$, existe un elemento $a_epsilon in A$ tal que $a_epsilon < i + epsilon$.
 ]
 
+Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
+
+- def 1 : $forall c in RR: c "es cota inferior" => i >= c$
+- def 2 : $forall epsilon > 0 => exists a_epsilon in A: i < a_epsilon < i + epsilon$
+
+#estrategia[Por contradicción][
+  La estrategia sale por contradicción: ¿qué pasa si no existe $a_epsilon$?
+]
+#demostracion[def 1 $=>$ def 2][
+  Sea $i = op("ínf")(A)$ y $epsilon > 0$. Supongamos que no existe $a_epsilon in A$ tal que $i < a_epsilon < i + epsilon$. Es decir, que para todo $a in A$ se cumple $a >= i + epsilon$. Por lo tanto, $i + epsilon$ es una cota inferior de $A$ mayor que $i$, lo cual es absurdo porque $i = op("ínf")(A)$ (es la mayor de las cotas inferiores). En consecuencia, debe existir $a_epsilon in A$ tal que $i < a_epsilon < i + epsilon$.
+]
+
+#estrategia[Contrarrecíproco][
+  - Tomo $t > i$ y defino $epsilon = t - i > 0$.
+  - Uso def 2 para encontrar $a_epsilon < i + epsilon = t$, lo que demuestra que $t$ no puede ser cota inferior.
+]
+#demostracion[def 2 $=>$ def 1][
+  Sea $i$ tal que cumple def 2. Tomemos $t > i$, es decir que $t - i > 0$. Llamemos $epsilon = t - i > 0$. Por def 2 sabemos que existe $a_epsilon in A$ tal que $i < a_epsilon < i + epsilon$. Reemplazando $epsilon$, tenemos:
+  $ a_epsilon < i + (t - i) = t. $
+  Es decir, $t$ no puede ser cota inferior de $A$. Por lo tanto, toda cota inferior $c$ de $A$ debe cumplir $c <= i$, lo que demuestra def 1.
+]
+
 #definicion[Mínimo][6][
   Si $op("ínf")(A) in A$, entonces $op("ínf")(A)$ se denomina *mínimo* de $A$. En ese caso, notamos $op("mín")(A)$ en lugar de $op("ínf")(A)$.
 ]
 
 #proposicion[Caracterización de Ínfimo y Mínimo][6][
   Sea $A subset.eq RR$ un conjunto acotado inferiormente y no vacío. Si $t$ es una cota inferior y $t in A$ entonces $t = op("ínf")(A) = op("mín")(A)$.
+]
+
+#estrategia[Idea de la demostración][
+  Como $t$ es cota inferior e $i = op("ínf")(A)$, por definición de ínfimo se tiene $t <= i$. Por otro lado, como $t in A$ e $i$ es cota inferior, se tiene $t >= i$. Al cumplirse $t <= i$ y $t >= i$, se concluye $t = i$.
+]
+#demostracion[
+  Dado que $A$ está acotado inferiormente y no es un conjunto vacío, por completitud en términos de ínfimos existe $i = op("ínf")(A)$.
+
+  Como $t$ es cota inferior e $i = op("ínf")(A)$, sabemos que $t <= i$ (pues el ínfimo es la mayor de las cotas inferiores). Por otro lado, como $t in A$ e $i$ es cota inferior de $A$, se tiene $t >= i$.
+
+  Solo pueden cumplirse ambas desigualdades ($t <= i$ y $t >= i$) si $t = i$. Por lo tanto $t = op("ínf")(A)$, y como $t in A$, también resulta $t = op("mín")(A)$.
 ]
 
 #definicion[Sucesiones][6][
@@ -315,20 +359,26 @@
   Es decir, el límite de una sucesión es único.
 ]
 
-#demostracion[
-  Sabemos que dado $epsilon > 0$ existe $n_1 in NN$ tal que $|a_n - ell_1| < epsilon/2$ para todo $n >= n_1$ y a la vez existe $n_2 in NN$ tal que $|a_n - ell_2| < epsilon/2$ para todo $n >= n_2$. Entonces si elegimos $a_n$ con $n >= n_1$ y $n >= n_2$:
+#estrategia[Acotar la distancia $abs(ell_1 - ell_2) < epsilon$][
+  La estrategia consiste en buscar $abs(ell_1 - ell_2) < epsilon$ para todo $epsilon > 0$. Para lograrlo, sumamos y restamos $a_n$, aplicamos desigualdad triangular para obtener $abs(ell_1 - a_n) + abs(a_n - ell_2)$, y acotamos cada parte por $epsilon/2$ eligiendo $n >= op("máx")(n_1, n_2)$.
+]
 
-  $ |ell_1 - ell_2| = |ell_1 - a_n + a_n - ell_2| <= |ell_1 - a_n| + |a_n - ell_2| < epsilon/2 + epsilon/2 = epsilon. $
+
+#demostracion[
+  Sabemos que dado $epsilon > 0$ existe $n_1 in NN$ tal que $abs(a_n - ell_1) < epsilon/2$ para todo $n >= n_1$ y a la vez existe $n_2 in NN$ tal que $abs(a_n - ell_2) < epsilon/2$ para todo $n >= n_2$. Entonces si elegimos $a_n$ con $n >= n_1$ y $n >= n_2$:
+
+  $ abs(ell_1 - ell_2) = abs(ell_1 - a_n + a_n - ell_2) <= abs(ell_1 - a_n) + abs(a_n - ell_2) < epsilon/2 + epsilon/2 = epsilon. $
 
   Como $epsilon$ es arbitrario, por ejercicio de la guía 1, sabemos que $ell_1 = ell_2$.
 ]
 
+
 #definicion[Negación de la Convergencia (No Convergencia / Divergencia)][9][
   Decimos que una sucesión real $(a_n)_(n in NN)$ *no converge* (es decir, no admite ningún límite en $RR$) si satisface la negación formal de la definición de convergencia para todo candidato a límite $L in RR$:
 
-  $ (forall L in RR)(exists epsilon_0 > 0)(forall N in NN)(exists n >= N) => |a_n - L| >= epsilon_0 $
+  $ (forall L in RR)(exists epsilon_0 > 0)(forall N in NN)(exists n >= N) => abs(a_n - L) >= epsilon_0 $
 
-  En palabras: para todo candidato a límite $L in RR$, existe un umbral de error $epsilon_0 > 0$ tal que para cualquier elección de $N in NN$, existe un término $a_n$ con $n >= N$ cuya distancia a $L$ es mayor o igual a $epsilon_0$ ($|a_n - L| >= epsilon_0$).
+  En palabras: para todo candidato a límite $L in RR$, existe un umbral de error $epsilon_0 > 0$ tal que para cualquier elección de $N in NN$, existe un término $a_n$ con $n >= N$ cuya distancia a $L$ es mayor o igual a $epsilon_0$ ($abs(a_n - L) >= epsilon_0$).
 ]
 
 #proposicion[Álgebra de límites][6][
@@ -342,50 +392,60 @@
   + Si $a_n <= b_n$ para todo $n >= n_0$ entonces $a <= b$.
 ]
 
-#demostracion[Demostración del Álgebra de límites][
-  Veamos los ítems por separado:
+#demostracion[Álgebra de límites: Ítem a ($lim_(n -> oo) c · a_n = c · a$)][
+  Sea $c in RR$. Tenemos dos opciones: $c = 0$ o $c != 0$. Observemos que si $c = 0$, tanto $c · a_n = 0$ para todo $n in NN$ como $c · a = 0$, con lo cual la propiedad se cumple trivialmente.
 
-  - *Ítem a ($\lim_(n -> oo) (c · a_n) = c · a$ para todo $c in RR$):*
-    Sea $c in RR$. Tenemos dos opciones: $c = 0$ o $c != 0$. Observemos que si $c = 0$, tanto $c · a_n = 0$ para todo $n in NN$ como $c · a = 0$, con lo cual la propiedad se cumple trivialmente.
+  Supongamos ahora que $c != 0$ y tomemos $epsilon > 0$. Como $a_n -> a$, debe existir un $n_0 in NN$ tal que $abs(a_n - a) < epsilon / abs(c)$ para todo $n >= n_0$ (notemos que podemos dividir a $epsilon$ por $abs(c)$ porque $c != 0$ y que $epsilon / abs(c) > 0$). Tenemos que
 
-    Supongamos ahora que $c != 0$ y tomemos $epsilon > 0$. Como $a_n -> a$, debe existir un $n_0 in NN$ tal que $|a_n - a| < epsilon / |c|$ para todo $n >= n_0$ (notemos que podemos dividir a $epsilon$ por $|c|$ porque $c != 0$ y que $epsilon / |c| > 0$). Tenemos que
+  $ abs(c · a_n - c · a) = abs(c · (a_n - a)) = abs(c) abs(a_n - a) < abs(c) · epsilon / abs(c) = epsilon $
 
-    $ |c · a_n - c · a| = |c · (a_n - a)| = |c| |a_n - a| < |c| epsilon / |c| = epsilon $
-
-    para todo $n >= n_0$.
-
-  - *Ítem b ($\lim_(n -> oo) (a_n + b_n) = a + b$):*
-    _Ejercicio de la guía (demostración a completar / ver archivo de desafíos)_.
-
-  - *Ítem c ($\lim_(n -> oo) (a_n b_n) = a b$):*
-    Sea $epsilon > 0$. Como $a_n$ es una sucesión convergente, sabemos que es acotada. Es decir, existe $M > 0$ tal que $|a_n| <= M$ para todo $n in NN$. Sea $n_1 in NN$ tal que $|b_n - b| < epsilon / (2M)$ para todo $n >= n_1$ (otra vez, acá es importante notar que $epsilon / (2M)$ es un número positivo y por lo tanto podemos aplicar la definición de límite). Como en el ítem 1, vamos a distinguir dos casos: $b = 0$ o $b != 0$.
-
-    Si $b = 0$ entonces $a · b = 0$ y tenemos que
-
-    $ |a_n b_n - a b| = |a_n b_n| = |a_n||b_n| <= M |b_n - b| < epsilon/2 < epsilon $
-
-    para todo $n >= n_1$. Tomamos $n_0 = n_1$ y listo.
-
-    Supongamos ahora que $b != 0$. Como $a_n -> a$, sabemos que existe $n_2 in NN$ tal que $|a_n - a| < epsilon / (2|b|)$ para todo $n >= n_2$. Entonces tenemos
-
-    $ |a_n b_n - a b| &= |a_n b_n - a_n b + a_n b - a b| \
-    &<= |a_n||b_n - b| + |b||a_n - a| \
-    &<= M underbrace(|b_n - b|, < epsilon / (2M)) + |b| underbrace(|a_n - a|, < epsilon / (2|b|)) \
-    &< epsilon/2 + epsilon/2 = epsilon. $
-
-    Acá tenemos que pensar qué necesitamos para que se cumpla la cuenta que acabamos de hacer. Por un lado, $n$ debería ser más grande que $n_1$ para que se cumpla que podemos acotar $|b_n - b|$. Por el otro, necesitamos que $n$ sea más grande que $n_2$ para que podamos acotar el término $|a_n - a|$. Es decir que para que sean ciertas ambas cotas al mismo tiempo necesitamos que $n$ sea más grande $n_1$ y $n_2$ *al mismo tiempo*. Esto se puede plasmar en nuestra demostración eligiendo $n_0 = op("máx")(n_1, n_2)$ y entonces la cuenta de arriba vale para todo $n >= n_0$ que es lo que queríamos ver.
-
-  - *Ítem d (Si $b != 0$, entonces $\lim_(n -> oo) (a_n / b_n) = a / b$):*
-    _*Estrategia:* Escribimos el cociente como un producto $a_n / b_n = a_n · (1/b_n)$. Habiendo probado el ítem c (límite del producto), lo único que necesitamos demostrar es que $1/b_n -> 1/b$ (con $b != 0$)._
-
-    Por el ejercicio 6, si $b_n -> b$ y $b != 0$ entonces existe una constante $c > 0$ (en el ejercicio mostramos que esa constante $c$ se puede elegir $c = |b|/2 > 0$) y $n_1 in NN$ tal que $|b_n| >= c$ para todo $n >= n_1$.
-
-    Tomando por válido este resultado, fijemos un $epsilon > 0$. Sea $n_2 in NN$ tal que $|b_n - b| < epsilon · |b| · c$ para todo $n >= n_2$. Entonces
-
-    $ |1/b_n - 1/b| = |b - b_n| / |b_n · b| <= |b_n - b| / (|b| · c) < epsilon $
-
-    si $n >= n_0 = op("máx")(n_1, n_2)$ (donde $n_1$ es el que nos garantiza que $|b_n| >= c$ y $n_2$ es el que nos da la cota de $|b_n - b|$).
+  para todo $n >= n_0$.
 ]
+
+#demostracion[Álgebra de límites: Ítem b ($lim_(n -> oo) (a_n + b_n) = a + b$)][
+  _Ejercicio de la guía (demostración a completar / ver archivo de desafíos)_.
+]
+
+#estrategia[Estrategia para el producto de límites][
+  1. *Fijar $epsilon > 0$* al comienzo de la demostración para poder construir las cotas relativas a $epsilon$.
+  2. Como $(a_n)$ converge, utilizar que es *acotada*: existe $M > 0$ tal que $|a_n| <= M$ para todo $n in NN$.
+  3. Acotar $|b_n - b| < epsilon / (2M)$ a partir de un $n_1 in NN$.
+  4. Para el caso $b != 0$, acotar $|a_n - a| < epsilon / (2 |b|)$ a partir de un $n_2 in NN$.
+  5. Elegir $n_0 = op("máx")(n_1, n_2)$ para asegurar que ambas cotas valgan en simultáneo y concluir $|a_n b_n - a b| < epsilon$.
+]
+#demostracion[Álgebra de límites: Ítem c ($lim_(n -> oo) a_n b_n = a b$)][
+  Sea $epsilon > 0$. Como $a_n$ es una sucesión convergente, sabemos que es acotada. Es decir, existe $M > 0$ tal que $abs(a_n) <= M$ para todo $n in NN$. Sea $n_1 in NN$ tal que $abs(b_n - b) < epsilon / (2M)$ para todo $n >= n_1$ (otra vez, acá es importante notar que $epsilon / (2M)$ es un número positivo y por lo tanto podemos aplicar la definición de límite). Como en el ítem 1, vamos a distinguir dos casos: $b = 0$ o $b != 0$.
+
+  Si $b = 0$ entonces $a · b = 0$ y tenemos que
+
+  $ abs(a_n b_n - a b) = abs(a_n b_n) = abs(a_n) abs(b_n) <= M abs(b_n - b) < epsilon/2 < epsilon $
+
+  para todo $n >= n_1$. Tomamos $n_0 = n_1$ y listo.
+
+  Supongamos ahora que $b != 0$. Como $a_n -> a$, sabemos que existe $n_2 in NN$ tal que $abs(a_n - a) < epsilon / (2 abs(b))$ para todo $n >= n_2$. Entonces tenemos
+
+  $ abs(a_n b_n - a b) &= abs(a_n b_n - a_n b + a_n b - a b) \
+  &<= abs(a_n) abs(b_n - b) + abs(b) abs(a_n - a) \
+  &<= M underbrace(abs(b_n - b), < epsilon / (2M)) + abs(b) underbrace(abs(a_n - a), < epsilon / (2 abs(b))) \
+  &< epsilon/2 + epsilon/2 = epsilon. $
+
+  Acá tenemos que pensar qué necesitamos para que se cumpla la cuenta que acabamos de hacer. Por un lado, $n$ debería ser más grande que $n_1$ para que se cumpla que podemos acotar $abs(b_n - b)$. Por el otro, necesitamos que $n$ sea más grande que $n_2$ para que podamos acotar el término $abs(a_n - a)$. Es decir que para que sean ciertas ambas cotas al mismo tiempo necesitamos que $n$ sea más grande $n_1$ y $n_2$ *al mismo tiempo*. Esto se puede plasmar en nuestra demostración eligiendo $n_0 = op("máx")(n_1, n_2)$ y entonces la cuenta de arriba vale para todo $n >= n_0$ que es lo que queríamos ver.
+]
+
+#estrategia[Cociente como producto][
+  Escribimos el cociente como un producto $a_n / b_n = a_n · (1/b_n)$. Habiendo probado el ítem c (límite del producto), lo único que necesitamos demostrar es que $1/b_n -> 1/b$ (con $b != 0$).
+]
+#demostracion[Álgebra de límites: Ítem d ($lim_(n -> oo) a_n / b_n = a / b$)][
+  Por el ejercicio 6, si $b_n -> b$ y $b != 0$ entonces existe una constante $c > 0$ (en el ejercicio mostramos que esa constante $c$ se puede elegir $c = abs(b)/2 > 0$) y $n_1 in NN$ tal que $abs(b_n) >= c$ para todo $n >= n_1$.
+
+  Tomando por válido este resultado, fijemos un $epsilon > 0$. Sea $n_2 in NN$ tal que $abs(b_n - b) < epsilon · abs(b) · c$ para todo $n >= n_2$. Entonces
+
+  $ abs(1/b_n - 1/b) = abs(b - b_n) / abs(b_n · b) <= abs(b_n - b) / (c · abs(b)) < epsilon $
+
+  si $n >= n_0 = op("máx")(n_1, n_2)$ (donde $n_1$ es el que nos garantiza que $abs(b_n) >= c$ y $n_2$ es el que nos da la cota de $abs(b_n - b)$).
+]
+
+
 
 #definicion[Sucesión Acotada][9][
   Una sucesión $(a_n)_(n in NN)$ está *acotada* si el conjunto $\{a_n : n in NN\} subset.eq RR$ está acotado.

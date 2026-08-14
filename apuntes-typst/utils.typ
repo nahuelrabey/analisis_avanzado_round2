@@ -2,14 +2,52 @@
 #import "@preview/cetz-plot:0.1.2": plot
 #import "@preview/frame-it:2.0.0": *
 
-#let (enunciado, solucion, duda) = frames(
+#let (
+  definicion,
+  teorema,
+  proposicion,
+  lema,
+  corolario,
+  ejemplo,
+  axioma,
+  demostracion,
+  estrategia,
+  resolucion,
+  desafio,
+  enunciado,
+  solucion,
+  duda,
+) = frames(
+  definicion: ("Definición", rgb("#2563eb")),
+  teorema: ("Teorema", rgb("#7c3aed")),
+  proposicion: ("Proposición", rgb("#4f46e5")),
+  lema: ("Lema", rgb("#0d9488")),
+  corolario: ("Corolario", rgb("#d97706")),
+  ejemplo: ("Ejemplo", rgb("#059669")),
+  axioma: ("Axioma", rgb("#dc2626")),
+  demostracion: ("demo", rgb("#475569")),
+  estrategia: ("estrategia", rgb("#d97706")),
+  resolucion: ("Resolución", rgb("#475569")),
+  desafio: ("Desafío", rgb("#d97706")),
   enunciado: ("Enunciado", rgb("#0284c7")),
   solucion: ("Solución", rgb("#15803d")),
   duda: ("Consulta Docente", rgb("#dc2626")),
 )
 
+
 #show figure.where(kind: "frame"): set figure(numbering: none)
+#show figure.where(kind: "frame"): set block(breakable: true)
 #show: frame-style(styles.boxy)
+
+#show grid.cell: it => {
+  if it.fill != none {
+    set text(fill: white, weight: "bold", style: "italic")
+    it
+  } else {
+    it
+  }
+}
+
 
 
 /// Dibuja una recta numérica sencilla con marcas y etiquetas ajustables.
@@ -28,6 +66,27 @@
     content((x, 0.5 * dir), lbl)
   }
 })
+
+/// Marca compacta de ítem ya resuelto, para el índice de enunciados de las guías.
+/// Uso: `+ Pruebe que ... #hecho`
+#let hecho = box(
+  baseline: 0.1em,
+  text(size: 9pt, weight: "bold", fill: rgb("#15803d"))[ ✓],
+)
+
+/// Panel de progreso de una guía: qué está resuelto, qué falta transcribir y qué sigue.
+/// Uso: #progreso[*Resueltos:* ejercicios 1 a 6 ...]
+#let progreso(cuerpo) = block(
+  fill: rgb("#f0fdf4"),
+  stroke: (left: 3.5pt + rgb("#15803d"), rest: 0.5pt + rgb("#bbf7d0")),
+  inset: (x: 12pt, y: 9pt),
+  radius: (right: 4pt),
+  width: 100%,
+)[
+  #text(weight: "bold", size: 9.5pt, fill: rgb("#15803d"))[Progreso] \
+  #v(2pt)
+  #text(size: 9.5pt)[#cuerpo]
+]
 
 /// Caja destacada para lemas auxiliares o justificaciones técnicas intermedias.
 /// Uso: #sublema(titulo: "Lema auxiliar")[Texto...]

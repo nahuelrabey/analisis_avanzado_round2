@@ -40,6 +40,11 @@
   badge(etiqueta, bg: cl.lighten(86%), fg: cl.darken(15%))
 }
 
+// Badges de estado de avance
+#let est-ok = badge("✓ completo", bg: rgb("#dcfce7"), fg: rgb("#15803d"))
+#let est-curso = badge("en curso", bg: rgb("#fef3c7"), fg: rgb("#92400e"))
+#let est-pend = badge("pendiente", bg: rgb("#f1f5f9"), fg: rgb("#475569"))
+
 #let bloque-card(titulo, tag-dias, color-borde: rgb("#2563eb"), cuerpo) = block(
   breakable: false,
   fill: rgb("#f8fafc"),
@@ -75,7 +80,56 @@
   ]
 ]
 
-#v(2pt)
+#v(3pt)
+
+== Estado actual
+
+#v(1pt)
+
+#block(
+  fill: rgb("#f0fdf4"),
+  stroke: (left: 4pt + rgb("#15803d"), rest: 0.5pt + rgb("#bbf7d0")),
+  inset: (x: 12pt, y: 8pt),
+  radius: (right: 5pt),
+  width: 100%
+)[
+  #text(size: 8pt, fill: rgb("#64748b"))[Actualizado: 12 de agosto de 2026] \
+  #v(2pt)
+  *Punto de avance: $approx$ Día 9 de 90.* El Cap. 1 está cerrado con los cuatro pasos y repasado; del Cap. 2 hay teoría transcrita hasta la mitad y ninguno de los pasos 2--4; y la Práctica 1 se arrancó antes de tiempo, con los ejercicios 1 a 6 resueltos.
+
+  #v(3pt)
+  *Todo lo que falta repasar del apunte es sucesiones* --- y es también lo que traba el resto de la guía: los ejercicios 8 a 15 de p1 son todos de ese capítulo.
+]
+
+#v(3pt)
+
+#table(
+  columns: (1.7fr, 0.6fr, 0.75fr, 2.6fr),
+  align: (left + horizon, center + horizon, center + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#1e3a8a") } else if calc.even(y) { rgb("#f8fafc") } else { white },
+  stroke: 0.4pt + rgb("#cbd5e1"),
+  inset: (x: 5pt, y: 3.5pt),
+
+  [*Tramo*], [*Días*], [*Estado*], [*Detalle*],
+  [Cap. 1 Supremos --- pasos 1 a 4], [1--5], est-ok, [Teoría, 6 demostraciones, 6 ejemplos y los desafíos, todo repasado],
+  [Cap. 2 Sucesiones --- #paso(1, "Teoría")], [6--8], est-curso, [`apuntes.typ` llega hasta la Prop. 8 (monótonas); faltan subsucesiones y Bolzano--Weierstrass],
+  [Cap. 2 Sucesiones --- pasos 2 a 4], [9--11], est-pend, [Es lo único sin repasar de todo `apuntes-typst/`],
+  [#badge("Práctica 1", bg: c-prac.lighten(86%), fg: c-prac.darken(15%)) --- Ej. 1 a 6], [12--15], est-ok, [15 de los 28 ítems; resueltos antes de lo previsto por el plan],
+  [#badge("Práctica 1", bg: c-prac.lighten(86%), fg: c-prac.darken(15%)) --- Ej. 7 a 15], [12--15], est-pend, [El 7 es de supremos; del 8 al 15, todos de sucesiones],
+  [Cap. 3 en adelante], [16--90], est-pend, [Sin empezar],
+)
+
+#v(3pt)
+
+#sublema(titulo: "Qué implica para el cronograma")[
+  - *El orden real se dio vuelta, y por ahora no costó nada.* El plan pone la guía recién después de cerrar los pasos 2--4 del capítulo; en los hechos p1 arrancó antes. Como los ejercicios 1--6 son de supremos y densidad --- material del Cap. 1, que sí está repasado --- el adelanto salió gratis.
+  - *La guía se frena sola en el ejercicio 8.* De ahí en adelante todo es límites, subsucesiones y monotonía. El único ejercicio que queda apoyado sólo en el Cap. 1 es el *7* (punto fijo de una función creciente vía supremo): conviene cerrarlo ahora y recién después volver a sucesiones.
+  - *Secuencia recomendada desde acá:* (1) Ej. 7 de p1; (2) terminar la teoría del Cap. 2 --- subsucesiones y Bolzano--Weierstrass, que son las 2 demostraciones que faltan de las 6; (3) pasos 2--4 de sucesiones (Días 9--11), que incluyen los 6 desafíos del capítulo; (4) retomar p1 desde el Ej. 8.
+  - *La recalibración del ritmo ya tiene muestra.* El plan pedía medir el ritmo real al terminar p1, pero con 6 ejercicios hechos alcanza para una primera lectura: anotá las horas que llevaron y comparalas con los 35 min/ítem presupuestados. Si el número real se parece a 50 min/ítem, hay que recortar alcance en p2 y p4 antes de llegar al Cap. 4.
+  - *Nota de conteo:* contando sub-ítems (a), (b), ... p1 tiene *28 ítems*, no los 31 que figuran en el inventario de más abajo. La diferencia no se propagó a los totales globales (245 ítems) porque no se recontaron p2--p9; hacelo cuando abras cada guía.
+]
+
+#v(3pt)
 
 == El método: 6 pasos, todos con días asignados
 
@@ -158,19 +212,20 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
 #v(2pt)
 
 #bloque-card("Bloque 1: Supremos y Sucesiones", "Días 1 al 15", color-borde: c-teoria)[
-  - *Días 1 -- 5: Cap. 1 Supremos (págs. 5--12)* --- ciclo completo de 4 pasos
+  - *Días 1 -- 5: Cap. 1 Supremos (págs. 5--12)* --- ciclo completo de 4 pasos #est-ok
     - #paso(1, "Teoría") _Días 1--3:_ Axiomas de cuerpo y orden, conjuntos acotados, propiedad del supremo, Principio de Arquímedes, ínfimo y densidad de $QQ$. Transcribir con `/apunte`.
     - #paso(2, "Demostraciones") _Día 4:_ Rehacer las 6 demostraciones del capítulo sin mirar el apunte.
     - #paso(3, "Ejemplos") + #paso(4, "Desafíos") _Día 5:_ 6 ejemplos y 2 desafíos.
   - *Días 6 -- 11: Cap. 2 Sucesiones (págs. 13--20)* --- ciclo completo
-    - #paso(1, "Teoría") _Días 6--8:_ Límite de sucesiones, álgebra de límites, subsucesiones, Bolzano-Weierstrass.
-    - #paso(2, "Demostraciones") _Día 9:_ Las 6 demostraciones del capítulo.
-    - #paso(3, "Ejemplos") _Día 10:_ 6 ejemplos.
-    - #paso(4, "Desafíos") _Día 11:_ 6 desafíos --- es el capítulo con más carga de este paso en la primera mitad.
-  - *Días 12 -- 15: #badge("Práctica 1 -- 31 ítems", bg: c-prac.lighten(86%), fg: c-prac.darken(15%))* #paso(5, "")
+    - #paso(1, "Teoría") _Días 6--8:_ Límite de sucesiones, álgebra de límites, subsucesiones, Bolzano-Weierstrass. #est-curso --- transcrito hasta la convergencia de monótonas (Prop. 8); faltan subsucesiones y Bolzano-Weierstrass.
+    - #paso(2, "Demostraciones") _Día 9:_ Las 6 demostraciones del capítulo. #est-pend
+    - #paso(3, "Ejemplos") _Día 10:_ 6 ejemplos. #est-pend --- hay 2 cargados en `ejemplos.typ`.
+    - #paso(4, "Desafíos") _Día 11:_ 6 desafíos --- es el capítulo con más carga de este paso en la primera mitad. #est-pend
+  - *Días 12 -- 15: #badge("Práctica 1 -- 31 ítems", bg: c-prac.lighten(86%), fg: c-prac.darken(15%))* #paso(5, "") #est-curso
     - Supremo, ínfimo, Arquímedes, densidad de irracionales, límites por definición, subsucesiones.
+    - #text(fill: rgb("#15803d"))[*Hecho:* ejercicios 1 a 6 (15 de 28 ítems), resueltos por adelantado. Transcritos en `guias/p1.typ`: 1, 2 (a--d) y 6 (a--b); los 3, 4 y 5 están resueltos pero sin pasar en limpio.]
     - #text(fill: rgb("#92400e"))[*Nota:* los ejercicios 1 y 2 de p1 ya están en `desafios.typ` como Desafíos 5.3 y 5.4. Aprovechalos: parte del paso 4 adelanta el paso 5.]
-    - #text(fill: rgb("#92400e"))[*Punto de recalibración:* al terminar, medí cuántas horas te llevaron realmente los 31 ítems y ajustá el resto del cronograma.]
+    - #text(fill: rgb("#92400e"))[*Punto de recalibración:* al terminar, medí cuántas horas te llevaron realmente los 31 ítems y ajustá el resto del cronograma. Con los ejercicios 1--6 ya hay una primera muestra para comparar contra los 35 min/ítem presupuestados.]
 ]
 
 #v(4pt)
