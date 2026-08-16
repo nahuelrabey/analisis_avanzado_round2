@@ -2,7 +2,7 @@
 #show: frame-style(styles.boxy)
 
 #align(center)[
-  #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
+  #text(14pt, weight: "bold")[Análisis Avanzado 2026] \
   #v(2pt)
   #text(12pt, weight: "medium")[Práctica 1]
 ]
@@ -12,80 +12,154 @@
 #v(8pt)
 
 #progreso[
-  *Resueltos:* ejercicios 1 a 6 completos --- 15 de los 28 ítems de la guía. Van marcados con #hecho en la lista de abajo.
+  *Resueltos:* ejercicios 1 a 6 completos --- 15 de los 32 ítems de la guía. Van marcados con #hecho en la lista de abajo.
 
   *Transcritos en este archivo:* Ej. 1, Ej. 2 (a--d) y Ej. 6 (a--b). Los ejercicios 3, 4 y 5 están resueltos pero todavía sin pasar en limpio: usá `/guia` cuando quieras incorporarlos.
 
-  *Lo que sigue:* el Ej. 7 (punto fijo vía supremo) es lo último de la guía que se apoya sólo en el Cap. 1. Del Ej. 8 al 15 todo es sucesiones, así que conviene cerrar antes los pasos 2--4 de ese capítulo.
+  *Edición:* este archivo sigue la guía *2026* (`apuntes-docentes/guias/p1.pdf`). Respecto de la versión 2025 que estaba transcrita antes: el ejercicio de punto fijo ya no forma parte de la práctica (queda al final, como anexo), entraron dos ejercicios nuevos --- el *8* y el *9* --- y del 7 en adelante la numeración corre un lugar. Los ejercicios 1 a 6 no cambiaron.
+
+  *Lo que sigue:* del Ej. 7 al 16 es todo sucesiones, así que conviene cerrar antes los pasos 2--4 del Cap. 2. Arrancá por el *Ej. 8*: es el lema que después usan el 7 (b), el 7 (c) y el 11.
 ]
 
+#v(10pt)
+
+#align(center)[
+  #text(11.5pt, weight: "bold", fill: rgb("#0c4a6e"))[Qué leer antes de empezar]
+]
+
+#v(3pt)
+
+Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña. Las filas son acumulativas: cada una supone leídas las de arriba.
+
+#v(5pt)
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#block[
+  #set text(size: 8.5pt)
+  #table(
+    columns: (0.55fr, 4fr, 0.7fr),
+    align: (center + horizon, left + top, center + horizon),
+    fill: (x, y) => if y == 0 { rgb("#0c4a6e") } else if calc.even(y) { rgb("#f8fafc") } else { white },
+    stroke: 0.4pt + rgb("#cbd5e1"),
+    inset: (x: 6pt, y: 5pt),
+
+    [*Ejercicios*], [*Leer en `apuntes.typ`*], [*Ejemplos*],
+
+    [*1* y *2*],
+    [*Principio de Arquímedes* (teorema) con su demostración · *Principio de Arquímedes 2* · *Densidad de $QQ$*: su demostración _es_ el ítem 2 (b), y deja planteado el 2 (a) como ejercicio.],
+    [5],
+
+    [*3*, *4* y *5*],
+    [*Conjunto Acotado Superiormente* · *Supremo* · *Axioma de Completitud* · *Máximo* y *Caracterización de Supremo y Máximo* · *Conjunto Acotado Inferiormente*, *Ínfimo*, *Mínimo* y *Caracterización de Ínfimo y Mínimo* · *Equivalencia de supremo* (la de $epsilon$) y *Equivalencia de Ínfimo*: esta última demostración _es_ el Ej. 3.],
+    [1--4, 6],
+
+    [*6*],
+    [*Completitud en términos de ínfimos*: su demostración es el ítem (a) con los roles cambiados --- prueba que si $A$ está acotado inferiormente entonces $-A$ lo está superiormente, y que $op("ínf")(A) = -op("sup")(-A)$. El ítem (b) es el mismo argumento multiplicando por $c$ en vez de por $-1$.],
+    [---],
+
+    [*7* y *8*],
+    [*Sucesiones* · *Convergencia de Sucesiones* · otra vez el *Principio de Arquímedes*, que es lo que produce el $n_0$ al final de cada cuenta.],
+    [7, 8],
+
+    [*9*, *10* y *11*],
+    [*Divergencia de Sucesiones* (para los casos $ell = plus.minus oo$ del Ej. 9) · *Álgebra de límites* con sus demostraciones: la del ítem c, caso $b = 0$, es el argumento completo del Ej. 11 · *Sucesión Acotada* y *Toda sucesión convergente está acotada* · *Unicidad del límite*.],
+    [8],
+
+    [*12* y *13*],
+    [*Sucesión Monótona* · *Convergencia de sucesiones monótonas crecientes*: el Ej. 12 (a) es su espejo · *Equivalencia del supremo 2*, cuya demostración construye la sucesión que pide el Ej. 13.],
+    [10, 12],
+
+    [*14*, *15* y *16*],
+    [*Subsucesión* · *Convergencia de subsucesiones* con su demostración · *Negación de la Convergencia*, que es por donde se entra al Ej. 15.],
+    [9, 11, 12],
+  )
+]
+
+#v(5pt)
+
+#text(size: 9pt)[
+  *Dónde no hay ejemplo:* los Ej. 7 (b)--(c), 8, 9, 11, 12 (b), 14, 15 y 16 (b) no tienen ninguno que los ensaye. El modelo más cercano de cada uno --- casi siempre un desafío resuelto o una demostración del apunte --- está listado al final de `ejemplos.typ`, en las notas *Huecos frente a la Práctica 1* y *Dónde está el modelo cuando no hay ejemplo*.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
 #v(8pt)
 
 #set enum(numbering: "1.")
 
-+ Pruebe que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deduzca que si $|x - y| < epsilon$ para todo $epsilon > 0$, entonces $x = y$. #hecho
++ Probar que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deducir que si $abs(x - y) < epsilon$ para todo $epsilon > 0$, entonces $x = y$. #hecho
 
 + #set enum(numbering: "(a)")
-  + Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$. #hecho
-  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un racional entre $x$ e $y$. #hecho
-  + Sean $x, y in QQ$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$. #hecho
-  + Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$. #hecho
+  + Sean $x, y in RR$ tales que $y - x > 1$. Probar que existe un entero entre $x$ e $y$. #hecho
+  + Sean $x, y in RR$ tales que $x < y$. Probar que existe un racional entre $x$ e $y$. #hecho
+  + Sean $x, y in QQ$ tales que $x < y$. Probar que existe un irracional entre $x$ e $y$. #hecho
+  + Sean $x, y in RR$ tales que $x < y$. Probar que existe un irracional entre $x$ e $y$. #hecho
 
-+ Sea $A subset.eq RR$ no vacío y acotado inferiormente. Pruebe la siguiente equivalencia: #hecho
++ Sea $A subset.eq RR$ no vacío y acotado inferiormente. Probar la siguiente equivalencia: #hecho
   $ i = op("ínf") A <=> cases(
     i <= a "para todo " a in A,,
     "para todo " epsilon > 0 "existe " a in A "tal que " i <= a < i + epsilon.
   ) $
 
-+ Halle, si existen, supremo, ínfimo, máximo y mínimo de los siguientes subconjuntos de $RR$, y pruebe que lo son:
++ Hallar, si existen, supremo, ínfimo, máximo y mínimo de los siguientes subconjuntos de $RR$, y probar que lo son:
   #set enum(numbering: "(a)")
   #grid(
     columns: (1fr, 1fr),
     row-gutter: 10pt,
-    [+ $(a, b]$ #hecho],
-    [+ $B union \{0\}$ #hecho],
-    [+ $B = \{1/2^n : n in NN\}$ #hecho],
-    [+ $\{x^2 - x - 1 : x in RR\}$ #hecho]
+    [#set enum(numbering: "(a)", start: 1)
+     + $(a, b]$ #hecho],
+    [#set enum(numbering: "(a)", start: 2)
+     + $B = \{1/2^n : n in NN\}$ #hecho],
+    [#set enum(numbering: "(a)", start: 3)
+     + $B union \{0\}$ #hecho],
+    [#set enum(numbering: "(a)", start: 4)
+     + $\{x^2 - x - 1 : x in RR\}$ #hecho]
   )
 
-+ Sean $A subset.eq B subset.eq RR$, con $A != nothing$. Pruebe las siguientes afirmaciones:
++ Sean $A subset.eq B subset.eq RR$, con $A != nothing$. Probar las siguientes afirmaciones:
   #set enum(numbering: "(a)")
   + Si $B$ está acotado superiormente, entonces $A$ también lo está, y $op("sup") A <= op("sup") B$. #hecho
   + Si $B$ está acotado inferiormente, entonces $A$ también lo está, e $op("ínf") B <= op("ínf") A$. #hecho
   + Si $A$ no está acotado, entonces $B$ tampoco lo está. #hecho
 
-+ Dados un conjunto de números reales $A$ y $c in RR$, denotamos $c A = \{c a : a in A\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Pruebe las siguientes afirmaciones:
++ Dados un conjunto de números reales $A$ y $c in RR$, denotamos $c A = \{c a : a in A\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Probar las siguientes afirmaciones:
   #set enum(numbering: "(a)")
-  + Si $A$ está acotado superiormente, entonces $-A$ está acotado inferiormente e $op("ínf")(-A) = -op("sup") A$. #hecho
-  + Si $c > 0$ y $A$ está acotado superiormente, entonces $c A$ está acotado superiormente y $op("sup")(c A) = c op("sup")(A)$. #hecho
+  + Probar que si $A$ está acotado superiormente, entonces $-A$ está acotado inferiormente e $op("ínf")(-A) = -op("sup") A$. #hecho
+  + Probar que si $c > 0$ y $A$ está acotado superiormente, entonces $c A$ está acotado superiormente y $op("sup")(c A) = c op("sup")(A)$. #hecho
 
-+ Sea $f : [a, b] -> [a, b]$ creciente. Supongamos que $f(a) > a$. Sea
-  $ x_0 = op("sup")(\{x in [a, b] : f(x) > x\}). $
-  Pruebe que $f(x_0) = x_0$.
-
-+ Pruebe, usando la definición de límite:
++ Probar, usando la definición de límite:
   #set enum(numbering: "(a)")
   + $lim_(n -> oo) (3 - 2n)/(n + 1) = -2$.
   + $lim_(n -> oo) (sin(n))/n = 0$.
   + $lim_(n -> oo) (2^n - 3)/(2^n + 4) = 1$.
 
-+ Sean $(x_n)_(n in NN), (y_n)_(n in NN)$ sucesiones de números reales tales que $x_n ->_(n -> oo) ell_1$ e $y_n ->_(n -> oo) ell_2$. Pruebe que si $x_n <= y_n$ para todo $n$, entonces $ell_1 <= ell_2$.
++ Sean $(x_n)_(n in NN)$ y $(a_n)_(n in NN)$ sucesiones de números reales. Probar que si $abs(x_n - ell) <= a_n$ para todo $n in NN$ y $a_n ->_(n -> oo) 0$ entonces $x_n ->_(n -> oo) ell$.
 
-+ Si $(x_n)_(n in NN)$ e $(y_n)_(n in NN)$ son sucesiones de números reales tales que $(x_n)_(n in NN)$ converge a $0$ e $(y_n)_(n in NN)$ está acotada, pruebe que $(x_n y_n)_(n in NN)$ converge a $0$.
++ Si $(x_n)_(n in NN)$ e $(y_n)_(n in NN)$ son sucesiones de números reales tales que $x_n ->_(n -> oo) ell_1$ e $y_n ->_(n -> oo) ell_2$, probar que $x_n + y_n ->_(n -> oo) ell_1 + ell_2$ para el caso en que:
+  #set enum(numbering: "(a)")
+  + $ell_1, ell_2 in RR$.
+  + $ell_1 in RR$ y $ell_2 = oo$.
+  + $ell_1 = +oo = ell_2$.
+  + Pensar por qué no vale en el caso en que $ell_1 = +oo$ y $ell_2 = -oo$. Dar un contraejemplo para este caso.
 
-+ Sea $(x_n)_(n in NN) subset.eq RR$ decreciente. Pruebe que:
++ Sean $(x_n)_(n in NN), (y_n)_(n in NN)$ sucesiones de números reales tales que $x_n ->_(n -> oo) ell_1$ e $y_n ->_(n -> oo) ell_2$. Probar que si $x_n <= y_n$ para todo $n$, entonces $ell_1 <= ell_2$.
+
++ Si $(x_n)_(n in NN)$ e $(y_n)_(n in NN)$ son sucesiones de números reales tales que $(x_n)_(n in NN)$ converge a $0$ e $(y_n)_(n in NN)$ está acotada, probar que $(x_n y_n)_(n in NN)$ converge a $0$.
+
++ Sea $(x_n)_(n in NN) subset.eq RR$ decreciente. Probar que:
   #set enum(numbering: "(a)")
   + Si $(x_n)_(n in NN)$ es acotada inferiormente, entonces tiene límite y
     $ lim_(n -> oo) x_n = op("ínf")\{x_n : n in NN\}. $
   + Si $(x_n)_(n in NN)$ es no acotada inferiormente, entonces $x_n ->_(n -> oo) -oo$.
 
-+ Sea $A subset.eq RR$ acotado superiormente y no vacío. Pruebe que si $A$ no tiene máximo entonces existe $(a_n)_(n in NN) subset.eq A$ estrictamente creciente tal que $a_n ->_(n -> oo) op("sup")(A)$.
++ Sea $A subset.eq RR$ acotado superiormente y no vacío. Probar que si $A$ no tiene máximo entonces existe $(a_n)_(n in NN) subset.eq A$ estrictamente creciente tal que $a_n ->_(n -> oo) op("sup")(A)$.
 
-+ Sea $(x_n)_(n in NN) subset.eq RR$ una sucesión no acotada superiormente. Pruebe que existe una subsucesión $(x_(n_k))_(k in NN)$ que diverge a $+oo$.
++ Sea $(x_n)_(n in NN) subset.eq RR$ una sucesión no acotada superiormente. Probar que existe una subsucesión $(x_(n_k))_(k in NN)$ que diverge a $+oo$.
 
-+ Sean $(x_n)_(n in NN) subset.eq RR$ y $ell in RR$. Pruebe que si toda subsucesión $(x_(n_k))_(k in NN)$ tiene una (sub)subsucesión $(x_(n_(k_j)))_(j in NN)$ que converge a $ell$, entonces la sucesión $(x_n)_(n in NN)$ converge a $ell$.
++ Sean $(x_n)_(n in NN) subset.eq RR$ y $ell in RR$. Probar que si toda subsucesión $(x_(n_k))_(k in NN)$ tiene una (sub)subsucesión $(x_(n_(k_j)))_(j in NN)$ que converge a $ell$, entonces la sucesión $(x_n)_(n in NN)$ converge a $ell$.
 
-+ Sea $(x_n)_(n in NN) subset.eq RR$. Pruebe:
++ Sea $(x_n)_(n in NN) subset.eq RR$. Probar:
   #set enum(numbering: "(a)")
   + Si $(x_(2k))_(k in NN)$ y $(x_(2k-1))_(k in NN)$ son convergentes, y sus límites coinciden, entonces $(x_n)_(n in NN)$ es convergente.
   + Si $(x_(2k))_(k in NN)$, $(x_(2k-1))_(k in NN)$ y $(x_(3k))_(k in NN)$ son convergentes, entonces $(x_n)_(n in NN)$ es convergente.
@@ -95,7 +169,7 @@
 #v(8pt)
 
 #enunciado[Ejercicio 1][
-  Pruebe que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deduzca que si $|x - y| < epsilon$ para todo $epsilon > 0$, entonces $x = y$.
+  Probar que si $x < y + epsilon$ para todo $epsilon > 0$, entonces $x <= y$. Deducir que si $abs(x - y) < epsilon$ para todo $epsilon > 0$, entonces $x = y$.
 ]
 
 #solucion[Propuesta 1][
@@ -109,7 +183,7 @@
 #v(8pt)
 
 #enunciado[Ejercicio 2 (a)][
-  Sean $x, y in RR$ tales que $y - x > 1$. Pruebe que existe un entero entre $x$ e $y$.
+  Sean $x, y in RR$ tales que $y - x > 1$. Probar que existe un entero entre $x$ e $y$.
 ]
 
 #solucion[Propuesta 1][
@@ -123,7 +197,7 @@
 #v(8pt)
 
 #enunciado[Ejercicio 2 (b)][
-  Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un racional entre $x$ e $y$.
+  Sean $x, y in RR$ tales que $x < y$. Probar que existe un racional entre $x$ e $y$.
 ]
 
 #solucion[Propuesta 1][
@@ -135,7 +209,7 @@
 #v(8pt)
 
 #enunciado[Ejercicio 2 (c)][
-  Sean $x, y in QQ$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
+  Sean $x, y in QQ$ tales que $x < y$. Probar que existe un irracional entre $x$ e $y$.
 ]
 
 #solucion[Propuesta 1][
@@ -154,7 +228,7 @@
 #v(8pt)
 
 #enunciado[Ejercicio 2 (d)][
-  Sean $x, y in RR$ tales que $x < y$. Pruebe que existe un irracional entre $x$ e $y$.
+  Sean $x, y in RR$ tales que $x < y$. Probar que existe un irracional entre $x$ e $y$.
 ]
 
 #solucion[Propuesta 1][
@@ -203,8 +277,16 @@
   $ op("sup")(c A) = c s = c op("sup")(A) $
 ]
 
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
 
+#sublema(titulo: "Anexo: ejercicio de la edición 2025")[
+  La guía 2026 no incluye el ejercicio de punto fijo, que figuraba como *Ejercicio 7* en la edición anterior. Se conserva acá porque es el único ejercicio de toda la práctica que se apoya sólo en el Cap. 1 y estaba marcado como el siguiente a resolver.
+]
 
-
-
-
+#enunciado[Ejercicio 7 (edición 2025)][
+  Sea $f : [a, b] -> [a, b]$ creciente. Supongamos que $f(a) > a$. Sea
+  $ x_0 = op("sup")(\{x in [a, b] : f(x) > x\}). $
+  Pruebe que $f(x_0) = x_0$.
+]

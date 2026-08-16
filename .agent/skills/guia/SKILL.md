@@ -22,6 +22,14 @@ Esta skill instruye al agente sobre cómo procesar imágenes o textos de ejercic
 - El archivo destino es [`apuntes-typst/guias/p{N}.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/guias/).
 - Asegurar que el archivo contenga la cabecera `#import "../utils.typ": *`.
 
+#### Verificación de edición (obligatoria)
+La cátedra republica las guías cada cuatrimestre y los PDF de `apuntes-docentes/guias/` se reemplazan sin aviso. Antes de transcribir:
+
+1. Comparar el encabezado del `.typ` (ej. `Análisis Avanzado 2026`) con la primera línea del PDF correspondiente:
+   `pdftotext -layout -f 1 -l 1 apuntes-docentes/guias/p{N}.pdf - | head -5`
+2. Si difieren, **avisar al usuario antes de seguir**: la numeración de los ejercicios puede haber corrido y las marcas `#hecho` quedarían apuntando a enunciados equivocados.
+3. Al actualizar un `.typ` a una edición nueva, los ejercicios que ya no figuran en la guía **no se borran**: pasan a un anexo al final del archivo, encabezado por un `#sublema` que aclare de qué edición vienen y por qué se conservan.
+
 ### 2. Procesamiento del Input del Usuario
 Inspeccionar la imagen o texto enviado y extraer:
 1. **Número o Título del Ejercicio** (ej. "Ejercicio 3 (b)").
@@ -75,3 +83,12 @@ Al transcribir un ejercicio con `/guia`:
 3. Si el avance modifica el punto en que está el usuario dentro del plan, avisarle para actualizar la sección *"Estado actual"* de [`apuntes-typst/plan_de_trabajo.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/plan_de_trabajo.typ).
 
 **Cuidado:** un ejercicio puede estar resuelto sin estar transcrito. `#hecho` marca *resuelto*; el panel `#progreso` es el que aclara qué falta pasar en limpio.
+
+### 7. Tabla "Qué leer antes de empezar"
+Las guías llevan, entre el panel `#progreso` y la lista de enunciados, una tabla de tres columnas (*Ejercicios* / *Leer en `apuntes.typ`* / *Ejemplos*) que dice qué teoría y qué ejemplos hay que leer antes de cada tramo. Hay que revisarla cuando:
+
+- cambia la numeración de la guía (edición nueva),
+- se transcribe teoría nueva con `/apunte` que alguno de los tramos necesita,
+- se carga un ejemplo con `/ejemplo` que tapa uno de los huecos anotados debajo de la tabla.
+
+Las cajas de `apuntes.typ` se referencian **por nombre** (los tags numéricos se repiten entre definiciones y proposiciones); los ejemplos, por su número de pestaña.

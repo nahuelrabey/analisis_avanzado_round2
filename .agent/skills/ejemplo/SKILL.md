@@ -71,4 +71,14 @@ Esta skill instruye al agente sobre cómo procesar imágenes de ejemplos o ejerc
 - Asegurar que la notación matemática, símbolos, subíndices, integrales, límites y funciones estén correctamente adaptados a la sintaxis nativa de Typst (`$ ... $`).
 
 ### 5. Actualización del Archivo
-- Añadir los nuevos bloques al final de [`apuntes-typst/ejemplos.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/ejemplos.typ), preservando todo el contenido existente.
+
+`ejemplos.typ` **no es una lista cronológica**: está organizado en bloques temáticos (`== Bloque N · Título`) ordenados como escalera de preparación para la práctica correspondiente. Cada bloque abre con un `#sublema(titulo: "Qué desbloquea")[...]` que explica qué ejercicios de la guía habilita.
+
+Por lo tanto, al incorporar un ejemplo nuevo:
+
+1. **Identificar la técnica** del ejemplo (acotar por definición, caracterización $\varepsilon$, densidad, límite por definición, negación de convergencia, monotonía/subsucesiones, ...).
+2. **Insertarlo al final del bloque temático que corresponda**, *no* al final del archivo. Si el ejemplo no encaja en ningún bloque existente, crear un bloque nuevo con su encabezado `==` y su `#sublema(titulo: "Qué desbloquea")[...]`, ubicándolo en el punto de la escalera donde la técnica se necesita por primera vez.
+3. **Actualizar la tabla-mapa del encabezado** si se creó un bloque nuevo o si el ejemplo cambia qué ejercicios de la guía quedan cubiertos.
+4. **Revisar la nota final "Huecos frente a la Práctica N"**: si el ejemplo recién cargado tapa uno de los huecos listados, borrar ese ítem.
+
+Preservar siempre todo el contenido existente.
