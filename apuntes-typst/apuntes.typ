@@ -488,4 +488,55 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   que es lo que queríamos probar.
 ]
 
+#proposicion[Equivalencia del supremo 2][
+  Sea $A subset.eq RR$ no vacío y acotado superiormente. Entonces $s = op("sup")(A)$ si y sólo si:
+
+  #set enum(numbering: "a)")
+  + $s$ es cota superior de $A$, y
+  + existe una sucesión $(a_n)_(n in NN) subset.eq A$ tal que $lim_(n -> oo) a_n = s$.
+]
+
+#demostracion[
+  - *($=>$)* Sea $s = op("sup")(A)$. Por definición de supremo, se cumple a). Para ver que también se cumple b), vamos a construir una sucesión $(a_n)_(n in NN)$ que cumpla lo que queremos ver. Empezamos tomando $epsilon = 1$. Por la equivalencia que ya probamos, sabemos que tiene que existir un elemento de $A$ que sea más grande que $s - 1$, es decir que existe un elemento $a_1 in A$ tal que $s - 1 < a_1 <= s$. Para elegir $a_2$ vamos a repetir este razonamiento pero achicando el $epsilon$, ahora tomamos $epsilon = 1/2$. Otra vez por la equivalencia, sabemos que existe $a_2 in A$ tal que $s - 1/2 < a_2 <= s$. En general, para elegir $a_n$ vamos a tomar $epsilon = 1/n > 0$ y vamos a elegir $a_n in A$ tal que $s - 1/n < a_n <= s$.
+
+    Veamos que esta sucesión cumple que $a_n -> s$. Sea $epsilon > 0$ (acá este $epsilon$ es un número arbitrario, no es de los que veníamos eligiendo antes). Por el principio de Arquímedes sabemos que debe existir un número natural $n_0$ tal que $epsilon > 1/n_0 > 0$. Además, como $1/n$ es una sucesión decreciente, sabemos que $1/n <= 1/n_0$ para todo $n >= n_0$. Con todo esto tenemos que si $n >= n_0$,
+
+    $ abs(s - a_n) = s - a_n < 1/n <= 1/n_0 < epsilon, $
+
+    lo que prueba que $a_n -> s$.
+
+  - *($<=.bar$)* Sea $s$ que cumple a) y b) y veamos que es el supremo de $A$. Como $s$ cumple a) ya sabemos que es cota superior. Veamos que también cumple la condición 2 de la primera equivalencia de supremo. Sea $epsilon > 0$. Como $a_n -> s$, sabemos que debe existir un $n_0$ tal que $abs(s - a_n) < epsilon$ para todo $n >= n_0$. En particular, usando que $s$ es cota superior, tenemos
+
+    $ abs(s - a_(n_0)) = s - a_(n_0) < epsilon => s - epsilon < a_(n_0) $
+
+    y $a_(n_0) in A$. Es decir, encontramos un elemento de $A$ que es más grande que $s - epsilon$, que es lo que queríamos probar.
+]
+
+#definicion[Subsucesión][
+  Una subsucesión de $(a_n)_(n in NN)$ es una sucesión de la forma $(a_(n_k))$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 < n_2 < n_3 < ...$.
+]
+
+#proposicion[Convergencia de subsucesiones][
+  Si $lim_(n -> oo) a_n = ell$, entonces toda subsucesión también converge a $ell$.
+]
+
+#demostracion[
+  Sea $(a_(n_k))_(k in NN)$ una subsucesión de $(a_n)_(n in NN)$. Para probar que $a_(n_k) -> ell$, empezamos tomando $epsilon > 0$ y queremos encontrar $k_0$ tal que $abs(a_(n_k) - ell) < epsilon$ para todo $k >= k_0$.
+
+  Sabemos que para este $epsilon$, como $a_n -> ell$ debe existir $n_0 in NN$ tal que
+
+  $ abs(a_n - ell) < epsilon quad "para todo" n >= n_0. $
+
+  Estamos tentados a elegir el mismo índice para la subsucesión. Sin embargo, no sabemos que $n_0$ sea uno de los índices elegidos dentro de nuestra subsucesión (por ejemplo, en el ejemplo que vimos antes donde la subsucesión era elegir todos los índices pares, podría ser que este $n_0$ sea un índice impar y por lo tanto no lo podríamos elegir). Pero lo que sí sabemos es que los índices elegidos por la subsucesión son infinitos y crecientes, por lo tanto, tiene que existir un índice $n_(k_0) > n_0$. Es decir, que hay un índice elegido por la subsucesión que sea más grande que $n_0$ (ojo, acá es fácil confundirse con la notación. Estamos hablando de los índices, no de los elementos de la sucesión).
+
+  Elegido este $n_(k_0)$, lo que sabemos es que $n_k > n_(k_0)$ para todo $k > k_0$ y por lo tanto, $n_k > n_0$. Pero entonces
+
+  $ abs(a_(n_k) - ell) < epsilon quad "para todo" k >= k_0, $
+
+  que es lo que queríamos probar.
+]
+
+
+
+
 

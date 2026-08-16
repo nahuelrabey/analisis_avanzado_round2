@@ -372,6 +372,28 @@
   Por los dos casos anteriores, concluimos que existe $n_0 in NN$ tal que $|a_n| >= |a|/2 > 0$ para todo $n >= n_0$.
 ]
 
+#desafio[Ejercicio 2.17][
+  Sea $(a_n)_(n in NN)$ creciente y no acotada. Probar que $a_n -> +oo$.
+]
+
+#desafio[Ejercicio 2.19][
+  En la equivalencia de supremo se puede tomar la sucesión $(a_n)_(n in NN)$ monótona creciente. Es decir, vale la siguiente proposición: Sea $A subset.eq RR$ acotado superiormente. Entonces $s = op("sup")(A)$ si y sólo si:
+
+  #set enum(numbering: "1.")
+  + $s$ es cota superior de $A$, y
+  + existe una sucesión monótona creciente $(a_n) subset.eq A$ tal que $lim_(n -> oo) a_n = s$.
+
+  #v(4pt)
+  Modificar la demostración anterior para probar esta nueva equivalencia.
+]
+
+#desafio[Límite de la sucesión $a_n = n / (n + 1)$][
+  Demostrar que $lim_(n -> +oo) n / (n + 1) = 1$.
+]
+
+
+
+
 
 
 

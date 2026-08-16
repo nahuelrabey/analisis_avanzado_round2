@@ -26,6 +26,7 @@ _reglas_:
 2. El código en `apuntes-typst` debe ser escrito en Typst
 3. Las `scripts/animaciones/` se harán usando `manim` y las `scripts/slides` usando `manim-slides`
 4. Los multiple-choices s harán en HTML plano y CSS simple (se verán sólo en PC). Tendrán una función en javascript para que las preguntas se presenten de forma aleatoria.
+5. Siempre que se escriban expresiones con valor absoluto en Typst, usar obligatoriamente la función `abs(...)` en lugar de barras verticales aisladas `|...|` (por ejemplo, `abs(a_n)` o `abs(a)`).
 
 ## Modificacion de apuntes
 
