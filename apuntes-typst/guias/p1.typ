@@ -29,7 +29,7 @@
 
 #v(3pt)
 
-Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña. Las filas son acumulativas: cada una supone leídas las de arriba.
+Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña, y los que empiezan con *C* son los resueltos en clase (`C1-4` es el Ejemplo 4 de `clases/apuntes_1.typ`). Las filas son acumulativas: cada una supone leídas las de arriba.
 
 #v(5pt)
 
@@ -38,7 +38,7 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
 #block[
   #set text(size: 8.5pt)
   #table(
-    columns: (0.55fr, 4fr, 0.7fr),
+    columns: (0.5fr, 3.7fr, 1fr),
     align: (center + horizon, left + top, center + horizon),
     fill: (x, y) => if y == 0 { rgb("#0c4a6e") } else if calc.even(y) { rgb("#f8fafc") } else { white },
     stroke: 0.4pt + rgb("#cbd5e1"),
@@ -48,11 +48,11 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
 
     [*1* y *2*],
     [*Principio de Arquímedes* (teorema) con su demostración · *Principio de Arquímedes 2* · *Densidad de $QQ$*: su demostración _es_ el ítem 2 (b), y deja planteado el 2 (a) como ejercicio.],
-    [5],
+    [5, C1-5, C1-6],
 
     [*3*, *4* y *5*],
     [*Conjunto Acotado Superiormente* · *Supremo* · *Axioma de Completitud* · *Máximo* y *Caracterización de Supremo y Máximo* · *Conjunto Acotado Inferiormente*, *Ínfimo*, *Mínimo* y *Caracterización de Ínfimo y Mínimo* · *Equivalencia de supremo* (la de $epsilon$) y *Equivalencia de Ínfimo*: esta última demostración _es_ el Ej. 3.],
-    [1--4, 6],
+    [1--4, 6, C1-4],
 
     [*6*],
     [*Completitud en términos de ínfimos*: su demostración es el ítem (a) con los roles cambiados --- prueba que si $A$ está acotado inferiormente entonces $-A$ lo está superiormente, y que $op("ínf")(A) = -op("sup")(-A)$. El ítem (b) es el mismo argumento multiplicando por $c$ en vez de por $-1$.],
@@ -60,26 +60,33 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
 
     [*7* y *8*],
     [*Sucesiones* · *Convergencia de Sucesiones* · otra vez el *Principio de Arquímedes*, que es lo que produce el $n_0$ al final de cada cuenta.],
-    [7, 8],
+    [7, 8, \ C1-1.1, C1-1.2],
 
     [*9*, *10* y *11*],
     [*Divergencia de Sucesiones* (para los casos $ell = plus.minus oo$ del Ej. 9) · *Álgebra de límites* con sus demostraciones: la del ítem c, caso $b = 0$, es el argumento completo del Ej. 11 · *Sucesión Acotada* y *Toda sucesión convergente está acotada* · *Unicidad del límite*.],
-    [8],
+    [8, C1-1.2, C1-3],
 
     [*12* y *13*],
     [*Sucesión Monótona* · *Convergencia de sucesiones monótonas crecientes*: el Ej. 12 (a) es su espejo · *Equivalencia del supremo 2*, cuya demostración construye la sucesión que pide el Ej. 13.],
-    [10, 12],
+    [10, 12, \ C1-2, C1-6, C2-1],
 
     [*14*, *15* y *16*],
     [*Subsucesión* · *Convergencia de subsucesiones* con su demostración · *Negación de la Convergencia*, que es por donde se entra al Ej. 15.],
-    [9, 11, 12],
+    [9, 11, \ C2-2, C2-3],
   )
 ]
 
 #v(5pt)
 
 #text(size: 9pt)[
-  *Dónde no hay ejemplo:* los Ej. 7 (b)--(c), 8, 9, 11, 12 (b), 14, 15 y 16 (b) no tienen ninguno que los ensaye. El modelo más cercano de cada uno --- casi siempre un desafío resuelto o una demostración del apunte --- está listado al final de `ejemplos.typ`, en las notas *Huecos frente a la Práctica 1* y *Dónde está el modelo cuando no hay ejemplo*.
+  *Los tres que más rinden:*
+  #v(2pt)
+  - *C1-1.1 y C1-1.2* son los Ej. 7 (c) y 7 (b) casi textuales: acotar $1/2^n <= 1/m$ usando $m <= 2^m$, y acotar $abs((-1)^n + 2) <= 3$ *antes* de aplicar Arquímedes. El C1-1.2 es además el Ej. 11 (acotada por nula) en versión concreta, y el lema que ordena a los dos es el Ej. 8.
+  - *C2-2* es el Ej. 16 con tres clases de restos en vez de dos: su prueba (I) --- partir $NN$ y tomar el máximo de los índices --- es la técnica del 16 (a) y (b), y su lema auxiliar construye recursivamente la subsucesión "mala", que es el paso central del Ej. 15 y la primera mitad del 14.
+  - *C1-6* construye una sucesión de racionales estrictamente decreciente que converge a $x$: es el Ej. 13 en espejo (allá hay que subir hasta el supremo).
+
+  #v(3pt)
+  *Lo que sigue sin ejemplo:* la divergencia a $plus.minus oo$ *por definición* --- el cuantificador "para todo $M > 0$", que hace falta en los Ej. 9 (b)--(d), 12 (b) y en la segunda mitad del 14 --- y el punto fijo del anexo. Para todo lo demás, el modelo más cercano está listado al final de `ejemplos.typ`.
 ]
 
 #v(10pt)

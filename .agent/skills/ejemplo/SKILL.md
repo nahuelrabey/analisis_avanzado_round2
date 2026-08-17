@@ -80,5 +80,13 @@ Por lo tanto, al incorporar un ejemplo nuevo:
 2. **Insertarlo al final del bloque temático que corresponda**, *no* al final del archivo. Si el ejemplo no encaja en ningún bloque existente, crear un bloque nuevo con su encabezado `==` y su `#sublema(titulo: "Qué desbloquea")[...]`, ubicándolo en el punto de la escalera donde la técnica se necesita por primera vez.
 3. **Actualizar la tabla-mapa del encabezado** si se creó un bloque nuevo o si el ejemplo cambia qué ejercicios de la guía quedan cubiertos.
 4. **Revisar la nota final "Huecos frente a la Práctica N"**: si el ejemplo recién cargado tapa uno de los huecos listados, borrar ese ítem.
+5. **Actualizar la tabla "Qué leer antes de empezar"** de la guía correspondiente (`guias/p{N}.typ`), que referencia los ejemplos por su tag.
 
 Preservar siempre todo el contenido existente.
+
+### 5.1 Tags: la pestaña dice de dónde viene el ejemplo
+
+- **Número solo** (`8`): ejemplo de `notas_materia.pdf`, con el contador secuencial del apunte. El título lleva además su numeración por capítulo entre paréntesis: `(Ejemplo 2.4)`.
+- **`C{clase}-{ejemplo}`** (`C1-1.2`, `C2-2`): ejercicio resuelto en clase, transcrito en `clases/apuntes_{clase}.typ`. El título termina en `(Clase 1 · Ejemplo 1.2)`.
+
+Los ejemplos de clase **sí se copian** a `ejemplos.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos acá y ubicarlos en el bloque que corresponda. Los que sean de un capítulo posterior al de la práctica en curso quedan fuera de la escalera: se anotan como pendientes en la nota de huecos.

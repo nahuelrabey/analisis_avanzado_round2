@@ -76,7 +76,7 @@ $
   Si $(a_n)_n$ no converge a $L$, entonces existe $epsilon > 0$ tal que para todo $n in NN$ existe $n_0 >= n$ tal que $abs(a_(n_0) - L) >= epsilon$.
   - Si $n = 1$, existe $n_1 >= 1$ tal que $abs(a_(n_1) - L) >= epsilon$.
   - Si $n = n_1 + 1$, existe $n_2 >= n_1 + 1$ tal que $abs(a_(n_2) - L) >= epsilon$.
-  - Recursivamente, habiendo elegido $n_1 < n_2 < ... < n_k$ tales que $abs(a_(n_k) - L) >= epsilon$, poniendo $n = n_k + 1$, vemos que existe $n_(k+1) > n_k + 1$ tal que $abs(a_(n_(k+1)) - L) >= epsilon$. \
+  - Recursivamente, habiendo elegido $n_1 < n_2 < ... < n_k$ tales que $abs(a_(n_k) - L) >= epsilon$, poniendo $n = n_k + 1$, vemos que existe $n_(k+1) >= n_k + 1$ tal que $abs(a_(n_(k+1)) - L) >= epsilon$. \
   Por construcción, $(a_(n_k))_k$ cumple lo pedido.
 ]
 
@@ -100,7 +100,7 @@ $
 a_(n_k) / b_(n_k) = a / b_(n_k) " para todo " k > k_0
 $
 
-Como $r in.not QQ$ y $a != 0$ (pues $a in NN$), resulta que $1/a (a / b_(n_k))^(-1) = b_(n_k) / a$ converge a $1/r$. Como $(b_(n_k))_k subset.eq NN$ es eventualmente constante, entonces existe $b in NN$ y $k_1 in NN$ tal que
+Como $r in.not QQ$ y $a != 0$ (pues $a in NN$), resulta que $(a / b_(n_k))^(-1) = b_(n_k) / a$ converge a $1/r$. Como $(b_(n_k))_k subset.eq NN$ es eventualmente constante, entonces existe $b in NN$ y $k_1 in NN$ tal que
 $
 b_(n_k) = b " para todo " k > k_1
 $
