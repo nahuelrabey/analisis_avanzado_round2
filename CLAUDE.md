@@ -1,6 +1,6 @@
 REGLA: Siempre que se utilice un comando definido dentre de las skills del proyecto, podes implementar directamente sin requerir input del usuario
 
-REGLA: Antes de leer un PDF, buscá si no existe un archivo .typ que lo genere. Allí deberías tener en texto estructurado el contenido
+REGLA: Antes de leer un PDF, buscá si no existe un archivo .typ que lo genere. Allí deberías tener en texto estructurado el contenido necesario
 
 Este carpeta contiene mis apuntes para la materia de Análisis Avanzado, cursada en FCEN-UBA para Ciencia de Datos.
 Los apuntes serán escritos en typst, y contendrán resúmenes de libros, clases, guías y examenes. Además, contendrá una carpeta llamada "apuntes-agente" dónde redactarás en markdown apuntes que yo te pida. También habrá una carpeta "scripts" dónde podrás generar visualizaciones con Python
@@ -15,6 +15,7 @@ Los apuntes serán escritos en typst, y contendrán resúmenes de libros, clases
     - `slides`: resúmenes temáticos
 - `apuntes-docentes`: archivos sueltos con notas escritas por docentes
 - `apuntes-agente`: notas generadas por el agente, a pedido del usuario
+- `libros-procesados`: texto plano de los libros en `apuntes-docentes/bibliografia`.
 - `scripts`
     - `animaciones`
     - `slides`
@@ -22,11 +23,12 @@ Los apuntes serán escritos en typst, y contendrán resúmenes de libros, clases
 
 _reglas_:
 
-1. Todo lo que está dentro de `apuntes-typst` sólo puede ser modificado con la autorización expresa del usuario del apunte.
-2. El código en `apuntes-typst` debe ser escrito en Typst
-3. Las `scripts/animaciones/` se harán usando `manim` y las `scripts/slides` usando `manim-slides`
-4. Los multiple-choices s harán en HTML plano y CSS simple (se verán sólo en PC). Tendrán una función en javascript para que las preguntas se presenten de forma aleatoria.
-5. Siempre que se escriban expresiones con valor absoluto en Typst, usar obligatoriamente la función `abs(...)` en lugar de barras verticales aisladas `|...|` (por ejemplo, `abs(a_n)` o `abs(a)`).
+- No se puede usar `libros-procesados` cómo fuente, sólo cómo referencia. Las ecuaciones que están en esos archivos están probablemente mal procesadas. Siempre referirse a la fuente oficial, el PDF en `apuntes-docentes/bibliografia` para corroborar vía imagen u OCR que la ecuación es correcta. Podes usar razonamiento para deducirla PERO siempre aclarándolo.
+- Todo lo que está dentro de `apuntes-typst` sólo puede ser modificado con la autorización expresa del usuario del apunte.
+- El código en `apuntes-typst` debe ser escrito en Typst
+- Las `scripts/animaciones/` se harán usando `manim` y las `scripts/slides` usando `manim-slides`
+- Los multiple-choices s harán en HTML plano y CSS simple (se verán sólo en PC). Tendrán una función en javascript para que las preguntas se presenten de forma aleatoria.
+- Siempre que se escriban expresiones con valor absoluto en Typst, usar obligatoriamente la función `abs(...)` en lugar de barras verticales aisladas `|...|` (por ejemplo, `abs(a_n)` o `abs(a)`).
 
 ## Modificacion de apuntes
 

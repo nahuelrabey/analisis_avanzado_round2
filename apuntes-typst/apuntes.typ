@@ -536,7 +536,123 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   que es lo que queríamos probar.
 ]
 
+#definicion[Conjuntos Coordinables][3.1][
+  Sean $X, Y$ dos conjuntos. Decimos que son *coordinables* si existe una función biyectiva $f : X -> Y$. Cuando esto ocurre, escribimos $X tilde.op Y$.
+]
 
+#proposicion[Relación de equivalencia][3.2][
+  La relación $tilde.op$ es una relación de equivalencia.
+]
 
+#demostracion[
+  Veamos que $tilde.op$ cumple las condiciones de relación de equivalencia:
 
+  - *Reflexiva:* $X tilde.op X$ porque la identidad $op("id") : X -> X$ es biyectiva.
+  - *Simétrica:* Si $X tilde.op Y$ entonces existe una función $f : X -> Y$ biyectiva. Pero si $f$ es biyectiva entonces su inversa $f^(-1) : Y -> X$ también lo es, lo que nos dice que $Y tilde.op X$.
+  - *Transitiva:* Si $X tilde.op Y$ y $Y tilde.op Z$ entonces existen funciones $f : X -> Y$ y $g : Y -> Z$ biyectivas. Pero entonces $g compose f : X -> Z$ también lo es, lo que nos dice que $X tilde.op Z$.
+]
 
+#definicion[Cardinal de un Conjunto][3.5][
+  El cardinal de un conjunto $X$ se define como la clase de equivalencia de los conjuntos coordinables con $X$:
+
+  $ \#X = op("card")(X) := {Y : X tilde.op Y}. $
+]
+
+#definicion[Conjunto Finito, Infinito, Numerable y Contable][3.6][
+  Un conjunto $A$ es:
+
+  - *finito* si existe $n in NN$ y una biyección $f : {1, 2, ..., n} -> A$. En este caso, $\#A = n$.
+  - *infinito* si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.
+  - *numerable* si existe una biyección $f : NN -> A$. En este caso se tiene que $\#A = aleph_0$.
+  - *a lo sumo numerable* o *contable* si es finito o numerable.
+]
+
+#definicion[Comparación y Orden entre Cardinales][3.8][
+  Dados dos conjuntos $A$ y $B$, decimos que $\#A <= \#B$ si existe una función inyectiva $f : A -> B$.
+
+  Además, decimos que $\#A < \#B$ si $\#A <= \#B$ pero $\#A != \#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).
+]
+
+#teorema[Cantor-Schröeder-Bernstein][3.11][
+  Si existen funciones inyectivas $f : A -> B$ y $g : B -> A$, entonces existe una función biyectiva $h : A -> B$. Es decir, si $\#A <= \#B$ y $\#B <= \#A$ entonces $\#A = \#B$.
+]
+
+#definicion[Serie][
+  Sea $(a_n)_(n in NN)$, llamamos *serie de $a_n$* (o sucesión de sumas parciales) a
+  $ S_n = sum_(k=1)^n a_k. $
+]
+
+#definicion[Límite y Convergencia de Series][
+  Sea $(a_n)_(n in NN) subset.eq RR$. Decimos que la serie $sum_(k=1)^oo a_k$ *converge* si existe $lim_(n -> oo) S_n$.
+
+  En ese caso,
+  $ sum_(k=1)^oo a_k = lim_(n -> oo) S_n. $
+]
+
+#ejemplo[Serie de $a_n = (-1)^n$][
+  Sea $(a_n)_(n in NN)$ dada por $a_n = (-1)^n$.
+
+  Tenemos que
+  $
+    S_1 &= -1 \
+    S_2 &= 0 \
+    S_3 &= -1 \
+        & dots.v \
+    S_(2n) &= 0 \
+    S_(2n+1) &= -1
+  $
+
+  Podemos ver que $(S_n)_(n in NN)$ no tiene límite, por lo tanto $sum_(k=1)^oo a_k$ no converge.
+]
+
+#proposicion[Condición necesaria de convergencia][
+  Si $sum_(k=1)^oo a_k$ converge, entonces $a_n -> 0$.
+]
+
+#demostracion[
+  Sabemos que $lim_(n -> oo) S_n = ell in RR$ y $ell = sum_(k=1)^oo a_k$.
+
+  El $n$-ésimo término de la sucesión se puede escribir en función de las sumas parciales:
+  $ a_n = S_n - S_(n-1). $
+
+  Luego $lim_(n -> oo) (S_n - S_(n-1)) = 0$, entonces (demostrar esto queda como ejercicio) $lim_(n -> oo) a_n = 0$.
+]
+
+#ejemplo[Serie Geométrica][
+  Sea $r in RR$ con $r != 1$.
+
+  $ sum_(k=0)^oo r^k = sum_(k=1)^oo r^(k-1) = lim_(n -> oo) sum_(k=1)^n r^(k-1) $
+
+  $
+    S_n &= 1 + r + r^2 + dots + r^(n-1) \
+    S_n (r - 1) &= r + r^2 + dots + r^n - 1 - r - r^2 - dots - r^(n-1) = r^n - 1 \
+    S_n &= (r^n - 1) / (r - 1)
+  $
+
+  Sabemos que $lim_(n -> oo) r^n = 0$ cuando $r in (0, 1)$, por lo tanto, en el mismo intervalo:
+  $ lim_(n -> oo) S_n = lim_(n -> oo) (r^n - 1) / (r - 1) = 1 / (1 - r). $
+
+  _Ejercicio:_ Si $abs(r) < 1 => S_n -> 1 / (1 - r)$.
+]
+
+#proposicion[Álgebra de Series][
+  #set enum(numbering: "a)")
+  + Si $sum_(k=1)^oo a_k$ converge y $c in RR$, entonces $sum_(k=1)^oo (c a_k) = c sum_(k=1)^oo a_k$ y también converge.
+  + Si $sum_(k=1)^oo a_k$ y $sum_(k=1)^oo b_k$ convergen, entonces $sum_(k=1)^oo (a_k + b_k) = sum_(k=1)^oo a_k + sum_(k=1)^oo b_k$ y también converge.
+]
+
+#proposicion[Convergencia de series de términos no negativos][
+  Sea $a_n >= 0$ para todo $n in NN$, con $sum_(k=1)^oo a_k$ de forma tal que $(S_n)_(n >= 1)$ es una sucesión acotada, entonces $sum_(k=1)^oo a_k$ converge.
+]
+
+#demostracion[
+  Notemos que $S_(n+1) = S_n + a_(n+1) >= S_n$, pues $a_n >= 0$ para todo $n in NN$. Por lo tanto, $(S_n)_(n >= 1)$ es monótona creciente. Como, además, está acotada, sabemos que es convergente.
+]
+
+#teorema[Criterio de Comparación][
+  Sean $(a_n)_(n in NN), (b_n)_(n in NN) subset.eq RR$ tales que $0 <= a_n <= b_n$ para todo $n in NN$, vale lo siguiente:
+
+  #set enum(numbering: "a)")
+  + Si $sum_(k=1)^oo b_k$ converge, entonces $sum_(k=1)^oo a_k$ converge.
+  + Si $sum_(k=1)^oo a_k$ diverge, entonces $sum_(k=1)^oo b_k$ diverge.
+]

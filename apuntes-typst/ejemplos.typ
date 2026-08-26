@@ -51,13 +51,14 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   stroke: 0.4pt + rgb("#cbd5e1"),
   inset: (x: 6pt, y: 4pt),
 
-  [*\#*], [*Bloque*], [*Desbloquea de p1*],
-  [1], [Supremo, ínfimo, máximo y mínimo por definición], [Ej. 4, 5, 6],
-  [2], [La caracterización $epsilon$ y la sucesión que alcanza el supremo], [Ej. 3, 13],
-  [3], [Densidad y completitud: por qué $QQ$ no alcanza], [Ej. 2 (a--d)],
-  [4], [Límite por definición, y cómo acotar cuando no se puede despejar], [Ej. 1, 7, 8, 11],
-  [5], [Negar la convergencia], [Ej. 16 (a)],
-  [6], [Monotonía, álgebra de límites y subsucesiones], [Ej. 12, 14, 15, 16],
+  [*\#*], [*Bloque*], [*Desbloquea*],
+  [1], [Supremo, ínfimo, máximo y mínimo por definición], [p1: Ej. 4, 5, 6],
+  [2], [Densidad y completitud: por qué $QQ$ no alcanza], [p1: Ej. 2 (a--d)],
+  [3], [Límite por definición, y cómo acotar cuando no se puede despejar], [p1: Ej. 1, 7, 8, 11],
+  [4], [La equivalencia del supremo por sucesiones], [p1: Ej. 13 (intro)],
+  [5], [Negar la convergencia], [p1: Ej. 16 (a)],
+  [6], [Monotonía, álgebra de límites y subsucesiones], [p1: Ej. 12, 13, 14, 15, 16],
+  [7], [Coordinabilidad y biyecciones explícitas], [p2: Ej. 1 (a--c)],
 )
 
 #v(4pt)
@@ -152,82 +153,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Esto nos da el conjunto $D = (-2, 0) union (0, 2)$, cuyo supremo es $op("sup")(D) = 2$.
 ]
 
-== Bloque 2 · La caracterización $epsilon$ y la sucesión que alcanza el supremo
-
-#sublema(titulo: "Qué desbloquea")[
-  El *Ejercicio 3* de p1 pide demostrar exactamente esta caracterización, pero para el ínfimo; los ejemplos de abajo la *usan*, que es la mejor forma de entender qué dice. El *Ejercicio 13* (si $A$ no tiene máximo hay una sucesión creciente en $A$ que tiende a $op("sup")(A)$) es la versión general de estas construcciones.
-
-  *La progresión del bloque:* el primero exhibe la sucesión de un tirón; el segundo la usa dos veces sobre un conjunto de dos parámetros, una para el ínfimo y otra para probar que no hay cota superior; el tercero *construye* la sucesión paso a paso por recursión y densidad --- que es exactamente lo que pide el Ej. 13, sólo que allá hay que subir hasta el supremo en lugar de bajar.
-]
-
-#ejemplo[Supremo de $A = {x/(x + 1) : x > 0}$ (Ejemplo 2.20)][10][
-  Sea $A = {x / (x + 1) : x > 0}$. Veamos que $op("sup")(A) = 1$.
-]
-
-#resolucion[
-  - *1 es cota superior:*
-    $ x / (x + 1) <= 1 <=> x <= x + 1, $
-    dado que $x > 0$ y por lo tanto 1 es cota superior.
-
-  - *Veamos que existe una sucesión que converge a 1:* Consideremos $a_n = n / (n + 1) in A$ para todo $n in NN$ y sabemos que $lim_(n -> oo) a_n = 1$.
-
-  Por la equivalencia del supremo nos sale que $1 = op("sup")(A)$. Podemos observar además que $1 in.not A$, por lo que $A$ no tiene máximo.
-]
-
-#ejemplo[Supremo e ínfimo de $A = {1/n + m : n, m in NN}$ (Clase 1 · Ejemplo 4)][C1-4][
-  Hallar, si existen, supremo e ínfimo de $A = {1/n + m : n in NN, m in NN}$.
-]
-
-#estrategia[
-  El lema de la clase tiene tres partes, y acá se usan dos: $s = op("sup")(A)$ si y sólo si $s$ es cota superior y existe una sucesión contenida en $A$ que converge a $s$; y si $A$ contiene una sucesión no acotada superiormente, entonces $A$ no está acotado superiormente. Con eso, todo el ejercicio se reduce a *exhibir dos sucesiones dentro de $A$*: una que se escape y otra que baje hasta el candidato a ínfimo. Fijar uno de los dos parámetros es lo que las produce.
-]
-
-#resolucion[
-  Tenemos que $A != nothing$.
-
-  #set enum(numbering: "1.")
-  + $a_m = 1 + m$ define una sucesión contenida en $A$ (es el caso $n = 1$), y $lim_(m -> +oo) a_m = +oo$ por arquimedianidad. Entonces $A$ no está acotado superiormente.
-  + $1/n + m > 1$ para todo $n, m in NN$. Como $a_n = 1/n + 1$ está en $A$ y cumple $lim_(n -> +oo) a_n = 1$, concluimos que $1$ es el ínfimo de $A$.
-]
-
-#ejemplo[Racionales estrictamente decrecientes hacia $x$ (Clase 1 · Ejemplo 6)][C1-6][
-  Probar que para todo $x in RR$ existe $(q_n)_(n in NN) subset.eq QQ$ estrictamente decreciente tal que $lim_(n -> +oo) q_n = x$.
-]
-
-#estrategia[
-  No hay una fórmula para $q_n$: hay que *construirla*. El truco es que cada término nuevo se elige por densidad dentro del intervalo $(x, (x + q_n)/2)$ --- el punto medio garantiza a la vez que se mantenga por encima de $x$ y que baje estrictamente. Después, la convergencia sale de monotonía + acotación, y el valor del límite se identifica pasando al límite en la propia desigualdad de la construcción.
-]
-
-#resolucion[
-  Por arquimedianidad existe $m in NN$ tal que $x < m$. Tomamos $q_1 = m$.
-
-  #recta([$x$],[$q_2$], [$(x+q_1)/2$], [$q_1$])
-
-  Por la densidad de $QQ$ en $RR$ podemos elegir $q_2$ entre $x$ y $(x+q_1)/2$, es decir $x < q_2 < (x+q_1)/2$.
-
-  En general, si definimos $q_1, q_2, ..., q_n$ racionales con $q_1 > q_2 > ... > q_n$, elegimos $q_(n+1) in QQ$ con $x < q_(n+1) < (x+q_n)/2$, que existe por densidad de $QQ$. Afirmamos que $q_(n+1) < q_n$ para todo $n$ y que $q_n -> x$.
-
-  *(1) $q_(n+1) < q_n$ para todo $n in NN$.* Por inducción.
-
-  Caso base: $n = 1$,
-  $ q_2 < (x+q_1)/2 " y " (x+q_1)/2 < q_1, $
-  porque
-  $ (x+q_1)/2 < q_1 <=> x + q_1 < 2 q_1 <=> x < q_1. $
-
-  Caso inductivo:
-  $ q_(k+1) < (x+q_k)/2 " y " (x+q_k)/2 < q_k, $
-  porque
-  $ (x+q_k)/2 < q_k <=> x + q_k < 2 q_k <=> x < q_k. $
-
-  *(2) $lim_(n -> +oo) q_n = x$.* Como $(q_n)_n$ es decreciente y acotada inferiormente por $x$, es convergente a algún $q in RR$.
-
-  - $x < q_n$ para todo $n$, entonces $x <= q$.
-  - $q_(n+1) < (x+q_n)/2$. Tomando límite, $q <= (x+q)/2 <=> q <= x$.
-
-  Entonces $q = x$.
-]
-
-== Bloque 3 · Densidad y completitud: por qué $QQ$ no alcanza
+== Bloque 2 · Densidad y completitud: por qué $QQ$ no alcanza
 
 #sublema(titulo: "Qué desbloquea")[
   Todo el *Ejercicio 2* de p1 (entero entre $x$ e $y$, racional entre reales, irracional entre racionales, irracional entre reales). El ejemplo de abajo va en la dirección inversa --- usa la densidad para probar que algo *no* existe en $QQ$ --- y por eso es el que fija la técnica: multiplicar por $n$ para separar, encajar un entero, volver a dividir.
@@ -284,7 +210,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   )
 ]
 
-== Bloque 4 · Límite por definición
+== Bloque 3 · Límite por definición
 
 #sublema(titulo: "Qué desbloquea")[
   El *Ejercicio 7* de p1 son los tres primeros ejemplos con cuentas distintas: despejar la condición $abs(a_n - ell) < epsilon$ hasta que quede $n > "algo"(epsilon)$, y recién ahí invocar Arquímedes para exhibir $n_0$. El *Ejercicio 1* ($x < y + epsilon$ para todo $epsilon$ implica $x <= y$) es la contracara: acá se elige un $epsilon$ chico a propósito, allá se usa que la desigualdad vale para *todos*.
@@ -402,6 +328,114 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Pero la diferencia entre dos enteros distintos es, al menos, $1$. Concluimos que $a_n = a_(n_1)$ para todo $n >= n_1$. Como $a_n$ converge, $lim_(n -> +oo) a_n = a_(n_1) = L$.
 ]
 
+#ejemplo[Límite de la raíz cuadrada: si $a_n -> l$, entonces $sqrt(a_n) -> sqrt(l)$][Prop][
+  Sea $(a_n)_(n in NN)$ con $a_n >= 0$ tal que $a_n -> l in RR$. Demostrar que $sqrt(a_n) -> sqrt(l)$.
+]
+
+#estrategia[
+  Se analizan dos casos según el valor del límite $l$:
+  - Si $l > 0$, no se puede despejar directamente $n$. Se multiplica y divide por el conjugado $sqrt(a_n) + sqrt(l)$ y se acota el denominador por $sqrt(l)$, reduciendo la cota a $|a_n - l| < epsilon sqrt(l)$.
+  - Si $l = 0$, el truco del conjugado no se aplica (daría división por cero); en su lugar se aprovecha directamente la definición de $a_n -> 0$ eligiendo $epsilon^2$.
+]
+
+#resolucion[
+  Como $a_n >= 0$ para todo $n in NN$, se tiene que $l >= 0$. Estudiamos los dos casos:
+
+  *Caso 1: $l > 0$.* Dado $epsilon > 0$, como $a_n -> l$, existe $n_0 in NN$ tal que
+  $ abs(a_n - l) < epsilon sqrt(l) quad forall n >= n_0. $
+
+  En particular, para $n >= n_0$, usando el conjugado:
+  $ abs(sqrt(a_n) - sqrt(l)) = abs(sqrt(a_n) - sqrt(l)) dot abs(sqrt(a_n) + sqrt(l)) / abs(sqrt(a_n) + sqrt(l)) = abs(a_n - l) / (sqrt(a_n) + sqrt(l)). $
+
+  Como $a_n >= 0$, se cumple que $sqrt(a_n) + sqrt(l) >= sqrt(l) > 0$, por lo que $1 / (sqrt(a_n) + sqrt(l)) <= 1 / sqrt(l)$. Luego, para todo $n >= n_0$:
+  $ abs(sqrt(a_n) - sqrt(l)) <= abs(a_n - l) / sqrt(l) < (epsilon sqrt(l)) / sqrt(l) = epsilon. $
+
+  *Caso 2: $l = 0$.* Dado $epsilon > 0$, como $a_n -> 0$, existe $n_0 in NN$ tal que
+  $ abs(a_n) < epsilon^2 quad forall n >= n_0. $
+
+  Como $a_n >= 0$, la desigualdad es $a_n < epsilon^2$. Aplicando raíz cuadrada (que es una función estrictamente creciente):
+  $ sqrt(a_n) < epsilon quad ("pues " epsilon > 0), $
+  es decir, $abs(sqrt(a_n) - 0) < epsilon$ para todo $n >= n_0$.
+
+  En ambos casos, demostramos que $forall epsilon > 0, exists n_0 in NN : abs(sqrt(a_n) - sqrt(l)) < epsilon, forall n >= n_0$.
+]
+
+#ejemplo[Límite de las medias de Cesàro: si $a_n -> 0$, entonces $S_n = 1/n sum_(i=1)^n a_i -> 0$][Prop][
+  Sea $(a_n)_(n in NN) subset.eq RR$ tal que $a_n -> 0$. Definimos $S_n$ como
+  $ S_n = (sum_(i=1)^n a_i) / n. $
+  Demostrar que $S_n -> 0$.
+]
+
+#estrategia[
+  La técnica clave es *partir la suma en dos tramos*:
+  - Los primeros $n_1$ términos se acotan por una suma constante $K = sum_(i=1)^(n_1) abs(a_i)$, la cual decae a cero al dividir por $n$ cuando $n$ crece (por arquimedianidad).
+  - Los términos restantes ($i > n_1$) se acotan por $epsilon / 2$ usando la convergencia de $a_n -> 0$.
+  Elegir $n_0 = op("máx"){n_1, n_2}$ permite controlar ambas partes simultáneamente por $epsilon / 2 + epsilon / 2 = epsilon$.
+]
+
+#resolucion[
+  Dado $epsilon > 0$, como $a_n -> 0$, existe $n_1 in NN$ tal que
+  $ abs(a_i) < epsilon / 2 quad forall i >= n_1. $
+
+  Para $n >= n_1$, aplicando desigualdad triangular y separando la suma en los primeros $n_1$ términos y la cola:
+  $ abs(S_n) <= (sum_(i=1)^n abs(a_i)) / n = (sum_(i=1)^(n_1) abs(a_i) + sum_(i=n_1 + 1)^n abs(a_i)) / n. $
+
+  Como cada uno de los $n - n_1$ términos del segundo tramo cumple $abs(a_i) < epsilon / 2$:
+  $ sum_(i=n_1 + 1)^n abs(a_i) < (n - n_1) dot epsilon / 2 <= n dot epsilon / 2. $
+
+  Luego:
+  $ abs(S_n) < (sum_(i=1)^(n_1) abs(a_i)) / n + (n epsilon / 2) / n = (sum_(i=1)^(n_1) abs(a_i)) / n + epsilon / 2. $
+
+  Llamemos $K = sum_(i=1)^(n_1) abs(a_i) >= 0$.
+  - Si $K = 0$, la primera fracción es $0 < epsilon / 2$.
+  - Si $K > 0$, por el Principio de Arquímedes existe $n_2 in NN$ tal que $K / n_2 < epsilon / 2$. Entonces para todo $n >= n_2$, se cumple $K / n <= K / n_2 < epsilon / 2$.
+
+  Tomando $n_0 = op("máx"){n_1, n_2}$, resulta que para todo $n >= n_0$:
+  $ abs(S_n) < epsilon / 2 + epsilon / 2 = epsilon. $
+
+  Concluimos que $forall epsilon > 0, exists n_0 in NN : abs(S_n) < epsilon, forall n >= n_0$, es decir, $S_n -> 0$.
+]
+
+== Bloque 4 · La equivalencia del supremo por sucesiones
+
+#sublema(titulo: "Qué desbloquea")[
+  Esta es la equivalencia del supremo *por sucesiones* --- distinta de la de $epsilon$ ($s - epsilon < a <= s$ para algún $a in A$), que es la que pide el *Ejercicio 3* de p1 (para el ínfimo) y que no usa límites en absoluto. Por eso este bloque va recién acá: citar "existe una sucesión en $A$ que converge a $s$" no tiene sentido antes de saber qué significa que una sucesión converja.
+
+  *(Ej. 3 sigue sin ejemplo propio en este archivo: sólo está cubierto por la demostración de la Equivalencia de Ínfimo en `apuntes.typ`.)*
+
+  *La progresión del bloque:* los dos ejemplos exhiben una sucesión *ya conocida* (no la construyen) y cierran con el lema "$s = op(\"sup\")(A)$ sii es cota superior y hay una sucesión en $A$ que converge a $s$" --- alcanza con la noción de límite, nada de monotonía. La construcción más fina que pide el *Ejercicio 13* (fabricar la sucesión por recursión cuando no hay una a mano, y probar su convergencia por monotonía + acotación) queda para el Ejemplo C1-6, al final del Bloque 6, que es donde esas herramientas recién están disponibles.
+]
+
+#ejemplo[Supremo de $A = {x/(x + 1) : x > 0}$ (Ejemplo 2.20)][10][
+  Sea $A = {x / (x + 1) : x > 0}$. Veamos que $op("sup")(A) = 1$.
+]
+
+#resolucion[
+  - *1 es cota superior:*
+    $ x / (x + 1) <= 1 <=> x <= x + 1, $
+    dado que $x > 0$ y por lo tanto 1 es cota superior.
+
+  - *Veamos que existe una sucesión que converge a 1:* Consideremos $a_n = n / (n + 1) in A$ para todo $n in NN$ y sabemos que $lim_(n -> oo) a_n = 1$.
+
+  Por la equivalencia del supremo nos sale que $1 = op("sup")(A)$. Podemos observar además que $1 in.not A$, por lo que $A$ no tiene máximo.
+]
+
+#ejemplo[Supremo e ínfimo de $A = {1/n + m : n, m in NN}$ (Clase 1 · Ejemplo 4)][C1-4][
+  Hallar, si existen, supremo e ínfimo de $A = {1/n + m : n in NN, m in NN}$.
+]
+
+#estrategia[
+  El lema de la clase tiene tres partes, y acá se usan dos: $s = op("sup")(A)$ si y sólo si $s$ es cota superior y existe una sucesión contenida en $A$ que converge a $s$; y si $A$ contiene una sucesión no acotada superiormente, entonces $A$ no está acotado superiormente. Con eso, todo el ejercicio se reduce a *exhibir dos sucesiones dentro de $A$*: una que se escape y otra que baje hasta el candidato a ínfimo. Fijar uno de los dos parámetros es lo que las produce.
+]
+
+#resolucion[
+  Tenemos que $A != nothing$.
+
+  #set enum(numbering: "1.")
+  + $a_m = 1 + m$ define una sucesión contenida en $A$ (es el caso $n = 1$), y $lim_(m -> +oo) a_m = +oo$ por arquimedianidad. Entonces $A$ no está acotado superiormente.
+  + $1/n + m > 1$ para todo $n, m in NN$. Como $a_n = 1/n + 1$ está en $A$ y cumple $lim_(n -> +oo) a_n = 1$, concluimos que $1$ es el ínfimo de $A$.
+]
+
 == Bloque 5 · Negar la convergencia
 
 #sublema(titulo: "Qué desbloquea")[
@@ -436,6 +470,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   *Monotonía (Ejercicio 12).* El Ejemplo 11 fija qué cuenta como subsucesión y qué no. El 12 ($r^n$), C1-2 ($x^n$ para todo $x$) y C2-1 (una sucesión definida por recursión) son la misma receta con dificultad creciente: probar que es monótona y acotada para saber que el límite *existe*, y recién entonces *cerrar una ecuación sobre él* ($ell = ell^2$, $L = L x$, $L^2 = 2 + L$) usando álgebra de límites y unicidad. El paso final siempre es descartar la raíz que sobra con una desigualdad que valga para todos los términos.
 
   *Subsucesiones (Ejercicios 14, 15 y 16).* C2-2 es el *Ejercicio 16* con tres clases de restos en vez de dos, y viene con las dos pruebas posibles: la directa --- partir $NN$ y tomar el máximo de los índices, que es la del 16 (a) --- y la del absurdo, cuyo *lema auxiliar construye recursivamente la subsucesión que se aleja del límite*. Ese lema es el paso central del *Ejercicio 15* y la primera mitad del *14*. C2-3 cierra con un uso combinado: acotada $arrow.r$ hay subsucesión convergente.
+
+  *Cierre con el Ejercicio 13.* El Ejemplo C1-6, al final del bloque, es la versión espejada de este ejercicio: en vez de construir una sucesión creciente que suba hasta el supremo vía la caracterización $epsilon$ (eso ya está resuelto en `apuntes.typ` y en el Bloque 4), construye por recursión y densidad una sucesión de racionales *decreciente* hacia un $x in RR$ cualquiera, y recién identifica el límite invocando el Teorema de sucesiones monótonas acotadas y pasaje al límite en la desigualdad de la construcción --- las dos herramientas que este bloque acaba de instalar con 12, C1-2 y C2-1.
 ]
 
 #ejemplo[Qué es y qué no es una subsucesión (Ejemplo 2.22)][11][
@@ -609,6 +645,153 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Pero entonces $b/a = 1/r in QQ$, absurdo. Concluimos que $(a_n)_n$ no está acotada.
 
   Para ver que $(b_n)_n$ no es acotada, usamos que $1/r in.not QQ$ y que $b_n / a_n$ converge a $1/r$, por lo tanto el mismo argumento aplicado a $(b_n)_n$ permite deducir que no está acotada.
+]
+
+#ejemplo[Racionales estrictamente decrecientes hacia $x$ (Clase 1 · Ejemplo 6)][C1-6][
+  Probar que para todo $x in RR$ existe $(q_n)_(n in NN) subset.eq QQ$ estrictamente decreciente tal que $lim_(n -> +oo) q_n = x$.
+]
+
+#estrategia[
+  No hay una fórmula para $q_n$: hay que *construirla*. El truco es que cada término nuevo se elige por densidad dentro del intervalo $(x, (x+q_n)/2)$ --- el punto medio garantiza a la vez que se mantenga por encima de $x$ y que baje estrictamente. Después, la convergencia sale de monotonía + acotación, y el valor del límite se identifica pasando al límite en la propia desigualdad de la construcción.
+]
+
+#resolucion[
+  Por arquimedianidad existe $m in NN$ tal que $x < m$. Tomamos $q_1 = m$.
+
+  #recta([$x$],[$q_2$], [$(x+q_1)/2$], [$q_1$])
+
+  Por la densidad de $QQ$ en $RR$ podemos elegir $q_2$ entre $x$ y $(x+q_1)/2$, es decir $x < q_2 < (x+q_1)/2$.
+
+  En general, si definimos $q_1, q_2, ..., q_n$ racionales con $q_1 > q_2 > ... > q_n$, elegimos $q_(n+1) in QQ$ con $x < q_(n+1) < (x+q_n)/2$, que existe por densidad de $QQ$. Afirmamos que $q_(n+1) < q_n$ para todo $n$ y que $q_n -> x$.
+
+  *(1) $q_(n+1) < q_n$ para todo $n in NN$.* Por inducción.
+
+  Caso base: $n = 1$,
+  $ q_2 < (x+q_1)/2 " y " (x+q_1)/2 < q_1, $
+  porque
+  $ (x+q_1)/2 < q_1 <=> x + q_1 < 2 q_1 <=> x < q_1. $
+
+  Caso inductivo:
+  $ q_(k+1) < (x+q_k)/2 " y " (x+q_k)/2 < q_k, $
+  porque
+  $ (x+q_k)/2 < q_k <=> x + q_k < 2 q_k <=> x < q_k. $
+
+  *(2) $lim_(n -> +oo) q_n = x$.* Como $(q_n)_n$ es decreciente y acotada inferiormente por $x$, es convergente a algún $q in RR$.
+
+  - $x < q_n$ para todo $n$, entonces $x <= q$.
+  - $q_(n+1) < (x+q_n)/2$. Tomando límite, $q <= (x+q)/2 <=> q <= x$.
+
+  Entonces $q = x$.
+]
+
+== Bloque 7 · Coordinabilidad y biyecciones explícitas
+
+#sublema(titulo: "Qué desbloquea")[
+  El *Ejercicio 1* de la Práctica 2 (cardinalidad de subconjuntos de $ZZ$, múltiplos y productos) requiere construir biyecciones o inyecciones explícitas. La partición de $NN$ en pares e impares para coordinar con $ZZ$ es el modelo fundamental para entrelazar conjuntos o cubrir signos opuestos. El uso del Teorema de Cantor-Schröeder-Bernstein y la codificación con factores primos ($2^n 3^m$) desbloquea el producto cartesiano de conjuntos numerables.
+]
+
+#ejemplo[Coordinabilidad de $NN$ con los pares, con $ZZ$ y con $QQ^+$ (Ejemplo 3.3)][13][
+  #set enum(numbering: "a)")
+  + $NN tilde.op {"números naturales pares"}$. Son coordinables mediante la función $f(n) = 2n$, que es biyectiva.
+  + $NN tilde.op ZZ$: podemos tomar la función
+    $ f(n) = cases(
+      n/2 &"si" n "es par",
+      -((n - 1)/2) &"si" n "es impar".
+    ) $
+  + $NN tilde.op QQ^+ = {q in QQ : q > 0}$: para ver esto, vamos a hacer el siguiente procedimiento.
+
+    Pensemos que armamos una grilla infinita donde ubicamos a la fracción $m/n$ en la columna $m$ y fila $n$. Nuestra biyección $f : NN -> QQ^+$ va a recorrer la grilla como en el gráfico que hicimos más abajo, teniendo en cuenta que debemos "saltarnos" a los repetidos: las fracciones $1/1$ y $2/2$ representan el mismo número, y queremos que nuestra $f$ sea inyectiva.
+
+    Nos quedaría:
+    $ f(1) = 1, quad f(2) = 2, quad f(3) = 1/2, quad f(4) = 1/3, quad f(5) = 3, quad dots $
+
+    #v(4pt)
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+
+        let spacing = 1.4
+        let rows = 5
+        let cols = 5
+
+        // Título Numeradores arriba
+        content(((cols + 1) * spacing / 2, 1.4), text(12pt, weight: "bold")[Numeradores ($m$)])
+
+        // Etiquetas de columnas m
+        for m in range(1, cols + 1) {
+          content((m * spacing, 0.65), text(11pt)[$m = #m$])
+        }
+
+        // Título Denominadores a la izquierda
+        content((-1.8, - (rows - 1) * spacing / 2), angle: 90deg, text(12pt, weight: "bold")[Denominadores ($n$)])
+
+        // Etiquetas de filas n
+        for n in range(1, rows + 1) {
+          let y = - (n - 1) * spacing
+          content((-0.4, y), text(11pt)[$n = #n$])
+        }
+
+        // Dibujar puntos y etiquetas de fracciones
+        for n in range(1, rows + 1) {
+          for m in range(1, cols + 1) {
+            let x = m * spacing
+            let y = - (n - 1) * spacing
+            circle((x, y), radius: 0.08, fill: black, stroke: black)
+            
+            if m <= 4 and n <= 4 {
+              content((x, y + 0.28), text(8pt, fill: rgb("#64748b"))[$#m/#n$])
+            }
+          }
+        }
+
+        // Cruces rojas en los repetidos
+        let repetidos = ((2, 2), (4, 2), (3, 3), (2, 4))
+        for (m, n) in repetidos {
+          let x = m * spacing
+          let y = - (n - 1) * spacing
+          line((x - 0.2, y - 0.2), (x + 0.2, y + 0.2), stroke: 1.5pt + rgb("#dc2626"))
+          line((x - 0.2, y + 0.2), (x + 0.2, y - 0.2), stroke: 1.5pt + rgb("#dc2626"))
+        }
+
+        // Trayectoria azul
+        let pt(m, n) = (m * spacing, - (n - 1) * spacing)
+
+        line(
+          pt(1, 1),
+          pt(2, 1),
+          pt(1, 2),
+          pt(1, 3),
+          pt(3, 1),
+          pt(4, 1),
+          pt(1, 4),
+          pt(1, 5),
+          pt(5, 1),
+          stroke: 1.3pt + rgb("#2563eb"),
+          mark: (end: "stealth")
+        )
+      })
+    ]
+]
+
+#estrategia[
+  Informalmente, notemos que esta función le asigna a cada número natural par su mitad y con esto estaríamos "cubriendo" los enteros positivos. Por otro lado, "cubrimos" los enteros negativos y el cero con los naturales impares asignándole a cada uno, $-$ la mitad de su par anterior.
+]
+
+#resolucion[
+  Formalmente tenemos que probar que $f$ resulta biyectiva:
+
+  - *Inyectiva:* supongamos que $n != m$. Si $n$ es par y $m$ es impar, entonces $f(n) != f(m)$ porque uno es positivo y el otro negativo. Si ambos son pares, es fácil ver que $f(n) != f(m)$ porque $n/2 != m/2$. Si ambos son impares podemos hacer un razonamiento parecido.
+  - *Sobreyectiva:* sea $a in ZZ$. Si $a > 0$, entonces $a = f(2a)$, dado que $2a$ es un número natural par. Si $a <= 0$, entonces $a = f(-2a + 1)$, dado que $-2a + 1$ es un número natural impar.
+]
+
+#ejemplo[Numerabilidad de $NN times NN$ vía Cantor-Schröeder-Bernstein (Ejemplo 3.12)][14][
+  Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $NN times NN$ es numerable.
+]
+
+#resolucion[
+  - Sea $f : NN -> NN times NN$ la función $f(n) = (n, 1)$. La función $f$ es inyectiva, lo que nos dice que $\#NN <= \#(NN times NN)$.
+
+  - Sea $g : NN times NN -> NN$ la función $g(n, m) = 2^n 3^m$. La función $g$ es inyectiva (por descomposición única en factores primos), con lo cual $\#(NN times NN) <= \#NN$.
 ]
 
 #v(10pt)
