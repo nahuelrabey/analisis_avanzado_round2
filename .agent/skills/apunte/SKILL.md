@@ -61,4 +61,20 @@ Esta skill instruye al agente sobre cómo procesar imágenes de contenido matem�
 - Asegurar que la notación matemática, símbolos, subíndices, integrales, límites y funciones estén correctamente adaptados a la sintaxis nativa de Typst (`$ ... $`).
 
 ### 5. Actualización del Archivo
-- Añadir el nuevo apunte al final de [`apuntes-typst/apuntes.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/apuntes.typ), preservando todo el contenido existente y con una separación clara respecto a las entradas anteriores.
+
+El destino es siempre [`apuntes-typst/apuntes.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/apuntes.typ), preservando **todo** el contenido existente y separando el bloque nuevo con una línea en blanco.
+
+`apuntes.typ` **no es un log cronológico**: es el apunte de la materia leído de principio a fin. Por eso el apunte nuevo va **en el lugar que le corresponde temáticamente**, no automáticamente al final. Criterio en cascada:
+
+1. **Si el concepto trae número de la fuente** (`3.9`, `2.4`, ...): insertarlo en su lugar dentro de la secuencia numérica del archivo, aunque ya haya contenido posterior cargado. **Nunca renumerar** lo que ya está.
+2. **Si no trae número**: ubicarlo junto al concepto del que depende --- una proposición inmediatamente después de la definición que caracteriza, un corolario después de su teorema, un ejemplo después del resultado que ilustra.
+3. **Al final del archivo** sólo si el concepto continúa el último tema cargado, o si no hay ningún lugar natural donde ubicarlo.
+
+Además:
+
+- Los bloques `#estrategia` y `#demostracion` viajan **pegados** a su enunciado: nunca se separan del `#proposicion` / `#teorema` / `#lema` al que pertenecen.
+- Si el slot que corresponde ya está ocupado (choque de numeración), ubicar el bloque lo más cerca posible del lugar correcto, **no** tocar lo existente y **avisarle al usuario** del choque.
+- Después de insertar, verificar que el archivo siga compilando:
+  ```bash
+  typst compile apuntes-typst/apuntes.typ
+  ```

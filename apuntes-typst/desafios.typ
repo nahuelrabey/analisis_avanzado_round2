@@ -513,6 +513,16 @@ alimenta cada bloque.
   Si $a_n <= b_n$ para todo $n >= n_0$, probar que $a <= b$.
 ]
 
+#desafio[Verdadero o Falso: Sucesiones acotadas, operaciones y subsucesiones][
+  Decidir si las siguientes afirmaciones son verdaderas o falsas (demostrar o dar un contraejemplo):
+
+  #set enum(numbering: "1.")
+  + Toda sucesión acotada es convergente.
+  + Si $(a_n)_(n in NN)$ y $(b_n)_(n in NN)$ son acotadas, entonces $(a_n b_n)_(n in NN)$ también es acotada.
+  + Si $(a_n)_(n in NN)$ y $(b_n)_(n in NN)$ (con $b_n != 0$ para todo $n in NN$) son acotadas, entonces $(a_n / b_n)_(n in NN)$ también es acotada.
+  + Sea $(a_n)_(n in NN)$ una sucesión tal que $a_(2n) -> 3$ y $a_(3n) -> 3$, entonces $a_n -> 3$.
+]
+
 #v(10pt)
 #line(length: 100%, stroke: 0.5pt + luma(150))
 #v(8pt)
@@ -631,4 +641,38 @@ alimenta cada bloque.
 
 #desafio[Ejercicio 3.9][
   Probar que $\#A <= \#B$ si y solo si existe una función sobreyectiva $g : B -> A$.
+]
+
+#desafio[Principio del Palomar (Pigeonhole Principle)][
+  Si se distribuyen más de $k$ objetos en $k$ cajas, entonces alguna caja contiene al menos dos objetos.
+
+  En forma equivalente: si $f : A -> B$ es una función entre conjuntos finitos y $\#A > \#B$, entonces $f$ no puede ser inyectiva. Por lo tanto existen $x, y in A$ con $x != y$ tales que $f(x) = f(y)$.
+]
+#solucion[
+  *Demostración formal (por contradicción usando cardinalidad de conjuntos):*
+
+  Sean $A$ y $B$ conjuntos finitos con $\#A > \#B$. Sea $\#B = k in NN_0$ y denotemos $B = {b_1, b_2, dots, b_k}$.
+
+  Para cada $y in B$, consideremos su fibra o preimagen bajo $f$:
+  $ A_y = f^(-1)({y}) = {x in A : f(x) = y} $
+
+  Notemos que la familia $(A_y)_(y in B)$ constituye una partición del conjunto $A$:
+  + Son conjuntos disjuntos dos a dos: si $y, y' in B$ con $y != y'$, entonces:
+    $ A_y inter A_(y') = f^(-1)({y}) inter f^(-1)({y'}) = f^(-1)({y} inter {y'}) = f^(-1)(emptyset) = emptyset $
+  + Su unión cubre la totalidad de $A$: para cualquier $x in A$, $f(x) in B$, luego $x in A_(f(x))$, de modo que:
+    $ A = union.big_(y in B) A_y = union.big_(i=1)^k f^(-1)({b_i}) $
+
+  Por la propiedad aditiva del cardinal para uniones finitas de conjuntos disjuntos dos a dos, la cantidad total de elementos de $A$ es:
+  $ \#A = sum_(y in B) \#(f^(-1)({y})) = sum_(i=1)^k \#(f^(-1)({b_i})) $
+
+  Supongamos por contradicción que $f$ es inyectiva.
+  Por definición de inyectividad, dados $x_1, x_2 in A$, si $f(x_1) = f(x_2) = y$, necesariamente $x_1 = x_2$. En consecuencia, cada fibra $f^(-1)({y})$ puede contener a lo sumo un único elemento:
+  $ \#(f^(-1)({y})) <= 1 quad forall y in B $
+
+  Reemplazando en la suma del cardinal de $A$:
+  $ \#A = sum_(i=1)^k \#(f^(-1)({b_i})) <= sum_(i=1)^k 1 = k = \#B $
+
+  De esto se deduce que $\#A <= \#B$, lo cual entra en directa contradicción con la hipótesis de que $\#A > \#B$ (o $\#A > k$).
+
+  Por lo tanto, la suposición inicial es falsa y concluimos que $f$ no puede ser inyectiva. Esto implica que existe al menos un elemento $y in B$ tal que $\#(f^(-1)({y})) >= 2$, es decir, existen $x, y' in A$ con $x != y'$ tales que $f(x) = f(y')$.
 ]

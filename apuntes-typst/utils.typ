@@ -17,6 +17,7 @@
   enunciado,
   solucion,
   duda,
+  observacion,
 ) = frames(
   definicion: ("Definición", rgb("#2563eb")),
   teorema: ("Teorema", rgb("#7c3aed")),
@@ -32,6 +33,7 @@
   enunciado: ("Enunciado", rgb("#0284c7")),
   solucion: ("Solución", rgb("#15803d")),
   duda: ("Consulta Docente", rgb("#dc2626")),
+  observacion: ("Observación", rgb("#0891b2")),
 )
 
 

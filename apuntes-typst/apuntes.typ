@@ -536,47 +536,6 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   que es lo que queríamos probar.
 ]
 
-#definicion[Conjuntos Coordinables][3.1][
-  Sean $X, Y$ dos conjuntos. Decimos que son *coordinables* si existe una función biyectiva $f : X -> Y$. Cuando esto ocurre, escribimos $X tilde.op Y$.
-]
-
-#proposicion[Relación de equivalencia][3.2][
-  La relación $tilde.op$ es una relación de equivalencia.
-]
-
-#demostracion[
-  Veamos que $tilde.op$ cumple las condiciones de relación de equivalencia:
-
-  - *Reflexiva:* $X tilde.op X$ porque la identidad $op("id") : X -> X$ es biyectiva.
-  - *Simétrica:* Si $X tilde.op Y$ entonces existe una función $f : X -> Y$ biyectiva. Pero si $f$ es biyectiva entonces su inversa $f^(-1) : Y -> X$ también lo es, lo que nos dice que $Y tilde.op X$.
-  - *Transitiva:* Si $X tilde.op Y$ y $Y tilde.op Z$ entonces existen funciones $f : X -> Y$ y $g : Y -> Z$ biyectivas. Pero entonces $g compose f : X -> Z$ también lo es, lo que nos dice que $X tilde.op Z$.
-]
-
-#definicion[Cardinal de un Conjunto][3.5][
-  El cardinal de un conjunto $X$ se define como la clase de equivalencia de los conjuntos coordinables con $X$:
-
-  $ \#X = op("card")(X) := {Y : X tilde.op Y}. $
-]
-
-#definicion[Conjunto Finito, Infinito, Numerable y Contable][3.6][
-  Un conjunto $A$ es:
-
-  - *finito* si existe $n in NN$ y una biyección $f : {1, 2, ..., n} -> A$. En este caso, $\#A = n$.
-  - *infinito* si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.
-  - *numerable* si existe una biyección $f : NN -> A$. En este caso se tiene que $\#A = aleph_0$.
-  - *a lo sumo numerable* o *contable* si es finito o numerable.
-]
-
-#definicion[Comparación y Orden entre Cardinales][3.8][
-  Dados dos conjuntos $A$ y $B$, decimos que $\#A <= \#B$ si existe una función inyectiva $f : A -> B$.
-
-  Además, decimos que $\#A < \#B$ si $\#A <= \#B$ pero $\#A != \#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).
-]
-
-#teorema[Cantor-Schröeder-Bernstein][3.11][
-  Si existen funciones inyectivas $f : A -> B$ y $g : B -> A$, entonces existe una función biyectiva $h : A -> B$. Es decir, si $\#A <= \#B$ y $\#B <= \#A$ entonces $\#A = \#B$.
-]
-
 #definicion[Serie][
   Sea $(a_n)_(n in NN)$, llamamos *serie de $a_n$* (o sucesión de sumas parciales) a
   $ S_n = sum_(k=1)^n a_k. $
@@ -655,4 +614,156 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   #set enum(numbering: "a)")
   + Si $sum_(k=1)^oo b_k$ converge, entonces $sum_(k=1)^oo a_k$ converge.
   + Si $sum_(k=1)^oo a_k$ diverge, entonces $sum_(k=1)^oo b_k$ diverge.
+]
+
+#definicion[Conjuntos Coordinables][3.1][
+  Sean $X, Y$ dos conjuntos. Decimos que son *coordinables* si existe una función biyectiva $f : X -> Y$. Cuando esto ocurre, escribimos $X tilde.op Y$.
+]
+
+#proposicion[Relación de equivalencia][3.2][
+  La relación $tilde.op$ es una relación de equivalencia.
+]
+
+#demostracion[
+  Veamos que $tilde.op$ cumple las condiciones de relación de equivalencia:
+
+  - *Reflexiva:* $X tilde.op X$ porque la identidad $op("id") : X -> X$ es biyectiva.
+  - *Simétrica:* Si $X tilde.op Y$ entonces existe una función $f : X -> Y$ biyectiva. Pero si $f$ es biyectiva entonces su inversa $f^(-1) : Y -> X$ también lo es, lo que nos dice que $Y tilde.op X$.
+  - *Transitiva:* Si $X tilde.op Y$ y $Y tilde.op Z$ entonces existen funciones $f : X -> Y$ y $g : Y -> Z$ biyectivas. Pero entonces $g compose f : X -> Z$ también lo es, lo que nos dice que $X tilde.op Z$.
+]
+
+#definicion[Cardinal de un Conjunto][3.5][
+  El cardinal de un conjunto $X$ se define como la clase de equivalencia de los conjuntos coordinables con $X$:
+
+  $ \#X = op("card")(X) := {Y : X tilde.op Y}. $
+]
+
+#definicion[Conjunto Finito, Infinito, Numerable y Contable][3.6][
+  Un conjunto $A$ es:
+
+  - *finito* si existe $n in NN$ y una biyección $f : {1, 2, ..., n} -> A$. En este caso, $\#A = n$.
+  - *infinito* si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.
+  - *numerable* si existe una biyección $f : NN -> A$. En este caso se tiene que $\#A = aleph_0$.
+  - *a lo sumo numerable* o *contable* si es finito o numerable.
+]
+
+#observacion[Enumeración de un Conjunto Numerable][3.7][
+  Notemos que si $A$ es un conjunto numerable, entonces podemos hacer una lista de sus elementos. Es decir, si $f : {1, 2, ..., n} -> A$ es biyectiva y llamamos $a_n = f(n)$ entonces podemos describir a $A$ como la sucesión $A = (a_n)_(n in NN)$. En particular, esta sucesión tiene todos elementos distintos.
+]
+
+#definicion[Comparación y Orden entre Cardinales][3.8][
+  Dados dos conjuntos $A$ y $B$, decimos que $\#A <= \#B$ si existe una función inyectiva $f : A -> B$.
+
+  Además, decimos que $\#A < \#B$ si $\#A <= \#B$ pero $\#A != \#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).
+]
+
+#proposicion[Caracterización de $<=$ vía sobreyecciones][3.9][
+  Sean $A$ y $B$ conjuntos, con $A != nothing$. Entonces $\#A <= \#B$ si y sólo si existe una función sobreyectiva $g : B -> A$.
+]
+
+#observacion[Por qué pedimos $A != nothing$][
+  La hipótesis $A != nothing$ no es un detalle técnico: sin ella el enunciado es falso. Tomemos $A = nothing$ y $B = {1}$. La función vacía $nothing -> B$ es (vacuamente) inyectiva, con lo cual $\#A <= \#B$. Sin embargo, no existe *ninguna* función $g : B -> nothing$ (habría que asignarle a $1$ un elemento de un conjunto sin elementos) y por lo tanto tampoco una sobreyectiva.
+
+  En la demostración vamos a ver que la hipótesis se usa en un único lugar: para poder fijar un elemento $a' in A$ con el cual definir $g$ afuera de la imagen de $f$.
+]
+
+#estrategia[Ida: dar vuelta $f$ donde se pueda][
+  Tenemos $f : A -> B$ inyectiva y queremos construir $g : B -> A$ sobreyectiva. La idea es *invertir $f$*: si $b$ está en la imagen de $f$, hay un único $a$ con $f(a) = b$ (acá se usa la inyectividad) y definimos $g(b) = a$. Los $b$ que sobran, los que no están en la imagen, los mandamos todos a un mismo $a' in A$ fijado de antemano (acá se usa $A != nothing$). La sobreyectividad sale sola, porque $g(f(a)) = a$.
+]
+#demostracion[$arrow.r.double$) Si $\#A <= \#B$ entonces existe $g : B -> A$ sobreyectiva][
+  Como $\#A <= \#B$, existe $f : A -> B$ inyectiva. Fijemos además un elemento cualquiera $a' in A$, que existe porque $A != nothing$. Llamemos $f(A) = {f(a) : a in A} subset.eq B$ a la imagen de $f$ y definamos $g : B -> A$ separando en dos casos según $b$ esté o no en $f(A)$:
+
+  #set enum(numbering: "a)")
+  + Si $b in f(A)$, existe $a in A$ tal que $f(a) = b$; definimos $g(b) = a$.
+  + Si $b in.not f(A)$, definimos $g(b) = a'$.
+
+  *$g$ está bien definida.* Los dos casos son excluyentes y cubren todo $B$, así que a cada $b in B$ le estamos asignando algún valor. Falta ver que ese valor es único en el primer caso: si $b in f(A)$ y hubiera dos elementos $a, tilde(a) in A$ con $f(a) = b = f(tilde(a))$, por ser $f$ inyectiva tendríamos $a = tilde(a)$. Es decir, el $a$ del primer caso es único y $g(b)$ no depende de ninguna elección. Notemos que *éste es el único lugar de la ida donde usamos que $f$ es inyectiva*.
+
+  *$g$ es sobreyectiva.* Sea $a in A$ y tomemos $b = f(a) in B$. Como $b in f(A)$, estamos en el primer caso de la definición y, por la unicidad que acabamos de probar, $g(b) = a$. Es decir, todo elemento de $A$ tiene una preimagen por $g$.
+]
+
+#estrategia[Vuelta: elegir una preimagen para cada elemento][
+  Ahora tenemos $g : B -> A$ sobreyectiva y queremos $f : A -> B$ inyectiva. Para cada $a in A$ el conjunto de preimágenes $g^(-1)({a})$ es no vacío (eso *es* la sobreyectividad), así que podemos elegir un $b_a$ adentro y definir $f(a) = b_a$. Con esa definición $g compose f = op("id")_A$, y una función que admite inversa a izquierda tiene que ser inyectiva.
+]
+#demostracion[$arrow.l.double$) Si existe $g : B -> A$ sobreyectiva entonces $\#A <= \#B$][
+  Como $g$ es sobreyectiva, para cada $a in A$ el conjunto $g^(-1)({a}) = {b in B : g(b) = a}$ es no vacío. Elegimos entonces, para cada $a in A$, un elemento $b_a in g^(-1)({a})$ y definimos
+
+  $ f : A -> B, quad f(a) = b_a. $
+
+  Vale la pena notar que esta elección simultánea de un $b_a$ para cada uno de los (posiblemente infinitos) $a in A$ es una aplicación del axioma de elección.
+
+  Por construcción, $g(f(a)) = g(b_a) = a$ para todo $a in A$, es decir, $g compose f = op("id")_A$.
+
+  Veamos que $f$ es inyectiva. Sean $a_1, a_2 in A$ tales que $f(a_1) = f(a_2)$. Aplicando $g$ a ambos miembros,
+
+  $ a_1 = g(f(a_1)) = g(f(a_2)) = a_2. $
+
+  Por lo tanto $f : A -> B$ es inyectiva y, por la Definición 3.8, $\#A <= \#B$.
+]
+
+#observacion[Buena Definición y Propiedades del Orden entre Cardinales][3.10][
+  Tenemos que ver que $<=$ está bien definida, es decir que la relación no depende de los representantes elegidos (recordemos que la definición de cardinal involucra una clase de equivalencia). Es decir, tenemos que ver que si $\#A <= \#B$ y $A tilde.op X$, $B tilde.op Y$ entonces $\#X <= \#Y$. Como $\#A <= \#B$ sabemos que existe $f : A -> B$ inyectiva y como $A tilde.op X$ y $B tilde.op Y$ deben existir funciones $h : A -> X$ y $g : B -> Y$ biyectivas. Como la composición de funciones inyectivas resulta inyectiva, tenemos que $g compose f compose h^(-1) : X -> Y$ es también inyectiva, lo que nos dice que $\#X <= \#Y$.
+
+  #block(breakable: false)[
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+
+        content((0, 2), [$A$], name: "A")
+        content((3.5, 2), [$B$], name: "B")
+        content((0, 0), [$X$], name: "X")
+        content((3.5, 0), [$Y$], name: "Y")
+
+        line("A", "B", mark: (end: ">"), stroke: 0.8pt)
+        content((1.75, 2.35), text(size: 9pt)[$f$ (iny.)])
+
+        line("A", "X", mark: (end: ">"), stroke: 0.8pt)
+        content((-0.7, 1), text(size: 9pt)[$h$ (biy.)])
+
+        line("B", "Y", mark: (end: ">"), stroke: 0.8pt)
+        content((4.2, 1), text(size: 9pt)[$g$ (biy.)])
+
+        line("X", "Y", mark: (end: ">"), stroke: (dash: "dashed", paint: rgb("#dc2626"), thickness: 0.9pt))
+        content((1.75, -0.35), text(size: 9.5pt, fill: rgb("#dc2626"))[$g compose f compose h^(-1)$])
+      })
+    ]
+  ]
+
+  Nos gustaría ver también que $<=$ define una relación de orden entre los cardinales. Tenemos que:
+
+  - *es reflexiva:* $\#A <= \#A$ vía $op("id") : A -> A$.
+  - *es transitiva:* si $\#A <= \#B$ y $\#B <= \#C$ entonces tenemos funciones $f : A -> B$ y $g : B -> C$ inyectivas. Sabemos que la composición $g compose f : A -> C$ también es inyectiva, lo que nos dice que $\#A <= \#C$.
+
+  Sin embargo, la *antisimetría* de la relación no es tan inmediata de probar y es el contenido del siguiente resultado.
+]
+
+#teorema[Cantor-Schröeder-Bernstein][3.11][
+  Si existen funciones inyectivas $f : A -> B$ y $g : B -> A$, entonces existe una función biyectiva $h : A -> B$. Es decir, si $\#A <= \#B$ y $\#B <= \#A$ entonces $\#A = \#B$.
+]
+
+#proposicion[Subconjuntos de Conjuntos Numerables][3.13][
+  Sea $A$ numerable. Si $nothing != B subset.eq A$, entonces $B$ es a lo sumo numerable.
+]
+
+#demostracion[
+  Enumeramos a $A$ como en la Observación 3.7: $A = {a_1, a_2, a_3, dots}$. Tenemos dos opciones para $B$: es finito o es infinito. Si es finito, por definición es a lo sumo numerable. Nos queda ver que si es infinito entonces tiene que ser numerable. Para numerarlo, vamos a construir una función $g : NN -> B$ que mire la posición relativa de un elemento de $B$ en la lista enumerada de elementos de $A$. Es decir, definimos $g(1) = a_(j_1)$ donde $j_1 = op("mín"){j : a_j in B}$ (el primer elemento de $B$ que aparece listado en $A$). Como $B$ es infinito, $B != {a_(j_1)}$ y podemos definir $B_2 = B backslash {a_(j_1)}$. Definimos $g(2) = a_(j_2)$ donde $j_2 = op("mín"){j : a_j in B_2}$ (el segundo elemento de $B$ que aparece listado en $A$). Inductivamente construimos a la función $g$. Por construcción, $g$ es inyectiva. Además es sobreyectiva: si $b$ es algún elemento de $B$, tenemos que $b = a_n$ para algún $n in NN$ (pues $A$ es numerable). Pero esto nos dice que con nuestra función $g$ en a lo sumo $n$ pasos tenemos que haber llegado a $b$.
+]
+
+#proposicion[Todo Conjunto Infinito Contiene un Subconjunto Numerable][3.14][
+  Si $A$ es infinito, entonces existe un subconjunto $B subset A$ tal que $B$ es numerable.
+]
+
+#demostracion[
+  Sea $a_1 in A$ cualquiera. Como $A$ es infinito, sabemos que $A backslash {a_1}$ es no vacío (si lo fuera, estaríamos diciendo que $A = {a_1}$ y por lo tanto finito). Podemos elegir $a_2 in A backslash {a_1}$, es decir, podemos elegir un elemento de $A$ distinto de $a_1$. Este proceso lo podemos repetir, dado que ahora observamos que $A backslash {a_1, a_2} != nothing$. Inductivamente podemos construir una sucesión $(a_n)_(n in NN)$ de elementos distintos y tomando $B = {a_n : n in NN}$ tenemos lo que buscamos.
+]
+
+#observacion[Ideas Importantes y Minimalidad de $aleph_0$][
+  De los resultados anteriores enfatizamos dos ideas importantes:
+
+  - Los subconjuntos de conjuntos numerables son a lo sumo numerables (Proposición 3.13).
+  - Todo conjunto infinito contiene un conjunto numerable (Proposición 3.14).
+
+  Notemos que si $A$ y $B$ son conjuntos tales que $A subset.eq B$, tenemos que $\#A <= \#B$ ya que la inclusión $iota : A arrow.hook B$ es inyectiva. Por lo tanto, gracias a la Proposición 3.14, podemos concluir que si $A$ es un conjunto infinito, entonces $aleph_0 <= \#A$.
+
+  Lo que podríamos preguntarnos es si existe algún conjunto infinito cuyo cardinal sea estrictamente mayor que $aleph_0$. La respuesta es que sí y eso es lo que vemos a continuación.
 ]

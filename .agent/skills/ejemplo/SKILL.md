@@ -87,6 +87,6 @@ Preservar siempre todo el contenido existente.
 ### 5.1 Tags: la pestaña dice de dónde viene el ejemplo
 
 - **Número solo** (`8`): ejemplo de `notas_materia.pdf`, con el contador secuencial del apunte. El título lleva además su numeración por capítulo entre paréntesis: `(Ejemplo 2.4)`.
-- **`C{clase}-{ejemplo}`** (`C1-1.2`, `C2-2`): ejercicio resuelto en clase, transcrito en `clases/apuntes_{clase}.typ`. El título termina en `(Clase 1 · Ejemplo 1.2)`.
+- **`C{clase}-{ejemplo}`** (`C1-1.2`, `C2-2`): ejercicio resuelto en clase, transcrito en `clases_2023/apuntes_{clase}.typ`. El título termina en `(Clase 1 · Ejemplo 1.2)`.
 
 Los ejemplos de clase **sí se copian** a `ejemplos.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos acá y ubicarlos en el bloque que corresponda. Los que sean de un capítulo posterior al de la práctica en curso quedan fuera de la escalera: se anotan como pendientes en la nota de huecos.

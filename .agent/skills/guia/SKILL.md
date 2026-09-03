@@ -89,6 +89,6 @@ Las guías llevan, entre el panel `#progreso` y la lista de enunciados, una tabl
 
 - cambia la numeración de la guía (edición nueva),
 - se transcribe teoría nueva con `/apunte` que alguno de los tramos necesita,
-- se carga un ejemplo con `/ejemplo` (incluidos los que vengan de `clases/`), que puede tapar uno de los huecos anotados debajo de la tabla.
+- se carga un ejemplo con `/ejemplo` (incluidos los que vengan de `clases_2023/`), que puede tapar uno de los huecos anotados debajo de la tabla.
 
-Las cajas de `apuntes.typ` se referencian **por nombre** (los tags numéricos se repiten entre definiciones y proposiciones); los ejemplos, **por su tag de pestaña** --- número para los de `notas_materia.pdf`, `C{clase}-{ejemplo}` para los resueltos en clase. Todos los ejemplos viven en `ejemplos.typ`: la columna no apunta nunca a `clases/` directamente.
+Las cajas de `apuntes.typ` se referencian **por nombre** (los tags numéricos se repiten entre definiciones y proposiciones); los ejemplos, **por su tag de pestaña** --- número para los de `notas_materia.pdf`, `C{clase}-{ejemplo}` para los resueltos en clase. Todos los ejemplos viven en `ejemplos.typ`: la columna no apunta nunca a `clases_2023/` directamente.
