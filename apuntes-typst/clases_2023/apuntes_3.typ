@@ -19,7 +19,7 @@ a) $NN^NN$.
 
 b) $A = {(a_n)_n in NN^NN : a_n != a_m " si " n != m}$.
 
-c) $A = {(a_n)_n in NN^NN : a_n mid a_(n+1) med forall n in NN}$.
+c) $A = {(a_n)_n in NN^NN : a_n divides a_(n+1) med forall n in NN}$.
 
 Para hacer este ejercicio vamos a usar que hay una biyección entre $(A^B)^C$ y $A^(B times C)$. Notemos que un elemento de $(A^B)^C$ es una función $f: C -> A^B$, mientras que un elemento de $A^(B times C)$ es una función $g: B times C -> A$. Con esto en mente, definimos
 $
@@ -79,7 +79,7 @@ Supongamos que $B != tilde(B)$. Sea $k = min{k in NN : k in B without tilde(B)}$
 
 Como ${B subset.eq NN : \#B = infinity} ~ RR$ (por el ejercicio 11 de la guía 2, ${B subset.eq NN : \#B < infinity}$ es numerable, entonces $cal(P)(NN) = {B subset.eq NN : \#B < infinity} union.sq {B subset.eq NN : \#B = infinity}$ y al ser $cal(P)(NN) ~ RR$, por el ejercicio 3a), ${B subset.eq NN : \#B = infinity} ~ RR$), concluimos que existe $g: RR -> A$ inyectiva. Por el teorema de Cantor-Bernstein, $A ~ RR$.
 
-c) Por a), tenemos que existe una función inyectiva $f: A -> RR$. Notemos que si $a_n mid a_(n+1)$ entonces existe $k_n in NN$ tal que $a_(n+1) = k_n a_n$. Entonces, $(a_n)_n in A$ tiene la forma
+c) Por a), tenemos que existe una función inyectiva $f: A -> RR$. Notemos que si $a_n divides a_(n+1)$ entonces existe $k_n in NN$ tal que $a_(n+1) = k_n a_n$. Entonces, $(a_n)_n in A$ tiene la forma
 $
 a_1, med a_2 = k_1 a_1, med a_3 = k_2 a_2 = k_2 k_1 a_1, med a_4 = k_3 k_2 k_1 a_1, ..., med a_(n+1) = k_n dots.h.c k_1 a_1.
 $

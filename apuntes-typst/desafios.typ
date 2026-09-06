@@ -676,3 +676,14 @@ alimenta cada bloque.
 
   Por lo tanto, la suposición inicial es falsa y concluimos que $f$ no puede ser inyectiva. Esto implica que existe al menos un elemento $y in B$ tal que $\#(f^(-1)({y})) >= 2$, es decir, existen $x, y' in A$ con $x != y'$ tales que $f(x) = f(y')$.
 ]
+
+#desafio[No unicidad del desarrollo decimal en la no numerabilidad de $(0, 1)$ (Observación 3.22)][
+  En la demostración de que el intervalo $(0, 1)$ no es numerable (Teorema 3.19), utilizamos el desarrollo decimal de los números reales para construir un $y in (0, 1)$ y probar que $y != x_n$ para todo $n in NN$.
+
+  Sin embargo, el desarrollo decimal de un número real no siempre es único: por ejemplo,
+  $ 0,1 = 0,0999999 dots $
+  (y en general, cualquier número con desarrollo decimal finito admite una representación alternativa terminada en una cola infinita de nueves).
+
+  *Desafío:* Explicar y justificar formalmente por qué esta falta de unicidad en los desarrollos decimales no invalida la demostración de la diagonalización de Cantor (es decir, por qué la elección de los dígitos $y_i in {2, 3}$ garantiza que $y != x_n$ para todo $n in NN$ a pesar de la no unicidad).
+]
+

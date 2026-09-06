@@ -18,6 +18,7 @@
   solucion,
   duda,
   observacion,
+  galerazo,
 ) = frames(
   definicion: ("Definición", rgb("#2563eb")),
   teorema: ("Teorema", rgb("#7c3aed")),
@@ -34,6 +35,7 @@
   solucion: ("Solución", rgb("#15803d")),
   duda: ("Consulta Docente", rgb("#dc2626")),
   observacion: ("Observación", rgb("#0891b2")),
+  galerazo: ("Galerazo", rgb("#c026d3")),
 )
 
 
@@ -162,4 +164,18 @@
       }
     }
   })
+]
+
+/// Pregunta que dispara un galerazo: la puerta de entrada de cada entrada de `galerazos.typ`.
+/// Uso: #disparador[¿Cómo se me puede ocurrir que $x/(1+abs(x))$ va de $RR$ en $(-1,1)$?]
+#let disparador(cuerpo) = block(
+  fill: rgb("#fdf4ff"),
+  stroke: (left: 3.5pt + rgb("#c026d3"), rest: 0.5pt + rgb("#f5d0fe")),
+  inset: (x: 12pt, y: 9pt),
+  radius: (right: 4pt),
+  width: 100%,
+)[
+  #text(weight: "bold", size: 9.5pt, fill: rgb("#a21caf"))[Disparador] \
+  #v(2pt)
+  #text(size: 10pt, style: "italic")[#cuerpo]
 ]

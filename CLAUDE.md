@@ -8,6 +8,7 @@ Los apuntes serán escritos en typst, y contendrán resúmenes de libros, clases
 ## Estructura de Archivos
 
 - `apuntes-typst`
+    - `galerazos.typ`: técnicas y truquitos reutilizables (skill `/galerazo`)
     - `libros`
     - `clases`
     - `guias`
@@ -29,6 +30,9 @@ _reglas_:
 - Las `scripts/animaciones/` se harán usando `manim` y las `scripts/slides` usando `manim-slides`
 - Los multiple-choices s harán en HTML plano y CSS simple (se verán sólo en PC). Tendrán una función en javascript para que las preguntas se presenten de forma aleatoria.
 - Siempre que se escriban expresiones con valor absoluto en Typst, usar obligatoriamente la función `abs(...)` en lugar de barras verticales aisladas `|...|` (por ejemplo, `abs(a_n)` o `abs(a)`).
+- Para divisibilidad en Typst usar `divides` (∣) y `divides.not` (∤). Nunca `mid` ni `nmid` (no existen en Typst: se renderizan como texto monoespaciado literal) ni parches como `cancel("|")`.
+- Las composiciones se escriben con `compose` ($g compose f$), no como aplicación anidada ($g(f(x))$). Si hace falta evaluar en un punto, primero se nombra la composición y después se la evalúa: `$ g = phi compose f, quad g(x) = ... $`.
+- Las ecuaciones display no deben desbordar el margen: Typst no las parte solo, así que partirlas explícitamente con `\` y alinear la continuación.
 
 ## Modificacion de apuntes
 

@@ -38,7 +38,7 @@
 
 Los ejemplos están agrupados por *técnica*, no por orden de transcripción, y los bloques siguen el orden en que la guía los necesita. Cada bloque abre con la nota de qué ejercicios de `guias/p{N}.typ` desbloquea.
 
-La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), y *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase --- `C1-4` es el Ejemplo 4 de `clases_2023/apuntes_1.typ`.
+La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase --- `C1-4` es el Ejemplo 4 de `clases_2023/apuntes_1.typ` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_ --- `A1.5.9` es el Ejercicio 1.5.9 del libro.
 
 #v(6pt)
 
@@ -855,6 +855,41 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   - *Sobreyectiva:* sea $a in ZZ$. Si $a > 0$, entonces $a = f(2a)$, dado que $2a$ es un número natural par. Si $a <= 0$, entonces $a = f(-2a + 1)$, dado que $-2a + 1$ es un número natural impar.
 ]
 
+#ejemplo[$QQ$ es numerable partiéndolo en bloques finitos (Abbott, Teorema 1.5.6 (i))][A1.5.6a][
+  Probar que $QQ$ es numerable, sin construir ninguna fórmula explícita: agrupando los racionales en pedazos finitos y listándolos uno tras otro.
+]
+
+#estrategia[Cuando la fórmula es incómoda, se lista por bloques][
+  El Ejemplo 3.3 (c) recorre la grilla de $QQ^+$ en diagonal salteando repetidos, y ahí la biyección existe pero escribirla es un engorro. La alternativa es partir $QQ$ en *bloques finitos*: si cada bloque tiene finitos elementos y hay una cantidad numerable de bloques, la lista se arma concatenándolos, y todo elemento cae en una posición finita.
+
+  La señal es tener un *parámetro natural* que ordene el conjunto en capas finitas. Para una fracción irreducible $p\/q$ el parámetro natural es $p + q$.
+]
+
+#resolucion[
+  Definimos $A_1 = {0}$ y, para cada $n >= 2$,
+  $ A_n = {plus.minus p/q : p, q in NN "coprimos con" p + q = n}. $
+
+  Los primeros bloques son
+  $ A_1 = {0}, quad A_2 = {1/1, -1/1}, quad A_3 = {1/2, -1/2, 2/1, -2/1}, \
+    A_4 = {1/3, -1/3, 3/1, -3/1}, quad A_5 = {1/4, -1/4, 2/3, -2/3, 3/2, -3/2, 4/1, -4/1}. $
+
+  Notemos que en $A_4$ no aparece $2/2$, porque no está escrito en forma irreducible (ya apareció como $1/1$ en $A_2$).
+
+  Las dos observaciones que hacen funcionar todo son:
+
+  #set enum(numbering: "a)")
+  + *Cada $A_n$ es finito.* Hay a lo sumo $n - 1$ pares $(p, q) in NN times NN$ con $p + q = n$, y cada uno aporta a lo sumo dos elementos.
+  + *Cada racional aparece en exactamente un bloque.* Escrito en forma irreducible como $plus.minus p\/q$, el número cae en $A_(p+q)$ y en ningún otro: los $A_n$ son disjuntos dos a dos.
+
+  La correspondencia con $NN$ se obtiene listando consecutivamente los elementos de $A_1$, después los de $A_2$, después los de $A_3$, y así siguiendo. Es *sobreyectiva*: por ejemplo $22\/7 in A_29$, y como $A_1 union dots union A_28$ es finito, $22\/7$ aparece en un lugar finito de la lista; el mismo razonamiento vale para cualquier $p\/q$. Es *inyectiva* porque los bloques son disjuntos y dentro de cada bloque no repetimos elementos.
+]
+
+#sublema(titulo: "Qué técnica es ésta")[
+  Es *unión numerable de conjuntos finitos*, el caso más manso del resultado que se trabaja en `ruta_union_contables.typ`. Vale la pena notar que Abbott no escribe la fórmula de la biyección y aclara que intentarlo no es un buen uso del tiempo: lo que hay que ver es que cada elemento ocupa una posición finita en la lista.
+
+  La misma maniobra resuelve varios ítems de la Práctica 2: en el Ejemplo C2-4 (b) aparece como $(0,1) inter QQ = union.sq_(m in NN) {m\/n : 0 < m < n}$, con cada pedazo finito.
+]
+
 #ejemplo[Numerabilidad de $NN times NN$ vía Cantor-Schröeder-Bernstein (Ejemplo 3.12)][14][
   Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $NN times NN$ es numerable.
 ]
@@ -863,6 +898,58 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   - Sea $f : NN -> NN times NN$ la función $f(n) = (n, 1)$. La función $f$ es inyectiva, lo que nos dice que $\#NN <= \#(NN times NN)$.
 
   - Sea $g : NN times NN -> NN$ la función $g(n, m) = 2^n 3^m$. La función $g$ es inyectiva (por descomposición única en factores primos), con lo cual $\#(NN times NN) <= \#NN$.
+]
+
+#ejemplo[Coordinabilidad de $RR$ con $(0, 1)$ (Ejemplo 3.20)][15][
+  Veamos que $RR tilde.op (0, 1)$.
+]
+
+#resolucion[
+  Para esto, vemos primero que $RR tilde.op (-1, 1)$ vía la función
+  $ f : RR -> (-1, 1), quad f(x) = x / (1 + abs(x)), $
+  que resulta biyectiva. Esto lo podemos ver, por ejemplo, comprobando que $f^(-1)(x) = x / (1 - abs(x))$.
+
+  Por otro lado, podemos probar también que $(-1, 1) tilde.op (0, 1)$, vía la función
+  $ g : (-1, 1) -> (0, 1), quad g(x) = (x + 1) / 2, $
+  que también resulta biyectiva.
+
+  Por transitividad de la relación de equivalencia concluimos que $RR tilde.op (0, 1)$.
+]
+
+#ejemplo[$RR$ no es numerable, sin usar desarrollos decimales (Abbott, Teorema 1.5.6 (ii))][A1.5.6b][
+  Probar que $RR$ no es numerable atrapando al número que falta con una sucesión de intervalos cerrados encajados, en lugar de fabricarlo dígito a dígito.
+]
+
+#estrategia[La misma contradicción, pero con intervalos en vez de dígitos][
+  La demostración del Teorema 3.19 supone que existe una lista $(x_n)_(n in NN)$ de todos los reales y construye un $y$ que no está en ella, eligiendo cada dígito de $y$ distinto del correspondiente de $x_n$. El precio es que hay que discutir la no unicidad del desarrollo decimal (Observación 3.22, que en `desafios.typ` figura como desafío).
+
+  La versión de Abbott produce el mismo $y$ *sin escribirlo*: en vez de controlar sus dígitos, se lo encierra en una sucesión de intervalos cerrados encajados, cada uno de los cuales deja afuera un término más de la lista. El número que la propiedad de intervalos encajados entrega no puede estar en la lista, y no hubo que representarlo de ninguna manera particular.
+]
+
+#resolucion[
+  Supongamos que $RR$ es numerable, es decir que podemos escribir
+  $ RR = {x_1, x_2, x_3, dots}. $
+
+  Construimos inductivamente intervalos cerrados y acotados $I_1 supset.eq I_2 supset.eq I_3 supset.eq dots$ tales que $x_n in.not I_n$ para todo $n$:
+
+  - Tomamos $I_1$ cualquier intervalo cerrado con $x_1 in.not I_1$ (por ejemplo $I_1 = [x_1 + 1, x_1 + 2]$).
+  - Dado $I_n = [a, b]$ con $a < b$, consideramos los dos intervalos cerrados *disjuntos*
+    $ [a, a + (b - a)/3] quad "y" quad [b - (b - a)/3, b]. $
+    Como son disjuntos, $x_(n+1)$ puede pertenecer a lo sumo a uno de los dos; elegimos como $I_(n+1)$ al otro. Así se cumplen $I_(n+1) subset.eq I_n$ y $x_(n+1) in.not I_(n+1)$.
+
+  Por la propiedad de los intervalos encajados existe $x in inter.big_(n in NN) I_n$. Pero si $x$ estuviera en la lista, sería $x = x_(n_0)$ para algún $n_0 in NN$, y por construcción $x_(n_0) in.not I_(n_0)$, mientras que $x in inter.big_(n in NN) I_n subset.eq I_(n_0)$. Absurdo.
+
+  Por lo tanto $x$ es un número real que no aparece en la lista, lo que contradice que la lista fuera todo $RR$. Concluimos que $RR$ no es numerable.
+]
+
+#sublema(titulo: "La propiedad de intervalos encajados no está en el apunte del curso")[
+  Abbott la usa como resultado previo (su Teorema 1.4.1), pero en `notas_materia.pdf` no aparece, así que conviene tenerla probada:
+
+  *Enunciado.* Si $I_n = [a_n, b_n]$ son intervalos cerrados y acotados con $I_(n+1) subset.eq I_n$ para todo $n$, entonces $inter.big_(n in NN) I_n != nothing$.
+
+  *Demostración.* Del encaje se sigue que $a_n <= b_m$ para *todo* par $n, m$: si $n <= m$ vale $a_n <= a_m <= b_m$, y si $n > m$ vale $a_n <= b_n <= b_m$. Entonces el conjunto $A = {a_n : n in NN}$ es no vacío y está acotado superiormente (por cualquier $b_m$), así que por el axioma de completitud existe $x = op("sup")(A)$. Como $x$ es cota superior, $a_n <= x$ para todo $n$; y como cada $b_m$ es cota superior de $A$ y $x$ es la menor de ellas, $x <= b_m$ para todo $m$. Luego $x in [a_n, b_n]$ para todo $n$. #h(1fr) $qed$
+
+  Las dos hipótesis se usan: *cerrados* para que el supremo pertenezca al intervalo, y *acotados* para poder tomar supremo. Con $I_n = (0, 1/n)$ la intersección es vacía.
 ]
 
 #ejemplo[Cinco cálculos de cardinal: $ZZ times ZZ$, $(0,1) inter QQ$, $pi QQ$, $QQ + QQ$ y las sucesiones enteras convergentes (Clase 2 · Ejemplo 4)][C2-4][
@@ -900,19 +987,33 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   - *inyectiva:* $F(n, m) = F(n', m')$ equivale a $f(n) = f(n')$ y $f(m) = f(m')$; como $f$ es inyectiva, $n = n'$ y $m = m'$;
   - *suryectiva:* dado $(y_1, y_2) in NN times NN$, como $f$ es suryectiva existen $n, m in ZZ$ con $f(n) = y_1$ y $f(m) = y_2$, y entonces $F(n, m) = (y_1, y_2)$.
 
-  Finalmente, $NN times NN -> NN$ dada por $(n, m) |-> 2^n (2m - 1)$ es biyectiva, porque todo natural se escribe de forma única como una potencia de $2$ por un impar (Teorema Fundamental de la Aritmética).
+  Finalmente, $NN times NN -> NN$ dada por $(n, m) |-> 2^n (2m - 1)$ es biyectiva, porque todo natural se escribe de forma única como una potencia de $2$ por un impar (Teorema Fundamental de la Aritmética). Componiendo, $ZZ times ZZ tilde.op NN$, luego $ZZ times ZZ$ es numerable.
 
   _Otra resolución:_ podemos escribir $ZZ times ZZ = union.sq_(n in ZZ) A_n$ con $A_n = {n} times ZZ$. Como $A_n tilde.op ZZ$ para cada $n$, resulta que $ZZ times ZZ$ es unión contable de numerables y por lo tanto es numerable.
 
-  *(b) $(0, 1) inter QQ$ es numerable.* Primero, $QQ_(>0)$ es numerable: la función $QQ_(>0) -> NN times NN$ que a $x = a/b$ con $(a, b) = 1$ le asigna $(a, b)$ es inyectiva, y $NN times NN$ es numerable, así que $QQ_(>0)$ es contable; siendo infinito, es numerable.
+  *(b) $(0, 1) inter QQ$ es numerable.*
 
-  Ahora usamos que $QQ_(>0) = (0, +oo) inter QQ$ y que $f : (0, +oo) -> (0, 1)$, $f(x) = x/(x+1)$, es biyectiva:
+  _Paso 1: $QQ_(>0)$ es numerable._ La función $QQ_(>0) -> NN times NN$ que a $x = a/b$ con $(a, b) = 1$ le asigna $(a, b)$ es inyectiva (cada racional positivo tiene una única representación como fracción irreducible), y $NN times NN$ es numerable por la parte (a). Así que $QQ_(>0)$ es coordinable con un subconjunto de un numerable, es decir, es contable; siendo infinito, es numerable.
+
+  _Paso 2: biyección auxiliar $(0, +oo) -> (0, 1)$._ Consideramos $f : (0, +oo) -> (0, 1)$, $f(x) = x/(x+1)$.
 
   - *bien definida:* $0 < x < x + 1$, con lo cual $0 < x/(x+1) < 1$;
   - *inyectiva:* $x/(x+1) = y/(y+1) <=> x(y+1) = (x+1)y <=> x y + x = x y + y <=> x = y$;
   - *suryectiva:* dado $y in (0, 1)$, de $x/(x+1) = y$ se despeja $x - y x = y$, o sea $x = y/(1-y) > 0$.
 
-  Como $f$ manda racionales en racionales y su inversa también, restringida da una biyección $(0, +oo) inter QQ -> (0, 1) inter QQ$. Luego $(0, 1) inter QQ$ es numerable.
+  Luego $f$ es biyectiva, con inversa $f^(-1)(y) = y/(1-y)$.
+
+  _Paso 3: restricción de $f$ a $QQ_(>0)$._ Idea general a recordar: *si $f : A -> B$ es biyección y $A_0 subset.eq A$ es tal que $f(A_0) = B_0$ exactamente, entonces $f|_(A_0) : A_0 -> B_0$ también es biyección.*
+
+  Acá se aplica con $A_0 = QQ_(>0)$ y $B_0 = (0, 1) inter QQ$. Hay que verificar que $f(QQ_(>0)) = (0, 1) inter QQ$:
+
+  - si $x in QQ_(>0)$, entonces $f(x) = x/(x+1)$ es cociente de racionales, y ya sabemos que $f(x) in (0, 1)$; luego $f(x) in (0, 1) inter QQ$;
+  - si $y in (0, 1) inter QQ$, entonces $x = f^(-1)(y) = y/(1-y)$ es cociente de racionales, y como $y in (0, 1)$ sabemos que $x in (0, +oo)$; luego $x in QQ_(>0)$ y $f(x) = y$.
+
+  Por lo tanto $f$ manda $QQ_(>0)$ biyectivamente sobre $(0, 1) inter QQ$, es decir,
+  $ QQ_(>0) tilde.op (0, 1) inter QQ. $
+
+  Como $QQ_(>0)$ es numerable (Paso 1) y la numerabilidad se preserva por biyecciones, $(0, 1) inter QQ$ es numerable.
 
   _Otras formas:_ la inclusión $(0,1) inter QQ arrow.hook QQ$ es inyectiva, así que el conjunto es contable; como contiene a ${1/n : n in NN, n >= 2}$, es infinito, y por lo tanto numerable. También sirve escribirlo como $union.sq_(m in NN) A_m$ con $A_m = {m/n : 0 < m < n}$, que es unión contable de conjuntos finitos.
 
@@ -936,7 +1037,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   *(e) ${(a_n)_n subset.eq ZZ : (a_n)_n "es convergente"}$ es numerable.* Por el Ejemplo C1-3, una sucesión convergente de enteros es finalmente constante: existe $n_0 in NN$ tal que $a_n = a_(n_0)$ para todo $n >= n_0$. Entonces
 
-  $ {(a_n)_n subset.eq ZZ : (a_n)_n "converge"} = union.sq_((a, k) in ZZ times NN) A_(a,k), quad A_(a,k) = {(a_n)_n subset.eq ZZ : a_n = a "para todo" n >= k}. $
+  $ {(a_n)_n subset.eq ZZ : (a_n)_n "converge"} = union.sq_((a, k) in ZZ times NN) A_(a,k), \
+    "donde" quad A_(a,k) = {(a_n)_n subset.eq ZZ : a_n = a "para todo" n >= k}. $
 
   Cada $A_(a,k)$ es contable, porque la función $A_(a,k) -> ZZ^(k-1)$, $(a_n)_n |-> (a_1, a_2, dots, a_(k-1))$, es biyectiva y $ZZ^(k-1)$ es numerable. Como $ZZ times NN$ es contable, el conjunto es unión contable de contables y por lo tanto contable; siendo infinito, es numerable.
 ]
@@ -944,9 +1046,83 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #sublema(titulo: "Sobre la observación del manuscrito en (a)")[
   Después del ítem (a) el manuscrito anota una observación sobre particiones de $NN$: dado $N in NN$ vale $NN = union.sq_(i=1)^N B_i$ con $B_i = {k N + i : k in NN_0}$ y $1 <= i <= N$, y también hay particiones infinitas, por ejemplo indexadas por primos,
 
-  $ B_2 = {n in NN : 2 mid n}, quad B_3 = {n in NN : 2 divides.not n "y" 3 mid n}, quad B_p = {n in NN : q divides.not n "para todo primo" q < p "pero" p mid n}. $
+  $ B_2 = {n in NN : 2 divides n}, quad B_3 = {n in NN : 2 divides.not n "y" 3 divides n}, \
+    B_p = {n in NN : q divides.not n "para todo primo" q < p "pero" p divides n}. $
 
   El paso final del manuscrito, que quería armar la biyección $ZZ times ZZ = union.sq_m A_m -> union.sq_(p in P) B_p = NN$, queda incompleto en el original (aparece una familia $h_(g(m))$ que nunca se define), así que no se transcribe: para (a) ya alcanza con cualquiera de las dos resoluciones de arriba.
+]
+
+#ejemplo[Un conjunto de reales positivos con todas sus sumas finitas acotadas es contable (Abbott, Ejercicio 1.5.8)][A1.5.8][
+  Sea $B$ un conjunto de números reales positivos tal que la suma de los elementos de cualquier subconjunto finito de $B$ es siempre menor o igual a $2$. Probar que $B$ es finito o numerable.
+]
+
+#estrategia[Partir por tamaño][
+  No hay ninguna biyección a la vista ni ninguna estructura que copiar: lo único que se sabe de $B$ es una cota sobre sus sumas finitas. La idea es que *no puede haber muchos elementos grandes*, porque unos pocos ya se comerían el presupuesto de $2$.
+
+  Eso sugiere cortar $B$ en capas según el tamaño: $B_n = {x in B : x > 1/n}$. Cada capa tiene que ser finita por la cota, y las capas cubren todo $B$ porque ningún elemento de $B$ es $0$ y vale el Principio de Arquímedes. De nuevo, unión numerable de finitos.
+]
+
+#resolucion[
+  Para cada $n in NN$ definimos
+  $ B_n = {x in B : x > 1/n}. $
+
+  *Cada $B_n$ es finito.* Supongamos que $B_n$ tuviera al menos $2n + 1$ elementos y tomemos $2n + 1$ de ellos, digamos $x_1, dots, x_(2n+1)$. Como cada uno es mayor que $1\/n$,
+  $ sum_(i=1)^(2n+1) x_i > (2n+1) · 1/n = 2 + 1/n > 2, $
+  y encontramos un subconjunto finito de $B$ cuya suma supera $2$, contra la hipótesis. Luego $B_n$ tiene a lo sumo $2n$ elementos.
+
+  *Las capas cubren $B$.* Sea $x in B$. Como $x > 0$, por el Principio de Arquímedes (Proposición 1 de `apuntes.typ`) existe $n in NN$ con $1\/n < x$, es decir $x in B_n$. Por lo tanto
+  $ B = union.big_(n in NN) B_n. $
+
+  Así, $B$ es una unión numerable de conjuntos finitos y en consecuencia es contable: finito o numerable.
+]
+
+#sublema(titulo: "La misma forma en la Práctica 2")[
+  El Ejercicio 12 (a) de la Práctica 2 --- una familia de intervalos disjuntos dos a dos, cada uno con más de un punto, tiene que estar indexada por un conjunto contable --- tiene exactamente esta estructura: no hay biyección para construir, hay que *cortar en capas contables* y usar que un conjunto no puede tener demasiados elementos "grandes" (allá, intervalos que contienen un racional distinto cada uno). El Ejemplo C3-4 es la versión con entornos.
+]
+
+#ejemplo[Los números algebraicos son numerables (Abbott, Ejercicio 1.5.9)][A1.5.9][
+  Un número $x in RR$ se dice *algebraico* si existen enteros $a_0, a_1, dots, a_n in ZZ$, no todos nulos, tales que
+  $ a_n x^n + a_(n-1) x^(n-1) + dots + a_1 x + a_0 = 0, $
+  es decir, si es raíz de un polinomio no nulo con coeficientes enteros. Los reales que no son algebraicos se llaman *trascendentes*.
+
+  #set enum(numbering: "a)")
+  + Probar que $sqrt(2)$, $root(3, 2)$ y $sqrt(2) + sqrt(3)$ son algebraicos.
+  + Fijado $n in NN$, sea $A_n$ el conjunto de los números algebraicos que son raíces de polinomios de grado $n$ con coeficientes enteros. Probar que $A_n$ es contable.
+  + Concluir que el conjunto de todos los números algebraicos es numerable. ¿Qué se deduce sobre los trascendentes?
+]
+
+#estrategia[Dos uniones encadenadas][
+  Es el ejemplo que junta todas las herramientas del bloque, y conviene ver el esqueleto antes de las cuentas:
+
+  #set enum(numbering: "1.")
+  + Un polinomio de grado $n$ *es* su lista de coeficientes: los polinomios de grado $n$ con coeficientes enteros se identifican con un subconjunto de $ZZ^(n+1)$, que es numerable por ser producto finito de numerables.
+  + Cada polinomio no nulo aporta *finitas* raíces (a lo sumo $n$).
+  + Entonces $A_n$ es una unión, indexada por un numerable, de conjuntos finitos.
+  + Y el conjunto de todos los algebraicos es $union.big_(n in NN) A_n$: otra vez unión numerable, ahora de contables.
+]
+
+#resolucion[
+  *(a)* $sqrt(2)$ es raíz de $x^2 - 2$ y $root(3, 2)$ es raíz de $x^3 - 2$. Para $x = sqrt(2) + sqrt(3)$ elevamos al cuadrado dos veces:
+  $ x^2 = 5 + 2 sqrt(6) quad ==> quad x^2 - 5 = 2 sqrt(6) quad ==> quad (x^2 - 5)^2 = 24, $
+  de donde $x^4 - 10 x^2 + 25 = 24$, es decir que $sqrt(2) + sqrt(3)$ es raíz de $x^4 - 10 x^2 + 1$.
+
+  *(b)* Llamemos $P_n$ al conjunto de los polinomios de grado $n$ con coeficientes enteros. La función que a $p(x) = a_n x^n + dots + a_0$ le asigna la tupla $(a_0, a_1, dots, a_n)$ es inyectiva de $P_n$ en $ZZ^(n+1)$, y $ZZ^(n+1)$ es numerable (producto finito de conjuntos numerables, iterando el Ejemplo 3.12). Por la Proposición 3.13, $P_n$ es contable.
+
+  Para cada $p in P_n$, el conjunto $R_p$ de sus raíces reales es finito: tiene a lo sumo $n$ elementos, porque $p$ no es el polinomio nulo. Entonces
+  $ A_n = union.big_(p in P_n) R_p $
+  es una unión indexada por un conjunto contable de conjuntos finitos, y por lo tanto $A_n$ es contable.
+
+  *(c)* El conjunto de todos los números algebraicos es
+  $ A = union.big_(n in NN) A_n, $
+  unión numerable de contables, así que $A$ es contable. Además $A$ es infinito, porque contiene a $QQ$: todo racional $p\/q$ es raíz de $q x - p$. Luego $A$ es numerable.
+
+  Sea $T = RR backslash A$ el conjunto de los trascendentes. Si $T$ fuera contable, entonces $RR = A union T$ sería unión de dos contables y por lo tanto contable, contradiciendo el Teorema 3.19. Concluimos que $T$ no es contable: *existen números trascendentes* y, de hecho, son "casi todos" los reales.
+]
+
+#sublema(titulo: "Por qué este ejemplo vale la pena")[
+  Es el mismo movimiento que el cardinal de los irracionales (Ejercicio 4 de la Práctica 2), pero con un conjunto que no se puede describir de manera explícita: la existencia de números trascendentes se demuestra *contando*, sin exhibir ninguno. Exhibir uno concreto ($e$, $pi$) es muchísimo más difícil que probar que hay una cantidad no numerable.
+
+  Para la Práctica 2 la parte reutilizable es la identificación *polinomio $<-->$ tupla de coeficientes*, que es la que resuelve el Ejercicio 13 (cardinal de $RR[X]$): con coeficientes reales en lugar de enteros, la misma identificación da $RR[X] tilde.op union.big_(n in NN) RR^(n+1)$.
 ]
 
 #ejemplo[Transportar funciones: si $A tilde.op X$ y $B tilde.op Y$ entonces $B^A tilde.op Y^X$][Prop][
@@ -1081,7 +1257,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   #set enum(numbering: "a)")
   + $NN^NN$.
   + $A = {(a_n)_n in NN^NN : a_n != a_m "si" n != m}$ (las sucesiones inyectivas).
-  + $A = {(a_n)_n in NN^NN : a_n mid a_(n+1) "para todo" n in NN}$.
+  + $A = {(a_n)_n in NN^NN : a_n divides a_(n+1) "para todo" n in NN}$.
 ]
 
 #estrategia[Contar con exponentes, y después justificar][
@@ -1138,7 +1314,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   y $cal(P)(NN) tilde.op RR$, por el Ejercicio 3 (a) de la Práctica 2 el segundo pedazo tiene cardinal $frak(c)$. Existe entonces $g : RR -> A$ inyectiva y, por Cantor-Schröeder-Bernstein, $A tilde.op RR$.
 
-  *(c) Las cadenas de divisibilidad.* Por (a), existe $f : A -> RR$ inyectiva. Para la vuelta, notemos que si $a_n mid a_(n+1)$ entonces $a_(n+1) = k_n a_n$ para algún $k_n in NN$, y por lo tanto la sucesión queda determinada por $a_1$ y por $(k_n)_n$:
+  *(c) Las cadenas de divisibilidad.* Por (a), existe $f : A -> RR$ inyectiva. Para la vuelta, notemos que si $a_n divides a_(n+1)$ entonces $a_(n+1) = k_n a_n$ para algún $k_n in NN$, y por lo tanto la sucesión queda determinada por $a_1$ y por $(k_n)_n$:
 
   $ a_1, quad a_2 = k_1 a_1, quad a_3 = k_2 k_1 a_1, quad dots, quad a_(n+1) = k_n dots.h.c k_1 a_1. $
 
@@ -1146,7 +1322,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   $ (g(a, (k_n)_n))_m := a dot product_(i=1)^(m-1) k_i, quad "con la convención" product_(i=1)^0 k_i = 1. $
 
-  Está bien definida, porque $a_(m+1) = a product_(i=1)^m k_i = (a product_(i=1)^(m-1) k_i) k_m = a_m k_m$, o sea $a_m mid a_(m+1)$.
+  Está bien definida, porque $a_(m+1) = a product_(i=1)^m k_i = (a product_(i=1)^(m-1) k_i) k_m = a_m k_m$, o sea $a_m divides a_(m+1)$.
 
   Es inyectiva: si $(a_m)_m = g(a, (k_n)_n)$ y $(b_m)_m = g(tilde(a), (tilde(k)_n)_n)$ cumplen $a_m = b_m$ para todo $m$, entonces $a = a_1 = b_1 = tilde(a)$; y dado $n in NN$, de $a_n k_n = a_(n+1) = b_(n+1) = b_n tilde(k)_n$ con $a_n = b_n != 0$ se concluye $k_n = tilde(k)_n$.
 

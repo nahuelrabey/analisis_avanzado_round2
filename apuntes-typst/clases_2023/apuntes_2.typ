@@ -133,9 +133,9 @@ _Obs_: dado $N in NN$ tenemos que $NN = union.sq_(i=1)^N B_i$. \
 Esto se puede probar por inducción, o notando que $B_i = {k N + i : k in NN_0}$ con $1 <= i <= N$ cumplen lo pedido. \
 En general, $NN = union.sq_(m in NN)^(+oo) B_m$ con $N$ numerable. \
 Por ejemplo:
-$B_2 = {n in NN : 2 mid n}$, $B_3 = {n in NN : 2 cancel("|") n " y " 3 mid n}$, \
-$B_5 = {n in NN : 2 cancel("|") n, 3 cancel("|") n, 5 mid n}, ...$ \
-$B_p = {n in NN : q cancel("|") n " para todo " q < p " primo pero " p mid n}$. \
+$B_2 = {n in NN : 2 divides n}$, $B_3 = {n in NN : 2 divides.not n " y " 3 divides n}$, \
+$B_5 = {n in NN : 2 divides.not n, 3 divides.not n, 5 divides n}, ...$ \
+$B_p = {n in NN : q divides.not n " para todo " q < p " primo pero " p divides n}$. \
 Una razón por la cual $union.sq_(n in ZZ) B_n ~ NN$ es porque hay biyecciones $NN ->^g P = {p in NN " primos"}$, $B_p ~> NN$, entonces
 $
 A_m ~> B_(g(m)), (n,m) |-> h_(g(m))(m) \

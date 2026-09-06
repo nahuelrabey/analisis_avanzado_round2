@@ -767,3 +767,31 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
 
   Lo que podríamos preguntarnos es si existe algún conjunto infinito cuyo cardinal sea estrictamente mayor que $aleph_0$. La respuesta es que sí y eso es lo que vemos a continuación.
 ]
+
+#teorema[No numerabilidad de $RR$][3.19][
+  El conjunto de los números reales $RR$ no es numerable.
+]
+
+#demostracion[
+  Supongamos que sí es numerable, es decir que existe $f : NN -> (0, 1)$ biyectiva. Esto quiere decir que con los números entre $0$ y $1$ podemos formar una lista ordenada $(x_n)_(n in NN)$. Tenemos que podemos escribir a estos números
+
+  $
+    x_1 &= 0, x_(11) x_(12) x_(13) x_(14) dots \
+    x_2 &= 0, x_(21) x_(22) x_(23) x_(24) dots \
+        & dots.v \
+    x_n &= 0, x_(n 1) x_(n 2) x_(n 3) x_(n 4) dots \
+        & dots.v
+  $
+
+  donde cada uno de los números $x_(n m) in {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}$, es decir, $(x_(n m))_m$ son los dígitos de $x_n$ en su desarrollo decimal. Sea $y in (0, 1)$ el número
+
+  $ y = 0, y_1 y_2 y_3 dots quad "donde" y_i = cases(2 & "si" x_(i i) != 2, 3 & "si" x_(i i) = 2) $
+
+  Vemos que $y$ es un número entre $0$ y $1$ que no pertenece a la lista anterior, dado que $y_n != x_(n n)$ por definición (lo cual nos dice que $y != x_n$ para todo $n in NN$). Esto contradice que la función $f$ que teníamos al principio sea biyectiva.
+]
+
+#observacion[Coordinabilidad de $RR$ con Intervalos][3.21][
+  De hecho, podemos probar que $RR$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $RR tilde.op (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $RR$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $RR tilde.op [a, b]$, podemos pensar que $RR tilde.op (a, b)$ y $(a, b) tilde.op [a, b]$ dado que $(a, b) = [a, b] backslash {a, b}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] tilde.op (a, b)$.
+]
+
+
