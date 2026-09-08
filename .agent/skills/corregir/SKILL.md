@@ -161,3 +161,4 @@ Pista: <una sola, la mínima que destrabe>
 - Las observaciones van **en orden de gravedad**, no en orden de aparición.
 - Nada de preámbulos ni de elogios de relleno. Si algo está bien resuelto y vale la pena decirlo, es una línea concreta sobre *qué* estuvo bien, no "¡muy buen intento!".
 - Notación matemática en Typst inline (`$abs(a_n - a) < epsilon$`), respetando las reglas del proyecto: `abs(...)` nunca `|...|`, `divides` / `divides.not`, `compose` para composición.
+- **Excepción:** si está activo [`/modo-web`](../modo-web/SKILL.md) --- el usuario lee en Claude web y ahí el Typst inline se ve como código crudo --- la notación del chat sigue las reglas de esa skill (LaTeX en `$$` aislado, unicode en la prosa). La estructura de la corrección (veredicto, ✗ / ⚠ / ○, una sola pista) no cambia.
