@@ -1,5 +1,16 @@
 #import "../utils.typ": *
+#show figure.where(kind: "frame"): set figure(numbering: none)
+#show figure.where(kind: "frame"): set block(breakable: true)
 #show: frame-style(styles.boxy)
+
+#show grid.cell: it => {
+  if it.fill != none {
+    set text(fill: white, weight: "bold", style: "italic")
+    it
+  } else {
+    it
+  }
+}
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
@@ -12,10 +23,9 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 3 (b). 1 ítem sobre 30. \
-  *Transcritos en este archivo:* Ej. 3 (b). Queda sin pasar en limpio el Ej. 1 (d), cuya
-  resolución todavía tiene huecos lógicos abiertos. \
-  *Lo que sigue:* cerrar el Ej. 1 (d) y encarar el Ej. 1 (a), (b), (c).
+  *Resueltos:* Ej. 1 (d) y Ej. 3 (b). 2 ítems sobre 33. \
+  *Transcritos en este archivo:* los dos. \
+  *Lo que sigue:* el Ej. 1 (a), (b), (c), que completan el primer ejercicio.
 ]
 
 #v(6pt)
@@ -51,7 +61,7 @@
     [+ $ZZ_(<= -3)$],
     [+ $5 ZZ$],
     [+ $ZZ times NN$],
-    [+ $(-1, 1) inter QQ$]
+    [+ $(-1, 1) inter QQ$ #hecho]
   )
 
 + Sea $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable.
@@ -210,4 +220,103 @@
   Hemos encontrado que $psi$ es la función inversa de $phi$, por lo tanto existe una biyección
   entre $B$ y $B backslash A$. Es decir, $B tilde.op B backslash A$, tal como queríamos
   demostrar.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 1 (d)][
+  Halle el cardinal de $(-1,1) inter QQ$.
+]
+
+#solucion[Propuesta 1][
+  Notemos que puedo definir una función $f : QQ -> (-1,1) inter QQ$ biyectiva de la siguiente
+  forma:
+
+  $ f(x) = x/(1 + abs(x)) $
+
+  *La función está bien definida.* Observemos que para todo $q in QQ$ sabemos que
+  $abs(q) in QQ$ también, pues $abs(dot)$ lo único que hace es multiplicar por $1$ o por $-1$,
+  y ambos son racionales, por lo tanto el producto se mantiene en los racionales. Además
+  $1 + abs(q) in QQ$, puesto que sumar racionales se mantiene en los racionales, y en particular
+  $1 + abs(q) > 0$. Finalmente
+
+  $ q/(1 + abs(q)) in QQ, $
+
+  pues la división de dos racionales, con denominador no nulo, está permitida y vive dentro de
+  los racionales.
+
+  Hay que probar ahora que $abs(f(q)) < 1$, para lo cual necesitamos ver que
+
+  $ -1 < f(q) < 1. $
+
+  Como $1 + abs(q) > 0$, multiplicar por ese factor no invierte las desigualdades, y entonces
+
+  $ -1 < q/(1 + abs(q)) < 1 quad <==> quad -1 - abs(q) < q < 1 + abs(q). $
+
+  Si $q < 0$ tenemos $abs(q) = -q$, y la desigualdad de la derecha se lee $-1 + q < q < 1 - q$:
+  la primera vale porque $-1 < 0$, y la segunda porque $q < -q < 1 - q$. Si $q >= 0$ tenemos
+  $abs(q) = q$, y se lee $-1 - q < q < 1 + q$: la primera vale porque $-1 < 2q$ y la segunda
+  porque $0 < 1$.
+
+  Notemos entonces que para todo $q in QQ$ vale $f(q) in (-1,1) inter QQ$, y con esto vemos que
+  $f$ está bien definida.
+
+  *La inversa.* Puedo definir también otra función $f^(-1) : (-1,1) inter QQ -> QQ$ tal que
+
+  $ f^(-1)(x) = x/(1 - abs(x)) $
+
+  Para esta función podemos ver que $1 - abs(x) = 0 <==> abs(x) = 1$, pero como
+  $"Dom"(f^(-1)) subset.eq (-1,1)$, sabemos que $abs(x) != 1$ siempre, por lo tanto nuestra
+  función está bien definida en su dominio. Además, para todo $x in (-1,1) inter QQ$ también se
+  cumple que $f^(-1)(x) in QQ$ por el mismo argumento de arriba, es decir, está bien definida en
+  su codominio.
+
+  *Primera composición.* Calculemos $f compose f^(-1)$:
+
+  $
+    (f compose f^(-1))(x)
+      &= x/(1 - abs(x)) dot 1/(1 + abs(x/(1 - abs(x)))) \
+      &= x/(1 - abs(x)) dot (1 + abs(x)/abs(1 - abs(x)))^(-1)
+  $
+
+  Notemos que si $x in (-1,1) inter QQ$, tenemos que
+  $-1 < x < 1 <==> abs(x) < 1 <==> 1 - abs(x) > 0$. Por lo tanto, en este dominio
+  $abs(1 - abs(x)) = 1 - abs(x)$, y vale lo siguiente
+
+  $
+    (f compose f^(-1))(x)
+      &= x/(1 - abs(x)) dot (1 + abs(x)/(1 - abs(x)))^(-1)
+       = x/(1 - abs(x)) dot ((1 - abs(x) + abs(x))/(1 - abs(x)))^(-1) \
+      &= x/(1 - abs(x)) dot (1/(1 - abs(x)))^(-1)
+       = x/(1 - abs(x)) dot (1 - abs(x))
+       = x
+  $
+
+  Luego, $f compose f^(-1) = id_((-1,1) inter QQ)$.
+
+  *Segunda composición.* La cuenta es la misma con $1 - abs(x)$ y $1 + abs(x)$ intercambiados
+  (ver Galerazo 4 en `galerazos.typ`), y esta vez el paso del módulo es gratis: $1 + abs(x) > 0$
+  para todo $x in QQ$, sin ninguna hipótesis sobre $x$, así que
+  $abs(1 + abs(x)) = 1 + abs(x)$. Para $x in QQ$,
+
+  $
+    (f^(-1) compose f)(x)
+      &= x/(1 + abs(x)) dot 1/(1 - abs(x/(1 + abs(x))))
+       = x/(1 + abs(x)) dot (1 - abs(x)/(1 + abs(x)))^(-1) \
+      &= x/(1 + abs(x)) dot ((1 + abs(x) - abs(x))/(1 + abs(x)))^(-1)
+       = x/(1 + abs(x)) dot (1/(1 + abs(x)))^(-1) \
+      &= x/(1 + abs(x)) dot (1 + abs(x))
+       = x
+  $
+
+  Es decir, $f^(-1) compose f = id_(QQ)$, y así hemos demostrado que $f$ es biyectiva.
+
+  *Conclusión.* Como sabemos que $NN tilde.op QQ$ (Numerabilidad de $QQ$ en `apuntes.typ`) y
+  $f$ es una biyección, tenemos que $QQ tilde.op (-1,1) inter QQ$, y por transitividad
+  $NN tilde.op (-1,1) inter QQ$. Por la Definición 3.6, eso dice que $(-1,1) inter QQ$ es
+  numerable, o sea
+
+  $ \#((-1,1) inter QQ) = aleph_0. $
 ]
