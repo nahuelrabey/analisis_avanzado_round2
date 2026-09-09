@@ -71,6 +71,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-2],
   [Mudar un intervalo a otro con una afín],
   [Ya tengo una biyección hacia un intervalo, pero me piden otro],
+
+  [G-3],
+  [La firma $X -> Y$ es una afirmación, no una etiqueta],
+  [Definí una función por una fórmula o por ramas y hay que ver que está bien definida],
 )
 
 #v(8pt)
@@ -332,3 +336,174 @@ multiplica*. Los dos coeficientes son el punto medio y el semiancho del interval
   otro.
 - Cualquier ejercicio donde ya se resolvió un caso modelo y el enunciado pide una variante
   desplazada o reescalada.
+
+#v(8pt)
+
+== Galerazo 3 · La firma $X -> Y$ es una afirmación, no una etiqueta
+
+#disparador[
+  Cuando defino una función con una fórmula *veo* que anda --- lo veo desde el momento en que se
+  me ocurre la idea --- pero no sé qué hay que escribir para justificarlo. Y ya van tres
+  ejercicios seguidos en los que el único hueco que me queda es ése.
+]
+
+#galerazo[G-3][
+  Escribir $f : X -> Y$ no es etiquetar la fórmula: es *afirmar* dos cosas que hay que probar
+  --- que la fórmula esté definida en todo $X$, y que su valor caiga en $Y$ ---. La segunda
+  mitad se verifica *una condición por vez*, leyendo cómo está descrito $Y$. Es la verificación
+  más barata que existe y la que más errores atrapa: cuando la firma está mal, falla acá, antes
+  de gastar media página en componer.
+]
+
+=== La señal
+
+La señal no es una hipótesis del enunciado: es un *momento de la escritura*. Cada vez que uno
+escribe una flecha seguida de una fórmula, o de una definición por ramas,
+
+$ f : X -> Y, quad f(x) = dots $
+
+acaba de contraer una deuda. Y nada de lo que venga después --- inyectividad, sobreyectividad,
+inversas, composiciones --- significa nada hasta que esa deuda esté saldada: si $f(x)$ se sale
+de $Y$, la expresión $g compose f$ ni siquiera tiene sentido, porque $g$ no sabe qué hacer con
+lo que le llega.
+
+#sublema(titulo: "Traducción")[
+  *"Defino $f : X -> Y$ tal que $f(x) = dots$"* $==>$ *"tengo que probar que la fórmula tiene
+  sentido para todo $x in X$, y que $f(x)$ cumple todas las condiciones que definen a $Y$"*.
+
+  Cuántas cosas hay que verificar no lo decide la fórmula: lo decide *la descripción de $Y$*.
+  Una condición en $Y$, una línea de verificación.
+]
+
+=== Por qué funciona: qué es exactamente lo que se debe
+
+Son tres obligaciones, y ninguna es opcional:
+
++ *Que esté definida en todo $X$.* La fórmula tiene que tener sentido en cada punto: sin
+  denominadores nulos, sin raíces de negativos. Si la definición es por ramas, además las ramas
+  tienen que *cubrir* todo $X$.
++ *Que no sea ambigua.* Sólo aparece en las definiciones por ramas: dos ramas no pueden pisarse,
+  o el mismo $x$ tendría dos valores. Se resuelve exhibiendo la disjunción.
++ *Que los valores caigan en $Y$.* Una verificación por cada condición que describe a $Y$.
+
+La tercera es la que se saltea siempre, y es la más rentable de las tres: es mecánica, ocupa un
+renglón por condición, y es la única que detecta un error de *tipo* --- una flecha mal escrita
+--- que de otro modo recién se manifiesta media demostración después, disfrazado de cuenta que
+no cierra.
+
+#observacion[No confundirla con la sobreyectividad][
+  La obligación es $"Im" f subset.eq Y$, no $"Im" f = Y$. Que la imagen *alcance* todo el
+  codominio es otra propiedad, se prueba aparte y muchas veces sale gratis al exhibir la
+  inversa. Confundirlas cuesta doble: se escribe de más y, peor, se deja sin hacer el chequeo
+  barato --- que es el que hacía falta.
+]
+
+=== La familia entera: cómo se disfraza el codominio
+
+El trabajo a hacer no cambia; lo que cambia es en cuántas condiciones se parte $Y$.
+
+#table(
+  columns: (1.1fr, 1.9fr),
+  align: (left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 4pt),
+
+  [*$Y$ viene descrito como...*], [*...y entonces hay que verificar*],
+
+  [Un conjunto numérico cerrado por operaciones ($QQ$)],
+  [Que ninguna de las operaciones usadas se salga del conjunto],
+
+  [Una condición de desigualdad ($abs(y) < 1$)],
+  [La desigualdad, despejada para un $x$ genérico],
+
+  [Una intersección de las dos ($(-1,1) inter QQ$)],
+  [Las dos cosas, una línea cada una],
+
+  [Una diferencia de conjuntos ($B - A$)],
+  [Que el valor esté en $B$ *y además* que no esté en $A$],
+
+  [Una pieza de una partición],
+  [Que el valor caiga en esa pieza, no en otra],
+
+  [Todo el conjunto de llegada sin condiciones ($QQ$ como codominio pleno)],
+  [Nada extra: no hay tercera obligación],
+)
+
+=== Los dos ejercicios que lo destaparon
+
+*Caso 1 --- una fórmula con dos condiciones en el codominio* (`p2: Ej. 1(d)`).
+
+Se define $f : QQ -> (-1,1) inter QQ$ con $f(x) = x \/ (1 + abs(x))$ (Galerazo 1). El codominio
+tiene dos condiciones, así que hay exactamente tres cosas que verificar, y las tres son de un
+renglón. Dado $q in QQ$:
+
++ *Definida:* $1 + abs(q) >= 1 > 0$, nunca se anula.
++ *Racional:* $abs(q)$ es $q$ o $-q$, y los dos están en $QQ$; y $QQ$ es cerrado por suma y por
+  cociente con denominador no nulo. Entonces $f(q) in QQ$.
++ *Módulo menor que 1:* como $1 + abs(q) > 0$, la desigualdad $abs(f(q)) < 1$ equivale a
+  $abs(q) < 1 + abs(q)$, es decir a $0 < 1$.
+
+Para la inversa $g : (-1,1) inter QQ -> QQ$, $g(x) = x \/ (1 - abs(x))$, la lista es más corta:
+está definida porque $abs(x) < 1$ da $1 - abs(x) > 0$, y $g(x) in QQ$ por el mismo argumento de
+cuerpo. No hay tercera obligación, porque el codominio es *todo* $QQ$ y no impone ninguna
+condición. Esa asimetría entre las dos listas no es descuido: se lee de cómo está descrito cada
+codominio.
+
+#sublema(titulo: "Lo que el chequeo atrapa")[
+  El primer intento de ese ejercicio fue $f(x) = abs(x) \/ (1 + abs(x))$. La tercera
+  verificación lo mata en un renglón: $f(q) >= 0$ para todo $q$, así que la imagen queda dentro
+  de $[0,1) inter QQ$ y ningún racional negativo tiene preimagen. Sin ese chequeo, el error
+  recién apareció al final, cuando la composición dio $abs(x)$ en lugar de $x$ --- media página
+  después.
+]
+
+*Caso 2 --- dos funciones por ramas entre conjuntos abstractos* (`p2: Ej. 3(b)`).
+
+Con $A subset.eq B$, $C subset.eq B - A$ y $f : C -> A union C$ biyectiva, se definen
+
+$ phi : B - A -> B, quad
+  phi(x) = cases(f(x) & "si" x in C, x & "si" x in B - (A union C)) $
+
+$ psi : B -> B - A, quad
+  psi(x) = cases(f^(-1)(x) & "si" x in A union C, x & "si" x in B - (A union C)) $
+
+Acá las tres obligaciones se ven separadas con toda claridad:
+
++ *Cubren el dominio:* son exactamente las dos uniones disjuntas del principio,
+  $B - A = C union [B - (A union C)]$ y $B = (A union C) union [B - (A union C)]$.
++ *No se pisan:* por la disjunción de esas mismas uniones, ningún $x$ cae en dos ramas.
++ *Caen en el codominio:* para $phi$, $f(x) in A union C subset.eq B$ y
+  $x in B - (A union C) subset.eq B$; para $psi$, $f^(-1)(x) in C subset.eq B - A$ y
+  $x in B - (A union C) subset.eq B - A$.
+
+#sublema(titulo: "Lo que el chequeo atrapa")[
+  El primer intento de ese ejercicio tenía las dos flechas cruzadas: $phi : B -> B - A$ con la
+  regla de arriba. Las obligaciones 1 y 3 lo detectan por separado y de inmediato --- las ramas
+  sólo cubrían $B - A$, no $B$; y para $x in C$ el valor $f(x) in A union C$ no está contenido
+  en $B - A$ ---. Sin ese chequeo, el error sobrevivió hasta las composiciones, donde se
+  manifestó como identidades con el subíndice equivocado.
+]
+
+=== Cómo inventarlo de cero
+
++ *Escribir la flecha y subrayar el codominio.* La deuda nace ahí, no en la fórmula.
++ *Desarmar el codominio en su lista de condiciones.* $(-1,1) inter QQ$ son dos; $B - A$ es una
+  pertenencia y una no-pertenencia; $QQ$ solo no es ninguna.
++ *Tomar un $x$ genérico del dominio y recorrer la lista*, un renglón por condición. Si la
+  definición es por ramas, hacerlo rama por rama, y antes chequear que cubran y no se pisen.
++ *Si alguna condición no sale, no arreglar la cuenta: revisar la flecha.* En los dos casos de
+  arriba lo que estaba mal era la firma, no el álgebra. Una verificación que se resiste suele
+  estar diciendo que el codominio declarado no es el verdadero.
+
+El atajo mental: *la flecha es una promesa, y las tres obligaciones son la factura*. Se paga al
+escribirla, que es cuando sale barata.
+
+=== Dónde se usa
+
+- `p2: Ej. 1(d)` --- $f : QQ -> (-1,1) inter QQ$: racionalidad más desigualdad.
+- `p2: Ej. 3(b)` --- $phi$ y $psi$ por ramas: cobertura, disjunción y pertenencia a la pieza.
+- Toda definición por ramas, siempre: las tres obligaciones son el precio fijo del `cases`.
+- Al componer (Galerazo 2, $phi compose f$): la firma es justamente lo que tiene que encajar
+  --- el codominio de la primera contenido en el dominio de la segunda --- así que este chequeo
+  es la condición de entrada para poder usar "composición de biyecciones" sin mentir.
