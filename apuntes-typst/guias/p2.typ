@@ -11,6 +11,15 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(6pt)
 
+#progreso[
+  *Resueltos:* Ej. 3 (b). 1 ítem sobre 30. \
+  *Transcritos en este archivo:* Ej. 3 (b). Queda sin pasar en limpio el Ej. 1 (d), cuya
+  resolución todavía tiene huecos lógicos abiertos. \
+  *Lo que sigue:* cerrar el Ej. 1 (d) y encarar el Ej. 1 (a), (b), (c).
+]
+
+#v(6pt)
+
 #text(9pt)[
   *Recuerde:* Dadas $f : X -> Y$, $g : Y -> Z$ y dados $A, B subset.eq X$ y $C, D subset.eq Y$, se tiene:
   #set enum(numbering: "(a)")
@@ -23,7 +32,7 @@
     [+ $f^(-1)(C inter D) = f^(-1)(C) inter f^(-1)(D)$.],
     [+ $A subset.eq f^(-1)(f(A))$. Si $f$ es inyectiva vale la igualdad.],
     [+ $f(f^(-1)(C)) subset.eq C$. Si $f$ es sobreyectiva vale la igualdad.],
-    [+ $X \ f^(-1)(D) = f^(-1)(Y \ D)$.],
+    [+ $X backslash f^(-1)(D) = f^(-1)(Y backslash D)$.],
     [+ Si $f$ y $g$ son inyectivas (resp. sobreyectivas, biyectivas), entonces $g compose f$ es inyectiva (resp. sobreyectiva, biyectiva).]
   )
 ]
@@ -47,10 +56,10 @@
 
 + Sea $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable.
 
-+ Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B \ A$ es infinito.
++ Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
   #set enum(numbering: "(a)")
-  + Pruebe que existe $C subset.eq B \ A$ tal que $C ~ C union A$.
-  + Deduzca que $B \ A ~ B$.
+  + Pruebe que existe $C subset.eq B backslash A$ tal que $C ~ C union A$.
+  + Deduzca que $B backslash A ~ B$. #hecho
 
 + Halle el cardinal del conjunto de los números irracionales.
 
@@ -93,7 +102,7 @@
   + Pruebe que el conjunto de números primos es numerable.
   + Escriba a $NN$ como unión numerable de conjuntos numerables disjuntos dos a dos.
 
-+ Calcule el cardinal del conjunto $\{B subset.eq NN : \# B = \# (NN \ B) = aleph_0\}$.
++ Calcule el cardinal del conjunto $\{B subset.eq NN : \# B = \# (NN backslash B) = aleph_0\}$.
 
 + #set enum(numbering: "(a)")
   + Calcule el cardinal de $cal(P)(NN) times cal(P)(NN)$.
@@ -113,3 +122,92 @@
     - $A_i inter A_j = nothing$ si $i != j$. \
     Pruebe que $I$ es contable.
   + Sea $f : RR -> RR$ una función monótona. Pruebe que el conjunto de sus discontinuidades es contable.
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 3 (b)][
+  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
+  Sabiendo que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$, deduzca que
+  $B backslash A tilde.op B$.
+]
+
+#solucion[Propuesta 1][
+  Podemos construir dos uniones disjuntas
+
+  $
+    B backslash A &= C union (B backslash A backslash C) &&= C union [B backslash (A union C)] \
+    B &= A union (B backslash A) &&= (A union C) union [B backslash (A union C)]
+  $
+
+  Notemos que $(A union C) union [B backslash (A union C)]$ es una unión disjunta.
+
+  Además, como $C tilde.op A union C$ puedo plantear que existe $f : C -> A union C$ biyectiva.
+  Y, por supuesto, tengo $id : (B backslash (A union C)) -> (B backslash (A union C))$ también
+  biyectiva. Luego, planteo dos funciones.
+
+  $phi : B backslash A -> B$ tal que
+
+  $
+    phi(x) = cases(
+      f(x) & "si" x in C,
+      id(x) & "si" x in B backslash (A union C)
+    )
+  $
+
+  $psi : B -> B backslash A$ tal que
+
+  $
+    psi(x) = cases(
+      f^(-1)(x) & "si" x in A union C,
+      id(x) & "si" x in B backslash (A union C)
+    )
+  $
+
+  Por la disjunción entre los conjuntos $(C, B backslash (A union C))$ y
+  $(A union C, B backslash (A union C))$, ningún elemento del dominio de estas funciones tiene
+  dos imágenes. A su vez, la imagen de ambas funciones cae en el codominio declarado,
+
+  $
+    f(C) union id(B backslash (A union C)) &subset.eq B \
+    f^(-1)(A union C) union id(B backslash (A union C)) &subset.eq B backslash A
+  $
+
+  Podemos afirmar que están bien definidas.
+
+  Luego, notemos que $(phi compose psi)(x)$ tiene dos caminos:
+
+  - $x in B backslash (A union C)$, entonces $psi(x) = id_(B backslash (A union C))(x)$, y luego
+    $(phi compose psi)(x) = (phi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)$.
+  - $x in A union C$, entonces $psi(x) = f^(-1)(x)$, y luego
+    $(phi compose psi)(x) = (phi compose f^(-1))(x) = (f compose f^(-1))(x)$, pues $f^(-1)(x) in C$;
+    finalmente $(f compose f^(-1))(x) = id_(A union C)(x)$.
+
+  Hemos visto que
+
+  $
+    (phi compose psi)(x) = cases(
+      id_(B backslash (A union C))(x) & "si" x in B backslash (A union C),
+      id_(A union C)(x) & "si" x in A union C
+    )
+  $
+
+  Por lo tanto $phi compose psi = id_B$.
+
+  De forma análoga, estudiando $psi compose phi$,
+
+  $
+    (psi compose phi)(x) = cases(
+      (psi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)
+        & "si" x in B backslash (A union C),
+      (psi compose f)(x) = (f^(-1) compose f)(x) = id_C (x) & "si" x in C
+    )
+  $
+
+  Es decir, $psi compose phi = id_(B backslash A)$.
+
+  Hemos encontrado que $psi$ es la función inversa de $phi$, por lo tanto existe una biyección
+  entre $B$ y $B backslash A$. Es decir, $B tilde.op B backslash A$, tal como queríamos
+  demostrar.
+]
