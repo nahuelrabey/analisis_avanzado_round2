@@ -23,9 +23,10 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (d) y Ej. 3 (b). 2 ítems sobre 33. \
-  *Transcritos en este archivo:* los dos. \
-  *Lo que sigue:* el Ej. 1 (a), (b), (c), que completan el primer ejercicio.
+  *Resueltos:* Ej. 1 (d), Ej. 3 (a) y Ej. 3 (b). 3 ítems sobre 33. \
+  *Transcritos en este archivo:* los tres. \
+  *Lo que sigue:* Ej. 1 (a) tiene un error real (ver corrección en el chat); Ej. 1 (b), 1 (c)
+  y 2 tienen huecos menores pendientes de que el usuario los cierre.
 ]
 
 #v(6pt)
@@ -68,7 +69,7 @@
 
 + Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
   #set enum(numbering: "(a)")
-  + Pruebe que existe $C subset.eq B backslash A$ tal que $C ~ C union A$.
+  + Pruebe que existe $C subset.eq B backslash A$ tal que $C ~ C union A$. #hecho
   + Deduzca que $B backslash A ~ B$. #hecho
 
 + Halle el cardinal del conjunto de los números irracionales.
@@ -319,4 +320,26 @@
   numerable, o sea
 
   $ \#((-1,1) inter QQ) = aleph_0. $
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 3 (a)][
+  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
+  Pruebe que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$.
+]
+
+#solucion[Propuesta 1][
+  Al ser $B backslash A$ infinito, por la Proposición 3.14 (`apuntes.typ`) sabemos que existe
+  $C subset.eq B backslash A$ numerable.
+
+  Como $C$ es numerable y $A$ es contable, por el Ejercicio 2 sabemos que la unión de dos
+  contables es contable. En particular $C union A$ es contable, y como $C subset.eq C union A$
+  y $C$ es infinito, $C union A$ también es infinito (todo conjunto que contiene un
+  subconjunto infinito es infinito). Un contable infinito es, por la Definición 3.6, numerable.
+
+  Por lo tanto, ambos conjuntos son numerables: $C tilde.op NN$ y $(C union A) tilde.op NN$.
+  Por simetría y transitividad de $tilde.op$ (Proposición 3.2), $C tilde.op C union A$.
 ]
