@@ -23,9 +23,10 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a), 1 (b), 1 (d), Ej. 3 (a) y Ej. 3 (b). 5 ítems sobre 33. \
-  *Transcritos en este archivo:* los cinco. \
-  *Lo que sigue:* Ej. 1 (c) y Ej. 2 tienen huecos menores pendientes de cerrar.
+  *Resueltos:* Ej. 1 (a), 1 (b), 1 (c), 1 (d), Ej. 3 (a) y Ej. 3 (b). 6 ítems sobre 33. \
+  *Transcritos en este archivo:* los seis. \
+  *Lo que sigue:* Ej. 2 (A ∪ B contable) tiene un hueco real --- los casos A=∅, B=∅, A=B=∅
+  quedaron sin resolver en el original --- pendiente de que el usuario lo cierre.
 ]
 
 #v(6pt)
@@ -60,7 +61,7 @@
     row-gutter: 10pt,
     [+ $ZZ_(<= -3)$ #hecho],
     [+ $5 ZZ$ #hecho],
-    [+ $ZZ times NN$],
+    [+ $ZZ times NN$ #hecho],
     [+ $(-1, 1) inter QQ$ #hecho]
   )
 
@@ -404,4 +405,37 @@
   $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos.typ`), por transitividad $NN tilde.op 5 ZZ$.
 
   Finalmente, $\#(5 ZZ) = aleph_0$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 1 (c)][
+  Halle el cardinal de $ZZ times NN$.
+]
+
+#solucion[Propuesta 1][
+  Sabemos que $ZZ tilde.op NN$ (Ejemplo 13 en `ejemplos.typ`), por lo tanto existe
+  $f : ZZ -> NN$ biyectiva. Además, $NN tilde.op NN times NN$ (Ejemplo 14 en `ejemplos.typ`),
+  con lo cual existe $g : NN times NN -> NN$ biyectiva.
+
+  Con lo anterior, puedo definir $phi : ZZ times NN -> NN times NN$ tal que
+
+  $ phi(m,n) = (f(m), n) $
+
+  *$phi$ es inyectiva.* Si $phi(m,n) = phi(tilde(m), tilde(n))$ tenemos que
+  $(f(tilde(m)), tilde(n)) = (f(m), n)$, con lo cual, al ser $f$ inyectiva (por ser biyectiva),
+  $tilde(m) = m$; y de la igualdad de pares, $tilde(n) = n$.
+
+  *$phi$ es sobreyectiva.* Dado $(p,q) in NN times NN$, como $f$ es sobreyectiva existe
+  $m in ZZ$ tal que $f(m) = p$. Tomando $n = q$, tenemos $phi(m,n) = (f(m), n) = (p,q)$.
+
+  Por ser inyectiva y sobreyectiva, $phi$ es biyectiva.
+
+  Por lo tanto, puedo construir $h : ZZ times NN -> NN$ tal que $h = g compose phi$, que es
+  biyectiva por ser composición de funciones biyectivas. Es decir, $ZZ times NN tilde.op NN$, y
+  en particular
+
+  $ \#(ZZ times NN) = aleph_0. $
 ]
