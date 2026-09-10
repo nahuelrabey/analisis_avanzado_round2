@@ -23,10 +23,9 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (d), Ej. 3 (a) y Ej. 3 (b). 3 ítems sobre 33. \
-  *Transcritos en este archivo:* los tres. \
-  *Lo que sigue:* Ej. 1 (a) tiene un error real (ver corrección en el chat); Ej. 1 (b), 1 (c)
-  y 2 tienen huecos menores pendientes de que el usuario los cierre.
+  *Resueltos:* Ej. 1 (a), 1 (b), 1 (d), Ej. 3 (a) y Ej. 3 (b). 5 ítems sobre 33. \
+  *Transcritos en este archivo:* los cinco. \
+  *Lo que sigue:* Ej. 1 (c) y Ej. 2 tienen huecos menores pendientes de cerrar.
 ]
 
 #v(6pt)
@@ -59,8 +58,8 @@
   #grid(
     columns: (1fr, 1fr, 1fr, 1fr),
     row-gutter: 10pt,
-    [+ $ZZ_(<= -3)$],
-    [+ $5 ZZ$],
+    [+ $ZZ_(<= -3)$ #hecho],
+    [+ $5 ZZ$ #hecho],
     [+ $ZZ times NN$],
     [+ $(-1, 1) inter QQ$ #hecho]
   )
@@ -342,4 +341,67 @@
 
   Por lo tanto, ambos conjuntos son numerables: $C tilde.op NN$ y $(C union A) tilde.op NN$.
   Por simetría y transitividad de $tilde.op$ (Proposición 3.2), $C tilde.op C union A$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 1 (a)][
+  Halle el cardinal de $ZZ_(<= -3)$.
+]
+
+#solucion[Propuesta 1][
+  Defino $f : NN -> ZZ_(<= -3)$ y $g : ZZ_(<= -3) -> NN$, ambas con la misma fórmula
+  $f(n) = g(n) = -2 - n$.
+
+  *Están bien definidas.* Para $n in NN$ (es decir, $n >= 1$), $f(n) = -2 - n <= -3$, así que
+  $f(n) in ZZ_(<= -3)$. Para $n in ZZ_(<= -3)$ (es decir, $n <= -3$), $g(n) = -2 - n >= 1$, así
+  que $g(n) in NN$.
+
+  *Son inversas.* Para $n in ZZ_(<= -3)$,
+
+  $ (f compose g)(n) = -2 - (-2 - n) = n, $
+
+  es decir $f compose g = id_(ZZ_(<= -3))$. La misma cuenta, con los roles de dominio y
+  codominio intercambiados, da para $n in NN$
+
+  $ (g compose f)(n) = -2 - (-2 - n) = n, $
+
+  es decir $g compose f = id_(NN)$.
+
+  Por lo tanto $f$ es biyectiva, $NN tilde.op ZZ_(<= -3)$, y en particular
+  $\#ZZ_(<= -3) = aleph_0$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 1 (b)][
+  Halle el cardinal de $5 ZZ$.
+]
+
+#solucion[Propuesta 1][
+  Notemos que $5 ZZ = {5k : k in ZZ}$.
+
+  Planteo $f : ZZ -> 5 ZZ$, $f(k) = 5k$, que está bien definida porque $5k in 5 ZZ$ para todo
+  $k in ZZ$ --- es la definición misma de $5ZZ$. Existe $f^(-1) : 5 ZZ -> ZZ$, $f^(-1)(n) = n/5$,
+  que está bien definida porque si $n in 5ZZ$ entonces $n = 5k$ para algún $k in ZZ$, y luego
+  $n/5 = k in ZZ$.
+
+  Verifiquemos que son inversas. Para $n in 5ZZ$, escribiendo $n = 5k$ con $k in ZZ$,
+
+  $ (f compose f^(-1))(n) = f(n/5) = 5 dot (n/5) = n, $
+
+  es decir $f compose f^(-1) = id_(5ZZ)$. Para $k in ZZ$,
+
+  $ (f^(-1) compose f)(k) = f^(-1)(5k) = (5k)/5 = k, $
+
+  es decir $f^(-1) compose f = id_(ZZ)$.
+
+  Por lo tanto $f$ es biyectiva, es decir $ZZ tilde.op 5 ZZ$. Como además sabemos que
+  $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos.typ`), por transitividad $NN tilde.op 5 ZZ$.
+
+  Finalmente, $\#(5 ZZ) = aleph_0$.
 ]
