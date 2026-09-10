@@ -75,6 +75,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-3],
   [La firma $X -> Y$ es una afirmación, no una etiqueta],
   [Definí una función por una fórmula o por ramas y hay que ver que está bien definida],
+
+  [G-4],
+  [La segunda composición no se rehace],
+  [Ya verifiqué una composición y la otra "sale igual"],
 )
 
 #v(8pt)
@@ -507,3 +511,143 @@ escribirla, que es cuando sale barata.
 - Al componer (Galerazo 2, $phi compose f$): la firma es justamente lo que tiene que encajar
   --- el codominio de la primera contenido en el dominio de la segunda --- así que este chequeo
   es la condición de entrada para poder usar "composición de biyecciones" sin mentir.
+
+#v(8pt)
+
+== Galerazo 4 · La segunda composición no se rehace
+
+#disparador[
+  Ya verifiqué $f compose f^(-1) = id$. ¿No existe una forma más compacta de señalar que
+  $f^(-1) compose f = id$ también, sin tener que hacer toda la cuenta de nuevo?
+]
+
+#galerazo[G-4][
+  Verificada una de las dos composiciones, la otra *no se rehace*: o se la deduce de un lema
+  --- inversa a un lado más una hipótesis mínima --- o se señala con precisión la simetría de
+  la cuenta, diciendo qué se intercambia y qué se simplifica. Lo único que nunca alcanza es
+  escribir *"análogamente"* a secas: eso no es un atajo, es un agujero.
+]
+
+=== La señal
+
+Estás probando que $g$ es la inversa de $f$, ya hiciste una de las dos composiciones, y la
+segunda *tiene la misma pinta*. La tentación es cerrarla con "la otra sale igual". El problema
+es que "igual" no es una afirmación: no dice qué se conserva ni qué cambia, y el lector --- o
+el corrector --- no tiene con qué verificarla.
+
+#sublema(titulo: "Traducción")[
+  *"Ya verifiqué un lado y el otro se ve igual"* $==>$ *"o cito el lema de inversa a un lado, o
+  digo exactamente qué se intercambia en la cuenta y qué paso se vuelve innecesario"*.
+
+  Las dos salidas son legítimas y cuestan dos renglones. La tercera, "análogamente" sin más,
+  cuesta cero y no prueba nada.
+]
+
+=== Por qué funciona: el lema de la inversa a un lado
+
+#sublema(titulo: "Lema (inversa a un lado + inyectividad)")[
+  Sean $f : X -> Y$ y $g : Y -> X$ tales que $f compose g = id_Y$. Si además $f$ es inyectiva,
+  entonces $g compose f = id_X$, y por lo tanto $g$ es la inversa de $f$.
+]
+
+*Demostración.* Sea $x in X$. Aplicando $f$ a $g(f(x))$ y usando la hipótesis en el punto
+$f(x) in Y$,
+
+$ f(g(f(x))) = (f compose g)(f(x)) = id_Y (f(x)) = f(x). $
+
+Es decir, $f$ toma el mismo valor en $g(f(x))$ y en $x$. Como $f$ es inyectiva, esos dos puntos
+son el mismo: $g(f(x)) = x$. Como $x$ era arbitrario, $g compose f = id_X$. $qed$
+
+La hipótesis extra *no sobra*. Con $f compose g = id_Y$ sola, lo único que se deduce es que $f$
+es sobreyectiva y $g$ inyectiva, y eso no basta:
+
+#sublema(titulo: "Por qué hace falta la hipótesis extra")[
+  Tomemos $X = Y = NN$, con $g(n) = n + 1$ y
+
+  $ f(n) = cases(n - 1 & "si" n >= 2, 1 & "si" n = 1) $
+
+  Entonces $(f compose g)(n) = f(n+1) = n$ para todo $n$, o sea $f compose g = id_NN$. Pero
+  $(g compose f)(1) = g(1) = 2 != 1$, así que $g compose f != id_NN$. Coherente con el lema:
+  esta $f$ no es inyectiva, porque $f(1) = f(2) = 1$.
+]
+
+=== La familia entera: las tres salidas
+
+#table(
+  columns: (1fr, 1.6fr),
+  align: (left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 4pt),
+
+  [*Salida*], [*Qué hay que pagar*],
+
+  [Lema con $f$ inyectiva],
+  [Probar que $f$ es inyectiva. Conviene si eso sale más barato que la cuenta],
+
+  [Dual con $g$ sobreyectiva],
+  [Probar que $g$ es sobreyectiva. Mismo espíritu: $x = g(y)$ y entonces
+   $g(f(x)) = g((f compose g)(y)) = g(y) = x$],
+
+  [Simetría explícita de la cuenta],
+  [Nombrar la sustitución que lleva una composición en la otra, y qué paso desaparece],
+
+  [_"Análogamente"_ a secas],
+  [Nada, y por eso no prueba nada],
+)
+
+=== La salida por simetría, en concreto
+
+Con $f(x) = x \/ (1 + abs(x))$ y $f^(-1)(x) = x \/ (1 - abs(x))$ las dos cuentas son
+
+$
+  (f compose f^(-1))(x) &= x/(1 - abs(x)) dot ((1 - abs(x) + abs(x))/(1 - abs(x)))^(-1) \
+  (f^(-1) compose f)(x) &= x/(1 + abs(x)) dot ((1 + abs(x) - abs(x))/(1 + abs(x)))^(-1)
+$
+
+o sea *la misma cuenta con $1 - abs(x)$ y $1 + abs(x)$ intercambiados*: en las dos el numerador
+del paréntesis se cancela a $1$ y queda $x$. Y hay un detalle que conviene decir, porque es lo
+que vuelve honesta la analogía: el único paso de la primera que pedía justificación era
+$abs(1 - abs(x)) = 1 - abs(x)$, que necesitaba $abs(x) < 1$. Su análogo en la segunda es
+$abs(1 + abs(x)) = 1 + abs(x)$, que vale sin ninguna hipótesis. La segunda cuenta no es
+parecida a la primera: es *estrictamente más fácil*.
+
+=== Cuándo no aplica
+
+Si las dos composiciones se calculan sobre *particiones distintas del dominio*, no hay simetría
+que señalar y hay que hacer las dos. Es el caso de las funciones definidas por ramas: en
+`p2: Ej. 3 (b)`, $phi compose psi$ se parte según $B - (A union C)$ y $A union C$, mientras que
+$psi compose phi$ se parte según $B - (A union C)$ y $C$. Son análisis de casos distintos, y
+ahí "análogamente" tapa justamente lo que cambia. La salida por el lema, en cambio, sigue
+disponible.
+
+=== Cómo inventarlo de cero
+
++ *Escribir las dos composiciones una debajo de la otra*, sin resolverlas. La simetría --- o su
+  ausencia --- se ve ahí, no en el resultado.
++ *Si son la misma cuenta con una sustitución*: nombrarla, y decir qué paso delicado desaparece
+  en la segunda.
++ *Si no son simétricas*: buscar la hipótesis más barata entre inyectividad de $f$ y
+  sobreyectividad de $g$, y cerrar con el lema.
++ *Nunca escribir "análogamente" sin completar con qué.* Si no se puede completar, es porque no
+  era análogo.
+
+=== Dónde se usa
+
+- `p2: Ej. 1 (d)` --- $f(x) = x \/ (1 + abs(x))$: las dos composiciones son simétricas, sirve
+  la salida corta.
+- `p2: Ej. 3 (b)` --- $phi$ y $psi$ por ramas: no son simétricas, ver *Cuándo no aplica*.
+- En general, cada vez que se exhibe una inversa explícita para probar una biyección, que es la
+  forma canónica de resolver los ejercicios de cardinalidad de la práctica 2.
+
+#sublema(titulo: "Pendiente --- buscar fuente")[
+  El enunciado y la demostración del lema de arriba, el contraejemplo de $NN$ y la lectura por
+  simetría *fueron reconstruidos en conversación*, no copiados de la bibliografía. El resultado
+  es estándar (aparece en los capítulos de funciones bajo los nombres *inversa a izquierda* e
+  *inversa a derecha*), pero acá no está verificado contra ninguna fuente.
+
+  Antes de citarlo en una entrega: buscarlo en `apuntes-docentes/bibliografia` y en las notas de
+  la materia, y en cuanto aparezca, reemplazar esta caja por la referencia exacta --- libro,
+  capítulo y numeración --- y anotar si la cátedra lo enuncia con la hipótesis de inyectividad
+  de $f$ o con la de sobreyectividad de $g$.
+]

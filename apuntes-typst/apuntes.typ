@@ -768,6 +768,11 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   Lo que podríamos preguntarnos es si existe algún conjunto infinito cuyo cardinal sea estrictamente mayor que $aleph_0$. La respuesta es que sí y eso es lo que vemos a continuación.
 ]
 
+#proposicion[Numerabilidad de $QQ$][
+  El conjunto de los números racionales es numerable. Es decir, $NN tilde.op QQ$ y por lo tanto
+  $\#QQ = aleph_0$.
+]
+
 #teorema[No numerabilidad de $RR$][3.19][
   El conjunto de los números reales $RR$ no es numerable.
 ]
