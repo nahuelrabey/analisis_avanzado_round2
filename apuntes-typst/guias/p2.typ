@@ -23,10 +23,11 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a), 1 (b), 1 (c), 1 (d), Ej. 3 (a) y Ej. 3 (b). 6 ítems sobre 33. \
-  *Transcritos en este archivo:* los seis. \
-  *Lo que sigue:* Ej. 2 (A ∪ B contable) tiene un hueco real --- los casos A=∅, B=∅, A=B=∅
-  quedaron sin resolver en el original --- pendiente de que el usuario lo cierre.
+  *Resueltos:* Ej. 1 (a), 1 (b), 1 (c), 1 (d), Ej. 2, Ej. 3 (a) y Ej. 3 (b). 7 ítems sobre 33. \
+  *Transcritos en este archivo:* los siete --- todo lo que traía el PDF original de
+  demostraciones del usuario. \
+  *Lo que sigue:* el Ej. 1 completo (a)-(d) y el Ej. 2 y 3 quedan resueltos; falta encarar el
+  resto de la guía (Ej. 4 en adelante).
 ]
 
 #v(6pt)
@@ -65,7 +66,7 @@
     [+ $(-1, 1) inter QQ$ #hecho]
   )
 
-+ Sea $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable.
++ Sea $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable. #hecho
 
 + Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
   #set enum(numbering: "(a)")
@@ -438,4 +439,57 @@
   en particular
 
   $ \#(ZZ times NN) = aleph_0. $
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 2][
+  Sean $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable.
+]
+
+#solucion[Propuesta 1][
+  *Caso $A != emptyset$ y $B != emptyset$.* Si $A$ y $B$ son contables, entonces
+  $\#A <= aleph_0$ y $\#B <= aleph_0$. En particular, por la Proposición 3.9, deben existir
+  $f : NN -> A$ y $g : NN -> B$ sobreyectivas.
+
+  Sé que existen funciones biyectivas $phi : NN_("pares") -> NN$ y $psi : NN_("impares") -> NN$.
+  Por lo tanto, puedo definir $h : NN -> A union B$ tal que
+
+  $
+    h(n) = cases(
+      (f compose phi)(n) & "si" n equiv 0 (mod 2),
+      (g compose psi)(n) & "si" n equiv 1 (mod 2)
+    )
+  $
+
+  Sea $x in A union B$, tenemos dos posibilidades: $x in A$ o $x in B$.
+
+  - $x in A$ implica que existe $n in NN$ con $f(n) = x$, pues $f$ es sobreyectiva. Y, como
+    $phi$ es sobreyectiva también, existe $m in NN_("pares")$ con $phi(m) = n$. Por lo tanto,
+    hemos encontrado $m in NN$ con $h(m) = (f compose phi)(m) = x$.
+  - $x in B$ implica que existe $n in NN$ con $g(n) = x$, pues $g$ es sobreyectiva. Y, como
+    $psi$ es sobreyectiva también, existe $m in NN_("impares")$ con $psi(m) = n$. Por lo tanto,
+    hemos encontrado $m in NN$ con $h(m) = (g compose psi)(m) = x$.
+
+  ¿Qué pasa si $x in A inter B$? Nada, se repetirá la imagen, lo cual está permitido.
+
+  Notemos que $forall x in A union B$, $exists m in NN$ con $h(m) = x$, es decir, $h$ es
+  sobreyectiva.
+
+  Como existe $h : NN -> A union B$ sobreyectiva y $A union B != emptyset$ (pues
+  $A != emptyset$), por la Proposición 3.9 sabemos que $\#(A union B) <= aleph_0$, y por lo
+  tanto $A union B$ es contable.
+
+  *Caso $A = emptyset$ o $B = emptyset$.* Por la Definición 3.6, "finito" pide un $n in NN$ y
+  una biyección ${1,...,n} -> A$; como en este apunte $NN = {1,2,3,...}$ (tal como se usa en el
+  Ejemplo 13 de `ejemplos.typ`), ningún $n in NN$ da ${1,...,n} = emptyset$, y tampoco existe
+  una biyección $NN -> emptyset$ (no hay función alguna de un dominio no vacío a $emptyset$). Es
+  decir, $emptyset$ no es contable según esta definición. Por lo tanto, no puede ocurrir que
+  $A = emptyset$ (o $B = emptyset$) y que a la vez $A$ (o $B$) sea contable: este caso queda
+  descartado por la propia hipótesis del enunciado.
+
+  *Caso $A = B = emptyset$.* Por la misma razón, tampoco puede ocurrir: si $A = B = emptyset$,
+  ninguno de los dos es contable, así que la hipótesis del enunciado no se satisface.
 ]
