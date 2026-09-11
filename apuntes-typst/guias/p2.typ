@@ -23,11 +23,9 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a), 1 (b), 1 (c), 1 (d), Ej. 2, Ej. 3 (a) y Ej. 3 (b). 7 ítems sobre 33. \
-  *Transcritos en este archivo:* los siete --- todo lo que traía el PDF original de
-  demostraciones del usuario. \
-  *Lo que sigue:* el Ej. 1 completo (a)-(d) y el Ej. 2 y 3 quedan resueltos; falta encarar el
-  resto de la guía (Ej. 4 en adelante).
+  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4 y Ej. 5 (a). 9 ítems sobre 33. \
+  *Transcritos en este archivo:* los nueve. \
+  *Lo que sigue:* el Ej. 5 (b) y el resto de la guía (6 en adelante) sin encarar.
 ]
 
 #v(6pt)
@@ -73,11 +71,11 @@
   + Pruebe que existe $C subset.eq B backslash A$ tal que $C ~ C union A$. #hecho
   + Deduzca que $B backslash A ~ B$. #hecho
 
-+ Halle el cardinal del conjunto de los números irracionales.
++ Halle el cardinal del conjunto de los números irracionales. #hecho
 
 + Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) A_n$.
   #set enum(numbering: "(a)")
-  + Encuentre una sucesión $(B_n)_(n in NN)$ de conjuntos disjuntos dos a dos tales que:
+  + Encuentre una sucesión $(B_n)_(n in NN)$ de conjuntos disjuntos dos a dos tales que: #hecho
     - $B_n subset.eq A_n$ para todo $n in NN$, y
     - $union.big_(n <= m) B_n = union.big_(n <= m) A_n$ para todo $m in NN$.
   + Pruebe que para toda sucesión $(B_n)_(n in NN)$ como arriba se tiene que $A = union.big_(n in NN) B_n$.
@@ -492,4 +490,79 @@
 
   *Caso $A = B = emptyset$.* Por la misma razón, tampoco puede ocurrir: si $A = B = emptyset$,
   ninguno de los dos es contable, así que la hipótesis del enunciado no se satisface.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 5 (a)][
+  Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) A_n$.
+  Encuentre una sucesión $(B_n)_(n in NN)$ de conjuntos disjuntos dos a dos tales que:
+  - $B_n subset.eq A_n$ para todo $n in NN$, y
+  - $union.big_(n <= m) B_n = union.big_(n <= m) A_n$ para todo $m in NN$.
+]
+
+#solucion[Propuesta 1][
+  Propongo
+
+  $
+    B_1 &= A_1 \
+    B_2 &= A_2 - B_1 \
+    B_3 &= A_3 - (B_1 union B_2) \
+    B_4 &= A_4 - (B_1 union B_2 union B_3) \
+        &dots.v \
+    B_n &= A_n - union.big_(k=1)^(n-1) B_k
+  $
+
+  *Son disjuntos dos a dos.* Que sean disjuntos dos a dos significa que, para todo $i != j$,
+  $B_i inter B_j = emptyset$. Sin pérdida de generalidad, digo que $i < j$.
+
+  Sea $x in B_j$; se cumple que $x in A_j$ y $x in.not union.big_(k=1)^(j-1) B_k$, en
+  particular, $x in.not B_i$, pues $i <= j-1$.
+
+  Hemos visto que ningún elemento de $B_j$ está en $B_i$, por lo tanto $B_j inter B_i =
+  emptyset$ con $i != j$.
+
+  *Cada $B_n subset.eq A_n$*, por construcción: cada $B_n$ es $A_n$ menos algún conjunto, y
+  $A_n$ menos cualquier cosa sigue estando dentro de $A_n$.
+
+  *Primera inclusión.* Sea $x in union.big_(n <= m) B_n$; entonces existe $k in NN$ con
+  $k <= m$ y $x in B_k$, por lo tanto $x in A_k$ (pues $B_k subset.eq A_k$), con lo cual
+  $x in union.big_(n <= m) A_n$.
+
+  *Segunda inclusión.* Sea $x in union.big_(n <= m) A_n$; entonces existe $k in NN$ con
+  $k <= m$ y $x in A_k$. Por la definición, $B_k = A_k - union.big_(i=1)^(k-1) B_i$, luego hay
+  dos opciones:
+
+  - Si $x in.not union.big_(i=1)^(k-1) B_i$, entonces $x in B_k$ y, por lo tanto,
+    $x in union.big_(n <= m) B_n$.
+  - Si $x in union.big_(i=1)^(k-1) B_i$, entonces $x in B_i$ para algún $i < k <= m$, con lo
+    cual $x in union.big_(n <= m) B_n$.
+
+  Hemos demostrado que $union.big_(n <= m) B_n subset.eq union.big_(n <= m) A_n$ y que
+  $union.big_(n <= m) A_n subset.eq union.big_(n <= m) B_n$; por doble inclusión, ambos
+  conjuntos son iguales.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 4][
+  Halle el cardinal de los números irracionales.
+]
+
+#solucion[Propuesta 1][
+  Como $QQ subset.eq RR$ es un conjunto numerable (Numerabilidad de $QQ$ en `apuntes.typ`),
+  tenemos dos opciones para $RR - QQ$.
+
+  Si $RR - QQ$ fuera finito, entonces $RR = (RR - QQ) union QQ$ sería unión de dos contables
+  (Ejercicio 2), y por lo tanto contable. Esto es absurdo, pues $RR$ es infinito y no es
+  numerable (Teorema 3.19), es decir, no es contable. Luego, $RR - QQ$ es infinito.
+
+  Por el Ejercicio 3 (a) y (b), con $A = QQ$ contable y $B = RR$, sabemos que
+  $RR - QQ tilde.op RR$. Es decir, llamando $II = RR - QQ$ al conjunto de los irracionales,
+
+  $ \#II = \#RR. $
 ]

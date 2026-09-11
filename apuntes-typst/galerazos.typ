@@ -79,6 +79,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-4],
   [La segunda composición no se rehace],
   [Ya verifiqué una composición y la otra "sale igual"],
+
+  [G-5],
+  [El primer índice: capturar dónde aparece por primera vez],
+  [Un conjunto se define restando todo lo anterior, y hay que ubicar un elemento en él],
 )
 
 #v(8pt)
@@ -651,3 +655,93 @@ disponible.
   capítulo y numeración --- y anotar si la cátedra lo enuncia con la hipótesis de inyectividad
   de $f$ o con la de sobreyectividad de $g$.
 ]
+
+#v(8pt)
+
+== Galerazo 5 · El primer índice: capturar dónde aparece por primera vez
+
+#disparador[
+  Tengo $x in union.big_(n <= m) A_n$, y los $B_n$ están definidos restando todo lo anterior
+  --- $B_n = A_n - union.big_(k < n) B_k$ ---. ¿Cómo encuentro *cuál* $B_n$ contiene a $x$, si
+  para saberlo necesito que $x$ no haya caído en ninguno de los $B_k$ previos?
+]
+
+#galerazo[G-5][
+  Cuando un elemento aparece en varios conjuntos de una familia indexada por $NN$ y hay que
+  ubicarlo en una construcción que *recorta lo ya visto*, tomá el *primer* índice donde
+  aparece --- el mínimo, que existe por buena ordenación de $NN$ ---. La minimalidad te regala
+  gratis lo que la construcción pide: que no haya aparecido antes.
+]
+
+=== La señal
+
+La señal no es "hay un mínimo que tomar": es el *tipo de construcción* con el que estás
+lidiando. Si tenés una familia $(C_n)_(n in NN)$ definida por
+
+$ C_n = D_n - union.big_(k < n) C_k $
+
+--- recortando en cada paso lo que ya apareció --- y necesitás decidir en qué $C_n$ vive un
+elemento $x$ que sabés que está en algún $D_n$, la pregunta correcta nunca es "¿en cuál cae
+$x$?" sino *"¿cuál es el primer $D_n$ en el que aparece $x$?"*. La respuesta a esa segunda
+pregunta es, casi siempre, la respuesta a la primera.
+
+#sublema(titulo: "Traducción")[
+  *"Necesito ubicar $x$ en una construcción que resta lo anterior"* $==>$ *"tomo el mínimo
+  índice donde $x$ aparece en la familia original, y esa minimalidad es la que hace andar la
+  resta"*.
+]
+
+=== Por qué funciona
+
+El mecanismo tiene dos pasos, y el segundo es el que se suele olvidar.
+
+*Paso 1 --- conseguir el mínimo.* Si $x in union.big_(n <= m) D_n$, el conjunto de índices
+
+$ S = {j <= m : x in D_j} $
+
+es no vacío. Por buena ordenación de $NN$, $S$ tiene mínimo: llamalo $k$. Por definición de
+mínimo, valen dos cosas a la vez --- $k in S$ (es decir $x in D_k$) *y* $j in.not S$ para todo
+$j < k$ (es decir $x in.not D_j$ para todo $j < k$) ---. La segunda es la que realmente se
+usa; la primera es sólo la entrada.
+
+*Paso 2 --- trasladar la minimalidad a los $C$.* Acá es donde el galerazo hace el trabajo. Si
+ya sabés que $C_j subset.eq D_j$ para todo $j$ (algo que suele probarse aparte, y casi
+gratis: $C_j$ es $D_j$ menos algo), el contrarrecíproco te dice: $x in.not D_j ==> x in.not
+C_j$. Aplicado a cada $j < k$: $x in.not C_j$ para todo $j < k$, es decir
+
+$ x in.not union.big_(j < k) C_j. $
+
+Y eso es *exactamente* lo que la definición $C_k = D_k - union.big_(j<k) C_j$ necesita junto
+con $x in D_k$ para concluir $x in C_k$.
+
+La minimalidad nunca se usa para nada más que esto: convertir "no apareció antes en los $D$"
+en "no apareció antes en los $C$", vía la inclusión $C_j subset.eq D_j$.
+
+=== Cuándo no hace falta
+
+El mínimo no es la única salida, y a veces hay una más corta. Fijate el caso concreto: dado
+*cualquier* $k <= m$ con $x in D_k$ (no necesariamente el mínimo), separá en dos casos según
+$x in union.big_(j<k) C_j$ o no:
+
+- si *no* está, la definición te da directo $x in C_k$;
+- si *sí* está, entonces $x in C_i$ para algún $i < k <= m$, y con ese $i$ ya alcanza.
+
+Esta dicotomía no necesita saber *cuál* $k$ elegiste, ni que sea mínimo: cualquiera sirve,
+porque si no es el que atrapa a $x$, algún anterior ya lo hizo. Es más corta que el argumento
+del mínimo --- no hace falta invocar buena ordenación --- pero es *menos informativa*: no te
+dice en qué $C_n$ vive $x$, sólo que vive en alguno con índice $<= m$. El mínimo, en cambio,
+identifica exactamente cuál. Si sólo te importa la pertenencia a la unión, andá por la
+dicotomía; si te importa *cuál* $C_n$, el mínimo es insustituible.
+
+=== Dónde se usa
+
+- `p2: Ej. 5 (a)` --- la disjointificación $B_n = A_n - union.big_(k<n) B_k$: es el ejemplo que
+  disparó este galerazo, y donde también aparece la salida corta de la sección anterior.
+- *Proposición 3.13* de `apuntes.typ` (Subconjuntos de Conjuntos Numerables) usa la misma idea
+  para enumerar $B$: define $g(1) = a_(j_1)$ con $j_1 = op("mín"){j : a_j in B}$, el primer
+  elemento de $B$ que aparece listado en $A$, y sigue inductivamente descontando lo ya
+  encontrado --- es el mismo patrón de "primer índice" aplicado a construir una enumeración en
+  vez de a probar una pertenencia.
+- Cualquier construcción de "unión contable de conjuntos, hecha disjunta" --- la técnica se
+  llama *disjointificación* y reaparece fuera de esta materia, por ejemplo en teoría de la
+  medida, con la misma estructura exacta.
