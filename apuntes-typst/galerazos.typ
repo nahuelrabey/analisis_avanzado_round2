@@ -83,6 +83,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-5],
   [El primer índice: capturar dónde aparece por primera vez],
   [Un conjunto se define restando todo lo anterior, y hay que ubicar un elemento en él],
+
+  [G-6],
+  [La inducción no cruza al límite],
+  [Hay que probar algo de una unión infinita y tengo la propiedad en cada escalón finito],
 )
 
 #v(8pt)
@@ -745,3 +749,152 @@ dicotomía; si te importa *cuál* $C_n$, el mínimo es insustituible.
 - Cualquier construcción de "unión contable de conjuntos, hecha disjunta" --- la técnica se
   llama *disjointificación* y reaparece fuera de esta materia, por ejemplo en teoría de la
   medida, con la misma estructura exacta.
+
+#v(8pt)
+
+== Galerazo 6 · La inducción no cruza al límite
+
+#disparador[
+  ¿Es posible usar inducción para hacer esta demostración? Me han comentado que tengo que
+  tener cuidado con la inducción en uniones infinitas, porque hay cosas que no cierran o que
+  rompen otras. No lo tengo muy claro.
+]
+
+#galerazo[G-6][
+  La inducción concluye exactamente una cosa: $forall m in NN, P(m)$. La unión infinita
+  $union.big_(n in NN) A_n$ *no es ninguno* de esos escalones $union.big_(n <= m) A_n$, y no
+  hay paso $m = infinity$. La regla práctica: las propiedades de los *elementos* pasan al
+  límite --- cada $x$ de la unión vive en algún escalón finito ---; las propiedades del
+  *conjunto entero* no.
+]
+
+=== La señal
+
+La señal es el *sujeto* de lo que hay que probar. Si el objetivo es una propiedad de un objeto
+límite --- $union.big_(n in NN) A_n$, $inter.big_(n in NN) A_n$, una serie, un supremo --- y lo
+que tenés a mano son afirmaciones sobre los escalones finitos, la inducción no es la
+herramienta: te va a probar infinitas afirmaciones, ninguna de las cuales es la que querés.
+
+La trampa es que la inducción *sale bien*. No hay error que detectar: el paso base cierra, el
+paso inductivo cierra, y la conclusión es verdadera. Simplemente no es la conclusión pedida.
+
+#sublema(titulo: "Traducción")[
+  *"Tengo que probar algo del conjunto $union.big_(n in NN) A_n$ entero"* $==>$ *"la inducción
+  me da a lo sumo un lema sobre $union.big_(n <= m) A_n$; el paso al límite necesita otro
+  argumento"*.
+]
+
+=== Por qué falla
+
+Tomá $A_n = {n}$ y la propiedad $P(m) =$ "$union.big_(n <= m) A_n$ es finito".
+
+- *Paso base.* $union.big_(n <= 1) A_n = {1}$ es finito.
+- *Paso inductivo.* Si $union.big_(n <= m) A_n$ es finito, agregarle el elemento $m+1$ lo deja
+  finito.
+
+La inducción es impecable y la conclusión, $forall m in NN$ el conjunto $union.big_(n <= m) A_n$
+es finito, es verdadera. Y sin embargo
+
+$ union.big_(n in NN) A_n = NN, $
+
+que no es finito. No se rompió nada: la inducción probó otra cosa. El motivo es puramente
+estructural ---
+
+$ union.big_(n in NN) A_n eq.not union.big_(n <= m) A_n quad "para ningún" m in NN $
+
+--- y $NN$ no tiene último elemento, así que no hay escalón desde el cual dar el salto.
+
+=== El test que descarta la inducción
+
+Poné las dos propiedades lado a lado, con esa misma familia $A_n = {n}$:
+
+#v(4pt)
+
+#table(
+  columns: (1.1fr, 1.2fr, 1.2fr),
+  align: (left + horizon, center + horizon, center + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 4pt),
+
+  [*Propiedad*], [*En cada escalón* $union.big_(n <= m) A_n$], [*En la unión* $union.big_(n in NN) A_n$],
+  [Es finito], [vale], [*falla*],
+  [Es contable], [vale], [vale],
+)
+
+#v(4pt)
+
+La inducción ve *exactamente lo mismo* en las dos filas: en ambos casos todos los escalones
+cumplen. Por lo tanto no puede distinguir la propiedad que sobrevive de la que se cae, y
+cualquier demostración que sí lo haga tiene que usar algo que la inducción no provee.
+
+De ahí sale el test de control: antes de confiar en una inducción sobre escalones, buscá una
+propiedad *más fuerte* que también valga en todos los escalones. Si la encontrás y se cae en
+el límite, tu inducción no puede estar probando el enunciado.
+
+=== La familia entera: otros objetos límite
+
+El mismo fenómeno, con otro disfraz. En los tres casos la propiedad vale en todos los escalones
+y se cae al pasar al límite.
+
+#v(4pt)
+
+#table(
+  columns: (0.9fr, 1fr, 1.6fr),
+  align: (left + horizon, left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 4pt),
+
+  [*Objeto límite*], [*Los escalones*], [*La propiedad que se cae*],
+  [$union.big_(n in NN) A_n$], [$union.big_(n <= m) A_n$],
+  [_es finito_, con $A_n = {n}$: cada escalón es ${1, dots, m}$, la unión es $NN$],
+  [$inter.big_(n in NN) A_n$], [$inter.big_(n <= m) A_n$],
+  [_es no vacío_, con $A_n = {j in NN : j >= n}$: cada escalón es $A_m eq.not emptyset$, la
+   intersección es $emptyset$ (ningún $j$ sobrevive a $n = j+1$)],
+  [$sum_(n=1)^infinity a_n$], [$sum_(n=1)^m a_n$],
+  [_es racional_, con $a_n = 1 \/ n!$: toda suma parcial es racional y el límite es $e - 1$,
+   irracional (hecho estándar, fuera de esta materia)],
+)
+
+=== Qué sí cruza al límite
+
+Los *elementos*. Por definición de unión,
+
+$ x in union.big_(n in NN) A_n <==> exists k in NN "tal que" x in A_k, $
+
+y ese $k$ es un natural concreto: todo elemento de la unión infinita vive en algún escalón
+finito. Por eso el chequeo elemento a elemento sí alcanza el infinito, y por eso la doble
+inclusión con un $x$ genérico es la técnica natural para estos objetos.
+
+La asimetría es la clave de todo el galerazo: "ser finito" o "ser numerable" no son propiedades
+de ningún $x$ en particular, así que ningún escalón las sostiene. Si tu enunciado se puede
+reescribir como "para todo $x$ de la unión, ...", estás del lado bueno; si habla del conjunto
+como un todo, no.
+
+=== Cómo inventarlo de cero
+
++ *Identificá el sujeto.* ¿Lo que hay que probar es una propiedad de los elementos de
+  $union.big_(n in NN) A_n$, o del conjunto entero?
++ *Si es de los elementos*, olvidate de la inducción: tomá $x$ genérico, usá $exists k in NN$
+  con $x in A_k$ para bajar a un escalón finito, y trabajá ahí. Ese $k$ es finito y hace todo
+  el trabajo.
++ *Si es del conjunto entero*, la inducción sólo te va a dar un lema sobre
+  $union.big_(n <= m) A_n$. Útil como ingrediente, nunca como conclusión.
++ *Aplicá el test de control*: buscá una propiedad más fuerte que valga en todos los escalones.
+  Si se cae en el límite, quedó demostrado que la inducción no puede cerrar el enunciado.
++ *Para el paso al límite*, lo que hay que exhibir es *un solo objeto* --- una función, una
+  enumeración, una biyección --- definido para todos los $n$ *a la vez*, no una sucesión de
+  construcciones escalón por escalón.
+
+=== Dónde se usa
+
+- `p2: Ej. 6 (a)` --- unión numerable de contables es contable: es el ejercicio que disparó este
+  galerazo. La inducción sobre $union.big_(n <= m) A_n$ (con el Ejercicio 2 como paso inductivo)
+  prueba el caso finito y no llega a la conclusión.
+- `p2: Ej. 5 (b)` --- $A = union.big_(n in NN) B_n$: el caso contrario. El enunciado es sobre
+  *elementos*, se resuelve por doble inclusión con un $x$ genérico, y el "$exists k in NN$" es
+  exactamente el mecanismo del punto 2 de la receta.
+- `p2: Ej. 2` --- $A union B$ contable: el caso finito puro. Es lo que la inducción extiende a
+  uniones finitas, y sólo a ellas.
+- `p2: Ej. 7 (b)` --- $\# (union.big_(n in NN) A_n) = c$: misma forma, mismo cuidado.

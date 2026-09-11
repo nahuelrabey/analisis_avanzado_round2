@@ -23,9 +23,9 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4 y Ej. 5 (a). 9 ítems sobre 33. \
-  *Transcritos en este archivo:* los nueve. \
-  *Lo que sigue:* el Ej. 5 (b) y el resto de la guía (6 en adelante) sin encarar.
+  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4 y Ej. 5 (a)-(b). 10 ítems sobre 33. \
+  *Transcritos en este archivo:* los diez. \
+  *Lo que sigue:* el Ej. 6 en adelante, sin encarar.
 ]
 
 #v(6pt)
@@ -78,7 +78,7 @@
   + Encuentre una sucesión $(B_n)_(n in NN)$ de conjuntos disjuntos dos a dos tales que: #hecho
     - $B_n subset.eq A_n$ para todo $n in NN$, y
     - $union.big_(n <= m) B_n = union.big_(n <= m) A_n$ para todo $m in NN$.
-  + Pruebe que para toda sucesión $(B_n)_(n in NN)$ como arriba se tiene que $A = union.big_(n in NN) B_n$.
+  + Pruebe que para toda sucesión $(B_n)_(n in NN)$ como arriba se tiene que $A = union.big_(n in NN) B_n$. #hecho
 
 + #set enum(numbering: "(a)")
   + Sea $\{A_n\}_{n in NN}$ una familia de conjuntos contables. Pruebe que $union.big_(n in NN) A_n$ es contable.
@@ -565,4 +565,27 @@
   $RR - QQ tilde.op RR$. Es decir, llamando $II = RR - QQ$ al conjunto de los irracionales,
 
   $ \#II = \#RR. $
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 5 (b)][
+  Pruebe que para toda sucesión $(B_n)_(n in NN)$ como la del punto anterior se tiene que
+  $A = union.big_(n in NN) B_n$.
+]
+
+#solucion[Propuesta 1][
+  *$A subset.eq union.big_(n in NN) B_n$.* Si $x in A$, entonces $exists k in NN$ tal que
+  $x in A_k$, por lo tanto $x in union.big_(m <= k) A_m$ y, por el punto anterior,
+
+  $ x in union.big_(m <= k) B_m subset.eq union.big_(n in NN) B_n. $
+
+  *$union.big_(n in NN) B_n subset.eq A$.* Si $x in union.big_(n in NN) B_n$, entonces
+  $exists k in NN$ tal que
+
+  $ x in B_k subset.eq union.big_(m <= k) B_m = union.big_(m <= k) A_m subset.eq A. $
+
+  Por doble inclusión, $A = union.big_(n in NN) B_n$.
 ]
