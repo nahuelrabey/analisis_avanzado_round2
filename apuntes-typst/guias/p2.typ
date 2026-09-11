@@ -23,11 +23,9 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b) y Ej. 5 (a). 8 ítems sobre 33. \
-  *Transcritos en este archivo:* los ocho. \
-  *Lo que sigue:* el Ej. 4 (cardinal de los irracionales) tiene un paso sin probar --- ver
-  corrección en el chat --- pendiente de que el usuario lo cierre. El Ej. 5 (b) y el resto de
-  la guía (6 en adelante) sin encarar.
+  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4 y Ej. 5 (a). 9 ítems sobre 33. \
+  *Transcritos en este archivo:* los nueve. \
+  *Lo que sigue:* el Ej. 5 (b) y el resto de la guía (6 en adelante) sin encarar.
 ]
 
 #v(6pt)
@@ -73,7 +71,7 @@
   + Pruebe que existe $C subset.eq B backslash A$ tal que $C ~ C union A$. #hecho
   + Deduzca que $B backslash A ~ B$. #hecho
 
-+ Halle el cardinal del conjunto de los números irracionales.
++ Halle el cardinal del conjunto de los números irracionales. #hecho
 
 + Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) A_n$.
   #set enum(numbering: "(a)")
@@ -545,4 +543,26 @@
   Hemos demostrado que $union.big_(n <= m) B_n subset.eq union.big_(n <= m) A_n$ y que
   $union.big_(n <= m) A_n subset.eq union.big_(n <= m) B_n$; por doble inclusión, ambos
   conjuntos son iguales.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 4][
+  Halle el cardinal de los números irracionales.
+]
+
+#solucion[Propuesta 1][
+  Como $QQ subset.eq RR$ es un conjunto numerable (Numerabilidad de $QQ$ en `apuntes.typ`),
+  tenemos dos opciones para $RR - QQ$.
+
+  Si $RR - QQ$ fuera finito, entonces $RR = (RR - QQ) union QQ$ sería unión de dos contables
+  (Ejercicio 2), y por lo tanto contable. Esto es absurdo, pues $RR$ es infinito y no es
+  numerable (Teorema 3.19), es decir, no es contable. Luego, $RR - QQ$ es infinito.
+
+  Por el Ejercicio 3 (a) y (b), con $A = QQ$ contable y $B = RR$, sabemos que
+  $RR - QQ tilde.op RR$. Es decir, llamando $II = RR - QQ$ al conjunto de los irracionales,
+
+  $ \#II = \#RR. $
 ]
