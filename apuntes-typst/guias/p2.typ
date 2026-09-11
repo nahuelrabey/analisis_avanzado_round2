@@ -23,13 +23,55 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4 y Ej. 5 (a)-(b). 10 ítems sobre 33. \
-  *Transcritos en este archivo:* los diez. \
-  *Lo que sigue:* el Ej. 6 en adelante, sin encarar.
+  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4, Ej. 5 (a)-(b) y Ej. 6 (a). 11 ítems sobre 33. \
+  *Transcritos en este archivo:* los once. \
+  *Pendiente:* la Consulta Docente de acá abajo (¿$emptyset$ es contable?) afecta al Ej. 2 y al
+  Ej. 6 (a), que están escritos suponiendo que no lo es. \
+  *Lo que sigue:* el Ej. 6 (b) en adelante, sin encarar.
 ]
 
 #v(6pt)
 
+#duda[¿El conjunto vacío es contable?][
+  La Definición 3.6 (`apuntes.typ`) dice que $A$ es *finito* si existe $n in NN$ y una biyección
+  ${1, ..., n} -> A$, y *contable* si es finito o numerable. Como en este apunte
+  $NN = {1, 2, 3, ...}$ arranca en $1$, ningún ${1, ..., n}$ es vacío, y tampoco hay biyección
+  $NN -> emptyset$. Leída al pie de la letra, entonces, *$emptyset$ no es contable*.
+
+  Eso choca con la convención habitual de la bibliografía, donde $emptyset$ es finito y
+  $\#emptyset = 0$. Y las dos lecturas no se pueden mezclar, porque cada una hace verdadera una
+  cosa distinta:
+
+  #v(4pt)
+  #table(
+    columns: (1.1fr, 0.8fr, 1.1fr, 1.1fr),
+    align: (left + horizon, center + horizon, center + horizon, center + horizon),
+    fill: (x, y) => if y == 0 { rgb("#b91c1c") } else if calc.even(y) { rgb("#fef2f2") } else { white },
+    stroke: 0.4pt + rgb("#fecaca"),
+    inset: (x: 6pt, y: 4pt),
+
+    [*Lectura*], [$emptyset$ contable], [contable $<==>$ $\# <= aleph_0$], [contable $==>$ $A != emptyset$],
+    [(A) Definición 3.6 literal], [no], [*falso* (falla $arrow.l.double$)], [sí],
+    [(B) convención habitual], [sí], [verdadero], [*falso*],
+  )
+  #v(4pt)
+
+  El contraejemplo que separa las dos es $emptyset$ mismo: $\#emptyset <= aleph_0$ es verdadero
+  (la función vacía $emptyset -> NN$ es vacuamente inyectiva, tal como observa el apunte después
+  de la Proposición 3.9), pero bajo (A) $emptyset$ no es contable. Si las dos columnas de la
+  derecha valieran a la vez, la Proposición 3.9 no tendría por qué pedir $A != emptyset$ como
+  hipótesis separada.
+
+  *Qué se usa en este archivo.* Las soluciones del *Ejercicio 2* y del *Ejercicio 6 (a)* están
+  escritas bajo la lectura (A): descartan los casos con $emptyset$ por la propia hipótesis de
+  contabilidad. Si el docente usa (B), esas dos soluciones necesitan un caso extra (trivial en
+  ambas, pero hay que escribirlo). El resto de los ejercicios transcritos no depende de esto.
+
+  *Para preguntar:* ¿la cátedra considera a $emptyset$ finito (y por lo tanto contable), o la
+  Definición 3.6 se lee literalmente como está transcripta?
+]
+
+#v(6pt)
 #text(9pt)[
   *Recuerde:* Dadas $f : X -> Y$, $g : Y -> Z$ y dados $A, B subset.eq X$ y $C, D subset.eq Y$, se tiene:
   #set enum(numbering: "(a)")
@@ -81,7 +123,7 @@
   + Pruebe que para toda sucesión $(B_n)_(n in NN)$ como arriba se tiene que $A = union.big_(n in NN) B_n$. #hecho
 
 + #set enum(numbering: "(a)")
-  + Sea $\{A_n\}_{n in NN}$ una familia de conjuntos contables. Pruebe que $union.big_(n in NN) A_n$ es contable.
+  + Sea $\{A_n\}_{n in NN}$ una familia de conjuntos contables. Pruebe que $union.big_(n in NN) A_n$ es contable. #hecho
   + Sea $A$ un conjunto finito y no vacío y $S = union.big_(m in NN) A^m$. Pruebe que $\# S = aleph_0$. \
     _*Deduzca que, dado un alfabeto (esto es, un conjunto de símbolos) finito, hay más números reales que palabras (esto es, sucesiones finitas de símbolos) definibles con ese alfabeto para nombrarlos.*_
 
@@ -369,7 +411,7 @@
   $A != emptyset$), por la Proposición 3.9 sabemos que $\#(A union B) <= aleph_0$, y por lo
   tanto $A union B$ es contable.
 
-  *Caso $A = emptyset$ o $B = emptyset$.* Por la Definición 3.6, "finito" pide un $n in NN$ y
+  *Caso $A = emptyset$ o $B = emptyset$.* #box(text(size: 8pt, weight: "bold", fill: rgb("#dc2626"))[[ver Consulta Docente]]) Por la Definición 3.6, "finito" pide un $n in NN$ y
   una biyección ${1,...,n} -> A$; como en este apunte $NN = {1,2,3,...}$ (tal como se usa en el
   Ejemplo 13 de `ejemplos.typ`), ningún $n in NN$ da ${1,...,n} = emptyset$, y tampoco existe
   una biyección $NN -> emptyset$ (no hay función alguna de un dominio no vacío a $emptyset$). Es
@@ -588,4 +630,71 @@
   $ x in B_k subset.eq union.big_(m <= k) B_m = union.big_(m <= k) A_m subset.eq A. $
 
   Por doble inclusión, $A = union.big_(n in NN) B_n$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 6 (a)][
+  Sea ${A_n}_(n in NN)$ una familia de conjuntos contables. Pruebe que
+  $union.big_(n in NN) A_n$ es contable.
+]
+
+#solucion[Propuesta 1][
+  Llamemos $S = union.big_(n in NN) A_n$. Queremos ver que $\#S <= aleph_0$.
+
+  *Las sucesiones.* Sea $n in NN$. De la hipótesis "$A_n$ es contable" salen dos cosas, y de
+  partes distintas de ella:
+
+  - $A_n != emptyset$, por la Definición 3.6 leída como en la Consulta Docente del inicio del
+    archivo (bajo esa lectura, $emptyset$ no es contable);
+  - $\#A_n <= aleph_0$, que es la traducción a cardinales de "finito o numerable".
+
+  Con las dos, la Proposición 3.9 (`apuntes.typ`), aplicada a $A_n != emptyset$ y a $NN$, nos da
+  una función *sobreyectiva* $NN -> A_n$. La escribimos como sucesión $(a^n_m)_(m in NN)$, con
+  $a^n_m in A_n$ para todo $m in NN$.
+
+  Conviene subrayar que lo que la Proposición 3.9 entrega es una sobreyección y no una
+  biyección: la sucesión lista todos los elementos de $A_n$, eventualmente *con repeticiones*.
+  Eso es justamente lo que hace que los $A_n$ finitos no rompan nada --- pedir una enumeración
+  sin repetir (una biyección $NN -> A_n$) sería imposible para ellos.
+
+  *La sobreyección desde $NN times NN$.* Definimos $f : NN times NN -> S$ por
+
+  $ f(n, m) = a^n_m. $
+
+  Está bien definida en todo el dominio: para cada $n$ la sucesión existe (es el paso anterior) y
+  $a^n_m in A_n subset.eq S$, así que los valores caen en el codominio declarado.
+
+  *$f$ es sobreyectiva.* Sea $a in S$. Por definición de la unión, existe $n in NN$ con
+  $a in A_n$; y como $(a^n_m)_(m in NN)$ es sobreyectiva sobre $A_n$, existe $m in NN$ con
+  $a^n_m = a$. Es decir, existe $(n, m) in NN times NN$ con $f(n, m) = a$.
+
+  *El cierre.* Tenemos $f : NN times NN -> S$ sobreyectiva y $S != emptyset$ (pues
+  $A_1 subset.eq S$ y $A_1 != emptyset$), así que la Proposición 3.9, ahora en la otra
+  dirección, nos da
+
+  $ \#S <= \#(NN times NN) = aleph_0, $
+
+  donde la igualdad es la numerabilidad de $NN times NN$ (Ejemplo 3.12, tag 14 de
+  `ejemplos.typ`).
+
+  Finalmente, $\#S <= aleph_0$ significa que existe $g : S -> NN$ inyectiva (Definición 3.8), con
+  lo cual $S tilde.op g(S)$ y $emptyset != g(S) subset.eq NN$. Como $NN$ es numerable, la
+  Proposición 3.13 dice que $g(S)$ es contable, y por lo tanto $S$ también lo es.
+]
+
+#observacion[Dos huecos que este ejercicio deja anotados][
+  *1. El caso $A_n = emptyset$.* El primer paso de la demostración descarta los $A_n$ vacíos
+  invocando la lectura (A) de la Definición 3.6. Si la cátedra usa la convención habitual (B),
+  ese renglón no vale y hay que tratar los índices con $A_n = emptyset$ aparte. Ver la Consulta
+  Docente al inicio del archivo: el hueco está pendiente de resolverse ahí, no acá.
+
+  *2. Elección numerable.* Al decir "para cada $n$ tomamos la sobreyección $NN -> A_n$" se está
+  eligiendo una función por cada $n in NN$, infinitas elecciones simultáneas: eso es el axioma de
+  elección numerable. No es un error ni algo a corregir --- el apunte lo usa libremente, por
+  ejemplo en la demostración de la propia Proposición 3.9 ("elegimos entonces, para cada
+  $a in A$, un elemento $b_a$") --- pero conviene saber que es acá donde esta demostración usa
+  algo que las anteriores no usaban.
 ]
