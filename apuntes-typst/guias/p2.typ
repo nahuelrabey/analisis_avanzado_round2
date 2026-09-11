@@ -137,89 +137,96 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
-#enunciado[Ejercicio 3 (b)][
-  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
-  Sabiendo que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$, deduzca que
-  $B backslash A tilde.op B$.
+#enunciado[Ejercicio 1 (a)][
+  Halle el cardinal de $ZZ_(<= -3)$.
 ]
 
 #solucion[Propuesta 1][
-  Podemos construir dos uniones disjuntas
+  Defino $f : NN -> ZZ_(<= -3)$ y $g : ZZ_(<= -3) -> NN$, ambas con la misma fórmula
+  $f(n) = g(n) = -2 - n$.
 
-  $
-    B backslash A &= C union (B backslash A backslash C) &&= C union [B backslash (A union C)] \
-    B &= A union (B backslash A) &&= (A union C) union [B backslash (A union C)]
-  $
+  *Están bien definidas.* Para $n in NN$ (es decir, $n >= 1$), $f(n) = -2 - n <= -3$, así que
+  $f(n) in ZZ_(<= -3)$. Para $n in ZZ_(<= -3)$ (es decir, $n <= -3$), $g(n) = -2 - n >= 1$, así
+  que $g(n) in NN$.
 
-  Notemos que $(A union C) union [B backslash (A union C)]$ es una unión disjunta.
+  *Son inversas.* Para $n in ZZ_(<= -3)$,
 
-  Además, como $C tilde.op A union C$ puedo plantear que existe $f : C -> A union C$ biyectiva.
-  Y, por supuesto, tengo $id : (B backslash (A union C)) -> (B backslash (A union C))$ también
-  biyectiva. Luego, planteo dos funciones.
+  $ (f compose g)(n) = -2 - (-2 - n) = n, $
 
-  $phi : B backslash A -> B$ tal que
+  es decir $f compose g = id_(ZZ_(<= -3))$. La misma cuenta, con los roles de dominio y
+  codominio intercambiados, da para $n in NN$
 
-  $
-    phi(x) = cases(
-      f(x) & "si" x in C,
-      id(x) & "si" x in B backslash (A union C)
-    )
-  $
+  $ (g compose f)(n) = -2 - (-2 - n) = n, $
 
-  $psi : B -> B backslash A$ tal que
+  es decir $g compose f = id_(NN)$.
 
-  $
-    psi(x) = cases(
-      f^(-1)(x) & "si" x in A union C,
-      id(x) & "si" x in B backslash (A union C)
-    )
-  $
+  Por lo tanto $f$ es biyectiva, $NN tilde.op ZZ_(<= -3)$, y en particular
+  $\#ZZ_(<= -3) = aleph_0$.
+]
 
-  Por la disjunción entre los conjuntos $(C, B backslash (A union C))$ y
-  $(A union C, B backslash (A union C))$, ningún elemento del dominio de estas funciones tiene
-  dos imágenes. A su vez, la imagen de ambas funciones cae en el codominio declarado,
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
 
-  $
-    f(C) union id(B backslash (A union C)) &subset.eq B \
-    f^(-1)(A union C) union id(B backslash (A union C)) &subset.eq B backslash A
-  $
+#enunciado[Ejercicio 1 (b)][
+  Halle el cardinal de $5 ZZ$.
+]
 
-  Podemos afirmar que están bien definidas.
+#solucion[Propuesta 1][
+  Notemos que $5 ZZ = {5k : k in ZZ}$.
 
-  Luego, notemos que $(phi compose psi)(x)$ tiene dos caminos:
+  Planteo $f : ZZ -> 5 ZZ$, $f(k) = 5k$, que está bien definida porque $5k in 5 ZZ$ para todo
+  $k in ZZ$ --- es la definición misma de $5ZZ$. Existe $f^(-1) : 5 ZZ -> ZZ$, $f^(-1)(n) = n/5$,
+  que está bien definida porque si $n in 5ZZ$ entonces $n = 5k$ para algún $k in ZZ$, y luego
+  $n/5 = k in ZZ$.
 
-  - $x in B backslash (A union C)$, entonces $psi(x) = id_(B backslash (A union C))(x)$, y luego
-    $(phi compose psi)(x) = (phi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)$.
-  - $x in A union C$, entonces $psi(x) = f^(-1)(x)$, y luego
-    $(phi compose psi)(x) = (phi compose f^(-1))(x) = (f compose f^(-1))(x)$, pues $f^(-1)(x) in C$;
-    finalmente $(f compose f^(-1))(x) = id_(A union C)(x)$.
+  Verifiquemos que son inversas. Para $n in 5ZZ$, escribiendo $n = 5k$ con $k in ZZ$,
 
-  Hemos visto que
+  $ (f compose f^(-1))(n) = f(n/5) = 5 dot (n/5) = n, $
 
-  $
-    (phi compose psi)(x) = cases(
-      id_(B backslash (A union C))(x) & "si" x in B backslash (A union C),
-      id_(A union C)(x) & "si" x in A union C
-    )
-  $
+  es decir $f compose f^(-1) = id_(5ZZ)$. Para $k in ZZ$,
 
-  Por lo tanto $phi compose psi = id_B$.
+  $ (f^(-1) compose f)(k) = f^(-1)(5k) = (5k)/5 = k, $
 
-  De forma análoga, estudiando $psi compose phi$,
+  es decir $f^(-1) compose f = id_(ZZ)$.
 
-  $
-    (psi compose phi)(x) = cases(
-      (psi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)
-        & "si" x in B backslash (A union C),
-      (psi compose f)(x) = (f^(-1) compose f)(x) = id_C (x) & "si" x in C
-    )
-  $
+  Por lo tanto $f$ es biyectiva, es decir $ZZ tilde.op 5 ZZ$. Como además sabemos que
+  $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos.typ`), por transitividad $NN tilde.op 5 ZZ$.
 
-  Es decir, $psi compose phi = id_(B backslash A)$.
+  Finalmente, $\#(5 ZZ) = aleph_0$.
+]
 
-  Hemos encontrado que $psi$ es la función inversa de $phi$, por lo tanto existe una biyección
-  entre $B$ y $B backslash A$. Es decir, $B tilde.op B backslash A$, tal como queríamos
-  demostrar.
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 1 (c)][
+  Halle el cardinal de $ZZ times NN$.
+]
+
+#solucion[Propuesta 1][
+  Sabemos que $ZZ tilde.op NN$ (Ejemplo 13 en `ejemplos.typ`), por lo tanto existe
+  $f : ZZ -> NN$ biyectiva. Además, $NN tilde.op NN times NN$ (Ejemplo 14 en `ejemplos.typ`),
+  con lo cual existe $g : NN times NN -> NN$ biyectiva.
+
+  Con lo anterior, puedo definir $phi : ZZ times NN -> NN times NN$ tal que
+
+  $ phi(m,n) = (f(m), n) $
+
+  *$phi$ es inyectiva.* Si $phi(m,n) = phi(tilde(m), tilde(n))$ tenemos que
+  $(f(tilde(m)), tilde(n)) = (f(m), n)$, con lo cual, al ser $f$ inyectiva (por ser biyectiva),
+  $tilde(m) = m$; y de la igualdad de pares, $tilde(n) = n$.
+
+  *$phi$ es sobreyectiva.* Dado $(p,q) in NN times NN$, como $f$ es sobreyectiva existe
+  $m in ZZ$ tal que $f(m) = p$. Tomando $n = q$, tenemos $phi(m,n) = (f(m), n) = (p,q)$.
+
+  Por ser inyectiva y sobreyectiva, $phi$ es biyectiva.
+
+  Por lo tanto, puedo construir $h : ZZ times NN -> NN$ tal que $h = g compose phi$, que es
+  biyectiva por ser composición de funciones biyectivas. Es decir, $ZZ times NN tilde.op NN$, y
+  en particular
+
+  $ \#(ZZ times NN) = aleph_0. $
 ]
 
 #v(10pt)
@@ -325,124 +332,6 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
-#enunciado[Ejercicio 3 (a)][
-  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
-  Pruebe que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$.
-]
-
-#solucion[Propuesta 1][
-  Al ser $B backslash A$ infinito, por la Proposición 3.14 (`apuntes.typ`) sabemos que existe
-  $C subset.eq B backslash A$ numerable.
-
-  Como $C$ es numerable y $A$ es contable, por el Ejercicio 2 sabemos que la unión de dos
-  contables es contable. En particular $C union A$ es contable, y como $C subset.eq C union A$
-  y $C$ es infinito, $C union A$ también es infinito (todo conjunto que contiene un
-  subconjunto infinito es infinito). Un contable infinito es, por la Definición 3.6, numerable.
-
-  Por lo tanto, ambos conjuntos son numerables: $C tilde.op NN$ y $(C union A) tilde.op NN$.
-  Por simetría y transitividad de $tilde.op$ (Proposición 3.2), $C tilde.op C union A$.
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.7pt)
-#v(8pt)
-
-#enunciado[Ejercicio 1 (a)][
-  Halle el cardinal de $ZZ_(<= -3)$.
-]
-
-#solucion[Propuesta 1][
-  Defino $f : NN -> ZZ_(<= -3)$ y $g : ZZ_(<= -3) -> NN$, ambas con la misma fórmula
-  $f(n) = g(n) = -2 - n$.
-
-  *Están bien definidas.* Para $n in NN$ (es decir, $n >= 1$), $f(n) = -2 - n <= -3$, así que
-  $f(n) in ZZ_(<= -3)$. Para $n in ZZ_(<= -3)$ (es decir, $n <= -3$), $g(n) = -2 - n >= 1$, así
-  que $g(n) in NN$.
-
-  *Son inversas.* Para $n in ZZ_(<= -3)$,
-
-  $ (f compose g)(n) = -2 - (-2 - n) = n, $
-
-  es decir $f compose g = id_(ZZ_(<= -3))$. La misma cuenta, con los roles de dominio y
-  codominio intercambiados, da para $n in NN$
-
-  $ (g compose f)(n) = -2 - (-2 - n) = n, $
-
-  es decir $g compose f = id_(NN)$.
-
-  Por lo tanto $f$ es biyectiva, $NN tilde.op ZZ_(<= -3)$, y en particular
-  $\#ZZ_(<= -3) = aleph_0$.
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.7pt)
-#v(8pt)
-
-#enunciado[Ejercicio 1 (b)][
-  Halle el cardinal de $5 ZZ$.
-]
-
-#solucion[Propuesta 1][
-  Notemos que $5 ZZ = {5k : k in ZZ}$.
-
-  Planteo $f : ZZ -> 5 ZZ$, $f(k) = 5k$, que está bien definida porque $5k in 5 ZZ$ para todo
-  $k in ZZ$ --- es la definición misma de $5ZZ$. Existe $f^(-1) : 5 ZZ -> ZZ$, $f^(-1)(n) = n/5$,
-  que está bien definida porque si $n in 5ZZ$ entonces $n = 5k$ para algún $k in ZZ$, y luego
-  $n/5 = k in ZZ$.
-
-  Verifiquemos que son inversas. Para $n in 5ZZ$, escribiendo $n = 5k$ con $k in ZZ$,
-
-  $ (f compose f^(-1))(n) = f(n/5) = 5 dot (n/5) = n, $
-
-  es decir $f compose f^(-1) = id_(5ZZ)$. Para $k in ZZ$,
-
-  $ (f^(-1) compose f)(k) = f^(-1)(5k) = (5k)/5 = k, $
-
-  es decir $f^(-1) compose f = id_(ZZ)$.
-
-  Por lo tanto $f$ es biyectiva, es decir $ZZ tilde.op 5 ZZ$. Como además sabemos que
-  $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos.typ`), por transitividad $NN tilde.op 5 ZZ$.
-
-  Finalmente, $\#(5 ZZ) = aleph_0$.
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.7pt)
-#v(8pt)
-
-#enunciado[Ejercicio 1 (c)][
-  Halle el cardinal de $ZZ times NN$.
-]
-
-#solucion[Propuesta 1][
-  Sabemos que $ZZ tilde.op NN$ (Ejemplo 13 en `ejemplos.typ`), por lo tanto existe
-  $f : ZZ -> NN$ biyectiva. Además, $NN tilde.op NN times NN$ (Ejemplo 14 en `ejemplos.typ`),
-  con lo cual existe $g : NN times NN -> NN$ biyectiva.
-
-  Con lo anterior, puedo definir $phi : ZZ times NN -> NN times NN$ tal que
-
-  $ phi(m,n) = (f(m), n) $
-
-  *$phi$ es inyectiva.* Si $phi(m,n) = phi(tilde(m), tilde(n))$ tenemos que
-  $(f(tilde(m)), tilde(n)) = (f(m), n)$, con lo cual, al ser $f$ inyectiva (por ser biyectiva),
-  $tilde(m) = m$; y de la igualdad de pares, $tilde(n) = n$.
-
-  *$phi$ es sobreyectiva.* Dado $(p,q) in NN times NN$, como $f$ es sobreyectiva existe
-  $m in ZZ$ tal que $f(m) = p$. Tomando $n = q$, tenemos $phi(m,n) = (f(m), n) = (p,q)$.
-
-  Por ser inyectiva y sobreyectiva, $phi$ es biyectiva.
-
-  Por lo tanto, puedo construir $h : ZZ times NN -> NN$ tal que $h = g compose phi$, que es
-  biyectiva por ser composición de funciones biyectivas. Es decir, $ZZ times NN tilde.op NN$, y
-  en particular
-
-  $ \#(ZZ times NN) = aleph_0. $
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.7pt)
-#v(8pt)
-
 #enunciado[Ejercicio 2][
   Sean $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable.
 ]
@@ -496,6 +385,139 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
+#enunciado[Ejercicio 3 (a)][
+  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
+  Pruebe que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$.
+]
+
+#solucion[Propuesta 1][
+  Al ser $B backslash A$ infinito, por la Proposición 3.14 (`apuntes.typ`) sabemos que existe
+  $C subset.eq B backslash A$ numerable.
+
+  Como $C$ es numerable y $A$ es contable, por el Ejercicio 2 sabemos que la unión de dos
+  contables es contable. En particular $C union A$ es contable, y como $C subset.eq C union A$
+  y $C$ es infinito, $C union A$ también es infinito (todo conjunto que contiene un
+  subconjunto infinito es infinito). Un contable infinito es, por la Definición 3.6, numerable.
+
+  Por lo tanto, ambos conjuntos son numerables: $C tilde.op NN$ y $(C union A) tilde.op NN$.
+  Por simetría y transitividad de $tilde.op$ (Proposición 3.2), $C tilde.op C union A$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 3 (b)][
+  Sean $A subset.eq B$ conjuntos tales que $A$ es contable y $B backslash A$ es infinito.
+  Sabiendo que existe $C subset.eq B backslash A$ tal que $C tilde.op C union A$, deduzca que
+  $B backslash A tilde.op B$.
+]
+
+#solucion[Propuesta 1][
+  Podemos construir dos uniones disjuntas
+
+  $
+    B backslash A &= C union (B backslash A backslash C) &&= C union [B backslash (A union C)] \
+    B &= A union (B backslash A) &&= (A union C) union [B backslash (A union C)]
+  $
+
+  Notemos que $(A union C) union [B backslash (A union C)]$ es una unión disjunta.
+
+  Además, como $C tilde.op A union C$ puedo plantear que existe $f : C -> A union C$ biyectiva.
+  Y, por supuesto, tengo $id : (B backslash (A union C)) -> (B backslash (A union C))$ también
+  biyectiva. Luego, planteo dos funciones.
+
+  $phi : B backslash A -> B$ tal que
+
+  $
+    phi(x) = cases(
+      f(x) & "si" x in C,
+      id(x) & "si" x in B backslash (A union C)
+    )
+  $
+
+  $psi : B -> B backslash A$ tal que
+
+  $
+    psi(x) = cases(
+      f^(-1)(x) & "si" x in A union C,
+      id(x) & "si" x in B backslash (A union C)
+    )
+  $
+
+  Por la disjunción entre los conjuntos $(C, B backslash (A union C))$ y
+  $(A union C, B backslash (A union C))$, ningún elemento del dominio de estas funciones tiene
+  dos imágenes. A su vez, la imagen de ambas funciones cae en el codominio declarado,
+
+  $
+    f(C) union id(B backslash (A union C)) &subset.eq B \
+    f^(-1)(A union C) union id(B backslash (A union C)) &subset.eq B backslash A
+  $
+
+  Podemos afirmar que están bien definidas.
+
+  Luego, notemos que $(phi compose psi)(x)$ tiene dos caminos:
+
+  - $x in B backslash (A union C)$, entonces $psi(x) = id_(B backslash (A union C))(x)$, y luego
+    $(phi compose psi)(x) = (phi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)$.
+  - $x in A union C$, entonces $psi(x) = f^(-1)(x)$, y luego
+    $(phi compose psi)(x) = (phi compose f^(-1))(x) = (f compose f^(-1))(x)$, pues $f^(-1)(x) in C$;
+    finalmente $(f compose f^(-1))(x) = id_(A union C)(x)$.
+
+  Hemos visto que
+
+  $
+    (phi compose psi)(x) = cases(
+      id_(B backslash (A union C))(x) & "si" x in B backslash (A union C),
+      id_(A union C)(x) & "si" x in A union C
+    )
+  $
+
+  Por lo tanto $phi compose psi = id_B$.
+
+  De forma análoga, estudiando $psi compose phi$,
+
+  $
+    (psi compose phi)(x) = cases(
+      (psi compose id_(B backslash (A union C)))(x) = id_(B backslash (A union C))(x)
+        & "si" x in B backslash (A union C),
+      (psi compose f)(x) = (f^(-1) compose f)(x) = id_C (x) & "si" x in C
+    )
+  $
+
+  Es decir, $psi compose phi = id_(B backslash A)$.
+
+  Hemos encontrado que $psi$ es la función inversa de $phi$, por lo tanto existe una biyección
+  entre $B$ y $B backslash A$. Es decir, $B tilde.op B backslash A$, tal como queríamos
+  demostrar.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 4][
+  Halle el cardinal de los números irracionales.
+]
+
+#solucion[Propuesta 1][
+  Como $QQ subset.eq RR$ es un conjunto numerable (Numerabilidad de $QQ$ en `apuntes.typ`),
+  tenemos dos opciones para $RR - QQ$.
+
+  Si $RR - QQ$ fuera finito, entonces $RR = (RR - QQ) union QQ$ sería unión de dos contables
+  (Ejercicio 2), y por lo tanto contable. Esto es absurdo, pues $RR$ es infinito y no es
+  numerable (Teorema 3.19), es decir, no es contable. Luego, $RR - QQ$ es infinito.
+
+  Por el Ejercicio 3 (a) y (b), con $A = QQ$ contable y $B = RR$, sabemos que
+  $RR - QQ tilde.op RR$. Es decir, llamando $II = RR - QQ$ al conjunto de los irracionales,
+
+  $ \#II = \#RR. $
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
 #enunciado[Ejercicio 5 (a)][
   Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) A_n$.
   Encuentre una sucesión $(B_n)_(n in NN)$ de conjuntos disjuntos dos a dos tales que:
@@ -543,28 +565,6 @@
   Hemos demostrado que $union.big_(n <= m) B_n subset.eq union.big_(n <= m) A_n$ y que
   $union.big_(n <= m) A_n subset.eq union.big_(n <= m) B_n$; por doble inclusión, ambos
   conjuntos son iguales.
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.7pt)
-#v(8pt)
-
-#enunciado[Ejercicio 4][
-  Halle el cardinal de los números irracionales.
-]
-
-#solucion[Propuesta 1][
-  Como $QQ subset.eq RR$ es un conjunto numerable (Numerabilidad de $QQ$ en `apuntes.typ`),
-  tenemos dos opciones para $RR - QQ$.
-
-  Si $RR - QQ$ fuera finito, entonces $RR = (RR - QQ) union QQ$ sería unión de dos contables
-  (Ejercicio 2), y por lo tanto contable. Esto es absurdo, pues $RR$ es infinito y no es
-  numerable (Teorema 3.19), es decir, no es contable. Luego, $RR - QQ$ es infinito.
-
-  Por el Ejercicio 3 (a) y (b), con $A = QQ$ contable y $B = RR$, sabemos que
-  $RR - QQ tilde.op RR$. Es decir, llamando $II = RR - QQ$ al conjunto de los irracionales,
-
-  $ \#II = \#RR. $
 ]
 
 #v(10pt)

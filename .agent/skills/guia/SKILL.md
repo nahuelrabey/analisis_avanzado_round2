@@ -66,7 +66,8 @@ Inspeccionar la imagen o texto enviado y extraer:
 - Adaptar toda la notación matemática a la sintaxis nativa de Typst (`$ ... $`).
 
 ### 5. Actualización del Archivo
-- Añadir la transcripción al final del archivo correspondiente [`apuntes-typst/guias/p{N}.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/guias/), preservando todo el contenido previo.
+- Añadir la transcripción al archivo correspondiente [`apuntes-typst/guias/p{N}.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/guias/), preservando todo el contenido previo.
+- **La sección de resueltos va en orden de guía**, no en orden de transcripción: insertar el bloque nuevo en la posición que le corresponde por número de ejercicio (1 (a) antes que 1 (b), 1 (d) antes que 2, etc.), no al final del archivo. El final es el destino sólo si el ejercicio es posterior a todos los ya transcritos. El anexo de ediciones viejas (punto 1) va siempre último.
 
 ### 6. Marcado de Progreso (obligatorio)
 Las guías llevan el registro de qué ejercicios están resueltos. Ambas marcas están definidas en [`apuntes-typst/utils.typ`](file:///home/nahuel/study/analisis-avanzado/apuntes-typst/utils.typ):
