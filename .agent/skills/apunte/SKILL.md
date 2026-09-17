@@ -46,7 +46,7 @@ Esta skill instruye al agente sobre cómo procesar imágenes de contenido matem�
   - **Lema** (`#lema[...]`)
   - **Corolario** (`#corolario[...]`)
   - **Axioma** (`#axioma[...]`)
-  - **Ejemplo** (`#ejemplo[...]`)
+- **REGLA ESTRICTA:** Si la imagen es un **Ejemplo** (numerado o no) de `notas_materia.pdf` o de cualquier otra fuente, **no usar esta skill**: delegar a la skill `ejemplo` (`apuntes-typst/ejemplos.typ`), aunque continúe la numeración por capítulo de un apunte ya cargado. Los ejemplos no van en `apuntes.typ`.
 - Identificar título o nombre (si aplica), hipótesis, tesis y notación matemática.
 
 ### 3. Manejo Riguroso de Demostraciones y Explicaciones

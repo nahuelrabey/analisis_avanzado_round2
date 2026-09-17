@@ -23,11 +23,12 @@
 #v(6pt)
 
 #progreso[
-  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4, Ej. 5 (a)-(b) y Ej. 6 (a). 11 ítems sobre 33. \
-  *Transcritos en este archivo:* los once. \
+  *Resueltos:* Ej. 1 (a)-(d), Ej. 2, Ej. 3 (a)-(b), Ej. 4, Ej. 5 (a)-(b), Ej. 6 (a) y Ej. 7 (a). 12 ítems sobre 33. \
+  *Transcritos en este archivo:* los doce. \
   *Pendiente:* la Consulta Docente de acá abajo (¿$emptyset$ es contable?) afecta al Ej. 2 y al
-  Ej. 6 (a), que están escritos suponiendo que no lo es. \
-  *Lo que sigue:* el Ej. 6 (b) en adelante, sin encarar.
+  Ej. 6 (a), que están escritos suponiendo que no lo es. El Ej. 7 (a) tiene un hueco anotado al
+  pie (la biyección con $(-1, 0]$). \
+  *Lo que sigue:* el Ej. 6 (b) y el Ej. 7 (b) en adelante, sin encarar.
 ]
 
 #v(6pt)
@@ -129,7 +130,7 @@
 
 + Sea $c$ el cardinal de $RR$. Pruebe las siguientes afirmaciones:
   #set enum(numbering: "(a)")
-  + Si $\# A = c$ y $\# B = c$, entonces $\# (A union B) = c$.
+  + Si $\# A = c$ y $\# B = c$, entonces $\# (A union B) = c$. #hecho
   + Si $\# A_n = c$ para todo $n in NN$, entonces $\# (union.big_(n in NN) A_n) = c$.
 
 + Sea $A$ un conjunto.
@@ -697,4 +698,50 @@
   ejemplo en la demostración de la propia Proposición 3.9 ("elegimos entonces, para cada
   $a in A$, un elemento $b_a$") --- pero conviene saber que es acá donde esta demostración usa
   algo que las anteriores no usaban.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+#enunciado[Ejercicio 7 (a)][
+  Sea $frak(c)$ el cardinal de $RR$. Pruebe que si $\#A = frak(c)$ y $\#B = frak(c)$, entonces
+  $\#(A union B) = frak(c)$.
+]
+
+#solucion[Propuesta 1][
+  Como $\#A = frak(c)$ y $\#B = frak(c)$, sé que existen $f : A -> (-1, 0]$ y
+  $g : B -> (0, 1)$ biyectivas.
+
+  Por lo tanto puedo construir $phi : A union B -> (-1, 1)$ de forma tal que
+
+  $ phi(x) = cases(f(x) & "si" x in A - B, g(x) & "si" x in B) $
+
+  Notemos que cada rama tiene dominio disjunto y, además, $(A - B) union B = A union B$. Por otro
+  lado, $phi(A union B) subset.eq (-1, 1)$. Por lo tanto, está bien definida.
+
+  Por otro lado, si $phi(x) = phi(z)$, como las imágenes de $f$ y $g$ son disjuntas, tenemos dos
+  opciones:
+
+  - $phi(x) = f(x) = f(z) = phi(z)$, y como $f$ es inyectiva, $x = z$;
+  - $phi(x) = g(x) = g(z) = phi(z)$, y como $g$ es inyectiva, $x = z$.
+
+  Vimos que $phi(x) = phi(z) => x = z$, por lo tanto $phi$ es inyectiva, es decir
+  $\#(A union B) <= frak(c)$.
+
+  Notemos que $B subset.eq A union B$, es decir, existe $iota : B -> A union B$ inyectiva. Por
+  otro lado, $g : B -> (0, 1)$ es biyectiva. Con ambas cosas puedo construir
+  $psi : (0, 1) -> A union B$ tal que $psi = iota compose g^(-1)$, que es inyectiva por
+  composición de inyectivas. Por lo tanto $\#(0, 1) <= \#(A union B)$, es decir,
+  $frak(c) <= \#(A union B)$.
+
+  Como $frak(c) <= \#(A union B) <= frak(c)$, por Cantor-Schröeder-Bernstein (Teorema 3.11)
+  sabemos que $\#(A union B) = frak(c)$.
+]
+
+#observacion[Hueco pendiente][
+  *La biyección $f : A -> (-1, 0]$.* El primer renglón da por sentado que $\#(-1, 0] = frak(c)$.
+  Es verdadero, pero la propuesta no lo justifica ni cita de dónde sale: lo que da el
+  Ejemplo 3.20 más una afín es $RR tilde.op (a, b)$ para intervalos *abiertos*, y ninguna afín
+  lleva un intervalo abierto en uno semiabierto. Queda por resolver.
 ]

@@ -799,4 +799,520 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   De hecho, podemos probar que $RR$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $RR tilde.op (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $RR$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $RR tilde.op [a, b]$, podemos pensar que $RR tilde.op (a, b)$ y $(a, b) tilde.op [a, b]$ dado que $(a, b) = [a, b] backslash {a, b}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] tilde.op (a, b)$.
 ]
 
+#definicion[Métrica y Espacio Métrico][4.1][
+  Una métrica en un conjunto $M$ es una función $d : M times M -> RR$ que cumple las siguientes propiedades para todo $x, y, z in M$:
+
+  #set enum(numbering: "(i)")
+  + $d(x, y) >= 0$ para todo $x, y in M$.
+  + $d(x, y) = 0$ si y sólo si $x = y$.
+  + $d(x, y) = d(y, x)$ para todo $x, y in M$ (Simetría).
+  + $d(x, z) <= d(x, y) + d(y, z)$ para todo $x, y, z in M$ (Desigualdad triangular).
+
+  El par $(M, d)$ se denomina *espacio métrico*.
+]
+
+#definicion[Distancias en $RR^n$][][
+  Sean $x = (x_1, dots, x_n)$ e $y = (y_1, dots, y_n)$ elementos de $RR^n$. Se definen las siguientes métricas:
+
+  #set enum(numbering: "1.")
+  + *Distancia euclídea ($d_2$):*
+    $ d_2(x, y) = sqrt(sum_(i=1)^n (x_i - y_i)^2). $
+
+  + *Distancia taxista ($d_1$):*
+    $ d_1(x, y) = sum_(i=1)^n abs(x_i - y_i). $
+
+  + *Distancia del máximo ($d_oo$):*
+    $ d_oo (x, y) = max_(1 <= i <= n) abs(x_i - y_i). $
+
+  #align(center)[
+    #grid(
+      columns: (1fr, 1fr, 1fr),
+      gutter: 12pt,
+      align: center + horizon,
+      [
+        #cetz.canvas({
+          import cetz.draw: *
+          line((0, 0), (2.8, 0), mark: (end: ">"), stroke: 0.8pt)
+          content((3.0, 0), text(size: 8.5pt)[$x_1$])
+          line((0, 0), (0, 2.5), mark: (end: ">"), stroke: 0.8pt)
+          content((0, 2.7), text(size: 8.5pt)[$x_2$])
+
+          let p1 = (0.6, 0.6)
+          let p2 = (2.0, 1.8)
+          circle(p1, radius: 0.07, fill: black)
+          content((0.45, 0.45), text(size: 8.5pt)[$x$])
+          circle(p2, radius: 0.07, fill: black)
+          content((2.15, 1.95), text(size: 8.5pt)[$y$])
+
+          line(p1, p2, stroke: 1.2pt + blue)
+          content((1.2, 1.35), text(size: 8pt, fill: blue)[$d_2$])
+          content((1.4, -0.4), text(size: 9pt)[Euclídea])
+        })
+      ],
+      [
+        #cetz.canvas({
+          import cetz.draw: *
+          line((0, 0), (2.8, 0), mark: (end: ">"), stroke: 0.8pt)
+          content((3.0, 0), text(size: 8.5pt)[$x_1$])
+          line((0, 0), (0, 2.5), mark: (end: ">"), stroke: 0.8pt)
+          content((0, 2.7), text(size: 8.5pt)[$x_2$])
+
+          let p1 = (0.6, 0.6)
+          let p2 = (2.0, 1.8)
+          let corner = (0.6, 1.8)
+          circle(p1, radius: 0.07, fill: black)
+          content((0.45, 0.45), text(size: 8.5pt)[$x_0$])
+          circle(p2, radius: 0.07, fill: black)
+          content((2.15, 1.95), text(size: 8.5pt)[$y$])
+
+          line(p1, corner, stroke: 1.2pt + red)
+          line(corner, p2, stroke: 1.2pt + red)
+          content((0.2, 1.2), text(size: 7.5pt, fill: red)[$Delta x_2$])
+          content((1.3, 2.05), text(size: 7.5pt, fill: red)[$Delta x_1$])
+          content((1.4, -0.4), text(size: 9pt)[Taxista ($d_1$)])
+        })
+      ],
+      [
+        #cetz.canvas({
+          import cetz.draw: *
+          line((0, 0), (2.8, 0), mark: (end: ">"), stroke: 0.8pt)
+          content((3.0, 0), text(size: 8.5pt)[$x_1$])
+          line((0, 0), (0, 2.5), mark: (end: ">"), stroke: 0.8pt)
+          content((0, 2.7), text(size: 8.5pt)[$x_2$])
+
+          let p1 = (0.6, 0.8)
+          let p2 = (2.1, 1.6)
+          let corner = (2.1, 0.8)
+          circle(p1, radius: 0.07, fill: black)
+          content((0.45, 0.65), text(size: 8.5pt)[$x$])
+          circle(p2, radius: 0.07, fill: black)
+          content((2.2, 1.8), text(size: 8.5pt)[$y$])
+
+          line(p1, corner, stroke: (dash: "dashed", paint: gray, thickness: 1pt))
+          line(corner, p2, stroke: (dash: "dashed", paint: gray, thickness: 1pt))
+          content((1.35, 0.55), text(size: 7.5pt)[$Delta x_1$ (máx)])
+          content((2.45, 1.2), text(size: 7.5pt)[$Delta x_2$])
+          content((1.4, -0.4), text(size: 9pt)[Máximo ($d_oo$)])
+        })
+      ]
+    )
+  ]
+  #v(6pt)
+]
+
+#definicion[Distancias en espacios de funciones][][
+  Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como
+  $ C([a, b]) = {f : [a, b] -> RR "funciones continuas"}. $
+
+  Así como $RR^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:
+
+  #set enum(numbering: "1.")
+  + *Distancia infinito:* Esta distancia se define de manera análoga a la distancia infinito en $RR^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$:
+    $ d_oo (f, g) = sup_(x in [a, b]) abs(f(x) - g(x)). $
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+
+      // f y g son bezier cúbicas simétricas respecto de x0 = (a_x + b_x)/2:
+      // control points espejados garantizan que el extremo de cada curva
+      // (el pico de f, el valle de g) caiga exactamente en x = x0.
+      let a_x = 1.2
+      let b_x = 5.4
+      let x0 = (a_x + b_x) / 2
+      let half = 1.3
+
+      let f_end = 1.6
+      let f_ctrl = 3.9
+      let g_end = 0.7
+      let g_ctrl = 0.05
+
+      // Bezier cúbica evaluada en t = 0.5: (P0 + 3P1 + 3P2 + P3) / 8
+      let y_f = (f_end + 3 * f_ctrl + 3 * f_ctrl + f_end) / 8
+      let y_g = (g_end + 3 * g_ctrl + 3 * g_ctrl + g_end) / 8
+
+      line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((6.7, 0), text(size: 9pt)[$x$])
+      line((0, -0.4), (0, 3.5), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 3.7), text(size: 9pt)[$y$])
+
+      line((a_x, -0.1), (a_x, 0.1), stroke: 1pt)
+      content((a_x, -0.35), text(size: 9pt)[$a$])
+      line((b_x, -0.1), (b_x, 0.1), stroke: 1pt)
+      content((b_x, -0.35), text(size: 9pt)[$b$])
+
+      bezier((a_x, f_end), (b_x, f_end), (x0 - half, f_ctrl), (x0 + half, f_ctrl), stroke: 1.2pt + blue)
+      content((b_x + 0.2, f_end), text(fill: blue, size: 10pt)[$f$])
+
+      bezier((a_x, g_end), (b_x, g_end), (x0 - half, g_ctrl), (x0 + half, g_ctrl), stroke: 1.2pt + red)
+      content((b_x + 0.2, g_end), text(fill: red, size: 10pt)[$g$])
+
+      line((x0, 0), (x0, y_g), stroke: (dash: "dashed", paint: gray, thickness: 0.8pt))
+      content((x0, -0.35), text(size: 8.5pt)[$x_0$])
+      line((x0, y_g), (x0, y_f), mark: (start: ">", end: ">"), stroke: 1pt + black)
+      content((x0 + 0.9, (y_f + y_g)/2), text(size: 9pt)[$d_oo (f, g)$])
+    })
+  ]
+
+  + *Distancia 1:* Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno:
+    $ d_1(f, g) = integral_a^b abs(f(x) - g(x)) dif x. $
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((6.7, 0), text(size: 9pt)[$x$])
+      line((0, -0.4), (0, 3.5), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 3.7), text(size: 9pt)[$y$])
+
+      line((1.2, -0.1), (1.2, 0.1), stroke: 1pt)
+      content((1.2, -0.35), text(size: 9pt)[$a$])
+      line((5.4, -0.1), (5.4, 0.1), stroke: 1pt)
+      content((5.4, -0.35), text(size: 9pt)[$b$])
+
+      merge-path(fill: rgb("#e0e7ff"), stroke: none, {
+        line((1.2, 0.4), (1.2, 2.0))
+        bezier((1.2, 2.0), (5.4, 2.8), (2.0, 2.6), (3.8, 1.9))
+        line((5.4, 2.8), (5.4, 0.9))
+        bezier((5.4, 0.9), (1.2, 0.4), (3.8, 0.5), (2.5, 0.8))
+      })
+
+      bezier((1.2, 2.0), (5.4, 2.8), (2.0, 2.6), (3.8, 1.9), stroke: 1.2pt + blue)
+      content((5.6, 2.8), text(fill: blue, size: 10pt)[$f$])
+
+      bezier((1.2, 0.4), (5.4, 0.9), (2.5, 0.8), (3.8, 0.5), stroke: 1.2pt + red)
+      content((5.6, 0.9), text(fill: red, size: 10pt)[$g$])
+
+      line((1.2, 0.4), (1.2, 2.0), stroke: 0.5pt + rgb("#6366f1"))
+      line((5.4, 0.9), (5.4, 2.8), stroke: 0.5pt + rgb("#6366f1"))
+
+      content((3.3, 1.4), text(size: 9.5pt)[$#"Área" = d_1(f, g)$])
+    })
+  ]
+]
+
+#observacion[Comparación entre $d_1$ y $d_oo$ en $C([0, 1])$][4.4][
+  La distancia uno y la distancia infinito en el espacio de funciones continuas miden "muy distinto". Consideremos el siguiente ejemplo: pensemos en el conjunto
+  $ C([0, 1]) = {f : [0, 1] -> RR "funciones continuas"} $
+  y dentro de este conjunto tomemos a las funciones $f(x) = 0$ (la función constantemente cero) y $g_epsilon$ la función continua que vale $0$ en todo el intervalo $[0, 1/2 - epsilon) union (1/2 + epsilon, 1]$, $1$ en $x = 1/2$ y es lineal en el intervalo $[1/2 - epsilon, 1/2 + epsilon]$. Es decir, la función $g_epsilon$ es la función que se ve como en el siguiente diagrama:
+
+  #block(breakable: false)[
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((6.7, 0), text(size: 9pt)[$x$])
+      line((0, -0.4), (0, 3.2), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 3.4), text(size: 9pt)[$y$])
+
+      let x_mid = 3.0
+      let eps = 0.8
+      let y_top = 2.4
+
+      line((-0.1, y_top), (0.1, y_top), stroke: 1pt)
+      content((-0.3, y_top), text(size: 9pt)[$1$])
+      line((0, y_top), (x_mid, y_top), stroke: (dash: "dashed", paint: gray, thickness: 0.8pt))
+
+      line((0, -0.1), (0, 0.1), stroke: 1pt)
+      content((-0.2, -0.3), text(size: 9pt)[$0$])
+      line((5.5, -0.1), (5.5, 0.1), stroke: 1pt)
+      content((5.5, -0.3), text(size: 9pt)[$1$])
+
+      line((x_mid - eps, -0.1), (x_mid - eps, 0.1), stroke: 0.8pt)
+      content((x_mid - eps, -0.35), text(size: 8pt)[$1/2 - epsilon$])
+      line((x_mid, -0.1), (x_mid, 0.1), stroke: 0.8pt)
+      content((x_mid, -0.35), text(size: 8.5pt)[$1/2$])
+      line((x_mid + eps, -0.1), (x_mid + eps, 0.1), stroke: 0.8pt)
+      content((x_mid + eps, -0.35), text(size: 8pt)[$1/2 + epsilon$])
+
+      line((x_mid, 0), (x_mid, y_top), stroke: (dash: "dashed", paint: gray, thickness: 0.8pt))
+
+      merge-path(fill: rgb("#e0e7ff"), stroke: none, {
+        line((x_mid - eps, 0), (x_mid, y_top))
+        line((x_mid, y_top), (x_mid + eps, 0))
+        line((x_mid + eps, 0), (x_mid - eps, 0))
+      })
+
+      line((0, 0), (x_mid - eps, 0), stroke: 1.4pt + blue)
+      line((x_mid - eps, 0), (x_mid, y_top), stroke: 1.4pt + blue)
+      line((x_mid, y_top), (x_mid + eps, 0), stroke: 1.4pt + blue)
+      line((x_mid + eps, 0), (5.5, 0), stroke: 1.4pt + blue)
+
+      content((x_mid + 0.5, y_top + 0.25), text(fill: blue, size: 9.5pt)[$g_epsilon (x)$])
+      line((4.2, 1.4), (x_mid + 0.1, 0.7), mark: (end: ">"), stroke: 0.8pt)
+      content((4.8, 1.5), text(size: 9pt)[$#"Área" = epsilon$])
+    })
+  ]
+  ]
+
+  Por un lado, observamos que la distancia infinito $d_oo (f, g_epsilon) = 1$, independientemente de qué tan chico tomemos al parámetro $epsilon$ (puesto que por diseño, la función $g_epsilon$ siempre va a tomar el valor $1$ en $x = 1/2$). Sin embargo, cuando calculamos la distancia uno entre estas dos funciones, tenemos que el área bajo la curva de $g_epsilon$ se puede pensar como el área del triángulo de base $2 epsilon$ y altura $1$: $d_1(f, g_epsilon) = epsilon$. Es decir, si tomamos el parámetro $epsilon$ cada vez más chico, nos queda que las funciones en distancia uno están cada vez más cerca, mientras que si medimos su distancia en la distancia infinito nos queda constantemente $1$.
+]
+
+#definicion[Bolas y Esfera][4.5][
+  Sea $(M, d)$ un espacio métrico, $x_0 in M$ y $r > 0$. Definimos:
+
+  - *Bola abierta:* $B(x_0, r) = {y in M : d(x_0, y) < r}$.
+  - *Bola cerrada:* $B[x_0, r] = {y in M : d(x_0, y) <= r}$.
+  - *Esfera:* $S(x_0, r) = {y in M : d(x_0, y) = r}$.
+]
+
+#definicion[Conjunto Acotado][4.8][
+  #block(breakable: false)[
+  Sea $(M, d)$ un espacio métrico. Un conjunto $E subset.eq M$ es *acotado* si existe $C > 0$ tal que $d(x, y) <= C$ para todo $x, y in E$. Equivalentemente, si existe $x_0 in M$ y $R > 0$ tal que $E subset.eq B(x_0, R)$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-2.2, 0), (2.2, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((2.35, 0), text(size: 8pt)[$x$])
+      line((0, -2.0), (0, 2.0), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 2.15), text(size: 8pt)[$y$])
+
+      let c = (0.2, 0.1)
+      circle(c, radius: 1.5, fill: none, stroke: (dash: "dashed", paint: gray, thickness: 1pt))
+      circle(c, radius: 0.04, fill: black)
+      content((c.at(0), c.at(1) - 0.25), text(size: 8pt)[$x_0$])
+
+      let ang = 40deg
+      line(c, (c.at(0) + 1.5 * calc.cos(ang), c.at(1) + 1.5 * calc.sin(ang)), stroke: 0.7pt)
+      content((1.15, 0.85), text(size: 8pt)[$R$])
+
+      hobby((-0.5, 0.6), (-0.1, 1.0), (0.5, 0.85), (0.75, 0.35), (0.55, -0.25), (0.0, -0.45), (-0.55, -0.2), (-0.75, 0.2), close: true, fill: rgb("#ede9fe"), stroke: 1.1pt + rgb("#7c3aed"))
+      content((0.1, 0.25), text(size: 9pt, fill: rgb("#7c3aed"))[$E$])
+
+      content((c.at(0), 1.85), text(size: 8.5pt, fill: gray)[$B(x_0, R)$])
+    })
+  ]
+  #align(center)[
+    #text(size: 8.5pt, style: "italic", fill: rgb("#64748b"))[
+      (Esquema ilustrativo de un conjunto acotado $E$ cualquiera --- invención propia, no está en la fuente.)
+    ]
+  ]
+  ]
+]
+
+#definicion[Diámetro][4.9][
+  Si $E$ es acotado, su *diámetro* se define como:
+  $ op("diam")(E) = sup {d(x, y) : x, y in E}. $
+]
+
+#definicion[Punto Interior][4.11][
+  #block(breakable: false)[
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$ y $x in E$. Decimos que $x$ es un *punto interior* de $E$ si existe un radio $r > 0$ tal que $B(x, r) subset.eq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.
+
+  En este gráfico podemos ver que $x$ es un punto interior de $E$, mientras que $y$ no lo es ya que cualquier bolita centrada en $y$ interseca al complemento de $E$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+
+      let blob = ((-1.6, 0.2), (-1.1, 1.1), (-0.1, 1.3), (1.0, 1.0), (1.5, 0.2), (1.3, -0.7), (0.2, -1.1), (-0.9, -0.9), (-1.7, -0.3))
+      hobby(..blob, close: true, fill: rgb("#f1f5f9"), stroke: 1pt + black)
+      content((0.6, 1.0), text(size: 10pt)[$E$])
+
+      let xp = (-0.3, 0.1)
+      let rx = 0.5
+      circle(xp, radius: rx, fill: none, stroke: (dash: "dashed", paint: blue, thickness: 1pt))
+      circle(xp, radius: 0.035, fill: black)
+      content((xp.at(0), xp.at(1) + 0.22), text(size: 9pt)[$x$])
+      let ang = 55deg
+      line(xp, (xp.at(0) + rx * calc.cos(ang), xp.at(1) + rx * calc.sin(ang)), stroke: 0.6pt + blue)
+      content((xp.at(0) + 0.35, xp.at(1) + 0.4), text(size: 8pt, fill: blue)[$r$])
+      content((xp.at(0), xp.at(1) - rx - 0.2), text(size: 8.5pt, fill: blue)[$B(x, r) subset.eq E$])
+
+      let yp = (1.5, 0.2)
+      circle(yp, radius: 0.42, fill: none, stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      circle(yp, radius: 0.035, fill: black)
+      content((yp.at(0) + 0.2, yp.at(1) + 0.12), text(size: 9pt)[$y$])
+      content((yp.at(0) + 0.05, yp.at(1) - 0.55), text(size: 8pt, fill: red)[*no* es interior])
+    })
+  ]
+
+  El *interior* de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^compose$. Es decir,
+  $ E^compose = {x in E : x "es punto interior de" E}. $
+  ]
+]
+
+#observacion[$E^compose subset.eq E$, inclusión posiblemente estricta][4.12][
+  Por definición, sabemos que $E^compose subset.eq E$ pero la inclusión puede ser estricta.
+]
+
+#definicion[Conjunto Abierto][4.14][
+  Sea $(M, d)$ un espacio métrico. Decimos que $A subset.eq M$ es *abierto* si $A = A^compose$.
+]
+
+#teorema[Unión arbitraria de abiertos es abierta][4.17][
+  Sea $(M, d)$ un espacio métrico. Sea $(A_i)_(i in I)$ una familia de conjuntos abiertos (acá podríamos tomar una cantidad arbitraria, finita o infinita, numerable o no, de conjuntos). Entonces $A = union.big_(i in I) A_i$ es abierto.
+]
+#demostracion[
+  Sea $x in A$. Para ver que $A$ es abierto, nos alcanza con encontrar un radio $r > 0$ tal que $B(x, r) subset.eq A$. Como $x in A$, existe un índice $i in I$ tal que $x in A_i$. Como $A_i$ es abierto, sabemos que tiene que existir un $r > 0$ tal que $B(x, r) subset.eq A_i$. Pero como $A_i subset.eq A$, tenemos que $B(x, r) subset.eq A$.
+]
+
+#teorema[Intersección finita de abiertos es abierta][4.18][
+  Sea $(M, d)$ un espacio métrico. Sean $A_1, dots, A_n$ conjuntos abiertos. Entonces $A = inter.big_(i=1)^n A_i$ es abierto.
+]
+#demostracion[
+  Sea $x in A$. Para ver que $A$ es abierto, debemos encontrar un radio $r > 0$ tal que $B(x, r) subset.eq A$. Como $A = inter.big_(i=1)^n A_i$, sabemos que para todo $i = 1, dots, n$, $x in A_i$. Como $A_i$ es abierto, existe un radio $r_i > 0$ tal que $B(x, r_i) subset.eq A_i$. Como queremos que la bola esté contenida en la intersección de los conjuntos, queremos encontrar la bolita alrededor de $x$ más chica entre $B(x, r_1), dots, B(x, r_n)$. Tomemos $r = op("mín"){r_1, r_2, dots, r_n}$. Como tenemos una cantidad finita de radios, sabemos que $r > 0$ (porque es uno de los radios que ya teníamos). Observemos que, para cada $i = 1, dots, n$,
+  $ B(x, r) = {y in M : d(x, y) < r} subset.eq {y in M : d(x, y) < r_i} = B(x, r_i) subset.eq A_i. $
+  Esto nos dice que $B(x, r) subset.eq A_i$ para todo $i = 1, dots, n$, lo cual nos dice que $B(x, r) subset.eq inter.big_(i=1)^n A_i = A$.
+]
+
+#observacion[El teorema anterior no vale para infinitos abiertos][4.19][
+  El teorema anterior no vale si tomamos infinitos conjuntos abiertos $A_i$. Consideremos el siguiente ejemplo: sea $(M, d) = (RR, abs(dot.c))$ y sean $A_n = (-1/n, 1/n)$. Al ser $A_n = B(0, 1/n)$, sabemos que $A_n$ es abierto para cada $n in NN$ porque probamos que las bolas abiertas son conjuntos abiertos en cualquier espacio métrico. Sin embargo,
+  $ A = inter.big_(n in NN) (-1/n, 1/n) = {0}. $
+  Queda como ejercicio probar que este conjunto no es abierto.
+]
+
+#proposicion[El interior es el abierto más grande contenido en $E$][4.21][
+  Sea $(M, d)$ un espacio métrico y sea $E subset.eq M$ un subconjunto. Sea $A subset.eq E$ un conjunto abierto. Entonces $A subset.eq E^compose$. Es decir, el interior es el conjunto abierto más grande contenido dentro de $E$.
+]
+#demostracion[
+  Sea $x in A$. Como $A$ es abierto, existe un $r > 0$ tal que $B(x, r) subset.eq A subset.eq E$. Esto nos dice que $B(x, r) subset.eq E$, lo cual es la definición de punto interior. Esto nos dice que $x in E^compose$, que es lo que queríamos ver.
+]
+
+#definicion[Punto de Adherencia y Clausura][4.22][
+  #block(breakable: false)[
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$ un subconjunto. Un punto $x in M$ se dice *de adherencia* de $E$ si para todo radio $r > 0$ se tiene que $B(x, r) inter E != nothing$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+
+      let blob = ((-2.1, 0.3), (-1.4, 1.4), (-0.1, 1.7), (1.3, 1.3), (2.0, 0.3), (1.7, -0.9), (0.3, -1.4), (-1.2, -1.2), (-2.2, -0.4))
+      hobby(..blob, close: true, fill: rgb("#f1f5f9"), stroke: (dash: "dashed", paint: black, thickness: 1pt))
+      content((1.0, 1.55), text(size: 10pt)[$E$])
+
+      let zp = (-0.8, 0.1)
+      circle(zp, radius: 0.42, fill: none, stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      circle(zp, radius: 0.03, fill: black)
+      content((zp.at(0), zp.at(1) - 0.62), text(size: 9pt)[$z$])
+
+      let xp = (1.85, -0.35)
+      circle(xp, radius: 0.55, fill: rgb("#fecaca"), stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      circle(xp, radius: 0.03, fill: black)
+      content((xp.at(0) - 0.9, xp.at(1) + 0.45), text(size: 9pt, fill: red)[$B(x, r)$])
+      content((xp.at(0), xp.at(1) - 0.8), text(size: 9pt)[$x$])
+
+      line((-3.0, 1.0), (zp.at(0) - 0.45, zp.at(1) + 0.3), stroke: 0.6pt, mark: (end: ">"))
+      content((-3.0, 1.25), text(size: 8.5pt)[$B(z, r) inter E != nothing$])
+
+      line((3.1, 0.75), (xp.at(0) + 0.4, xp.at(1) + 0.4), stroke: 0.6pt, mark: (end: ">"))
+      content((3.2, 1.0), text(size: 8.5pt)[$B(x, r) inter E != nothing$])
+    })
+  ]
+
+  Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la *clausura* de $E$ y lo denotamos $overline(E)$. Es decir,
+  $ overline(E) = {x in M : "para todo " r > 0, B(x, r) inter E != nothing}. $
+  ]
+]
+
+#observacion[][4.23][
+  #set enum(numbering: "a)")
+  + Todos los puntos de $E$ son puntos de adherencia. Dado $x in E$, tenemos que $B(x, r) inter E$ contiene, al menos, al punto $x$: esto nos dice que es punto de adherencia. Es decir, $E subset.eq overline(E)$.
+  + Con lo que acabamos de observar y teniendo en cuenta la Observación 4.12, tenemos que
+    $ E^compose subset.eq E subset.eq overline(E). $
+]
+
+#definicion[Conjunto Cerrado][4.27][
+  Sea $(M, d)$ un espacio métrico y sea $F subset.eq M$. Decimos que $F$ es *cerrado* si $overline(F) = F$.
+]
+
+#teorema[Cerrados vía complemento abierto][4.29][
+  $F$ es un conjunto cerrado si y sólo si $F^c$ es un conjunto abierto.
+]
+#demostracion[
+  *($arrow.r.double$)* Veamos que $F^c$ es un conjunto abierto. Sea $x in F^c$. Queremos ver que existe un radio $r > 0$ tal que $B(x, r) subset.eq F^c$. Si esto no pasa, tendríamos entonces que $B(x, r) subset.eq.not F^c$ para todo $r > 0$. Esto nos dice que $B(x, r) inter F != nothing$ para todo $r > 0$. Pero esto es lo mismo que decir que $x in overline(F)$ y $overline(F) = F$ por hipótesis ($F$ es cerrado). Esto es absurdo.
+
+  *($arrow.l.double$)* Supongamos que $F^c$ es abierto y veamos que $F = overline(F)$. Recordemos que nos alcanza con ver que $overline(F) subset.eq F$. Sea $x in overline(F)$. Si $x in.not F$, como $F^c$ es un conjunto abierto, tiene que existir un $r > 0$ tal que $B(x, r) subset.eq F^c$. Es decir, $B(x, r) inter F = nothing$ y esto es absurdo, dado que $x in overline(F)$.
+]
+
+#teorema[Intersección arbitraria y unión finita de cerrados][4.31][
+  Sea $(M, d)$ un espacio métrico. Entonces:
+
+  #set enum(numbering: "a)")
+  + Si ${F_i}_(i in I)$ es una familia de conjuntos cerrados, entonces $F = inter.big_(i in I) F_i$ es cerrado.
+  + Si ${F_i}_(i=1)^n$ son conjuntos cerrados, entonces $F = union.big_(i=1)^n F_i$ es cerrado.
+]
+#demostracion[
+  Para probar ambos enunciados sólo tenemos que observar que
+  $ (inter.big_(i in I) F_i)^c = union.big_(i in I) F_i^c, quad (union.big_(i=1)^n F_i)^c = inter.big_(i=1)^n F_i^c. $
+  Por los teoremas 4.17 y 4.18, tenemos lo que queríamos probar.
+]
+
+#observacion[$QQ$ no es ni abierto ni cerrado en $RR$][4.32][
+  Muchas veces pensamos que cerrado es lo contrario de abierto. Y tiene sentido, porque tenemos cierta dualidad entre los conceptos: un conjunto es abierto si y sólo si su complemento es cerrado o un conjunto es cerrado si y sólo si su complemento es abierto. Pero esto no quiere decir que sólo existan estas dos opciones: que un conjunto *no sea abierto no significa que sea cerrado* necesariamente.
+
+  Hay muchos ejemplos de conjuntos que no son ni cerrados ni abiertos (pensá a ver si se te ocurre alguno). Uno de esos ejemplos es el conjunto de los números racionales $QQ subset.eq (RR, abs(dot.c))$.
+
+  - $overline(QQ) = RR$: Si $x in RR$, $B(x, r) = (x - r, x + r)$. Como sabemos que cualquier intervalo abierto contiene números racionales, sabemos que $(x-r, x+r) inter QQ != nothing$ y por lo tanto $x in overline(QQ)$. Esto nos dice que $QQ$ no es cerrado.
+  - $QQ^compose = emptyset$: sea $x in QQ$. Como $B(x, r) = (x - r, x + r)$ contiene números irracionales, tenemos que $B(x, r) inter QQ^c != nothing$ para todo $r > 0$. Esto nos dice que $B(x, r) subset.eq.not QQ$ para ningún $r > 0$, con lo cual $x in.not QQ^compose$. En particular, esto nos dice que $QQ$ tampoco es abierto.
+]
+
+#definicion[Punto de Acumulación y Conjunto Derivado][4.33][
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$. Decimos que $x$ es un *punto de acumulación* de $E$ si para todo radio $r > 0$ tenemos que existe un $y in B(x, r) inter E$ con $y != x$.
+
+  Definimos el *conjunto derivado* de $E$ como
+  $ E' = {x in M : x "es punto de acumulación"}. $
+]
+
+#proposicion[Clausura como unión con el conjunto derivado][4.36][
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$. Entonces $overline(E) = E union E'$.
+]
+#demostracion[
+  Como sabemos que $E' subset.eq overline(E)$ y también $E subset.eq overline(E)$, nos alcanza con probar la otra inclusión.
+
+  Sea $x in overline(E)$ y supongamos que $x in.not E$. Como $x$ es punto de adherencia, sabemos que para todo $r > 0$, $B(x, r) inter E != nothing$. Pero como $x in.not E$, tenemos que $x in.not B(x, r) inter E$. Como este conjunto es no vacío, tenemos que existe $y in B(x, r) inter E$ con $y != x$, es decir, $x in E'$.
+]
+
+#corolario[Cerrados vía puntos de acumulación][4.37][
+  $E$ es un conjunto cerrado si y sólo si todos los puntos de acumulación de $E$ pertenecen a $E$, es decir, $E' subset.eq E$.
+]
+#demostracion[
+  Recordemos que $E$ es cerrado si $overline(E) = E$. Tenemos que
+  $ overline(E) = E union E' = E <=> E' subset.eq E, $
+  como queríamos ver.
+]
+
+#definicion[Punto de Frontera y Frontera de un Conjunto][4.38][
+  #block(breakable: false)[
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$. Decimos que $x$ es un *punto de frontera* de $E$ si para todo $r > 0$, $B(x, r) inter E != nothing$ y $B(x, r) inter E^c != nothing$.
+
+  Al conjunto de los puntos de frontera lo llamamos la *frontera* de $E$ y lo notamos
+  $ partial E = {x in M : x "es punto de frontera de" E}. $
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+
+      let blob = ((-2.1, 0.3), (-1.4, 1.4), (-0.1, 1.7), (1.3, 1.3), (2.0, 0.3), (1.7, -0.9), (0.3, -1.4), (-1.2, -1.2), (-2.2, -0.4))
+      hobby(..blob, close: true, fill: rgb("#e2e8f0"), stroke: (paint: black, thickness: 1pt))
+      content((-1.1, 0), text(size: 10pt)[$E$])
+      content((1.75, 1.55), text(size: 9pt)[$E^c$])
+
+      let xp = (1.55, 0.25)
+      circle(xp, radius: 0.55, fill: rgb("#dbeafe"), stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      circle(xp, radius: 0.03, fill: black)
+      content((xp.at(0) - 0.15, xp.at(1) + 0.75), text(size: 9pt, fill: red)[$B(x, r)$])
+      content((xp.at(0) + 0.45, xp.at(1) - 0.05), text(size: 8.5pt)[$x in partial E$])
+
+      line((3.1, 0.9), (xp.at(0) + 0.35, xp.at(1) + 0.35), stroke: 0.6pt, mark: (end: ">"))
+      content((3.35, 1.15), text(size: 8pt)[Intersección con $E^c$])
+      content((3.35, 0.9), text(size: 8pt)[$(B(x,r) inter E^c != nothing)$])
+
+      line((0.2, -1.9), (xp.at(0) - 0.35, xp.at(1) - 0.35), stroke: 0.6pt, mark: (end: ">"))
+      content((0.35, -2.15), text(size: 8pt)[Intersección con $E$])
+      content((0.35, -2.4), text(size: 8pt)[$(B(x,r) inter E != nothing)$])
+    })
+  ]
+  ]
+]
+
+#proposicion[Clausura como unión con la frontera][4.40][
+  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Entonces $overline(E) = E union partial E$.
+]
+#demostracion[
+  Al igual que en la proposición anterior, no es difícil ver que $partial E subset.eq overline(E)$, dado que a los puntos de frontera les estamos pidiendo que pertenezcan a la clausura y *algo más*. Además, claramente $E subset.eq overline(E)$, con lo cual nos sale que $partial E union E subset.eq overline(E)$. Veamos la otra contención.
+
+  Sea $x in overline(E)$. Si $x in.not E$, entonces sabemos que para todo $r > 0$, tenemos que por un lado $B(x, r) inter E != nothing$ (porque $x in overline(E)$) y por otro lado $B(x, r) inter E^c != nothing$ (porque $x in.not E$). Pero esto nos dice que $x in partial E$ por definición.
+]
 

@@ -687,3 +687,49 @@ alimenta cada bloque.
   *Desafío:* Explicar y justificar formalmente por qué esta falta de unicidad en los desarrollos decimales no invalida la demostración de la diagonalización de Cantor (es decir, por qué la elección de los dígitos $y_i in {2, 3}$ garantiza que $y != x_n$ para todo $n in NN$ a pesar de la no unicidad).
 ]
 
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Bloque 11 · Espacios métricos y topología
+
+#sublema(titulo: "Qué desbloquea")[
+  Alimenta la *Práctica 3* (espacios métricos, bolas y topología). En particular, el Ejercicio 1 (e) de la guía pide verificar que $C([0, 1])$ con la métrica del supremo es un espacio métrico.
+]
+
+#desafio[Ejercicio 4.3 ($d_oo$ y $d_1$ en $C([a, b])$)][
+  Probar que $d_oo$ y $d_1$ son métricas en $C([a, b])$.
+]
+
+#desafio[Equivalencia de las definiciones de conjunto acotado (Definición 4.8)][
+  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Probar que las siguientes dos condiciones son equivalentes:
+
+  + Existe $C > 0$ tal que $d(x, y) <= C$ para todo $x, y in E$.
+  + Existe $x_0 in M$ y $R > 0$ tal que $E subset.eq B(x_0, R)$.
+]
+
+#desafio[$inter.big_(n in NN) (-1/n, 1/n) = {0}$ no es abierto (Observación 4.19)][
+  Sea $(M, d) = (RR, abs(dot.c))$ y sean $A_n = (-1/n, 1/n)$ para $n in NN$. Se tiene que $A = inter.big_(n in NN) A_n = {0}$. Probar que $A$ no es un conjunto abierto.
+]
+
+#desafio[Los intervalos abiertos son conjuntos abiertos (Ejercicio 4.20)][
+  Sea $(M, d) = (RR, abs(dot.c))$ y sean $a < b in RR$. Mostrar que $A = (a, b)$ es un conjunto abierto.
+]
+
+#desafio[Clausura de la bola abierta (Ejercicio 4.25)][
+  Sea $(M, d)$ un espacio métrico.
+
+  #set enum(numbering: "a)")
+  + Probar que $overline(B(x,r)) subset.eq B[x,r]$.
+  + Mostrar con un contraejemplo que en general no vale la igualdad entre estos dos conjuntos.
+]
+
+#desafio[Supremo e ínfimo en la clausura (Ejercicio 4.26)][
+  Sea $E subset.eq (RR, abs(dot.c))$ acotado. Probar que $op("sup")(E)$ e $op("ínf")(E)$ pertenecen a la clausura de $E$.
+]
+
+#desafio[Caracterización del punto de acumulación (Ejercicio 4.34)][
+  Probar que $x$ es un punto de acumulación de $E$ si y sólo si para todo $r > 0$, $B(x, r) inter E$ tiene infinitos elementos.
+]
+
+

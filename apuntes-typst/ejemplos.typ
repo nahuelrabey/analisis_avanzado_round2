@@ -60,6 +60,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [6], [Monotonía, álgebra de límites y subsucesiones], [p1: Ej. 12, 13, 14, 15, 16],
   [7], [Coordinabilidad y biyecciones explícitas], [p2: Ej. 1, 4, 8, 9 (c), 14, 16, 17 (a)],
   [8], [Métricas: verificar los axiomas], [p3: Ej. 1, 2],
+  [9], [Topología en espacios métricos: puntos interiores y abiertos], [p3: Ej. 3 (a), 4],
+  [10], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7],
 )
 
 #v(4pt)
@@ -1453,7 +1455,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 8 · Métricas: verificar los axiomas
 
 #sublema(titulo: "Qué desbloquea")[
-  El *Ejercicio 1* de la Práctica 3 pide probar que varios espacios son métricos, y el *Ejercicio 2* decidir cuáles de unas funciones dadas lo son. Los cuatro ejemplos de este bloque cubren el repertorio completo de maniobras: reducir la lista de axiomas a verificar, tratar una métrica definida por casos, trabajar con supremos de funciones, y truncar una métrica existente. Los tres últimos son, además, los modelos para $C([0,1])$ del Ejercicio 1 (e) y para el Ejercicio 11.
+  El *Ejercicio 1* de la Práctica 3 pide probar que varios espacios son métricos, y el *Ejercicio 2* decidir cuáles de unas funciones dadas lo son. Los ejemplos de este bloque cubren el repertorio completo de maniobras: reducir la lista de axiomas a verificar, tratar una métrica definida por casos, trabajar con supremos de funciones, truncar una métrica existente, y verificar paso a paso la métrica discreta y la métrica del máximo ($d_oo$) en $RR^n$. Constituyen los modelos directos para los ítems (d), (e) y (f) del Ejercicio 1 y para el Ejercicio 11.
 ]
 
 #ejemplo[Dos axiomas alcanzan para tener una métrica (Clase 3 · Ejercicio 5)][C3-5][
@@ -1602,12 +1604,521 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Eso no se sigue: dos números pueden sumar $1$ o más sin que ninguno llegue a $1$ (por ejemplo $0,5 + 0,5$). La conclusión del caso igual vale, y el arreglo es una línea: si ninguno llega a $1$, entonces los dos mínimos son los propios valores y su suma es $d(x,z) + d(z,y) >= d(x,y) >= 1$. Es la versión que se transcribió arriba.
 ]
 
+#ejemplo[La distancia discreta en cualquier conjunto (Ejemplo 4.2)][16][
+  Sea $M$ un conjunto no vacío cualquiera. Se define la función $delta : M times M -> RR$ por
+  $ delta(x, y) = cases(
+    0 & "si" x = y,
+    1 & "si" x != y.
+  ) $
+  Probar que $delta$ es una métrica en $M$.
+]
+
+#estrategia[Separar en casos según el lado izquierdo sea cero o uno][
+  La no negatividad, la anulación si y sólo si $x = y$ y la simetría se deducen directamente de la definición por casos.
+
+  Para la desigualdad triangular $delta(x, z) <= delta(x, y) + delta(y, z)$, si $x = z$ el lado izquierdo es $0$ y es trivial. Si $x != z$, el lado izquierdo vale $1$: basta notar que un elemento intermedio $y$ no puede ser simultáneamente igual a $x$ y a $z$, de modo que al menos uno de los términos de la derecha tiene que valer $1$.
+]
+
+#resolucion[
+  Verifiquemos que $delta$ cumple los cuatro axiomas de métrica:
+
+  #set enum(numbering: "(i)")
+  + *No negatividad:* Como $delta(x, y) in {0, 1}$, se tiene $delta(x, y) >= 0$ para todos $x, y in M$.
+  + *Separación:* Por definición, $delta(x, y) = 0$ si y sólo si $x = y$.
+  + *Simetría:* Si $x = y$, $delta(x, y) = 0 = delta(y, x)$. Si $x != y$, entonces $y != x$, luego $delta(x, y) = 1 = delta(y, x)$. En cualquier caso, $delta(x, y) = delta(y, x)$ para todo $x, y in M$.
+  + *Desigualdad triangular:* Sean $x, y, z in M$. Queremos ver que
+    $ delta(x, z) <= delta(x, y) + delta(y, z). $
+    - Si $x = z$, entonces $delta(x, z) = 0 <= delta(x, y) + delta(y, z)$ pues ambos sumandos son no negativos.
+    - Si $x != z$, entonces $delta(x, z) = 1$. Dado $y in M$ cualquiera, no puede suceder que $y = x$ e $y = z$ al mismo tiempo (pues implicaría $x = z$). Por lo tanto, $y != x$ o $y != z$ (o ambos). Esto implica que $delta(x, y) = 1$ o $delta(y, z) = 1$. En consecuencia:
+      $ delta(x, y) + delta(y, z) >= 1 = delta(x, z). $
+
+  Concluimos que $delta$ es una métrica en $M$.
+]
+
+#ejemplo[La distancia del máximo en $RR^n$ (Ejemplo 4.2)][17][
+  En $RR^n$, dados $x = (x_1, dots, x_n)$ e $y = (y_1, dots, y_n)$, se define
+  $ d_oo (x, y) = max_(1 <= i <= n) abs(x_i - y_i). $
+  Probar que $d_oo$ es una métrica en $RR^n$.
+]
+
+#estrategia[Acotar coordenada a coordenada por el máximo y trasladar la desigualdad al máximo][
+  La no negatividad y la simetría provienen de las propiedades del valor absoluto en cada coordenada. La anulación requiere notar que si el máximo de cantidades no negativas es cero, cada una debe anularse por separado.
+
+  Para la desigualdad triangular, se aplica la desigualdad triangular usual en $RR$ coordenada a coordenada, se reemplaza cada término de la derecha por el máximo global correspondiente, y al tener una cota independiente del índice $i$, se toma máximo del lado izquierdo.
+]
+
+#resolucion[
+  Tomemos $x, y, z in RR^n$, con $x = (x_1, dots, x_n)$, $y = (y_1, dots, y_n)$ y $z = (z_1, dots, z_n)$.
+
+  #set enum(numbering: "(i)")
+  + *No negatividad:* Para cada $i = 1, dots, n$, se tiene $abs(x_i - y_i) >= 0$. Siendo el máximo de números no negativos,
+    $ d_oo (x, y) = max_(1 <= i <= n) abs(x_i - y_i) >= 0. $
+  + *Separación:* Supongamos que $d_oo (x, y) = 0$. Como $abs(x_i - y_i) >= 0$ para todo $i$ y su máximo es $0$, debe cumplirse $abs(x_i - y_i) = 0$ para cada $i = 1, dots, n$. Por lo tanto, $x_i = y_i$ para todo $i = 1, dots, n$, lo que equivale a $x = y$. Recíprocamente, si $x = y$, cada coordenada coincide y $abs(x_i - y_i) = 0$, con lo cual $d_oo (x, x) = 0$.
+  + *Simetría:* Como $abs(x_i - y_i) = abs(y_i - x_i)$ para cada coordenada $i$,
+    $ d_oo (x, y) = max_(1 <= i <= n) abs(x_i - y_i) = max_(1 <= i <= n) abs(y_i - x_i) = d_oo (y, x). $
+  + *Desigualdad triangular:* Por la desigualdad triangular del valor absoluto en $RR$, para todo $i = 1, dots, n$ vale:
+    $ abs(x_i - z_i) <= abs(x_i - y_i) + abs(y_i - z_i). $
+    A su vez, para cada índice $i$:
+    $ abs(x_i - y_i) <= max_(1 <= j <= n) abs(x_j - y_j) = d_oo (x, y), \
+      abs(y_i - z_i) <= max_(1 <= j <= n) abs(y_j - z_j) = d_oo (y, z). $
+    Sumando ambas desigualdades obtenemos:
+    $ abs(x_i - z_i) &<= max_(1 <= j <= n) abs(x_j - y_j) + max_(1 <= j <= n) abs(y_j - z_j) \
+      &= d_oo (x, y) + d_oo (y, z) quad "para todo" i = 1, dots, n. $
+    Como esta cota superior no depende del índice $i$, vale en particular para el índice donde se alcanza el máximo del miembro izquierdo:
+    $ d_oo (x, z) = max_(1 <= i <= n) abs(x_i - z_i) <= d_oo (x, y) + d_oo (y, z). $
+
+  Queda demostrado que $d_oo$ es una métrica en $RR^n$.
+]
+
+#ejemplo[Bolas unitarias en $RR^2$ para $d_2, d_1$ y $d_oo$ (Ejemplo 4.6)][18][
+  Determinar y describir la bola unitaria abierta centrada en el origen, $B((0, 0), 1)$, en el espacio $RR^2$ equipado con cada una de las métricas euclídea ($d_2$), taxista ($d_1$) y del máximo ($d_oo$).
+]
+
+#estrategia[Explicitar la inecuación que define cada bola a partir de la distancia][
+  Se aplica directamente la definición de bola abierta $B(x_0, r) = {y in M : d(x_0, y) < r}$ tomando $x_0 = (0, 0)$ y $r = 1$:
+  - Para $d_2$: $sqrt(x^2 + y^2) < 1 <=> x^2 + y^2 < 1$, que es el disco euclídeo sin el borde.
+  - Para $d_1$: $abs(x) + abs(y) < 1$, cuyas cuatro rectas frontera son $plus.minus x plus.minus y = 1$, formando un rombo o cuadrado rotado.
+  - Para $d_oo$: $max(abs(x), abs(y)) < 1 <=> abs(x) < 1 "y" abs(y) < 1$, que es un cuadrado de lado 2 alineado con los ejes.
+]
+
+#resolucion[
+  #set enum(numbering: "1.")
+  + *En $(RR^2, d_2)$:*
+    $ B_(d_2)((0, 0), 1) &= {(x, y) in RR^2 : d_2((x, y), (0, 0)) < 1} \
+      &= {(x, y) in RR^2 : sqrt(x^2 + y^2) < 1} = {(x, y) in RR^2 : x^2 + y^2 < 1}. $
+    Geométricamente corresponde al interior del disco de radio $1$ centrado en el origen.
+
+  + *En $(RR^2, d_1)$:*
+    $ B_(d_1)((0, 0), 1) &= {(x, y) in RR^2 : d_1((x, y), (0, 0)) < 1} \
+      &= {(x, y) in RR^2 : abs(x) + abs(y) < 1}. $
+    Corresponde al interior del rombo de vértices $(1, 0), (0, 1), (-1, 0), (0, -1)$.
+
+  + *En $(RR^2, d_oo)$:*
+    $ B_(d_oo)((0, 0), 1) &= {(x, y) in RR^2 : d_oo ((x, y), (0, 0)) < 1} \
+      &= {(x, y) in RR^2 : max(abs(x), abs(y)) < 1} = (-1, 1) times (-1, 1). $
+    Corresponde al interior del cuadrado de lado $2$ con lados paralelos a los ejes coordenados.
+
+  Observamos que $B_(d_1)((0, 0), 1) subset B_(d_2)((0, 0), 1) subset B_(d_oo)((0, 0), 1)$.
+]
+
+#ejemplo[Bola en $(C([a, b]), d_oo)$ como banda funcional (Ejemplo 4.7)][19][
+  Sea $C([a, b])$ el espacio de funciones continuas equipado con la distancia del supremo $d_oo (f, g) = sup_(x in [a, b]) abs(f(x) - g(x))$. Describir geométricamente la bola abierta $B_(d_oo)(f, 1)$ centrada en una función $f in C([a, b])$ con radio $1$.
+]
+
+#estrategia[Traducir la cota global del supremo en una banda vertical punto a punto][
+  La condición $sup_(x in [a, b]) abs(f(x) - g(x)) < 1$ exige que en cada punto $x in [a, b]$, el valor $g(x)$ diste estrictamente menos de $1$ de $f(x)$, es decir $f(x) - 1 < g(x) < f(x) + 1$. Geométricamente, el gráfico de $g$ debe quedar completamente contenido en el interior de la "banda" tubular de ancho vertical $2$ delimitada por $f - 1$ y $f + 1$.
+]
+
+#resolucion[
+  Por definición de bola abierta:
+  $ B_(d_oo)(f, 1) &= {g in C([a, b]) : d_oo (f, g) < 1} \
+    &= {g in C([a, b]) : sup_(x in [a, b]) abs(f(x) - g(x)) < 1}. $
+
+  Dado que $sup_(x in [a, b]) abs(f(x) - g(x)) < 1$, para todo $x in [a, b]$ se debe cumplir:
+  $ abs(f(x) - g(x)) < 1 <==> -1 < g(x) - f(x) < 1 <==> f(x) - 1 < g(x) < f(x) + 1. $
+
+  Por ende, una función $g in C([a, b])$ pertenece a $B_(d_oo)(f, 1)$ si y sólo si su gráfico está estrictamente contenido dentro de la banda vertical de semiancho $1$ alrededor de la curva $f(x)$. Si para algún punto $x_0 in [a, b]$ la curva de $g$ toca o cruza las curvas $f - 1$ o $f + 1$, entonces $abs(f(x_0) - g(x_0)) >= 1$ y por ende $g in.not B_(d_oo)(f, 1)$.
+]
+
+#v(10pt)
+
+== Bloque 9 · Topología en espacios métricos: puntos interiores y abiertos
+
+#sublema(titulo: "Qué desbloquea")[
+  Desbloquea directamente el *Ejercicio 3 (a)* de la Práctica 3 (hallar el interior de $[0, 1]$) y el *Ejercicio 4* (probar que conjuntos son abiertos exhibiendo el radio de la bola contenida).
+
+  La maniobra clave para un punto interior $x$ es elegir el radio como la distancia mínima al borde, $r = min(x - a, b - x)$, lo cual garantiza tanto que $r > 0$ como que la bola abierta $B(x, r)$ no se sale del conjunto.
+]
+
+#ejemplo[Interior del intervalo cerrado: $[0, 1]^circle = (0, 1)$ (Ejemplo 4.13)][20][
+  Consideremos $(RR, abs(dot.c))$ y el conjunto $E = [0, 1]$. Probar que $E^circle = (0, 1)$.
+]
+
+#estrategia[Tomar el radio como la distancia más corta al borde del intervalo][
+  Para que un punto $x in (0, 1)$ sea interior, debemos hallar un radio $r > 0$ tal que la bola abierta $B(x, r) = (x - r, x + r)$ quede totalmente contenida en $[0, 1]$. La distancia de $x$ al extremo izquierdo $0$ es $x$, y al extremo derecho $1$ es $1 - x$. Tomando $r = min(x, 1 - x) > 0$, la bola no puede rebasar ninguno de los dos bordes.
+]
+
+#resolucion[
+  Sea $x in (0, 1)$. Para ver que $x in E^circle$, debemos hallar $r > 0$ tal que $B(x, r) subset.eq [0, 1]$. Como la métrica es la usual del módulo en $RR$:
+  $ B(x, r) = {y in RR : d(x, y) < r} = {y in RR : abs(x - y) < r} = (x - r, x + r). $
+  Debemos encontrar un radio $r > 0$ de modo que el intervalo centrado en $x$ se mantenga adentro de $(0, 1)$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((6.8, 0), text(size: 9pt)[$RR$])
+
+      let x0 = 1.0
+      let x1 = 5.5
+      let xp = 2.8
+
+      line((x0, 0), (x1, 0), stroke: 2.2pt + rgb("#1e3a8a"))
+
+      line((x0, -0.15), (x0, 0.15), stroke: 1pt)
+      content((x0, -0.35), text(size: 9pt)[$0$])
+      line((x1, -0.15), (x1, 0.15), stroke: 1pt)
+      content((x1, -0.35), text(size: 9pt)[$1$])
+
+      circle((xp, 0), radius: 0.08, fill: black)
+      content((xp, 0.35), text(size: 9.5pt, weight: "bold")[$x$])
+
+      let y_b = -0.18
+      line((x0, y_b), (xp, y_b), stroke: 0.7pt, mark: (start: "|", end: "|"))
+      content(((x0 + xp)/2, y_b - 0.25), text(size: 8.5pt)[$x$])
+
+      line((xp, y_b), (x1, y_b), stroke: 0.7pt, mark: (start: "|", end: "|"))
+      content(((xp + x1)/2, y_b - 0.25), text(size: 8.5pt)[$1 - x$])
+    })
+  ]
+
+  Observamos que nos alcanza con tomar $r = min(x, 1 - x)$, es decir, la distancia más corta al borde del intervalo. Como $0 < x < 1$, sabemos que $r > 0$. Veamos que efectivamente este radio funciona: sea $y in (x - r, x + r)$, entonces:
+
+  - *Cota inferior ($y >= 0$):* Como $r <= x$, tenemos que $-r >= -x$. Usando esto:
+    $ y >= x - r >= x - x = 0. $
+  - *Cota superior ($y <= 1$):* Como $r <= 1 - x$, tenemos:
+    $ y <= x + r <= x + 1 - x = 1. $
+
+  Por lo tanto, $(x - r, x + r) subset.eq [0, 1]$, lo que prueba que todo $x in (0, 1)$ es punto interior de $E$.
+
+  Recíprocamente, los extremos $0$ y $1$ no son interiores pues para cualquier $r > 0$, $B(0, r) = (-r, r)$ contiene puntos negativos que no pertenecen a $E$, y análogamente $B(1, r)$ contiene puntos mayores a $1$. En conclusión, $E^circle = (0, 1)$.
+]
+
+#ejemplo[Interior de $QQ$ en $RR$ es vacío (Ejemplo 4.13 b)][20][
+  En $(RR, abs(dot.c))$, consideremos $E = QQ$. Veamos que $E^circle = emptyset$.
+]
+
+#resolucion[
+  Sea $q in E$. Para ver que $q in.not E^circle$, lo que tenemos que ver es que para cualquier radio $r > 0$, $B(q, r) inter E^c != nothing$. Como nuestra distancia es el módulo, tenemos como antes que $B(q, r) = (q - r, q + r)$.
+
+  Pero sabemos que entre dos números reales (en este caso podríamos tomar $q$ y $q + r$) siempre debe haber un número irracional. Es decir, existe $x in RR backslash QQ$ tal que $q < x < q + r$ y por lo tanto $(q - r, q + r) inter E^c != nothing$, como queríamos ver.
+]
+
+#ejemplo[Diámetro de una bola (Ejemplo 4.10)][21][
+  Para una bola $B(x_0, r)$, se cumple que $op("diam")(B(x_0, r)) <= 2r$. Veamos esto: lo que tenemos que hacer es ver que $d(x, y) <= 2r$ para cualesquiera $x, y in B(x_0, r)$.
+]
+
+#resolucion[
+  Sean $x, y in B(x_0, r)$. Por la desigualdad triangular tenemos que
+  $ d(x, y) <= d(x, x_0) + d(x_0, y) < r + r = 2r. $
+  Como $d(x, y) < 2r$ para todo $x, y in B(x_0, r)$, podemos concluir que $op("diam")(B(x_0, r)) <= 2r$.
+
+  En el caso de la distancia euclídea se puede probar que el diámetro de una bola es 2 veces su radio. Sin embargo, esto no es cierto en general. Veamos qué pasa con la distancia discreta. Sea $M$ cualquier conjunto con más de dos elementos y $delta$ la distancia discreta. Consideremos $r > 1$ y calculemos el diámetro de $B(x_0, r)$. Si $x != x_0$ cualquier elemento, tenemos por definición que $delta(x, x_0) = 1$, lo cual nos dice que
+  $ op("diam")(B(x_0, r)) = 1 < 2r, quad "si" r > 1. $
+
+  ¿Qué pasa si $0 < r < 1$?
+]
+
+#ejemplo[$M$ y $emptyset$ son abiertos (Ejemplo 4.15)][22][
+  Sea $(M, d)$ un espacio métrico.
+  #set enum(numbering: "a)")
+  + $A = M$ es abierto: por definición, un punto interior $x$ es un punto tal que existe algún radio $r > 0$ con $B(x, r) subset.eq M$. Pero como $M$ es todo el espacio métrico, ninguna bola se puede salir de $M$ (porque $M$ es todo el universo), con lo cual todos los puntos $x in M$ son puntos interiores. Esto dice que $M$ es abierto.
+  + $A = emptyset$ es abierto: como el interior de un conjunto siempre está contenido en el conjunto, tenemos que $emptyset^compose subset.eq emptyset$. Pero entonces $emptyset^compose$ no puede tener ningún elemento. Entonces $emptyset^compose = emptyset$.
+]
+
+#ejemplo[Bola unitaria en $RR^2$ es abierta (Ejemplo 4.16 a)][23][
+  En $(RR^2, d_2)$, sea $A = B((0, 0), 1) = {(x, y) in RR^2 : x^2 + y^2 < 1}$. Veamos que $A$ es un conjunto abierto.
+]
+
+#estrategia[Tomar el radio como la distancia de $p$ al borde de la circunferencia][
+  Dado $p in A$, hay que encontrar $r > 0$ tal que $B(p, r) subset.eq A$. Gráficamente, lo más grande que puede ser ese radio es cuando lo tomamos como la distancia de $p$ al borde del círculo de radio $1$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-1.8, 0), (2.3, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((2.5, 0), text(size: 8pt)[$x$])
+      line((0, -1.8), (0, 2.3), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 2.45), text(size: 8pt)[$y$])
+
+      circle((0, 0), radius: 1.5, fill: rgb("#ede9fe"), stroke: (dash: "dashed", paint: rgb("#2563eb"), thickness: 1pt))
+      content((1.15, 1.15), text(size: 8.5pt, fill: rgb("#2563eb"))[$B((0,0), 1)$])
+
+      line((-0.07, 1.5), (0.07, 1.5), stroke: 0.8pt)
+      content((-0.2, 1.5), text(size: 7.5pt)[$1$])
+      line((1.5, -0.07), (1.5, 0.07), stroke: 0.8pt)
+      content((1.5, -0.25), text(size: 7.5pt)[$1$])
+
+      let p = (0.35, 0.15)
+      let rp = 0.55
+      circle(p, radius: rp, fill: none, stroke: (dash: "dashed", paint: rgb("#dc2626"), thickness: 1pt))
+      circle(p, radius: 0.03, fill: black)
+      content((p.at(0) + 0.25, p.at(1) - 0.15), text(size: 8pt)[$p$])
+      let ang = 130deg
+      line(p, (p.at(0) + rp * calc.cos(ang), p.at(1) + rp * calc.sin(ang)), stroke: 0.6pt + rgb("#dc2626"))
+      content((p.at(0) - 0.3, p.at(1) + 0.35), text(size: 7.5pt, fill: rgb("#dc2626"))[$r$])
+      content((p.at(0) - 0.15, p.at(1) - rp - 0.2), text(size: 7.5pt, fill: rgb("#dc2626"))[$B(p, r)$])
+    })
+  ]
+]
+
+#resolucion[
+  Sea $p = (x_0, y_0) in A$, es decir $x_0^2 + y_0^2 < 1$. Tomemos $r = 1 - sqrt(x_0^2 + y_0^2) > 0$ por hipótesis. Veamos que este radio funciona, es decir que $B(p, r) subset.eq B((0, 0), 1)$. Sea $(x, y) in B(p, r)$. Tenemos, por la desigualdad triangular, que
+  $ sqrt(x^2 + y^2) = d_2((x, y), (0, 0)) <= d_2((x, y), (x_0, y_0)) + d_2((x_0, y_0), (0, 0)) < r + sqrt(x_0^2 + y_0^2) = 1. $
+  Es decir, tenemos que $sqrt(x^2 + y^2) < 1$ como queríamos ver.
+]
+
+#ejemplo[Toda bola abierta es un conjunto abierto (Ejemplo 4.16 b)][23][
+  En general, en $(M, d)$ cualquier espacio métrico, $A = B(x_0, r)$ es un conjunto abierto.
+]
+
+#resolucion[
+  Si pensamos en el ejemplo anterior, nos damos cuenta de que en realidad no era tan importante el hecho de estar en $RR^2$ con $d_2$: la única propiedad que necesitamos fue usar la desigualdad triangular, que es común a todas las métricas.
+
+  Veamos que $A$ es abierto: sea $x in A$ y tomemos $t = r - d(x, x_0) > 0$ por definición, y consideremos $B(x, t)$. Veamos que $B(x, t) subset.eq B(x_0, r)$. Sea $y in B(x, t)$. Tenemos que
+  $ d(y, x_0) <= d(y, x) + d(x, x_0) < t + d(x, x_0) = r, $
+  como queríamos ver.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Bloque 10 · Clausura, cerrados, conjunto derivado y frontera
+
+#sublema(titulo: "Qué desbloquea")[
+  El resto del *Ejercicio 3* de la Práctica 3 (clausura, no sólo interior), el *Ejercicio 4
+  (a), (b) y (d)* (bolas cerradas, complemento abierto/cerrado, y que $emptyset$ y el total
+  sean cerrados) y el *Ejercicio 7* (frontera y puntos de acumulación de los conjuntos del
+  Ejercicio 3).
+
+  *El orden importa:* el primero (clausura de la bola abierta en $RR^2$) fija la técnica de la
+  doble contención con la recta que une al centro; el segundo (bola cerrada es cerrada) la
+  reusa con la desigualdad triangular "al revés". Los tres últimos son el mismo par de
+  conjuntos ($(0,1) union {2}$) recorrido con las cuatro nociones --- interior, clausura,
+  derivado y frontera --- y después generalizado a $ZZ$, $(0,1)$ y $QQ$.
+]
+
+#ejemplo[Clausura de la bola unitaria en $(RR^2, d_2)$ (Ejemplo 4.24)][24][
+  Sea $(M, d) = (RR^2, d_2)$ y sea $E = B((0,0), 1) = {(x, y) in RR^2 : x^2 + y^2 < 1}$. Veamos que $overline(E) = B[(0,0), 1]$.
+]
+
+#estrategia[Doble contención por la recta que une al centro con el punto][
+  Para ver que $B[(0,0),1] subset.eq overline(E)$, hay que probar que todo punto del borde $x^2+y^2=1$ es de adherencia. La idea es acercarse a ese punto *desde adentro* de $E$, siguiendo la recta que lo une con el origen: los puntos $(t x, t y)$ con $t$ cercano a $1$ (pero menor) están en $E$ y a la vez arbitrariamente cerca de $(x,y)$.
+]
+
+#resolucion[
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-1.8, 0), (1.8, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((1.95, 0), text(size: 8pt)[$x$])
+      line((0, -1.8), (0, 1.8), mark: (end: ">"), stroke: 0.8pt)
+      content((0, 1.95), text(size: 8pt)[$y$])
+
+      line((-0.07, 1.2), (0.07, 1.2), stroke: 0.8pt)
+      content((-0.2, 1.2), text(size: 7.5pt)[$1$])
+      line((1.2, -0.07), (1.2, 0.07), stroke: 0.8pt)
+      content((1.2, -0.25), text(size: 7.5pt)[$1$])
+
+      circle((0, 0), radius: 1.2, fill: rgb("#eff6ff"), stroke: (dash: "dashed", paint: blue, thickness: 1.1pt))
+      content((-0.9, -0.9), text(size: 9pt, fill: blue)[$E$])
+      content((-0.25, -0.25), text(size: 7.5pt)[$0$])
+
+      let xp = (0.85, 0.85)
+      circle(xp, radius: 0.35, fill: rgb("#fecaca"), stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      circle(xp, radius: 0.03, fill: black)
+      content((xp.at(0) - 0.05, xp.at(1) + 0.28), text(size: 7.5pt, fill: red)[$B(x,r)$])
+      content((xp.at(0) + 0.08, xp.at(1) - 0.2), text(size: 7.5pt)[$x$])
+
+      line((2.7, 0.55), (xp.at(0) + 0.32, xp.at(1) - 0.05), stroke: 0.6pt, mark: (end: ">"))
+      content((2.7, 0.85), text(size: 7.5pt)[$B(x,r) inter E != nothing$])
+      content((2.7, 0.35), text(size: 7pt)[(punto de adherencia)])
+    })
+  ]
+
+  Veamos que $overline(E) = {(x, y) in RR^2 : x^2 + y^2 <= 1} = B[(0,0), 1]$. Para esto, veamos la doble contención.
+
+  Supongamos que $(x, y) in B[(0,0), 1]$. Si $x^2 + y^2 < 1$, tenemos que $(x, y) in E$ y por lo tanto pertenece a su clausura. Si $x^2 + y^2 = 1$ (es decir, $(x, y)$ está en el borde del círculo), lo que tenemos que probar es que para todo radio $r > 0$, $B((x,y), r) inter E != nothing$. Para encontrar un punto que pertenezca a la intersección de las bolas lo que podemos hacer es pensar en la recta que une al $(0,0)$ con $(x,y)$. Gráficamente, podemos ver que vamos a tener un elemento en esa recta que pertenece a la intersección. Analíticamente, esto lo podemos escribir de la siguiente manera: consideremos los elementos $(t x, t y)$, con $t in RR$. Para que un elemento de esta recta pertenezca a $E$, debemos tener
+  $ (t x)^2 + (t y)^2 = t^2 (x^2 + y^2) = t^2 < 1, $
+  es decir, nos alcanza con que $abs(t) < 1$. Para que este elemento además pertenezca a la bola $B((x,y), r)$, deberíamos tener
+  $ d_2((t x, t y), (x, y)) = sqrt((t x - x)^2 + (t y - y)^2) = sqrt((t-1)^2 (x^2+y^2)) = abs(t - 1) < r. $
+  Esto nos dice que si queremos que un elemento de la pinta $(t x, t y)$ pertenezca a la intersección lo que estamos buscando es un $t in RR$ que simultáneamente cumpla que $abs(t) < 1$ y $abs(1-t) < r$. Esto no es difícil de conseguir, podríamos por ejemplo fijar $t = 1 - r/2$, y este número cumple las dos condiciones que queríamos. Esto nos termina de probar que $B[(0,0), 1] subset.eq overline(E)$.
+
+  Para ver la otra contención, es más fácil probar que si un elemento *no* pertenece a $B[(0,0), 1]$ entonces *no* puede pertenecer a la clausura de $E$. Lo dejamos como ejercicio.
+]
+
+#ejemplo[Las bolas cerradas son conjuntos cerrados (Ejemplo 4.28)][25][
+  En $(M, d)$ cualquier espacio métrico, el conjunto $F = B[x, r] = {y in M : d(y, x) <= r}$ es un conjunto cerrado.
+]
+
+#estrategia[La mitad de la doble inclusión sale gratis][
+  Para probar la igualdad $overline(F) = F$, la inclusión $F subset.eq overline(F)$ vale siempre (Observación 4.23), así que sólo hay que probar $overline(F) subset.eq F$. Usando el contrarrecíproco ($A subset.eq B <=> B^c subset.eq A^c$), alcanza con ver que si $y in.not F$ entonces $y in.not overline(F)$: hay que exhibir una bola alrededor de $y$ que no toque a $F$.
+]
+
+#resolucion[
+  Dicho esto, lo que vamos a probar es que si $y in.not B[x, r]$ entonces $y in.not overline(B[x, r])$. Sea $y in.not B[x, r]$. Por definición, esto quiere decir que $d(y, x) > r$. Veamos que $y in.not overline(B[x, r])$, es decir, que existe un radio $t > 0$ tal que $B(y, t) inter B[x, r] = nothing$. Como $d(y, x) > r$, tomemos $t = d(y, x) - r > 0$ y veamos que $B(y, t) inter B[x, r] = nothing$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let xp = (0, 0)
+      let yp = (1.9, 0)
+
+      circle(xp, radius: 1.3, fill: rgb("#dbeafe"), stroke: (paint: blue, thickness: 1.2pt))
+      circle(yp, radius: 0.6, fill: none, stroke: (dash: "dashed", paint: red, thickness: 1.1pt))
+      circle(xp, radius: 0.03, fill: black)
+      circle(yp, radius: 0.03, fill: black)
+
+      content((xp.at(0) - 0.6, xp.at(1) + 1.4), text(size: 9pt, fill: blue)[$B[x,r]$])
+      content((yp.at(0) + 0.4, yp.at(1) + 0.75), text(size: 9pt, fill: red)[$B(y,t)$])
+      content((xp.at(0), xp.at(1) - 0.25), text(size: 8pt)[$x$])
+      content((yp.at(0), yp.at(1) - 0.25), text(size: 8pt)[$y$])
+
+      line(xp, (1.3, 0), stroke: (paint: blue, thickness: 2pt))
+      content((0.65, 0.22), text(size: 8pt, fill: blue)[$r$])
+      line((1.3, 0), yp, stroke: (paint: red, thickness: 2pt))
+      content((1.6, 0.22), text(size: 8pt, fill: red)[$t$])
+
+      line((0, -1.6), (1.9, -1.6), stroke: 0.6pt)
+      line((0, -1.5), (0, -1.7), stroke: 0.6pt)
+      line((1.9, -1.5), (1.9, -1.7), stroke: 0.6pt)
+      content((0.95, -1.9), text(size: 8pt)[$d(y,x)$])
+
+      content((0.95, -2.3), text(size: 8.5pt)[$B(y,t) inter B[x,r] = emptyset$])
+    })
+  ]
+
+  Hagamos una pequeña observación. Recordemos que la desigualdad triangular, que vale en cualquier espacio métrico, nos dice que
+  $ d(x, y) <= d(x, z) + d(z, y), $
+  para cualquiera tres puntos $x, y, z in M$. Muchas veces, como en esta demostración, nos sirve mirar a la desigualdad triangular "al revés": esta desigualdad también dice
+  $ d(x, z) >= d(x, y) - d(z, y). $
+
+  Ahora sigamos con el ejemplo. Recordemos que estábamos intentando probar que $B(y, t) inter B[x, r] = nothing$. Sea $z in B(y, t)$, y veamos que no puede pasar que $z in B[x, r]$, es decir, probemos que $d(z, x) > r$:
+  $ d(z, x) >= d(x, y) - d(z, y) > d(x, y) - t = d(x, y) - (d(x, y) - r) = r, $
+  que es lo que queríamos ver.
+]
+
+#ejemplo[$emptyset$ y $M$ son conjuntos cerrados (Ejemplo 4.30)][26][
+  Sea $(M, d)$ un espacio métrico. Entonces $emptyset$ y $M$ son conjuntos cerrados.
+]
+
+#resolucion[
+  Recordemos que ya vimos que $M$ y $emptyset$ son conjuntos abiertos (Ejemplo 22). Como un conjunto es cerrado si y sólo si su complemento es abierto, y $emptyset^c = M$, $M^c = emptyset$, vemos que ambos son también cerrados.
+]
+
+#ejemplo[Clausura, interior y conjunto derivado de $(0,1) union {2}$ (Ejemplo 4.35)][27][
+  Sea $E = (0,1) union {2} subset.eq (RR, abs(dot.c))$. Hallar $E^compose$, $overline(E)$ y $E'$.
+]
+
+#resolucion[
+  Tenemos:
+
+  - $E^compose = (0,1)$.
+  - $overline(E) = [0,1] union {2}$.
+  - $E' = [0,1]$: cuando tomamos $B(2, 1/2) = (2 - 1/2, 2 + 1/2) = (3/2, 5/2)$, vemos que $B(2,1/2) inter E = {2}$, y por lo tanto $2 in overline(E)$ pero $2 in.not E'$.
+
+  La clausura y el conjunto derivado no son iguales, como vemos en este ejemplo. Sin embargo, por definición sabemos que $E' subset.eq overline(E)$, dado que la condición que le pedimos a punto de acumulación es más fuerte que la que le pedimos a punto de adherencia.
+]
+
+#ejemplo[Frontera de $(0,1) union {2}$ (Ejemplo 4.39)][28][
+  Sea $E = (0,1) union {2} subset.eq (RR, abs(dot.c))$. Entonces $partial E = {0, 1, 2}$.
+]
+
+#resolucion[
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-1.2, 0), (5.2, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((5.45, 0), text(size: 9pt)[$RR$])
+
+      line((0, 0), (2, 0), stroke: (paint: blue, thickness: 2.5pt))
+      content((1, 0.3), text(size: 8.5pt, fill: blue)[$E$])
+
+      circle((0, 0), radius: 0.04, fill: red)
+      circle((2, 0), radius: 0.04, fill: red)
+      circle((4, 0), radius: 0.05, fill: blue)
+      content((0, -0.3), text(size: 8pt)[$0$])
+      content((2, -0.3), text(size: 8pt)[$1$])
+      content((4, -0.3), text(size: 8pt)[$2$])
+
+      content((-0.55, 0.3), text(size: 9pt, fill: red)[(])
+      content((0.55, 0.3), text(size: 9pt, fill: red)[)])
+      content((0, 0.65), text(size: 8pt, fill: red)[$B(0,r)$])
+
+      content((1.45, 0.3), text(size: 9pt, fill: red)[(])
+      content((2.55, 0.3), text(size: 9pt, fill: red)[)])
+      content((2, 0.65), text(size: 8pt, fill: red)[$B(1,r)$])
+
+      content((3.45, 0.3), text(size: 9pt, fill: red)[(])
+      content((4.55, 0.3), text(size: 9pt, fill: red)[)])
+      content((4, 0.65), text(size: 8pt, fill: red)[$B(2,r)$])
+    })
+  ]
+
+  Para ver esto, deberíamos probar que dado $r > 0$, las bolas $B(0,r)$, $B(1,r)$ y $B(2,r)$ intersecan tanto a $E$ como a $E^c$. Gráficamente, esto no es difícil de creer. Analíticamente, podríamos argumentar que, por ejemplo, $-r/2 in B(0,r) inter E^c$ y $r/2 in B(0,r) inter E$ (y podríamos hacer lo mismo con los otros puntos).
+
+  Por otra parte, deberíamos ver que no hay otros puntos en la frontera. Acá tenemos dos casos: $x in E$ o $x in.not E$.
+
+  Si $x in E$ pero $x != 2$, tenemos que $x in (0,1)$. Podemos construir una bola que se quede contenida en $E$ alrededor de $x$, tomando como $r = op("mín"){r, 1 - r}$, como hicimos en el Ejemplo 20. Esto nos indica que $x in.not partial E$, dado que no interseca a $E^c$.
+
+  Si $x in.not E$, podríamos encontrar una bola que se quede contenida totalmente en $E^c$. Podríamos tomar $r = op("mín"){abs(x), abs(x-1), abs(x-2)} > 0$ (es decir, tomamos la menor distancia de $x$ a los puntos $0, 1, 2$) y nos sale que $B(x, r) subset.eq E^c$. Esto nos dice que $x in.not partial E$.
+]
+
+#ejemplo[Clausura, interior, derivado y frontera: tres ejemplos en $(RR, abs(dot.c))$ (Ejemplo 4.41)][29][
+  #set enum(numbering: "a)")
+  + Sea $E = ZZ subset.eq (RR, abs(dot.c))$. Como estamos en $(RR, abs(dot.c))$, sabemos que $B(x, r) = (x - r, x + r)$. Observemos que si $n in ZZ$, y $r$ es un radio con $0 < r < 1$, $B(n, r) inter ZZ = {n}$ y a su vez $B(n, r) inter ZZ^c != nothing$. Por otro lado, si $x in.not ZZ$, no es difícil ver que existe un radio $r > 0$ tal que $B(x, r) inter ZZ = emptyset$.
+
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        line((-1.6, 0), (5.6, 0), mark: (end: ">"), stroke: 0.8pt)
+        content((5.85, 0), text(size: 9pt)[$RR$])
+        content((-1, 1.1), text(size: 9pt, fill: blue)[$E = ZZ$])
+
+        for pair in ((-1, "-1"), (0, "0"), (1, "1"), (2, "2"), (3, "3")) {
+          let px = pair.at(0)
+          circle((px, 0), radius: 0.045, fill: blue)
+          content((px, -0.3), text(size: 8pt)[#pair.at(1)])
+        }
+
+        content((1, 0.55), text(size: 9pt, fill: red)[$B(n,r)$])
+        content((0.45, 0.15), text(size: 9pt, fill: red)[(])
+        content((1.55, 0.15), text(size: 9pt, fill: red)[)])
+        line((0.5, 0), (1.5, 0), stroke: (paint: red, thickness: 1.5pt))
+
+        line((2.1, 0.85), (1.15, 0.2), stroke: 0.5pt, mark: (end: ">"))
+        content((3.0, 1.05), text(size: 7pt)[$B(n,r) inter ZZ = {n}$])
+        content((3.0, 0.85), text(size: 7pt)[$B(n,r) inter ZZ^c != nothing$])
+
+        let xp = 2.4
+        circle((xp, 0), radius: 0.04, fill: black)
+        content((xp, -0.3), text(size: 8pt)[$x in.not ZZ$])
+        content((xp, 0.55), text(size: 9pt, fill: rgb("#15803d"))[$B(x,r)$])
+        content((xp - 0.5, 0.15), text(size: 9pt, fill: rgb("#15803d"))[(])
+        content((xp + 0.5, 0.15), text(size: 9pt, fill: rgb("#15803d"))[)])
+        line((xp - 0.4, 0), (xp + 0.4, 0), stroke: (paint: rgb("#15803d"), thickness: 1.5pt))
+
+        line((xp + 0.3, -0.6), (xp, -0.15), stroke: 0.5pt, mark: (end: ">"))
+        content((xp + 0.35, -0.85), text(size: 7pt)[$B(x,r) inter ZZ = emptyset$])
+      })
+    ]
+
+    Estas observaciones nos llevan a concluir lo siguiente:
+    - $overline(ZZ) = ZZ$ (es un conjunto cerrado).
+    - $ZZ^compose = emptyset$ (no es un conjunto abierto).
+    - $ZZ' = emptyset$.
+    - $partial ZZ = ZZ$.
+
+  + Sea $E = (0, 1) subset.eq (RR, abs(dot.c))$. Tenemos
+    - $overline((0,1)) = [0,1]$ (no es un conjunto cerrado).
+    - $(0,1)^compose = (0,1)$ (es un conjunto abierto).
+    - $(0,1)' = [0,1]$: si $x in [0,1]$, sabemos que $(x-r, x+r) inter (0,1)$ es un intervalo y por lo tanto contiene infinitos elementos para todo $r > 0$.
+    - $partial (0,1) = {0, 1}$: los únicos puntos que cumplen que $(x-r,x+r)$ interseca tanto a $(0,1)$ como a $(0,1)^c$ para todo $r > 0$ son el $0$ y el $1$.
+
+  + Sea $E = QQ subset.eq (RR, abs(dot.c))$. Tenemos
+    - $overline(QQ) = RR$ (no es un conjunto cerrado).
+    - $QQ^compose = emptyset$ (no es un conjunto abierto).
+    - $QQ' = RR$: si $x in RR$ y $r > 0$, tenemos que el conjunto $(x-r,x+r) inter QQ$ contiene infinitos elementos.
+    - $partial QQ = RR$: si $x in RR$ y $r > 0$, el intervalo $(x-r,x+r)$ interseca tanto a $QQ$ como a $QQ^c$ (cualquier intervalo abierto contiene números racionales e irracionales).
+]
+
 #v(10pt)
 #line(length: 100%, stroke: 0.5pt + luma(150))
 #v(8pt)
 
 #sublema(titulo: "Huecos frente a la Práctica 1")[
-  Con los 12 ejemplos del apunte y los 19 de clase, quedan sólo dos técnicas sin ningún ejemplo trabajado en todo el repositorio. Cuando aparezca una en clase, cargala con `/ejemplo` en el bloque indicado:
+  Con los 17 ejemplos del apunte y los 19 de clase, quedan sólo dos técnicas sin ningún ejemplo trabajado en todo el repositorio. Cuando aparezca una en clase, cargala con `/ejemplo` en el bloque indicado:
 
   #set enum(numbering: "1.")
   + *Divergencia a $plus.minus oo$ por definición* --- *Ej. 9 (b)--(d)*, *Ej. 12 (b)*, y la segunda mitad del *Ej. 14*. De `apuntes.typ` sólo está la definición, y ninguna demostración usa el cuantificador "para todo $M > 0$": lo más cerca que hay es el Ejemplo C1-4, que invoca $a_m -> +oo$ sin probarlo por definición. → Bloque 6 o bloque nuevo.
