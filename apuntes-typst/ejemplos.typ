@@ -62,6 +62,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [8], [Métricas: verificar los axiomas], [p3: Ej. 1, 2],
   [9], [Topología en espacios métricos: puntos interiores y abiertos], [p3: Ej. 3 (a), 4],
   [10], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7],
+  [11], [Caracterizaciones y estabilidad de abiertos y cerrados], [p3: Ej. 9; conceptual para Ej. 5, 12],
 )
 
 #v(4pt)
@@ -1720,6 +1721,35 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Por ende, una función $g in C([a, b])$ pertenece a $B_(d_oo)(f, 1)$ si y sólo si su gráfico está estrictamente contenido dentro de la banda vertical de semiancho $1$ alrededor de la curva $f(x)$. Si para algún punto $x_0 in [a, b]$ la curva de $g$ toca o cruza las curvas $f - 1$ o $f + 1$, entonces $abs(f(x_0) - g(x_0)) >= 1$ y por ende $g in.not B_(d_oo)(f, 1)$.
 ]
 
+#ejemplo[$d_oo$ y $d_1$ en $C([a,b])$ no son equivalentes (guía de la práctica)][guía-1][
+  En $C([a,b])$ consideremos las dos métricas
+  $ d_oo (f,g) = sup_(a<=x<=b) abs(f(x)-g(x)), quad d_1 (f,g) = integral_a^b abs(f(x)-g(x)) dif x. $
+  (Por ejemplo, con $a=0$, $b=1$, $f(x)=x$ y $g(x)=0$: $d_oo(f,g)=1$ pero $d_1(f,g)=1/2$.) ¿Son estas dos métricas *equivalentes*, es decir, definen los mismos abiertos?
+]
+
+#estrategia[Comparar bolas: cada bola de una métrica, ¿contiene una bola de la otra?][
+  Dos métricas son equivalentes si toda bola de una contiene una bola de la otra centrada en el mismo punto, y viceversa (esto sí pasa, por ejemplo, entre $d_2$ y $d_oo$ en $RR^n$). Acá hay que revisar las dos direcciones por separado:
+
+  + ¿Existe, dada $B_oo(f,epsilon)$, un $delta>0$ tal que $B_1(f,delta) subset.eq B_oo(f,epsilon)$?
+  + ¿Existe, dada $B_1(f,epsilon)$, un $delta>0$ tal que $B_oo(f,delta) subset.eq B_1(f,epsilon)$?
+]
+
+#resolucion[
+  *(1) Falla.* Tomemos $f = 0$. Dado cualquier $delta > 0$, construimos $g in C([a,b])$ con $d_1(f,g) < delta$ pero $d_oo(f,g) >= epsilon$: una función "pico" triangular, de altura $2epsilon$ y base de ancho menor que $delta/epsilon$.
+
+  El área bajo el pico (que es exactamente $integral_a^b abs(g)$) es
+  $ "área" < (delta/epsilon) dot (2epsilon)/2 = delta, $
+  así que $g in B_1(f,delta)$. Pero $sup abs(g) = 2epsilon >= epsilon$, así que $g in.not B_oo(f,epsilon)$. Como esto vale para *cualquier* $delta$, no existe ningún $delta$ que garantice $B_1(f,delta) subset.eq B_oo(f,epsilon)$: por más chica que sea la bola en $d_1$, siempre queda algún "pico" flaco y alto adentro que se escapa de la bola en $d_oo$.
+
+  *(2) Vale.* Sea $epsilon > 0$ y tomemos $delta = epsilon/(b-a)$. Si $g in B_oo(f,delta)$, entonces para todo $x in [a,b]$:
+  $ abs(f(x)-g(x)) <= sup_(t in [a,b]) abs(f(t)-g(t)) = d_oo(f,g). $
+  El lado derecho no depende de $x$, así que integrando ambos lados en $[a,b]$:
+  $ d_1(f,g) = integral_a^b abs(f(x)-g(x)) dif x <= integral_a^b d_oo(f,g) dif x = d_oo(f,g) dot (b-a) < delta dot (b-a) = epsilon. $
+  Luego $g in B_1(f,epsilon)$, es decir $B_oo(f,delta) subset.eq B_1(f,epsilon)$.
+
+  *Conclusión:* como la dirección (1) falla, $d_oo$ y $d_1$ *no* son equivalentes: hay bolas de $d_1$ que no contienen ninguna bola de $d_oo$. Sí vale que la topología de $d_oo$ es *más fina* que la de $d_1$ (toda bola de $d_oo$ contiene una bola de $d_1$, pero no al revés).
+]
+
 #v(10pt)
 
 == Bloque 9 · Topología en espacios métricos: puntos interiores y abiertos
@@ -1868,6 +1898,24 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Veamos que $A$ es abierto: sea $x in A$ y tomemos $t = r - d(x, x_0) > 0$ por definición, y consideremos $B(x, t)$. Veamos que $B(x, t) subset.eq B(x_0, r)$. Sea $y in B(x, t)$. Tenemos que
   $ d(y, x_0) <= d(y, x) + d(x, x_0) < t + d(x, x_0) = r, $
   como queríamos ver.
+]
+
+#ejemplo[El conjunto de funciones inyectivas no es abierto ni cerrado (Clase 4 · Ejercicio 4)][C4-4][
+  Sea $E = {f:[0,1] -> RR : f "acotada"}$ con la métrica $d_infinity$, y sea $A = {f in E : f "inyectiva"}$. ¿Es $A$ abierto? ¿Es cerrado?
+]
+
+#estrategia[Para "no abierto", chocar dos valores cercanos; para "no cerrado", aplastar $f$ hacia una constante][
+  Alcanza con un contraejemplo en cada dirección: una función $tilde(f)$ no inyectiva pero $d_infinity$-cercana a una $f in A$ (para "no abierto"), y una sucesión en $A$ que converge a algo fuera de $A$ (para "no cerrado"). En ambos casos $f(x)=x$ es el punto de partida natural.
+]
+
+#resolucion[
+  *$A$ no es abierto.* Sea $f(x)=x in A$. Dado $epsilon>0$, definimos
+  $ tilde(f)(x) = cases(0 & "si" x in [0,epsilon/2], x & "si" x in.not [0,epsilon/2]). $
+  Entonces $tilde(f)$ no es inyectiva ($tilde(f)(0)=tilde(f)(epsilon/4)=0$, por ejemplo), pero
+  $ abs(f(x)-tilde(f)(x)) = cases(abs(x) = epsilon/2 < epsilon & "si" x in [0,epsilon/2], 0 & "si no"), $
+  así que $d_infinity(f,tilde(f)) <= epsilon/2 < epsilon$, es decir $tilde(f) in B(f,epsilon)$. Como $tilde(f) in.not A$ para todo $epsilon$, $f in.not A^circle$, y por lo tanto $A$ no es abierto.
+
+  *$A$ no es cerrado.* La sucesión $f_n(x)=x\/n$ está en $A$ (es inyectiva), pero $d_infinity(f_n,0) <= 1/n -> 0$, así que $f_n -> 0$ y la función nula no es inyectiva.
 ]
 
 #v(10pt)
@@ -2111,6 +2159,338 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
     - $QQ^compose = emptyset$ (no es un conjunto abierto).
     - $QQ' = RR$: si $x in RR$ y $r > 0$, tenemos que el conjunto $(x-r,x+r) inter QQ$ contiene infinitos elementos.
     - $partial QQ = RR$: si $x in RR$ y $r > 0$, el intervalo $(x-r,x+r)$ interseca tanto a $QQ$ como a $QQ^c$ (cualquier intervalo abierto contiene números racionales e irracionales).
+]
+
+#ejemplo[$[a,b]$ es cerrado (Clase 15/09)][15/09-1][
+  Sea $(RR, abs(dot.c))$ y $E = [a,b]$. Veamos que $E$ es cerrado.
+]
+
+#estrategia[Doble inclusión: una mitad es gratis][
+  Un conjunto es cerrado si $overline(E) = E$. La inclusión $E subset.eq overline(E)$ vale siempre, para cualquier conjunto, así que sólo falta probar $overline(E) subset.eq E$.
+]
+
+#ejemplo[$[a,b)$ no es cerrado ni es abierto (Clase 15/09)][15/09-2][
+  Sea $(RR, abs(dot.c))$ y $E = [a,b)$. Veamos que $E$ no es abierto y que tampoco es cerrado.
+]
+
+#resolucion[
+  *$E$ no es abierto:* tenemos que $a in E$, pero $a in.not E^compose$. En efecto, para todo $r > 0$,
+  $ B(a,r) inter E^c = (a-r,a+r) inter [a,b)^c != nothing, $
+  ya que $a - r/2 in B(a,r) inter [a,b)^c$ (está a la izquierda de $a$, así que no pertenece a $E$).
+
+  *$E$ no es cerrado:* tenemos que $b in overline(E)$, pero $b in.not E$. En efecto, para todo $r > 0$,
+  $ B(b,r) inter E = (b-r,b+r) inter [a,b) != nothing, $
+  ya que $b - r/2 in B(b,r) inter E$ (tomando $r$ suficientemente chico para que además $b - r/2 > a$).
+]
+
+#ejemplo[La bola cerrada es cerrada, vía $r arrow 0^+$ (Clase 15/09)][15/09-3][
+  Sea $(RR^2, d_2)$ y $E = B[(0,0), 1] = {(x,y) in RR^2 : d_2((x,y),(0,0)) <= 1}$. Veamos que $E$ es cerrado.
+]
+
+#estrategia[Acotar la distancia al origen por $r + 1$ para todo $r > 0$, y después hacer $r arrow 0^+$][
+  La inclusión $E subset.eq overline(E)$ vale siempre. Para la otra, si $(x,y) in overline(E)$, para todo $r > 0$ hay un punto de $E$ en $B((x,y),r)$, y la desigualdad triangular da una cota de $d_2((x,y),(0,0))$ que depende de $r$. Como esa cota vale para *todo* $r > 0$ y el lado izquierdo no depende de $r$, tomando $r arrow 0^+$ se concluye $d_2((x,y),(0,0)) <= 1$.
+]
+
+#resolucion[
+  Como $E subset.eq overline(E)$ vale siempre, falta ver $overline(E) subset.eq E$. Sea $(x,y) in overline(E)$: por definición, para todo $r > 0$ existe $(tilde(x), tilde(y)) in B((x,y),r) inter E$, es decir
+  $ d_2((tilde(x),tilde(y)),(x,y)) < r quad "y" quad d_2((tilde(x),tilde(y)),(0,0)) <= 1. $
+
+  Por desigualdad triangular,
+  $ d_2((x,y),(0,0)) <= d_2((x,y),(tilde(x),tilde(y))) + d_2((tilde(x),tilde(y)),(0,0)) < r + 1. $
+
+  Como esto vale para todo $r > 0$, tomando $r -> 0^+$ concluimos que $d_2((x,y),(0,0)) <= 1$, es decir, $(x,y) in E$.
+]
+
+#ejemplo[Supremo e ínfimo de un conjunto acotado están en su clausura (Clase 15/09)][15/09-4][
+  Sea $E subset.eq RR$ acotado, en $(RR, abs(dot.c))$. Veamos que $op("sup")(E), op("ínf")(E) in overline(E)$.
+]
+
+#estrategia[Todo entorno del supremo agarra algún punto de $E$, por ser la menor cota superior][
+  Recordemos que $overline(E) = {x in RR : forall r > 0, B(x,r) inter E != nothing}$. Dado $r > 0$, hay que hallar un punto de $E$ en $B(op("sup")(E), r) = (op("sup")(E) - r, op("sup")(E) + r)$. Como $op("sup")(E) - r$ es menor que la *menor* cota superior de $E$, ya no puede ser cota superior, así que debe existir $e in E$ con $e > op("sup")(E) - r$; y automáticamente $e <= op("sup")(E) < op("sup")(E) + r$.
+]
+
+#resolucion[
+  Sea $r > 0$. Como $op("sup")(E) - r < op("sup")(E)$ y $op("sup")(E)$ es la menor cota superior de $E$, el número $op("sup")(E) - r$ no puede ser cota superior de $E$. Por lo tanto existe $e in E$ tal que
+  $ e in (op("sup")(E) - r, op("sup")(E)) subset.eq B(op("sup")(E), r), $
+  es decir, $e in B(op("sup")(E), r) inter E$. Como $r > 0$ era arbitrario, $op("sup")(E) in overline(E)$.
+
+  La demostración para $op("ínf")(E) in overline(E)$ es análoga.
+
+  Dos ejemplos concretos de esta observación:
+  - $E = {1/n : n in NN}$: tenemos $0 = op("ínf")(E) in overline(E)$, aunque $0 in.not E$.
+  - $E = [a, b)$ (Ejemplo 15/09-2): tenemos $b in overline(E)$ porque $b = op("sup")(E)$, lo cual explica directamente por qué $b in overline(E) without E$.
+]
+
+#ejemplo[La esfera $S(x,r)$ es un conjunto cerrado (Clase 15/09)][15/09-5][
+  Sea $(X, d)$ un espacio métrico. Dados $x in X$ y $r > 0$, definimos la esfera
+  $ S(x,r) = {y in X : d(y,x) = r}. $
+  Probar que $S(x,r)$ es cerrado.
+]
+
+#estrategia[Doble contradicción por tricotomía][
+  Como $S(x,r) subset.eq overline(S(x,r))$ vale siempre, alcanza con ver $overline(S(x,r)) subset.eq S(x,r)$: si $y$ es punto de adherencia de $S(x,r)$, hay que ver que $d(y,x) = r$. La estrategia es descartar los otros dos casos de la tricotomía ($d(y,x) > r$ y $d(y,x) < r$) por separado, sacando en ambos un punto $z in S(x,r)$ suficientemente cerca de $y$ y usando la desigualdad triangular para llegar a un absurdo.
+]
+
+#resolucion[
+  Sea $y in X$ un punto de adherencia de $S(x,r)$. Queremos ver que $d(y,x) = r$.
+
+  *Caso $d(x,y) > r$:* sea $epsilon = d(y,x) - r > 0$. Como $y in overline(S(x,r))$, existe $z in B(y,epsilon) inter S(x,r)$. Entonces
+  $ d(x,y) <= underbrace(d(x,z), =r) + underbrace(d(z,y), <epsilon) < r + epsilon = r + d(y,x) - r = d(y,x), $
+  es decir $d(x,y) < d(y,x)$, lo cual es absurdo (por simetría, $d(x,y) = d(y,x)$).
+
+  *Caso $d(y,x) < r$:* sea $epsilon = r - d(x,y) > 0$. Como $y in overline(S(x,r))$, existe $z in B(y,epsilon) inter S(x,r)$. Entonces
+  $ r = d(x,z) <= d(x,y) + underbrace(d(y,z), <epsilon) < d(x,y) + epsilon = d(x,y) + r - d(x,y) = r, $
+  es decir $r < r$, absurdo.
+
+  Por tricotomía, descartados los otros dos casos, debe ser $d(y,x) = r$, es decir $y in S(x,r)$. Esto prueba que $overline(S(x,r)) subset.eq S(x,r)$ y, junto con la inclusión que vale siempre, $overline(S(x,r)) = S(x,r)$: $S(x,r)$ es cerrado.
+]
+
+#sublema(titulo: "Otra forma del primer caso (guía de la práctica)")[
+  La versión de la guía evita el paso de simetría del primer caso: define directamente $epsilon = d(x,y) - r$ (en vez de $epsilon = d(y,x) - r$), con lo cual $r + epsilon = d(x,y)$ de entrada, y la cadena
+  $ d(x,y) <= d(x,z) + d(z,y) < r + epsilon = d(x,y) $
+  da la contradicción $d(x,y) < d(x,y)$ directamente, sin necesitar invocar $d(x,y) = d(y,x)$.
+]
+
+#ejemplo[Interior y clausura de $A = {m + 1/(n+1) : m, n in NN}$ (Clase 15/09)][15/09-6][
+  Sea $A subset.eq RR$ definido como
+  $ A = {m + 1/(n+1) : m, n in NN}. $
+  Hallar $A^circle$ y $overline(A)$, en $(RR, d)$ con $d(x,y) = abs(x-y)$.
+]
+
+#estrategia[Racimos de puntos que se acumulan sobre cada natural, viniendo desde la derecha][
+  Notemos que $A subset.eq RR_(>0)$ y $A subset.eq QQ$. Fijado $m in NN$, al variar $n in NN$ se obtiene la sucesión
+  $ m + 1/2, quad m + 1/3, quad m + 1/4, quad dots, quad m + 1/(n+1) -> m, $
+  que decrece estrictamente hacia $m$ sin alcanzarlo nunca. Es decir, $A$ es una unión de racimos de puntos que se acumulan sobre cada natural $m$, acercándose desde la derecha.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      line((-0.3, 0), (7.3, 0), mark: (end: ">"), stroke: 0.8pt)
+      content((7.6, 0), text(size: 9pt)[$RR$])
+
+      for pair in ((0.5, "1"), (2, "2"), (3.5, "3")) {
+        circle((pair.at(0), 0), radius: 0.035, fill: black)
+        content((pair.at(0), -0.3), text(size: 8pt)[#pair.at(1)])
+      }
+      content((4.5, -0.05), text(size: 9pt)[...])
+      circle((5.5, 0), radius: 0.035, fill: black)
+      content((5.5, -0.3), text(size: 8pt)[$m$])
+      circle((7, 0), radius: 0.035, fill: black)
+      content((7, -0.3), text(size: 8pt)[$m+1$])
+
+      for xoff in (1.45, 1.15, 0.95, 0.8, 0.68, 0.6) {
+        circle((5.5 + xoff, 0.12), radius: 0.025, fill: rgb("#dc2626"))
+      }
+      content((6.4, 0.4), text(size: 7.5pt, fill: rgb("#dc2626"))[$m + 1/(n+1)$])
+    })
+  ]
+]
+
+#resolucion[
+  *Interior: $A^circle = emptyset$.* Como $A subset.eq QQ$, tenemos $A^circle subset.eq QQ^circle$. Pero ya vimos que $QQ^circle = emptyset$ (Ejemplo 20 b), así que $A^circle subset.eq emptyset$, es decir $A^circle = emptyset$.
+
+  *Clausura: $overline(A) = A union NN$.* Veamos primero que $A union NN subset.eq overline(A)$.
+
+  - $A subset.eq overline(A)$ vale siempre.
+  - $NN subset.eq overline(A)$: sea $m in NN$; veamos que $m$ es punto de adherencia de $A$. Sea $r > 0$; queremos ver que $B(m,r) inter A = (m-r, m+r) inter A != nothing$. Por arquimedianidad, existe $k in NN$ tal que $1/k < r$. Entonces
+    $ m - r < m < m + 1/(k+1) < m + 1/k < m + r, $
+    donde $m + 1/(k+1) < m + 1/k$ porque $k+1 > k$, y $m + 1/k < m+r$ porque $1/k < r$. El punto $m + 1/(k+1)$ pertenece a $A$ (tomando el índice $k$ en su definición), y por la cadena de desigualdades pertenece también a $(m-r, m+r)$. Luego $(m-r,m+r) inter A != nothing$, es decir, $m in overline(A)$.
+
+  *(Queda pendiente, tal como se dejó en la clase, la otra inclusión $overline(A) subset.eq A union NN$.)*
+]
+
+#ejemplo[El conjunto derivado de la imagen de una sucesión convergente (guía de la práctica)][guía-2][
+  Sea $(E,d)$ un espacio métrico y sea $(a_n)_(n in NN) subset.eq E$ tal que $a_n -> a$. Sea $A = {a_n : n in NN}$ (la imagen de la sucesión, sin el orden). Probar que $A' = {a}$ o $A' = emptyset$.
+]
+
+#estrategia[Si hay algún punto de acumulación, tiene que ser el límite][
+  Recordemos que $A' = {x in E : forall r > 0, B(x,r) inter (A without {x}) != nothing}$. La idea es suponer que $A' != emptyset$, tomar $b in A'$ arbitrario, y ver que necesariamente $b = a$. Si $b != a$, la distancia $lambda = d(b,a) > 0$ da margen para construir un radio $r$ demasiado chico como para que $B(b,r)$ agarre algún término de la sucesión distinto de $b$: los términos con $n$ grande están todos cerca de $a$ (lejos de $b$), y de los finitos términos con $n$ chico se puede achicar $r$ para esquivarlos a todos.
+]
+
+#resolucion[
+  Supongamos que $A' != emptyset$ y veamos que $A' = {a}$. Sea $b in A'$, y veamos que $b = a$.
+
+  Supongamos, por el absurdo, que $b != a$, y sea $lambda = d(b,a) > 0$. Como $a_n -> a$, existe $n_0 in NN$ tal que
+  $ d(a_n, a) < lambda/2 quad forall n >= n_0. $
+
+  Tomemos
+  $ r = min({d(b, a_n) : n < n_0, a_n != b} union {lambda/2}) > 0 $
+  (el mínimo de un conjunto finito de números positivos, así que $r > 0$). Veamos que $B(b,r) inter (A without {b}) = emptyset$, lo cual contradice que $b in A'$:
+
+  - Si $n < n_0$ y $a_n != b$, entonces $d(b, a_n) >= r$ por construcción de $r$, así que $a_n in.not B(b,r)$.
+  - Si $n >= n_0$ y $a_n != b$: si además $a_n in B(b,r)$, es decir $d(a_n,b) < r <= lambda/2$, por desigualdad triangular
+    $ lambda = d(a,b) <= d(a, a_n) + d(a_n, b) < lambda/2 + lambda/2 = lambda, $
+    absurdo. Luego $a_n in.not B(b,r)$.
+
+  En cualquier caso, ningún $a_n != b$ está en $B(b,r)$, es decir $B(b,r) inter (A without {b}) = emptyset$, lo cual contradice que $b$ sea punto de acumulación de $A$. Por lo tanto $b = a$, y concluimos que $A' subset.eq {a}$, es decir $A' = {a}$ o $A' = emptyset$.
+]
+
+#ejemplo[Interior, clausura, aislados, acumulación y frontera de $A = {1/n + 1/m : n,m in NN}$ (Clase 4 · Ejercicio 1)][C4-1][
+  En $(RR, abs(dot.c))$, sea $A = {1/n + 1/m : n,m in NN}$. Determinar $A^circle$, $overline(A)$, los puntos aislados, $A'$ y $partial A$.
+]
+
+#estrategia[Ningún punto de $A$ tiene margen (está en $QQ$), pero sí está aislado de los demás puntos de $A$][
+  Como $A subset.eq QQ$ y $QQ^circle = emptyset$ (Ejemplo 20 b), inmediatamente $A^circle = emptyset$. Para la clausura, hay que rastrear a dónde puede converger una sucesión $1/n_k+1/m_k$ cuando los índices $n_k,m_k$ no necesariamente divergen: si ambos quedan acotados, Bolzano-Weierstrass los vuelve eventualmente constantes y el límite cae en $A$; si alguno diverge, el límite es $0$ o $1/m$ para algún $m$ fijo. Por otro lado, dos elementos distintos de $A$ nunca están arbitrariamente cerca: la resta $1/n+1/m-1/n'-1/m'$ tiene numerador entero no nulo sobre denominador $n n' m m'$, así que está acotada lejos de $0$ --- eso hace que cada punto de $A$ sea aislado.
+]
+
+#resolucion[
+  *Interior: $A^circle = emptyset$.* Como $A subset.eq QQ$, $A^circle subset.eq QQ^circle = emptyset$ (Ejemplo 20 b).
+
+  *Clausura: $overline(A) = A union {0} union {1/n : n in NN}$.*
+
+  $supset.eq)$ Siempre $A subset.eq overline(A)$. Además, $1/n+1/(n+1) -> 0$, así que $0 in overline(A)$; y fijado $n$, $1/n+1/m -> 1/n$ cuando $m -> +infinity$, así que $1/n in overline(A)$.
+
+  $subset.eq)$ Sea $a in overline(A)$, con $a_k = 1/n_k + 1/m_k -> a$. Las sucesiones $(n_k)_k, (m_k)_k$ no tienen por qué divergir. Si ambas están acotadas, por Bolzano-Weierstrass (aplicado primero a una y, sobre la subsucesión resultante, a la otra) se extrae una subsucesión con $n_(k_j) = n$ y $m_(k_j) = m$ eventualmente constantes (al ser sucesiones de naturales, toda subsucesión convergente es eventualmente constante), y entonces $a = 1/n+1/m in A$. Si alguna de las dos no está acotada, digamos $(n_k)_k$ (el otro caso es análogo), por el Ejercicio 13 de la Práctica 1 existe una subsucesión $n_(k_j) -> +infinity$; si a su vez $(m_(k_j))_j$ está acotada, se extrae una subsucesión con $m$ eventualmente constante y $a_(k_(j_l)) -> 1/m$; si $(m_(k_j))_j$ tampoco está acotada, se extrae una subsucesión con $m_(k_(j_l)) -> +infinity$ y $a_(k_(j_l)) -> 0$. En cualquier caso, $a in A union {0} union {1/n : n in NN}$.
+
+  *Puntos aislados: todos los de $A$.* Dados $a = 1/n+1/m != b = 1/n'+1/m'$ en $A$,
+  $ abs(a-b) = abs((n'm m' + n m m' - n n' m' - n m n')/(n n' m m')) >= 1/(n n' m m'), $
+  porque el numerador es un entero no nulo. Tomando $r < 1/(n n' m m')$, $B(a,r) inter A = {a}$.
+
+  *Conjunto derivado: $A' = {0} union {1/n : n in NN}$*, ya que $overline(A) = A' union A$ y $A$ consta de puntos aislados ($A' inter A = emptyset$).
+
+  *Frontera: $partial A = overline(A) without A^circle = {0} union {1/n : n in NN}$* (Ejercicio 9 de la Práctica 3).
+
+  _Comparar con el Ejemplo 15/09-6_: mismo tipo de análisis para $A = {m+1/(n+1)}$, donde había quedado pendiente $overline(A) subset.eq A union NN$; el argumento de Bolzano-Weierstrass de acá se adapta a ese caso.
+]
+
+#ejemplo[Interior, clausura, aislados, acumulación y frontera de $A = {(x,y) in RR^2 : y > x}$ (Clase 4 · Ejercicio 2)][C4-2][
+  En $(RR^2, d_2)$, sea $A = {(x,y) in RR^2 : y > x}$ (el semiplano estrictamente por encima de la recta $y=x$). Determinar $A^circle$, $overline(A)$, los puntos aislados, $A'$ y $partial A$.
+]
+
+#estrategia[Trabajar con $d_infinity$ (equivalente a $d_2$) y tomar el radio como la mitad de la distancia vertical a la diagonal][
+  Para ver que $a=(a_1,a_2) in A$ es interior, conviene medir con $d_infinity$ en vez de $d_2$ (dan los mismos abiertos): la bola $B_infinity(a,r)$ es un cuadrado de lado $2r$ centrado en $a$, y tomando $r = 1/2(a_2-a_1)$ el cuadrado no llega a tocar la diagonal. Para la clausura, basta ver que toda sucesión en $A$ que converge tiene límite con $y>=x$ (pasando al límite en la desigualdad estricta), y que cualquier punto con $y>=x$ es límite de puntos de $A$ desplazando $y$ una cantidad $1/m -> 0$.
+]
+
+#resolucion[
+  *Interior: $A^circle = A$.* Ya vale $A^circle subset.eq A$. Sea $a=(a_1,a_2) in A$, es decir $a_2>a_1$. Con $d_infinity(a,(x,y)) = sup{abs(a_1-x),abs(a_2-y)}$, tomamos $r=1/2(a_2-a_1)>0$. Si $(x,y) in B_infinity(a,r)$, es decir $abs(x-a_1)<r$, $abs(y-a_2)<r$, entonces
+  $ y-x = (y-a_2)+(a_2-a_1)+(a_1-x) > (a_2-a_1)-2r = (a_2-a_1)-(a_2-a_1) = 0, $
+  así que $y>x$, es decir $(x,y) in A$. Luego $B_infinity(a,r) subset.eq A$, y como $d_2$ y $d_infinity$ son equivalentes, también hay una $d_2$-bola contenida en $A$.
+
+  *Clausura: $overline(A) = {(x,y) : y>=x}$.*
+
+  $subset.eq)$ Si $(x_m,y_m) in A$ para todo $m$ y $(x_m,y_m) -> (x,y)$, entonces $x_m -> x$, $y_m -> y$ (acotando cada coordenada por $d_infinity$), y como $y_m>x_m$ para todo $m$, pasando al límite $y >= x$.
+
+  $supset.eq)$ Dado $(x,y)$ con $y=x$ (el caso $y>x$ ya está en $A$), la sucesión $(x,x+1/m) in A$ converge a $(x,x)$.
+
+  *Puntos aislados: ninguno.* Se sigue de que $A' = overline(A)$ (ver abajo): todo punto de $A$ es límite de otros puntos de $A$ distintos de él.
+
+  *Conjunto derivado: $A' = overline(A) = {(x,y):y>=x}$.* Como $A' subset.eq overline(A)$, alcanza ver $overline(A) subset.eq A'$: dado $(x,y)$ con $y>=x$, la sucesión $(x,y+1/m) in A$ (pues $y+1/m>=x+1/m>x$) converge a $(x,y)$ y es distinta de $(x,y)$ para todo $m$.
+
+  *Frontera: $partial A = overline(A) without A^circle = {(x,y):y=x}$* (Ejercicio 9 de la Práctica 3).
+
+  _Nota_: para $A^circle$ también se puede probar que $RR^2 without A = {(x,y):y<=x}$ es cerrado, razonando igual que en el cálculo de $overline(A)$.
+]
+
+#ejemplo[Clausura de la unión de rectas por el origen con pendiente entera (Clase 4 · Ejercicio 3)][C4-3][
+  En $(RR^2,d_2)$, sea $A = {(x,y) in RR^2 : y=m x " para algún " m in ZZ} = union_(m in ZZ) {(x,y):y=m x}$ (unión infinita de rectas por el origen, todas cerradas). Calcular $overline(A)$.
+]
+
+#estrategia[Las rectas se "acumulan" sobre el eje $y$ cuando la pendiente crece][
+  Si una sucesión de puntos de $A$ converge con abscisas $x_n$ que no tienden a $0$, la pendiente $m_n=y_n\/x_n$ converge a un número real y, al ser entera, debe ser eventualmente constante --- entonces el límite cae en la misma recta. Pero si $x_n -> 0$, la pendiente puede "escaparse" a $plus.minus infinity$ y el límite es cualquier punto del eje $y$: por eso aparece todo el eje $y$ en la clausura, no sólo el origen.
+]
+
+#resolucion[
+  Veamos que $overline(A) = A union {(0,y):y != 0}$ (excluyendo $(0,0)$, que ya está en $A$).
+
+  $subset.eq)$ Sea $(x_n,y_n) in A$ con $(x_n,y_n) -> (x,y)$, y $m_n in ZZ$ con $y_n=m_n x_n$.
+
+  Si $x_n -> x != 0$: existe $n_0$ tal que $x_n != 0$ para $n>=n_0$, así que $m_n = y_n\/x_n -> y\/x$ por álgebra de límites; como $(m_n)$ es una sucesión de *enteros* convergente, es eventualmente constante $=m_0$, y entonces $y = lim m_0 x_n = m_0 x$, es decir $(x,y) in A$.
+
+  Si $x_n -> 0$: entonces $(x,y)=(0,y) in A union {(0,y):y!=0}$.
+
+  $supset.eq)$ Dado $(0,y)$ con $y!=0$, la sucesión $(y\/m, y) in A$ (pues $y = m dot (y\/m)$) converge a $(0,y)$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Bloque 11 · Caracterizaciones y estabilidad de abiertos y cerrados
+
+#sublema(titulo: "Qué desbloquea")[
+  Estos ejemplos no calculan interior o clausura de un conjunto concreto, sino que prueban *hechos generales* sobre cómo se comportan los abiertos y cerrados: bajo la suma de conjuntos $A+B$, mediante sucesiones, y en dos caracterizaciones de "ser abierto" y "ser frontera de un abierto" que no involucran bolas directamente. Son las herramientas que hacen falta cuando el conjunto en cuestión no tiene una fórmula sencilla para su bola, y conviene tenerlas separadas de los ejemplos "de cálculo" de los Bloques 9 y 10.
+]
+
+#ejemplo[Estabilidad de abierto/cerrado/denso bajo $A+B$ (Clase 4 · Ejercicio 4 bis)][C4-4b][
+  Sean $A,B subset.eq RR^m$ y $A+B = {a+b : a in A, b in B}$.
+  #set enum(numbering: "a)")
+  + Si $A$ es abierto, $A+B$ es abierto.
+  + Si $A$ es cerrado y $B={b}$, $A+B$ es cerrado.
+  + Si $A$ es denso ($overline(A)=RR^m$) y $B=B(0,epsilon)$ con $epsilon>0$, $A+B=RR^m$.
+]
+
+#estrategia[Trasladar la bola o la sucesión restando el punto fijo de $B$][
+  En los tres ítems la maniobra es la misma: "cancelar" el sumando de $B$ para volver al problema en $A$. En (a), la bola de $A$ alrededor de $a$ se traslada para armar la bola de $A+B$ alrededor de $x=a+b$. En (b), a una sucesión convergente en $A+B$ se le resta $b$ para obtener una sucesión convergente en $A$, y se usa que $A$ es cerrado. En (c), la densidad de $A$ da un punto de $A$ a distancia menor que $epsilon$ de cualquier $x$, y esa diferencia es exactamente el elemento de $B(0,epsilon)$ que hace falta.
+]
+
+#resolucion[
+  *a)* Sea $x=a+b in A+B$. Como $A$ es abierto, existe $r>0$ con $B(a,r) subset.eq A$. Si $y in B(x,r)$, entonces
+  $ d(x,y) = norm(a+b-y) = norm(a-(y-b)) < r, $
+  así que $y-b in B(a,r) subset.eq A$, y por lo tanto $y=(y-b)+b in A+B$. Luego $B(x,r) subset.eq A+B$.
+
+  *b)* Basta ver $overline(A+B) subset.eq A+B$. Si $x_m=a_m+b -> x$ con $(a_m)_m subset.eq A$, entonces $norm(a_m-(x-b)) = norm(x_m-x) -> 0$, es decir $a_m -> x-b$. Como $A$ es cerrado, $x-b in A$, y $x=(x-b)+b in A+B$.
+
+  *c)* Sea $x in RR^m$. Como $A$ es denso, existe $y in A$ con $norm(x-y)<epsilon$, es decir $x-y in B(0,epsilon)$. Entonces $x=y+(x-y) in A+B$.
+]
+
+#ejemplo[Caracterización sucesional de los abiertos (Clase 4 · Ejercicio 5)][C4-5][
+  Sea $(E,d)$ un espacio métrico. Probar que $A subset.eq E$ es abierto si y sólo si para toda $(x_n)_n subset.eq A$ con $x_n -> a in A$, existe $n_0 in NN$ tal que $x_n in A$ para todo $n>=n_0$.
+]
+
+#estrategia[La vuelta es la contrarrecíproca: "no abierto" da una sucesión que se cuela desde afuera][
+  La ida es directa: la bola alrededor de $a$ que atestigua que $A$ es abierto contiene la cola de la sucesión. La vuelta conviene probarla por el contrarrecíproco: si $A$ no es abierto, hay un punto $a in A$ tal que *ninguna* bola $B(a,1\/n)$ está contenida en $A$, así que se puede elegir $x_n in B(a,1\/n) without A$ para cada $n$; esta sucesión converge a $a$ pero *ningún* término está en $A$, violando la propiedad.
+]
+
+#resolucion[
+  $=>)$ Sea $(x_n)_n subset.eq A$ con $x_n -> a in A$. Como $A$ es abierto, existe $r>0$ con $B(a,r) subset.eq A$. Tomando $epsilon=r$ en la definición de límite, existe $n_0$ tal que $d(x_n,a)<r$ para $n>=n_0$, es decir $x_n in B(a,r) subset.eq A$.
+
+  $arrow.l.double)$ Supongamos que $A$ no es abierto: existe $a in A$ tal que para todo $r>0$, $B(a,r) subset.eq.not A$. Entonces, para cada $n in NN$, existe $x_n in B(a,1\/n) without A$, y $d(x_n,a)<1\/n -> 0$, así que $x_n -> a$. Pero $x_n in.not A$ para *todo* $n$, así que no existe ningún $n_0$ con $x_n in A$ para $n>=n_0$: contradice la hipótesis.
+]
+
+#ejemplo[$U$ abierto si y sólo si $U inter overline(T) subset.eq overline(U inter T)$ para todo $T$ (Clase 4 · Ejercicio 6)][C4-6][
+  Sea $(E,d)$ un espacio métrico y $U subset.eq E$. Probar que $U$ es abierto si y sólo si para todo $T subset.eq E$, $U inter overline(T) subset.eq overline(U inter T)$.
+]
+
+#estrategia[La vuelta sale de particularizar $T = E without U$][
+  La ida usa que $V inter U$ es abierto siempre que $V$ lo sea, para trasladar un entorno de un punto de $overline(T)$ a un entorno dentro de $U$. La vuelta es la parte más económica: alcanza con aplicar la hipótesis a $T=E without U$, donde el lado derecho se anula, y de ahí se deduce directamente que $E without U$ es cerrado.
+]
+
+#resolucion[
+  $=>)$ Sea $T subset.eq E$ y $x in U inter overline(T)$. Veamos $x in overline(U inter T)$: sea $V$ abierto con $x in V$. Como $x in U$, $x in V inter U$, que es abierto; como $x in overline(T)$, $(V inter U) inter T != emptyset$, que es lo que había que ver.
+
+  $arrow.l.double)$ Tomemos $T=E without U$. La hipótesis da $U inter overline(E without U) subset.eq overline(U inter (E without U)) = overline(emptyset) = emptyset$, es decir $overline(E without U) inter U = emptyset$. Entonces
+  $ overline(E without U) = (overline(E without U) inter U) union (overline(E without U) inter (E without U)) = overline(E without U) inter (E without U) subset.eq E without U, $
+  así que $E without U$ es cerrado (la otra inclusión vale siempre), es decir $U$ es abierto.
+]
+
+#ejemplo[$F$ es frontera de un abierto si y sólo si es cerrado con interior vacío (Clase 4 · Ejercicio 7)][C4-7][
+  Sea $(E,d)$ un espacio métrico. Probar que $F subset.eq E$ es la frontera de un abierto si y sólo si $F$ es cerrado y $F^circle=emptyset$.
+]
+
+#estrategia[La vuelta se construye tomando $U = E without F$][
+  La ida usa que $partial U = overline(U) inter overline(E without U)$ (Ejercicio 9 de la Práctica 3) es intersección de cerrados, y que ningún punto de $U$ puede estar en $partial U$ (tiene una bola adentro de $U$) para descartar puntos interiores de $F$. La vuelta es constructiva: el candidato natural a abierto es el complemento de $F$, y hay que verificar que su frontera es exactamente $F$, usando que $F$ es cerrado con interior vacío en cada paso.
+]
+
+#resolucion[
+  $=>)$ Si $F=partial U$ con $U$ abierto, $F=overline(U) inter overline(E without U)$ es intersección de cerrados, luego cerrado. Si $x in U$, hay $r>0$ con $B(x,r) subset.eq U$, así que $B(x,r) inter (E without U) = emptyset$ y $x in.not F$. Para ver $F^circle=emptyset$: sea $x in F$; dado $r>0$, $B(x,r) inter U != emptyset$, y como $x in.not U$, hay $y!=x$ con $y in B(x,r) inter U$; pero $y in U$ implica $y in.not F$, así que ninguna bola alrededor de $x$ queda contenida en $F$.
+
+  $arrow.l.double)$ Sea $U=E without F$; veamos $partial U = F$. Por un lado,
+  $ partial U = overline(U) inter overline(E without U) = overline(E without F) inter overline(F) = overline(E without F) inter F subset.eq F $
+  (usando $overline(F)=F$). Por otro, si $x in F$, como $F^circle=emptyset$, para todo $r>0$ vale $B(x,r) inter (E without F) != emptyset$, es decir $x in overline(E without F)$; junto con $x in F subset.eq overline(F)$, se sigue $x in partial U$.
+]
+
+#ejemplo[Métricas equivalentes vía sucesiones (Clase 4 · Ejercicio 8)][C4-8][
+  Sea $E != emptyset$. Probar que dos métricas $d,d'$ en $E$ son equivalentes (dan los mismos abiertos) si y sólo si toda sucesión converge para $d$ exactamente cuando converge para $d'$ (al mismo límite).
+]
+
+#estrategia[Traducir una bola de una métrica a un radio suficientemente chico en la otra][
+  Usamos la caracterización de equivalencia por bolas: para todo $x$ y todo $r>0$ existen $r',r''>0$ con $B_d(x,r') subset.eq B_(d')(x,r)$ y $B_(d')(x,r'') subset.eq B_d(x,r)$. Con eso, convertir "converge para $d$" en "converge para $d'$" es sólo enhebrar la definición de límite a través de esa bola intermedia.
+]
+
+#resolucion[
+  Supongamos $x_n -> x$ respecto de $d$. Dado $epsilon>0$, por equivalencia existe $r'>0$ con $B_d(x,r') subset.eq B_(d')(x,epsilon)$. Como $x_n -> x$ para $d$, existe $tilde(n) in NN$ tal que $d(x_n,x)<r'$ para $n>=tilde(n)$, es decir $(x_n)_(n>=tilde(n)) subset.eq B_d(x,r') subset.eq B_(d')(x,epsilon)$. Tomando $n_0>=tilde(n)$, $d'(x_n,x)<epsilon$ para todo $n>=n_0$, es decir $x_n -> x$ respecto de $d'$.
+
+  El argumento recíproco (que la convergencia para $d'$ implica la convergencia para $d$) es análogo, intercambiando los roles de $d$ y $d'$.
 ]
 
 #v(10pt)
