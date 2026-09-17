@@ -1451,6 +1451,52 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   La reparación es no dejar que el radio venga impuesto: se lo elige uno, racional, adentro del entorno bueno de $x$. Eso es lo que hace la resolución de arriba, y es *razonamiento agregado*, no transcripción del manuscrito.
 ]
 
+#ejemplo[Cardinal de las sucesiones binarias que valen $1$ finitas veces (Avanzada · Práctica)][guía-3][
+  Sea $A subset.eq {0,1}^NN$ el conjunto de las sucesiones de ceros y unos que toman el valor $1$ sólo finitas veces (es decir, son eventualmente $0$). ¿Qué cardinal tiene $A$?
+]
+
+#estrategia[Partir por la cantidad de unos, y para cada cantidad fija anotar sus posiciones][
+  Como cada sucesión de $A$ tiene finitos unos, tiene sentido agrupar $A$ según *cuántos* unos tiene cada una. Fijada esa cantidad $k$, una sucesión de $A_k$ queda completamente determinada por las $k$ posiciones (ordenadas) donde vale $1$ --- el resto son ceros --- así que $A_k$ se inyecta en $NN^k$.
+]
+
+#resolucion[
+  *Cota inferior: $A$ es infinito.* Para cada $m in NN$, sea $(e^m_k)_(k in NN)$ la sucesión con $e^m_k = 1$ si $k=m$ y $e^m_k=0$ si no. La familia ${(e^m_k)_k : m in NN} subset.eq A$ es numerable (sucesiones distintas para $m$ distintos), así que $A$ es infinito.
+
+  *Partición por cantidad de unos.* Escribimos $A = union.big_(k in NN_0) A_k$, con $A_k = {(a_n)_n in A : (a_n)_n "tiene exactamente" k "unos"}$.
+
+  - $A_0 = {(0,0,0,dots)}$: un solo elemento.
+  - $A_1 = {(e^m_k)_k : m in NN}$: numerable, biyectando con $m in NN$.
+  - Para $k >= 2$: la función $A_k -> NN^k$ que manda $(a_n)_n$ a $(m_1, dots, m_k)$ con $m_1 < dots < m_k$ las posiciones donde vale $1$, es inyectiva --- dos sucesiones de $A_k$ con las mismas $k$ posiciones en $1$ coinciden en esas posiciones y en el resto (todo ceros), así que son la misma sucesión. Como $NN^k$ es numerable, $A_k$ es contable.
+
+  *Conclusión.* $A$ es unión numerable de conjuntos contables, así que $A$ es contable; combinado con ser infinito, $A$ es numerable: $\#A = aleph_0$.
+]
+
+#ejemplo[Cardinal de $Omega = {B subset.eq ZZ : \#B != \#(ZZ without B)}$ (Parcial 2023)][guía-4][
+  Sea $Omega subset.eq cal(P)(ZZ)$ definido como $Omega = {B subset.eq ZZ : \#B != \#(ZZ without B)}$. ¿Cuál es el cardinal de $Omega$?
+]
+
+#estrategia[$Omega$ es exactamente finitos $union$ cofinitos, y cada mitad es numerable][
+  La clave es notar que la condición que define a $Omega$ es *simétrica* entre $B$ y su complemento, así que $Omega$ se parte en dos mitades del mismo tamaño: los subconjuntos finitos y los de complemento finito (cofinitos). Cada mitad se cuenta con la misma técnica del ejemplo anterior (partir por tamaño y encajar en $ZZ^k$).
+]
+
+#resolucion[
+  *$Omega = Omega_F union Omega_("cof")$*, con $Omega_F = {B subset.eq ZZ : B "finito"}$ y $Omega_("cof") = {B subset.eq ZZ : ZZ without B "finito"}$ (unión disjunta, porque $ZZ$ es infinito: ningún subconjunto puede ser finito y cofinito a la vez).
+
+  $supset.eq)$ Si $B$ es finito, $ZZ without B$ es infinito, así que $\#B != \#(ZZ without B)$ y $B in Omega$. Por simetría de la condición que define a $Omega$, si $B in Omega$ entonces $ZZ without B in Omega$ también; en particular, todo $B$ cofinito está en $Omega$.
+
+  $subset.eq)$ Sea $B in Omega$. Si $B$ no fuera finito, sería infinito y, al ser $B subset.eq ZZ$ numerable, resultaría $\#B = aleph_0$. Si además $ZZ without B$ fuera infinito, también sería numerable, y entonces $\#B = \#(ZZ without B) = aleph_0$, contradiciendo $B in Omega$. Luego $ZZ without B$ debe ser finito, es decir $B in Omega_("cof")$.
+
+  *$\#Omega_F = \#Omega_("cof")$*, vía la biyección $Omega_F -> Omega_("cof")$, $B |-> ZZ without B$ (con inversa la misma operación).
+
+  *$\#Omega_F = aleph_0$.* Escribimos $Omega_F = union.big_(k in NN_0) Omega_(F,k)$ con $Omega_(F,k) = {B subset.eq ZZ : \#B = k}$. Cada $Omega_(F,k)$ es contable: la función que manda $B in Omega_(F,k)$ a la $k$-upla ordenada de sus elementos es inyectiva hacia $ZZ^k$, que es numerable (como en el Ejemplo guía-3). Como $Omega_F$ es infinito (contiene, por ejemplo, todos los singuletes ${n}$, $n in ZZ$) y es unión numerable de contables, $Omega_F$ es numerable.
+
+  *Conclusión.* $\#Omega_("cof") = \#Omega_F = aleph_0$, y $Omega = Omega_F union Omega_("cof")$ es unión de dos numerables, así que $\#Omega = aleph_0$.
+]
+
+#sublema(titulo: "Pregunta abierta en el margen (sin resolver)")[
+  La clase deja anotada, sin resolver, la pregunta complementaria: ¿cuál es el cardinal de $Omega' = {A subset.eq ZZ : \#A = \#(ZZ without A)}$? Como $Omega' = cal(P)(ZZ) without Omega$ y $Omega$ es numerable mientras que $cal(P)(ZZ) tilde.op RR$, la respuesta debería ser $\#Omega' = frak(c)$ (quitarle un numerable a un conjunto de cardinal $frak(c)$ no cambia su cardinal), pero esa propiedad de aritmética cardinal no está probada en el apunte, así que no se completa acá.
+]
+
 #v(10pt)
 
 == Bloque 8 · Métricas: verificar los axiomas
