@@ -708,6 +708,18 @@ alimenta cada bloque.
   + Existe $x_0 in M$ y $R > 0$ tal que $E subset.eq B(x_0, R)$.
 ]
 
+#desafio[Toda bola es abierta, caso $RR^2$ (Ejercicio 5)][
+  En $(RR^2, d_2)$, sea $E = B(p, R)$. Probar que $E$ es abierto.
+
+  *Pista:* dado $(x_0, y_0) in E$, tomar
+  $ r = R - d_2((x_0, y_0), p) $
+  y mostrar que $B((x_0, y_0), r) subset.eq E$.
+]
+
+#desafio[El primer cuadrante abierto es abierto (Ejercicio 6)][
+  En $(RR^2, d_2)$, sea $E = {(x, y) in RR^2 : x > 0 and y > 0}$. Probar que $E$ es abierto.
+]
+
 #desafio[$inter.big_(n in NN) (-1/n, 1/n) = {0}$ no es abierto (Observación 4.19)][
   Sea $(M, d) = (RR, abs(dot.c))$ y sean $A_n = (-1/n, 1/n)$ para $n in NN$. Se tiene que $A = inter.big_(n in NN) A_n = {0}$. Probar que $A$ no es un conjunto abierto.
 ]

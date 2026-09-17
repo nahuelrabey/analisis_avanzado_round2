@@ -910,7 +910,8 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   + *Distancia infinito:* Esta distancia se define de manera análoga a la distancia infinito en $RR^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$:
     $ d_oo (f, g) = sup_(x in [a, b]) abs(f(x) - g(x)). $
 
-  #align(center)[
+    #block(breakable: false)[
+    #align(center)[
     #cetz.canvas({
       import cetz.draw: *
 
@@ -952,12 +953,14 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
       line((x0, y_g), (x0, y_f), mark: (start: ">", end: ">"), stroke: 1pt + black)
       content((x0 + 0.9, (y_f + y_g)/2), text(size: 9pt)[$d_oo (f, g)$])
     })
-  ]
+    ]
+    ]
 
   + *Distancia 1:* Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno:
     $ d_1(f, g) = integral_a^b abs(f(x) - g(x)) dif x. $
 
-  #align(center)[
+    #block(breakable: false)[
+    #align(center)[
     #cetz.canvas({
       import cetz.draw: *
       line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
@@ -988,7 +991,8 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
 
       content((3.3, 1.4), text(size: 9.5pt)[$#"Área" = d_1(f, g)$])
     })
-  ]
+    ]
+    ]
 ]
 
 #observacion[Comparación entre $d_1$ y $d_oo$ en $C([0, 1])$][4.4][
