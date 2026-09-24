@@ -118,3 +118,16 @@ alimenta cada bloque.
 #desafio[Toda sucesión convergente es acotada (Ejercicio 4.50)][
   Sea $(x_n)_(n in NN) subset.eq M$ una sucesión convergente. Probar que entonces es acotada (sugerencia: ver 2.12).
 ]
+
+#desafio[Unicidad del límite fuera de $C([0,1])$ (Observación 4.53)][
+  Sea $(f_n)_(n in NN)$ la sucesión de funciones del Ejemplo 4.52 (d) (`ejemplos/p3.typ`, pestaña 31), que es de Cauchy en $(C([0,1]), d_1)$ pero no converge en ese espacio. Si cambiamos el conjunto de las funciones continuas por, por ejemplo, el conjunto de _todas_ las funciones de $[0,1]$ en $RR$, la sucesión $f_n$ tiene límite, pero este límite *no es único*.
+  #set enum(numbering: "a)")
+  + Encontrar otra función $f$, distinta de la del Ejemplo 4.52 (d), tal que $f_n -> f$ en $d_1$.
+  + Pensar por qué falla la unicidad del límite si hacemos este cambio.
+]
+
+#desafio[Elección del índice de la subsucesión (Teorema 4.54 c)][
+  En la demostración del Teorema 4.54 c) (una sucesión de Cauchy con una subsucesión convergente es convergente), para acotar
+  $ d(x_n, x) <= d(x_n, x_(n_k)) + d(x_(n_k), x) $
+  necesitamos elegir un $n_k$ que cumpla dos condiciones: $n_k >= n_0$ (para poder acotar $d(x_n, x_(n_k))$ usando que $(x_n)$ es de Cauchy) y $n_k >= n_(k_0)$ (para poder acotar $d(x_(n_k), x)$ usando que $x_(n_k) -> x$). Pensar por qué podemos conseguir un $n_k$ que cumpla ambas condiciones.
+]

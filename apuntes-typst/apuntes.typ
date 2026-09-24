@@ -1351,3 +1351,35 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
   $ d(x_n, x_m) < epsilon, quad "para todo " n, m >= n_0. $
 ]
 
+
+#teorema[Sucesiones de Cauchy, acotadas y convergentes][4.54][
+  Sea $(M, d)$ un espacio métrico y $(x_n)_(n in NN) subset.eq M$ una sucesión.
+  #set enum(numbering: "a)")
+  + Si $(x_n)_(n in NN)$ es de Cauchy, entonces es acotada.
+  + Si $(x_n)_(n in NN)$ es convergente, entonces es de Cauchy.
+  + Si $(x_n)_(n in NN)$ es de Cauchy y tiene una subsucesión convergente, entonces $(x_n)$ es convergente.
+]
+#demostracion[
+  #set enum(numbering: "a)")
+  + Sea $(x_n)_(n in NN)$ una sucesión de Cauchy. Para ver que es acotada, tenemos que encontrar una constante $C$ tal que para todo $n, m in NN$, $d(x_n, x_m) <= C$. Como la sucesión es de Cauchy, tenemos que para $epsilon = 1$, tenemos un $n_0$ tal que si $n, m >= n_0$, $d(x_n, x_m) < 1$. Observemos que el conjunto
+    $ {d(x_n, x_m) : 1 <= n, m <= n_0} $
+    es un conjunto finito, y por lo tanto, tiene máximo. Sea $k$ ese máximo y tomemos $C = k + 1$. Veamos que esta constante nos sirve para lo que queremos. Sean $n, m$ dos índices cualesquiera.
+
+    Sabemos que si $n, m >= n_0$, entonces $d(x_n, x_m) < 1 <= C$.
+
+    Si $n, m <= n_0$, por como elegimos la constante $C$, nos sale que $d(x_n, x_m) <= k <= C$.
+
+    Para terminar de probar todos los casos, veamos qué pasa si $n <= n_0 <= m$. En este caso, tenemos que
+    $ d(x_n, x_m) <= underbrace(d(x_n, x_(n_0)), <= k) + underbrace(d(x_(n_0), x_m), < 1) <= k + 1 = C, $
+    como queríamos probar.
+
+  + Sea $(x_n)_(n in NN)$ y $x in M$ tal que $x_n -> x$. Para ver que esta sucesión es de Cauchy, tomemos $epsilon > 0$. Como $x_n -> x$, sabemos que existe un $n_0$ tal que si $n >= n_0$, $d(x_n, x) < epsilon/2$. Ahora si $n, m >= n_0$,
+    $ d(x_n, x_m) <= d(x_n, x) + d(x, x_m) < epsilon/2 + epsilon/2 = epsilon, $
+    lo que nos dice que la sucesión es de Cauchy.
+
+  + Sea $(x_n)_(n in NN)$ de Cauchy y sea $(x_(n_k))_(k in NN)$ una subsucesión tal que $x_(n_k) -> x$ cuando $k -> oo$, con $x in M$. Veamos que la sucesión entera converge a $x$. Para esto, tomemos $epsilon > 0$. Como $(x_n)$ es de Cauchy, sabemos que existe un $n_0$ tal que $d(x_n, x_m) < epsilon/2$ para todo $n, m >= n_0$. Como $x_(n_k) -> x$, sabemos que existe un $k_0$ tal que $d(x_(n_k), x) < epsilon/2$ para todo $k >= k_0$. Tenemos
+    $ d(x_n, x) <= underbrace(d(x_n, x_(n_k)), < epsilon\/2) + underbrace(d(x_(n_k), x), epsilon\/2) < epsilon, $
+    si $n >= n_0$.
+
+    ¿Cómo elegimos el $n_k$ en esta cuenta? Por un lado, necesitamos que $n_k >= n_0$ (para que podamos acotar $d(x_n, x_(n_k))$) y por otro lado necesitamos que $n_k >= n_(k_0)$ (para poder acotar $d(x_(n_k), x)$). Pensá por qué podemos conseguir un $n_k$ que cumpla ambas condiciones.
+]
