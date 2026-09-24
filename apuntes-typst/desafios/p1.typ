@@ -1,5 +1,5 @@
 #import "@preview/frame-it:2.0.0": *
-#import "utils.typ": *
+#import "../utils.typ": *
 #show figure.where(kind: "frame"): set figure(numbering: none)
 #show figure.where(kind: "frame"): set block(breakable: true)
 #show: frame-style(styles.boxy)
@@ -14,12 +14,13 @@
 }
 
 
-// --- Archivo Acumulativo de Desafíos ---
+
+// --- Desafíos de la Práctica 1 ---
 // Ordenado por dependencias hacia `guias/p1.typ`: cada bloque supone hechos los anteriores.
 // Ver `proposals/orden_desafios_p1.md` para el criterio completo.
 
 #align(center)[
-  #text(14pt, weight: "bold")[Desafíos --- Análisis Avanzado] \
+  #text(14pt, weight: "bold")[Desafíos --- Práctica 1] \
   #v(2pt)
   #text(10pt)[Ordenados como cadena de insumos para la Práctica 1]
 ]
@@ -56,7 +57,6 @@ alimenta cada bloque.
     [7], [Álgebra de límites], [Ej. 9 (a), 10, 11],
     [8], [Divergencia a $plus.minus oo$], [Ej. 9 (b--d), 12 (b), 14],
     [9], [Monótonas: el supremo y el ínfimo como límite], [Ej. 12 (a), 13],
-    [10], [Coordinabilidad y numerabilidad], [p2: Ej. 1, 2],
   )
 ]
 
@@ -531,7 +531,7 @@ alimenta cada bloque.
 
 #sublema(titulo: "Qué desbloquea")[
   Los *Ejercicios 9 (b)--(d)*, el *12 (b)* y la segunda mitad del *14*. Es el tramo que
-  `ejemplos.typ` registra como *hueco 1*: de `apuntes.typ` sólo está la Definición 2.6, y
+  `ejemplos/p1.typ` registra como *hueco 1*: de `apuntes.typ` sólo está la Definición 2.6, y
   ninguna demostración usa todavía el cuantificador "para todo $M > 0$".
 
   Los tres primeros son, textualmente, los Ejercicios 2.7, 2.13 y 2.17 de las notas de
@@ -604,7 +604,7 @@ alimenta cada bloque.
     descarta explícitamente --- "sabemos que este límite debe coincidir con el ínfimo, y esa
     es otra manera de terminar este ejercicio pero no es lo que vamos a hacer nosotros" --- y
     resuelve por subsucesiones, cerrando la ecuación $ell = ell^2$. Esa versión ya está en
-    `ejemplos.typ` como Ejemplo 12. Este desafío recorre la ruta que las notas dejan sin
+    `ejemplos/p1.typ` como Ejemplo 12. Este desafío recorre la ruta que las notas dejan sin
     hacer._
   - _*Estrategia (para el ínfimo):* que $0$ sea cota inferior es inmediato. Para ver que es
     la *mayor*, dado $epsilon > 0$ hay que exhibir un $n$ con $r^n < epsilon$. Escribir
@@ -624,136 +624,3 @@ alimenta cada bloque.
   #v(4pt)
   Modificar la demostración anterior para probar esta nueva equivalencia.
 ]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.5pt + luma(150))
-#v(8pt)
-
-== Bloque 10 · Coordinabilidad y numerabilidad
-
-#sublema(titulo: "Qué desbloquea")[
-  Alimenta la *Práctica 2* (cardinalidad y conjuntos numerables / contables). En particular, combina biyecciones conocidas ($NN tilde.op ZZ$ y $NN tilde.op QQ^+$) para deducir la numerabilidad de $QQ$.
-]
-
-#desafio[Ejercicio 3.4 ($NN tilde.op QQ$)][
-  Usar los ítems b) y c) del Ejemplo 3.3 para probar que $NN tilde.op QQ$.
-]
-
-#desafio[Ejercicio 3.9][
-  Probar que $\#A <= \#B$ si y solo si existe una función sobreyectiva $g : B -> A$.
-]
-
-#desafio[Principio del Palomar (Pigeonhole Principle)][
-  Si se distribuyen más de $k$ objetos en $k$ cajas, entonces alguna caja contiene al menos dos objetos.
-
-  En forma equivalente: si $f : A -> B$ es una función entre conjuntos finitos y $\#A > \#B$, entonces $f$ no puede ser inyectiva. Por lo tanto existen $x, y in A$ con $x != y$ tales que $f(x) = f(y)$.
-]
-#solucion[
-  *Demostración formal (por contradicción usando cardinalidad de conjuntos):*
-
-  Sean $A$ y $B$ conjuntos finitos con $\#A > \#B$. Sea $\#B = k in NN_0$ y denotemos $B = {b_1, b_2, dots, b_k}$.
-
-  Para cada $y in B$, consideremos su fibra o preimagen bajo $f$:
-  $ A_y = f^(-1)({y}) = {x in A : f(x) = y} $
-
-  Notemos que la familia $(A_y)_(y in B)$ constituye una partición del conjunto $A$:
-  + Son conjuntos disjuntos dos a dos: si $y, y' in B$ con $y != y'$, entonces:
-    $ A_y inter A_(y') = f^(-1)({y}) inter f^(-1)({y'}) = f^(-1)({y} inter {y'}) = f^(-1)(emptyset) = emptyset $
-  + Su unión cubre la totalidad de $A$: para cualquier $x in A$, $f(x) in B$, luego $x in A_(f(x))$, de modo que:
-    $ A = union.big_(y in B) A_y = union.big_(i=1)^k f^(-1)({b_i}) $
-
-  Por la propiedad aditiva del cardinal para uniones finitas de conjuntos disjuntos dos a dos, la cantidad total de elementos de $A$ es:
-  $ \#A = sum_(y in B) \#(f^(-1)({y})) = sum_(i=1)^k \#(f^(-1)({b_i})) $
-
-  Supongamos por contradicción que $f$ es inyectiva.
-  Por definición de inyectividad, dados $x_1, x_2 in A$, si $f(x_1) = f(x_2) = y$, necesariamente $x_1 = x_2$. En consecuencia, cada fibra $f^(-1)({y})$ puede contener a lo sumo un único elemento:
-  $ \#(f^(-1)({y})) <= 1 quad forall y in B $
-
-  Reemplazando en la suma del cardinal de $A$:
-  $ \#A = sum_(i=1)^k \#(f^(-1)({b_i})) <= sum_(i=1)^k 1 = k = \#B $
-
-  De esto se deduce que $\#A <= \#B$, lo cual entra en directa contradicción con la hipótesis de que $\#A > \#B$ (o $\#A > k$).
-
-  Por lo tanto, la suposición inicial es falsa y concluimos que $f$ no puede ser inyectiva. Esto implica que existe al menos un elemento $y in B$ tal que $\#(f^(-1)({y})) >= 2$, es decir, existen $x, y' in A$ con $x != y'$ tales que $f(x) = f(y')$.
-]
-
-#desafio[No unicidad del desarrollo decimal en la no numerabilidad de $(0, 1)$ (Observación 3.22)][
-  En la demostración de que el intervalo $(0, 1)$ no es numerable (Teorema 3.19), utilizamos el desarrollo decimal de los números reales para construir un $y in (0, 1)$ y probar que $y != x_n$ para todo $n in NN$.
-
-  Sin embargo, el desarrollo decimal de un número real no siempre es único: por ejemplo,
-  $ 0,1 = 0,0999999 dots $
-  (y en general, cualquier número con desarrollo decimal finito admite una representación alternativa terminada en una cola infinita de nueves).
-
-  *Desafío:* Explicar y justificar formalmente por qué esta falta de unicidad en los desarrollos decimales no invalida la demostración de la diagonalización de Cantor (es decir, por qué la elección de los dígitos $y_i in {2, 3}$ garantiza que $y != x_n$ para todo $n in NN$ a pesar de la no unicidad).
-]
-
-#v(10pt)
-#line(length: 100%, stroke: 0.5pt + luma(150))
-#v(8pt)
-
-== Bloque 11 · Espacios métricos y topología
-
-#sublema(titulo: "Qué desbloquea")[
-  Alimenta la *Práctica 3* (espacios métricos, bolas y topología). En particular, el Ejercicio 1 (e) de la guía pide verificar que $C([0, 1])$ con la métrica del supremo es un espacio métrico.
-]
-
-#desafio[Ejercicio 4.3 ($d_oo$ y $d_1$ en $C([a, b])$)][
-  Probar que $d_oo$ y $d_1$ son métricas en $C([a, b])$.
-]
-
-#desafio[Equivalencia de las definiciones de conjunto acotado (Definición 4.8)][
-  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Probar que las siguientes dos condiciones son equivalentes:
-
-  + Existe $C > 0$ tal que $d(x, y) <= C$ para todo $x, y in E$.
-  + Existe $x_0 in M$ y $R > 0$ tal que $E subset.eq B(x_0, R)$.
-]
-
-#desafio[Toda bola es abierta, caso $RR^2$ (Ejercicio 5)][
-  En $(RR^2, d_2)$, sea $E = B(p, R)$. Probar que $E$ es abierto.
-
-  *Pista:* dado $(x_0, y_0) in E$, tomar
-  $ r = R - d_2((x_0, y_0), p) $
-  y mostrar que $B((x_0, y_0), r) subset.eq E$.
-]
-
-#desafio[El primer cuadrante abierto es abierto (Ejercicio 6)][
-  En $(RR^2, d_2)$, sea $E = {(x, y) in RR^2 : x > 0 and y > 0}$. Probar que $E$ es abierto.
-]
-
-#desafio[$inter.big_(n in NN) (-1/n, 1/n) = {0}$ no es abierto (Observación 4.19)][
-  Sea $(M, d) = (RR, abs(dot.c))$ y sean $A_n = (-1/n, 1/n)$ para $n in NN$. Se tiene que $A = inter.big_(n in NN) A_n = {0}$. Probar que $A$ no es un conjunto abierto.
-]
-
-#desafio[Los intervalos abiertos son conjuntos abiertos (Ejercicio 4.20)][
-  Sea $(M, d) = (RR, abs(dot.c))$ y sean $a < b in RR$. Mostrar que $A = (a, b)$ es un conjunto abierto.
-]
-
-#desafio[Clausura de la bola abierta (Ejercicio 4.25)][
-  Sea $(M, d)$ un espacio métrico.
-
-  #set enum(numbering: "a)")
-  + Probar que $overline(B(x,r)) subset.eq B[x,r]$.
-  + Mostrar con un contraejemplo que en general no vale la igualdad entre estos dos conjuntos.
-]
-
-#desafio[Supremo e ínfimo en la clausura (Ejercicio 4.26)][
-  Sea $E subset.eq (RR, abs(dot.c))$ acotado. Probar que $op("sup")(E)$ e $op("ínf")(E)$ pertenecen a la clausura de $E$.
-]
-
-#desafio[Caracterización del punto de acumulación (Ejercicio 4.34)][
-  Probar que $x$ es un punto de acumulación de $E$ si y sólo si para todo $r > 0$, $B(x, r) inter E$ tiene infinitos elementos.
-]
-
-#desafio[Unicidad del límite (Ejercicio 4.44)][
-  Sea $(M, d)$ un espacio métrico y sea $(x_n)_(n in NN)$ una sucesión. Probar que si $x_n -> x$ y $x_n -> y$ entonces $x = y$. Es decir, el límite de una sucesión es único (recordar la proposición 2.8).
-]
-
-#desafio[Cerrados vía sucesiones (Corolario 4.47)][
-  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Probar que $E$ es cerrado si y sólo si para toda sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$ se tiene que $x in E$ (sugerencia: usar la Proposición 4.46).
-]
-
-#desafio[Toda sucesión convergente es acotada (Ejercicio 4.50)][
-  Sea $(x_n)_(n in NN) subset.eq M$ una sucesión convergente. Probar que entonces es acotada (sugerencia: ver 2.12).
-]
-
-

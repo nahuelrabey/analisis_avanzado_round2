@@ -29,7 +29,7 @@
 
 #v(3pt)
 
-Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña, y los que empiezan con *C* son los resueltos en clase (`C1-4` es el Ejemplo 4 de `clases/apuntes_1.typ`). Las filas son acumulativas: cada una supone leídas las de arriba.
+Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos/p1.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña, y los que empiezan con *C* son los resueltos en clase (`C1-4` es el Ejemplo 4 de `clases/apuntes_1.typ`). Las filas son acumulativas: cada una supone leídas las de arriba.
 
 #v(5pt)
 
@@ -86,7 +86,7 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
   - *C1-6* construye una sucesión de racionales estrictamente decreciente que converge a $x$: es el Ej. 13 en espejo (allá hay que subir hasta el supremo).
 
   #v(3pt)
-  *Lo que sigue sin ejemplo:* la divergencia a $plus.minus oo$ *por definición* --- el cuantificador "para todo $M > 0$", que hace falta en los Ej. 9 (b)--(d), 12 (b) y en la segunda mitad del 14 --- y el punto fijo del anexo. Para todo lo demás, el modelo más cercano está listado al final de `ejemplos.typ`.
+  *Lo que sigue sin ejemplo:* la divergencia a $plus.minus oo$ *por definición* --- el cuantificador "para todo $M > 0$", que hace falta en los Ej. 9 (b)--(d), 12 (b) y en la segunda mitad del 14 --- y el punto fijo del anexo. Para todo lo demás, el modelo más cercano está listado al final de `ejemplos/p1.typ`.
 ]
 
 #v(10pt)

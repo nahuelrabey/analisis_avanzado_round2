@@ -151,8 +151,8 @@ Cada capítulo se recorre con el mismo ciclo. Los pasos 1--4 trabajan sobre la t
   [*\#*], [*Paso*], [*Archivo de trabajo*], [*Volumen total*], [*Horas*], [*Días*],
   [1], [Leer teoría y redactar apuntes], [`apuntes.typ`], [77 páginas], [116], [26],
   [2], [Re-leer y rehacer las demostraciones solo], [`apuntes.typ`], [51 resultados], [38], [9],
-  [3], [Rehacer los ejemplos], [`ejemplos.typ`], [50 ejemplos], [25], [6],
-  [4], [Completar los desafíos], [`desafios.typ`], [29 ejercicios], [29], [6],
+  [3], [Rehacer los ejemplos], [`ejemplos/`], [50 ejemplos], [25], [6],
+  [4], [Completar los desafíos], [`desafios/`], [29 ejercicios], [29], [6],
   [5], [Resolver las prácticas], [`guias/p1`--`p7`], [245 ítems], [142], [32],
   [6], [Rendir los parciales], [`parcial_1/2.typ`], [2 simulacros], [12], [3],
   [--], [Repaso integrador pre-parcial], [--], [2 bloques], [18], [4],
@@ -219,12 +219,12 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
   - *Días 6 -- 11: Cap. 2 Sucesiones (págs. 13--20)* --- ciclo completo
     - #paso(1, "Teoría") _Días 6--8:_ Límite de sucesiones, álgebra de límites, subsucesiones, Bolzano-Weierstrass. #est-curso --- transcrito hasta la convergencia de monótonas (Prop. 8); faltan subsucesiones y Bolzano-Weierstrass.
     - #paso(2, "Demostraciones") _Día 9:_ Las 6 demostraciones del capítulo. #est-pend
-    - #paso(3, "Ejemplos") _Día 10:_ 6 ejemplos. #est-pend --- hay 2 cargados en `ejemplos.typ`.
+    - #paso(3, "Ejemplos") _Día 10:_ 6 ejemplos. #est-pend --- hay 2 cargados en `ejemplos/`.
     - #paso(4, "Desafíos") _Día 11:_ 6 desafíos --- es el capítulo con más carga de este paso en la primera mitad. #est-pend
   - *Días 12 -- 15: #badge("Práctica 1 -- 31 ítems", bg: c-prac.lighten(86%), fg: c-prac.darken(15%))* #paso(5, "") #est-curso
     - Supremo, ínfimo, Arquímedes, densidad de irracionales, límites por definición, subsucesiones.
     - #text(fill: rgb("#15803d"))[*Hecho:* ejercicios 1 a 6 (15 de 28 ítems), resueltos por adelantado. Transcritos en `guias/p1.typ`: 1, 2 (a--d) y 6 (a--b); los 3, 4 y 5 están resueltos pero sin pasar en limpio.]
-    - #text(fill: rgb("#92400e"))[*Nota:* los ejercicios 1 y 2 de p1 ya están en `desafios.typ` como Desafíos 5.3 y 5.4. Aprovechalos: parte del paso 4 adelanta el paso 5.]
+    - #text(fill: rgb("#92400e"))[*Nota:* los ejercicios 1 y 2 de p1 ya están en `desafios/p1.typ` como Desafíos 5.3 y 5.4. Aprovechalos: parte del paso 4 adelanta el paso 5.]
     - #text(fill: rgb("#92400e"))[*Punto de recalibración:* al terminar, medí cuántas horas te llevaron realmente los 31 ítems y ajustá el resto del cronograma. Con los ejercicios 1--6 ya hay una primera muestra para comparar contra los 35 min/ítem presupuestados.]
 ]
 
@@ -345,7 +345,7 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
 
 #sublema(titulo: "Notas de método")[
   - *Los pasos 2 a 4 no son repaso, son producción.* Rehacer una demostración sin mirar el apunte es lo que convierte la lectura en conocimiento propio, y por eso tienen 21 días asignados (9 + 6 + 6) en lugar de quedar implícitos dentro de la lectura.
-  - *Los pasos 3 y 4 dependen de que `ejemplos.typ` y `desafios.typ` estén cargados.* Transcribí con `/ejemplo` y `/desafio` durante el paso 1 de cada capítulo, no después: cuando llegue el día del paso 3 el material tiene que estar listo.
+  - *Los pasos 3 y 4 dependen de que `ejemplos/` y `desafios/` estén cargados.* Transcribí con `/ejemplo` y `/desafio` durante el paso 1 de cada capítulo, no después: cuando llegue el día del paso 3 el material tiene que estar listo.
   - *Escribir de atrás para adelante, pensar de adelante para atrás.* La intuición viene primero; la redacción formal reconstruye el puente. Al cerrar cada guía, resumí la estrategia de cada ejercicio en una o dos líneas --- eso es lo que se relee antes del parcial, no la resolución completa.
   - *Las fechas de parcial de los Días 49--50 y 89--90 son marcadores.* Alinealas con las fechas reales de la cursada y desplazá los bloques vecinos; los días de repaso integrador que las preceden son el amortiguador natural para ese ajuste.
   - *Conflictos entre métodos de resolución:* anotarlos durante el paso 5 y llevarlos juntos a la clase de consulta, en lugar de resolverlos sobre la marcha.
@@ -384,7 +384,7 @@ Conteo crudo de resultados numerados por capítulo, extraído del PDF. Es la bas
 
 #sublema(titulo: "Cómo leer este inventario")[
   - *Dem* agrupa Teoremas, Proposiciones y Corolarios --- los 51 resultados con demostración que alimentan el paso 2. Desglosados: 23 teoremas, 24 proposiciones, 4 corolarios.
-  - *Ejer* son los ejercicios que las notas dejan planteados dentro del texto teórico. Son la fuente del paso 4 y lo que se acumula en `desafios.typ`.
+  - *Ejer* son los ejercicios que las notas dejan planteados dentro del texto teórico. Son la fuente del paso 4 y lo que se acumula en `desafios/`.
   - *Def* y *Obs* no tienen días propios: se absorben dentro del paso 1, al transcribir con `/apunte`.
   - *Las dos filas de total difieren en Dem (53 vs 51) y Ejem (51 vs 50).* La suma por capítulos cuenta dos veces los resultados que cruzan el corte de página entre capítulos; la fila _sin repetidos_ es el conteo global deduplicado y es la que se usó para presupuestar. Def, Ejer y Obs coinciden en ambas filas.
   - *Densidad de demostraciones:* Cap. 6 encabeza con 1,08 dem/pág, seguido de Cap. 7 (0,80) y Caps. 1--3 (0,75). Cap. 5 es el más liviano (0,42) pero compensa con 9 ejercicios internos, el máximo del apunte.

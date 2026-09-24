@@ -45,7 +45,7 @@
 
 Un *galerazo* es una idea que uno saca de la galera: el paso que, visto de afuera, parece magia,
 y que en realidad responde a un patrón que se puede reconocer y reutilizar. A diferencia de
-`ejemplos.typ`, acá no interesa el enunciado concreto sino la *maniobra*; a diferencia de
+`ejemplos/`, acá no interesa el enunciado concreto sino la *maniobra*; a diferencia de
 `apuntes.typ`, un galerazo no es teoría de la materia y no se cita como resultado.
 
 Cada entrada arranca por el *disparador*: la pregunta que la hizo aparecer. Después viene la

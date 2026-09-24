@@ -234,7 +234,7 @@
   es decir $f^(-1) compose f = id_(ZZ)$.
 
   Por lo tanto $f$ es biyectiva, es decir $ZZ tilde.op 5 ZZ$. Como además sabemos que
-  $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos.typ`), por transitividad $NN tilde.op 5 ZZ$.
+  $NN tilde.op ZZ$ (Ejemplo 13 en `ejemplos/p2.typ`), por transitividad $NN tilde.op 5 ZZ$.
 
   Finalmente, $\#(5 ZZ) = aleph_0$.
 ]
@@ -248,8 +248,8 @@
 ]
 
 #solucion[Propuesta 1][
-  Sabemos que $ZZ tilde.op NN$ (Ejemplo 13 en `ejemplos.typ`), por lo tanto existe
-  $f : ZZ -> NN$ biyectiva. Además, $NN tilde.op NN times NN$ (Ejemplo 14 en `ejemplos.typ`),
+  Sabemos que $ZZ tilde.op NN$ (Ejemplo 13 en `ejemplos/p2.typ`), por lo tanto existe
+  $f : ZZ -> NN$ biyectiva. Además, $NN tilde.op NN times NN$ (Ejemplo 14 en `ejemplos/p2.typ`),
   con lo cual existe $g : NN times NN -> NN$ biyectiva.
 
   Con lo anterior, puedo definir $phi : ZZ times NN -> NN times NN$ tal que
@@ -414,7 +414,7 @@
 
   *Caso $A = emptyset$ o $B = emptyset$.* #box(text(size: 8pt, weight: "bold", fill: rgb("#dc2626"))[[ver Consulta Docente]]) Por la Definición 3.6, "finito" pide un $n in NN$ y
   una biyección ${1,...,n} -> A$; como en este apunte $NN = {1,2,3,...}$ (tal como se usa en el
-  Ejemplo 13 de `ejemplos.typ`), ningún $n in NN$ da ${1,...,n} = emptyset$, y tampoco existe
+  Ejemplo 13 de `ejemplos/p2.typ`), ningún $n in NN$ da ${1,...,n} = emptyset$, y tampoco existe
   una biyección $NN -> emptyset$ (no hay función alguna de un dominio no vacío a $emptyset$). Es
   decir, $emptyset$ no es contable según esta definición. Por lo tanto, no puede ocurrir que
   $A = emptyset$ (o $B = emptyset$) y que a la vez $A$ (o $B$) sea contable: este caso queda
@@ -679,7 +679,7 @@
   $ \#S <= \#(NN times NN) = aleph_0, $
 
   donde la igualdad es la numerabilidad de $NN times NN$ (Ejemplo 3.12, tag 14 de
-  `ejemplos.typ`).
+  `ejemplos/p2.typ`).
 
   Finalmente, $\#S <= aleph_0$ significa que existe $g : S -> NN$ inyectiva (Definición 3.8), con
   lo cual $S tilde.op g(S)$ y $emptyset != g(S) subset.eq NN$. Como $NN$ es numerable, la

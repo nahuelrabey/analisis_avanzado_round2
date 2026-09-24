@@ -14,13 +14,13 @@ El destino es siempre [`apuntes-typst/galerazos.typ`](file:///home/nahuel/study/
 | Va a... | Cuando el contenido es... |
 |---|---|
 | `galerazos.typ` | una **técnica** independiente del enunciado: cómo se le ocurre a uno, qué señal la dispara, cómo reconstruirla |
-| `ejemplos.typ` (`/ejemplo`) | un **ejercicio resuelto** concreto, con su enunciado |
+| `ejemplos/p{N}.typ` (`/ejemplo`) | un **ejercicio resuelto** concreto, con su enunciado |
 | `apuntes.typ` (`/apunte`) | **teoría de la materia**: definición, teorema, proposición, lema |
 
 Reglas de frontera:
 
 - Un galerazo **no se cita como resultado** en una demostración: es andamiaje mental, no teoría. Puede *usar* resultados de `apuntes.typ`, y los cita por nombre.
-- Si una `#estrategia` de `ejemplos.typ` se repite en tres o más ejercicios, es candidata a **ascender** a galerazo. En ese caso el ejemplo queda donde está y su `#estrategia` pasa a remitir al galerazo (`ver G-N en galerazos.typ`).
+- Si una `#estrategia` de `ejemplos/p{N}.typ` se repite en tres o más ejercicios, es candidata a **ascender** a galerazo. En ese caso el ejemplo queda donde está y su `#estrategia` pasa a remitir al galerazo (`ver G-N en galerazos.typ`).
 - Un galerazo puede nacer de una conversación, de una clase o de una pregunta suelta del usuario: **no requiere que exista un ejercicio asociado**.
 
 ## Procedimiento
@@ -63,7 +63,7 @@ La receta en pasos numerados para reconstruirlo sin acordarse de la fórmula.
 
 === Dónde se usa
 Ejercicios, guías y temas donde aparece. Referenciar `p{N}: Ej. K` y los tags
-de `ejemplos.typ` cuando corresponda.
+de `ejemplos/p{N}.typ` cuando corresponda.
 ```
 
 Las secciones `La familia entera` y `Por qué funciona` son opcionales según el galerazo; **`La señal` y `Cómo inventarlo de cero` no lo son**: son la razón de ser del archivo. Si de un input no se puede extraer la señal, avisarle al usuario en lugar de rellenar.
@@ -71,7 +71,7 @@ Las secciones `La familia entera` y `Por qué funciona` son opcionales según el
 ### 4. Numeración y tag
 
 - La sección se numera secuencialmente: `== Galerazo N · ...`, con $N$ el siguiente disponible.
-- La pestaña del marco lleva `G-N` (`#galerazo[G-3][...]`). Ese tag es la forma de citarlo desde `ejemplos.typ` o desde las guías.
+- La pestaña del marco lleva `G-N` (`#galerazo[G-3][...]`). Ese tag es la forma de citarlo desde `ejemplos/p{N}.typ` o desde las guías.
 - Los galerazos **no se renumeran nunca**: entradas nuevas van al final.
 
 ### 5. Actualizar la tabla-índice

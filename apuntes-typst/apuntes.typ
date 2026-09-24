@@ -548,22 +548,6 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   $ sum_(k=1)^oo a_k = lim_(n -> oo) S_n. $
 ]
 
-#ejemplo[Serie de $a_n = (-1)^n$][
-  Sea $(a_n)_(n in NN)$ dada por $a_n = (-1)^n$.
-
-  Tenemos que
-  $
-    S_1 &= -1 \
-    S_2 &= 0 \
-    S_3 &= -1 \
-        & dots.v \
-    S_(2n) &= 0 \
-    S_(2n+1) &= -1
-  $
-
-  Podemos ver que $(S_n)_(n in NN)$ no tiene límite, por lo tanto $sum_(k=1)^oo a_k$ no converge.
-]
-
 #proposicion[Condición necesaria de convergencia][
   Si $sum_(k=1)^oo a_k$ converge, entonces $a_n -> 0$.
 ]
@@ -575,23 +559,6 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   $ a_n = S_n - S_(n-1). $
 
   Luego $lim_(n -> oo) (S_n - S_(n-1)) = 0$, entonces (demostrar esto queda como ejercicio) $lim_(n -> oo) a_n = 0$.
-]
-
-#ejemplo[Serie Geométrica][
-  Sea $r in RR$ con $r != 1$.
-
-  $ sum_(k=0)^oo r^k = sum_(k=1)^oo r^(k-1) = lim_(n -> oo) sum_(k=1)^n r^(k-1) $
-
-  $
-    S_n &= 1 + r + r^2 + dots + r^(n-1) \
-    S_n (r - 1) &= r + r^2 + dots + r^n - 1 - r - r^2 - dots - r^(n-1) = r^n - 1 \
-    S_n &= (r^n - 1) / (r - 1)
-  $
-
-  Sabemos que $lim_(n -> oo) r^n = 0$ cuando $r in (0, 1)$, por lo tanto, en el mismo intervalo:
-  $ lim_(n -> oo) S_n = lim_(n -> oo) (r^n - 1) / (r - 1) = 1 / (1 - r). $
-
-  _Ejercicio:_ Si $abs(r) < 1 => S_n -> 1 / (1 - r)$.
 ]
 
 #proposicion[Álgebra de Series][
@@ -1367,7 +1334,7 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   Sea $(M, d)$ un espacio métrico, $E subset.eq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$ se tiene que $x in E$.
 ]
 
-La demostración se deduce directamente del resultado anterior y la dejamos de ejercicio (ver `desafios.typ`).
+La demostración se deduce directamente del resultado anterior y la dejamos de ejercicio (ver `desafios/p3.typ`).
 
 #observacion[][4.48][
   El corolario nos dice que en un conjunto cerrado, toda sucesión convergente lo hace dentro de $E$. Lo que *no dice* el corolario es que toda sucesión sea convergente.
@@ -1382,142 +1349,5 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
 #definicion[Sucesión de Cauchy][4.51][
   Sea $(x_n)_(n in NN) subset.eq M$ una sucesión. Decimos que $(x_n)_(n in NN)$ es una sucesión _de Cauchy_ si para todo $epsilon > 0$ existe un $n_0 in NN$ tal que
   $ d(x_n, x_m) < epsilon, quad "para todo " n, m >= n_0. $
-]
-
-#ejemplo[Sucesiones de Cauchy][4.52][
-  #set enum(numbering: "a)")
-  + Sea $(x_n)_(n in NN) = (1/n) subset.eq (RR, abs(dot))$. Veamos que $(x_n)_(n in NN)$ es de Cauchy.
-
-    Sea $epsilon > 0$. Queremos encontrar un $n_0$ tal que si $n, m >= n_0$ se tiene que $abs(1/n - 1/m) < epsilon$. Si $n, m >= n_0$ tenemos
-    $ abs(1/n - 1/m) <= 1/n + 1/m <= 1/n_0 + 1/n_0 = 2/n_0 < epsilon $
-    si elegimos $n_0 > 2/epsilon$.
-
-    Como observamos antes, vamos a ver que toda sucesión convergente es de Cauchy, con lo cual vamos a poder decir que esta sucesión es de Cauchy porque converge en $RR$. Sin embargo, notemos que la definición de sucesión de Cauchy no depende de la existencia del $0$ en este espacio métrico.
-
-  + Sea $(x_n)_(n in NN) = (1/n) subset.eq ((0, 1], abs(dot))$. Por la cuenta que hicimos antes, vemos que esta sucesión sigue siendo de Cauchy. Sin embargo, esta sucesión no converge en el espacio métrico que estamos considerando: $0 in.not (0, 1]$.
-
-  + Sea $(M, delta)$ un espacio métrico con la métrica discreta. ¿Cómo son las sucesiones de Cauchy en este espacio?
-
-    Supongamos que $(x_n)_(n in NN)$ es de Cauchy. Entonces para $0 < epsilon < 1$, deberíamos tener un $n_0$ tal que $delta(x_n, x_m) < epsilon$ para todo $n, m >= n_0$. Pero como la métrica sólo toma los valores $0$ y $1$, vemos que tiene que ser $delta(x_n, x_m) = 0$. Es decir, que las sucesiones de Cauchy son las eventualmente constantes. Observemos que, por el Ejemplo 4.45, tenemos que en este espacio las sucesiones de Cauchy y las convergentes sí son las mismas.
-
-  + Consideremos en $(C([0, 1]), d_1)$ la sucesión de funciones $f_n$ definidas de la siguiente forma:
-    $
-      f_n (x) = cases(
-        0\, & "si " 0 <= x <= 1/2 - 1/n\,,
-        "segmento que une los puntos " (1/2 - 1/n, 0) " y " (1/2, 1)\, & "si " 1/2 - 1/n <= x <= 1/2\,,
-        1\, & "si " 1/2 <= x <= 1.
-      )
-    $
-    Para que esta sucesión tenga sentido la definimos con $n >= 3$ (para completar la sucesión, podemos tomar los primeros dos términos de la sucesión como $f_1 = f_2 = 0$).
-
-    #align(center)[
-      #cetz.canvas({
-        import cetz.draw: *
-        let (sx, sy) = (6, 3)
-        let p(x, y) = (x * sx, y * sy)
-
-        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
-        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
-        content(p(1.19, 0), $x$)
-        content(p(0, 1.27), $y$)
-        content(p(-0.06, -0.07), $0$)
-        content(p(-0.06, 1), $1$)
-        content(p(0.5, -0.1), $1/2$)
-        content(p(1, -0.08), $1$)
-        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-
-        for (n, col) in ((4, blue), (10, red), (25, rgb("#15803d"))) {
-          let a = 0.5 - 1 / n
-          line(p(0, 0), p(a, 0), p(0.5, 1), p(1, 1), stroke: 1pt + col)
-        }
-        content(p(0.28, 0.3), text(fill: blue)[$f_4$])
-        content(p(0.56, 0.45), text(fill: red)[$f_(10)$])
-        content(p(0.56, 0.72), text(fill: rgb("#15803d"))[$f_(25)$])
-        line(p(0.2, 0.1), p(0.4, 0.1), mark: (end: ">"), stroke: 0.6pt)
-        content(p(0.3, 0.15), text(size: 8pt)[$n -> oo$])
-        circle(p(0.5, 1), radius: 0.06, fill: black)
-        content(p(0.5, -0.24), text(size: 9pt)[Sucesión $(f_n)$ en $(C([0, 1]), d_1)$])
-      })
-    ]
-
-    Veamos que esta sucesión es de Cauchy. Para esto, tenemos que entender cómo son las distancias entre dos términos de la sucesión. Sean $f_n$ y $f_m$ dos elementos de la sucesión, y supongamos que $m > n$. Recordemos que la distancia 1 entre funciones representa el área atrapada entre las dos funciones. Gráficamente tendremos algo así:
-
-    #align(center)[
-      #cetz.canvas({
-        import cetz.draw: *
-        let (sx, sy) = (6, 3)
-        let p(x, y) = (x * sx, y * sy)
-        let (an, am) = (0.5 - 1 / 4, 0.5 - 1 / 10)
-
-        line(p(an, 0), p(0.5, 1), p(am, 0), close: true, fill: rgb("#fde6cf"), stroke: none)
-        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
-        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
-        content(p(1.19, 0), $x$)
-        content(p(0, 1.27), $y$)
-        content(p(-0.06, -0.07), $0$)
-        content(p(-0.06, 1), $1$)
-        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-
-        line(p(0, 0), p(an, 0), p(0.5, 1), p(1, 1), stroke: 1pt + blue)
-        line(p(0, 0), p(am, 0), p(0.5, 1), p(1, 1), stroke: 1pt + red)
-        content(p(0.2, 0.5), text(fill: blue)[$f_n$])
-        content(p(0.56, 0.62), text(fill: red)[$f_m$])
-        content(p(an, -0.1), text(size: 8pt)[$1/2 - 1/n$])
-        content(p(am + 0.01, -0.22), text(size: 8pt)[$1/2 - 1/m$])
-        content(p(0.52, -0.1), text(size: 8pt)[$1/2$])
-        line(p(0.62, 0.42), p(0.4, 0.3), mark: (end: ">"), stroke: 0.5pt)
-        content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f_m)$])
-      })
-    ]
-
-    El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n) = 1/n - 1/m$ y altura $1$, entonces el área es $A = 1/2 (1/n - 1/m) dot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $epsilon > 0$,
-    $ d_1 (f_n, f_m) <= 1/2 abs(1/n - 1/m) < epsilon, quad "para todo " n, m >= n_0. $
-
-    Sin embargo, esta sucesión tampoco converge en el espacio métrico que estamos considerando. El límite de esta sucesión es la función
-    $
-      f(x) = cases(
-        0\, & "si " 0 <= x <= 1/2\,,
-        1\, & "si " 1/2 < x <= 1\,,
-      )
-    $
-    que no es una función continua.
-
-    Probemos que efectivamente las funciones $f_n$ convergen a $f$ en la distancia 1. Para esto, analicemos cómo es la distancia de $f_n$ a $f$.
-
-    #align(center)[
-      #cetz.canvas({
-        import cetz.draw: *
-        let (sx, sy) = (6, 3)
-        let p(x, y) = (x * sx, y * sy)
-        let an = 0.5 - 1 / 4
-
-        line(p(an, 0), p(0.5, 1), p(0.5, 0), close: true, fill: rgb("#ccfbd1"), stroke: none)
-        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
-        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
-        content(p(1.19, 0), $x$)
-        content(p(0, 1.27), $y$)
-        content(p(-0.06, -0.07), $0$)
-        content(p(-0.06, 1), $1$)
-        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
-
-        line(p(0, 0), p(0.5, 0), stroke: 2pt + black)
-        line(p(0.5, 1), p(1, 1), stroke: 2pt + black)
-        line(p(an, 0), p(0.5, 1), stroke: 1pt + blue)
-        circle(p(0.5, 0), radius: 0.06, fill: black)
-        circle(p(0.5, 1), radius: 0.06, fill: white, stroke: 0.8pt)
-        content(p(0.28, 0.55), text(fill: blue)[$f_n$])
-        content(p(0.95, 0.88), $f$)
-        content(p(an, -0.1), text(size: 8pt)[$1/2 - 1/n$])
-        content(p(0.5, -0.1), text(size: 8pt)[$1/2$])
-        line(p(0.62, 0.42), p(0.44, 0.3), mark: (end: ">"), stroke: 0.5pt)
-        content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f)$])
-      })
-    ]
-
-    Como vimos antes, la distancia $d_1 (f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $epsilon > 0$, podemos encontrar un $n_0$ tal que
-    $ d_1 (f_n, f) = 1/2 dot 1/n < epsilon, quad "para todo " n >= n_0. $
 ]
 

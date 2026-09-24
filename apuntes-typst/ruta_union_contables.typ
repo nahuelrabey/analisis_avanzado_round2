@@ -92,7 +92,7 @@ demostración, es la ruta hacia ella.
 #v(6pt)
 
 Es decir: el curso lo parte deliberadamente en tres ejercicios y nunca lo enuncia como
-resultado. Después se usa como si fuera teoría en `ejemplos.typ` ($ZZ times ZZ$,
+resultado. Después se usa como si fuera teoría en `ejemplos/p2.typ` ($ZZ times ZZ$,
 $(0,1) inter QQ$, $QQ + QQ$, sucesiones convergentes de enteros) y en
 `clases_2023/apuntes_2.typ`.
 
@@ -117,7 +117,7 @@ se traba.
   [$A$ numerable $==>$ se lo puede *listar*, $A = {a_1, a_2, a_3, dots}$. Es lo que convierte la hipótesis abstracta en algo manipulable],
 
   [Ejemplo 3.12],
-  [`ejemplos.typ`],
+  [`ejemplos/p2.typ`],
   [$NN times NN tilde.op NN$ (vía Cantor--Schröeder--Bernstein con $g(n,m) = 2^n 3^m$). Es el motor: comprime *dos* índices en uno],
 
   [Proposición 3.9],
@@ -251,10 +251,10 @@ reproducir *sin mirar*, porque son las dos piezas que la demostración usa en se
 
 - *Ejemplo 3.12* --- $NN times NN tilde.op NN$ vía Cantor--Schröeder--Bernstein. Es el motor:
   si no lo tenés en los dedos, la demostración se corta a la mitad. Está resuelto en
-  `ejemplos.typ` (Ejemplo 14).
+  `ejemplos/p2.typ` (Ejemplo 14).
 - *Proposición 3.9* --- $\#A <= \#B$ si y sólo si hay una sobreyección $B -> A$. Es la
   herramienta del Camino A. Está demostrada en `apuntes.typ` y también figura como desafío en
-  `desafios.typ` (Bloque 10, "Ejercicio 3.9").
+  `desafios/p2.typ` (Bloque 1, "Ejercicio 3.9").
 
 === La escalera de la Práctica 2
 
