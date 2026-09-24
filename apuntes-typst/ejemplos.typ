@@ -63,6 +63,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [9], [Topología en espacios métricos: puntos interiores y abiertos], [p3: Ej. 3 (a), 4],
   [10], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7],
   [11], [Caracterizaciones y estabilidad de abiertos y cerrados], [p3: Ej. 9; conceptual para Ej. 5, 12],
+  [12], [Sucesiones en espacios métricos], [p3: Ej. 13 (intro)],
 )
 
 #v(4pt)
@@ -2537,6 +2538,69 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Supongamos $x_n -> x$ respecto de $d$. Dado $epsilon>0$, por equivalencia existe $r'>0$ con $B_d(x,r') subset.eq B_(d')(x,epsilon)$. Como $x_n -> x$ para $d$, existe $tilde(n) in NN$ tal que $d(x_n,x)<r'$ para $n>=tilde(n)$, es decir $(x_n)_(n>=tilde(n)) subset.eq B_d(x,r') subset.eq B_(d')(x,epsilon)$. Tomando $n_0>=tilde(n)$, $d'(x_n,x)<epsilon$ para todo $n>=n_0$, es decir $x_n -> x$ respecto de $d'$.
 
   El argumento recíproco (que la convergencia para $d'$ implica la convergencia para $d$) es análogo, intercambiando los roles de $d$ y $d'$.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Bloque 12 · Sucesiones en espacios métricos
+
+#sublema(titulo: "Qué desbloquea")[
+  La definición de convergencia en un espacio métrico (Definición 4.42) es la de $RR$ con $abs(x_n - x)$ cambiado por $d(x_n, x)$. Lo que cambia de un espacio a otro es *qué significa* $d(x_n, x) < epsilon$ en concreto. Estos ejemplos lo traducen en dos métricas conocidas: en la discreta, convergencia quiere decir eventualmente constante; con $d_oo$, quiere decir convergencia uniforme. Es el punto de partida del *Ejercicio 13* de la Práctica 3.
+]
+
+#ejemplo[Sucesiones convergentes en la métrica discreta y en $(C([a,b]), d_oo)$ (Ejemplo 4.45)][30][
+  #set enum(numbering: "a)")
+  + Consideremos $(M, delta)$, con $delta$ la métrica discreta. ¿Cómo son las sucesiones convergentes en este espacio?
+  + Consideremos $(C([a,b]), d_oo)$. ¿Qué significa que $f_n -> f$ en este espacio?
+]
+
+#resolucion[
+  #set enum(numbering: "a)")
+  + Supongamos que $x_n -> x$. Por definición, tenemos que para todo $epsilon > 0$, debería ser que $delta(x_n, x) < epsilon$ para todo $n$ a partir de cierto $n_0$. Pero si $0 < epsilon < 1$, $delta(x_n, x) < epsilon$ si y sólo si $delta(x_n, x) = 0$ (puesto que $delta$ toma sólo dos valores, $0$ y $1$). Pero $delta(x_n, x) = 0$ sólo cuando $x_n = x$.
+
+    Es decir, que las únicas sucesiones convergentes en $(M, delta)$ son aquéllas que a partir de cierto punto valen siempre lo mismo (es decir, las *eventualmente constantes*).
+
+  + Recordemos que $d_oo (f_n, f) = sup_(x in [a,b]) abs(f_n (x) - f(x))$. Tenemos que $f_n -> f$ en este espacio si para todo $epsilon > 0$ existe un $n_0 in NN$ tal que si $n >= n_0$ se tiene que
+    $ abs(f_n (x) - f(x)) < epsilon quad bold("para todo") x in [a, b]. $
+
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+
+        line((-0.5, 0), (5.3, 0), mark: (end: ">"), stroke: 0.6pt)
+        line((0, -0.5), (0, 4.4), mark: (end: ">"), stroke: 0.6pt)
+        content((5.55, 0), text(size: 10pt)[$x$])
+        content((0, 4.65), text(size: 10pt)[$y$])
+
+        let f(t) = 2.0 + 0.3 * calc.sin(t * 1.9 + 0.3) + 0.12 * t
+        let fn(t) = f(t) + 0.35 * calc.sin(1.9 * (t - 1) - 1.2)
+        let eps = 0.75
+        let xs = range(0, 41).map(i => 1 + i * 3.5 / 40)
+
+        let upper = xs.map(t => (t, f(t) + eps))
+        let lower = xs.map(t => (t, f(t) - eps)).rev()
+        line(..upper, ..lower, close: true, fill: rgb("#e0e7ff"), stroke: none)
+        line(..upper, stroke: (dash: "dashed", paint: gray, thickness: 0.7pt))
+        line(..lower, stroke: (dash: "dashed", paint: gray, thickness: 0.7pt))
+
+        line(..xs.map(t => (t, f(t))), stroke: (paint: blue, thickness: 2pt))
+        line(..xs.map(t => (t, fn(t))), stroke: (paint: red, thickness: 1pt))
+
+        content((4.95, f(4.5) + eps), text(size: 9pt)[$f + epsilon$])
+        content((4.8, f(4.5) + 0.05), text(size: 9pt, fill: blue)[$f$])
+        content((4.8, fn(4.5) - 0.05), text(size: 9pt, fill: red)[$f_n$])
+        content((4.95, f(4.5) - eps), text(size: 9pt)[$f - epsilon$])
+
+        for pair in ((1, $a$), (4.5, $b$)) {
+          line((pair.at(0), -0.08), (pair.at(0), 0.08), stroke: 0.8pt)
+          content((pair.at(0), -0.35), text(size: 10pt)[#pair.at(1)])
+        }
+      })
+    ]
+
+    Esto es lo que vamos a llamar *convergencia uniforme* de las funciones $f_n$ y es una de las nociones de convergencia en espacio de funciones que vamos a explorar más adelante.
 ]
 
 #v(10pt)

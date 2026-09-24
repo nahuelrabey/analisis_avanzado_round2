@@ -744,4 +744,16 @@ alimenta cada bloque.
   Probar que $x$ es un punto de acumulación de $E$ si y sólo si para todo $r > 0$, $B(x, r) inter E$ tiene infinitos elementos.
 ]
 
+#desafio[Unicidad del límite (Ejercicio 4.44)][
+  Sea $(M, d)$ un espacio métrico y sea $(x_n)_(n in NN)$ una sucesión. Probar que si $x_n -> x$ y $x_n -> y$ entonces $x = y$. Es decir, el límite de una sucesión es único (recordar la proposición 2.8).
+]
+
+#desafio[Cerrados vía sucesiones (Corolario 4.47)][
+  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Probar que $E$ es cerrado si y sólo si para toda sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$ se tiene que $x in E$ (sugerencia: usar la Proposición 4.46).
+]
+
+#desafio[Toda sucesión convergente es acotada (Ejercicio 4.50)][
+  Sea $(x_n)_(n in NN) subset.eq M$ una sucesión convergente. Probar que entonces es acotada (sugerencia: ver 2.12).
+]
+
 

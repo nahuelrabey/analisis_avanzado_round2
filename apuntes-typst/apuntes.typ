@@ -1320,3 +1320,204 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
   Sea $x in overline(E)$. Si $x in.not E$, entonces sabemos que para todo $r > 0$, tenemos que por un lado $B(x, r) inter E != nothing$ (porque $x in overline(E)$) y por otro lado $B(x, r) inter E^c != nothing$ (porque $x in.not E$). Pero esto nos dice que $x in partial E$ por definición.
 ]
 
+#definicion[Sucesión y Convergencia][4.42][
+  Sea $(M, d)$ un espacio métrico. Una *sucesión* en $(M, d)$ es una función $f: NN -> M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_(n in NN)$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.
+
+  Decimos que $(x_n)_(n in NN)$ *converge* a $x in M$ (y usamos la notación $x_n -> x$ o $lim_(n -> oo) x_n = x$) si para todo $epsilon > 0$ existe un $n_0 in NN$ tal que
+  $ d(x_n, x) < epsilon, quad "para todo " n >= n_0. $
+]
+
+#observacion[][4.43][
+  Si tenemos una sucesión $(x_n)_(n in NN) subset.eq M$ y $x in M$, entonces podemos formar la sucesión de las distancias de $x_n$ a $x$, $d(x_n, x) in RR_(>= 0)$. Por definición de convergencia en $RR$, tenemos que
+  $ x_n -> x quad ("en " M) quad <=> quad d(x_n, x) -> 0 quad ("en " RR). $
+]
+
+#proposicion[Clausura y conjunto derivado vía sucesiones][4.46][
+  Sea $(M, d)$ un espacio métrico, y sean $E subset.eq M$ y $x in M$. Entonces
+  #set enum(numbering: "a)")
+  + $x in overline(E)$ si y sólo si existe una sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$.
+  + $x in E'$ si y sólo si existe una sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n != x$ para todo $n in NN$ y además $x_n -> x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).
+]
+#demostracion[
+  Veamos las dos afirmaciones. Como ambas involucran una doble implicación, en ambas vamos a hacer las dos implicaciones por separado.
+
+  #set enum(numbering: "a)")
+  + $(arrow.double.r)$ Supongamos que $x in overline(E)$ y veamos que podemos construir una sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$. Como $x in overline(E)$, sabemos que para todo $r > 0$, $B(x, r) inter E != nothing$. Si tomamos $r = 1/n > 0$, sabemos que tiene que existir un $x_n in B(x, 1\/n) inter E$. Veamos que esta sucesión cumple lo que queremos: por un lado, $x_n in E$ (porque está en la intersección) y por el otro, como $x_n in B(x, 1\/n)$, tenemos
+    $ d(x_n, x) < 1/n -> 0. $
+    Como además la distancia es siempre no negativa, esto nos dice que $d(x_n, x) -> 0$ y como observamos antes, esto es lo mismo que $x_n -> x$.
+
+    $(arrow.double.l)$ Supongamos que existe $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$. Veamos que $x in overline(E)$. Para esto, tomemos un $r > 0$ y veamos que $B(x, r) inter E != nothing$. Como sabemos que $x_n -> x$, para $r > 0$ debe existir un $n_0 in NN$ tal que $d(x_n, x) < r$ para todo $n >= n_0$. Pero esto es lo mismo que decir que $x_n in B(x, r)$ para todo $n >= n_0$. Por otro lado, también sabemos que $(x_n)_(n in NN) subset.eq E$, con lo cual $x_n in B(x, r) inter E$ para todo $n >= n_0$. En particular, $B(x, r) inter E != nothing$.
+
+  + $(arrow.double.r)$ Supongamos que $x in E'$ y construyamos la sucesión $(x_n)_(n in NN)$ de la siguiente manera: comenzamos tomando $r = 1$ y elegimos $x_1 in B(x, 1) inter E$, con $x_1 != x$ (que existe por hipótesis). Para elegir $x_2$ que sea distinto de $x_1$ y de $x$, vamos a tomar ahora $r = min(1\/2, d(x_1, x)) > 0$ puesto que $x_1 != x$. Elegimos entonces $x_2 in B(x, r) inter E$ con $x_2 != x$. Además, vemos que
+    $ d(x_2, x) < r <= d(x_1, x), $
+    lo que nos dice que $x_2 != x_1$ (si fueran iguales, tendrían la misma distancia a $x$). Sucesivamente vamos a ir eligiendo $x_n in B(x, r) inter E$ con $x_n != x$ y $r = min(1\/n, d(x_(n-1), x)) > 0$. En particular, por como construimos los $x_n$, tenemos que
+    $ d(x_n, x) < d(x_(n-1), x) < dots.c < d(x_2, x) < d(x_1, x), $
+    lo cual nos dice que los $x_n$ son todos distintos entre sí como queríamos. Por construcción, la sucesión $(x_n)_(n in NN) subset.eq E$.
+
+    Además, tenemos que
+    $ d(x_n, x) < r <= 1/n -> 0, $
+    y como vimos antes, esto nos dice que $x_n -> x$.
+
+    $(arrow.double.l)$ Sea $(x_n)_(n in NN) subset.eq E$ tal que $x_n != x$ para todo $n$ y $x_n -> x$. Veamos que $x in E'$. Para esto, tomemos $r > 0$ un radio arbitrario. Como $x_n -> x$, existe un $n_0$ tal que si $n >= n_0$, tenemos que $d(x_n, x) < r$. Como antes, esto nos dice que $x_n in B(x, r) inter E$ para todo $n >= n_0$ y además $x_n != x$. Esto nos dice que $x in E'$.
+
+    De hecho, si usamos que los $x_n$ son todos distintos entre sí, lo que nos sale es que no sólo podemos encontrar un elemento distinto de $x$ en $B(x, r) inter E$, sino que podemos encontrar _infinitos elementos_ en $B(x, r) inter E$, como mencionamos anteriormente.
+]
+
+#corolario[Cerrados vía sucesiones][4.47][
+  Sea $(M, d)$ un espacio métrico, $E subset.eq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$ se tiene que $x in E$.
+]
+
+La demostración se deduce directamente del resultado anterior y la dejamos de ejercicio (ver `desafios.typ`).
+
+#observacion[][4.48][
+  El corolario nos dice que en un conjunto cerrado, toda sucesión convergente lo hace dentro de $E$. Lo que *no dice* el corolario es que toda sucesión sea convergente.
+]
+
+#definicion[Sucesión acotada][4.49][
+  Sea $(x_n)_(n in NN) subset.eq M$ una sucesión dentro de $M$. Decimos que $(x_n)_(n in NN)$ es _acotada_ si el conjunto
+  $ A = {x_n : n in NN} subset.eq M $
+  es un conjunto acotado.
+]
+
+#definicion[Sucesión de Cauchy][4.51][
+  Sea $(x_n)_(n in NN) subset.eq M$ una sucesión. Decimos que $(x_n)_(n in NN)$ es una sucesión _de Cauchy_ si para todo $epsilon > 0$ existe un $n_0 in NN$ tal que
+  $ d(x_n, x_m) < epsilon, quad "para todo " n, m >= n_0. $
+]
+
+#ejemplo[Sucesiones de Cauchy][4.52][
+  #set enum(numbering: "a)")
+  + Sea $(x_n)_(n in NN) = (1/n) subset.eq (RR, abs(dot))$. Veamos que $(x_n)_(n in NN)$ es de Cauchy.
+
+    Sea $epsilon > 0$. Queremos encontrar un $n_0$ tal que si $n, m >= n_0$ se tiene que $abs(1/n - 1/m) < epsilon$. Si $n, m >= n_0$ tenemos
+    $ abs(1/n - 1/m) <= 1/n + 1/m <= 1/n_0 + 1/n_0 = 2/n_0 < epsilon $
+    si elegimos $n_0 > 2/epsilon$.
+
+    Como observamos antes, vamos a ver que toda sucesión convergente es de Cauchy, con lo cual vamos a poder decir que esta sucesión es de Cauchy porque converge en $RR$. Sin embargo, notemos que la definición de sucesión de Cauchy no depende de la existencia del $0$ en este espacio métrico.
+
+  + Sea $(x_n)_(n in NN) = (1/n) subset.eq ((0, 1], abs(dot))$. Por la cuenta que hicimos antes, vemos que esta sucesión sigue siendo de Cauchy. Sin embargo, esta sucesión no converge en el espacio métrico que estamos considerando: $0 in.not (0, 1]$.
+
+  + Sea $(M, delta)$ un espacio métrico con la métrica discreta. ¿Cómo son las sucesiones de Cauchy en este espacio?
+
+    Supongamos que $(x_n)_(n in NN)$ es de Cauchy. Entonces para $0 < epsilon < 1$, deberíamos tener un $n_0$ tal que $delta(x_n, x_m) < epsilon$ para todo $n, m >= n_0$. Pero como la métrica sólo toma los valores $0$ y $1$, vemos que tiene que ser $delta(x_n, x_m) = 0$. Es decir, que las sucesiones de Cauchy son las eventualmente constantes. Observemos que, por el Ejemplo 4.45, tenemos que en este espacio las sucesiones de Cauchy y las convergentes sí son las mismas.
+
+  + Consideremos en $(C([0, 1]), d_1)$ la sucesión de funciones $f_n$ definidas de la siguiente forma:
+    $
+      f_n (x) = cases(
+        0\, & "si " 0 <= x <= 1/2 - 1/n\,,
+        "segmento que une los puntos " (1/2 - 1/n, 0) " y " (1/2, 1)\, & "si " 1/2 - 1/n <= x <= 1/2\,,
+        1\, & "si " 1/2 <= x <= 1.
+      )
+    $
+    Para que esta sucesión tenga sentido la definimos con $n >= 3$ (para completar la sucesión, podemos tomar los primeros dos términos de la sucesión como $f_1 = f_2 = 0$).
+
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        let (sx, sy) = (6, 3)
+        let p(x, y) = (x * sx, y * sy)
+
+        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
+        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
+        content(p(1.19, 0), $x$)
+        content(p(0, 1.27), $y$)
+        content(p(-0.06, -0.07), $0$)
+        content(p(-0.06, 1), $1$)
+        content(p(0.5, -0.1), $1/2$)
+        content(p(1, -0.08), $1$)
+        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+
+        for (n, col) in ((4, blue), (10, red), (25, rgb("#15803d"))) {
+          let a = 0.5 - 1 / n
+          line(p(0, 0), p(a, 0), p(0.5, 1), p(1, 1), stroke: 1pt + col)
+        }
+        content(p(0.28, 0.3), text(fill: blue)[$f_4$])
+        content(p(0.56, 0.45), text(fill: red)[$f_(10)$])
+        content(p(0.56, 0.72), text(fill: rgb("#15803d"))[$f_(25)$])
+        line(p(0.2, 0.1), p(0.4, 0.1), mark: (end: ">"), stroke: 0.6pt)
+        content(p(0.3, 0.15), text(size: 8pt)[$n -> oo$])
+        circle(p(0.5, 1), radius: 0.06, fill: black)
+        content(p(0.5, -0.24), text(size: 9pt)[Sucesión $(f_n)$ en $(C([0, 1]), d_1)$])
+      })
+    ]
+
+    Veamos que esta sucesión es de Cauchy. Para esto, tenemos que entender cómo son las distancias entre dos términos de la sucesión. Sean $f_n$ y $f_m$ dos elementos de la sucesión, y supongamos que $m > n$. Recordemos que la distancia 1 entre funciones representa el área atrapada entre las dos funciones. Gráficamente tendremos algo así:
+
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        let (sx, sy) = (6, 3)
+        let p(x, y) = (x * sx, y * sy)
+        let (an, am) = (0.5 - 1 / 4, 0.5 - 1 / 10)
+
+        line(p(an, 0), p(0.5, 1), p(am, 0), close: true, fill: rgb("#fde6cf"), stroke: none)
+        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
+        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
+        content(p(1.19, 0), $x$)
+        content(p(0, 1.27), $y$)
+        content(p(-0.06, -0.07), $0$)
+        content(p(-0.06, 1), $1$)
+        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+
+        line(p(0, 0), p(an, 0), p(0.5, 1), p(1, 1), stroke: 1pt + blue)
+        line(p(0, 0), p(am, 0), p(0.5, 1), p(1, 1), stroke: 1pt + red)
+        content(p(0.2, 0.5), text(fill: blue)[$f_n$])
+        content(p(0.56, 0.62), text(fill: red)[$f_m$])
+        content(p(an, -0.1), text(size: 8pt)[$1/2 - 1/n$])
+        content(p(am + 0.01, -0.22), text(size: 8pt)[$1/2 - 1/m$])
+        content(p(0.52, -0.1), text(size: 8pt)[$1/2$])
+        line(p(0.62, 0.42), p(0.4, 0.3), mark: (end: ">"), stroke: 0.5pt)
+        content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f_m)$])
+      })
+    ]
+
+    El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n) = 1/n - 1/m$ y altura $1$, entonces el área es $A = 1/2 (1/n - 1/m) dot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $epsilon > 0$,
+    $ d_1 (f_n, f_m) <= 1/2 abs(1/n - 1/m) < epsilon, quad "para todo " n, m >= n_0. $
+
+    Sin embargo, esta sucesión tampoco converge en el espacio métrico que estamos considerando. El límite de esta sucesión es la función
+    $
+      f(x) = cases(
+        0\, & "si " 0 <= x <= 1/2\,,
+        1\, & "si " 1/2 < x <= 1\,,
+      )
+    $
+    que no es una función continua.
+
+    Probemos que efectivamente las funciones $f_n$ convergen a $f$ en la distancia 1. Para esto, analicemos cómo es la distancia de $f_n$ a $f$.
+
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        let (sx, sy) = (6, 3)
+        let p(x, y) = (x * sx, y * sy)
+        let an = 0.5 - 1 / 4
+
+        line(p(an, 0), p(0.5, 1), p(0.5, 0), close: true, fill: rgb("#ccfbd1"), stroke: none)
+        line(p(-0.08, 0), p(1.15, 0), mark: (end: ">"), stroke: 0.6pt)
+        line(p(0, -0.1), p(0, 1.2), mark: (end: ">"), stroke: 0.6pt)
+        content(p(1.19, 0), $x$)
+        content(p(0, 1.27), $y$)
+        content(p(-0.06, -0.07), $0$)
+        content(p(-0.06, 1), $1$)
+        line(p(0, 1), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+        line(p(0.5, 0), p(0.5, 1), stroke: (paint: gray, dash: "dashed", thickness: 0.5pt))
+
+        line(p(0, 0), p(0.5, 0), stroke: 2pt + black)
+        line(p(0.5, 1), p(1, 1), stroke: 2pt + black)
+        line(p(an, 0), p(0.5, 1), stroke: 1pt + blue)
+        circle(p(0.5, 0), radius: 0.06, fill: black)
+        circle(p(0.5, 1), radius: 0.06, fill: white, stroke: 0.8pt)
+        content(p(0.28, 0.55), text(fill: blue)[$f_n$])
+        content(p(0.95, 0.88), $f$)
+        content(p(an, -0.1), text(size: 8pt)[$1/2 - 1/n$])
+        content(p(0.5, -0.1), text(size: 8pt)[$1/2$])
+        line(p(0.62, 0.42), p(0.44, 0.3), mark: (end: ">"), stroke: 0.5pt)
+        content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f)$])
+      })
+    ]
+
+    Como vimos antes, la distancia $d_1 (f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $epsilon > 0$, podemos encontrar un $n_0$ tal que
+    $ d_1 (f_n, f) = 1/2 dot 1/n < epsilon, quad "para todo " n >= n_0. $
+]
+
