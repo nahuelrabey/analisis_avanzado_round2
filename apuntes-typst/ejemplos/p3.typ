@@ -147,7 +147,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #ejemplo[La métrica $C^1$ en $[0,1]$ (Clase 3 · Ejercicio 7)][C3-7][
   Sea $X = {f : [0,1] -> RR "continuas tales que" f' "es continua en" [0,1]}$ y definamos
-  $ d : X times X -> RR, quad d(f, g) = norm(f - g)_infinity + norm(f' - g')_infinity = sup_(x in [0,1]) abs(f(x) - g(x)) + sup_(x in [0,1]) abs(f'(x) - g'(x)). $
+  $
+    d : X times X -> RR, quad d(f, g) &= norm(f - g)_infinity + norm(f' - g')_infinity \
+    &= sup_(x in [0,1]) abs(f(x) - g(x)) + sup_(x in [0,1]) abs(f'(x) - g'(x)).
+  $
   Probar que $d$ es una métrica.
 ]
 
@@ -172,7 +175,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ sup_(x in [0,1]) abs(f'(x) - g'(x)) <= sup_(x in [0,1]) abs(f'(x) - h'(x)) + sup_(x in [0,1]) abs(h'(x) - g'(x)). quad (2) $
   Sumando $(1)$ y $(2)$ y reagrupando,
   $ d(f, g) &= sup_(x in [0,1]) abs(f(x) - g(x)) + sup_(x in [0,1]) abs(f'(x) - g'(x)) \
-    &<= sup_(x in [0,1]) abs(f(x) - h(x)) + sup_(x in [0,1]) abs(f'(x) - h'(x)) + sup_(x in [0,1]) abs(h(x) - g(x)) + sup_(x in [0,1]) abs(h'(x) - g'(x)) \
+    &<= sup_(x in [0,1]) abs(f(x) - h(x)) + sup_(x in [0,1]) abs(f'(x) - h'(x)) \
+    &quad + sup_(x in [0,1]) abs(h(x) - g(x)) + sup_(x in [0,1]) abs(h'(x) - g'(x)) \
     &= d(f, h) + d(h, g). $
 
   Concluimos que $d$ es una métrica.
@@ -386,7 +390,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ B(x, r) = {y in RR : d(x, y) < r} = {y in RR : abs(x - y) < r} = (x - r, x + r). $
   Debemos encontrar un radio $r > 0$ de modo que el intervalo centrado en $x$ se mantenga adentro de $(0, 1)$.
 
-  #align(center)[
+  #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
       import cetz.draw: *
       line((-0.5, 0), (6.5, 0), mark: (end: ">"), stroke: 0.8pt)
@@ -413,7 +417,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       line((xp, y_b), (x1, y_b), stroke: 0.7pt, mark: (start: "|", end: "|"))
       content(((xp + x1)/2, y_b - 0.25), text(size: 8.5pt)[$1 - x$])
     })
-  ]
+  ]]
 
   Observamos que nos alcanza con tomar $r = min(x, 1 - x)$, es decir, la distancia más corta al borde del intervalo. Como $0 < x < 1$, sabemos que $r > 0$. Veamos que efectivamente este radio funciona: sea $y in (x - r, x + r)$, entonces:
 
@@ -466,32 +470,34 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #estrategia[Tomar el radio como la distancia de $p$ al borde de la circunferencia][
   Dado $p in A$, hay que encontrar $r > 0$ tal que $B(p, r) subset.eq A$. Gráficamente, lo más grande que puede ser ese radio es cuando lo tomamos como la distancia de $p$ al borde del círculo de radio $1$.
 
-  #align(center)[
-    #cetz.canvas({
-      import cetz.draw: *
-      line((-1.8, 0), (2.3, 0), mark: (end: ">"), stroke: 0.8pt)
-      content((2.5, 0), text(size: 8pt)[$x$])
-      line((0, -1.8), (0, 2.3), mark: (end: ">"), stroke: 0.8pt)
-      content((0, 2.45), text(size: 8pt)[$y$])
+  #block(breakable: false, width: 100%)[
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        line((-1.8, 0), (2.3, 0), mark: (end: ">"), stroke: 0.8pt)
+        content((2.5, 0), text(size: 8pt)[$x$])
+        line((0, -1.8), (0, 2.3), mark: (end: ">"), stroke: 0.8pt)
+        content((0, 2.45), text(size: 8pt)[$y$])
 
-      circle((0, 0), radius: 1.5, fill: rgb("#ede9fe"), stroke: (dash: "dashed", paint: rgb("#2563eb"), thickness: 1pt))
-      content((1.15, 1.15), text(size: 8.5pt, fill: rgb("#2563eb"))[$B((0,0), 1)$])
+        circle((0, 0), radius: 1.5, fill: rgb("#ede9fe"), stroke: (dash: "dashed", paint: rgb("#2563eb"), thickness: 1pt))
+        content((1.15, 1.15), text(size: 8.5pt, fill: rgb("#2563eb"))[$B((0,0), 1)$])
 
-      line((-0.07, 1.5), (0.07, 1.5), stroke: 0.8pt)
-      content((-0.2, 1.5), text(size: 7.5pt)[$1$])
-      line((1.5, -0.07), (1.5, 0.07), stroke: 0.8pt)
-      content((1.5, -0.25), text(size: 7.5pt)[$1$])
+        line((-0.07, 1.5), (0.07, 1.5), stroke: 0.8pt)
+        content((-0.2, 1.5), text(size: 7.5pt)[$1$])
+        line((1.5, -0.07), (1.5, 0.07), stroke: 0.8pt)
+        content((1.5, -0.25), text(size: 7.5pt)[$1$])
 
-      let p = (0.35, 0.15)
-      let rp = 0.55
-      circle(p, radius: rp, fill: none, stroke: (dash: "dashed", paint: rgb("#dc2626"), thickness: 1pt))
-      circle(p, radius: 0.03, fill: black)
-      content((p.at(0) + 0.25, p.at(1) - 0.15), text(size: 8pt)[$p$])
-      let ang = 130deg
-      line(p, (p.at(0) + rp * calc.cos(ang), p.at(1) + rp * calc.sin(ang)), stroke: 0.6pt + rgb("#dc2626"))
-      content((p.at(0) - 0.3, p.at(1) + 0.35), text(size: 7.5pt, fill: rgb("#dc2626"))[$r$])
-      content((p.at(0) - 0.15, p.at(1) - rp - 0.2), text(size: 7.5pt, fill: rgb("#dc2626"))[$B(p, r)$])
-    })
+        let p = (0.35, 0.15)
+        let rp = 0.55
+        circle(p, radius: rp, fill: none, stroke: (dash: "dashed", paint: rgb("#dc2626"), thickness: 1pt))
+        circle(p, radius: 0.03, fill: black)
+        content((p.at(0) + 0.25, p.at(1) - 0.15), text(size: 8pt)[$p$])
+        let ang = 130deg
+        line(p, (p.at(0) + rp * calc.cos(ang), p.at(1) + rp * calc.sin(ang)), stroke: 0.6pt + rgb("#dc2626"))
+        content((p.at(0) - 0.3, p.at(1) + 0.35), text(size: 7.5pt, fill: rgb("#dc2626"))[$r$])
+        content((p.at(0) - 0.15, p.at(1) - rp - 0.2), text(size: 7.5pt, fill: rgb("#dc2626"))[$B(p, r)$])
+      })
+    ]
   ]
 ]
 
@@ -559,7 +565,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #resolucion[
-  #align(center)[
+  #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
       import cetz.draw: *
       line((-1.8, 0), (1.8, 0), mark: (end: ">"), stroke: 0.8pt)
@@ -586,7 +592,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       content((2.7, 0.85), text(size: 7.5pt)[$B(x,r) inter E != nothing$])
       content((2.7, 0.35), text(size: 7pt)[(punto de adherencia)])
     })
-  ]
+  ]]
 
   Veamos que $overline(E) = {(x, y) in RR^2 : x^2 + y^2 <= 1} = B[(0,0), 1]$. Para esto, veamos la doble contención.
 
@@ -610,7 +616,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #resolucion[
   Dicho esto, lo que vamos a probar es que si $y in.not B[x, r]$ entonces $y in.not overline(B[x, r])$. Sea $y in.not B[x, r]$. Por definición, esto quiere decir que $d(y, x) > r$. Veamos que $y in.not overline(B[x, r])$, es decir, que existe un radio $t > 0$ tal que $B(y, t) inter B[x, r] = nothing$. Como $d(y, x) > r$, tomemos $t = d(y, x) - r > 0$ y veamos que $B(y, t) inter B[x, r] = nothing$.
 
-  #align(center)[
+  #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
       import cetz.draw: *
       let xp = (0, 0)
@@ -638,7 +644,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
       content((0.95, -2.3), text(size: 8.5pt)[$B(y,t) inter B[x,r] = emptyset$])
     })
-  ]
+  ]]
 
   Hagamos una pequeña observación. Recordemos que la desigualdad triangular, que vale en cualquier espacio métrico, nos dice que
   $ d(x, y) <= d(x, z) + d(z, y), $
@@ -677,7 +683,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #resolucion[
-  #align(center)[
+  #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
       import cetz.draw: *
       line((-1.2, 0), (5.2, 0), mark: (end: ">"), stroke: 0.8pt)
@@ -705,7 +711,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       content((4.55, 0.3), text(size: 9pt, fill: red)[)])
       content((4, 0.65), text(size: 8pt, fill: red)[$B(2,r)$])
     })
-  ]
+  ]]
 
   Para ver esto, deberíamos probar que dado $r > 0$, las bolas $B(0,r)$, $B(1,r)$ y $B(2,r)$ intersecan tanto a $E$ como a $E^c$. Gráficamente, esto no es difícil de creer. Analíticamente, podríamos argumentar que, por ejemplo, $-r/2 in B(0,r) inter E^c$ y $r/2 in B(0,r) inter E$ (y podríamos hacer lo mismo con los otros puntos).
 
@@ -720,40 +726,42 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   #set enum(numbering: "a)")
   + Sea $E = ZZ subset.eq (RR, abs(dot.c))$. Como estamos en $(RR, abs(dot.c))$, sabemos que $B(x, r) = (x - r, x + r)$. Observemos que si $n in ZZ$, y $r$ es un radio con $0 < r < 1$, $B(n, r) inter ZZ = {n}$ y a su vez $B(n, r) inter ZZ^c != nothing$. Por otro lado, si $x in.not ZZ$, no es difícil ver que existe un radio $r > 0$ tal que $B(x, r) inter ZZ = emptyset$.
 
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
-        line((-1.6, 0), (5.6, 0), mark: (end: ">"), stroke: 0.8pt)
-        content((5.85, 0), text(size: 9pt)[$RR$])
-        content((-1, 1.1), text(size: 9pt, fill: blue)[$E = ZZ$])
+        let u = 2.2
+        let verde = rgb("#15803d")
+        line((-3.0, 0), (8.0, 0), mark: (end: ">"), stroke: 0.8pt)
+        content((8.3, 0), text(size: 9pt)[$RR$])
+        content((-2.6, 0.9), text(size: 10pt, fill: blue)[$E = ZZ$])
 
-        for pair in ((-1, "-1"), (0, "0"), (1, "1"), (2, "2"), (3, "3")) {
-          let px = pair.at(0)
-          circle((px, 0), radius: 0.045, fill: blue)
-          content((px, -0.3), text(size: 8pt)[#pair.at(1)])
+        for k in (-1, 0, 1, 2, 3) {
+          circle((k * u, 0), radius: 0.05, fill: blue)
+          content((k * u, -0.32), text(size: 8pt)[$#k$])
         }
 
-        content((1, 0.55), text(size: 9pt, fill: red)[$B(n,r)$])
-        content((0.45, 0.15), text(size: 9pt, fill: red)[(])
-        content((1.55, 0.15), text(size: 9pt, fill: red)[)])
-        line((0.5, 0), (1.5, 0), stroke: (paint: red, thickness: 1.5pt))
+        // Bola centrada en un entero: sólo contiene a n
+        let n = 1 * u
+        line((n - 0.5, 0), (n + 0.5, 0), stroke: (paint: red, thickness: 1.5pt))
+        content((n - 0.5, 0.02), text(size: 10pt, fill: red)[(])
+        content((n + 0.5, 0.02), text(size: 10pt, fill: red)[)])
+        content((n, 0.5), text(size: 9pt, fill: red)[$B(n,r)$])
+        content((0.2, 1.65), text(size: 8pt)[$B(n,r) inter ZZ = {n}$])
+        content((0.2, 1.25), text(size: 8pt)[$B(n,r) inter ZZ^c != emptyset$])
+        line((0.9, 1.0), (n - 0.25, 0.15), stroke: 0.5pt, mark: (end: ">"))
 
-        line((2.1, 0.85), (1.15, 0.2), stroke: 0.5pt, mark: (end: ">"))
-        content((3.0, 1.05), text(size: 7pt)[$B(n,r) inter ZZ = {n}$])
-        content((3.0, 0.85), text(size: 7pt)[$B(n,r) inter ZZ^c != nothing$])
-
-        let xp = 2.4
+        // Bola centrada en un no entero: no toca a ZZ
+        let xp = 2.5 * u
+        line((xp - 0.45, 0), (xp + 0.45, 0), stroke: (paint: verde, thickness: 1.5pt))
+        content((xp - 0.45, 0.02), text(size: 10pt, fill: verde)[(])
+        content((xp + 0.45, 0.02), text(size: 10pt, fill: verde)[)])
         circle((xp, 0), radius: 0.04, fill: black)
-        content((xp, -0.3), text(size: 8pt)[$x in.not ZZ$])
-        content((xp, 0.55), text(size: 9pt, fill: rgb("#15803d"))[$B(x,r)$])
-        content((xp - 0.5, 0.15), text(size: 9pt, fill: rgb("#15803d"))[(])
-        content((xp + 0.5, 0.15), text(size: 9pt, fill: rgb("#15803d"))[)])
-        line((xp - 0.4, 0), (xp + 0.4, 0), stroke: (paint: rgb("#15803d"), thickness: 1.5pt))
-
-        line((xp + 0.3, -0.6), (xp, -0.15), stroke: 0.5pt, mark: (end: ">"))
-        content((xp + 0.35, -0.85), text(size: 7pt)[$B(x,r) inter ZZ = emptyset$])
+        content((xp, 0.5), text(size: 9pt, fill: verde)[$B(x,r)$])
+        content((xp, -0.32), text(size: 8pt)[$x$])
+        line((xp + 1.0, -0.95), (xp + 0.3, -0.1), stroke: 0.5pt, mark: (end: ">"))
+        content((xp + 1.2, -1.25), text(size: 8pt)[$x in.not ZZ: quad B(x,r) inter ZZ = emptyset$])
       })
-    ]
+    ]]
 
     Estas observaciones nos llevan a concluir lo siguiente:
     - $overline(ZZ) = ZZ$ (es un conjunto cerrado).
@@ -875,7 +883,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ m + 1/2, quad m + 1/3, quad m + 1/4, quad dots, quad m + 1/(n+1) -> m, $
   que decrece estrictamente hacia $m$ sin alcanzarlo nunca. Es decir, $A$ es una unión de racimos de puntos que se acumulan sobre cada natural $m$, acercándose desde la derecha.
 
-  #align(center)[
+  #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
       import cetz.draw: *
       line((-0.3, 0), (7.3, 0), mark: (end: ">"), stroke: 0.8pt)
@@ -896,7 +904,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       }
       content((6.4, 0.4), text(size: 7.5pt, fill: rgb("#dc2626"))[$m + 1/(n+1)$])
     })
-  ]
+  ]]
 ]
 
 #resolucion[
@@ -1131,7 +1139,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   + Recordemos que $d_oo (f_n, f) = sup_(x in [a,b]) abs(f_n (x) - f(x))$. Tenemos que $f_n -> f$ en este espacio si para todo $epsilon > 0$ existe un $n_0 in NN$ tal que si $n >= n_0$ se tiene que
     $ abs(f_n (x) - f(x)) < epsilon quad bold("para todo") x in [a, b]. $
 
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
 
@@ -1164,7 +1172,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
           content((pair.at(0), -0.35), text(size: 10pt)[#pair.at(1)])
         }
       })
-    ]
+    ]]
 
     Esto es lo que vamos a llamar *convergencia uniforme* de las funciones $f_n$ y es una de las nociones de convergencia en espacio de funciones que vamos a explorar más adelante.
 ]
@@ -1187,7 +1195,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
     $
     Para que esta sucesión tenga sentido la definimos con $n >= 3$ (para completar la sucesión, podemos tomar los primeros dos términos de la sucesión como $f_1 = f_2 = 0$).
 
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
         let (sx, sy) = (6, 3)
@@ -1216,7 +1224,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
         circle(p(0.5, 1), radius: 0.06, fill: black)
         content(p(0.5, -0.24), text(size: 9pt)[Sucesión $(f_n)$ en $(C([0, 1]), d_1)$])
       })
-    ]
+    ]]
 
     ¿Es $(f_n)$ de Cauchy? ¿Converge en $(C([0, 1]), d_1)$?
 ]
@@ -1235,7 +1243,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   + Veamos que esta sucesión es de Cauchy. Para esto, tenemos que entender cómo son las distancias entre dos términos de la sucesión. Sean $f_n$ y $f_m$ dos elementos de la sucesión, y supongamos que $m > n$. Recordemos que la distancia 1 entre funciones representa el área atrapada entre las dos funciones. Gráficamente tendremos algo así:
 
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
         let (sx, sy) = (6, 3)
@@ -1262,7 +1270,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
         line(p(0.62, 0.42), p(0.4, 0.3), mark: (end: ">"), stroke: 0.5pt)
         content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f_m)$])
       })
-    ]
+    ]]
 
     El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n) = 1/n - 1/m$ y altura $1$, entonces el área es $A = 1/2 (1/n - 1/m) dot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $epsilon > 0$,
     $ d_1 (f_n, f_m) <= 1/2 abs(1/n - 1/m) < epsilon, quad "para todo " n, m >= n_0. $
@@ -1278,7 +1286,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
     Probemos que efectivamente las funciones $f_n$ convergen a $f$ en la distancia 1. Para esto, analicemos cómo es la distancia de $f_n$ a $f$.
 
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
         let (sx, sy) = (6, 3)
@@ -1307,7 +1315,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
         line(p(0.62, 0.42), p(0.44, 0.3), mark: (end: ">"), stroke: 0.5pt)
         content(p(0.62, 0.42), anchor: "west", text(size: 8.5pt)[Distancia $d_1 (f_n, f)$])
       })
-    ]
+    ]]
 
     Como vimos antes, la distancia $d_1 (f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $epsilon > 0$, podemos encontrar un $n_0$ tal que
     $ d_1 (f_n, f) = 1/2 dot 1/n < epsilon, quad "para todo " n >= n_0. $

@@ -141,7 +141,7 @@ Con $f(x) = x / (1 + abs(x))$ el comportamiento se lee sin hacer ninguna cuenta:
 Esa combinación --- identidad cerca del cero, asíntotas en los extremos --- es toda la
 construcción. El denominador *domina* y achata la función contra $plus.minus 1$.
 
-#align(center)[
+#block(breakable: false, width: 100%)[#align(center)[
   #cetz.canvas({
     plot.plot(
       size: (9, 4.2),
@@ -170,7 +170,7 @@ construcción. El denominador *domina* y achata la función contra $plus.minus 1
       },
     )
   })
-]
+]]
 
 La monotonía se chequea en un renglón. Para $x >= 0$,
 

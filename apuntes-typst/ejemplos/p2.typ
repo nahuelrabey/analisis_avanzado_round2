@@ -84,7 +84,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
     $ f(1) = 1, quad f(2) = 2, quad f(3) = 1/2, quad f(4) = 1/3, quad f(5) = 3, quad dots $
 
     #v(4pt)
-    #align(center)[
+    #block(breakable: false, width: 100%)[#align(center)[
       #cetz.canvas({
         import cetz.draw: *
 
@@ -148,7 +148,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
           mark: (end: "stealth")
         )
       })
-    ]
+    ]]
 ]
 
 #estrategia[
