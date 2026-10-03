@@ -76,7 +76,7 @@
     #v(2pt)
     #text(size: 9.5pt, fill: rgb("#334155"))[Análisis Avanzado -- Plan de 90 Días sobre un método de 6 pasos] \
     #v(1pt)
-    #text(size: 8pt, fill: rgb("#64748b"))[Teoría: `notas_materia.pdf`, Caps. 1--7 (77 pág.) · Prácticas: `guias/p1`--`p7` (245 ítems) · Exámenes: `parcial_1.typ`, `parcial_2.typ`]
+    #text(size: 8pt, fill: rgb("#64748b"))[Teoría: `notas_materia.pdf`, Caps. 1--7 (77 pág.) · Prácticas: `guias/p1`--`p7` (245 ítems) · Exámenes: `parciales/2025_1c_parcial_1.typ`, `parciales/2024_2c_parcial_2.typ`]
   ]
 ]
 
@@ -154,7 +154,7 @@ Cada capítulo se recorre con el mismo ciclo. Los pasos 1--4 trabajan sobre la t
   [3], [Rehacer los ejemplos], [`ejemplos/`], [50 ejemplos], [25], [6],
   [4], [Completar los desafíos], [`desafios/`], [29 ejercicios], [29], [6],
   [5], [Resolver las prácticas], [`guias/p1`--`p7`], [245 ítems], [142], [32],
-  [6], [Rendir los parciales], [`parcial_1/2.typ`], [2 simulacros], [12], [3],
+  [6], [Rendir los parciales], [`parciales/`], [2 simulacros], [12], [3],
   [--], [Repaso integrador pre-parcial], [--], [2 bloques], [18], [4],
   table.cell(colspan: 4, align: right)[*Total*], [*380*], [*86*],
 )
@@ -252,7 +252,7 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
     - Verificar métricas y dibujar bolas; interior/clausura/frontera; $d(x,A)$; equivalencia de $d_1, d_2, d_infinity$; completitud de $RR^n$; Teorema de la intersección de Cantor (ej. 16, reservale una jornada entera).
   - *Días 47 -- 48: Repaso integrador Caps. 1--4*
     - Releer los resúmenes de estrategia y rehacer un ejercicio al azar de cada guía sin mirar la resolución.
-  - *Días 49 -- 50: #badge("Primer Parcial (parcial_1.typ)", bg: rgb("#fee2e2"), fg: rgb("#991b1b"))* #paso(6, "")
+  - *Días 49 -- 50: #badge("Primer Parcial (parciales/2025_1c_parcial_1.typ)", bg: rgb("#fee2e2"), fg: rgb("#991b1b"))* #paso(6, "")
     - _Día 49:_ resolverlo cronometrado, en condiciones de examen. _Día 50:_ corregirlo y rehacer lo que salió mal.
     - _Temas que pone a prueba:_ cardinal de un conjunto de sucesiones (Ej. 1); $op("ínf")(A)$ frente a clausura e interior (Ej. 2); caracterización de abiertos vía $U inter overline(T) subset.eq overline(U inter T)$ (Ej. 3); el espacio $(X, d_infinity)$ de sucesiones finalmente nulas y su no completitud (Ej. 4).
 ]
@@ -293,7 +293,7 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
   - *Días 84 -- 86: #badge("Práctica 7 -- 23 ítems", bg: c-prac.lighten(86%), fg: c-prac.darken(15%))* #paso(5, "")
     - Convergencia puntual y uniforme, el espacio $B(X)$ de funciones acotadas, preservación de continuidad uniforme, derivación de límites uniformes.
   - *Días 87 -- 88: Repaso integrador Caps. 5--7*
-  - *Días 89 -- 90: #badge("Segundo Parcial (parcial_2.typ)", bg: rgb("#fee2e2"), fg: rgb("#991b1b"))* #paso(6, "")
+  - *Días 89 -- 90: #badge("Segundo Parcial (parciales/2024_2c_parcial_2.typ)", bg: rgb("#fee2e2"), fg: rgb("#991b1b"))* #paso(6, "")
     - _Ejercicios vigentes:_ Ej. 1 ($f^n$ contracción $=>$ punto fijo único de $f$, Cap. 6) y Ej. 2 (la serie $c(x) = sum (-1)^n x^(2n)\/(2n)!$ está bien definida, es dos veces derivable y $c'' + c = 0$ --- convergencia uniforme y derivación término a término, Cap. 7).
     - _Ejercicio 5 (optativo, Picard):_ también vigente. Escribe $integral_0^t f(y(s)) d mu(s)$, pero para $f compose y$ continua eso es integral de Riemann; lo que realmente necesita es el punto fijo de Banach sobre $C([-epsilon,epsilon], RR^d)$.
     - #text(fill: rgb("#991b1b"))[*Advertencia:* los Ej. 3 y 4 son de teoría de la medida (ver contingencia abajo). Si ese tema no entra, quedan fuera de programa --- y como la consigna dice "se aprueba con dos de los primeros cuatro", *este parcial deja de ser un simulacro representativo*. Usalo como práctica de los Ej. 1, 2 y 5, no como examen cronometrado.]
@@ -324,7 +324,7 @@ La columna *dem/pág* es la densidad de demostraciones del capítulo, y es la qu
     [*Documento*], [*Fecha*], [*¿Trae Medida?*],
     [`notas_materia.pdf`], [1er cuat. 2026], [*No* --- 7 capítulos, termina en "Sucesiones de funciones", pág. 77],
     [`guias/p1`--`p9.typ`], [2do cuat. 2025], [Sí, en p8 y p9],
-    [`parcial_2.typ`], [30/11/2024], [Sí, en Ej. 3 y 4],
+    [`parciales/2024_2c_parcial_2.typ`], [30/11/2024], [Sí, en Ej. 3 y 4],
   )
   #v(3pt)
 

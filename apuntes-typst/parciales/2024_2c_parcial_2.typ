@@ -1,4 +1,4 @@
-#import "utils.typ": *
+#import "../utils.typ": *
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado] \
