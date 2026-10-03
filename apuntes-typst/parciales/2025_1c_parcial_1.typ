@@ -1,4 +1,8 @@
-#import "utils.typ": *
+#import "../utils.typ": *
+
+// Fuente: `parciales/primer_parcial_1c2025.jpg` y `parciales/Enunciado_1C_2025.jpg` (dos fotos del mismo enunciado).
+// Resolución de los ejercicios 2 y 3 (no del 1 ni del 4) en avanzadito:
+// https://www.avanzadito.online/analisis-avanzado/parciales/2-1C2025/an-lisis-avanzado-1p-1c2025
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado - Primer cuatrimestre 2025] \
