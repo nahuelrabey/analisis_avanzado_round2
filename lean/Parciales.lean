@@ -1,0 +1,2 @@
+import Parciales.Parcial1_1C2025
+import Parciales.Recu1_1C2025

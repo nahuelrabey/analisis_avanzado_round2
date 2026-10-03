@@ -16,6 +16,9 @@
 // Fuente: `parciales/1 RECU 2025.JPG` (enunciado) y
 // `parciales/AnalisisAvanzado_1recu_01-07-25.pdf` (enunciado + resolución corregida de un alumno).
 // El nombre del PDF dice 01-07-25, pero el examen y las hojas están fechados 08/07/2025.
+// Después del enunciado: resoluciones propuestas de los cuatro ejercicios, cada una verificada
+// formalmente en `lean/Parciales/Recu1_1C2025.lean` (Lean 4 + Mathlib). Al final, la resolución
+// de un alumno corregida por la cátedra.
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado - Primer cuatrimestre 2025] \
@@ -60,6 +63,371 @@
     Complete esta hoja con sus datos y entréguela con el resto del examen. \
     *Justifique todas sus respuestas y escriba con claridad.*
   ]
+]
+
+#pagebreak()
+
+= Resoluciones propuestas
+
+#progreso[
+  *Qué hay acá:* una resolución completa de cada ejercicio, escrita como para entregar, usando
+  sólo las cajas de `apuntes.typ` (citadas por nombre y número) y los enunciados de las guías
+  (citados como "Práctica $k$, Ej. $m$"). Más abajo, en la sección siguiente, está la
+  resolución de un alumno corregida por la cátedra, que sirve de contraste.
+
+  *Verificación en Lean:* cada resolución tiene su contraparte formal en
+  `lean/Parciales/Recu1_1C2025.lean`, compilada con Lean 4 + Mathlib (`cd lean && lake build`).
+  Al final de cada ejercicio, una caja _Observación_ dice qué teorema de ese archivo certifica
+  el resultado y en qué difiere la formalización de la escritura a mano. Ninguna demostración
+  usa `sorry`; los únicos axiomas son los estándar de Lean (`propext`, `Classical.choice`,
+  `Quot.sound`).
+
+  *Convención de índices:* en el curso las sucesiones arrancan en $n = 1$; en Lean arrancan en
+  $0$. Ningún argumento depende de ella.
+]
+
+#v(8pt)
+
+== Ejercicio 1
+
+#enunciado[Ejercicio 1][
+  Sea $A$ el conjunto de sucesiones $(a_n)_(n in NN)$ de números enteros que cumplen
+  $a_n divides a_(n+1)$ para todo $n in NN$. Halle el cardinal de $A$.
+]
+
+#estrategia[Potencias de $2$ con exponente creciente][
+  La cota $\#A <= frak(c)$ es gratis porque $A subset.eq ZZ^NN$. Para la otra hace falta meter
+  ${0,1}^NN$ dentro de $A$: una sucesión de ceros y unos se codifica como $a_n = 2^(s_n)$, donde
+  $s_n$ cuenta los unos que aparecieron antes del lugar $n$. Como $s_n <= s_(n+1)$, cada término
+  divide al siguiente, y de los $s_n$ se recupera la sucesión original mirando los saltos.
+  (El alumno de la sección siguiente usa productos parciales $product_(i <= n) k_i$ con
+  $k_i != 0$; es la misma idea con base variable.)
+]
+
+#resolucion[Propuesta][
+  Vamos a probar que $\#A = frak(c) = \#RR$.
+
+  *Cota superior.* $A subset.eq ZZ^NN$, así que $\#A <= \#ZZ^NN = frak(c)$ (Lema de abajo).
+
+  *Cota inferior.* Para $b = (b_n)_n in {0,1}^NN$ definimos $s_1 = 0$ y
+  $s_(n+1) = s_n + b_n$, es decir $s_n = b_1 + dots.c + b_(n-1)$ (la cantidad de unos entre
+  $b_1, dots, b_(n-1)$), y
+  $ Phi : {0,1}^NN -> ZZ^NN, quad Phi(b) = (2^(s_n))_(n in NN). $
+
+  _$Phi$ toma valores en $A$._ Para todo $n$, $2^(s_(n+1)) = 2^(s_n) dot 2^(b_n)$ con
+  $2^(b_n) in {1, 2} subset.eq ZZ$, así que $2^(s_n) divides 2^(s_(n+1))$, es decir
+  $Phi(b)_n divides Phi(b)_(n+1)$.
+
+  _$Phi$ es inyectiva._ Sean $b, b' in {0,1}^NN$ con $Phi(b) = Phi(b')$ y llamemos $s_n, s'_n$ a
+  los respectivos exponentes. Para cada $n$, $2^(s_n) = 2^(s'_n)$ y, como $k |-> 2^k$ es
+  inyectiva en $NN_0$ (es estrictamente creciente), $s_n = s'_n$. Entonces
+  $ b_n = s_(n+1) - s_n = s'_(n+1) - s'_n = b'_n quad "para todo " n, $
+  es decir $b = b'$.
+
+  Luego $frak(c) = \#{0,1}^NN <= \#A$ (Definición 3.8), donde $\#{0,1}^NN = frak(c)$ porque
+  ${0,1}^NN tilde.op [0,1)$ (Práctica 2, Ej. 9 (a)) y $[0,1) tilde.op RR$ (Observación 3.21).
+
+  *Conclusión.* $frak(c) <= \#A <= frak(c)$ y, por el Teorema 3.11
+  (Cantor--Schröeder--Bernstein), $\#A = frak(c)$. $qed$
+]
+
+#sublema(titulo: [Lema: $\#(ZZ^NN) = frak(c)$])[
+  *$frak(c) <= \#ZZ^NN$:* ${0,1}^NN subset.eq ZZ^NN$ y $\#{0,1}^NN = frak(c)$ (como arriba).
+
+  *$\#ZZ^NN <= frak(c)$:* la función $ZZ^NN -> cal(P)(NN times ZZ)$ que manda una sucesión a su
+  gráfico, $(a_n)_n |-> {(n, a_n) : n in NN}$, es inyectiva (si dos sucesiones tienen el mismo
+  gráfico, para cada $n$ el único par con primera coordenada $n$ coincide, así que
+  $a_n = b_n$). Como $NN times ZZ tilde.op NN$ (Práctica 2, Ej. 1 (c)), vale
+  $cal(P)(NN times ZZ) tilde.op cal(P)(NN)$ (Práctica 2, Ej. 8 (c)) y $\#cal(P)(NN) = frak(c)$
+  (Práctica 2, Ej. 9 (b)). Luego $\#ZZ^NN <= frak(c)$, y por Cantor--Schröeder--Bernstein,
+  $\#ZZ^NN = frak(c)$.
+]
+
+#observacion[Verificado en Lean: `Recu1_1C2025.ej1`][
+  `cuenta b n` es $s_n$, `codif b n = 2 ^ cuenta b n` es $Phi(b)_n$; `codif_mem` y
+  `codif_injective` son los dos párrafos de arriba (la inyectividad de $k |-> 2^k$ es
+  `Nat.pow_right_injective`). `ej1 : #A = 𝔠` cierra con `Cardinal.mk_set_le` (la inclusión
+  $A subset.eq ZZ^NN$), `Cardinal.mk_le_of_injective` y la aritmética
+  $aleph_0^(aleph_0) = 2^(aleph_0) = frak(c)$ de Mathlib en lugar del Lema; `ej1'` lo
+  reescribe como $\#A = \#RR$.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Ejercicio 2
+
+#enunciado[Ejercicio 2 a)][
+  Dados $A, B subset.eq RR$ no vacíos, sea $A + B = {a + b : a in A, b in B}$. Si $A$ y $B$ son
+  acotados, ¿vale $op("sup")(A + B) = op("sup")(A) + op("sup")(B)$?
+]
+
+#estrategia[Cota superior por un lado, $epsilon/2 + epsilon/2$ por el otro][
+  $op("sup") A + op("sup") B$ es cota superior de $A + B$, lo que da $<=$. Para $>=$ se usa la
+  caracterización con $epsilon$ del supremo (Proposición 3): hay $a_epsilon$, $b_epsilon$ a menos
+  de $epsilon/2$ de cada supremo, y su suma está en $A + B$.
+]
+
+#resolucion[Propuesta: es *verdadera*][
+  Como $A$ y $B$ son no vacíos y acotados superiormente, existen $alpha = op("sup")(A)$ y
+  $beta = op("sup")(B)$ (Axioma de Completitud). Fijemos $a_0 in A$ y $b_0 in B$; entonces
+  $a_0 + b_0 in A + B$, así que $A + B != emptyset$.
+
+  *$alpha + beta$ es cota superior de $A + B$.* Si $x in A + B$, existen $a in A$, $b in B$ con
+  $x = a + b$; como $a <= alpha$ y $b <= beta$, resulta $x <= alpha + beta$. En particular
+  $A + B$ está acotado superiormente, existe $sigma = op("sup")(A + B)$ y, por ser la menor de
+  las cotas superiores (Definición 2), $sigma <= alpha + beta$.
+
+  *$alpha + beta <= sigma$.* Sea $epsilon > 0$. Por la Proposición 3 (equivalencia de supremo)
+  aplicada a $A$ y a $B$ con $epsilon/2$, existen $a_epsilon in A$ y $b_epsilon in B$ tales que
+  $alpha - epsilon/2 < a_epsilon$ y $beta - epsilon/2 < b_epsilon$. Sumando,
+  $ alpha + beta - epsilon < a_epsilon + b_epsilon <= sigma, $
+  donde la última desigualdad vale porque $a_epsilon + b_epsilon in A + B$ y $sigma$ es cota
+  superior de $A + B$. Así $alpha + beta < sigma + epsilon$ para todo $epsilon > 0$, y por la
+  Práctica 1, Ej. 1, $alpha + beta <= sigma$.
+
+  Por lo tanto $op("sup")(A + B) = op("sup")(A) + op("sup")(B)$. $qed$
+]
+
+#enunciado[Ejercicio 2 b)][
+  Si $(a_n)_n$ y $(b_n)_n$ son sucesiones acotadas de números reales, ¿vale
+  $op("sup")({a_n + b_n}_n) = op("sup")({a_n}_n) + op("sup")({b_n}_n)$?
+]
+
+#estrategia[El supremo de la suma de sucesiones se toma sobre la diagonal][
+  En $A + B$ se suman *todos* los pares $(a, b)$; en ${a_n + b_n}_n$ sólo los pares con el mismo
+  índice. Si los máximos de las dos sucesiones están en índices distintos, la suma nunca los
+  junta.
+]
+
+#resolucion[Propuesta: es *falsa*][
+  Sean $a_1 = 1$, $b_1 = -1$ y $a_n = b_n = 0$ para todo $n >= 2$. Ambas sucesiones son acotadas
+  ($abs(a_n) <= 1$ y $abs(b_n) <= 1$ para todo $n$).
+
+  - ${a_n}_n = {1, 0}$ y $op("sup")({1, 0}) = 1$ ($1$ es cota superior y pertenece al conjunto;
+    Proposición 4).
+  - ${b_n}_n = {-1, 0}$ y $op("sup")({-1, 0}) = 0$ (misma razón).
+  - $a_n + b_n = 0$ para todo $n$, así que ${a_n + b_n}_n = {0}$ y
+    $op("sup")({0}) = 0$.
+
+  Entonces $op("sup")({a_n + b_n}_n) = 0 != 1 = op("sup")({a_n}_n) + op("sup")({b_n}_n)$. $qed$
+
+  _Lo que sí vale siempre_ es $op("sup")({a_n + b_n}_n) <= op("sup")({a_n}_n) + op("sup")({b_n}_n)$,
+  porque ${a_n + b_n}_n subset.eq {a_n}_n + {b_n}_n$ y se aplica el ítem a) junto con la
+  Práctica 1, Ej. 5 (a).
+]
+
+#observacion[Verificado en Lean: `Recu1_1C2025.ej2a` y `ej2b`][
+  `sumSet A B` es $A + B$ tal como lo define el enunciado. `ej2a` prueba
+  `sSup (sumSet A B) = sSup A + sSup B` pidiendo sólo que $A$ y $B$ sean no vacíos y acotados
+  *superiormente*; el paso "$alpha + beta < sigma + epsilon$ para todo $epsilon$" es
+  `le_of_forall_pos_lt_add` y los $a_epsilon$, $b_epsilon$ salen de `exists_lt_of_lt_csSup`.
+  `ej2b` exhibe `a2`, `b2` (las sucesiones de arriba), calcula `Set.range a2 = {1, 0}`,
+  `Set.range b2 = {-1, 0}` y `fun n => a2 n + b2 n = fun _ => 0`, y concluye $0 != 1$ con
+  `csSup_pair` y `csSup_singleton`.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Ejercicio 3
+
+#enunciado[Ejercicio 3][
+  Sea $(E, d)$ un espacio métrico y $X subset.eq E$ con $overline(X) = E$. Pruebe que para todo
+  abierto $U subset.eq E$ se tiene $overline(X inter U) = overline(U)$.
+]
+
+#estrategia[Una bola dentro de otra bola, y la densidad en la chica][
+  Si $x in overline(U)$, cada bola $B(x, r)$ tiene un punto $u in U$; como $U$ es abierto hay una
+  bola $B(u, rho)$ dentro de $U$, y se la puede achicar para que además quede dentro de
+  $B(x, r)$. La densidad de $X$ pone un punto de $X$ en $B(u, rho)$, que entonces está en
+  $X inter U inter B(x, r)$. (El alumno de la sección siguiente hace lo mismo con una sucesión
+  de sucesiones; con bolas se evita la elección de índices.)
+]
+
+#resolucion[Propuesta][
+  *$overline(X inter U) subset.eq overline(U)$.* Sea $z in overline(X inter U)$ y $r > 0$. Existe
+  $y in B(z, r) inter (X inter U)$; en particular $y in B(z, r) inter U$, así que
+  $B(z, r) inter U != emptyset$. Como $r$ era arbitrario, $z in overline(U)$ (Definición 4.22).
+
+  *$overline(U) subset.eq overline(X inter U)$.* Sea $x in overline(U)$ y $r > 0$. Como
+  $x in overline(U)$, existe $u in B(x, r) inter U$. Como $U$ es abierto, existe $s > 0$ con
+  $B(u, s) subset.eq U$ (Definiciones 4.11 y 4.14). Sea
+  $ rho = min{s, r - d(x, u)} > 0 $
+  (es positivo porque $d(x, u) < r$). Como $u in E = overline(X)$, existe
+  $y in B(u, rho) inter X$. Entonces:
+  - $y in U$, porque $d(u, y) < rho <= s$ y $B(u, s) subset.eq U$;
+  - $y in B(x, r)$, porque $d(x, y) <= d(x, u) + d(u, y) < d(x, u) + (r - d(x, u)) = r$
+    (desigualdad triangular, Definición 4.1);
+  - $y in X$ por elección.
+  Luego $y in B(x, r) inter (X inter U)$, y como $r$ era arbitrario, $x in overline(X inter U)$.
+
+  Por doble inclusión, $overline(X inter U) = overline(U)$. $qed$
+]
+
+#observacion[Verificado en Lean: `Recu1_1C2025.ej3`][
+  Enunciado idéntico, con la hipótesis de densidad escrita como `closure X = Set.univ`. La
+  primera inclusión es `closure_mono`; para la segunda, Lean prueba `U ⊆ closure (X ∩ U)`
+  con `IsOpen.inter_closure` (el mismo lema que el Ejercicio 3 del primer parcial) y cierra con
+  `closure_minimal`, que es "la clausura es el cerrado más chico que contiene a $U$".
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Ejercicio 4
+
+#enunciado[Ejercicio 4 a)][
+  Sea $d(x, y) = op("máx"){4/3 d_oo (x, y), d_2 (x, y)}$ en $RR^n$. Pruebe que $(RR^n, d)$ es
+  un espacio métrico.
+]
+
+#estrategia[El máximo de dos métricas (reescaladas) es métrica][
+  Cada axioma se verifica "coordenada a coordenada" del máximo. Para la desigualdad triangular
+  hay que acotar *cada una* de las dos expresiones $4/3 d_oo (x, z)$ y $d_2 (x, z)$ por
+  $d(x, y) + d(y, z)$, usando que cada sumando $d(x, y)$ es un máximo y domina a la expresión
+  correspondiente.
+]
+
+#resolucion[Propuesta][
+  Sabemos que $d_oo$ y $d_2$ son métricas en $RR^n$ (Práctica 3, Ej. 1 (b) y (d)). Sean
+  $x, y, z in RR^n$.
+
+  #set enum(numbering: "(i)")
+  + *No negatividad.* $d(x, y) >= d_2 (x, y) >= 0$.
+  + *Separación.* Si $x = y$, $d(x, x) = op("máx"){0, 0} = 0$. Recíprocamente, si $d(x, y) = 0$
+    entonces $0 <= d_2 (x, y) <= d(x, y) = 0$, luego $d_2 (x, y) = 0$ y $x = y$ por ser $d_2$
+    una métrica.
+  + *Simetría.* $d(x, y) = op("máx"){4/3 d_oo (x, y), d_2 (x, y)} = op("máx"){4/3 d_oo (y, x), d_2 (y, x)} = d(y, x)$,
+    por la simetría de $d_oo$ y de $d_2$.
+  + *Desigualdad triangular.* Usamos que $4/3 d_oo (p, q) <= d(p, q)$ y $d_2 (p, q) <= d(p, q)$
+    para todo $p, q$ (cada expresión es menor o igual que el máximo). Entonces
+    $ 4/3 d_oo (x, z) &<= 4/3 d_oo (x, y) + 4/3 d_oo (y, z) <= d(x, y) + d(y, z), \
+      d_2 (x, z) &<= d_2 (x, y) + d_2 (y, z) <= d(x, y) + d(y, z), $
+    por las desigualdades triangulares de $d_oo$ y de $d_2$. Como $d(x, z)$ es el máximo de las
+    dos expresiones de la izquierda y ambas están acotadas por $d(x, y) + d(y, z)$,
+    $d(x, z) <= d(x, y) + d(y, z)$.
+
+  Por lo tanto $d$ es una métrica y $(RR^n, d)$ es un espacio métrico (Definición 4.1). $qed$
+]
+
+#enunciado[Ejercicio 4 b)][
+  Dibuje aproximadamente $B((0, 0), 1)$ en $(RR^2, d)$.
+]
+
+#resolucion[Propuesta][
+  Para $p = (x, y) in RR^2$,
+  $ p in B_d ((0,0), 1) &<==> op("máx"){4/3 d_oo (p, 0), d_2 (p, 0)} < 1 \
+    &<==> d_oo (p, 0) < 3/4 " y " d_2 (p, 0) < 1 \
+    &<==> abs(x) < 3/4, " " abs(y) < 3/4 " y " x^2 + y^2 < 1. $
+  Es decir, $B_d ((0,0), 1) = B_(d_oo)((0,0), 3/4) inter B_(d_2)((0,0), 1)$: el cuadrado
+  abierto de lado $3/2$ centrado en el origen, intersecado con el disco abierto de radio $1$.
+  Los vértices del cuadrado, $(plus.minus 3/4, plus.minus 3/4)$, quedan afuera porque
+  $(3/4)^2 + (3/4)^2 = 9/8 > 1$; los puntos medios de los lados, como $(3/4, 0)$, están en el
+  borde del cuadrado y adentro del disco. El dibujo es entonces un cuadrado con las cuatro
+  esquinas recortadas por arcos de la circunferencia unidad: sobre el lado $x = 3/4$ la
+  condición $x^2 + y^2 < 1$ deja $abs(y) < sqrt(7)/4 approx 0.66$.
+]
+
+#block(breakable: false, width: 100%)[
+  #align(center)[
+    #cetz.canvas(length: 2.2cm, {
+      import cetz.draw: *
+      let s = 0.75
+      let h = calc.sqrt(7) / 4
+      let t1 = calc.atan2(s, h)
+      let t2 = calc.atan2(h, s)
+
+      line((-1.35, 0), (1.35, 0), stroke: 0.6pt + luma(120), mark: (end: "stealth", fill: luma(120)))
+      line((0, -1.35), (0, 1.35), stroke: 0.6pt + luma(120), mark: (end: "stealth", fill: luma(120)))
+
+      circle((0, 0), radius: 1, stroke: (paint: rgb("#dc2626"), dash: "dashed", thickness: 0.8pt))
+      rect((-s, -s), (s, s), stroke: (paint: rgb("#2563eb"), dash: "dashed", thickness: 0.8pt))
+
+      merge-path(close: true, fill: rgb("#bfdbfe").transparentize(30%), stroke: 1.2pt + rgb("#1e3a8a"), {
+        line((s, -h), (s, h))
+        arc((s, h), start: t1, stop: t2, radius: 1)
+        line((h, s), (-h, s))
+        arc((-h, s), start: 180deg - t2, stop: 180deg - t1, radius: 1)
+        line((-s, h), (-s, -h))
+        arc((-s, -h), start: 180deg + t1, stop: 180deg + t2, radius: 1)
+        line((-h, -s), (h, -s))
+        arc((h, -s), start: 360deg - t2, stop: 360deg - t1, radius: 1)
+      })
+
+      line((s, -0.04), (s, 0.04), stroke: 0.6pt)
+      content((s, -0.17), text(size: 8pt)[$3/4$])
+      line((1, -0.04), (1, 0.04), stroke: 0.6pt)
+      content((1.02, -0.17), text(size: 8pt)[$1$])
+      content((1.05, 1.1), text(size: 8pt, fill: rgb("#dc2626"))[$B_(d_2)((0,0),1)$])
+      content((-0.95, 0.95), text(size: 8pt, fill: rgb("#2563eb"))[$B_(d_oo)((0,0),3/4)$])
+      content((0, -1.5), text(size: 9pt, fill: rgb("#1e3a8a"))[$B_d ((0,0), 1)$])
+    })
+  ]
+]
+
+#enunciado[Ejercicio 4 c)][
+  Pruebe que $d$ es equivalente a $d_oo$ y a $d_2$ en $RR^n$. ¿Es $(RR^n, d)$ completo?
+]
+
+#estrategia[Encajar $d$ entre múltiplos de $d_2$ y de $d_oo$][
+  Dos métricas con $c_1 d' <= d <= c_2 d'$ ($c_1, c_2 > 0$) tienen las mismas bolas "a menos de
+  reescalar el radio", así que los mismos abiertos, las mismas sucesiones convergentes y las
+  mismas sucesiones de Cauchy. Las desigualdades salen de la Práctica 3, Ej. 12 (a):
+  $d_oo <= d_2 <= n d_oo$. Para la completitud, una sucesión de Cauchy para $d$ lo es para
+  $d_oo$, converge ahí (Práctica 3, Ej. 14) y la convergencia vuelve a $d$.
+]
+
+#resolucion[Propuesta][
+  *Las desigualdades.* Sean $x, y in RR^n$. Por definición de máximo, $d_2 (x, y) <= d(x, y)$. Por
+  la Práctica 3, Ej. 12 (a), $d_oo (x, y) <= d_2 (x, y)$, así que
+  $4/3 d_oo (x, y) <= 4/3 d_2 (x, y)$ y también $d_2 (x, y) <= 4/3 d_2 (x, y)$; como $d(x, y)$ es
+  el máximo de dos cantidades acotadas por $4/3 d_2 (x,y)$,
+  $ d_2 (x, y) <= d(x, y) <= 4/3 d_2 (x, y). $
+  Usando además $d_oo <= d_2 <= n d_oo$ (Práctica 3, Ej. 12 (a)),
+  $ d_oo (x, y) <= d_2 (x, y) <= d(x, y) <= 4/3 d_2 (x, y) <= (4 n)/3 d_oo (x, y). $
+
+  *Equivalencia.* Sean $d'$ cualquiera de $d_2$ o $d_oo$ y $c >= 1$ tal que
+  $d' <= d <= c d'$ (con $c = 4/3$ o $c = 4n/3$). Para $x in RR^n$ y $r > 0$:
+  $ B_d (x, r) subset.eq B_(d') (x, r) quad "y" quad B_(d') (x, r/c) subset.eq B_d (x, r), $
+  pues $d'(x, y) <= d(x, y) < r$ en el primer caso y $d(x, y) <= c d'(x,y) < r$ en el segundo.
+  Entonces un conjunto $G$ es abierto para $d$ si y sólo si lo es para $d'$: si $G$ es
+  $d$-abierto y $x in G$, hay $r > 0$ con $B_d (x, r) subset.eq G$, y entonces
+  $B_(d')(x, r/c) subset.eq B_d (x, r) subset.eq G$; recíprocamente, si $G$ es $d'$-abierto y
+  $B_(d')(x, r) subset.eq G$, entonces $B_d (x, r) subset.eq B_(d')(x, r) subset.eq G$. Luego $d$
+  es equivalente a $d_2$ y a $d_oo$ (tienen los mismos abiertos; de hecho son uniformemente
+  equivalentes).
+
+  *Completitud.* Sea $(x_k)_k$ de Cauchy en $(RR^n, d)$. Como $d_oo <= d$, dado $epsilon > 0$ el
+  $k_0$ que da $d(x_k, x_j) < epsilon$ para $k, j >= k_0$ también da
+  $d_oo (x_k, x_j) < epsilon$: $(x_k)_k$ es de Cauchy en $(RR^n, d_oo)$. Por la Práctica 3,
+  Ej. 14, $(RR^n, d_oo)$ es completo, así que existe $x in RR^n$ con $d_oo (x_k, x) -> 0$.
+  Finalmente $0 <= d(x_k, x) <= (4n)/3 d_oo (x_k, x) -> 0$, y por la Práctica 1, Ej. 8,
+  $d(x_k, x) -> 0$, es decir $x_k -> x$ en $(RR^n, d)$ (Observación 4.43). Toda sucesión de
+  Cauchy converge: $(RR^n, d)$ es completo. $qed$
+]
+
+#observacion[Verificado en Lean: `Recu1_1C2025`, sección Ejercicio 4][
+  En Mathlib, `Fin n → ℝ` lleva de fábrica la métrica $d_oo$ (`dist_pi_le_iff`,
+  `dist_le_pi_dist`) y `EuclideanSpace ℝ (Fin n)` lleva $d_2$; `d2` transporta esta última y
+  `d2_eq` comprueba que es $sqrt(sum (x_i - y_i)^2)$. `d` es la del enunciado.
+  - *(a)* `d_nonneg`, `d_eq_zero_iff`, `d_comm`, `d_triangle` son los cuatro axiomas, y
+    `instMetricSpaceRd` empaqueta a $(RR^n, d)$ como un `MetricSpace` sobre el sinónimo
+    `Rd n`.
+  - *(b)* `ball_eq` prueba que $B_d (0, 1) = {(x, y) : abs(x) < 3/4, abs(y) < 3/4, x^2 + y^2 < 1}$
+    en $RR^2$; `vertice_notMem`, `punto_disco_notMem` y `punto_mem` certifican que
+    $(3/4, 3/4) in.not B$, $(9/10, 0) in.not B$ y $(7/10, 7/10) in B$, que es lo que distingue
+    al dibujo del cuadrado entero y del disco entero.
+  - *(c)* `d2_le_d`, `d_le_d2`, `dist_le_d`, `d_le_dist` son las desigualdades
+    $d_2 <= d <= 4/3 d_2$ y $d_oo <= d <= 4/3 sqrt(n) d_oo$ (Lean usa $sqrt(n)$, que es mejor
+    que el $n$ de la guía; `d2_le_sqrt_mul_dist` lo prueba). `lipschitz_toRd` y
+    `lipschitz_ofRd` dicen que la identidad es Lipschitz en los dos sentidos y
+    `uniformEquivRd : (Fin n → ℝ) ≃ᵤ Rd n` es la equivalencia uniforme. La instancia
+    `CompleteSpace (Rd n)` es el párrafo de completitud: Cauchy para $d$ $=>$ Cauchy para
+    $d_oo$ $=>$ converge para $d_oo$ $=>$ converge para $d$.
 ]
 
 #pagebreak()
