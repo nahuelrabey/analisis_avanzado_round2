@@ -87,6 +87,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-6],
   [La inducción no cruza al límite],
   [Hay que probar algo de una unión infinita y tengo la propiedad en cada escalón finito],
+
+  [G-7],
+  [La diagonal vive adentro de todos los pares],
+  [Hay un supremo de una operación término a término entre dos sucesiones],
 )
 
 #v(8pt)
@@ -898,3 +902,97 @@ como un todo, no.
 - `p2: Ej. 2` --- $A union B$ contable: el caso finito puro. Es lo que la inducción extiende a
   uniones finitas, y sólo a ellas.
 - `p2: Ej. 7 (b)` --- $\# (union.big_(n in NN) A_n) = c$: misma forma, mismo cuidado.
+
+#v(8pt)
+
+== Galerazo 7 · La diagonal vive adentro de todos los pares
+
+#disparador[
+  Ya vi que $op("sup")({a_n + b_n}_n) = op("sup")({a_n}_n) + op("sup")({b_n}_n)$ es falso.
+  ¿Queda algo en pie? ¿Y cómo lo pruebo sin rehacer todo el argumento del $epsilon$?
+]
+
+#galerazo[G-7][
+  Un conjunto armado combinando *sólo los pares con el mismo índice* es un subconjunto del
+  armado con *todos* los pares. El supremo es monótono respecto de la inclusión, así que lo que
+  se sabe del conjunto grande baja al chico como *desigualdad*:
+  $op("sup")({a_n + b_n}_n) <= op("sup")({a_n}_n) + op("sup")({b_n}_n)$ vale siempre. La
+  igualdad no: ésa se pierde al achicar el conjunto.
+]
+
+=== La señal
+
+Aparece el supremo de un conjunto de la forma ${a_n + b_n : n in NN}$ --- una operación entre
+dos sucesiones hecha *término a término* --- y al lado los supremos de cada sucesión por
+separado. La tentación es tratarlo como un conjunto suma $A + B$. No lo es: si
+$A = {a_n}_n$ y $B = {b_n}_n$, en $A + B$ se suman *todos* los pares $a_i + b_j$, mientras que
+en ${a_n + b_n}_n$ sólo los que tienen $i = j$, es decir la diagonal.
+
+#sublema(titulo: "Traducción")[
+  *"Supremo de una operación término a término entre dos sucesiones"* $==>$ *"es la diagonal
+  del conjunto de todos los pares: heredo la cota por inclusión, no la igualdad"*.
+]
+
+=== Por qué funciona
+
+El enunciado preciso: si $(a_n)_(n in NN)$ y $(b_n)_(n in NN)$ son sucesiones de números reales
+acotadas superiormente, entonces
+
+$ op("sup")({a_n + b_n}_n) <= op("sup")({a_n}_n) + op("sup")({b_n}_n). $
+
+#demostracion[de la desigualdad][
+  Llamemos $A = {a_n}_n$, $B = {b_n}_n$ y $D = {a_n + b_n}_n$. Los tres son no vacíos, y $A$ y
+  $B$ están acotados superiormente por hipótesis, así que existen $alpha = op("sup")(A)$ y
+  $beta = op("sup")(B)$ (Axioma de Completitud).
+
+  *Paso 1: $D subset.eq A + B$.* Sea $x in D$. Existe $n in NN$ con $x = a_n + b_n$. Como
+  $a_n in A$ y $b_n in B$, $x$ es de la forma $a + b$ con $a in A$ y $b in B$, es decir
+  $x in A + B$.
+
+  *Paso 2: $A + B$ está acotado superiormente y $op("sup")(A + B) = alpha + beta$.* Es el
+  Ej. 2 a) del primer recuperatorio 1C 2025, aplicado a $A$ y $B$ (no vacíos y acotados
+  superiormente).
+
+  *Paso 3: monotonía del supremo.* Como $D subset.eq A + B$ y $A + B$ está acotado
+  superiormente, $D$ también lo está y $op("sup")(D) <= op("sup")(A + B)$
+  (Práctica 1, Ej. 5 (a)).
+
+  Encadenando los pasos 3 y 2,
+  $ op("sup")({a_n + b_n}_n) = op("sup")(D) <= op("sup")(A + B) = alpha + beta
+    = op("sup")({a_n}_n) + op("sup")({b_n}_n). quad qed $
+]
+
+Ningún paso usa $epsilon$: todo el trabajo analítico quedó encapsulado en el paso 2, que ya
+estaba probado. El galerazo es el paso 1.
+
+_Alternativa directa_ (sin pasar por $A + B$; no está en la resolución del parcial, es un
+argumento agregado al redactar este galerazo): para todo $n$, $a_n <= alpha$ y $b_n <= beta$,
+luego $a_n + b_n <= alpha + beta$. Entonces $alpha + beta$ es cota superior de $D$ y, como el
+supremo es la menor de las cotas superiores, $op("sup")(D) <= alpha + beta$.
+
+=== Por qué no hay igualdad
+
+La inclusión $D subset.eq A + B$ puede ser estricta, y lo que queda afuera puede ser justo lo
+que realiza el supremo. Con $a = (1, 0, 0, dots)$ y $b = (-1, 0, 0, dots)$:
+
+- $a_n + b_n = 0$ para todo $n$, así que $D = {0}$ y $op("sup")(D) = 0$;
+- $op("sup")(A) + op("sup")(B) = 1 + 0 = 1$, y ese valor lo realiza $a_1 + b_2$, un par con
+  índices distintos: está en $A + B$ pero no en $D$.
+
+=== Cómo inventarlo de cero
+
++ *Escribí los dos conjuntos como conjuntos de pares*: ¿quién se combina con quién? En uno,
+  cualquier $a_i$ con cualquier $b_j$; en el otro, sólo $a_n$ con $b_n$.
++ *Chequeá la inclusión*: el de mismo índice está contenido en el de todos los pares.
++ *Aplicá la monotonía del supremo* (Práctica 1, Ej. 5 (a)): sale la desigualdad.
++ *Reemplazá el supremo del conjunto grande* por lo que ya se sabe de él.
++ *No intentes la otra desigualdad*: buscá un contraejemplo poniendo los máximos de las dos
+  sucesiones en índices distintos.
+
+=== Dónde se usa
+
+- Primer recuperatorio 1C 2025, Ej. 2 b) (`parciales/2025_1c_recuperatorio_1.typ`) --- es el
+  ejercicio que disparó este galerazo: la igualdad es falsa y esta desigualdad es lo que
+  sobrevive.
+- `p1: Ej. 5 (a)` --- la monotonía del supremo respecto de la inclusión, que es el motor del
+  argumento.

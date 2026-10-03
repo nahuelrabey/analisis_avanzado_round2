@@ -13,6 +13,22 @@
   }
 }
 
+// Nota escrita en el margen derecho de la página, a la altura del punto donde se la invoca.
+#let nota-margen(cuerpo) = context {
+  let margen = 2.5 / 21 * calc.min(page.width, page.height)
+  let sep = 5pt
+  let x = here().position().x
+  box(place(
+    dx: page.width - margen + sep - x,
+    dy: -0.7em,
+    block(width: margen - 2 * sep, {
+      set text(6.5pt, fill: rgb("#475569"))
+      set par(justify: false, leading: 0.45em)
+      cuerpo
+    }),
+  ))
+}
+
 // Fuente: `parciales/1 RECU 2025.JPG` (enunciado) y
 // `parciales/AnalisisAvanzado_1recu_01-07-25.pdf` (enunciado + resolución corregida de un alumno).
 // El nombre del PDF dice 01-07-25, pero el examen y las hojas están fechados 08/07/2025.
@@ -114,9 +130,14 @@
   $b_1, dots, b_(n-1)$), y
   $ Phi : {0,1}^NN -> ZZ^NN, quad Phi(b) = (2^(s_n))_(n in NN). $
 
-  _$Phi$ toma valores en $A$._ Para todo $n$, $2^(s_(n+1)) = 2^(s_n) dot 2^(b_n)$ con
-  $2^(b_n) in {1, 2} subset.eq ZZ$, así que $2^(s_n) divides 2^(s_(n+1))$, es decir
-  $Phi(b)_n divides Phi(b)_(n+1)$.
+  _$Phi$ toma valores en $A$._ Por definición, $a divides c$ en $ZZ$ significa que existe
+  $k in ZZ$ con $c = a dot k$. Para todo $n$, $2^(s_(n+1)) = 2^(s_n) dot 2^(b_n)$, y el factor
+  $k = 2^(b_n)$ es entero#nota-margen[Lo único que se usa de $2^(b_n)$ es que es entero, no su
+  valor; pero ese dato no se puede omitir. Si el factor no fuera entero la conclusión se cae:
+  $4 = 8 dot 2^(-1)$ y sin embargo $8 divides.not 4$.]: como $b_n in {0, 1}$, vale
+  $2^(b_n) in {1, 2} subset.eq ZZ$. Luego $2^(s_n) divides 2^(s_(n+1))$, es decir
+  $Phi(b)_n divides Phi(b)_(n+1)$. Luego $Phi(b) in A$ para todo $b$, y podemos considerar
+  $Phi : {0,1}^NN -> A$.
 
   _$Phi$ es inyectiva._ Sean $b, b' in {0,1}^NN$ con $Phi(b) = Phi(b')$ y llamemos $s_n, s'_n$ a
   los respectivos exponentes. Para cada $n$, $2^(s_n) = 2^(s'_n)$ y, como $k |-> 2^k$ es
@@ -134,12 +155,19 @@
 #sublema(titulo: [Lema: $\#(ZZ^NN) = frak(c)$])[
   *$frak(c) <= \#ZZ^NN$:* ${0,1}^NN subset.eq ZZ^NN$ y $\#{0,1}^NN = frak(c)$ (como arriba).
 
-  *$\#ZZ^NN <= frak(c)$:* la función $ZZ^NN -> cal(P)(NN times ZZ)$ que manda una sucesión a su
-  gráfico, $(a_n)_n |-> {(n, a_n) : n in NN}$, es inyectiva (si dos sucesiones tienen el mismo
-  gráfico, para cada $n$ el único par con primera coordenada $n$ coincide, así que
-  $a_n = b_n$). Como $NN times ZZ tilde.op NN$ (Práctica 2, Ej. 1 (c)), vale
-  $cal(P)(NN times ZZ) tilde.op cal(P)(NN)$ (Práctica 2, Ej. 8 (c)) y $\#cal(P)(NN) = frak(c)$
-  (Práctica 2, Ej. 9 (b)). Luego $\#ZZ^NN <= frak(c)$, y por Cantor--Schröeder--Bernstein,
+  *$\#ZZ^NN <= frak(c)$:* consideramos la función que manda una sucesión a su gráfico,
+  $ G : ZZ^NN -> cal(P)(NN times ZZ), quad G(a) = {(n, a_n) : n in NN} quad "para " a = (a_n)_n. $
+
+  _$G$ es inyectiva._ Sean $a = (a_n)_n$ y $b = (b_n)_n$ en $ZZ^NN$ con $G(a) = G(b)$, y fijemos
+  $n in NN$. El par $(n, a_n)$ pertenece a $G(a)$, luego también a $G(b) = {(m, b_m) : m in NN}$,
+  así que existe $m in NN$ con $(n, a_n) = (m, b_m)$. Comparando primeras coordenadas, $m = n$;
+  comparando segundas, $a_n = b_m = b_n$. Como $n$ era arbitrario, $a = b$.
+
+  _El codominio tiene cardinal $frak(c)$._ Como $NN times ZZ tilde.op NN$ (Práctica 2, Ej. 1 (c)),
+  vale $cal(P)(NN times ZZ) tilde.op cal(P)(NN)$ (Práctica 2, Ej. 8 (c)), y $\#cal(P)(NN) = frak(c)$
+  (Práctica 2, Ej. 9 (b)).
+
+  Luego $\#ZZ^NN <= frak(c)$ (Definición 3.8), y por Cantor--Schröeder--Bernstein,
   $\#ZZ^NN = frak(c)$.
 ]
 
@@ -163,10 +191,53 @@
   acotados, ¿vale $op("sup")(A + B) = op("sup")(A) + op("sup")(B)$?
 ]
 
+// Caja no partible: el esquema de cetz no se puede cortar entre páginas.
+#block(breakable: false)[
 #estrategia[Cota superior por un lado, $epsilon/2 + epsilon/2$ por el otro][
   $op("sup") A + op("sup") B$ es cota superior de $A + B$, lo que da $<=$. Para $>=$ se usa la
   caracterización con $epsilon$ del supremo (Proposición 3): hay $a_epsilon$, $b_epsilon$ a menos
   de $epsilon/2$ de cada supremo, y su suma está en $A + B$.
+
+  #align(center, cetz.canvas(length: 1cm, {
+    import cetz.draw: *
+    // Una recta con el supremo, la ventana de ancho `ancho` a su izquierda y un punto adentro.
+    let fila(y, nombre, sup, ancho, punto, lbl-sup, lbl-izq, lbl-punto, lbl-ancho, color) = {
+      line((0, y), (10, y), stroke: 0.8pt, mark: (end: "stealth"))
+      content((-0.7, y), nombre)
+      rect((sup - ancho, y - 0.12), (sup, y + 0.12), fill: color.lighten(65%), stroke: none)
+      line((sup - ancho, y - 0.18), (sup - ancho, y + 0.18), stroke: 0.8pt)
+      content((sup - ancho, y - 0.5), text(9pt, lbl-izq))
+      line((sup, y - 0.22), (sup, y + 0.22), stroke: 1.4pt)
+      content((sup, y - 0.5), text(9pt, lbl-sup))
+      circle((punto, y), radius: 0.08, fill: color, stroke: none)
+      content((punto, y + 0.4), text(9pt, lbl-punto))
+      line(
+        (sup - ancho, y + 0.85), (sup, y + 0.85),
+        stroke: 0.5pt + color,
+        mark: (start: "stealth", end: "stealth", scale: 0.6),
+      )
+      content((sup - ancho / 2, y + 1.12), text(9pt, fill: color, lbl-ancho))
+    }
+    let azul = rgb("#2563eb")
+    let verde = rgb("#059669")
+    let naranja = rgb("#d97706")
+    fila(4.6, $A$, 7, 1.5, 6.4, $alpha$, $alpha - epsilon/2$, $a_epsilon$, $epsilon/2$, azul)
+    fila(2.3, $B$, 6, 1.5, 5.4, $beta$, $beta - epsilon/2$, $b_epsilon$, $epsilon/2$, verde)
+    fila(
+      0, $A + B$, 8, 3, 6.3,
+      $alpha + beta$, $alpha + beta - epsilon$, $a_epsilon + b_epsilon$, $epsilon$, naranja,
+    )
+    // sigma = sup(A + B): atrapado entre a_eps + b_eps y alpha + beta.
+    line((7.4, -0.22), (7.4, 0.22), stroke: 1.4pt + rgb("#dc2626"))
+    content((7.4, 0.42), text(9pt, fill: rgb("#dc2626"), $sigma$))
+  }))
+
+  #align(center, text(9pt)[
+    $sigma = op("sup")(A + B)$ queda atrapado en la ventana de ancho $epsilon$ pegada a
+    $alpha + beta$; \ como $epsilon$ es arbitrario, la ventana se achica todo lo que uno quiera y
+    $sigma = alpha + beta$.
+  ])
+]
 ]
 
 #resolucion[Propuesta: es *verdadera*][

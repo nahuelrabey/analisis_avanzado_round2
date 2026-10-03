@@ -140,12 +140,19 @@
 #sublema(titulo: [Lema: $\#(ZZ^NN) = frak(c)$])[
   *$frak(c) <= \#ZZ^NN$:* ${0,1}^NN subset.eq ZZ^NN$ y $\#{0,1}^NN = frak(c)$ (como arriba).
 
-  *$\#ZZ^NN <= frak(c)$:* la función $ZZ^NN -> cal(P)(NN times ZZ)$ que manda una sucesión a su
-  gráfico, $(a_n)_n |-> {(n, a_n) : n in NN}$, es inyectiva (si dos sucesiones tienen el mismo
-  gráfico, para cada $n$ el único par con primera coordenada $n$ coincide, así que
-  $a_n = b_n$). Como $NN times ZZ tilde.op NN$ (Práctica 2, Ej. 1 (c)), vale
-  $cal(P)(NN times ZZ) tilde.op cal(P)(NN)$ (Práctica 2, Ej. 8 (c)) y $\#cal(P)(NN) = frak(c)$
-  (Práctica 2, Ej. 9 (b)). Luego $\#ZZ^NN <= frak(c)$, y por Cantor--Schröeder--Bernstein,
+  *$\#ZZ^NN <= frak(c)$:* consideramos la función que manda una sucesión a su gráfico,
+  $ G : ZZ^NN -> cal(P)(NN times ZZ), quad G(a) = {(n, a_n) : n in NN} quad "para " a = (a_n)_n. $
+
+  _$G$ es inyectiva._ Sean $a = (a_n)_n$ y $b = (b_n)_n$ en $ZZ^NN$ con $G(a) = G(b)$, y fijemos
+  $n in NN$. El par $(n, a_n)$ pertenece a $G(a)$, luego también a $G(b) = {(m, b_m) : m in NN}$,
+  así que existe $m in NN$ con $(n, a_n) = (m, b_m)$. Comparando primeras coordenadas, $m = n$;
+  comparando segundas, $a_n = b_m = b_n$. Como $n$ era arbitrario, $a = b$.
+
+  _El codominio tiene cardinal $frak(c)$._ Como $NN times ZZ tilde.op NN$ (Práctica 2, Ej. 1 (c)),
+  vale $cal(P)(NN times ZZ) tilde.op cal(P)(NN)$ (Práctica 2, Ej. 8 (c)), y $\#cal(P)(NN) = frak(c)$
+  (Práctica 2, Ej. 9 (b)).
+
+  Luego $\#ZZ^NN <= frak(c)$ (Definición 3.8), y por Cantor--Schröeder--Bernstein,
   $\#ZZ^NN = frak(c)$.
 ]
 
