@@ -131,3 +131,10 @@ alimenta cada bloque.
   $ d(x_n, x) <= d(x_n, x_(n_k)) + d(x_(n_k), x) $
   necesitamos elegir un $n_k$ que cumpla dos condiciones: $n_k >= n_0$ (para poder acotar $d(x_n, x_(n_k))$ usando que $(x_n)$ es de Cauchy) y $n_k >= n_(k_0)$ (para poder acotar $d(x_(n_k), x)$ usando que $x_(n_k) -> x$). Pensar por qué podemos conseguir un $n_k$ que cumpla ambas condiciones.
 ]
+
+#desafio[$(RR^n, d_2)$ y $(RR^n, d_1)$ son completos (Ejercicio 4.59)][
+  Probar que $(RR^n, d_2)$ y $(RR^n, d_1)$ son espacios métricos completos.
+
+  _Sugerencia:_ usar que valen las desigualdades
+  $ d_oo (x, y) <= d_2 (x, y) <= d_1 (x, y) <= n d_oo (x, y). $
+]

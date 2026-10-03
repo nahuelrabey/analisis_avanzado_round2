@@ -1320,3 +1320,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
     Como vimos antes, la distancia $d_1 (f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $epsilon > 0$, podemos encontrar un $n_0$ tal que
     $ d_1 (f_n, f) = 1/2 dot 1/n < epsilon, quad "para todo " n >= n_0. $
 ]
+
+#ejemplo[Espacios completos y no completos (Ejemplo 4.56)][32][
+  #set enum(numbering: "a)")
+  + $(QQ, abs(dot))$ no es completo. Por ejemplo, podríamos tomar $x_n = 3","14159 dots$ los primeros $n$ dígitos del número $pi$. Tenemos que $(x_n) subset.eq QQ$, y $x_n -> pi$. Como la sucesión es convergente en $RR$, sabemos que debe ser de Cauchy (Teorema 4.54 b). Sin embargo, su límite no pertenece a $QQ$, lo cual nos dice que $QQ$ no puede ser completo.
+
+  + Sea $(M, delta)$ un conjunto con la métrica discreta. Como vimos en los ejemplos anteriores (Ejemplos 30 y 31), las sucesiones de Cauchy son las eventualmente constantes y estas son convergentes. Esto nos dice que el espacio sí es completo.
+]

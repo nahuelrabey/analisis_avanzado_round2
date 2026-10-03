@@ -1258,21 +1258,24 @@ Vamos a probar la doble implicación. Antes de avanzar vamos a llamar:
       let blob = ((-2.1, 0.3), (-1.4, 1.4), (-0.1, 1.7), (1.3, 1.3), (2.0, 0.3), (1.7, -0.9), (0.3, -1.4), (-1.2, -1.2), (-2.2, -0.4))
       hobby(..blob, close: true, fill: rgb("#e2e8f0"), stroke: (paint: black, thickness: 1pt))
       content((-1.1, 0), text(size: 10pt)[$E$])
-      content((1.75, 1.55), text(size: 9pt)[$E^c$])
+      content((1.1, 1.8), text(size: 9pt)[$E^c$])
 
-      let xp = (1.55, 0.25)
-      circle(xp, radius: 0.55, fill: rgb("#dbeafe"), stroke: (dash: "dashed", paint: red, thickness: 1pt))
-      circle(xp, radius: 0.03, fill: black)
-      content((xp.at(0) - 0.15, xp.at(1) + 0.75), text(size: 9pt, fill: red)[$B(x, r)$])
-      content((xp.at(0) + 0.45, xp.at(1) - 0.05), text(size: 8.5pt)[$x in partial E$])
+      // x está sobre la curva (es un nodo de la hobby): la bola queda mitad en E, mitad en E^c
+      let xp = (2.0, 0.3)
+      circle(xp, radius: 0.55, fill: rgb("#3b82f6").transparentize(80%), stroke: (dash: "dashed", paint: red, thickness: 1pt))
+      // se vuelve a trazar el borde para que se vea por encima de la bola
+      hobby(..blob, close: true, fill: none, stroke: (paint: black, thickness: 1pt))
+      circle(xp, radius: 0.04, fill: black)
+      content((xp.at(0) + 0.85, xp.at(1) - 0.55), text(size: 9pt, fill: red)[$B(x, r)$])
+      content((xp.at(0) + 1.1, xp.at(1)), text(size: 8.5pt)[$x in partial E$])
 
-      line((3.1, 0.9), (xp.at(0) + 0.35, xp.at(1) + 0.35), stroke: 0.6pt, mark: (end: ">"))
-      content((3.35, 1.15), text(size: 8pt)[Intersección con $E^c$])
-      content((3.35, 0.9), text(size: 8pt)[$(B(x,r) inter E^c != nothing)$])
+      line((3.3, 1.2), (xp.at(0) + 0.3, xp.at(1) + 0.35), stroke: 0.6pt, mark: (end: ">"))
+      content((3.6, 1.8), text(size: 8pt)[Intersección con $E^c$])
+      content((3.6, 1.4), text(size: 8pt)[$(B(x,r) inter E^c != nothing)$])
 
-      line((0.2, -1.9), (xp.at(0) - 0.35, xp.at(1) - 0.35), stroke: 0.6pt, mark: (end: ">"))
-      content((0.35, -2.15), text(size: 8pt)[Intersección con $E$])
-      content((0.35, -2.4), text(size: 8pt)[$(B(x,r) inter E != nothing)$])
+      line((0.2, -1.9), (xp.at(0) - 0.3, xp.at(1) - 0.2), stroke: 0.6pt, mark: (end: ">"))
+      content((0.35, -2.1), text(size: 8pt)[Intersección con $E$])
+      content((0.35, -2.5), text(size: 8pt)[$(B(x,r) inter E != nothing)$])
     })
   ]
   ]
@@ -1382,4 +1385,335 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
     si $n >= n_0$.
 
     ¿Cómo elegimos el $n_k$ en esta cuenta? Por un lado, necesitamos que $n_k >= n_0$ (para que podamos acotar $d(x_n, x_(n_k))$) y por otro lado necesitamos que $n_k >= n_(k_0)$ (para poder acotar $d(x_(n_k), x)$). Pensá por qué podemos conseguir un $n_k$ que cumpla ambas condiciones.
+]
+
+#definicion[Espacio métrico completo][4.55][
+  Sea $(M, d)$ un espacio métrico. Decimos que $M$ es *completo* si toda sucesión de Cauchy tiene límite en $M$.
+]
+
+#teorema[$RR$ es completo][4.57][
+  $(RR, abs(dot))$ es completo.
+]
+#demostracion[
+  Para probar que un espacio métrico es completo, debemos probar que toda sucesión de Cauchy tiene límite. Tomemos $(x_n)_(n in NN) subset.eq RR$ una sucesión de Cauchy. Vamos a construir una subsucesión convergente y por el inciso c) del Teorema 4.54, vamos a concluir que la sucesión entera converge.
+
+  Para esto, vamos a construir los conjuntos
+  $ X_k = {x_n : n > k}. $
+  Por el inciso a) del Teorema 4.54, sabemos que estos conjuntos están acotados para todo $k in NN$. Pero además, estos conjuntos están contenidos en los números reales y lo que sabemos es que todos los conjuntos acotados tienen ínfimo (y supremo, pero eso lo vamos a usar más tarde). Llamemos $a_k = inf X_k$.
+
+  Hagamos una pausa para observar que esta no es la subsucesión que estábamos buscando, dado que los $a_k$ ni siquiera son (necesariamente) elementos de la sucesión $(x_n)_(n in NN)$. Los $a_k$ son los ínfimos de los términos de la sucesión de índice más grande que $k$.
+
+  Siguiendo con la demostración, vemos que los conjuntos $X_k$ están encajados: por definición,
+  $ X_1 supset.eq X_2 supset.eq X_3 supset.eq dots.c supset.eq X_k supset.eq dots $
+  Por propiedad de los ínfimos, esto nos dice que
+  $ a_1 <= a_2 <= a_3 <= dots.c <= a_k <= dots $
+  #block(breakable: false)[
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+
+        // Sucesión de ejemplo (de Cauchy): x_n = 2 + (-1)^n 3/n
+        let xs = range(1, 15).map(n => 2 + calc.pow(-1, n) * 3 / n)
+        let u(x) = (x - 0.8) * 3
+        let filas = 5
+        let gris = rgb("#94a3b8")
+        let rojo = rgb("#dc2626")
+        let azul = rgb("#2563eb")
+
+        let infs = range(1, filas + 1).map(k => calc.min(..xs.slice(k)))
+        let sups = range(1, filas + 1).map(k => calc.max(..xs.slice(k)))
+
+        for k in range(1, filas + 1) {
+          let y = -(k - 1) * 0.9
+          let a = infs.at(k - 1)
+          let b = sups.at(k - 1)
+          line((u(0.85), y), (u(3.6), y), stroke: 0.6pt + rgb("#94a3b8"))
+          // Intervalo [a_k, b_k]
+          line((u(a), y), (u(b), y), stroke: 2.5pt + rgb("#e2e8f0"))
+          // Términos descartados (n <= k) en gris, términos de X_k en negro
+          for n in range(2, 15) {
+            let x = xs.at(n - 1)
+            if n <= k {
+              circle((u(x), y), radius: 0.06, fill: white, stroke: 0.6pt + gris)
+            } else {
+              circle((u(x), y), radius: 0.06, fill: rgb("#1e293b"), stroke: none)
+            }
+          }
+          line((u(a), y - 0.18), (u(a), y + 0.18), stroke: 1.4pt + rojo)
+          line((u(b), y - 0.18), (u(b), y + 0.18), stroke: 1.4pt + azul)
+          content((u(a) - 0.1, y - 0.12), anchor: "north-east", text(size: 8pt, fill: rojo)[$a_#k$])
+          content((u(b) + 0.1, y - 0.12), anchor: "north-west", text(size: 8pt, fill: azul)[$b_#k$])
+          content((-0.9, y), [$X_#k$])
+        }
+
+        // Guías: a_k avanza a la derecha, b_k retrocede a la izquierda
+        for k in range(1, filas) {
+          let y1 = -(k - 1) * 0.9
+          let y2 = -k * 0.9
+          line((u(infs.at(k - 1)), y1 - 0.18), (u(infs.at(k)), y2 + 0.18),
+            stroke: (dash: "dashed", paint: rojo, thickness: 0.6pt))
+          line((u(sups.at(k - 1)), y1 - 0.18), (u(sups.at(k)), y2 + 0.18),
+            stroke: (dash: "dashed", paint: azul, thickness: 0.6pt))
+        }
+
+        content((u(2.2), -filas * 0.9 + 0.1), text(size: 8.5pt)[
+          #text(fill: gris)[#sym.circle.stroked] ya descartados #h(1em)
+          #sym.bullet términos de $X_k$ #h(1em)
+          #text(fill: rojo)[$a_k = inf X_k$] #h(1em)
+          #text(fill: azul)[$b_k = sup X_k$]
+        ])
+      })
+    ]
+  ]
+  Es decir, que la sucesión $(a_k)_(k in NN)$ es una sucesión monótona creciente. También tenemos que esta sucesión está acotada: como los $X_k$ están acotados, sabemos que existe $b_k = sup X_k$ y tenemos que vale $a_k <= b_k$ para todo $k in NN$. Razonando de la misma manera que para los ínfimos, sabemos que
+  $ a_k <= b_k <= b_1, quad "para todo " k in NN. $
+  #block(breakable: false)[
+    #align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+
+        // Mismos a_k y b_k que en el esquema anterior
+        let xs = range(1, 15).map(n => 2 + calc.pow(-1, n) * 3 / n)
+        let u(x) = (x - 0.8) * 3
+        let rojo = rgb("#dc2626")
+        let azul = rgb("#2563eb")
+        let infs = (1, 2, 3, 4, 5, 6, 7).map(k => calc.min(..xs.slice(k)))
+        let sups = (1, 3, 5, 7).map(k => calc.max(..xs.slice(k)))
+
+        line((u(0.85), 0), (u(3.75), 0), stroke: 1.2pt + rgb("#334155"), mark: (end: ">"))
+
+        // Los a_k (con repeticiones) suben; los b_k bajan
+        for a in infs.dedup() {
+          circle((u(a), 0), radius: 0.07, fill: rojo, stroke: none)
+        }
+        content((u(infs.at(0)), -0.4), text(size: 9pt, fill: rojo)[$a_1$])
+        content((u(infs.at(2)), -0.4), text(size: 9pt, fill: rojo)[$a_3$])
+        content((u(infs.at(4)), -0.4), text(size: 9pt, fill: rojo)[$a_5$])
+        line((u(1.0), 0.35), (u(1.8), 0.35), stroke: 0.8pt + rojo, mark: (end: ">"))
+        content((u(1.4), 0.62), text(size: 8.5pt, fill: rojo)[crecen])
+
+        for b in sups.dedup() {
+          circle((u(b), 0), radius: 0.07, fill: azul, stroke: none)
+        }
+        content((u(sups.at(1)), -0.4), text(size: 9pt, fill: azul)[$b_3$])
+        content((u(sups.at(2)), -0.4), text(size: 9pt, fill: azul)[$b_5$])
+        line((u(2.9), 0.35), (u(2.35), 0.35), stroke: 0.8pt + azul, mark: (end: ">"))
+        content((u(2.62), 0.62), text(size: 8.5pt, fill: azul)[decrecen])
+
+        // b_1 como techo común
+        let b1 = sups.at(0)
+        line((u(b1), -0.25), (u(b1), 1.1), stroke: 1.6pt + azul)
+        content((u(b1), -0.4), text(size: 9pt, fill: azul)[$b_1$])
+        content((u(b1) + 0.1, 1.35), text(size: 8.5pt)[techo común de todos los $a_k$])
+      })
+    ]
+  ]
+  #sublema(titulo: "Aporte del agente")[
+    "Razonando de la misma manera" quiere decir:
+    - *$a_k <= b_k$:* como $X_k != nothing$, tomamos cualquier $x in X_k$. El ínfimo es cota inferior y el supremo es cota superior, así que $a_k <= x <= b_k$.
+    - *$b_k <= b_1$:* como $X_k subset.eq X_1$, todo elemento de $X_k$ es también elemento de $X_1$ y por lo tanto es $<= b_1$. Es decir, $b_1$ es una cota superior de $X_k$. Como $b_k$ es la _menor_ de las cotas superiores de $X_k$, resulta $b_k <= b_1$.
+
+    Es el mismo argumento que para los ínfimos pero dado vuelta: al achicar el conjunto, el ínfimo sólo puede subir y el supremo sólo puede bajar. Encadenando, $a_k <= b_k <= b_1$, así que $b_1$ es una cota superior de toda la sucesión $(a_k)_(k in NN)$ que no depende de $k$.
+  ]
+  Es decir, que la sucesión $(a_k)_(k in NN)$ es una sucesión en $RR$, monótona creciente y acotada superiormente. Vimos que esto significa que la sucesión converge (al supremo de sus términos, aunque eso no nos importa demasiado para esta demostración). Sea $x = lim_(k -> oo) a_k in RR$.
+
+  Ahora sí, nuestro objetivo es construir una subsucesión de $(x_n)_(n in NN)$ tal que $x_(n_j) -> x$ (el que definimos más arriba). Para esto, nuestra idea es usar que la sucesión de los $(a_k)$ converge a $x$ y usando que los $(a_k)$ son los ínfimos de elementos de la sucesión, vamos a poder encontrar elementos de la sucesión que estén "cerca" de los $a_k$. Lo hacemos de la siguiente manera.
+
+  Como $a_1 = inf X_1$, sabemos que tiene que existir un elemento $x_(n_1) in X_1$ tal que $a_1 <= x_(n_1) < a_1 + 1$. Este es el primer término de nuestra subsucesión. Para elegir $n_2$, podríamos intentar hacer lo mismo con $a_2$: el problema es que en $X_2$ tengo todos los términos de la sucesión más grande que $2$ y podría ser que cuando elija $n_2$ me quede más chico que $n_1$. Esto no nos puede pasar, porque queremos construir una subsucesión (recordemos que para tener una subsucesión tenemos que respetar el orden de la sucesión original).
+
+  #sublema(titulo: "Ejemplo (aporte del agente)")[
+    Tomemos de nuevo $x_n = 2 + (-1)^n 3\/n$, con $a_1 = inf X_1 = x_3 = 1$. Para el primer término podemos elegir $n_1 = 5$, porque $1 <= x_5 = 1.4 < 2$. Pero si ahora buscamos $n_2$ en $X_2$, el término $x_3$ está en $X_2$ y cumple $a_2 = 1 <= x_3 < 1.5$: nada nos impide elegir $n_2 = 3 < n_1 = 5$, y eso no respeta el orden.
+
+    #block(breakable: false)[
+      #align(center)[
+        #cetz.canvas({
+          import cetz.draw: *
+          let xs = range(1, 13).map(n => 2 + calc.pow(-1, n) * 3 / n)
+          let gris = rgb("#94a3b8")
+          let rojo = rgb("#dc2626")
+          let verde = rgb("#15803d")
+
+          // Índices n en el eje horizontal y valores x_n en el vertical (n >= 2)
+          let panel(desde, franja, etiqueta, color, n2) = {
+            let X(n) = n * 0.5
+            let Y(v) = (v - 0.8) * 1.2
+            rect((X(1.5), Y(franja.at(0))), (X(12.5), Y(franja.at(1))),
+              fill: color.lighten(80%), stroke: none)
+            content((X(12.6), Y((franja.at(0) + franja.at(1)) / 2)), anchor: "west", text(size: 7.5pt, fill: color)[#etiqueta])
+            line((X(1.5), Y(0.8)), (X(12.7), Y(0.8)), stroke: 0.7pt + rgb("#334155"), mark: (end: ">"))
+            content((X(12.9), Y(0.8)), anchor: "west", text(size: 8pt)[$n$])
+            for n in range(2, 13) {
+              let v = xs.at(n - 1)
+              if n > desde {
+                circle((X(n), Y(v)), radius: 0.06, fill: rgb("#1e293b"), stroke: none)
+              } else {
+                circle((X(n), Y(v)), radius: 0.06, fill: white, stroke: 0.6pt + gris)
+              }
+              content((X(n), Y(0.8) - 0.25), text(size: 7pt)[$#n$])
+            }
+            // n_1 = 5 (ya elegido) y el candidato a n_2
+            circle((X(5), Y(xs.at(4))), radius: 0.15, stroke: 1.2pt + verde)
+            content((X(5) + 0.1, Y(xs.at(4)) - 0.1), anchor: "north-west", text(size: 7.5pt, fill: verde)[$n_1$])
+            circle((X(n2), Y(xs.at(n2 - 1))), radius: 0.15, stroke: 1.2pt + color)
+            content((X(n2), Y(xs.at(n2 - 1)) + 0.2), anchor: "south", text(size: 7.5pt, fill: color)[$n_2 = #n2$])
+          }
+
+          panel(2, (1, 1.5), [$[a_2, a_2 + 1\/2)$], rojo, 3)
+        })
+      ]
+    ]
+
+    Los puntos huecos son los términos que quedan afuera de $X_2$ (acá sólo $x_2$; $x_1 = -1$ queda fuera del dibujo).
+  ]
+
+  Para evitarnos este problema, vamos a usar directamente al conjunto $X_(n_1) = {x_n : n > n_1}$. Como $a_(n_1) = inf X_(n_1)$, sabemos que existe un $n_2$ tal que $a_(n_1) <= x_(n_2) < a_(n_1) + 1\/2$, y ahora sí sabemos que $n_2 > n_1$ como necesitamos.
+
+  #sublema(titulo: "Por qué funciona (aporte del agente)")[
+    En el mismo ejemplo, con $n_1 = 5$ buscamos ahora en $X_(n_1) = X_5 = {x_n : n > 5}$. Los términos $x_2, dots, x_5$ (huecos) directamente no están en el conjunto, así que cualquier candidato tiene índice mayor que $5$. Acá $a_5 = x_7 approx 1.57$ y elegimos $n_2 = 7$.
+
+    #block(breakable: false)[
+      #align(center)[
+        #cetz.canvas({
+          import cetz.draw: *
+          let xs = range(1, 13).map(n => 2 + calc.pow(-1, n) * 3 / n)
+          let gris = rgb("#94a3b8")
+          let rojo = rgb("#dc2626")
+          let verde = rgb("#15803d")
+
+          // Índices n en el eje horizontal y valores x_n en el vertical (n >= 2)
+          let panel(desde, franja, etiqueta, color, n2) = {
+            let X(n) = n * 0.5
+            let Y(v) = (v - 0.8) * 1.2
+            rect((X(1.5), Y(franja.at(0))), (X(12.5), Y(franja.at(1))),
+              fill: color.lighten(80%), stroke: none)
+            content((X(12.6), Y((franja.at(0) + franja.at(1)) / 2)), anchor: "west", text(size: 7.5pt, fill: color)[#etiqueta])
+            line((X(1.5), Y(0.8)), (X(12.7), Y(0.8)), stroke: 0.7pt + rgb("#334155"), mark: (end: ">"))
+            content((X(12.9), Y(0.8)), anchor: "west", text(size: 8pt)[$n$])
+            for n in range(2, 13) {
+              let v = xs.at(n - 1)
+              if n > desde {
+                circle((X(n), Y(v)), radius: 0.06, fill: rgb("#1e293b"), stroke: none)
+              } else {
+                circle((X(n), Y(v)), radius: 0.06, fill: white, stroke: 0.6pt + gris)
+              }
+              content((X(n), Y(0.8) - 0.25), text(size: 7pt)[$#n$])
+            }
+            // n_1 = 5 (ya elegido) y el candidato a n_2
+            circle((X(5), Y(xs.at(4))), radius: 0.15, stroke: 1.2pt + verde)
+            content((X(5) + 0.1, Y(xs.at(4)) - 0.1), anchor: "north-west", text(size: 7.5pt, fill: verde)[$n_1$])
+            circle((X(n2), Y(xs.at(n2 - 1))), radius: 0.15, stroke: 1.2pt + color)
+            content((X(n2), Y(xs.at(n2 - 1)) + 0.2), anchor: "south", text(size: 7.5pt, fill: color)[$n_2 = #n2$])
+          }
+
+          panel(5, (xs.at(6), xs.at(6) + 0.5), [$[a_(n_1), a_(n_1) + 1\/2)$], verde, 7)
+        })
+      ]
+    ]
+
+    Mirando sólo los índices, la construcción es una "escalera": cada búsqueda empieza justo a la derecha del índice elegido en el paso anterior, así que los $n_j$ quedan forzosamente ordenados.
+
+    #block(breakable: false)[
+      #align(center)[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          let verde = rgb("#15803d")
+          let X(n) = n * 0.5
+          // (conjunto donde buscamos, índice mínimo, índice elegido)
+          let pasos = (([$X_1$], 2, 5, [$n_1$]), ([$X_(n_1)$], 6, 7, [$n_2$]), ([$X_(n_2)$], 8, 9, [$n_3$]))
+          for (i, (conj, desde, elegido, nombre)) in pasos.enumerate() {
+            let y = -i * 0.8
+            content((X(0.3), y), anchor: "east", text(size: 8.5pt)[buscar en #conj])
+            for n in range(1, 15) {
+              let c = if n >= desde { rgb("#1e293b") } else { rgb("#cbd5e1") }
+              circle((X(n), y), radius: 0.05, fill: c, stroke: none)
+            }
+            line((X(desde) - 0.15, y + 0.2), (X(14.6), y + 0.2), stroke: 0.8pt + verde, mark: (end: ">"))
+            circle((X(elegido), y), radius: 0.14, stroke: 1.2pt + verde)
+            content((X(elegido), y - 0.18), anchor: "north", text(size: 7.5pt, fill: verde)[#nombre $= #elegido$])
+            if i < pasos.len() - 1 {
+              line((X(elegido), y - 0.45), (X(elegido) + 0.35, y - 0.6), stroke: (dash: "dashed", paint: verde, thickness: 0.6pt), mark: (end: ">"))
+            }
+          }
+          for n in range(1, 15) {
+            content((X(n), -2 * 0.8 - 0.75), text(size: 7pt)[$#n$])
+          }
+        })
+      ]
+    ]
+  ]
+
+  Sucesivamente, vamos a ir eligiendo $x_(n_j) in X_(n_(j-1))$ tal que $a_(n_(j-1)) <= x_(n_j) < a_(n_(j-1)) + 1\/j$, con $n_j > n_(j-1)$. Por sandwich, cuando $j -> oo$, vemos que $x_(n_j) -> x$. Como $(x_(n_j))$ es una subsucesión de $(x_n)_(n in NN)$ y $(x_n)_(n in NN)$ es de Cauchy, probamos que $x_n$ converge a $x$.
+
+  #sublema(titulo: [Por qué sirve el $1\/j$ (aporte del agente)])[
+    Hay dos cosas para ver: que el $x_(n_j)$ existe y que la subsucesión converge a $x$.
+
+    - *Existencia:* $a_(n_(j-1)) = inf X_(n_(j-1))$ es la _mayor_ cota inferior de $X_(n_(j-1))$, así que $a_(n_(j-1)) + 1\/j$ ya no es cota inferior: tiene que haber algún elemento $x_(n_j) in X_(n_(j-1))$ con $x_(n_j) < a_(n_(j-1)) + 1\/j$. La otra desigualdad, $a_(n_(j-1)) <= x_(n_j)$, es gratis: el ínfimo es cota inferior de todo $X_(n_(j-1))$. Es la caracterización del supremo de la Proposición 3, dada vuelta para el ínfimo. Y como $x_(n_j) in X_(n_(j-1))$, automáticamente $n_j > n_(j-1)$.
+    - *Convergencia:* $x_(n_j)$ queda atrapado en el intervalo $[a_(n_(j-1)), a_(n_(j-1)) + 1\/j)$. Como $n_1 < n_2 < dots$, los índices $n_(j-1) -> oo$, así que $(a_(n_(j-1)))_j$ es una subsucesión de $(a_k)$ y tiende a $x$. El techo $a_(n_(j-1)) + 1\/j$ también tiende a $x + 0 = x$. Por sandwich, $x_(n_j) -> x$.
+
+    El $1\/j$ cumple el rol de "ancho de la ventana": lo único que importa es que sea positivo (para que exista el elemento) y que tienda a $0$ (para que la ventana se cierre sobre $x$). Con $1\/2^j$ o cualquier $epsilon_j -> 0^+$ funcionaría igual. Notar que $a_1 + 1$ y $a_(n_1) + 1\/2$ de los primeros pasos son los casos $j = 1$ y $j = 2$, si para $j = 1$ usamos la convención $n_0 = 1$ (así $X_(n_0) = X_1$).
+
+    Ojo: la ventana $[a_(n_(j-1)), a_(n_(j-1)) + 1\/j)$ *no tiene por qué contener a $x$*. En nuestro ejemplo ($x = 2$) a partir de $j = 4$ queda entera por debajo de $x$. No importa: el sandwich sólo necesita que sus dos bordes *tiendan* a $x$. El gráfico muestra los valores reales del ejemplo, donde $x_(n_j) = a_(n_(j-1))$ para $j >= 2$ (el ínfimo se alcanza).
+
+    #block(breakable: false)[
+      #align(center)[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          let rojo = rgb("#dc2626")
+          let azul = rgb("#2563eb")
+          let verde = rgb("#15803d")
+          // Valores reales del ejemplo x_n = 2 + (-1)^n 3/n, con n_0 = 1 y n_j = 2j + 3
+          let xn(n) = 2 + calc.pow(-1, n) * 3 / n
+          let a(k) = xn(if calc.odd(k) { k + 2 } else { k + 1 })
+          let nidx(j) = if j == 0 { 1 } else { 2 * j + 3 }
+          let x = 2
+          let J = 9
+          let X(j) = j * 0.8
+          let Y(v) = (v - 0.85) * 2.6
+
+          line((X(0.4), Y(x)), (X(J + 0.6), Y(x)), stroke: (dash: "dashed", paint: rgb("#334155"), thickness: 0.8pt))
+          content((X(J + 0.7), Y(x)), anchor: "west", text(size: 9pt)[$x = 2$])
+
+          for j in range(1, J + 1) {
+            let lo = a(nidx(j - 1))
+            let hi = lo + 1 / j
+            line((X(j), Y(lo)), (X(j), Y(hi)), stroke: 3pt + rgb("#e2e8f0"))
+            line((X(j) - 0.12, Y(lo)), (X(j) + 0.12, Y(lo)), stroke: 1.3pt + rojo)
+            line((X(j) - 0.12, Y(hi)), (X(j) + 0.12, Y(hi)), stroke: 1.3pt + azul)
+            circle((X(j), Y(xn(nidx(j)))), radius: 0.07, fill: verde, stroke: none)
+            content((X(j), Y(0.85) - 0.3), text(size: 8pt)[$#j$])
+          }
+          line((X(0.4), Y(0.85)), (X(J + 0.6), Y(0.85)), stroke: 0.7pt + rgb("#334155"), mark: (end: ">"))
+          content((X(J + 0.7), Y(0.85)), anchor: "west", text(size: 8pt)[$j$])
+
+          content((X(5), Y(2.1) + 0.45), text(size: 8.5pt)[
+            #text(fill: azul)[$a_(n_(j-1)) + 1\/j$] #h(0.8em)
+            #text(fill: verde)[$x_(n_j)$] #h(0.8em)
+            #text(fill: rojo)[$a_(n_(j-1))$]
+          ])
+        })
+      ]
+    ]
+  ]
+]
+
+#corolario[$RR^n$ es completo][4.58][
+  $(RR^n, d_oo)$ es completo.
+]
+#demostracion[
+  Sea $v_k = (x_1^k, x_2^k, dots, x_n^k) in RR^n$ una sucesión de Cauchy. Es decir,
+  $
+    v_1 & = (x_1^1, x_2^1, x_3^1, dots, x_n^1) \
+    v_2 & = (x_1^2, x_2^2, x_3^2, dots, x_n^2) \
+    v_3 & = (x_1^3, x_2^3, x_3^3, dots, x_n^3) \
+        & dots.v \
+    v_k & = (x_1^k, x_2^k, x_3^k, dots, x_n^k)
+  $
+  Pensemos en la sucesión de números reales que se forma si tomamos siempre la primer coordenada de los vectores, es decir, la sucesión $(x_1^k)_(k in NN) subset.eq RR$. Observemos que
+  $ abs(x_1^k - x_1^j) <= max_(1 <= i <= n) abs(x_i^k - x_i^j) = d_oo (v_k, v_j) < epsilon $
+  si $k, j$ son lo suficientemente grandes. Esto nos dice que la sucesión $(x_1^k)$ es de Cauchy (en $RR$) y por el teorema anterior, sabemos que existe un $x_1$ tal que $x_1^k -> x_1$ cuando $k -> oo$. No es difícil ver que podemos hacer lo mismo con el resto de las coordenadas y obtenemos que $x_i^k -> x_i$ cuando $k -> oo$.
+
+  Veamos que si llamamos $v = (x_1, dots, x_n)$ tenemos que $v_k -> v$. Como cada coordenada converge, sabemos que para $epsilon > 0$ existe un $k_1$ tal que $abs(x_1^k - x_1) < epsilon$ para todo $k >= k_1$, existe un $k_2$ tal que $abs(x_2^k - x_2) < epsilon$ para todo $k >= k_2$, y así siguiendo hasta llegar a la coordenada $n$. Eligiendo $k_0 = max{k_1, k_2, dots, k_n}$, nos sale que
+  $ abs(x_i^k - x_i) < epsilon quad "para todo " i = 1, dots, n, " para todo " k >= k_0. $
 ]
