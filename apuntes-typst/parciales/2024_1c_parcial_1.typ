@@ -7,6 +7,8 @@
 // Fuente: `parciales/primer_parcial_1c2024_soluciones.pdf` (enunciado + soluciones de la cátedra).
 // Las resoluciones de abajo son transcripción de ese documento, sin agregados. Las erratas
 // evidentes del original se conservan y están marcadas con un comentario `// sic`.
+// Al final: sección "Verificación en Lean", con la formalización de las cuatro soluciones en
+// `lean/Parciales/Parcial1_1C2024.lean`.
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado] \
@@ -220,4 +222,61 @@
 
   Como hemos considerado todos los casos posibles, hemos probado que $(RR, d)$ es completo.
   #h(1fr) $square$
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+= Verificación en Lean
+
+#progreso[
+  Las cuatro soluciones oficiales están formalizadas en `lean/Parciales/Parcial1_1C2024.lean`
+  (Lean 4 + Mathlib, `cd lean && lake build`). Cada enunciado está escrito tal cual y cada
+  demostración sigue el argumento de la cátedra; abajo se anota, ejercicio por ejercicio, qué
+  teorema lo certifica y en qué se aparta la formalización del texto. Ninguna demostración usa
+  `sorry`; los únicos axiomas son los estándar de Lean. Las erratas marcadas con `sic` en la
+  transcripción no afectan al argumento y la formalización usa la versión corregida.
+]
+
+#observacion[Ejercicio 1: `ej1a : #ℚ[X] = ℵ₀` y `ej1b : #𝒜 = ℵ₀`][
+  *(a)* La solución oficial parte $QQ[x]$ por grado e inyecta cada $QQ_n [x]$ en $NN$ con primos.
+  Lean hace la misma partición pero sin primos: `codif p = (grado p, coeficientes de p)` inyecta
+  $QQ[x]$ en $union.big_n QQ^(n+1)$ (`codif_injective`, usando que los coeficientes de índice
+  mayor que el grado son $0$), y una unión numerable de numerables es contable. `infinite_QX`
+  es la inyección $n |-> n$ del texto, y `ej1a` concluye con "contable e infinito $=>$ numerable".
+
+  *(b)* Sigue el texto literalmente: `R p` es $R_p$, `R_finite` dice que es finito si $p != 0$
+  (`Polynomial.finite_setOfPred_isRoot`), `𝒜_eq` es $cal(A) = union.big_(p != 0) R_p$,
+  `rat_subset_𝒜` es $QQ subset.eq cal(A)$ vía $x - alpha$, y `ej1b` cierra igual que (a).
+]
+
+#observacion[Ejercicio 2: `d1_Ψ_le` y `ej2`][
+  $C[0,1]$ es `C(unitInterval, ℝ)` con la métrica $d_oo$ de Mathlib; $d_1$ se define a mano como
+  $integral_0^1 abs(f - g)$ (`d1`), sin dotar a $(C[0,1], d_1)$ de estructura de espacio métrico,
+  y la continuidad uniforme hacia $d_1$ se escribe con $epsilon$-$delta$. `d1_Ψ_le` es la cuenta
+  (2): $d_1 (Psi f, Psi g) <= d_oo (f, g)/2$, con `integral_id` para $integral_0^1 x dif x = 1/2$.
+  `ej2` es la continuidad uniforme por definición, con $delta = epsilon$ como en el texto. La
+  observación "Lipschitz $=>$ uniformemente continua" no hace falta formalizarla.
+]
+
+#observacion[Ejercicio 3: `ej3`][
+  Enunciado idéntico para espacios métricos. La inclusión $f(overline(A)) subset.eq overline(f(A))$
+  es el lema de Mathlib `image_closure_subset_closure_image` (continuidad, sin compacidad). La
+  recíproca sigue el primer argumento del texto: $overline(A)$ es cerrado en un compacto, luego
+  compacto (`IsClosed.isCompact`); su imagen es compacta (`IsCompact.image`), luego cerrada
+  (`IsCompact.isClosed`, usa que $Y$ es Hausdorff); y $f(A) subset.eq f(overline(A))$ da
+  $overline(f(A)) subset.eq f(overline(A))$ por `closure_minimal`. La alternativa por sucesiones
+  no está formalizada.
+]
+
+#observacion[Ejercicio 4: instancia `CompleteSpace Rd`][
+  `Rd` es $RR$ con la métrica $d$; aunque el enunciado no lo pide, la instancia `MetricSpace Rd`
+  verifica los cuatro axiomas. La completitud se prueba con la misma dicotomía del texto, pero
+  organizada al revés: *o bien* la sucesión es eventualmente constante (y converge a esa
+  constante), *o bien* para cada $n >= N$ hay $m >= N$ con $x_m != x_n$, y entonces
+  $abs(x_n) <= abs(x_n) + abs(x_m) = d(x_n, x_m) < epsilon$: la sucesión converge a $0$ porque
+  $d(x_n, 0) <= abs(x_n)$ (`Rd.dist_zero_le`). El Caso 1 del texto (una subsucesión con
+  $abs(x_(n_k)) >= epsilon_0$ es constante y se usa el Teorema 4.54 c) queda cubierto por la
+  rama "eventualmente constante" sin pasar por subsucesiones.
 ]
