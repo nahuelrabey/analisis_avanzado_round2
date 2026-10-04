@@ -6,6 +6,8 @@
 
 // Fuente: `parciales/resolucion_oficial_1er_parcial_2c2024.pdf` (enunciado + resolución oficial
 // de la cátedra). Las resoluciones de abajo son transcripción de ese documento, sin agregados.
+// Al final: sección "Verificación en Lean", con la formalización de las cuatro resoluciones en
+// `lean/Parciales/Parcial1_2C2024.lean`.
 
 #align(center)[
   #text(14pt, weight: "bold")[Análisis Avanzado] \
@@ -134,4 +136,61 @@
 
   Para la última pregunta vimos en clase que la función evaluación $cal(E) : X -> RR$ es continua
   en $d_oo$ y no en $d_1$, por lo cual no vale la vuelta.
+]
+
+#v(12pt)
+#line(length: 100%, stroke: 0.7pt)
+#v(8pt)
+
+= Verificación en Lean
+
+#progreso[
+  Las cuatro resoluciones oficiales están formalizadas en `lean/Parciales/Parcial1_2C2024.lean`
+  (Lean 4 + Mathlib, `cd lean && lake build`). Cada enunciado está escrito tal cual y cada
+  demostración sigue el argumento de la cátedra; abajo se anota, ejercicio por ejercicio, qué
+  teorema lo certifica y en qué se aparta la formalización del texto. Ninguna demostración usa
+  `sorry`; los únicos axiomas son los estándar de Lean.
+]
+
+#observacion[Ejercicio 1: `ej1`][
+  Calco del texto: $op("ínf")(A) + op("ínf")(B)$ es cota inferior de $A + B$ (`csInf_le`), y para
+  cada $epsilon > 0$ hay $a in A$, $b in B$ con $a < op("ínf")(A) + epsilon/2$,
+  $b < op("ínf")(B) + epsilon/2$ (`exists_lt_of_csInf_lt`); "como $epsilon$ era cualquiera" es
+  `le_of_forall_pos_lt_add`. Sólo se usa que $A$ y $B$ estén acotados *inferiormente*.
+]
+
+#observacion[Ejercicio 2: `ej2 : #𝒜 = 𝔠`][
+  `𝒜` es ${B subset.eq QQ : \#B = \#(QQ without B)}$ y `Φ B = B ∪ ((1,2) ∩ ℚ)` es la función del
+  texto. `Φ_mem` reproduce las dos cadenas de desigualdades (los dos lados contienen a
+  $(1,2) inter QQ$ y a $(2,3) inter QQ$, infinitos, y están dentro de $QQ$, contable, así que
+  ambos tienen cardinal $aleph_0$). El texto dice "construimos una función inyectiva" sin
+  verificar la inyectividad; `Φ_injective` la prueba: $n in B <==> n in Phi(B)$, porque ningún
+  natural está en $(1, 2)$. La cota superior usa $\#cal(P)(QQ) = 2^(aleph_0) = frak(c)$.
+]
+
+#observacion[Ejercicio 3: `ej3`][
+  La hipótesis del enunciado se formaliza para sucesiones de cerrados, *acotados* y no vacíos:
+  en el curso el diámetro sólo está definido para conjuntos acotados (Definición 4.9), mientras
+  que en Mathlib `diam` de un conjunto no acotado vale $0$ por convención, y sin la palabra
+  "acotados" la hipótesis de Lean sería más fuerte que la del parcial. Con ella, es el enunciado
+  de la Práctica 3, Ej. 16.
+
+  La prueba sigue el texto: `A n` es $overline(union.big_(m >= n) B(x_m, 1/(n+1)))$ (índices desde
+  $0$), se verifica que son cerrados, no vacíos, decrecientes y acotados (toda sucesión de Cauchy
+  es acotada, `cauchySeq_bdd`), y el diámetro se acota con $epsilon/5$ como en el texto
+  (`Metric.diam_le_of_forall_dist_le`, `Metric.diam_closure`). El punto $x$ de la intersección es
+  el límite porque $d(x_n, x) <= op("diam")(A_n)$ (`Metric.dist_le_diam_of_mem`).
+]
+
+#observacion[Ejercicio 4: `d1_le_dist`, `ej4` y `ej4_reciproca_falsa`][
+  $X = C[0,1]$ es `C(unitInterval, ℝ)` con $d_oo$; $d_1$ se define a mano como integral (`d1`) y
+  "continua con $d_1$" se escribe con $epsilon$-$delta$. `d1_le_dist` es la inclusión de bolas
+  $B^(d_oo)(f, r) subset.eq B^(d_1)(f, r)$ del texto, en la forma $d_1 (f, g) <= d_oo (f, g)$.
+  `ej4` deduce `Continuous F` (para $d_oo$) de la hipótesis $epsilon$-$delta$ en $d_1$.
+
+  Para la recíproca el texto cita lo visto en clase (la evaluación $cal(E)$ es continua para
+  $d_oo$ y no para $d_1$; Práctica 4, Ej. 9). `ej4_reciproca_falsa` lo prueba: `E f = f 0` es
+  continua para $d_oo$ (`continuous_eval_const`) y no es $d_1$-continua en $0$, porque la función
+  "carpa" $g_h (x) = max{0, 1 - x/h}$ cumple $d_1 (g_h, 0) <= h$ (se parte la integral en $[0, h]$ y
+  $[h, 1]$) pero $cal(E)(g_h) = 1$.
 ]

@@ -5,11 +5,21 @@ transcriptos en `apuntes-typst/parciales/`:
 
 | Examen | Transcripción y resolución | Archivo Lean |
 |---|---|---|
+| Primer parcial 1C 2024 (soluciones oficiales) | `apuntes-typst/parciales/2024_1c_parcial_1.typ` | `Parciales/Parcial1_1C2024.lean` |
+| Primer parcial 2C 2024 (19/10/2024, resolución oficial) | `apuntes-typst/parciales/2024_2c_parcial_1.typ` | `Parciales/Parcial1_2C2024.lean` |
 | Primer parcial 1C 2025 (08/05/2025) | `apuntes-typst/parciales/2025_1c_parcial_1.typ` | `Parciales/Parcial1_1C2025.lean` |
 | Primer recuperatorio 1C 2025 (08/07/2025) | `apuntes-typst/parciales/2025_1c_recuperatorio_1.typ` | `Parciales/Recu1_1C2025.lean` |
+| Primer parcial 2C 2025 (16/10/2025) | `apuntes-typst/parciales/2025_2c_parcial_1.typ` | `Parciales/Parcial1_2C2025.lean` |
+| Recuperatorio del primer parcial 2C 2025 (04/12/2025) | `apuntes-typst/parciales/2025_2c_recuperatorio_1.typ` | `Parciales/Recu1_2C2025.lean` |
 
-Cada resolución escrita en el `.typ` termina con una caja *Observación* que indica qué teorema
-del archivo Lean la certifica y en qué difiere la formalización de la escritura a mano.
+Para los exámenes que traen resolución oficial (2024), el archivo Lean formaliza esa resolución
+y el `.typ` termina con una sección *Verificación en Lean* que anota las diferencias. Para los
+demás, el `.typ` tiene resoluciones propuestas y cada una termina con una caja *Observación*
+que indica qué teorema del archivo Lean la certifica y en qué difiere la formalización de la
+escritura a mano.
+
+Fuera de alcance: `apuntes-typst/parciales/2024_2c_parcial_2.typ` (segundo parcial: punto fijo,
+series, medida de Lebesgue), cuyos temas no están cubiertos por `apuntes.typ`.
 
 ## Compilar
 
@@ -35,5 +45,10 @@ import Parciales
   (`a_n` del curso es `a (n-1)` en Lean). Ningún argumento depende de esto.
 - `ℝⁿ` es `Fin n → ℝ`, que en Mathlib trae la métrica `d_∞`; `d_2` se transporta desde
   `EuclideanSpace ℝ (Fin n)`.
-- El espacio `X` de sucesiones eventualmente nulas (parcial 1, ej. 4) se modela como
+- El espacio `X` de sucesiones eventualmente nulas (parcial 1C 2025, ej. 4) se modela como
   subconjunto de `ℕ →ᵇ ℝ` (funciones acotadas, con la métrica del supremo).
+- `C([0, 1])` es `C(unitInterval, ℝ)`, que trae la métrica `d_∞`; la distancia `d_1` se define
+  a mano como `∫₀¹ |f - g|` y las afirmaciones de continuidad respecto de `d_1` se escriben con
+  `ε`-`δ` (no se construye un espacio métrico `(C[0,1], d_1)`).
+- Métricas "raras" del enunciado (`|x| + |y|`, la discreta, `máx{4/3 d_∞, d_2}`) se ponen sobre
+  un sinónimo de tipo (`def Rd : Type := ℝ`, etc.) con su propia instancia `MetricSpace`.
