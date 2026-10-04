@@ -1,3 +1,4 @@
+// Notas docentes 2025 · clase 2 de la transcripción: sus ejemplos llevan el tag `C2-{k}` en `ejemplos/`.
 #import "../utils.typ": recta, sublema
 
 = Sucesiones y cardinales

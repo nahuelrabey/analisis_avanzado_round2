@@ -37,7 +37,7 @@
 
 Los ejemplos están agrupados por *técnica*, no por orden de transcripción, y los bloques siguen el orden en que la guía los necesita. Cada bloque abre con la nota de qué ejercicios de `guias/p3.typ` desbloquea.
 
-La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase --- `C1-4` es el Ejemplo 4 de `clases_2023/apuntes_1.typ` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_ --- `A1.5.9` es el Ejercicio 1.5.9 del libro.
+La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) --- `C1-4` es el Ejemplo 4 de `clases/sucesiones_supremos.typ` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_ --- `A1.5.9` es el Ejercicio 1.5.9 del libro.
 
 #v(6pt)
 
@@ -56,6 +56,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [3], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7],
   [4], [Caracterizaciones y estabilidad de abiertos y cerrados], [p3: Ej. 9; conceptual para Ej. 5, 12],
   [5], [Sucesiones en espacios métricos], [p3: Ej. 13 (intro)],
+  [6], [Completitud: probarla, heredarla y caracterizarla], [p3: Ej. 14, 15, 16; conceptual para Ej. 10, 12],
 )
 
 #v(4pt)
@@ -1346,4 +1347,123 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   + $(QQ, abs(dot))$ no es completo. Por ejemplo, podríamos tomar $x_n = 3","14159 dots$ los primeros $n$ dígitos del número $pi$. Tenemos que $(x_n) subset.eq QQ$, y $x_n -> pi$. Como la sucesión es convergente en $RR$, sabemos que debe ser de Cauchy (Teorema 4.54 b). Sin embargo, su límite no pertenece a $QQ$, lo cual nos dice que $QQ$ no puede ser completo.
 
   + Sea $(M, delta)$ un conjunto con la métrica discreta. Como vimos en los ejemplos anteriores (Ejemplos 30 y 31), las sucesiones de Cauchy son las eventualmente constantes y estas son convergentes. Esto nos dice que el espacio sí es completo.
+]
+
+#v(10pt)
+#line(length: 100%, stroke: 0.5pt + luma(150))
+#v(8pt)
+
+== Bloque 6 · Completitud: probarla, heredarla y caracterizarla
+
+#sublema(titulo: "Qué desbloquea")[
+  Un espacio es completo (Definición 4.55) si toda sucesión de Cauchy converge *adentro* del espacio. Los seis ejemplos de la clase del 01/10 cubren las tres maniobras que piden los *Ejercicios 14, 15 y 16* de la Práctica 3: (i) probar completitud "a mano", coordenada a coordenada, controlando que el límite candidato quede en el espacio y que la convergencia sea en la métrica del espacio y no sólo coordenada a coordenada (C5-1, que es el Corolario 4.58 con infinitas coordenadas); (ii) heredar la completitud a un subconjunto cerrado y usarla para decidir si conjuntos concretos son completos (C5-2, C5-6); (iii) caracterizarla sin bolas, por sucesiones, en una métrica rara (C5-3) o a través del encaje de cerrados, que es el recíproco del Ejercicio 16 (C5-5). C5-4 es una aplicación de $d(x, F)$ (Ejercicio 10) que se usa de paso.
+]
+
+#ejemplo[Las sucesiones acotadas con $d_oo$ forman un espacio completo (Clase 5 · Ejercicio 1)][C5-1][
+  Probar que $X = {a in RR^NN : a "es acotada"}$ es completo con $d_oo (a, b) = sup_(k in NN) abs(a_k - b_k)$.
+]
+
+#estrategia[Límite coordenada a coordenada, y después dos cosas más: que es acotado y que la convergencia es uniforme en $k$][
+  Una sucesión $(a_n)_n subset.eq X$ es una "matriz infinita" $a_n = (a_(n 1), a_(n 2), dots)$. Que sea de Cauchy para $d_oo$ obliga a cada columna $(a_(n k))_n$ a ser de Cauchy en $RR$, así que tiene límite $tilde(a)_k$. El candidato es $tilde(a) = (tilde(a)_k)_k$, y quedan dos cosas: que $tilde(a)$ es acotada (porque una Cauchy está dentro de una bola, y esa cota se hereda al límite) y que $d_oo (a_n, tilde(a)) -> 0$. Lo segundo es el punto delicado: la convergencia de cada columna da un $n$ "grande" que depende de $k$, y hay infinitas columnas. Se esquiva con la condición de Cauchy: se fija un $n_0$ *uniforme* y se pasa al límite en $m$ dentro de $abs(a_(n_0 k) - a_(m k)) < epsilon'$.
+]
+
+#resolucion[
+  Sea $(a_n)_n subset.eq X$ de Cauchy: para todo $epsilon > 0$ existe $n_0$ tal que $d_oo (a_n, a_m) < epsilon$ si $n, m >= n_0$. Entonces, para cada $i$ y $n, m >= n_0$,
+  $ abs(a_(n i) - a_(m i)) <= sup_(k in NN) abs(a_(n k) - a_(m k)) = d_oo (a_n, a_m) < epsilon, quad (*) $
+  así que $(a_(n i))_n$ es de Cauchy en $RR$ y, como $RR$ es completo, existe $tilde(a)_i = lim_n a_(n i)$. Sea $tilde(a) = (tilde(a)_k)_k$.
+
+  *$tilde(a) in X$.* Primero, una Cauchy está en una bola: existe $n_0$ con $d(a_n, a_m) < 1$ para $n, m >= n_0$, y entonces $d(a_1, a_n) <= d(a_1, a_(n_0)) + d(a_(n_0), a_n) < d(a_1, a_(n_0)) + 1$ para $n >= n_0$; agrandando con los finitos $n < n_0$, hay $M > 0$ con $(a_n)_n subset.eq B(a_1, M)$. Entonces, para todo $n$ y $k$,
+  $ abs(a_(n k)) <= abs(a_(n k) - a_(1 k)) + abs(a_(1 k)) <= M + sup_(k in NN) abs(a_(1 k)) =: tilde(M), $
+  donde el último supremo es finito porque $a_1 in X$. Como $a_(n k) -> tilde(a)_k$, por álgebra de límites $abs(tilde(a)_k) <= tilde(M)$ para todo $k$: $tilde(a)$ es acotada.
+
+  *$a_n -> tilde(a)$ en $d_oo$.* Dado $epsilon' > 0$, sea $n_0$ el de $(*)$. Para $n >= n_0$,
+  $ d_oo (a_n, tilde(a)) <= underbrace(d_oo (a_n, a_(n_0)), (1)) + underbrace(d_oo (a_(n_0), tilde(a)), (2)). $
+  $(1) < epsilon'$ por $(*)$. Para $(2)$: por $(*)$, $abs(a_(n_0 k) - a_(m k)) < epsilon'$ para todo $k$ y todo $m >= n_0$; haciendo $m -> +oo$ con $k$ fijo, $abs(a_(n_0 k) - tilde(a)_k) <= epsilon'$ para todo $k$, y tomando supremo en $k$, $(2) <= epsilon'$. Luego $d_oo (a_n, tilde(a)) < 2 epsilon'$ para todo $n >= n_0$; con $epsilon' = epsilon \/ 2$ queda $d_oo (a_n, tilde(a)) < epsilon$.
+]
+
+#ejemplo[Completo si y sólo si cerrado, y dos conjuntos de $RR^2$ (Clase 5 · Ejercicio 2)][C5-2][
+  Sea $(E, d)$ un espacio métrico completo.
+  #set enum(numbering: "a)")
+  + Probar que $A subset.eq E$ es completo si y sólo si $A$ es cerrado.
+  + En $E = (RR^2, d_2)$, decidir si $A = {(x, y) : exists n in NN "con" y = x^n}$ y $B = {(x, y) : x^2 + y^2 = 1}$ son completos.
+]
+
+#estrategia[Un punto de la clausura es límite de una sucesión de $A$, que es de Cauchy; y para los ejemplos, mirar sólo si son cerrados][
+  La vuelta de (a) es el Ejercicio 15 de la Práctica 3. Para la ida, si $a in overline(A)$ hay $(a_n)_n subset.eq A$ con $a_n -> a$; convergente implica Cauchy, y la completitud de $A$ obliga al límite a estar en $A$. Con (a), en un espacio completo "completo" es lo mismo que "cerrado": para $A$ basta exhibir un punto de $overline(A) without A$ (la sucesión $(1\/2, 1\/2^n)$ se cae al eje $x$), y para $B$ basta pasar al límite en la ecuación $x_n^2 + y_n^2 = 1$.
+]
+
+#resolucion[
+  *a)* $arrow.l.double)$ Ejercicio 15 de la Práctica 3. $=>)$ Sea $a in overline(A)$ y $(a_n)_n subset.eq A$ con $a_n -> a$. Entonces $(a_n)_n$ es de Cauchy en $E$, y por lo tanto también en $A$ (la distancia es la misma). Como $A$ es completo, converge en $A$; por unicidad del límite, $a in A$. Luego $overline(A) = A$.
+
+  *b)* $A$ es la unión de los gráficos de $y = x^n$, $n in NN$, que pasan todos por $(0,0)$ y $(1,1)$ y en $(0,1)$ se aplastan contra el eje $x$. Tomemos $(x_n, y_n) = (1\/2, 1\/2^n) in A$: converge a $(1\/2, 0) in overline(A)$, pero $(1\/2, 0) in.not A$ porque $0 != (1\/2)^n$ para todo $n$. Así que $A$ no es cerrado y, por (a), *no es completo*.
+
+  Para $B$, veamos $overline(B) subset.eq B$: si $(x_n, y_n) in B$ y $(x_n, y_n) -> (x, y)$, entonces $x_n -> x$, $y_n -> y$ y, por álgebra de límites, $x^2 + y^2 = lim (x_n^2 + y_n^2) = 1$, es decir $(x, y) in B$. Luego $B$ es cerrado y, como $(RR^2, d_2)$ es completo, *$B$ es completo*.
+]
+
+#ejemplo[La métrica $d(x, y) = abs(x) + abs(y)$ para $x != y$: es métrica, es completa, no es equivalente a la usual (Clase 5 · Ejercicio 3)][C5-3][
+  Sea $d : RR times RR -> RR$ dada por $d(x, y) = 0$ si $x = y$ y $d(x, y) = abs(x) + abs(y)$ si $x != y$.
+  #set enum(numbering: "a)")
+  + Probar que $d$ es una métrica en $RR$.
+  + Probar que $(RR, d)$ es completo.
+  + ¿Es $d$ equivalente a la métrica usual de $RR$?
+]
+
+#estrategia[En esta métrica, dos puntos distintos "pasan por el $0$"; una Cauchy o se va a $0$ o se vuelve constante][
+  Para la triangular sólo hay que repasar los casos según qué puntos coinciden: cuando los tres son distintos queda $abs(x) + abs(y) <= abs(x) + 2 abs(z) + abs(y)$. Para la completitud, la clave es que $d(a_n, a_m) < epsilon$ con $a_n != a_m$ fuerza $abs(a_n) < epsilon$: si la sucesión toma infinitos valores, una subsucesión de términos distintos tiende a $0$ y arrastra a toda la Cauchy; si toma finitos valores, alguno se repite infinitas veces y la Cauchy se vuelve eventualmente constante. Para (c), lejos del $0$ los puntos están aislados: $B(1, 1) = {1}$.
+]
+
+#resolucion[
+  *a)* $d >= 0$, y $d(x, y) = 0$ si y sólo si $x = y$ (pues $abs(x) + abs(y) = 0$ sólo si $x = y = 0$); la simetría es evidente. Triangular: sean $x, y, z$. Si $x = y$ es $0 <= d(x, z) + d(z, y)$. Si $x != y$ y $z = x$ (o $z = y$) es $d(x, y) <= 0 + d(x, y)$. Si son distintos dos a dos, $d(x, y) = abs(x) + abs(y) <= abs(x) + abs(z) + abs(z) + abs(y) = d(x, z) + d(z, y)$.
+
+  *b)* Sea $(a_n)_n$ de Cauchy: dado $epsilon > 0$ hay $n_0$ con $d(a_n, a_m) < epsilon$ para $n, m >= n_0$; en particular, si además $a_n != a_m$, $abs(a_n) + abs(a_m) < epsilon$.
+  - Si ${a_n : n in NN}$ es infinito, hay una subsucesión $(a_(n_k))_k$ de términos distintos dos a dos, que sigue siendo de Cauchy; para $k, k' >= k_0$ vale $abs(a_(n_k)) + abs(a_(n_(k'))) < epsilon$, luego $abs(a_(n_k)) < epsilon$ para $k >= k_0$, es decir $a_(n_k) -> 0$ (en $d$, pues $d(a_(n_k), 0) = abs(a_(n_k))$). Una Cauchy con una subsucesión convergente converge (Teorema 4.54 c): $a_n -> 0$.
+  - Si ${a_n : n in NN}$ es finito, digamos ${a_(n_1), dots, a_(n_k)}$, entonces $NN = union.big_(i=1)^k {n : a_n = a_(n_i)}$, y alguno de esos conjuntos es infinito: hay una subsucesión constante igual a $a_(n_i)$, que converge, y de nuevo por el Teorema 4.54 c, $a_n -> a_(n_i)$.
+  En cualquier caso $(a_n)_n$ converge: $(RR, d)$ es completo.
+
+  *c)* No. Por (b), las únicas sucesiones convergentes tienden a $0$ o son eventualmente constantes, así que lejos del $0$ el espacio es "discreto": si $x != 1$, $d(x, 1) = abs(x) + 1 > 1$, luego $B_d (1, 1) = {1}$ es abierto en $(RR, d)$ pero no en $(RR, abs(dot.c))$. Las métricas no definen los mismos abiertos.
+]
+
+#ejemplo[Un cerrado es intersección numerable de los abiertos ${d(x, F) < 1\/n}$ (Clase 5 · Ejercicio 4)][C5-4][
+  Sea $(E, d)$ un espacio métrico y $F subset.eq E$ cerrado. Probar que
+  $ F = inter.big_(n in NN) {x in E : d(x, F) < 1/n}. $
+]
+
+#estrategia[La inclusión difícil fabrica una sucesión de $F$ que converge a $x$][
+  Si $x in F$, $d(x, F) = 0$ y está en todos los conjuntos. Recíprocamente, $d(x, F) < 1\/n$ para todo $n$ da, por definición de ínfimo, puntos $y_n in F$ con $d(x, y_n) < 1\/n$; entonces $y_n -> x$ y, como $F$ es cerrado, $x in F$ (Corolario 4.47). Cada ${d(x, F) < 1\/n}$ es abierto por el Ejercicio 10 (d).
+]
+
+#resolucion[
+  $subset.eq)$ Si $x in F$, $d(x, F) = inf{d(x, y) : y in F} = 0$ porque $d(x, x) = 0$, así que $x$ está en todos los conjuntos.
+
+  $supset.eq)$ Sea $x$ con $d(x, F) < 1\/n$ para todo $n$. Como $d(x, F)$ es un ínfimo, para cada $n$ existe $y_n in F$ con $d(x, y_n) < 1\/n$. Entonces $y_n -> x$, y como $(y_n)_n subset.eq F$ y $F$ es cerrado, $x in F$.
+]
+
+#ejemplo[Si todo encaje de cerrados acotados con diámetro $-> 0$ tiene intersección no vacía, el espacio es completo (Clase 5 · Ejercicio 5)][C5-5][
+  Sea $(E, d)$ un espacio métrico tal que para *toda* sucesión $(A_n)_n$ de subconjuntos cerrados, acotados y no vacíos con $A_(n+1) subset.eq A_n$ y $lim_n op("diam")(A_n) = 0$ se tiene $inter.big_n A_n != emptyset$. Probar que $E$ es completo.
+]
+
+#estrategia[Encajar las clausuras de las colas de la sucesión de Cauchy][
+  Es el recíproco del Ejercicio 16. Dada una Cauchy $(a_n)_n$, la condición de Cauchy con $epsilon = 1\/k$ da índices $n_1 <= n_2 <= dots$ tales que la cola ${a_n : n >= n_k}$ tiene diámetro $<= 1\/k$. Sus clausuras $A_k$ son cerradas, no vacías, encajadas, y conservan el diámetro (Ejercicio 7 de la Práctica 3), así que la hipótesis da un $a in inter A_k$. Que $a_n -> a$ sale por el absurdo: una subsucesión que se mantenga a distancia $>= epsilon$ de $a$ no cabe en un $A_k$ de diámetro $< epsilon \/ 2$ que contiene a $a$.
+]
+
+#resolucion[
+  Sea $(a_n)_n$ de Cauchy. Elegimos inductivamente $n_1 <= n_2 <= dots$ con $d(a_n, a_m) < 1\/k$ para $n, m >= n_k$, y definimos $A_k = overline({a_n : n >= n_k})$. Entonces, para todo $k$: $A_k$ es cerrado y no vacío; $op("diam") {a_n : n >= n_k} <= 1\/k$ y, por el Ejercicio 7 de la Práctica 3, $op("diam")(A_k) <= 1\/k$ (en particular $A_k$ es acotado); y $A_(k+1) subset.eq A_k$ porque ${a_n : n >= n_(k+1)} subset.eq {a_n : n >= n_k}$ y la clausura es monótona. Así $op("diam")(A_k) -> 0$ y, por hipótesis, existe $a in inter.big_k A_k$.
+
+  Veamos que $a_n -> a$. Si no, hay $epsilon > 0$ y una subsucesión con $d(a_(n_j), a) >= epsilon$ para todo $j$. Tomemos $k$ con $2\/k < epsilon$. Como $a in A_k = overline({a_n : n >= n_k})$, hay $m >= n_k$ con $d(a, a_m) < 1\/k$; y como $n_j -> +oo$, hay $j_0$ con $n_(j_0) >= n_k$, de modo que $a_(n_(j_0)), a_m in A_k$. Entonces
+  $ epsilon <= d(a_(n_(j_0)), a) <= d(a_(n_(j_0)), a_m) + d(a_m, a) < op("diam")(A_k) + 1/k <= 2/k < epsilon, $
+  absurdo. Luego $a_n -> a$ y $E$ es completo.
+]
+
+#ejemplo[Completo si y sólo si toda bola cerrada es completa (Clase 5 · Ejercicio 6)][C5-6][
+  Probar que $(E, d)$ es completo si y sólo si toda bola cerrada $overline(B)(x, r) = {y : d(x, y) <= r}$ es completa.
+]
+
+#estrategia[Una Cauchy es acotada, así que vive en una bola cerrada][
+  La ida es el Ejercicio 15 de la Práctica 3 (las bolas cerradas son cerradas, Ejercicio 4 (d)). Para la vuelta, la condición de Cauchy con $epsilon = 1$ encierra a toda la sucesión en una bola cerrada centrada en $a_1$ (Teorema 4.54 a); por hipótesis esa bola es completa, así que la sucesión converge ahí, y por lo tanto en $E$.
+]
+
+#resolucion[
+  $=>)$ Por el Ejercicio 15 de la Práctica 3, ya que $overline(B)(x, r)$ es cerrada (Ejercicio 4 (d)).
+
+  $arrow.l.double)$ Sea $(a_n)_n subset.eq E$ de Cauchy. Es acotada (Teorema 4.54 a): existe $M > 0$ con $(a_n)_n subset.eq overline(B)(a_1, M)$. Por hipótesis $overline(B)(a_1, M)$ es completo, así que $(a_n)_n$ converge a un punto de $overline(B)(a_1, M)$, y como la distancia es la misma, converge en $(E, d)$.
 ]

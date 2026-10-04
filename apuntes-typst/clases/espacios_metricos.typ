@@ -1,3 +1,5 @@
+// Notas docentes 2025 · clase del 23/09/2025 (manuscrito "Análisis Avanzado — Espacios métricos").
+// Clase 4 de la transcripción: sus ejercicios llevan el tag `C4-{k}` en `ejemplos/`.
 #import "../utils.typ": recta, sublema
 
 = Espacios métricos

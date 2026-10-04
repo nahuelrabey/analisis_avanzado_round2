@@ -1,3 +1,4 @@
+// Notas docentes 2025 · clase 1 de la transcripción: sus ejemplos llevan el tag `C1-{k}` en `ejemplos/`.
 // #let ge = $epsilon$
 #import "../utils.typ": recta
 

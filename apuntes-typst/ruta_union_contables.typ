@@ -44,7 +44,7 @@ El resultado que se quiere probar es
 
 $ A_n "contable para todo" n in NN quad ==> quad union.big_(n in NN) A_n "es contable". $
 
-Se usa sin aclaración en buena parte de la Práctica 2 y en las clases de 2023, pero *no está
+Se usa sin aclaración en buena parte de la Práctica 2 y en las clases (transcriptas en `clases/`), pero *no está
 demostrado en ninguna fuente del curso*. Este archivo reúne el estatus bibliográfico del
 enunciado y el inventario de lo que hace falta para escribir la demostración: no es la
 demostración, es la ruta hacia ella.
@@ -94,7 +94,7 @@ demostración, es la ruta hacia ella.
 Es decir: el curso lo parte deliberadamente en tres ejercicios y nunca lo enuncia como
 resultado. Después se usa como si fuera teoría en `ejemplos/p2.typ` ($ZZ times ZZ$,
 $(0,1) inter QQ$, $QQ + QQ$, sucesiones convergentes de enteros) y en
-`clases_2023/apuntes_2.typ`.
+`clases/sucesiones_cardinales.typ`.
 
 == 1. Las cuatro piezas previas
 

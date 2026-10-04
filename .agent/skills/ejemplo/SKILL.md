@@ -79,7 +79,17 @@ Preservar siempre todo el contenido existente.
 ### 5.1 Tags: la pestaña dice de dónde viene el ejemplo
 
 - **Número solo** (`8`): ejemplo de `notas_materia.pdf`, con el contador secuencial del apunte. El título lleva además su numeración por capítulo entre paréntesis: `(Ejemplo 2.4)`.
-- **`C{clase}-{ejemplo}`** (`C1-1.2`, `C2-2`): ejercicio resuelto en clase, transcrito en `clases_2023/apuntes_{clase}.typ`. El título termina en `(Clase 1 · Ejemplo 1.2)`.
+- **`C{clase}-{ejemplo}`** (`C1-1.2`, `C2-2`): ejercicio resuelto en clase, transcrito en `apuntes-typst/clases/` (notas docentes 2025). Los archivos se nombran **por tema**, no por número de clase; el número `{clase}` del tag es el orden de transcripción y cada archivo lo declara en su primera línea de comentario. Tabla actual:
+
+  | tag | archivo en `clases/` | contenido |
+  |---|---|---|
+  | `C1-*` | `sucesiones_supremos.typ` | límites por definición, supremo e ínfimo |
+  | `C2-*` | `sucesiones_cardinales.typ` | sucesiones recursivas, subsucesiones, primeros cardinales |
+  | `C3-*` | `cardinales_metricas.typ` | cardinales de `ℕ^ℕ` y familias, primeras métricas |
+  | `C4-*` | `espacios_metricos.typ` | interior/clausura/frontera, `A+B`, caracterizaciones de abierto (clase del 23/09/2025) |
+  | `C5-*` | `completitud.typ` | espacios completos, `d = |x|+|y|`, encaje de cerrados (clase del 01/10/2025) |
+
+  Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
 Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
 
