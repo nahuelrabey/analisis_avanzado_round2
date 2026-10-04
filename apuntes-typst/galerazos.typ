@@ -91,6 +91,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-7],
   [La diagonal vive adentro de todos los pares],
   [Hay un supremo de una operación término a término entre dos sucesiones],
+
+  [G-8],
+  [Compacto y continua: el supremo es un máximo],
+  [Hay un sup o ínf de una función continua sobre $[a, b]$ y necesito que sea finito o que se alcance],
 )
 
 #v(8pt)
@@ -996,3 +1000,218 @@ que realiza el supremo. Con $a = (1, 0, 0, dots)$ y $b = (-1, 0, 0, dots)$:
   sobrevive.
 - `p1: Ej. 5 (a)` --- la monotonía del supremo respecto de la inclusión, que es el motor del
   argumento.
+
+#v(8pt)
+
+== Galerazo 8 · Compacto y continua: el supremo es un máximo
+
+#disparador[
+  En el Ejemplo C3-7 dice que los dos supremos son finitos "por el teorema de Weierstrass".
+  ¿Cómo se me puede ocurrir tirar de ese teorema? ¿Y qué tengo que chequear antes de usarlo?
+]
+
+#galerazo[G-8][
+  Si hay que tratar con el supremo o el ínfimo de una función *continua* sobre un conjunto
+  *compacto* (en $RR$: un intervalo cerrado y acotado $[a, b]$), el teorema de Weierstrass dice
+  tres cosas a la vez: el supremo es *finito*, es un *máximo* (no hace falta pasar al límite),
+  y hay un punto concreto $x_0$ donde se alcanza. Las dos hipótesis son necesarias: si falta la
+  continuidad o la compacidad, el supremo puede valer $+infinity$ o quedar sin alcanzarse.
+]
+
+=== La señal
+
+Aparece una expresión de la forma
+$ op("sup")_(x in K) abs(f(x) - g(x)), quad norm(f)_infinity, quad op("ínf")_(x in K) f(x), quad
+  op("diam")(K), quad d(x, K), $
+y lo que falta es una de estas tres cosas: que sea *finita* (para que una fórmula como la de la
+métrica de C3-7 tenga sentido), que se *alcance* (para escribirla como $f(x_0)$ y trabajar con
+un punto) o que sea *positiva* (el ínfimo de una función positiva, ¿puede ser cero?).
+
+#sublema(titulo: "Traducción")[
+  *"Sup (o ínf) de una función continua sobre un compacto"* $==>$ *"es un máx (o mín): finito, y
+  existe un punto que lo realiza"*. Lo primero que se mira es el *dominio*, no la función.
+]
+
+=== El enunciado
+
+Versión para espacios métricos, que es el contexto de la Práctica 5: si $K$ es un espacio
+métrico compacto y no vacío y $f : K -> RR$ es continua, existen $x_m, x_M in K$ tales que
+$ f(x_m) <= f(x) <= f(x_M) quad "para todo " x in K. $
+En particular $f$ es acotada y $op("sup")_K f = f(x_M) = op("máx")_K f$. Para $K = [a, b]$ es el
+teorema de los libros de primer análisis: _Lebl, Teorema 3.3.2_ ("Minimum-maximum theorem"),
+_Boman y Rogers, Teorema 7.4.2_ (EVT), _MIT 18.100A, Lecture 16, Teorema 4_. La versión para
+espacios métricos compactos figura en ProofWiki (ver Fuentes).
+
+*Ojo:* `apuntes.typ` todavía no transcribe ni compacidad ni este teorema; en el Ejemplo C3-7 se
+lo cita por nombre. Lo que sí está disponible son los ejercicios de la Práctica 5 (ver más abajo).
+
+=== Por qué funciona
+
+La prueba de MIT 18.100A (Lecture 16) para $[a, b]$ tiene tres pasos, y cada hipótesis entra en
+un lugar distinto:
+
++ *$f$ es acotada.* Si no, para cada $n$ hay $x_n in [a, b]$ con $abs(f(x_n)) >= n$. Por
+  Bolzano--Weierstrass una subsucesión $x_(n_k)$ converge a algún $x in [a, b]$ (acá se usa que
+  el intervalo es *cerrado y acotado*), y por continuidad $abs(f(x_(n_k))) -> abs(f(x))$, que
+  es finito: absurdo con $abs(f(x_(n_k))) >= n_k -> infinity$.
++ *Hay una sucesión que se acerca al supremo.* Como $f$ es acotada, existe
+  $L = op("sup") f([a, b])$, y por la Proposición de equivalencia del supremo existen
+  $x_n in [a, b]$ con $f(x_n) -> L$.
++ *El supremo se alcanza.* Otra vez Bolzano--Weierstrass: $x_(n_k) -> d in [a, b]$, y por
+  continuidad $f(d) = lim f(x_(n_k)) = L$.
+
+La *compacidad* sirve para que el límite $d$ de la subsucesión *se quede en el dominio*; la
+*continuidad* sirve para pasar el límite adentro de $f$.
+
+=== Tres ejemplos pavotes
+
+*Ejemplo 1 · Calcular los extremos de una cúbica en $[0, 3]$.* (_APEX Calculus_, Ejemplo 3.1.17.)
+Hallar el máximo y el mínimo de $f(x) = 2x^3 + 3x^2 - 12x$ en $[0, 3]$.
+
+Como $f$ es continua en el compacto $[0, 3]$, Weierstrass garantiza que ambos existen; recién
+ahí tiene sentido buscarlos entre los *candidatos*: los extremos del intervalo y los puntos
+críticos de adentro. Se tiene
+$ f'(x) = 6x^2 + 6x - 12 = 6 (x + 2)(x - 1), $
+así que el único punto crítico en $[0, 3]$ es $x = 1$ (el $x = -2$ queda afuera). Evaluando,
+$ f(0) = 0, quad f(1) = -7, quad f(3) = 45. $
+Entonces el máximo es $45$ (en $x = 3$) y el mínimo es $-7$ (en $x = 1$), valores que coinciden
+con los del libro; la factorización de $f'$ y las evaluaciones se verificaron acá.
+
+#block(breakable: false, width: 100%)[#align(center)[
+  #cetz.canvas({
+    plot.plot(
+      size: (9, 4.2),
+      x-min: -0.3, x-max: 3.3,
+      y-min: -12, y-max: 52,
+      x-tick-step: 1,
+      y-tick-step: 10,
+      x-label: $x$,
+      y-label: $f(x)$,
+      axis-style: "school-book",
+      {
+        plot.add(
+          domain: (0, 3),
+          samples: 120,
+          x => 2 * x * x * x + 3 * x * x - 12 * x,
+          style: (stroke: rgb("#c026d3") + 1.6pt),
+        )
+        plot.add(
+          ((0, 0), (1, -7), (3, 45)),
+          style: (stroke: none),
+          mark: "o",
+          mark-size: 0.16,
+          mark-style: (fill: rgb("#a21caf"), stroke: rgb("#a21caf")),
+        )
+      },
+    )
+  })
+]]
+
+#align(center)[
+  #text(9pt, style: "italic", fill: rgb("#64748b"))[
+    Los tres candidatos $(0, 0)$, $(1, -7)$ y $(3, 45)$. Sin el teorema, comparar candidatos no
+    probaría nada: podría no haber máximo.
+  ]
+]
+
+*Ejemplo 2 · La norma uniforme es finita y es un máximo.* (_Wikipedia, "Uniform norm"_, sección
+Definition; _APEX Calculus_, Ejemplo 3.1.26.) La norma uniforme se define como
+$norm(f)_infinity = op("sup") {abs(f(s)) : s in S}$, y el artículo observa que si $f$ es continua
+sobre un intervalo cerrado y acotado, o más en general sobre un compacto, entonces es acotada y
+el supremo se alcanza por el teorema de valores extremos de Weierstrass, así que se lo puede
+reemplazar por un máximo (traducción libre). Este es exactamente el uso del Ejemplo C3-7.
+
+El pavote concreto: $f(x) = sqrt(1 - x^2)$ en $[-1, 1]$. El libro calcula que el máximo es $1$
+(en $x = 0$) y el mínimo es $0$ (en $x = plus.minus 1$). Como $f >= 0$, vale $abs(f) = f$ y por
+lo tanto $norm(f)_infinity = op("máx") f = 1$ (esta última conclusión sobre la norma es
+deducción propia a partir de los valores del libro).
+
+*Ejemplo 3 · Antes de usarlo, chequear las dos hipótesis.* Cada hipótesis tiene su contraejemplo
+canónico, todos sacados de libros y apuntes abiertos:
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#table(
+  columns: (1.15fr, 1.5fr, 2.1fr, 1.35fr),
+  align: (left + horizon, left + horizon, left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 6pt),
+
+  [*Qué falla*], [*Función y dominio*], [*Qué pasa*], [*Fuente*],
+
+  [Dominio no acotado],
+  [$f(x) = x$ en $RR$],
+  [Continua; no alcanza ni máximo ni mínimo.],
+  [Lebl, Ej. 3.3.4],
+
+  [Dominio no cerrado],
+  [$f(x) = 1 / x$ en $(0, 1)$],
+  [Continua; no alcanza ni máximo ni mínimo. Detalle propio: es no acotada superiormente
+  ($op("sup") = +infinity$) y su ínfimo $1$ no se alcanza.],
+  [Lebl, Ej. 3.3.5],
+
+  [Dominio no cerrado],
+  [$f(x) = 1 - x$ en $(0, 1]$],
+  [Acotada, con $op("sup") = 1$ que *no se alcanza* (haría falta $x = 0$).],
+  [Wikipedia, _Extreme value theorem_],
+
+  [No es continua],
+  [$f(0) = f(1) = 1 / 2$ y $f(x) = x$ en $(0, 1)$, sobre $[0, 1]$],
+  [No alcanza ni máximo ni mínimo. Detalle propio: $op("sup") = 1$ y $op("ínf") = 0$, y los
+  valores $f(0) = f(1) = 1 / 2$ no llegan a ninguno de los dos.],
+  [MIT 18.100A, Lec. 16, Obs. 6],
+)
+
+Moraleja para C3-7: si el dominio fuera $(0, 1)$ en lugar de $[0, 1]$, la fórmula
+$op("sup") abs(f(x) - g(x))$ podría valer $+infinity$ y $d$ ni siquiera estaría definida
+(deducción propia, con el $f(x) = 1 / x$ de la tabla y $g = 0$).
+
+=== Cómo inventarlo de cero
+
++ *Identificá el conjunto $K$ sobre el que se toma el sup o el ínf* y la función $f$ que se
+  evalúa adentro.
++ *¿Es $f$ continua en todo $K$?* Si aparece una derivada, como en C3-7, la continuidad de $f'$
+  tiene que estar en la hipótesis: ahí está en la definición de $X$.
++ *¿Es $K$ compacto?* En $RR$, mirá si es un $[a, b]$. En un espacio métrico cualquiera, "cerrado
+  y acotado" no alcanza: la bola cerrada de $(C[0, 1], d_infinity)$ no es compacta (Práctica 5,
+  Ej. 10).
++ *Si las dos respuestas son sí:* el sup es un máx, finito, y se escribe $f(x_0)$ para algún
+  $x_0 in K$. Para *calcularlo* se compara entre los extremos y los puntos críticos (Ejemplo 1).
++ *Si alguna es no:* no se puede usar el teorema. Buscá una cota a mano o un contraejemplo
+  parecido a los de la tabla.
+
+=== Dónde se usa
+
+- `ejemplos/p3: C3-7` --- la métrica $C^1$ en $[0, 1]$: los dos supremos son finitos por
+  Weierstrass, con $f$ y $f'$ continuas en el compacto $[0, 1]$.
+- `p5: Ej. 2` --- un compacto de $RR$ tiene máximo y mínimo: es el teorema aplicado a la
+  función identidad sobre $K$ (deducción propia: la guía no dice cómo resolverlo).
+- `p5: Ej. 8` --- la distancia de un punto a un compacto se realiza: es el teorema aplicado a
+  $y |-> d(x, y)$ sobre $K$ (la continuidad de esa función está en la Práctica 4, Ej. 10).
+- `p5: Ej. 10` --- el contraste: cerrado y acotado en $(C[0, 1], d_infinity)$ *no* es compacto,
+  así que ahí el teorema no se puede invocar.
+- `p5: Ej. 11` --- una función continua y positiva sobre un compacto tiene mínimo positivo:
+  el mínimo se alcanza (Weierstrass) en algún $x_0$ y $f(x_0) > 0$.
+
+=== Fuentes
+
+Todas consultadas el 4 de octubre de 2026.
+
+- Jiří Lebl, _Basic Analysis: Introduction to Real Analysis_, sección 3.3.1: Teorema 3.3.2 y
+  Ejemplos 3.3.4 a 3.3.6.
+  #link("https://jirka.org/ra/html/sec_minmaxint.html")[jirka.org/ra/html/sec_minmaxint.html]
+- Gregory Hartman et al., _APEX Calculus_, 4ª ed., sección 3.1: Teorema 3.1.4 y Ejemplos 3.1.17
+  y 3.1.26.
+  #link("https://spot.pcc.edu/math/APEXCalculus/sec_extreme_values.html")[spot.pcc.edu/math/APEXCalculus]
+- MIT 18.100A Real Analysis (otoño 2020), _Complete Lecture Notes_, Lecture 16: Teorema 4
+  (Min-Max) y Observación 6.
+  #link("https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec16.pdf")[ocw.mit.edu (18.100A, lec16)]
+- Eugene Boman y Robert Rogers, _Real Analysis_, sección 7.4: Teorema 7.4.2 (EVT).
+  #link("https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/07:_Intermediate_and_Extreme_Values/7.04:_The_Supremum_and_the_Extreme_Value_Theorem")[math.libretexts.org]
+- Wikipedia, _Extreme value theorem_ (sección sobre funciones a las que no se aplica) y
+  _Uniform norm_ (sección Definition).
+  #link("https://en.wikipedia.org/wiki/Extreme_value_theorem")[en.wikipedia.org/wiki/Extreme_value_theorem],
+  #link("https://en.wikipedia.org/wiki/Uniform_norm")[en.wikipedia.org/wiki/Uniform_norm]
+- ProofWiki, _Extreme Value Theorem_ (versión para espacios métricos compactos).
+  #link("https://proofwiki.org/wiki/Extreme_Value_Theorem")[proofwiki.org/wiki/Extreme_Value_Theorem]
