@@ -11,18 +11,15 @@ los lemas de Mathlib que son literalmente los ítems.
 import Mathlib
 
 open Metric Set
-open scoped Classical
 
 namespace Guias.Guia3.Ej04
 
 variable {E : Type*} [MetricSpace E]
 
-/-! ## Herramientas del curso, por bolas -/
+/-! ## Herramientas del curso, por bolas
 
-/-- Definición 4.11: `x` es interior de `A` si hay una bola abierta `B(x, r) ⊆ A`. -/
-theorem mem_interior_iff_ball {A : Set E} {x : E} :
-    x ∈ interior A ↔ ∃ r > 0, ball x r ⊆ A := by
-  rw [mem_interior_iff_mem_nhds, Metric.mem_nhds_iff]
+"Abierto" es `IsOpen`, que `Metric.isOpen_iff` lee como "todo punto tiene una bola adentro"
+(`A ⊆ A°`, que con la Observación 4.12 es la Definición 4.14). -/
 
 /-- Definición 4.22: `x` es de adherencia de `A` si toda bola `B(x, r)` corta a `A`. -/
 theorem mem_closure_iff_ball {A : Set E} {x : E} :
@@ -160,6 +157,8 @@ theorem ej4e (x : E) (r : ℝ) : closure (ball x r) ⊆ closedBall x r := by
 /-- Un conjunto `X` con la métrica discreta `δ(x, y) = 0` si `x = y`, `1` si no. -/
 def Disc (X : Type*) : Type _ := X
 
+-- Sólo la instancia y los dos cálculos de bolas necesitan decidir `x = y`.
+open scoped Classical in
 noncomputable instance {X : Type*} : MetricSpace (Disc X) where
   dist x y := if x = y then 0 else 1
   dist_self x := by simp
@@ -184,8 +183,10 @@ noncomputable instance {X : Type*} : MetricSpace (Disc X) where
     rw [ite_eq_right hxy] at h
     exact one_ne_zero h
 
+open scoped Classical in
 theorem Disc.dist_eq {X : Type*} (x y : Disc X) : dist x y = if x = y then 0 else 1 := rfl
 
+open scoped Classical in
 /-- En la métrica discreta, `B(x, 1) = {x}`. -/
 theorem Disc.ball_one {X : Type*} (x : Disc X) : ball x 1 = {x} := by
   ext z
@@ -194,6 +195,7 @@ theorem Disc.ball_one {X : Type*} (x : Disc X) : ball x 1 = {x} := by
   · simp [h]
   · simp [h]
 
+open scoped Classical in
 /-- En la métrica discreta, `B̄(x, 1)` es todo el espacio. -/
 theorem Disc.closedBall_one {X : Type*} (x : Disc X) : closedBall x 1 = univ := by
   ext z

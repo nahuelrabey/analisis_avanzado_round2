@@ -8,9 +8,10 @@ Sea `E` un espacio métrico y `A ⊆ E`.
 
 La frontera es la de la Definición 4.38 de `apuntes.typ` (`fronteraCurso`), definida por bolas.
 `interior` y `closure` son los de Mathlib, pero se manejan siempre a través de su
-caracterización por bolas (Definiciones 4.11 y 4.22). El Ejercicio 5 (a) del Typst
-(`E ∖ A° = cl (E ∖ A)`) se reprueba acá como `compl_interior_eq` (los archivos Lean son
-independientes entre sí).
+caracterización por bolas (Definiciones 4.11 y 4.22). Los Ejercicios 5 (a) y 5 (b) del Typst
+(`E ∖ A° = cl (E ∖ A)`, `E ∖ cl A = (E ∖ A)°`) se reprueban acá como `compl_interior_eq` y
+`compl_closure_eq`, y con ellos "`A°` es abierto" y "`cl A` es cerrado" (Paso 3 del texto), sin
+usar `isOpen_interior`/`isClosed_closure` de Mathlib.
 -/
 import Mathlib
 
@@ -69,11 +70,39 @@ theorem frontera_eq_sdiff (A : Set E) : fronteraCurso A = closure A \ interior A
   rw [frontera_eq_inter, ← compl_interior_eq]
   rfl
 
-/-- **Ejercicio 9 (a), cerrado.** `∂A` es cerrado: es `cl A ∖ A°`, la clausura (cerrada)
-menos un abierto (el interior). -/
+/-- Paso 3 del texto: `A°` es abierto. Si `B(x, r) ⊆ A` e `y ∈ B(x, r)`, la bola
+`B(y, r - d(y, x))` queda dentro de `B(x, r) ⊆ A` (triangular), así que `y ∈ A°`. -/
+theorem isOpen_interior_bolas (A : Set E) : IsOpen (interior A) := by
+  rw [Metric.isOpen_iff]
+  intro x hx
+  obtain ⟨r, hr, hsub⟩ := mem_interior_bolas.1 hx
+  refine ⟨r, hr, fun y hy => ?_⟩
+  rw [Metric.mem_ball] at hy
+  refine mem_interior_bolas.2 ⟨r - dist y x, by linarith, fun z hz => hsub ?_⟩
+  rw [Metric.mem_ball] at hz ⊢
+  calc dist z x ≤ dist z y + dist y x := dist_triangle _ _ _
+    _ < r := by linarith
+
+/-- **Ejercicio 5 (b)**, reprobado localmente: `E ∖ cl A = (E ∖ A)°` (es el (a) aplicado a `E ∖ A`). -/
+theorem compl_closure_eq (A : Set E) : (closure A)ᶜ = interior Aᶜ := by
+  rw [← compl_compl (interior Aᶜ), compl_interior_eq, compl_compl]
+
+/-- Paso 3 del texto: `cl A` es cerrado, porque su complemento `(E ∖ A)°` es abierto
+(Ej. 5 (b) y Teorema 4.29, que acá es `isOpen_compl_iff`). -/
+theorem isClosed_closure_bolas (A : Set E) : IsClosed (closure A) := by
+  rw [← isOpen_compl_iff, compl_closure_eq]
+  exact isOpen_interior_bolas Aᶜ
+
+/-- **Ejercicio 9 (a), cerrado.** `∂A = cl A ∩ (E ∖ A°)` es intersección de dos cerrados
+(Teorema 4.31 (a)): `cl A` por `isClosed_closure_bolas` y `E ∖ A°` por el Teorema 4.29
+(`isClosed_compl_iff`) con `isOpen_interior_bolas`. -/
 theorem frontera_isClosed (A : Set E) : IsClosed (fronteraCurso A) := by
-  rw [frontera_eq_sdiff]
-  exact isClosed_closure.sdiff isOpen_interior
+  rw [frontera_eq_sdiff, Set.sdiff_eq]
+  exact (isClosed_closure_bolas A).inter (isClosed_compl_iff.2 (isOpen_interior_bolas A))
+
+/-- Lo mismo en la forma de la Definición 4.27: `cl (∂A) = ∂A`. -/
+theorem closure_frontera_eq (A : Set E) : closure (fronteraCurso A) = fronteraCurso A :=
+  (frontera_isClosed A).closure_eq
 
 /-- **Ejercicio 9 (b), igualdad.** `∂A = cl A ∩ cl (E ∖ A)`. -/
 theorem frontera_eq_inter_closure_compl (A : Set E) :

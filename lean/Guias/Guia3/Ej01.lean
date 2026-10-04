@@ -239,15 +239,18 @@ noncomputable def dC (f g : C01) : ℝ := ⨆ t, |f t - g t|
 theorem continuous_absdiff (f g : C01) : Continuous fun t => |f t - g t| :=
   (f.continuous.sub g.continuous).abs
 
-/-- El conjunto de valores `{|f t - g t|}` está acotado (compacidad de `[0, 1]`). -/
-theorem bdd_absdiff (f g : C01) : BddAbove (Set.range fun t => |f t - g t|) :=
-  (isCompact_range (continuous_absdiff f g)).bddAbove
-
-/-- Weierstrass: la función continua `t ↦ |f t - g t|` alcanza su máximo en `[0, 1]`. -/
+/-- Weierstrass (supuesto externo declarado en el texto): la función continua
+`t ↦ |f t - g t|` alcanza su máximo en el compacto `[0, 1]`. Es la única entrada de
+compacidad del archivo. -/
 theorem exists_max (f g : C01) : ∃ t₀, ∀ t, |f t - g t| ≤ |f t₀ - g t₀| :=
   let ⟨t₀, _, ht₀⟩ := isCompact_univ.exists_isMaxOn Set.univ_nonempty
     (continuous_absdiff f g).continuousOn
   ⟨t₀, fun t => ht₀ (Set.mem_univ t)⟩
+
+/-- El conjunto de valores `{|f t - g t|}` está acotado: por el máximo de `exists_max`. -/
+theorem bdd_absdiff (f g : C01) : BddAbove (Set.range fun t => |f t - g t|) :=
+  let ⟨t₀, ht₀⟩ := exists_max f g
+  ⟨|f t₀ - g t₀|, by rintro _ ⟨t, rfl⟩; exact ht₀ t⟩
 
 /-- El supremo es un máximo: `d∞(f, g) = |f t₀ - g t₀|` para un `t₀` donde se alcanza. -/
 theorem dC_eq_max (f g : C01) : ∃ t₀, dC f g = |f t₀ - g t₀| ∧ ∀ t, |f t - g t| ≤ dC f g := by

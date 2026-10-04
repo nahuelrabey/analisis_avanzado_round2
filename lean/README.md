@@ -33,7 +33,8 @@ viven en `apuntes-typst/guias/`):
 | 3 (espacios métricos y topología) | `guias-agente/guia_3_resuelta_agente.typ` | `Guias/Guia3/Ej01.lean` ... `Ej16.lean` |
 
 `Guias/Common.lean` define `EsMetrica` (Definición 4.1 de `apuntes.typ`), `bola` y `bolaCerrada`.
-Cada ejercicio tiene un archivo independiente (no se importan entre sí); el `.typ` termina cada
+Cada ejercicio tiene su archivo; como en el texto, un ejercicio puede importar uno anterior
+(`Ej08` importa `Ej03`, `Ej14` importa `Ej12`), nunca uno posterior. El `.typ` termina cada
 ejercicio con una caja *Observación* que indica qué teoremas certifican qué ítems y los desvíos de
 la formalización. Para comprobar todos los teoremas de la Práctica 3:
 

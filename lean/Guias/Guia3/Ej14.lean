@@ -1,10 +1,12 @@
 /-
-Práctica 3 · Ejercicio 14 (`apuntes-typst/guias/p3.typ`).
+Práctica 3 · Ejercicio 14 (`apuntes-typst/guias/p3.typ`); resolución en
+`apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 14).
 
 Pruebe que `(ℝⁿ, d₁)`, `(ℝⁿ, d₂)` y `(ℝⁿ, d∞)` son completos.
 
 Formalización fiel al texto, sin instancias: trabajamos con las funciones de distancia
-explícitas `d₁, d₂, d∞ : (Fin n → ℝ) → (Fin n → ℝ) → ℝ` y con la Definición 4.55 de
+explícitas `d₁, d₂, d∞ : (Fin n → ℝ) → (Fin n → ℝ) → ℝ` **del Ejercicio 12** (importado, para
+que sean los mismos objetos del Ej. 1 (d) y del Ej. 12) y con la Definición 4.55 de
 `apuntes.typ` ("toda sucesión de Cauchy tiene límite") escrita con `ε`-`N` (Definiciones 4.42 y
 4.51). No se usa que Mathlib ya tenga `CompleteSpace` para `PiLp`/`EuclideanSpace`.
 
@@ -12,29 +14,20 @@ Convención: `n ≥ 1` (`[NeZero n]`) y las sucesiones empiezan en `0` (en el cu
 
 Estructura (la misma que el texto Typst):
 1. `d∞`: prueba por coordenadas del Corolario 4.58 y completitud de `ℝ` (Teorema 4.57).
-2. Desigualdades `d∞ ≤ d₂ ≤ d₁ ≤ n d∞` (Ej. 12 (a); se reprueban acá).
+2. Desigualdades `d∞ ≤ d₂ ≤ d₁ ≤ n d∞`: son `Ej12.dinf_le_d2`, `Ej12.d2_le_d1`,
+   `Ej12.d1_le_n_dinf` (Ej. 12 (a), como cita el texto).
 3. Lema: si `d∞ ≤ d ≤ n d∞`, y `(ℝⁿ, d∞)` es completo, entonces `(ℝⁿ, d)` es completo.
 4. Se aplica el lema a `d₁` y a `d₂`.
 -/
 import Mathlib
+import Guias.Guia3.Ej12
 
 open Filter Topology
+open Guias.Guia3.Ej12 (d1 d2 dinf abs_le_dinf dinf_le_d2 d2_le_d1 d1_le_n_dinf d2_le_n_dinf)
 
 namespace Guias.Guia3.Ej14
 
 variable {n : ℕ}
-
-/-! ### Las distancias -/
-
-/-- Distancia taxista `d₁(x, y) = Σᵢ |xᵢ − yᵢ|`. -/
-noncomputable def d1 (x y : Fin n → ℝ) : ℝ := ∑ i, |x i - y i|
-
-/-- Distancia euclídea `d₂(x, y) = √(Σᵢ (xᵢ − yᵢ)²)`. -/
-noncomputable def d2 (x y : Fin n → ℝ) : ℝ := Real.sqrt (∑ i, (x i - y i) ^ 2)
-
-/-- Distancia del máximo `d∞(x, y) = máxᵢ |xᵢ − yᵢ|` (como supremo sobre el conjunto finito de
-índices). -/
-noncomputable def dinf (x y : Fin n → ℝ) : ℝ := ⨆ i, |x i - y i|
 
 /-! ### Definición 4.55: completitud, con `ε`-`N` -/
 
@@ -50,51 +43,16 @@ def Converge {X : Type*} (d : X → X → ℝ) (x : ℕ → X) (l : X) : Prop :=
 def EsCompleto {X : Type*} (d : X → X → ℝ) : Prop :=
   ∀ x : ℕ → X, EsCauchy d x → ∃ l, Converge d x l
 
-/-! ### Cotas elementales para `d∞` -/
-
-/-- Cada coordenada está acotada por el máximo: `|xᵢ − yᵢ| ≤ d∞(x, y)`. -/
-theorem abs_le_dinf (x y : Fin n → ℝ) (i : Fin n) : |x i - y i| ≤ dinf x y :=
-  le_ciSup (f := fun i => |x i - y i|) (Set.finite_range _).bddAbove i
+/-! ### Cotas elementales para `d∞` (un máximo sobre `n ≥ 1` índices) -/
 
 /-- Si todas las coordenadas están acotadas por `c`, entonces `d∞(x, y) ≤ c`. -/
 theorem dinf_le [NeZero n] (x y : Fin n → ℝ) (c : ℝ) (h : ∀ i, |x i - y i| ≤ c) :
-    dinf x y ≤ c := by
-  have : Nonempty (Fin n) := ⟨⟨0, Nat.pos_of_neZero n⟩⟩
-  exact ciSup_le h
+    dinf x y ≤ c :=
+  Finset.sup'_le _ _ fun i _ => h i
 
-/-! ### Ej. 12 (a): `d∞ ≤ d₂ ≤ d₁ ≤ n d∞` -/
-
-/-- `d∞ ≤ d₂`: `|aᵢ| = √(aᵢ²) ≤ √(Σ aⱼ²)`. -/
-theorem dinf_le_d2 [NeZero n] (x y : Fin n → ℝ) : dinf x y ≤ d2 x y := by
-  apply dinf_le
-  intro i
-  rw [← Real.sqrt_sq_eq_abs]
-  exact Real.sqrt_le_sqrt
-    (Finset.single_le_sum (f := fun j => (x j - y j) ^ 2) (fun j _ => sq_nonneg _)
-      (Finset.mem_univ i))
-
-/-- `d₂ ≤ d₁`: `Σ aᵢ² = Σ |aᵢ|² ≤ (Σ |aᵢ|)²`. -/
-theorem d2_le_d1 (x y : Fin n → ℝ) : d2 x y ≤ d1 x y := by
-  unfold d2 d1
-  rw [Real.sqrt_le_left (Finset.sum_nonneg fun i _ => abs_nonneg _)]
-  calc ∑ i, (x i - y i) ^ 2 = ∑ i, |x i - y i| ^ 2 := by simp [sq_abs]
-    _ ≤ (∑ i, |x i - y i|) ^ 2 :=
-        Finset.sum_sq_le_sq_sum_of_nonneg (fun i _ => abs_nonneg _)
-
-/-- `d₁ ≤ n d∞`: cada sumando es `≤ d∞`, y hay `n` sumandos. -/
-theorem d1_le (x y : Fin n → ℝ) : d1 x y ≤ n * dinf x y := by
-  unfold d1
-  calc ∑ i, |x i - y i| ≤ ∑ _i : Fin n, dinf x y :=
-        Finset.sum_le_sum fun i _ => abs_le_dinf x y i
-    _ = n * dinf x y := by simp
-
-/-- `d∞ ≤ d₁` (consecuencia de `d∞ ≤ d₂ ≤ d₁`). -/
+/-- `d∞ ≤ d₁` (consecuencia de `d∞ ≤ d₂ ≤ d₁`, Ej. 12 (a)). -/
 theorem dinf_le_d1 [NeZero n] (x y : Fin n → ℝ) : dinf x y ≤ d1 x y :=
   (dinf_le_d2 x y).trans (d2_le_d1 x y)
-
-/-- `d₂ ≤ n d∞` (consecuencia de `d₂ ≤ d₁ ≤ n d∞`). -/
-theorem d2_le (x y : Fin n → ℝ) : d2 x y ≤ n * dinf x y :=
-  (d2_le_d1 x y).trans (d1_le x y)
 
 /-! ### `(ℝⁿ, d∞)` es completo: Corolario 4.58 -/
 
@@ -154,11 +112,11 @@ theorem completo_of_equiv [NeZero n] (d : (Fin n → ℝ) → (Fin n → ℝ) �
 
 /-- **Ejercicio 14, caso `d₁`.** -/
 theorem completo_d1 [NeZero n] : EsCompleto (d1 (n := n)) :=
-  completo_of_equiv d1 dinf_le_d1 d1_le
+  completo_of_equiv d1 dinf_le_d1 d1_le_n_dinf
 
 /-- **Ejercicio 14, caso `d₂`.** -/
 theorem completo_d2 [NeZero n] : EsCompleto (d2 (n := n)) :=
-  completo_of_equiv d2 dinf_le_d2 d2_le
+  completo_of_equiv d2 dinf_le_d2 d2_le_n_dinf
 
 /-- **Ejercicio 14.** `(ℝⁿ, d₁)`, `(ℝⁿ, d₂)` y `(ℝⁿ, d∞)` son completos. -/
 theorem ej14 [NeZero n] :

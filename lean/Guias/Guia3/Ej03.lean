@@ -17,7 +17,8 @@ con `Metric.mem_nhds_iff` y `Metric.mem_closure_iff` y permite releer los veredi
 Mathlib que calcule interior o clausura de intervalos, `ℚ` o `ℤ` (`interior_Icc`, `closure_Ioo`,
 `Rat.denseRange_cast`, ...). Las únicas herramientas de Mathlib sobre `ℝ` son las que el curso
 da por demostradas: Arquímedes (`exists_nat_gt`), densidad de `ℚ` (`exists_rat_btwn`) y de los
-irracionales (`exists_irrational_btwn`, Práctica 1, Ej. 2), y `Int.floor`.
+irracionales (`exists_irrational_btwn`, Práctica 1, Ej. 2 (d)), e `Int.floor`/`Nat.floor` (el
+entero `n` con `n < x < n + 1`, que el texto deduce de la Práctica 1, Ej. 2 (a)).
 
 Convención: en el curso `ℕ = {1, 2, 3, …}`; acá se escribe `1 ≤ n` explícitamente.
 -/

@@ -109,6 +109,12 @@ theorem ej6b_ejemplo :
     have := (hsub hz).1
     linarith
 
+/-- El ejemplo de (b) como inclusión estricta: `A° ∪ B° ⊊ (A ∪ B)°`. -/
+theorem ej6b_ejemplo_ssubset :
+    interior (Icc (0 : ℝ) 1) ∪ interior (Icc (1 : ℝ) 2) ⊂
+      interior (Icc (0 : ℝ) 1 ∪ Icc (1 : ℝ) 2) :=
+  ⟨ej6b _ _, fun h => ej6b_ejemplo (Subset.antisymm (ej6b _ _) h)⟩
+
 /-! ## (c) `cl (A ∪ B) = cl A ∪ cl B` -/
 
 /-- **Ej. 6 (c).** `⊇` por monotonía. `⊆`: si `x ∉ cl A` y `x ∉ cl B` hay `B(x, r₁)` que no corta
@@ -166,5 +172,10 @@ theorem ej6d_ejemplo :
   rw [← h, hempty] at h1
   obtain ⟨z, _, hz⟩ := mem_closure_iff_ball.1 h1 1 one_pos
   exact hz
+
+/-- El ejemplo de (d) como inclusión estricta: `cl (A ∩ B) ⊊ cl A ∩ cl B`. -/
+theorem ej6d_ejemplo_ssubset :
+    closure (Ioo (0 : ℝ) 1 ∩ Ioo (1 : ℝ) 2) ⊂ closure (Ioo (0 : ℝ) 1) ∩ closure (Ioo (1 : ℝ) 2) :=
+  ⟨ej6d _ _, fun h => ej6d_ejemplo (Subset.antisymm (ej6d _ _) h)⟩
 
 end Guias.Guia3.Ej06

@@ -350,9 +350,11 @@
 
   Desvíos de la formalización: $RR^n$ es `Fin n → ℝ` y el máximo de $d_oo$ es `Finset.sup'` (pide
   `[NeZero n]`, es decir $n >= 1$, igual que el texto). $C([0, 1])$ es `C(unitInterval, ℝ)` y $d_oo$
-  se escribe con `⨆`; `dC_eq_max` prueba que se alcanza, usando el teorema de valores extremos en
-  un compacto (`IsCompact.exists_isMaxOn`) como el Weierstrass del texto; `bola_dC` lo usa
-  exactamente en el paso señalado. La métrica $delta$ se formaliza para cualquier $E$ con
+  se escribe con `⨆`; `exists_max` es el Weierstrass del texto (`IsCompact.exists_isMaxOn`, la
+  única entrada de compacidad del archivo: la acotación `bdd_absdiff` se deduce de ese máximo),
+  `dC_eq_max` prueba que el supremo se alcanza y `bola_dC` lo usa exactamente en el paso (W).
+  Los axiomas (i) y (iv) se cierran con propiedades del supremo (`Real.iSup_nonneg`, `ciSup_le`)
+  en lugar de evaluar en $t_0$; es equivalente. La métrica $delta$ se formaliza para cualquier $E$ con
   igualdad decidible (la hipótesis "no vacío" no se necesita). Las bolas $B_2$ y $B_oo$ se
   formalizan con el centro $c$ genérico (y radio $r>0$ para $B_2$) y en $RR^2$ con centro $0$ y radio $1$.
 ]
@@ -761,10 +763,12 @@ $overline(B)(x, r) = \{y in E : d(x, y) <= r\}$.
   Los ítems son `ej4a` a `ej4g` (con `ej4f_bool` como caso concreto de (f)), sobre
   `{E : Type*} [MetricSpace E]` y con los objetos de Mathlib `closure`, `Metric.ball`,
   `Metric.closedBall`, `IsOpen`, `IsClosed`. No se usan los lemas de Mathlib que son los ítems:
-  el archivo reprueba por bolas las herramientas del curso (`mem_interior_iff_ball` es la
-  Definición 4.11, `mem_closure_iff_ball` la 4.22, `isClosed_iff_isOpen_compl_ball` el Teorema 4.29
+  el archivo reprueba por bolas las herramientas del curso (`mem_closure_iff_ball` es la
+  Definición 4.22, `isClosed_iff_isOpen_compl_ball` el Teorema 4.29
   y `isOpen_inter_ball` el Teorema 4.18 para dos abiertos, con $r = op("mín")\{r_1, r_2\}$). Desvíos:
-  (i) "cerrado" es `IsClosed`, y se pasa a la Definición 4.27 ($overline(F) = F$) con
+  (i) "abierto" es `IsOpen`, leído con `Metric.isOpen_iff` como "todo punto tiene una bola
+  adentro" ($A subset.eq A^compose$, que con la Observación 4.12 es la Definición 4.14); "cerrado"
+  es `IsClosed`, y se pasa a la Definición 4.27 ($overline(F) = F$) con
   `closure_eq_iff_isClosed`; en (e) se usa `IsClosed.closure_eq` sólo para esa igualdad;
   (ii) `ej4b` y `ej4c` valen sin la hipótesis $r > 0$ (o $r' > 0$), que el argumento no usa, y
   `ej4d` vale para todo $r$; (iii) para (f) se define localmente `Disc X` (un sinónimo de $X$ con
@@ -977,7 +981,8 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   (`closure (Ioo 0 1 ∩ Ioo 1 2) ≠ closure (Ioo 0 1) ∩ closure (Ioo 1 2)`); se calculan con las
   bolas, con los mismos puntos $1 plus.minus r/2$ y $1 plus.minus m/2$ del texto, y no con
   `interior_Icc`. Como (b) y (d) valen siempre (`ej6b`, `ej6d`), las desigualdades `≠` de los
-  ejemplos son exactamente la inclusión estricta.
+  ejemplos son exactamente la inclusión estricta, enunciada con `⊂` en `ej6b_ejemplo_ssubset` y
+  `ej6d_ejemplo_ssubset`.
 ]
 
 #v(12pt)
@@ -1211,10 +1216,11 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   y para cada conjunto `Ca`, ..., `Ch` hay un teorema `x_derivado` y uno `x_frontera` (los de (g) y (h)
   comparten `h_derivado_sub`, `zero_mem_derivado_Cg`, `Cg_sub_Ch`). El Sublema de la frontera es
   `fronteraCurso_eq`; los de derivado, `derivadoCurso_sub_clausura` y `derivadoCurso_mono`; el del
-  espaciado, `aislado`. Como los archivos de Lean son independientes, `Ej08.lean` reprueba
-  localmente el Ejercicio 3 (interior y clausura de los ocho conjuntos, sin lemas de Mathlib que los
-  calculen). `frontier_eq_fronteraCurso` conecta con `frontier` de Mathlib (`a_frontier_mathlib`,
-  ..., `h_frontier_mathlib`); el conjunto derivado no tiene contraparte directa que se use acá.
+  espaciado, `aislado`. Igual que el texto, `Ej08.lean` toma del Ejercicio 3 (importa
+  `Guias.Guia3.Ej03`) las definiciones por bolas, los Lemas 1--4 y los interiores y clausuras
+  de los ocho conjuntos, en vez de volver a probarlos. `frontier_eq_fronteraCurso` conecta con
+  `frontier` de Mathlib (`a_frontier_mathlib`, ..., `h_frontier_mathlib`); el conjunto derivado
+  no se conecta con `derivedSet` de Mathlib (no hace falta para el ejercicio).
   Diferencias con el texto: en `aislado` la cota se prueba despejando denominadores
   (`div_le_div_iff₀` y `nlinarith`) en vez de comparar con $1\/n - 1\/(n+1)$, y `ℕ` empieza en $1$
   (se escribe `1 ≤ n`).
@@ -1287,11 +1293,13 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   `fronteraCurso A` es la Definición 4.38 (por bolas); `interior` y `closure` son los de Mathlib, siempre
   manejados con `mem_interior_bolas` (Definición 4.11) y `mem_closure_bolas` (Definición 4.22, vía
   `Metric.mem_closure_iff`). `frontera_eq_inter` es el Paso 1; `compl_interior_eq` reprueba localmente
-  el Ej. 5 (a), `frontera_eq_sdiff` es la igualdad de (a), `frontera_isClosed` la cerradura, y
-  `frontera_eq_inter_closure_compl` y `frontera_compl` son (b). Desvío: para la cerradura, Lean toma de
-  Mathlib que `closure A` es cerrado y `interior A` es abierto (`isClosed_closure`, `isOpen_interior`)
-  y cierra con `IsClosed.sdiff`; el texto, en cambio, demuestra esos dos hechos (Paso 3) con el Ej. 5 (b)
-  y el Teorema 4.29. El Ej. 5 (b) no se necesita en Lean.
+  el Ej. 5 (a), `compl_closure_eq` el Ej. 5 (b), `frontera_eq_sdiff` es la igualdad de (a),
+  `frontera_isClosed` la cerradura, y `frontera_eq_inter_closure_compl` y `frontera_compl` son (b).
+  El Paso 3 se sigue tal cual: `isOpen_interior_bolas` ($A^compose$ es abierto, con el radio
+  $r - d(y, x)$) e `isClosed_closure_bolas` ($overline(A)$ es cerrado, vía el Ej. 5 (b) y
+  `isOpen_compl_iff`, que es el Teorema 4.29); la intersección de dos cerrados es `IsClosed.inter`
+  (Teorema 4.31 (a)). No se usan `isClosed_closure` ni `isOpen_interior` de Mathlib. "Cerrado" es
+  `IsClosed`; `closure_frontera_eq` lo reescribe como $overline(partial A) = partial A$ (Def. 4.27).
 ]
 
 #v(12pt)
@@ -1541,11 +1549,12 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   `A11_inter_B11`, `A11_B11_dhat` y `ej11c_contraejemplo`; para (d), `ej11d_valores` y
   `ej11d_contraejemplo`. Las refutaciones están formalizadas como `¬ (∀ A B, ... → ...)`. La
   conclusión es `no_es_metrica : ¬ EsMetrica dhatX` (con `EsMetrica` de `Guias.Common`, la Definición 4.1,
-  sobre $cal(X) =$ subconjuntos no vacíos de `ℝ`), con `no_separa` y `no_triangular`. Desvío: la conclusión
-  se formaliza sólo para $E = RR$; para un `E` arbitrario es falsa (si `E` tiene un solo punto, $cal(X)$ tiene
-  un solo elemento y $hat(d)$ sí es una métrica), por lo que "no es una distancia" se entiende "en general".
-  El criterio de los preliminares ("si para todo $epsilon$ hay pares a distancia $< epsilon$ entonces
-  $hat(d) = 0$") es `dhat_eq_zero_of_approx`.
+  sobre $cal(X) =$ subconjuntos no vacíos de `ℝ`), con `no_separa` y `no_triangular`, y
+  `no_es_metrica_general`, la misma conclusión para cualquier `E` con al menos dos puntos
+  (`[Nontrivial E]`): la separación falla con $A = \{p\}$, $C = \{p, q\}$, $p != q$, por (b)
+  ($arrow.l.double$). Esa hipótesis es necesaria: si `E` tiene un solo punto, $cal(X)$ tiene un solo
+  elemento y $hat(d)$ sí es una métrica. El criterio de los preliminares ("si para todo $epsilon$ hay
+  pares a distancia $< epsilon$ entonces $hat(d) = 0$") es `dhat_eq_zero_of_approx`.
 ]
 
 #v(12pt)
@@ -1780,16 +1789,17 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej14`][
-  `ej14` afirma `EsCompleto d1 ∧ EsCompleto d2 ∧ EsCompleto dinf`. Las distancias son funciones
-  explícitas sobre `Fin n → ℝ` (con `[NeZero n]`, es decir $n >= 1$; `dinf` es
-  el supremo `iSup` de las `n` diferencias `|x i - y i|`) y `EsCompleto` es la Definición 4.55 escrita con $epsilon$-$N$; no hay
-  instancias de `MetricSpace` y no se usa que Mathlib ya tenga `CompleteSpace` para
-  `EuclideanSpace`/`PiLp`. `completo_dinf` sigue el Corolario 4.58 (usando
-  `cauchySeq_tendsto_of_complete` sobre las coordenadas, que es el Teorema 4.57, y `choose` para
-  fijar los límites `l i`). Las desigualdades $d_infinity <= d_2 <= d_1 <= n d_infinity$ del Ej. 12 (a)
-  se reprueban localmente (`dinf_le_d2`, `d2_le_d1`, `d1_le`, y las derivadas `dinf_le_d1`, `d2_le`).
-  `completo_of_equiv` es el argumento de los casos $d_1$ y $d_2$; `completo_d1` y `completo_d2`
-  lo aplican. La sucesión empieza en $0$ en Lean y en $1$ en el curso.
+  `ej14` afirma `EsCompleto d1 ∧ EsCompleto d2 ∧ EsCompleto dinf`. Las distancias son las
+  funciones explícitas `d1`, `d2`, `dinf` del Ej. 12 (`Ej14.lean` importa `Guias.Guia3.Ej12`, así
+  que son los mismos objetos de los Ej. 1 (d) y 12; `[NeZero n]`, es decir $n >= 1$) y `EsCompleto`
+  es la Definición 4.55 escrita con $epsilon$-$N$; no hay instancias de `MetricSpace` y no se usa
+  que Mathlib ya tenga `CompleteSpace` para `EuclideanSpace`/`PiLp`. `completo_dinf` sigue el
+  Corolario 4.58 (usando `cauchySeq_tendsto_of_complete` sobre las coordenadas, que es el
+  Teorema 4.57, y `choose` para fijar los límites `l i`). Las desigualdades
+  $d_infinity <= d_2 <= d_1 <= n d_infinity$ son las del Ej. 12 (a) (`Ej12.dinf_le_d2`,
+  `Ej12.d2_le_d1`, `Ej12.d1_le_n_dinf`), citadas igual que en el texto. `completo_of_equiv` es
+  el argumento de los casos $d_1$ y $d_2$; `completo_d1` y `completo_d2` lo aplican. La sucesión
+  empieza en $0$ en Lean y en $1$ en el curso.
 ]
 
 #v(12pt)

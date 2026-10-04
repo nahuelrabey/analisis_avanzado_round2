@@ -14,8 +14,10 @@ Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-a
     (`ej11d_contraejemplo`).
 Conclusión: `d̂` no es una distancia en `𝒳 = {A ⊆ ℝ : A ≠ ∅}` (falla la separación y la
 triangular; `no_es_metrica`).
-Los contraejemplos se hacen en `ℝ`: para un `E` cualquiera (p. ej. de un solo punto) no son
-posibles, así que "no es distancia" se entiende "en general".
+Los contraejemplos (b)-(d) se hacen en `ℝ`. Para la conclusión, `no_es_metrica` es el caso
+`E = ℝ`, y `no_es_metrica_general` la versión para cualquier `E` con al menos dos puntos
+(`[Nontrivial E]`): la separación falla con `A = {p}`, `C = {p, q}`. Para `E` de un solo punto
+`𝒳` tiene un solo elemento y `d̂` sí es una métrica, así que esa hipótesis es necesaria.
 -/
 import Mathlib
 import Guias.Common
@@ -56,7 +58,8 @@ theorem le_dhat {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) {c : ℝ}
 theorem dhat_nonneg {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) : 0 ≤ dhat A B :=
   le_dhat hA hB fun _ _ _ _ => dist_nonneg
 
-/-- `d̂` es simétrica (se usa en la conclusión). -/
+/-- `d̂` es simétrica: la propiedad (iii) de la Definición 4.1 sí vale (no hace falta en
+`no_es_metrica`, que usa la triangular). -/
 theorem dhat_comm (A B : Set E) : dhat A B = dhat B A := by
   have : distancias A B = distancias B A := by
     ext r
@@ -345,5 +348,27 @@ theorem no_triangular : ¬ (∀ A B C : X, dhatX A C ≤ dhatX A B + dhatX B C) 
 theorem no_es_metrica : ¬ Guias.EsMetrica dhatX := by
   intro hm
   exact no_triangular hm.triangle
+
+/-! ### La conclusión para un `E` cualquiera con al menos dos puntos -/
+
+/-- `𝒳(E)`: los subconjuntos no vacíos de `E`. -/
+abbrev XE (E : Type*) [MetricSpace E] : Type _ := {A : Set E // A.Nonempty}
+
+/-- `d̂` como función `𝒳(E) × 𝒳(E) → ℝ`. -/
+noncomputable def dhatXE (A B : XE E) : ℝ := dhat A.1 B.1
+
+/-- **Conclusión del Ejercicio 11, para todo `E` con al menos dos puntos.** `d̂` no es una
+distancia en `𝒳(E)`: si `p ≠ q`, los conjuntos `{p}` y `{p, q}` son distintos pero
+`d̂({p}, {p, q}) = 0` (ítem (b), `⇐`), contra la separación (Def. 4.1 (ii)). -/
+theorem no_es_metrica_general [Nontrivial E] : ¬ Guias.EsMetrica (dhatXE (E := E)) := by
+  intro hm
+  obtain ⟨p, q, hpq⟩ := exists_pair_ne E
+  have hC : ({p, q} : Set E).Nonempty := ⟨p, Set.mem_insert _ _⟩
+  have h0 : dhat ({p} : Set E) {p, q} = 0 :=
+    dhat_eq_zero_of_inter (Set.singleton_nonempty p) hC ⟨p, rfl, Set.mem_insert _ _⟩
+  have heq := (hm.eq_zero_iff ⟨{p}, Set.singleton_nonempty p⟩ ⟨{p, q}, hC⟩).1 h0
+  have hval : ({p} : Set E) = {p, q} := congrArg Subtype.val heq
+  have hq : q ∈ ({p} : Set E) := hval ▸ Set.mem_insert_of_mem _ rfl
+  exact hpq (Set.mem_singleton_iff.1 hq).symm
 
 end Guias.Guia3.Ej11
