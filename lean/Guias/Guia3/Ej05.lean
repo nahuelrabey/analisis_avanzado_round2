@@ -1,6 +1,6 @@
 /-
 Práctica 3, Ejercicio 5 (interior y clausura de un complemento).
-Resolución "a mano" en `apuntes-typst/guias-agente/_partes/ej05.typ`.
+Resolución "a mano" en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 5).
 
 Se prueban (a) `E ∖ A° = cl (E ∖ A)` y (b) `E ∖ cl A = (E ∖ A)°`, y se responde la pregunta final:
 `cl A = cl (A°)` y `A° = (cl A)°` son falsas en general (contraejemplo `A = ℚ` en `ℝ`), aunque valen

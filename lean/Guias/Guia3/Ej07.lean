@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 7 (diámetro).
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej07.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 7).
 
 Sea `E` un espacio métrico y `A, B ⊆ E` acotados.
 (a) Si `A ⊆ B` entonces `diam A ≤ diam B`.

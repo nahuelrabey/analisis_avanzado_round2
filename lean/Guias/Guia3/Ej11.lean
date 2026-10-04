@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 11 (la "distancia" `d̂` entre conjuntos).
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej11.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 11).
 
 `d̂(A, B) = ínf {d(a, b) : a ∈ A, b ∈ B}` (`dhat`, con `sInf`) para `A, B` no vacíos. Veredictos:
 (a) `d̂(A, B) = d̂(cl A, B)`: VERDADERA, para todo espacio métrico `E` (`dhat_closure_left`).

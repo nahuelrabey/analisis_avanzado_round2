@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 1
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej01.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 1).
 
 Para cada espacio de la lista se prueba `EsMetrica d` (los cuatro axiomas de la Definición 4.1,
 ver `Guias/Common.lean`) sobre una función `d` definida a mano, y se verifica la descripción

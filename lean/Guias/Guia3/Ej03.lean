@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 3
-Resolución en `apuntes-typst/guias-agente/_partes/ej03.typ`.
+Resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 3).
 
 Se pide hallar interior y clausura de ocho subconjuntos de `ℝ` y decidir cuáles son abiertos o
 cerrados:

@@ -1,7 +1,7 @@
 /-
 Práctica 3, Ejercicio 4 (bolas, conjuntos abiertos y cerrados), con las nociones del curso:
 interior (Definición 4.11), abierto (4.14), clausura (4.22) y cerrado (4.27).
-Resolución "a mano" en `apuntes-typst/guias-agente/_partes/ej04.typ`.
+Resolución "a mano" en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 4).
 
 Los objetos son los de Mathlib (`interior`, `closure`, `Metric.ball`, `Metric.closedBall`,
 `IsOpen`, `IsClosed`), pero las demostraciones pasan por las caracterizaciones por bolas

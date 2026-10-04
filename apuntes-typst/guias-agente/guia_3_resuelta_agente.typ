@@ -34,7 +34,19 @@
   *Qué se supone verdadero:* todo lo escrito en `apuntes.typ` (definiciones, proposiciones y
   teoremas, citados por nombre y número) y los enunciados de las Prácticas 1 y 2. Los ejemplos de
   `ejemplos/p3.typ` se leyeron como inspiración; ninguno se usa como lema. Dentro de la propia
-  Práctica 3, un ejercicio puede citar los anteriores ("Ej. 4 (b)").
+  Práctica 3, un ejercicio puede citar los anteriores ("Ej. 4 (b)"), nunca los posteriores.
+
+  *Qué se usa sin cita:* sólo hechos de base del orden y la aritmética de $RR$, $ZZ$ y $NN$
+  (la desigualdad triangular de $abs(dot.c)$, que una suma de términos $>= 0$ es nula sólo si cada
+  uno lo es, que la raíz cuadrada es creciente, que un conjunto finito no vacío de reales tiene
+  máximo, que no hay enteros estrictamente entre $n$ y $n + 1$). Todo lo que va más allá de eso
+  se demuestra en el lugar y se marca "(deducción propia)".
+
+  *Supuestos externos declarados:* hay exactamente dos. (1) En el Ej. 1 (e) el enunciado escribe
+  $max_(0 <= t <= 1) abs(f(t) - g(t))$: que ese máximo exista es el teorema de Weierstrass
+  (valores extremos), que *no* está en `apuntes.typ` ni en las guías 1-2; se lo toma como parte del
+  enunciado y se señala cada paso que lo usa. (2) `apuntes.typ` no define "métricas equivalentes"
+  (Ej. 12); se adopta y se explicita la definición de clase.
 
   *Verificación en Lean:* cada ejercicio tiene su contraparte en `lean/Guias/Guia3/EjNN.lean`
   (Lean 4 + Mathlib; `cd lean && lake build`). La caja _Observación_ del final de cada ejercicio dice
@@ -227,11 +239,13 @@
   Si $f, g$ son continuas, $t |-> abs(f(t) - g(t))$ es continua en el compacto $[0, 1]$, y por el
   teorema de Weierstrass (valores extremos) alcanza su máximo: es el mismo teorema que usa la guía
   al escribir "máx" en vez de "sup" (el apunte define $d_oo$ con $op("sup")$ y por Weierstrass ambos
-  coinciden). Los axiomas se prueban para cada $t$ y se toma máximo.
+  coinciden). *Supuesto externo:* Weierstrass no está en `apuntes.typ` ni en las guías 1-2; acá se
+  lo toma como presupuesto del enunciado (que escribe "máx"), y se marca con "(W)" cada paso que
+  depende de él. Los axiomas se prueban para cada $t$ y se toma máximo.
 ]
 
 #resolucion[Propuesta: es métrica; la bola es una banda de semiancho $r$ alrededor de $f$][
-  *Buena definición.* Para $f, g in C([0, 1])$ existe $t_0 in [0, 1]$ con
+  *Buena definición (W).* Para $f, g in C([0, 1])$ existe $t_0 in [0, 1]$ con
   $abs(f(t) - g(t)) <= abs(f(t_0) - g(t_0)) = d_oo (f, g)$ para todo $t$ (Weierstrass).
   En particular $abs(f(t) - g(t)) <= d_oo (f, g)$ para todo $t in [0, 1]$.
 
@@ -244,7 +258,7 @@
     En particular en $t = t_0$, el punto donde se alcanza $d_oo (f, h)$: $d_oo (f, h) <= d_oo (f, g) + d_oo (g, h)$.
 
   *Bola.* Afirmamos que $g in B_oo (f, r) <=> abs(f(t) - g(t)) < r$ para todo $t in [0, 1]$.
-  ($==>$) $abs(f(t) - g(t)) <= d_oo (f, g) < r$. ($arrow.l.double$) Si $t_0$ es el punto donde se
+  ($==>$) $abs(f(t) - g(t)) <= d_oo (f, g) < r$. ($arrow.l.double$) (W) Si $t_0$ es el punto donde se
   alcanza el máximo, $d_oo (f, g) = abs(f(t_0) - g(t_0)) < r$. (Acá se usa que el supremo *es* un
   máximo: con un supremo, "todos $< r$" no alcanzaría para "supremo $< r$".) Luego
   $ B_oo (f, r) = \{g in C([0, 1]) : f(t) - r < g(t) < f(t) + r " para todo " t in [0, 1]\}: $
@@ -476,9 +490,12 @@
   _Prueba._ Todo elemento de $U$ está en $[0, 1]$. Sea $x in.not U$ (en particular $x != 0$).
   - Si $x < 0$: $r = -x$ da $B(x, r) = (2x, 0)$, que no corta a $[0, oo)$.
   - Si $x > 1$: $r = x - 1$ da $B(x, r) = (1, 2x - 1)$, que no corta a $(-oo, 1]$.
-  - Si $0 < x <= 1$: como $1\/x >= 1$, existe $n = floor(1\/x) in NN$ con $n <= 1\/x < n + 1$ (parte
-    entera; consecuencia de Arquímedes y el buen orden de $NN$). Como $x in.not T$, $1\/x != n$,
-    así que $n < 1\/x < n + 1$, es decir
+  - Si $0 < x <= 1$: sea $u = 1\/x >= 1$. Primero, $u in.not ZZ$: si fuera $u = k in ZZ$, de $u >= 1$
+    saldría $k in NN$ y $x = 1\/k in T$, contra la hipótesis. Por la Práctica 1, Ej. 2 (a), aplicada
+    a $u - 1 < u + 1$ (su diferencia es $2 > 1$), existe $m in ZZ$ con $u - 1 < m < u + 1$. Como
+    $u in.not ZZ$, $m != u$: si $m < u$ tomamos $n = m$, y si $m > u$ tomamos $n = m - 1$; en ambos
+    casos $n in ZZ$ y $n < u < n + 1$. Además $n >= 1$: de $n + 1 > u >= 1$ sale $n > 0$, y $n$ es
+    entero. Así $n in NN$ y $n < 1\/x < n + 1$, es decir
     $ 1/(n+1) < x < 1/n. $
     Sea $r = op("mín")\{1\/n - x, thick x - 1\/(n+1)\} > 0$; notar que $r < x$. Si $1\/m in B(x, r)$,
     entonces $1\/(n+1) = x - (x - 1\/(n+1)) <= x - r < 1\/m < x + r <= 1\/n$, de donde $m < n + 1$ y
@@ -536,8 +553,10 @@
   Como $ZZ subset.eq QQ$, el Lema 2 (2) da $ZZ^compose = emptyset$, y $ZZ$ no es abierto porque
   $0 in ZZ$ pero $0 in.not ZZ^compose$.
 
-  Veamos que $overline(ZZ) subset.eq ZZ$ (la otra inclusión es la Obs. 4.23). Sea $x in.not ZZ$ y
-  $n = floor(x)$ su parte entera, de modo que $n < x < n + 1$ (es estricto porque $x in.not ZZ$).
+  Veamos que $overline(ZZ) subset.eq ZZ$ (la otra inclusión es la Obs. 4.23). Sea $x in.not ZZ$.
+  Por la Práctica 1, Ej. 2 (a), aplicada a $x - 1 < x + 1$ (diferencia $2 > 1$), hay $m in ZZ$ con
+  $x - 1 < m < x + 1$; como $x in.not ZZ$, $m != x$, y tomando $n = m$ si $m < x$ o $n = m - 1$ si
+  $m > x$ queda $n in ZZ$ con $n < x < n + 1$.
   Sea $r = op("mín")\{x - n, thick n + 1 - x\} > 0$. Si $m in ZZ$ estuviera en $B(x, r)$, tendríamos
   $m > x - r >= n$ y $m < x + r <= n + 1$, o sea $n < m < n + 1$ con $m in ZZ$: absurdo.
   Entonces $B(x, r) inter ZZ = emptyset$ y $x in.not overline(ZZ)$.
@@ -609,8 +628,10 @@
   `lejos_Ch`/`clausura_Ch_sub`. `interior_eq_interiorCurso` y `closure_eq_clausuraCurso`
   (por `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`) permiten releer todo con `interior`,
   `closure`, `IsOpen` e `IsClosed` de Mathlib (`a_mathlib`, ..., `h_mathlib`). No se usó ningún
-  lema de Mathlib que calcule interiores o clausuras. Diferencias con el texto: la parte entera es
-  `Int.floor`/`Nat.floor`, y `ℕ` empieza en $1$ (se escribe `1 ≤ n`).
+  lema de Mathlib que calcule interiores o clausuras. Diferencias con el texto: el entero $n$ con
+  $n < x < n + 1$ (que el texto obtiene de la Práctica 1, Ej. 2 (a)) en Lean es la parte entera
+  `Int.floor`/`Nat.floor` de Mathlib; la densidad de irracionales (Práctica 1, Ej. 2 (d)) es
+  `exists_irrational_btwn`; y `ℕ` empieza en $1$ (se escribe `1 ≤ n`).
 ]
 
 #v(12pt)
@@ -809,10 +830,8 @@ Sea $E$ un espacio métrico y $A subset.eq E$. Escribimos $B(x, r) = \{y in E : 
   - $overline(QQ) = RR$: dado $x in RR$ y $r > 0$, por la densidad de $QQ$ (Proposición 2, Densidad
     de $QQ$) hay un racional en $(x - r, x + r) = B(x, r)$, así que $B(x, r) inter QQ != nothing$.
   - $QQ^compose = emptyset$: dado $x in RR$ y $r > 0$, el intervalo $(x, x + r) subset.eq B(x, r)$
-    contiene un irracional, luego $B(x, r) subset.eq.not QQ$ para todo $r > 0$. (Deducción propia,
-    desde la densidad de $QQ$: tomemos un racional $q_1 in (x, x + r)$ y un racional $q_2$ con
-    $0 < q_2 < (x + r - q_1)/sqrt(2)$; entonces $q_1 + q_2 sqrt(2) in (x, x + r)$ es irracional, porque
-    $q_2 != 0$ y $sqrt(2) in.not QQ$.)
+    contiene un irracional (Práctica 1, Ej. 2 (d), con $x < x + r$), luego
+    $B(x, r) subset.eq.not QQ$ para todo $r > 0$ y ningún $x$ es interior.
   Además $emptyset$ no tiene puntos de adherencia (toda bola corta a $emptyset$ en el vacío), y
   todo punto de $RR$ es interior de $RR$ (toda bola está contenida en $RR$). Entonces:
   - $overline(A) = overline(QQ) = RR$ pero $overline(A^compose) = overline(emptyset) = emptyset$:
@@ -839,7 +858,7 @@ Sea $E$ un espacio métrico y $A subset.eq E$. Escribimos $B(x, r) = \{y in E : 
   ($not forall A, overline(A) = overline(A^compose)$ y $not forall A, A^compose = (overline(A))^compose$,
   en $RR$). Las inclusiones que sí valen son `closure_interior_subset` e
   `interior_subset_interior_closure`. Desvío: la densidad de racionales e irracionales se toma de
-  Mathlib en lugar de la Proposición 2 del apunte.
+  Mathlib en lugar de la Proposición 2 del apunte y de la Práctica 1, Ej. 2 (d).
 ]
 
 #v(12pt)
@@ -1480,9 +1499,9 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   - _$A inter B = nothing$._ Si $n = m + 1\/m$ con $n, m in NN$, $m >= 2$, entonces $n - m = 1\/m in (0, 1\/2]$.
     Pero $n - m$ es entero: si $n <= m$ es $<= 0$, y si $n >= m + 1$ es $>= 1$. Absurdo.
     Luego $overline(A) inter overline(B) = A inter B = nothing$.
-  - _$hat(d)(A, B) = 0$._ Sea $epsilon > 0$. Por el Principio de Arquímedes (Teorema 1) existe $N in NN$ con
-    $N > 1\/epsilon$; sea $n = op("máx")(N, 2)$. Entonces $n in A$, $n + 1\/n in B$ y
-    $d(n, n + 1\/n) = 1\/n < epsilon$. Por el criterio de los preliminares, $hat(d)(A, B) = 0$.
+  - _$hat(d)(A, B) = 0$._ Sea $epsilon > 0$. Por el Principio de Arquímedes 2 (Proposición 1) existe
+    $N in NN$ con $0 < 1\/N < epsilon$; sea $n = op("máx")(N, 2)$. Entonces $n in A$, $n + 1\/n in B$ y
+    $d(n, n + 1\/n) = 1\/n <= 1\/N < epsilon$. Por el criterio de los preliminares, $hat(d)(A, B) = 0$.
 
   Entonces $hat(d)(A, B) = 0$ pero $overline(A) inter overline(B) = nothing$: (c) es falsa. $qed$
 ]

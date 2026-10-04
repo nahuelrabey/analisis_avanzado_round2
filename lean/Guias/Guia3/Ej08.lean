@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 8
-Resolución en `apuntes-typst/guias-agente/_partes/ej08.typ`.
+Resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 8).
 
 Se pide hallar la frontera y los puntos de acumulación (conjunto derivado) de los mismos ocho
 subconjuntos de `ℝ` del Ejercicio 3:

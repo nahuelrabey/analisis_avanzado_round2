@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 9 (frontera).
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej09.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 9).
 
 Sea `E` un espacio métrico y `A ⊆ E`.
 (a) `∂A = cl A ∖ A°`, y `∂A` es cerrado.

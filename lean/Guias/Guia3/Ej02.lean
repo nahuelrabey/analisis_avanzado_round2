@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 2
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej02.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 2).
 
 Se decide cuáles de las funciones `d : ℝ × ℝ → ℝ` son métricas en `ℝ` (Definición 4.1):
   (a) `(x - y)²`      NO es métrica: falla la desigualdad triangular (`0, 1, 2`).

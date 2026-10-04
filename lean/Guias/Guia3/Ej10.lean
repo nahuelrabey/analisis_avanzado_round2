@@ -1,6 +1,6 @@
 /-
 Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 10 (distancia de un punto a un conjunto).
-Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/_partes/ej10.typ`.
+Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 10).
 
 Sea `A ⊆ E` no vacío y `d(x, A) = ínf {d(x, a) : a ∈ A}` (`distA`, con `sInf`). Se prueba, para
 todos `x, y ∈ E` y `r`:

@@ -1,6 +1,6 @@
 /-
 Práctica 3, Ejercicio 6 (interior y clausura frente a unión e intersección).
-Resolución "a mano" en `apuntes-typst/guias-agente/_partes/ej06.typ`.
+Resolución "a mano" en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 6).
 
 Se prueban (a) `(A ∩ B)° = A° ∩ B°`, (b) `A° ∪ B° ⊆ (A ∪ B)°`, (c) `cl (A ∪ B) = cl A ∪ cl B` y
 (d) `cl (A ∩ B) ⊆ cl A ∩ cl B`, más los ejemplos de desigualdad estricta en (b) y (d).
