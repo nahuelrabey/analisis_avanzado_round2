@@ -9,54 +9,13 @@ Las demostraciones pasan por las definiciones por bolas (4.11, 4.22), vía `Metr
 y `Metric.mem_nhds_iff`; los cálculos en `ℝ` también se hacen con bolas (no con `interior_Icc`).
 -/
 import Mathlib
+import Guias.Common
 
-open Metric Set
+open Metric Set Guias
 
 namespace Guias.Guia3.Ej06
 
 variable {E : Type*} [MetricSpace E]
-
-/-! ## Herramientas del curso, por bolas -/
-
-/-- Definición 4.11: `x` es interior de `A` si hay una bola abierta `B(x, r) ⊆ A`. -/
-theorem mem_interior_iff_ball {A : Set E} {x : E} :
-    x ∈ interior A ↔ ∃ r > 0, ball x r ⊆ A := by
-  rw [mem_interior_iff_mem_nhds, Metric.mem_nhds_iff]
-
-/-- Definición 4.22: `x` es de adherencia de `A` si toda bola `B(x, r)` corta a `A`. -/
-theorem mem_closure_iff_ball {A : Set E} {x : E} :
-    x ∈ closure A ↔ ∀ r > 0, (ball x r ∩ A).Nonempty := by
-  rw [Metric.mem_closure_iff]
-  constructor
-  · intro h r hr
-    obtain ⟨b, hb, hd⟩ := h r hr
-    exact ⟨b, mem_ball.2 (by rwa [dist_comm]), hb⟩
-  · intro h r hr
-    obtain ⟨b, hb, hbA⟩ := h r hr
-    exact ⟨b, hbA, by rw [dist_comm]; exact mem_ball.1 hb⟩
-
-/-- Negación de la Definición 4.22: existe una bola `B(x, r)` que no corta a `A`. -/
-theorem notMem_closure_iff_ball {A : Set E} {x : E} :
-    x ∉ closure A ↔ ∃ r > 0, ∀ z ∈ ball x r, z ∉ A := by
-  rw [mem_closure_iff_ball]
-  constructor
-  · intro h
-    by_contra hne
-    apply h
-    intro r hr
-    by_contra hemp
-    exact hne ⟨r, hr, fun z hz hzA => hemp ⟨z, hz, hzA⟩⟩
-  · rintro ⟨r, hr, h⟩ hc
-    obtain ⟨z, hz, hzA⟩ := hc r hr
-    exact h z hz hzA
-
-/-- La clausura es monótona (inmediato de la Definición 4.22). -/
-theorem closure_mono_ball {A B : Set E} (h : A ⊆ B) : closure A ⊆ closure B := by
-  intro x hx
-  rw [mem_closure_iff_ball] at hx ⊢
-  intro r hr
-  obtain ⟨z, hz1, hz2⟩ := hx r hr
-  exact ⟨z, hz1, h hz2⟩
 
 /-! ## (a) `(A ∩ B)° = A° ∩ B°` -/
 

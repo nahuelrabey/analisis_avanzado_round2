@@ -763,8 +763,9 @@ $overline(B)(x, r) = \{y in E : d(x, y) <= r\}$.
   Los ítems son `ej4a` a `ej4g` (con `ej4f_bool` como caso concreto de (f)), sobre
   `{E : Type*} [MetricSpace E]` y con los objetos de Mathlib `closure`, `Metric.ball`,
   `Metric.closedBall`, `IsOpen`, `IsClosed`. No se usan los lemas de Mathlib que son los ítems:
-  el archivo reprueba por bolas las herramientas del curso (`mem_closure_iff_ball` es la
-  Definición 4.22, `isClosed_iff_isOpen_compl_ball` el Teorema 4.29
+  las herramientas del curso son los lemas puente de `Guias/Common.lean` (`mem_closure_iff_ball`
+  es la Definición 4.22, `closure_mono_ball` la monotonía de la clausura) y, en el archivo,
+  `isClosed_iff_isOpen_compl_ball` (el Teorema 4.29)
   y `isOpen_inter_ball` el Teorema 4.18 para dos abiertos, con $r = op("mín")\{r_1, r_2\}$). Desvíos:
   (i) "abierto" es `IsOpen`, leído con `Metric.isOpen_iff` como "todo punto tiene una bola
   adentro" ($A subset.eq A^compose$, que con la Observación 4.12 es la Definición 4.14); "cerrado"
@@ -853,8 +854,9 @@ Sea $E$ un espacio métrico y $A subset.eq E$. Escribimos $B(x, r) = \{y in E : 
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej05`][
   `ej5a : (interior A)ᶜ = closure Aᶜ` y `ej5b : (closure A)ᶜ = interior Aᶜ`, probados con
-  `mem_interior_iff_ball` (Definición 4.11) y `mem_closure_iff_ball` (Definición 4.22), que se
-  reprueban desde `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`; el complemento $E backslash A$
+  `mem_interior_iff_ball` (Definición 4.11) y `mem_closure_iff_ball` (Definición 4.22), los lemas
+  puente de `Guias/Common.lean` (probados desde `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`);
+  el complemento $E backslash A$
   es `Aᶜ`. Para la pregunta final, `Q` es `Set.range ((↑) : ℚ → ℝ)`, con `closure_Q`
   ($overline(QQ) = RR$, vía `exists_rat_btwn`), `interior_Q` ($QQ^compose = emptyset$, vía
   `exists_irrational_btwn`), `closure_empty_ball` e `interior_univ_ball`. Los veredictos son
@@ -973,8 +975,8 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 #observacion[Verificado en Lean: `Guias.Guia3.Ej06`][
   `ej6a`, `ej6b`, `ej6c`, `ej6d` son los cuatro ítems, para `{E : Type*} [MetricSpace E]` y con
   `interior`, `closure` de Mathlib; se prueban con `mem_interior_iff_ball` (Definición 4.11),
-  `mem_closure_iff_ball` y `notMem_closure_iff_ball` (Definición 4.22 y su negación), que se
-  reprueban desde `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`. El paso "$r = op("mín")\{r_1, r_2\}$"
+  `mem_closure_iff_ball` y `notMem_closure_iff_ball` (Definición 4.22 y su negación), los lemas
+  puente de `Guias/Common.lean`. El paso "$r = op("mín")\{r_1, r_2\}$"
   es `ball_subset_ball (min_le_left _ _)`. No se usan `interior_inter`, `closure_union` ni
   `closure_inter_subset`. Los ejemplos son `ej6b_ejemplo`
   (`interior (Icc 0 1) ∪ interior (Icc 1 2) ≠ interior (Icc 0 1 ∪ Icc 1 2)`) y `ej6d_ejemplo`
@@ -1291,8 +1293,8 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej09`][
   `fronteraCurso A` es la Definición 4.38 (por bolas); `interior` y `closure` son los de Mathlib, siempre
-  manejados con `mem_interior_bolas` (Definición 4.11) y `mem_closure_bolas` (Definición 4.22, vía
-  `Metric.mem_closure_iff`). `frontera_eq_inter` es el Paso 1; `compl_interior_eq` reprueba localmente
+  manejados con `mem_interior_iff_ball` (Definición 4.11) y `mem_closure_iff_ball` (Definición 4.22),
+  los lemas puente de `Guias/Common.lean`. `frontera_eq_inter` es el Paso 1; `compl_interior_eq` reprueba localmente
   el Ej. 5 (a), `compl_closure_eq` el Ej. 5 (b), `frontera_eq_sdiff` es la igualdad de (a),
   `frontera_isClosed` la cerradura, y `frontera_eq_inter_closure_compl` y `frontera_compl` son (b).
   El Paso 3 se sigue tal cual: `isOpen_interior_bolas` ($A^compose$ es abierto, con el radio

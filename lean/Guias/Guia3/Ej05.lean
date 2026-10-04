@@ -10,45 +10,13 @@ Todo pasa por las definiciones por bolas (4.11, 4.22), vía `Metric.mem_closure_
 `Metric.mem_nhds_iff`.
 -/
 import Mathlib
+import Guias.Common
 
-open Metric Set
+open Metric Set Guias
 
 namespace Guias.Guia3.Ej05
 
 variable {E : Type*} [MetricSpace E]
-
-/-! ## Herramientas del curso, por bolas -/
-
-/-- Definición 4.11: `x` es interior de `A` si hay una bola abierta `B(x, r) ⊆ A`. -/
-theorem mem_interior_iff_ball {A : Set E} {x : E} :
-    x ∈ interior A ↔ ∃ r > 0, ball x r ⊆ A := by
-  rw [mem_interior_iff_mem_nhds, Metric.mem_nhds_iff]
-
-/-- Definición 4.22: `x` es de adherencia de `A` si toda bola `B(x, r)` corta a `A`. -/
-theorem mem_closure_iff_ball {A : Set E} {x : E} :
-    x ∈ closure A ↔ ∀ r > 0, (ball x r ∩ A).Nonempty := by
-  rw [Metric.mem_closure_iff]
-  constructor
-  · intro h r hr
-    obtain ⟨b, hb, hd⟩ := h r hr
-    exact ⟨b, mem_ball.2 (by rwa [dist_comm]), hb⟩
-  · intro h r hr
-    obtain ⟨b, hb, hbA⟩ := h r hr
-    exact ⟨b, hbA, by rw [dist_comm]; exact mem_ball.1 hb⟩
-
-/-- Observación 4.23 (a): `A ⊆ cl A`. -/
-theorem subset_closure_ball (A : Set E) : A ⊆ closure A := by
-  intro x hx
-  rw [mem_closure_iff_ball]
-  exact fun r hr => ⟨x, mem_ball_self hr, hx⟩
-
-/-- La clausura es monótona (inmediato de la Definición 4.22). -/
-theorem closure_mono_ball {A B : Set E} (h : A ⊆ B) : closure A ⊆ closure B := by
-  intro x hx
-  rw [mem_closure_iff_ball] at hx ⊢
-  intro r hr
-  obtain ⟨z, hz1, hz2⟩ := hx r hr
-  exact ⟨z, hz1, h hz2⟩
 
 /-! ## (a) `E ∖ A° = cl (E ∖ A)` -/
 

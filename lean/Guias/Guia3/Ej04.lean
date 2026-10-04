@@ -5,47 +5,19 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` 
 
 Los objetos son los de Mathlib (`interior`, `closure`, `Metric.ball`, `Metric.closedBall`,
 `IsOpen`, `IsClosed`), pero las demostraciones pasan por las caracterizaciones por bolas
-(`Metric.mem_closure_iff`, `Metric.isOpen_iff`, `Metric.mem_nhds_iff`, `dist_triangle`) y no por
-los lemas de Mathlib que son literalmente los ítems.
+(`Guias.mem_closure_iff_ball`, `Guias.closure_mono_ball` de `Common.lean`; `Metric.isOpen_iff`,
+`dist_triangle`) y no por los lemas de Mathlib que son literalmente los ítems. "Abierto" es
+`IsOpen`, que `Metric.isOpen_iff` lee como "todo punto tiene una bola adentro" (`A ⊆ A°`, que con
+la Observación 4.12 es la Definición 4.14).
 -/
 import Mathlib
+import Guias.Common
 
-open Metric Set
+open Metric Set Guias
 
 namespace Guias.Guia3.Ej04
 
 variable {E : Type*} [MetricSpace E]
-
-/-! ## Herramientas del curso, por bolas
-
-"Abierto" es `IsOpen`, que `Metric.isOpen_iff` lee como "todo punto tiene una bola adentro"
-(`A ⊆ A°`, que con la Observación 4.12 es la Definición 4.14). -/
-
-/-- Definición 4.22: `x` es de adherencia de `A` si toda bola `B(x, r)` corta a `A`. -/
-theorem mem_closure_iff_ball {A : Set E} {x : E} :
-    x ∈ closure A ↔ ∀ r > 0, (ball x r ∩ A).Nonempty := by
-  rw [Metric.mem_closure_iff]
-  constructor
-  · intro h r hr
-    obtain ⟨b, hb, hd⟩ := h r hr
-    exact ⟨b, mem_ball.2 (by rwa [dist_comm]), hb⟩
-  · intro h r hr
-    obtain ⟨b, hb, hbA⟩ := h r hr
-    exact ⟨b, hbA, by rw [dist_comm]; exact mem_ball.1 hb⟩
-
-/-- Observación 4.23 (a): `A ⊆ cl A`. -/
-theorem subset_closure_ball (A : Set E) : A ⊆ closure A := by
-  intro x hx
-  rw [mem_closure_iff_ball]
-  exact fun r hr => ⟨x, mem_ball_self hr, hx⟩
-
-/-- La clausura es monótona (inmediato de la Definición 4.22). -/
-theorem closure_mono_ball {A B : Set E} (h : A ⊆ B) : closure A ⊆ closure B := by
-  intro x hx
-  rw [mem_closure_iff_ball] at hx ⊢
-  intro r hr
-  obtain ⟨z, hz1, hz2⟩ := hx r hr
-  exact ⟨z, hz1, h hz2⟩
 
 /-- Teorema 4.29: `F` es cerrado (`cl F = F`, Definición 4.27) si y sólo si `Fᶜ` es abierto. -/
 theorem isClosed_iff_isOpen_compl_ball {F : Set E} : IsClosed F ↔ IsOpen Fᶜ := by

@@ -8,12 +8,16 @@ Sea `E` un espacio métrico y `A ⊆ E`.
 
 La frontera es la de la Definición 4.38 de `apuntes.typ` (`fronteraCurso`), definida por bolas.
 `interior` y `closure` son los de Mathlib, pero se manejan siempre a través de su
-caracterización por bolas (Definiciones 4.11 y 4.22). Los Ejercicios 5 (a) y 5 (b) del Typst
+caracterización por bolas (Definiciones 4.11 y 4.22: `Guias.mem_interior_iff_ball` y
+`Guias.mem_closure_iff_ball` de `Common.lean`). Los Ejercicios 5 (a) y 5 (b) del Typst
 (`E ∖ A° = cl (E ∖ A)`, `E ∖ cl A = (E ∖ A)°`) se reprueban acá como `compl_interior_eq` y
 `compl_closure_eq`, y con ellos "`A°` es abierto" y "`cl A` es cerrado" (Paso 3 del texto), sin
 usar `isOpen_interior`/`isClosed_closure` de Mathlib.
 -/
 import Mathlib
+import Guias.Common
+
+open Guias
 
 namespace Guias.Guia3.Ej09
 
@@ -23,28 +27,11 @@ variable {E : Type*} [MetricSpace E]
 def fronteraCurso (A : Set E) : Set E :=
   {x | ∀ r > 0, (Metric.ball x r ∩ A).Nonempty ∧ (Metric.ball x r ∩ Aᶜ).Nonempty}
 
-/-- Definición 4.22: `x ∈ cl A` ⇔ toda bola `B(x, r)` corta a `A`. -/
-theorem mem_closure_bolas {A : Set E} {x : E} :
-    x ∈ closure A ↔ ∀ r > 0, (Metric.ball x r ∩ A).Nonempty := by
-  rw [Metric.mem_closure_iff]
-  constructor
-  · intro h r hr
-    obtain ⟨b, hb, hxb⟩ := h r hr
-    exact ⟨b, Metric.mem_ball'.2 hxb, hb⟩
-  · intro h r hr
-    obtain ⟨b, hb, hbA⟩ := h r hr
-    exact ⟨b, hbA, Metric.mem_ball'.1 hb⟩
-
-/-- Definición 4.11: `x ∈ A°` ⇔ existe una bola `B(x, r) ⊆ A`. -/
-theorem mem_interior_bolas {A : Set E} {x : E} :
-    x ∈ interior A ↔ ∃ r > 0, Metric.ball x r ⊆ A := by
-  rw [mem_interior_iff_mem_nhds, Metric.mem_nhds_iff]
-
 /-- **Ejercicio 5 (a)**, reprobado localmente: `E ∖ A° = cl (E ∖ A)`.
 Negar "existe una bola dentro de `A`" es "toda bola corta a `E ∖ A`". -/
 theorem compl_interior_eq (A : Set E) : (interior A)ᶜ = closure Aᶜ := by
   ext x
-  rw [Set.mem_compl_iff, mem_interior_bolas, mem_closure_bolas]
+  rw [Set.mem_compl_iff, mem_interior_iff_ball, mem_closure_iff_ball]
   push Not
   refine forall₂_congr fun r _ => ?_
   rw [Set.not_subset]
@@ -57,7 +44,7 @@ theorem compl_interior_eq (A : Set E) : (interior A)ᶜ = closure Aᶜ := by
 /-- Reescritura por definición: `∂A = cl A ∩ cl (E ∖ A)` (ambas se leen por bolas). -/
 theorem frontera_eq_inter (A : Set E) : fronteraCurso A = closure A ∩ closure Aᶜ := by
   ext x
-  rw [Set.mem_inter_iff, mem_closure_bolas, mem_closure_bolas]
+  rw [Set.mem_inter_iff, mem_closure_iff_ball, mem_closure_iff_ball]
   constructor
   · intro h
     exact ⟨fun r hr => (h r hr).1, fun r hr => (h r hr).2⟩
@@ -75,10 +62,10 @@ theorem frontera_eq_sdiff (A : Set E) : fronteraCurso A = closure A \ interior A
 theorem isOpen_interior_bolas (A : Set E) : IsOpen (interior A) := by
   rw [Metric.isOpen_iff]
   intro x hx
-  obtain ⟨r, hr, hsub⟩ := mem_interior_bolas.1 hx
+  obtain ⟨r, hr, hsub⟩ := mem_interior_iff_ball.1 hx
   refine ⟨r, hr, fun y hy => ?_⟩
   rw [Metric.mem_ball] at hy
-  refine mem_interior_bolas.2 ⟨r - dist y x, by linarith, fun z hz => hsub ?_⟩
+  refine mem_interior_iff_ball.2 ⟨r - dist y x, by linarith, fun z hz => hsub ?_⟩
   rw [Metric.mem_ball] at hz ⊢
   calc dist z x ≤ dist z y + dist y x := dist_triangle _ _ _
     _ < r := by linarith
