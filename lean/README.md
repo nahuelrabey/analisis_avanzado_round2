@@ -24,6 +24,27 @@ Además, `Ejemplos/` formaliza ejemplos de `apuntes-typst/ejemplos/`:
 |---|---|
 | C3-6, la métrica del peine en `ℝ²` (`ejemplos/p3.typ`) | `Ejemplos/Peine.lean` |
 
+`Guias/` formaliza las resoluciones de las prácticas escritas por el agente en
+`apuntes-typst/guias-agente/` (separadas de las resoluciones del autor de los apuntes, que
+viven en `apuntes-typst/guias/`):
+
+| Práctica | Resolución | Archivos Lean |
+|---|---|---|
+| 3 (espacios métricos y topología) | `guias-agente/guia_3_resuelta_agente.typ` | `Guias/Guia3/Ej01.lean` ... `Ej16.lean` |
+
+`Guias/Common.lean` define `EsMetrica` (Definición 4.1 de `apuntes.typ`), `bola` y `bolaCerrada`, y
+los lemas puente que leen `interior`/`closure` de Mathlib con las Definiciones 4.11 y 4.22 por bolas
+(`mem_interior_iff_ball`, `mem_closure_iff_ball`, `notMem_closure_iff_ball`, `subset_closure_ball`,
+`closure_mono_ball`), compartidos por los ejercicios 4, 5, 6 y 9.
+Cada ejercicio tiene su archivo; como en el texto, un ejercicio puede importar uno anterior
+(`Ej08` importa `Ej03`, `Ej14` importa `Ej12`), nunca uno posterior. El `.typ` termina cada
+ejercicio con una caja *Observación* que indica qué teoremas certifican qué ítems y los desvíos de
+la formalización. Para comprobar todos los teoremas de la Práctica 3:
+
+```sh
+cd lean && lake build Guias        # compila sin errores ni warnings
+```
+
 Fuera de alcance: `apuntes-typst/parciales/2024_2c_parcial_2.typ` (segundo parcial: punto fijo,
 series, medida de Lebesgue), cuyos temas no están cubiertos por `apuntes.typ`.
 
