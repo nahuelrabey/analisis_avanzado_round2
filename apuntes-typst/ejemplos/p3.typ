@@ -161,6 +161,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Como $x$, $x'$, $x''$ son tres números reales, o bien coinciden los tres, o bien coinciden exactamente dos (y hay tres formas de elegir cuáles), o bien son todos distintos: los cinco casos de arriba cubren todas las posibilidades, y $d$ cumple la desigualdad triangular. Junto con (a) y la simetría, $d$ es una métrica en $RR^2$.
 ]
 
+#observacion[Verificado en Lean: `lean/Ejemplos/Peine.lean`][
+  `Peine.d` es la distancia del enunciado; `d_comm` es la simetría, `d_eq_zero_iff` es el ítem (a) y `d_triangle` es la desigualdad triangular con los mismos cinco casos, en el mismo orden y con las mismas cotas (`abs_sub_le` para las desigualdades triangulares en $RR$, `abs_sub` para $abs(y - y') <= abs(y) + abs(y')$). La instancia `MetricSpace Peine.Plano` empaqueta la conclusión: $(RR^2, d)$ es un espacio métrico.
+]
+
 #ejemplo[La métrica $C^1$ en $[0,1]$ (Clase 3 · Ejercicio 7)][C3-7][
   Sea $X = {f : [0,1] -> RR "continuas tales que" f' "es continua en" [0,1]}$ y definamos
   $

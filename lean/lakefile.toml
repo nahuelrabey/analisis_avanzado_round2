@@ -1,5 +1,5 @@
 name = "parciales"
-defaultTargets = ["Parciales"]
+defaultTargets = ["Parciales", "Ejemplos"]
 
 [[require]]
 name = "mathlib"
@@ -8,3 +8,6 @@ rev = "v4.34.1"
 
 [[lean_lib]]
 name = "Parciales"
+
+[[lean_lib]]
+name = "Ejemplos"

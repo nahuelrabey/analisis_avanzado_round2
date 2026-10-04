@@ -18,6 +18,12 @@ demás, el `.typ` tiene resoluciones propuestas y cada una termina con una caja 
 que indica qué teorema del archivo Lean la certifica y en qué difiere la formalización de la
 escritura a mano.
 
+Además, `Ejemplos/` formaliza ejemplos de `apuntes-typst/ejemplos/`:
+
+| Ejemplo | Archivo Lean |
+|---|---|
+| C3-6, la métrica del peine en `ℝ²` (`ejemplos/p3.typ`) | `Ejemplos/Peine.lean` |
+
 Fuera de alcance: `apuntes-typst/parciales/2024_2c_parcial_2.typ` (segundo parcial: punto fijo,
 series, medida de Lebesgue), cuyos temas no están cubiertos por `apuntes.typ`.
 
