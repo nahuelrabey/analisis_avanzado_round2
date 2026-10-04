@@ -1,3 +1,4 @@
+// Notas docentes 2025 · clase 3 de la transcripción: sus ejercicios llevan el tag `C3-{k}` en `ejemplos/`.
 #import "../utils.typ": recta, sublema
 
 = Cardinales y métricas
