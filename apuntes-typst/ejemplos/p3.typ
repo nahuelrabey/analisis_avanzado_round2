@@ -142,7 +142,23 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       &<= abs(x - x'') + abs(y) + abs(y'') + abs(x'' - x') + abs(y'') + abs(y') \
       &= d((x, y), (x'', y'')) + d((x'', y''), (x', y')). $
 
-  _Observación:_ los casos restantes (los que tienen $x != x'$) se prueban de forma análoga a los desarrollados arriba, separando según $x''$ coincida o no con $x$ o con $x'$.
+  En los tres casos restantes es $x != x'$, así que el término de la izquierda cae en el segundo caso: $d((x,y),(x',y')) = abs(x - x') + abs(y) + abs(y')$. Lo que cambia es en qué caso caen los dos términos de la derecha, según $x''$ coincida con $x$, con $x'$ o con ninguno de los dos.
+
+  - Si $x'' = x != x'$, el primer término de la derecha cae en el primer caso y el segundo en el segundo. Usando $abs(y) <= abs(y - y'') + abs(y'')$ (desigualdad triangular en $RR$),
+    $ abs(x - x') + abs(y) + abs(y') &<= abs(x - x') + abs(y - y'') + abs(y'') + abs(y') \
+      &= abs(y - y'') + (abs(x - x') + abs(y'') + abs(y')) \
+      &= d((x, y), (x, y'')) + d((x, y''), (x', y')), $
+    donde en la última igualdad se usó $x'' = x$ en los dos sumandos.
+  - Si $x'' = x' != x$, es el caso anterior con los roles de $(x, y)$ y $(x', y')$ intercambiados: el primer término de la derecha cae en el segundo caso y el segundo en el primero. Usando ahora $abs(y') <= abs(y'') + abs(y'' - y')$,
+    $ abs(x - x') + abs(y) + abs(y') &<= abs(x - x') + abs(y) + abs(y'') + abs(y'' - y') \
+      &= (abs(x - x') + abs(y) + abs(y'')) + abs(y'' - y') \
+      &= d((x, y), (x', y'')) + d((x', y''), (x', y')). $
+  - Si $x'' != x$ y $x'' != x'$, los tres términos caen en el segundo caso. Como $abs(x - x') <= abs(x - x'') + abs(x'' - x')$ (desigualdad triangular en $RR$) y $2 abs(y'') >= 0$,
+    $ abs(x - x') + abs(y) + abs(y') &<= abs(x - x'') + abs(x'' - x') + abs(y) + abs(y') + 2 abs(y'') \
+      &= (abs(x - x'') + abs(y) + abs(y'')) + (abs(x'' - x') + abs(y'') + abs(y')) \
+      &= d((x, y), (x'', y'')) + d((x'', y''), (x', y')). $
+
+  Como $x$, $x'$, $x''$ son tres números reales, o bien coinciden los tres, o bien coinciden exactamente dos (y hay tres formas de elegir cuáles), o bien son todos distintos: los cinco casos de arriba cubren todas las posibilidades, y $d$ cumple la desigualdad triangular. Junto con (a) y la simetría, $d$ es una métrica en $RR^2$.
 ]
 
 #ejemplo[La métrica $C^1$ en $[0,1]$ (Clase 3 · Ejercicio 7)][C3-7][
