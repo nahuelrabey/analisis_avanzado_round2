@@ -31,6 +31,15 @@ viven en `apuntes-typst/guias/`):
 | Práctica | Resolución | Archivos Lean |
 |---|---|---|
 | 3 (espacios métricos y topología) | `guias-agente/guia_3_resuelta_agente.typ` | `Guias/Guia3/Ej01.lean` ... `Ej16.lean` |
+| 2 (cardinales) | `guias-agente/guia_2_resuelta_agente.typ` | `Guias/Guia2/Defs.lean`, `Guias/Guia2/Ej01.lean` ... `Ej17.lean` |
+
+`Guias/Guia2/Defs.lean` define las nociones del curso sobre cardinales (`Coordinables`, `CardLe`,
+`Finito`, `Numerable`, `Contable`, `CardEq`, `CardC` = "tiene el cardinal de ℝ"; Definiciones 3.1,
+3.5, 3.6 y 3.8 de `apuntes.typ`), sus puentes a Mathlib y los resultados de `apuntes.typ` que la
+Práctica 2 toma como verdaderos (Prop. 3.2, 3.9, 3.13, 3.14, numerabilidad de ℚ, Teoremas 3.11 y
+3.19, Observaciones 3.10 y 3.21), deducidos de Mathlib. Los `Guias/Guia2/EjNN.lean` sólo importan
+`Defs` y no usan los lemas de Mathlib que son literalmente los ejercicios (unión contable de
+contables, cardinal de ℝ, de 𝒫(ℕ), de los polinomios, discontinuidades de una monótona, …).
 
 `Guias/Common.lean` define `EsMetrica` (Definición 4.1 de `apuntes.typ`), `bola` y `bolaCerrada`, y
 los lemas puente que leen `interior`/`closure` de Mathlib con las Definiciones 4.11 y 4.22 por bolas
