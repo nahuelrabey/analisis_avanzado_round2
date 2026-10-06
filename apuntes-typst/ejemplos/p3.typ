@@ -357,33 +357,144 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ abs(f(x) - g(x)) < 1 <==> -1 < g(x) - f(x) < 1 <==> f(x) - 1 < g(x) < f(x) + 1. $
 
   Por ende, una función $g in C([a, b])$ pertenece a $B_(d_oo)(f, 1)$ si y sólo si su gráfico está estrictamente contenido dentro de la banda vertical de semiancho $1$ alrededor de la curva $f(x)$. Si para algún punto $x_0 in [a, b]$ la curva de $g$ toca o cruza las curvas $f - 1$ o $f + 1$, entonces $abs(f(x_0) - g(x_0)) >= 1$ y por ende $g in.not B_(d_oo)(f, 1)$.
+
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let (xa, xb) = (0.8, 7.6)
+      let n = 80
+      let xs = range(n + 1).map(i => xa + (xb - xa) * i / n)
+      let f(x) = 2.7 + 0.5 * calc.sin(0.9 * x)
+      // g se queda adentro de la banda; h se escapa cerca de x0.
+      let g(x) = f(x) + 0.6 * calc.sin(2.3 * x + 0.5)
+      let x0 = 5.0
+      let h(x) = f(x) - 0.35 + 2.1 * calc.exp(-calc.pow(x - x0, 2) / 0.5)
+      let curva(fn) = xs.map(x => (x, fn(x)))
+
+      let azul = rgb("#1e3a8a")
+      let verde = rgb("#059669")
+      let rojo = rgb("#dc2626")
+
+      // Banda entre f - 1 y f + 1.
+      line(
+        ..curva(x => f(x) + 1), ..curva(x => f(x) - 1).rev(),
+        close: true, fill: azul.lighten(88%), stroke: none,
+      )
+      line(..curva(x => f(x) + 1), stroke: (paint: azul, thickness: 0.7pt, dash: "dashed"))
+      line(..curva(x => f(x) - 1), stroke: (paint: azul, thickness: 0.7pt, dash: "dashed"))
+      line(..curva(f), stroke: 1.3pt + azul)
+      line(..curva(g), stroke: 1pt + verde)
+      line(..curva(h), stroke: 1pt + rojo)
+
+      // Ejes.
+      line((0, 0), (8.6, 0), mark: (end: ">"), stroke: 0.8pt)
+      line((0.3, -0.3), (0.3, 5.2), mark: (end: ">"), stroke: 0.8pt)
+      for (x, lbl) in ((xa, $a$), (xb, $b$)) {
+        line((x, -0.1), (x, 0.1), stroke: 0.8pt)
+        content((x, -0.35), text(size: 9pt, lbl))
+        line((x, 0.1), (x, f(x) - 1), stroke: (paint: gray, thickness: 0.4pt, dash: "dotted"))
+      }
+
+      // El punto donde h se sale de la banda.
+      line((x0, 0), (x0, h(x0)), stroke: (paint: rojo, thickness: 0.6pt, dash: "dotted"))
+      line((x0, -0.1), (x0, 0.1), stroke: 0.8pt + rojo)
+      content((x0, -0.35), text(size: 9pt, fill: rojo)[$x_0$])
+      circle((x0, h(x0)), radius: 0.07, fill: rojo, stroke: none)
+      circle((x0, f(x0)), radius: 0.06, fill: azul, stroke: none)
+
+      // Etiquetas.
+      content((xb + 0.55, f(xb) + 1), text(size: 9pt, fill: azul)[$f + 1$])
+      content((xb + 0.3, f(xb)), text(size: 9pt, fill: azul)[$f$])
+      content((xb + 0.55, f(xb) - 1), text(size: 9pt, fill: azul)[$f - 1$])
+      content((3.2, g(3.2) + 0.28), text(size: 9pt, fill: verde)[$g$])
+      content((x0 + 0.35, h(x0) + 0.25), text(size: 9pt, fill: rojo)[$h$])
+    })
+
+    #text(9pt)[
+      #text(fill: rgb("#059669"))[$g in B_(d_oo)(f, 1)$]: su gráfico nunca sale de la banda. \
+      #text(fill: rgb("#dc2626"))[$h in.not B_(d_oo)(f, 1)$]: en $x_0$ queda por encima de $f + 1$, así que
+      $abs(f(x_0) - h(x_0)) >= 1$.
+    ]
+  ]]
 ]
 
 #ejemplo[$d_oo$ y $d_1$ en $C([a,b])$ no son equivalentes (guía de la práctica)][guía-1][
   En $C([a,b])$ consideremos las dos métricas
   $ d_oo (f,g) = sup_(a<=x<=b) abs(f(x)-g(x)), quad d_1 (f,g) = integral_a^b abs(f(x)-g(x)) dif x. $
-  (Por ejemplo, con $a=0$, $b=1$, $f(x)=x$ y $g(x)=0$: $d_oo(f,g)=1$ pero $d_1(f,g)=1/2$.) ¿Son estas dos métricas *equivalentes*, es decir, definen los mismos abiertos?
+  (Por ejemplo, con $a=0$, $b=1$, $f(x)=x$ y $g(x)=0$: $d_(oo)(f,g)=1$ pero $d_1(f,g)=1/2$.) ¿Son estas dos métricas *equivalentes*, es decir, definen los mismos abiertos?
 ]
 
 #estrategia[Comparar bolas: cada bola de una métrica, ¿contiene una bola de la otra?][
   Dos métricas son equivalentes si toda bola de una contiene una bola de la otra centrada en el mismo punto, y viceversa (esto sí pasa, por ejemplo, entre $d_2$ y $d_oo$ en $RR^n$). Acá hay que revisar las dos direcciones por separado:
 
-  + ¿Existe, dada $B_oo(f,epsilon)$, un $delta>0$ tal que $B_1(f,delta) subset.eq B_oo(f,epsilon)$?
-  + ¿Existe, dada $B_1(f,epsilon)$, un $delta>0$ tal que $B_oo(f,delta) subset.eq B_1(f,epsilon)$?
+  + ¿Existe, dada $B_(oo)(f,epsilon)$, un $delta>0$ tal que $B_1(f,delta) subset.eq B_(oo)(f,epsilon)$?
+  + ¿Existe, dada $B_1(f,epsilon)$, un $delta>0$ tal que $B_(oo)(f,delta) subset.eq B_1(f,epsilon)$?
 ]
 
 #resolucion[
-  *(1) Falla.* Tomemos $f = 0$. Dado cualquier $delta > 0$, construimos $g in C([a,b])$ con $d_1(f,g) < delta$ pero $d_oo(f,g) >= epsilon$: una función "pico" triangular, de altura $2epsilon$ y base de ancho menor que $delta/epsilon$.
+  *(1) Falla.* Tomemos $f = 0$. Dado cualquier $delta > 0$, construimos $g in C([a,b])$ con $d_1(f,g) < delta$ pero $d_(oo)(f,g) >= epsilon$: una función "pico" triangular, de altura $2epsilon$ y base de ancho menor que $delta/epsilon$.
 
   El área bajo el pico (que es exactamente $integral_a^b abs(g)$) es
   $ "área" < (delta/epsilon) dot (2epsilon)/2 = delta, $
-  así que $g in B_1(f,delta)$. Pero $sup abs(g) = 2epsilon >= epsilon$, así que $g in.not B_oo(f,epsilon)$. Como esto vale para *cualquier* $delta$, no existe ningún $delta$ que garantice $B_1(f,delta) subset.eq B_oo(f,epsilon)$: por más chica que sea la bola en $d_1$, siempre queda algún "pico" flaco y alto adentro que se escapa de la bola en $d_oo$.
 
-  *(2) Vale.* Sea $epsilon > 0$ y tomemos $delta = epsilon/(b-a)$. Si $g in B_oo(f,delta)$, entonces para todo $x in [a,b]$:
-  $ abs(f(x)-g(x)) <= sup_(t in [a,b]) abs(f(t)-g(t)) = d_oo(f,g). $
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let (xa, xb) = (0.8, 7.6)
+      let e = 1.2 // epsilon
+      let (c, w) = (4.6, 0.9) // centro y base del pico
+
+      let azul = rgb("#1e3a8a")
+      let rojo = rgb("#dc2626")
+
+      // Banda B_oo(f, epsilon) alrededor de f = 0.
+      rect((xa, -e), (xb, e), fill: azul.lighten(88%), stroke: none)
+      line((xa, e), (xb, e), stroke: (paint: azul, thickness: 0.7pt, dash: "dashed"))
+      line((xa, -e), (xb, -e), stroke: (paint: azul, thickness: 0.7pt, dash: "dashed"))
+
+      // Ejes.
+      line((0, 0), (8.6, 0), mark: (end: ">"), stroke: 0.8pt)
+      line((0.3, -1.6), (0.3, 3.1), mark: (end: ">"), stroke: 0.8pt)
+      for (x, lbl) in ((xa, $a$), (xb, $b$)) {
+        line((x, -0.1), (x, 0.1), stroke: 0.8pt)
+        content((x - 0.2, -0.3), text(size: 9pt, lbl))
+      }
+      for (y, lbl) in ((e, $epsilon$), (2 * e, $2 epsilon$), (-e, $-epsilon$)) {
+        line((0.2, y), (0.4, y), stroke: 0.8pt)
+        content((-0.15, y), text(size: 9pt, lbl))
+      }
+
+      // f = 0 y el pico g.
+      line((c - w / 2, 0), (c, 2 * e), (c + w / 2, 0), close: true, fill: rojo.lighten(80%), stroke: none)
+      line((xa, 0), (c - w / 2, 0), (c, 2 * e), (c + w / 2, 0), (xb, 0), stroke: 1.3pt + rojo)
+      line((xa, 0), (xb, 0), stroke: (paint: azul, thickness: 1.3pt, dash: "dashed"))
+      line((0.4, 2 * e), (c, 2 * e), stroke: (paint: gray, thickness: 0.4pt, dash: "dotted"))
+
+      // Base del pico.
+      line((c - w / 2, -0.3), (c + w / 2, -0.3), mark: (start: ">", end: ">"), stroke: 0.5pt)
+      content((c, -0.65), text(size: 9pt)[$w < delta\/epsilon$])
+
+      // Etiquetas.
+      content((c + 0.45, 2 * e), text(size: 9pt, fill: rojo)[$g$])
+      content((xb + 0.55, 0.25), text(size: 9pt, fill: azul)[$f = 0$])
+      content((2.2, e + 0.28), text(size: 9pt, fill: azul)[$B_oo (f, epsilon)$])
+      line((c + 1.0, 0.6), (c + 0.12, 0.6), mark: (end: ">"), stroke: 0.5pt + rojo)
+      content((c + 1.9, 0.6), text(size: 9pt, fill: rojo)[área $= w epsilon < delta$])
+    })
+
+    #text(9pt)[
+      #text(fill: rgb("#dc2626"))[$g in B_1(f, delta)$]: el área bajo el pico es $w epsilon < delta$. \
+      #text(fill: rgb("#dc2626"))[$g in.not B_oo (f, epsilon)$]: la punta llega a $2 epsilon$ y se sale de la banda.
+    ]
+  ]]
+
+  Así que $g in B_1(f,delta)$. Pero $sup abs(g) = 2epsilon >= epsilon$, así que $g in.not B_(oo)(f,epsilon)$. Como esto vale para *cualquier* $delta$, no existe ningún $delta$ que garantice $B_1(f,delta) subset.eq B_(oo)(f,epsilon)$: por más chica que sea la bola en $d_1$, siempre queda algún "pico" flaco y alto adentro que se escapa de la bola en $d_oo$.
+
+  *(2) Vale.* Sea $epsilon > 0$ y tomemos $delta = epsilon/(b-a)$. Si $g in B_(oo)(f,delta)$, entonces para todo $x in [a,b]$:
+  $ abs(f(x)-g(x)) <= sup_(t in [a,b]) abs(f(t)-g(t)) = d_(oo)(f,g). $
   El lado derecho no depende de $x$, así que integrando ambos lados en $[a,b]$:
-  $ d_1(f,g) = integral_a^b abs(f(x)-g(x)) dif x <= integral_a^b d_oo(f,g) dif x = d_oo(f,g) dot (b-a) < delta dot (b-a) = epsilon. $
-  Luego $g in B_1(f,epsilon)$, es decir $B_oo(f,delta) subset.eq B_1(f,epsilon)$.
+  $ d_1(f,g) = integral_a^b abs(f(x)-g(x)) dif x <= integral_a^b d_(oo)(f,g) dif x = d_(oo)(f,g) dot (b-a) < delta dot (b-a) = epsilon. $
+  Luego $g in B_1(f,epsilon)$, es decir $B_(oo)(f,delta) subset.eq B_1(f,epsilon)$.
 
   *Conclusión:* como la dirección (1) falla, $d_oo$ y $d_1$ *no* son equivalentes: hay bolas de $d_1$ que no contienen ninguna bola de $d_oo$. Sí vale que la topología de $d_oo$ es *más fina* que la de $d_1$ (toda bola de $d_oo$ contiene una bola de $d_1$, pero no al revés).
 ]
