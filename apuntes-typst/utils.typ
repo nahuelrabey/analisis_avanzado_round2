@@ -2,6 +2,22 @@
 #import "@preview/cetz-plot:0.1.2": plot
 #import "@preview/frame-it:2.0.0": *
 
+// `boxy` rellena la pestaña con el color del frame y deja el texto negro. Esta versión pone el
+// título en blanco: como los archivos importan este después de frame-it, `styles.boxy` es esta.
+#let styles = (
+  ..styles,
+  boxy: (title, tags, body, supplement, number, accent-color) => (styles.boxy)(
+    if title in ([], "", none) { title } else {
+      text(fill: white, weight: "bold", style: "italic", title)
+    },
+    tags,
+    body,
+    supplement,
+    number,
+    accent-color,
+  ),
+)
+
 #let (
   definicion,
   teorema,
