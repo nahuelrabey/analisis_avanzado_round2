@@ -56,6 +56,15 @@
 
 == Ejercicio 1
 
+#enunciado[Ejercicio 1][
+  Calcular el cardinal de:
+  #set enum(numbering: "(a)")
+  + El conjunto de polinomios de una variable con coeficientes racionales, $QQ[x]$.
+  + El conjunto $cal(A)$ de los números reales algebraicos, definido por
+    $ cal(A) := {alpha in RR : exists p in QQ[x] without {0}, space p(alpha) = 0}. $
+    Sugerencia: Use el ítem (a).
+]
+
 #resolucion[Cátedra][
   *(a)* Primero notemos que existe una función inyectiva $Psi : NN -> QQ[x]$ tal que
   $Psi(n) = n$, es decir que envía cada número natural $n$ al polinomio de grado cero que puede
@@ -101,6 +110,12 @@
 
 == Ejercicio 2
 
+#enunciado[Ejercicio 2][
+  Sea $Psi : (C[0, 1], d_oo) -> (C[0, 1], d_1)$ dada por
+  $ (Psi(f))(x) = x f(x) quad quad forall f in C[0, 1], forall x in [0, 1]. $
+  Probar que $Psi$ es uniformemente continua.
+]
+
 #resolucion[Cátedra][
   Dadas $f, g in C[0, 1]$, tenemos que
   $ d_1(Psi(f), Psi(g)) & = integral_0^1 abs(x f(x) - x g(x)) dif x
@@ -130,6 +145,10 @@
 ]
 
 == Ejercicio 3
+
+#enunciado[Ejercicio 3][
+  Sean $X$, $Y$ espacios métricos y $f : X -> Y$ una función continua. Probar que si $X$ es compacto, entonces $f(overline(A)) = overline(f(A))$ para cualquier subconjunto $A$ de $X$.
+]
 
 #resolucion[Cátedra][
   La inclusión $f(overline(A)) subset overline(f(A))$ vale por la continuidad de $f$ (y sin
@@ -177,6 +196,12 @@
 ]
 
 == Ejercicio 4
+
+#enunciado[Ejercicio 4][
+  Sea la métrica $d : RR times RR -> RR$, definida por
+  $ d(x, y) = cases(0\, & quad "si" x = y\,, abs(x) + abs(y)\, & quad "si" x != y.) $
+  Probar que $(RR, d)$ es un espacio métrico completo (no hace falta probar que $d$ es una métrica).
+]
 
 #resolucion[Cátedra][
   Sea $(x_n)_(n in NN) subset RR$ una sucesión de Cauchy con respecto a la métrica $d$. Para ver

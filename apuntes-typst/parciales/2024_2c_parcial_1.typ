@@ -55,6 +55,10 @@
 
 == Ejercicio 1
 
+#enunciado[Ejercicio 1][
+  Consideremos $A$ y $B$ conjuntos en $RR$ no vacíos y acotados. Probar que $op("ínf")(A) + op("ínf")(B) = op("ínf")(A + B)$, donde $A + B = {a + b : a in A, b in B}$.
+]
+
 #resolucion[Cátedra][
   Dado un elemento en $A + B$ podemos escribirlo como $a + b$ con $a in A$ y $b in B$. Luego
   $ a + b >= op("ínf")(A) + op("ínf")(B) $
@@ -71,6 +75,10 @@
 ]
 
 == Ejercicio 2
+
+#enunciado[Ejercicio 2][
+  Calcular el cardinal del conjunto ${B subset.eq QQ : \#B = \#(QQ without B)}$.
+]
 
 #resolucion[Cátedra][
   Llamemos $cal(A) = {B subset.eq QQ : \#B = \#(QQ without B)}$. Notemos que
@@ -116,6 +124,10 @@
 ]
 
 == Ejercicio 4
+
+#enunciado[Ejercicio 4][
+  Sean $(X, d)$ y $(Y, d')$ espacios métricos con $X = C([0, 1])$ y $cal(F) : X -> Y$ una función. Probar que si $cal(F)$ es continua con $d = d_1$ entonces también es continua con $d = d_oo$. ¿Vale la recíproca?
+]
 
 #resolucion[Cátedra][
   Primero veamos que dados $f in X$ y $r > 0$ sucede que
