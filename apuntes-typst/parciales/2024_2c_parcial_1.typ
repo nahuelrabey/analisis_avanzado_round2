@@ -96,7 +96,62 @@
   $bold(c) <= \#cal(A)$ y obtenemos $bold(c) = \#cal(A)$.
 ]
 
+// Agregado (no es parte de la resolución oficial).
+#observacion[Por qué $aleph_0 = \#((1, 2) inter QQ)$][
+  Son dos desigualdades y Cantor–Bernstein.
+
+  - $\#((1, 2) inter QQ) <= aleph_0$: es un subconjunto de $QQ$ (la inclusión es inyectiva) y
+    $\#QQ = aleph_0$.
+  - $aleph_0 <= \#((1, 2) inter QQ)$: la función
+    $ phi : NN -> (1, 2) inter QQ, quad phi(n) = 1 + 1 / (n + 1) $
+    está bien definida, porque $1 / (n + 1) in (0, 1) inter QQ$, y es inyectiva, porque
+    $1 + 1 / (n + 1) = 1 + 1 / (m + 1)$ implica $n = m$.
+
+  Lo mismo vale para $(2, 3) inter QQ$ con $n |-> 2 + 1 / (n + 1)$. En general, todo intervalo
+  abierto no vacío tiene infinitos racionales, y todo subconjunto infinito de $QQ$ es numerable.
+]
+
+// Agregado (no es parte de la resolución oficial).
+#observacion[Por qué la función está bien definida y es inyectiva][
+  Sea $Phi(B) = B union ((1, 2) inter QQ)$ con $B subset.eq NN$. Que $Phi$ esté bien definida
+  significa que $Phi(B) in cal(A)$, es decir, $\#Phi(B) = \#(QQ without Phi(B))$. Las dos
+  cadenas de la resolución son *independientes*: no se compara un lado con el otro, sino que se
+  prueba que *los dos valen $aleph_0$*.
+
+  Cada cadena tiene la forma $aleph_0 <= \#X <= aleph_0$, así que $\#X = aleph_0$
+  (Cantor–Bernstein). Cada $<=$ sale de una inclusión ($S subset.eq T => \#S <= \#T$):
+
+  - Primera cadena, $X = Phi(B)$:
+    $ (1, 2) inter QQ subset.eq Phi(B) subset.eq QQ, $
+    la primera inclusión por definición de la unión y la segunda porque
+    $B subset.eq NN subset.eq QQ$.
+  - Segunda cadena, $X = QQ without Phi(B)$:
+    $ (2, 3) inter QQ subset.eq QQ without Phi(B) subset.eq QQ. $
+    Si $q in (2, 3) inter QQ$, entonces $q in.not (1, 2)$ porque $q > 2$, y $q in.not B$ porque
+    $B subset.eq NN$ y el intervalo abierto $(2, 3)$ no tiene naturales. Luego
+    $q in.not Phi(B)$.
+
+  Por eso se eligen intervalos sin naturales: así $B$, que puede ser cualquier subconjunto de
+  $NN$, no "invade" ninguno de los dos intervalos. En ambas cadenas el extremo izquierdo vale
+  $aleph_0$ por la observación anterior, y $\#QQ = aleph_0$.
+
+  *Inyectividad.* El texto dice "construimos una función inyectiva" pero no lo verifica. Como
+  $(1, 2)$ no tiene naturales, al cortar con $NN$ se recupera $B$:
+  $ Phi(B) inter NN = B. $
+  Entonces $Phi(B) = Phi(B')$ implica $B = Phi(B) inter NN = Phi(B') inter NN = B'$.
+
+  *Conclusión.* $\#S <= \#T$ significa que existe una función inyectiva $S -> T$. Las cadenas dan
+  que $Phi$ va de $cal(P)(NN)$ a $cal(A)$, y acabamos de ver que es inyectiva, así que
+  $bold(c) = \#cal(P)(NN) <= \#cal(A)$. Esto es lo que el texto llama "el cardinal de $cal(A)$
+  no puede ser menor al de $cal(P)(NN)$". Junto con $\#cal(A) <= bold(c)$, Cantor–Bernstein da
+  $\#cal(A) = bold(c)$.
+]
+
 == Ejercicio 3
+
+#enunciado[Ejercicio 3][
+  Sea $(X, d)$ un espacio métrico. Supongamos que toda sucesión $(A_n)_(n in NN)$ de subconjuntos cerrados y no vacíos tal que $A_(n+1) subset.eq A_n$ para todo $n in NN$ con $op("diam")(A_n) -> 0$ cuando $n$ tiende a infinito cumple que $inter.big_(n in NN) A_n != emptyset$. Probar que $X$ es completo.
+]
 
 #resolucion[Cátedra][
   Consideremos una sucesión $(x_n)_(n in NN) subset.eq X$ de Cauchy, debemos probar que tiene

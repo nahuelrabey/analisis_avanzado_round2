@@ -95,6 +95,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-8],
   [Compacto y continua: el supremo es un máximo],
   [Hay un sup o ínf de una función continua sobre $[a, b]$ y necesito que sea finito o que se alcance],
+
+  [G-9],
+  [Sándwich $NN arrow.hook S arrow.hook QQ$: todo intervalo tiene $aleph_0$ racionales],
+  [Hay que ver que un subconjunto de $QQ$ (por ejemplo $(a, b) inter QQ$) tiene cardinal $aleph_0$],
 )
 
 #v(8pt)
@@ -1215,3 +1219,126 @@ Todas consultadas el 4 de octubre de 2026.
   #link("https://en.wikipedia.org/wiki/Uniform_norm")[en.wikipedia.org/wiki/Uniform_norm]
 - ProofWiki, _Extreme Value Theorem_ (versión para espacios métricos compactos).
   #link("https://proofwiki.org/wiki/Extreme_Value_Theorem")[proofwiki.org/wiki/Extreme_Value_Theorem]
+
+#v(8pt)
+
+== Galerazo 9 · Sándwich $NN arrow.hook S arrow.hook QQ$: todo intervalo tiene $aleph_0$ racionales
+
+#disparador[
+  En la resolución del Ej. 2 del primer parcial 2C 2024 aparece
+  $aleph_0 = \#((1, 2) inter QQ)$ sin más. ¿Por qué vale? ¿Está demostrado en alguna de las
+  prácticas que todo intervalo abierto tiene infinitos racionales y que todo subconjunto
+  infinito de $QQ$ es numerable?
+]
+
+#galerazo[G-9][
+  Para ver que un $S subset.eq QQ$ tiene cardinal $aleph_0$ no hace falta una biyección: se lo
+  encierra entre dos inyecciones, $NN arrow.hook S arrow.hook QQ$. La de la derecha es la
+  inclusión y sale gratis; la de la izquierda es una sucesión de elementos *distintos* de $S$,
+  es decir, ver que $S$ es infinito. Como $\#QQ = aleph_0$, Cantor--Bernstein cierra. Para
+  $S = (a, b) inter QQ$ la sucesión sale de la densidad de $QQ$.
+]
+
+=== La señal
+
+Aparece el cardinal de un subconjunto de $QQ$ (o de $NN$, o de cualquier conjunto numerable):
+$(a, b) inter QQ$, los racionales de un intervalo, un $B subset.eq NN$ infinito. La
+tentación es buscar una biyección explícita con $NN$, que suele ser difícil de escribir. Pero
+una de las dos desigualdades ya está hecha por la inclusión, y la otra sólo pide exhibir
+infinitos elementos distintos.
+
+#sublema(titulo: "Traducción")[
+  *"Cardinal de un subconjunto de un numerable"* $==>$ *"¿es infinito? Si sí, es $aleph_0$:
+  arriba la inclusión, abajo una sucesión inyectiva"*.
+]
+
+=== Por qué funciona
+
+Todo lo que se usa está en `apuntes.typ` (Cap. 3) y en las prácticas.
+
+*Cota superior: $\#S <= aleph_0$.* La inclusión $iota : S arrow.hook QQ$ es inyectiva, así que
+$\#S <= \#QQ$ por la definición de $<=$ entre cardinales (Definición 3.8; está remarcado en la
+Observación "Ideas Importantes y Minimalidad de $aleph_0$"). Y $\#QQ = aleph_0$ por la
+Proposición "Numerabilidad de $QQ$".
+
+*Cota inferior: $aleph_0 <= \#S$.* Hace falta una inyección $NN -> S$. Hay dos casos.
+
+- *Extremos racionales.* Si $a, b in QQ$ con $a < b$, sirve
+  $ phi(n) = a + (b - a) / (n + 1). $
+  Está bien definida porque $QQ$ es cerrado por sumas, restas y cocientes con denominador no
+  nulo, y porque $0 < (b - a) / (n + 1) < b - a$ deja a $phi(n)$ en $(a, b)$. Es inyectiva
+  porque $n |-> 1 / (n + 1)$ lo es y $b - a != 0$. Con $a = 1$, $b = 2$ es la función
+  $n |-> 1 + 1 / (n + 1)$ de las observaciones del parcial. _(Esta fórmula es un argumento
+  propio, no figura en el apunte.)_
+- *Extremos reales cualesquiera.* Si $a$ o $b$ es irracional, la fórmula anterior no da
+  racionales y se usa la *Densidad de $QQ$* (Proposición 2 del apunte, que es el
+  `p1: Ej. 2 (b)`): entre dos reales distintos hay un racional. Se aplica una y otra vez:
+  $ q_1 in (a, b) inter QQ, quad q_(n + 1) in (a, q_n) inter QQ. $
+  Por construcción $b > q_1 > q_2 > dots > a$, así que los $q_n$ están en $(a, b) inter QQ$
+  y son todos distintos: $n |-> q_n$ es inyectiva. Es la misma construcción por recursión y
+  densidad del Ejemplo C1-6 de `ejemplos/p1.typ` (allí con $q_(n + 1)$ en
+  $(x, (x + q_n) / 2)$ para que además converja a $x$; acá alcanza con que decrezca).
+  _(La adaptación al intervalo es razonamiento propio.)_
+
+Otra forma de cerrar la cota inferior, una vez que se sabe que $S$ es infinito: por la
+Proposición 3.14 todo conjunto infinito contiene un subconjunto numerable, así que
+$aleph_0 <= \#S$ (lo dice la misma Observación "Ideas Importantes").
+
+*Cierre.* Con $aleph_0 <= \#S <= aleph_0$, el Teorema de Cantor--Schröder--Bernstein (3.11) da
+$\#S = aleph_0$. Equivalentemente: la Proposición 3.13 dice que un subconjunto no vacío de un
+numerable es a lo sumo numerable (finito o numerable), y si además es infinito, por la
+Definición 3.6 es numerable.
+
+=== La familia entera
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#table(
+  columns: (1.3fr, 1.1fr, 2.2fr),
+  align: (left + horizon, left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 5pt),
+
+  [*Conjunto $S$*], [*Arriba*], [*Abajo: inyección $NN -> S$*],
+
+  [$(a, b) inter QQ$, $a, b in QQ$],
+  [$S subset.eq QQ$],
+  [$n |-> a + (b - a) / (n + 1)$],
+
+  [$(a, b) inter QQ$, $a, b in RR$],
+  [$S subset.eq QQ$],
+  [$n |-> q_n$, decreciente, construida por densidad],
+
+  [$(-1, 1) inter QQ$ (`p2: Ej. 1 (d)`)],
+  [$S subset.eq QQ$],
+  [$n |-> 1 / (n + 1)$. En la guía se resolvió con la biyección $x / (1 + abs(x))$ de G-1; el
+  sándwich evita verificar la inversa.],
+
+  [$B subset.eq NN$ infinito],
+  [$B subset.eq NN$],
+  [$B$ es infinito; Proposición 3.14 (o 3.13 directamente).],
+)
+
+=== Cómo inventarlo de cero
+
++ *¿Dónde vive $S$?* Si está adentro de $QQ$, $NN$, $ZZ$ o cualquier numerable, la cota
+  $\#S <= aleph_0$ es la inclusión. No hay nada que construir.
++ *¿Es infinito?* Buscá una sucesión de elementos distintos de $S$. Con un intervalo de
+  extremos racionales, acercate a un extremo con $1 / (n + 1)$; con extremos reales, usá la
+  densidad de $QQ$ una vez por paso.
++ *Cerrá con Cantor--Bernstein* (o con la Proposición 3.13 + la Definición 3.6).
++ *Si piden comparar dos conjuntos*, como en el parcial, no compares uno con otro: probá que
+  los dos valen $aleph_0$ con un sándwich cada uno.
+
+=== Dónde se usa
+
+- Primer parcial 2C 2024, Ej. 2 (`parciales/2024_2c_parcial_1.typ`) --- es el ejercicio que
+  disparó este galerazo: las cadenas
+  $aleph_0 = \#((1, 2) inter QQ) <= \#Phi(B) <= \#QQ <= aleph_0$ y la análoga con $(2, 3)$ son
+  dos sándwiches.
+- `p2: Ej. 1 (d)` --- $\#((-1, 1) inter QQ)$; ver la fila de la tabla.
+- `p1: Ej. 2 (b)` --- la densidad de $QQ$, que da la inyección abajo cuando los extremos no son
+  racionales.
+- `ejemplos/p1: C1-6` --- la construcción por recursión y densidad de racionales
+  estrictamente decrecientes.
