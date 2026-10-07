@@ -127,7 +127,7 @@
   se prueba a mano con una suma de cuadrados no negativa.
 ]
 
-#sublema(titulo: "Lema auxiliar: desigualdad de Cauchy-Schwarz en ℝⁿ (deducción propia)")[
+#sublema(titulo: "Lema auxiliar: desigualdad de Cauchy-Schwarz en ℝⁿ (deducción propia; cf. Rudnev)")[
   Para $a, b in RR^n$, con $A = (sum a_i^2)^(1/2)$ y $B = (sum b_i^2)^(1/2)$,
   $ sum_(i=1)^n a_i b_i <= A B. $
   *Prueba.* Si $A = 0$, todos los $a_i^2$ son sumandos $>= 0$ de una suma nula, luego $a_i = 0$ para
@@ -135,6 +135,15 @@
   cuadrados
   $ 0 <= sum_(i=1)^n (B a_i - A b_i)^2 = B^2 sum a_i^2 - 2 A B sum a_i b_i + A^2 sum b_i^2 = 2 A^2 B^2 - 2 A B sum a_i b_i, $
   y como $A B > 0$, dividiendo por $2 A B$ queda $sum a_i b_i <= A B$. $qed$
+
+  _Referencia._ Es la "Proof 1" del Teorema 1 de M. Rudnev, _Cauchy-Schwartz inequality and
+  geometric incidence problems_, notas de clase, University of Bristol, p. 2
+  (#link("https://people.maths.bris.ac.uk/~maxmr/cs.pdf")[people.maths.bris.ac.uk/\~maxmr/cs.pdf]),
+  escrita allí en forma normalizada: dividiendo la suma de cuadrados por $A^2 B^2$ queda
+  $sum (a_i \/ A - b_i \/ B)^2 >= 0$, que es aplicar $u v <= (u^2 + v^2) \/ 2$ a $u = a_i \/ A$,
+  $v = b_i \/ B$ y sumar. La misma prueba, vía AM--GM, está en Dartmouth College, _Math 35: Real
+  Analysis_ (Winter 2018), Lecture 4, Theorem 10. Rudnev supone $a_i, b_i != 0$; los casos
+  $A = 0$ o $B = 0$ de arriba cubren el resto.
 ]
 
 #resolucion[Propuesta: es métrica; la bola es el disco abierto][
