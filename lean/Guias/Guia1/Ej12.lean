@@ -10,23 +10,17 @@ Enunciado en `apuntes-typst/guias/p1.typ`; resolución en
     `tendsto_atTop_ciInf`.
 (b) Si no está acotada inferiormente, `x_n → -∞`: dado `M > 0`, `-M` no es cota inferior, hay
     `x_(n₀) < -M`, y `x_n ≤ x_(n₀) < -M` para `n ≥ n₀`.
-El hecho "`m ≤ n ⇒ x_n ≤ x_m`" (inducción en `n`) es el sublema `decreciente_le`.
+El hecho "`m ≤ n ⇒ x_n ≤ x_m`" (inducción en `n`) es el sublema `decreciente_le` de
+`Comun.Sucesiones`. De `Comun.Supremos` se importan el Teorema 2 y la Proposición 5; de
+`Comun.Sucesiones`, las Definiciones 7, 8 y 10 y `decreciente_le`. Los dos ítems quedan locales.
 -/
 import Mathlib
-import Comun.Reales
 import Comun.Supremos
 import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej12
 
 open Comun
-
-/-- Sublema: si `(x_n)` es decreciente y `m ≤ n`, entonces `x_n ≤ x_m` (inducción en `n`
-desde `m`). -/
-theorem decreciente_le {x : ℕ → ℝ} (hd : Decreciente x) {m n : ℕ} (h : m ≤ n) : x n ≤ x m := by
-  induction h with
-  | refl => exact le_rfl
-  | step _ ih => exact (hd _).trans ih
 
 /-- **Ej. 12 (a).** Si `(x_n)` es decreciente y acotada inferiormente, existe
 `i = ínf {x_n : n ∈ ℕ}` y `x_n → i`. Dado `ε > 0`, la Proposición 5 da `x_(n₀) < i + ε`, y para

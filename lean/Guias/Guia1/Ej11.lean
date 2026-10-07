@@ -5,11 +5,10 @@ Enunciado en `apuntes-typst/guias/p1.typ`; resolución en
 
 Si `x_n → 0` e `(y_n)` está acotada, entonces `x_n y_n → 0`. Con `|y_n| ≤ M` (`M > 0`,
 Definición 9) y `|x_n| < ε/M` desde `n₀`, queda `|x_n y_n| = |x_n| |y_n| ≤ M |x_n| < ε`.
-Sólo la Definición 7 y la Definición 9: no se usa la Proposición 7 ni `Filter.Tendsto`.
+Sólo la Definición 7 y la Definición 9 (de `Comun.Sucesiones`): no se usa la Proposición 7 ni
+`Filter.Tendsto`.
 -/
 import Mathlib
-import Comun.Reales
-import Comun.Supremos
 import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej11

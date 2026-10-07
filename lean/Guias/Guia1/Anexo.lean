@@ -11,12 +11,10 @@ registra). La prueba sigue el texto: `a ≤ x₀ ≤ b`; `f x₀` es cota superi
 `x < f x ≤ f x₀`), luego `x₀ ≤ f x₀`; y si fuera `x₀ < f x₀`, el punto medio `m = (x₀ + f x₀)/2`
 estaría en `[a, b]` con `f m ≥ f x₀ > m`, es decir `m ∈ S` con `m > x₀ = sup S`, absurdo.
 No se usa la Proposición 3 ni ninguna continuidad; tampoco `sSup`, `IsLUB` ni teoremas de punto
-fijo de Mathlib.
+fijo de Mathlib. Sólo se importan las Definiciones y el Axioma de Completitud de `Comun.Supremos`.
 -/
 import Mathlib
-import Comun.Reales
 import Comun.Supremos
-import Comun.Sucesiones
 
 open Comun
 

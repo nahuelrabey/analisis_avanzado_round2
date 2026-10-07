@@ -6,12 +6,11 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` 
 
 Se prueba desde la Definición 5 (`EsInf`), sin usar la Proposición 5 (`equiv_inf`), que es
 literalmente este ejercicio. Las hipótesis `A ≠ ∅` y "acotado inferiormente" son las del
-enunciado (dan sentido a `ínf A`) pero el argumento no las necesita.
+enunciado (dan sentido a `ínf A`) pero el argumento no las necesita. Sólo se importan las
+Definiciones de `Comun.Supremos`.
 -/
 import Mathlib
-import Comun.Reales
 import Comun.Supremos
-import Comun.Sucesiones
 
 open Comun
 

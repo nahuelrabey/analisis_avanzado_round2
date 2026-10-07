@@ -11,8 +11,19 @@ curso, en `1`); ningún argumento depende de eso. Una subsucesión de `a` es `a 
 Los `Guias/Guia1/EjNN.lean` no usan el resultado que es literalmente su ejercicio
 (`algebra_limites_add` ↔ Ej. 9 (a), `algebra_limites_le` ↔ Ej. 10, `monotona_creciente_converge` ↔
 espejo del Ej. 12 (a)) ni pasan por `Filter.Tendsto`.
+Al final, en "Lemas genéricos", están los sublemas que los ejercicios de la Práctica 1 probaban
+localmente (ninguno es un ejercicio): monotonía término a término (`creciente_le`,
+`decreciente_le`, Ej. 12), la construcción recursiva de índices (`exists_strictMono_of_step`,
+Ej. 14 y 15), el máximo de finitos términos y la negación de "acotado superiormente"
+(`exists_bound_finite`, `exists_gt_of_not_acotadoSup`, Ej. 14), la "subsucesión mala" de una
+sucesión que no converge (`exists_subseq_far_of_not_converge`, Ej. 15, probada desplegando la
+Definición 7, sin `tendsto_of_subseq_tendsto` ni `Filter.extraction_of_*`), subsucesiones dadas
+término a término (`converge_of_subseq`, `strictMono_mul_add`, Ej. 16) y los ejemplos básicos de
+límites (`converge_const`, `divergeMasInf_id`, `divergeMenosInf_neg_id`, `divergeMasInf_const_mul`,
+`divergeMenosInf_const_mul`, Ej. 9 (d)), todos desplegando las Definiciones 7 y 8.
 -/
 import Mathlib
+import Comun.Reales
 import Comun.Supremos
 
 open Filter Topology
@@ -158,5 +169,136 @@ theorem le_of_strictMono {φ : ℕ → ℕ} (hφ : StrictMono φ) (n : ℕ) : n 
 theorem convergencia_subsucesiones {a : ℕ → ℝ} {l : ℝ} (h : Converge a l) {φ : ℕ → ℕ}
     (hφ : StrictMono φ) : Converge (a ∘ φ) l :=
   converge_iff_tendsto.2 ((converge_iff_tendsto.1 h).comp hφ.tendsto_atTop)
+
+/-! ## Lemas genéricos -/
+
+/-- Si `(x_n)` es creciente y `m ≤ n`, entonces `x_m ≤ x_n` (inducción en `n` desde `m`). -/
+theorem creciente_le {x : ℕ → ℝ} (hc : Creciente x) {m n : ℕ} (h : m ≤ n) : x m ≤ x n := by
+  induction h with
+  | refl => exact le_rfl
+  | step _ ih => exact ih.trans (hc _)
+
+/-- Si `(x_n)` es decreciente y `m ≤ n`, entonces `x_n ≤ x_m` (inducción en `n` desde `m`). -/
+theorem decreciente_le {x : ℕ → ℝ} (hd : Decreciente x) {m n : ℕ} (h : m ≤ n) : x n ≤ x m := by
+  induction h with
+  | refl => exact le_rfl
+  | step _ ih => exact (hd _).trans ih
+
+/-- Construcción recursiva de índices: si para cada `k` y cada `N` hay `n > N` con `P k n`,
+entonces hay `φ` estrictamente creciente con `P k (φ k)` para todo `k`. Se elige `φ 0` con
+`P 0 (φ 0)` y, dado `φ k`, se elige `φ (k + 1) > φ k` con `P (k + 1) (φ (k + 1))`. -/
+theorem exists_strictMono_of_step {P : ℕ → ℕ → Prop} (h : ∀ k N, ∃ n > N, P k n) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∀ k, P k (φ k) := by
+  choose f hf using h
+  let φ : ℕ → ℕ := fun k => Nat.rec (f 0 0) (fun k ih => f (k + 1) ih) k
+  have hφ0 : P 0 (φ 0) := (hf 0 0).2
+  have hφs : ∀ k, φ k < φ (k + 1) ∧ P (k + 1) (φ (k + 1)) := fun k =>
+    ⟨(hf (k + 1) (φ k)).1, (hf (k + 1) (φ k)).2⟩
+  refine ⟨φ, strictMono_nat_of_lt_succ fun k => (hφs k).1, fun k => ?_⟩
+  cases k with
+  | zero => exact hφ0
+  | succ k => exact (hφs k).2
+
+/-- `k ↦ c k + r` es estrictamente creciente si `c > 0` (los índices pares `2k`, impares
+`2k + 1`, múltiplos de 3, …). -/
+theorem strictMono_mul_add {c : ℕ} (hc : 0 < c) (r : ℕ) : StrictMono (fun k => c * k + r) :=
+  strictMono_nat_of_lt_succ fun k => by
+    show c * k + r < c * (k + 1) + r
+    rw [Nat.mul_succ]
+    omega
+
+/-- Hecho de base: finitos números tienen un máximo. Por inducción en `N`, hay `c` con
+`x_n ≤ c` para todo `n ≤ N` (`c = máx {x_0, …, x_N}`). -/
+theorem exists_bound_finite (x : ℕ → ℝ) (N : ℕ) : ∃ c : ℝ, ∀ n ≤ N, x n ≤ c := by
+  induction N with
+  | zero => exact ⟨x 0, fun n hn => by rw [Nat.le_zero.1 hn]⟩
+  | succ N ih =>
+    obtain ⟨c, hc⟩ := ih
+    refine ⟨max c (x (N + 1)), fun n hn => ?_⟩
+    rcases Nat.lt_or_ge n (N + 1) with h | h
+    · exact (hc n (Nat.lt_succ_iff.1 h)).trans (le_max_left _ _)
+    · rw [le_antisymm hn h]; exact le_max_right _ _
+
+/-- Si `{x_n}` no está acotado superiormente, para todo `K ∈ ℝ` y todo `N ∈ ℕ` hay `n > N` con
+`x_n > K`. Si no, `máx {x_0, …, x_N, K}` sería cota superior de `{x_n}`. -/
+theorem exists_gt_of_not_acotadoSup {x : ℕ → ℝ} (h : ¬ AcotadoSup (Set.range x)) (K : ℝ)
+    (N : ℕ) : ∃ n > N, K < x n := by
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨c, hc⟩ := exists_bound_finite x N
+  apply h
+  refine ⟨max c K, ?_⟩
+  rintro _ ⟨n, rfl⟩
+  rcases Nat.lt_or_ge N n with hn | hn
+  · exact (hcon n hn).trans (le_max_right _ _)
+  · exact (hc n hn).trans (le_max_left _ _)
+
+/-- Negación de la Definición 7 más la "subsucesión mala": si `x_n` no converge a `ℓ`, hay
+`ε₀ > 0` y una subsucesión `(x_(φ k))` con `|x_(φ k) - ℓ| ≥ ε₀` para todo `k`. -/
+theorem exists_subseq_far_of_not_converge {x : ℕ → ℝ} {l : ℝ} (h : ¬ Converge x l) :
+    ∃ ε₀ > 0, ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∀ k, ε₀ ≤ |x (φ k) - l| := by
+  unfold Converge at h
+  push Not at h
+  obtain ⟨ε₀, hε₀, hbad⟩ := h
+  refine ⟨ε₀, hε₀, ?_⟩
+  have hstep : ∀ (k : ℕ) (N : ℕ), ∃ n > N, ε₀ ≤ |x n - l| := fun _ N => by
+    obtain ⟨n, hn, hfar⟩ := hbad (N + 1)
+    exact ⟨n, by omega, hfar⟩
+  obtain ⟨φ, hφ, hfar⟩ := exists_strictMono_of_step hstep
+  exact ⟨φ, hφ, hfar⟩
+
+/-- Convergencia de subsucesiones, en la forma "si `b k = a (φ k)` con `φ` estrictamente
+creciente y `a → ℓ`, entonces `b → ℓ`" (es `convergencia_subsucesiones` más la identificación
+término a término de `a ∘ φ` con `b`). -/
+theorem converge_of_subseq {a b : ℕ → ℝ} {l : ℝ} (ha : Converge a l) {φ : ℕ → ℕ}
+    (hφ : StrictMono φ) (hb : ∀ k, b k = a (φ k)) : Converge b l := by
+  have h := convergencia_subsucesiones ha hφ
+  have hab : b = a ∘ φ := funext hb
+  rw [hab]
+  exact h
+
+/-- La sucesión constante `c` converge a `c` (`|c - c| = 0 < ε`). -/
+theorem converge_const (c : ℝ) : Converge (fun _ : ℕ => c) c := by
+  intro ε hε
+  exact ⟨0, fun _ _ => by simp [hε]⟩
+
+/-- `x_n = n → +∞` (Teorema 1, en la forma `exists_n0_forall_lt`). -/
+theorem divergeMasInf_id : DivergeMasInf (fun n : ℕ => (n : ℝ)) := by
+  intro M _
+  obtain ⟨n₀, hn₀⟩ := exists_n0_forall_lt M
+  exact ⟨n₀, fun n hn => hn₀ n hn⟩
+
+/-- `y_n = -n → -∞`: `-n < -M`. -/
+theorem divergeMenosInf_neg_id : DivergeMenosInf (fun n : ℕ => -(n : ℝ)) := by
+  intro M _
+  obtain ⟨n₀, hn₀⟩ := exists_n0_forall_lt M
+  refine ⟨n₀, fun n hn => ?_⟩
+  have := hn₀ n hn
+  show -(n : ℝ) < -M
+  linarith
+
+/-- Si `x_n → +∞` y `c > 0`, entonces `c x_n → +∞`: dado `M > 0`, se usa la Definición 8 para
+`x_n` con `M / c > 0`, y `c x_n > c (M / c) = M`. -/
+theorem divergeMasInf_const_mul {x : ℕ → ℝ} {c : ℝ} (hc : 0 < c) (hx : DivergeMasInf x) :
+    DivergeMasInf (fun n => c * x n) := by
+  intro M hM
+  obtain ⟨n₀, hn₀⟩ := hx (M / c) (div_pos hM hc)
+  refine ⟨n₀, fun n hn => ?_⟩
+  have h1 := mul_lt_mul_of_pos_left (hn₀ n hn) hc
+  have h2 : c * (M / c) = M := by field_simp
+  show M < c * x n
+  linarith
+
+/-- Si `x_n → -∞` y `c > 0`, entonces `c x_n → -∞`: dado `M > 0`, se usa la Definición 8 para
+`x_n` con `M / c > 0`, y `c x_n < c (-(M / c)) = -M`. -/
+theorem divergeMenosInf_const_mul {x : ℕ → ℝ} {c : ℝ} (hc : 0 < c) (hx : DivergeMenosInf x) :
+    DivergeMenosInf (fun n => c * x n) := by
+  intro M hM
+  obtain ⟨n₀, hn₀⟩ := hx (M / c) (div_pos hM hc)
+  refine ⟨n₀, fun n hn => ?_⟩
+  have h1 := mul_lt_mul_of_pos_left (hn₀ n hn) hc
+  have h2 : c * (M / c) = M := by field_simp
+  show c * x n < -M
+  linarith [mul_neg c (M / c)]
 
 end Comun

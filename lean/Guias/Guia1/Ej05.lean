@@ -6,17 +6,17 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` 
 
 Hipótesis: `A ⊆ B ⊆ ℝ`, `A ≠ ∅`. Los ítems (a) y (b) se prueban sólo con las Definiciones 1, 2,
 4 y 5 (toda cota de `B` es cota de `A`; el supremo de `B` es cota superior de `A`, luego mayor o
-igual que el supremo de `A`). Para hablar de `sup A` hay que saber que existe: eso lo da el
-Axioma de Completitud (`axioma_completitud`) con `A ≠ ∅` y `A` acotado, y lo mismo el Teorema 2
-(`completitud_inf`) para el ínfimo; los teoremas `ej5a_sup` / `ej5b_inf` toman los dos extremos
+igual que el supremo de `A`): esas pruebas viven en `Comun.Supremos` (`acotadoSup_mono`,
+`esSup_mono`, `acotadoInf_mono`, `esInf_mono`) y acá `ej5a_acotado` / `ej5a_sup` / `ej5b_acotado`
+/ `ej5b_inf` las re-enuncian en una línea. Para hablar de `sup A` hay que saber que existe: eso
+lo da el Axioma de Completitud (`axioma_completitud`) con `A ≠ ∅` y `A` acotado, y lo mismo el
+Teorema 2 (`completitud_inf`) para el ínfimo; `ej5a_sup` / `ej5b_inf` toman los dos extremos
 como hipótesis (`EsSup A s`, `EsSup B t`) y concluyen `s ≤ t`, y `ej5a` / `ej5b` empaquetan la
 existencia. El ítem (c) es el contrarrecíproco de (a) + (b), sólo con cotas.
 No se usan `sSup`, `sInf`, `csSup_le_csSup` ni `BddAbove.mono`.
 -/
 import Mathlib
-import Comun.Reales
 import Comun.Supremos
-import Comun.Sucesiones
 
 open Comun
 
@@ -25,16 +25,16 @@ namespace Guias.Guia1.Ej05
 /-! ## (a) Cotas superiores y supremos -/
 
 /-- **Ej. 5 (a), acotación.** Si `A ⊆ B` y `B` está acotado superiormente, `A` también: toda
-cota superior de `B` lo es de `A` (Definición 1). -/
-theorem ej5a_acotado {A B : Set ℝ} (hAB : A ⊆ B) (hB : AcotadoSup B) : AcotadoSup A := by
-  obtain ⟨c, hc⟩ := hB
-  exact ⟨c, fun a ha => hc a (hAB ha)⟩
+cota superior de `B` lo es de `A` (Definición 1). Es `Comun.acotadoSup_mono`. -/
+theorem ej5a_acotado {A B : Set ℝ} (hAB : A ⊆ B) (hB : AcotadoSup B) : AcotadoSup A :=
+  acotadoSup_mono hAB hB
 
 /-- **Ej. 5 (a), desigualdad.** Si `s = sup A` y `t = sup B`, entonces `s ≤ t`: `t` es cota
-superior de `B`, luego de `A`, y `s` es la menor cota superior de `A` (Definición 2). -/
+superior de `B`, luego de `A`, y `s` es la menor cota superior de `A` (Definición 2). Es
+`Comun.esSup_mono`. -/
 theorem ej5a_sup {A B : Set ℝ} (hAB : A ⊆ B) {s t : ℝ} (hs : EsSup A s) (ht : EsSup B t) :
     s ≤ t :=
-  hs.2 t (fun a ha => ht.1 a (hAB ha))
+  esSup_mono hAB hs ht
 
 /-- **Ej. 5 (a).** Si `A ⊆ B`, `A ≠ ∅` y `B` está acotado superiormente, entonces `A` está
 acotado superiormente y `sup A ≤ sup B` (ambos supremos existen por el Axioma de Completitud). -/
@@ -48,16 +48,16 @@ theorem ej5a {A B : Set ℝ} (hAB : A ⊆ B) (hne : A.Nonempty) (hB : AcotadoSup
 /-! ## (b) Cotas inferiores e ínfimos -/
 
 /-- **Ej. 5 (b), acotación.** Si `A ⊆ B` y `B` está acotado inferiormente, `A` también: toda
-cota inferior de `B` lo es de `A` (Definición 4). -/
-theorem ej5b_acotado {A B : Set ℝ} (hAB : A ⊆ B) (hB : AcotadoInf B) : AcotadoInf A := by
-  obtain ⟨c, hc⟩ := hB
-  exact ⟨c, fun a ha => hc a (hAB ha)⟩
+cota inferior de `B` lo es de `A` (Definición 4). Es `Comun.acotadoInf_mono`. -/
+theorem ej5b_acotado {A B : Set ℝ} (hAB : A ⊆ B) (hB : AcotadoInf B) : AcotadoInf A :=
+  acotadoInf_mono hAB hB
 
 /-- **Ej. 5 (b), desigualdad.** Si `i = ínf A` y `j = ínf B`, entonces `j ≤ i`: `j` es cota
-inferior de `B`, luego de `A`, e `i` es la mayor cota inferior de `A` (Definición 5). -/
+inferior de `B`, luego de `A`, e `i` es la mayor cota inferior de `A` (Definición 5). Es
+`Comun.esInf_mono`. -/
 theorem ej5b_inf {A B : Set ℝ} (hAB : A ⊆ B) {i j : ℝ} (hi : EsInf A i) (hj : EsInf B j) :
     j ≤ i :=
-  hi.2 j (fun a ha => hj.1 a (hAB ha))
+  esInf_mono hAB hi hj
 
 /-- **Ej. 5 (b).** Si `A ⊆ B`, `A ≠ ∅` y `B` está acotado inferiormente, entonces `A` está
 acotado inferiormente e `ínf B ≤ ínf A` (ambos ínfimos existen por el Teorema 2). -/

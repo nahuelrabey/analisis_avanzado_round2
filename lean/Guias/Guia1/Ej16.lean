@@ -10,13 +10,14 @@ curso, `x_(2k)` y `x_(2k-1)` con `k ≥ 1`: los mismos términos, salvo `x_0`, q
 (a) sigue el texto: dado `ε`, se toman `n₁` para los pares y `n₂` para los impares,
 `n₀ = máx (2 n₁, 2 n₂ + 1)`, y todo `n ≥ n₀` es par o impar (`Nat.even_or_odd`).
 (b) usa que `(x_(6k))` es subsucesión de `(x_(2k))` y de `(x_(3k))`, y `(x_(6k+3))` lo es de
-`(x_(2k+1))` y de `(x_(3k))`: por Convergencia de subsucesiones (`convergencia_subsucesiones`)
-y Unicidad del límite (`unicidad_limite`) los tres límites coinciden, y se cierra con (a).
-No se usa `Tendsto`.
+`(x_(2k+1))` y de `(x_(3k))`: por Convergencia de subsucesiones (`convergencia_subsucesiones`,
+en la forma término a término `converge_of_subseq`, con `strictMono_mul_add` para `k ↦ 3k`,
+`2k`, `3k + 1`, `2k + 1`) y Unicidad del límite (`unicidad_limite`) los tres límites coinciden,
+y se cierra con (a). No se usa `Tendsto`.
+De `Comun.Sucesiones` se importan la Definición 7, `unicidad_limite`, `converge_of_subseq` y
+`strictMono_mul_add`; los dos ítems quedan locales.
 -/
 import Mathlib
-import Comun.Reales
-import Comun.Supremos
 import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej16
@@ -50,32 +51,6 @@ theorem ej16a {x : ℕ → ℝ} {l : ℝ} (he : Converge (fun k => x (2 * k)) l)
 
 /-! ## (b) Pares, impares y múltiplos de 3 -/
 
-/-- Convergencia de subsucesiones, en la forma "si `b k = a (φ k)` con `φ` estrictamente
-creciente y `a → ℓ`, entonces `b → ℓ`" (es `convergencia_subsucesiones` más la identificación
-término a término de `a ∘ φ` con `b`). -/
-theorem converge_of_subseq {a b : ℕ → ℝ} {l : ℝ} (ha : Converge a l) {φ : ℕ → ℕ}
-    (hφ : StrictMono φ) (hb : ∀ k, b k = a (φ k)) : Converge b l := by
-  have h := convergencia_subsucesiones ha hφ
-  have hab : b = a ∘ φ := funext hb
-  rw [hab]
-  exact h
-
-/-- `k ↦ 3k` es estrictamente creciente. -/
-theorem strictMono_three_mul : StrictMono (fun k : ℕ => 3 * k) :=
-  strictMono_nat_of_lt_succ fun k => by show 3 * k < 3 * (k + 1); omega
-
-/-- `k ↦ 2k` es estrictamente creciente. -/
-theorem strictMono_two_mul : StrictMono (fun k : ℕ => 2 * k) :=
-  strictMono_nat_of_lt_succ fun k => by show 2 * k < 2 * (k + 1); omega
-
-/-- `k ↦ 3k + 1` es estrictamente creciente. -/
-theorem strictMono_three_mul_add_one : StrictMono (fun k : ℕ => 3 * k + 1) :=
-  strictMono_nat_of_lt_succ fun k => by show 3 * k + 1 < 3 * (k + 1) + 1; omega
-
-/-- `k ↦ 2k + 1` es estrictamente creciente. -/
-theorem strictMono_two_mul_add_one : StrictMono (fun k : ℕ => 2 * k + 1) :=
-  strictMono_nat_of_lt_succ fun k => by show 2 * k + 1 < 2 * (k + 1) + 1; omega
-
 /-- **Ej. 16 (b).** Si `(x (2k))`, `(x (2k+1))` y `(x (3k))` convergen (a `ℓ₁`, `ℓ₂`, `ℓ₃`),
 entonces `(x n)` converge. `(x (6k))` es subsucesión de `(x (2k))` (con `k ↦ 3k`) y de
 `(x (3k))` (con `k ↦ 2k`), así que `ℓ₁ = ℓ₃`; `(x (6k+3))` es subsucesión de `(x (2k+1))` (con
@@ -88,18 +63,18 @@ theorem ej16b {x : ℕ → ℝ} (h₁ : ∃ l₁, Converge (fun k => x (2 * k)) 
   obtain ⟨l₃, ht⟩ := h₃
   -- `x (6k) → ℓ₁` (subsucesión de los pares) y `x (6k) → ℓ₃` (subsucesión de los múltiplos de 3)
   have h6a : Converge (fun k => x (6 * k)) l₁ :=
-    converge_of_subseq he strictMono_three_mul fun k => by
-      show x (6 * k) = x (2 * (3 * k)); congr 1; ring
+    converge_of_subseq he (strictMono_mul_add (by norm_num : 0 < 3) 0) fun k => by
+      show x (6 * k) = x (2 * (3 * k + 0)); congr 1; ring
   have h6b : Converge (fun k => x (6 * k)) l₃ :=
-    converge_of_subseq ht strictMono_two_mul fun k => by
-      show x (6 * k) = x (3 * (2 * k)); congr 1; ring
+    converge_of_subseq ht (strictMono_mul_add (by norm_num : 0 < 2) 0) fun k => by
+      show x (6 * k) = x (3 * (2 * k + 0)); congr 1; ring
   have h13 : l₁ = l₃ := unicidad_limite h6a h6b
   -- `x (6k+3) → ℓ₂` (subsucesión de los impares) y `x (6k+3) → ℓ₃` (de los múltiplos de 3)
   have h63a : Converge (fun k => x (6 * k + 3)) l₂ :=
-    converge_of_subseq ho strictMono_three_mul_add_one fun k => by
+    converge_of_subseq ho (strictMono_mul_add (by norm_num : 0 < 3) 1) fun k => by
       show x (6 * k + 3) = x (2 * (3 * k + 1) + 1); congr 1; ring
   have h63b : Converge (fun k => x (6 * k + 3)) l₃ :=
-    converge_of_subseq ht strictMono_two_mul_add_one fun k => by
+    converge_of_subseq ht (strictMono_mul_add (by norm_num : 0 < 2) 1) fun k => by
       show x (6 * k + 3) = x (3 * (2 * k + 1)); congr 1; ring
   have h23 : l₂ = l₃ := unicidad_limite h63a h63b
   -- pares e impares convergen a `ℓ₃`: ítem (a)
