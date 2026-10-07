@@ -9,11 +9,13 @@ Es el ítem e de la Proposición 6 (Álgebra de límites): no se usa `algebra_li
 `le_of_tendsto_of_tendsto`; sólo la Definición 7.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej10
 
-open Guias.Guia1
+open Comun
 
 /-- **Ej. 10.** Si `x_n → ℓ₁`, `y_n → ℓ₂` y `x_n ≤ y_n` para todo `n`, entonces `ℓ₁ ≤ ℓ₂`.
 Por el absurdo con `ε = (ℓ₁ - ℓ₂)/2` y `n₀ = máx(n₁, n₂)`. -/

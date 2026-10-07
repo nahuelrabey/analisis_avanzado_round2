@@ -10,7 +10,11 @@ por paridad (`sqrt_two_irrational`) y que racional + racional no nulo · irracio
 (d) aplica (b) dos veces y (c). `Irrational z` es sólo la definición `z ∉ Set.range ((↑) : ℚ → ℝ)`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej02
 

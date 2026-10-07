@@ -15,7 +15,9 @@ Los auxiliares (`setEquivBool`, cortes, serie, `ℝ × ℝ ∼ ℝ`) se repiten 
 `Ej14.lean` porque los archivos son independientes.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej15
 

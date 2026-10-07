@@ -1,6 +1,6 @@
 /-
 Práctica 1, Anexo (Ejercicio 7 de la edición 2025: punto fijo de una función creciente), con las
-nociones del curso (`Guias.Guia1.Defs`): `EsSup`, `CotaSup` (Definiciones 1 y 2).
+nociones del curso (`Comun`): `EsSup`, `CotaSup` (Definiciones 1 y 2).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Anexo).
 
 `f : ℝ → ℝ` aplica `[a, b]` en `[a, b]` (`Set.MapsTo f (Set.Icc a b) (Set.Icc a b)`) y es
@@ -14,7 +14,11 @@ No se usa la Proposición 3 ni ninguna continuidad; tampoco `sSup`, `IsLUB` ni t
 fijo de Mathlib.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Anexo
 

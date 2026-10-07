@@ -2,7 +2,7 @@
 Práctica 1, Ejercicio 16: (a) si las subsucesiones de índices pares e impares convergen al
 mismo límite, la sucesión converge; (b) si las de índices pares, impares y múltiplos de 3
 convergen, la sucesión converge. Nociones del curso: `Converge` (Definición 7) y subsucesión
-(`x ∘ φ` con `StrictMono φ`), de `Guias.Guia1.Defs`.
+(`x ∘ φ` con `StrictMono φ`), de `Comun`.
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 16).
 
 Los índices empiezan en `0`: los pares son `x (2 * k)` y los impares `x (2 * k + 1)` (en el
@@ -15,11 +15,13 @@ y Unicidad del límite (`unicidad_limite`) los tres límites coinciden, y se cie
 No se usa `Tendsto`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej16
 
-open Guias.Guia1
+open Comun
 
 /-! ## (a) Pares e impares con el mismo límite -/
 

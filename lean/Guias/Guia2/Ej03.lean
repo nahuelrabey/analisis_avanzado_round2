@@ -11,12 +11,11 @@ Sean `A ⊆ B` con `A` contable y `B \ A` infinito.
 El Ej. 2 se reprueba localmente (`union_contable`): los archivos de la práctica son independientes.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej03
 
-open Guias.Guia2
-
+open Comun
 /-! ## Ej. 2, reprobado localmente (los archivos son independientes entre sí) -/
 
 /-- (Ej. 2, Sublema 1) Si `A` es contable entonces `#A ≤ #ℕ`. -/

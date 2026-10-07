@@ -17,7 +17,9 @@ Enunciado en `apuntes-typst/guias/p2.typ`; resolución en
       Deducción: `#S = ℵ₀ < c = #ℝ` (`cardLt_nat_real`), formalizada como `CardLt S ℝ`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej06
 

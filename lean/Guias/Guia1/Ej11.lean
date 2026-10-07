@@ -8,11 +8,13 @@ Definición 9) y `|x_n| < ε/M` desde `n₀`, queda `|x_n y_n| = |x_n| |y_n| ≤
 Sólo la Definición 7 y la Definición 9: no se usa la Proposición 7 ni `Filter.Tendsto`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej11
 
-open Guias.Guia1
+open Comun
 
 /-- **Ej. 11.** Si `x_n → 0` e `(y_n)` está acotada, entonces `x_n y_n → 0`. Dado `ε > 0`, con
 `|y_n| ≤ M` para todo `n` se toma `n₀` tal que `|x_n| < ε/M` para `n ≥ n₀`. -/

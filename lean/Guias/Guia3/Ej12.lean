@@ -11,11 +11,12 @@ En `ℝⁿ` (modelado como `Fin n → ℝ`, con `n ≥ 1`) se tienen las distanc
 * (b) `B₁(x, r) ⊆ B₂(x, r) ⊆ B∞(x, r) ⊆ B₁(x, n r)` (`bola_inclusiones`).
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
 namespace Guias.Guia3.Ej12
 
-open Guias
+open Comun
 
 variable {n : ℕ} [NeZero n]
 

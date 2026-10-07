@@ -15,7 +15,9 @@ Los archivos de la Práctica son independientes: los auxiliares (`setEquivBool`,
 se repiten en `Ej14.lean` y `Ej15.lean`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej13
 

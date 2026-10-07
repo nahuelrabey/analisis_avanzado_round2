@@ -14,12 +14,11 @@ Los sublemas `ℤ ∼ ℕ` y `ℕ × ℕ ∼ ℕ` NO están en `apuntes.typ`: ac
 `Denumerable`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej01
 
-open Guias.Guia2
-
+open Comun
 /-! ## (a) `ℤ_{≤ -3}` -/
 
 /-- El conjunto `ℤ_{≤ -3} = {z ∈ ℤ : z ≤ -3}`. -/

@@ -10,9 +10,10 @@ Todo pasa por las definiciones por bolas (4.11, 4.22), vía `Metric.mem_closure_
 `Metric.mem_nhds_iff`.
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
-open Metric Set Guias
+open Metric Set Comun
 
 namespace Guias.Guia3.Ej05
 

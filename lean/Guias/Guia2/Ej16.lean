@@ -24,12 +24,11 @@ Convergencia: se usa la Definición 7 de `apuntes.typ` tal cual (`ε`-`n₀`), c
 en `ℝ`; `converge_iff_tendsto` muestra que coincide con `Tendsto` de Mathlib.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej16
 
-open Guias.Guia2
-
+open Comun
 /-! ## Codificaciones explícitas (deducción propia) -/
 
 /-- Sublema: la codificación `(m, n) ↦ 2^m (2n + 1)` de `ℕ × ℕ` en `ℕ`. -/

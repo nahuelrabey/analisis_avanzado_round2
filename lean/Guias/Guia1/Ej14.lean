@@ -1,7 +1,7 @@
 /-
 Práctica 1, Ejercicio 14: toda sucesión no acotada superiormente tiene una subsucesión que
 diverge a `+∞`. Nociones del curso: `AcotadoSup` (Definición 1), subsucesión (`x ∘ φ` con
-`StrictMono φ`) y `DivergeMasInf` (Definición 8), de `Guias.Guia1.Defs`.
+`StrictMono φ`) y `DivergeMasInf` (Definición 8), de `Comun`.
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 14).
 
 La prueba sigue el texto: (1) si `{x_n}` no está acotado superiormente, para todo `K` y todo `N`
@@ -11,11 +11,13 @@ finitos números se obtiene por inducción en `N`); (2) con eso se elige recursi
 para `k ≥ k₀` resulta `x_(n_k) > k ≥ k₀ ≥ M`. No se usa `Tendsto` ni `Filter.extraction_of_*`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej14
 
-open Guias.Guia1
+open Comun
 
 /-- Hecho de base: finitos números tienen un máximo. Por inducción en `N`, hay `c` con
 `x_n ≤ c` para todo `n ≤ N` (`c = máx {x_0, …, x_N}`). -/

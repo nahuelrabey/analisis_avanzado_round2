@@ -5,15 +5,16 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` 
 
 Los objetos son los de Mathlib (`interior`, `closure`, `Metric.ball`, `Metric.closedBall`,
 `IsOpen`, `IsClosed`), pero las demostraciones pasan por las caracterizaciones por bolas
-(`Guias.mem_closure_iff_ball`, `Guias.closure_mono_ball` de `Common.lean`; `Metric.isOpen_iff`,
+(`Comun.mem_closure_iff_ball`, `Comun.closure_mono_ball` de `Common.lean`; `Metric.isOpen_iff`,
 `dist_triangle`) y no por los lemas de Mathlib que son literalmente los ítems. "Abierto" es
 `IsOpen`, que `Metric.isOpen_iff` lee como "todo punto tiene una bola adentro" (`A ⊆ A°`, que con
 la Observación 4.12 es la Definición 4.14).
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
-open Metric Set Guias
+open Metric Set Comun
 
 namespace Guias.Guia3.Ej04
 

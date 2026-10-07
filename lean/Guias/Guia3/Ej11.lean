@@ -20,7 +20,10 @@ Los contraejemplos (b)-(d) se hacen en `ℝ`. Para la conclusión, `no_es_metric
 `𝒳` tiene un solo elemento y `d̂` sí es una métrica, así que esa hipótesis es necesaria.
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
+
+open Comun
 
 namespace Guias.Guia3.Ej11
 
@@ -345,7 +348,7 @@ theorem no_triangular : ¬ (∀ A B C : X, dhatX A C ≤ dhatX A B + dhatX B C) 
 
 /-- **Conclusión del Ejercicio 11.** `d̂` no es una distancia en `𝒳`
 (`EsMetrica` es la Definición 4.1): fallan la separación y la desigualdad triangular. -/
-theorem no_es_metrica : ¬ Guias.EsMetrica dhatX := by
+theorem no_es_metrica : ¬ Comun.EsMetrica dhatX := by
   intro hm
   exact no_triangular hm.triangle
 
@@ -360,7 +363,7 @@ noncomputable def dhatXE (A B : XE E) : ℝ := dhat A.1 B.1
 /-- **Conclusión del Ejercicio 11, para todo `E` con al menos dos puntos.** `d̂` no es una
 distancia en `𝒳(E)`: si `p ≠ q`, los conjuntos `{p}` y `{p, q}` son distintos pero
 `d̂({p}, {p, q}) = 0` (ítem (b), `⇐`), contra la separación (Def. 4.1 (ii)). -/
-theorem no_es_metrica_general [Nontrivial E] : ¬ Guias.EsMetrica (dhatXE (E := E)) := by
+theorem no_es_metrica_general [Nontrivial E] : ¬ Comun.EsMetrica (dhatXE (E := E)) := by
   intro hm
   obtain ⟨p, q, hpq⟩ := exists_pair_ne E
   have hC : ({p, q} : Set E).Nonempty := ⟨p, Set.mem_insert _ _⟩

@@ -1,7 +1,7 @@
 /-
 Práctica 1, Ejercicio 15: si toda subsucesión de `(x_n)` tiene una sub-subsucesión que converge
 a `ℓ`, entonces `x_n → ℓ`. Nociones del curso: `Converge` (Definición 7) y subsucesión (`x ∘ φ`
-con `StrictMono φ`), de `Guias.Guia1.Defs`.
+con `StrictMono φ`), de `Comun`.
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 15).
 
 La prueba sigue el texto: por el absurdo, la Definición 9 (negación de la convergencia) da
@@ -12,11 +12,13 @@ Por hipótesis tiene una sub-subsucesión que converge a `ℓ`, pero sus términ
 `tendsto_of_subseq_tendsto` ni `Tendsto`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej15
 
-open Guias.Guia1
+open Comun
 
 /-- Construcción recursiva de índices (la misma que en `Ej14.lean`): si para cada `k` y cada
 `N` hay `n > N` con `P k n`, hay `φ` estrictamente creciente con `P k (φ k)` para todo `k`. -/

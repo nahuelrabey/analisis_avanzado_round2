@@ -13,11 +13,13 @@ Enunciado en `apuntes-typst/guias/p1.typ`; resolución en
 El hecho "`m ≤ n ⇒ x_n ≤ x_m`" (inducción en `n`) es el sublema `decreciente_le`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej12
 
-open Guias.Guia1
+open Comun
 
 /-- Sublema: si `(x_n)` es decreciente y `m ≤ n`, entonces `x_n ≤ x_m` (inducción en `n`
 desde `m`). -/

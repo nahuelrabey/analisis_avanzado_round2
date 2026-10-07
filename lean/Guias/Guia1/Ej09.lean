@@ -16,11 +16,13 @@ Suma de límites `x_n + y_n → ℓ₁ + ℓ₂` en cuatro casos, todo desplegan
       cambia nada.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej09
 
-open Guias.Guia1
+open Comun
 
 /-! ## (a) `ℓ₁, ℓ₂ ∈ ℝ` -/
 

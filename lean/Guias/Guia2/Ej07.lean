@@ -12,7 +12,9 @@ Sea `c = #ℝ`.
       `ℕ × [0,1)` en `ℝ` (la parte entera de `n + t` es `n`). Se concluye con CSB.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej07
 

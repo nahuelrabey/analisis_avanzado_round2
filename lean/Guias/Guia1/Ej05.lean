@@ -1,6 +1,6 @@
 /-
 Práctica 1, Ejercicio 5 (monotonía de cotas, supremo e ínfimo respecto de la inclusión), con las
-nociones del curso (`Guias.Guia1.Defs`): `CotaSup`, `CotaInf`, `AcotadoSup`, `AcotadoInf`,
+nociones del curso (`Comun`): `CotaSup`, `CotaInf`, `AcotadoSup`, `AcotadoInf`,
 `Acotado` (Definiciones 1 y 4), `EsSup`, `EsInf` (Definiciones 2 y 5).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 5).
 
@@ -14,7 +14,11 @@ existencia. El ítem (c) es el contrarrecíproco de (a) + (b), sólo con cotas.
 No se usan `sSup`, `sInf`, `csSup_le_csSup` ni `BddAbove.mono`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej05
 

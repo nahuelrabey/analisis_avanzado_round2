@@ -8,16 +8,17 @@ Sea `E` un espacio métrico y `A ⊆ E`.
 
 La frontera es la de la Definición 4.38 de `apuntes.typ` (`fronteraCurso`), definida por bolas.
 `interior` y `closure` son los de Mathlib, pero se manejan siempre a través de su
-caracterización por bolas (Definiciones 4.11 y 4.22: `Guias.mem_interior_iff_ball` y
-`Guias.mem_closure_iff_ball` de `Common.lean`). Los Ejercicios 5 (a) y 5 (b) del Typst
+caracterización por bolas (Definiciones 4.11 y 4.22: `Comun.mem_interior_iff_ball` y
+`Comun.mem_closure_iff_ball` de `Common.lean`). Los Ejercicios 5 (a) y 5 (b) del Typst
 (`E ∖ A° = cl (E ∖ A)`, `E ∖ cl A = (E ∖ A)°`) se reprueban acá como `compl_interior_eq` y
 `compl_closure_eq`, y con ellos "`A°` es abierto" y "`cl A` es cerrado" (Paso 3 del texto), sin
 usar `isOpen_interior`/`isClosed_closure` de Mathlib.
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
-open Guias
+open Comun
 
 namespace Guias.Guia3.Ej09
 

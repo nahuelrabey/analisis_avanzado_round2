@@ -13,12 +13,11 @@ Convenciones: en (a) y (b) `A, B : Set X` son subconjuntos de un conjunto ambien
 `Set A`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej09
 
-open Guias.Guia2
-
+open Comun
 variable {X : Type*}
 
 /-! ## (a) y (b): igualdad e inclusión de conjuntos -/

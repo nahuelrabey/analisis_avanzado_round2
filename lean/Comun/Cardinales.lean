@@ -1,6 +1,10 @@
 /-
-Definiciones del curso sobre cardinales (`apuntes.typ`, sección 3) para la Práctica 2, y los
-resultados de `apuntes.typ` que la Práctica toma como verdaderos, tomados de Mathlib.
+Librería común `Comun`: definiciones del curso y resultados de `apuntes.typ` compartidos por las
+guías (`Guias/`), los parciales (`Parciales/`) y los ejemplos (`Ejemplos/`). Ver
+`apuntes-agente/lean-lemas-compartidos-y-organizacion.md` para el diseño.
+
+`Comun.Cardinales`: definiciones del curso sobre cardinales (`apuntes.typ`, sección 3) y los
+resultados de `apuntes.typ` que la Práctica 2 toma como verdaderos, tomados de Mathlib.
 
 Convenciones:
 - Un "conjunto" es un tipo `A : Type*`; un subconjunto `S : Set X` se usa como el subtipo `↥S`.
@@ -18,7 +22,7 @@ Convenciones:
 -/
 import Mathlib
 
-namespace Guias.Guia2
+namespace Comun
 
 /-! ## Definiciones (3.1, 3.5, 3.6, 3.8) -/
 
@@ -220,4 +224,4 @@ theorem cardLt_nat_real : CardLt ℕ ℝ :=
 
 end Apuntes
 
-end Guias.Guia2
+end Comun

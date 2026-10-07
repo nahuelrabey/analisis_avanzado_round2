@@ -10,12 +10,11 @@ Si `A` y `B` son contables, `A ∪ B` es contable. El argumento es una cadena de
 No se usa `Set.Countable.union` ni ninguna instancia `Countable`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej02
 
-open Guias.Guia2
-
+open Comun
 /-! ## Sublemas -/
 
 /-- Sublema 1: si `A` es contable entonces `#A ≤ #ℕ`. Finito: `A ∼ {0, …, n-1} ⊆ ℕ`;

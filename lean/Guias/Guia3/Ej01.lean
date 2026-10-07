@@ -20,11 +20,12 @@ vía `IsCompact.exists_isMaxOn`, el teorema de los valores extremos en un compac
 mismo teorema que cita la guía al escribir "máx").
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
 namespace Guias.Guia3.Ej01
 
-open Guias
+open Comun
 
 /-! ## (a) `ℝ` con `d(x, y) = |x - y|` -/
 

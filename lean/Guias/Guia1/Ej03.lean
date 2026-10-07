@@ -9,7 +9,11 @@ literalmente este ejercicio. Las hipótesis `A ≠ ∅` y "acotado inferiormente
 enunciado (dan sentido a `ínf A`) pero el argumento no las necesita.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej03
 

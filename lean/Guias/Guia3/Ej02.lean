@@ -8,11 +8,12 @@ Se decide cuáles de las funciones `d : ℝ × ℝ → ℝ` son métricas en `�
   (c) `|x² - y²|`     NO es métrica: falla la separación (`1` y `-1`).
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
 namespace Guias.Guia3.Ej02
 
-open Guias
+open Comun
 
 /-- (a) `d(x, y) = (x - y)²`. -/
 def dA (x y : ℝ) : ℝ := (x - y) ^ 2

@@ -8,7 +8,11 @@ Sólo se usa el orden de `ℝ` (contrarrecíproco con `ε = x - y`) y el hecho d
 (`unicidad_limite`), cuya demostración en `apuntes.typ` pasa por este ejercicio.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej01
 

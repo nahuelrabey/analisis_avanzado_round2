@@ -9,9 +9,10 @@ Las demostraciones pasan por las definiciones por bolas (4.11, 4.22), vía `Metr
 y `Metric.mem_nhds_iff`; los cálculos en `ℝ` también se hacen con bolas (no con `interior_Icc`).
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
 
-open Metric Set Guias
+open Metric Set Comun
 
 namespace Guias.Guia3.Ej06
 

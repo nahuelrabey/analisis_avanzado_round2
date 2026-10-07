@@ -17,12 +17,11 @@ Convenciones: `{0,1}` es `Bool`, `{0,1}^ℕ` es `ℕ → Bool`, `𝒫(ℕ)` es `
 empiezan en `0`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej10
 
-open Guias.Guia2
-
+open Comun
 /-! ## Inyección `[0,1) → {0,1}^ℕ`: los dígitos binarios -/
 
 /-- El dígito binario `d_n(x) = ⌊2^(n+1) x⌋ mod 2`, como booleano (`true` si vale `1`). -/

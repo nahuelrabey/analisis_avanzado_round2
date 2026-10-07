@@ -13,7 +13,9 @@ Enunciado en `apuntes-typst/guias/p2.typ`; resolución en
 serie) se repiten en `Ej13.lean` y `Ej15.lean` porque los archivos son independientes.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej14
 

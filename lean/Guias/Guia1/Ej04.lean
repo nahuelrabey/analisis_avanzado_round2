@@ -1,6 +1,6 @@
 /-
 Práctica 1, Ejercicio 4 (hallar supremo, ínfimo, máximo y mínimo), con las nociones del curso
-(`Guias.Guia1.Defs`): `EsSup`, `EsInf`, `EsMax`, `EsMin` (Definiciones 2, 5, 3 y 6),
+(`Comun`): `EsSup`, `EsInf`, `EsMax`, `EsMin` (Definiciones 2, 5, 3 y 6),
 `CotaSup`, `CotaInf`, `AcotadoSup` (Definiciones 1 y 4).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 4).
 
@@ -14,7 +14,11 @@ Definición 2 / 5; cuando no existe, se exhibe el elemento del conjunto que lo c
 No se usan `sSup`, `sInf`, `IsLUB`, `IsGLB` ni `Nat.lt_two_pow_self`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej04
 

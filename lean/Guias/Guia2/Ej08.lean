@@ -10,12 +10,11 @@ Resolución "a mano" en `apuntes-typst/guias-agente/_partes2/ej08.typ`.
 Convenciones: `𝒫(A)` es `Set A`, `{0,1}` es `Bool`, `{1, …, n}` es `Fin n`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej08
 
-open Guias.Guia2
-
+open Comun
 /-! ## (a) La función característica -/
 
 /-- La función característica `χ_S : A → {0,1}` de un subconjunto `S ⊆ A`. -/

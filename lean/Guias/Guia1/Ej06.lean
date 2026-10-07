@@ -1,5 +1,5 @@
 /-
-Práctica 1, Ejercicio 6 (`-A` y `c A`), con las nociones del curso (`Guias.Guia1.Defs`):
+Práctica 1, Ejercicio 6 (`-A` y `c A`), con las nociones del curso (`Comun`):
 `CotaSup`, `CotaInf`, `AcotadoSup`, `AcotadoInf` (Definiciones 1 y 4), `EsSup`, `EsInf`
 (Definiciones 2 y 5).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 6).
@@ -14,7 +14,11 @@ superior) de la imagen, y que toda cota inferior `t` de `-A` da la cota superior
 ni `Set.neg`, `IsLUB.neg`, `csSup_neg` o `Real.sSup_smul`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
+
+open Comun
 
 namespace Guias.Guia1.Ej06
 

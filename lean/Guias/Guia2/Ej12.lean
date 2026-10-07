@@ -10,7 +10,9 @@ Convención: acá `ℕ` empieza en `0`. Para (b) se usa `A_k = {n : n + 1 = 2^k 
 que es el `A_k = {2^k (2m+1)}` del texto corrido en una unidad.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej12
 

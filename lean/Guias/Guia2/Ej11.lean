@@ -12,12 +12,11 @@ Si `e : ℕ → A` es biyectiva, `𝒫_f(A) = {B ⊆ A : B finito}` es numerable
 Convenciones: `𝒫_f(A)` es el subtipo `{B : Set A // B.Finite}`; `ℕ` empieza en `0`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej11
 
-open Guias.Guia2
-
+open Comun
 /-! ## Unicidad del desarrollo binario de un natural -/
 
 /-- El código binario de un conjunto finito de naturales: `Σ_{k ∈ S} 2^k`. -/

@@ -14,11 +14,13 @@ No se usa `Tendsto` ni ningún lema de límites de Mathlib. Los índices empieza
 `0 < 1/n₀` fuerza `n₀ ≥ 1`, así que los `n ≥ n₀` que se miran son los del curso.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej07
 
-open Guias.Guia1
+open Comun
 
 /-! ## (a) `(3 - 2n)/(n + 1) → -2` -/
 

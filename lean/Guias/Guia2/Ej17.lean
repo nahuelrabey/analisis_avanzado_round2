@@ -25,12 +25,11 @@ distintos. La continuidad es `ContinuousAt` de Mathlib, traducida a `ε`-`δ` co
 `Metric.continuousAt_iff` (la definición estándar, que no está en `apuntes.typ`).
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
 
 namespace Guias.Guia2.Ej17
 
-open Guias.Guia2
-
+open Comun
 /-! ## Preliminares -/
 
 /-- Un subconjunto `A ⊆ ℝ` es un intervalo si es convexo: contiene todo punto entre dos de sus
