@@ -12,32 +12,18 @@ depende de esto.
 La convergencia y el carácter de Cauchy se usan en su forma `ε`-`N` (Definiciones 4.42 y 4.51
 de `apuntes.typ`) a través de `Metric.tendsto_atTop` y `Metric.cauchySeq_iff`. No se usa
 `Filter.Tendsto.dist`, que es el enunciado (a).
+
+Importa `Comun.Metricas` por el sublema genérico `abs_dist_sub_dist_le` (que vivía acá)
+(va a `Comun.Sucesiones` en el paso 3 del plan).
 -/
 import Mathlib
+import Comun.Metricas
 
-open Filter Topology
+open Filter Topology Comun
 
 namespace Guias.Guia3.Ej13
 
 variable {E : Type*} [MetricSpace E]
-
-/-- Desigualdad clave: `|d(xₙ, yₙ) − d(x, y)| ≤ d(xₙ, x) + d(yₙ, y)`.
-(Se deduce de la desigualdad triangular aplicada dos veces, en cada sentido.) -/
-theorem abs_dist_sub_dist_le (a b a' b' : E) :
-    |dist a b - dist a' b'| ≤ dist a a' + dist b b' := by
-  rw [abs_le]
-  constructor
-  · -- `d(a',b') ≤ d(a',a) + d(a,b) + d(b,b')`
-    have h1 := dist_triangle a' a b
-    have h2 := dist_triangle a' b b'
-    have h3 := dist_comm a a'
-    have h4 := dist_comm b b'
-    linarith
-  · -- `d(a,b) ≤ d(a,a') + d(a',b') + d(b',b)`
-    have h1 := dist_triangle a a' b
-    have h2 := dist_triangle a' b' b
-    have h3 := dist_comm b b'
-    linarith
 
 /-- **Ejercicio 13 (a).** Si `xₙ → x` e `yₙ → y`, entonces `d(xₙ, yₙ) → d(x, y)`. -/
 theorem ej13a (x y : ℕ → E) (a b : E)

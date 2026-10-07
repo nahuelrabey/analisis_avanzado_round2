@@ -25,6 +25,7 @@ límites (`converge_const`, `divergeMasInf_id`, `divergeMenosInf_neg_id`, `diver
 import Mathlib
 import Comun.Reales
 import Comun.Supremos
+import Comun.Metricas
 
 open Filter Topology
 
@@ -51,6 +52,10 @@ def Creciente (a : ℕ → ℝ) : Prop := ∀ n, a n ≤ a (n + 1)
 def Decreciente (a : ℕ → ℝ) : Prop := ∀ n, a (n + 1) ≤ a n
 
 /-! ### Puentes a Mathlib -/
+
+/-- `Converge` es la Definición 4.42 (`ConvergeMet`, `Comun.Metricas`) para la distancia usual de `ℝ`. -/
+theorem converge_iff_convergeMet {a : ℕ → ℝ} {l : ℝ} :
+    Converge a l ↔ ConvergeMet (fun x y : ℝ => |x - y|) a l := Iff.rfl
 
 theorem converge_iff_tendsto {a : ℕ → ℝ} {l : ℝ} : Converge a l ↔ Tendsto a atTop (𝓝 l) := by
   rw [Metric.tendsto_atTop]

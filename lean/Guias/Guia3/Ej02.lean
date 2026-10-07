@@ -6,56 +6,51 @@ Se decide cuáles de las funciones `d : ℝ × ℝ → ℝ` son métricas en `�
   (a) `(x - y)²`      NO es métrica: falla la desigualdad triangular (`3, 2, 0`).
   (b) `√|x - y|`      SÍ es métrica.
   (c) `|x² - y²|`     NO es métrica: falla la separación (`1` y `-1`).
+
+Qué importa de `Comun`: `EsMetrica` (`Comun.Metricas`) y el paso clave `√(a + b) ≤ √a + √b`
+(`Comun.sqrt_add_le`, en `Comun.Topologia.Real`). Las tres funciones se llaman `dA2`, `dB`, `dC2`
+(no `dA`/`dC`, que son las del Ej. 1 y de `C([0,1])`).
 -/
 import Mathlib
 import Comun.Metricas
-import Comun.Topologia
+import Comun.Topologia.Real
 
 namespace Guias.Guia3.Ej02
 
 open Comun
 
 /-- (a) `d(x, y) = (x - y)²`. -/
-def dA (x y : ℝ) : ℝ := (x - y) ^ 2
+def dA2 (x y : ℝ) : ℝ := (x - y) ^ 2
 
 /-- (b) `d(x, y) = √|x - y|`. -/
 noncomputable def dB (x y : ℝ) : ℝ := Real.sqrt |x - y|
 
 /-- (c) `d(x, y) = |x² - y²|`. -/
-def dC (x y : ℝ) : ℝ := |x ^ 2 - y ^ 2|
+def dC2 (x y : ℝ) : ℝ := |x ^ 2 - y ^ 2|
 
 /-! ## (a) `(x - y)²` no es métrica -/
 
 /-- Contraejemplo a la desigualdad triangular: `d(3, 0) = 9 > 5 = d(3, 2) + d(2, 0)`. -/
-theorem dA_contraejemplo : ¬ (dA 3 0 ≤ dA 3 2 + dA 2 0) := by
-  unfold dA
+theorem dA2_contraejemplo : ¬ (dA2 3 0 ≤ dA2 3 2 + dA2 2 0) := by
+  unfold dA2
   norm_num
 
 /-- **Ej. 2 (a).** `(x - y)²` no es una métrica en `ℝ`. -/
-theorem ej2a : ¬ EsMetrica dA := fun h => dA_contraejemplo (h.triangle 3 2 0)
+theorem ej2a : ¬ EsMetrica dA2 := fun h => dA2_contraejemplo (h.triangle 3 2 0)
 
 /-! ## (c) `|x² - y²|` no es métrica -/
 
 /-- Contraejemplo a la separación: `d(1, -1) = 0` pero `1 ≠ -1`. -/
-theorem dC_contraejemplo : dC 1 (-1) = 0 ∧ (1 : ℝ) ≠ -1 := by
+theorem dC2_contraejemplo : dC2 1 (-1) = 0 ∧ (1 : ℝ) ≠ -1 := by
   refine ⟨?_, by norm_num⟩
-  unfold dC
+  unfold dC2
   norm_num
 
 /-- **Ej. 2 (c).** `|x² - y²|` no es una métrica en `ℝ`. -/
-theorem ej2c : ¬ EsMetrica dC := fun h =>
-  dC_contraejemplo.2 ((h.eq_zero_iff 1 (-1)).1 dC_contraejemplo.1)
+theorem ej2c : ¬ EsMetrica dC2 := fun h =>
+  dC2_contraejemplo.2 ((h.eq_zero_iff 1 (-1)).1 dC2_contraejemplo.1)
 
 /-! ## (b) `√|x - y|` es métrica -/
-
-/-- Paso clave: `√(a + b) ≤ √a + √b` para `a, b ≥ 0` (se eleva al cuadrado). -/
-theorem sqrt_add_le (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) :
-    Real.sqrt (a + b) ≤ Real.sqrt a + Real.sqrt b := by
-  rw [Real.sqrt_le_iff]
-  refine ⟨by positivity, ?_⟩
-  have h1 := Real.sq_sqrt ha
-  have h2 := Real.sq_sqrt hb
-  nlinarith [mul_nonneg (Real.sqrt_nonneg a) (Real.sqrt_nonneg b)]
 
 /-- **Ej. 2 (b).** `√|x - y|` es una métrica en `ℝ`. -/
 theorem ej2b : EsMetrica dB where
