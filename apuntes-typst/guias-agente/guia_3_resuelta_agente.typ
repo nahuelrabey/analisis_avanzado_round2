@@ -609,23 +609,32 @@
 #sublema(titulo: [Lema 3 (puntos de $(a, b)$ cerca de $x in [a, b]$)])[
   Sean $a < b$, $x in [a, b]$ y $r > 0$. Existe $y in (a, b)$ con $y != x$ y $abs(y - x) < r$. Más aún, se lo puede elegir racional.
 
-  _Prueba._
-  - _El paso._ Sea
-    $ t = (op("mín")\{r, b - a\}) / 4 > 0. $
-  - _Caso $x <= (a + b)\/2$._ Tomamos $y = x + t$. Entonces
-    $ y > x >= a quad "y" quad y <= (a + b) / 2 + (b - a) / 4 < b. $
-  - _Caso $x > (a + b)\/2$._ Tomamos $y = x - t$. Entonces
-    $ y < x <= b quad "y" quad y > (a + b) / 2 - (b - a) / 4 > a. $
-  - _Conclusión._ En ambos casos $y in (a, b)$, $y != x$ y
-    $ abs(y - x) = t < r. $
-  - _El racional._ Por Densidad de $QQ$ hay $q in QQ$ estrictamente entre $x$ e $y$. Entonces
-    $q != x$ y
-    $ abs(q - x) < abs(y - x) < r. $
-    Además, como $x in [a, b]$ e $y in (a, b)$, $q in (a, b)$.
+  En resumen, el Lema 3 dice que todo punto de $[a, b]$, incluidos los extremos, se puede
+  aproximar tanto como se quiera por puntos de $(a, b)$ distintos de él, y que esos puntos se
+  pueden elegir racionales.
 
-  // Un panel por caso: a = -3, b = 3, (a+b)/2 = 0, r = 3.6, t = r/4 = 0.9.
+  _Cómo elegir $t$._ Queremos que, para cualquier $x in [a, b]$, haya un $y in (a, b)$ tan cerca
+  de $x$ como queramos: dado cualquier $r > 0$, con $abs(y - x) < r$. Para eso construimos primero
+  una distancia $t$, lo bastante chica para que $t < r$ y para no salirnos de $(a, b)$, y a partir
+  de ella elegimos $y$, a distancia $t$ de $x$ y hacia el centro del intervalo. Tomemos el caso $x <= (a + b)\/2$ e $y = x + t$ (el otro es simétrico). El número $t$ tiene que cumplir:
+  - _$t > 0$_, para que $y != x$.
+  - _$t < r$_, para que $abs(y - x) = t < r$.
+  - _$y < b$_, para que $y in (a, b)$ (la otra cota, $y > x >= a$, sale gratis). Como
+    $x <= (a + b)\/2$,
+    $ y = x + t <= (a + b) / 2 + t, $
+    y alcanza con $t < (b - a)\/2$.
+
+  Las dos últimas piden que $t$ sea chico respecto de dos cantidades distintas, $r$ y $b - a$, y no
+  sabemos cuál es menor. Por eso se toma el mínimo y se lo divide por algo *estrictamente* mayor
+  que $2$. Dividir por $2$ no alcanza: si $b - a <= r$ y $x = (a + b)\/2$, quedaría
+  $ y = (a + b) / 2 + (b - a) / 2 = b in.not (a, b). $
+  Con $3$ ya funciona; el $4$ es margen de sobra y deja la cuenta redonda. Una elección equivalente,
+  con un término por condición, es $t = op("mín")\{r\/2, (b - a)\/4\}$.
+
+  // Esquemas de la prueba. Un panel por caso: a = -3, b = 3, (a+b)/2 = 0, r = 3.6, t = r/4 = 0.9.
   // `s` es el sentido en que se mueve y: +1 (hacia la derecha) o -1 (hacia la izquierda).
-  #let l3-panel(x, s, titulo) = cetz.canvas(length: 1cm, {
+  // Gris: (a, b); azul: B(x, r); naranja: y; verde (sólo con `con-q`): q.
+  #let l3-panel(x, s, con-q: false) = cetz.canvas(length: 1cm, {
     import cetz.draw: *
     let azul = rgb("#2563eb")
     let naranja = rgb("#ea580c")
@@ -635,7 +644,6 @@
     let t = 0.9
     let y = x + s * t
     let q = x + s * t / 2
-    content((-5.9, 1.25), anchor: "west", text(size: 9pt, style: "italic")[#titulo])
     line((-6, 0), (6.2, 0), mark: (end: ">"), stroke: 0.6pt + luma(90))
     // (a, b) en gris, con los extremos abiertos
     line((-3, 0), (3, 0), stroke: 7pt + luma(215))
@@ -650,14 +658,14 @@
     // x, y, q
     circle((x, 0), radius: 0.06, fill: black)
     circle((y, 0), radius: 0.08, fill: naranja, stroke: none)
-    circle((q, 0), radius: 0.07, fill: verde, stroke: none)
+    if con-q { circle((q, 0), radius: 0.07, fill: verde, stroke: none) }
     // etiquetas
     et(-3, -0.45, $a$)
     et(3, -0.45, $b$)
     et(0, -0.45, $(a + b)\/2$)
     et(x, -0.45, $x$)
     et(y, -0.45, $y$, color: naranja)
-    et(q, 0.42, $q$, color: verde)
+    if con-q { et(q, 0.42, $q$, color: verde) }
     et(x - r, 0.42, $x - r$, color: azul)
     et(x + r, 0.42, $x + r$, color: azul)
     // y está a distancia t de x
@@ -665,18 +673,27 @@
     et((x + y) / 2, -1.1, $t$)
   })
 
-  #block(breakable: false, width: 100%)[#align(center)[
-    #l3-panel(-2, 1, [Caso $x <= (a + b)\/2$: $y = x + t$])
-    #v(4pt)
-    #l3-panel(2, -1, [Caso $x > (a + b)\/2$: $y = x - t$])
-    #v(2pt)
-    #text(size: 9pt)[
-      #text(fill: luma(110))[gris: $(a, b)$] #h(1em)
-      #text(fill: rgb("#2563eb"))[azul: $B(x, r)$] #h(1em)
-      #text(fill: rgb("#ea580c"))[naranja: $y$] #h(1em)
-      #text(fill: rgb("#16a34a"))[verde: $q in QQ$, entre $x$ e $y$]
-    ]
-  ]]
+  _Prueba._
+  - _El paso._ Sea
+    $ t = (op("mín")\{r, b - a\}) / 4 > 0. $
+  - _Caso $x <= (a + b)\/2$._ Tomamos $y = x + t$. Entonces
+    $ y > x >= a quad "y" quad y <= (a + b) / 2 + (b - a) / 4 < b. $
+
+    #block(breakable: false, width: 100%)[#align(center)[#l3-panel(-2, 1)]]
+
+  - _Caso $x > (a + b)\/2$._ Tomamos $y = x - t$. Entonces
+    $ y < x <= b quad "y" quad y > (a + b) / 2 - (b - a) / 4 > a. $
+
+    #block(breakable: false, width: 100%)[#align(center)[#l3-panel(2, -1)]]
+
+  - _Conclusión._ En ambos casos $y in (a, b)$, $y != x$ y
+    $ abs(y - x) = t < r. $
+  - _El racional._ Por Densidad de $QQ$ hay $q in QQ$ estrictamente entre $x$ e $y$. Entonces
+    $q != x$ y
+    $ abs(q - x) < abs(y - x) < r. $
+    Además, como $x in [a, b]$ e $y in (a, b)$, $q in (a, b)$.
+
+    #block(breakable: false, width: 100%)[#align(center)[#l3-panel(-2, 1, con-q: true)]]
 ]
 
 #sublema(titulo: [Lema 4 ($\{1\/n\} union \{0\}$ es cerrado)])[
