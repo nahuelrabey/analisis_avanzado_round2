@@ -4,7 +4,14 @@ guías (`Guias/`), los parciales (`Parciales/`) y los ejemplos (`Ejemplos/`). Ve
 `apuntes-agente/lean-lemas-compartidos-y-organizacion.md` para el diseño.
 
 `Comun.Cardinales`: definiciones del curso sobre cardinales (`apuntes.typ`, sección 3) y los
-resultados de `apuntes.typ` que la Práctica 2 toma como verdaderos, tomados de Mathlib.
+resultados de `apuntes.typ` que la Práctica 2 toma como verdaderos, tomados de Mathlib. Al final
+hay una sección de corolarios de una línea que varios ejercicios de la Práctica 2 usan
+(`contable_iff_cardLe_nat`, `infinito_of_cardLe_nat`, `numerable_of_infinito_subset_nat`,
+`finito_pow`, `cardLt_fin_one_iff`, …) y una de puentes con `Cardinal.mk`
+(`coordinables_iff_mk_eq`, `cardLe_iff_mk_le`, `numerable_iff_mk_eq_aleph0`,
+`cardC_iff_mk_eq_continuum`) para los parciales. Las construcciones explícitas de la Práctica 2
+(`ℤ ∼ ℕ`, `ℕ × ℕ ∼ ℕ`, uniones contables, cortes, series, `ℝ × ℝ ∼ ℝ`, …) están en los
+submódulos `Comun.Cardinales.Numerables` y `Comun.Cardinales.Continuo`.
 
 Convenciones:
 - Un "conjunto" es un tipo `A : Type*`; un subconjunto `S : Set X` se usa como el subtipo `↥S`.
@@ -223,5 +230,129 @@ theorem cardLt_nat_real : CardLt ℕ ℝ :=
   ⟨⟨⟨((↑) : ℕ → ℝ), Nat.cast_injective⟩⟩, fun h => no_numerable_real h⟩
 
 end Apuntes
+
+/-! ## Corolarios
+
+Consecuencias de una línea de las definiciones y de los resultados de arriba, que la Práctica 2
+usa en varios ejercicios (antes se reprobaban en cada `EjNN.lean`). -/
+
+section Corolarios
+
+variable {A B : Type*}
+
+/-- (Ej. 2, Sublema 1) Si `A` es contable entonces `#A ≤ #ℕ`. Finito: `A ∼ {0, …, n-1} ⊆ ℕ`;
+numerable: la biyección `ℕ → A` al revés. -/
+theorem cardLe_nat_of_contable (h : Contable A) : CardLe A ℕ := by
+  rcases h with ⟨n, ⟨e⟩⟩ | h
+  · exact ⟨e.toEmbedding.trans Fin.valEmbedding⟩
+  · obtain ⟨e⟩ := h
+    exact ⟨e.symm.toEmbedding⟩
+
+/-- Contable si y sólo si `#A ≤ ℵ₀` (la vuelta es la Proposición 3.13 con `ℕ`). -/
+theorem contable_iff_cardLe_nat : Contable A ↔ CardLe A ℕ :=
+  ⟨cardLe_nat_of_contable, contable_of_cardLe_numerable numerable_nat⟩
+
+/-- Un conjunto que contiene una copia de un infinito es infinito (palomar). -/
+theorem infinito_of_cardLe (h : CardLe A B) (hA : Infinito A) : Infinito B := by
+  obtain ⟨f⟩ := h
+  have := infinito_iff_infinite.1 hA
+  exact infinito_iff_infinite.2 (Infinite.of_injective f f.injective)
+
+/-- Recíproca de la Proposición 3.14: si `ℵ₀ ≤ #A` entonces `A` es infinito. -/
+theorem infinito_of_cardLe_nat (h : CardLe ℕ A) : Infinito A :=
+  infinito_of_cardLe h (infinito_iff_infinite.2 inferInstance)
+
+/-- Todo subconjunto de `ℕ` es contable (Proposición 3.13 con la inclusión). -/
+theorem contable_subtype_nat (S : Set ℕ) : Contable S :=
+  contable_of_cardLe_numerable numerable_nat ⟨Function.Embedding.subtype _⟩
+
+/-- Un subconjunto infinito de `ℕ` es numerable (Proposiciones 3.13 y 3.14). -/
+theorem numerable_of_infinito_subset_nat (S : Set ℕ) (h : Infinito S) : Numerable S :=
+  numerable_iff_contable_infinito.2 ⟨contable_subtype_nat S, h⟩
+
+/-- `#ℚ ≤ ℵ₀` (de la Proposición "Numerabilidad de `ℚ`"). -/
+theorem cardLe_rat_nat : CardLe ℚ ℕ := cardLe_of_coordinables (coordinables_symm numerable_rat)
+
+/-- `ℵ₀ ≤ #ℚ`. -/
+theorem cardLe_nat_rat : CardLe ℕ ℚ := cardLe_of_coordinables numerable_rat
+
+/-- El producto de dos conjuntos finitos es finito: `Fin p × Fin q ∼ Fin (p q)` (deducción propia;
+la biyección es `(i, j) ↦ i q + j`, `finProdFinEquiv` en Mathlib). -/
+theorem finito_prod {P Q : Type*} (hP : Finito P) (hQ : Finito Q) : Finito (P × Q) := by
+  obtain ⟨p, ⟨eP⟩⟩ := hP
+  obtain ⟨q, ⟨eQ⟩⟩ := hQ
+  exact ⟨p * q, ⟨(eP.prodCongr eQ).trans finProdFinEquiv⟩⟩
+
+/-- (Ej. 6 (b), sublema) `A^m` es finito para todo `m ≥ 1` (inducción en `m`). `A^1 ∼ A`, y
+`A^(m+2) ∼ A × A^(m+1)` separando la primera coordenada. -/
+theorem finito_pow (hA : Finito A) (m : ℕ) : Finito (Fin (m + 1) → A) := by
+  induction m with
+  | zero => exact
+      let ⟨k, ⟨e⟩⟩ := hA
+      ⟨k, ⟨(Equiv.funUnique (Fin 1) A).trans e⟩⟩
+  | succ m ih =>
+    obtain ⟨k, ⟨e⟩⟩ := finito_prod hA ih
+    exact ⟨k, ⟨(Fin.consEquiv fun _ : Fin (m + 2) => A).symm.trans e⟩⟩
+
+/-- (Ej. 17) `#A > 1` (Definición 3.8, con `{1} = Fin 1`) equivale a que `A` tenga dos puntos
+distintos. -/
+theorem cardLt_fin_one_iff (A : Type*) : CardLt (Fin 1) A ↔ ∃ a b : A, a ≠ b := by
+  constructor
+  · rintro ⟨⟨e⟩, hne⟩
+    by_contra hcon
+    push Not at hcon
+    apply hne
+    exact ⟨{ toFun := fun _ => e 0
+             invFun := fun _ => 0
+             left_inv := fun i => Fin.ext (by have := i.isLt; simp only [Fin.val_zero]; omega)
+             right_inv := fun b => hcon _ _ }⟩
+  · rintro ⟨a, b, hab⟩
+    refine ⟨⟨⟨fun _ => a, fun i j _ => ?_⟩⟩, fun ⟨e⟩ => hab ?_⟩
+    · exact Fin.ext (by have := i.isLt; have := j.isLt; omega)
+    · have h1 : e.symm a = e.symm b :=
+        Fin.ext (by have := (e.symm a).isLt; have := (e.symm b).isLt; omega)
+      exact e.symm.injective h1
+
+end Corolarios
+
+/-! ## Puentes con `Cardinal.mk`
+
+Las definiciones del curso leídas en el dialecto de los parciales (`#A = ℵ₀`, `#A = 𝔠`). Estos
+puentes sí usan la API de `Cardinal` (no son ejercicios). Se restringen a tipos de un mismo
+universo (`Type u`), que es el caso de todos los parciales; para universos distintos hay que
+pasar por `Cardinal.lift` (`Cardinal.lift_mk_eq'`, `Cardinal.lift_mk_le'`). -/
+
+section PuentesCardinal
+
+open Cardinal
+
+universe u
+
+variable {A B : Type u}
+
+/-- Definición 3.1 leída en Mathlib: `A ∼ B ↔ #A = #B`. -/
+theorem coordinables_iff_mk_eq : Coordinables A B ↔ #A = #B := Cardinal.eq.symm
+
+/-- Definición 3.8 leída en Mathlib: `#A ≤ #B` del curso es `#A ≤ #B` de `Cardinal`. -/
+theorem cardLe_iff_mk_le : CardLe A B ↔ #A ≤ #B := (Cardinal.le_def A B).symm
+
+/-- Contable si y sólo si `#A ≤ ℵ₀`. -/
+theorem contable_iff_mk_le_aleph0 : Contable A ↔ #A ≤ ℵ₀ := by
+  rw [contable_iff_countable, Cardinal.mk_le_aleph0_iff]
+
+/-- Numerable si y sólo si `#A = ℵ₀`. -/
+theorem numerable_iff_mk_eq_aleph0 : Numerable A ↔ #A = ℵ₀ := by
+  rw [numerable_iff]
+  constructor
+  · rintro ⟨hc, hi⟩
+    exact Cardinal.mk_eq_aleph0 A
+  · intro h
+    exact ⟨Cardinal.mk_le_aleph0_iff.1 h.le, Cardinal.infinite_iff.2 h.ge⟩
+
+/-- `#A = c` si y sólo si `#A = 𝔠` (`Cardinal.mk_real`). Como `ℝ : Type`, acá `A : Type`. -/
+theorem cardC_iff_mk_eq_continuum {A : Type} : CardC A ↔ #A = 𝔠 := by
+  rw [CardC, coordinables_iff_mk_eq, Cardinal.mk_real]
+
+end PuentesCardinal
 
 end Comun

@@ -16,7 +16,10 @@ Argumento (el mismo del Typst):
   * `⋃_N X^{N+1}` se inyecta en `ℕ` si `X` lo hace, componiendo las codificaciones explícitas
     `ℕ × ℕ ↪ ℕ` (`(m, n) ↦ 2^m (2n + 1)`), `ℤ ↪ ℕ`, `ℚ ↪ ℕ` (numerabilidad de `ℚ`) y
     `ℕ^{N+1} ↪ ℕ` (por inducción en `N`). Esto reemplaza, dentro de Lean, a la cita del Ej. 6 (a)
-    (unión contable de contables) que hace el texto.
+    (unión contable de contables) que hace el texto. Las codificaciones viven en
+    `Comun.Cardinales.Numerables` (`par`, `par_injective`, `codTupla`, `codSigma`,
+    `cardLe_sigma_nat`, `natEquivInt`) y `Comun.Cardinales` (`cardLe_rat_nat`); acá quedan los
+    conjuntos `Conv` y `Per` y sus inyecciones `codConv`, `codPer`.
   * Ambos conjuntos contienen a las sucesiones constantes, así que son infinitos; contable e
     infinito es numerable (Definición 3.6, vía `numerable_iff_contable_infinito`).
 
@@ -25,93 +28,11 @@ en `ℝ`; `converge_iff_tendsto` muestra que coincide con `Tendsto` de Mathlib.
 -/
 import Mathlib
 import Comun.Cardinales
+import Comun.Cardinales.Numerables
 
 namespace Guias.Guia2.Ej16
 
 open Comun
-/-! ## Codificaciones explícitas (deducción propia) -/
-
-/-- Sublema: la codificación `(m, n) ↦ 2^m (2n + 1)` de `ℕ × ℕ` en `ℕ`. -/
-def par (m n : ℕ) : ℕ := 2 ^ m * (2 * n + 1)
-
-/-- `par` es inyectiva: si `2^m (2n+1) = 2^m' (2n'+1)`, comparando la paridad después de cancelar
-tantos `2` como se pueda, `m = m'`, y luego `n = n'`. -/
-theorem par_injective : ∀ {m m' n n' : ℕ}, par m n = par m' n' → m = m' ∧ n = n' := by
-  intro m
-  induction m with
-  | zero =>
-    intro m' n n' h
-    cases m' with
-    | zero =>
-      simp only [par, pow_zero, one_mul] at h
-      omega
-    | succ k =>
-      simp only [par, pow_zero, one_mul, pow_succ, mul_comm (2 ^ k) 2, mul_assoc] at h
-      omega
-  | succ k ih =>
-    intro m' n n' h
-    cases m' with
-    | zero =>
-      simp only [par, pow_zero, one_mul, pow_succ, mul_comm (2 ^ k) 2, mul_assoc] at h
-      omega
-    | succ k' =>
-      simp only [par, pow_succ, mul_comm (2 ^ k) 2, mul_comm (2 ^ k') 2, mul_assoc] at h
-      have h' : 2 ^ k * (2 * n + 1) = 2 ^ k' * (2 * n' + 1) :=
-        Nat.eq_of_mul_eq_mul_left (by norm_num : 0 < 2) h
-      obtain ⟨h1, h2⟩ := ih h'
-      exact ⟨by omega, h2⟩
-
-/-- Sublema: `ℤ ↪ ℕ`, con `z ↦ 2z` si `z ≥ 0` y `z ↦ -2z - 1` si `z < 0`. -/
-def codZ (z : ℤ) : ℕ := if 0 ≤ z then (2 * z).toNat else (-2 * z - 1).toNat
-
-theorem codZ_injective : Function.Injective codZ := by
-  intro a b h
-  unfold codZ at h
-  split_ifs at h <;> omega
-
-/-- Sublema: `ℕ^{k+1} ↪ ℕ`, por inducción en `k` usando `par`. -/
-def codTupla : (k : ℕ) → (Fin (k + 1) → ℕ) → ℕ
-  | 0, f => f 0
-  | k + 1, f => par (f 0) (codTupla k (fun i => f i.succ))
-
-theorem codTupla_injective (k : ℕ) : Function.Injective (codTupla k) := by
-  induction k with
-  | zero =>
-    intro f g h
-    funext i
-    have hi : i = 0 := Fin.ext (by have := i.isLt; simp only [Fin.val_zero]; omega)
-    rw [hi]
-    exact h
-  | succ k ih =>
-    intro f g h
-    simp only [codTupla] at h
-    obtain ⟨h0, h1⟩ := par_injective h
-    have h2 := ih h1
-    funext i
-    refine Fin.cases h0 (fun j => ?_) i
-    exact congrFun h2 j
-
-/-- Codificación de `⋃_N X^{N+1}` (modelado como `Σ N, (Fin (N+1) → X)`) en `ℕ`, dada una
-codificación `c : X → ℕ`: `(N, x_0, …, x_N) ↦ par N (codTupla N (c x_0, …, c x_N))`. -/
-def codSigma {X : Type*} (c : X → ℕ) (s : Σ N : ℕ, (Fin (N + 1) → X)) : ℕ :=
-  par s.1 (codTupla s.1 (fun i => c (s.2 i)))
-
-theorem codSigma_injective {X : Type*} {c : X → ℕ} (hc : Function.Injective c) :
-    Function.Injective (codSigma c) := by
-  rintro ⟨N, f⟩ ⟨M, g⟩ h
-  unfold codSigma at h
-  obtain ⟨hNM, h2⟩ := par_injective h
-  subst hNM
-  have h3 := codTupla_injective N h2
-  have hfg : f = g := funext fun i => hc (congrFun h3 i)
-  rw [hfg]
-
-/-- Sublema (producto finito y unión numerable de contables, versión inyectiva): si `#X ≤ ℵ₀`
-entonces `#(⋃_N X^{N+1}) ≤ ℵ₀`. -/
-theorem cardLe_sigma_nat {X : Type*} (hX : CardLe X ℕ) :
-    CardLe (Σ N : ℕ, (Fin (N + 1) → X)) ℕ :=
-  let ⟨c⟩ := hX
-  ⟨⟨codSigma c, codSigma_injective c.injective⟩⟩
 
 /-! ## (a) Sucesiones convergentes de enteros -/
 
@@ -195,9 +116,9 @@ theorem codConv_injective : Function.Injective codConv := by
   · rw [ha n (by omega), hb n (by omega)]
     exact hval N le_rfl
 
-/-- `#Conv ≤ ℵ₀`: componiendo `Conv ↪ ⋃_N ℤ^{N+1} ↪ ℕ`. -/
+/-- `#Conv ≤ ℵ₀`: componiendo `Conv ↪ ⋃_N ℤ^{N+1} ↪ ℕ` (`ℤ ↪ ℕ` es `Comun.natEquivInt`). -/
 theorem cardLe_conv_nat : CardLe Conv ℕ :=
-  cardLe_trans ⟨⟨codConv, codConv_injective⟩⟩ (cardLe_sigma_nat ⟨⟨codZ, codZ_injective⟩⟩)
+  cardLe_trans ⟨⟨codConv, codConv_injective⟩⟩ (cardLe_sigma_nat cardLe_int_nat)
 
 /-- Las sucesiones constantes `k, k, k, …` (`k ∈ ℕ`) están en `Conv`. -/
 def constConv (k : ℕ) : Conv :=
@@ -210,7 +131,7 @@ theorem constConv_injective : Function.Injective constConv := by
 
 /-- `Conv` es infinito: contiene una copia de `ℕ`. -/
 theorem infinito_conv : Infinito Conv :=
-  infinito_iff_infinite.2 (Infinite.of_injective constConv constConv_injective)
+  infinito_of_cardLe_nat ⟨⟨constConv, constConv_injective⟩⟩
 
 /-- **Ej. 16 (a).** `#{(a_n) ⊆ ℤ : (a_n) converge} = ℵ₀`. -/
 theorem ej16a : Numerable Conv :=
@@ -274,10 +195,6 @@ theorem codPer_injective : Function.Injective codPer := by
   have := congrFun h3 ⟨i, by omega⟩
   simpa using this
 
-/-- `#ℚ ≤ ℵ₀` (de la Proposición "Numerabilidad de `ℚ`"). -/
-theorem cardLe_rat_nat : CardLe ℚ ℕ :=
-  cardLe_of_coordinables (coordinables_symm numerable_rat)
-
 /-- `#Per ≤ ℵ₀`: componiendo `Per ↪ ⋃_N ℚ^{N+1} ↪ ℕ`. -/
 theorem cardLe_per_nat : CardLe Per ℕ :=
   cardLe_trans ⟨⟨codPer, codPer_injective⟩⟩ (cardLe_sigma_nat cardLe_rat_nat)
@@ -292,7 +209,7 @@ theorem constPer_injective : Function.Injective constPer := by
 
 /-- `Per` es infinito: contiene una copia de `ℕ`. -/
 theorem infinito_per : Infinito Per :=
-  infinito_iff_infinite.2 (Infinite.of_injective constPer constPer_injective)
+  infinito_of_cardLe_nat ⟨⟨constPer, constPer_injective⟩⟩
 
 /-- **Ej. 16 (b).** `#{(a_n) ⊆ ℚ : (a_n) es periódica} = ℵ₀`. -/
 theorem ej16b : Numerable Per :=

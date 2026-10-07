@@ -10,10 +10,12 @@ Resolución "a mano" en `apuntes-typst/guias-agente/_partes2/ej09.typ`.
 
 Convenciones: en (a) y (b) `A, B : Set X` son subconjuntos de un conjunto ambiente y `𝒫 A` es
 `Set.powerset A : Set (Set X)`; en (c) `A` y `B` son conjuntos abstractos (tipos) y `𝒫(A)` es
-`Set A`.
+`Set A`. La biyección de (c) vive en `Comun.Cardinales.Continuo` (`partesCongr`,
+`coordinables_set`); (a) y (b) quedan locales.
 -/
 import Mathlib
 import Comun.Cardinales
+import Comun.Cardinales.Continuo
 
 namespace Guias.Guia2.Ej09
 
@@ -61,16 +63,9 @@ theorem ej9b_estricta :
 
 /-! ## (c) Transportar la biyección a las partes -/
 
-/-- Si `f : A → B` es biyectiva, `S ↦ f(S)` es una biyección `𝒫(A) → 𝒫(B)` con inversa
-`T ↦ f⁻¹(T)`. -/
-def partesCongr {A B : Type*} (f : A ≃ B) : Set A ≃ Set B where
-  toFun S := f '' S
-  invFun T := f ⁻¹' T
-  left_inv S := Set.preimage_image_eq S f.injective
-  right_inv T := Set.image_preimage_eq T f.surjective
-
-/-- **Ej. 9 (c).** `A ∼ B ⟹ 𝒫(A) ∼ 𝒫(B)`. -/
+/-- **Ej. 9 (c).** `A ∼ B ⟹ 𝒫(A) ∼ 𝒫(B)`: `S ↦ f(S)` con inversa `T ↦ f⁻¹(T)`
+(`Comun.partesCongr`, `Comun.coordinables_set`). -/
 theorem ej9c {A B : Type*} (h : Coordinables A B) : Coordinables (Set A) (Set B) :=
-  let ⟨f⟩ := h; ⟨partesCongr f⟩
+  coordinables_set h
 
 end Guias.Guia2.Ej09

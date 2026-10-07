@@ -20,8 +20,9 @@ Argumento (el mismo del Typst):
     decreciente se reduce al creciente con `-f`.
 
 "Intervalo" se define a mano como conjunto convexo de `ℝ` (`EsIntervalo`), y `#A > 1` como
-`CardLt (Fin 1) A` (Definición 3.8); `cardLt_fin_one_iff` muestra que equivale a tener dos puntos
-distintos. La continuidad es `ContinuousAt` de Mathlib, traducida a `ε`-`δ` con
+`CardLt (Fin 1) A` (Definición 3.8); `Comun.cardLt_fin_one_iff` muestra que equivale a tener dos
+puntos distintos (es lo único que se importa de `Comun` además de las definiciones; `EsIntervalo`,
+`L` y `R` quedan locales). La continuidad es `ContinuousAt` de Mathlib, traducida a `ε`-`δ` con
 `Metric.continuousAt_iff` (la definición estándar, que no está en `apuntes.typ`).
 -/
 import Mathlib
@@ -38,24 +39,6 @@ def EsIntervalo (A : Set ℝ) : Prop := ∀ u ∈ A, ∀ v ∈ A, ∀ w, u ≤ w
 
 theorem esIntervalo_Ioo (a b : ℝ) : EsIntervalo (Set.Ioo a b) :=
   fun _ hu _ hv _ huw hwv => ⟨lt_of_lt_of_le hu.1 huw, lt_of_le_of_lt hwv hv.2⟩
-
-/-- `#A > 1` (Definición 3.8, con `{1} = Fin 1`) equivale a que `A` tenga dos puntos distintos. -/
-theorem cardLt_fin_one_iff (A : Type*) : CardLt (Fin 1) A ↔ ∃ a b : A, a ≠ b := by
-  constructor
-  · rintro ⟨⟨e⟩, hne⟩
-    by_contra hcon
-    push Not at hcon
-    apply hne
-    exact ⟨{ toFun := fun _ => e 0
-             invFun := fun _ => 0
-             left_inv := fun i => Fin.ext (by have := i.isLt; simp only [Fin.val_zero]; omega)
-             right_inv := fun b => hcon _ _ }⟩
-  · rintro ⟨a, b, hab⟩
-    refine ⟨⟨⟨fun _ => a, fun i j _ => ?_⟩⟩, fun ⟨e⟩ => hab ?_⟩
-    · exact Fin.ext (by have := i.isLt; have := j.isLt; omega)
-    · have h1 : e.symm a = e.symm b :=
-        Fin.ext (by have := (e.symm a).isLt; have := (e.symm b).isLt; omega)
-      exact e.symm.injective h1
 
 /-! ## (a) Familias disjuntas de intervalos no degenerados -/
 
