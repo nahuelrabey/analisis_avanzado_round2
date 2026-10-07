@@ -496,20 +496,92 @@
 ]
 
 #sublema(titulo: [Lema 1 (intervalos)])[
-  Sean $S subset.eq RR$ y $a < b$.
+  Trabajamos en $RR$ con la métrica $d(x, y) = abs(x - y)$ (en $RR$, $d_1$, $d_2$ y $d_oo$
+  coinciden con ella), y así también en los Lemas 2 a 4. Sean $S subset.eq RR$ y $a < b$.
 
   + Si $(a, b) subset.eq S$, entonces $(a, b) subset.eq S^compose$.
   + Si $S subset.eq [a, b]$, entonces $S^compose subset.eq (a, b)$ y $overline(S) subset.eq [a, b]$.
 
-  _Prueba._ (1) Sea $x in (a, b)$ y $r = op("mín")\{x - a, b - x\} > 0$. Si $abs(y - x) < r$,
-  entonces $y > x - r >= a$ e $y < x + r <= b$, es decir $B(x, r) subset.eq (a, b) subset.eq S$:
-  $x$ es interior (Def. 4.11).
+  _Prueba._ (1) Sea $x in (a, b)$. Para ver que $x$ es interior a $S$ hay que encontrar un
+  $r > 0$ con $B(x, r) subset.eq S$.
+  - _El radio._ Tomamos $r = op("mín")\{x - a, b - x\}$: la distancia de $x$ al borde más
+    cercano del intervalo. Es $r > 0$ porque $a < x < b$. Y por ser el mínimo,
+    $ r <= x - a quad "y" quad r <= b - x. $
+  - _Los puntos de la bola._ Sea $y in B(x, r)$, es decir $d(y, x) = abs(y - x) < r$. Eso equivale a
+    $ x - r < y < x + r. $
+  - _Cota inferior._ Usando $r <= x - a$ (restar algo más grande da algo más chico):
+    $ y > x - r >= x - (x - a) = a. $
+  - _Cota superior._ Usando $r <= b - x$:
+    $ y < x + r <= x + (b - x) = b. $
+  - _Conclusión._ Todo $y in B(x, r)$ cumple $a < y < b$, así que
+    $B(x, r) subset.eq (a, b) subset.eq S$: $x$ es interior (Def. 4.11).
 
-  (2) Sea $x in S^compose$ y $r > 0$ con $B(x, r) subset.eq S subset.eq [a, b]$. Los puntos
-  $x plus.minus r\/2$ están en $B(x, r)$, luego en $[a, b]$: $a <= x - r\/2 < x$ y
-  $x < x + r\/2 <= b$. Así $x in (a, b)$. Para la clausura, sea $x in.not [a, b]$. Si $x < a$,
-  tomamos $r = a - x > 0$: $B(x, r) = (2x - a, a)$ no corta a $[a, b]$, luego tampoco a $S$, y
-  $x in.not overline(S)$. Si $x > b$, $r = x - b$ funciona igual ($B(x, r) = (b, 2x - b)$).
+  #v(8pt)
+  (2) *Interior.* Sea $x in S^compose$. Hay que ver que $a < x < b$.
+  - _El radio._ Por ser $x$ interior (Def. 4.11), existe $r > 0$ con
+    $ B(x, r) subset.eq S subset.eq [a, b]. $
+  - _Dos puntos de la bola._ Los puntos $x - r\/2$ y $x + r\/2$ están a distancia $r\/2 < r$ de
+    $x$, así que están en $B(x, r)$ y, por la inclusión anterior, en $[a, b]$.
+
+    #block(breakable: false, width: 100%)[#align(center)[
+      #cetz.canvas(length: 1.2cm, {
+        import cetz.draw: *
+        let azul = rgb("#2563eb")
+        let naranja = rgb("#ea580c")
+        let et(p, y, cuerpo, color: black) = content((p, y), text(size: 9pt, fill: color)[#cuerpo])
+        // a = -3.2, b = 3.4, x = 0.4, r = 2
+        line((-4, 0), (4.2, 0), mark: (end: ">"), stroke: 0.6pt + luma(90))
+        line((-3.2, 0), (3.4, 0), stroke: 7pt + luma(215))
+        circle((-3.2, 0), radius: 0.09, fill: luma(120), stroke: luma(120))
+        circle((3.4, 0), radius: 0.09, fill: luma(120), stroke: luma(120))
+        line((-1.6, 0), (2.4, 0), stroke: 2.4pt + azul)
+        circle((-1.6, 0), radius: 0.09, fill: white, stroke: 1.2pt + azul)
+        circle((2.4, 0), radius: 0.09, fill: white, stroke: 1.2pt + azul)
+        circle((0.4, 0), radius: 0.06, fill: black)
+        circle((-0.6, 0), radius: 0.08, fill: naranja, stroke: none)
+        circle((1.4, 0), radius: 0.08, fill: naranja, stroke: none)
+        // etiquetas de abajo
+        et(-3.2, -0.45, $a$)
+        et(-1.6, -0.45, $x - r$)
+        et(0.4, -0.45, $x$)
+        et(2.4, -0.45, $x + r$)
+        et(3.4, -0.45, $b$)
+        // los dos puntos, arriba
+        et(-0.6, 0.42, $x - r\/2$, color: naranja)
+        et(1.4, 0.42, $x + r\/2$, color: naranja)
+        // distancias r/2
+        line((-0.6, 0.9), (0.4, 0.9), mark: (start: "|", end: "|"), stroke: 0.6pt)
+        line((0.4, 0.9), (1.4, 0.9), mark: (start: "|", end: "|"), stroke: 0.6pt)
+        et(-0.1, 1.15, $r\/2$)
+        et(0.9, 1.15, $r\/2$)
+        // leyenda
+        et(0.4, -1.0, $B(x, r)$, color: azul)
+        et(-2.6, -1.0, $[a, b]$, color: luma(110))
+      })
+    ]]
+
+  - _Cota inferior._ De $x - r\/2 in [a, b]$ y $r\/2 > 0$:
+    $ a <= x - r\/2 < x. $
+  - _Cota superior._ De $x + r\/2 in [a, b]$ y $r\/2 > 0$:
+    $ x < x + r\/2 <= b. $
+  - _Conclusión._ $a < x < b$, es decir $x in (a, b)$. Como $x in S^compose$ era arbitrario,
+    $S^compose subset.eq (a, b)$.
+
+  *Clausura.* Probamos el contrarrecíproco: si $x in.not [a, b]$, entonces $x in.not overline(S)$.
+  Por la Def. 4.22, alcanza con encontrar un $r > 0$ con $B(x, r) inter S = emptyset$. Como
+  $x in.not [a, b]$, o bien $x < a$, o bien $x > b$.
+  - _Caso $x < a$._ Tomamos $r = a - x$, que es $> 0$. La bola es
+    $ B(x, r) = (x - r, x + r) = (x - (a - x), x + (a - x)) = (2x - a, a). $
+    Todo $y in B(x, r)$ cumple $y < a$, así que $y in.not [a, b]$. Luego
+    $B(x, r) inter [a, b] = emptyset$ y, como $S subset.eq [a, b]$, también
+    $B(x, r) inter S = emptyset$.
+  - _Caso $x > b$._ Tomamos $r = x - b$, que es $> 0$. La bola es
+    $ B(x, r) = (x - (x - b), x + (x - b)) = (b, 2x - b). $
+    Todo $y in B(x, r)$ cumple $y > b$, así que $y in.not [a, b]$, y como antes
+    $B(x, r) inter S = emptyset$.
+  - _Conclusión._ En ambos casos $x$ no es punto de adherencia de $S$: $x in.not overline(S)$.
+    Por contrarrecíproco, todo punto de $overline(S)$ está en $[a, b]$, es decir
+    $overline(S) subset.eq [a, b]$.
 ]
 
 #sublema(titulo: [Lema 2 (racionales e irracionales)])[
@@ -527,12 +599,74 @@
 #sublema(titulo: [Lema 3 (puntos de $(a, b)$ cerca de $x in [a, b]$)])[
   Sean $a < b$, $x in [a, b]$ y $r > 0$. Existe $y in (a, b)$ con $y != x$ y $abs(y - x) < r$. Más aún, se lo puede elegir racional.
 
-  _Prueba._ Sea $t = op("mín")\{r, b - a\}\/4 > 0$. Si $x <= (a + b)\/2$, tomamos $y = x + t$:
-  $y > x >= a$ e $y <= (a + b)\/2 + (b - a)\/4 < b$. Si $x > (a + b)\/2$, tomamos $y = x - t$:
-  $y < x <= b$ e $y > (a + b)\/2 - (b - a)\/4 > a$. En ambos casos $y != x$ y
-  $abs(y - x) = t < r$. Para el racional: por Densidad de $QQ$ hay $q in QQ$ estrictamente entre
-  $x$ e $y$; entonces $q != x$, $abs(q - x) < abs(y - x) < r$ y, como $x in [a, b]$ e $y in (a, b)$,
-  $q in (a, b)$.
+  _Prueba._
+  - _El paso._ Sea
+    $ t = (op("mín")\{r, b - a\}) / 4 > 0. $
+  - _Caso $x <= (a + b)\/2$._ Tomamos $y = x + t$. Entonces
+    $ y > x >= a quad "y" quad y <= (a + b) / 2 + (b - a) / 4 < b. $
+  - _Caso $x > (a + b)\/2$._ Tomamos $y = x - t$. Entonces
+    $ y < x <= b quad "y" quad y > (a + b) / 2 - (b - a) / 4 > a. $
+  - _Conclusión._ En ambos casos $y in (a, b)$, $y != x$ y
+    $ abs(y - x) = t < r. $
+  - _El racional._ Por Densidad de $QQ$ hay $q in QQ$ estrictamente entre $x$ e $y$. Entonces
+    $q != x$ y
+    $ abs(q - x) < abs(y - x) < r. $
+    Además, como $x in [a, b]$ e $y in (a, b)$, $q in (a, b)$.
+
+  // Un panel por caso: a = -3, b = 3, (a+b)/2 = 0, r = 3.6, t = r/4 = 0.9.
+  // `s` es el sentido en que se mueve y: +1 (hacia la derecha) o -1 (hacia la izquierda).
+  #let l3-panel(x, s, titulo) = cetz.canvas(length: 1cm, {
+    import cetz.draw: *
+    let azul = rgb("#2563eb")
+    let naranja = rgb("#ea580c")
+    let verde = rgb("#16a34a")
+    let et(p, y, cuerpo, color: black) = content((p, y), text(size: 9pt, fill: color)[#cuerpo])
+    let r = 3.6
+    let t = 0.9
+    let y = x + s * t
+    let q = x + s * t / 2
+    content((-5.9, 1.25), anchor: "west", text(size: 9pt, style: "italic")[#titulo])
+    line((-6, 0), (6.2, 0), mark: (end: ">"), stroke: 0.6pt + luma(90))
+    // (a, b) en gris, con los extremos abiertos
+    line((-3, 0), (3, 0), stroke: 7pt + luma(215))
+    circle((-3, 0), radius: 0.09, fill: white, stroke: luma(120))
+    circle((3, 0), radius: 0.09, fill: white, stroke: luma(120))
+    // B(x, r) en azul (puede salirse de (a, b))
+    line((x - r, 0), (x + r, 0), stroke: 2.2pt + azul)
+    circle((x - r, 0), radius: 0.09, fill: white, stroke: 1.2pt + azul)
+    circle((x + r, 0), radius: 0.09, fill: white, stroke: 1.2pt + azul)
+    // punto medio
+    line((0, -0.2), (0, 0.2), stroke: 1pt + luma(60))
+    // x, y, q
+    circle((x, 0), radius: 0.06, fill: black)
+    circle((y, 0), radius: 0.08, fill: naranja, stroke: none)
+    circle((q, 0), radius: 0.07, fill: verde, stroke: none)
+    // etiquetas
+    et(-3, -0.45, $a$)
+    et(3, -0.45, $b$)
+    et(0, -0.45, $(a + b)\/2$)
+    et(x, -0.45, $x$)
+    et(y, -0.45, $y$, color: naranja)
+    et(q, 0.42, $q$, color: verde)
+    et(x - r, 0.42, $x - r$, color: azul)
+    et(x + r, 0.42, $x + r$, color: azul)
+    // y está a distancia t de x
+    line((x, -0.85), (y, -0.85), mark: (start: "|", end: "|"), stroke: 0.6pt)
+    et((x + y) / 2, -1.1, $t$)
+  })
+
+  #block(breakable: false, width: 100%)[#align(center)[
+    #l3-panel(-2, 1, [Caso $x <= (a + b)\/2$: $y = x + t$])
+    #v(4pt)
+    #l3-panel(2, -1, [Caso $x > (a + b)\/2$: $y = x - t$])
+    #v(2pt)
+    #text(size: 9pt)[
+      #text(fill: luma(110))[gris: $(a, b)$] #h(1em)
+      #text(fill: rgb("#2563eb"))[azul: $B(x, r)$] #h(1em)
+      #text(fill: rgb("#ea580c"))[naranja: $y$] #h(1em)
+      #text(fill: rgb("#16a34a"))[verde: $q in QQ$, entre $x$ e $y$]
+    ]
+  ]]
 ]
 
 #sublema(titulo: [Lema 4 ($\{1\/n\} union \{0\}$ es cerrado)])[
