@@ -3,7 +3,7 @@ Análisis Avanzado (FCEN-UBA) · Práctica 3 · Ejercicio 2
 Enunciado en `apuntes-typst/guias/p3.typ`; resolución en `apuntes-typst/guias-agente/guia_3_resuelta_agente.typ` (Ejercicio 2).
 
 Se decide cuáles de las funciones `d : ℝ × ℝ → ℝ` son métricas en `ℝ` (Definición 4.1):
-  (a) `(x - y)²`      NO es métrica: falla la desigualdad triangular (`0, 1, 2`).
+  (a) `(x - y)²`      NO es métrica: falla la desigualdad triangular (`3, 2, 0`).
   (b) `√|x - y|`      SÍ es métrica.
   (c) `|x² - y²|`     NO es métrica: falla la separación (`1` y `-1`).
 -/
@@ -25,13 +25,13 @@ def dC (x y : ℝ) : ℝ := |x ^ 2 - y ^ 2|
 
 /-! ## (a) `(x - y)²` no es métrica -/
 
-/-- Contraejemplo a la desigualdad triangular: `d(0, 2) = 4 > 2 = d(0, 1) + d(1, 2)`. -/
-theorem dA_contraejemplo : ¬ (dA 0 2 ≤ dA 0 1 + dA 1 2) := by
+/-- Contraejemplo a la desigualdad triangular: `d(3, 0) = 9 > 5 = d(3, 2) + d(2, 0)`. -/
+theorem dA_contraejemplo : ¬ (dA 3 0 ≤ dA 3 2 + dA 2 0) := by
   unfold dA
   norm_num
 
 /-- **Ej. 2 (a).** `(x - y)²` no es una métrica en `ℝ`. -/
-theorem ej2a : ¬ EsMetrica dA := fun h => dA_contraejemplo (h.triangle 0 1 2)
+theorem ej2a : ¬ EsMetrica dA := fun h => dA_contraejemplo (h.triangle 3 2 0)
 
 /-! ## (c) `|x² - y²|` no es métrica -/
 

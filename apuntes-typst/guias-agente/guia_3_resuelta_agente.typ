@@ -245,9 +245,13 @@
 ]
 
 #resolucion[Propuesta: es métrica; la bola es una banda de semiancho $r$ alrededor de $f$][
-  *Buena definición (W).* Para $f, g in C([0, 1])$ existe $t_0 in [0, 1]$ con
-  $abs(f(t) - g(t)) <= abs(f(t_0) - g(t_0)) = d_oo (f, g)$ para todo $t$ (Weierstrass).
-  En particular $abs(f(t) - g(t)) <= d_oo (f, g)$ para todo $t in [0, 1]$.
+  *Buena definición (W).* Sean $f, g in C([0, 1])$.
+  - La función $t |-> abs(f(t) - g(t))$ es continua en el compacto $[0, 1]$.
+  - Por Weierstrass alcanza su máximo: existe $t_0 in [0, 1]$ tal que
+    $ abs(f(t) - g(t)) <= abs(f(t_0) - g(t_0)) quad "para todo" t in [0, 1]. $
+  - Ese máximo es la distancia: $d_oo (f, g) = abs(f(t_0) - g(t_0))$.
+  - En particular,
+    $ abs(f(t) - g(t)) <= d_oo (f, g) quad "para todo" t in [0, 1]. $
 
   + *(i)* $d_oo (f, g) = abs(f(t_0) - g(t_0)) >= 0$.
   + *(ii)* Si $f = g$, el máximo de la función nula es $0$. Si $d_oo (f, g) = 0$, entonces
@@ -375,33 +379,70 @@
 
 #estrategia[Cada función se contrasta con los cuatro axiomas de la Definición 4.1][
   Para refutar basta un contraejemplo a un solo axioma; para probar hay que chequear los cuatro.
-  En (a) la que falla es la desigualdad triangular (tres puntos equiespaciados); en (c) falla la
+  En (a) la que falla es la desigualdad triangular (dos saltos del mismo signo); en (c) falla la
   separación (dos puntos opuestos que tienen el mismo cuadrado); (b) es una métrica porque la raíz
   cuadrada "achica" las sumas: $sqrt(a + b) <= sqrt(a) + sqrt(b)$.
 ]
 
 #resolucion[Propuesta (a): $(x - y)^2$ NO es métrica][
-  Falla (iv), la desigualdad triangular. Con $x = 0$, $y = 1$, $z = 2$:
-  $ d(0, 2) = (0 - 2)^2 = 4 quad > quad 2 = 1 + 1 = (0 - 1)^2 + (1 - 2)^2 = d(0, 1) + d(1, 2). $
+  Falla (iv), la desigualdad triangular.
+
+  *Cómo encontrar el contraejemplo.* Para comparar $d(x, z)$ con $d(x, y) + d(y, z)$ se mete $y$
+  en el medio: con $a = x - y$ y $b = y - z$ queda $x - z = a + b$, y
+  $ d(x, z) = (x - z)^2 = (a + b)^2 = a^2 + 2 a b + b^2 = d(x, y) + d(y, z) + 2 a b. $
+  La triangular pide entonces $(a + b)^2 <= a^2 + b^2$, es decir $2 a b <= 0$, y eso no vale
+  siempre: falla en cuanto $a$ y $b$ tengan el mismo signo. Por ejemplo, $a = 1$ y $b = 2$.
+
+  *Contraejemplo.* Tomando $z = 0$, de $b = y - z = 2$ sale $y = 2$, y de $a = x - y = 1$ sale
+  $x = 3$:
+  $ d(3, 0) = (3 - 0)^2 = 9 quad > quad 5 = 1 + 4 = (3 - 2)^2 + (2 - 0)^2 = d(3, 2) + d(2, 0). $
+  La diferencia, $9 - 5 = 4$, es justo el término cruzado $2 a b$.
+
   Como el axioma (iv) de la Definición 4.1 pide $d(x, z) <= d(x, y) + d(y, z)$ para todos $x, y, z$,
   $d$ no es una métrica. (Los otros tres axiomas sí valen, pero no importa.)
 ]
 
 #resolucion[Propuesta (b): $sqrt(abs(x - y))$ SÍ es métrica][
+  #sublema(titulo: [Lema (la raíz achica las sumas)])[
+    Para $a, b >= 0$,
+    $ sqrt(a + b) <= sqrt(a) + sqrt(b). quad (star) $
+    *Paso 1: alcanza con comparar cuadrados.* Si $s, t >= 0$, entonces $s <= t <==> s^2 <= t^2$.
+    En efecto, $t^2 - s^2 = (t - s)(t + s)$: si $t + s > 0$, el signo de $t^2 - s^2$ es el de
+    $t - s$; si $t + s = 0$, entonces $s = t = 0$ y valen las dos. Los dos miembros de $(star)$
+    son $>= 0$, así que se puede usar.
+
+    *Paso 2: desarrollar el cuadrado del lado derecho.*
+    $ (sqrt(a) + sqrt(b))^2 = a + 2 sqrt(a) sqrt(b) + b >= a + b = (sqrt(a + b))^2, $
+    porque $2 sqrt(a) sqrt(b) >= 0$. Por el Paso 1, $sqrt(a + b) <= sqrt(a) + sqrt(b)$. $qed$
+
+    *Relación con (a).* Es el mismo término cruzado que rompía la triangular de $(x - y)^2$, pero
+    del otro lado. Allá, con $a = x - y$ y $b = y - z$, $(a + b)^2 = a^2 + b^2 + 2 a b$, y el $2 a b$ podía hacer que el cuadrado
+    de la suma superara la suma de los cuadrados. Acá el término cruzado $2 sqrt(a) sqrt(b) >= 0$
+    juega a favor: elevar al cuadrado agranda las sumas y la raíz, su inversa, las achica.
+  ]
+
   + *(i)* Una raíz cuadrada es $>= 0$.
   + *(ii)* $sqrt(abs(x - y)) = 0 <=> abs(x - y) = 0 <=> x = y$.
   + *(iii)* $abs(x - y) = abs(y - x)$, luego las raíces coinciden.
-  + *(iv)* Primero, una desigualdad auxiliar: para $a, b >= 0$,
-    $ sqrt(a + b) <= sqrt(a) + sqrt(b). quad (star) $
-    Ambos miembros son $>= 0$, así que basta comparar cuadrados:
-    $ (sqrt(a) + sqrt(b))^2 = a + 2 sqrt(a) sqrt(b) + b >= a + b = (sqrt(a + b))^2, $
-    pues $sqrt(a) sqrt(b) >= 0$. Ahora, por la desigualdad triangular de $RR$ y porque la raíz es creciente,
+  + *(iv)* Por la desigualdad triangular de $RR$, porque la raíz es creciente, y por el Lema,
     $ sqrt(abs(x - z)) <= sqrt(abs(x - y) + abs(y - z)) <= sqrt(abs(x - y)) + sqrt(abs(y - z)), $
     donde la última desigualdad es $(star)$ con $a = abs(x - y)$ y $b = abs(y - z)$.
 ]
 
 #resolucion[Propuesta (c): $abs(x^2 - y^2)$ NO es métrica][
-  Falla (ii), la separación. Con $x = 1$ e $y = -1$:
+  Falla (ii), la separación.
+
+  *Cómo encontrar el contraejemplo.* La separación pide que $d(x, y) = 0$ sólo cuando $x = y$, así
+  que conviene resolver $d(x, y) = 0$ y ver si aparecen otras soluciones. Factorizando la
+  diferencia de cuadrados,
+  $ d(x, y) = abs(x^2 - y^2) = abs((x - y)(x + y)) = abs(x - y) dot abs(x + y). $
+  Un producto se anula si y sólo si se anula alguno de los factores, así que
+  $ d(x, y) = 0 <==> x = y quad "o" quad x = -y. $
+  El primer factor da los ceros que la separación permite; el segundo agrega ceros *de más*. Sirve
+  cualquier $y = -x$ con $x != 0$ (si $x = 0$, entonces $-x = x$ y no hay contraejemplo). El más
+  simple es $x = 1$.
+
+  *Contraejemplo.* Con $x = 1$ e $y = -1$:
   $ d(1, -1) = abs(1^2 - (-1)^2) = abs(1 - 1) = 0, quad "pero" quad 1 != -1. $
   El axioma (ii) exige $d(x, y) = 0 => x = y$, que acá no se cumple. (Intuitivamente, $d$ no
   distingue $x$ de $-x$.)
@@ -409,7 +450,7 @@
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej02`][
   `ej2a : ¬ EsMetrica dA` se prueba con el contraejemplo explícito `dA_contraejemplo`
-  ($d(0, 2) = 4 > 2$ es la negación de `triangle 0 1 2`). `ej2c : ¬ EsMetrica dC` usa
+  ($d(3, 0) = 9 > 5$ es la negación de `triangle 3 2 0`). `ej2c : ¬ EsMetrica dC` usa
   `dC_contraejemplo` ($d(1, -1) = 0$ y $1 != -1$) contra `eq_zero_iff`. `ej2b : EsMetrica dB`
   prueba los cuatro axiomas, con `sqrt_add_le` como el paso $(star)$ (se eleva al cuadrado, igual
   que en el texto) y `abs_add_le` para la triangular de $RR$. La formalización no se aparta del texto.
