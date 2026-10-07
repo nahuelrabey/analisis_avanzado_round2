@@ -5,12 +5,16 @@ la métrica del peine en `ℝ²`,
 
 Este archivo verifica la resolución escrita en el `.typ`: la simetría, el ítem (a) y los cinco
 casos de la desigualdad triangular, en el mismo orden y con las mismas cotas.
+
+Qué usa de `Comun`: la Definición 4.1 `EsMetrica` y el constructor `EsMetrica.toMetricSpace`
+(`Comun.Metricas`) para armar la instancia `MetricSpace Plano` a partir de los cuatro axiomas,
+que son el ejemplo y quedan locales (`d_nonneg`, `d_eq_zero_iff`, `d_comm`, `d_triangle`).
 -/
 import Mathlib
+import Comun.Metricas
 
 open scoped Classical
-
-set_option maxHeartbeats 200000
+open Comun
 
 namespace Peine
 
@@ -88,24 +92,21 @@ theorem d_triangle (x y x' y' x'' y'' : ℝ) :
         rw [d_eq_of_ne h1, d_eq_of_ne h4, d_eq_of_ne h3]
         linarith [abs_sub_le x x'' x', abs_nonneg y'']
 
+/-- Conclusión del ejemplo: `d` es una métrica en `ℝ²` (Definición 4.1), con los cuatro axiomas
+de arriba. -/
+theorem esMetrica_d : EsMetrica d where
+  nonneg p q := d_nonneg p.1 p.2 q.1 q.2
+  eq_zero_iff p q := d_eq_zero_iff p.1 p.2 q.1 q.2
+  symm p q := d_comm p.1 p.2 q.1 q.2
+  triangle p q r := d_triangle p.1 p.2 r.1 r.2 q.1 q.2
+
 /-- `ℝ²` con la métrica del peine. -/
 def Plano : Type := ℝ × ℝ
 
-/-- Conclusión del ejemplo: `d` es una métrica en `ℝ²`. -/
-noncomputable instance : MetricSpace Plano where
-  dist p q := d p q
-  dist_self p := by
-    obtain ⟨x, y⟩ := p
-    exact (d_eq_zero_iff x y x y).2 rfl
-  dist_comm p q := by
-    obtain ⟨x, y⟩ := p; obtain ⟨x', y'⟩ := q
-    exact d_comm x y x' y'
-  dist_triangle p q r := by
-    obtain ⟨x, y⟩ := p; obtain ⟨x', y'⟩ := q; obtain ⟨x'', y''⟩ := r
-    exact d_triangle x y x'' y'' x' y'
-  eq_of_dist_eq_zero := by
-    intro p q h
-    obtain ⟨x, y⟩ := p; obtain ⟨x', y'⟩ := q
-    exact (d_eq_zero_iff x y x' y').1 h
+/-- `(ℝ², d)` como `MetricSpace` de Mathlib (`Comun.EsMetrica.toMetricSpace`). -/
+noncomputable instance : MetricSpace Plano :=
+  show MetricSpace (Con (ℝ × ℝ) d) from esMetrica_d.toMetricSpace
+
+theorem Plano.dist_eq (p q : Plano) : dist p q = d p q := rfl
 
 end Peine

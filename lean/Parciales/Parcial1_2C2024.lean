@@ -5,10 +5,21 @@ Enunciado y resolución oficial transcriptos en `apuntes-typst/parciales/2024_2c
 Este archivo verifica en Lean 4 + Mathlib las cuatro resoluciones oficiales: cada ejercicio
 tiene su enunciado formalizado y una demostración que sigue, paso a paso, el argumento de la
 cátedra. Las diferencias entre el texto y la formalización están anotadas en el `.typ`.
+
+Qué usa de `Comun`: el conjunto suma `sumSet` con `sInf_sumSet` (`Comun.Supremos`; el Ej. 1 es
+un alias), la distancia integral `C01.d1` de `C([0,1])` con `C01.ext`, `C01.d1_le_dist` y la
+evaluación `C01.E` (`Comun.Metricas.C01`), los hechos sobre `1/(n+1)` y Arquímedes
+`one_div_succ_antitone`, `exists_n0_forall_lt` (`Comun.Reales`) y el puente
+`cardC_iff_mk_eq_continuum` para el corolario `_curso` (`Comun.Cardinales`). Quedan locales:
+`𝒜`, `Φ`, el Ej. 3 y la "carpa" de `ej4_reciproca_falsa`.
 -/
 import Mathlib
+import Comun.Reales
+import Comun.Supremos
+import Comun.Cardinales
+import Comun.Metricas.C01
 
-open Cardinal Filter Topology
+open Cardinal Filter Topology Comun
 
 namespace Parcial1_2C2024
 
@@ -16,31 +27,19 @@ namespace Parcial1_2C2024
 
 `ínf A + ínf B = ínf (A + B)` para `A, B ⊆ ℝ` no vacíos y acotados. -/
 
-/-- El conjunto suma `A + B = {a + b : a ∈ A, b ∈ B}`. -/
-def sumSet (A B : Set ℝ) : Set ℝ := {x | ∃ a ∈ A, ∃ b ∈ B, x = a + b}
-
-/-- **Ejercicio 1.** (Alcanza con que `A` y `B` estén acotados inferiormente.) -/
+/-- **Ejercicio 1.** (Alcanza con que `A` y `B` estén acotados inferiormente.) El conjunto suma
+es `Comun.sumSet` y la igualdad es `Comun.sInf_sumSet`: `ínf A + ínf B` es cota inferior de
+`A + B`, y para cada `ε > 0` hay `a ∈ A`, `b ∈ B` a menos de `ε/2` de los ínfimos. -/
 theorem ej1 (A B : Set ℝ) (hA : A.Nonempty) (hA' : BddBelow A)
     (hB : B.Nonempty) (hB' : BddBelow B) :
-    sInf A + sInf B = sInf (sumSet A B) := by
-  obtain ⟨a₀, ha₀⟩ := hA
-  obtain ⟨b₀, hb₀⟩ := hB
-  have hne : (sumSet A B).Nonempty := ⟨a₀ + b₀, a₀, ha₀, b₀, hb₀, rfl⟩
-  -- `ínf A + ínf B` es cota inferior del conjunto suma.
-  have hlb : ∀ x ∈ sumSet A B, sInf A + sInf B ≤ x := by
-    rintro x ⟨a, ha, b, hb, rfl⟩
-    exact add_le_add (csInf_le hA' ha) (csInf_le hB' hb)
-  apply le_antisymm
-  · -- `ínf (A + B) ≥ ínf A + ínf B`: el ínfimo es la mayor cota inferior.
-    exact le_csInf hne hlb
-  · -- `ínf (A + B) ≤ ínf A + ínf B + ε` para todo `ε > 0`, con `a`, `b` a menos de `ε/2`.
-    apply le_of_forall_pos_lt_add
-    intro ε hε
-    obtain ⟨a, ha, haε⟩ := exists_lt_of_csInf_lt ⟨a₀, ha₀⟩ (show sInf A < sInf A + ε / 2 by linarith)
-    obtain ⟨b, hb, hbε⟩ := exists_lt_of_csInf_lt ⟨b₀, hb₀⟩ (show sInf B < sInf B + ε / 2 by linarith)
-    have hab : sInf (sumSet A B) ≤ a + b :=
-      csInf_le ⟨sInf A + sInf B, hlb⟩ ⟨a, ha, b, hb, rfl⟩
-    linarith
+    sInf A + sInf B = sInf (sumSet A B) :=
+  (sInf_sumSet A B hA hA' hB hB').symm
+
+/-- **Ejercicio 1**, en el dialecto del curso: si `i = ínf A` y `j = ínf B` (Definición 5),
+entonces `i + j = ínf (A + B)` (`Comun.esInf_sumSet`). -/
+theorem ej1_curso {A B : Set ℝ} {i j : ℝ} (hi : EsInf A i) (hj : EsInf B j) :
+    EsInf (sumSet A B) (i + j) :=
+  esInf_sumSet hi hj
 
 /-! ## Ejercicio 2
 
@@ -103,6 +102,10 @@ theorem ej2 : #𝒜 = 𝔠 := by
     calc 𝔠 = #(Set ℕ) := by rw [Cardinal.mk_set, Cardinal.mk_nat, Cardinal.two_power_aleph0]
       _ ≤ #𝒜 := Cardinal.mk_le_of_injective hinj
 
+/-- **Ejercicio 2**, en el dialecto del curso: `𝒜` tiene el cardinal del continuo, `#𝒜 = c`
+(Definición 3.8, `CardC`). -/
+theorem ej2_curso : CardC 𝒜 := cardC_iff_mk_eq_continuum.2 ej2
+
 /-! ## Ejercicio 3
 
 Si en `(X, d)` toda sucesión decreciente de cerrados, acotados y no vacíos con diámetro
@@ -125,8 +128,7 @@ theorem ej3 {X : Type*} [MetricSpace X]
   have hr : ∀ n, 0 < r n := fun n => by positivity
   have hr1 : ∀ n, r n ≤ 1 := fun n => by
     simp only [r]; rw [div_le_one (by positivity)]; linarith [(Nat.cast_nonneg n : (0:ℝ) ≤ n)]
-  have hr_anti : ∀ n, r (n + 1) ≤ r n := fun n => by
-    simp only [r]; apply one_div_le_one_div_of_le (by positivity); push_cast; linarith
+  have hr_anti : ∀ n, r (n + 1) ≤ r n := fun n => one_div_succ_antitone (Nat.le_succ n)
   let S : ℕ → Set X := fun n => ⋃ m, ⋃ (_ : n ≤ m), Metric.ball (x m) (r n)
   let A : ℕ → Set X := fun n => closure (S n)
   have hmemS : ∀ n y, y ∈ S n ↔ ∃ m, n ≤ m ∧ y ∈ Metric.ball (x m) (r n) := by
@@ -160,17 +162,14 @@ theorem ej3 {X : Type*} [MetricSpace X]
     rw [Metric.tendsto_atTop]
     intro ε hε
     obtain ⟨N₁, hN₁⟩ := Metric.cauchySeq_iff.1 hx (ε / 5) (by positivity)
-    obtain ⟨N₂, hN₂⟩ := exists_nat_gt (5 / ε)
+    obtain ⟨N₂, hN₂⟩ := exists_n0_forall_lt (5 / ε)
     refine ⟨max N₁ N₂, fun n hn => ?_⟩
     have hn₁ : N₁ ≤ n := le_trans (le_max_left _ _) hn
     have hn₂ : N₂ ≤ n := le_trans (le_max_right _ _) hn
     have hrn : r n < ε / 5 := by
       simp only [r]
       rw [div_lt_iff₀ (by positivity)]
-      have : (5 : ℝ) / ε < n + 1 := by
-        calc (5 : ℝ) / ε < N₂ := hN₂
-          _ ≤ n := by exact_mod_cast hn₂
-          _ < n + 1 := by linarith
+      have : (5 : ℝ) / ε < n + 1 := by linarith [hN₂ n hn₂]
       rw [div_lt_iff₀ hε] at this
       linarith
     have hdS : Metric.diam (S n) ≤ 2 * r n + ε / 5 := by
@@ -209,36 +208,14 @@ theorem ej3 {X : Type*} [MetricSpace X]
 es falsa (la evaluación `f ↦ f(0)` es `d_∞`-continua y no `d_1`-continua).
 
 `C([0, 1])` se modela como `C(I, ℝ)` (`I = [0, 1]`), que en Mathlib lleva la métrica `d_∞`.
-La distancia `d_1` se define a mano como la integral de `|f - g|` sobre `[0, 1]`, y la
-"continuidad con `d_1`" se escribe con `ε`-`δ`. -/
+La distancia `d_1` es la integral de `|f - g|` sobre `[0, 1]` (`Comun.C01.d1`, que integra la
+extensión `C01.ext` a `ℝ`; `C01.d1_le_dist` es `d_1 ≤ d_∞`), y la "continuidad con `d_1`" se
+escribe con `ε`-`δ`. -/
 
-open unitInterval in
-/-- Extiende `f : C(I, ℝ)` a `ℝ` (constante fuera de `[0, 1]`), para integrar en `ℝ`. -/
-noncomputable def ext (f : C(unitInterval, ℝ)) : ℝ → ℝ :=
-  fun x => f (Set.projIcc 0 1 zero_le_one x)
+open Comun.C01 (ext continuous_ext ext_of_mem d1_le_dist)
 
-theorem continuous_ext (f : C(unitInterval, ℝ)) : Continuous (ext f) :=
-  f.continuous.comp continuous_projIcc
-
-theorem ext_of_mem (f : C(unitInterval, ℝ)) {x : ℝ} (hx : x ∈ Set.Icc (0 : ℝ) 1) :
-    ext f x = f ⟨x, hx⟩ := by
-  simp [ext, Set.projIcc_of_mem zero_le_one hx]
-
-/-- La distancia `d_1(f, g) = ∫_0^1 |f(x) - g(x)| dx`. -/
-noncomputable def d1 (f g : C(unitInterval, ℝ)) : ℝ :=
-  ∫ x in (0 : ℝ)..1, |ext f x - ext g x|
-
-/-- `d_1(f, g) ≤ d_∞(f, g)`: la bola de `d_∞` está dentro de la bola de `d_1`. -/
-theorem d1_le_dist (f g : C(unitInterval, ℝ)) : d1 f g ≤ dist f g := by
-  unfold d1
-  calc ∫ x in (0 : ℝ)..1, |ext f x - ext g x| ≤ ∫ _x in (0 : ℝ)..1, dist f g := by
-        apply intervalIntegral.integral_mono_on zero_le_one
-        · exact ((continuous_ext f).sub (continuous_ext g)).abs.intervalIntegrable _ _
-        · exact intervalIntegrable_const
-        · intro x hx
-          rw [ext_of_mem f hx, ext_of_mem g hx, ← Real.dist_eq]
-          exact ContinuousMap.dist_apply_le_dist _
-    _ = dist f g := by simp
+/-- La distancia `d_1(f, g) = ∫_0^1 |f(x) - g(x)| dx` (`Comun.C01.d1`). -/
+noncomputable abbrev d1 (f g : C(unitInterval, ℝ)) : ℝ := C01.d1 f g
 
 /-- **Ejercicio 4, ida.** Si `𝓕` es continua para `d_1` (en `ε`-`δ`), es continua para `d_∞`. -/
 theorem ej4 {Y : Type*} [MetricSpace Y] (F : C(unitInterval, ℝ) → Y)
@@ -249,8 +226,8 @@ theorem ej4 {Y : Type*} [MetricSpace Y] (F : C(unitInterval, ℝ) → Y)
   obtain ⟨δ, hδ, h⟩ := hF f ε hε
   exact ⟨δ, hδ, fun g hg => h g (lt_of_le_of_lt (d1_le_dist g f) hg)⟩
 
-/-- La evaluación en `0`. -/
-noncomputable def E (f : C(unitInterval, ℝ)) : ℝ := f ⟨0, by norm_num⟩
+/-- La evaluación en `0` (`Comun.C01.E`). -/
+noncomputable abbrev E (f : C(unitInterval, ℝ)) : ℝ := C01.E f
 
 /-- **Ejercicio 4, recíproca falsa.** `E` es continua para `d_∞` pero no para `d_1`: la función
 "carpa" `g_h(x) = máx{0, 1 - x/h}` tiene `d_1(g_h, 0) ≤ h` y `E(g_h) = 1`. -/
@@ -286,7 +263,7 @@ theorem ej4_reciproca_falsa :
   have hbc : IntervalIntegrable (fun x => |ext g x - ext 0 x|) MeasureTheory.volume r 1 :=
     hcont.intervalIntegrable _ _
   have hd1 : d1 g 0 ≤ r := by
-    unfold d1
+    unfold d1 C01.d1
     rw [← intervalIntegral.integral_add_adjacent_intervals hab hbc]
     have h1 : ∫ x in (0 : ℝ)..r, |ext g x - ext 0 x| ≤ r := by
       calc ∫ x in (0 : ℝ)..r, |ext g x - ext 0 x| ≤ ∫ _x in (0 : ℝ)..r, (1 : ℝ) := by
@@ -310,8 +287,8 @@ theorem ej4_reciproca_falsa :
     linarith
   have := hδ' g (lt_of_le_of_lt hd1 hrδ)
   -- `E g = 1`, `E 0 = 0`.
-  have hE : E g = 1 := by simp [E, g]
-  have hE0 : E 0 = 0 := by simp [E]
+  have hE : E g = 1 := by simp [E, C01.E, g]
+  have hE0 : E 0 = 0 := by simp [E, C01.E]
   rw [hE, hE0, Real.dist_eq, sub_zero, abs_one] at this
   exact lt_irrefl _ this
 

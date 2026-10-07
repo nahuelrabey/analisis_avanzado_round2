@@ -7,10 +7,23 @@ Lean 4 + Mathlib. Las resoluciones "a mano" están en el archivo Typst.
 
 Convención sobre índices: en el curso las sucesiones empiezan en `n = 1`; en Lean usamos
 `ℕ = {0, 1, 2, ...}`. Ningún argumento depende de dónde empieza la numeración.
+
+Qué usa de `Comun`: el conjunto suma `sumSet` con `sSup_sumSet`/`esSup_sumSet`
+(`Comun.Supremos`; el Ej. 2 (a) es un alias), la distancia euclídea `d2` con `esMetrica_d2`,
+`dinf_le_d2`, `d2_le_sqrt_n_dinf` y el puente `dinf_eq_dist` (`Comun.Metricas.Rn`), la
+Definición 4.1 `EsMetrica` con `EsMetrica.max`, `EsMetrica.const_mul`, el constructor
+`EsMetrica.toMetricSpace` y la transferencia de completitud `completeSpace_of_dist_le_of_le`
+(`Comun.Metricas`), y el puente `cardC_iff_mk_eq_continuum` para el corolario `_curso`
+(`Comun.Cardinales`). Quedan locales: `A`, `codif`, el contraejemplo `a2`/`b2`, el Ej. 3, la
+métrica `d` del Ej. 4 con `Rd n` y el dibujo de la bola.
 -/
 import Mathlib
+import Comun.Supremos
+import Comun.Cardinales
+import Comun.Metricas
+import Comun.Metricas.Rn
 
-open Cardinal Filter Topology
+open Cardinal Filter Topology Comun
 
 namespace Recu1_1C2025
 
@@ -70,36 +83,27 @@ theorem ej1 : #A = 𝔠 := by
 
 theorem ej1' : #A = #ℝ := by rw [ej1, Cardinal.mk_real]
 
+/-- **Ejercicio 1**, en el dialecto del curso: `#A = c` (Definición 3.8, `CardC`). -/
+theorem ej1_curso : CardC A := cardC_iff_mk_eq_continuum.2 ej1
+
 /-! ## Ejercicio 2
 
 (a) `sup (A + B) = sup A + sup B` para `A, B` no vacíos y acotados: **verdadera**.
 (b) `sup {a_n + b_n} = sup {a_n} + sup {b_n}` para sucesiones acotadas: **falsa**. -/
 
-/-- El conjunto suma `A + B = {a + b : a ∈ A, b ∈ B}`. -/
-def sumSet (A B : Set ℝ) : Set ℝ := {x | ∃ a ∈ A, ∃ b ∈ B, x = a + b}
-
-/-- **Ejercicio 2 (a).** (Alcanza con que `A` y `B` estén acotados superiormente.) -/
+/-- **Ejercicio 2 (a).** (Alcanza con que `A` y `B` estén acotados superiormente.) El conjunto
+suma es `Comun.sumSet` y la igualdad es `Comun.sSup_sumSet`: `sup A + sup B` es cota superior
+de `A + B`, y para cada `ε > 0` hay `a ∈ A`, `b ∈ B` a menos de `ε/2` de los supremos. -/
 theorem ej2a (A B : Set ℝ) (hA : A.Nonempty) (hA' : BddAbove A)
     (hB : B.Nonempty) (hB' : BddAbove B) :
-    sSup (sumSet A B) = sSup A + sSup B := by
-  obtain ⟨a₀, ha₀⟩ := hA
-  obtain ⟨b₀, hb₀⟩ := hB
-  have hne : (sumSet A B).Nonempty := ⟨a₀ + b₀, a₀, ha₀, b₀, hb₀, rfl⟩
-  -- `sup A + sup B` es cota superior de `A + B`.
-  have hub : ∀ x ∈ sumSet A B, x ≤ sSup A + sSup B := by
-    rintro x ⟨a, ha, b, hb, rfl⟩
-    exact add_le_add (le_csSup hA' ha) (le_csSup hB' hb)
-  apply le_antisymm
-  · -- `≤`: el supremo es la menor cota superior.
-    exact csSup_le hne hub
-  · -- `≥`: para cada `ε > 0` hay `a_ε ∈ A`, `b_ε ∈ B` con `sup A - ε/2 < a_ε`, `sup B - ε/2 < b_ε`.
-    apply le_of_forall_pos_lt_add
-    intro ε hε
-    obtain ⟨a, ha, haε⟩ := exists_lt_of_lt_csSup ⟨a₀, ha₀⟩ (show sSup A - ε / 2 < sSup A by linarith)
-    obtain ⟨b, hb, hbε⟩ := exists_lt_of_lt_csSup ⟨b₀, hb₀⟩ (show sSup B - ε / 2 < sSup B by linarith)
-    have hab : a + b ≤ sSup (sumSet A B) :=
-      le_csSup ⟨sSup A + sSup B, hub⟩ ⟨a, ha, b, hb, rfl⟩
-    linarith
+    sSup (sumSet A B) = sSup A + sSup B :=
+  sSup_sumSet A B hA hA' hB hB'
+
+/-- **Ejercicio 2 (a)**, en el dialecto del curso: si `s = sup A` y `t = sup B` (Definición 2),
+entonces `s + t = sup (A + B)` (`Comun.esSup_sumSet`). -/
+theorem ej2a_curso {A B : Set ℝ} {s t : ℝ} (hs : EsSup A s) (ht : EsSup B t) :
+    EsSup (sumSet A B) (s + t) :=
+  esSup_sumSet hs ht
 
 /-- Contraejemplo de 2 (b): `a = (1, 0, 0, ...)`, `b = (-1, 0, 0, ...)`. -/
 def a2 : ℕ → ℝ := fun n => if n = 0 then 1 else 0
@@ -161,9 +165,9 @@ theorem ej3 {E : Type*} [MetricSpace E] (X : Set E) (hX : closure X = Set.univ)
 
 `d(x, y) = máx {4/3 d_∞(x, y), d_2(x, y)}` en `ℝⁿ`.
 
-En Mathlib, `Fin n → ℝ` lleva la métrica `d_∞` (`dist x y = máx |x i - y i|`) y
-`EuclideanSpace ℝ (Fin n)` lleva `d_2`. Definimos `d2` transportando esta última y `d` como
-en el enunciado.
+En Mathlib, `Fin n → ℝ` lleva la métrica `d_∞` (`dist x y = máx |x i - y i|`); `d_2` es la
+`Comun.d2` de la Práctica 3 (`d2_eq_dist_euclidean` la identifica con la distancia de
+`EuclideanSpace ℝ (Fin n)`). Definimos `d` como en el enunciado.
 
 (a) `d` es una métrica.
 (b) `B_d(0, 1) = B_{d_∞}(0, 3/4) ∩ B_{d_2}(0, 1)` (un cuadrado con las esquinas recortadas).
@@ -171,48 +175,29 @@ en el enunciado.
 
 variable {n : ℕ}
 
-/-- La distancia euclídea `d_2` en `ℝⁿ = Fin n → ℝ`. -/
-noncomputable def d2 (x y : Fin n → ℝ) : ℝ :=
-  dist (WithLp.toLp 2 x : EuclideanSpace ℝ (Fin n)) (WithLp.toLp 2 y)
-
-theorem d2_eq (x y : Fin n → ℝ) : d2 x y = Real.sqrt (∑ i, (x i - y i) ^ 2) := by
-  simp [d2, EuclideanSpace.dist_eq, Real.dist_eq, sq_abs]
-
-theorem d2_nonneg (x y : Fin n → ℝ) : 0 ≤ d2 x y := dist_nonneg
-theorem d2_comm (x y : Fin n → ℝ) : d2 x y = d2 y x := dist_comm _ _
-theorem d2_triangle (x y z : Fin n → ℝ) : d2 x z ≤ d2 x y + d2 y z := dist_triangle _ _ _
-theorem d2_self (x : Fin n → ℝ) : d2 x x = 0 := dist_self _
-theorem d2_eq_zero_iff (x y : Fin n → ℝ) : d2 x y = 0 ↔ x = y := by
-  simp [d2, dist_eq_zero]
+/-- La distancia euclídea `d_2` en `ℝⁿ = Fin n → ℝ` es `Comun.d2`, por definición la fórmula
+`√(∑ (xᵢ - yᵢ)²)`. -/
+theorem d2_eq (x y : Fin n → ℝ) : d2 x y = Real.sqrt (∑ i, (x i - y i) ^ 2) := rfl
 
 /-- La distancia `d` del Ejercicio 4. `dist x y` es `d_∞(x, y)`. -/
 noncomputable def d (x y : Fin n → ℝ) : ℝ := max (4 / 3 * dist x y) (d2 x y)
 
-/-- **Ejercicio 4 (a).** Los cuatro axiomas de métrica para `d`. -/
-theorem d_nonneg (x y : Fin n → ℝ) : 0 ≤ d x y :=
-  le_max_of_le_right (d2_nonneg x y)
+/-- **Ejercicio 4 (a).** `d` es una métrica (Definición 4.1): es el máximo de dos métricas,
+`4/3 · d_∞` (`Comun.EsMetrica.const_mul` de la métrica de Mathlib) y `d_2`
+(`Comun.esMetrica_d2`, Práctica 3, Ej. 1 (b)), y `Comun.EsMetrica.max`. -/
+theorem esMetrica_d : EsMetrica (d (n := n)) :=
+  ((esMetrica_dist (Fin n → ℝ)).const_mul (by norm_num : (0 : ℝ) < 4 / 3)).max (esMetrica_d2 n)
 
-theorem d_self (x : Fin n → ℝ) : d x x = 0 := by simp [d, d2_self]
+/-- **Ejercicio 4 (a).** Los cuatro axiomas de métrica para `d`, uno por uno. -/
+theorem d_nonneg (x y : Fin n → ℝ) : 0 ≤ d x y := esMetrica_d.nonneg x y
 
-theorem d_eq_zero_iff (x y : Fin n → ℝ) : d x y = 0 ↔ x = y := by
-  constructor
-  · intro h
-    have h2 : d2 x y ≤ 0 := h ▸ le_max_right _ _
-    exact (d2_eq_zero_iff x y).1 (le_antisymm h2 (d2_nonneg x y))
-  · rintro rfl; exact d_self x
+theorem d_eq_zero_iff (x y : Fin n → ℝ) : d x y = 0 ↔ x = y := esMetrica_d.eq_zero_iff x y
 
-theorem d_comm (x y : Fin n → ℝ) : d x y = d y x := by
-  simp [d, dist_comm, d2_comm]
+theorem d_self (x : Fin n → ℝ) : d x x = 0 := (d_eq_zero_iff x x).2 rfl
 
-theorem d_triangle (x y z : Fin n → ℝ) : d x z ≤ d x y + d y z := by
-  unfold d
-  apply max_le
-  · calc 4 / 3 * dist x z ≤ 4 / 3 * (dist x y + dist y z) := by
-          gcongr; exact dist_triangle x y z
-      _ = 4 / 3 * dist x y + 4 / 3 * dist y z := by ring
-      _ ≤ _ := add_le_add (le_max_left _ _) (le_max_left _ _)
-  · calc d2 x z ≤ d2 x y + d2 y z := d2_triangle x y z
-      _ ≤ _ := add_le_add (le_max_right _ _) (le_max_right _ _)
+theorem d_comm (x y : Fin n → ℝ) : d x y = d y x := esMetrica_d.symm x y
+
+theorem d_triangle (x y z : Fin n → ℝ) : d x z ≤ d x y + d y z := esMetrica_d.triangle x y z
 
 /-- `ℝⁿ` con la métrica `d` (sinónimo de tipo de `Fin n → ℝ`). -/
 def Rd (n : ℕ) : Type := Fin n → ℝ
@@ -222,40 +207,25 @@ def toRd (x : Fin n → ℝ) : Rd n := x
 /-- Pasar de `(ℝⁿ, d)` a `(ℝⁿ, d_∞)`: es la identidad. -/
 def ofRd (x : Rd n) : Fin n → ℝ := x
 
-/-- **Ejercicio 4 (a).** `(ℝⁿ, d)` es un espacio métrico. -/
-noncomputable instance : MetricSpace (Rd n) where
-  dist x y := d (ofRd x) (ofRd y)
-  dist_self x := d_self _
-  dist_comm x y := d_comm _ _
-  dist_triangle x y z := d_triangle _ _ _
-  eq_of_dist_eq_zero h := (d_eq_zero_iff _ _).1 h
+/-- **Ejercicio 4 (a).** `(ℝⁿ, d)` es un espacio métrico (`Comun.EsMetrica.toMetricSpace`). -/
+noncomputable instance : MetricSpace (Rd n) :=
+  show MetricSpace (Con (Fin n → ℝ) d) from esMetrica_d.toMetricSpace
 
 theorem Rd.dist_eq (x y : Rd n) : dist x y = d (ofRd x) (ofRd y) := rfl
 
 /-! ### Las desigualdades de (c) -/
 
-/-- `d_∞ ≤ d_2`. -/
+/-- `d_∞ ≤ d_2` (`Comun.dinf_le_d2` con el puente `dinf_eq_dist`; si `n = 0` las dos valen `0`). -/
 theorem dist_le_d2 (x y : Fin n → ℝ) : dist x y ≤ d2 x y := by
-  rw [dist_pi_le_iff (d2_nonneg x y)]
-  intro i
-  rw [d2_eq, Real.dist_eq]
-  apply Real.le_sqrt_of_sq_le
-  rw [sq_abs]
-  exact Finset.single_le_sum (f := fun j => (x j - y j) ^ 2) (fun j _ => sq_nonneg _)
-    (Finset.mem_univ i)
+  cases n with
+  | zero => rw [Subsingleton.elim x y, dist_self]; exact (esMetrica_d2 0).nonneg y y
+  | succ n => rw [← dinf_eq_dist]; exact dinf_le_d2 x y
 
-/-- `d_2 ≤ √n · d_∞`. -/
+/-- `d_2 ≤ √n · d_∞` (`Comun.d2_le_sqrt_n_dinf`; si `n = 0` las dos valen `0`). -/
 theorem d2_le_sqrt_mul_dist (x y : Fin n → ℝ) : d2 x y ≤ Real.sqrt n * dist x y := by
-  rw [d2_eq, ← Real.sqrt_sq dist_nonneg, ← Real.sqrt_mul (Nat.cast_nonneg n)]
-  apply Real.sqrt_le_sqrt
-  calc ∑ i, (x i - y i) ^ 2 ≤ ∑ _i : Fin n, dist x y ^ 2 := by
-        apply Finset.sum_le_sum
-        intro i _
-        have := dist_le_pi_dist x y i
-        rw [Real.dist_eq] at this
-        calc (x i - y i) ^ 2 = |x i - y i| ^ 2 := (sq_abs _).symm
-          _ ≤ dist x y ^ 2 := by gcongr
-    _ = n * dist x y ^ 2 := by simp
+  cases n with
+  | zero => rw [Subsingleton.elim x y, ((esMetrica_d2 0).eq_zero_iff y y).2 rfl, dist_self, mul_zero]
+  | succ n => rw [← dinf_eq_dist]; exact d2_le_sqrt_n_dinf x y
 
 /-- `d_2 ≤ d`. -/
 theorem d2_le_d (x y : Fin n → ℝ) : d2 x y ≤ d x y := le_max_right _ _
@@ -264,7 +234,7 @@ theorem d2_le_d (x y : Fin n → ℝ) : d2 x y ≤ d x y := le_max_right _ _
 theorem d_le_d2 (x y : Fin n → ℝ) : d x y ≤ 4 / 3 * d2 x y := by
   apply max_le
   · gcongr; exact dist_le_d2 x y
-  · linarith [d2_nonneg x y]
+  · linarith [(esMetrica_d2 n).nonneg x y]
 
 /-- `d_∞ ≤ d`. -/
 theorem dist_le_d (x y : Fin n → ℝ) : dist x y ≤ d x y :=
@@ -304,13 +274,12 @@ noncomputable def uniformEquivRd : (Fin n → ℝ) ≃ᵤ Rd n where
   uniformContinuous_invFun := lipschitz_ofRd.uniformContinuous
 
 /-- **Ejercicio 4 (c), completitud.** `(ℝⁿ, d)` es completo: toda sucesión de Cauchy para `d`
-lo es para `d_∞`, converge para `d_∞` (que es completa) y entonces converge para `d`. -/
-instance : CompleteSpace (Rd n) := by
-  apply Metric.complete_of_cauchySeq_tendsto
-  intro u hu
-  have hu' : CauchySeq (fun k => ofRd (u k)) := lipschitz_ofRd.uniformContinuous.comp_cauchySeq hu
-  obtain ⟨x, hx⟩ := cauchySeq_tendsto_of_complete hu'
-  exact ⟨toRd x, (lipschitz_toRd.continuous.tendsto x).comp hx⟩
+lo es para `d_∞` (`d_∞ ≤ d`), converge para `d_∞` (que es completa) y entonces converge para `d`
+(`d ≤ (4/3)√n · d_∞`). Es `Comun.completeSpace_of_dist_le_of_le` con la identidad
+`toRd`/`ofRd`. -/
+instance : CompleteSpace (Rd n) :=
+  completeSpace_of_dist_le_of_le toRd ofRd (fun _ => rfl) (c := 1) (C := 4 / 3 * Real.sqrt n)
+    (fun x y => by rw [one_mul, Rd.dist_eq]; exact dist_le_d _ _) (fun x y => d_le_dist x y)
 
 /-- Misma conclusión vía el isomorfismo uniforme. -/
 example : CompleteSpace (Rd n) := uniformEquivRd.completeSpace_iff.1 inferInstance

@@ -13,7 +13,9 @@ En el apunte `ℕ` arranca en `1`; acá arranca en `0`, lo que no cambia nada (e
 lo cumple `B 0 = A 0`).
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+
+open Comun
 
 namespace Guias.Guia2.Ej05
 

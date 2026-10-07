@@ -18,58 +18,22 @@ Los contraejemplos (b)-(d) se hacen en `ℝ`. Para la conclusión, `no_es_metric
 `E = ℝ`, y `no_es_metrica_general` la versión para cualquier `E` con al menos dos puntos
 (`[Nontrivial E]`): la separación falla con `A = {p}`, `C = {p, q}`. Para `E` de un solo punto
 `𝒳` tiene un solo elemento y `d̂` sí es una métrica, así que esa hipótesis es necesaria.
+
+Qué importa de `Comun`: `distsPar`, `dhat` y sus lemas (`dhat_le`, `le_dhat`, `dhat_nonneg`,
+`dhat_comm`, `dhat_eq_zero_of_approx`) y las partes verdaderas (a), (b) `⇐`, (c) `⇐`
+(`Comun.Topologia.DistConjuntos`), más `closure_subset_of_sep` (`Comun.Topologia`, con la
+constante de separación como parámetro). Quedan locales los contraejemplos y la conclusión.
 -/
 import Mathlib
-import Guias.Common
+import Comun.Metricas
+import Comun.Topologia
+import Comun.Topologia.DistConjuntos
+
+open Comun
 
 namespace Guias.Guia3.Ej11
 
 variable {E : Type*} [MetricSpace E]
-
-/-- El conjunto `{d(a, b) : a ∈ A, b ∈ B}`. -/
-def distancias (A B : Set E) : Set ℝ := {r | ∃ a ∈ A, ∃ b ∈ B, r = dist a b}
-
-/-- Ejercicio 11: `d̂(A, B) = ínf {d(a, b) : a ∈ A, b ∈ B}`. -/
-noncomputable def dhat (A B : Set E) : ℝ := sInf (distancias A B)
-
-theorem distancias_nonempty {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) :
-    (distancias A B).Nonempty := by
-  obtain ⟨a, ha⟩ := hA
-  obtain ⟨b, hb⟩ := hB
-  exact ⟨dist a b, a, ha, b, hb, rfl⟩
-
-/-- El conjunto de distancias está acotado inferiormente por `0`. -/
-theorem distancias_bddBelow (A B : Set E) : BddBelow (distancias A B) := by
-  refine ⟨0, ?_⟩
-  rintro r ⟨a, -, b, -, rfl⟩
-  exact dist_nonneg
-
-/-- `d̂(A, B) ≤ d(a, b)` para `a ∈ A`, `b ∈ B` (el ínfimo es cota inferior). -/
-theorem dhat_le {A B : Set E} {a b : E} (ha : a ∈ A) (hb : b ∈ B) : dhat A B ≤ dist a b :=
-  csInf_le (distancias_bddBelow A B) ⟨a, ha, b, hb, rfl⟩
-
-/-- El ínfimo es la mayor cota inferior. -/
-theorem le_dhat {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) {c : ℝ}
-    (h : ∀ a ∈ A, ∀ b ∈ B, c ≤ dist a b) : c ≤ dhat A B := by
-  apply le_csInf (distancias_nonempty hA hB)
-  rintro r ⟨a, ha, b, hb, rfl⟩
-  exact h a ha b hb
-
-theorem dhat_nonneg {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) : 0 ≤ dhat A B :=
-  le_dhat hA hB fun _ _ _ _ => dist_nonneg
-
-/-- `d̂` es simétrica: la propiedad (iii) de la Definición 4.1 sí vale (no hace falta en
-`no_es_metrica`, que usa la triangular). -/
-theorem dhat_comm (A B : Set E) : dhat A B = dhat B A := by
-  have : distancias A B = distancias B A := by
-    ext r
-    constructor
-    · rintro ⟨a, ha, b, hb, rfl⟩
-      exact ⟨b, hb, a, ha, dist_comm a b⟩
-    · rintro ⟨b, hb, a, ha, rfl⟩
-      exact ⟨a, ha, b, hb, dist_comm b a⟩
-  unfold dhat
-  rw [this]
 
 /-! ## (a) `d̂(A, B) = d̂(cl A, B)` -/
 
@@ -77,42 +41,19 @@ theorem dhat_comm (A B : Set E) : dhat A B = dhat B A := by
 
 `(≥)`: `A ⊆ cl A` y el ínfimo sobre un conjunto mayor es menor. `(≤)`: si `x ∈ cl A`, `b ∈ B`,
 para `ε > 0` hay `a ∈ A` con `d(x, a) < ε`, y `d̂(A, B) ≤ d(a, b) ≤ d(a, x) + d(x, b) < ε + d(x, b)`;
-luego `d̂(A, B) ≤ d(x, b)` y `d̂(A, B)` es cota inferior de las distancias de `(cl A, B)`. -/
+luego `d̂(A, B) ≤ d(x, b)` y `d̂(A, B)` es cota inferior de las distancias de `(cl A, B)`
+(`Comun.dhat_closure_left`). -/
 theorem dhat_closure_left {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty) :
-    dhat A B = dhat (closure A) B := by
-  apply le_antisymm
-  · apply le_dhat hA.closure hB
-    intro x hx b hb
-    apply le_of_forall_pos_le_add
-    intro ε hε
-    obtain ⟨a, ha, hxa⟩ := Metric.mem_closure_iff.1 hx ε hε
-    have h1 : dhat A B ≤ dist a b := dhat_le ha hb
-    have h2 : dist a b ≤ dist a x + dist x b := dist_triangle _ _ _
-    rw [dist_comm a x] at h2
-    linarith
-  · -- `d̂(cl A, B) ≤ d̂(A, B)`: `d̂(cl A, B)` es cota inferior de las distancias de `(A, B)`.
-    exact le_dhat hA hB fun a ha b hb => dhat_le (subset_closure ha) hb
+    dhat A B = dhat (closure A) B :=
+  Comun.dhat_closure_left hA hB
 
 /-! ## (b) `d̂(A, B) = 0 ↔ A ∩ B ≠ ∅` -/
 
 /-- **Ejercicio 11 (b), ida `⇐` (cierta en todo `E`).** Si `A ∩ B ≠ ∅` entonces `d̂(A, B) = 0`:
-si `x ∈ A ∩ B`, `0 ≤ d̂(A, B) ≤ d(x, x) = 0`. -/
+si `x ∈ A ∩ B`, `0 ≤ d̂(A, B) ≤ d(x, x) = 0` (`Comun.dhat_eq_zero_of_inter`). -/
 theorem dhat_eq_zero_of_inter {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty)
-    (h : (A ∩ B).Nonempty) : dhat A B = 0 := by
-  obtain ⟨x, hxA, hxB⟩ := h
-  apply le_antisymm _ (dhat_nonneg hA hB)
-  have := dhat_le hxA hxB
-  rwa [dist_self] at this
-
-/-- Si para todo `ε > 0` hay `a ∈ A`, `b ∈ B` con `d(a, b) < ε`, entonces `d̂(A, B) = 0`. -/
-theorem dhat_eq_zero_of_approx {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty)
-    (h : ∀ ε > 0, ∃ a ∈ A, ∃ b ∈ B, dist a b < ε) : dhat A B = 0 := by
-  apply le_antisymm _ (dhat_nonneg hA hB)
-  apply le_of_forall_pos_le_add
-  intro ε hε
-  obtain ⟨a, ha, b, hb, hab⟩ := h ε hε
-  have := dhat_le ha hb
-  linarith
+    (h : (A ∩ B).Nonempty) : dhat A B = 0 :=
+  Comun.dhat_eq_zero_of_inter hA hB h
 
 /-- Los intervalos `(0, 1)` y `(1, 2)` de `ℝ`: disjuntos y a distancia `0`. -/
 theorem ej11b_conjuntos :
@@ -147,42 +88,10 @@ theorem ej11b_contraejemplo :
 
 /-- **Ejercicio 11 (c), ida `⇐` (cierta en todo `E`).** Si `x ∈ cl A ∩ cl B` entonces
 `d̂(A, B) = 0`: para `ε > 0` hay `a ∈ A`, `b ∈ B` con `d(x, a), d(x, b) < ε/2`, así que
-`d(a, b) < ε`. -/
+`d(a, b) < ε` (`Comun.dhat_eq_zero_of_closure_inter`). -/
 theorem dhat_eq_zero_of_closure_inter {A B : Set E} (hA : A.Nonempty) (hB : B.Nonempty)
-    (h : (closure A ∩ closure B).Nonempty) : dhat A B = 0 := by
-  obtain ⟨x, hxA, hxB⟩ := h
-  apply dhat_eq_zero_of_approx hA hB
-  intro ε hε
-  obtain ⟨a, ha, hxa⟩ := Metric.mem_closure_iff.1 hxA (ε / 2) (by positivity)
-  obtain ⟨b, hb, hxb⟩ := Metric.mem_closure_iff.1 hxB (ε / 2) (by positivity)
-  refine ⟨a, ha, b, hb, ?_⟩
-  have h2 : dist a b ≤ dist a x + dist x b := dist_triangle _ _ _
-  rw [dist_comm a x] at h2
-  linarith
-
-/-- Un conjunto `S` con puntos distintos a distancia `≥ 1/2` es cerrado:
-`cl S ⊆ S`. Si `x ∈ cl S`, hay `a ∈ S` con `d(x, a) < 1/4`; si fuera `x ≠ a`, tomando
-`ε = mín(d(x, a), 1/4)` hay `a' ∈ S` con `d(x, a') < ε`, y entonces `d(a, a') < 1/2`, luego
-`a' = a`, pero `d(x, a') < d(x, a) = d(x, a')`. -/
-theorem closure_subset_of_sep {S : Set E} (hS : ∀ a ∈ S, ∀ a' ∈ S, a ≠ a' → 1 / 2 ≤ dist a a') :
-    closure S ⊆ S := by
-  intro x hx
-  obtain ⟨a, ha, hxa⟩ := Metric.mem_closure_iff.1 hx (1 / 4) (by norm_num)
-  by_cases hxeq : x = a
-  · rw [hxeq]; exact ha
-  · exfalso
-    have hpos : 0 < dist x a := dist_pos.2 hxeq
-    obtain ⟨a', ha', hxa'⟩ := Metric.mem_closure_iff.1 hx (min (dist x a) (1 / 4))
-      (lt_min hpos (by norm_num))
-    have h1 : dist x a' < dist x a := lt_of_lt_of_le hxa' (min_le_left _ _)
-    have h2 : dist x a' < 1 / 4 := lt_of_lt_of_le hxa' (min_le_right _ _)
-    have h3 : dist a a' ≤ dist a x + dist x a' := dist_triangle _ _ _
-    rw [dist_comm a x] at h3
-    by_cases haa : a = a'
-    · rw [haa] at h1
-      exact lt_irrefl _ h1
-    · have := hS a ha a' ha' haa
-      linarith
+    (h : (closure A ∩ closure B).Nonempty) : dhat A B = 0 :=
+  Comun.dhat_eq_zero_of_closure_inter hA hB h
 
 /-- `A = {n : n ≥ 2}` (naturales `≥ 2` vistos en `ℝ`). -/
 def A11 : Set ℝ := {x | ∃ n : ℕ, 2 ≤ n ∧ x = n}
@@ -233,11 +142,11 @@ theorem B11_sep : ∀ a ∈ B11, ∀ a' ∈ B11, a ≠ a' → 1 / 2 ≤ dist a a
 
 /-- `A` es cerrado: `cl A = A`. -/
 theorem A11_closure : closure A11 = A11 :=
-  Set.Subset.antisymm (closure_subset_of_sep A11_sep) subset_closure
+  Set.Subset.antisymm (closure_subset_of_sep (by norm_num) A11_sep) subset_closure
 
 /-- `B` es cerrado: `cl B = B`. -/
 theorem B11_closure : closure B11 = B11 :=
-  Set.Subset.antisymm (closure_subset_of_sep B11_sep) subset_closure
+  Set.Subset.antisymm (closure_subset_of_sep (by norm_num) B11_sep) subset_closure
 
 /-- `A` y `B` son disjuntos: `n = m + 1/m` con `0 < 1/m < 1` no puede ser entero. -/
 theorem A11_inter_B11 : A11 ∩ B11 = ∅ := by
@@ -345,7 +254,7 @@ theorem no_triangular : ¬ (∀ A B C : X, dhatX A C ≤ dhatX A B + dhatX B C) 
 
 /-- **Conclusión del Ejercicio 11.** `d̂` no es una distancia en `𝒳`
 (`EsMetrica` es la Definición 4.1): fallan la separación y la desigualdad triangular. -/
-theorem no_es_metrica : ¬ Guias.EsMetrica dhatX := by
+theorem no_es_metrica : ¬ Comun.EsMetrica dhatX := by
   intro hm
   exact no_triangular hm.triangle
 
@@ -360,7 +269,7 @@ noncomputable def dhatXE (A B : XE E) : ℝ := dhat A.1 B.1
 /-- **Conclusión del Ejercicio 11, para todo `E` con al menos dos puntos.** `d̂` no es una
 distancia en `𝒳(E)`: si `p ≠ q`, los conjuntos `{p}` y `{p, q}` son distintos pero
 `d̂({p}, {p, q}) = 0` (ítem (b), `⇐`), contra la separación (Def. 4.1 (ii)). -/
-theorem no_es_metrica_general [Nontrivial E] : ¬ Guias.EsMetrica (dhatXE (E := E)) := by
+theorem no_es_metrica_general [Nontrivial E] : ¬ Comun.EsMetrica (dhatXE (E := E)) := by
   intro hm
   obtain ⟨p, q, hpq⟩ := exists_pair_ne E
   have hC : ({p, q} : Set E).Nonempty := ⟨p, Set.mem_insert _ _⟩

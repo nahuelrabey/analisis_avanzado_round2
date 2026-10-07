@@ -8,45 +8,22 @@ Resolución "a mano" en `apuntes-typst/guias-agente/_partes2/ej08.typ`.
     en `n+1`, y usando que `X × {0,1} ∼ X ⊔ X` tiene el doble de elementos que `X`.
 
 Convenciones: `𝒫(A)` es `Set A`, `{0,1}` es `Bool`, `{1, …, n}` es `Fin n`.
+La biyección de (a) vive en `Comun.Cardinales.Continuo` (`setEquivBool`: `toFun` es la función
+característica `χ_S = decide (· ∈ S)` e `invFun` es `f ↦ f⁻¹({1})`); acá `equivCaracteristica` es
+un alias. La inducción de (b) queda local.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Cardinales
+import Comun.Cardinales.Continuo
 
 namespace Guias.Guia2.Ej08
 
-open Guias.Guia2
-
+open Comun
 /-! ## (a) La función característica -/
 
-/-- La función característica `χ_S : A → {0,1}` de un subconjunto `S ⊆ A`. -/
-noncomputable def caracteristica {A : Type*} (S : Set A) : A → Bool :=
-  fun a => by classical exact decide (a ∈ S)
-
-/-- El conjunto donde `f` vale `1`: `f⁻¹({1}) = {a ∈ A : f a = 1}`. -/
-def soporte {A : Type*} (f : A → Bool) : Set A := {a | f a = true}
-
-theorem caracteristica_eq_true_iff {A : Type*} (S : Set A) (a : A) :
-    caracteristica S a = true ↔ a ∈ S := by
-  unfold caracteristica
-  simp
-
-/-- `S ↦ χ_S` es una biyección `𝒫(A) → {0,1}^A` con inversa `f ↦ f⁻¹({1})`. -/
-noncomputable def equivCaracteristica (A : Type*) : Set A ≃ (A → Bool) where
-  toFun := caracteristica
-  invFun := soporte
-  left_inv S := by
-    ext a
-    simp only [soporte, Set.mem_ofPred_eq, caracteristica_eq_true_iff]
-  right_inv f := by
-    funext a
-    rcases Bool.eq_false_or_eq_true (f a) with h | h
-    · rw [h, caracteristica_eq_true_iff]
-      exact h
-    · rw [h]
-      rcases Bool.eq_false_or_eq_true (caracteristica (soporte f) a) with h' | h'
-      · rw [caracteristica_eq_true_iff] at h'
-        exact absurd (h.symm.trans h') Bool.false_ne_true
-      · exact h'
+/-- `S ↦ χ_S` es una biyección `𝒫(A) → {0,1}^A` con inversa `f ↦ f⁻¹({1})`
+(`Comun.setEquivBool`). -/
+noncomputable abbrev equivCaracteristica (A : Type*) : Set A ≃ (A → Bool) := setEquivBool A
 
 /-- **Ej. 8 (a).** `𝒫(A) ∼ {0,1}^A`. -/
 theorem ej8a (A : Type*) : Coordinables (Set A) (A → Bool) := ⟨equivCaracteristica A⟩

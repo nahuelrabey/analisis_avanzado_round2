@@ -7,10 +7,21 @@ Lean 4 + Mathlib. Las resoluciones "a mano" están en el archivo Typst.
 
 Convención sobre índices: en el curso `ℕ = {1, 2, ...}` y las sucesiones arrancan en `1`; en
 Lean arrancan en `0`. Donde importa, se escribe `1 ≤ n` o se usa `n + 1`.
+
+Qué usa de `Comun`: las Definiciones 2, 3, 5 y 6 (`EsSup`, `EsMax`, `EsInf`, `EsMin`) con sus
+puentes `esSup_iff_isLUB`, `esInf_iff_isGLB`, `esSup_unique`, `esInf_unique` para los
+corolarios `_curso` del Ej. 1 (`Comun.Supremos`), el puente `numerable_iff_mk_eq_aleph0` para el
+del Ej. 2 (`Comun.Cardinales`), y la distancia entre conjuntos `dhat` con `dhat_le`
+(`Comun.Topologia.DistConjuntos`; `dtilde` es un alias). Quedan locales: `A1`, `A2`, los
+Ej. 3, 4 y 5 y `C01.dist_prod_eq`.
 -/
 import Mathlib
+import Comun.Metricas.C01
+import Comun.Supremos
+import Comun.Cardinales
+import Comun.Topologia.DistConjuntos
 
-open Cardinal Filter Topology
+open Cardinal Filter Topology Comun
 
 namespace Parcial1_2C2025
 
@@ -67,6 +78,30 @@ theorem ej1_sInf : sInf A1 = 0 := by
 
 theorem ej1_zero_notMem : (0 : ℝ) ∉ A1 := fun h => lt_irrefl _ (mem_A1_pos h)
 
+/-- **Ejercicio 1, supremo**, en el dialecto del curso: `1` es el supremo de `A` (Definición 2). -/
+theorem ej1_sSup_curso : EsSup A1 1 := by
+  have h := isLUB_csSup A1_nonempty ⟨1, fun x hx => (mem_A1_lt_one hx).le⟩
+  rwa [ej1_sSup] at h
+
+/-- **Ejercicio 1, ínfimo**, en el dialecto del curso: `0` es el ínfimo de `A` (Definición 5). -/
+theorem ej1_sInf_curso : EsInf A1 0 := by
+  have h := isGLB_csInf A1_nonempty ⟨0, fun x hx => (mem_A1_pos hx).le⟩
+  rwa [ej1_sInf] at h
+
+/-- **Ejercicio 1, no hay máximo**, en el dialecto del curso (Definición 3): un máximo sería el
+supremo `1`, que no pertenece a `A`. -/
+theorem ej1_no_max_curso : ¬ ∃ m, EsMax A1 m := by
+  rintro ⟨m, hm, hmem⟩
+  rw [esSup_unique hm ej1_sSup_curso] at hmem
+  exact ej1_one_notMem hmem
+
+/-- **Ejercicio 1, no hay mínimo**, en el dialecto del curso (Definición 6): un mínimo sería el
+ínfimo `0`, que no pertenece a `A`. -/
+theorem ej1_no_min_curso : ¬ ∃ m, EsMin A1 m := by
+  rintro ⟨m, hm, hmem⟩
+  rw [esInf_unique hm ej1_sInf_curso] at hmem
+  exact ej1_zero_notMem hmem
+
 /-! ## Ejercicio 2
 
 `A = {(a_n) ⊆ ℚ : ∃ k, a_{n+k} = (a_k)^n ∀ n}` tiene cardinal `ℵ₀`.
@@ -115,6 +150,9 @@ theorem ej2 : #A2 = ℵ₀ :=
   haveI := A2_infinite
   Cardinal.mk_eq_aleph0 A2
 
+/-- **Ejercicio 2**, en el dialecto del curso: `A` es numerable (Definición 3.6). -/
+theorem ej2_curso : Numerable A2 := numerable_iff_mk_eq_aleph0.2 ej2
+
 /-! ## Ejercicio 3
 
 Dos puntos distintos tienen entornos abiertos con clausuras disjuntas. -/
@@ -141,18 +179,14 @@ theorem ej3 {E : Type*} [MetricSpace E] (x y : E) (hxy : x ≠ y) :
 (a) `⋃ cl(M_n) ⊆ cl(⋃ M_n)`.
 (b) Si `d̃(M_n, M_m) > ε` para `n ≠ m`, vale la igualdad. -/
 
-/-- La distancia entre conjuntos del enunciado. -/
-noncomputable def dtilde {E : Type*} [MetricSpace E] (A B : Set E) : ℝ :=
-  sInf {r | ∃ a ∈ A, ∃ b ∈ B, r = dist a b}
+/-- La distancia entre conjuntos del enunciado: es la `d̂` del Ej. 11 de la Práctica 3
+(`Comun.dhat`). -/
+noncomputable abbrev dtilde {E : Type*} [MetricSpace E] (A B : Set E) : ℝ := dhat A B
 
-/-- `d̃(A, B) ≤ d(a, b)` para todo `a ∈ A`, `b ∈ B`. -/
+/-- `d̃(A, B) ≤ d(a, b)` para todo `a ∈ A`, `b ∈ B` (`Comun.dhat_le`). -/
 theorem dtilde_le {E : Type*} [MetricSpace E] {A B : Set E} {a b : E} (ha : a ∈ A) (hb : b ∈ B) :
-    dtilde A B ≤ dist a b := by
-  apply csInf_le
-  · refine ⟨0, ?_⟩
-    rintro r ⟨a', _, b', _, rfl⟩
-    exact dist_nonneg
-  · exact ⟨a, ha, b, hb, rfl⟩
+    dtilde A B ≤ dist a b :=
+  dhat_le ha hb
 
 /-- **Ejercicio 4 (a).** -/
 theorem ej4a {E : Type*} [MetricSpace E] (M : ℕ → Set E) :
@@ -195,11 +229,6 @@ theorem ej4b {E : Type*} [MetricSpace E] (M : ℕ → Set E) (ε : ℝ) (hε : 0
 
 /-- La evaluación `F(f, x) = f(x)`. -/
 def F (p : C(unitInterval, ℝ) × unitInterval) : ℝ := p.1 p.2
-
-/-- La métrica de `C([0,1]) × [0,1]` en Mathlib es exactamente la del enunciado. -/
-theorem dist_prod_eq (p q : C(unitInterval, ℝ) × unitInterval) :
-    dist p q = max (dist p.1 q.1) |(p.2 : ℝ) - q.2| := by
-  rw [Prod.dist_eq, Subtype.dist_eq, Real.dist_eq]
 
 /-- **Ejercicio 5.** -/
 theorem ej5 : Continuous F := by

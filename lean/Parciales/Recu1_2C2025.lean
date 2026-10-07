@@ -7,10 +7,20 @@ Lean 4 + Mathlib. Las resoluciones "a mano" están en el archivo Typst.
 
 Convención sobre índices: en el curso `ℕ = {1, 2, ...}`; donde importa, se escribe
 explícitamente `1 ≤ n` o se usa `n + 1`.
+
+Qué usa de `Comun`: las Definiciones 2, 3, 5 y 6 (`EsSup`, `EsMax`, `EsInf`, `EsMin`) con sus
+puentes `esSup_iff_isLUB`, `esInf_iff_isGLB`, `esInf_unique` para los corolarios `_curso` del
+Ej. 1 (`Comun.Supremos`), el puente `numerable_iff_mk_eq_aleph0` para el del Ej. 2
+(`Comun.Cardinales`), y la métrica discreta `Disc ℝ` con su instancia y `Disc.dist_eq`
+(`Comun.Metricas.Discreta`; `Rδ` es un alias). Quedan locales: `A1`, `C`, los Ej. 3 y 5 y el
+plano `P` del Ej. 4.
 -/
 import Mathlib
+import Comun.Supremos
+import Comun.Cardinales
+import Comun.Metricas.Discreta
 
-open Cardinal Filter Topology
+open Cardinal Filter Topology Comun
 open scoped Classical
 
 namespace Recu1_2C2025
@@ -65,6 +75,24 @@ theorem ej1_no_min : (0 : ℝ) ∉ A1 := by
   rintro ⟨n, _, hn⟩
   have := one_div_pos.2 (denom_pos n)
   linarith
+
+/-- **Ejercicio 1, supremo y máximo**, en el dialecto del curso: `1/2` es el máximo de `A`
+(Definición 3: es el supremo y pertenece a `A`). -/
+theorem ej1_max_curso : EsMax A1 (1 / 2) :=
+  ⟨esSup_iff_isLUB.2 ej1_isGreatest.isLUB, ej1_max_mem⟩
+
+/-- **Ejercicio 1, ínfimo**, en el dialecto del curso: `0` es el ínfimo de `A` (Definición 5). -/
+theorem ej1_sInf_curso : EsInf A1 0 := by
+  have h := isGLB_csInf ⟨1 / 2, ej1_max_mem⟩
+    ⟨0, by rintro x ⟨n, _, rfl⟩; exact (one_div_pos.2 (denom_pos n)).le⟩
+  rwa [ej1_sInf] at h
+
+/-- **Ejercicio 1, no hay mínimo**, en el dialecto del curso (Definición 6): un mínimo sería el
+ínfimo `0`, que no pertenece a `A`. -/
+theorem ej1_no_min_curso : ¬ ∃ m, EsMin A1 m := by
+  rintro ⟨m, hm, hmem⟩
+  rw [esInf_unique hm ej1_sInf_curso] at hmem
+  exact ej1_no_min hmem
 
 /-! ## Ejercicio 2
 
@@ -130,6 +158,9 @@ theorem ej2 : #C = ℵ₀ :=
   haveI := C_infinite
   Cardinal.mk_eq_aleph0 C
 
+/-- **Ejercicio 2**, en el dialecto del curso: `C` es numerable (Definición 3.6). -/
+theorem ej2_curso : Numerable C := numerable_iff_mk_eq_aleph0.2 ej2
+
 /-! ## Ejercicio 3
 
 (a) `A` abierto y `A ∩ cl B ≠ ∅` ⇒ `A ∩ B ≠ ∅`.
@@ -153,34 +184,10 @@ theorem ej3b : ∃ A B : Set ℝ, (A ∩ closure B).Nonempty ∧ A ∩ B = ∅ :
 `d((x₁, y₁), (x₂, y₂)) = √(|x₁ - x₂|² + δ(y₁, y₂)²)` con `δ` la métrica discreta en `ℝ`.
 Es la métrica producto "ℓ²" de `(ℝ, |·|)` y `(ℝ, δ)`, que en Mathlib es `WithLp 2 (ℝ × Rδ)`. -/
 
-/-- `ℝ` con la métrica discreta. -/
-def Rδ : Type := ℝ
+/-- `ℝ` con la métrica discreta (`Comun.Disc ℝ`, con su instancia de `MetricSpace`). -/
+abbrev Rδ : Type := Disc ℝ
 
-noncomputable instance : MetricSpace Rδ where
-  dist x y := if x = y then 0 else 1
-  dist_self x := by simp
-  dist_comm x y := by
-    show (if x = y then (0 : ℝ) else 1) = if y = x then 0 else 1
-    by_cases h : x = y
-    · rw [ite_eq_left h, ite_eq_left h.symm]
-    · rw [ite_eq_right h, ite_eq_right (Ne.symm h)]
-  dist_triangle x y z := by
-    show (if x = z then (0 : ℝ) else 1) ≤ (if x = y then 0 else 1) + (if y = z then 0 else 1)
-    by_cases hxz : x = z
-    · rw [ite_eq_left hxz]; split_ifs <;> norm_num
-    · rw [ite_eq_right hxz]
-      by_cases hxy : x = y
-      · have hyz : y ≠ z := fun h => hxz (hxy.trans h)
-        rw [ite_eq_left hxy, ite_eq_right hyz]; norm_num
-      · rw [ite_eq_right hxy]; split_ifs <;> norm_num
-  eq_of_dist_eq_zero := by
-    intro x y h
-    by_contra hxy
-    change (if x = y then (0 : ℝ) else 1) = 0 at h
-    rw [ite_eq_right hxy] at h
-    exact one_ne_zero h
-
-theorem Rδ.dist_eq (x y : Rδ) : dist x y = if x = y then 0 else 1 := rfl
+theorem Rδ.dist_eq (x y : Rδ) : dist x y = if x = y then 0 else 1 := Disc.dist_eq x y
 
 /-- El plano con la métrica `d` del enunciado. -/
 abbrev P := WithLp 2 (ℝ × Rδ)

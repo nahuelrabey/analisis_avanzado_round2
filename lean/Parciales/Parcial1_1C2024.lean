@@ -4,10 +4,21 @@ Enunciado y soluciones oficiales transcriptos en `apuntes-typst/parciales/2024_1
 
 Este archivo verifica en Lean 4 + Mathlib las cuatro soluciones oficiales. Las diferencias
 entre el texto de la cátedra y la formalización están anotadas en el `.typ`.
+
+Qué usa de `Comun`: la codificación de polinomios por coeficientes `coefs`/`coefs_injective`
+(`Comun.Cardinales.Continuo`; `codif` es un alias), la distancia integral `C01.d1` de `C([0,1])`
+con su extensión `C01.ext` (`Comun.Metricas.C01`), la Definición 4.1 `EsMetrica` y el constructor
+`EsMetrica.toMetricSpace` para armar `(ℝ, d)` (`Comun.Metricas`), y los puentes
+`numerable_iff_mk_eq_aleph0` para los corolarios `_curso` (`Comun.Cardinales`). Quedan locales:
+`𝒜`, `R`, `Ψ`, `d`, `Rd` y la completitud de `(ℝ, d)`.
 -/
 import Mathlib
+import Comun.Cardinales
+import Comun.Cardinales.Continuo
+import Comun.Metricas
+import Comun.Metricas.C01
 
-open Cardinal Filter Topology Polynomial
+open Cardinal Filter Topology Polynomial Comun
 
 namespace Parcial1_1C2024
 
@@ -16,31 +27,12 @@ namespace Parcial1_1C2024
 (a) `#ℚ[x] = ℵ₀`. (b) Los reales algebraicos `𝒜 = {α : ∃ p ∈ ℚ[x] ∖ {0}, p(α) = 0}` son numerables. -/
 
 /-- La codificación "por grado" de la solución oficial: un polinomio de grado `n` queda
-determinado por sus `n + 1` coeficientes. -/
-def codif (p : ℚ[X]) : Σ n : ℕ, Fin (n + 1) → ℚ :=
-  ⟨p.natDegree, fun i => p.coeff i⟩
+determinado por sus `n + 1` coeficientes. Es `Comun.coefs` (la del Ej. 15 de la Práctica 2). -/
+abbrev codif (p : ℚ[X]) : Σ n : ℕ, Fin (n + 1) → ℚ := coefs p
 
-/-- Dos pares `(n, f)`, `(m, g)` iguales tienen `n = m` y los mismos valores. -/
-theorem sigma_eq_aux {n m : ℕ} {f : Fin (n + 1) → ℚ} {g : Fin (m + 1) → ℚ}
-    (h : (⟨n, f⟩ : Σ k : ℕ, Fin (k + 1) → ℚ) = ⟨m, g⟩) (i : ℕ) (hi : i < n + 1)
-    (hi' : i < m + 1) : f ⟨i, hi⟩ = g ⟨i, hi'⟩ := by
-  cases h
-  rfl
-
-theorem codif_injective : Function.Injective codif := by
-  intro p q h
-  have hdeg : p.natDegree = q.natDegree := congrArg Sigma.fst h
-  -- con el mismo grado, los coeficientes coinciden en `0, ..., n` ...
-  have hcoef : ∀ i : ℕ, i ≤ p.natDegree → p.coeff i = q.coeff i :=
-    fun i hi => sigma_eq_aux h i (by omega) (by omega)
-  -- ... y son `0` después.
-  apply Polynomial.ext
-  intro n
-  by_cases hn : n ≤ p.natDegree
-  · exact hcoef n hn
-  · push Not at hn
-    rw [Polynomial.coeff_eq_zero_of_natDegree_lt hn,
-      Polynomial.coeff_eq_zero_of_natDegree_lt (hdeg ▸ hn)]
+/-- `codif` es inyectiva: mismo grado y mismos coeficientes hasta el grado dan el mismo
+polinomio (`Comun.coefs_injective`). -/
+theorem codif_injective : Function.Injective codif := coefs_injective
 
 /-- `ℚ[x]` es contable. -/
 theorem countable_QX : Countable ℚ[X] := codif_injective.countable
@@ -56,6 +48,9 @@ theorem ej1a : #ℚ[X] = ℵ₀ :=
   have := countable_QX
   have := infinite_QX
   Cardinal.mk_eq_aleph0 ℚ[X]
+
+/-- **Ejercicio 1 (a)**, en el dialecto del curso: `ℚ[x]` es numerable (Definición 3.6). -/
+theorem ej1a_curso : Numerable ℚ[X] := numerable_iff_mk_eq_aleph0.2 ej1a
 
 /-- El conjunto `𝒜` de los reales algebraicos, como en el enunciado. -/
 def 𝒜 : Set ℝ := {α | ∃ p : ℚ[X], p ≠ 0 ∧ aeval α p = 0}
@@ -96,28 +91,22 @@ theorem ej1b : #𝒜 = ℵ₀ := by
   have := hinf.to_subtype
   exact Cardinal.mk_eq_aleph0 𝒜
 
+/-- **Ejercicio 1 (b)**, en el dialecto del curso: `𝒜` es numerable (Definición 3.6). -/
+theorem ej1b_curso : Numerable 𝒜 := numerable_iff_mk_eq_aleph0.2 ej1b
+
 /-! ## Ejercicio 2
 
 `Ψ : (C[0,1], d_∞) → (C[0,1], d_1)`, `Ψ(f)(x) = x f(x)`, es uniformemente continua:
 `d_1(Ψ f, Ψ g) ≤ d_∞(f, g) / 2`.
 
-`C[0,1]` es `C(I, ℝ)` con la métrica `d_∞` de Mathlib; `d_1` se define como la integral de
-`|f - g|` en `[0, 1]`, y la continuidad uniforme hacia `d_1` se escribe con `ε`-`δ`. -/
+`C[0,1]` es `C(I, ℝ)` con la métrica `d_∞` de Mathlib; `d_1` es la integral de `|f - g|` en
+`[0, 1]` (`Comun.C01.d1`, definida integrando la extensión `C01.ext` a `ℝ`), y la continuidad
+uniforme hacia `d_1` se escribe con `ε`-`δ`. -/
 
-/-- Extiende `f : C(I, ℝ)` a `ℝ` (constante fuera de `[0, 1]`), para integrar en `ℝ`. -/
-noncomputable def ext (f : C(unitInterval, ℝ)) : ℝ → ℝ :=
-  fun x => f (Set.projIcc 0 1 zero_le_one x)
+open Comun.C01 (ext continuous_ext ext_of_mem)
 
-theorem continuous_ext (f : C(unitInterval, ℝ)) : Continuous (ext f) :=
-  f.continuous.comp continuous_projIcc
-
-theorem ext_of_mem (f : C(unitInterval, ℝ)) {x : ℝ} (hx : x ∈ Set.Icc (0 : ℝ) 1) :
-    ext f x = f ⟨x, hx⟩ := by
-  simp [ext, Set.projIcc_of_mem zero_le_one hx]
-
-/-- La distancia `d_1(f, g) = ∫_0^1 |f(x) - g(x)| dx`. -/
-noncomputable def d1 (f g : C(unitInterval, ℝ)) : ℝ :=
-  ∫ x in (0 : ℝ)..1, |ext f x - ext g x|
+/-- La distancia `d_1(f, g) = ∫_0^1 |f(x) - g(x)| dx` (`Comun.C01.d1`). -/
+noncomputable abbrev d1 (f g : C(unitInterval, ℝ)) : ℝ := C01.d1 f g
 
 /-- La función `Ψ` del enunciado. -/
 def Ψ (f : C(unitInterval, ℝ)) : C(unitInterval, ℝ) :=
@@ -127,7 +116,7 @@ def Ψ (f : C(unitInterval, ℝ)) : C(unitInterval, ℝ) :=
 
 /-- La cuenta (2) de la solución oficial: `d_1(Ψ f, Ψ g) ≤ d_∞(f, g) / 2`. -/
 theorem d1_Ψ_le (f g : C(unitInterval, ℝ)) : d1 (Ψ f) (Ψ g) ≤ dist f g / 2 := by
-  unfold d1
+  unfold d1 C01.d1
   calc ∫ x in (0 : ℝ)..1, |ext (Ψ f) x - ext (Ψ g) x|
       ≤ ∫ x in (0 : ℝ)..1, x * dist f g := by
         apply intervalIntegral.integral_mono_on zero_le_one
@@ -181,38 +170,44 @@ def toRd (x : ℝ) : Rd := x
 /-- La distancia del enunciado. -/
 noncomputable def d (x y : ℝ) : ℝ := if x = y then 0 else |x| + |y|
 
-/-- `(ℝ, d)` es un espacio métrico (el enunciado lo da por sabido; acá se verifica igual). -/
-noncomputable instance : MetricSpace Rd where
-  dist x y := d (toR x) (toR y)
-  dist_self x := by simp [d]
-  dist_comm x y := by
-    simp only [d]
-    by_cases h : toR x = toR y
+/-- `d` es una métrica en `ℝ` (Definición 4.1; el enunciado lo da por sabido, acá se verifican
+los cuatro axiomas igual). -/
+theorem esMetrica_d : EsMetrica d where
+  nonneg x y := by unfold d; split_ifs <;> positivity
+  eq_zero_iff x y := by
+    unfold d
+    constructor
+    · intro h
+      by_contra hxy
+      rw [ite_eq_right hxy] at h
+      have hx : 0 ≤ |x| := abs_nonneg _
+      have hy : 0 ≤ |y| := abs_nonneg _
+      have hx0 : x = 0 := abs_eq_zero.1 (by linarith)
+      have hy0 : y = 0 := abs_eq_zero.1 (by linarith)
+      exact hxy (hx0.trans hy0.symm)
+    · intro h
+      rw [ite_eq_left h]
+  symm x y := by
+    unfold d
+    by_cases h : x = y
     · rw [ite_eq_left h, ite_eq_left h.symm]
     · rw [ite_eq_right h, ite_eq_right (Ne.symm h)]; ring
-  dist_triangle x y z := by
-    simp only [d]
-    by_cases hxz : toR x = toR z
+  triangle x y z := by
+    unfold d
+    by_cases hxz : x = z
     · rw [ite_eq_left hxz]; split_ifs <;> positivity
     · rw [ite_eq_right hxz]
-      by_cases hxy : toR x = toR y
-      · have hyz : toR y ≠ toR z := fun h => hxz (hxy.trans h)
+      by_cases hxy : x = y
+      · have hyz : y ≠ z := fun h => hxz (hxy.trans h)
         rw [ite_eq_left hxy, ite_eq_right hyz, hxy]; linarith
       · rw [ite_eq_right hxy]
         split_ifs with hyz
         · rw [← hyz]; linarith
-        · linarith [abs_nonneg (toR y)]
-  eq_of_dist_eq_zero := by
-    intro x y h
-    by_contra hxy
-    have hxy' : toR x ≠ toR y := hxy
-    simp only [d] at h
-    rw [ite_eq_right hxy'] at h
-    have hx : 0 ≤ |toR x| := abs_nonneg _
-    have hy : 0 ≤ |toR y| := abs_nonneg _
-    have hx0 : toR x = 0 := abs_eq_zero.1 (by linarith)
-    have hy0 : toR y = 0 := abs_eq_zero.1 (by linarith)
-    exact hxy' (hx0.trans hy0.symm)
+        · linarith [abs_nonneg y]
+
+/-- `(ℝ, d)` es un espacio métrico (`Comun.EsMetrica.toMetricSpace`). -/
+noncomputable instance : MetricSpace Rd :=
+  show MetricSpace (Con ℝ d) from esMetrica_d.toMetricSpace
 
 theorem Rd.dist_eq (x y : Rd) :
     dist x y = if toR x = toR y then 0 else |toR x| + |toR y| := rfl

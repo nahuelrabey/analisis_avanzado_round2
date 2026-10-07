@@ -15,14 +15,19 @@ Resolución "a mano" en `apuntes-typst/guias-agente/_partes2/ej10.typ`.
 
 Convenciones: `{0,1}` es `Bool`, `{0,1}^ℕ` es `ℕ → Bool`, `𝒫(ℕ)` es `Set ℕ`, los índices
 empiezan en `0`.
+La serie `a ↦ Σ a_n / 3^(n+1)` vive en `Comun.Cardinales.Continuo` (`serie`, `serie_mem`,
+`serie_injective`, `serieIcoEmb`), igual que `𝒫(ℕ) ∼ {0,1}^ℕ` (`setEquivBool`, Ej. 8 (a)). El
+bloque de desarrollos binarios (`digito`, …, `codigo_injective`) queda local;
+`eq_of_forall_abs_sub_lt` (Arquímedes) está en `Comun.Reales`.
 -/
 import Mathlib
-import Guias.Guia2.Defs
+import Comun.Reales
+import Comun.Cardinales
+import Comun.Cardinales.Continuo
 
 namespace Guias.Guia2.Ej10
 
-open Guias.Guia2
-
+open Comun
 /-! ## Inyección `[0,1) → {0,1}^ℕ`: los dígitos binarios -/
 
 /-- El dígito binario `d_n(x) = ⌊2^(n+1) x⌋ mod 2`, como booleano (`true` si vale `1`). -/
@@ -70,18 +75,6 @@ theorem abs_sub_lt_of_floor_eq {x y : ℝ} (hx : 0 ≤ x) (hy : 0 ≤ y) {n : �
   rw [abs_sub_lt_iff, lt_div_iff₀ h2, lt_div_iff₀ h2]
   constructor <;> nlinarith
 
-/-- Arquímedes: si `|x - y| < 1 / 2^n` para todo `n`, entonces `x = y`. Se usa que `n < 2^n` y
-que hay `n` con `1 / (n + 1) < ε` para todo `ε > 0`. -/
-theorem eq_of_forall_abs_sub_lt {x y : ℝ} (h : ∀ n : ℕ, |x - y| < 1 / 2 ^ n) : x = y := by
-  by_contra hne
-  have hpos : 0 < |x - y| := abs_pos.2 (sub_ne_zero.2 hne)
-  obtain ⟨n, hn⟩ := exists_nat_one_div_lt hpos
-  have h1 : (1 : ℝ) / 2 ^ n ≤ 1 / ((n : ℝ) + 1) := by
-    apply one_div_le_one_div_of_le (by positivity)
-    have := Nat.succ_le_of_lt (@Nat.lt_two_pow_self n)
-    exact_mod_cast this
-  linarith [h n]
-
 /-- La inyección `[0,1) → {0,1}^ℕ`: `x ↦ (d_n(x))_n`. -/
 noncomputable def codigo (x : Set.Ico (0 : ℝ) 1) : ℕ → Bool := digito x.1
 
@@ -93,124 +86,14 @@ theorem codigo_injective : Function.Injective codigo := by
   exact abs_sub_lt_of_floor_eq x.2.1 y.2.1
     (floor_eq_of_digitos_eq x.2 y.2 (fun n => congrFun h n) n)
 
-/-! ## Inyección `{0,1}^ℕ → [0,1)`: la serie `Σ a_n / 3^(n+1)` -/
+/-! ## Inyección `{0,1}^ℕ → [0,1)`: la serie `Σ a_n / 3^(n+1)` (`Comun.serie`) -/
 
-/-- El término `n`-ésimo: `a_n / 3^(n+1)`. -/
-noncomputable def termino (a : ℕ → Bool) (n : ℕ) : ℝ := if a n then (1 / 3) ^ (n + 1) else 0
-
-theorem termino_nonneg (a : ℕ → Bool) (n : ℕ) : 0 ≤ termino a n := by
-  unfold termino
-  split_ifs
-  · positivity
-  · exact le_rfl
-
-theorem termino_le (a : ℕ → Bool) (n : ℕ) : termino a n ≤ (1 / 3) ^ (n + 1) := by
-  unfold termino
-  split_ifs
-  · exact le_rfl
-  · positivity
-
-/-- La geométrica desplazada: `Σ_n (1/3)^(n+k) = (1/3)^k · 3/2` (`hasSum_geometric_of_lt_one`). -/
-theorem hasSum_geom_shift (k : ℕ) :
-    HasSum (fun n : ℕ => (1 / 3 : ℝ) ^ (n + k)) ((1 / 3) ^ k * (3 / 2)) := by
-  have h := (hasSum_geometric_of_lt_one (r := (1 / 3 : ℝ)) (by norm_num) (by norm_num)).mul_left
-    ((1 / 3) ^ k)
-  have e1 : (fun n : ℕ => (1 / 3 : ℝ) ^ k * (1 / 3) ^ n) = fun n => (1 / 3) ^ (n + k) := by
-    funext n
-    rw [pow_add, mul_comm]
-  have e2 : (1 - (1 / 3 : ℝ))⁻¹ = 3 / 2 := by norm_num
-  rw [e1, e2] at h
-  exact h
-
-/-- Convergencia por comparación con la geométrica. -/
-theorem summable_termino (a : ℕ → Bool) : Summable (termino a) :=
-  Summable.of_nonneg_of_le (termino_nonneg a) (termino_le a) (hasSum_geom_shift 1).summable
-
-/-- La suma `Σ_n a_n / 3^(n+1)`. -/
-noncomputable def suma (a : ℕ → Bool) : ℝ := ∑' n, termino a n
-
-theorem hasSum_suma (a : ℕ → Bool) : HasSum (termino a) (suma a) := (summable_termino a).hasSum
-
-/-- `0 ≤ Σ a_n / 3^(n+1) ≤ Σ 1 / 3^(n+1) = 1/2 < 1`. -/
-theorem suma_mem (a : ℕ → Bool) : suma a ∈ Set.Ico (0 : ℝ) 1 := by
-  refine ⟨hasSum_le (fun n => termino_nonneg a n) hasSum_zero (hasSum_suma a), ?_⟩
-  have := hasSum_le (termino_le a) (hasSum_suma a) (hasSum_geom_shift 1)
-  norm_num at this
-  linarith
-
-/-- Inyectividad de la suma: si `a ≠ b`, en el primer índice `k` con `a_k ≠ b_k` el término
-`1/3^(k+1)` domina a la cola `Σ_{n>k} 1/3^(n+1) = (1/2) · 1/3^(k+1)`. -/
-theorem suma_injective : Function.Injective suma := by
-  intro a b hab
-  by_contra hne
-  have hex : ∃ n, a n ≠ b n := by
-    by_contra h
-    push Not at h
-    exact hne (funext h)
-  -- el primer índice donde difieren
-  set k := Nat.find hex with hk_def
-  have hk : a k ≠ b k := Nat.find_spec hex
-  have hlt : ∀ m < k, a m = b m := by
-    intro m hm
-    have := Nat.find_min hex hm
-    push Not at this
-    exact this
-  -- la serie de las diferencias suma 0
-  set h : ℕ → ℝ := fun n => termino a n - termino b n with hh
-  have hsum : HasSum h 0 := by
-    have := (hasSum_suma a).sub (hasSum_suma b)
-    rwa [hab, sub_self] at this
-  -- la cola a partir de `k+1` suma `-(Σ_{i ≤ k} h i) = -h k`
-  have htail : HasSum (fun n => h (n + (k + 1))) (-(∑ i ∈ Finset.range (k + 1), h i)) := by
-    rw [hasSum_nat_add_iff (k + 1), neg_add_cancel]
-    exact hsum
-  have hfin : ∑ i ∈ Finset.range (k + 1), h i = h k := by
-    rw [Finset.sum_range_succ, Finset.sum_eq_zero, zero_add]
-    intro i hi
-    rw [Finset.mem_range] at hi
-    simp only [hh, termino, hlt i hi, sub_self]
-  rw [hfin] at htail
-  -- `|h k| = 1/3^(k+1)`
-  have hk' : |h k| = (1 / 3 : ℝ) ^ (k + 1) := by
-    simp only [hh, termino]
-    rcases Bool.eq_false_or_eq_true (a k) with ha | ha <;>
-      rcases Bool.eq_false_or_eq_true (b k) with hb | hb
-    · exact absurd (ha.trans hb.symm) hk
-    · rw [ha, hb]
-      simp only [Bool.false_eq_true, ite_true, ite_false, sub_zero]
-      exact abs_of_nonneg (by positivity)
-    · rw [ha, hb]
-      simp only [Bool.false_eq_true, ite_true, ite_false, zero_sub, abs_neg]
-      exact abs_of_nonneg (by positivity)
-    · exact absurd (ha.trans hb.symm) hk
-  -- la cola está acotada por la geométrica desplazada
-  have hbound : ∀ n, -(1 / 3 : ℝ) ^ (n + (k + 2)) ≤ h (n + (k + 1)) ∧
-      h (n + (k + 1)) ≤ (1 / 3) ^ (n + (k + 2)) := by
-    intro n
-    have h1 := termino_nonneg a (n + (k + 1))
-    have h2 := termino_nonneg b (n + (k + 1))
-    have h3 := termino_le a (n + (k + 1))
-    have h4 := termino_le b (n + (k + 1))
-    have e : n + (k + 1) + 1 = n + (k + 2) := by ring
-    rw [e] at h3 h4
-    constructor <;> simp only [hh] <;> linarith
-  have hgeo := hasSum_geom_shift (k + 2)
-  have hup : -h k ≤ (1 / 3 : ℝ) ^ (k + 2) * (3 / 2) :=
-    hasSum_le (fun n => (hbound n).2) htail hgeo
-  have hlo : -((1 / 3 : ℝ) ^ (k + 2) * (3 / 2)) ≤ -h k :=
-    hasSum_le (fun n => (hbound n).1) hgeo.neg htail
-  -- contradicción: `1/3^(k+1) = |h k| ≤ (1/2) · 1/3^(k+1)`
-  have habs : |h k| ≤ (1 / 3 : ℝ) ^ (k + 2) * (3 / 2) := abs_le.2 ⟨by linarith, by linarith⟩
-  have hc : (0 : ℝ) < (1 / 3) ^ (k + 1) := by positivity
-  have e : (1 / 3 : ℝ) ^ (k + 2) = (1 / 3) ^ (k + 1) * (1 / 3) := pow_succ _ _
-  rw [hk', e] at habs
-  linarith
-
-/-- La inyección `{0,1}^ℕ → [0,1)`: `a ↦ Σ a_n / 3^(n+1)`. -/
-noncomputable def decodigo (a : ℕ → Bool) : Set.Ico (0 : ℝ) 1 := ⟨suma a, suma_mem a⟩
+/-- La inyección `{0,1}^ℕ → [0,1)`: `a ↦ Σ a_n / 3^(n+1)` (`Comun.serie`, que cae en `[0,1)` por
+`Comun.serie_mem` y es inyectiva por `Comun.serie_injective`). -/
+noncomputable def decodigo (a : ℕ → Bool) : Set.Ico (0 : ℝ) 1 := ⟨serie a, serie_mem a⟩
 
 theorem decodigo_injective : Function.Injective decodigo :=
-  fun _ _ h => suma_injective (congrArg Subtype.val h)
+  fun _ _ h => serie_injective (congrArg Subtype.val h)
 
 /-! ## (a) y (b) -/
 
@@ -219,20 +102,11 @@ theorem decodigo_injective : Function.Injective decodigo :=
 theorem ej10a : Coordinables (Set.Ico (0 : ℝ) 1) (ℕ → Bool) :=
   teorema_CSB ⟨⟨codigo, codigo_injective⟩⟩ ⟨⟨decodigo, decodigo_injective⟩⟩
 
-/-- Ej. 8 (a) para `ℕ`, reprobado localmente: `𝒫(ℕ) ∼ {0,1}^ℕ` por la función característica. -/
-noncomputable def partesEquivFun : Set ℕ ≃ (ℕ → Bool) where
-  toFun S := fun n => by classical exact decide (n ∈ S)
-  invFun f := {n | f n = true}
-  left_inv S := by
-    ext n
-    simp
-  right_inv f := by
-    funext n
-    simp
-
-/-- **Ej. 10 (b).** `#𝒫(ℕ) = c`: `𝒫(ℕ) ∼ {0,1}^ℕ ∼ [0,1) ∼ ℝ`. -/
+/-- **Ej. 10 (b).** `#𝒫(ℕ) = c`: `𝒫(ℕ) ∼ {0,1}^ℕ ∼ [0,1) ∼ ℝ` (Ej. 8 (a) como
+`Comun.setEquivBool`, (a), Observación 3.21). (En `Comun.Cardinales.Continuo`, `cardC_set_nat` es
+el mismo enunciado probado por CSB con cortes y serie.) -/
 theorem ej10b : CardC (Set ℕ) :=
-  coordinables_trans ⟨partesEquivFun⟩
+  coordinables_trans ⟨setEquivBool ℕ⟩
     (coordinables_trans (coordinables_symm ej10a) (cardC_Ico zero_lt_one))
 
 end Guias.Guia2.Ej10

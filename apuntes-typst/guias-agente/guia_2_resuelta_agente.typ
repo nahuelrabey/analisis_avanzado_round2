@@ -53,7 +53,10 @@
   *Verificación en Lean:* cada ejercicio tiene su contraparte en `lean/Guias/Guia2/EjNN.lean`
   (Lean 4 + Mathlib; `cd lean && lake build`). Las definiciones del curso (coordinables, $<=$ entre
   cardinales, finito, numerable, contable, $\# A = c$) y los resultados de `apuntes.typ` que se toman
-  como verdaderos están en `lean/Guias/Guia2/Defs.lean`; cada archivo sólo importa ése. La caja
+  como verdaderos están en la librería común `lean/Comun/` (`Comun.Cardinales`, con los sublemas
+  compartidos en `Comun.Cardinales.Numerables` y `Comun.Cardinales.Continuo`); cada archivo
+  importa los módulos que usa (y, a lo sumo, un ejercicio anterior), y varios `ejN…` son alias
+  de una línea de lemas de `Comun`. La caja
   _Observación_ del final de cada ejercicio dice qué teorema certifica qué ítem y en qué se aparta
   la formalización del texto.
 ]
@@ -174,7 +177,8 @@
   `ej1a : Numerable Zle3` (con `Zle3 = {z : ℤ | z ≤ -3}`), `ej1b : Numerable cincoZ` (con
   `cincoZ = {z : ℤ | 5 ∣ z}`, que es $5 ZZ$), `ej1c : Numerable (ℤ × ℕ)` y
   `ej1d : Numerable I` (con `I = Set.Ioo (-1 : ℚ) 1`, es decir $(-1, 1) inter QQ$ como
-  subconjunto de $QQ$). Los sublemas son `natEquivInt : ℕ ≃ ℤ` (la $g$ del Sublema A) y
+  subconjunto de $QQ$). Los sublemas, en `Comun.Cardinales.Numerables`, son `natEquivInt : ℕ ≃ ℤ`
+  (la $g$ del Sublema A) y
   `natProdNat_numerable` (Sublema B: `pow_two_three_inj` es B.1, con la misma inducción en $a$ y
   el mismo argumento de paridad vía `Nat.even_pow` y `Odd.pow`; luego `teorema_CSB` con
   `pairEmb` y `diagEmb`). No se usan `Equiv.intEquivNat`, `Nat.pairEquiv` ni instancias
@@ -184,7 +188,7 @@
   $n |-> -3 - n$, el Sublema A es $2 k |-> k$, $2 k + 1 |-> -(k + 1)$, $psi(n) = (n, 0)$ y
   $iota(n) = 1 slash (n + 2)$. En (b) la inversa de $k |-> 5 k$ se escribe con la división entera
   `z / 5`. En (d), la segunda desigualdad usa `Function.Embedding.subtype` (la inclusión) y
-  `numerable_rat` de `Defs.lean`.
+  `numerable_rat` de `Comun.Cardinales`.
 ]
 
 #v(12pt)
@@ -212,7 +216,7 @@
   inyectiva. En ambos casos $\#A <= \#NN$ (Definición 3.8). $qed$
 
   _Convención sobre $nothing$._ Si se admite $nothing$ como finito ($n = 0$, la biyección vacía,
-  como hace `Defs.lean` con `Fin 0`), el argumento vale igual: la función vacía $nothing -> NN$ es
+  como hace `Comun.Cardinales` con `Fin 0`), el argumento vale igual: la función vacía $nothing -> NN$ es
   inyectiva. Si se lee la Definición 3.6 al pie de la letra ($n >= 1$), $nothing$ no es contable y
   el caso no aparece.
 ]
@@ -252,13 +256,15 @@
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia2.Ej02`][
-  `ej2 {X} (A B : Set X) (hA : Contable A) (hB : Contable B) : Contable ↥(A ∪ B)`. Los sublemas
-  son `cardLe_nat_of_contable` (Sublema 1; el caso finito usa `Fin.valEmbedding`, la inclusión
+  `ej2 {X} (A B : Set X) (hA : Contable A) (hB : Contable B) : Contable ↥(A ∪ B)`, alias de
+  `Comun.union_contable` (`Comun.Cardinales.Numerables`, cuya demostración es la de abajo). Los
+  sublemas son `cardLe_nat_of_contable` (Sublema 1, en `Comun.Cardinales`; el caso finito usa
+  `Fin.valEmbedding`, la inclusión
   ${0, dots, n - 1} subset.eq NN$), `sumNatEmb : ℕ ⊕ ℕ ↪ ℕ` (Sublema 2, con `inl n ↦ 2n`,
   `inr n ↦ 2n + 1` porque $NN$ empieza en $0$) y `unionEmb A B : ↥(A ∪ B) ↪ ↥A ⊕ ↥B` (Sublema 3,
   con un `if` clásico sobre $x in A$). La cadena es `(unionEmb A B).trans (sumMap fA fB)` seguida
   de `sumNatEmb`, y el cierre es `contable_of_cardLe_numerable numerable_nat` (la Proposición 3.13
-  en la forma "inyección en un numerable", que en `Defs.lean` ya incluye el caso vacío). No se usa
+  en la forma "inyección en un numerable", que en `Comun.Cardinales` ya incluye el caso vacío). No se usa
   `Set.Countable.union` ni ninguna instancia `Countable`. El único desvío es que en Lean $nothing$
   es finito (`Fin 0`), así que no hay caso aparte para $S = nothing$.
 ]
@@ -332,12 +338,14 @@
 
 #observacion[Verificado en Lean: `Guias.Guia2.Ej03`][
   `ej3a {X} {A B : Set X} (hA : Contable A) (hBA : Infinito ↥(B \ A)) : ∃ C : Set X, C ⊆ B \ A ∧ Coordinables C ↥(C ∪ A)`
-  y `ej3b (hAB : A ⊆ B) (hA : Contable A) (hBA : Infinito ↥(B \ A)) : Coordinables ↥(B \ A) ↥B`.
+  y `ej3b (hAB : A ⊆ B) (hA : Contable A) (hBA : Infinito ↥(B \ A)) : Coordinables ↥(B \ A) ↥B`,
+  alias de `Comun.exists_C_coordinables` y `Comun.diff_coordinables` (`Comun.Cardinales.Numerables`,
+  con las demostraciones de abajo).
   En (a) el $C$ es `Set.range` de la inyección $NN -> B backslash A$ que da
   `cardLe_nat_of_infinito` (Proposición 3.14), numerable por `Equiv.ofInjective`; "contable e
-  infinito $=>$ numerable" es `numerable_iff_contable_infinito` de `Defs.lean`. El Ej. 2 se
-  reprueba localmente (`union_contable`, mismo código que `Ej02.lean`), porque los archivos son
-  independientes. El hecho de base "$C union A$ contiene al infinito $C$" es `infinito_union_left`,
+  infinito $=>$ numerable" es `numerable_iff_contable_infinito` de `Comun.Cardinales`. El Ej. 2 es
+  `union_contable`, el mismo lema de `Comun.Cardinales.Numerables` que certifica `ej2`. El hecho
+  de base "$C union A$ contiene al infinito $C$" es `infinito_union_left`,
   probado con `Set.Infinite.mono` de Mathlib (y `numerable_iff` para que $C$ sea infinito).
 
   En (b), el pegado se formaliza con las descomposiciones disjuntas
@@ -395,10 +403,11 @@
 
   La prueba sigue el texto: `Qr_numerable` es $NN tilde.op QQ tilde.op$ `Qr` (`numerable_rat` y
   `Equiv.ofInjective` con `Rat.cast_injective`); `irracionales_infinito` es el absurdo con
-  `union_contable` (el Ej. 2, reprobado localmente) y `no_contable_real`; `diff_coordinables` es
-  el Ej. 3 (b), también reprobado localmente (mismo código que `Ej03.lean`); y `Equiv.Set.univ`
+  `union_contable` (el Ej. 2, importado de `Comun.Cardinales.Numerables`) y `no_contable_real`;
+  `diff_coordinables` es el Ej. 3 (b), el mismo lema de `Comun` que certifica `ej3b`; y
+  `Equiv.Set.univ`
   pasa de `↥Set.univ` a `ℝ`. Único desvío: "$RR$ no es finito" no se prueba vía $NN subset.eq RR$,
-  porque `no_contable_real` de `Defs.lean` ya enuncia el Teorema 3.19 en la forma "$RR$ no es
+  porque `no_contable_real` de `Comun.Cardinales` ya enuncia el Teorema 3.19 en la forma "$RR$ no es
   contable", que descarta de una vez los dos casos.
 ]
 
@@ -641,15 +650,18 @@ Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) 
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia2.Ej06`][
-  *(a)* `ej6a (A : ℕ → Set X) (h : ∀ n, Contable (A n)) : Contable ↥(⋃ n, A n)`, sin
-  `Set.countable_iUnion` ni instancias `Countable`. Los pasos son `embedding_nat_of_contable`
-  (Sublema 1), `pow23_injective` y `cardLe_nat_prod_nat` (Sublema 2, con `Nat.Prime.dvd_of_dvd_pow`
+  *(a)* `ej6a (A : ℕ → Set X) (h : ∀ n, Contable (A n)) : Contable ↥(⋃ n, A n)`, alias de
+  `Comun.contable_iUnion` (`Comun.Cardinales.Numerables`), sin
+  `Set.countable_iUnion` ni instancias `Countable`. Los pasos son `cardLe_nat_of_contable`
+  (Sublema 1, `Comun.Cardinales`), `pow_two_three_inj` y `cardLe_nat_prod_nat` (Sublema 2, la
+  misma inyección del Ej. 1 (c), con `Nat.Prime.dvd_of_dvd_pow`
   para la paridad y `Nat.pow_right_injective` para $3^b = 3^d$), el índice `idx` (`Nat.find`, el
-  menor $n$ con $x in A_n$), la función `F` y `F_injective` (Paso 3), `cardLe_iUnion_nat_prod`
+  menor $n$ con $x in A_n$), la inyección `cardLe_iUnion_prod` (Paso 3, la $F$ del texto),
+  `cardLe_iUnion_nat_prod`
   (Paso 1, con `Classical.choice` para elegir las $f_n$ a la vez) y el cierre con
   `contable_of_cardLe_numerable numerable_nat` (Proposición 3.13). Desvío: en Lean el índice se
   toma directamente como el mínimo en lugar de pasar por los $B_n$ del Ej. 5 (es lo mismo: $x in
-  B_n$ si y sólo si $n$ es ese mínimo); los `.lean` son independientes y no importan `Ej05`.
+  B_n$ si y sólo si $n$ es ese mínimo); `Comun` no importa `Ej05`.
 
   *(b)* $A^m$ se modela como `Fin m → A` y $S$ como el sigma-tipo `S A := Σ m : ℕ, (Fin (m+1) → A)`:
   las tuplas de longitud $m + 1$ con $m in NN$ desde $0$, o sea las de longitud $>= 1$, cada una
@@ -657,12 +669,12 @@ Sea $(A_n)_(n in NN)$ una sucesión de conjuntos y sea $A = union.big_(n in NN) 
   son `finito_prod` (Sublema 3, con la biyección `finProdFinEquiv : Fin p × Fin q ≃ Fin (p*q)` de
   Mathlib en lugar de escribir $(i, j) |-> (i-1) q + j$ a mano) y `finito_pow` (Sublema 4, por
   inducción con `Fin.consEquiv`, que es separar la primera coordenada, y `Equiv.funUnique` para
-  $A^1 tilde.op A$). Para aplicar (a), `T m ⊆ S` son las palabras de longitud $m + 1$ vistas
+  $A^1 tilde.op A$), ambos en `Comun.Cardinales`. Para aplicar (a), `T m ⊆ S` son las palabras de longitud $m + 1$ vistas
   dentro de `S` (`T_equiv : T m ≃ (Fin (m+1) → A)`, `iUnion_T : ⋃ m, T m = univ`), y
   `contable_S` usa `ej6a` sobre esa familia. `nat_embedding_S` es $phi$, `infinito_S` usa
-  `Infinite.of_injective` (el palomar) y `ej6b [Nonempty A] (hA : Finito A) : Numerable (S A)`
+  `infinito_of_cardLe_nat` (el palomar, `Infinite.of_injective` en `Comun.Cardinales`) y `ej6b [Nonempty A] (hA : Finito A) : Numerable (S A)`
   cierra por la Definición 3.6 (`Or.resolve_left`). La deducción es
-  `ej6b_deduccion : CardLt (S A) ℝ`, con `cardLt_nat_real` de `Defs.lean` ($aleph_0 < c$). La
+  `ej6b_deduccion : CardLt (S A) ℝ`, con `cardLt_nat_real` de `Comun.Cardinales` ($aleph_0 < c$). La
   frase sobre los "nombres" no se formaliza por separado: es `CardLt` leído con la
   Proposición 3.9.
 ]
@@ -767,20 +779,25 @@ sobreyectiva porque las etiquetas separan las copias).
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia2.Ej07`][
-  *(a)* `ej7a {A B : Set X} (hA : CardC A) (hB : CardC B) : CardC ↥(A ∪ B)`, por `teorema_CSB` con
+  *(a)* `ej7a {A B : Set X} (hA : CardC A) (hB : CardC B) : CardC ↥(A ∪ B)`, alias de
+  `Comun.cardC_union` (`Comun.Cardinales.Continuo`), por `teorema_CSB` con
   `cardLe_union_real` ($\#(A union B) <= c$) y `cardLe_real_union` ($c <= \#(A union B)$, vía
   `cardLe_of_subset`). La unión disjunta $X union.sq Y$ es el tipo suma `X ⊕ Y`; la inyección $F$
-  es `cardLe_union_sum` (un `if h : x ∈ A then Sum.inl ⟨x, h⟩ else Sum.inr ⟨x, _⟩`) y el
+  es `cardLe_union_sum` (`Comun.Cardinales.Numerables`; un
+  `if h : x ∈ A then Sum.inl ⟨x, h⟩ else Sum.inr ⟨x, _⟩`) y el
   Sublema 1 es `coordinables_real_sum_real`, que encadena `Equiv.sumCongr` con `cardC_Ico`
   (Observación 3.21), `Equiv.Set.union` ($[0,1) union.sq [1,2) tilde.op [0,1) union [1,2)$, el
   "pegado"; necesita `Set.Ico_disjoint_Ico_same`) y `Set.Ico_union_Ico_eq_Ico`
   ($[0,1) union [1,2) = [0,2)$).
 
-  *(b)* `ej7b (A : ℕ → Set X) (h : ∀ n, CardC (A n)) : CardC ↥(⋃ n, A n)`, por `teorema_CSB` con
+  *(b)* `ej7b (A : ℕ → Set X) (h : ∀ n, CardC (A n)) : CardC ↥(⋃ n, A n)`, alias de
+  `Comun.cardC_iUnion`, por `teorema_CSB` con
   `cardLe_iUnion_real` y `cardLe_real_iUnion` (con `A 0`, porque `ℕ` empieza en `0`). El índice
-  mínimo es `idx` (`Nat.find`), la función $G$ es `G` con `G_injective`, las $e_n$ se eligen con
-  `Classical.choice`, y el Sublema 2 es `cardLe_nat_prod_real` con `add_injective`, donde la parte
-  entera se maneja con `Int.floor_eq_iff` ($floor.l n + t floor.r = n$) en lugar del argumento
+  mínimo es `idx` (`Nat.find`), la función $G$ es `cardLe_iUnion_prod` (`Comun.Cardinales.Numerables`,
+  la misma inyección del Ej. 6 (a) con $Y = RR$), las $e_n$ se eligen con
+  `Classical.choice`, y el Sublema 2 es `cardLe_nat_prod_real` con `sumaEmb`, donde la parte
+  entera se maneja con `Int.floor_natCast_add` e `Int.floor_eq_zero_iff`
+  ($floor.l n + t floor.r = n$) en lugar del argumento
   "el único entero entre $-1$ y $1$ es $0$".
 ]
 
@@ -889,8 +906,8 @@ Sea $A$ un conjunto. Escribimos ${0, 1}^A$ para el conjunto de todas las funcion
 #observacion[Verificado en Lean: `Guias.Guia2.Ej08`][
   $cal(P)(A)$ es `Set A`, ${0, 1}$ es `Bool` y ${1, ..., n}$ es `Fin n` (que empieza en $0$, lo
   que no cambia nada). (a) es `ej8a : Coordinables (Set A) (A → Bool)`, con la biyección
-  construida a mano en `equivCaracteristica` (`caracteristica S a = decide (a ∈ S)` y
-  `soporte f = {a | f a = true}`). (b) es `ej8b : CardEq A n → CardEq (Set A) (2 ^ n)`, que
+  construida a mano en `Comun.setEquivBool` (`Comun.Cardinales.Continuo`; `equivCaracteristica`
+  es su alias): `toFun s a = decide (a ∈ s)` e `invFun f = {a | f a = true}`. (b) es `ej8b : CardEq A n → CardEq (Set A) (2 ^ n)`, que
   encadena `equivCaracteristica`, `Equiv.arrowCongr σ (Equiv.refl Bool)` (el Paso 2) y
   `funBool_equiv_fin n : Nonempty ((Fin n → Bool) ≃ Fin (2 ^ n))`, probado por inducción en
   `n` desde `n = 0` (`Fin 0 → Bool` tiene un único elemento). El Lema 2 es `partirUltimo`
@@ -983,10 +1000,10 @@ Sean $A$ y $B$ conjuntos. Recordemos que $S in cal(P)(A)$ significa $S subset.eq
   `Set.mem_powerset_iff` (no se usa `Set.powerset_inter`). El contraejemplo de (b) es
   `ej9b_estricta`, con $A = {0}$, $B = {1}$ y $S = {0, 1}$ en $NN$. En (c), $A$ y $B$ son
   conjuntos abstractos (tipos) y $cal(P)(A)$ es `Set A`: `partesCongr (f : A ≃ B) : Set A ≃ Set B`
-  es la biyección `S ↦ f '' S` con inversa `T ↦ f ⁻¹' T`, cuyas dos identidades son
+  (`Comun.Cardinales.Continuo`) es la biyección `S ↦ f '' S` con inversa `T ↦ f ⁻¹' T`, cuyas dos identidades son
   `Set.preimage_image_eq _ f.injective` y `Set.image_preimage_eq _ f.surjective` (los ítems (e)
   y (f) del "Recuerde", tomados de Mathlib en lugar de reprobarlos); `ej9c` es el enunciado
-  `Coordinables A B → Coordinables (Set A) (Set B)`.
+  `Coordinables A B → Coordinables (Set A) (Set B)`, alias de `Comun.coordinables_set`.
 ]
 
 #v(12pt)
@@ -1117,15 +1134,15 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   `codigo_injective` y `decodigo_injective`. El Sublema A es `floor_succ` (vía
   `Nat.floor_div_ofNat`, $floor(t / 2) = floor(t) div 2$, y `Nat.div_add_mod`); el Sublema B son
   `floor_eq_of_digitos_eq` (inducción), `abs_sub_lt_of_floor_eq` y `eq_of_forall_abs_sub_lt`
-  (Arquímedes como `exists_nat_one_div_lt` más `Nat.lt_two_pow_self`). Para la serie se usan
-  `HasSum`/`tsum`: `hasSum_geom_shift` es la geométrica desplazada (de
-  `hasSum_geometric_of_lt_one`), `summable_termino` la comparación (`Summable.of_nonneg_of_le`),
-  `suma_mem` la cota $0 <= Psi(a) <= 1 / 2$ (`hasSum_le`). En `suma_injective` el primer índice
+  (`Comun.Reales`; Arquímedes como `exists_nat_one_div_lt` más `Nat.lt_two_pow_self`). La serie
+  vive en `Comun.Cardinales.Continuo` y se maneja con `tsum`: `summable_term` es la comparación
+  con la geométrica (`Summable.of_nonneg_of_le`), `serie_mem` la cota $0 <= Psi(a) <= 1 / 2$ (vía
+  `tsum_tail_le`, la cola geométrica). En `serie_injective` el primer índice
   distinto es `Nat.find`, y en vez de pasar por sumas parciales se trabaja con la serie entera:
-  `hasSum_nat_add_iff` separa la cola a partir de $k + 1$ y `hasSum_le` la compara con la
+  `serie_split` separa la cola a partir de $k + 1$ y `tsum_tail_le` la acota por la
   geométrica desplazada, obteniendo $abs(a_k - b_k) / 3^(k + 1) <= (1 / 2) dot 1 / 3^(k + 1)$,
-  contradicción. (b) es `ej10b : CardC (Set ℕ)`: el Ej. 8 (a) se reprueba localmente como
-  `partesEquivFun`, y se encadena con `ej10a` y `cardC_Ico` (Observación 3.21). No se usan
+  contradicción. (b) es `ej10b : CardC (Set ℕ)`: el Ej. 8 (a) es `setEquivBool`
+  (`Comun.Cardinales.Continuo`), y se encadena con `ej10a` y `cardC_Ico` (Observación 3.21). No se usan
   `Cardinal.mk_real`, `Cardinal.mk_set` ni `Cardinal.continuum`.
 ]
 
@@ -1198,7 +1215,9 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
 #observacion[Verificado en Lean: `Guias.Guia2.Ej11`][
   $cal(P)_f (A)$ es el subtipo `{B : Set A // B.Finite}` y el enunciado es
   `ej11 : Numerable A → Numerable {B : Set A // B.Finite}`, obtenido de
-  `ej11_contable` y `ej11_infinito` vía `numerable_iff_contable_infinito` (Definición 3.6). La
+  `ej11_contable` y `ej11_infinito` vía `numerable_iff_contable_infinito` (Definición 3.6). Todo
+  vive en `Comun.Cardinales.Numerables` (los tres teoremas son alias de `partes_finitas_contable`,
+  `partes_finitas_infinito` y `partes_finitas_numerable`). La
   codificación es `codificar e B = codigo (B.2.toFinset.map e.symm)` con
   `codigo S = ∑ k ∈ S, 2 ^ k` (como `ℕ` de Lean empieza en $0$, no hace falta el $+ 1$). El Lema
   de unicidad del desarrollo binario es `codigo_injective`, probado de otra manera que en el
@@ -1208,7 +1227,8 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   misma suma geométrica $sum_(i < k) 2^i < 2^k$), y `Nat.eq_of_testBit_eq` ("un natural queda
   determinado por sus dígitos binarios") cierra. La contabilidad usa `contable_of_cardLe_numerable`
   (Proposición 3.13 con una inyección en lugar de una inclusión). Para la infinitud, el principio
-  del palomar del texto se reemplaza por `Infinite.of_injective` aplicado a `unitario e n = {e n}`.
+  del palomar del texto se reemplaza por `infinito_of_cardLe_nat` (`Infinite.of_injective`)
+  aplicado a `unitario e n = {e n}`.
   No se usa `Set.countable_setOf_finite_subset` ni ninguna instancia `Countable`/`Encodable`.
 ]
 
@@ -1295,13 +1315,15 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   `infinito_primos`, deducida del hecho de base `Nat.exists_infinite_primes` (para todo $N$ hay un
   primo $p >= N$), declarado como tal: un subconjunto finito de $NN$ está acotado
   (`Set.Finite.bddAbove`), y eso contradice el primo $p >= N + 1$. El resto es
-  `numerable_iff_contable_infinito` + `contable_of_cardLe_numerable` (Prop. 3.13 y 3.14).
+  `numerable_of_infinito_subset_nat` de `Comun.Cardinales` (`numerable_iff_contable_infinito` +
+  `contable_of_cardLe_numerable`, Prop. 3.13 y 3.14).
 
   `ej12b : ∃ A : ℕ → Set ℕ, (∀ k, Numerable (A k)) ∧ (∀ k l, k ≠ l → Disjoint (A k) (A l)) ∧ ⋃ k, A k = Set.univ`.
   Como en Lean $NN$ empieza en $0$, se usa $A_k = {n : n + 1 = 2^k (2m + 1) "para algún" m}$ con
   $k = 0, 1, 2, dots$, que es la familia del texto corrida en una unidad (y reindexada desde $0$).
   El Lema es `descomposicion` (inducción fuerte, `Nat.strong_induction_on` + `Nat.even_or_odd`)
-  y `unicidad` (cancelar $2^k$ con `Nat.eq_of_mul_eq_mul_left` y paridad por `omega`); no se usa
+  y `par_injective` (antes `unicidad`; cancelar $2^k$ con `Nat.eq_of_mul_eq_mul_left` y paridad
+  por `omega`), ambos en `Comun.Cardinales.Numerables`; no se usa
   `Nat.exists_eq_two_pow_mul_odd` de Mathlib. `numerable_A` es la biyección
   $m |-> 2^k (2m + 1) - 1$ (`Equiv.ofBijective`).
 ]
@@ -1373,7 +1395,8 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   `ej13 : CardC Omega`, con `Omega : Set (Set ℕ) := {B | Numerable B ∧ Numerable ↥(Bᶜ)}`
   ($cal(P)(NN)$ es `Set ℕ`). La prueba es `teorema_CSB cardLe_Omega_real cardLe_real_Omega`.
 
-  Como los archivos son independientes, lo que el texto cita se reprueba localmente:
+  Lo que el texto cita de ejercicios anteriores viene de `Comun.Cardinales.Continuo` (una sola
+  copia para los Ej. 10, 13, 14 y 15):
   - $\#cal(P)(NN) <= c$ (parte del Ej. 10 (b)): `setEquivBool : Set ℕ ≃ (ℕ → Bool)` (Ej. 8 (a),
     función característica) seguido de `serieEmb : (ℕ → Bool) ↪ ℝ`, la serie
     $a |-> sum_(n >= 0) a_n \/ 3^(n + 1)$ (`tsum`). Su inyectividad (`serie_injective`) toma el
@@ -1388,8 +1411,8 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   - Lema 1 es `corte_injective` (con `exists_rat_btwn`, la Prop. 2); Lema 2 es `Phi_mem` y
     `Phi_injective`. Como en Lean $NN$ empieza en $0$, los pares son ${2n, 2n + 1}$ y
     $Phi(a) = {m : a_(m \/ 2) = 1 <==> m "par"}$; que $Phi(a)$ y su complemento son numerables
-    se prueba con `numerable_iff_contable_infinito` y una inyección $NN -> Phi(a)$
-    (`Infinite.of_injective`), que es la biyección del texto restringida a una dirección.
+    se prueba con `numerable_of_infinito_subset_nat` y una inyección $NN -> Phi(a)$
+    (`infinito_of_cardLe_nat`), que es la biyección del texto restringida a una dirección.
 ]
 
 #v(12pt)
@@ -1504,13 +1527,15 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   inducción con `Fin.consEquiv`, que separa la *primera* coordenada en lugar de la última (es la
   misma idea; sólo cambia qué coordenada se aparta), y `Equiv.funUnique` para $RR^1 tilde.op RR$.
 
-  Lo que el texto cita de ejercicios anteriores se reprueba localmente: Ej. 8 (a) es
+  Lo que el texto cita de ejercicios anteriores viene de `Comun.Cardinales.Continuo` (`ej14a` es
+  alias de `cardC_set_nat_prod`; `intercalar`, `cardC_real_prod` y `cardC_pi` también viven ahí):
+  Ej. 8 (a) es
   `setEquivBool` (función característica); Ej. 9 (c) para $QQ tilde.op NN$ es `setRatEquivSetNat`
   (vía `Equiv.arrowCongr`); los cortes del Ej. 13 son `corte_injective` (`exists_rat_btwn`);
   y $\#cal(P)(NN) = c$ (Ej. 10 (b)) es `cardC_set_nat`, cuya mitad $\#cal(P)(NN) <= c$ se prueba
   con la serie $a |-> sum a_n \/ 3^(n + 1)$ (`serieEmb`, con `tsum_geometric_of_lt_one`,
   `Summable.sum_add_tsum_nat_add`, `Summable.tsum_eq_zero_add`, `Summable.tsum_le_tsum`), que no
-  aparece en el texto. $[0, 1) tilde.op RR$ es `cardC_Ico` (Obs. 3.21, de `Defs.lean`).
+  aparece en el texto. $[0, 1) tilde.op RR$ es `cardC_Ico` (Obs. 3.21, de `Comun.Cardinales`).
 ]
 
 #v(12pt)
@@ -1569,10 +1594,12 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   tuplas de la misma longitud), ceros más allá del grado (`Polynomial.coeff_eq_zero_of_natDegree_lt`)
   y `Polynomial.ext`.
 
-  Lo citado de ejercicios anteriores se reprueba localmente: $\#RR^(n + 1) = c$ (Ej. 14 (c)) es
+  Lo citado de ejercicios anteriores viene de `Comun.Cardinales.Continuo` (igual que `coefs`,
+  `coefs_injective` y `heq_apply`): $\#RR^(n + 1) = c$ (Ej. 14 (c)) es
   `cardC_pi`, con toda su cadena ($RR times RR tilde.op RR$ vía cortes, $cal(P)(QQ) tilde.op cal(P)(NN)$,
-  intercalado y la serie $a |-> sum a_n \/ 3^(n + 1)$, igual que en `Ej14.lean`); y el Ej. 7 (b)
-  se reemplaza por `cardLe_nat_prod_real : CardLe (ℕ × ℝ) ℝ`: se escribe $RR tilde.op [0, 1)$
+  intercalado y la serie $a |-> sum a_n \/ 3^(n + 1)$, la misma que usa `Ej14.lean`); y el Ej. 7 (b)
+  se reemplaza por `cardLe_nat_prod_real : CardLe (ℕ × ℝ) ℝ` (con `sumaEmb`): se escribe
+  $RR tilde.op [0, 1)$
   (`cardC_Ico`, Obs. 3.21) y $(n, x) |-> n + x$ es inyectiva en $NN times [0, 1)$ porque
   $n = floor(n + x)$ recupera $n$ (`Int.floor_natCast_add`, `Int.floor_eq_zero_iff`). El pasaje
   de `Σ n, ℝ^(n+1)` a `ℕ × ℝ` usa en cada $n$ una biyección $RR^(n + 1) tilde.op RR$
@@ -1732,12 +1759,15 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   $(a_0, dots, a_N)$ y $union.big_N ZZ^(N + 1)$ se modela como el tipo `Σ N, (Fin (N+1) → ℤ)`;
   en (b) se guarda $p - 1$ y $(a_0, dots, a_(p - 1))$. (2) En lugar de citar el Ej. 6 (a), Lean
   construye la inyección $union.big_N X^(N + 1) -> NN$ directamente, componiendo las
-  codificaciones explícitas de los Lemas A y B (`par`, `codZ`, `codTupla`, `codSigma`), que es lo
+  codificaciones explícitas de los Lemas A y B (`par`, `codTupla`, `codSigma` y `cardLe_sigma_nat`
+  de `Comun.Cardinales.Numerables`; $ZZ arrow.r.hook NN$ es `natEquivInt` y $QQ arrow.r.hook NN$,
+  `cardLe_rat_nat`), que es lo
   que hace al Ej. 6 (a) innecesario en este caso (uplas de longitud $N + 1$ van a
   `par N (codTupla N ...)`). (3) El índice $N(a)$ y el período $p(a)$ mínimos se toman con
   `Nat.find` (buen orden) y decidibilidad clásica. (4) El Lema C es
   `eventualmenteConstante_of_converge`; el Lema D es `periodica_ext`. (5) "Infinito" se obtiene de
-  la inyección $NN -> S$ con `Infinite.of_injective` (el principio del palomar del texto) y la
+  la inyección $NN -> S$ con `infinito_of_cardLe_nat` (`Infinite.of_injective`, el principio del
+  palomar del texto) y la
   conclusión con `numerable_iff_contable_infinito` y `contable_of_cardLe_numerable` (Proposición
   3.13). No se usa ningún lema de Mathlib sobre contabilidad de productos, uniones o
   sucesiones.
@@ -1776,7 +1806,7 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
 
 #resolucion[Propuesta (a): $I$ es contable][
   Si $I = nothing$ no hay nada que probar ($I$ es finito con $\#I = 0$, la convención de
-  `Defs.lean`; ver la Consulta Docente de `guias/p2.typ`). Supongamos $I != nothing$.
+  `Comun.Cardinales`; ver la Consulta Docente de `guias/p2.typ`). Supongamos $I != nothing$.
 
   *Un racional en cada $A_i$.* Fijemos $i in I$. Como $\#A_i > 1$, hay $u, v in A_i$ con $u != v$;
   intercambiando nombres, $u < v$. Por la densidad de $QQ$ (Proposición 2) existe $q in QQ$ con
@@ -1881,10 +1911,10 @@ $m <= t < m + 1$ (existe por Arquímedes y el buen orden, hecho de base).
   `ej17a {I} (A : I → Set ℝ) (hint : ∀ i, EsIntervalo (A i)) (hcard : ∀ i, CardLt (Fin 1) (A i))
   (hdisj : ∀ i j, i ≠ j → A i ∩ A j = ∅) : Contable I`, donde `EsIntervalo` es la convexidad
   escrita a mano y `CardLt (Fin 1) (A i)` es $\#A_i > 1$ con la Definición 3.8;
-  `cardLt_fin_one_iff` prueba la equivalencia con "dos puntos distintos" del sublema de
+  `cardLt_fin_one_iff` (`Comun.Cardinales`) prueba la equivalencia con "dos puntos distintos" del sublema de
   convenciones. La prueba sigue el texto: `exists_rat_btwn` (Proposición 2), `choose` para los
   $q_i$, inyectividad por disjunción y `contable_of_cardLe_numerable numerable_rat` (Proposición
-  3.13). El caso $I = nothing$ no se separa porque `Contable` de `Defs.lean` ya lo cubre
+  3.13). El caso $I = nothing$ no se separa porque `Contable` de `Comun.Cardinales` ya lo cubre
   (`Fin 0`).
 
   `ej17b (hf : Monotone f ∨ Antitone f) : Contable {x : ℝ // ¬ ContinuousAt f x}`, vía
