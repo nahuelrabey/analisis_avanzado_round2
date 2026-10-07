@@ -13,13 +13,18 @@ En Lean la elección de cada término se hace con `choose` (`Classical.choose`) 
 `paso`, y la sucesión se define con `Nat.rec` sobre el subtipo `{a // a ∈ A}`. Los índices
 empiezan en `0`: `a_n` queda a menos de `1/(n+1)` de `s`. No se usa `equiv_sup2`,
 `IsLUB.exists_seq_*` ni `Filter.Tendsto`.
+De `Comun.Reales` se importa `arquimedes2`; de `Comun.Supremos`, las Definiciones y la
+Proposición 3; de `Comun.Sucesiones`, la Definición 7. El paso `paso` y la recursión de `ej13`
+quedan locales (son el ejercicio).
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej13
 
-open Guias.Guia1
+open Comun
 
 /-- Paso de la construcción: si `s = sup A ∉ A`, para todo `a ∈ A` y todo `n` hay `b ∈ A` con
 `a < b`, `s - 1/(n+1) < b` y `b ≤ s`. Se aplica la Proposición 3 con

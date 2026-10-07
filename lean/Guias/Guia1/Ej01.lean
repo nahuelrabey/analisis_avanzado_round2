@@ -5,10 +5,10 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` 
 
 Sólo se usa el orden de `ℝ` (contrarrecíproco con `ε = x - y`) y el hecho de base
 `|x - y| < ε ↔ -ε < x - y < ε` (`abs_lt`). No se usa la Unicidad del límite
-(`unicidad_limite`), cuya demostración en `apuntes.typ` pasa por este ejercicio.
+(`Comun.unicidad_limite`), cuya demostración en `apuntes.typ` pasa por este ejercicio; no se
+importa nada de `Comun`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
 
 namespace Guias.Guia1.Ej01
 

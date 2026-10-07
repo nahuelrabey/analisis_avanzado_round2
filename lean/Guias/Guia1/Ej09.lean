@@ -12,15 +12,20 @@ Suma de límites `x_n + y_n → ℓ₁ + ℓ₂` en cuatro casos, todo desplegan
   (c) `ℓ₁ = ℓ₂ = +∞`: `M/2` para cada una.
   (d) `ℓ₁ = +∞`, `ℓ₂ = -∞`: no se puede decir nada. Tres pares de contraejemplos:
       `(n, -n)` suma `0` (converge), `(2n, -n)` suma `n` (→ +∞), `(n, -2n)` suma `-n` (→ -∞).
-      Que `n → +∞` es el Teorema 1 (`arquimedes`); los índices empiezan en `0`, lo que no
-      cambia nada.
+      Que `n → +∞`, `-n → -∞`, `c x_n → ±∞` si `x_n → ±∞` y `c > 0`, y que la constante
+      converge son los lemas `divergeMasInf_id`, `divergeMenosInf_neg_id`,
+      `divergeMasInf_const_mul`, `divergeMenosInf_const_mul` y `converge_const` de
+      `Comun.Sucesiones` (Teorema 1 y Definiciones 7 y 8); los índices empiezan en `0`, lo que
+      no cambia nada.
+De `Comun.Sucesiones` se importan las Definiciones 7 y 8 y esos cinco lemas; los cuatro ítems
+quedan locales.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej09
 
-open Guias.Guia1
+open Comun
 
 /-! ## (a) `ℓ₁, ℓ₂ ∈ ℝ` -/
 
@@ -74,54 +79,8 @@ theorem ej9c {x y : ℕ → ℝ} (hx : DivergeMasInf x) (hy : DivergeMasInf y) :
 
 /-! ## (d) `ℓ₁ = +∞`, `ℓ₂ = -∞`: contraejemplos -/
 
-/-- Hecho auxiliar (Teorema 1): dado `M > 0` hay `n₀` con `M < n` para todo `n ≥ n₀`
-(se aplica Arquímedes a `M + 1`). -/
-theorem exists_nat_gt_of_ge {M : ℝ} (_ : 0 < M) : ∃ n₀ : ℕ, ∀ n ≥ n₀, M < n := by
-  obtain ⟨n₀, hn₀⟩ := arquimedes (M + 1)
-  refine ⟨n₀, fun n hn => ?_⟩
-  have : (n₀ : ℝ) ≤ n := by exact_mod_cast hn
-  linarith
-
-/-- `x_n = n → +∞` (Teorema 1). -/
-theorem divergeMasInf_id : DivergeMasInf (fun n : ℕ => (n : ℝ)) := by
-  intro M hM
-  obtain ⟨n₀, hn₀⟩ := exists_nat_gt_of_ge hM
-  exact ⟨n₀, fun n hn => hn₀ n hn⟩
-
-/-- `x_n = 2n → +∞`: `2n ≥ n > M`. -/
-theorem divergeMasInf_two_mul : DivergeMasInf (fun n : ℕ => 2 * (n : ℝ)) := by
-  intro M hM
-  obtain ⟨n₀, hn₀⟩ := exists_nat_gt_of_ge hM
-  refine ⟨n₀, fun n hn => ?_⟩
-  have := hn₀ n hn
-  show M < 2 * (n : ℝ)
-  linarith
-
-/-- `y_n = -n → -∞`: `-n < -M`. -/
-theorem divergeMenosInf_neg_id : DivergeMenosInf (fun n : ℕ => -(n : ℝ)) := by
-  intro M hM
-  obtain ⟨n₀, hn₀⟩ := exists_nat_gt_of_ge hM
-  refine ⟨n₀, fun n hn => ?_⟩
-  have := hn₀ n hn
-  show -(n : ℝ) < -M
-  linarith
-
-/-- `y_n = -2n → -∞`: `-2n ≤ -n < -M`. -/
-theorem divergeMenosInf_neg_two_mul : DivergeMenosInf (fun n : ℕ => -(2 * (n : ℝ))) := by
-  intro M hM
-  obtain ⟨n₀, hn₀⟩ := exists_nat_gt_of_ge hM
-  refine ⟨n₀, fun n hn => ?_⟩
-  have := hn₀ n hn
-  show -(2 * (n : ℝ)) < -M
-  linarith
-
-/-- La sucesión constante `0` converge a `0`. -/
-theorem converge_zero : Converge (fun _ : ℕ => (0 : ℝ)) 0 := by
-  intro ε hε
-  exact ⟨0, fun n _ => by simp [hε]⟩
-
-/-- **Ej. 9 (d), primer par.** `x_n = n → +∞`, `y_n = -n → -∞`, y `x_n + y_n = 0 → 0`:
-la suma converge. -/
+/-- **Ej. 9 (d), primer par.** `x_n = n → +∞` (`divergeMasInf_id`), `y_n = -n → -∞`
+(`divergeMenosInf_neg_id`), y `x_n + y_n = 0 → 0` (`converge_const`): la suma converge. -/
 theorem ej9d_converge :
     ∃ x y : ℕ → ℝ, DivergeMasInf x ∧ DivergeMenosInf y ∧ Converge (fun n => x n + y n) 0 := by
   refine ⟨fun n => (n : ℝ), fun n => -(n : ℝ), divergeMasInf_id, divergeMenosInf_neg_id, ?_⟩
@@ -129,12 +88,13 @@ theorem ej9d_converge :
     funext n
     ring
   rw [h]
-  exact converge_zero
+  exact converge_const 0
 
-/-- **Ej. 9 (d), segundo par.** `x_n = 2n → +∞`, `y_n = -n → -∞`, y `x_n + y_n = n → +∞`. -/
+/-- **Ej. 9 (d), segundo par.** `x_n = 2n → +∞` (`divergeMasInf_const_mul` con `c = 2`),
+`y_n = -n → -∞`, y `x_n + y_n = n → +∞`. -/
 theorem ej9d_masInf :
     ∃ x y : ℕ → ℝ, DivergeMasInf x ∧ DivergeMenosInf y ∧ DivergeMasInf (fun n => x n + y n) := by
-  refine ⟨fun n => 2 * (n : ℝ), fun n => -(n : ℝ), divergeMasInf_two_mul,
+  refine ⟨fun n => 2 * (n : ℝ), fun n => -(n : ℝ), divergeMasInf_const_mul two_pos divergeMasInf_id,
     divergeMenosInf_neg_id, ?_⟩
   have h : (fun n : ℕ => 2 * (n : ℝ) + -(n : ℝ)) = fun n : ℕ => (n : ℝ) := by
     funext n
@@ -142,13 +102,14 @@ theorem ej9d_masInf :
   rw [h]
   exact divergeMasInf_id
 
-/-- **Ej. 9 (d), tercer par.** `x_n = n → +∞`, `y_n = -2n → -∞`, y `x_n + y_n = -n → -∞`. -/
+/-- **Ej. 9 (d), tercer par.** `x_n = n → +∞`, `y_n = 2 · (-n) = -2n → -∞`
+(`divergeMenosInf_const_mul` con `c = 2`), y `x_n + y_n = -n → -∞`. -/
 theorem ej9d_menosInf :
     ∃ x y : ℕ → ℝ, DivergeMasInf x ∧ DivergeMenosInf y ∧
       DivergeMenosInf (fun n => x n + y n) := by
-  refine ⟨fun n => (n : ℝ), fun n => -(2 * (n : ℝ)), divergeMasInf_id,
-    divergeMenosInf_neg_two_mul, ?_⟩
-  have h : (fun n : ℕ => (n : ℝ) + -(2 * (n : ℝ))) = fun n : ℕ => -(n : ℝ) := by
+  refine ⟨fun n => (n : ℝ), fun n => 2 * -(n : ℝ), divergeMasInf_id,
+    divergeMenosInf_const_mul two_pos divergeMenosInf_neg_id, ?_⟩
+  have h : (fun n : ℕ => (n : ℝ) + 2 * -(n : ℝ)) = fun n : ℕ => -(n : ℝ) := by
     funext n
     ring
   rw [h]

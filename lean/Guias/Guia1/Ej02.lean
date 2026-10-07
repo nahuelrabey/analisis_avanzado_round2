@@ -5,12 +5,17 @@ Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` 
 
 Los cuatro ítems están encadenados como en el texto: (a) construye el entero desde el Teorema 1
 (`arquimedes`) y el buen orden de `ℕ` (`Nat.find`, sin `Int.floor` ni `Int.ceil`); (b) usa la
-Proposición 1 (`arquimedes2`) y (a), sin `densidad_Q` ni `exists_rat_btwn`; (c) prueba `√2 ∉ ℚ`
-por paridad (`sqrt_two_irrational`) y que racional + racional no nulo · irracional es irracional;
-(d) aplica (b) dos veces y (c). `Irrational z` es sólo la definición `z ∉ Set.range ((↑) : ℚ → ℝ)`.
+Proposición 1 (`arquimedes2`) y (a), sin `densidad_Q` ni `exists_rat_btwn`; (c) usa que `√2 ∉ ℚ`
+(por paridad) y que racional + racional no nulo · irracional es irracional; (d) aplica (b) dos
+veces y (c). `Irrational z` es sólo la definición `z ∉ Set.range ((↑) : ℚ → ℝ)`.
+De `Comun.Reales` se importan `arquimedes`, `arquimedes2` y los tres sublemas de (c)
+(`sqrt_two_irrational`, `irrational_rat_add`, `irrational_rat_mul`, deducción propia, probados
+allí sin `irrational_sqrt_two` ni `Irrational.rat_add/mul`); los cuatro ítems quedan locales.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+
+open Comun
 
 namespace Guias.Guia1.Ej02
 
@@ -64,64 +69,9 @@ theorem ej2b {x y : ℝ} (h : x < y) : ∃ q : ℚ, x < q ∧ q < y := by
 
 /-! ## (c) Un irracional entre dos racionales -/
 
-/-- **Sublema (deducción propia): `√2 ∉ ℚ`.** Si `√2 = r ∈ ℚ`, con `r = a/b` reducida,
-entonces `a² = 2 b²`, así que `a² es par`, luego `a` es par, `a = 2k`; entonces `b² = 2 k²` y
-`b` es par: `2` divide a `a` y a `b`, contra `mcd(a, b) = 1`. -/
-theorem sqrt_two_irrational : Irrational (Real.sqrt 2) := by
-  rintro ⟨r, hr⟩
-  have h2 : (r : ℝ) ^ 2 = 2 := by rw [hr]; exact Real.sq_sqrt (by norm_num)
-  have h2q : r ^ 2 = 2 := by exact_mod_cast h2
-  -- `a² = 2 b²` con `a = r.num`, `b = r.den`
-  have hden : (r.den : ℚ) ≠ 0 := by exact_mod_cast r.den_nz
-  have hnd : (r.num : ℚ) ^ 2 = 2 * (r.den : ℚ) ^ 2 := by
-    have hr' : r = r.num / r.den := (Rat.num_div_den r).symm
-    rw [hr'] at h2q
-    field_simp at h2q
-    linarith
-  have hZ : r.num ^ 2 = 2 * (r.den : ℤ) ^ 2 := by exact_mod_cast hnd
-  -- `a` es par (si `a` fuera impar, `a²` sería impar)
-  have hnum : Even r.num := by
-    have : Even (r.num ^ 2) := ⟨(r.den : ℤ) ^ 2, by rw [hZ]; ring⟩
-    exact (Int.even_pow.1 this).1
-  obtain ⟨k, hk⟩ := hnum
-  -- `b² = 2 k²`, así que `b` es par
-  have hden2 : Even (r.den : ℤ) := by
-    have hsq : (r.den : ℤ) ^ 2 = k ^ 2 + k ^ 2 := by
-      have e : 2 * (r.den : ℤ) ^ 2 = 2 * (k ^ 2 + k ^ 2) := by
-        rw [hk] at hZ
-        linear_combination -hZ
-      linarith
-    exact (Int.even_pow.1 ⟨k ^ 2, hsq⟩).1
-  -- contradicción con `mcd(a, b) = 1`
-  have h2num : (2 : ℤ) ∣ r.num := even_iff_two_dvd.1 ⟨k, hk⟩
-  have h2den : (2 : ℤ) ∣ (r.den : ℤ) := even_iff_two_dvd.1 hden2
-  have hgcd : Int.gcd r.num (r.den : ℤ) = 1 := by
-    show Nat.gcd r.num.natAbs (r.den : ℤ).natAbs = 1
-    rw [Int.natAbs_natCast]
-    exact r.reduced
-  have := Int.dvd_gcd (c := 2) h2num h2den
-  rw [hgcd] at this
-  omega
-
-/-- **Sublema (deducción propia):** racional más irracional es irracional. Si `q + t = s ∈ ℚ`,
-entonces `t = s - q ∈ ℚ`. -/
-theorem irrational_rat_add {t : ℝ} (ht : Irrational t) (q : ℚ) : Irrational (q + t) := by
-  rintro ⟨s, hs⟩
-  exact ht ⟨s - q, by push_cast; linarith⟩
-
-/-- **Sublema (deducción propia):** racional no nulo por irracional es irracional. Si
-`q · t = s ∈ ℚ` con `q ≠ 0`, entonces `t = s / q ∈ ℚ`. -/
-theorem irrational_rat_mul {t : ℝ} (ht : Irrational t) {q : ℚ} (hq : q ≠ 0) :
-    Irrational (q * t) := by
-  rintro ⟨s, hs⟩
-  have hq' : (q : ℝ) ≠ 0 := by exact_mod_cast hq
-  refine ht ⟨s / q, ?_⟩
-  push_cast
-  rw [hs]
-  exact mul_div_cancel_left₀ t hq'
-
 /-- **Ej. 2 (c).** Si `x < y` son racionales hay un irracional `z` con `x < z < y`:
-`z = x + ((y - x)/2) · √2`. Es irracional por los dos sublemas, y está entre `x` e `y` porque
+`z = x + ((y - x)/2) · √2`. Es irracional por los sublemas `sqrt_two_irrational`,
+`irrational_rat_mul` e `irrational_rat_add` de `Comun.Reales`, y está entre `x` e `y` porque
 `0 < √2/2 < 1` (pues `0 < √2 < 2`). -/
 theorem ej2c {x y : ℚ} (h : x < y) : ∃ z : ℝ, Irrational z ∧ (x : ℝ) < z ∧ z < y := by
   have hs0 : 0 < Real.sqrt 2 := Real.sqrt_pos.2 (by norm_num)

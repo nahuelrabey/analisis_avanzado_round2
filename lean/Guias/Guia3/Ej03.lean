@@ -7,44 +7,37 @@ cerrados:
   (a) `[0,1]`   (b) `(0,1)`   (c) `ℚ`   (d) `ℚ ∩ [0,1]`
   (e) `ℤ`       (f) `[0,1) ∪ {2}`   (g) `{1/n : n ∈ ℕ}`   (h) `{1/n : n ∈ ℕ} ∪ {0}`.
 
-Fidelidad. Las nociones del curso (Def. 4.11, 4.14, 4.22, 4.27) se definen acá con bolas
-(`interiorCurso`, `clausuraCurso`, `AbiertoCurso`, `CerradoCurso`) y todos los veredictos se
-prueban con ellas, a mano, siguiendo el argumento del `.typ`: para cada conjunto un teorema
-`x_interior`, `x_clausura`, `x_abierto`/`x_no_abierto`, `x_cerrado`/`x_no_cerrado`.
-Después, el "puente" (`interior_eq_interiorCurso`, `closure_eq_clausuraCurso`, ...) se prueba
-con `Metric.mem_nhds_iff` y `Metric.mem_closure_iff` y permite releer los veredictos con
-`interior`, `closure`, `IsOpen` e `IsClosed` de Mathlib (`x_mathlib`). No se usa ningún lema de
+Fidelidad. Las nociones del curso (Def. 4.11, 4.14, 4.22, 4.27) están definidas con bolas en
+`Comun.Topologia.Curso` (`interiorCurso`, `clausuraCurso`, `AbiertoCurso`, `CerradoCurso`) y
+todos los veredictos se prueban con ellas, a mano, siguiendo el argumento del `.typ`: para cada
+conjunto un teorema `x_interior`, `x_clausura`, `x_abierto`/`x_no_abierto`,
+`x_cerrado`/`x_no_cerrado`. Después, el "puente" de `Comun` (`interior_eq_interiorCurso`,
+`closure_eq_clausuraCurso`, ..., probado con `Comun.mem_interior_iff_ball` y
+`Comun.mem_closure_iff_ball`, no con los cálculos de este archivo) permite releer los veredictos
+con `interior`, `closure`, `IsOpen` e `IsClosed` de Mathlib (`x_mathlib`). No se usa ningún lema de
 Mathlib que calcule interior o clausura de intervalos, `ℚ` o `ℤ` (`interior_Icc`, `closure_Ioo`,
 `Rat.denseRange_cast`, ...). Las únicas herramientas de Mathlib sobre `ℝ` son las que el curso
-da por demostradas: Arquímedes (`exists_nat_gt`), densidad de `ℚ` (`exists_rat_btwn`) y de los
+da por demostradas: Arquímedes (`Comun.arquimedes2`), densidad de `ℚ` (`exists_rat_btwn`) y de los
 irracionales (`exists_irrational_btwn`, Práctica 1, Ej. 2 (d)), e `Int.floor`/`Nat.floor` (el
 entero `n` con `n < x < n + 1`, que el texto deduce de la Práctica 1, Ej. 2 (a)).
+
+Qué importa de `Comun`: las definiciones y el puente (`Comun.Topologia.Curso`), las reescrituras
+con intervalos (`mem_interiorCurso_real`, `mem_clausuraCurso_real`), los lemas sobre intervalos
+(`clausuraCurso_sub_Icc`, `interiorCurso_sub_Ioo`, `Ioo_sub_interiorCurso`,
+`interiorCurso_vacio_of_racional`, `not_abierto_of`, `not_cerrado_of`), los puntos cercanos
+(`exists_pto`, `exists_rat_pto`) y `ℚ` como `Comun.Q` (`Comun.Topologia.Real`). Quedan locales
+los ocho conjuntos y sus veredictos.
 
 Convención: en el curso `ℕ = {1, 2, 3, …}`; acá se escribe `1 ≤ n` explícitamente.
 -/
 import Mathlib
+import Comun.Reales
+import Comun.Topologia.Real
+import Comun.Topologia.Curso
 
-open Set
+open Set Comun
 
 namespace Guias.Guia3.Ej03
-/-! ## Nociones del curso, definidas con bolas
-
-Se usan exactamente las definiciones de `apuntes.typ`, con `B(x, r) = Metric.ball x r` en `ℝ`
-con la distancia usual `d(x, y) = |x - y|`. -/
-
-/-- Definición 4.11: `x` es *punto interior* de `S` si `x ∈ S` y existe `r > 0` con
-`B(x, r) ⊆ S`. El *interior* es el conjunto de todos ellos. -/
-def interiorCurso (S : Set ℝ) : Set ℝ := {x | x ∈ S ∧ ∃ r > 0, Metric.ball x r ⊆ S}
-
-/-- Definición 4.22: `x` es *punto de adherencia* de `S` si para todo `r > 0` se tiene
-`B(x, r) ∩ S ≠ ∅`. La *clausura* es el conjunto de todos ellos. -/
-def clausuraCurso (S : Set ℝ) : Set ℝ := {x | ∀ r > 0, (Metric.ball x r ∩ S).Nonempty}
-
-/-- Definición 4.14: `S` es *abierto* si `S = S°`. -/
-def AbiertoCurso (S : Set ℝ) : Prop := interiorCurso S = S
-
-/-- Definición 4.27: `S` es *cerrado* si `S̄ = S`. -/
-def CerradoCurso (S : Set ℝ) : Prop := clausuraCurso S = S
 
 /-! ### Los ocho conjuntos del ejercicio -/
 
@@ -52,8 +45,8 @@ def CerradoCurso (S : Set ℝ) : Prop := clausuraCurso S = S
 def Ca : Set ℝ := Set.Icc 0 1
 /-- (b) `(0, 1)`. -/
 def Cb : Set ℝ := Set.Ioo 0 1
-/-- (c) `ℚ`, como imagen de `ℚ → ℝ`. -/
-def Cc : Set ℝ := Set.range ((↑) : ℚ → ℝ)
+/-- (c) `ℚ`, como imagen de `ℚ → ℝ` (es `Comun.Q`). -/
+abbrev Cc : Set ℝ := Q
 /-- (d) `ℚ ∩ [0, 1]`. -/
 def Cd : Set ℝ := Cc ∩ Set.Icc 0 1
 /-- (e) `ℤ`, como imagen de `ℤ → ℝ`. -/
@@ -64,139 +57,6 @@ def Cf : Set ℝ := Set.Ico 0 1 ∪ {2}
 def Cg : Set ℝ := {x | ∃ n : ℕ, 1 ≤ n ∧ x = 1 / (n : ℝ)}
 /-- (h) `{1/n : n ∈ ℕ} ∪ {0}`. -/
 def Ch : Set ℝ := Cg ∪ {0}
-
-/-! ### Lemas generales -/
-
-/-- `B(x, r) = (x - r, x + r)` en `ℝ`. -/
-theorem mem_ball_iff {x y r : ℝ} : y ∈ Metric.ball x r ↔ x - r < y ∧ y < x + r := by
-  rw [Real.ball_eq_Ioo]; exact Set.mem_Ioo
-
-/-- Reescritura de la clausura con intervalos. -/
-theorem mem_clausuraCurso {S : Set ℝ} {x : ℝ} :
-    x ∈ clausuraCurso S ↔ ∀ r > 0, ∃ y ∈ S, x - r < y ∧ y < x + r := by
-  constructor
-  · intro h r hr
-    obtain ⟨y, hyb, hyS⟩ := h r hr
-    exact ⟨y, hyS, mem_ball_iff.1 hyb⟩
-  · intro h r hr
-    obtain ⟨y, hyS, hy⟩ := h r hr
-    exact ⟨y, mem_ball_iff.2 hy, hyS⟩
-
-/-- Reescritura del interior con intervalos. -/
-theorem mem_interiorCurso {S : Set ℝ} {x : ℝ} :
-    x ∈ interiorCurso S ↔ x ∈ S ∧ ∃ r > 0, ∀ y, x - r < y → y < x + r → y ∈ S := by
-  constructor
-  · rintro ⟨hx, r, hr, h⟩
-    exact ⟨hx, r, hr, fun y h1 h2 => h (mem_ball_iff.2 ⟨h1, h2⟩)⟩
-  · rintro ⟨hx, r, hr, h⟩
-    exact ⟨hx, r, hr, fun y hy => h y (mem_ball_iff.1 hy).1 (mem_ball_iff.1 hy).2⟩
-
-/-- Observación 4.12: `S° ⊆ S`. -/
-theorem interiorCurso_subset (S : Set ℝ) : interiorCurso S ⊆ S := fun _ h => h.1
-
-/-- Observación 4.23 (a): `S ⊆ S̄`. -/
-theorem subset_clausuraCurso (S : Set ℝ) : S ⊆ clausuraCurso S := by
-  intro x hx r hr
-  exact ⟨x, Metric.mem_ball_self hr, hx⟩
-
-/-- Si `S ⊆ T` entonces `S̄ ⊆ T̄`. -/
-theorem clausuraCurso_mono {S T : Set ℝ} (h : S ⊆ T) : clausuraCurso S ⊆ clausuraCurso T := by
-  intro x hx r hr
-  obtain ⟨y, hy1, hy2⟩ := hx r hr
-  exact ⟨y, hy1, h hy2⟩
-
-/-- Un conjunto contenido en `[a, b]` tiene la clausura contenida en `[a, b]`. -/
-theorem clausuraCurso_sub_Icc {S : Set ℝ} {a b : ℝ} (h : S ⊆ Set.Icc a b) :
-    clausuraCurso S ⊆ Set.Icc a b := by
-  intro x hx
-  rw [mem_clausuraCurso] at hx
-  constructor
-  · by_contra hxa
-    have hxa' : x < a := not_le.1 hxa
-    obtain ⟨y, hyS, _, hy2⟩ := hx (a - x) (by linarith)
-    have := (h hyS).1
-    linarith
-  · by_contra hxb
-    have hxb' : b < x := not_le.1 hxb
-    obtain ⟨y, hyS, hy1, _⟩ := hx (x - b) (by linarith)
-    have := (h hyS).2
-    linarith
-
-/-- Un conjunto contenido en `[a, b]` tiene el interior contenido en `(a, b)`: si
-`B(x, r) ⊆ S ⊆ [a, b]`, los puntos `x ± r/2` están en `[a, b]`. -/
-theorem interiorCurso_sub_Ioo {S : Set ℝ} {a b : ℝ} (h : S ⊆ Set.Icc a b) :
-    interiorCurso S ⊆ Set.Ioo a b := by
-  intro x hx
-  rw [mem_interiorCurso] at hx
-  obtain ⟨_, r, hr, hball⟩ := hx
-  have h1 := (h (hball (x - r / 2) (by linarith) (by linarith))).1
-  have h2 := (h (hball (x + r / 2) (by linarith) (by linarith))).2
-  exact ⟨by linarith, by linarith⟩
-
-/-- Un intervalo abierto contenido en `S` está contenido en `S°`: para `x ∈ (a, b)` sirve
-`r = mín{x - a, b - x}`. -/
-theorem Ioo_sub_interiorCurso {S : Set ℝ} {a b : ℝ} (h : Set.Ioo a b ⊆ S) :
-    Set.Ioo a b ⊆ interiorCurso S := by
-  intro x hx
-  rw [mem_interiorCurso]
-  refine ⟨h hx, min (x - a) (b - x), lt_min (by linarith [hx.1]) (by linarith [hx.2]), ?_⟩
-  intro y hy1 hy2
-  have h1 := min_le_left (x - a) (b - x)
-  have h2 := min_le_right (x - a) (b - x)
-  exact h ⟨by linarith, by linarith⟩
-
-/-- Un conjunto formado sólo por racionales tiene interior vacío,
-porque toda bola `(x - r, x + r)` contiene un irracional (Práctica 1, Ej. 2 (d)). -/
-theorem interiorCurso_vacio_of_racional {S : Set ℝ} (hS : S ⊆ Cc) : interiorCurso S = ∅ := by
-  ext x
-  simp only [Set.mem_empty_iff_false, iff_false]
-  intro hx
-  rw [mem_interiorCurso] at hx
-  obtain ⟨_, r, hr, h⟩ := hx
-  obtain ⟨z, hz, hz1, hz2⟩ := exists_irrational_btwn (show x - r < x + r by linarith)
-  exact hz (hS (h z hz1 hz2))
-
-/-- Sobre un intervalo `[a, b]` con `a < b`, todo punto `x` tiene puntos de `(a, b)` distintos
-de `x` y arbitrariamente cerca: se corre `x` hacia el centro del intervalo en
-`t = mín{r, b - a} / 4`. -/
-theorem exists_pto {a b x r : ℝ} (hab : a < b) (hx : a ≤ x ∧ x ≤ b) (hr : 0 < r) :
-    ∃ y, a < y ∧ y < b ∧ y ≠ x ∧ x - r < y ∧ y < x + r := by
-  have hm : 0 < min r (b - a) := lt_min hr (by linarith)
-  have hmr := min_le_left r (b - a)
-  have hmb := min_le_right r (b - a)
-  by_cases h : x ≤ (a + b) / 2
-  · refine ⟨x + min r (b - a) / 4, by linarith [hx.1], by linarith, by linarith, by linarith,
-      by linarith⟩
-  · refine ⟨x - min r (b - a) / 4, by linarith, by linarith [hx.2], by linarith, by linarith,
-      by linarith⟩
-
-/-- Igual que `exists_pto`, pero con el punto racional (densidad de `ℚ`). -/
-theorem exists_rat_pto {a b x r : ℝ} (hab : a < b) (hx : a ≤ x ∧ x ≤ b) (hr : 0 < r) :
-    ∃ q : ℚ, a < q ∧ (q : ℝ) < b ∧ (q : ℝ) ≠ x ∧ x - r < q ∧ (q : ℝ) < x + r := by
-  obtain ⟨y, hy1, hy2, hyx, hy3, hy4⟩ := exists_pto hab hx hr
-  rcases lt_or_gt_of_ne hyx with hlt | hgt
-  · obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn hlt
-    exact ⟨q, by linarith, by linarith [hx.2], by linarith, by linarith, by linarith⟩
-  · obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn hgt
-    exact ⟨q, by linarith [hx.1], by linarith, by linarith, by linarith, by linarith⟩
-
-/-- Para refutar "abierto": basta un punto de `S` que no es interior. -/
-theorem not_abierto_of {S : Set ℝ} {x : ℝ} (hx : x ∈ S) (hn : x ∉ interiorCurso S) :
-    ¬ AbiertoCurso S := by
-  intro h
-  apply hn
-  unfold AbiertoCurso at h
-  rw [h]
-  exact hx
-
-/-- Para refutar "cerrado": basta un punto de adherencia que no está en `S`. -/
-theorem not_cerrado_of {S : Set ℝ} {x : ℝ} (hx : x ∈ clausuraCurso S) (hn : x ∉ S) :
-    ¬ CerradoCurso S := by
-  intro h
-  apply hn
-  unfold CerradoCurso at h
-  rw [← h]
-  exact hx
 
 /-! ### (a) `[0, 1]` -/
 
@@ -223,7 +83,7 @@ theorem b_clausura : clausuraCurso Cb = Set.Icc 0 1 := by
   apply Set.Subset.antisymm
   · exact clausuraCurso_sub_Icc (S := Cb) Set.Ioo_subset_Icc_self
   · intro x hx
-    rw [mem_clausuraCurso]
+    rw [mem_clausuraCurso_real]
     intro r hr
     obtain ⟨y, hy1, hy2, _, hy3, hy4⟩ := exists_pto zero_lt_one hx hr
     exact ⟨y, ⟨hy1, hy2⟩, hy3, hy4⟩
@@ -242,7 +102,7 @@ theorem c_interior : interiorCurso Cc = ∅ := interiorCurso_vacio_of_racional s
 theorem c_clausura : clausuraCurso Cc = Set.univ := by
   apply Set.eq_univ_of_forall
   intro x
-  rw [mem_clausuraCurso]
+  rw [mem_clausuraCurso_real]
   intro r hr
   obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn (show x - r < x + r by linarith)
   exact ⟨q, ⟨q, rfl⟩, hq1, hq2⟩
@@ -267,7 +127,7 @@ theorem d_clausura : clausuraCurso Cd = Set.Icc 0 1 := by
   apply Set.Subset.antisymm
   · exact clausuraCurso_sub_Icc (S := Cd) Set.inter_subset_right
   · intro x hx
-    rw [mem_clausuraCurso]
+    rw [mem_clausuraCurso_real]
     intro r hr
     obtain ⟨q, hq1, hq2, _, hq3, hq4⟩ := exists_rat_pto zero_lt_one hx hr
     exact ⟨q, ⟨⟨q, rfl⟩, hq1.le, hq2.le⟩, hq3, hq4⟩
@@ -297,7 +157,7 @@ theorem e_clausura : clausuraCurso Ce = Ce := by
   apply Set.Subset.antisymm _ (subset_clausuraCurso Ce)
   intro x hx
   by_contra hxe
-  rw [mem_clausuraCurso] at hx
+  rw [mem_clausuraCurso_real] at hx
   have h1 : ((⌊x⌋ : ℤ) : ℝ) ≤ x := Int.floor_le x
   have h2 : x < ((⌊x⌋ : ℤ) : ℝ) + 1 := Int.lt_floor_add_one x
   have h3 : ((⌊x⌋ : ℤ) : ℝ) ≠ x := fun h => hxe ⟨⌊x⌋, h⟩
@@ -324,7 +184,7 @@ theorem e_cerrado : CerradoCurso Ce := e_clausura
 theorem f_interior : interiorCurso Cf = Set.Ioo 0 1 := by
   apply Set.Subset.antisymm
   · intro x hx
-    rw [mem_interiorCurso] at hx
+    rw [mem_interiorCurso_real] at hx
     obtain ⟨hxS, r, hr, hball⟩ := hx
     rcases hxS with hx | hx
     · -- `x ∈ [0, 1)`: el punto `x - r/2` está en `S`, luego `x - r/2 ≥ 0`.
@@ -348,7 +208,7 @@ theorem f_clausura : clausuraCurso Cf = Set.Icc 0 1 ∪ {2} := by
     by_contra hxn
     have hxn1 : ¬ (0 ≤ x ∧ x ≤ 1) := fun h => hxn (Or.inl h)
     have hxn2 : x ≠ 2 := fun h => hxn (Or.inr h)
-    rw [mem_clausuraCurso] at hx
+    rw [mem_clausuraCurso_real] at hx
     rcases lt_or_ge x 0 with h0 | h0
     · obtain ⟨y, hyS, _, hy2⟩ := hx (-x) (by linarith)
       rcases hyS with hy | hy
@@ -373,7 +233,7 @@ theorem f_clausura : clausuraCurso Cf = Set.Icc 0 1 ∪ {2} := by
         · have : y = 2 := hy
           linarith
   · rintro x (hx | hx)
-    · rw [mem_clausuraCurso]
+    · rw [mem_clausuraCurso_real]
       intro r hr
       obtain ⟨y, hy1, hy2, _, hy3, hy4⟩ := exists_pto zero_lt_one hx hr
       exact ⟨y, Or.inl ⟨hy1.le, hy2⟩, hy3, hy4⟩
@@ -398,12 +258,11 @@ theorem f_no_cerrado : ¬ CerradoCurso Cf := by
 El ingrediente es que `x ∉ {1/n} ∪ {0}` está a distancia positiva de todo el conjunto: si
 `x ∈ (0, 1]`, queda entre `1/(n+1)` y `1/n` con `n = ⌊1/x⌋`. -/
 
-/-- Arquímedes: para todo `r > 0` hay `n ≥ 1` con `1/n < r`. -/
-theorem exists_inv_lt {r : ℝ} (hr : 0 < r) : ∃ n : ℕ, 1 ≤ n ∧ 1 / (n : ℝ) < r := by
-  obtain ⟨N, hN⟩ := exists_nat_gt (1 / r)
-  have hNpos : (0 : ℝ) < N := lt_trans (one_div_pos.2 hr) hN
-  have h0 : 0 < N := Nat.cast_pos.1 hNpos
-  exact ⟨N, h0, (one_div_lt hNpos hr).2 hN⟩
+/-- Arquímedes: para todo `r > 0` hay `n ≥ 1` con `1/n < r` (`Comun.arquimedes2`; `0 < 1/n`
+fuerza `n ≥ 1`). -/
+theorem exists_inv_lt {r : ℝ} (hr : 0 < r) : ∃ n : ℕ, 1 ≤ n ∧ 1 / (n : ℝ) < r :=
+  let ⟨n, hn, hnr⟩ := arquimedes2 hr
+  ⟨n, Nat.cast_pos.1 (one_div_pos.1 hn), hnr⟩
 
 theorem Cg_sub_Ch : Cg ⊆ Ch := Set.subset_union_left
 
@@ -477,7 +336,7 @@ theorem clausura_Ch_sub : clausuraCurso Ch ⊆ Ch := by
   intro x hx
   by_contra hxn
   obtain ⟨r, hr, hlej⟩ := lejos_Ch hxn
-  rw [mem_clausuraCurso] at hx
+  rw [mem_clausuraCurso_real] at hx
   obtain ⟨y, hy, hy1, hy2⟩ := hx r hr
   exact hlej y hy ⟨hy1, hy2⟩
 
@@ -489,7 +348,7 @@ theorem g_clausura : clausuraCurso Cg = Ch := by
   · rintro x (hx | hx)
     · exact subset_clausuraCurso Cg hx
     · have hx0 : x = 0 := hx
-      rw [hx0, mem_clausuraCurso]
+      rw [hx0, mem_clausuraCurso_real]
       intro r hr
       obtain ⟨n, hn, hnr⟩ := exists_inv_lt hr
       have hn' : (1 : ℝ) ≤ n := by exact_mod_cast hn
@@ -522,43 +381,11 @@ theorem h_no_abierto : ¬ AbiertoCurso Ch := by
 
 theorem h_cerrado : CerradoCurso Ch := h_clausura
 
-/-! ### Puente con Mathlib
-
-Las nociones del curso coinciden con `interior`, `closure`, `IsOpen` e `IsClosed` de Mathlib.
-Se prueban con las caracterizaciones por bolas (`Metric.mem_nhds_iff`, `Metric.mem_closure_iff`),
-no con los cálculos concretos del ejercicio. -/
-
-theorem interior_eq_interiorCurso (S : Set ℝ) : interior S = interiorCurso S := by
-  ext x
-  rw [mem_interior_iff_mem_nhds, Metric.mem_nhds_iff]
-  constructor
-  · rintro ⟨r, hr, h⟩
-    exact ⟨h (Metric.mem_ball_self hr), r, hr, h⟩
-  · rintro ⟨_, r, hr, h⟩
-    exact ⟨r, hr, h⟩
-
-theorem closure_eq_clausuraCurso (S : Set ℝ) : closure S = clausuraCurso S := by
-  ext x
-  rw [Metric.mem_closure_iff]
-  constructor
-  · intro h r hr
-    obtain ⟨y, hyS, hd⟩ := h r hr
-    exact ⟨y, Metric.mem_ball'.2 hd, hyS⟩
-  · intro h r hr
-    obtain ⟨y, hyb, hyS⟩ := h r hr
-    exact ⟨y, hyS, Metric.mem_ball'.1 hyb⟩
-
-theorem isOpen_iff_abiertoCurso (S : Set ℝ) : IsOpen S ↔ AbiertoCurso S := by
-  unfold AbiertoCurso
-  rw [← interior_eq_interiorCurso, interior_eq_iff_isOpen]
-
-theorem isClosed_iff_cerradoCurso (S : Set ℝ) : IsClosed S ↔ CerradoCurso S := by
-  unfold CerradoCurso
-  rw [← closure_eq_clausuraCurso, closure_eq_iff_isClosed]
-
 /-! ## Los veredictos, enunciados con `interior`, `closure`, `IsOpen` e `IsClosed` de Mathlib
 
-Son los mismos teoremas de arriba, traducidos con el puente; sólo cambia el vocabulario. -/
+Son los mismos teoremas de arriba, traducidos con el puente de `Comun.Topologia.Curso`
+(`interior_eq_interiorCurso`, `closure_eq_clausuraCurso`, `isOpen_iff_abiertoCurso`,
+`isClosed_iff_cerradoCurso`); sólo cambia el vocabulario. -/
 
 theorem a_mathlib : interior Ca = Set.Ioo 0 1 ∧ closure Ca = Set.Icc 0 1 ∧
     ¬ IsOpen Ca ∧ IsClosed Ca := by

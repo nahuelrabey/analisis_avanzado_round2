@@ -8,17 +8,21 @@ Tres límites "por definición" (Definición 7, `Converge`): se fija `ε > 0`, s
 Arquímedes (Teorema 1, `arquimedes`) o de su segunda forma (Proposición 1, `arquimedes2`).
   (a) `|a_n + 2| = 5 / (n + 1)`;
   (b) `|sen n / n| ≤ 1 / n` por `|sen n| ≤ 1` (hecho de base: `Real.abs_sin_le_one`);
-  (c) `|a_n - 1| = 7 / (2^n + 4) ≤ 7 / n` por el sublema `n ≤ 2^n` (inducción local).
+  (c) `|a_n - 1| = 7 / (2^n + 4) ≤ 7 / n` por el sublema `n ≤ 2^n` (`natCast_le_two_pow` de
+      `Comun.Reales`, probado por inducción).
+De `Comun.Reales` se importan `arquimedes`, `arquimedes2` y `natCast_le_two_pow`; de
+`Comun.Sucesiones`, la Definición 7. Los tres límites quedan locales.
 No se usa `Tendsto` ni ningún lema de límites de Mathlib. Los índices empiezan en `0`: en (a) y
 (c) la cuenta vale igual para `n = 0`; en (b) `sen 0 / 0 = 0` en Lean, pero de todos modos
 `0 < 1/n₀` fuerza `n₀ ≥ 1`, así que los `n ≥ n₀` que se miran son los del curso.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej07
 
-open Guias.Guia1
+open Comun
 
 /-! ## (a) `(3 - 2n)/(n + 1) → -2` -/
 
@@ -59,17 +63,8 @@ theorem ej7b : Converge (fun n : ℕ => Real.sin n / n) 0 := by
 
 /-! ## (c) `(2^n - 3)/(2^n + 4) → 1` -/
 
-/-- Sublema (deducción propia, por inducción): `n ≤ 2^n`. Caso `0`: `0 ≤ 1`. Paso:
-`n + 1 ≤ 2^n + 1 ≤ 2^n + 2^n = 2^(n+1)` porque `1 ≤ 2^n`. -/
-theorem le_two_pow (n : ℕ) : n ≤ 2 ^ n := by
-  induction n with
-  | zero => norm_num
-  | succ k ih =>
-    have h1 : 1 ≤ 2 ^ k := Nat.one_le_two_pow
-    rw [pow_succ]
-    omega
-
-/-- **Ej. 7 (c).** `|a_n - 1| = 7/(2^n + 4) < 7/2^n ≤ 7/n` (sublema `n ≤ 2^n`). Dado `ε > 0`,
+/-- **Ej. 7 (c).** `|a_n - 1| = 7/(2^n + 4) < 7/2^n ≤ 7/n` (sublema `n ≤ 2^n`,
+`natCast_le_two_pow`). Dado `ε > 0`,
 la Proposición 1 aplicada a `ε/7` da `n₀` con `0 < 1/n₀ < ε/7`; para `n ≥ n₀`,
 `7/n ≤ 7/n₀ < ε`. -/
 theorem ej7c : Converge (fun n : ℕ => ((2 : ℝ) ^ n - 3) / (2 ^ n + 4)) 1 := by
@@ -78,7 +73,7 @@ theorem ej7c : Converge (fun n : ℕ => ((2 : ℝ) ^ n - 3) / (2 ^ n + 4)) 1 := 
   refine ⟨n₀, fun n hn => ?_⟩
   have hn₀r : (0 : ℝ) < n₀ := one_div_pos.1 hn₀pos
   have hnr : (0 : ℝ) < n := lt_of_lt_of_le hn₀r (by exact_mod_cast hn)
-  have h2n : (n : ℝ) ≤ 2 ^ n := by exact_mod_cast le_two_pow n
+  have h2n : (n : ℝ) ≤ 2 ^ n := natCast_le_two_pow n
   have hpow : (0 : ℝ) < 2 ^ n := by positivity
   -- la cuenta exacta: a_n - 1 = -7/(2^n + 4)
   have hdiff : ((2 : ℝ) ^ n - 3) / (2 ^ n + 4) - 1 = -(7 / (2 ^ n + 4)) := by

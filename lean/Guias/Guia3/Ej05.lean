@@ -6,13 +6,19 @@ Se prueban (a) `E ∖ A° = cl (E ∖ A)` y (b) `E ∖ cl A = (E ∖ A)°`, y se
 `cl A = cl (A°)` y `A° = (cl A)°` son falsas en general (contraejemplo `A = ℚ` en `ℝ`), aunque valen
 las inclusiones `cl (A°) ⊆ cl A` y `A° ⊆ (cl A)°`.
 
-Todo pasa por las definiciones por bolas (4.11, 4.22), vía `Metric.mem_closure_iff` y
-`Metric.mem_nhds_iff`.
+Todo pasa por las definiciones por bolas (4.11, 4.22), vía `Comun.mem_interior_iff_ball` y
+`Comun.mem_closure_iff_ball`.
+
+Qué importa de `Comun`: (a) y (b) son `Comun.compl_interior_eq` y `Comun.compl_closure_eq`
+(`Comun.Topologia`), con las inclusiones `closure_interior_subset` e
+`interior_subset_interior_closure`; `Q`, `closure_Q` e `interior_Q` están en
+`Comun.Topologia.Real`. Queda local la pregunta final (el contraejemplo `A = ℚ`).
 -/
 import Mathlib
-import Guias.Common
+import Comun.Topologia
+import Comun.Topologia.Real
 
-open Metric Set Guias
+open Metric Set Comun
 
 namespace Guias.Guia3.Ej05
 
@@ -21,80 +27,24 @@ variable {E : Type*} [MetricSpace E]
 /-! ## (a) `E ∖ A° = cl (E ∖ A)` -/
 
 /-- **Ej. 5 (a).** `x ∉ A°` ⟺ ninguna bola `B(x, r)` está contenida en `A` ⟺ toda bola `B(x, r)`
-corta a `E ∖ A` ⟺ `x ∈ cl (E ∖ A)`. -/
-theorem ej5a (A : Set E) : (interior A)ᶜ = closure Aᶜ := by
-  ext x
-  rw [mem_compl_iff, mem_interior_iff_ball, mem_closure_iff_ball]
-  constructor
-  · intro h r hr
-    by_contra hne
-    apply h
-    refine ⟨r, hr, fun z hz => ?_⟩
-    by_contra hzA
-    exact hne ⟨z, hz, hzA⟩
-  · rintro h ⟨r, hr, hsub⟩
-    obtain ⟨z, hz1, hz2⟩ := h r hr
-    exact hz2 (hsub hz1)
+corta a `E ∖ A` ⟺ `x ∈ cl (E ∖ A)` (`Comun.compl_interior_eq`). -/
+theorem ej5a (A : Set E) : (interior A)ᶜ = closure Aᶜ := compl_interior_eq A
 
 /-! ## (b) `E ∖ cl A = (E ∖ A)°` -/
 
 /-- **Ej. 5 (b).** `x ∉ cl A` ⟺ existe `r > 0` con `B(x, r) ∩ A = ∅` ⟺ existe `r > 0` con
-`B(x, r) ⊆ E ∖ A` ⟺ `x ∈ (E ∖ A)°`. -/
-theorem ej5b (A : Set E) : (closure A)ᶜ = interior Aᶜ := by
-  ext x
-  rw [mem_compl_iff, mem_closure_iff_ball, mem_interior_iff_ball]
-  constructor
-  · intro h
-    by_contra hne
-    apply h
-    intro r hr
-    by_contra hemp
-    apply hne
-    refine ⟨r, hr, fun z hz hzA => hemp ⟨z, hz, hzA⟩⟩
-  · rintro ⟨r, hr, hsub⟩ h
-    obtain ⟨z, hz1, hz2⟩ := h r hr
-    exact hsub hz1 hz2
+`B(x, r) ⊆ E ∖ A` ⟺ `x ∈ (E ∖ A)°` (`Comun.compl_closure_eq`). -/
+theorem ej5b (A : Set E) : (closure A)ᶜ = interior Aᶜ := compl_closure_eq A
 
-/-! ## Las inclusiones que sí valen -/
+/-! ## Las inclusiones que sí valen
 
-/-- `cl (A°) ⊆ cl A`, pues `A° ⊆ A` (Observación 4.12) y la clausura es monótona. -/
-theorem closure_interior_subset (A : Set E) : closure (interior A) ⊆ closure A := by
-  apply closure_mono_ball
-  intro x hx
-  obtain ⟨r, hr, hsub⟩ := mem_interior_iff_ball.1 hx
-  exact hsub (mem_ball_self hr)
-
-/-- `A° ⊆ (cl A)°`, pues `A ⊆ cl A` (Observación 4.23 (a)): la misma bola sirve. -/
-theorem interior_subset_interior_closure (A : Set E) : interior A ⊆ interior (closure A) := by
-  intro x hx
-  obtain ⟨r, hr, hsub⟩ := mem_interior_iff_ball.1 hx
-  exact mem_interior_iff_ball.2 ⟨r, hr, hsub.trans (subset_closure_ball A)⟩
+`cl (A°) ⊆ cl A` e `A° ⊆ (cl A)°` son `Comun.closure_interior_subset` y
+`Comun.interior_subset_interior_closure`. -/
 
 /-! ## La pregunta final: contraejemplo `A = ℚ` en `ℝ` -/
 
-/-- Los racionales como subconjunto de `ℝ`. -/
-def Q : Set ℝ := range ((↑) : ℚ → ℝ)
-
-/-- `cl ℚ = ℝ`: todo intervalo `(x - r, x + r)` contiene un racional (Densidad de `ℚ`). -/
-theorem closure_Q : closure Q = univ := by
-  ext x
-  simp only [mem_univ, iff_true]
-  rw [mem_closure_iff_ball]
-  intro r hr
-  obtain ⟨q, hq1, hq2⟩ := exists_rat_btwn (show x - r < x + r by linarith)
-  refine ⟨q, mem_ball.2 ?_, q, rfl⟩
-  rw [Real.dist_eq, abs_lt]
-  constructor <;> linarith
-
-/-- `ℚ° = ∅`: todo intervalo `(x, x + r)` contiene un irracional. -/
-theorem interior_Q : interior Q = ∅ := by
-  refine eq_empty_of_forall_notMem fun x hx => ?_
-  obtain ⟨r, hr, hsub⟩ := mem_interior_iff_ball.1 hx
-  obtain ⟨y, hy, hy1, hy2⟩ := exists_irrational_btwn (show x < x + r by linarith)
-  have hmem : y ∈ ball x r := by
-    rw [mem_ball, Real.dist_eq, abs_lt]
-    constructor <;> linarith
-  exact hy (hsub hmem)
+/-- `ℚ ⊆ ℝ` es `Comun.Q`, con `cl ℚ = ℝ` (`Comun.closure_Q`) y `ℚ° = ∅` (`Comun.interior_Q`). -/
+theorem closure_Q_interior_Q : closure Q = univ ∧ interior Q = ∅ := ⟨closure_Q, interior_Q⟩
 
 /-- `cl ∅ = ∅`: ninguna bola corta al vacío. -/
 theorem closure_empty_ball : closure (∅ : Set ℝ) = ∅ := by

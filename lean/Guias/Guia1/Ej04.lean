@@ -1,6 +1,6 @@
 /-
 Práctica 1, Ejercicio 4 (hallar supremo, ínfimo, máximo y mínimo), con las nociones del curso
-(`Guias.Guia1.Defs`): `EsSup`, `EsInf`, `EsMax`, `EsMin` (Definiciones 2, 5, 3 y 6),
+(`Comun`): `EsSup`, `EsInf`, `EsMax`, `EsMin` (Definiciones 2, 5, 3 y 6),
 `CotaSup`, `CotaInf`, `AcotadoSup` (Definiciones 1 y 4).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Ejercicio 4).
 
@@ -10,11 +10,17 @@ Los cuatro conjuntos son `Set.Ioc a b` (el intervalo `(a, b]`, con `a < b`),
 Las demostraciones siguen el texto: cuando el extremo existe se usa la Proposición 4 / 6
 (`caract_sup_max` / `caract_inf_min`: cota que pertenece al conjunto) o directamente la
 Definición 2 / 5; cuando no existe, se exhibe el elemento del conjunto que lo contradice
-(punto medio, `1/2^(n+1)`, Principio de Arquímedes). El sublema `n ≤ 2^n` se prueba por inducción.
+(punto medio, `1/2^(n+1)`, Principio de Arquímedes). Los sublemas `n ≤ 2^n` (por inducción,
+`natCast_le_two_pow`) y `1/2^n ≤ 1/2` para `n ≥ 1` (`one_div_two_pow_le`) se importan de
+`Comun.Reales`, junto con `arquimedes` y `arquimedes2`; de `Comun.Supremos`, las Definiciones y
+las Proposiciones 4 y 6. Los conjuntos `B`, `C` y todos los ítems quedan locales.
 No se usan `sSup`, `sInf`, `IsLUB`, `IsGLB` ni `Nat.lt_two_pow_self`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Reales
+import Comun.Supremos
+
+open Comun
 
 namespace Guias.Guia1.Ej04
 
@@ -52,23 +58,6 @@ theorem ej4a_no_min {a b : ℝ} : ¬ ∃ m, EsMin (Set.Ioc a b) m := by
 /-- El conjunto `B = {1/2^n : n ∈ ℕ}` del enunciado, con `ℕ = {1, 2, 3, …}`. -/
 def B : Set ℝ := {x | ∃ n : ℕ, 0 < n ∧ x = 1 / 2 ^ n}
 
-/-- Sublema (deducción propia, por inducción): `n ≤ 2 ^ n` para todo `n ∈ ℕ`. -/
-theorem le_two_pow (n : ℕ) : (n : ℝ) ≤ 2 ^ n := by
-  induction n with
-  | zero => norm_num
-  | succ k ih =>
-    push_cast
-    have h1 : (1 : ℝ) ≤ 2 ^ k := one_le_pow₀ (by norm_num)
-    rw [pow_succ]
-    linarith
-
-/-- Para `n ≥ 1`, `1 / 2 ^ n ≤ 1 / 2` (porque `2 ≤ 2 ^ n`). -/
-theorem one_div_two_pow_le {n : ℕ} (hn : 0 < n) : (1 : ℝ) / 2 ^ n ≤ 1 / 2 := by
-  have h2 : (2 : ℝ) ≤ 2 ^ n := by
-    calc (2 : ℝ) = 2 ^ 1 := by norm_num
-      _ ≤ 2 ^ n := pow_le_pow_right₀ (by norm_num) hn
-  exact one_div_le_one_div_of_le (by norm_num) h2
-
 /-- **Ej. 4 (b), supremo y máximo.** `1/2 ∈ B` (es `n = 1`) y es cota superior
 (`1/2^n ≤ 1/2` para `n ≥ 1`): es el máximo por la Proposición 4. -/
 theorem ej4b_max : EsMax B (1 / 2) := by
@@ -80,8 +69,8 @@ theorem ej4b_max : EsMax B (1 / 2) := by
 theorem ej4b_sup : EsSup B (1 / 2) := ej4b_max.1
 
 /-- **Ej. 4 (b), ínfimo.** `ínf B = 0`: `0` es cota inferior; si `t > 0` fuera cota inferior, la
-Proposición 1 (Arquímedes 2) da `n` con `0 < 1/n < t`, y como `n ≤ 2^n` (sublema),
-`1/2^n ≤ 1/n < t` con `1/2^n ∈ B`, absurdo. -/
+Proposición 1 (Arquímedes 2) da `n` con `0 < 1/n < t`, y como `n ≤ 2^n` (sublema
+`natCast_le_two_pow`), `1/2^n ≤ 1/n < t` con `1/2^n ∈ B`, absurdo. -/
 theorem ej4b_inf : EsInf B 0 := by
   refine ⟨?_, fun t ht => ?_⟩
   · rintro x ⟨n, _, rfl⟩
@@ -95,7 +84,7 @@ theorem ej4b_inf : EsInf B 0 := by
       have : (1 : ℝ) / n ≤ 0 := div_nonpos_of_nonneg_of_nonpos zero_le_one h
       linarith
     have hn1 : 0 < n := by exact_mod_cast hnpos
-    have hle : (1 : ℝ) / 2 ^ n ≤ 1 / n := one_div_le_one_div_of_le hnpos (le_two_pow n)
+    have hle : (1 : ℝ) / 2 ^ n ≤ 1 / n := one_div_le_one_div_of_le hnpos (natCast_le_two_pow n)
     have hmem : (1 : ℝ) / 2 ^ n ∈ B := ⟨n, hn1, rfl⟩
     linarith [ht _ hmem]
 

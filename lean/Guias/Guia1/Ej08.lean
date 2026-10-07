@@ -5,14 +5,15 @@ Enunciado en `apuntes-typst/guias/p1.typ`; resolución en
 
 Si `|x_n - ℓ| ≤ a_n` para todo `n` y `a_n → 0`, entonces `x_n → ℓ`. Directo desde la
 Definición 7: dado `ε > 0`, el `n₀` de `a_n → 0` sirve para `x_n`, porque
-`|x_n - ℓ| ≤ a_n ≤ |a_n| = |a_n - 0| < ε`. No se usa `squeeze_zero` ni `Tendsto`.
+`|x_n - ℓ| ≤ a_n ≤ |a_n| = |a_n - 0| < ε`. No se usa `squeeze_zero` ni `Tendsto`. Sólo se
+importa la Definición 7 de `Comun.Sucesiones`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej08
 
-open Guias.Guia1
+open Comun
 
 /-- **Ej. 8.** Dado `ε > 0`, se toma el `n₀` de `a_n → 0` (Definición 7) y para `n ≥ n₀`:
 `|x_n - ℓ| ≤ a_n ≤ |a_n| = |a_n - 0| < ε`. -/

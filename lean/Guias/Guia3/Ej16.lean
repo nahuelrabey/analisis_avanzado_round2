@@ -13,21 +13,18 @@ Pasos (los mismos del texto Typst):
 3. converge a un `x` por completitud;
 4. `x ∈ Aₙ` para todo `n`: la cola `(xₘ)_{m ≥ n}` está en `Aₙ`, que es cerrado (Corolario 4.47);
 5. unicidad: si `y, z ∈ ⋂ Aₙ`, entonces `d(y, z) ≤ diam(Aₙ) → 0`.
+
+Importa `Comun.Topologia` por el sublema genérico `antitone_subset_of_succ` (una sucesión decreciente
+de conjuntos), que queda local (va a `Comun.Sucesiones` como `decreciente_le` en el paso 3).
 -/
 import Mathlib
+import Comun.Topologia
 
-open Filter Topology
+open Filter Topology Comun
 
 namespace Guias.Guia3.Ej16
 
 variable {E : Type*} [MetricSpace E]
-
-/-- Los `Aₙ` son decrecientes: `Aₘ ⊆ Aₙ` si `n ≤ m`. -/
-theorem sub_of_le {X : Type*} (A : ℕ → Set X) (hdec : ∀ n, A (n + 1) ⊆ A n) {n m : ℕ} (h : n ≤ m) :
-    A m ⊆ A n := by
-  induction h with
-  | refl => exact subset_rfl
-  | step _ ih => exact (hdec _).trans ih
 
 /-- **Ejercicio 16 (Cantor).** Existe un único `x ∈ ⋂ₙ Aₙ`. -/
 theorem ej16 [CompleteSpace E] (A : ℕ → Set E)
@@ -43,8 +40,8 @@ theorem ej16 [CompleteSpace E] (A : ℕ → Set E)
     intro ε hε
     obtain ⟨N, hN⟩ := (Metric.tendsto_atTop.1 hdiam) ε hε
     refine ⟨N, fun m hm n hn => ?_⟩
-    have hmN : x m ∈ A N := sub_of_le A hdec hm (hx m)
-    have hnN : x n ∈ A N := sub_of_le A hdec hn (hx n)
+    have hmN : x m ∈ A N := antitone_subset_of_succ A hdec hm (hx m)
+    have hnN : x n ∈ A N := antitone_subset_of_succ A hdec hn (hx n)
     have h1 : dist (x m) (x n) ≤ Metric.diam (A N) :=
       Metric.dist_le_diam_of_mem (hacot N) hmN hnN
     have h2 : Metric.diam (A N) < ε := by
@@ -60,7 +57,7 @@ theorem ej16 [CompleteSpace E] (A : ℕ → Set E)
     intro n
     apply (hcerr n).mem_of_tendsto hl
     rw [eventually_atTop]
-    exact ⟨n, fun m hm => sub_of_le A hdec hm (hx m)⟩
+    exact ⟨n, fun m hm => antitone_subset_of_succ A hdec hm (hx m)⟩
   refine ⟨l, hlmem, fun y hy => ?_⟩
   -- 5. unicidad: `d(y, l) ≤ diam(Aₙ) → 0`
   have hle : dist y l ≤ 0 := by

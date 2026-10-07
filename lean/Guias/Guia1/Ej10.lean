@@ -6,14 +6,14 @@ Enunciado en `apuntes-typst/guias/p1.typ`; resolución en
 Si `x_n → ℓ₁`, `y_n → ℓ₂` y `x_n ≤ y_n` para todo `n`, entonces `ℓ₁ ≤ ℓ₂`. Por el absurdo: si
 `ℓ₂ < ℓ₁`, con `ε = (ℓ₁ - ℓ₂)/2` y `n = máx(n₁, n₂)` queda `x_n > ℓ₁ - ε = ℓ₂ + ε > y_n`.
 Es el ítem e de la Proposición 6 (Álgebra de límites): no se usa `algebra_limites_le` ni
-`le_of_tendsto_of_tendsto`; sólo la Definición 7.
+`le_of_tendsto_of_tendsto`; sólo la Definición 7, importada de `Comun.Sucesiones`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Sucesiones
 
 namespace Guias.Guia1.Ej10
 
-open Guias.Guia1
+open Comun
 
 /-- **Ej. 10.** Si `x_n → ℓ₁`, `y_n → ℓ₂` y `x_n ≤ y_n` para todo `n`, entonces `ℓ₁ ≤ ℓ₂`.
 Por el absurdo con `ε = (ℓ₁ - ℓ₂)/2` y `n₀ = máx(n₁, n₂)`. -/

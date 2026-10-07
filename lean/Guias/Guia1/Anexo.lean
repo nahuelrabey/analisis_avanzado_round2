@@ -1,6 +1,6 @@
 /-
 Práctica 1, Anexo (Ejercicio 7 de la edición 2025: punto fijo de una función creciente), con las
-nociones del curso (`Guias.Guia1.Defs`): `EsSup`, `CotaSup` (Definiciones 1 y 2).
+nociones del curso (`Comun`): `EsSup`, `CotaSup` (Definiciones 1 y 2).
 Resolución "a mano" en `apuntes-typst/guias-agente/guia_1_resuelta_agente.typ` (Anexo).
 
 `f : ℝ → ℝ` aplica `[a, b]` en `[a, b]` (`Set.MapsTo f (Set.Icc a b) (Set.Icc a b)`) y es
@@ -11,10 +11,12 @@ registra). La prueba sigue el texto: `a ≤ x₀ ≤ b`; `f x₀` es cota superi
 `x < f x ≤ f x₀`), luego `x₀ ≤ f x₀`; y si fuera `x₀ < f x₀`, el punto medio `m = (x₀ + f x₀)/2`
 estaría en `[a, b]` con `f m ≥ f x₀ > m`, es decir `m ∈ S` con `m > x₀ = sup S`, absurdo.
 No se usa la Proposición 3 ni ninguna continuidad; tampoco `sSup`, `IsLUB` ni teoremas de punto
-fijo de Mathlib.
+fijo de Mathlib. Sólo se importan las Definiciones y el Axioma de Completitud de `Comun.Supremos`.
 -/
 import Mathlib
-import Guias.Guia1.Defs
+import Comun.Supremos
+
+open Comun
 
 namespace Guias.Guia1.Anexo
 

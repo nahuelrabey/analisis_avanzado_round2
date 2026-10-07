@@ -1,4 +1,3 @@
-import Guias.Common
 import Guias.Guia3.Ej01
 import Guias.Guia3.Ej02
 import Guias.Guia3.Ej03
@@ -15,7 +14,6 @@ import Guias.Guia3.Ej13
 import Guias.Guia3.Ej14
 import Guias.Guia3.Ej15
 import Guias.Guia3.Ej16
-import Guias.Guia2.Defs
 import Guias.Guia2.Ej01
 import Guias.Guia2.Ej02
 import Guias.Guia2.Ej03
@@ -33,7 +31,6 @@ import Guias.Guia2.Ej14
 import Guias.Guia2.Ej15
 import Guias.Guia2.Ej16
 import Guias.Guia2.Ej17
-import Guias.Guia1.Defs
 import Guias.Guia1.Ej01
 import Guias.Guia1.Ej02
 import Guias.Guia1.Ej03
