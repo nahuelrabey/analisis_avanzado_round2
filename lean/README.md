@@ -32,6 +32,7 @@ viven en `apuntes-typst/guias/`):
 |---|---|---|
 | 3 (espacios métricos y topología) | `guias-agente/guia_3_resuelta_agente.typ` | `Guias/Guia3/Ej01.lean` ... `Ej16.lean` |
 | 2 (cardinales) | `guias-agente/guia_2_resuelta_agente.typ` | `Guias/Guia2/Defs.lean`, `Guias/Guia2/Ej01.lean` ... `Ej17.lean` |
+| 1 (ℝ, supremos, sucesiones) | `guias-agente/guia_1_resuelta_agente.typ` | `Guias/Guia1/Defs.lean`, `Guias/Guia1/Ej01.lean` ... `Ej16.lean`, `Guias/Guia1/Anexo.lean` |
 
 `Guias/Guia2/Defs.lean` define las nociones del curso sobre cardinales (`Coordinables`, `CardLe`,
 `Finito`, `Numerable`, `Contable`, `CardEq`, `CardC` = "tiene el cardinal de ℝ"; Definiciones 3.1,
@@ -41,6 +42,19 @@ Práctica 2 toma como verdaderos (Prop. 3.2, 3.9, 3.13, 3.14, numerabilidad de �
 `Defs` y no usan los lemas de Mathlib que son literalmente los ejercicios (unión contable de
 contables, cardinal de ℝ, de 𝒫(ℕ), de los polinomios, discontinuidades de una monótona, …).
 
+`Guias/Guia1/Defs.lean` define las nociones del curso sobre `ℝ` y sucesiones (`CotaSup`, `CotaInf`,
+`AcotadoSup`, `AcotadoInf`, `Acotado`, `EsSup`, `EsInf`, `EsMax`, `EsMin`; `Converge` (ε-n₀),
+`DivergeMasInf`, `DivergeMenosInf`, `Acotada`, `Creciente`, `Decreciente`; subsucesión = `a ∘ φ` con
+`StrictMono φ`; Definiciones 1 a 10 de `apuntes.typ`), sus puentes a Mathlib y los resultados de los
+capítulos 1 y 2 de `apuntes.typ` (Axioma de Completitud, Arquímedes, densidad de ℚ, equivalencias de
+supremo e ínfimo, caracterizaciones de máximo y mínimo, unicidad del límite, álgebra de límites,
+convergente ⇒ acotada, monótona acotada ⇒ converge al supremo, equivalencia del supremo 2,
+convergencia de subsucesiones), deducidos de Mathlib. Los `Guias/Guia1/EjNN.lean` sólo importan `Defs`,
+despliegan la definición ε-n₀ (no pasan por `Filter.Tendsto`) y no usan el resultado de `apuntes.typ`
+que es literalmente el ejercicio (Ej. 2 (b) ↔ densidad de ℚ, Ej. 3 ↔ equivalencia de ínfimo,
+Ej. 9 (a) y 10 ↔ álgebra de límites b y e, Ej. 12 (a) ↔ espejo de la Proposición 8).
+`Guias/Guia1/Anexo.lean` es el ejercicio de punto fijo de la edición 2025 de la Práctica 1.
+
 `Guias/Common.lean` define `EsMetrica` (Definición 4.1 de `apuntes.typ`), `bola` y `bolaCerrada`, y
 los lemas puente que leen `interior`/`closure` de Mathlib con las Definiciones 4.11 y 4.22 por bolas
 (`mem_interior_iff_ball`, `mem_closure_iff_ball`, `notMem_closure_iff_ball`, `subset_closure_ball`,
@@ -48,7 +62,7 @@ los lemas puente que leen `interior`/`closure` de Mathlib con las Definiciones 4
 Cada ejercicio tiene su archivo; como en el texto, un ejercicio puede importar uno anterior
 (`Ej08` importa `Ej03`, `Ej14` importa `Ej12`), nunca uno posterior. El `.typ` termina cada
 ejercicio con una caja *Observación* que indica qué teoremas certifican qué ítems y los desvíos de
-la formalización. Para comprobar todos los teoremas de la Práctica 3:
+la formalización. Para comprobar todos los teoremas de las Prácticas 1, 2 y 3:
 
 ```sh
 cd lean && lake build Guias        # compila sin errores ni warnings
