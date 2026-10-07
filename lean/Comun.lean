@@ -8,6 +8,7 @@ import Comun.Metricas
 import Comun.Metricas.Rn
 import Comun.Metricas.Discreta
 import Comun.Metricas.C01
+import Comun.Metricas.EvNulas
 import Comun.Topologia
 import Comun.Topologia.Real
 import Comun.Topologia.Curso

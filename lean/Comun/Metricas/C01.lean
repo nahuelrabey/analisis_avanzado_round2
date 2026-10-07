@@ -132,6 +132,13 @@ theorem d1_le_dist (f g : C01) : d1 f g ≤ dist f g := by
 /-- La evaluación en `0`. -/
 noncomputable def E (f : C01) : ℝ := f ⟨0, by norm_num⟩
 
+
+/-- La métrica producto de `C([0,1]) × [0,1]` en Mathlib es `máx {d_∞(f, g), |x - y|}`
+(1er parcial 2C 2025, Ej. 5). -/
+theorem dist_prod_eq (p q : C(unitInterval, ℝ) × unitInterval) :
+    dist p q = max (dist p.1 q.1) |(p.2 : ℝ) - q.2| := by
+  rw [Prod.dist_eq, Subtype.dist_eq, Real.dist_eq]
+
 end C01
 
 end Comun

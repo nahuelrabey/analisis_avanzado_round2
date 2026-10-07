@@ -59,6 +59,7 @@ lemas genéricos que antes estaban repetidos entre ejercicios y parciales. El di
 | `Comun/Metricas/Rn.lean` | `d1`, `d2`, `dinf` en `Fin n → ℝ`: son métricas (P3 Ej. 1 b-d), bolas, `d_∞ ≤ d₂ ≤ d₁ ≤ n·d_∞` (Ej. 12), completitud (Ej. 14), puentes con `dist` y `EuclideanSpace` |
 | `Comun/Metricas/Discreta.lean` | `δ` (P3 Ej. 1 f), `Disc X` con su instancia, `B(x,1) = {x}`, `B̄(x,1) = X` |
 | `Comun/Metricas/C01.lean` | `C01 = C([0,1])`, `dC` = `d_∞` (P3 Ej. 1 e) con `dC_eq_dist`; `C01.d1` (integral), `C01.d1_le_dist`, evaluación |
+| `Comun/Metricas/EvNulas.lean` | las sucesiones eventualmente nulas con `d_∞` (`EvNulas ⊆ ℕ →ᵇ ℝ`), la sucesión de Cauchy `aN` sin límite y `¬ CompleteSpace EvNulas` (1er parcial 1C 2025, Ej. 4 b) |
 | `Comun/Topologia.lean` | interior/clausura por bolas (Def. 4.11, 4.22) para un `MetricSpace`; bolas abiertas/cerradas, `{x}`, `cl B(x,r') ⊆ B(x,r)` (P3 Ej. 4), complementos (Ej. 5), unión e intersección (Ej. 6), frontera (Ej. 9), conjuntos uniformemente discretos |
 | `Comun/Topologia/Real.lean` | la bola de ℝ como intervalo, puntos cercanos racionales/irracionales, `Q = ℚ ⊆ ℝ` con su clausura e interior |
 | `Comun/Topologia/Curso.lean` | `interiorCurso`, `clausuraCurso`, `AbiertoCurso`, `CerradoCurso`, `derivadoCurso`, `fronteraCurso` en cualquier espacio métrico, con los puentes a `interior`/`closure`/`IsOpen`/`IsClosed`/`frontier` y la sección de intervalos en ℝ |
