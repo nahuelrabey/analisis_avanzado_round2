@@ -61,8 +61,10 @@
   *Verificación en Lean:* cada ejercicio tiene su contraparte en `lean/Guias/Guia1/EjNN.lean`
   (Lean 4 + Mathlib; `cd lean && lake build`). Las definiciones del curso (cota, supremo, ínfimo,
   máximo, mínimo, convergencia, divergencia a $plus.minus oo$, sucesión acotada, monótona,
-  subsucesión) y los resultados de `apuntes.typ` que se toman como verdaderos están en
-  `lean/Guias/Guia1/Defs.lean`; cada archivo importa ése (y, a lo sumo, un ejercicio anterior).
+  subsucesión) y los resultados de `apuntes.typ` que se toman como verdaderos están en la
+  librería común `lean/Comun/` (`Comun.Reales`, `Comun.Supremos`, `Comun.Sucesiones`), junto con
+  los sublemas genéricos; cada archivo importa los módulos que usa (y, a lo sumo, un ejercicio
+  anterior), y varios `ejN…` son alias de una línea de lemas de `Comun`.
   En Lean las sucesiones empiezan en $n = 0$ (en el curso, en $n = 1$); ningún argumento depende
   de eso. Las demostraciones de límites se hacen desplegando la definición $epsilon$-$n_0$, sin
   pasar por la noción de límite de Mathlib. La caja _Observación_ del final de cada ejercicio dice
@@ -102,7 +104,7 @@
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia1.Ej01`][
-  `ej1a {x y : ℝ} (h : ∀ ε > 0, x < y + ε) : x ≤ y` certifica la primera parte y `ej1b {x y : ℝ} (h : ∀ ε > 0, |x - y| < ε) : x = y` la segunda. La primera es el contrarrecíproco con `ε = x - y` (`by_contra` + `linarith`); la segunda aplica `ej1a` dos veces, con las dos mitades de `abs_lt` (`|x - y| < ε ↔ -ε < x - y ∧ x - y < ε`, el hecho de base sobre el valor absoluto) y cierra con `le_antisymm`. No se usa la Unicidad del límite (`unicidad_limite`, cuya demostración en `apuntes.typ` pasa por este ejercicio) ni ningún otro resultado de `Defs.lean`: la formalización sigue el texto sin desvíos.
+  `ej1a {x y : ℝ} (h : ∀ ε > 0, x < y + ε) : x ≤ y` certifica la primera parte y `ej1b {x y : ℝ} (h : ∀ ε > 0, |x - y| < ε) : x = y` la segunda. La primera es el contrarrecíproco con `ε = x - y` (`by_contra` + `linarith`); la segunda aplica `ej1a` dos veces, con las dos mitades de `abs_lt` (`|x - y| < ε ↔ -ε < x - y ∧ x - y < ε`, el hecho de base sobre el valor absoluto) y cierra con `le_antisymm`. No se usa la Unicidad del límite (`unicidad_limite`, cuya demostración en `apuntes.typ` pasa por este ejercicio) ni ningún otro resultado de `Comun` (`Ej01.lean` no importa nada de la librería): la formalización sigue el texto sin desvíos.
 ]
 
 #v(12pt)
@@ -206,7 +208,7 @@
 
   - *(a)* usa `arquimedes` (Teorema 1) dos veces, para $-x$ y para $x + N$, y el buen orden vía `Nat.find` sobre el predicado trasladado $k |-> x < k - N$ con $k in NN$ (sin `Int.floor` ni `Int.ceil`): el mínimo $k_0$ da $m = k_0 - N$, y `Nat.find_min` es la minimalidad "$m - 1 in.not C$" (si $k_0 = 0$, $m - 1 = -N - 1 <= x$ directamente). Es exactamente la traslación por $N$ que el texto invoca para el buen orden de $ZZ$.
   - *(b)* usa `arquimedes2` (Proposición 1) y `ej2a`; las dos divisiones por $n$ son `lt_div_iff₀` y `div_lt_iff₀`. No se usa `densidad_Q` ni `exists_rat_btwn`.
-  - *(c)*: `sqrt_two_irrational : Irrational (Real.sqrt 2)` es el Sublema 1, probado localmente por paridad con `r.num`, `r.den` y `Rat.reduced` (la forma reducida, hecho de base) y `Int.dvd_gcd`; el paso "$a^2$ par $=>$ $a$ par" es `Int.even_pow` (lema elemental de paridad de Mathlib, equivalente a "impar al cuadrado es impar"). `irrational_rat_add` e `irrational_rat_mul` son el Sublema 2. La existencia de $sqrt(2)$ es `Real.sqrt 2` con `Real.sq_sqrt`, y $sqrt(2) < 2$ sale con `nlinarith` de $(sqrt(2))^2 = 2$. No se usa `irrational_sqrt_two`, `Irrational.rat_add`, `Irrational.rat_mul` ni `exists_irrational_btwn`.
+  - *(c)*: `sqrt_two_irrational : Irrational (Real.sqrt 2)` es el Sublema 1, probado en `Comun.Reales` por paridad con `r.num`, `r.den` y `Rat.reduced` (la forma reducida, hecho de base) y `Int.dvd_gcd`; el paso "$a^2$ par $=>$ $a$ par" es `Int.even_pow` (lema elemental de paridad de Mathlib, equivalente a "impar al cuadrado es impar"). `irrational_rat_add` e `irrational_rat_mul` son el Sublema 2 (también en `Comun.Reales`). La existencia de $sqrt(2)$ es `Real.sqrt 2` con `Real.sq_sqrt`, y $sqrt(2) < 2$ sale con `nlinarith` de $(sqrt(2))^2 = 2$. No se usa `irrational_sqrt_two`, `Irrational.rat_add`, `Irrational.rat_mul` ni `exists_irrational_btwn`.
   - *(d)* es `ej2b` dos veces y `ej2c`, con la cadena $x < q_1 < z < q_2 < y$.
 ]
 
@@ -379,7 +381,8 @@
   Los casos "existe" usan `caract_sup_max` / `caract_inf_min` (Proposiciones 4 y 6) o la
   Definición 2 / 5 a mano; los casos "no existe" exhiben el mismo elemento que el texto (el punto
   medio, $1/2^(n+1)$, el natural $n >= abs(c) + 2$ de `arquimedes`). El Sublema 1 es
-  `le_two_pow`, probado por inducción (no se usa `Nat.lt_two_pow_self`); en (b) el ínfimo usa
+  `natCast_le_two_pow` de `Comun.Reales`, probado por inducción (`le_two_pow`; no se usa
+  `Nat.lt_two_pow_self`); en (b) el ínfimo usa
   `arquimedes2` (Proposición 1) y `one_div_le_one_div_of_le` (invertir una desigualdad entre
   positivos). No se usan `sSup`, `sInf`, `IsLUB` ni `IsGLB`. El único desvío es que en (d) la
   cuenta $n(n-1) - 1 >= n - 1 > c$ la cierra `nlinarith` a partir de $abs(c) + 2 <= n$ y
@@ -468,12 +471,15 @@
 
 #observacion[Verificado en Lean: `Guias.Guia1.Ej05`][
   (a) `ej5a_acotado (hAB : A ⊆ B) (hB : AcotadoSup B) : AcotadoSup A` y
-  `ej5a_sup (hAB : A ⊆ B) (hs : EsSup A s) (ht : EsSup B t) : s ≤ t`; `ej5a` las junta con la
+  `ej5a_sup (hAB : A ⊆ B) (hs : EsSup A s) (ht : EsSup B t) : s ≤ t`, alias de
+  `Comun.acotadoSup_mono` y `Comun.esSup_mono` (`Comun.Supremos`, con las demostraciones de
+  abajo); `ej5a` las junta con la
   existencia de ambos supremos vía `axioma_completitud` (con `A.Nonempty` y `hne.mono hAB` para
   $B != nothing$). (b) `ej5b_acotado`, `ej5b_inf (hi : EsInf A i) (hj : EsInf B j) : j ≤ i`
-  y `ej5b` (con `completitud_inf`, el Teorema 2). (c) `ej5c (hAB : A ⊆ B) : ¬ Acotado A → ¬ Acotado B`,
+  (alias de `Comun.acotadoInf_mono` y `Comun.esInf_mono`) y `ej5b` (con `completitud_inf`, el
+  Teorema 2). (c) `ej5c (hAB : A ⊆ B) : ¬ Acotado A → ¬ Acotado B`,
   que es exactamente el contrarrecíproco con `ej5a_acotado` y `ej5b_acotado` (`Acotado` es la
-  conjunción `AcotadoSup ∧ AcotadoInf` de `Defs.lean`). Las desigualdades son una línea cada una:
+  conjunción `AcotadoSup ∧ AcotadoInf` de `Comun.Supremos`). Las desigualdades son una línea cada una:
   `hs.2 t (fun a ha => ht.1 a (hAB ha))` es literalmente "el sup de $B$ es cota superior de $A$,
   y el sup de $A$ es la menor". No se usan `csSup_le_csSup`, `BddAbove.mono` ni `sSup`/`sInf`.
 ]
@@ -566,11 +572,15 @@
 #observacion[Verificado en Lean: `Guias.Guia1.Ej06`][
   Los conjuntos se escriben como imágenes (`Set.image`): $-A$ es `(fun a => -a) '' A` y $c A$ es
   `(fun a => c * a) '' A`; un elemento de la imagen se destruye como `⟨a, ha, rfl⟩` ("un $a in A$
-  y $y = f(a)$"), que es exactamente "un elemento de $-A$ es un $-a$ con $a in A$". (a)
-  `cotaInf_neg (hs : CotaSup A s) : CotaInf (-A) (-s)` (el primer párrafo), `ej6a_acotado`,
-  `ej6a_inf (hs : EsSup A s) : EsInf (-A) (-s)` (el tercer párrafo: de una cota inferior `t` se
+  y $y = f(a)$"), que es exactamente "un elemento de $-A$ es un $-a$ con $a in A$". Las
+  demostraciones viven en `Comun.Supremos`. (a)
+  `cotaInf_neg (hs : CotaSup A s) : CotaInf (-A) (-s)` (el primer párrafo), `ej6a_acotado` (alias
+  de `Comun.acotadoInf_neg_of_acotadoSup`),
+  `ej6a_inf (hs : EsSup A s) : EsInf (-A) (-s)` (alias de `Comun.esInf_neg`; el tercer párrafo:
+  de una cota inferior `t` se
   construye `CotaSup A (-t)` y se aplica `hs.2`), y `ej6a` las junta. (b) `cotaSup_smul`,
-  `ej6b_acotado`, `ej6b_sup (hc : 0 < c) (hs : EsSup A s) : EsSup (c A) (c * s)` y `ej6b`; el paso
+  `ej6b_acotado` y `ej6b_sup (hc : 0 < c) (hs : EsSup A s) : EsSup (c A) (c * s)` (alias de
+  `Comun.acotadoSup_smul` y `Comun.esSup_smul`) y `ej6b`; el paso
   "dividir por $c$" es `le_div_iff₀ hc` y "multiplicar por $c$" es `mul_le_mul_of_nonneg_left`.
   Lean no exige $A != nothing$: las Definiciones 2 y 5 se formalizan sin esa hipótesis, y el
   argumento no la usa. No se usan `Set.neg`, `IsLUB.neg`, `csSup_neg`, `Real.sSup_smul` ni
@@ -686,9 +696,9 @@
   `refine ⟨n₀, fun n hn => ?_⟩`) y la misma cadena de desigualdades que arriba: la cuenta exacta
   de $a_n - ell$ es un `field_simp; ring`, y las cotas son `div_le_div_of_nonneg_right`,
   `div_le_div_of_nonneg_left`, `one_div_le_one_div_of_le` y `linarith`. El hecho de base
-  $abs(op("sen")(x)) <= 1$ es `Real.abs_sin_le_one`; el Sublema $n <= 2^n$ se prueba localmente
-  por inducción (`le_two_pow`, con `Nat.one_le_two_pow` para $1 <= 2^n$), no se usa
-  `Nat.lt_two_pow_self`. No se pasa por `Tendsto`.
+  $abs(op("sen")(x)) <= 1$ es `Real.abs_sin_le_one`; el Sublema $n <= 2^n$ es `natCast_le_two_pow`
+  de `Comun.Reales`, probado por inducción (`le_two_pow`, con `Nat.one_le_two_pow` para
+  $1 <= 2^n$); no se usa `Nat.lt_two_pow_self`. No se pasa por `Tendsto`.
 
   Desvíos: en Lean los índices empiezan en $n = 0$. En (a) y (c) la cuenta vale igual
   ($n + 1 > 0$ y $2^n + 4 > 0$ también para $n = 0$). En (b), `Real.sin 0 / 0 = 0` por la
@@ -873,14 +883,15 @@
   `abs_lt` para pasar de $abs(x_n - ell_1) < 1$ a $x_n > ell_1 - 1$, y el mismo
   `M' = max (M + 1 - l₁) 1` con `le_max_right` para ver $M' > 0$; en (c) `M / 2`. El ítem (a)
   **no** usa `algebra_limites_add` (es el ítem b de la Proposición 6, excluido por circularidad)
-  ni `Filter.Tendsto.add`. El Sublema es `exists_nat_gt_of_ge` (Teorema 1, `arquimedes (M + 1)`)
-  y de él salen `divergeMasInf_id`, `divergeMasInf_two_mul`, `divergeMenosInf_neg_id` y
-  `divergeMenosInf_neg_two_mul`; la suma de cada par se reescribe con `funext; ring`. No se pasa
-  por `Tendsto` en ningún ítem.
+  ni `Filter.Tendsto.add`. El Sublema es `Comun.exists_n0_forall_lt` (`Comun.Reales`; Teorema 1
+  con `arquimedes (M + 1)`) y de él salen `divergeMasInf_id` y `divergeMenosInf_neg_id`; $2n$ y
+  $-2n$ son `divergeMasInf_const_mul` y `divergeMenosInf_const_mul` con $c = 2$, y la constante es
+  `converge_const` (todos en `Comun.Sucesiones`); la suma de cada par se reescribe con
+  `funext; ring`. No se pasa por `Tendsto` en ningún ítem.
 
-  Desvío: en Lean los índices empiezan en $n = 0$. En (a)-(c) no interviene; en el Sublema la
-  desigualdad $-2n <= -n$ usa $n >= 0$, que vale también para $n = 0$, y el $n_0$ que da
-  `arquimedes (M + 1)` es el mismo.
+  Desvío: en Lean los índices empiezan en $n = 0$. En (a)-(c) no interviene; en los lemas de
+  `Comun.Sucesiones` el $n_0$ que da `arquimedes (M + 1)` es el mismo, y $2n -> +oo$, $-2n -> -oo$
+  salen de la Definición 8 con $M/2$ en lugar de la desigualdad $-2n <= -n$.
 ]
 
 #v(12pt)
@@ -1002,7 +1013,7 @@
   veces hace falta "$x_n <= x_m$ si $n >= m$", que es el sublema de abajo.
 
   *Sobre la hipótesis "decreciente".* Tomamos la Definición 10 en su primera forma:
-  $x_(n+1) <= x_n$ *para todo* $n in NN$ (así está también en `Defs.lean`). La Definición 10
+  $x_(n+1) <= x_n$ *para todo* $n in NN$ (así está también en `Comun.Sucesiones`). La Definición 10
   admite además "a partir de algún $n_0$", pero con esa lectura el ítem (a) es falso tal como está
   escrito: la sucesión $x_1 = -10$, $x_n = 1 / n$ para $n >= 2$ es decreciente a partir de
   $n_0 = 2$, está acotada inferiormente, converge a $0$, y sin embargo
@@ -1064,7 +1075,8 @@
   Con `hd : Decreciente x` (`∀ n, x (n + 1) ≤ x n`):
   `ej12a (hd) (hb : AcotadoInf (Set.range x)) : ∃ i, EsInf (Set.range x) i ∧ Converge x i` y
   `ej12b (hd) (hb : ¬ AcotadoInf (Set.range x)) : DivergeMenosInf x`. El Sublema es
-  `decreciente_le (hd) (h : m ≤ n) : x n ≤ x m`, por inducción sobre la prueba de `m ≤ n`.
+  `decreciente_le (hd) (h : m ≤ n) : x n ≤ x m` (`Comun.Sucesiones`), por inducción sobre la
+  prueba de `m ≤ n`.
   En (a) el ínfimo viene de `completitud_inf` (Teorema 2) y el término $x_(n_0)$ de
   `equiv_inf` (Proposición 5, legítima acá: el ejercicio circular con ella es el 3); `abs_lt` y
   `linarith` hacen la cuenta $i <= x_n <= x_(n_0) < i + epsilon$. En (b), `push Not` sobre
@@ -1208,7 +1220,8 @@
 
 #observacion[Verificado en Lean: `Guias.Guia1.Ej14`][
   `ej14 {x : ℕ → ℝ} (h : ¬ AcotadoSup (Set.range x)) : ∃ φ : ℕ → ℕ, StrictMono φ ∧ DivergeMasInf (x ∘ φ)`.
-  El hecho de base "finitos números tienen máximo" es `exists_bound_finite` (inducción en $N$,
+  Los lemas auxiliares están en `Comun.Sucesiones`: el hecho de base "finitos números tienen
+  máximo" es `exists_bound_finite` (inducción en $N$,
   con `max`); el Sublema 1 es `exists_gt_of_not_acotadoSup` (por el absurdo, con la cota
   `max c K`). La recursión es `exists_strictMono_of_step`: de "para todo $k$ y todo $N$ hay
   $n > N$ con $P(k, n)$" se fabrica $phi$ con `Nat.rec` y `Classical.choose` (tactic `choose`),
@@ -1270,9 +1283,11 @@
 
 #observacion[Verificado en Lean: `Guias.Guia1.Ej15`][
   `ej15 {x : ℕ → ℝ} {l : ℝ} (h : ∀ φ : ℕ → ℕ, StrictMono φ → ∃ ψ : ℕ → ℕ, StrictMono ψ ∧ Converge (x ∘ φ ∘ ψ) l) : Converge x l`.
-  El Sublema 1 es `exists_subseq_far_of_not_converge`: `push Not` sobre `¬ Converge x l` da
+  El Sublema 1 es `exists_subseq_far_of_not_converge` (`Comun.Sucesiones`): `push Not` sobre
+  `¬ Converge x l` da
   exactamente la Definición 9 (`∃ ε₀ > 0, ∀ N, ∃ n ≥ N, ε₀ ≤ |x n - l|`), y la recursión es
-  `exists_strictMono_of_step` (la misma que en `Ej14.lean`, con `Nat.rec`, `choose` y
+  `exists_strictMono_of_step` (la misma de `Comun.Sucesiones` que usa el Ej. 14, con `Nat.rec`,
+  `choose` y
   `strictMono_nat_of_lt_succ`), aplicada con $N = n_k + 1$ para que el índice nuevo sea
   estrictamente mayor. La prueba principal es por `by_contra`, toma la sub-subsucesión $psi$ que
   da la hipótesis, evalúa la Definición 7 en $epsilon = epsilon_0$ y en el índice $j_0$ obtenido,
@@ -1361,9 +1376,11 @@
   salvo $x_0$, que en el curso no existe; del mismo modo $(x_(6k+3))_(k >= 0)$ reemplaza a
   $(x_(6k-3))_(k >= 1)$. En (a) el umbral es `max (2 * n₁) (2 * n₂ + 1)` y la partición es
   `Nat.even_or_odd`, con `omega` para despejar $k >= n_1$ o $k >= n_2$. En (b),
-  `converge_of_subseq` es `convergencia_subsucesiones` más la identificación término a término
+  `converge_of_subseq` (`Comun.Sucesiones`) es `convergencia_subsucesiones` más la identificación
+  término a término
   ($b_k = a_(phi(k))$), aplicada con $phi(k) = 3k$, $2k$, $3k + 1$ y $2k + 1$ (sus `StrictMono`
-  salen de `strictMono_nat_of_lt_succ` y `omega`); las igualdades de índices
+  salen de `strictMono_mul_add`, también de `Comun.Sucesiones`, vía `strictMono_nat_of_lt_succ` y
+  `omega`); las igualdades de índices
   ($6k = 2 dot 3k$, etc.) se cierran con `congr 1; ring`, y los límites se igualan con
   `unicidad_limite`. No se usa `Tendsto`.
 ]

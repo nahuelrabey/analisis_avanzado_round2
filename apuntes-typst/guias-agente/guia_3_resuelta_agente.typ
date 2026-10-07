@@ -49,7 +49,12 @@
   (Ej. 12); se adopta y se explicita la definición de clase.
 
   *Verificación en Lean:* cada ejercicio tiene su contraparte en `lean/Guias/Guia3/EjNN.lean`
-  (Lean 4 + Mathlib; `cd lean && lake build`). La caja _Observación_ del final de cada ejercicio dice
+  (Lean 4 + Mathlib; `cd lean && lake build`). Las definiciones del curso (métrica, bola,
+  interior, clausura, frontera, diámetro, Cauchy, completitud) y los resultados de `apuntes.typ`
+  que se toman como verdaderos están en la librería común `lean/Comun/` (`Comun.Metricas` y
+  `Comun.Topologia`, con sus submódulos); cada archivo importa los módulos que usa (y, a lo sumo,
+  un ejercicio anterior), y varios `ejN…` son alias de una línea de lemas de `Comun`. La caja
+  _Observación_ del final de cada ejercicio dice
   qué teorema certifica qué ítem y en qué se aparta la formalización del texto. Los dibujos no se
   verifican con Lean; sí se verifica la descripción conjuntista de lo dibujado.
 ]
@@ -349,14 +354,17 @@
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej01`][
-  Cada ítem prueba `EsMetrica d` (la Definición 4.1 de `Guias/Common.lean`, con los cuatro campos
+  Cada ítem prueba `EsMetrica d` (la Definición 4.1 de `Comun.Metricas`, con los cuatro campos
   `nonneg`, `eq_zero_iff`, `symm`, `triangle`) sobre la función explícita: `ej1a` ($abs(x - y)$ en
-  $RR$), `ej1b` ($d_2$), `ej1c` ($d_1$), `ej1d` ($d_oo$), `ej1e` ($d_oo$ en $C([0, 1])$) y `ej1f`
-  ($delta$). Para $d_2$, `cauchy_schwarz` es el Lema de arriba (misma prueba: casos $A = 0$,
+  $RR$, local), `ej1b` ($d_2$), `ej1c` ($d_1$), `ej1d` ($d_oo$), `ej1e` ($d_oo$ en $C([0, 1])$) y
+  `ej1f` ($delta$); los cinco últimos son alias de `esMetrica_d2`, `esMetrica_d1`, `esMetrica_dinf`
+  (`Comun.Metricas.Rn`), `esMetrica_dC` (`Comun.Metricas.C01`) y `esMetrica_delta`
+  (`Comun.Metricas.Discreta`), con las demostraciones de abajo. Para $d_2$, `cauchy_schwarz`
+  (`Comun.Metricas.Rn`) es el Lema de arriba (misma prueba: casos $A = 0$,
   $B = 0$, y la suma de cuadrados $sum (B a_i - A b_i)^2$), y la triangular sigue el desarrollo del
   texto; no se usa la instancia de Mathlib de $RR^n$ euclídeo.
 
-  Las bolas dibujadas se verifican con `bola` de `Common.lean`: `bola_dA` ($(x - r, x + r)$),
+  Las bolas dibujadas se verifican con `bola` de `Comun.Metricas`: `bola_dA` ($(x - r, x + r)$),
   `bola_d2` y `bola_d2_R2` (el disco $x_0^2 + x_1^2 < 1$), `bola_d1_R2` (el rombo
   $abs(x_0) + abs(x_1) < 1$), `bola_dinf` y `bola_dinf_R2` (el cuadrado), `bola_dC` (la banda) y
   `bola_delta_le` / `bola_delta_gt` ($\{x\}$ y $E$).
@@ -364,7 +372,8 @@
   Desvíos de la formalización: $RR^n$ es `Fin n → ℝ` y el máximo de $d_oo$ es `Finset.sup'` (pide
   `[NeZero n]`, es decir $n >= 1$, igual que el texto). $C([0, 1])$ es `C(unitInterval, ℝ)` y $d_oo$
   se escribe con `⨆`; `exists_max` es el Weierstrass del texto (`IsCompact.exists_isMaxOn`, la
-  única entrada de compacidad del archivo: la acotación `bdd_absdiff` se deduce de ese máximo),
+  única entrada de compacidad de `Comun.Metricas.C01`: la acotación `bdd_absdiff` se deduce de ese
+  máximo),
   `dC_eq_max` prueba que el supremo se alcanza y `bola_dC` lo usa exactamente en el paso (W).
   Los axiomas (i) y (iv) se cierran con propiedades del supremo (`Real.iSup_nonneg`, `ciSup_le`)
   en lugar de evaluar en $t_0$; es equivalente. La métrica $delta$ se formaliza para cualquier $E$ con
@@ -458,10 +467,11 @@
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej02`][
-  `ej2a : ¬ EsMetrica dA` se prueba con el contraejemplo explícito `dA_contraejemplo`
-  ($d(3, 0) = 9 > 5$ es la negación de `triangle 3 2 0`). `ej2c : ¬ EsMetrica dC` usa
-  `dC_contraejemplo` ($d(1, -1) = 0$ y $1 != -1$) contra `eq_zero_iff`. `ej2b : EsMetrica dB`
-  prueba los cuatro axiomas, con `sqrt_add_le` como el paso $(star)$ (se eleva al cuadrado, igual
+  `ej2a : ¬ EsMetrica dA2` (las funciones se llaman `dA2`, `dB`, `dC2`, para no chocar con las
+  `dA` y `dC` del Ej. 1) se prueba con el contraejemplo explícito `dA2_contraejemplo`
+  ($d(3, 0) = 9 > 5$ es la negación de `triangle 3 2 0`). `ej2c : ¬ EsMetrica dC2` usa
+  `dC2_contraejemplo` ($d(1, -1) = 0$ y $1 != -1$) contra `eq_zero_iff`. `ej2b : EsMetrica dB`
+  prueba los cuatro axiomas, con `sqrt_add_le` (`Comun.Topologia.Real`) como el paso $(star)$ (se eleva al cuadrado, igual
   que en el texto) y `abs_add_le` para la triangular de $RR$. La formalización no se aparta del texto.
 ]
 
@@ -672,13 +682,16 @@
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej03`][
-  Cada conjunto es `Ca`, ..., `Ch`; las nociones del curso están definidas con bolas
+  Cada conjunto es `Ca`, ..., `Ch` (`Cc` es `Comun.Q`); las nociones del curso están definidas
+  con bolas en `Comun.Topologia.Curso`
   (`interiorCurso`, `clausuraCurso`, `AbiertoCurso`, `CerradoCurso`, Def. 4.11, 4.22, 4.14, 4.27).
   Los veredictos son, para cada letra `x`, `x_interior`, `x_clausura`, `x_abierto` o `x_no_abierto`,
   `x_cerrado` o `x_no_cerrado`. Los Lemas 1--4 son `interiorCurso_sub_Ioo`/`Ioo_sub_interiorCurso`/
-  `clausuraCurso_sub_Icc`, `interiorCurso_vacio_of_racional`, `exists_pto`/`exists_rat_pto` y
-  `lejos_Ch`/`clausura_Ch_sub`. `interior_eq_interiorCurso` y `closure_eq_clausuraCurso`
-  (por `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`) permiten releer todo con `interior`,
+  `clausuraCurso_sub_Icc`, `interiorCurso_vacio_of_racional` (`Comun.Topologia.Curso`),
+  `exists_pto`/`exists_rat_pto` (`Comun.Topologia.Real`) y
+  `lejos_Ch`/`clausura_Ch_sub` (locales). `interior_eq_interiorCurso` y `closure_eq_clausuraCurso`
+  (`Comun.Topologia.Curso`, por `mem_interior_iff_ball` y `mem_closure_iff_ball` de
+  `Comun.Topologia`) permiten releer todo con `interior`,
   `closure`, `IsOpen` e `IsClosed` de Mathlib (`a_mathlib`, ..., `h_mathlib`). No se usó ningún
   lema de Mathlib que calcule interiores o clausuras. Diferencias con el texto: el entero $n$ con
   $n < x < n + 1$ (que el texto obtiene de la Práctica 1, Ej. 2 (a)) en Lean es la parte entera
@@ -813,17 +826,20 @@ $overline(B)(x, r) = \{y in E : d(x, y) <= r\}$.
   Los ítems son `ej4a` a `ej4g` (con `ej4f_bool` como caso concreto de (f)), sobre
   `{E : Type*} [MetricSpace E]` y con los objetos de Mathlib `closure`, `Metric.ball`,
   `Metric.closedBall`, `IsOpen`, `IsClosed`. No se usan los lemas de Mathlib que son los ítems:
-  las herramientas del curso son los lemas puente de `Guias/Common.lean` (`mem_closure_iff_ball`
-  es la Definición 4.22, `closure_mono_ball` la monotonía de la clausura) y, en el archivo,
+  las herramientas del curso son los lemas puente de `Comun.Topologia` (`mem_closure_iff_ball`
+  es la Definición 4.22, `closure_mono_ball` la monotonía de la clausura), más
   `isClosed_iff_isOpen_compl_ball` (el Teorema 4.29)
-  y `isOpen_inter_ball` el Teorema 4.18 para dos abiertos, con $r = op("mín")\{r_1, r_2\}$). Desvíos:
+  y `isOpen_inter_ball` (el Teorema 4.18 para dos abiertos, con $r = op("mín")\{r_1, r_2\}$), del
+  mismo módulo; `ej4a`--`ej4e` son alias de `isClosed_singleton_bolas`, `isOpen_ball_bolas`,
+  `closure_ball_subset_ball_of_lt`, `isClosed_closedBall_bolas` y
+  `closure_ball_subset_closedBall_bolas` de `Comun.Topologia`. Desvíos:
   (i) "abierto" es `IsOpen`, leído con `Metric.isOpen_iff` como "todo punto tiene una bola
   adentro" ($A subset.eq A^compose$, que con la Observación 4.12 es la Definición 4.14); "cerrado"
   es `IsClosed`, y se pasa a la Definición 4.27 ($overline(F) = F$) con
   `closure_eq_iff_isClosed`; en (e) se usa `IsClosed.closure_eq` sólo para esa igualdad;
   (ii) `ej4b` y `ej4c` valen sin la hipótesis $r > 0$ (o $r' > 0$), que el argumento no usa, y
-  `ej4d` vale para todo $r$; (iii) para (f) se define localmente `Disc X` (un sinónimo de $X$ con
-  la métrica discreta y su instancia `MetricSpace`) y `ej4f` vale para todo `X` con
+  `ej4d` vale para todo $r$; (iii) para (f) se usa `Disc X` de `Comun.Metricas.Discreta` (un
+  sinónimo de $X$ con la métrica discreta y su instancia `MetricSpace`) y `ej4f` vale para todo `X` con
   `[Nontrivial X]`: afirma `closure (ball x 1) ⊂ closedBall x 1`, inclusión estricta; (iv) en (g)
   el conjunto se escribe `{y | 2 < dist y x ∧ dist y x < 3}` y se prueba la igualdad con
   `ball x 3 ∩ (closedBall x 2)ᶜ` como en el texto.
@@ -903,17 +919,19 @@ Sea $E$ un espacio métrico y $A subset.eq E$. Escribimos $B(x, r) = \{y in E : 
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej05`][
-  `ej5a : (interior A)ᶜ = closure Aᶜ` y `ej5b : (closure A)ᶜ = interior Aᶜ`, probados con
+  `ej5a : (interior A)ᶜ = closure Aᶜ` y `ej5b : (closure A)ᶜ = interior Aᶜ`, alias de
+  `Comun.compl_interior_eq` y `Comun.compl_closure_eq` (`Comun.Topologia`), probados con
   `mem_interior_iff_ball` (Definición 4.11) y `mem_closure_iff_ball` (Definición 4.22), los lemas
-  puente de `Guias/Common.lean` (probados desde `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`);
+  puente del mismo módulo (probados desde `Metric.mem_nhds_iff` y `Metric.mem_closure_iff`);
   el complemento $E backslash A$
-  es `Aᶜ`. Para la pregunta final, `Q` es `Set.range ((↑) : ℚ → ℝ)`, con `closure_Q`
-  ($overline(QQ) = RR$, vía `exists_rat_btwn`), `interior_Q` ($QQ^compose = emptyset$, vía
-  `exists_irrational_btwn`), `closure_empty_ball` e `interior_univ_ball`. Los veredictos son
+  es `Aᶜ`. Para la pregunta final, `Q` es `Set.range ((↑) : ℚ → ℝ)` (`Comun.Topologia.Real`, con
+  `closure_Q`
+  ($overline(QQ) = RR$, vía `exists_rat_btwn`) e `interior_Q` ($QQ^compose = emptyset$, vía
+  `exists_irrational_btwn`)), y, locales, `closure_empty_ball` e `interior_univ_ball`. Los veredictos son
   `closure_ne_closure_interior` e `interior_ne_interior_closure`, reunidos en `ej5_final`
   ($not forall A, overline(A) = overline(A^compose)$ y $not forall A, A^compose = (overline(A))^compose$,
   en $RR$). Las inclusiones que sí valen son `closure_interior_subset` e
-  `interior_subset_interior_closure`. Desvío: la densidad de racionales e irracionales se toma de
+  `interior_subset_interior_closure` (`Comun.Topologia`). Desvío: la densidad de racionales e irracionales se toma de
   Mathlib en lugar de la Proposición 2 del apunte y de la Práctica 1, Ej. 2 (d).
 ]
 
@@ -1024,9 +1042,11 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej06`][
   `ej6a`, `ej6b`, `ej6c`, `ej6d` son los cuatro ítems, para `{E : Type*} [MetricSpace E]` y con
-  `interior`, `closure` de Mathlib; se prueban con `mem_interior_iff_ball` (Definición 4.11),
+  `interior`, `closure` de Mathlib, alias de `interior_inter_bolas`, `interior_union_subset_bolas`,
+  `closure_union_bolas` y `closure_inter_subset_bolas` (`Comun.Topologia`, con las demostraciones
+  de abajo); se prueban con `mem_interior_iff_ball` (Definición 4.11),
   `mem_closure_iff_ball` y `notMem_closure_iff_ball` (Definición 4.22 y su negación), los lemas
-  puente de `Guias/Common.lean`. El paso "$r = op("mín")\{r_1, r_2\}$"
+  puente del mismo módulo. El paso "$r = op("mín")\{r_1, r_2\}$"
   es `ball_subset_ball (min_le_left _ _)`. No se usan `interior_inter`, `closure_union` ni
   `closure_inter_subset`. Los ejemplos son `ej6b_ejemplo`
   (`interior (Icc 0 1) ∪ interior (Icc 1 2) ≠ interior (Icc 0 1 ∪ Icc 1 2)`) y `ej6d_ejemplo`
@@ -1102,8 +1122,10 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej07`][
-  `diam A` es `sSup` del conjunto `distancias A` $= \{d(x, y) : x, y in A\}$ y `Acotado A` es la
-  Definición 4.8 (no se usa `Metric.diam`). `diam_mono` certifica (a) y `diam_closure` certifica (b)
+  `diam A` es `sSup` del conjunto `distsDiam A` $= \{d(x, y) : x, y in A\}$ y `AcotadoMet A` (antes
+  `Acotado`) es la
+  Definición 4.8 (no se usa `Metric.diam`); todo vive en `Comun.Topologia.DistConjuntos` y los
+  teoremas de `Ej07.lean` son alias. `diam_mono` certifica (a) y `diam_closure` certifica (b)
   (acotación de $overline(A)$ y la igualdad); el paso clave del texto es
   `dist_le_diam_of_mem_closure`, que usa `Metric.mem_closure_iff` (Definición 4.22) y `dist_triangle`
   con $epsilon\/3$ y `le_of_forall_pos_le_add` para el "si es menor que $D + epsilon$ para todo
@@ -1264,13 +1286,17 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej08`][
-  `acumulacion`/`derivadoCurso` (Def. 4.33) y `fronteraCurso` (Def. 4.38) están definidos con bolas,
+  `acumulacion`/`derivadoCurso` (Def. 4.33, `Comun.Topologia.Curso`) y `fronteraCurso` (Def. 4.38,
+  `Comun.Topologia`) están definidos con bolas,
   y para cada conjunto `Ca`, ..., `Ch` hay un teorema `x_derivado` y uno `x_frontera` (los de (g) y (h)
   comparten `h_derivado_sub`, `zero_mem_derivado_Cg`, `Cg_sub_Ch`). El Sublema de la frontera es
-  `fronteraCurso_eq`; los de derivado, `derivadoCurso_sub_clausura` y `derivadoCurso_mono`; el del
-  espaciado, `aislado`. Igual que el texto, `Ej08.lean` toma del Ejercicio 3 (importa
-  `Guias.Guia3.Ej03`) las definiciones por bolas, los Lemas 1--4 y los interiores y clausuras
-  de los ocho conjuntos, en vez de volver a probarlos. `frontier_eq_fronteraCurso` conecta con
+  `fronteraCurso_eq`; los de derivado, `derivadoCurso_sub_clausura` y `derivadoCurso_mono`
+  (`Comun.Topologia.Curso`); el del
+  espaciado, `aislado` (`Comun.Topologia.Real`). Igual que el texto, `Ej08.lean` toma del
+  Ejercicio 3 (importa
+  `Guias.Guia3.Ej03`) los ocho conjuntos y sus interiores y clausuras, en vez de volver a
+  probarlos (las definiciones por bolas y los Lemas 1--4 vienen de `Comun`).
+  `frontier_eq_fronteraCurso` (`Comun.Topologia.Curso`) conecta con
   `frontier` de Mathlib (`a_frontier_mathlib`, ..., `h_frontier_mathlib`); el conjunto derivado
   no se conecta con `derivedSet` de Mathlib (no hace falta para el ejercicio).
   Diferencias con el texto: en `aislado` la cota se prueba despejando denominadores
@@ -1342,11 +1368,14 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej09`][
-  `fronteraCurso A` es la Definición 4.38 (por bolas); `interior` y `closure` son los de Mathlib, siempre
+  `fronteraCurso A` es la Definición 4.38 (por bolas, en `Comun.Topologia`, donde vive todo el
+  ejercicio; los teoremas de `Ej09.lean` son alias); `interior` y `closure` son los de Mathlib, siempre
   manejados con `mem_interior_iff_ball` (Definición 4.11) y `mem_closure_iff_ball` (Definición 4.22),
-  los lemas puente de `Guias/Common.lean`. `frontera_eq_inter` es el Paso 1; `compl_interior_eq` reprueba localmente
-  el Ej. 5 (a), `compl_closure_eq` el Ej. 5 (b), `frontera_eq_sdiff` es la igualdad de (a),
-  `frontera_isClosed` la cerradura, y `frontera_eq_inter_closure_compl` y `frontera_compl` son (b).
+  los lemas puente de `Comun.Topologia`. `frontera_eq_inter` es el Paso 1 (y la igualdad de (b));
+  `compl_interior_eq` es
+  el Ej. 5 (a) y `compl_closure_eq` el Ej. 5 (b) (los mismos lemas que certifican `ej5a`/`ej5b`),
+  `frontera_eq_sdiff` es la igualdad de (a),
+  `frontera_isClosed` la cerradura, y `frontera_compl` la conclusión de (b).
   El Paso 3 se sigue tal cual: `isOpen_interior_bolas` ($A^compose$ es abierto, con el radio
   $r - d(y, x)$) e `isClosed_closure_bolas` ($overline(A)$ es cerrado, vía el Ej. 5 (b) y
   `isOpen_compl_iff`, que es el Teorema 4.29); la intersección de dos cerrados es `IsClosed.inter`
@@ -1448,8 +1477,9 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej10`][
-  `distA x A` es `sInf` del conjunto `distancias x A` $= \{d(x, a) : a in A\}$ (no se usa
-  `Metric.infDist`). `distA_le` y `le_distA` son las dos propiedades de la Definición 5 (cota
+  `distA x A` es `sInf` del conjunto `distsPunto x A` $= \{d(x, a) : a in A\}$ (no se usa
+  `Metric.infDist`); todo vive en `Comun.Topologia.DistConjuntos` y los cinco ítems de `Ej10.lean`
+  son alias. `distA_le` y `le_distA` son las dos propiedades de la Definición 5 (cota
   inferior y la mayor de ellas), con las hipótesis de no vacío y acotado inferiormente de
   `csInf_le`/`le_csInf` (preliminares). Ítems: (a) `abs_distA_sub_le` (vía `distA_le_add`, el
   argumento del texto), (b) `distA_eq_zero_of_mem`, (c) `distA_eq_zero_iff` (con
@@ -1593,14 +1623,16 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej11`][
-  `dhat A B` es `sInf` del conjunto `distancias A B`. Las partes ciertas y las mitades ciertas se
-  prueban para un espacio métrico `E` arbitrario: (a) `dhat_closure_left`, (b $arrow.l.double$)
+  `dhat A B` es `sInf` del conjunto `distsPar A B` (`Comun.Topologia.DistConjuntos`). Las partes
+  ciertas y las mitades ciertas se
+  prueban allí para un espacio métrico `E` arbitrario (en `Ej11.lean` son alias): (a) `dhat_closure_left`, (b $arrow.l.double$)
   `dhat_eq_zero_of_inter`, (c $arrow.l.double$) `dhat_eq_zero_of_closure_inter` (ambas vía el criterio
   `dhat_eq_zero_of_approx`). Los contraejemplos son en `ℝ`: `ej11b_conjuntos` y `ej11b_contraejemplo` para
-  (b); para (c), `closure_subset_of_sep` (el sublema), `A11_sep`, `B11_sep`, `A11_closure`, `B11_closure`,
+  (b); para (c), `closure_subset_of_sep` (el sublema, en `Comun.Topologia`, con la constante de
+  separación como parámetro), `A11_sep`, `B11_sep`, `A11_closure`, `B11_closure`,
   `A11_inter_B11`, `A11_B11_dhat` y `ej11c_contraejemplo`; para (d), `ej11d_valores` y
   `ej11d_contraejemplo`. Las refutaciones están formalizadas como `¬ (∀ A B, ... → ...)`. La
-  conclusión es `no_es_metrica : ¬ EsMetrica dhatX` (con `EsMetrica` de `Guias.Common`, la Definición 4.1,
+  conclusión es `no_es_metrica : ¬ EsMetrica dhatX` (con `EsMetrica` de `Comun.Metricas`, la Definición 4.1,
   sobre $cal(X) =$ subconjuntos no vacíos de `ℝ`), con `no_separa` y `no_triangular`, y
   `no_es_metrica_general`, la misma conclusión para cualquier `E` con al menos dos puntos
   (`[Nontrivial E]`): la separación falla con $A = \{p\}$, $C = \{p, q\}$, $p != q$, por (b)
@@ -1714,14 +1746,16 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej12`][
-  `d1`, `d2`, `dinf` son las tres distancias sobre `Fin n → ℝ` (con `[NeZero n]`, $n >= 1$, como en
-  el Ej. 1 (d); $d_oo$ es `Finset.sup'`). Las desigualdades de (a) son `dinf_le_d2`, `d2_le_d1`
-  (con la misma cuenta $sum a_i^2 <= d_1 sum abs(a_i)$) y `d1_le_n_dinf`, resumidas en `cadena`.
-  `Equivalentes` formaliza la definición de clase (cada bola de una contiene una bola concéntrica
+  `d1`, `d2`, `dinf` son las tres distancias sobre `Fin n → ℝ` (`Comun.Metricas.Rn`, las mismas
+  del Ej. 1 (b)--(d); con `[NeZero n]`, $n >= 1$; $d_oo$ es `Finset.sup'`). Las desigualdades de
+  (a) son `dinf_le_d2`, `d2_le_d1`
+  (con la misma cuenta $sum a_i^2 <= d_1 sum abs(a_i)$) y `d1_le_n_dinf` (también en
+  `Comun.Metricas.Rn`), resumidas en `cadena`.
+  `Equivalentes` (`Comun.Metricas`) formaliza la definición de clase (cada bola de una contiene una bola concéntrica
   de la otra); `abiertos_iff` prueba que entonces los abiertos coinciden (con `EsAbierto`: cada
   punto tiene una bola adentro), `equivalentes_of_le` es el criterio uniforme, y
   `equivalentes_dinf_d2`, `equivalentes_d2_d1`, `equivalentes_dinf_d1` son las tres equivalencias de
-  (a). Las inclusiones de (b) son `bola_inclusiones` (con `bola` de `Common.lean`, para todo $r$).
+  (a). Las inclusiones de (b) son `bola_inclusiones` (con `bola` de `Comun.Metricas`, para todo $r$).
   La formalización no se aparta del texto.
 ]
 
@@ -1778,7 +1812,8 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 ]
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej13`][
-  `abs_dist_sub_dist_le` es la cota clave. `ej13a` certifica (a) y `ej13b` certifica (b). Las
+  `abs_dist_sub_dist_le` (`Comun.Metricas`) es la cota clave. `ej13a` certifica (a) y `ej13b`
+  certifica (b). Las
   hipótesis y conclusiones se enuncian con `Filter.Tendsto` y `CauchySeq` de Mathlib, pero las
   pruebas pasan a $epsilon$-$N$ con `Metric.tendsto_atTop` y `Metric.cauchySeq_iff` (que son las
   Definiciones 4.42 y 4.51) y repiten el argumento de $epsilon/2$ de arriba. No se usa
@@ -1842,15 +1877,19 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
 
 #observacion[Verificado en Lean: `Guias.Guia3.Ej14`][
   `ej14` afirma `EsCompleto d1 ∧ EsCompleto d2 ∧ EsCompleto dinf`. Las distancias son las
-  funciones explícitas `d1`, `d2`, `dinf` del Ej. 12 (`Ej14.lean` importa `Guias.Guia3.Ej12`, así
-  que son los mismos objetos de los Ej. 1 (d) y 12; `[NeZero n]`, es decir $n >= 1$) y `EsCompleto`
-  es la Definición 4.55 escrita con $epsilon$-$N$; no hay instancias de `MetricSpace` y no se usa
-  que Mathlib ya tenga `CompleteSpace` para `EuclideanSpace`/`PiLp`. `completo_dinf` sigue el
-  Corolario 4.58 (usando `cauchySeq_tendsto_of_complete` sobre las coordenadas, que es el
+  funciones explícitas `d1`, `d2`, `dinf` de `Comun.Metricas.Rn` (los mismos objetos de los
+  Ej. 1 (b)--(d) y 12; `[NeZero n]`, es decir $n >= 1$) y `EsCompleto`
+  (`Comun.Metricas`, con `EsCauchy` y `ConvergeMet`) es la Definición 4.55 escrita con
+  $epsilon$-$N$; no hay instancias de `MetricSpace` y no se usa
+  que Mathlib ya tenga `CompleteSpace` para `EuclideanSpace`/`PiLp`. `completo_dinf` (alias de
+  `Comun.completo_dinf`, en `Comun.Metricas.Rn`) sigue
+  el Corolario 4.58 (usando `cauchySeq_tendsto_of_complete` sobre las coordenadas, que es el
   Teorema 4.57, y `choose` para fijar los límites `l i`). Las desigualdades
-  $d_infinity <= d_2 <= d_1 <= n d_infinity$ son las del Ej. 12 (a) (`Ej12.dinf_le_d2`,
-  `Ej12.d2_le_d1`, `Ej12.d1_le_n_dinf`), citadas igual que en el texto. `completo_of_equiv` es
-  el argumento de los casos $d_1$ y $d_2$; `completo_d1` y `completo_d2` lo aplican. La sucesión
+  $d_infinity <= d_2 <= d_1 <= n d_infinity$ son las del Ej. 12 (a) (`Comun.dinf_le_d2`,
+  `Comun.d2_le_d1`, `Comun.d1_le_n_dinf`), citadas igual que en el texto. `completo_of_equiv` es
+  el argumento de los casos $d_1$ y $d_2$ (en `Comun.Metricas` vale en general para
+  $c d_0 <= d <= C d_0$; `Ej14.lean` lo re-enuncia con $d_oo$); `completo_d1` y `completo_d2`
+  (alias de los de `Comun.Metricas.Rn`) lo aplican. La sucesión
   empieza en $0$ en Lean y en $1$ en el curso.
 ]
 
@@ -1949,7 +1988,8 @@ Sea $E$ un espacio métrico y sean $A, B subset.eq E$. Escribimos $B(x, r) = \{y
   `Tendsto (fun n => Metric.diam (A n)) atTop (nhds 0)`, con `[CompleteSpace E]`. La cota
   $d(a, b) <= op("diam")(A_n)$ es `Metric.dist_le_diam_of_mem` (que usa que $A_n$ es acotado; en
   Mathlib `Metric.diam` coincide con el supremo de la Definición 4.9 en conjuntos acotados). El
-  lema auxiliar `sub_of_le` es el preliminar $A_m subset.eq A_n$. Los pasos de la prueba son los
+  lema auxiliar `antitone_subset_of_succ` (`Comun.Topologia`, antes `sub_of_le`) es el preliminar
+  $A_m subset.eq A_n$. Los pasos de la prueba son los
   mismos: `choose` para la elección, `Metric.cauchySeq_iff`, `cauchySeq_tendsto_of_complete`
   (hipótesis de completitud de $E$), `IsClosed.mem_of_tendsto` para el Corolario 4.47 y
   `ge_of_tendsto'` para pasar al límite en la unicidad. La sucesión empieza en $0$ en Lean y en $1$
