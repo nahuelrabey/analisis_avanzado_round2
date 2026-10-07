@@ -287,3 +287,32 @@ Dos observaciones que salen de cruzar guías y parciales:
 ## 6. Fuentes de esta nota
 
 Cuatro relevamientos exhaustivos (uno por bloque: parciales + Peine; Guía 3 + Common; Guía 2; Guía 1), cada uno con catálogo de definiciones y lemas con archivo:línea, más una pasada mecánica sobre los nombres de declaración repetidos (`grep` de `def|theorem|instance` en los 60 archivos). Los números de línea son los de `main` tras el PR #13.
+
+---
+
+## 7. Estado de ejecución (7 de octubre de 2026, mismo PR)
+
+Los cinco pasos de la sección 3.4 están hechos, un commit por paso (`Lean, paso 0` … `paso 4`),
+con `lake build` completo sin errores ni warnings y `#print axioms` estándar en los 786 teoremas
+del proyecto después de cada uno. Enunciados y nombres de los `ejN…` sin cambios (salvo los
+renombres anunciados: `dA2`/`dC2` en Guía 3 Ej. 2 y `AcotadoMet`).
+
+| Carpeta | Antes (`main`) | Después | Nota |
+|---|---|---|---|
+| `Comun/` (15 módulos) | 615 (los tres `Defs`/`Common`) | 4026 | incluye puentes, generalizaciones, `EvNulas`, docstrings |
+| `Guias/Guia1/` | 1664 | 1165 | |
+| `Guias/Guia2/` | 3112 | 1499 | |
+| `Guias/Guia3/` | 3037 | 1889 | |
+| `Parciales/` | 1672 | 1613 | más 22 corolarios `_curso` nuevos |
+| `Ejemplos/` | 111 | 112 | instancia vía `EsMetrica.toMetricSpace` |
+| **Ejercicios + parciales + ejemplos** | **9129** | **6278** | **−2851** |
+| Total `lean/` | 9744 | 10376 | la librería creció más de lo que se borró: es el "kit" de la sección 5.2 |
+
+Desvíos respecto de la sección 3.2: `mem_ball_iff`, `exists_pto`, `exists_rat_pto`, `Icc_diff_Ioo_01`,
+`aislado`, `sqrt_add_le` quedaron en `Comun/Topologia/Real.lean` (no en `Reales`); `cauchy_schwarz`
+en `Metricas/Rn.lean`; `EsCauchy`/`ConvergeMet`/`EsCompleto` en `Metricas.lean` (no en
+`Sucesiones`), con el puente `converge_iff_convergeMet`; los lemas de los ítems de P3 Ej. 4 y 6
+llevan sufijo `_bolas` para no chocar con Mathlib; `dist_prod_eq` vive en `Comun.C01`;
+`Recu1_1C2025.dist_le_d2`/`d2_le_sqrt_mul_dist` llevan un `cases n` porque `dinf` pide `[NeZero n]`
+y las firmas del parcial no. Las cajas *Observación* de las tres guías resueltas citan los lemas de
+`Comun`; los `.typ` de los parciales no cambian porque los nombres que citan se conservaron.
