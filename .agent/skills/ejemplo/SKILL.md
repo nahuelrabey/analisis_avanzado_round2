@@ -88,9 +88,25 @@ Preservar siempre todo el contenido existente.
   | `C3-*` | `cardinales_metricas.typ` | cardinales de `ℕ^ℕ` y familias, primeras métricas |
   | `C4-*` | `espacios_metricos.typ` | interior/clausura/frontera, `A+B`, caracterizaciones de abierto (clase del 23/09/2025) |
   | `C5-*` | `completitud.typ` | espacios completos, `d = |x|+|y|`, encaje de cerrados (clase del 01/10/2025) |
+  | `C6-*` | `continuidad.typ` | suma y producto de continuas, polinomios continuos, `GL_n(ℝ)` abierto, continuas en densos (clase del 07/10/2025, apunte tipeado de Mateo Mauri) |
+  | `C7-*` | `compactos.typ` | compacidad por sucesiones: producto finito, `{x_n} ∪ {x}`, `F` cerrado ⇔ `K ∩ F` compacto (octubre de 2025, apunte tipeado de Tomer Cohen Mizrahi) |
+  | `C8-*` | `continuidad_uniforme.typ` | `d_∞` en `X × Y` y proyecciones, lipschitz, continuidad uniforme y contraejemplos, pegado de dominios (clase del 23/10/2025) |
+  | `C9-*` | `punto_fijo.typ` | `d(f(x),f(y)) < d(x,y)` en compactos, `f(∩A_n) = ∩f(A_n)`, `C(ℝ,[0,1])` no separable, normados y operadores lineales (clase del 11/11/2025) |
+  | `C10-*` | `conjuntos_medibles.typ` | σ-álgebra de nulos y conulos, borelianos, medida de uniones, números sin el dígito 4, cerrado de medida 1 (clase del 11/11/2025) |
+  | `C11-*` | `funciones_medibles.typ` | preimágenes, `g∘f`, conjunto de convergencia, `f'` medible, acotación fuera de medida `< ε`, `∫ f(tx)` (clase del 18/11/2025) |
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
-Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
+- **`{DD/MM}-{ejemplo}`** (`15/09-3`, `27/08-1`): ejercicio de una clase práctica **de este año (2026)**. Las clases tipeadas por la cátedra se transcriben en `apuntes-typst/clases/2026/{MMDD}_{tema}.typ` (una por archivo; la cabecera declara fecha, fuente y tags); los ejemplos cargados de fotos del pizarrón no tienen archivo de clase. El número `{ejemplo}` es el del ejercicio en el apunte, **salvo choque**: si la fecha ya tiene tags asignados (como `15/09-1..6`, que vienen del pizarrón), los del apunte continúan la numeración y la cabecera del archivo de clase lo dice (`15/09-7` es el Ejercicio 1 de `0915_espacios_metricos_1.typ`). El título termina en `(Clase DD/MM)`. Tabla actual:
+
+  | fecha | archivo en `clases/2026/` | tags | contenido |
+  |---|---|---|---|
+  | 27/08 | `0827_subsucesiones_monotonas.typ` | `27/08-1..3` | subsucesión creciente divergente, hacia `sup A_m`, toda sucesión tiene subsucesión monótona |
+  | 01/09 | `0901_cardinalidad_1.typ` | `01/09-1..2` | `A×C ∼ B×D`, `A^C ∼ B^D`, `P(A) ∼ P(B)`; `ℕ^d`, `ℚ`, `P(ℚ) ∼ ℕ^ℕ ∼ ℚ^ℚ` |
+  | 15/09 | `0915_espacios_metricos_1.typ` | `15/09-7..8` (`1..6` son de pizarrón) | `D_f = d(f(x),f(y))` con `f` inyectiva, `mín{1, d}` con bolas y diámetros |
+  | 17/09 | `0917_abiertos_cerrados.typ` | `17/09-1..5` | `(A×B)° = A°×B°`, clausura por sucesiones, clausura de `{(1/n, 1/m)}` (Ej. 2 y 3 sin solución) |
+  | 29/09 | `0929_repaso.typ` | `29/09-1..4` | `D_f` sobre `A`, `(0,1]` con `abs(1/x − 1/y)`, subconjuntos de `ℕ^ℕ`, máximo y mínimo de métricas |
+
+Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Un ejercicio que ya está cargado con otro tag (misma técnica y enunciado) **no se duplica**: se carga sólo lo que agrega, o se deja un `#sublema` de una línea debajo del ejemplo existente que remita a la clase. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
 
 Los tags de pestaña son **globales**: no se reinician por archivo, y las guías citan los ejemplos por tag.

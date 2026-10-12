@@ -29,7 +29,7 @@
 
 #v(3pt)
 
-Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos/p1.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña, y los que empiezan con *C* son los resueltos en clase (`C1-4` es el Ejemplo 4 de `clases/apuntes_1.typ`). Las filas son acumulativas: cada una supone leídas las de arriba.
+Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en algunos ejemplos de `ejemplos/p1.typ`. Las cajas del apunte van nombradas (los números de pestaña se repiten entre definiciones y proposiciones); los ejemplos van por número de pestaña, y los que empiezan con *C* son los resueltos en clase (`C1-4` es el Ejemplo 4 de `clases/apuntes_1.typ`), y los de la forma `27/08-1` son los de las clases prácticas 2026 (`clases/2026/`, por fecha). Las filas son acumulativas: cada una supone leídas las de arriba.
 
 #v(5pt)
 
@@ -68,11 +68,11 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
 
     [*12* y *13*],
     [*Sucesión Monótona* · *Convergencia de sucesiones monótonas crecientes*: el Ej. 12 (a) es su espejo · *Equivalencia del supremo 2*, cuya demostración construye la sucesión que pide el Ej. 13.],
-    [10, 12, \ C1-2, C1-6, C2-1],
+    [10, 12, \ C1-2, C1-6, C2-1, \ 27/08-2],
 
     [*14*, *15* y *16*],
     [*Subsucesión* · *Convergencia de subsucesiones* con su demostración · *Negación de la Convergencia*, que es por donde se entra al Ej. 15.],
-    [9, 11, \ C2-2, C2-3],
+    [9, 11, \ C2-2, C2-3, \ 27/08-1, 27/08-3],
   )
 ]
 
@@ -86,7 +86,7 @@ Cada tramo de la guía se apoya en un puñado de cajas de `apuntes.typ` y en alg
   - *C1-6* construye una sucesión de racionales estrictamente decreciente que converge a $x$: es el Ej. 13 en espejo (allá hay que subir hasta el supremo).
 
   #v(3pt)
-  *Lo que sigue sin ejemplo:* la divergencia a $plus.minus oo$ *por definición* --- el cuantificador "para todo $M > 0$", que hace falta en los Ej. 9 (b)--(d), 12 (b) y en la segunda mitad del 14 --- y el punto fijo del anexo. Para todo lo demás, el modelo más cercano está listado al final de `ejemplos/p1.typ`.
+  *Lo que sigue sin ejemplo:* sólo el punto fijo del anexo. La divergencia a $+oo$ *por definición* --- el cuantificador "para todo $M > 0$", que hace falta en los Ej. 9 (b)--(d), 12 (b) y 14 --- ya tiene modelo: el Ejemplo *27/08-1* es el Ej. 14 completo (con subsucesión estrictamente creciente), el *27/08-2* es el Ej. 13 sobre la cola $A_m$, y el *27/08-3* prueba que toda sucesión tiene una subsucesión monótona. Para todo lo demás, el modelo más cercano está listado al final de `ejemplos/p1.typ`.
 ]
 
 #v(10pt)
