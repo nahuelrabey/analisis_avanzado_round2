@@ -88,6 +88,12 @@ Preservar siempre todo el contenido existente.
   | `C3-*` | `cardinales_metricas.typ` | cardinales de `ℕ^ℕ` y familias, primeras métricas |
   | `C4-*` | `espacios_metricos.typ` | interior/clausura/frontera, `A+B`, caracterizaciones de abierto (clase del 23/09/2025) |
   | `C5-*` | `completitud.typ` | espacios completos, `d = |x|+|y|`, encaje de cerrados (clase del 01/10/2025) |
+  | `C6-*` | `continuidad.typ` | suma y producto de continuas, polinomios continuos, `GL_n(ℝ)` abierto, continuas en densos (clase del 07/10/2025, apunte tipeado de Mateo Mauri) |
+  | `C7-*` | `compactos.typ` | compacidad por sucesiones: producto finito, `{x_n} ∪ {x}`, `F` cerrado ⇔ `K ∩ F` compacto (octubre de 2025, apunte tipeado de Tomer Cohen Mizrahi) |
+  | `C8-*` | `continuidad_uniforme.typ` | `d_∞` en `X × Y` y proyecciones, lipschitz, continuidad uniforme y contraejemplos, pegado de dominios (clase del 23/10/2025) |
+  | `C9-*` | `punto_fijo.typ` | `d(f(x),f(y)) < d(x,y)` en compactos, `f(∩A_n) = ∩f(A_n)`, `C(ℝ,[0,1])` no separable, normados y operadores lineales (clase del 11/11/2025) |
+  | `C10-*` | `conjuntos_medibles.typ` | σ-álgebra de nulos y conulos, borelianos, medida de uniones, números sin el dígito 4, cerrado de medida 1 (clase del 11/11/2025) |
+  | `C11-*` | `funciones_medibles.typ` | preimágenes, `g∘f`, conjunto de convergencia, `f'` medible, acotación fuera de medida `< ε`, `∫ f(tx)` (clase del 18/11/2025) |
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
