@@ -123,6 +123,8 @@ Esta elección hace que para $j = k + 1$, también valga $(6)$. Recursivamente, 
 
 _Nota_: el apunte escribe "$s_(k+1) - 1/(k+1)$" en la definición de $n_(k+1)$; el supremo en juego es siempre el de $A_m$, así que debería decir $s_m - 1/(k+1)$ (es lo que hace falta para que valga $(6)$ con $j = k$, es decir, $(5)$ para $k + 1$).
 
+_Nota_: hay otro desliz en los rangos de índices: el apunte toma $op("máx") {a_n : 1 <= n <= n_1}$ (y $op("máx") {a_j : 1 <= j <= n_k}$) y busca $n in NN$ sin pedir $n >= m$. Si algún término anterior a $m$ es grande, ese máximo sí es cota superior de $A_m$ y el conjunto cuyo mínimo se toma queda vacío: por ejemplo $a_1 = 5$, $a_n = 1 - 1/n$ para $n >= 2$, con $m = 2$. Lo que hace funcionar el argumento es tomar los máximos sobre $m <= n <= n_1$ (resp. $m <= j <= n_k$) y $n in NN_(>= m)$, como en $n_1$; así está escrito en `ejemplos/p1.typ` (tag 27/08-2). La alternativa de la Observación 4 ($n_1 := 1$ y máximo desde $1$) tiene el mismo problema.
+
 _Observación 4_: En el Ejercicio 2, construimos una sucesión que converge al supremo del conjunto $A_m$, siguiendo la sugerencia. Pero notemos que eso no era necesario para cumplir con el enunciado del ejercicio, que sólo pedía que la sucesión fuera estrictamente creciente. Queda como ejercicio verificar que si sólo queremos que la subsucesión sea estrictamente creciente (como pide el enunciado del ejercicio), pero no nos interesa que tienda al supremo de $A_m$, la siguiente alternativa también está bien definida y cumple lo pedido:
 $
 n_1 &:= 1; \
