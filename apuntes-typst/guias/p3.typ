@@ -11,15 +11,19 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
+#sublema(titulo: "Edición")[
+  Este archivo sigue la guía *2026* (`apuntes-docentes/guias/p3.pdf`). Cotejada ítem por ítem con la edición 2025 que estaba transcripta: numeración y enunciados idénticos (16 ejercicios, 54 incisos); sólo cambió el encabezado.
+]
+
 #set enum(numbering: "1.")
 
 + Pruebe que los siguientes son espacios métricos. Dibuje, en cada caso, una bola abierta.
   #set enum(numbering: "(a)")
-  + $RR$ con $d(x, y) = |x - y|$.
+  + $RR$ con $d(x, y) = abs(x - y)$.
   + $RR^n$ con $d_2(x, y) = (sum_(i=1)^n (x_i - y_i)^2)^(1/2)$.
-  + $RR^n$ con $d_1(x, y) = sum_(i=1)^n |x_i - y_i|$.
-  + $RR^n$ con $d_infinity(x, y) = max_(1 <= i <= n) |x_i - y_i|$.
-  + $C([0, 1])$ con $d_infinity(f, g) = max_(0 <= t <= 1) |f(t) - g(t)|$.
+  + $RR^n$ con $d_1(x, y) = sum_(i=1)^n abs(x_i - y_i)$.
+  + $RR^n$ con $d_infinity(x, y) = max_(1 <= i <= n) abs(x_i - y_i)$.
+  + $C([0, 1])$ con $d_infinity(f, g) = max_(0 <= t <= 1) abs(f(t) - g(t))$.
   + $E$ un conjunto no vacío, con la métrica
     $ delta(x, y) = cases(
       0 &"si " x = y,,
@@ -31,9 +35,12 @@
   #grid(
     columns: (1fr, 1fr, 1fr),
     row-gutter: 10pt,
-    [+ $d(x, y) = (x - y)^2$],
-    [+ $d(x, y) = sqrt(|x - y|)$],
-    [+ $d(x, y) = |x^2 - y^2|$]
+    [#set enum(numbering: "(a)", start: 1)
+     + $d(x, y) = (x - y)^2$],
+    [#set enum(numbering: "(a)", start: 2)
+     + $d(x, y) = sqrt(abs(x - y))$],
+    [#set enum(numbering: "(a)", start: 3)
+     + $d(x, y) = abs(x^2 - y^2)$]
   )
 
 + Halle interior y clausura de cada uno de los siguientes subconjuntos de $RR$. Determine cuáles son abiertos o cerrados.
@@ -41,14 +48,22 @@
   #grid(
     columns: (1fr, 1fr),
     row-gutter: 10pt,
-    [+ $[0, 1]$],
-    [+ $(0, 1)$],
-    [+ $QQ$],
-    [+ $QQ inter [0, 1]$],
-    [+ $ZZ$],
-    [+ $[0, 1) union \{2\}$],
-    [+ $\{1/n : n in NN\}$],
-    [+ $\{1/n : n in NN\} union \{0\}$]
+    [#set enum(numbering: "(a)", start: 1)
+     + $[0, 1]$],
+    [#set enum(numbering: "(a)", start: 2)
+     + $(0, 1)$],
+    [#set enum(numbering: "(a)", start: 3)
+     + $QQ$],
+    [#set enum(numbering: "(a)", start: 4)
+     + $QQ inter [0, 1]$],
+    [#set enum(numbering: "(a)", start: 5)
+     + $ZZ$],
+    [#set enum(numbering: "(a)", start: 6)
+     + $[0, 1) union \{2\}$],
+    [#set enum(numbering: "(a)", start: 7)
+     + $\{1/n : n in NN\}$],
+    [#set enum(numbering: "(a)", start: 8)
+     + $\{1/n : n in NN\} union \{0\}$]
   )
 
 + Sea $(E, d)$ un espacio métrico. Sean $x in E$ y $r > 0$.
@@ -93,7 +108,7 @@
   $ d(x, A) = op("ínf")\{d(x, a) : a in A\}. $
   Pruebe que para todos $x, y in E$ y $r > 0$:
   #set enum(numbering: "(a)")
-  + $|d(x, A) - d(y, A)| <= d(x, y)$.
+  + $abs(d(x, A) - d(y, A)) <= d(x, y)$.
   + $x in A => d(x, A) = 0$.
   + $d(x, A) = 0 <=> x in overline(A)$.
   + $B_A (r) = \{x in E : d(x, A) < r\}$ es abierto.

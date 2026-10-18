@@ -11,6 +11,10 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
+#sublema(titulo: "Edición")[
+  Este archivo sigue la guía *2026* (`apuntes-docentes/guias/p4.pdf`). Cotejada ítem por ítem con la edición 2025 que estaba transcripta: numeración y enunciados idénticos (16 ejercicios, 34 incisos); sólo cambió el encabezado.
+]
+
 #set enum(numbering: "1.")
 
 + Decida cuáles de las siguientes funciones son continuas:
@@ -30,7 +34,7 @@
 + Sea $f : RR -> RR$ dada por
   $ f(x) = cases(
     x &"si " x in QQ,,
-    0 &"si " x not in QQ.
+    0 &"si " x in.not QQ.
   ) $
   Pruebe que $f$ es continua únicamente en $x = 0$.
 
