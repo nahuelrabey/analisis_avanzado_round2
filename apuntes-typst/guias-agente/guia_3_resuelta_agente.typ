@@ -18,7 +18,7 @@
 // Cada ejercicio está verificado en Lean 4 + Mathlib: ver `lean/Guias/Guia3/EjNN.lean`.
 
 #align(center)[
-  #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
+  #text(14pt, weight: "bold")[Análisis Avanzado 2026] \
   #v(2pt)
   #text(12pt, weight: "medium")[Práctica 3 --- resuelta por el agente]
 ]
