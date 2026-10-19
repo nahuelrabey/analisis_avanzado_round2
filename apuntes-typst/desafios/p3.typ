@@ -79,6 +79,10 @@ alimenta cada bloque.
   y mostrar que $B((x_0, y_0), r) subset.eq E$.
 ]
 
+#desafio[Toda bola abierta es abierta (Ejemplo 4.16 b))][
+  Sea $(M, d)$ un espacio métrico, $x_0 in M$ y $r > 0$. Probar que $B(x_0, r)$ es un conjunto abierto.
+]
+
 #desafio[El primer cuadrante abierto es abierto (Ejercicio 6)][
   En $(RR^2, d_2)$, sea $E = {(x, y) in RR^2 : x > 0 and y > 0}$. Probar que $E$ es abierto.
 ]
@@ -97,6 +101,10 @@ alimenta cada bloque.
   #set enum(numbering: "a)")
   + Probar que $overline(B(x,r)) subset.eq B[x,r]$.
   + Mostrar con un contraejemplo que en general no vale la igualdad entre estos dos conjuntos.
+]
+
+#desafio[La clausura es monótona][
+  Sea $(M, d)$ un espacio métrico y sean $A, B subset.eq M$ con $A subset.eq B$. Probar que $overline(A) subset.eq overline(B)$.
 ]
 
 #desafio[Supremo e ínfimo en la clausura (Ejercicio 4.26)][

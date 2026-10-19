@@ -1717,3 +1717,136 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
   Veamos que si llamamos $v = (x_1, dots, x_n)$ tenemos que $v_k -> v$. Como cada coordenada converge, sabemos que para $epsilon > 0$ existe un $k_1$ tal que $abs(x_1^k - x_1) < epsilon$ para todo $k >= k_1$, existe un $k_2$ tal que $abs(x_2^k - x_2) < epsilon$ para todo $k >= k_2$, y así siguiendo hasta llegar a la coordenada $n$. Eligiendo $k_0 = max{k_1, k_2, dots, k_n}$, nos sale que
   $ abs(x_i^k - x_i) < epsilon quad "para todo " i = 1, dots, n, " para todo " k >= k_0. $
 ]
+
+#definicion[Imagen y Preimagen de un Conjunto][5.1][
+  Dada una función $f : M -> N$, y dados conjuntos $A subset.eq M$ y $B subset.eq N$,
+  $
+         f(A) & = {f(x) in N : x in A} subset.eq N quad "y" \
+    f^(-1)(B) & = {x in M : f(x) in B} subset.eq M.
+  $
+]
+
+#definicion[Función Continua][5.4][
+  Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M -> N$ una función. Decimos que $f$ es _continua en $x$_ si para todo $epsilon > 0$ existe un $delta > 0$ tal que si $d(y, x) < delta$ se tiene que $d'(f(y), f(x)) < epsilon$.
+
+  Recordando que la definición de $B(x, delta) = {y in M : d(x, y) < delta}$ y $B(f(x), epsilon) = {z in N : d'(f(x), z) < epsilon}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $epsilon > 0$ existe un $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), epsilon)$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let azul = rgb("#4f46e5")
+      let rojo = rgb("#dc2626")
+
+      // (M, d)
+      circle((0, 0), radius: (2.6, 1.9), stroke: 0.9pt)
+      content((0, 2.3), $(M, d)$)
+      circle((0, 0), radius: 0.9, fill: azul.lighten(88%), stroke: 0.9pt + azul)
+      circle((0, 0), radius: 0.05, fill: black)
+      content((0, -0.25), $x$)
+      line((0, 0), (0.636, 0.636), stroke: 0.6pt + azul, mark: (end: ">"))
+      content((0.05, 0.5), text(fill: azul)[$delta$])
+      content((0, -1.3), text(fill: azul)[$B(x, delta)$])
+
+      // f
+      bezier((3.0, 0.3), (5.9, 0.3), (4.4, 0.9), stroke: 0.9pt, mark: (end: ">"))
+      content((4.4, 0.95), $f$)
+
+      // (N, d')
+      circle((7.8, 0), radius: (2.6, 1.9), stroke: 0.9pt)
+      content((7.8, 2.3), $(N, d')$)
+      circle((7.8, 0), radius: 0.9, stroke: 1pt + rojo)
+      content((7.8, 1.3), text(fill: rojo)[$B(f(x), epsilon)$])
+      hobby((7.4, -0.05), (7.65, 0.3), (8.05, 0.2), (8.3, -0.2), (8.0, -0.5), (7.6, -0.4), close: true,
+        fill: azul.lighten(85%), stroke: 0.5pt + azul)
+      circle((7.8, 0), radius: 0.05, fill: black)
+      content((7.8, -0.25), $f(x)$)
+      line((7.8, 0), (7.164, 0.636), stroke: 0.6pt + rojo, mark: (end: ">"))
+      content((7.4, 0.25), text(size: 8pt, fill: rojo)[$epsilon$])
+      content((8.5, -1.15), text(size: 8pt, fill: azul)[$f(B(x, delta))$])
+    })
+  ]
+
+  Cuando $f$ sea continua en $x$ para todo $x in M$, diremos que $f$ es continua en $M$.
+]
+
+#observacion[La continuidad depende de las métricas][][
+  En la Definición 5.4 la bola $B(f(x), epsilon)$ se mide con $d'$ porque es la métrica de $N$. Si en $N$ usamos otra métrica $d''$, estamos en otro espacio métrico $(N, d'')$, y la pregunta "¿$f$ es continua?" pasa a ser otra: la respuesta puede cambiar. Por ejemplo, con $delta$ la métrica discreta:
+  - $op("id") : (RR, delta) -> (RR, abs(dot))$ es continua: tomando $delta = 1/2$, $B(x, 1/2) = {x}$ y su imagen está dentro de cualquier $B(x, epsilon)$.
+  - $op("id") : (RR, abs(dot)) -> (RR, delta)$ no es continua: con $epsilon = 1/2$, $B(x, 1/2) = {x}$ en la llegada, pero toda bola $B(x, delta)$ de la salida tiene infinitos puntos.
+
+  Dentro de la definición no se pueden intercalar métricas. En una demostración sí se puede pasar por otra métrica cuando son comparables: si existe $C > 0$ con $d''(a, b) <= C d'(a, b)$ para todos $a, b in N$, entonces
+  $ f "continua hacia" (N, d') ==> f "continua hacia" (N, d''). $
+  Dado $epsilon > 0$, tomamos el $delta$ de la continuidad hacia $d'$ para $epsilon \/ C$; si $d(y, x) < delta$,
+  $ d''(f(y), f(x)) <= C d'(f(y), f(x)) < C dot epsilon / C = epsilon. $
+  Si además vale la desigualdad en el otro sentido (métricas equivalentes, como $d_1$, $d_2$ y $d_oo$ en $RR^n$), ser continua es lo mismo con cualquiera de las dos.
+]
+
+#teorema[Caracterización de continuidad por sucesiones][5.7][
+  Sea $f : (M, d) -> (N, d')$ una función y $x in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_(n in NN) subset.eq M$ con $x_n -> x$ se tiene que $f(x_n) -> f(x)$ (en $N$).
+]
+#demostracion[
+  Veamos la doble implicación.
+
+  / $(==>)$: Supongamos que $f$ es continua en $x$ y sea $(x_n)$ una sucesión con $x_n -> x$. Queremos ver que $f(x_n) -> f(x)$. Es decir, queremos ver que dado $epsilon > 0$ existe un $n_0 in NN$ tal que si $n >= n_0$ entonces $d'(f(x_n), f(x)) < epsilon$.
+
+    Sea $epsilon > 0$. Como $f$ es continua en $x$ existe $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), epsilon)$. Como $x_n -> x$, existe $n_0$ tal que $d(x_n, x) < delta$ para todo $n >= n_0$. Es decir, que a partir de $n_0$, todos los términos de la sucesión caen dentro de $B(x, delta)$. Por continuidad,
+    $ f(x_n) in f(B(x, delta)) subset.eq B(f(x), epsilon) quad "para todo" n >= n_0. $
+    Esto es lo mismo que decir que $d'(f(x_n), f(x)) < epsilon$ para todo $n >= n_0$ como queríamos ver.
+
+  / $(<==)$: Supongamos que para toda sucesión $(x_n)$ con $x_n -> x$ se tiene que $f(x_n) -> f(x)$, y veamos que $f$ es continua.
+
+    Probémoslo por el absurdo. Supongamos que $f$ no es continua en $x$, es decir, que existe un $epsilon > 0$ tal que para todo $delta > 0$, se tiene que $f(B(x, delta)) subset.eq.not B(f(x), epsilon)$. Para este $epsilon$, tomemos $delta = 1/n > 0$.
+
+    Como $f(B(x, 1/n)) subset.eq.not B(f(x), epsilon)$, tenemos que debe existir un $x_n in B(x, 1/n)$ tal que $f(x_n) in.not B(f(x), epsilon)$. Esto es lo mismo que decir que $d'(f(x_n), f(x)) >= epsilon$. Como $x_n in B(x, 1/n)$, tenemos que
+    $ d(x_n, x) < 1/n -> 0 quad "cuando" n -> oo, $
+    lo que nos dice que $x_n -> x$. Pero $d'(f(x_n), f(x)) >= epsilon$ para todo $n in NN$, lo cual es contradictorio con lo que estabámos suponiendo.
+]
+
+#observacion[En $(<==)$, la hipótesis es una máquina: hay que verificar que la sucesión entra][][
+  La hipótesis "para toda $(x_n) subset.eq M$ con $x_n -> x$ se tiene $f(x_n) -> f(x)$" no nos da ninguna sucesión: recibe una que converge a $x$ y devuelve que su imagen converge a $f(x)$. La sucesión de la prueba la *construimos* eligiendo $x_n in B(x, 1/n)$ con $f(x_n) in.not B(f(x), epsilon)$, así que antes de aplicarle la hipótesis hay que verificar que $x_n -> x$ (eso es lo que hace $d(x_n, x) < 1/n -> 0$). El renglón que se saltea el texto es "por hipótesis, $f(x_n) -> f(x)$". Escrita completa, la cadena es
+  $ & underbrace(x_n -> x, "lo verificamos") stretch(==>)^"hipótesis" f(x_n) -> f(x) \
+    & "pero" underbrace(d'(f(x_n), f(x)) >= epsilon quad forall n, "por construcción") ==> "absurdo". $
+  El absurdo concreto: como $f(x_n) -> f(x)$, para ese mismo $epsilon$ existe $n_0$ con $d'(f(x_n), f(x)) < epsilon$ para todo $n >= n_0$; pero por construcción $d'(f(x_(n_0)), f(x)) >= epsilon$.
+]
+
+#teorema[Caracterización de continuidad por abiertos][5.9][
+  Sea $f : (M, d) -> (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^(-1)(A) subset.eq M$ es abierto para todo $A subset.eq N$ abierto.
+]
+#demostracion[
+  Veamos la doble implicación.
+
+  / $(==>)$: Sea $A subset.eq N$ un conjunto abierto y veamos que $f^(-1)(A)$ es abierto. Sea $x in f^(-1)(A)$. Por definición de preimagen (Definición 5.1), sabemos que $f(x) in A$ y como $A$ es abierto, $f(x)$ es punto interior de $A$ (Definiciones 4.14 y 4.11): existe un radio $r > 0$ tal que $B(f(x), r) subset.eq A$. Como $f$ es continua en $x$, por la Definición 5.4 (en su versión con bolas) aplicada con $epsilon = r$, sabemos que existe $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), r)$. Veamos que $B(x, delta) subset.eq f^(-1)(A)$: sea $y in B(x, delta)$. Por la Definición 5.1, $y in f^(-1)(A)$ si $f(y) in A$. Como $y in B(x, delta)$, entonces
+    $ f(y) in f(B(x, delta)) subset.eq B(f(x), r) subset.eq A, $
+    como queríamos ver. Así, todo $x in f^(-1)(A)$ es punto interior de $f^(-1)(A)$ (Definición 4.11), es decir, $f^(-1)(A)$ es abierto (Definición 4.14).
+
+  / $(<==)$: Veamos que $f$ es continua. Sea $x in M$, y veamos que $f$ es continua en $x$ (Definición 5.4). Para $epsilon > 0$, sabemos que $B(f(x), epsilon) subset.eq N$ es un conjunto abierto, porque toda bola abierta es abierta (Ejemplo 4.16 b), desafío de la Práctica 3). Por hipótesis, $f^(-1)(B(f(x), epsilon)) subset.eq M$ es un conjunto abierto. Como $x in f^(-1)(B(f(x), epsilon))$ (porque $f(x) in B(f(x), epsilon)$, Definición 5.1) y el conjunto es abierto, $x$ es punto interior suyo (Definiciones 4.14 y 4.11): existe un $delta > 0$ tal que $B(x, delta) subset.eq f^(-1)(B(f(x), epsilon))$. Veamos que esto nos dice que $f(B(x, delta)) subset.eq B(f(x), epsilon)$, que es la Definición 5.4 en su versión con bolas.
+
+    Sea $y in B(x, delta)$. Como $y in f^(-1)(B(f(x), epsilon))$, por la Definición 5.1 tenemos que $f(y) in B(f(x), epsilon)$, como queríamos ver.
+]
+
+#observacion[La imagen de un abierto (o cerrado) no tiene por qué ser abierta (o cerrada)][5.12][
+  En el Teorema 5.9 y en el Ejercicio 5.10 vimos una caracterización que relaciona funciones continuas con que la preimagen de un abierto/cerrado sea abierto/cerrado. Esta caracterización falla si intentamos usar la imagen en vez de la preimagen: en general, es falso que una función continua manda abiertos en abiertos o cerrados en cerrados.
+
+  Pensemos en la función $f : (RR, abs(dot)) -> (RR, abs(dot))$, $f(x) = e^x$. Sabemos que esta función es continua, y que $f(RR) = (0, +oo)$. Observemos que $RR$ es cerrado en $RR$ (lo vimos antes), pero $(0, +oo)$ no es cerrado en $RR$.
+
+  Pensemos también en la función $f : (RR, abs(dot)) -> (RR, abs(dot))$, $f(x) = x^2$. Entonces tenemos que $f((-1, 1)) = [0, 1)$. El conjunto $(-1, 1)$ es abierto en $RR$ pero $[0, 1)$ no es abierto en $RR$.
+]
+
+#teorema[Caracterización de continuidad por clausuras][5.13][
+  Sea $f : (M, d) -> (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(overline(E)) subset.eq overline(f(E))$ para todo $E subset.eq M$.
+]
+#demostracion[
+  / $(==>)$: Supongamos que $f$ es continua. Sea $E subset.eq M$ y sea $x in overline(E)$. Queremos ver que $f(x) in overline(f(E))$.
+
+    Como $x in overline(E)$, por la Proposición 4.46, sabemos que existe una sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$. Como $f$ es continua, por el Teorema 5.7, tenemos que $f(x_n) -> f(x)$. Pero $(f(x_n))_(n in NN) subset.eq f(E)$ y otra vez por la Proposición 4.46, tenemos que $f(x) in overline(f(E))$.
+
+  / $(<==)$: Supongamos que $f(overline(E)) subset.eq overline(f(E))$ para todo $E$ y veamos que $f$ es continua. Para esto, por el Ejercicio 5.10, nos alcanza con ver que $f^(-1)(F)$ es cerrado para todo $F$ cerrado. Sea $F subset.eq N$ un conjunto cerrado.
+
+    Para ver que $f^(-1)(F)$ es cerrado, veamos que $overline(f^(-1)(F)) = f^(-1)(F)$. Llamemos $E = f^(-1)(F)$. Por hipótesis,
+    $ f(overline(E)) subset.eq overline(f(E)) = overline(f(f^(-1)(F))) subset.eq overline(F) = F. $
+    Para la segunda inclusión usamos que $f(f^(-1)(F)) subset.eq F$ (Ejercicio 5.3 b), desafío de la Práctica 4) y que la clausura es monótona: si $A subset.eq B$ entonces $overline(A) subset.eq overline(B)$ (desafío de la Práctica 3). La última igualdad es porque $F$ es cerrado (Definición 4.27).
+
+    Si miramos los dos extremos de las desigualdades que escribimos y tomamos preimagen a ambos lados (tomar preimagen preserva inclusiones, por la Definición 5.1) nos sale que $f^(-1)(f(overline(E))) subset.eq f^(-1)(F)$. Entonces tenemos que
+    $ overline(f^(-1)(F)) = overline(E) subset.eq f^(-1)(f(overline(E))) subset.eq f^(-1)(F), $
+    donde la primera inclusión es el Ejercicio 5.3 a) (desafío de la Práctica 4) aplicado al conjunto $overline(E)$. Esto nos dice que $overline(f^(-1)(F)) subset.eq f^(-1)(F)$. Como la otra contención vale siempre ($E subset.eq overline(E)$, Observación 4.23), nos sale que $overline(f^(-1)(F)) = f^(-1)(F)$ y esto nos dice que $f^(-1)(F)$ es cerrado.
+]

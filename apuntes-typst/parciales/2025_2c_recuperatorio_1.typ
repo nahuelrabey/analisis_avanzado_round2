@@ -109,13 +109,21 @@ $ d((x_1, y_1), (x_2, y_2)) = sqrt(abs(x_1 - x_2)^2 + delta(y_1, y_2)^2). $
   $1/2$ es cota superior de $A$ y $1/2 in A$. Por la Proposición 4 (caracterización de supremo y
   máximo), $op("sup")(A) = op("máx")(A) = 1/2$.
 
-  *Ínfimo.* Como $1/D_n > 0$ para todo $n$, el $0$ es cota inferior. Sea $epsilon > 0$; por el
-  Principio de Arquímedes (Teorema 1) existe $n in NN$ con $n > 4 + 1/epsilon$. Entonces
-  $n - 4 > 1/epsilon > 0$ y
-  $ D_n = (n - 4)^2 + 2 > (n - 4) > 1/epsilon, $
-  (usando $(n-4)^2 + 2 > n - 4$, que vale porque $t^2 - t + 2 = (t - 1/2)^2 + 7/4 > 0$), de donde
-  $1/D_n < epsilon$. Como $0$ es cota inferior y para todo $epsilon > 0$ hay un elemento de $A$
-  menor que $0 + epsilon$, la Proposición 5 (equivalencia de ínfimo) da $op("ínf")(A) = 0$.
+  *Ínfimo.* Como $1/D_n > 0$ para todo $n$, el $0$ es cota inferior. Falta ver que, para todo
+  $epsilon > 0$, hay un elemento de $A$ menor que $epsilon$.
+  - _Elegir $n$._ Sea $epsilon > 0$. Por el Principio de Arquímedes (Teorema 1) existe
+    $n in NN$ con $n > 4 + 1/epsilon$. Entonces
+    $ n - 4 > 1/epsilon > 0. $
+  - _Una desigualdad auxiliar._ Para todo $t in RR$ vale $t^2 + 2 > t$. Pasando todo a un lado,
+    es lo mismo que $t^2 - t + 2 > 0$. Completando cuadrados, como
+    $(t - 1/2)^2 = t^2 - t + 1/4$,
+    $ t^2 - t + 2 = (t - 1/2)^2 - 1/4 + 2 = (t - 1/2)^2 + 7/4 >= 7/4 > 0, $
+    porque un cuadrado es siempre $>= 0$.
+  - _Acotar $D_n$._ Aplicando la desigualdad auxiliar con $t = n - 4$:
+    $ D_n = (n - 4)^2 + 2 > n - 4 > 1/epsilon. $
+  - _Conclusión._ Invirtiendo (los dos lados son positivos), $1/D_n < epsilon$. Como $0$ es cota
+    inferior y para todo $epsilon > 0$ hay un elemento de $A$ menor que $0 + epsilon$, la
+    Proposición 5 (equivalencia de ínfimo) da $op("ínf")(A) = 0$.
 
   *No hay mínimo.* $0 in.not A$ porque todos los elementos son positivos (Definición 6). $qed$
 ]
@@ -144,28 +152,48 @@ $ d((x_1, y_1), (x_2, y_2)) = sqrt(abs(x_1 - x_2)^2 + delta(y_1, y_2)^2). $
 ]
 
 #resolucion[Propuesta: $\#C = aleph_0$][
-  *$C$ es contable.* Para $f in C$ definimos $G(f) = {(q, f(q)) : q in QQ, f(q) != 3} subset.eq QQ times NN$.
-  Es finito porque es la imagen de ${q : f(q) != 3}$, finito por hipótesis, por $q |-> (q, f(q))$.
-  Así $G : C -> cal(P)_f (QQ times NN)$, el conjunto de subconjuntos finitos de $QQ times NN$.
+  *Plan.* Probamos las dos desigualdades $\#C <= aleph_0$ y $aleph_0 <= \#C$, y cerramos con
+  Cantor--Schröeder--Bernstein.
 
-  _$G$ es inyectiva._ Sean $f, g in C$ con $G(f) = G(g)$ y sea $q in QQ$. Si $f(q) != 3$, entonces
-  $(q, f(q)) in G(f) = G(g)$, así que existe $q'$ con $g(q') != 3$ y $(q', g(q')) = (q, f(q))$;
-  comparando coordenadas, $q' = q$ y $g(q) = f(q)$. Simétricamente, si $g(q) != 3$ entonces
-  $f(q) = g(q)$. Y si $f(q) = 3 = g(q)$ también coinciden. Luego $f = g$.
+  *$C$ es contable.* La idea es que cada $f in C$ queda determinada por una cantidad finita de
+  datos: dónde no vale $3$ y cuánto vale ahí.
+  - _Las excepciones._ Para $f in C$ sea
+    $ E_f = {q in QQ : f(q) != 3}. $
+    Por la definición de $C$, $E_f$ es finito.
+  - _El código de $f$._ Definimos
+    $ G(f) = {(q, f(q)) : q in E_f} subset.eq QQ times NN, $
+    los pares (lugar de la excepción, valor que toma ahí).
+  - _$G(f)$ es finito._ Es la imagen de $E_f$ por $q |-> (q, f(q))$, y la imagen de un conjunto
+    finito es finita. Así
+    $ G : C -> cal(P)_f (QQ times NN), $
+    donde $cal(P)_f (QQ times NN)$ es el conjunto de subconjuntos finitos de $QQ times NN$.
+  - _$G$ es inyectiva._ Sean $f, g in C$ con $G(f) = G(g)$. Para ver que $f = g$, fijamos
+    $q in QQ$ y vemos que $f(q) = g(q)$ en cada caso:
+    - Si $f(q) != 3$: entonces $(q, f(q)) in G(f) = G(g)$. Así que existe $q'$ con $g(q') != 3$ y
+      $ (q', g(q')) = (q, f(q)). $
+      Comparando coordenadas, $q' = q$ y $g(q) = f(q)$.
+    - Si $g(q) != 3$: es el caso anterior con los papeles de $f$ y $g$ cambiados, y da
+      $f(q) = g(q)$.
+    - Si no, $f(q) = 3 = g(q)$, y también coinciden.
+  - _El codominio es numerable._ Por la Numerabilidad de $QQ$ (Ejemplo 3.12),
+    $ QQ times NN tilde.op NN times NN tilde.op NN, $
+    así que $cal(P)_f (QQ times NN)$ es numerable (Práctica 2, Ej. 10).
+  - _Conclusión._ $G$ inyecta $C$ en un conjunto numerable. Por la Definición 3.8,
+    $\#C <= aleph_0$.
 
-  _El codominio es numerable._ $QQ times NN tilde.op NN times NN tilde.op NN$ (Numerabilidad de $QQ$,
-  Ejemplo 3.12), así que $cal(P)_f (QQ times NN)$ es numerable (Práctica 2, Ej. 10). Por la
-  Definición 3.8, $\#C <= aleph_0$.
+  *$C$ es infinito.* Basta meter una copia de $NN$ adentro de $C$.
+  - _Una familia de funciones._ Para $k in NN$ sea $f_k : QQ -> NN$ con
+    $ f_k (0) = k quad "y" quad f_k (q) = 3 "si" q != 0. $
+  - _Cada $f_k$ está en $C$._ Sus excepciones cumplen $E_(f_k) subset.eq {0}$, que es finito.
+  - _$k |-> f_k$ es inyectiva._ Si $f_k = f_j$, evaluando en $0$:
+    $ k = f_k (0) = f_j (0) = j. $
+  - _Conclusión._ $aleph_0 = \#NN <= \#C$.
 
-  *$C$ es infinito.* Para $k in NN$ sea $f_k : QQ -> NN$ con $f_k (0) = k$ y $f_k (q) = 3$ si
-  $q != 0$. Cada $f_k in C$ (difiere de $3$ a lo sumo en $q = 0$) y $k |-> f_k$ es inyectiva
-  ($f_k (0) = k$). Luego $aleph_0 = \#NN <= \#C$.
-
-  Por el Teorema 3.11 (Cantor--Schröeder--Bernstein), $\#C = aleph_0$. $qed$
+  *Cierre.* Por el Teorema 3.11 (Cantor--Schröeder--Bernstein), $\#C = aleph_0$. $qed$
 ]
 
 #observacion[Verificado en Lean: `Recu1_2C2025.ej2`][
-  `grafico f` es $G(f)$; `grafico_finite` y `grafico_injective` son los dos párrafos de arriba
+  `grafico f` es $G(f)$; `grafico_finite` y `grafico_injective` son los pasos "$G(f)$ es finito" y "$G$ es inyectiva"
   (la inyectividad se prueba coordenada a coordenada, con el caso $f(q) = 3 = g(q)$ aparte).
   `C_countable` inyecta a `C` en `{t : Set (ℚ × ℕ) | t.Finite ∧ t ⊆ univ}`, que Mathlib sabe
   contable (`Set.countable_ofPred_finite_subset`, la Práctica 2, Ej. 10). `C_infinite` son las
