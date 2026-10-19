@@ -2,7 +2,7 @@
 #show: frame-style(styles.boxy)
 
 #align(center)[
-  #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
+  #text(14pt, weight: "bold")[Análisis Avanzado 2026] \
   #v(2pt)
   #text(12pt, weight: "medium")[Práctica 4]
 ]
@@ -10,6 +10,10 @@
 #v(4pt)
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
+
+#sublema(titulo: "Edición")[
+  Este archivo sigue la guía *2026* (`apuntes-docentes/guias/p4.pdf`). Cotejada ítem por ítem con la edición 2025 que estaba transcripta: numeración y enunciados idénticos (16 ejercicios, 34 incisos); sólo cambió el encabezado.
+]
 
 #set enum(numbering: "1.")
 
@@ -30,7 +34,7 @@
 + Sea $f : RR -> RR$ dada por
   $ f(x) = cases(
     x &"si " x in QQ,,
-    0 &"si " x not in QQ.
+    0 &"si " x in.not QQ.
   ) $
   Pruebe que $f$ es continua únicamente en $x = 0$.
 

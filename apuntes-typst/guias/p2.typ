@@ -13,7 +13,7 @@
 }
 
 #align(center)[
-  #text(14pt, weight: "bold")[Análisis Avanzado - Segundo cuatrimestre de 2025] \
+  #text(14pt, weight: "bold")[Análisis Avanzado 2026] \
   #v(2pt)
   #text(12pt, weight: "medium")[Práctica 2]
 ]
@@ -28,7 +28,8 @@
   *Pendiente:* la Consulta Docente de acá abajo (¿$emptyset$ es contable?) afecta al Ej. 2 y al
   Ej. 6 (a), que están escritos suponiendo que no lo es. El Ej. 7 (a) tiene un hueco anotado al
   pie (la biyección con $(-1, 0]$). \
-  *Lo que sigue:* el Ej. 6 (b) y el Ej. 7 (b) en adelante, sin encarar.
+  *Lo que sigue:* el Ej. 6 (b) y el Ej. 7 (b) en adelante, sin encarar. \
+  *Edición:* este archivo sigue la guía *2026* (`apuntes-docentes/guias/p2.pdf`), cotejada ítem por ítem con la edición 2025 que estaba transcripta: numeración y enunciados idénticos (17 ejercicios, 33 incisos, más el "Recuerde"); sólo cambió el encabezado.
 ]
 
 #v(6pt)
@@ -79,14 +80,22 @@
   #grid(
     columns: (1fr, 1fr),
     row-gutter: 6pt,
-    [+ $f(A union B) = f(A) union f(B)$.],
-    [+ $f(A inter B) subset.eq f(A) inter f(B)$.],
-    [+ $f^(-1)(C union D) = f^(-1)(C) union f^(-1)(D)$.],
-    [+ $f^(-1)(C inter D) = f^(-1)(C) inter f^(-1)(D)$.],
-    [+ $A subset.eq f^(-1)(f(A))$. Si $f$ es inyectiva vale la igualdad.],
-    [+ $f(f^(-1)(C)) subset.eq C$. Si $f$ es sobreyectiva vale la igualdad.],
-    [+ $X backslash f^(-1)(D) = f^(-1)(Y backslash D)$.],
-    [+ Si $f$ y $g$ son inyectivas (resp. sobreyectivas, biyectivas), entonces $g compose f$ es inyectiva (resp. sobreyectiva, biyectiva).]
+    [#set enum(numbering: "(a)", start: 1)
+     + $f(A union B) = f(A) union f(B)$.],
+    [#set enum(numbering: "(a)", start: 2)
+     + $f(A inter B) subset.eq f(A) inter f(B)$.],
+    [#set enum(numbering: "(a)", start: 3)
+     + $f^(-1)(C union D) = f^(-1)(C) union f^(-1)(D)$.],
+    [#set enum(numbering: "(a)", start: 4)
+     + $f^(-1)(C inter D) = f^(-1)(C) inter f^(-1)(D)$.],
+    [#set enum(numbering: "(a)", start: 5)
+     + $A subset.eq f^(-1)(f(A))$. Si $f$ es inyectiva vale la igualdad.],
+    [#set enum(numbering: "(a)", start: 6)
+     + $f(f^(-1)(C)) subset.eq C$. Si $f$ es sobreyectiva vale la igualdad.],
+    [#set enum(numbering: "(a)", start: 7)
+     + $X backslash f^(-1)(D) = f^(-1)(Y backslash D)$.],
+    [#set enum(numbering: "(a)", start: 8)
+     + Si $f$ y $g$ son inyectivas (resp. sobreyectivas, biyectivas), entonces $g compose f$ es inyectiva (resp. sobreyectiva, biyectiva).]
   )
 ]
 
@@ -101,10 +110,14 @@
   #grid(
     columns: (1fr, 1fr, 1fr, 1fr),
     row-gutter: 10pt,
-    [+ $ZZ_(<= -3)$ #hecho],
-    [+ $5 ZZ$ #hecho],
-    [+ $ZZ times NN$ #hecho],
-    [+ $(-1, 1) inter QQ$ #hecho]
+    [#set enum(numbering: "(a)", start: 1)
+     + $ZZ_(<= -3)$ #hecho],
+    [#set enum(numbering: "(a)", start: 2)
+     + $5 ZZ$ #hecho],
+    [#set enum(numbering: "(a)", start: 3)
+     + $ZZ times NN$ #hecho],
+    [#set enum(numbering: "(a)", start: 4)
+     + $(-1, 1) inter QQ$ #hecho]
   )
 
 + Sea $A$ y $B$ conjuntos contables. Pruebe que $A union B$ es contable. #hecho
@@ -124,7 +137,7 @@
   + Pruebe que para toda sucesión $(B_n)_(n in NN)$ como arriba se tiene que $A = union.big_(n in NN) B_n$. #hecho
 
 + #set enum(numbering: "(a)")
-  + Sea $\{A_n\}_{n in NN}$ una familia de conjuntos contables. Pruebe que $union.big_(n in NN) A_n$ es contable. #hecho
+  + Sea $\{A_n\}_(n in NN)$ una familia de conjuntos contables. Pruebe que $union.big_(n in NN) A_n$ es contable. #hecho
   + Sea $A$ un conjunto finito y no vacío y $S = union.big_(m in NN) A^m$. Pruebe que $\# S = aleph_0$. \
     _*Deduzca que, dado un alfabeto (esto es, un conjunto de símbolos) finito, hay más números reales que palabras (esto es, sucesiones finitas de símbolos) definibles con ese alfabeto para nombrarlos.*_
 
@@ -166,11 +179,11 @@
 
 + Calcule el cardinal de los siguientes conjuntos:
   #set enum(numbering: "(a)")
-  + \{(a_n)_(n in NN) subset.eq ZZ : (a_n)_(n in NN) "converge"\}.
-  + \{(a_n)_(n in NN) subset.eq QQ : (a_n)_(n in NN) "es periódica"\}.
+  + $\{(a_n)_(n in NN) subset.eq ZZ : (a_n)_(n in NN) "converge"\}$.
+  + $\{(a_n)_(n in NN) subset.eq QQ : (a_n)_(n in NN) "es periódica"\}$.
 
 + #set enum(numbering: "(a)")
-  + Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\{A_i\}_{i in I}$ indexada por $I$ tal que:
+  + Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\{A_i\}_(i in I)$ indexada por $I$ tal que:
     - $\# A_i > 1$ para todo $i in I$.
     - $A_i inter A_j = nothing$ si $i != j$. \
     Pruebe que $I$ es contable.
