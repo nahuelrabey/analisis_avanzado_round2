@@ -168,31 +168,29 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #resolucion[
-  *a)* Probemos que $pi_1$ es continua y abierta. Para ver que es continua, dado $(x_0, y_0) in X times Y$, podemos ver que dado $epsilon > 0$, existe $delta > 0$ tal que si $d_infinity ((x, y), (x_0, y_0)) < delta$ entonces
+  *a)* Probemos que $pi_1$ es continua y abierta. A lo largo de la resolución, los puntos de $X times Y$ se llaman $p, q$, y sus coordenadas $p = (x_p, y_p)$, $q = (x_q, y_q)$.
+
+  Para ver que $pi_1$ es continua, dado $p in X times Y$, podemos ver que dado $epsilon > 0$, existe $delta > 0$ tal que si $d_infinity (q, p) < delta$ entonces
   $
-  d_1 (pi_1 (x, y), pi_1 (x_0, y_0)) = d_1 (x, x_0) < epsilon.
+  d_1 (pi_1 (q), pi_1 (p)) = d_1 (x_q, x_p) < epsilon.
   $
   Como
   $
-  d_1 (x, x_0) <= max{d_1 (x, x_0), d_2 (y, y_0)} = d_infinity ((x, y), (x_0, y_0)), quad (*)
+  d_1 (x_q, x_p) <= max{d_1 (x_q, x_p), d_2 (y_q, y_p)} = d_infinity (q, p), quad (*)
   $
   si $delta < epsilon$ garantizamos $(*)$.
 
-  Para ver que $pi_1$ es abierta, tenemos que ver que *para todo abierto $U subset.eq X times Y$, $pi_1 (U)$ es abierto*. Notemos que si probamos que *para toda bola $B(x, r)$, $pi_1 (B(x, r))$ es abierto*, entonces se sigue la misma conclusión para todo abierto $U$: para todo $x in U$, existe $r_x > 0$ tal que $B(x, r_x) subset.eq U$. Entonces $U = union.big_(x in U) B(x, r_x)$, por lo tanto
-  $
-  pi_1 (U) = pi_1 (union.big_(x in U) B(x, r_x)) = union.big_(x in U) pi_1 (B(x, r_x))
-  $
-  y es unión de abiertos, por lo tanto es abierto.
+  Para ver que $pi_1$ es abierta, tenemos que ver que *para todo abierto $U subset.eq X times Y$, $pi_1 (U)$ es abierto*. Lo hacemos en dos pasos: primero para bolas y después para abiertos cualesquiera.
 
-  Sea $(x_0, y_0) in X times Y$ y $r > 0$. Entonces
+  *Paso 1: la proyección de una bola es una bola.* Sea $p in X times Y$ y $r > 0$. Veamos que $pi_1 (B(p, r)) = B(x_p, r)$; en particular, $pi_1 (B(p, r))$ es abierto. Por un lado,
   $
-  B((x_0, y_0), r) &= {(x, y) : d_infinity ((x, y), (x_0, y_0)) < r} \
-                   &= {(x, y) : max{d_1 (x, x_0), d_2 (y, y_0)} < r} \
-                   &= {(x, y) : d_1 (x, x_0) < r " y " d_2 (y, y_0) < r}.
+  B(p, r) &= {q in X times Y : d_infinity (q, p) < r} \
+          &= {q in X times Y : max{d_1 (x_q, x_p), d_2 (y_q, y_p)} < r} \
+          &= {q in X times Y : d_1 (x_q, x_p) < r " y " d_2 (y_q, y_p) < r}.
   $
   Por otro lado,
   $
-  pi_1 (B((x_0, y_0), r)) = {x in X : "existe " y in Y " con " d_1 (x, x_0) < r " y " d_2 (y, y_0) < r}.
+  pi_1 (B(p, r)) = {x in X : "existe " y in Y " con " d_1 (x, x_p) < r " y " d_2 (y, y_p) < r}.
   $
   #block(breakable: false, width: 100%)[#align(center)[
     #cetz.canvas({
@@ -207,18 +205,18 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
       content((6.4, -0.1), anchor: "north", text(size: 9pt, $X$))
       content((-0.1, 4.9), anchor: "east", text(size: 9pt, $Y$))
 
-      // Bola de d_infinity: el cuadrado (x0 - r, x0 + r) × (y0 - r, y0 + r).
+      // Bola de d_infinity: el cuadrado (x_p - r, x_p + r) × (y_p - r, y_p + r).
       rect(
         (x0 - r, y0 - r), (x0 + r, y0 + r),
         fill: azul.lighten(88%), stroke: (paint: azul, thickness: 1pt, dash: "dashed"),
       )
-      content((x0 + r + 0.15, y0 + r), anchor: "north-west", text(size: 9pt, fill: azul, $B = B((x_0, y_0), r)$))
+      content((x0 + r + 0.15, y0 + r), anchor: "north-west", text(size: 9pt, fill: azul, $B = B(p, r)$))
       circle((x0, y0), radius: 0.05, fill: black, stroke: none)
-      content((x0, y0 + 0.12), anchor: "south", text(size: 9pt, $(x_0, y_0)$))
+      content((x0, y0 + 0.12), anchor: "south", text(size: 9pt, $p = (x_p, y_p)$))
       line((x0, y0), (x0 + r, y0), stroke: 0.5pt + azul)
       content((x0 + r / 2, y0 - 0.08), anchor: "north", text(size: 9pt, $r$))
 
-      // Proyección sobre el eje x: el intervalo abierto (x0 - r, x0 + r).
+      // Proyección sobre el eje x: el intervalo abierto (x_p - r, x_p + r).
       for x in (x0 - r, x0 + r) {
         line((x, y0 - r), (x, 0), stroke: (paint: gray, thickness: 0.4pt, dash: "dotted"))
       }
@@ -227,31 +225,37 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
         circle((x, 0), radius: 0.07, fill: white, stroke: 0.9pt + verde)
       }
       line((x0, -0.1), (x0, 0.1), stroke: 0.8pt)
-      content((x0 - r, -0.15), anchor: "north", text(size: 9pt, $x_0 - r$))
-      content((x0, -0.15), anchor: "north", text(size: 9pt, $x_0$))
-      content((x0 + r, -0.15), anchor: "north", text(size: 9pt, $x_0 + r$))
-      content((x0, 0.2), anchor: "south", text(size: 9pt, fill: verde, $pi_1 (B) = B(x_0, r)$))
+      content((x0 - r, -0.15), anchor: "north", text(size: 9pt, $x_p - r$))
+      content((x0, -0.15), anchor: "north", text(size: 9pt, $x_p$))
+      content((x0 + r, -0.15), anchor: "north", text(size: 9pt, $x_p + r$))
+      content((x0, 0.2), anchor: "south", text(size: 9pt, fill: verde, $pi_1 (B) = B(x_p, r)$))
       // Flecha de proyección.
       line((x0 - r / 2, y0 - r - 0.1), (x0 - r / 2, 0.75), mark: (end: ">"), stroke: 0.6pt + verde)
       content((x0 - r / 2 - 0.1, (y0 - r) / 2 + 0.35), anchor: "east", text(size: 9pt, fill: verde, $pi_1$))
     })
   ]]
 
-  _Nota_: el manuscrito dibuja un disco de centro $(x_0, y_0)$ y radio $r$ y, sobre el eje $x$, su proyección: un intervalo de centro $x_0$ y del "mismo radio". Con $d_infinity$ la bola de $RR^2$ es en realidad el cuadrado $(x_0 - r, x_0 + r) times (y_0 - r, y_0 + r)$, que es lo que se dibuja acá; el disco es la bola euclídea. Las dos tienen la misma proyección.
+  _Nota_: el manuscrito dibuja un disco de centro $p$ y radio $r$ y, sobre el eje $x$, su proyección: un intervalo de centro $x_p$ y del "mismo radio". Con $d_infinity$ la bola de $RR^2$ es en realidad el cuadrado $(x_p - r, x_p + r) times (y_p - r, y_p + r)$, que es lo que se dibuja acá; el disco es la bola euclídea. Las dos tienen la misma proyección.
 
-  Veamos que $B(x_0, r) subset.eq pi_1 (B((x_0, y_0), r))$. Dado $x in B(x_0, r)$, resulta que $d_1 (x, x_0) < r$. Sea $y in B(y_0, r)$, por ejemplo $y = y_0$. Tenemos que $(x, y_0) in B((x_0, y_0), r)$, pues
-  $
-  d_infinity ((x_0, y_0), (x, y_0)) = max{d_1 (x_0, x), underbrace(d_2 (y_0, y_0), = 0)} = d_1 (x_0, x) < r.
-  $
-  Entonces $B(x_0, r) subset.eq pi_1 (B((x_0, y_0), r))$.
+  Las dos contenciones salen de la descripción de $pi_1 (B(p, r))$:
 
-  _Nota_: el manuscrito escribe "Sea $(x, y) in X times Y$ y $r > 0$. Entonces $B((x, y), r) = dots$" y a continuación usa $(x_0, y_0)$ como centro; acá se unificó a $(x_0, y_0)$. Además, sólo prueba la contención $B(x_0, r) subset.eq pi_1 (B((x_0, y_0), r))$; la otra es inmediata de la descripción de $pi_1 (B((x_0, y_0), r))$ (todo $x$ ahí cumple $d_1 (x, x_0) < r$), así que $pi_1 (B((x_0, y_0), r)) = B(x_0, r)$, que es abierto, y eso es lo que cierra el argumento.
+  ($subset.eq$) Todo $x in pi_1 (B(p, r))$ cumple $d_1 (x, x_p) < r$, es decir, $x in B(x_p, r)$.
+
+  ($supset.eq$) Dado $x in B(x_p, r)$, tenemos $d_1 (x, x_p) < r$, y $y = y_p$ cumple $d_2 (y_p, y_p) = 0 < r$. Entonces $q = (x, y_p) in B(p, r)$ y $x = pi_1 (q) in pi_1 (B(p, r))$.
+
+  *Paso 2: de bolas a abiertos.* Sea $U subset.eq X times Y$ abierto. Para todo $p in U$ existe $r_p > 0$ tal que $B(p, r_p) subset.eq U$. Entonces $U = union.big_(p in U) B(p, r_p)$, por lo tanto
+  $
+  pi_1 (U) = pi_1 (union.big_(p in U) B(p, r_p)) = union.big_(p in U) pi_1 (B(p, r_p)) = union.big_(p in U) B(x_p, r_p),
+  $
+  donde la última igualdad es el Paso 1. Es unión de abiertos, por lo tanto $pi_1 (U)$ es abierto.
+
+  _Nota_: el manuscrito presenta primero el Paso 2, como reducción ("si probamos que para toda bola $B(x, r)$, $pi_1 (B(x, r))$ es abierto, entonces se sigue la misma conclusión para todo abierto $U$"), y después el Paso 1; acá se reordenó. Además escribe los puntos de $X times Y$ como $x$, $(x, y)$ o $(x_0, y_0)$ según el lugar; acá se unificó a $p$, $q$ con coordenadas $(x_p, y_p)$, $(x_q, y_q)$. Por último, sólo prueba la contención $supset.eq$ (verificando $q in B(p, r)$ con la cuenta $d_infinity (p, q) = max{d_1 (x_p, x), d_2 (y_p, y_p)} = d_1 (x_p, x) < r$). Sola no alcanza para el Paso 1: dice que $x_p$ es punto interior de $pi_1 (B(p, r))$, pero no que lo sean todos sus puntos. Con la igualdad, en cambio, la proyección es una bola y por lo tanto es abierta.
 
   Veamos que en general $pi_1$ *no es cerrada, es decir, existe $F subset.eq X times Y$ cerrado con $pi_1 (F)$ no cerrado*.
 
-  _Idea_: sea $F subset.eq X times Y$ cerrado, y consideramos $pi_1 (F)$. Si $(x_n)_n subset.eq pi_1 (F)$ cumple que $x_n -> x$, querríamos ver que $x in pi_1 (F)$, es decir, existe $y in Y$ tal que $(x, y) in F$. Como $x_n in pi_1 (F)$, existe $y_n in Y$ tal que $(x_n, y_n) in F$. *Lo ideal sería que $(x_n, y_n) -> (x, y)$*, porque en tal caso, al ser $F$ cerrado, $(x, y) in F$ y entonces $x in pi_1 (F)$. El problema es que *$(y_n)_n$ no tiene por qué converger, o tener subsucesiones convergentes*.
+  _Idea_: sea $F subset.eq X times Y$ cerrado, y consideramos $pi_1 (F)$. Si $(x_n)_n subset.eq pi_1 (F)$ cumple que $x_n -> x$, querríamos ver que $x in pi_1 (F)$, es decir, existe $q in F$ con $x_q = x$. Como $x_n in pi_1 (F)$, existe $q_n in F$ con $x_(q_n) = x_n$. *Lo ideal sería que $q_n -> q$ para algún $q$*, porque en tal caso, al ser $F$ cerrado, $q in F$, y como la primera coordenada converge, $x_q = lim x_n = x$; entonces $x in pi_1 (F)$. El problema es que *las segundas coordenadas $(y_(q_n))_n$ no tienen por qué converger, o tener subsucesiones convergentes*.
 
-  _Ej_: si $X = Y = RR$, en $RR^2$ con $d_infinity$, sea $F = {(x, y) : x y = 1}$. Es cerrado porque es la preimagen de ${1}$ vía $f(x, y) = x y$, o sea: $F = f^(-1)({1})$. Como $f$ es continua, $F$ es cerrado. Pero
+  _Ej_: si $X = Y = RR$, en $RR^2$ con $d_infinity$, sea $F = {q in RR^2 : x_q y_q = 1}$. Es cerrado porque es la preimagen de ${1}$ vía $f(q) = x_q y_q$, o sea: $F = f^(-1)({1})$. Como $f$ es continua, $F$ es cerrado. Pero
   $
   pi_1 (F) = {x in RR : "existe " y in RR " con " x y = 1} = RR without {0},
   $
