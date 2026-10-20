@@ -1766,7 +1766,12 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
     })
   ]
 
-  Cuando $f$ sea continua en $x$ para todo $x in M$, diremos que $f$ es continua en $M$.
+  Cuando $f$ sea continua en $x$ para todo $x in M$, diremos que $f$ es continua en $M$. Con cuantificadores:
+  $
+    forall x in M quad forall epsilon > 0 quad exists delta > 0 quad forall y in M : \
+    d(x, y) < delta ==> d'(f(x), f(y)) < epsilon.
+  $
+  El $delta$ se elige _después_ de conocer el punto $x$: puede depender de $x$ y de $epsilon$ (comparar con la Definición 5.14).
 ]
 
 #observacion[La continuidad depende de las métricas][][
@@ -1860,6 +1865,13 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
 #definicion[Función Uniformemente Continua][5.14][
   Sea $f : (M, d) -> (N, d')$ una función. $f$ se dice _uniformemente continua_ si para todo $epsilon > 0$ existe $delta > 0$ tal que si $d(x, y) < delta$ entonces $d'(f(x), f(y)) < epsilon$. Equivalentemente, podríamos pedir que para todo $epsilon > 0$ existe $delta > 0$ tal que
   $ f(B(x, delta)) subset.eq B(f(x), epsilon). $
+
+  Con cuantificadores:
+  $
+    forall epsilon > 0 quad exists delta > 0 quad forall x in M quad forall y in M : \
+    d(x, y) < delta ==> d'(f(x), f(y)) < epsilon.
+  $
+  El $delta$ se elige _antes_ de conocer el punto: depende sólo de $epsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).
 
   _Nota_: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer *para todo $x in M$* con el mismo $delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.
 ]
