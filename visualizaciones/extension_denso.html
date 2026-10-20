@@ -1,0 +1,719 @@
+<title>Extender desde un denso</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: el dibujo queda fijo a la izquierda (sticky) y la demostración avanza paso a paso a la derecha; en el teléfono, dibujo arriba y paso abajo. Misma familia visual que visualizaciones/continuidad_uniforme.html. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --seq2: #b0532a;
+    --ok: #1d8556;
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --seq2: #f0a070; --ok: #4cc38a; --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --seq2: #f0a070; --ok: #4cc38a; --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.07rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1120px; margin: 0 auto; display: grid; gap: 1.6rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.4rem; line-height: 1.25; margin: 0 0 0.6rem; font-weight: 600; text-wrap: balance; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0 0 0.5rem; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.9rem; }
+  .intro { max-width: 70ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.15rem; }
+
+  .theorem {
+    background: var(--panel); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 1rem 1.2rem; max-width: 78ch;
+  }
+  .theorem p:last-child { margin: 0; }
+  .theorem b { font-family: var(--font-ui); }
+
+  /* ---------- referencias con popup ---------- */
+  .ref {
+    color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help;
+    border-radius: 3px;
+  }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  /* ---------- demostración ---------- */
+  .proof { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+  @media (max-width: 860px) { .proof { grid-template-columns: minmax(0, 1fr); } }
+  .stage {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px);
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0.9rem;
+    display: grid; gap: 0.7rem; font-family: var(--font-ui); font-size: 0.9rem;
+  }
+  @media (max-width: 860px) { .stage { position: static; } }
+  canvas { width: 100%; display: block; aspect-ratio: 5 / 4; border-radius: 6px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; color: var(--muted); font-size: 0.82rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .sw { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+  .slider { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) 3.6rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .readout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.15rem 0.9rem; font-family: var(--font-mono); font-size: 0.84rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .readout dt { color: var(--muted); }
+  .readout dd { margin: 0; }
+  .good { color: var(--ok); }
+  .bad { color: var(--fail); }
+
+  .steps { display: grid; gap: 0.8rem; min-width: 0; }
+  .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.9rem; }
+  .nav .count { color: var(--muted); margin-right: auto; font-variant-numeric: tabular-nums; }
+  button {
+    font: inherit; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--accent);
+    border-radius: 6px; padding: 0.35rem 0.85rem; cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--band); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-ui); font-size: 0.82rem; }
+  .toc button { border-color: var(--rule); color: var(--muted); padding: 0.2rem 0.6rem; font-weight: 400; }
+  .toc button[aria-current="step"] { border-color: var(--accent); color: var(--accent); background: var(--band); font-weight: 500; }
+
+  .step { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem 1.2rem; }
+  .step .kicker { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+  .look {
+    margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px dashed var(--rule);
+    font-size: 0.97rem; color: var(--muted);
+  }
+  .look strong { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .hyps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1.2rem; }
+  .hyp { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1rem; display: grid; gap: 0.6rem; align-content: start; }
+  .hyp canvas { aspect-ratio: 16 / 10; }
+  .hyp p { margin: 0; }
+  .note { color: var(--muted); font-size: 0.95rem; }
+</style>
+
+<div class="page">
+  <header class="intro">
+    <p class="eyebrow">Análisis Avanzado · Práctica 4 · Teorema 5.22</p>
+    <h1>Extender una función uniformemente continua desde un denso</h1>
+  </header>
+
+  <section class="theorem" aria-label="Enunciado">
+    <p>
+      <b>Teorema 5.22.</b> Sean $(M, d)$, $(N, d')$ dos espacios métricos, $E \subseteq M$ un conjunto
+      <span class="ref" tabindex="0" data-ref="denso">denso</span>, $(N, d')$
+      <span class="ref" tabindex="0" data-ref="completo">completo</span> y sea $f : E \to N$ una función
+      <span class="ref" tabindex="0" data-ref="uc">uniformemente continua</span>. Entonces existe una función
+      $\tilde f : M \to N$ uniformemente continua tal que $\tilde f|_E = f$ (es decir, $\tilde f(x) = f(x)$ para todo $x \in E$).
+    </p>
+  </section>
+
+  <p class="intro note">Pasá el mouse (o tocá) sobre las palabras subrayadas para ver la definición o el resultado que se usa. Avanzá con los botones o con las flechas del teclado.</p>
+
+  <section class="proof" aria-label="Demostración paso a paso">
+    <div class="stage">
+      <canvas id="cv" role="img" aria-label="Dibujo del paso actual de la demostración"></canvas>
+      <div class="legend" id="legend"></div>
+      <div class="slider" id="ctl-q"><label for="s-q">Puntos de $E$</label><input type="range" id="s-q" min="3" max="40" step="1" value="12"><output id="o-q" for="s-q"></output></div>
+      <div class="slider" id="ctl-n"><label for="s-n">$n$</label><input type="range" id="s-n" min="1" max="40" step="1" value="4"><output id="o-n" for="s-n"></output></div>
+      <div class="slider" id="ctl-eps"><label for="s-eps">$\varepsilon$</label><input type="range" id="s-eps" min="0.3" max="0.9" step="0.01" value="0.6"><output id="o-eps" for="s-eps"></output></div>
+      <div class="slider" id="ctl-off"><label for="s-off">$d(x, y)$ en $\delta/3$</label><input type="range" id="s-off" min="0.05" max="0.95" step="0.01" value="0.7"><output id="o-off" for="s-off"></output></div>
+      <dl class="readout" id="readout"></dl>
+    </div>
+
+    <div class="steps">
+      <div class="nav">
+        <span class="count" id="count"></span>
+        <button type="button" id="prev">← Anterior</button>
+        <button type="button" id="next">Siguiente →</button>
+      </div>
+      <ol class="toc" id="toc"></ol>
+
+      <article class="step" data-title="El dibujo">
+        <div class="kicker">Antes de empezar</div>
+        <h3>El ejemplo que vamos a dibujar</h3>
+        <p>
+          Para tener algo concreto: $M = [0, 1]$, $E = \mathbb{Q} \cap [0, 1]$, que es denso en $M$, y $N = \mathbb{R}$, que es completo.
+          La función es $f(t) = \tfrac12 + \tfrac14 \operatorname{sen}(4t)$, definida <em>sólo</em> en los racionales.
+          Es Lipschitz de constante $1$, así que es uniformemente continua (Ejercicio 5.25).
+        </p>
+        <p>
+          El eje horizontal es $M$ y el vertical es $N$. Del gráfico de $f$ sólo existen los puntos con abscisa racional.
+          El punto $x = 1/\sqrt2 \approx 0{,}7071$ no está en $E$, así que $f(x)$ no está definido: el teorema dice que igual podemos
+          asignarle un valor, y de forma que todo quede uniformemente continuo.
+        </p>
+        <p>Hay que hacer tres cosas: definir $\tilde f$, ver que está bien definida y ver que es uniformemente continua. Que extiende a $f$ va a salir gratis.</p>
+        <div class="look"><strong>En el dibujo</strong>Subí «Puntos de $E$»: aparecen racionales con denominadores más grandes y llenan el intervalo cada vez más, pero ninguno cae en $x$.</div>
+      </article>
+
+      <article class="step" data-title="x ∈ E">
+        <div class="kicker">Paso 1 · Definir $\tilde f$</div>
+        <h3>Si $x \in E$, copiamos a $f$</h3>
+        <p>
+          Empecemos por definir $\tilde f$ y después veamos que cumple las condiciones que queremos.
+          Sea $x \in M$. Si $x \in E$, como queremos que $\tilde f|_E = f$, definimos $\tilde f(x) = f(x)$.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>Los puntos de $E$ ya tienen su valor: son los mismos puntos del gráfico de $f$, ahora pintados como parte de $\tilde f$. Queda el hueco en $x$.</div>
+      </article>
+
+      <article class="step" data-title="Sucesión">
+        <div class="kicker">Paso 2 · Definir $\tilde f$</div>
+        <h3>Si $x \notin E$, nos acercamos con puntos de $E$</h3>
+        <p>
+          Si $x \notin E$, como $\overline{E} = M$ (<span class="ref" tabindex="0" data-ref="denso">Definición 5.20</span>), sabemos que debe existir una sucesión
+          $(x_n)_{n \in \mathbb{N}} \subseteq E$ tal que $x_n \to x$ (<span class="ref" tabindex="0" data-ref="clausura">Proposición 4.46</span>).
+          Como $f$ es continua (porque es uniformemente continua), nos gustaría decir que $f(x_n) \to f(x)$, pero esto no tiene sentido porque $f(x)$ no está definido.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>Mové $n$. Los $x_n$ (racionales: truncamientos decimales de $x - 0{,}35/n$) se acercan a $x$ por la izquierda. Sus imágenes $f(x_n)$ se proyectan sobre el eje $N$.</div>
+      </article>
+
+      <article class="step" data-title="Cauchy">
+        <div class="kicker">Paso 3 · Definir $\tilde f$</div>
+        <h3>Las imágenes $f(x_n)$ forman una sucesión de Cauchy</h3>
+        <p>
+          Sin embargo, intentemos arreglar este argumento. Como $x_n \to x$, tenemos que $(x_n)_{n \in \mathbb{N}}$ es una sucesión
+          <span class="ref" tabindex="0" data-ref="cauchy">de Cauchy</span> en $M$ (<span class="ref" tabindex="0" data-ref="conv-cauchy">Teorema 4.54 b)</span>).
+          Como $f$ es uniformemente continua, por el <span class="ref" tabindex="0" data-ref="ej519">Ejercicio 5.19</span>, sabemos que
+          $(f(x_n))_{n \in \mathbb{N}} \subseteq N$ es una sucesión de Cauchy.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>La franja sobre el eje $N$ marca el rango de la cola $\{f(x_m) : m \geq n\}$. Al subir $n$ se angosta: los términos de la cola están cada vez más cerca entre sí. Eso es ser de Cauchy, y todavía no hablamos de ningún límite.</div>
+      </article>
+
+      <article class="step" data-title="Completo">
+        <div class="kicker">Paso 4 · Definir $\tilde f$</div>
+        <h3>$N$ es completo: aparece el límite $y$</h3>
+        <p>
+          Como $(N, d')$ es <span class="ref" tabindex="0" data-ref="completo">completo</span>, existe $y = \lim_{n \to \infty} f(x_n)$. Definimos $\tilde f(x) = y$.
+        </p>
+        <p>
+          Acá hay un montón de cosas para probar. Para definir $\tilde f(x)$ usamos una sucesión que converge a $x$ y a partir de eso encontramos el valor de $y$.
+          Si en vez de elegir la sucesión $(x_n)$ usamos otra sucesión $(z_n) \subseteq E$ tal que $z_n \to x$, ¿será cierto que $f(z_n) \to y$, el mismo $y$ que teníamos antes?
+          Esto es la <strong>buena definición</strong> de $\tilde f$: si esto no pasa, la función no está bien definida.
+          Segundo, tenemos que ver que $\tilde f$ es efectivamente uniformemente continua, y por último (esto en realidad ya lo hicimos) que $\tilde f|_E = f$.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>La franja de Cauchy se cierra sobre un punto $y$ de $N$. Ese punto existe porque $N = \mathbb{R}$ es completo; en $N = \mathbb{Q}$ podría faltar (ver «¿Qué pasa si falta una hipótesis?», más abajo). El hueco del gráfico se llena con $(x, y)$.</div>
+      </article>
+
+      <article class="step" data-title="Buena definición">
+        <div class="kicker">Paso 5 · Buena definición</div>
+        <h3>Otra sucesión da el mismo $y$</h3>
+        <p>
+          Sea $(z_n)_{n \in \mathbb{N}} \subseteq E$ otra sucesión tal que $z_n \to x$. Tenemos que ver que $f(z_n) \to y = \lim_{n \to \infty} f(x_n)$.
+          Para esto, observemos primero que $d(x_n, z_n) \to 0$: por <span class="ref" tabindex="0" data-ref="triangular">desigualdad triangular</span>,
+        </p>
+        $$ d(x_n, z_n) \leq \underbrace{d(x_n, x)}_{\to 0} + \underbrace{d(x, z_n)}_{\to 0} \to 0. $$
+        <p>Por la <span class="ref" tabindex="0" data-ref="p518">Proposición 5.18</span>, sabemos que $d'(f(x_n), f(z_n)) \to 0$. Pero esto nos dice que $f(z_n) \to y$:</p>
+        $$ d'(f(z_n), y) \leq \underbrace{d'(f(z_n), f(x_n))}_{\to 0} + \underbrace{d'(f(x_n), y)}_{\to 0} \to 0. $$
+        <div class="look"><strong>En el dibujo</strong>Ahora hay dos sucesiones: $x_n$ por la izquierda y $z_n$ (truncamientos de $x + 0{,}45/n$) por la derecha. Las tres distancias de abajo tienden a $0$ al subir $n$, y las dos sucesiones de imágenes terminan en el mismo $y$.</div>
+      </article>
+
+      <article class="step" data-title="Unif. continua">
+        <div class="kicker">Paso 6 · $\tilde f$ es uniformemente continua</div>
+        <h3>El argumento del $\varepsilon/3$</h3>
+        <p>
+          Sea $\varepsilon > 0$. Tenemos que ver que existe $\delta > 0$ tal que $\tilde f(B(x, \delta)) \subseteq B(\tilde f(x), \varepsilon)$ para todo $x \in M$
+          (<span class="ref" tabindex="0" data-ref="uc">Definición 5.14</span>).
+        </p>
+        <p>
+          Como $f$ es uniformemente continua, existe $\delta > 0$ tal que $f(B(x, \delta)) \subseteq B(f(x), \varepsilon/3)$ para todo $x \in E$.
+          Tomemos ahora $\delta/3$. Sean $x, y \in M$ tal que $d(x, y) < \delta/3$ y veamos que $d'(\tilde f(x), \tilde f(y)) < \varepsilon$.
+          Sean $(x_n), (y_n) \subseteq E$ tal que $x_n \to x$ e $y_n \to y$. Podemos elegir un $n_0$ tal que $d(x_n, x) < \delta/3$ y $d(y_n, y) < \delta/3$ para todo $n \geq n_0$. Entonces
+        </p>
+        $$ d(x_n, y_n) \leq d(x_n, x) + d(x, y) + d(y, y_n) < \delta, $$
+        <p>
+          y por continuidad uniforme de $f$, $d'(f(x_n), f(y_n)) < \varepsilon/3$ para todo $n \geq n_0$.
+          Por otro lado, por definición de $\tilde f$, $\tilde f(x_n) = f(x_n) \to \tilde f(x)$ y $\tilde f(y_n) = f(y_n) \to \tilde f(y)$, así que existe $n_1$ tal que
+          $d'(\tilde f(x_n), \tilde f(x)) < \varepsilon/3$ y $d'(\tilde f(y_n), \tilde f(y)) < \varepsilon/3$ para todo $n \geq n_1$.
+          Tomando un $n$ más grande que $n_0$ y $n_1$:
+        </p>
+        $$ d'(\tilde f(x), \tilde f(y)) \leq \underbrace{d'(\tilde f(x), \tilde f(x_n))}_{< \varepsilon/3} + \underbrace{d'(f(x_n), f(y_n))}_{< \varepsilon/3} + \underbrace{d'(\tilde f(y_n), \tilde f(y))}_{< \varepsilon/3} < \varepsilon. $$
+        <div class="look"><strong>En el dibujo</strong>En este ejemplo $f$ es Lipschitz de constante $1$, así que sirve $\delta = \varepsilon/3$. Las franjas sobre $M$ son $B(x, \delta/3)$ y $B(y, \delta/3)$; las de $N$ son $B(\tilde f(x), \varepsilon/3)$ y $B(\tilde f(y), \varepsilon/3)$. La regla de la derecha muestra los tres tramos de la desigualdad: cada uno se pinta de verde cuando es menor que $\varepsilon/3$. Mové $n$ por debajo y por encima de $n_0$ y $n_1$ y mirá qué tramo cambia de color.</div>
+      </article>
+
+      <article class="step" data-title="Extiende a f">
+        <div class="kicker">Paso 7 · $\tilde f|_E = f$</div>
+        <h3>$\tilde f$ extiende a $f$</h3>
+        <p>
+          Esto ya lo sabemos, por cómo definimos $\tilde f(x)$ cuando $x \in E$ (Paso 1). Juntando todo, $\tilde f : M \to N$ es uniformemente continua y coincide con $f$ en $E$.
+        </p>
+        <p>
+          Además, es la única extensión continua posible (<span class="ref" tabindex="0" data-ref="ej523">Ejercicio 5.23</span>): el valor en cada $x \notin E$ quedó obligado a ser el límite de las imágenes.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>La curva continua es $\tilde f$ en todo $M$. Los puntos de $E$ están sobre ella, y el punto $(x, y)$ también: es uno más de los infinitos valores que agregó la construcción.</div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-label="Hipótesis">
+    <h2>¿Qué pasa si falta una hipótesis?</h2>
+    <div class="hyps">
+      <div class="hyp">
+        <h3>$N$ no es completo</h3>
+        <canvas id="cv-q" role="img" aria-label="La identidad de Q en Q: falta el límite en N"></canvas>
+        <p>
+          $E = \mathbb{Q} \cap [0, 1]$, $N = \mathbb{Q}$ y $f(t) = t$. Es uniformemente continua, y $f(x_n) = x_n$ es de Cauchy en $\mathbb{Q}$,
+          pero su límite $1/\sqrt2$ no está en $N$. Falla el Paso 4: no hay $y \in N$ para asignarle a $x$.
+          Ninguna extensión continua $\mathbb{R} \cap [0,1] \to \mathbb{Q}$ es posible.
+        </p>
+      </div>
+      <div class="hyp">
+        <h3>$f$ es continua pero no uniformemente</h3>
+        <canvas id="cv-s" role="img" aria-label="Una función continua en los racionales que oscila cerca de x"></canvas>
+        <p>
+          $E = \mathbb{Q} \cap [0, 1]$, $N = \mathbb{R}$ y $f(t) = \tfrac12 + \tfrac25 \operatorname{sen}\!\big(\tfrac{1}{8(t - x)}\big)$.
+          Como $x = 1/\sqrt2 \notin E$, $f$ es continua en todo $E$, pero oscila cada vez más rápido cerca de $x$.
+          Falla el Paso 3: hay sucesiones $x_n \to x$ con $(f(x_n))$ que no es de Cauchy, y no hay valor razonable para $\tilde f(x)$.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <p class="note">Las referencias son a las notas de la materia transcriptas en <code>apuntes-typst/apuntes.typ</code>. En la demostración se corrigieron dos erratas de las notas: en el Paso 6 el objetivo es con $\tilde f$ (no con $f$), y las distancias en $N$ se escriben con $d'$.</p>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="denso">
+    <div class="pop-title">Definición 5.20 · Conjunto denso</div>
+    <p>Sea $(M, d)$ un espacio métrico y $E \subseteq M$. Decimos que $E$ es <em>denso</em> en $M$ si $\overline{E} = M$.</p>
+    <p>Por la Proposición 4.46, esto dice que todo $x \in M$ es límite de una sucesión de puntos de $E$.</p>
+  </div>
+  <div data-key="completo">
+    <div class="pop-title">Definición 4.55 · Espacio completo</div>
+    <p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <em>completo</em> si toda sucesión de Cauchy tiene límite en $M$.</p>
+    <p>Ejemplos: $\mathbb{R}$ y $\mathbb{R}^n$ son completos; $\mathbb{Q}$ y $(0, 1)$ no.</p>
+  </div>
+  <div data-key="uc">
+    <div class="pop-title">Definición 5.14 · Uniformemente continua</div>
+    <p>$f : (M, d) \to (N, d')$ es uniformemente continua si</p>
+    <p>$\forall \varepsilon > 0 \;\; \exists \delta > 0 \;\; \forall x, y \in M : d(x, y) < \delta \implies d'(f(x), f(y)) < \varepsilon.$</p>
+    <p>El mismo $\delta$ sirve para todos los puntos.</p>
+  </div>
+  <div data-key="clausura">
+    <div class="pop-title">Proposición 4.46 a) · Clausura vía sucesiones</div>
+    <p>Sean $E \subseteq M$ y $x \in M$. Entonces $x \in \overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \in \mathbb{N}} \subseteq E$ tal que $x_n \to x$.</p>
+  </div>
+  <div data-key="cauchy">
+    <div class="pop-title">Definición 4.51 · Sucesión de Cauchy</div>
+    <p>$(x_n)_{n \in \mathbb{N}} \subseteq M$ es <em>de Cauchy</em> si para todo $\varepsilon > 0$ existe $n_0 \in \mathbb{N}$ tal que $d(x_n, x_m) < \varepsilon$ para todo $n, m \geq n_0$.</p>
+  </div>
+  <div data-key="conv-cauchy">
+    <div class="pop-title">Teorema 4.54 b)</div>
+    <p>Si $(x_n)_{n \in \mathbb{N}}$ es convergente, entonces es de Cauchy.</p>
+  </div>
+  <div data-key="ej519">
+    <div class="pop-title">Ejercicio 5.19 · desafío de la Práctica 4</div>
+    <p>Sea $f : (M, d) \to (N, d')$ uniformemente continua. Entonces $(f(x_n))_{n \in \mathbb{N}} \subseteq N$ es de Cauchy para toda sucesión $(x_n)_{n \in \mathbb{N}} \subseteq M$ de Cauchy.</p>
+  </div>
+  <div data-key="triangular">
+    <div class="pop-title">Definición 4.1 (iv) · Desigualdad triangular</div>
+    <p>$d(x, z) \leq d(x, y) + d(y, z)$ para todo $x, y, z \in M$.</p>
+  </div>
+  <div data-key="p518">
+    <div class="pop-title">Proposición 5.18</div>
+    <p>$f : (M, d) \to (N, d')$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n), (y_n) \subseteq M$ con $d(x_n, y_n) \to 0$ se tiene $d'(f(x_n), f(y_n)) \to 0$.</p>
+  </div>
+  <div data-key="ej523">
+    <div class="pop-title">Ejercicio 5.23 · desafío de la Práctica 4</div>
+    <p>Probar que la extensión $\tilde f$ del Teorema 5.22 es única.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const X = 1 / Math.SQRT2;
+  const f = (t) => 0.5 + 0.25 * Math.sin(4 * t);
+  const L = 1; // constante de Lipschitz de f
+  const $ = (id) => document.getElementById(id);
+
+  // Racionales p/q en [0,1] con q <= Q, sin repetir.
+  function rationals(Q) {
+    const seen = new Set(), out = [];
+    for (let q = 1; q <= Q; q++) for (let p = 0; p <= q; p++) {
+      const v = p / q, k = v.toFixed(12);
+      if (!seen.has(k)) { seen.add(k); out.push(v); }
+    }
+    return out;
+  }
+  // Truncamiento decimal (racional) hacia abajo / arriba con precisión creciente.
+  const prec = (n) => Math.pow(10, Math.min(n + 2, 12));
+  const truncDown = (v, n) => Math.floor(v * prec(n)) / prec(n);
+  const truncUp = (v, n) => Math.ceil(v * prec(n)) / prec(n);
+  const xs = (n, c = X) => truncDown(c - 0.35 / n, n);
+  const zs = (n, c = X) => truncUp(c + 0.45 / n, n);
+
+  const steps = [...document.querySelectorAll(".step")];
+  let cur = 0;
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"),
+             seq2: g("--seq2"), ok: g("--ok"), fail: g("--fail"), panel: g("--panel"), mono: g("--font-mono") };
+  }
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+
+  // Marco: eje M abajo, eje N a la izquierda. Devuelve los mapeos.
+  function axes(ctx, w, h, C, { yr = [0.15, 0.85], padR = 14, labelN = "N" } = {}) {
+    const pad = { l: 44, r: padR, t: 14, b: 34 };
+    const Xp = (t) => pad.l + t * (w - pad.l - pad.r);
+    const Yp = (v) => h - pad.b - (v - yr[0]) / (yr[1] - yr[0]) * (h - pad.t - pad.b);
+    ctx.fillStyle = C.panel; ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted;
+    for (let t = 0; t <= 1.0001; t += 0.25) {
+      ctx.beginPath(); ctx.moveTo(Xp(t), pad.t); ctx.lineTo(Xp(t), h - pad.b); ctx.stroke();
+      ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(+t.toFixed(2) + "", Xp(t), h - pad.b + 6);
+    }
+    for (let v = Math.ceil(yr[0] * 10) / 10; v <= yr[1] + 1e-9; v += 0.1) {
+      ctx.beginPath(); ctx.moveTo(pad.l, Yp(v)); ctx.lineTo(w - pad.r, Yp(v)); ctx.stroke();
+      ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillText(v.toFixed(1), pad.l - 6, Yp(v));
+    }
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(pad.l, h - pad.b); ctx.lineTo(w - pad.r, h - pad.b); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, h - pad.b); ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.font = "italic 13px " + C.mono;
+    ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText("M", w - pad.r, h - pad.b - 3);
+    ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(labelN, pad.l + 5, pad.t);
+    return { Xp, Yp, pad };
+  }
+  const dot = (ctx, x, y, r, fill) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); };
+  const ring = (ctx, x, y, r, stroke) => { ctx.strokeStyle = stroke; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.stroke(); };
+  function label(ctx, C, text, x, y, align = "left", base = "bottom", color) {
+    ctx.font = "12px " + C.mono; ctx.fillStyle = color || C.ink; ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(text, x, y);
+  }
+  function dashed(ctx, x1, y1, x2, y2, color) {
+    ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = color; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function curve(ctx, A, g, color, width, a = 0, b = 1) {
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath();
+    for (let i = 0; i <= 400; i++) { const t = a + (b - a) * i / 400; const px = A.Xp(t), py = A.Yp(g(t)); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+    ctx.stroke();
+  }
+
+  function setLegend(items) {
+    $("legend").innerHTML = items.map(([c, t]) => `<span><i class="sw" style="background:var(${c})"></i>${t}</span>`).join("");
+  }
+  function setReadout(rows) {
+    $("readout").innerHTML = rows.map(([k, v, cls]) => `<dt>${k}</dt><dd class="${cls || ""}">${v}</dd>`).join("");
+  }
+  const fmt = (v, d = 4) => v.toFixed(d);
+
+  function draw() {
+    const C = colors(), { ctx, w, h } = setup($("cv"));
+    const Q = +$("s-q").value, n = +$("s-n").value, eps = +$("s-eps").value, off = +$("s-off").value;
+    $("o-q").textContent = "q ≤ " + Q; $("o-n").textContent = n; $("o-eps").textContent = eps.toFixed(2); $("o-off").textContent = off.toFixed(2);
+    const show = { q: cur <= 1 || cur === 7, n: cur >= 2 && cur <= 6, eps: cur === 6, off: cur === 6 };
+    for (const k of ["q", "n", "eps", "off"]) $("ctl-" + k).hidden = !show[k];
+
+    const A = axes(ctx, w, h, C, { padR: cur === 6 ? 96 : 14 });
+    const base = h - A.pad.b, left = A.pad.l;
+    const rats = rationals(cur <= 1 || cur === 7 ? Q : 14);
+
+    // Puntos de E sobre el gráfico (siempre, tenues desde el paso 2)
+    const faint = cur >= 2 && cur <= 6;
+    ctx.globalAlpha = faint ? 0.25 : 1;
+    for (const t of rats) {
+      dot(ctx, A.Xp(t), A.Yp(f(t)), cur === 0 ? 2.6 : 3, cur === 0 ? C.muted : C.accent);
+      dot(ctx, A.Xp(t), base, 1.6, C.muted);
+    }
+    ctx.globalAlpha = 1;
+
+    const xPx = A.Xp(X);
+    if (cur < 4) {
+      dashed(ctx, xPx, base, xPx, A.pad.t + 10, C.muted);
+      ring(ctx, xPx, A.Yp(f(X)), 5, C.ink);
+      label(ctx, C, "?", xPx + 8, A.Yp(f(X)) - 6);
+    }
+    ring(ctx, xPx, base, 4.5, C.ink);
+    label(ctx, C, "x", xPx, base - 7, "center");
+
+    if (cur === 0) {
+      setLegend([["--muted", "gráfico de f (sólo en E)"], ["--ink", "x = 1/√2 ∉ E"]]);
+      setReadout([["puntos de E dibujados", rats.length + ""], ["x", fmt(X, 6) + "…  (irracional)"]]);
+    }
+    if (cur === 1) {
+      setLegend([["--accent", "f̃ = f en E"], ["--ink", "x ∉ E: todavía sin valor"]]);
+      setReadout([["f̃(t)", "= f(t) para t ∈ E"], ["f̃(x)", "sin definir"]]);
+    }
+
+    if (cur >= 2 && cur <= 5) {
+      const N = n;
+      // x_1..x_n
+      for (let k = 1; k <= N; k++) {
+        const t = xs(k), a = 0.35 + 0.65 * k / N;
+        ctx.globalAlpha = a;
+        dot(ctx, A.Xp(t), base, 3.2, C.accent);
+        dot(ctx, A.Xp(t), A.Yp(f(t)), 3.2, C.accent);
+        dot(ctx, left, A.Yp(f(t)), 3.2, C.accent);
+        ctx.globalAlpha = 1;
+      }
+      const tn = xs(N);
+      dashed(ctx, A.Xp(tn), base, A.Xp(tn), A.Yp(f(tn)), C.accent);
+      dashed(ctx, A.Xp(tn), A.Yp(f(tn)), left, A.Yp(f(tn)), C.accent);
+      label(ctx, C, "x" + sub(N), A.Xp(tn), base + 20, "center", "bottom", C.accent);
+      label(ctx, C, "f(x" + sub(N) + ")", left + 6, A.Yp(f(tn)) - 4, "left", "bottom", C.accent);
+
+      if (cur === 3 || cur === 4) {
+        // rango de la cola {f(x_m): m >= n}
+        let lo = Infinity, hi = -Infinity;
+        for (let m = N; m <= N + 400; m++) { const v = f(xs(m)); lo = Math.min(lo, v); hi = Math.max(hi, v); }
+        lo = Math.min(lo, f(X)); hi = Math.max(hi, f(X));
+        ctx.fillStyle = C.band; ctx.fillRect(left, A.Yp(hi), w - A.pad.r - left, Math.max(2, A.Yp(lo) - A.Yp(hi)));
+        ctx.strokeStyle = C.accent; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(left, A.Yp(hi)); ctx.lineTo(left, A.Yp(lo)); ctx.stroke();
+        if (cur === 3) setReadout([["n", N + ""], ["x_n", fmt(tn, 6)], ["diámetro de la cola", fmt(hi - lo, 5)], ["d(x_n, x)", fmt(Math.abs(tn - X), 5)]]);
+      }
+      if (cur === 4) {
+        const y = f(X);
+        dot(ctx, left, A.Yp(y), 5, C.ink);
+        label(ctx, C, "y", left - 6, A.Yp(y), "right", "middle");
+        dashed(ctx, left, A.Yp(y), xPx, A.Yp(y), C.ink);
+        dot(ctx, xPx, A.Yp(y), 5.5, C.ink);
+        label(ctx, C, "(x, y)", xPx + 8, A.Yp(y) - 6);
+        setReadout([["n", N + ""], ["f(x_n)", fmt(f(tn), 6)], ["y = lim f(x_n)", fmt(y, 6)], ["d'(f(x_n), y)", fmt(Math.abs(f(tn) - y), 6)]]);
+      }
+      if (cur === 5) {
+        for (let k = 1; k <= N; k++) {
+          const t = zs(k), a = 0.35 + 0.65 * k / N;
+          ctx.globalAlpha = a;
+          dot(ctx, A.Xp(t), base, 3.2, C.seq2);
+          dot(ctx, A.Xp(t), A.Yp(f(t)), 3.2, C.seq2);
+          dot(ctx, left + 7, A.Yp(f(t)), 3.2, C.seq2);
+          ctx.globalAlpha = 1;
+        }
+        const zn = zs(N), y = f(X);
+        dashed(ctx, A.Xp(zn), base, A.Xp(zn), A.Yp(f(zn)), C.seq2);
+        dashed(ctx, A.Xp(zn), A.Yp(f(zn)), left + 7, A.Yp(f(zn)), C.seq2);
+        label(ctx, C, "z" + sub(N), A.Xp(zn), base + 20, "center", "bottom", C.seq2);
+        dot(ctx, left, A.Yp(y), 4.5, C.ink); label(ctx, C, "y", left - 6, A.Yp(y), "right", "middle");
+        dot(ctx, xPx, A.Yp(y), 5, C.ink);
+        setReadout([
+          ["n", N + ""],
+          ["d(x_n, z_n)", fmt(Math.abs(tn - zn), 5)],
+          ["d'(f(x_n), f(z_n))", fmt(Math.abs(f(tn) - f(zn)), 5)],
+          ["d'(f(z_n), y)", fmt(Math.abs(f(zn) - y), 5)],
+        ]);
+      }
+      if (cur === 2) setReadout([["n", N + ""], ["x_n", fmt(tn, 6)], ["d(x_n, x)", fmt(Math.abs(tn - X), 6)], ["f(x_n)", fmt(f(tn), 6)]]);
+      setLegend(cur === 5
+        ? [["--accent", "x_n → x por la izquierda"], ["--seq2", "z_n → x por la derecha"], ["--ink", "y = f̃(x)"]]
+        : cur >= 3 ? [["--accent", "x_n y f(x_n)"], ["--band", "cola {f(x_m) : m ≥ n}"]].concat(cur === 4 ? [["--ink", "y = lim f(x_n)"]] : [])
+        : [["--accent", "x_n ∈ E y sus imágenes f(x_n)"], ["--ink", "x ∉ E"]]);
+    }
+
+    if (cur === 6) drawUC(ctx, w, h, C, A, n, eps, off);
+
+    if (cur === 7) {
+      curve(ctx, A, f, C.ink, 1.8);
+      for (const t of rats) dot(ctx, A.Xp(t), A.Yp(f(t)), 3, C.accent);
+      dot(ctx, xPx, A.Yp(f(X)), 5.5, C.ink);
+      label(ctx, C, "(x, f̃(x))", xPx + 8, A.Yp(f(X)) - 6);
+      setLegend([["--ink", "f̃ en todo M"], ["--accent", "f en E (los mismos valores)"]]);
+      setReadout([["f̃|E", "= f"], ["f̃(x)", fmt(f(X), 6) + " = lim f(x_n)"], ["unif. continua", "sí (Paso 6)"]]);
+    }
+  }
+  const sub = (k) => String(k).split("").map((c) => "₀₁₂₃₄₅₆₇₈₉"[+c]).join("");
+
+  function drawUC(ctx, w, h, C, A, n, eps, off) {
+    const delta = eps / (3 * L), r = delta / 3;
+    const p = X, q = X + off * r;
+    const fp = f(p), fq = f(q);
+    const base = h - A.pad.b, left = A.pad.l;
+    const pn = (k) => truncDown(p - 0.3 / k, k), qn = (k) => truncUp(q + 0.3 / k, k);
+    let n0 = 1; while (!(Math.abs(pn(n0) - p) < r && Math.abs(qn(n0) - q) < r) && n0 < 999) n0++;
+    let n1 = 1; while (!(Math.abs(f(pn(n1)) - fp) < eps / 3 && Math.abs(f(qn(n1)) - fq) < eps / 3) && n1 < 999) n1++;
+
+    // franjas en M y en N
+    ctx.fillStyle = C.band;
+    ctx.fillRect(A.Xp(p - r), base - 10, A.Xp(p + r) - A.Xp(p - r), 10);
+    ctx.fillRect(A.Xp(q - r), base - 20, A.Xp(q + r) - A.Xp(q - r), 10);
+    ctx.fillRect(left, A.Yp(fp + eps / 3), w - A.pad.r - left, A.Yp(fp - eps / 3) - A.Yp(fp + eps / 3));
+    ctx.fillRect(left, A.Yp(fq + eps / 3), w - A.pad.r - left, A.Yp(fq - eps / 3) - A.Yp(fq + eps / 3));
+
+    curve(ctx, A, f, C.rule, 1.2);
+    const P = pn(n), Qn = qn(n);
+    for (const [t, col] of [[P, C.accent], [Qn, C.seq2]]) {
+      dot(ctx, A.Xp(t), base, 3.6, col); dot(ctx, A.Xp(t), A.Yp(f(t)), 3.6, col);
+      dashed(ctx, A.Xp(t), base, A.Xp(t), A.Yp(f(t)), col);
+    }
+    for (const [t, nm] of [[p, "x"], [q, "y"]]) {
+      ring(ctx, A.Xp(t), base, 4.5, C.ink); dot(ctx, A.Xp(t), A.Yp(f(t)), 4.5, C.ink);
+    }
+    label(ctx, C, "x", A.Xp(p) - 4, base + 20, "right"); label(ctx, C, "y", A.Xp(q) + 4, base + 20, "left");
+    label(ctx, C, "x" + sub(n), A.Xp(P), base - 24, "center", "bottom", C.accent);
+    label(ctx, C, "y" + sub(n), A.Xp(Qn), base - 24, "center", "bottom", C.seq2);
+
+    // regla de N a la derecha: f̃(x) — f(x_n) — f(y_n) — f̃(y)
+    const rx = w - A.pad.r + 30;
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(rx, A.pad.t); ctx.lineTo(rx, base); ctx.stroke();
+    label(ctx, C, "N", rx + 4, A.pad.t, "left", "top", C.muted);
+    const segs = [
+      [fp, f(P), Math.abs(fp - f(P)) < eps / 3, "1"],
+      [f(P), f(Qn), Math.abs(f(P) - f(Qn)) < eps / 3, "2"],
+      [f(Qn), fq, Math.abs(f(Qn) - fq) < eps / 3, "3"],
+    ];
+    segs.forEach(([a, b, good, k], i) => {
+      const x = rx + 10 + i * 14;
+      ctx.strokeStyle = good ? C.ok : C.fail; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(x, A.Yp(a)); ctx.lineTo(x, A.Yp(b)); ctx.stroke();
+      dashed(ctx, rx, A.Yp(a), x, A.Yp(a), C.muted); dashed(ctx, rx, A.Yp(b), x, A.Yp(b), C.muted);
+      label(ctx, C, k, x, Math.min(A.Yp(a), A.Yp(b)) - 4, "center", "bottom", good ? C.ok : C.fail);
+    });
+    dot(ctx, rx, A.Yp(fp), 4, C.ink); dot(ctx, rx, A.Yp(fq), 4, C.ink);
+    dot(ctx, rx, A.Yp(f(P)), 3.4, C.accent); dot(ctx, rx, A.Yp(f(Qn)), 3.4, C.seq2);
+
+    const total = Math.abs(fp - fq);
+    const cls = (ok) => (ok ? "good" : "bad");
+    setLegend([["--ink", "x, y y sus imágenes"], ["--accent", "x_n"], ["--seq2", "y_n"], ["--band", "B(·, δ/3) en M, B(·, ε/3) en N"]]);
+    setReadout([
+      ["δ = ε/3,  δ/3", fmt(delta, 3) + ",  " + fmt(r, 3)],
+      ["n₀,  n₁", n0 + ",  " + n1],
+      ["1 · d'(f̃(x), f(x_n))", fmt(Math.abs(fp - f(P))) + (segs[0][2] ? "  < ε/3" : "  ≥ ε/3"), cls(segs[0][2])],
+      ["2 · d'(f(x_n), f(y_n))", fmt(Math.abs(f(P) - f(Qn))) + (segs[1][2] ? "  < ε/3" : "  ≥ ε/3"), cls(segs[1][2])],
+      ["3 · d'(f(y_n), f̃(y))", fmt(Math.abs(f(Qn) - fq)) + (segs[2][2] ? "  < ε/3" : "  ≥ ε/3"), cls(segs[2][2])],
+      ["d'(f̃(x), f̃(y))", fmt(total) + "  < ε = " + eps.toFixed(2), "good"],
+    ]);
+  }
+
+  // ---------- hipótesis ----------
+  function drawHyps() {
+    const C = colors();
+    { // N = Q
+      const { ctx, w, h } = setup($("cv-q"));
+      const A = axes(ctx, w, h, C, { yr: [0, 1], labelN: "N = ℚ" });
+      const base = h - A.pad.b, left = A.pad.l;
+      for (const t of rationals(14)) { dot(ctx, A.Xp(t), A.Yp(t), 2.4, C.accent); dot(ctx, left, A.Yp(t), 1.8, C.muted); }
+      for (let k = 1; k <= 10; k++) { const t = xs(k); ctx.globalAlpha = 0.3 + 0.07 * k; dot(ctx, left, A.Yp(t), 3, C.accent); ctx.globalAlpha = 1; }
+      ring(ctx, left, A.Yp(X), 5.5, C.fail);
+      label(ctx, C, "1/√2 ∉ ℚ", left + 10, A.Yp(X), "left", "middle", C.fail);
+      ring(ctx, A.Xp(X), base, 4.5, C.ink); label(ctx, C, "x", A.Xp(X), base - 7, "center");
+    }
+    { // continua pero no UC
+      const { ctx, w, h } = setup($("cv-s"));
+      const A = axes(ctx, w, h, C, { yr: [0, 1] });
+      const g = (t) => 0.5 + 0.4 * Math.sin(1 / (8 * (t - X)));
+      const base = h - A.pad.b;
+      for (const t of rationals(70)) if (Math.abs(t - X) > 1e-9) dot(ctx, A.Xp(t), A.Yp(g(t)), 1.6, C.accent);
+      dashed(ctx, A.Xp(X), base, A.Xp(X), A.pad.t, C.fail);
+      ring(ctx, A.Xp(X), base, 4.5, C.ink); label(ctx, C, "x", A.Xp(X), base - 7, "center");
+      label(ctx, C, "¿f̃(x)?", A.Xp(X) + 6, A.pad.t + 4, "left", "top", C.fail);
+    }
+  }
+
+  // ---------- navegación ----------
+  const toc = $("toc");
+  steps.forEach((s, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = i === 0 ? "Dibujo" : i + " · " + s.dataset.title; b.id = "toc-" + i;
+    b.addEventListener("click", () => go(i));
+    li.appendChild(b); toc.appendChild(li);
+  });
+  function go(i) {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => (s.hidden = k !== cur));
+    toc.querySelectorAll("button").forEach((b, k) => (k === cur ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
+    $("prev").disabled = cur === 0; $("next").disabled = cur === steps.length - 1;
+    $("count").textContent = (cur === 0 ? "Preparación" : "Paso " + cur + " de " + (steps.length - 1));
+    if (cur === 6 && +$("s-n").value < 3) $("s-n").value = 3;
+    hidePopup();
+    draw();
+  }
+  $("prev").addEventListener("click", () => go(cur - 1));
+  $("next").addEventListener("click", () => go(cur + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("input")) return;
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft") go(cur - 1);
+    if (e.key === "Escape") hidePopup();
+  });
+  for (const id of ["s-q", "s-n", "s-eps", "s-off"]) $(id).addEventListener("input", draw);
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    let x = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let y = r.bottom + 8;
+    if (y + ph > window.innerHeight - 12) y = Math.max(12, r.top - ph - 8);
+    popup.style.left = x + "px"; popup.style.top = y + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  const redraw = () => { draw(); drawHyps(); };
+  new ResizeObserver(redraw).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+  new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", redraw);
+
+  go(0);
+  drawHyps();
+})();
+</script>
