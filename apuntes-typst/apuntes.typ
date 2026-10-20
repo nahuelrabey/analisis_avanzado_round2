@@ -1832,6 +1832,12 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
   Pensemos también en la función $f : (RR, abs(dot)) -> (RR, abs(dot))$, $f(x) = x^2$. Entonces tenemos que $f((-1, 1)) = [0, 1)$. El conjunto $(-1, 1)$ es abierto en $RR$ pero $[0, 1)$ no es abierto en $RR$.
 ]
 
+// Definición (no está en las notas; la usa la Clase 6 sin enunciarla):
+// f : (M, d) -> (N, d') es ABIERTA si f(U) es abierto en N para todo U ⊆ M abierto,
+// y CERRADA si f(F) es cerrado en N para todo F ⊆ M cerrado. Es una propiedad de la
+// función, no de su imagen. La Obs. 5.12 dice justamente que continua no implica abierta
+// ni cerrada. Ver `ejemplos/p4.typ`, Bloque 4 (C6-1: π₁ es abierta pero no cerrada).
+
 #teorema[Caracterización de continuidad por clausuras][5.13][
   Sea $f : (M, d) -> (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(overline(E)) subset.eq overline(f(E))$ para todo $E subset.eq M$.
 ]

@@ -149,6 +149,16 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Trabajar en $X times Y$ con $d_infinity ((x, y), (x', y')) = max{d_1 (x, x'), d_2 (y, y')}$: las proyecciones $pi_1, pi_2$ son continuas y abiertas (pero no cerradas), una función a valores en el producto es continua si y sólo si lo son sus dos coordenadas, y una sucesión converge en $X times Y$ si y sólo si converge coordenada a coordenada. Es lo que está detrás del *Ejercicio 1 (a)* (una función de dos variables se evalúa en sucesiones $(x_n, y_n)$ que convergen coordenada a coordenada), del *Ejercicio 4* (la función $x |-> (f(x), g(x))$ es continua a valores en $E' times E'$) y del *Ejercicio 5* (las coordenadas $x, y, z$ de $RR^n$ son proyecciones continuas, y con ellas se arman las funciones cuya preimagen es el conjunto).
 ]
 
+#definicion[Función abierta y función cerrada][
+  Sea $f : (M, d) -> (N, d')$ una función. Decimos que
+  - $f$ es *abierta* si para todo $U subset.eq M$ abierto, $f(U)$ es abierto en $N$;
+  - $f$ es *cerrada* si para todo $F subset.eq M$ cerrado, $f(F)$ es cerrado en $N$.
+
+  Es una propiedad de la función, no de su imagen: $f(M)$ es abierto en $f(M)$ siempre, lo que importa es que *cada* abierto del dominio vaya a parar a un abierto. Comparar con la continuidad (Teorema 5.9), que pide lo mismo pero con *preimágenes*. A diferencia de lo que pasa con preimágenes, pasando a complementos no se obtiene la equivalencia entre "abierta" y "cerrada", porque en general $f(M without A) != N without f(A)$; por eso son dos propiedades distintas, como muestra el ejemplo siguiente. Que una función continua no tiene por qué ser abierta ni cerrada es la Observación 5.12 ($x^2$ y $e^x$).
+
+  _Nota_: esta definición no figura en `notas_materia.pdf` ni en el manuscrito de la clase, que la usa sin enunciarla; la agregó el agente.
+]
+
 #ejemplo[Proyecciones de $X times Y$ y continuidad coordenada a coordenada (Clase 6 · Ejemplo 1)][C6-1][
   Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. Pensamos a $X times Y$ con $d_infinity$.
 
@@ -184,7 +194,50 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $
   pi_1 (B((x_0, y_0), r)) = {x in X : "existe " y in Y " con " d_1 (x, x_0) < r " y " d_2 (y, y_0) < r}.
   $
-  _(Dibujo: en $RR^2$, el disco de centro $(x_0, y_0)$ y radio $r$ y, sobre el eje $x$, su proyección: un intervalo de centro $x_0$ y del "mismo radio".)_
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let (x0, y0, r) = (3.0, 3.0, 1.3)
+      let azul = rgb("#1e3a8a")
+      let verde = rgb("#059669")
+
+      // Ejes.
+      line((-0.3, 0), (6.4, 0), mark: (end: ">"), stroke: 0.8pt)
+      line((0, -0.3), (0, 4.9), mark: (end: ">"), stroke: 0.8pt)
+      content((6.4, -0.1), anchor: "north", text(size: 9pt, $X$))
+      content((-0.1, 4.9), anchor: "east", text(size: 9pt, $Y$))
+
+      // Bola de d_infinity: el cuadrado (x0 - r, x0 + r) × (y0 - r, y0 + r).
+      rect(
+        (x0 - r, y0 - r), (x0 + r, y0 + r),
+        fill: azul.lighten(88%), stroke: (paint: azul, thickness: 1pt, dash: "dashed"),
+      )
+      content((x0 + r + 0.15, y0 + r), anchor: "north-west", text(size: 9pt, fill: azul, $B = B((x_0, y_0), r)$))
+      circle((x0, y0), radius: 0.05, fill: black, stroke: none)
+      content((x0, y0 + 0.12), anchor: "south", text(size: 9pt, $(x_0, y_0)$))
+      line((x0, y0), (x0 + r, y0), stroke: 0.5pt + azul)
+      content((x0 + r / 2, y0 - 0.08), anchor: "north", text(size: 9pt, $r$))
+
+      // Proyección sobre el eje x: el intervalo abierto (x0 - r, x0 + r).
+      for x in (x0 - r, x0 + r) {
+        line((x, y0 - r), (x, 0), stroke: (paint: gray, thickness: 0.4pt, dash: "dotted"))
+      }
+      line((x0 - r, 0), (x0 + r, 0), stroke: 2.2pt + verde)
+      for x in (x0 - r, x0 + r) {
+        circle((x, 0), radius: 0.07, fill: white, stroke: 0.9pt + verde)
+      }
+      line((x0, -0.1), (x0, 0.1), stroke: 0.8pt)
+      content((x0 - r, -0.15), anchor: "north", text(size: 9pt, $x_0 - r$))
+      content((x0, -0.15), anchor: "north", text(size: 9pt, $x_0$))
+      content((x0 + r, -0.15), anchor: "north", text(size: 9pt, $x_0 + r$))
+      content((x0, 0.2), anchor: "south", text(size: 9pt, fill: verde, $pi_1 (B) = B(x_0, r)$))
+      // Flecha de proyección.
+      line((x0 - r / 2, y0 - r - 0.1), (x0 - r / 2, 0.75), mark: (end: ">"), stroke: 0.6pt + verde)
+      content((x0 - r / 2 - 0.1, (y0 - r) / 2 + 0.35), anchor: "east", text(size: 9pt, fill: verde, $pi_1$))
+    })
+  ]]
+
+  _Nota_: el manuscrito dibuja un disco de centro $(x_0, y_0)$ y radio $r$ y, sobre el eje $x$, su proyección: un intervalo de centro $x_0$ y del "mismo radio". Con $d_infinity$ la bola de $RR^2$ es en realidad el cuadrado $(x_0 - r, x_0 + r) times (y_0 - r, y_0 + r)$, que es lo que se dibuja acá; el disco es la bola euclídea. Las dos tienen la misma proyección.
 
   Veamos que $B(x_0, r) subset.eq pi_1 (B((x_0, y_0), r))$. Dado $x in B(x_0, r)$, resulta que $d_1 (x, x_0) < r$. Sea $y in B(y_0, r)$, por ejemplo $y = y_0$. Tenemos que $(x, y_0) in B((x_0, y_0), r)$, pues
   $
