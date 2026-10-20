@@ -51,6 +51,9 @@ alimenta cada bloque.
     [4], [Puntos aislados en $(NN, abs(dot))$], [Ejemplo 5.5 c)],
     [5], [Continuidad vía preimágenes de cerrados], [Ej. 4, 5, 6],
     [6], [El espacio métrico $(M_2(RR), d_oo)$], [Ejemplo 5.11],
+    [7], [Continuidad uniforme y sucesiones de Cauchy], [Ej. 14],
+    [8], [Extensión de uniformemente continuas desde un denso], [Teo. 5.22, Ej. 7],
+    [9], [Funciones Lipschitz], [Ej. 12, 13],
   )
 ]
 
@@ -144,4 +147,54 @@ alimenta cada bloque.
   Sea
   $ G l_2(RR) = {A in M_2(RR) : A "es una matriz inversible"} subset.eq (M_2(RR), d_oo). $
   Probar que $G l_2(RR)$ es un conjunto abierto usando solo la definición: no es imposible, pero es mucho más difícil que usar el Teorema 5.9 con $G l_2(RR) = scripts(det)^(-1)(RR without {0})$.
+]
+
+== Bloque 7 · Continuidad uniforme y sucesiones de Cauchy
+
+#sublema(titulo: "Qué desbloquea")[
+  Ver que la continuidad uniforme preserva sucesiones de Cauchy (con la Definición 5.14 o la Proposición 5.18), y preguntarse si vale la recíproca. Es el *Ejercicio 14* de la Práctica 4.
+]
+
+#desafio[Uniformemente continua manda Cauchy en Cauchy (Ejercicio 5.19)][
+  Sea $f : (M, d) -> (N, d')$ una función uniformemente continua. Probar que $(f(x_n))_(n in NN) subset.eq N$ es una sucesión de Cauchy para toda sucesión $(x_n)_(n in NN) subset.eq M$ de Cauchy.
+
+  ¿Vale que si $(f(x_n))_(n in NN)$ es de Cauchy para toda $(x_n)_(n in NN)$ de Cauchy entonces $f$ es uniformemente continua?
+
+  _Sugerencia: pensar qué pasa en el caso en que $M$ y $N$ sean completos. Por ejemplo, podría ser $M = N = (RR, abs(dot))$._
+]
+
+== Bloque 8 · Extensión de uniformemente continuas desde un denso
+
+#sublema(titulo: "Qué desbloquea")[
+  Leer con cuidado el cierre de la demostración del *Teorema 5.22* (extensión de $f : E -> N$ uniformemente continua a $tilde(f) : M -> N$, con $E$ denso y $N$ completo): qué desigualdad sale de cada elección de índice. Usa el Bloque 7 (Ejercicio 5.19) y la Proposición 5.18.
+]
+
+#desafio[¿Dónde se usa que $n >= n_0$ y $n >= n_1$? (Teorema 5.22)][
+  En la demostración de que $tilde(f)$ es uniformemente continua, para cerrar el argumento se toma un $n$ que sea, a la vez, más grande que $n_0$ y $n_1$, y se obtiene
+  $
+    d'(tilde(f)(x), tilde(f)(y)) <= & underbrace(d'(tilde(f)(x), tilde(f)(x_n)), < epsilon \/ 3) + underbrace(d'(f(x_n), f(y_n)), < epsilon \/ 3) \
+                                    & + underbrace(d'(tilde(f)(y_n), tilde(f)(y)), < epsilon \/ 3) < epsilon.
+  $
+  Pensá dónde usamos que $n$ es más grande que $n_0$ y $n_1$.
+]
+
+#desafio[Unicidad de la extensión (Ejercicio 5.23)][
+  Probar que la extensión $tilde(f)$ del teorema anterior (Teorema 5.22) es única.
+]
+
+== Bloque 9 · Funciones Lipschitz
+
+#sublema(titulo: "Qué desbloquea")[
+  Ver que ser Lipschitz (Definición 5.24) es una forma cómoda de probar continuidad uniforme: alcanza con dar la constante $C$. Es lo que pide el *Ejercicio 12* de la Práctica 4 ("pruebe que son Lipschitz; deduzca que son uniformemente continuas").
+]
+
+#desafio[Lipschitz implica uniformemente continua (Ejercicio 5.25)][
+  Sea $f : M -> N$ una función Lipschitz de constante $C$. Probar que $f$ es uniformemente continua.
+]
+
+#desafio[$sqrt(x)$ es uniformemente continua en $[0, +infinity)$ (Ejercicio 5.27)][
+  En el ejemplo anterior (Ejemplo 5.26 b)) vimos que $sqrt(x)$ no es Lipschitz si la pensamos como función en $[0, +infinity)$. Probar que $sqrt(x)$ es uniformemente continua en $[0, +infinity)$.
+
+  _Sugerencia: Usar que_
+  $ abs(sqrt(x) - sqrt(y))^2 <= abs(sqrt(x) - sqrt(y)) dot abs(sqrt(x) + sqrt(y)). $
 ]

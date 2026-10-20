@@ -1856,3 +1856,105 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
     $ overline(f^(-1)(F)) = overline(E) subset.eq f^(-1)(f(overline(E))) subset.eq f^(-1)(F), $
     donde la primera inclusión es el Ejercicio 5.3 a) (desafío de la Práctica 4) aplicado al conjunto $overline(E)$. Esto nos dice que $overline(f^(-1)(F)) subset.eq f^(-1)(F)$. Como la otra contención vale siempre ($E subset.eq overline(E)$, Observación 4.23), nos sale que $overline(f^(-1)(F)) = f^(-1)(F)$ y esto nos dice que $f^(-1)(F)$ es cerrado.
 ]
+
+#definicion[Función Uniformemente Continua][5.14][
+  Sea $f : (M, d) -> (N, d')$ una función. $f$ se dice _uniformemente continua_ si para todo $epsilon > 0$ existe $delta > 0$ tal que si $d(x, y) < delta$ entonces $d'(f(x), f(y)) < epsilon$. Equivalentemente, podríamos pedir que para todo $epsilon > 0$ existe $delta > 0$ tal que
+  $ f(B(x, delta)) subset.eq B(f(x), epsilon). $
+
+  _Nota_: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer *para todo $x in M$* con el mismo $delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.
+]
+
+#observacion[Continuidad vs. continuidad uniforme][5.15][
+  La definiciones de función continua y función uniformemente continua nos pueden parecer iguales a simple vista. Sin embargo, hay una diferencia importante entre ellas: en la definición de continuidad hablamos de continuidad en un punto en específico. Es decir, que cuando decimos que para todo $epsilon > 0$ existe $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), epsilon)$ en la definición de continuidad, estamos permitiendo que el $delta$ dependa del punto $x$ en el cual estamos mirando la continuidad. En la definición de continuidad uniforme, estamos diciendo que dado $epsilon > 0$ existe $delta > 0$ tal que *para todo* $x in M$, $f(B(x, delta)) subset.eq B(f(x), epsilon)$. Claramente, una función uniformemente continua siempre va a ser continua, pero la recíproca no va a ser cierta.
+]
+
+#observacion[Negación de la continuidad uniforme][5.16][
+  Pensemos qué significa negar que una función sea uniformemente continua. Por definición, una función *no* es uniformemente continua si existe un $epsilon > 0$ tal que para todo $delta > 0$, $f(B(x, delta)) subset.eq.not B(x, delta)$ para algún $x in M$ (acá el $x$ podría depender de $delta$).
+
+  Equivalentemente, podríamos decir que: existe $epsilon > 0$ tal que para todo $delta > 0$ existen $x, y$ tal que $d(x, y) < delta$ pero $d'(f(x), f(y)) >= epsilon$.
+
+  _Nota_: la bola de la derecha está mal escrita en las notas: negando la Definición 5.14 debería ser $f(B(x, delta)) subset.eq.not B(f(x), epsilon)$, que es lo que dice la versión equivalente con $x, y$.
+]
+
+#proposicion[Caracterización de continuidad uniforme por sucesiones][5.18][
+  Sea $f : (M, d) -> (N, d')$ una función. Entonces $f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n)_(n in NN), (y_n)_(n in NN) subset.eq M$ tal que $d(x_n, y_n) -> 0$ entonces $d'(f(x_n), f(y_n)) -> 0$.
+]
+#demostracion[
+  / $(==>)$: Supongamos que $f$ es uniformemente continua y tomemos $(x_n)_(n in NN)$ y $(y_n)_(n in NN)$ dos sucesiones en $M$ tal que $d(x_n, y_n) -> 0$. Para ver que $d'(f(x_n), f(y_n)) -> 0$, tomemos $epsilon > 0$ arbitrario. Como $f$ es uniformemente continua, sabemos que existe $delta > 0$ tal que
+    $ f(B(x, delta)) subset.eq B(f(x), epsilon), quad "para todo " x in M. $
+    Como $d(x_n, y_n) -> 0$, sabemos que existe un $n_0 in NN$ tal que si $n >= n_0$, $d(x_n, y_n) < delta$ para todo $n >= n_0$. Pero esto es lo mismo que decir que, para cada $n >= n_0$, tenemos que $y_n in B(x_n, delta)$. Por lo que vimos antes, sabemos que $f(y_n) in f(B(x_n, delta)) subset.eq B(f(x_n), epsilon)$, lo que nos dice que
+    $ d'(f(x_n), f(y_n)) < epsilon, quad "para todo " n >= n_0. $
+    Esto nos dice que $d'(f(x_n), f(y_n)) -> 0$ como queríamos ver.
+
+  / $(<==)$: Veamos que $f$ es uniformemente continua por el absurdo. Supongamos que no lo es, y construyamos sucesiones $(x_n), (y_n)$ que contradigan nuestra hipótesis. Como estamos suponiendo que $f$ no es uniformemente continua, sabemos que existe $epsilon > 0$ tal que para todo $delta > 0$ existen $x, y in M$ tal que $d(x, y) < delta$ pero $d'(f(x), f(y)) >= epsilon$ (Observación 5.16).
+
+    Tomemos $delta = 1 / n$ y sean $x_n, y_n in M$ tal que $d(x_n, y_n) < 1 / n$ pero $d'(f(x_n), f(y_n)) >= epsilon$.
+
+    Como $d(x_n, y_n) < 1 / n$, tenemos que $d(x_n, y_n) -> 0$ y $d'(f(x_n), f(y_n)) >= epsilon$ para todo $n in NN$ y por lo tanto $d'(f(x_n), f(y_n)) arrow.not 0$. Esto es absurdo.
+
+  _Nota_: en las notas la inclusión de la ida aparece como $f(B(x, delta)) subset.eq B(x, epsilon)$; la bola de llegada está centrada en $f(x)$ (Definición 5.14), como se usa dos líneas más abajo.
+]
+
+#definicion[Conjunto Denso][5.20][
+  Sea $(M, d)$ un espacio métrico, y $E subset.eq M$ un subconjunto. Decimos que $E$ es _denso_ en $M$ si $overline(E) = M$.
+]
+
+#teorema[Extensión de funciones uniformemente continuas desde un denso][5.22][
+  Sea $(M, d)$, $(N, d')$ dos espacios métricos, $E subset.eq M$ un conjunto denso, $(N, d')$ completo y sea $f : E -> N$ una función uniformemente continua. Entonces existe una función $tilde(f) : M -> N$ uniformemente continua tal que $tilde(f)|_E = f$ (es decir, $tilde(f)(x) = f(x)$ para todo $x in E$).
+]
+#demostracion[
+  Empecemos por definir $tilde(f)$ y después veamos que cumple las condiciones que queremos.
+
+  Sea $x in M$. Si $x in E$, como queremos que $tilde(f)|_E = f$, definimos $tilde(f)(x) = f(x)$. Si $x in.not E$, como $overline(E) = M$, sabemos que debe existir una sucesión $(x_n)_(n in NN) subset.eq E$ tal que $x_n -> x$. Como $f$ es continua (porque es uniformemente continua), nos gustaría decir que $f(x_n) -> f(x)$, pero esto no tiene sentido porque $f(x)$ no está definido.
+
+  Sin embargo, intentemos "arreglar" este argumento. Como $x_n -> x$, tenemos que $(x_n)_(n in NN)$ es una sucesión de Cauchy en $M$. Como $f$ es uniformemente continua, por el Ejercicio 5.19, sabemos que $(f(x_n))_(n in NN) subset.eq N$ es una sucesión de Cauchy, y como $(N, d')$ es completo, existe $y = lim_(n -> infinity) f(x_n)$. Definimos $tilde(f)(x) = y$.
+
+  Acá hay un montón de cosas para probar: primero que nada, notemos que para definir $tilde(f)(x)$ usamos una sucesión que converge a $x$ y a partir de eso encontramos el valor de $y$. Esto nos podría llegar a traer problemas: si en vez de elegir la sucesión $(x_n)$, usamos otra sucesión $(z_n) subset.eq E$ tal que $z_n -> x$, ¿será cierto que $f(z_n) -> y$ (el mismo $y$ que teníamos antes)? Esto es la *buena definición* de $tilde(f)$: si esto no pasa, la función no está bien definida. Segundo, tenemos que ver que $tilde(f)$ es efectivamente uniformemente continua y por último (esto en realidad ya lo hicimos) tenemos que ver que $tilde(f)|_E = f$.
+
+  - $tilde(f)$ está bien definida: sea $(z_n)_(n in NN) subset.eq E$ otra sucesión tal que $z_n -> x$. Tenemos que ver que $f(z_n) -> y = lim_(n -> infinity) f(x_n)$. Para esto, observemos primero que $d(x_n, z_n) -> 0$: por desigualdad triangular,
+    $ d(x_n, z_n) <= underbrace(d(x_n, x), -> 0) + underbrace(d(x, z_n), -> 0) -> 0. $
+    Por la Proposición 5.18, sabemos que $d'(f(x_n), f(z_n)) -> 0$. Pero esto nos dice que $f(z_n) -> y$:
+    $ d'(f(z_n), y) <= underbrace(d'(f(z_n), f(x_n)), -> 0) + underbrace(d'(f(x_n), y), -> 0) -> 0. $
+
+  - $tilde(f)$ es uniformemente continua: sea $epsilon > 0$. Tenemos que ver que existe $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), epsilon)$ para todo $x in M$.
+
+    Como $f$ es uniformemente continua, sabemos que existe $delta > 0$ tal que $f(B(x, delta)) subset.eq B(f(x), epsilon \/ 3)$ para todo $x in E$. Tomemos ahora $delta \/ 3$ y veamos que funciona para lo que queríamos. Sean $x, y in M$ tal que $d(x, y) < delta \/ 3$ y veamos que $d'(tilde(f)(x), tilde(f)(y)) < epsilon$. Sean $(x_n)_(n in NN) subset.eq E$ y $(y_n)_(n in NN) subset.eq E$ tal que $x_n -> x$ e $y_n -> y$. Por convergencia, sabemos que a partir de cierto momento toda la sucesión $x_n$ está cerca de $x$ y toda la sucesión $y_n$ está cerca de $y$. Es decir, podemos elegir un $n_0$ tal que $d(x_n, x) < delta \/ 3$ y $d(y_n, y) < delta \/ 3$ para todo $n >= n_0$. Entonces tenemos que
+    $ d(x_n, y_n) <= d(x_n, x) + d(x, y) + d(y, y_n) < delta, $
+    y por continuidad uniforme de $f$ esto nos dice que $d'(f(x_n), f(y_n)) < epsilon \/ 3$ para todo $n >= n_0$.
+
+    Por otro lado, como $x_n -> x$, $y_n -> y$ por definición de $tilde(f)$ sabemos que $tilde(f)(x_n) = f(x_n) -> tilde(f)(x)$ y $tilde(f)(y_n) = f(y_n) -> tilde(f)(y)$. En particular, tiene que existir algún $n_1$ tal que
+    $ d'(tilde(f)(x_n), tilde(f)(x)) < epsilon \/ 3 quad "y" quad d'(tilde(f)(y_n), tilde(f)(y)) < epsilon \/ 3 $
+    para todo $n >= n_1$.
+
+    Para cerrar nuestro argumento, tomemos ahora un $n$ que sea, a la vez, más grande que $n_0$ y $n_1$ (existen infinitos $n$ que cumplan esto). Entonces tenemos:
+    $
+      d'(tilde(f)(x), tilde(f)(y)) <= & underbrace(d'(tilde(f)(x), tilde(f)(x_n)), < epsilon \/ 3) + underbrace(d'(f(x_n), f(y_n)), < epsilon \/ 3) \
+                                      & + underbrace(d'(tilde(f)(y_n), tilde(f)(y)), < epsilon \/ 3) < epsilon,
+    $
+    como queríamos ver.
+
+    Como ejercicio, pensá dónde usamos que $n$ es más grande que $n_0$ y $n_1$.
+
+  - $tilde(f)|_E = f$: esto ya lo sabemos, por como definimos $tilde(f)(x)$ cuando $x in E$.
+
+  _Nota_: en el segundo ítem, lo que hay que ver es $tilde(f)(B(x, delta)) subset.eq B(tilde(f)(x), epsilon)$ para todo $x in M$; las notas escriben $f$ en lugar de $tilde(f)$. Además, en las notas varias distancias entre puntos de $N$ aparecen como $d$; acá se escribieron todas con $d'$, la métrica de $N$.
+]
+
+#definicion[Función Lipschitz][5.24][
+  Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M -> N$ una función. Decimos que $f$ es _Lipschitz de constante $C$_ si
+  $ d'(f(x), f(y)) <= C d(x, y), quad "para todo " x, y in M. $
+]
+
+#observacion[Derivada acotada implica Lipschitz][
+  Las funciones Lipschitz nos dan una buena cantidad de ejemplos de funciones uniformemente continuas (Ejercicio 5.25: toda función Lipschitz es uniformemente continua, desafío de la Práctica 4). Por ejemplo, supongamos que tenemos una función $f : (RR, abs(dot)) -> (RR, abs(dot))$ derivable. Por el teorema del valor medio (de Lagrange), sabemos que vale
+  $ abs(f(x) - f(y)) = abs(f'(z)(x - y)) $
+  con $z$ un punto intermedio entre $x$ e $y$. Esto nos dice que si $f$ tiene derivada acotada entonces $f$ es Lipschitz de constante $C = max_(z in RR) abs(f'(z))$.
+
+  _Nota_: que $f'$ sea acotada no garantiza que el máximo se alcance; en general la constante es $C = sup_(z in RR) abs(f'(z))$, y con eso $abs(f(x) - f(y)) = abs(f'(z)) abs(x - y) <= C abs(x - y)$.
+]
+
+#observacion[Lipschitz, uniformemente continua y continua][5.28][
+  Resumiendo lo que vimos hasta ahora, tenemos las siguientes implicaciones
+  $ "Lipschitz" ==> "uniformemente continua" ==> "continua", $
+  y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = sqrt(x)$ es uniformemente continua pero no Lipschitz).
+]

@@ -57,6 +57,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [4], [Continuidad en productos y proyecciones], [p4: Ej. 1 (a), 4, 5],
   [5], [Funciones Lipschitz], [p4: Ej. 9, 12],
   [6], [Continuidad uniforme: ejemplos, contraejemplos y pegado], [p4: Ej. 13, 14, 15, 16],
+  [7], [Conjuntos densos], [p4: Ej. 7, 8],
 )
 
 #v(8pt)
@@ -388,6 +389,40 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   _Nota_: en 4), en particular vemos que es uniformemente continua.
 ]
 
+#ejemplo[$cos(x)$, $sqrt(x)$ en $[1, +infinity)$ y la integral en $(C([0, 1]), d_infinity)$ son Lipschitz; $sqrt(x)$ en $[0, +infinity)$ no (Ejemplo 5.26)][39][
+  #set enum(numbering: "a)")
+  + Sea $f : (RR, abs(dot)) -> (RR, abs(dot))$, $f(x) = cos(x)$.
+  + Sea $f : ([1, +infinity), abs(dot)) -> (RR, abs(dot))$, $f(x) = sqrt(x)$.
+  + Sea $F : (C([0, 1]), d_infinity) -> (C([0, 1]), d_infinity)$ la función definida como
+    $ F(f)(x) = integral_0^x f(t) dif t. $
+]
+
+#resolucion[
+  *a)* Como $f$ es derivable, sabemos que para todo $x, y in RR$ existe un $z$ entre $x$ e $y$ tal que
+  $ abs(cos(x) - cos(y)) = abs(sin(z)) dot abs(x - y) <= 1 dot abs(x - y), $
+  lo que nos dice que $f$ es Lipschitz de constante $1$.
+
+  *b)* Otra vez, como $f$ es derivable, sabemos que para todo $x, y in [1, +infinity)$ existe un $z$ entre $x$ e $y$ tal que
+  $ abs(sqrt(x) - sqrt(y)) = 1 / (2 sqrt(z)) abs(x - y) <= 1 / 2 abs(x - y), $
+  dado que $z >= 1$. Esto nos dice que $f$ es Lipschitz de constante $1 \/ 2$.
+
+  Sin embargo, también usando el teorema del valor medio, podemos ver que $f$ no va a ser Lipschitz si la pensamos como función $f : [0, +infinity) -> RR$. Para ver esto, supongamos que sí lo es. Sea $C > 0$ la constante de Lipschitz de la función y sea $x in (0, +infinity)$ tal que $1 / (2 sqrt(x)) > C$. Como $x > 0$, podemos encontrar $y$ tal que $0 < y < x$. Como estamos suponiendo que $f$ es Lipschitz de constante $C$, tenemos que
+  $ abs(sqrt(x) - sqrt(y)) <= C abs(x - y). $
+  Por otro lado, por el teorema del valor medio, existe $y < z < x$ tal que
+  $ abs(sqrt(x) - sqrt(y)) = 1 / (2 sqrt(z)) abs(x - y) >= 1 / (2 sqrt(x)) abs(x - y) > C abs(x - y), $
+  lo cual es absurdo.
+
+  *c)* Veamos que $F$ es Lipschitz:
+  $
+    abs(F(f)(x) - F(g)(x)) & = abs(integral_0^x f(t) dif t - integral_0^x g(t) dif t) = abs(integral_0^x f(t) - g(t) dif t) \
+                           & <= integral_0^x abs(f(t) - g(t)) dif t <= integral_0^x d_infinity (f, g) dif t \
+                           & = x d_infinity (f, g) <= d_infinity (f, g).
+  $
+  Como esto vale para todo $0 <= x <= 1$, tenemos que
+  $ d_infinity (F(f), F(g)) <= d_infinity (f, g), $
+  lo que nos dice que $F$ es Lipschitz de constante $1$.
+]
+
 == Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y pegado
 
 #sublema(titulo: "Qué desbloquea")[
@@ -508,4 +543,47 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Tomando $epsilon' < epsilon$ concluimos. #align(right)[$square$]
 
   _Nota_: el "ejercicio 11 c)" citado es el Ejercicio 11 (c) de la Práctica 3 ($hat(d)(A, B) = 0 <=> overline(A) inter overline(B) != emptyset$); la implicación que se usa, $overline(A) inter overline(B) != emptyset ==> d(A, B) = 0$, es la dirección verdadera de ese ítem. Además, la observación $overline(A) inter overline(B) = emptyset$ no se vuelve a usar en la prueba: lo que hace falta es sólo la desigualdad $d(A, B) <= d(x, y)$ para $x in A$, $y in B$, que sale de la definición de ínfimo.
+]
+
+#ejemplo[$x^2$ no es uniformemente continua en $RR$; toda función desde un discreto lo es (Ejemplo 5.17)][37][
+  #set enum(numbering: "a)")
+  + Sea $f : (RR, abs(dot)) -> (RR, abs(dot))$ la función $f(x) = x^2$. Sabemos que $f$ es continua en todo $RR$. Veamos que $f$ no es uniformemente continua.
+  + Sea $f : (M, d) -> (N, d')$ con $d$ la métrica discreta y $(N, d')$ cualquiera. Veamos que $f$ es uniformemente continua.
+]
+
+#resolucion[
+  *a)* Para ver que $f$ no es uniformemente continua, deberíamos ver que existe $epsilon > 0$ tal que para todo $delta > 0$ existen $x, y$ tal que $abs(x - y) < delta$ pero $abs(f(x) - f(y)) >= epsilon$ (Observación 5.16).
+
+  Esto se puede lograr de muchas formas distintas. Una de ellas es la siguiente: tomemos $epsilon = 1$. Dado $delta > 0$, si $x$ es cualquiera en $RR$ y si $y = x + delta \/ 2$, entonces tenemos que $abs(x - y) = delta \/ 2 < delta$. Veamos que pasa con $abs(f(x) - f(y))$:
+  $
+    abs(f(x) - f(y)) & = abs(x^2 - (x + delta \/ 2)^2) = abs(x^2 - (x^2 + delta x + delta^2 / 4)) \
+                     & = abs(delta x + delta^2 / 4) = delta abs(x + delta / 4).
+  $
+  Si elegimos $x > 1 \/ delta$ (en particular, $x > 0$), nos sale que
+  $ abs(f(x) - f(y)) = delta abs(x + delta / 4) >= delta x > 1 = epsilon, $
+  lo que nos dice que la función $f$ *no* es uniformemente continua.
+
+  *b)* Dado $epsilon > 0$, tomemos $delta = 1 \/ 2$. Entonces tenemos que para todo $x in M$, $B(x, 1 \/ 2) = {x}$ y por lo tanto
+  $ f(B(x, 1 \/ 2)) = f({x}) = {f(x)} subset.eq B(f(x), epsilon). $
+  Como la elección de $delta$ no depende del punto $x$, vemos que cualquier función $f$ es uniformemente continua.
+]
+
+== Bloque 7 · Conjuntos densos
+
+#sublema(titulo: "Qué desbloquea")[
+  Probar que un conjunto es denso (Definición 5.20) mostrando que todo punto del espacio es límite de una sucesión del conjunto (Proposición 4.46). Es el vocabulario de los *Ejercicios 7 y 8* de la Práctica 4 (dos continuas que coinciden en un denso son iguales; la imagen continua y suryectiva de un denso es densa).
+]
+
+#ejemplo[$QQ$ y $II = RR without QQ$ son densos en $RR$ (Ejemplo 5.21)][38][
+  #set enum(numbering: "a)")
+  + $QQ subset.eq (RR, abs(dot))$ es un conjunto denso.
+  + $II = RR without QQ subset.eq (RR, abs(dot))$ el conjunto de los números irracionales también es denso.
+]
+
+#resolucion[
+  *a)* Si $x in RR$, sabemos que existe una sucesión de racionales $(q_n) subset.eq QQ$ tal que $q_n -> x$. Esto nos dice que $x in overline(QQ)$.
+
+  *b)* Dado $x in RR$, consideremos $y = x + 1 / n$. Como $x < y$, sabemos que debe existir un número irracional $z_n$ tal que $x < z_n < x + 1 / n$ (por el ejercicio 2 de la guía 1). Esto nos dice que
+  $ abs(x - z_n) < 1 / n -> 0 quad "cuando " n -> infinity, $
+  lo cual nos dice que $(z_n) subset.eq II$ es una sucesión tal que $z_n -> x$. Por lo tanto, $x in overline(II)$.
 ]
