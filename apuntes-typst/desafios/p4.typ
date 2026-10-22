@@ -26,9 +26,11 @@
 #line(length: 100%, stroke: 0.7pt)
 #v(8pt)
 
-Los desafíos están agrupados por *dependencia*, no por orden de transcripción: cada bloque
-supone resueltos los de arriba. La última columna dice a qué ejercicios de `guias/p4.typ`
-alimenta cada bloque.
+Los desafíos están ordenados según *qué hay que hacer primero para desbloquear la guía*: cada bloque
+supone resueltos los de arriba, y van en el orden de los ejercicios de `guias/p4.typ` que desbloquean.
+La idea es intercalar: hacer cada bloque justo antes de los ejercicios de su última columna. Los
+bloques 7 a 9 no alimentan ningún ejercicio de la guía (son teoría y ejemplos de las notas), así
+que van al final.
 
 #v(5pt)
 
@@ -43,17 +45,17 @@ alimenta cada bloque.
     stroke: 0.4pt + rgb("#cbd5e1"),
     inset: (x: 6pt, y: 5pt),
 
-    [*Bloque*], [*Tema*], [*Alimenta*],
+    [*Bloque*], [*Tema*], [*Hacelo antes de*],
 
-    [1], [Imagen y preimagen de conjuntos], [conceptual],
-    [2], [Continuidad: versión $epsilon$--$delta$ y versión con bolas], [Teo. 5.7, Ej. 1],
-    [3], [Continuidad y cambio de métrica], [Ej. 1],
-    [4], [Puntos aislados en $(NN, abs(dot))$], [Ejemplo 5.5 c)],
-    [5], [Continuidad vía preimágenes de cerrados], [Ej. 4, 5, 6],
-    [6], [El espacio métrico $(M_2(RR), d_oo)$], [Ejemplo 5.11],
-    [7], [Continuidad uniforme y sucesiones de Cauchy], [Ej. 14],
-    [8], [Extensión de uniformemente continuas desde un denso], [Teo. 5.22, Ej. 7],
-    [9], [Funciones Lipschitz], [Ej. 12, 13],
+    [1], [Imagen y preimagen de conjuntos], [Ej. 1 (base)],
+    [2], [Continuidad: versión $epsilon$--$delta$ y versión con bolas], [Ej. 1 (y Teo. 5.7)],
+    [3], [Continuidad y cambio de métrica], [Ej. 1, 5],
+    [4], [Continuidad vía preimágenes de cerrados], [Ej. 4, 5, 6],
+    [5], [Funciones Lipschitz], [Ej. 12, 15 (b)],
+    [6], [Continuidad uniforme y sucesiones de Cauchy], [Ej. 14 (mismo enunciado)],
+    [7], [Extensión de uniformemente continuas desde un denso], [--- (Teo. 5.22; requiere Ej. 7 (a))],
+    [8], [Puntos aislados en $(NN, abs(dot))$], [--- (Ejemplo 5.5 c))],
+    [9], [El espacio métrico $(M_2(RR), d_oo)$], [--- (Ejemplo 5.11)],
   )
 ]
 
@@ -96,24 +98,14 @@ alimenta cada bloque.
 == Bloque 3 · Continuidad y cambio de métrica
 
 #sublema(titulo: "Qué desbloquea")[
-  Ver que la continuidad (Definición 5.4) no cambia al reemplazar una métrica por otra equivalente. Alimenta el *Ejercicio 1* de la Práctica 4, donde se decide continuidad en $RR^n$ con distintas métricas.
+  Ver que la continuidad (Definición 5.4) no cambia al reemplazar una métrica por otra equivalente. Alimenta el *Ejercicio 1* de la Práctica 4, donde se decide continuidad en $RR^n$ con distintas métricas, y la misma pregunta del *Ejercicio 5*. Ojo: en el Ejercicio 1 (c) y (d) el codominio es $RR^2$, así que ahí el resultado no alcanza tal cual.
 ]
 
 #desafio[Continuidad con $d_1$ y $d_oo$ en $RR^n$ (Ejercicio 5.6)][
   Sea $f : (RR^n, d_2) -> (RR, abs(dot))$ una función continua en $x in RR^n$. Probar que $f$ sigue siendo continua en $x$ si en vez de usar la distancia $d_2$ usamos las distancias $d_1$ o $d_oo$.
 ]
 
-== Bloque 4 · Puntos aislados en $(NN, abs(dot))$
-
-#sublema(titulo: "Qué desbloquea")[
-  Justificar la afirmación del *Ejemplo 5.5 c)*: si todos los puntos de $(NN, abs(dot))$ son aislados, entonces toda función $f : (NN, abs(dot)) -> (M, d)$ es continua (por el Ejemplo 5.5 b). Es la versión de $NN$ como espacio métrico propio de lo que en la Práctica 3 se vio para $ZZ subset.eq RR$ ($ZZ' = emptyset$).
-]
-
-#desafio[Todos los puntos de $(NN, abs(dot))$ son aislados][
-  Probar que en el espacio métrico $(NN, abs(dot))$ todo punto es aislado, es decir, que para cada $n in NN$ existe $r > 0$ tal que $B(n, r) = {n}$.
-]
-
-== Bloque 5 · Continuidad vía preimágenes de cerrados
+== Bloque 4 · Continuidad vía preimágenes de cerrados
 
 #sublema(titulo: "Qué desbloquea")[
   Versión con cerrados del Teorema 5.9 (continuidad por preimágenes de abiertos). Permite probar que un conjunto definido por igualdades o desigualdades no estrictas es cerrado escribiéndolo como preimagen de un cerrado por una función continua. Alimenta los *Ejercicios 4, 5 y 6* de la Práctica 4.
@@ -123,7 +115,70 @@ alimenta cada bloque.
   Sea $f : (M, d) -> (N, d')$. Probar que $f$ es continua si y sólo si $f^(-1)(F)$ es cerrado para todo $F subset.eq N$ cerrado.
 ]
 
-== Bloque 6 · El espacio métrico $(M_2(RR), d_oo)$
+== Bloque 5 · Funciones Lipschitz
+
+#sublema(titulo: "Qué desbloquea")[
+  Ver que ser Lipschitz (Definición 5.24) es una forma cómoda de probar continuidad uniforme: alcanza con dar la constante $C$. Es lo que pide el *Ejercicio 12* de la Práctica 4 ("pruebe que son Lipschitz; deduzca que son uniformemente continuas"). El Ejercicio 5.27 da, además, un ejemplo para el *Ejercicio 15 (b)* (no acotada y uniformemente continua).
+]
+
+#desafio[Lipschitz implica uniformemente continua (Ejercicio 5.25)][
+  *Definición 5.24.* Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M -> N$ una función. Decimos que $f$ es _Lipschitz de constante $C$_ si
+  $ d'(f(x), f(y)) <= C d(x, y), quad "para todo" x, y in M. $
+
+  Sea $f : M -> N$ una función Lipschitz de constante $C$. Probar que $f$ es uniformemente continua.
+]
+
+#desafio[$sqrt(x)$ es uniformemente continua en $[0, +infinity)$ (Ejercicio 5.27)][
+  En el ejemplo anterior (Ejemplo 5.26 b)) vimos que $sqrt(x)$ no es Lipschitz si la pensamos como función en $[0, +infinity)$. Probar que $sqrt(x)$ es uniformemente continua en $[0, +infinity)$.
+
+  _Sugerencia: Usar que_
+  $ abs(sqrt(x) - sqrt(y))^2 <= abs(sqrt(x) - sqrt(y)) dot abs(sqrt(x) + sqrt(y)). $
+]
+
+== Bloque 6 · Continuidad uniforme y sucesiones de Cauchy
+
+#sublema(titulo: "Qué desbloquea")[
+  Ver que la continuidad uniforme preserva sucesiones de Cauchy (con la Definición 5.14 o la Proposición 5.18), y preguntarse si vale la recíproca. La primera parte es *el mismo enunciado que el Ejercicio 14* de la Práctica 4: lo nuevo acá es la pregunta por la recíproca.
+]
+
+#desafio[Uniformemente continua manda Cauchy en Cauchy (Ejercicio 5.19)][
+  Sea $f : (M, d) -> (N, d')$ una función uniformemente continua. Probar que $(f(x_n))_(n in NN) subset.eq N$ es una sucesión de Cauchy para toda sucesión $(x_n)_(n in NN) subset.eq M$ de Cauchy.
+
+  ¿Vale que si $(f(x_n))_(n in NN)$ es de Cauchy para toda $(x_n)_(n in NN)$ de Cauchy entonces $f$ es uniformemente continua?
+
+  _Sugerencia: pensar qué pasa en el caso en que $M$ y $N$ sean completos. Por ejemplo, podría ser $M = N = (RR, abs(dot))$._
+]
+
+== Bloque 7 · Extensión de uniformemente continuas desde un denso
+
+#sublema(titulo: "Qué desbloquea")[
+  Leer con cuidado el cierre de la demostración del *Teorema 5.22* (extensión de $f : E -> N$ uniformemente continua a $tilde(f) : M -> N$, con $E$ denso y $N$ completo): qué desigualdad sale de cada elección de índice. Usa el Bloque 6 (Ejercicio 5.19) y la Proposición 5.18. Hacer antes el *Ejercicio 7 (a)* de la Práctica 4: la unicidad (Ejercicio 5.23) sale directo de él.
+]
+
+#desafio[¿Dónde se usa que $n >= n_0$ y $n >= n_1$? (Teorema 5.22)][
+  En la demostración de que $tilde(f)$ es uniformemente continua, para cerrar el argumento se toma un $n$ que sea, a la vez, más grande que $n_0$ y $n_1$, y se obtiene
+  $
+    d'(tilde(f)(x), tilde(f)(y)) <= & underbrace(d'(tilde(f)(x), tilde(f)(x_n)), < epsilon \/ 3) + underbrace(d'(f(x_n), f(y_n)), < epsilon \/ 3) \
+                                    & + underbrace(d'(tilde(f)(y_n), tilde(f)(y)), < epsilon \/ 3) < epsilon.
+  $
+  Pensá dónde usamos que $n$ es más grande que $n_0$ y $n_1$.
+]
+
+#desafio[Unicidad de la extensión (Ejercicio 5.23)][
+  Probar que la extensión $tilde(f)$ del teorema anterior (Teorema 5.22) es única.
+]
+
+== Bloque 8 · Puntos aislados en $(NN, abs(dot))$
+
+#sublema(titulo: "Qué desbloquea")[
+  Justificar la afirmación del *Ejemplo 5.5 c)*: si todos los puntos de $(NN, abs(dot))$ son aislados, entonces toda función $f : (NN, abs(dot)) -> (M, d)$ es continua (por el Ejemplo 5.5 b). Es la versión de $NN$ como espacio métrico propio de lo que en la Práctica 3 se vio para $ZZ subset.eq RR$ ($ZZ' = emptyset$).
+]
+
+#desafio[Todos los puntos de $(NN, abs(dot))$ son aislados][
+  Probar que en el espacio métrico $(NN, abs(dot))$ todo punto es aislado, es decir, que para cada $n in NN$ existe $r > 0$ tal que $B(n, r) = {n}$.
+]
+
+== Bloque 9 · El espacio métrico $(M_2(RR), d_oo)$
 
 #sublema(titulo: "Qué desbloquea")[
   Verificar que las matrices de $2 times 2$ con la distancia infinito forman un espacio métrico, que es el escenario del *Ejemplo 5.11* (continuidad del determinante y $G l_2(RR)$ abierto).
@@ -147,54 +202,4 @@ alimenta cada bloque.
   Sea
   $ G l_2(RR) = {A in M_2(RR) : A "es una matriz inversible"} subset.eq (M_2(RR), d_oo). $
   Probar que $G l_2(RR)$ es un conjunto abierto usando solo la definición: no es imposible, pero es mucho más difícil que usar el Teorema 5.9 con $G l_2(RR) = scripts(det)^(-1)(RR without {0})$.
-]
-
-== Bloque 7 · Continuidad uniforme y sucesiones de Cauchy
-
-#sublema(titulo: "Qué desbloquea")[
-  Ver que la continuidad uniforme preserva sucesiones de Cauchy (con la Definición 5.14 o la Proposición 5.18), y preguntarse si vale la recíproca. Es el *Ejercicio 14* de la Práctica 4.
-]
-
-#desafio[Uniformemente continua manda Cauchy en Cauchy (Ejercicio 5.19)][
-  Sea $f : (M, d) -> (N, d')$ una función uniformemente continua. Probar que $(f(x_n))_(n in NN) subset.eq N$ es una sucesión de Cauchy para toda sucesión $(x_n)_(n in NN) subset.eq M$ de Cauchy.
-
-  ¿Vale que si $(f(x_n))_(n in NN)$ es de Cauchy para toda $(x_n)_(n in NN)$ de Cauchy entonces $f$ es uniformemente continua?
-
-  _Sugerencia: pensar qué pasa en el caso en que $M$ y $N$ sean completos. Por ejemplo, podría ser $M = N = (RR, abs(dot))$._
-]
-
-== Bloque 8 · Extensión de uniformemente continuas desde un denso
-
-#sublema(titulo: "Qué desbloquea")[
-  Leer con cuidado el cierre de la demostración del *Teorema 5.22* (extensión de $f : E -> N$ uniformemente continua a $tilde(f) : M -> N$, con $E$ denso y $N$ completo): qué desigualdad sale de cada elección de índice. Usa el Bloque 7 (Ejercicio 5.19) y la Proposición 5.18.
-]
-
-#desafio[¿Dónde se usa que $n >= n_0$ y $n >= n_1$? (Teorema 5.22)][
-  En la demostración de que $tilde(f)$ es uniformemente continua, para cerrar el argumento se toma un $n$ que sea, a la vez, más grande que $n_0$ y $n_1$, y se obtiene
-  $
-    d'(tilde(f)(x), tilde(f)(y)) <= & underbrace(d'(tilde(f)(x), tilde(f)(x_n)), < epsilon \/ 3) + underbrace(d'(f(x_n), f(y_n)), < epsilon \/ 3) \
-                                    & + underbrace(d'(tilde(f)(y_n), tilde(f)(y)), < epsilon \/ 3) < epsilon.
-  $
-  Pensá dónde usamos que $n$ es más grande que $n_0$ y $n_1$.
-]
-
-#desafio[Unicidad de la extensión (Ejercicio 5.23)][
-  Probar que la extensión $tilde(f)$ del teorema anterior (Teorema 5.22) es única.
-]
-
-== Bloque 9 · Funciones Lipschitz
-
-#sublema(titulo: "Qué desbloquea")[
-  Ver que ser Lipschitz (Definición 5.24) es una forma cómoda de probar continuidad uniforme: alcanza con dar la constante $C$. Es lo que pide el *Ejercicio 12* de la Práctica 4 ("pruebe que son Lipschitz; deduzca que son uniformemente continuas").
-]
-
-#desafio[Lipschitz implica uniformemente continua (Ejercicio 5.25)][
-  Sea $f : M -> N$ una función Lipschitz de constante $C$. Probar que $f$ es uniformemente continua.
-]
-
-#desafio[$sqrt(x)$ es uniformemente continua en $[0, +infinity)$ (Ejercicio 5.27)][
-  En el ejemplo anterior (Ejemplo 5.26 b)) vimos que $sqrt(x)$ no es Lipschitz si la pensamos como función en $[0, +infinity)$. Probar que $sqrt(x)$ es uniformemente continua en $[0, +infinity)$.
-
-  _Sugerencia: Usar que_
-  $ abs(sqrt(x) - sqrt(y))^2 <= abs(sqrt(x) - sqrt(y)) dot abs(sqrt(x) + sqrt(y)). $
 ]

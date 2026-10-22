@@ -99,6 +99,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-9],
   [Sándwich $NN arrow.hook S arrow.hook QQ$: todo intervalo tiene $aleph_0$ racionales],
   [Hay que ver que un subconjunto de $QQ$ (por ejemplo $(a, b) inter QQ$) tiene cardinal $aleph_0$],
+
+  [G-10],
+  [Derivada acotada: el valor medio fabrica la constante de Lipschitz],
+  [Hay que probar que una $f$ derivable en un intervalo de $RR$ es Lipschitz o uniformemente continua],
 )
 
 #v(8pt)
@@ -1342,3 +1346,121 @@ Definición 3.6 es numerable.
   racionales.
 - `ejemplos/p1: C1-6` --- la construcción por recursión y densidad de racionales
   estrictamente decrecientes.
+
+#v(8pt)
+
+== Galerazo 10 · Derivada acotada: el valor medio fabrica la constante de Lipschitz
+
+#disparador[
+  En las notas, después de la Definición 5.24, dice que si $f : RR -> RR$ es derivable con
+  derivada acotada entonces es Lipschitz "por el teorema del valor medio". ¿Cómo se me ocurre
+  usar Lagrange para probar que algo es Lipschitz o uniformemente continuo? ¿Y cuál es la
+  constante?
+]
+
+#galerazo[G-10][
+  Para una $f$ derivable sobre un *intervalo* de $RR$, el teorema del valor medio (de Lagrange)
+  convierte la diferencia $abs(f(x) - f(y))$ en $abs(f'(z)) abs(x - y)$, con $z$ entre $x$ e $y$.
+  Si $abs(f') <= C$ en todo el intervalo, eso es exactamente la desigualdad de Lipschitz con
+  constante $C$; y por el Ejercicio 5.25, $f$ es uniformemente continua. La constante es
+  $C = sup abs(f')$ (las notas escriben $max$, pero alcanza con que sea una cota).
+]
+
+=== La señal
+
+Hay que probar que una función *real de variable real* y *derivable* es Lipschitz o
+uniformemente continua, y su derivada se puede acotar en el dominio. En vez de pelear con
+$epsilon$ y $delta$, se mira $f'$: si es acotada, el problema está resuelto.
+
+#sublema(titulo: "Traducción")[
+  *"$f$ derivable en un intervalo, ¿es Lipschitz o uniformemente continua?"* $==>$ *"¿está
+  acotada $f'$? Si $abs(f') <= C$, entonces $abs(f(x) - f(y)) <= C abs(x - y)$"*.
+]
+
+=== Por qué funciona
+
+Es la Observación que sigue a la Definición 5.24 en `apuntes.typ`. Dados $x != y$ en el
+intervalo $I$, el teorema del valor medio aplicado a $f$ entre $x$ e $y$ da un $z$ intermedio
+(que también está en $I$, porque $I$ es un intervalo) con
+$ abs(f(x) - f(y)) = abs(f'(z)(x - y)) = abs(f'(z)) abs(x - y). $
+Si $C = sup_(z in I) abs(f'(z)) < +infinity$, queda
+$ abs(f(x) - f(y)) <= C abs(x - y) quad "para todo" x, y in I, $
+que es la Definición 5.24. Con $delta = epsilon \/ C$ sale la continuidad uniforme (Ejercicio
+5.25).
+
+*Ojo con el máximo.* Las notas escriben $C = max_(z in RR) abs(f'(z))$, pero que $f'$ sea
+acotada no garantiza que el máximo se alcance; lo correcto en general es el supremo (está
+aclarado en la misma Observación de `apuntes.typ`).
+
+=== Cuándo no aplica
+
+- *El dominio no es un intervalo.* El valor medio necesita que el segmento entre $x$ e $y$
+  esté en el dominio. Por ejemplo, $f : (0, 1) union (1, 2) -> RR$ que vale $0$ en $(0, 1)$ y
+  $1$ en $(1, 2)$ tiene $f' = 0$, pero con $x = 1 - t$, $y = 1 + t$ queda
+  $abs(f(x) - f(y)) = 1 > C dot 2 t$ para $t$ chico: no es Lipschitz. _(Ejemplo propio.)_
+- *La derivada no es acotada.* El galerazo no dice nada: $sqrt(x)$ en $[0, +infinity)$ tiene
+  derivada no acotada cerca de $0$, no es Lipschitz y sin embargo es uniformemente continua
+  (Ejemplo 5.26 b) y Ejercicio 5.27). Derivada no acotada *no* prueba que no sea uniformemente
+  continua; para eso hacen falta sucesiones (como en C6-3 de `ejemplos/p4.typ`).
+- *El dominio es un espacio métrico cualquiera.* Para $d(x, x_0)$ o $d(x, A)$ no hay
+  derivada: la constante $1$ sale de la desigualdad triangular, no de Lagrange (`p4: Ej. 12`).
+
+=== La familia entera
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#table(
+  columns: (1.2fr, 1.1fr, 1.6fr),
+  align: (left + horizon, left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 5pt),
+
+  [*Función y dominio*], [*Cota de $abs(f')$*], [*Conclusión*],
+
+  [$x^3$ en $(0, 1)$ (`ejemplos/p4: C6-2`)],
+  [$3 c^2 <= 3$],
+  [Lipschitz con $C = 3$],
+
+  [$sin x$ en $RR$],
+  [$abs(cos x) <= 1$],
+  [Lipschitz con $C = 1$],
+
+  [$1 \/ x$ en $[epsilon, +infinity)$ (`p4: Ej. 13 (a)`)],
+  [$1 \/ x^2 <= 1 \/ epsilon^2$],
+  [Lipschitz con $C = 1 \/ epsilon^2$, luego uniformemente continua],
+
+  [$1 \/ x$ en $(0, +infinity)$],
+  [no acotada],
+  [el galerazo no decide; no es uniformemente continua (`p4: Ej. 13 (a)`)],
+
+  [$sqrt(x)$ en $[0, +infinity)$],
+  [no acotada cerca de $0$],
+  [el galerazo no decide; es uniformemente continua (Ejercicio 5.27)],
+)
+
+Las cotas de las filas sin referencia a la guía son cuentas propias.
+
+=== Cómo inventarlo de cero
+
++ *Chequeá el dominio:* tiene que ser un intervalo de $RR$ (abierto, cerrado o no acotado,
+  da igual), para que el punto intermedio $z$ caiga adentro.
++ *Derivá y acotá:* buscá $C$ con $abs(f'(z)) <= C$ para todo $z$ del dominio. Si el dominio
+  es $[epsilon, +infinity)$ o similar, la cota suele salir del extremo donde $abs(f')$ es más
+  grande.
++ *Escribí Lagrange:* $abs(f(x) - f(y)) = abs(f'(z)) abs(x - y) <= C abs(x - y)$.
++ *Si piden uniformemente continua:* Lipschitz $==>$ uniformemente continua (Ejercicio 5.25),
+  o directamente $delta = epsilon \/ C$.
++ *Si $f'$ no es acotada:* el galerazo no sirve. Para probar que *no* es uniformemente continua
+  buscá dos sucesiones con $abs(x_n - y_n) -> 0$ y $abs(f(x_n) - f(y_n)) not -> 0$.
+
+=== Dónde se usa
+
+- `apuntes.typ` --- Observación "Derivada acotada implica Lipschitz", después de la
+  Definición 5.24: es la fuente de este galerazo.
+- `ejemplos/p4: C6-2` --- derivada acotada en $(a, b)$ implica Lipschitz, con $x^3$ en $(0, 1)$.
+- `p4: Ej. 13 (a)` --- $1 \/ x$ en $[epsilon, +infinity)$ es uniformemente continua.
+- `p4: Ej. 15 (b)` --- para dar una función no acotada y uniformemente continua alcanza con
+  una de derivada acotada, por ejemplo $f(x) = x$ ($f' = 1$).
+- `desafios/p4.typ`, Bloque 5 --- el Ejercicio 5.25 (Lipschitz $==>$ uniformemente continua) es
+  el paso que convierte este galerazo en continuidad uniforme.
