@@ -91,6 +91,7 @@ Preservar siempre todo el contenido existente.
   | `C6-*` | `continuidad.typ` | continuidad en productos `X × Y` con `d_∞`, proyecciones, continuidad coordenada a coordenada, continuidad uniforme (clase del 23/10/2025) |
   | `C7-*` | `compactos.typ` | compacidad por sucesiones: productos finitos, `{x_n} ∪ {x}`, cerrado ⟺ `K ∩ F` compacto (notas tipeadas "Clase AA — Compactos", octubre de 2025) |
   | `C8-*` | `punto_fijo.typ` | punto fijo en un compacto, encajes de compactos, `C(ℝ,[0,1])` sin denso numerable, Banach vía la esfera unitaria, operadores lineales y sucesiones nulas (clase del 11/11/2025; los Ej. 4 y 5 van a `ejemplos/p6.typ`) |
+  | `C9-*` | `continuidad_operaciones_densos.typ` | suma y producto de continuas, proyecciones de `ℝⁿ`, polinomios continuos, `GL_n(ℝ)` abierto, continuas y densos, `f(x+y) = f(x)f(y)` (clase del 07/10/2025, apunte tipeado de Mateo Mauri; los sufijos siguen la numeración por sección del apunte: `C9-2.2` es el Problema 2.2, y como hay Lema 3.1 y Problema 3.1, el problema lleva `C9-3.1b`) |
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 

@@ -55,11 +55,12 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [*\#*], [*Bloque*], [*Desbloquea*],
   [1], [Imagen y preimagen de conjuntos], [conceptual para p4],
   [2], [Continuidad por definición ($epsilon$--$delta$)], [p4: Ej. 1],
-  [3], [Continuidad por sucesiones y por preimágenes de abiertos], [p4: Ej. 4, 5],
+  [3], [Continuidad por sucesiones y por preimágenes de abiertos], [p4: Ej. 1 (a), 4, 5],
   [4], [Continuidad en productos y proyecciones], [p4: Ej. 1 (a), 4, 5],
   [5], [Funciones Lipschitz], [p4: Ej. 9, 12],
   [6], [Continuidad uniforme: ejemplos, contraejemplos y pegado], [p4: Ej. 13, 14, 15, 16],
-  [7], [Conjuntos densos], [p4: Ej. 7, 8],
+  [7], [Conjuntos densos], [p4: Ej. 2, 7, 8],
+  [8], [Homeomorfismos e isometrías], [conceptual; p5: Ej. 13],
 )
 
 #v(8pt)
@@ -115,6 +116,12 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   Usar las caracterizaciones de continuidad en vez de la definición: el Teorema 5.7 (sucesiones) para probar que una función es continua, y el Teorema 5.9 (preimágenes de abiertos) para probar que un conjunto es abierto escribiéndolo como preimagen de un abierto por una función continua. Es el modelo de los *Ejercicios 4 y 5* de la Práctica 4.
+
+  La clase del 07/10 (`C9-*`) arma la herramienta para no hacer cuentas: suma y producto de continuas son continuas (C9-1.1, por sucesiones y álgebra de límites), las proyecciones $pi_i : RR^n -> RR$ son continuas para $d_oo$ (C9-1.2; el único paso es $abs(x^i_k - x^i) <= d_oo$, que también vale con $d_1$ y $d_2$), y por lo tanto todo *polinomio en varias variables* es continuo (C9-1.6). Con eso, C9-2.1 lee un conjunto del plano como ${f >= 0} = f^(-1)([0, +oo))$ (modelo del *Ejercicio 5*), y C9-2.2 generaliza el Ejemplo 5.11 a $op("GL")_n (RR)$ viendo que $det$ es un polinomio en las entradas.
+
+  La clase define: $P : RR^n -> RR$ es un *polinomio en varias variables* si puede escribirse como
+  $ P(x_1, dots, x_n) = sum_(e_1 + dots.c + e_n <= r) a_((e_1, dots, e_n)) x_1^(e_1) dots.c x_n^(e_n) $
+  para algún $r in NN$ (Definición 1.4); por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5).
 ]
 
 #ejemplo[Continuidad del determinante y $G l_2(RR)$ abierto (Ejemplo 5.11)][36][
@@ -144,6 +151,110 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   y como $(-oo, 0) union (0, +oo) subset.eq RR$ es un conjunto abierto (por ejemplo, lo podríamos escribir como una unión de intervalos abiertos), nos sale que $G l_2(RR)$ es también un conjunto abierto.
 
   Como ejercicio, intentá probar que $G l_2(RR)$ es un conjunto abierto usando solo la definición: no es imposible, pero es mucho más difícil que lo que acabamos de hacer.
+]
+
+#ejemplo[Suma y producto de funciones continuas son continuas (Clase 9 · Proposición 1.1)][C9-1.1][
+  Sean $X$ e $Y$ dos espacios métricos, y $f, g : X -> Y$ dos funciones continuas entre estos espacios. Se tiene entonces que $f + g$ y $f dot.c g$ también son funciones continuas entre estos espacios.
+
+  _Nota_: para que $f + g$ y $f dot.c g$ tengan sentido hace falta que en $Y$ se pueda sumar y multiplicar; en lo que sigue se usa con $Y = RR$ (con la métrica usual), que es el caso que interesa para los polinomios.
+]
+
+#estrategia[Continuidad por sucesiones y álgebra de límites][
+  Con la caracterización sucesional, probar que $f + g$ es continua es probar que $(f + g)(x_n) -> (f + g)(x)$ para toda $x_n -> x$. Pero $(f + g)(x_n) = f(x_n) + g(x_n)$ es la suma de dos sucesiones convergentes (por continuidad de $f$ y de $g$), y el álgebra de límites de $RR$ hace el resto. Para el producto es la misma frase con "producto" en lugar de "suma".
+]
+
+#resolucion[
+  Comencemos por demostrar que la suma de funciones continuas es una función continua. Sea $(x_n)_(n in NN)$ una sucesión de elementos de $X$ convergente, y sea $x$ su límite; veamos que
+  $ lim_(n -> oo) (f + g)(x_n) = (f + g)(x). $
+  En efecto, notar que
+  $
+    lim_(n -> oo) (f + g)(x_n) &= lim_(n -> oo) f(x_n) + g(x_n) = lim_(n -> oo) f(x_n) + lim_(n -> oo) g(x_n) \
+    &= f(x) + g(x) = (f + g)(x),
+  $
+  donde la única igualdad que no se deduce directamente de las definiciones es la tercera, que se debe al álgebra de límites (la sucesión dada por una suma de sucesiones convergentes converge a la suma de los límites).
+
+  Exactamente de la misma forma uno puede probar que el producto de funciones continuas es continua, observando que
+  $
+    lim_(n -> oo) (f dot.c g)(x_n) &= lim_(n -> oo) f(x_n) dot.c g(x_n) = lim_(n -> oo) f(x_n) dot.c lim_(n -> oo) g(x_n) \
+    &= f(x) dot.c g(x) = (f dot.c g)(x).
+  $
+]
+
+#ejemplo[Las proyecciones $pi_i : RR^n -> RR$ son continuas para $d_oo$ (Clase 9 · Lema 1.2)][C9-1.2][
+  Sea $pi_i : RR^n -> RR$ la función que proyecta en la $i$-ésima coordenada, es decir, la función tal que $pi_i (x_1, x_2, dots, x_n) = x_i$. Esta función es continua en la métrica dada por la distancia $d_oo$.
+]
+
+#estrategia[Convergencia en $d_oo$ implica convergencia coordenada a coordenada][
+  Hay que ver que si $(x^1_k, dots, x^n_k) -> (x^1, dots, x^n)$ en $(RR^n, d_oo)$ entonces $x^i_k -> x^i$ en $RR$. Como $abs(x^i_k - x^i)$ es uno de los números cuyo máximo es $d_oo$, está acotado por la distancia: el $n_0$ de la convergencia en $RR^n$ sirve para la coordenada.
+]
+
+#resolucion[
+  Sea ${(x^1_k, x^2_k, dots, x^n_k)}_(k in NN)$ una sucesión cualquiera convergente a algún punto de $RR^n$, que denotaremos como $(x^1, x^2, dots, x^n)$. Para probar la continuidad, debemos ver que
+  $ lim_(k -> oo) pi_i (x^1_k, x^2_k, dots, x^n_k) = pi_i (x^1, x^2, dots, x^n). $
+  Por todo lo que acabamos de definir, esto es lo mismo que probar que
+  $ lim_(k -> oo) x^i_k = x^i, $
+  pero esto se deduce de que la convergencia de una sucesión en $RR^n$ con la métrica dada por la distancia $d_oo$ implica la convergencia de las sucesiones de sus coordenadas. En efecto, dado $epsilon > 0$, existe un $n_0 in NN$ tal que $d_oo ((x^1_k, dots, x^n_k), (x^1, dots, x^n)) <= epsilon$ para todo $k >= n_0$, pero esto implica que
+  $ abs(x^i_k - x^i) <= d_oo ((x^1_k, x^2_k, dots, x^n_k), (x^1, x^2, dots, x^n)) <= epsilon, $
+  y se concluye lo deseado.
+]
+
+#ejemplo[Los polinomios en varias variables son continuos (Clase 9 · Proposición 1.6)][C9-1.6][
+  Los polinomios en varias variables (Definición 1.4) son funciones continuas de $RR^n$ a $RR$.
+]
+
+#resolucion[
+  Basta con observar que los polinomios son sumas y productos de las funciones estudiadas en el Lema 1.2 (las proyecciones $x_i = pi_i (x_1, dots, x_n)$, y las constantes), y que sumas y productos de continuas son continuas por la Proposición 1.1.
+]
+
+#sublema(titulo: "Para qué sirve")[
+  En el Ejercicio 1 (a), $f(x, y) = x^2 + y^2$ es un polinomio: continua sin $epsilon$ ni $delta$. Y en el Ejercicio 5, cada conjunto está descripto por desigualdades entre polinomios (o entre funciones armadas con polinomios y $sin$, $exp$, que también son continuas), que es lo que hacen C9-2.1 y C9-2.2 a continuación.
+]
+
+#ejemplo[Un conjunto cerrado del plano como preimagen por un polinomio (Clase 9 · Problema 2.1)][C9-2.1][
+  Probar que el conjunto $A = {(x, y) in RR^2 : x^3 >= x^2 + y - x}$ es cerrado con la métrica dada por la distancia $d_oo$.
+
+  _Observación 2.1 (de la clase)_: puede graficarse el conjunto: es la región por debajo de la curva $y = x^3 - x^2 + x$, es decir $A = {(x, y) : y <= x^3 - x^2 + x}$.
+]
+
+#estrategia[Pasar todo de un lado y leer el conjunto como ${f >= 0}$][
+  La desigualdad $x^3 >= x^2 + y - x$ es $f(x, y) >= 0$ con $f(x, y) = x^3 - x^2 + x - y$, un polinomio y por lo tanto continuo (C9-1.6). Así $A = f^(-1) ([0, +oo))$: preimagen de un cerrado por una continua, cerrado.
+]
+
+#resolucion[
+  Si tomamos la función $f : RR^2 -> RR$ dada por $f(x, y) = x^3 - x^2 + x - y$, podemos caracterizar al conjunto $A$ como
+  $ A = {(x, y) : f(x, y) >= 0} = f^(-1) ([0, +oo)). $
+  Visto de esta manera, $A$ es la preimagen de un conjunto cerrado a través de una función continua (cosa que se ve de que $f$ es un polinomio), y por lo tanto es cerrado.
+
+  _Nota_: el apunte escribe $f^(-1) ((0, +oo))$ y "preimagen de un conjunto abierto", pero $A$ está definido con $>=$: es $A = {f >= 0} = f^(-1) ([0, +oo))$, la preimagen del _cerrado_ $[0, +oo)$, y por eso $A$ es cerrado (que es lo que pide el problema); con $(0, +oo)$ se obtendría el abierto ${f > 0}$, que no es $A$.
+]
+
+#ejemplo[$op("GL")_n (RR)$ es abierto en $op("M")_n (RR)$ (Clase 9 · Problema 2.2)][C9-2.2][
+  Probar que el conjunto de matrices inversibles con coeficientes reales, $op("GL")_n (RR)$, es abierto en el conjunto $op("M")_n (RR)$ de matrices de $n times n$ con coeficientes reales, si a las matrices las dotamos de la distancia $d_oo$ (identificando $op("M")_n (RR) = RR^(n times n)$).
+]
+
+#estrategia[Inversible es $det != 0$, y el determinante es un polinomio en las entradas][
+  $op("GL")_n (RR) = det^(-1) (RR without {0})$, preimagen de un abierto. Falta ver que $det : RR^(n times n) -> RR$ es continua, y es más: es un polinomio en los $n^2$ coeficientes. Esto sale por inducción en $n$ con el desarrollo por cofactores, que escribe $det_(n+1)$ como suma de productos de una entrada por un $det_n$.
+]
+
+#resolucion[
+  Una caracterización común de $op("GL")_n (RR)$ estudiada en el CBC es la dada por el determinante. En efecto, podemos pensar a este conjunto como
+  $ op("GL")_n (RR) = {A in op("M")_n (RR) : det(A) != 0}. $
+  En vista del ejercicio anterior, esto nos da una pista de cómo probar que este conjunto es abierto: si pudiésemos ver que la función determinante es continua, podríamos entender a las matrices inversibles como la preimagen de un abierto ($det^(-1) (RR without {0})$), y por ende sería abierto. En efecto, la función determinante es una función $det : RR^(n times n) -> RR$ y es más que continua: es un polinomio.
+
+  Para ver esto último vayamos por inducción. La hipótesis inductiva es: "la función $det_n$, pensada como el determinante para matrices de $n times n$, es una función polinomial en los coeficientes de la matriz (y por ende de $RR^(n times n)$ a $RR$)".
+
+  El caso base es sencillo, ya que $det_1$ es la identidad, que es trivialmente un polinomio. Para el paso inductivo, asumamos que la función $det_n$ es un polinomio y veamos que lo mismo ocurre para la función $det_(n+1)$. Sea $A = (a_(i j))_(1 <= i, j <= n+1)$ una matriz de tamaño $(n+1) times (n+1)$. Para cada par de índices $1 <= i, j <= n+1$ denotamos por $A_(i j)$ a la matriz que se obtiene de $A$ al eliminar la fila $i$ y la columna $j$. Con esta notación, la fórmula para calcular el determinante por cofactores viene dada por
+  $
+    cases(
+      det_1 (a_(11)) = a_(11)\,,
+      det_(n+1) (A) = limits(sum)_(j = 1)^(n+1) (-1)^(1+j) a_(1 j) det_n (A_(1 j)).
+    )
+  $
+  Mirando esta definición, es claro que si por hipótesis inductiva la función $det_n$ es un polinomio en los coeficientes de una matriz de $n times n$, la función $det_(n+1)$ también debe serlo, ya que se fabrica como suma y producto de polinomios en los coeficientes de una matriz de $(n+1) times (n+1)$.
+
+  Habiendo probado que el determinante es una función polinomial, y que las funciones polinomiales son continuas (C9-1.6), concluimos el resultado observando que
+  $ op("GL")_n (RR) = det^(-1) (RR without {0}), $
+  que es la preimagen de un abierto a través de una función continua, y por ende abierto también.
 ]
 
 == Bloque 4 · Continuidad en productos y proyecciones
@@ -574,6 +685,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   Probar que un conjunto es denso (Definición 5.20) mostrando que todo punto del espacio es límite de una sucesión del conjunto (Proposición 4.46). Es el vocabulario de los *Ejercicios 7 y 8* de la Práctica 4 (dos continuas que coinciden en un denso son iguales; la imagen continua y suryectiva de un denso es densa).
+
+  Dos resultados de la clase del 07/10 son *literalmente* esos ejercicios: el Lema 3.1 (C9-3.1) es el *Ejercicio 8* y el Lema 3.2 (C9-3.2) es el *Ejercicio 7 (a)*. Ojo: la guía agrega en el Ejercicio 8 la hipótesis "$f$ suryectiva", que la clase omite y que hace falta (ver la nota en C9-3.1). El Problema 3.1 (C9-3.1b) muestra para qué sirve el Lema 3.2: para determinar una función continua alcanza con conocerla en $QQ$. La misma idea (aproximar un real por racionales o por irracionales) decide el *Ejercicio 2*.
 ]
 
 #ejemplo[$QQ$ y $II = RR without QQ$ son densos en $RR$ (Ejemplo 5.21)][38][
@@ -588,4 +701,91 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   *b)* Dado $x in RR$, consideremos $y = x + 1 / n$. Como $x < y$, sabemos que debe existir un número irracional $z_n$ tal que $x < z_n < x + 1 / n$ (por el ejercicio 2 de la guía 1). Esto nos dice que
   $ abs(x - z_n) < 1 / n -> 0 quad "cuando " n -> infinity, $
   lo cual nos dice que $(z_n) subset.eq II$ es una sucesión tal que $z_n -> x$. Por lo tanto, $x in overline(II)$.
+]
+
+#ejemplo[La imagen continua de un denso es densa (Clase 9 · Lema 3.1 $=$ Ejercicio 8 de la guía)][C9-3.1][
+  Sea $f : X -> Y$ una función continua entre dos espacios métricos. Se tiene que $f(D) subset.eq Y$ es un conjunto denso siempre que $D subset.eq X$ sea denso.
+
+  _Nota_: tal como está enunciado, el lema necesita además que $f$ sea sobreyectiva (o bien debe leerse "$f(D)$ es denso en $f(X)$"); la guía lo pide con "$f$ continua y suryectiva". Si la imagen de $f$ no es todo $Y$, un abierto $A subset.eq Y$ disjunto de $f(X)$ tiene $f^(-1) (A) = emptyset$ y el argumento de la demostración, que supone $f^(-1) (A)$ no vacío, no se aplica.
+]
+
+#estrategia[Denso es "toca a todo abierto", y la continuidad transporta abiertos hacia atrás][
+  Hay que ver que todo abierto $A subset.eq Y$ corta a $f(D)$. Como $f$ es continua, $f^(-1) (A)$ es abierto en $X$ (y no vacío si $f$ es sobreyectiva y $A != emptyset$), así que por densidad de $D$ contiene un punto $d in D$; entonces $f(d) in A inter f(D)$.
+]
+
+#resolucion[
+  Sea $A subset.eq Y$ un conjunto abierto cualquiera (no vacío). Para ver que $f(D)$ es denso basta con probar que $f(D)$ interseca a $A$, ya que $A$ era arbitrario. Como $A$ es abierto y $f$ es continua, $f^(-1) (A)$ es un abierto de $X$ (no vacío, por la sobreyectividad), y como $D$ es denso en $X$, debe ocurrir que $f^(-1) (A) inter D != emptyset$. Esto último implica directamente que $A inter f(D) != emptyset$, y concluimos lo deseado.
+]
+
+#ejemplo[Dos continuas que coinciden en un denso coinciden en todo (Clase 9 · Lema 3.2 $=$ Ejercicio 7 (a) de la guía)][C9-3.2][
+  Sean $f, g : X -> Y$ dos funciones continuas entre espacios métricos y sea $D$ un conjunto denso en $X$. Si $f(x) = g(x)$ para todo $x in D$, tiene que ser que $f equiv g$.
+]
+
+#estrategia[Todo punto es límite de una sucesión del denso][
+  Fijado $x in X$, la densidad de $D$ da $(x_n)_n subset.eq D$ con $x_n -> x$. Sobre $D$ las dos funciones son la misma sucesión $f(x_n) = g(x_n)$, y la continuidad de ambas obliga a que sus límites, $f(x)$ y $g(x)$, coincidan.
+]
+
+#resolucion[
+  Sea $x in X$ un elemento cualquiera, y sea $(x_n)_(n in NN)$ una sucesión convergente a $x$ de elementos de $D$ (esto puede hacerse ya que $D$ es denso). Por continuidad, notar que
+  $ f(x) = lim_(n -> oo) f(x_n) = lim_(n -> oo) g(x_n) = g(x), $
+  de lo que concluimos lo deseado.
+
+  _Nota_: el apunte dice "una sucesión convergente a $X$ de elementos de $D$"; se refiere a una sucesión convergente al punto $x$.
+]
+
+#ejemplo[Las continuas con $f(x + y) = f(x) f(y)$ y $f(1) = 2$ (Clase 9 · Problema 3.1)][C9-3.1b][
+  Caracterizar todas las funciones continuas $f : RR -> RR$ tales que $f(x + y) = f(x) f(y)$ para cualesquiera $x, y in RR$ y $f(1) = 2$.
+]
+
+#estrategia[Primero $NN$, después $QQ$, y la continuidad hace el resto][
+  La ecuación funcional determina $f$ en $NN$ ($f(n) = 2^n$, sumando unos), en los racionales positivos ($f(p \/ q)^q = f(p) = 2^p$) y en los negativos (de $2 = f(1) = f(1) f(p \/ q) f(-p \/ q)$ se despeja $f(-p \/ q)$). Así $f = 2^x$ en $QQ$, y como $f$ y $x |-> 2^x$ son continuas e iguales en un denso, el Lema 3.2 (C9-3.2) da $f(x) = 2^x$ en todo $RR$.
+]
+
+#resolucion[
+  Notemos primero que, si $n in NN$, se tiene que
+  $ f(n) = f(1 + dots.c + 1) = f(1) dots.c f(1) = 2 dots.c 2 = 2^n. $
+  Por otro lado, si evaluamos en $p \/ q$ con $p, q in NN$, se tiene
+  $ f(p/q) = f(p/q)^(q/q) = (f(p/q)^q)^(1/q) = f(p)^(1/q) = (2^p)^(1/q) = 2^(p/q). $
+  Además, es claro que si tomamos $p \/ q$ con $p, q in NN$, se tiene que
+  $ 2 = f(1) = f(1 + p/q - p/q) = f(1) dot.c f(p/q) dot.c f(-p/q) = 2 dot.c f(p/q) dot.c f(-p/q), $
+  de lo que se concluye que, como $f(p \/ q) = 2^(p \/ q)$, debe tenerse que $f(-p \/ q) = 2^(-p \/ q)$.
+
+  Con todo lo probado hasta ahora, obtuvimos que si $x in QQ$ entonces $f(x) = 2^x$. Por hipótesis sabemos que $f$ es continua, y asumiremos la continuidad de la exponencial como un hecho. Tenemos entonces que, dado un $x in RR$ cualquiera, si tomamos una sucesión de racionales $(x_n)_(n in NN)$ convergente a $x$ (cosa que podemos hacer porque los racionales son densos en $RR$), se tiene que
+  $ f(x) = lim_(n -> oo) f(x_n) = lim_(n -> oo) 2^(x_n) = 2^x, $
+  lo que termina de caracterizar a nuestra función.
+
+  _Nota_: dos detalles que el apunte deja implícitos: el caso $x = 0$ sale de $2 = f(1) = f(1 + 0) = 2 f(0)$, o sea $f(0) = 1 = 2^0$; y para tomar la raíz $q$-ésima real en $(f(p \/ q)^q)^(1 \/ q) = f(p \/ q)$ hace falta $f(p \/ q) >= 0$, que vale porque $f(p \/ q) = f(p \/ (2q))^2$.
+]
+
+== Bloque 8 · Homeomorfismos e isometrías
+
+#sublema(titulo: "Qué desbloquea")[
+  Usar la Definición 5.29 (homeomorfismo: continua, biyectiva y con inversa continua) y la Definición 5.33 (isometría). El Ejemplo 5.30 muestra los dos lados: un homeomorfismo entre $RR$ y $(-1, 1)$, y una biyección continua cuya inversa no lo es (la discreta contra la usual, vía el Teorema 5.7). El Ejemplo 5.35 aplica la Observación 5.34: una isometría es homeomorfismo con su imagen, aunque no sea sobreyectiva. La guía 4 no tiene ejercicios de homeomorfismos; el primero aparece en la *Práctica 5, Ejercicio 13* (biyección continua desde un compacto).
+]
+
+#ejemplo[$x \/ (1 + abs(x))$ es un homeomorfismo; la identidad de $(RR, delta)$ en $(RR, abs(dot))$ no (Ejemplo 5.30)][40][
+  #set enum(numbering: "a)")
+  + Sea $h : (RR, abs(dot)) -> ((-1, 1), abs(dot))$ la función $h(x) = x / (1 + abs(x))$ (esta función la usamos en el capítulo de cardinalidad para probar que $RR$ y el intervalo $(-1, 1)$ son coordinables). Veamos que $h$ es un homeomorfismo.
+  + Sea $f : (RR, delta) -> (RR, abs(dot))$ la función $f(x) = x$, $delta$ la métrica discreta. Entonces $f$ no es un homeomorfismo.
+]
+
+#resolucion[
+  #set enum(numbering: "a)")
+  + - $h$ es continua por ser cociente de dos funciones continuas cuyo denominador no se anula.
+    - $h$ es biyectiva, porque podemos calcular su inversa $h^(-1)(y) = y / (1 - abs(y))$ y se cumple que $(h compose h^(-1))(y) = y$, $(h^(-1) compose h)(x) = x$.
+    - $h^(-1)$ es continua, dado que también es cociente de funciones continuas cuyo denominador no se anula.
+
+  + - $f$ es uniformemente continua, dado que sale de un espacio métrico con la métrica discreta.
+    - $f$ es biyectiva y su inversa es $f^(-1)(x) = x$.
+    - $f^(-1) : (RR, abs(dot)) -> (RR, delta)$, $f^(-1)(x) = x$ *no* es continua. Sea $x in RR$ cualquiera y tomemos $x_n = x + 1/n$. Entonces sabemos que $x_n -> x$ en $(RR, abs(dot))$ pero $delta(x_n, x) = 1$ para todo $n in NN$. Esto nos dice que $f^(-1)$ no puede ser continua.
+]
+
+#observacion[Qué resultado se usa en b)][
+  El último ítem es la contrarrecíproca del Teorema 5.7 (caracterización de continuidad por sucesiones): si existe *una* sucesión $x_n -> x$ con $f^(-1)(x_n) arrow.not f^(-1)(x)$, entonces $f^(-1)$ no es continua en $x$. Como $x_n != x$ para todo $n$, $delta(f^(-1)(x_n), f^(-1)(x)) = delta(x_n, x) = 1 arrow.not 0$. En la métrica discreta las únicas sucesiones convergentes son las eventualmente constantes (Ejemplo 4.45).
+]
+
+#ejemplo[$x + 1$ es una isometría de $RR_(>= 0)$ que no es sobreyectiva (Ejemplo 5.35)][41][
+  Consideremos $f : (RR_(>= 0), abs(dot)) -> (RR_(>= 0), abs(dot))$ la función $f(x) = x + 1$. Entonces $f$ es una isometría:
+  $ abs(f(x) - f(y)) = abs((x + 1) - (y + 1)) = abs(x - y). $
+  Sin embargo, es fácil ver que $f$ no es sobreyectiva; de hecho $op("Im")(f) = [1, +infinity)$. Por lo que vimos en la observación anterior (Observación 5.34), lo que podemos concluir es que $f$ es un homeomorfismo si la pensamos como $f : RR_(>= 0) -> RR_(>= 1)$.
 ]

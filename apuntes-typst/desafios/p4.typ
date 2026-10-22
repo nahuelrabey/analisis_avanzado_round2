@@ -29,7 +29,7 @@
 Los desafíos están ordenados según *qué hay que hacer primero para desbloquear la guía*: cada bloque
 supone resueltos los de arriba, y van en el orden de los ejercicios de `guias/p4.typ` que desbloquean.
 La idea es intercalar: hacer cada bloque justo antes de los ejercicios de su última columna. Los
-bloques 7 a 9 no alimentan ningún ejercicio de la guía (son teoría y ejemplos de las notas), así
+bloques 7 a 10 no alimentan ningún ejercicio de la guía (son teoría y ejemplos de las notas), así
 que van al final.
 
 #v(5pt)
@@ -56,6 +56,7 @@ que van al final.
     [7], [Extensión de uniformemente continuas desde un denso], [--- (Teo. 5.22; requiere Ej. 7 (a))],
     [8], [Puntos aislados en $(NN, abs(dot))$], [--- (Ejemplo 5.5 c))],
     [9], [El espacio métrico $(M_2(RR), d_oo)$], [--- (Ejemplo 5.11)],
+    [10], [Homeomorfismos], [--- (Sección 5.2; usa Bloque 3)],
   )
 ]
 
@@ -202,4 +203,25 @@ que van al final.
   Sea
   $ G l_2(RR) = {A in M_2(RR) : A "es una matriz inversible"} subset.eq (M_2(RR), d_oo). $
   Probar que $G l_2(RR)$ es un conjunto abierto usando solo la definición: no es imposible, pero es mucho más difícil que usar el Teorema 5.9 con $G l_2(RR) = scripts(det)^(-1)(RR without {0})$.
+]
+
+== Bloque 10 · Homeomorfismos
+
+#sublema(titulo: "Qué desbloquea")[
+  Usar la Definición 5.29 en el caso más simple: la identidad de $RR^n$ entre dos de las métricas $d_1$, $d_2$, $d_oo$. Es la versión "en las dos direcciones" del Bloque 3: ahí se cambiaba la métrica del dominio de una $f$ continua, acá se pide que la identidad y su inversa sean continuas. No alimenta ningún ejercicio de la guía (sale de la Sección 5.2 de las notas).
+]
+
+#desafio[La identidad entre $d_1$, $d_2$ y $d_oo$ es un homeomorfismo (Ejercicio 5.31)][
+  *Definición 5.29.* Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M -> N$ una función. Decimos que $f$ es un _homeomorfismo_ si $f$ es continua, biyectiva y $f^(-1) : N -> M$ es también continua. Si existe un homeomorfismo $f : M -> N$ decimos que $M$ y $N$ son espacios _homeomorfos_.
+
+  Sea $op("id") : RR^n -> RR^n$ la función $op("id")(x) = x$. Ver que si la pensamos como
+  $ op("id") : (RR^n, d_1) -> (RR^n, d_2), quad op("id") : (RR^n, d_2) -> (RR^n, d_oo) \
+    "o" quad op("id") : (RR^n, d_1) -> (RR^n, d_oo) $
+  siempre nos da un homeomorfismo.
+]
+
+#desafio[La composición de homeomorfismos es un homeomorfismo (Ejercicio 5.32)][
+  #set enum(numbering: "1.")
+  + Sean $f : (M, d) -> (N, d')$ y $g : (N, d') -> (X, d'')$ dos homeomorfismos. Ver que la composición $g compose f$ es también un homeomorfismo.
+  + Concluir que si definimos la relación $(M, d) tilde (N, d')$ si $(M, d)$ y $(N, d')$ son homeomorfos, entonces $tilde$ es una relación de equivalencia.
 ]

@@ -1970,3 +1970,28 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
   $ "Lipschitz" ==> "uniformemente continua" ==> "continua", $
   y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = sqrt(x)$ es uniformemente continua pero no Lipschitz).
 ]
+
+#definicion[Homeomorfismo][5.29][
+  Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M -> N$ una función. Decimos que $f$ es un _homeomorfismo_ si $f$ es continua, biyectiva y $f^(-1) : N -> M$ es también continua.
+
+  Si existe un homeomorfismo $f : M -> N$ decimos que $M$ y $N$ son espacios _homeomorfos_.
+]
+
+#definicion[Isometría][5.33][
+  Sean $(M, d)$ y $(N, d')$ espacios métricos y sea $f : M -> N$ una función. Decimos que $f$ es una _isometría_ si
+  $ d'(f(x), f(y)) = d(x, y) quad "para todo " x, y in M. $
+]
+
+En particular, una isometría es siempre una función Lipschitz de constante $1$ (y por lo tanto es uniformemente continua).
+
+#observacion[Una isometría es un homeomorfismo con su imagen][5.34][
+  Veamos que si $f : (M, d) -> (N, d')$ es una isometría entonces $f : (M, d) -> (op("Im")(f), d') subset.eq (N, d')$ es un homeomorfismo:
+
+  - $f$ es continua, dado que es Lipschitz de constante $1$.
+  - $f$ siempre es inyectiva: si $f(x) = f(y)$, entonces
+    $ 0 = d'(f(x), f(y)) = d(x, y) => x = y. $
+    En principio no podemos garantizar que $f$ sea sobreyectiva y por esto es que no decimos que $f$ sea un homeomorfismo con $N$, sino con su imagen dentro de $N$.
+  - $f^(-1) : op("Im")(f) -> M$ es continua. Si $z, w in op("Im")(f)$ tenemos que existen $x, y in M$ tal que $f(x) = z$ y $f(y) = w$. Pero entonces
+    $ d(f^(-1)(z), f^(-1)(w)) = d(x, y) = d'(f(x), f(y)) = d'(z, w), $
+    lo que nos dice que $f^(-1)$ es también una isometría y por lo tanto continua (y Lipschitz).
+]

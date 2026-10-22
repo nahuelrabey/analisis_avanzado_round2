@@ -1,0 +1,1437 @@
+<title>Ejemplos de continuidad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: una columna de bloques; cada ejemplo es una ficha con el texto a la izquierda y su dibujo interactivo a la derecha (apilados en pantallas angostas). Misma familia visual que las otras páginas de visualizaciones/. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.22);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.18);
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.14);
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.28);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.22); --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.28);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.22); --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 2rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.45rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+  h2 .bn { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  h3 { font-size: 1.2rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+  ol.items, ul.items { margin: 0 0 0.8rem; padding-left: 1.4rem; }
+  ol.items { list-style: lower-alpha; }
+  ol.items li, ul.items li { margin-bottom: 0.35rem; }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-ui); font-size: 0.86rem; }
+  .toc a { display: inline-block; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.25rem 0.8rem; background: var(--panel); }
+  .toc a:hover { border-color: var(--accent); color: var(--accent); }
+  .toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toc .k { color: var(--muted); margin-right: 0.35rem; font-variant-numeric: tabular-nums; }
+
+  .block { display: grid; gap: 1.2rem; scroll-margin-top: 1rem; }
+  .unlock { max-width: 78ch; color: var(--muted); margin: 0; }
+  .unlock b { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; scroll-margin-top: 1rem; min-width: 0; }
+  .ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
+  .tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0.05rem 0.4rem; white-space: nowrap; }
+  .src { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .ex-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 1.4rem; align-items: start; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+  .ex-text { min-width: 0; }
+  .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin-bottom: 1rem; }
+  .sol p:last-child, .enun p:last-child { margin-bottom: 0; }
+  .nota { font-size: 0.95rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.6rem; margin-top: 0.8rem; }
+  .nota b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .viz { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 0.6rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; }
+  @media (max-width: 900px) { .viz { position: static; } }
+  .viz canvas { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); }
+  .ctrl { display: grid; gap: 0.45rem; }
+  .slider { display: grid; grid-template-columns: minmax(4.5rem, auto) minmax(0, 1fr) 3.8rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; }
+  .pills label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.85rem; }
+  .pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .pills label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pills label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.1rem 0.9rem; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .read dt { color: var(--muted); }
+  .read dd { margin: 0; overflow-wrap: anywhere; }
+  .read .good { color: var(--ok); }
+  .read .bad { color: var(--fail); }
+  .viz figcaption { color: var(--muted); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.5; }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(460px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.96rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  #popup .agent { font-size: 0.88rem; color: var(--muted); }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 440px; visibility: hidden; }
+  a { color: var(--accent); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header>
+    <p class="eyebrow">Análisis Avanzado · Práctica 4 · Funciones continuas</p>
+    <h1>Ejemplos de continuidad</h1>
+    <p class="intro">Los 22 ejemplos resueltos de <code>ejemplos/p4.typ</code>, en el mismo orden por bloques. Cada uno trae un dibujo que se puede mover con los controles. Las palabras <span class="ref" data-ref="uso" tabindex="0">subrayadas así</span> muestran el enunciado que se está usando: pasá el mouse por encima, o tocalas para dejarlo fijo.</p>
+    <p class="intro" style="color: var(--muted); font-size: 0.95rem;">Etiquetas: un número es el ejemplo de <code>notas_materia.pdf</code>; <code>C6-k</code> y <code>C9-k</code> son ejercicios resueltos en clase (23/10 y 07/10).</p>
+  </header>
+
+  <nav aria-label="Bloques">
+    <ul class="toc">
+      <li><a href="#b1"><span class="k">1</span>Imagen y preimagen</a></li>
+      <li><a href="#b2"><span class="k">2</span>Continuidad ε–δ</a></li>
+      <li><a href="#b3"><span class="k">3</span>Sucesiones y abiertos</a></li>
+      <li><a href="#b4"><span class="k">4</span>Productos y proyecciones</a></li>
+      <li><a href="#b5"><span class="k">5</span>Lipschitz</a></li>
+      <li><a href="#b6"><span class="k">6</span>Continuidad uniforme</a></li>
+      <li><a href="#b7"><span class="k">7</span>Densos</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================= BLOQUE 1 ================= -->
+  <section class="block" id="b1">
+    <h2><span class="bn">Bloque 1</span>Imagen y preimagen de conjuntos</h2>
+    <p class="unlock"><b>Desbloquea</b> Calcular imágenes y preimágenes de conjuntos concretos (<span class="ref" data-ref="def51" tabindex="0">Definición 5.1</span>). Es el vocabulario de la caracterización de continuidad por preimágenes. Guía: Ej. 1 (base).</p>
+
+    <article class="ex" id="ex-33">
+      <div class="ex-head"><span class="tag">33</span><span class="src">Ejemplo 5.2</span></div>
+      <h3>Imagen y preimagen por $f(n) = n^2$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f : \mathbb{Z} \to \mathbb{N}$, $f(n) = n^2$. Si $A = \{1, 3, 4\}$ y $B = \{1, 3, 4\}$, entonces
+          $$f(A) = \{1, 9, 16\} \subseteq \mathbb{N}, \qquad f^{-1}(B) = \{1, -1, 2, -2\} \subseteq \mathbb{Z}.$$</p></div>
+          <div class="sol">
+            <p class="lbl">Observación</p>
+            <p>$3 \notin \operatorname{img}(f)$, porque ningún $n \in \mathbb{Z}$ cumple $n^2 = 3$. Así que el $3$ no aporta nada a la preimagen:
+            $$f^{-1}(B) = f^{-1}(B \setminus \{3\}).$$</p>
+            <p>En general $B \subseteq N$ no tiene por qué estar contenido en la imagen, y vale $f^{-1}(B) = f^{-1}(B \cap \operatorname{img}(f))$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v33">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Arriba $\mathbb{Z}$, abajo $\mathbb{N}$, una flecha por cada $n$. La imagen sigue las flechas que salen de $A$. La preimagen junta las flechas que llegan a $B$: al $3$ no llega ninguna.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 2 ================= -->
+  <section class="block" id="b2">
+    <h2><span class="bn">Bloque 2</span>Continuidad por definición ($\varepsilon$–$\delta$)</h2>
+    <p class="unlock"><b>Desbloquea</b> Leer la <span class="ref" data-ref="def54" tabindex="0">Definición 5.4</span> en casos concretos: en $\mathbb{R}$ y $\mathbb{R}^n$ es la de Análisis 1, y en un punto aislado cualquier función es continua. Guía: Ej. 1.</p>
+
+    <article class="ex" id="ex-34">
+      <div class="ex-head"><span class="tag">34</span><span class="src">Ejemplo 5.5</span></div>
+      <h3>Continuidad en $\mathbb{R}$, en puntos aislados, en $\mathbb{N}$ y en $\mathbb{R}^n$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun">
+            <ol class="items">
+              <li>$f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$ es continua en $x$ si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $|x - y| \lt \delta$ implica $|f(x) - f(y)| \lt \varepsilon$. Es la definición que ya conocemos.</li>
+              <li>Sea $f : (M, d) \to (N, d')$ y $x \in M$ un <span class="ref" data-ref="aislado" tabindex="0">punto aislado</span>: existe $r \gt 0$ con $B(x, r) = \{x\}$. Entonces $f$ es continua en $x$: dado $\varepsilon \gt 0$, tomando $\delta = r$,
+              $$f(B(x, r)) = f(\{x\}) = \{f(x)\} \subseteq B(f(x), \varepsilon).$$</li>
+              <li>Toda $f : (\mathbb{N}, |\cdot|) \to (M, d)$ es continua en todo $n \in \mathbb{N}$, porque en $(\mathbb{N}, |\cdot|)$ todos los puntos son aislados.</li>
+              <li>$f : (\mathbb{R}^n, d_2) \to (\mathbb{R}, |\cdot|)$ es continua en $x$ si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ con $\|x - y\| \lt \delta \Rightarrow |f(x) - f(y)| \lt \varepsilon$: otra vez la definición de Análisis 1.</li>
+            </ol>
+          </div>
+          <div class="sol">
+            <p class="lbl">Por qué funciona b)</p>
+            <p>Con $\delta = r$, si $d(x, y) \lt r$ entonces $y \in B(x, r) = \{x\}$, o sea $y = x$, y $d'(f(x), f(y)) = 0 \lt \varepsilon$. El único $y$ que hay que revisar es el propio $x$. Por eso en un espacio discreto <em>toda</em> función es continua.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v34">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Izquierda: $f(x) = x^2$ en $x_0 = 1$. Al achicar $\varepsilon$ (banda horizontal) hay que achicar $\delta$ (banda vertical). Derecha: una $f : \mathbb{N} \to \mathbb{R}$ cualquiera. La bola $B(3, \tfrac12)$ sólo contiene al $3$, así que $\delta = \tfrac12$ sirve para todo $\varepsilon$.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 3 ================= -->
+  <section class="block" id="b3">
+    <h2><span class="bn">Bloque 3</span>Continuidad por sucesiones y por preimágenes de abiertos</h2>
+    <p class="unlock"><b>Desbloquea</b> Usar las caracterizaciones en vez de la definición: el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span> (sucesiones) para probar continuidad, y el <span class="ref" data-ref="teo59" tabindex="0">Teorema 5.9</span> (preimágenes de abiertos) para probar que un conjunto es abierto. La clase del 07/10 arma la herramienta para no hacer cuentas: suma, producto, proyecciones y, con eso, polinomios. Guía: Ej. 1 (a), 4, 5.</p>
+
+    <article class="ex" id="ex-36">
+      <div class="ex-head"><span class="tag">36</span><span class="src">Ejemplo 5.11</span></div>
+      <h3>Continuidad del determinante y $GL_2(\mathbb{R})$ abierto</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>En $M_2(\mathbb{R}) = \left\{\begin{pmatrix} a & b \\ c & d \end{pmatrix}\right\}$ tomamos $d_\infty(A, B) = \max_{i,j} |a_{ij} - b_{ij}|$. Ver que $\det : (M_2(\mathbb{R}), d_\infty) \to (\mathbb{R}, |\cdot|)$ es continua y que $GL_2(\mathbb{R}) = \{A : A \text{ inversible}\}$ es abierto.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>El determinante es continuo.</b> Si $A_n = \begin{pmatrix} a_n & b_n \\ c_n & d_n \end{pmatrix} \to A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ en $d_\infty$, entonces $a_n \to a$, $b_n \to b$, $c_n \to c$, $d_n \to d$ en $\mathbb{R}$. Por el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span> alcanza con ver $\det(A_n) \to \det(A)$, y por <span class="ref" data-ref="alg" tabindex="0">álgebra de límites</span>
+            $$\det(A_n) = a_n d_n - b_n c_n \to ad - bc = \det(A).$$</p>
+            <p><b>$GL_2(\mathbb{R})$ es abierto.</b> Una matriz es inversible si y sólo si su determinante no es cero:
+            $$GL_2(\mathbb{R}) = \det^{-1}(\mathbb{R} \setminus \{0\}) = \det^{-1}\big((-\infty, 0) \cup (0, +\infty)\big),$$
+            preimagen de un abierto por una continua. Por el <span class="ref" data-ref="teo59" tabindex="0">Teorema 5.9</span>, es abierto.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v36">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Un corte de $M_2(\mathbb{R})$: matrices $\begin{pmatrix} a & 1 \\ 1 & d \end{pmatrix}$, con $a$ y $d$ en los ejes. Las singulares forman la hipérbola $ad = 1$. Alrededor de cada matriz inversible entra un cuadrado (la bola de $d_\infty$ en el corte) sin tocar la hipérbola. En el espacio completo, donde también se mueven $b$ y $c$, el radio que sirve es más chico, pero existe igual: eso dice el Teorema 5.9.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-1-1">
+      <div class="ex-head"><span class="tag">C9-1.1</span><span class="src">Clase 9 · Proposición 1.1</span></div>
+      <h3>Suma y producto de funciones continuas son continuas</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sean $f, g : X \to Y$ continuas. Entonces $f + g$ y $f \cdot g$ son continuas.</p>
+          <p class="nota" style="border:0;padding:0;margin:0"><b>Nota</b> Para que $f + g$ y $f \cdot g$ tengan sentido hace falta poder sumar y multiplicar en $Y$; se usa con $Y = \mathbb{R}$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Por el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span>: sea $x_n \to x$ en $X$. Entonces
+            $$\begin{aligned}\lim_{n} (f + g)(x_n) &= \lim_n \big(f(x_n) + g(x_n)\big) = \lim_n f(x_n) + \lim_n g(x_n) \\ &= f(x) + g(x) = (f + g)(x).\end{aligned}$$
+            La única igualdad que no sale de las definiciones es la tercera, que es <span class="ref" data-ref="alg" tabindex="0">álgebra de límites</span>. Para el producto es la misma cuenta con $\cdot$ en lugar de $+$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC911">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$f = \sin$ (azul), $g(x) = 0.4x$ (naranja) y $f + g$ (oscura). La sucesión $x_n = 1.2 + 1.2\,(-1)^n/n$ salta de un lado a otro de $x = 1.2$. Los tres valores $f(x_n)$, $g(x_n)$ y $(f+g)(x_n)$ se acercan a los de $x$ al mismo tiempo.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-1-2">
+      <div class="ex-head"><span class="tag">C9-1.2</span><span class="src">Clase 9 · Lema 1.2</span></div>
+      <h3>Las proyecciones $\pi_i : \mathbb{R}^n \to \mathbb{R}$ son continuas para $d_\infty$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>$\pi_i(x_1, \dots, x_n) = x_i$ es continua con la métrica $d_\infty$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Sea $(x^1_k, \dots, x^n_k) \to (x^1, \dots, x^n)$ en $d_\infty$. Por el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span> hay que ver que $x^i_k \to x^i$. Dado $\varepsilon \gt 0$ existe $n_0$ con $d_\infty\big((x^1_k, \dots, x^n_k), (x^1, \dots, x^n)\big) \le \varepsilon$ para $k \ge n_0$, y como $|x^i_k - x^i|$ es uno de los números cuyo máximo es $d_\infty$,
+            $$|x^i_k - x^i| \le d_\infty\big((x^1_k, \dots, x^n_k), (x^1, \dots, x^n)\big) \le \varepsilon.$$</p>
+            <p>El mismo paso vale con $d_1$ y $d_2$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC912">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>El cuadrado es la bola de $d_\infty$ centrada en el límite que pasa por $x_k$. Su sombra sobre el eje horizontal contiene a $x^1_k$: la distancia de la coordenada (tramo naranja) nunca supera al semilado del cuadrado.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-1-6">
+      <div class="ex-head"><span class="tag">C9-1.6</span><span class="src">Clase 9 · Proposición 1.6</span></div>
+      <h3>Los polinomios en varias variables son continuos</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Los <span class="ref" data-ref="def14" tabindex="0">polinomios en varias variables</span> son funciones continuas de $\mathbb{R}^n$ a $\mathbb{R}$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Un polinomio es sumas y productos de proyecciones $x_i = \pi_i(x_1, \dots, x_n)$, que son continuas por el <span class="ref" data-ref="lema12" tabindex="0">Lema 1.2</span>, y de constantes. Sumas y productos de continuas son continuas por la <span class="ref" data-ref="prop11" tabindex="0">Proposición 1.1</span>.</p>
+            <p class="nota"><b>Para qué sirve</b> En el Ej. 1 (a), $f(x, y) = x^2 + y^2$ es un polinomio: continua sin $\varepsilon$ ni $\delta$. En el Ej. 5 cada conjunto está descripto por desigualdades entre polinomios (o funciones armadas con polinomios, $\sin$, $\exp$).</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC916">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>El árbol de $P(x, y) = x^2 y + 3y - 2$. Las hojas son proyecciones o constantes. Cada nodo interno es una suma o un producto, así que es continuo apenas lo son sus dos hijos. Mové el paso para verlo subir hasta la raíz.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-2-1">
+      <div class="ex-head"><span class="tag">C9-2.1</span><span class="src">Clase 9 · Problema 2.1</span></div>
+      <h3>Un conjunto cerrado del plano como preimagen por un polinomio</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Probar que $A = \{(x, y) \in \mathbb{R}^2 : x^3 \ge x^2 + y - x\}$ es cerrado con $d_\infty$. Es la región por debajo de la curva $y = x^3 - x^2 + x$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Con $f(x, y) = x^3 - x^2 + x - y$,
+            $$A = \{(x, y) : f(x, y) \ge 0\} = f^{-1}\big([0, +\infty)\big).$$
+            $f$ es un polinomio, así que es continua (<span class="ref" data-ref="prop16" tabindex="0">Proposición 1.6</span>), y $A$ es preimagen de un cerrado por una continua: es cerrado (<span class="ref" data-ref="ej510" tabindex="0">Ejercicio 5.10</span>).</p>
+            <p class="nota"><b>Nota</b> El apunte escribe $f^{-1}((0, +\infty))$ y "preimagen de un abierto", pero $A$ está definido con $\ge$: es la preimagen del cerrado $[0, +\infty)$. Con $(0, +\infty)$ saldría el abierto $\{f \gt 0\}$, que no es $A$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC921">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Una sucesión $p_n \in A$ que converge a un punto del borde. Como $f(p_n) \ge 0$ y $f$ es continua, $f(\lim p_n) = \lim f(p_n) \ge 0$: el límite no se escapa de $A$ (<span class="ref" data-ref="cor447" tabindex="0">Corolario 4.47</span>).</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-2-2">
+      <div class="ex-head"><span class="tag">C9-2.2</span><span class="src">Clase 9 · Problema 2.2</span></div>
+      <h3>$\operatorname{GL}_n(\mathbb{R})$ es abierto en $\operatorname{M}_n(\mathbb{R})$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Probar que $\operatorname{GL}_n(\mathbb{R})$ es abierto en $\operatorname{M}_n(\mathbb{R}) = \mathbb{R}^{n \times n}$ con $d_\infty$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>$\operatorname{GL}_n(\mathbb{R}) = \{A : \det(A) \ne 0\} = \det^{-1}(\mathbb{R} \setminus \{0\})$. Alcanza con ver que $\det : \mathbb{R}^{n \times n} \to \mathbb{R}$ es continua, y es más: es un polinomio en las entradas.</p>
+            <p>Por inducción en $n$. $\det_1$ es la identidad. Si $\det_n$ es un polinomio, el <span class="ref" data-ref="cof" tabindex="0">desarrollo por cofactores</span>
+            $$\det_{n+1}(A) = \sum_{j=1}^{n+1} (-1)^{1+j} a_{1j} \det_n(A_{1j})$$
+            escribe $\det_{n+1}$ como suma de productos de una entrada por un $\det_n$: es un polinomio.</p>
+            <p>Los polinomios son continuos (<span class="ref" data-ref="prop16" tabindex="0">C9-1.6</span>), así que $\operatorname{GL}_n(\mathbb{R})$ es preimagen de un abierto por una continua, y es abierto (<span class="ref" data-ref="teo59" tabindex="0">Teorema 5.9</span>).</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC922">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Una matriz $A$ de $3 \times 3$ con $\det A = 3$ y 400 matrices sorteadas en la bola $B_\infty(A, r)$. Cada punto es el determinante de una de ellas. Con $r$ chico quedan todas lejos del $0$; al agrandar $r$ alguna llega a $\det \le 0$. Es una muestra, no una prueba: la prueba es la continuidad.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 4 ================= -->
+  <section class="block" id="b4">
+    <h2><span class="bn">Bloque 4</span>Continuidad en productos y proyecciones</h2>
+    <p class="unlock"><b>Desbloquea</b> Trabajar en $X \times Y$ con $d_\infty(p, q) = \max\{d_1(x_p, x_q), d_2(y_p, y_q)\}$: las proyecciones son continuas y abiertas (no cerradas), y una función al producto es continua si y sólo si lo son sus coordenadas. Guía: Ej. 1 (a), 4, 5.</p>
+
+    <article class="ex" id="ex-C6-1">
+      <div class="ex-head"><span class="tag">C6-1</span><span class="src">Clase 6 · Ejemplo 1</span></div>
+      <h3>Proyecciones de $X \times Y$ y continuidad coordenada a coordenada</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sean $(X, d_1)$, $(Y, d_2)$ espacios métricos y $X \times Y$ con $d_\infty$. Los puntos de $X \times Y$ se llaman $p = (x_p, y_p)$, $q = (x_q, y_q)$.</p>
+            <ol class="items">
+              <li>Probar que $\pi_1(p) = x_p$ y $\pi_2(p) = y_p$ son continuas y <span class="ref" data-ref="defab" tabindex="0">abiertas</span>, pero pueden no ser cerradas.</li>
+              <li>Sea $f : Z \to X \times Y$. Probar que $f$ es continua si y sólo si $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$ lo son.</li>
+            </ol>
+          </div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a) Continua.</b> $d_1(x_q, x_p) \le \max\{d_1(x_q, x_p), d_2(y_q, y_p)\} = d_\infty(q, p)$, así que $\delta = \varepsilon$ sirve.</p>
+            <p><b>Abierta, paso 1: la proyección de una bola es una bola.</b>
+            $$B(p, r) = \{q : d_1(x_q, x_p) \lt r \text{ y } d_2(y_q, y_p) \lt r\},$$
+            y $\pi_1(B(p, r)) = B(x_p, r)$. ($\subseteq$) todo $x$ de la proyección cumple $d_1(x, x_p) \lt r$. ($\supseteq$) si $d_1(x, x_p) \lt r$, el punto $q = (x, y_p)$ está en $B(p, r)$ y $\pi_1(q) = x$.</p>
+            <p><b>Paso 2: de bolas a abiertos.</b> Si $U$ es abierto, $U = \bigcup_{p \in U} B(p, r_p)$, y
+            $$\pi_1(U) = \bigcup_{p \in U} \pi_1(B(p, r_p)) = \bigcup_{p \in U} B(x_p, r_p),$$
+            unión de abiertos (<span class="ref" data-ref="teo417" tabindex="0">Teorema 4.17</span>).</p>
+            <p><b>No cerrada.</b> En $\mathbb{R}^2$, $F = \{q : x_q y_q = 1\}$ es cerrado: es $f^{-1}(\{1\})$ con $f(q) = x_q y_q$ continua. Pero $\pi_1(F) = \mathbb{R} \setminus \{0\}$ no es cerrado. El problema: si $x_n \to x$ con $x_n \in \pi_1(F)$, las segundas coordenadas de los $q_n \in F$ no tienen por qué converger.</p>
+            <p><b>b)</b> Si $f$ es continua, $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$ son composición de continuas. Recíprocamente, por el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span>: si $z_n \to z_0$, existen $n_1, n_2$ con $d_1(f_1(z_0), f_1(z_n)) \lt \varepsilon$ para $n \ge n_1$ y $d_2(f_2(z_0), f_2(z_n)) \lt \varepsilon$ para $n \ge n_2$. Para $n \ge \max\{n_1, n_2\}$,
+            $$d_\infty(f(z_0), f(z_n)) = \max\{d_1(\cdot), d_2(\cdot)\} \lt \varepsilon.$$</p>
+            <p class="nota"><b>Consecuencia</b> En $X \times Y$ con $d_\infty$, $(x_n, y_n) \to (x, y)$ si y sólo si $x_n \to x$ e $y_n \to y$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC61">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>"Bola": la bola de $d_\infty$ es un cuadrado y su sombra es el intervalo abierto $B(x_p, r)$; el disco punteado (la bola euclídea del manuscrito) tiene la misma sombra. "Hipérbola": los puntos $(1/n, n)$ están en $F$, sus sombras $1/n \to 0$, pero las alturas se van a infinito y $0 \notin \pi_1(F)$.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 5 ================= -->
+  <section class="block" id="b5">
+    <h2><span class="bn">Bloque 5</span>Funciones Lipschitz</h2>
+    <p class="unlock"><b>Desbloquea</b> Usar la <span class="ref" data-ref="def524" tabindex="0">Definición 5.24</span>: el valor medio da la constante cuando la derivada es acotada, la negación cuantificada da contraejemplos con sucesiones, y la cota de integrales por el supremo sirve para operadores en $C([0,1])$. <span class="ref" data-ref="ej525" tabindex="0">Lipschitz implica uniformemente continua</span>. Guía: Ej. 9, 12.</p>
+
+    <article class="ex" id="ex-C6-2">
+      <div class="ex-head"><span class="tag">C6-2</span><span class="src">Clase 6 · Ejemplo 2</span></div>
+      <h3>Derivada acotada implica Lipschitz</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f : (a, b) \to \mathbb{R}$ derivable con derivada acotada. Probar que $f$ es Lipschitz.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Dados $x \lt y$ en $(a, b)$, por el <span class="ref" data-ref="tvm" tabindex="0">teorema del valor medio</span> existe $c \in (x, y)$ con
+            $$|f(x) - f(y)| = |f'(c)| \cdot |x - y|.$$
+            Si $|f'| \le M$ en $(a, b)$, queda $|f(x) - f(y)| \le M |x - y|$.</p>
+            <p><b>Ejemplo.</b> $f(x) = x^3$ en $(0, 1)$: $|f(x) - f(y)| = 3c^2 |x - y| \le 3 |x - y|$, porque $c \in (0, 1)$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC62">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$f(x) = x^3$ en $(0, 1)$. La secante entre $x$ e $y$ (naranja) es paralela a la tangente en algún $c$ intermedio (punteada). El gráfico nunca sale del cono de pendientes $\pm 3$ apoyado en $(x, f(x))$.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C6-3">
+      <div class="ex-head"><span class="tag">C6-3</span><span class="src">Clase 6 · Ejemplo 3</span></div>
+      <h3>$x \sin(1/x)$ es continua en $0$ pero no es Lipschitz cerca de $0$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f(x) = x \sin(1/x)$ si $x \ne 0$, $f(0) = 0$.</p>
+            <ol class="items"><li>Probar que $f$ es continua en $0$.</li><li>Probar que $f$ no es Lipschitz en ningún intervalo que contenga al $0$.</li></ol></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a)</b> $|f(x) - f(0)| = |x \sin(1/x)| \le |x| \lt \varepsilon$ si $|x| \lt \delta \le \varepsilon$.</p>
+            <p><b>b)</b> No ser Lipschitz en $I$ es: para todo $M \gt 0$ existen $x_M, y_M \in I$ con $|f(x_M) - f(y_M)| \gt M |x_M - y_M|$. Alcanza con sucesiones y constantes $M_n \to +\infty$. Sean
+            $$x_n = \frac{1}{\pi/2 + 2\pi n}, \qquad y_n = \frac{1}{3\pi/2 + 2\pi n}.$$
+            Como $\sin(\pi/2 + 2\pi n) = 1$ y $\sin(3\pi/2 + 2\pi n) = -1$,
+            $$\begin{aligned}|f(x_n) - f(y_n)| &= x_n + y_n = \frac{2\pi + 4\pi n}{(\pi/2 + 2\pi n)(3\pi/2 + 2\pi n)} \\ &= (2 + 4n)\,|x_n - y_n| = M_n |x_n - y_n|,\end{aligned}$$
+            con $M_n = 2 + 4n \to +\infty$.</p>
+            <p class="nota"><b>Nota</b> $x_n, y_n \to 0$, así que están en $I$ para $n$ grande, y con esos $n$ alcanza.</p>
+            <p class="nota"><b>Observación</b> En $[-1, 1]$ esta $f$ es uniformemente continua pero no Lipschitz: la vuelta de <span class="ref" data-ref="obs528" tabindex="0">Lipschitz ⟹ UC</span> es falsa.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC63">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Zoom hacia el $0$ siguiendo el par $(x_n, y_n)$: $x_n$ cae en una cresta ($f = x$) e $y_n$ en un valle ($f = -x$). Los dos puntos se acercan, pero la secante que los une es cada vez más empinada.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C6-4">
+      <div class="ex-head"><span class="tag">C6-4</span><span class="src">Clase 6 · Ejemplo 4</span></div>
+      <h3>$\Psi(f)(x) = x f(x)$ de $(C([0,1]), d_\infty)$ en $(C([0,1]), d_1)$ es Lipschitz</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $\Psi : (C([0,1]), d_\infty) \to (C([0,1]), d_1)$, $(\Psi(f))(x) = x f(x)$. Decidir si $\Psi$ es Lipschitz.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>$$\begin{aligned} d_1(\Psi(f), \Psi(g)) &= \int_0^1 |x\,(f(x) - g(x))|\,dx \le \int_0^1 |x|\,|f(x) - g(x)|\,dx \\ &\le \int_0^1 \sup_{x \in [0,1]} |f(x) - g(x)|\,dx = d_\infty(f, g).\end{aligned}$$
+            Entonces $\Psi$ es <span class="ref" data-ref="def524" tabindex="0">Lipschitz</span> de constante $1$, y en particular <span class="ref" data-ref="ej525" tabindex="0">uniformemente continua</span>.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC64">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Arriba $f$ y $g = f + $ un pico de altura $0.5$, así que $d_\infty(f, g) = 0.5$. Abajo, el área clara es $\int |f - g|$ y la oscura es $\int x\,|f - g| = d_1(\Psi f, \Psi g)$. Las dos quedan por debajo de la línea $d_\infty$. Moviendo el pico hacia el $0$, el factor $x$ lo aplasta todavía más.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-39">
+      <div class="ex-head"><span class="tag">39</span><span class="src">Ejemplo 5.26</span></div>
+      <h3>$\cos$, $\sqrt{x}$ en $[1, +\infty)$ y la integral son Lipschitz; $\sqrt{x}$ en $[0, +\infty)$ no</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun">
+            <ol class="items">
+              <li>$f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$, $f(x) = \cos(x)$.</li>
+              <li>$f : ([1, +\infty), |\cdot|) \to (\mathbb{R}, |\cdot|)$, $f(x) = \sqrt{x}$.</li>
+              <li>$F : (C([0,1]), d_\infty) \to (C([0,1]), d_\infty)$, $F(f)(x) = \int_0^x f(t)\,dt$.</li>
+            </ol>
+          </div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a)</b> Por el <span class="ref" data-ref="tvm" tabindex="0">valor medio</span>, $|\cos x - \cos y| = |\sin z|\,|x - y| \le |x - y|$: constante $1$.</p>
+            <p><b>b)</b> $|\sqrt{x} - \sqrt{y}| = \frac{1}{2\sqrt{z}}|x - y| \le \frac12 |x - y|$, porque $z \ge 1$: constante $\tfrac12$.</p>
+            <p>En $[0, +\infty)$ no es Lipschitz. Si tuviera constante $C$, tomamos $x \gt 0$ con $\frac{1}{2\sqrt{x}} \gt C$ y $0 \lt y \lt x$. Por valor medio, con $y \lt z \lt x$,
+            $$|\sqrt{x} - \sqrt{y}| = \tfrac{1}{2\sqrt{z}}|x - y| \ge \tfrac{1}{2\sqrt{x}}|x - y| \gt C|x - y|,$$
+            absurdo.</p>
+            <p><b>c)</b> $$\begin{aligned}|F(f)(x) - F(g)(x)| &= \Big|\int_0^x (f - g)\Big| \le \int_0^x |f - g| \\ &\le x\, d_\infty(f, g) \le d_\infty(f, g),\end{aligned}$$
+            y tomando supremo en $x$, $d_\infty(F(f), F(g)) \le d_\infty(f, g)$: constante $1$. Este ítem tiene su propia <a href="https://claude.ai/artifact/GAwS569YAMdrDX6YuWnQ23" target="_blank" rel="noopener">visualización paso a paso</a>.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v39">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Elegí la función y mové $x$, $y$. Para $\sqrt{x}$ la pendiente de la secante es $\frac{1}{\sqrt{x} + \sqrt{y}}$: en la zona sombreada $[1, \infty)$ no pasa de $\tfrac12$, pero cerca del $0$ se dispara. Para $\cos$ la secante nunca sale del cono de pendientes $\pm 1$.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 6 ================= -->
+  <section class="block" id="b6">
+    <h2><span class="bn">Bloque 6</span>Continuidad uniforme: ejemplos, contraejemplos y pegado</h2>
+    <p class="unlock"><b>Desbloquea</b> Decidir <span class="ref" data-ref="def514" tabindex="0">continuidad uniforme</span>. Por la vía positiva: Lipschitz, o un $\delta$ que no depende del punto. Por la negativa (<span class="ref" data-ref="obs516" tabindex="0">Observación 5.16</span>): dos sucesiones con $|x_n - y_n| \to 0$ pero $|f(x_n) - f(y_n)| \ge \varepsilon$. Además, dos resultados de pegado. Guía: Ej. 13, 14, 15, 16.</p>
+
+    <article class="ex" id="ex-C6-5">
+      <div class="ex-head"><span class="tag">C6-5</span><span class="src">Clase 6 · Ejemplo 5</span></div>
+      <h3>$\sin(x)$ es uniformemente continua en $\mathbb{R}$; $x^2$ no lo es en $(0, +\infty)$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Decidir si son uniformemente continuas: <b>a)</b> $\sin : \mathbb{R} \to \mathbb{R}$; <b>b)</b> $f : (0, +\infty) \to \mathbb{R}$, $f(x) = x^2$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a)</b> Por <span class="ref" data-ref="tvm" tabindex="0">valor medio</span>, $|\sin x - \sin y| = |\cos c|\,|x - y| \le |x - y|$. Es Lipschitz, luego <span class="ref" data-ref="ej525" tabindex="0">uniformemente continua</span>.</p>
+            <p><b>b)</b> Hay que encontrar $\varepsilon \gt 0$ y sucesiones con $|x_n - y_n| \to 0$ pero $|f(x_n) - f(y_n)| \ge \varepsilon$ (<span class="ref" data-ref="prop518" tabindex="0">Proposición 5.18</span>). El problema está en $+\infty$. Con $x_n = n$, $y_n = n + 1/n$: $|x_n - y_n| = 1/n \to 0$, pero
+            $$|f(x_n) - f(y_n)| = \big|n^2 - (n + \tfrac1n)^2\big| = 2 + \tfrac{1}{n^2} \gt 2.$$
+            Con $\varepsilon = 2$, no es uniformemente continua.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC65">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>El mismo par $(n,\, n + 1/n)$ para las dos funciones, en una ventana que sigue a $n$. Para $x^2$ el salto vertical no baja de $2$ aunque los puntos se peguen; para $\sin$ el salto se achica junto con $1/n$.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C6-6">
+      <div class="ex-head"><span class="tag">C6-6</span><span class="src">Clase 6 · Ejemplo 6</span></div>
+      <h3>Producto de uniformemente continuas y acotadas</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sean $f, g : X \to \mathbb{R}$ uniformemente continuas y acotadas. Probar que $f \cdot g$ es uniformemente continua. Mostrar que el producto puede no serlo <em>aunque una de ellas sea acotada</em>. [Sugerencia: $x \sin(x)$.]</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Dado $\varepsilon' \gt 0$ hay $\delta_1, \delta_2$ con $|f(x) - f(y)| \lt \varepsilon'$ si $d(x, y) \lt \delta_1$ y $|g(x) - g(y)| \lt \varepsilon'$ si $d(x, y) \lt \delta_2$. Sumando y restando $f(y) g(x)$,
+            $$\begin{aligned}|f(x) g(x) - f(y) g(y)| &\le |g(x)|\,|f(x) - f(y)| + |f(y)|\,|g(x) - g(y)| \\ &\le (M_1 + M_2)\,\varepsilon'\end{aligned}$$
+            si $d(x, y) \lt \min\{\delta_1, \delta_2\}$, con $|g| \le M_1$, $|f| \le M_2$. Se toma $\varepsilon' \lt \varepsilon / (M_1 + M_2)$.</p>
+            <p><b>Hace falta acotada.</b> $f(x) = x \sin x$ es $\operatorname{id}_{\mathbb{R}}$ (UC, no acotada) por $\sin$ (UC y acotada). Con $x_n = \pi + 2\pi n$, $y_n = x_n + 1/n$:
+            $$|f(x_n) - f(y_n)| = \underbrace{\pi \sin\tfrac1n}_{\to 0} + \underbrace{2\pi n \sin\tfrac1n}_{\to 2\pi} + \underbrace{\tfrac1n \sin\tfrac1n}_{\to 0} \to 2\pi,$$
+            aunque $|x_n - y_n| = 1/n \to 0$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC66">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$x \sin x$ entre las rectas $\pm x$. En $x_n = \pi + 2\pi n$ la función cruza el cero con pendiente $\approx -x_n$. Por eso avanzar $1/n$ baja casi $x_n/n \approx 2\pi$, aunque el paso horizontal se achique.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C6-7">
+      <div class="ex-head"><span class="tag">C6-7</span><span class="src">Clase 6 · Ejemplo 7</span></div>
+      <h3>Pegado de continuidad uniforme en $[0, a]$ y $[a, +\infty)$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f : [0, +\infty) \to \mathbb{R}$ y $a \gt 0$ tal que $f|_{[0,a]}$ y $f|_{[a,+\infty)}$ son uniformemente continuas. Probar que $f$ es uniformemente continua.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Sean $\delta_1$, $\delta_2$ los de cada trozo para $\varepsilon'$. Si $x, y$ están en el mismo trozo, listo. Si $x \le a \le y$ y $|x - y| \lt \delta \lt \min\{\delta_1, \delta_2\}$:
+            $$\begin{aligned}|x - a| &= a - x \le y - x \lt \delta_1 \;\Rightarrow\; |f(x) - f(a)| \lt \varepsilon', \\ |y - a| &= y - a \le y - x \lt \delta_2 \;\Rightarrow\; |f(y) - f(a)| \lt \varepsilon'.\end{aligned}$$
+            Por la triangular, $|f(x) - f(y)| \lt 2\varepsilon'$, y alcanza con $\varepsilon' \le \varepsilon/2$.</p>
+            <p class="nota"><b>Nota</b> El manuscrito cierra con "tomando $\varepsilon' \lt 2\varepsilon$"; para que $2\varepsilon' \le \varepsilon$ hay que tomar $\varepsilon' \le \varepsilon/2$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC67">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Dos trozos pegados en $a = 1$. Cuando $x$ e $y$ quedan a ambos lados de $a$, el punto $a$ hace de puente: $x$ y $a$ están en el primer trozo y a distancia menor que $|x - y|$, lo mismo $a$ e $y$ en el segundo. Los dos saltos chicos suman el salto total.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C6-8">
+      <div class="ex-head"><span class="tag">C6-8</span><span class="src">Clase 6 · Ejemplo 8</span></div>
+      <h3>Pegado de continuidad uniforme en $A \cup B$ con $d(A, B) \gt 0$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f : X \to Y$ con $X = A \cup B$ y $d(A, B) \gt 0$. Si $f|_A$ y $f|_B$ son uniformemente continuas, $f$ es uniformemente continua.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Sean $\delta_A$, $\delta_B$ los de cada pieza. Tomemos $\delta \lt \min\{\delta_A, \delta_B, d(A, B)\}$. Si $x \in A$, $y \in B$ y $d(x, y) \lt \delta$, entonces
+            $$d(A, B) \le d(x, y) \lt \delta \lt d(A, B),$$
+            absurdo. Así que $d(x, y) \lt \delta$ obliga a que $x, y$ estén en la misma pieza, y ahí vale la continuidad uniforme de esa pieza.</p>
+            <p class="nota"><b>Nota</b> El manuscrito cita el <span class="ref" data-ref="p3ej11c" tabindex="0">Ejercicio 11 (c) de la Práctica 3</span> para ver que $\overline{A} \cap \overline{B} = \emptyset$, pero eso no se usa: alcanza con $d(A, B) \le d(x, y)$, que sale de la definición de ínfimo.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC68">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$A = [0, 1.2]$, $B = [2, 3.4]$, $d(A, B) = 0.8$. La regla de largo $\delta$ apoyada en el borde de $A$: mientras $\delta \le d(A, B)$ no llega a $B$, y ningún par que cruza la brecha cuenta como "cercano".</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-37">
+      <div class="ex-head"><span class="tag">37</span><span class="src">Ejemplo 5.17</span></div>
+      <h3>$x^2$ no es uniformemente continua en $\mathbb{R}$; toda función desde un discreto lo es</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><ol class="items"><li>$f(x) = x^2$ en $(\mathbb{R}, |\cdot|)$ es continua pero no uniformemente continua.</li><li>Si $d$ es la métrica discreta, toda $f : (M, d) \to (N, d')$ es uniformemente continua.</li></ol></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a)</b> Por la <span class="ref" data-ref="obs516" tabindex="0">Observación 5.16</span>, hay que dar $\varepsilon$ tal que para todo $\delta$ existan $x, y$ con $|x - y| \lt \delta$ y $|f(x) - f(y)| \ge \varepsilon$. Con $\varepsilon = 1$ e $y = x + \delta/2$:
+            $$|f(x) - f(y)| = \big|x^2 - (x + \tfrac{\delta}{2})^2\big| = \delta\,\big|x + \tfrac{\delta}{4}\big|.$$
+            Si $x \gt 1/\delta$, queda $\ge \delta x \gt 1 = \varepsilon$.</p>
+            <p><b>b)</b> Con $\delta = 1/2$, para todo $x$ es $B(x, 1/2) = \{x\}$, y $f(B(x, \tfrac12)) = \{f(x)\} \subseteq B(f(x), \varepsilon)$. El $\delta$ no depende de $x$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v37">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Para cada $\delta$, el par $x = 1.1/\delta$, $y = x + \delta/2$. Cuanto más chico es $\delta$, más lejos hay que ir a buscar $x$, pero siempre hay uno: el salto vertical nunca baja de $1$.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= BLOQUE 7 ================= -->
+  <section class="block" id="b7">
+    <h2><span class="bn">Bloque 7</span>Conjuntos densos</h2>
+    <p class="unlock"><b>Desbloquea</b> Probar que un conjunto es <span class="ref" data-ref="def520" tabindex="0">denso</span> mostrando que todo punto es límite de una sucesión del conjunto (<span class="ref" data-ref="prop446" tabindex="0">Proposición 4.46</span>). El Lema 3.1 de la clase es el Ej. 8 de la guía y el Lema 3.2 es el Ej. 7 (a). Guía: Ej. 2, 7, 8.</p>
+
+    <article class="ex" id="ex-38">
+      <div class="ex-head"><span class="tag">38</span><span class="src">Ejemplo 5.21</span></div>
+      <h3>$\mathbb{Q}$ e $\mathbb{I} = \mathbb{R} \setminus \mathbb{Q}$ son densos en $\mathbb{R}$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><ol class="items"><li>$\mathbb{Q} \subseteq (\mathbb{R}, |\cdot|)$ es denso.</li><li>$\mathbb{I} = \mathbb{R} \setminus \mathbb{Q}$ es denso.</li></ol></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p><b>a)</b> Todo $x \in \mathbb{R}$ es límite de una sucesión de racionales, así que $x \in \overline{\mathbb{Q}}$ (<span class="ref" data-ref="prop446" tabindex="0">Proposición 4.46</span>).</p>
+            <p><b>b)</b> Dado $x$, entre $x$ y $x + 1/n$ hay un irracional $z_n$ (<span class="ref" data-ref="p1ej2" tabindex="0">Ejercicio 2 de la guía 1</span>). Entonces $|x - z_n| \lt 1/n \to 0$, o sea $z_n \to x$ con $(z_n) \subseteq \mathbb{I}$, y $x \in \overline{\mathbb{I}}$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="v38">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Zoom alrededor de $x = \sqrt2 - 1$. En el intervalo $(x, x + 1/n)$ siempre hay un racional (el primer múltiplo de $1/n$ después de $x$) y un irracional ($x + \frac{1}{2n}$). Al crecer $n$ la ventana se cierra sobre $x$.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-3-1">
+      <div class="ex-head"><span class="tag">C9-3.1</span><span class="src">Clase 9 · Lema 3.1 = Ejercicio 8 de la guía</span></div>
+      <h3>La imagen continua de un denso es densa</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sea $f : X \to Y$ continua y $D \subseteq X$ denso. Entonces $f(D)$ es denso en $Y$.</p>
+          <p class="nota" style="margin-top:0.6rem"><b>Nota</b> Hace falta además que $f$ sea sobreyectiva (la guía lo pide), o leer "$f(D)$ es denso en $f(X)$". Si un abierto $A \subseteq Y$ no corta a $f(X)$, entonces $f^{-1}(A) = \emptyset$ y el argumento no se aplica.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Sea $A \subseteq Y$ abierto no vacío; hay que ver que corta a $f(D)$. Por el <span class="ref" data-ref="teo59" tabindex="0">Teorema 5.9</span>, $f^{-1}(A)$ es abierto en $X$, y no vacío por la sobreyectividad. Como $D$ es denso, $f^{-1}(A) \cap D \ne \emptyset$. Si $d$ está ahí, $f(d) \in A \cap f(D)$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC931">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$f(x) = x^3 - x$ (continua y sobre $\mathbb{R}$). $D$ son los racionales diádicos $k/2^m$, densos como $\mathbb{Q}$. La banda naranja es un abierto $A$ de $Y$; su preimagen (verde, en el eje horizontal) es abierta y no vacía, así que atrapa puntos de $D$, y sus imágenes caen en $A$.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-3-2">
+      <div class="ex-head"><span class="tag">C9-3.2</span><span class="src">Clase 9 · Lema 3.2 = Ejercicio 7 (a) de la guía</span></div>
+      <h3>Dos continuas que coinciden en un denso coinciden en todo</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Sean $f, g : X \to Y$ continuas y $D \subseteq X$ denso. Si $f = g$ en $D$, entonces $f \equiv g$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Sea $x \in X$ y $(x_n) \subseteq D$ con $x_n \to x$ (<span class="ref" data-ref="prop446" tabindex="0">Proposición 4.46</span>). Por el <span class="ref" data-ref="teo57" tabindex="0">Teorema 5.7</span>,
+            $$f(x) = \lim_n f(x_n) = \lim_n g(x_n) = g(x).$$</p>
+            <p class="nota"><b>Nota</b> El apunte dice "convergente a $X$"; se refiere al punto $x$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC932">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>$x^* = \sqrt2/2$ no es diádico. La sucesión $x_n = \lfloor 2^n x^* \rfloor / 2^n \in D$ tiende a $x^*$, y ahí $f(x_n) = g(x_n)$. En "$g$ no continua", $g$ coincide con $f$ en $D$ pero vale otra cosa en $x^*$: los valores $g(x_n)$ no llegan a $g(x^*)$. Sin continuidad el lema falla.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="ex" id="ex-C9-3-1b">
+      <div class="ex-head"><span class="tag">C9-3.1b</span><span class="src">Clase 9 · Problema 3.1</span></div>
+      <h3>Las continuas con $f(x + y) = f(x) f(y)$ y $f(1) = 2$</h3>
+      <div class="ex-grid">
+        <div class="ex-text">
+          <div class="enun"><p>Caracterizar las $f : \mathbb{R} \to \mathbb{R}$ continuas con $f(x + y) = f(x) f(y)$ para todos $x, y$ y $f(1) = 2$.</p></div>
+          <div class="sol">
+            <p class="lbl">Resolución</p>
+            <p>Para $n \in \mathbb{N}$: $f(n) = f(1 + \dots + 1) = f(1)^n = 2^n$. Para $p, q \in \mathbb{N}$: $f(p/q)^q = f(p) = 2^p$, así que $f(p/q) = 2^{p/q}$. Para los negativos:
+            $$2 = f(1) = f\big(1 + \tfrac pq - \tfrac pq\big) = 2\, f\big(\tfrac pq\big)\, f\big(-\tfrac pq\big) \;\Rightarrow\; f\big(-\tfrac pq\big) = 2^{-p/q}.$$
+            Así $f(x) = 2^x$ en $\mathbb{Q}$. Como $f$ y $2^x$ son continuas y coinciden en el denso $\mathbb{Q}$, el <span class="ref" data-ref="lema32" tabindex="0">Lema 3.2</span> da $f(x) = 2^x$ en todo $\mathbb{R}$.</p>
+            <p class="nota"><b>Nota</b> El apunte deja implícitos dos detalles. $f(0) = 1$ sale de $2 = f(1 + 0) = 2 f(0)$. Para tomar la raíz $q$-ésima hace falta $f(p/q) \ge 0$, que vale porque $f(p/q) = f(p/(2q))^2$.</p>
+          </div>
+        </div>
+        <figure class="viz" data-viz="vC931b">
+          <canvas></canvas><div class="ctrl"></div><dl class="read"></dl>
+          <figcaption>Los valores que la ecuación funcional fija sin usar continuidad: $f(p/q) = 2^{p/q}$ para denominadores $q \le Q$. Al subir $Q$ los puntos llenan la curva; la continuidad completa los huecos (los irracionales).</figcaption>
+        </figure>
+      </div>
+    </article>
+  </section>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<!-- Enunciados para los popups -->
+<div id="refs" class="offscreen" aria-hidden="true">
+  <div data-key="uso"><div class="pop-title">Así funcionan</div><p>Cada referencia subrayada abre el enunciado que se usa en ese paso, tal como está en las notas.</p></div>
+  <div data-key="def51"><div class="pop-title">Definición 5.1 · Imagen y preimagen</div><p>Dada $f : M \to N$ y conjuntos $A \subseteq M$, $B \subseteq N$:
+  $$f(A) = \{f(x) \in N : x \in A\}, \qquad f^{-1}(B) = \{x \in M : f(x) \in B\}.$$</p></div>
+  <div data-key="def54"><div class="pop-title">Definición 5.4 · Función continua</div><p>$f : (M, d) \to (N, d')$ es <em>continua en $x$</em> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d(y, x) \lt \delta$ implica $d'(f(y), f(x)) \lt \varepsilon$.</p><p>Con bolas: para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ con $f(B(x, \delta)) \subseteq B(f(x), \varepsilon)$.</p></div>
+  <div data-key="aislado"><div class="pop-title">Punto aislado · Ejemplo 5.5 b)</div><p>$x \in M$ es <em>aislado</em> si existe $r \gt 0$ tal que $B(x, r) = \{x\}$.</p></div>
+  <div data-key="teo57"><div class="pop-title">Teorema 5.7 · Continuidad por sucesiones</div><p>$f : (M, d) \to (N, d')$ es continua en $x$ si y sólo si para toda sucesión $(x_n) \subseteq M$ con $x_n \to x$ se tiene $f(x_n) \to f(x)$ en $N$.</p></div>
+  <div data-key="teo59"><div class="pop-title">Teorema 5.9 · Continuidad por abiertos</div><p>$f : (M, d) \to (N, d')$ es continua si y sólo si $f^{-1}(A) \subseteq M$ es abierto para todo $A \subseteq N$ abierto.</p></div>
+  <div data-key="ej510"><div class="pop-title">Ejercicio 5.10 · Continuidad por cerrados</div><p>$f$ es continua si y sólo si $f^{-1}(F)$ es cerrado para todo $F \subseteq N$ cerrado. (Sale del Teorema 5.9 pasando a complementos: $f^{-1}(N \setminus F) = M \setminus f^{-1}(F)$.)</p></div>
+  <div data-key="cor447"><div class="pop-title">Corolario 4.47 · Cerrados vía sucesiones</div><p>$E$ es cerrado si y sólo si para toda sucesión $(x_n) \subseteq E$ con $x_n \to x$ se tiene $x \in E$.</p></div>
+  <div data-key="alg"><div class="pop-title">Álgebra de límites (Análisis 1)</div><p>Si $a_n \to a$ y $b_n \to b$ en $\mathbb{R}$, entonces $a_n + b_n \to a + b$ y $a_n b_n \to ab$.</p></div>
+  <div data-key="def14"><div class="pop-title">Clase 9 · Definición 1.4</div><p>$P : \mathbb{R}^n \to \mathbb{R}$ es un <em>polinomio en varias variables</em> si
+  $$P(x_1, \dots, x_n) = \sum_{e_1 + \dots + e_n \le r} a_{(e_1, \dots, e_n)}\, x_1^{e_1} \cdots x_n^{e_n}$$
+  para algún $r \in \mathbb{N}$. Por ejemplo $x^4 + xyz^2 + xy + z^2 - y + 18$ (Ejemplo 1.5).</p></div>
+  <div data-key="prop11"><div class="pop-title">Clase 9 · Proposición 1.1</div><p>Si $f, g : X \to Y$ son continuas, entonces $f + g$ y $f \cdot g$ son continuas (con $Y = \mathbb{R}$).</p></div>
+  <div data-key="lema12"><div class="pop-title">Clase 9 · Lema 1.2</div><p>$\pi_i : \mathbb{R}^n \to \mathbb{R}$, $\pi_i(x_1, \dots, x_n) = x_i$, es continua con $d_\infty$.</p></div>
+  <div data-key="prop16"><div class="pop-title">Clase 9 · Proposición 1.6</div><p>Los polinomios en varias variables son funciones continuas de $\mathbb{R}^n$ a $\mathbb{R}$.</p></div>
+  <div data-key="cof"><div class="pop-title">Desarrollo por cofactores (Álgebra)</div><p>Si $A_{1j}$ es la matriz que queda al borrar la fila $1$ y la columna $j$ de $A$,
+  $$\det_{n+1}(A) = \sum_{j=1}^{n+1} (-1)^{1+j} a_{1j} \det_n(A_{1j}).$$</p></div>
+  <div data-key="defab"><div class="pop-title">Función abierta y cerrada</div><p>$f : (M, d) \to (N, d')$ es <em>abierta</em> si $f(U)$ es abierto para todo abierto $U \subseteq M$, y <em>cerrada</em> si $f(F)$ es cerrado para todo cerrado $F \subseteq M$.</p><p>Son dos propiedades distintas, porque en general $f(M \setminus A) \ne N \setminus f(A)$. Una continua no tiene por qué ser abierta ni cerrada (Observación 5.12: $x^2$, $e^x$).</p><p class="agent">No figura en las notas ni en el manuscrito, que la usa sin enunciarla; la agregó el agente.</p></div>
+  <div data-key="teo417"><div class="pop-title">Teorema 4.17 · Unión de abiertos</div><p>Si $(A_i)_{i \in I}$ es una familia cualquiera de abiertos, $\bigcup_{i \in I} A_i$ es abierto.</p></div>
+  <div data-key="def524"><div class="pop-title">Definición 5.24 · Función Lipschitz</div><p>$f : (M, d) \to (N, d')$ es <em>Lipschitz de constante $C$</em> si
+  $$d'(f(x), f(y)) \le C\, d(x, y) \quad \text{para todo } x, y \in M.$$</p></div>
+  <div data-key="ej525"><div class="pop-title">Ejercicio 5.25 · Lipschitz ⟹ UC</div><p>Toda función Lipschitz de constante $C$ es uniformemente continua: dado $\varepsilon$, sirve $\delta = \varepsilon / C$.</p><p class="agent">El $\delta$ explícito es la solución estándar; en las notas es un ejercicio (desafío de la Práctica 4).</p></div>
+  <div data-key="obs528"><div class="pop-title">Observación 5.28</div><p>$$\text{Lipschitz} \Rightarrow \text{uniformemente continua} \Rightarrow \text{continua},$$
+  y no vale la vuelta en ningún caso: $x^2$ es continua pero no UC, y $\sqrt{x}$ es UC pero no Lipschitz.</p></div>
+  <div data-key="tvm"><div class="pop-title">Teorema del valor medio (Análisis 1)</div><p>Si $f$ es continua en $[x, y]$ y derivable en $(x, y)$, existe $c \in (x, y)$ con
+  $$f(x) - f(y) = f'(c)\,(x - y).$$</p></div>
+  <div data-key="def514"><div class="pop-title">Definición 5.14 · Uniformemente continua</div><p>$f : (M, d) \to (N, d')$ es <em>uniformemente continua</em> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d(x, y) \lt \delta$ implica $d'(f(x), f(y)) \lt \varepsilon$. El $\delta$ no depende del punto.</p></div>
+  <div data-key="obs516"><div class="pop-title">Observación 5.16 · Negación</div><p>$f$ <em>no</em> es uniformemente continua si existe $\varepsilon \gt 0$ tal que para todo $\delta \gt 0$ existen $x, y$ con $d(x, y) \lt \delta$ pero $d'(f(x), f(y)) \ge \varepsilon$.</p></div>
+  <div data-key="prop518"><div class="pop-title">Proposición 5.18 · UC por sucesiones</div><p>$f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n), (y_n) \subseteq M$ con $d(x_n, y_n) \to 0$ se tiene $d'(f(x_n), f(y_n)) \to 0$.</p></div>
+  <div data-key="p3ej11c"><div class="pop-title">Práctica 3 · Ejercicio 11 (c)</div><p>$\hat d(A, B) = 0 \iff \overline{A} \cap \overline{B} \ne \emptyset$. La dirección verdadera, que es la que se usa, es $\overline{A} \cap \overline{B} \ne \emptyset \Rightarrow d(A, B) = 0$.</p></div>
+  <div data-key="def520"><div class="pop-title">Definición 5.20 · Conjunto denso</div><p>$E \subseteq M$ es <em>denso</em> en $M$ si $\overline{E} = M$.</p></div>
+  <div data-key="prop446"><div class="pop-title">Proposición 4.46 a) · Clausura vía sucesiones</div><p>$x \in \overline{E}$ si y sólo si existe una sucesión $(x_n) \subseteq E$ con $x_n \to x$.</p></div>
+  <div data-key="p1ej2"><div class="pop-title">Práctica 1 · Ejercicio 2</div><p>Entre dos números reales distintos siempre hay un número irracional (y uno racional).</p></div>
+  <div data-key="lema32"><div class="pop-title">Clase 9 · Lema 3.2 (= Ej. 7 (a))</div><p>Si $f, g : X \to Y$ son continuas, $D$ es denso en $X$ y $f = g$ en $D$, entonces $f \equiv g$.</p></div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const C = {};
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    for (const k of ["ink", "muted", "rule", "accent", "seq2", "ok", "okband", "fail", "panel", "band", "area", "area2", "bg"]) C[k] = cs.getPropertyValue("--" + k).trim();
+  }
+  const UI = '500 12px "IBM Plex Sans", system-ui, sans-serif';
+  const UIs = '500 11px "IBM Plex Sans", system-ui, sans-serif';
+
+  // ---------- plotting helper ----------
+  function plot(ctx, box, xr, yr) {
+    const X = (x) => box.x + ((x - xr[0]) / (xr[1] - xr[0])) * box.w;
+    const Y = (y) => box.y + box.h - ((y - yr[0]) / (yr[1] - yr[0])) * box.h;
+    const o = { X, Y, box, xr, yr };
+    o.clip = (fn) => { ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip(); fn(); ctx.restore(); };
+    o.axes = ({ xt = [], yt = [], xl = "", yl = "" } = {}) => {
+      const ay = yr[0] <= 0 && yr[1] >= 0 ? Y(0) : box.y + box.h;
+      const ax = xr[0] <= 0 && xr[1] >= 0 ? X(0) : box.x;
+      ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.setLineDash([]);
+      ctx.beginPath(); ctx.moveTo(box.x, ay); ctx.lineTo(box.x + box.w, ay); ctx.moveTo(ax, box.y); ctx.lineTo(ax, box.y + box.h); ctx.stroke();
+      ctx.fillStyle = C.muted; ctx.font = UIs;
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      for (const t of xt) { const [v, s] = Array.isArray(t) ? t : [t, fmt(t)]; const px = X(v); ctx.beginPath(); ctx.moveTo(px, ay - 3); ctx.lineTo(px, ay + 3); ctx.stroke(); ctx.fillText(s, px, ay + 5); }
+      ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      for (const t of yt) { const [v, s] = Array.isArray(t) ? t : [t, fmt(t)]; const py = Y(v); ctx.beginPath(); ctx.moveTo(ax - 3, py); ctx.lineTo(ax + 3, py); ctx.stroke(); ctx.fillText(s, ax - 6, py); }
+      if (xl) { ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(xl, box.x + box.w, ay - 4); }
+      if (yl) { ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(yl, ax + 5, box.y); }
+    };
+    o.fn = (f, color, w = 2, a = xr[0], b = xr[1], n = 600, dash) => o.clip(() => {
+      ctx.strokeStyle = color; ctx.lineWidth = w; ctx.setLineDash(dash || []); ctx.beginPath();
+      let pen = false;
+      for (let i = 0; i <= n; i++) {
+        const x = a + ((b - a) * i) / n, y = f(x);
+        if (!isFinite(y)) { pen = false; continue; }
+        const py = Y(y);
+        if (py < box.y - 4000 || py > box.y + box.h + 4000) { pen = false; continue; }
+        if (pen) ctx.lineTo(X(x), py); else ctx.moveTo(X(x), py);
+        pen = true;
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+    });
+    o.seg = (x1, y1, x2, y2, color, w = 1.5, dash) => o.clip(() => {
+      ctx.strokeStyle = color; ctx.lineWidth = w; ctx.setLineDash(dash || []);
+      ctx.beginPath(); ctx.moveTo(X(x1), Y(y1)); ctx.lineTo(X(x2), Y(y2)); ctx.stroke(); ctx.setLineDash([]);
+    });
+    o.dot = (x, y, color, r = 4, hollow = false) => {
+      const px = X(x), py = Y(y);
+      if (px < box.x - r || px > box.x + box.w + r || py < box.y - r || py > box.y + box.h + r) return;
+      ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2);
+      if (hollow) { ctx.fillStyle = C.panel; ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = 1.6; ctx.stroke(); }
+      else { ctx.fillStyle = color; ctx.fill(); }
+    };
+    o.text = (s, x, y, color, align = "left", base = "bottom", dx = 0, dy = 0, font = UI) => {
+      ctx.fillStyle = color || C.ink; ctx.font = font; ctx.textAlign = align; ctx.textBaseline = base;
+      ctx.fillText(s, X(x) + dx, Y(y) + dy);
+    };
+    o.vband = (a, b, fill) => o.clip(() => { ctx.fillStyle = fill; ctx.fillRect(X(a), box.y, X(b) - X(a), box.h); });
+    o.hband = (a, b, fill) => o.clip(() => { ctx.fillStyle = fill; ctx.fillRect(box.x, Y(b), box.w, Y(a) - Y(b)); });
+    o.rect = (x1, y1, x2, y2, fill, stroke, dash) => o.clip(() => {
+      const px = X(Math.min(x1, x2)), py = Y(Math.max(y1, y2)), w = Math.abs(X(x2) - X(x1)), h = Math.abs(Y(y2) - Y(y1));
+      if (fill) { ctx.fillStyle = fill; ctx.fillRect(px, py, w, h); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.4; ctx.setLineDash(dash || []); ctx.strokeRect(px, py, w, h); ctx.setLineDash([]); }
+    });
+    o.region = (f, g, a, b, fill, n = 300) => o.clip(() => {
+      ctx.fillStyle = fill; ctx.beginPath();
+      for (let i = 0; i <= n; i++) { const x = a + ((b - a) * i) / n; const py = Y(f(x)); i ? ctx.lineTo(X(x), py) : ctx.moveTo(X(x), py); }
+      for (let i = n; i >= 0; i--) { const x = a + ((b - a) * i) / n; ctx.lineTo(X(x), Y(g(x))); }
+      ctx.closePath(); ctx.fill();
+    });
+    o.vbrace = (x, y1, y2, color, label, side = 1) => {
+      const px = X(x) + side * 6;
+      ctx.strokeStyle = color; ctx.lineWidth = 1.4; ctx.setLineDash([]);
+      ctx.beginPath(); ctx.moveTo(px - side * 4, Y(y1)); ctx.lineTo(px, Y(y1)); ctx.lineTo(px, Y(y2)); ctx.lineTo(px - side * 4, Y(y2)); ctx.stroke();
+      if (label) { ctx.fillStyle = color; ctx.font = UI; ctx.textAlign = side > 0 ? "left" : "right"; ctx.textBaseline = "middle"; ctx.fillText(label, px + side * 5, (Y(y1) + Y(y2)) / 2); }
+    };
+    o.hbrace = (x1, x2, y, color, label, side = 1) => {
+      const py = Y(y) + side * 8;
+      ctx.strokeStyle = color; ctx.lineWidth = 1.4; ctx.setLineDash([]);
+      ctx.beginPath(); ctx.moveTo(X(x1), py - side * 4); ctx.lineTo(X(x1), py); ctx.lineTo(X(x2), py); ctx.lineTo(X(x2), py - side * 4); ctx.stroke();
+      if (label) { ctx.fillStyle = color; ctx.font = UI; ctx.textAlign = "center"; ctx.textBaseline = side > 0 ? "top" : "bottom"; ctx.fillText(label, (X(x1) + X(x2)) / 2, py + side * 4); }
+    };
+    return o;
+  }
+  function fmt(v, d = 3) { if (Math.abs(v) < 1e-12) return "0"; const s = (+v.toFixed(d)).toString(); return s.replace("-", "−"); }
+  function arrow(ctx, x1, y1, x2, y2, color, w = 1.3) {
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = w; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    const a = Math.atan2(y2 - y1, x2 - x1), h = 7;
+    ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(x2 - h * Math.cos(a - 0.4), y2 - h * Math.sin(a - 0.4)); ctx.lineTo(x2 - h * Math.cos(a + 0.4), y2 - h * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+  }
+  function mulberry(seed) { return () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  const PAD = { l: 40, r: 14, t: 14, b: 26 };
+  function full(W, H, pad = PAD) { return { x: pad.l, y: pad.t, w: W - pad.l - pad.r, h: H - pad.t - pad.b }; }
+  const good = (s) => ({ cls: "good", v: s });
+  const bad = (s) => ({ cls: "bad", v: s });
+
+  // ---------- visualizaciones ----------
+  const VIZ = {};
+
+  VIZ.v33 = {
+    aspect: 1.9,
+    ctrl: [{ type: "radio", name: "m", value: "img", opts: [["img", "Imagen de A"], ["pre", "Preimagen de B"]] }],
+    draw(ctx, W, H, s) {
+      const top = H * 0.24, bot = H * 0.76, L = 46, R = W - 18;
+      const zx = (n) => L + ((n + 4) / 8) * (R - L);
+      const nx = (k) => L + (k / 16) * (R - L);
+      ctx.font = '600 14px "IBM Plex Sans", sans-serif'; ctx.fillStyle = C.muted; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText("ℤ", 10, top); ctx.fillText("ℕ", 10, bot);
+      const A = new Set([1, 3, 4]), B = new Set([1, 3, 4]);
+      const hl = (n) => (s.m === "img" ? A.has(n) : B.has(n * n));
+      const col = s.m === "img" ? C.accent : C.seq2;
+      for (let n = -4; n <= 4; n++) if (!hl(n)) arrow(ctx, zx(n), top + 9, nx(n * n), bot - 10, C.rule, 1.1);
+      for (let n = -4; n <= 4; n++) if (hl(n)) arrow(ctx, zx(n), top + 9, nx(n * n), bot - 10, col, 2);
+      ctx.font = UI; ctx.textAlign = "center";
+      for (let n = -4; n <= 4; n++) {
+        ctx.beginPath(); ctx.arc(zx(n), top, hl(n) ? 6 : 4, 0, 7); ctx.fillStyle = hl(n) ? col : C.muted; ctx.fill();
+        ctx.fillStyle = hl(n) ? col : C.muted; ctx.textBaseline = "bottom"; ctx.fillText(String(n).replace("-", "−"), zx(n), top - 9);
+      }
+      const imgSet = new Set([0, 1, 4, 9, 16]);
+      for (let k = 0; k <= 16; k++) {
+        const inImg = imgSet.has(k);
+        let c = inImg ? C.muted : C.rule, r = inImg ? 4 : 3;
+        if (s.m === "img" && [1, 9, 16].includes(k)) { c = C.accent; r = 6; }
+        if (s.m === "pre" && B.has(k)) { c = k === 3 ? C.fail : C.seq2; r = 6; }
+        ctx.beginPath(); ctx.arc(nx(k), bot, r, 0, 7); ctx.fillStyle = c; ctx.fill();
+        ctx.fillStyle = r > 4 ? c : C.muted; ctx.textBaseline = "top"; ctx.fillText(String(k), nx(k), bot + 9);
+      }
+      if (s.m === "pre") {
+        ctx.fillStyle = C.fail; ctx.textBaseline = "top"; ctx.fillText("no está en img(f)", nx(3), bot + 26);
+      }
+      ctx.fillStyle = C.muted; ctx.font = UIs; ctx.textAlign = "right"; ctx.textBaseline = "top";
+      ctx.fillText("gris claro: fuera de la imagen", R, bot + 26 + (s.m === "pre" ? 16 : 0));
+      return s.m === "img"
+        ? [["A", "{1, 3, 4} ⊆ ℤ"], ["f(A)", "{1, 9, 16}"]]
+        : [["B", "{1, 3, 4} ⊆ ℕ"], ["f⁻¹(B)", "{−2, −1, 1, 2}"], ["f⁻¹({3})", bad("∅")]];
+    },
+  };
+
+  VIZ.v34 = {
+    aspect: 1.75,
+    ctrl: [{ type: "range", name: "e", label: "ε", min: 0.05, max: 0.9, step: 0.01, value: 0.4 }],
+    draw(ctx, W, H, s) {
+      const e = s.e, d = Math.sqrt(1 + e) - 1;
+      const L = plot(ctx, { x: 34, y: 14, w: W / 2 - 50, h: H - 40 }, [0, 2], [0, 3.2]);
+      L.hband(1 - e, 1 + e, C.band); L.vband(1 - d, 1 + d, C.area2);
+      L.axes({ xt: [[1, "x₀ = 1"], 2], yt: [1, 2, 3] });
+      L.fn((x) => x * x, C.muted, 1.6);
+      L.fn((x) => x * x, C.accent, 3, 1 - d, 1 + d, 80);
+      L.dot(1, 1, C.accent, 4.5);
+      L.text("f(x) = x²", 1.55, 2.55, C.muted);
+      L.text("ε", 0.06, 1 + e, C.accent, "left", "bottom");
+      L.text("δ", 1 + d, 0.05, C.seq2, "left", "bottom", 3);
+      const f = [0, 1.2, 2.6, 0.9, 2.1, 1.6, 2.8];
+      const Rp = plot(ctx, { x: W / 2 + 26, y: 14, w: W / 2 - 40, h: H - 40 }, [0.3, 6.7], [0, 3.2]);
+      Rp.hband(f[3] - e, f[3] + e, C.band); Rp.vband(2.5, 3.5, C.area2);
+      Rp.axes({ xt: [1, 2, 3, 4, 5, 6], yt: [1, 2, 3] });
+      for (let n = 1; n <= 6; n++) Rp.dot(n, f[n], n === 3 ? C.accent : C.muted, n === 3 ? 5 : 4);
+      Rp.text("B(3, ½) = {3}", 3, 3.15, C.seq2, "center", "top");
+      Rp.text("f : ℕ → ℝ", 6.6, 0.15, C.muted, "right", "bottom");
+      return [["en ℝ: δ = √(1+ε) − 1", fmt(d)], ["en ℕ: δ", good("1/2, para todo ε")]];
+    },
+  };
+
+  VIZ.v36 = {
+    aspect: 1.05,
+    ctrl: [
+      { type: "range", name: "a", label: "a", min: -3, max: 3, step: 0.05, value: 2 },
+      { type: "range", name: "d", label: "d", min: -3, max: 3, step: 0.05, value: 1.6 },
+    ],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 34, r: 14, t: 14, b: 26 }), [-3.2, 3.2], [-3.2, 3.2]);
+      P.axes({ xt: [-3, -2, -1, 1, 2, 3], yt: [-3, -2, -1, 1, 2, 3], xl: "a", yl: "d" });
+      P.fn((t) => 1 / t, C.fail, 2, 0.001, 3.2, 500); P.fn((t) => 1 / t, C.fail, 2, -3.2, -0.001, 500);
+      P.text("det = 0", 2.9, 1 / 2.9 + 0.12, C.fail, "right", "bottom");
+      const a = s.a, d = s.d, det = a * d - 1;
+      let r = Infinity;
+      for (let i = 0; i <= 6000; i++) {
+        const u = -3 + (6 * i) / 6000, t = Math.pow(10, u);
+        r = Math.min(r, Math.max(Math.abs(a - t), Math.abs(d - 1 / t)), Math.max(Math.abs(a + t), Math.abs(d + 1 / t)));
+      }
+      const inGL = Math.abs(det) > 1e-9 && r > 0.004;
+      if (inGL) P.rect(a - r, d - r, a + r, d + r, C.band, C.accent, [5, 4]);
+      P.dot(a, d, inGL ? C.accent : C.fail, 5);
+      P.text("A", a, d, inGL ? C.accent : C.fail, "left", "bottom", 6, -4);
+      return [["det A = ad − 1", fmt(det)], inGL ? ["radio en el corte", good("≈ " + fmt(r))] : ["A", bad("singular: no está en GL₂")]];
+    },
+  };
+
+  VIZ.vC911 = {
+    aspect: 1.3,
+    ctrl: [{ type: "range", name: "n", label: "n", min: 1, max: 40, step: 1, value: 3 }],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-0.4, 3], [-1.3, 2.6]);
+      P.axes({ xt: [[1.2, "x"], 2, 3], yt: [-1, 1, 2] });
+      const f = Math.sin, g = (x) => 0.4 * x, h = (x) => f(x) + g(x);
+      const x = 1.2, xn = (k) => x + (1.2 * (k % 2 ? -1 : 1)) / k;
+      P.fn(f, C.accent, 2); P.fn(g, C.seq2, 2); P.fn(h, C.ink, 2.2);
+      P.text("f", 2.9, f(2.9), C.accent, "right", "top", 0, 4); P.text("g", 2.9, g(2.9), C.seq2, "right", "top", 0, 4); P.text("f+g", 2.9, h(2.9), C.ink, "right", "bottom", 0, -4);
+      for (let k = 1; k < s.n; k++) P.dot(xn(k), h(xn(k)), C.rule, 2.5);
+      const v = xn(s.n);
+      P.seg(v, -1.3, v, 2.6, C.muted, 1, [3, 3]); P.seg(x, -1.3, x, 2.6, C.muted, 1, [1, 3]);
+      for (const [fn, c] of [[f, C.accent], [g, C.seq2], [h, C.ink]]) { P.dot(x, fn(x), c, 4.5, true); P.dot(v, fn(v), c, 4); }
+      P.text("xₙ", v, -1.3, C.muted, "center", "bottom", 0, -2);
+      return [["|xₙ − x|", fmt(Math.abs(v - x))], ["|(f+g)(xₙ) − (f+g)(x)|", fmt(Math.abs(h(v) - h(x)))], ["|(f·g)(xₙ) − (f·g)(x)|", fmt(Math.abs(f(v) * g(v) - f(x) * g(x)))]];
+    },
+  };
+
+  VIZ.vC912 = {
+    aspect: 1.15,
+    ctrl: [{ type: "range", name: "k", label: "k", min: 1, max: 30, step: 1, value: 2 }],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 30 }), [0, 3.1], [0, 2.6]);
+      const p = [1.5, 1.2], xk = (k) => [p[0] + (1.1 * Math.cos(2.3 * k)) / k, p[1] + (0.9 * Math.sin(1.7 * k)) / k];
+      const q = xk(s.k), dk = Math.max(Math.abs(q[0] - p[0]), Math.abs(q[1] - p[1]));
+      P.rect(p[0] - dk, p[1] - dk, p[0] + dk, p[1] + dk, C.band, C.accent, [5, 4]);
+      P.axes({ xt: [[p[0], "x¹"]], yt: [[p[1], "x²"]] });
+      P.seg(p[0] - dk, p[1] - dk, p[0] - dk, 0, C.accent, 1, [2, 3]); P.seg(p[0] + dk, p[1] - dk, p[0] + dk, 0, C.accent, 1, [2, 3]);
+      P.seg(p[0] - dk, 0, p[0] + dk, 0, C.accent, 5);
+      P.seg(p[0], 0, q[0], 0, C.seq2, 5);
+      P.seg(q[0], q[1], q[0], 0, C.seq2, 1, [3, 3]);
+      for (let j = 1; j < s.k; j++) { const r = xk(j); P.dot(r[0], r[1], C.rule, 2.5); }
+      P.dot(p[0], p[1], C.ink, 4.5, true); P.dot(q[0], q[1], C.seq2, 5);
+      P.text("xₖ", q[0], q[1], C.seq2, "left", "bottom", 6, -3);
+      return [["|x¹ₖ − x¹|", fmt(Math.abs(q[0] - p[0]))], ["d∞(xₖ, x)", fmt(dk)], ["|x¹ₖ − x¹| ≤ d∞", good("sí")]];
+    },
+  };
+
+  VIZ.vC916 = {
+    aspect: 1.35,
+    ctrl: [{ type: "range", name: "st", label: "paso", min: 0, max: 3, step: 1, value: 0 }],
+    draw(ctx, W, H, s) {
+      const N = {
+        r: { p: [0.5, 0.1], t: "+", lv: 3, e: "P = x²y + 3y − 2" },
+        A: { p: [0.27, 0.38], t: "×", lv: 2, e: "x²y", par: "r" },
+        B: { p: [0.74, 0.38], t: "+", lv: 2, e: "3y − 2", par: "r" },
+        A1: { p: [0.15, 0.64], t: "×", lv: 1, e: "x²", par: "A" },
+        A2: { p: [0.4, 0.64], t: "π₂", lv: 0, e: "y", par: "A" },
+        a1: { p: [0.06, 0.9], t: "π₁", lv: 0, e: "x", par: "A1" },
+        a2: { p: [0.25, 0.9], t: "π₁", lv: 0, e: "x", par: "A1" },
+        B1: { p: [0.64, 0.64], t: "×", lv: 1, e: "3y", par: "B" },
+        B2: { p: [0.88, 0.64], t: "−2", lv: 0, e: "constante", par: "B" },
+        b1: { p: [0.56, 0.9], t: "3", lv: 0, e: "constante", par: "B1" },
+        b2: { p: [0.73, 0.9], t: "π₂", lv: 0, e: "y", par: "B1" },
+      };
+      const px = ([u, v]) => [16 + u * (W - 32), 14 + v * (H - 34)];
+      for (const k in N) if (N[k].par) {
+        const [x1, y1] = px(N[k].p), [x2, y2] = px(N[N[k].par].p);
+        ctx.strokeStyle = N[k].lv < s.st ? C.ok : C.rule; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      }
+      for (const k in N) {
+        const n = N[k], [x, y] = px(n.p), on = n.lv <= s.st;
+        ctx.beginPath(); ctx.arc(x, y, 17, 0, 7); ctx.fillStyle = on ? C.okband : C.panel; ctx.fill();
+        ctx.strokeStyle = on ? C.ok : C.rule; ctx.lineWidth = 1.6; ctx.stroke();
+        ctx.fillStyle = on ? C.ok : C.muted; ctx.font = '600 13px "IBM Plex Sans", sans-serif'; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(n.t, x, y);
+        ctx.font = UIs; ctx.fillStyle = C.muted; ctx.textBaseline = "top"; ctx.fillText(n.e, x, y + 20);
+      }
+      const msg = [
+        "hojas: proyecciones (Lema 1.2) y constantes",
+        "x² = π₁·π₁ y 3y = 3·π₂ (Prop. 1.1, producto)",
+        "x²y (producto) y 3y − 2 (suma)",
+        "P es suma de continuas: continua",
+      ][s.st];
+      return [["continuas", msg]];
+    },
+  };
+
+  VIZ.vC921 = {
+    aspect: 1.15,
+    ctrl: [{ type: "range", name: "n", label: "n", min: 1, max: 30, step: 1, value: 2 }],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-1.5, 2.2], [-4, 4]);
+      const phi = (x) => x * x * x - x * x + x;
+      P.region(phi, () => -10, -1.5, 2.2, C.band);
+      P.axes({ xt: [-1, 1, 2], yt: [-4, -2, 2, 4] });
+      P.fn(phi, C.accent, 2.2);
+      P.text("A = {f ≥ 0}", -1.3, -3.3, C.accent, "left", "bottom");
+      P.text("y = x³ − x² + x", 2.1, 3.7, C.accent, "right", "top");
+      const pn = (k) => { const x = 1 + (0.8 * Math.cos(k)) / k; return [x, phi(x) - 0.9 / k]; };
+      for (let j = 1; j < s.n; j++) { const q = pn(j); P.dot(q[0], q[1], C.rule, 2.5); }
+      const q = pn(s.n);
+      P.dot(1, 1, C.ok, 5, true); P.dot(q[0], q[1], C.seq2, 5);
+      P.text("pₙ", q[0], q[1], C.seq2, "left", "top", 6, 3); P.text("límite (1, 1)", 1, 1, C.ok, "right", "bottom", -8, -4);
+      return [["f(pₙ)", good(fmt(phi(q[0]) - q[1]) + " ≥ 0")], ["f(1, 1)", good("0 ≥ 0: el límite está en A")]];
+    },
+  };
+
+  const A3 = [[2, 1, 0], [0, 1, 1], [1, 0, 1]];
+  const det3 = (m) => m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+  const U3 = (() => { const rnd = mulberry(7); return Array.from({ length: 400 }, () => ({ u: Array.from({ length: 9 }, () => 2 * rnd() - 1), j: rnd() })); })();
+  VIZ.vC922 = {
+    aspect: 2,
+    ctrl: [{ type: "range", name: "r", label: "r", min: 0, max: 1.2, step: 0.01, value: 0.3 }],
+    draw(ctx, W, H, s) {
+      const dets = U3.map(({ u, j }) => ({ d: det3(A3.map((row, i) => row.map((v, k) => v + s.r * u[3 * i + k]))), j }));
+      let lo = Math.min(-1, ...dets.map((o) => o.d)), hi = Math.max(5, ...dets.map((o) => o.d));
+      const P = plot(ctx, full(W, H, { l: 16, r: 16, t: 26, b: 28 }), [lo - 0.3, hi + 0.3], [0, 1]);
+      const neg = dets.filter((o) => o.d <= 0).length;
+      P.vband(lo - 1, 0, C.area2);
+      P.seg(0, 0, 0, 1, C.fail, 2); P.seg(3, 0, 3, 1, C.accent, 1.4, [4, 3]);
+      for (const o of dets) P.dot(o.d, 0.12 + 0.76 * o.j, o.d <= 0 ? C.fail : C.accent, 2.6);
+      P.text("det = 0", 0, 1, C.fail, "center", "bottom", 0, -4); P.text("det A = 3", 3, 1, C.accent, "center", "bottom", 0, -4);
+      const ticks = []; for (let t = Math.ceil(lo); t <= hi; t += Math.max(1, Math.round((hi - lo) / 8))) ticks.push(t);
+      P.axes({ xt: ticks });
+      const mn = Math.min(...dets.map((o) => o.d)), mx = Math.max(...dets.map((o) => o.d));
+      return [["det en la muestra", `[${fmt(mn, 2)}, ${fmt(mx, 2)}]`], ["con det ≤ 0", neg ? bad(`${neg} de 400`) : good("ninguna")]];
+    },
+  };
+
+  VIZ.vC61 = {
+    aspect: 1.1,
+    ctrl: [
+      { type: "radio", name: "m", value: "bola", opts: [["bola", "Bola"], ["hip", "Hipérbola"]] },
+      { type: "range", name: "r", label: "r (bola)", min: 0.2, max: 1.6, step: 0.05, value: 0.9 },
+      { type: "range", name: "n", label: "n (hipérbola)", min: 1, max: 20, step: 1, value: 2 },
+    ],
+    draw(ctx, W, H, s) {
+      if (s.m === "bola") {
+        const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 30 }), [0, 5], [0, 4.3]);
+        const p = [2.5, 2.3], r = s.r;
+        P.rect(p[0] - r, p[1] - r, p[0] + r, p[1] + r, C.band, C.accent, [5, 4]);
+        P.clip(() => { ctx.beginPath(); ctx.arc(P.X(p[0]), P.Y(p[1]), P.X(p[0] + r) - P.X(p[0]), 0, 7); ctx.strokeStyle = C.muted; ctx.setLineDash([2, 3]); ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]); });
+        P.axes({ xt: [[p[0], "x_p"]], xl: "X", yl: "Y" });
+        P.seg(p[0] - r, p[1] - r, p[0] - r, 0, C.muted, 1, [2, 3]); P.seg(p[0] + r, p[1] - r, p[0] + r, 0, C.muted, 1, [2, 3]);
+        P.seg(p[0] - r, 0, p[0] + r, 0, C.ok, 5);
+        P.dot(p[0] - r, 0, C.ok, 4.5, true); P.dot(p[0] + r, 0, C.ok, 4.5, true);
+        P.dot(p[0], p[1], C.ink, 4); P.text("p", p[0], p[1], C.ink, "left", "bottom", 5, -3);
+        P.text("B(p, r)", p[0] + r, p[1] + r, C.accent, "right", "bottom", 0, -3);
+        P.text("π₁(B) = B(x_p, r)", p[0], 0, C.ok, "center", "bottom", 0, -10);
+        return [["π₁(B(p, r))", `(${fmt(p[0] - r)}, ${fmt(p[0] + r)})`], ["abierto", good("sí")]];
+      }
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-4, 4], [-4, 4.4]);
+      P.axes({ xt: [-3, -1, 1, 3], yt: [-3, -1, 1, 3] });
+      P.seg(-4, 0, 4, 0, C.ok, 4); P.dot(0, 0, C.ok, 5, true);
+      P.fn((t) => 1 / t, C.accent, 2.2, 0.001, 4, 500); P.fn((t) => 1 / t, C.accent, 2.2, -4, -0.001, 500);
+      P.text("F: xy = 1", 3.9, 0.35, C.accent, "right", "bottom");
+      for (let k = 1; k <= s.n; k++) {
+        const on = k === s.n;
+        P.dot(1 / k, k, on ? C.seq2 : C.rule, on ? 5 : 3);
+        P.dot(1 / k, 0, on ? C.seq2 : C.rule, on ? 4 : 2.5);
+        if (on) P.seg(1 / k, Math.min(k, 4.4), 1 / k, 0, C.seq2, 1, [3, 3]);
+      }
+      if (s.n > 4) P.text(`(1/${s.n}, ${s.n}) ↑ fuera del dibujo`, 0.3, 4.3, C.seq2, "left", "top");
+      return [["xₙ = 1/n ∈ π₁(F)", fmt(1 / s.n)], ["yₙ = n", String(s.n) + " → ∞"], ["lím xₙ = 0", bad("∉ π₁(F) = ℝ ∖ {0}")]];
+    },
+  };
+
+  VIZ.vC62 = {
+    aspect: 1.15,
+    ctrl: [
+      { type: "range", name: "x", label: "x", min: 0.02, max: 0.98, step: 0.01, value: 0.25 },
+      { type: "range", name: "y", label: "y", min: 0.02, max: 0.98, step: 0.01, value: 0.8 },
+    ],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 34, r: 14, t: 14, b: 26 }), [0, 1], [-0.15, 1.05]);
+      const f = (t) => t * t * t, x = Math.min(s.x, s.y), y = Math.max(s.x, s.y);
+      P.region((t) => f(x) + 3 * (t - x), (t) => f(x) - 3 * (t - x), x, 1, C.band);
+      P.region((t) => f(x) + 3 * (x - t), (t) => f(x) - 3 * (x - t), 0, x, C.band);
+      P.axes({ xt: [0.5, 1], yt: [0.5, 1] });
+      P.fn((t) => f(x) + 3 * (t - x), C.accent, 1, 0, 1, 2, [3, 3]); P.fn((t) => f(x) - 3 * (t - x), C.accent, 1, 0, 1, 2, [3, 3]);
+      P.fn(f, C.ink, 2.2, 0, 1);
+      const out = [["pendiente secante", "—"]];
+      if (y - x > 1e-6) {
+        const m = (f(y) - f(x)) / (y - x), c = Math.sqrt(m / 3);
+        P.fn((t) => f(x) + m * (t - x), C.seq2, 1.8, 0, 1, 2);
+        P.fn((t) => f(c) + m * (t - c), C.accent, 1.5, 0, 1, 2, [6, 4]);
+        P.dot(c, f(c), C.accent, 4.5); P.text("c", c, f(c), C.accent, "left", "top", 5, 2);
+        out[0][1] = fmt(m) + " = 3c²";
+        out.push(["c", fmt(c)], ["≤ 3", good("sí")]);
+      }
+      P.dot(x, f(x), C.seq2, 5); P.dot(y, f(y), C.seq2, 5);
+      P.text("cono ±3", 0.02, 1.0, C.accent, "left", "top");
+      return out;
+    },
+  };
+
+  VIZ.vC63 = {
+    aspect: 1.15,
+    ctrl: [{ type: "range", name: "n", label: "n", min: 1, max: 15, step: 1, value: 1 }],
+    draw(ctx, W, H, s) {
+      const n = s.n, xn = 1 / (Math.PI / 2 + 2 * Math.PI * n), yn = 1 / ((3 * Math.PI) / 2 + 2 * Math.PI * n);
+      const P = plot(ctx, full(W, H, { l: 44, r: 14, t: 14, b: 26 }), [-0.25 * xn, 1.6 * xn], [-1.3 * xn, 1.3 * xn]);
+      const f = (x) => (x === 0 ? 0 : x * Math.sin(1 / x));
+      P.axes({ xt: [[xn, "xₙ"], [yn, "yₙ"]], yt: [[xn, fmt(xn, 4)], [-xn, fmt(-xn, 4)]] });
+      P.fn((x) => x, C.muted, 1, P.xr[0], P.xr[1], 2, [3, 3]); P.fn((x) => -x, C.muted, 1, P.xr[0], P.xr[1], 2, [3, 3]);
+      P.fn(f, C.accent, 1.8, 1e-6, P.xr[1], 2500); P.fn(f, C.accent, 1.8, P.xr[0], -1e-6, 600);
+      P.seg(yn, -yn, xn, xn, C.fail, 2);
+      P.dot(xn, xn, C.seq2, 5); P.dot(yn, -yn, C.seq2, 5);
+      const slope = (f(xn) - f(yn)) / (xn - yn);
+      return [["Mₙ = 2 + 4n", String(2 + 4 * n)], ["|f(xₙ) − f(yₙ)| / |xₙ − yₙ|", fmt(slope)], ["|xₙ − yₙ|", fmt(xn - yn, 5)]];
+    },
+  };
+
+  VIZ.vC64 = {
+    aspect: 1.1,
+    ctrl: [{ type: "range", name: "p", label: "pico en", min: 0, max: 1, step: 0.01, value: 0.7 }],
+    draw(ctx, W, H, s) {
+      const f = (x) => 0.45 + 0.18 * Math.sin(2 * Math.PI * x + 0.5);
+      const b = (x) => 0.5 * Math.max(0, 1 - Math.abs(x - s.p) / 0.08);
+      const g = (x) => f(x) + b(x);
+      const half = (H - 30) / 2;
+      const T = plot(ctx, { x: 34, y: 12, w: W - 48, h: half - 14 }, [0, 1], [0, 1.25]);
+      T.axes({ xt: [], yt: [0.5, 1] });
+      T.fn(f, C.accent, 2); T.fn(g, C.seq2, 2);
+      T.text("f", 0.02, f(0.02), C.accent, "left", "bottom", 0, -4); T.text("g", s.p, g(s.p), C.seq2, "left", "bottom", 6, 0);
+      const B = plot(ctx, { x: 34, y: half + 14, w: W - 48, h: half - 4 }, [0, 1], [0, 0.6]);
+      B.region(b, () => 0, 0, 1, C.area2, 500);
+      B.region((x) => x * b(x), () => 0, 0, 1, C.area, 500);
+      B.axes({ xt: [0.5, 1], yt: [[0.5, "d∞"]] });
+      B.seg(0, 0.5, 1, 0.5, C.ink, 1.2, [5, 4]);
+      B.fn(b, C.seq2, 1.4, 0, 1, 500); B.fn((x) => x * b(x), C.accent, 1.6, 0, 1, 500);
+      B.text("|f − g|", 0.99, 0.58, C.seq2, "right", "top"); B.text("x·|f − g|", 0.99, 0.46, C.accent, "right", "top");
+      let i1 = 0, i2 = 0; const N = 2000;
+      for (let i = 0; i < N; i++) { const x = (i + 0.5) / N; i1 += b(x) / N; i2 += (x * b(x)) / N; }
+      return [["d∞(f, g)", "0.5"], ["∫|f − g|", fmt(i1, 4)], ["d₁(Ψf, Ψg) = ∫x|f − g|", good(fmt(i2, 4) + " ≤ 0.5")]];
+    },
+  };
+
+  VIZ.v39 = {
+    aspect: 1.25,
+    ctrl: [
+      { type: "radio", name: "m", value: "sqrt", opts: [["sqrt", "√x"], ["cos", "cos x"]] },
+      { type: "range", name: "x", label: "x", min: 0, max: 4, step: 0.01, value: 0.04 },
+      { type: "range", name: "y", label: "y", min: 0, max: 4, step: 0.01, value: 0.6 },
+    ],
+    draw(ctx, W, H, s) {
+      const sq = s.m === "sqrt";
+      const f = sq ? Math.sqrt : Math.cos;
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 4.2], sq ? [-0.1, 2.3] : [-1.4, 1.4]);
+      const x = s.x, y = s.y;
+      if (sq) { P.vband(1, 5, C.okband); P.text("[1, ∞): pendientes ≤ ½", 4.15, 0.05, C.ok, "right", "bottom"); }
+      else {
+        P.region((t) => f(x) + Math.abs(t - x), (t) => f(x) - Math.abs(t - x), 0, 4.2, C.band);
+        P.text("cono ±1", 4.15, 1.35, C.accent, "right", "top");
+      }
+      P.axes({ xt: [1, 2, 3, 4], yt: sq ? [1, 2] : [-1, 1] });
+      P.fn(f, C.ink, 2.2, 0, 4.2, 800);
+      const out = [];
+      if (Math.abs(x - y) > 1e-6) {
+        const m = (f(y) - f(x)) / (y - x);
+        P.fn((t) => f(x) + m * (t - x), C.seq2, 1.8, 0, 4.2, 2);
+        const bound = sq ? (Math.min(x, y) >= 1 ? 0.5 : null) : 1;
+        out.push(["|pendiente secante|", fmt(Math.abs(m))]);
+        if (sq) out.push(["= 1/(√x + √y)", fmt(1 / (Math.sqrt(x) + Math.sqrt(y)))]);
+        out.push(bound === null ? ["x, y ≥ 1", bad("no: sin cota cerca del 0")] : ["≤ " + (sq ? "½" : "1"), good("sí")]);
+      } else out.push(["x = y", "mové uno de los dos"]);
+      P.dot(x, f(x), C.seq2, 5); P.dot(y, f(y), C.seq2, 5);
+      return out;
+    },
+  };
+
+  VIZ.vC65 = {
+    aspect: 1.2,
+    ctrl: [
+      { type: "radio", name: "m", value: "sq", opts: [["sq", "x²"], ["sin", "sin x"]] },
+      { type: "range", name: "n", label: "n", min: 1, max: 12, step: 1, value: 2 },
+    ],
+    draw(ctx, W, H, s) {
+      const n = s.n, xn = n, yn = n + 1 / n, sq = s.m === "sq";
+      const f = sq ? (x) => x * x : Math.sin;
+      const xr = [n - 1, n + 1.6], yr = sq ? [Math.max(0, (n - 1) ** 2) - 0.5, (n + 1.6) ** 2 + 0.5] : [-1.4, 1.4];
+      const P = plot(ctx, full(W, H, { l: 40, r: 70, t: 14, b: 26 }), xr, yr);
+      P.axes({ xt: [[xn, "n"], [yn, "n + 1/n"]], yt: sq ? [[f(xn), fmt(f(xn), 1)], [f(yn), fmt(f(yn), 1)]] : [-1, 1] });
+      P.fn(f, C.ink, 2.2);
+      P.seg(xn, f(xn), xn, yr[0], C.muted, 1, [3, 3]); P.seg(yn, f(yn), yn, yr[0], C.muted, 1, [3, 3]);
+      P.seg(xn, f(xn), yn + 0.15, f(xn), C.muted, 1, [3, 3]); P.seg(yn, f(yn), yn + 0.15, f(yn), C.muted, 1, [3, 3]);
+      const gap = Math.abs(f(yn) - f(xn));
+      P.vbrace(yn + 0.15, f(xn), f(yn), sq ? C.fail : C.ok, fmt(gap));
+      P.dot(xn, f(xn), C.seq2, 5); P.dot(yn, f(yn), C.seq2, 5);
+      return [["|xₙ − yₙ| = 1/n", fmt(1 / n)], ["|f(xₙ) − f(yₙ)|", sq ? bad(fmt(gap) + " > 2") : good(fmt(gap) + " ≤ 1/n")]];
+    },
+  };
+
+  VIZ.vC66 = {
+    aspect: 1.2,
+    ctrl: [{ type: "range", name: "n", label: "n", min: 1, max: 10, step: 1, value: 2 }],
+    draw(ctx, W, H, s) {
+      const n = s.n, xn = Math.PI + 2 * Math.PI * n, yn = xn + 1 / n, f = (x) => x * Math.sin(x);
+      const P = plot(ctx, full(W, H, { l: 40, r: 64, t: 14, b: 26 }), [xn - 3, xn + 3], [-(xn + 4), xn + 4]);
+      P.axes({ xt: [[xn, "xₙ"]], yt: [[xn, fmt(xn, 1)], [-xn, fmt(-xn, 1)]] });
+      P.fn((x) => x, C.muted, 1, P.xr[0], P.xr[1], 2, [3, 3]); P.fn((x) => -x, C.muted, 1, P.xr[0], P.xr[1], 2, [3, 3]);
+      P.fn(f, C.ink, 2.2);
+      P.seg(xn, f(xn), xn + 3, f(xn), C.muted, 1, [3, 3]); P.seg(yn, f(yn), xn + 3, f(yn), C.muted, 1, [3, 3]);
+      const gap = Math.abs(f(yn) - f(xn));
+      P.vbrace(xn + 2.6, f(xn), f(yn), C.fail, fmt(gap, 2));
+      P.dot(xn, f(xn), C.seq2, 5); P.dot(yn, f(yn), C.seq2, 5);
+      return [["|xₙ − yₙ| = 1/n", fmt(1 / n)], ["|f(xₙ) − f(yₙ)|", bad(fmt(gap) + " → 2π ≈ 6.283")]];
+    },
+  };
+
+  VIZ.vC67 = {
+    aspect: 1.2,
+    ctrl: [
+      { type: "range", name: "x", label: "x", min: 0.5, max: 1, step: 0.01, value: 0.85 },
+      { type: "range", name: "h", label: "|x − y|", min: 0.02, max: 0.5, step: 0.01, value: 0.3 },
+    ],
+    draw(ctx, W, H, s) {
+      const a = 1, f = (t) => (t <= 1 ? 2 * Math.sqrt(t) : 2 + 0.6 * Math.sin(2 * (t - 1)));
+      const P = plot(ctx, full(W, H, { l: 30, r: 70, t: 14, b: 26 }), [0, 2], [0, 3]);
+      const x = s.x, y = x + s.h;
+      P.vband(0, a, C.band); P.vband(a, 2, C.okband);
+      P.axes({ xt: [[x, "x"], [a, "a"], [y, "y"]], yt: [1, 2, 3] });
+      P.fn(f, C.ink, 2.2, 0, 2, 600);
+      P.text("trozo 1", 0.05, 2.95, C.accent, "left", "top"); P.text("trozo 2", 1.95, 2.95, C.ok, "right", "top");
+      for (const t of [x, a, y]) P.seg(t, 0, t, f(t), C.muted, 1, [3, 3]);
+      const cross = y >= a;
+      if (cross) {
+        P.seg(x, f(x), 2.05, f(x), C.muted, 1, [2, 3]); P.seg(a, f(a), 2.05, f(a), C.muted, 1, [2, 3]); P.seg(y, f(y), 2.05, f(y), C.muted, 1, [2, 3]);
+        P.vbrace(2.02, f(x), f(a), C.accent, fmt(Math.abs(f(x) - f(a)), 2));
+        P.vbrace(2.12, f(a), f(y), C.ok, fmt(Math.abs(f(a) - f(y)), 2));
+      }
+      P.dot(x, f(x), C.seq2, 5); P.dot(y, f(y), C.seq2, 5); P.dot(a, f(a), C.ink, 4, true);
+      if (!cross) return [["x, y", "en el mismo trozo: vale la UC del trozo 1"]];
+      return [["|x − a| ≤ |x − y|", fmt(a - x) + " ≤ " + fmt(s.h)], ["|y − a| ≤ |x − y|", fmt(y - a) + " ≤ " + fmt(s.h)], ["|f(x) − f(y)|", good(fmt(Math.abs(f(x) - f(y))) + " ≤ " + fmt(Math.abs(f(x) - f(a)) + Math.abs(f(a) - f(y))))]];
+    },
+  };
+
+  VIZ.vC68 = {
+    aspect: 1.5,
+    ctrl: [{ type: "range", name: "d", label: "δ", min: 0.1, max: 1.6, step: 0.01, value: 0.5 }],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 44 }), [-0.2, 3.7], [-0.6, 3]);
+      const fA = (x) => 1 + 0.5 * Math.sin(3 * x), fB = (x) => 2.4 - 0.3 * (x - 2);
+      P.rect(0, -0.12, 1.2, 0.12, C.band, C.accent); P.rect(2, -0.12, 3.4, 0.12, C.okband, C.ok);
+      P.axes({ xt: [0, [1.2, "1.2"], 2, [3.4, "3.4"]], yt: [1, 2, 3] });
+      P.fn(fA, C.accent, 2.2, 0, 1.2); P.fn(fB, C.ok, 2.2, 2, 3.4);
+      P.text("A", 0.6, 0.15, C.accent, "center", "bottom"); P.text("B", 2.7, 0.15, C.ok, "center", "bottom");
+      P.hbrace(1.2, 2, -0.12, C.muted, "d(A, B) = 0.8");
+      const ok = s.d <= 0.8;
+      P.seg(1.2, -0.42, 1.2 + s.d, -0.42, ok ? C.ok : C.fail, 4);
+      P.text("δ", 1.2 + s.d, -0.42, ok ? C.ok : C.fail, "left", "middle", 6);
+      return [["δ ≤ d(A, B)", ok ? good("sí: d(x, y) < δ deja a x, y en la misma pieza") : bad("no: hay x ∈ A, y ∈ B con d(x, y) < δ")]];
+    },
+  };
+
+  VIZ.v37 = {
+    aspect: 1.2,
+    ctrl: [{ type: "range", name: "d", label: "δ", min: 0.08, max: 1, step: 0.01, value: 0.5 }],
+    draw(ctx, W, H, s) {
+      const d = s.d, x = 1.1 / d, y = x + d / 2;
+      const P = plot(ctx, full(W, H, { l: 44, r: 64, t: 14, b: 26 }), [0, y * 1.12], [0, y * y * 1.12]);
+      P.axes({ xt: [[x, "x"]], yt: [[x * x, fmt(x * x, 1)], [y * y, fmt(y * y, 1)]] });
+      P.fn((t) => t * t, C.ink, 2.2);
+      P.seg(x, x * x, y * 1.12, x * x, C.muted, 1, [3, 3]); P.seg(y, y * y, y * 1.12, y * y, C.muted, 1, [3, 3]);
+      P.vbrace(y * 1.06, x * x, y * y, C.fail, fmt(y * y - x * x, 2));
+      P.dot(x, x * x, C.seq2, 5); P.dot(y, y * y, C.seq2, 5);
+      return [["x = 1.1/δ", fmt(x, 2)], ["|x − y| = δ/2", fmt(d / 2)], ["|f(x) − f(y)| = δ|x + δ/4|", bad(fmt(y * y - x * x) + " ≥ 1")]];
+    },
+  };
+
+  VIZ.v38 = {
+    aspect: 2.4,
+    ctrl: [{ type: "range", name: "n", label: "n", min: 1, max: 60, step: 1, value: 4 }],
+    draw(ctx, W, H, s) {
+      const n = s.n, x = Math.SQRT2 - 1, q = Math.ceil(n * x) / n, z = x + 1 / (2 * n);
+      const P = plot(ctx, full(W, H, { l: 16, r: 16, t: 20, b: 34 }), [x - 0.6 / n, x + 1.6 / n], [-1, 1]);
+      P.vband(x, x + 1 / n, C.band);
+      P.axes({ xt: [[x, "x"], [x + 1 / n, "x + 1/n"]] });
+      P.seg(x, -1, x, 1, C.accent, 1, [3, 3]); P.seg(x + 1 / n, -1, x + 1 / n, 1, C.accent, 1, [3, 3]);
+      P.dot(x, 0, C.ink, 5, true);
+      P.dot(q, 0.35, C.ok, 5); P.text(`qₙ = ${Math.ceil(n * x)}/${n}`, q, 0.35, C.ok, "center", "bottom", 0, -8);
+      P.dot(z, -0.35, C.seq2, 5); P.text("zₙ = x + 1/(2n)", z, -0.35, C.seq2, "center", "top", 0, 8);
+      return [["x = √2 − 1", fmt(x, 6)], ["qₙ ∈ ℚ, |qₙ − x|", fmt(q - x, 6)], ["zₙ ∈ 𝕀, |zₙ − x|", fmt(z - x, 6)]];
+    },
+  };
+
+  VIZ.vC931 = {
+    aspect: 1.05,
+    ctrl: [
+      { type: "range", name: "c", label: "centro de A", min: -1.3, max: 1.3, step: 0.01, value: 0.3 },
+      { type: "range", name: "m", label: "D = k/2^m", min: 1, max: 6, step: 1, value: 3 },
+    ],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-1.6, 1.6], [-1.6, 1.6]);
+      const f = (x) => x * x * x - x, w = 0.12, a = s.c - w, b = s.c + w;
+      P.hband(a, b, C.area2);
+      P.axes({ xt: [-1, 1], yt: [-1, 1], xl: "X", yl: "Y" });
+      P.fn(f, C.ink, 2.2);
+      const N = 1200; let segStart = null;
+      for (let i = 0; i <= N; i++) {
+        const x = -1.6 + (3.2 * i) / N, inn = f(x) > a && f(x) < b;
+        if (inn && segStart === null) segStart = x;
+        if ((!inn || i === N) && segStart !== null) { P.seg(segStart, 0, x, 0, C.ok, 5); segStart = null; }
+      }
+      const step = 1 / 2 ** s.m; let hits = 0;
+      for (let x = Math.ceil(-1.6 / step) * step; x <= 1.6; x += step) {
+        const inn = f(x) > a && f(x) < b;
+        P.seg(x, -0.05, x, 0.05, inn ? C.accent : C.muted, inn ? 2 : 1);
+        if (inn) { hits++; P.seg(x, 0, x, f(x), C.accent, 1, [2, 3]); P.seg(x, f(x), 0, f(x), C.accent, 1, [2, 3]); P.dot(x, f(x), C.accent, 3.5); P.dot(0, f(x), C.accent, 3.5); }
+      }
+      P.text("A", 1.55, b, C.seq2, "right", "bottom");
+      return [["A", `(${fmt(a, 2)}, ${fmt(b, 2)})`], ["puntos de D en f⁻¹(A)", hits ? good(String(hits)) : bad("0: probá un m más grande")], ["f(D) ∩ A ≠ ∅", hits ? good("sí") : "—"]];
+    },
+  };
+
+  VIZ.vC932 = {
+    aspect: 1.2,
+    ctrl: [
+      { type: "radio", name: "g", value: "c", opts: [["c", "g continua"], ["d", "g no continua"]] },
+      { type: "range", name: "n", label: "n", min: 1, max: 12, step: 1, value: 3 },
+    ],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 1.2], [0, 2.4]);
+      const f = (x) => 1 + 0.6 * Math.sin(2 * x), xs = Math.SQRT2 / 2;
+      P.axes({ xt: [[xs, "x*"], 1], yt: [1, 2] });
+      for (let k = 0; k <= 64; k++) { const x = k / 64; if (x <= 1.2) P.seg(x, 0, x, 0.06, C.muted, 1); }
+      P.fn(f, C.accent, 2.2);
+      const xn = (k) => Math.floor(xs * 2 ** k) / 2 ** k;
+      for (let k = 1; k <= s.n; k++) P.dot(xn(k), f(xn(k)), k === s.n ? C.seq2 : C.rule, k === s.n ? 5 : 3);
+      P.seg(xn(s.n), 0, xn(s.n), f(xn(s.n)), C.seq2, 1, [3, 3]);
+      P.dot(xs, f(xs), C.accent, 5, true);
+      const disc = s.g === "d";
+      if (disc) { P.dot(xs, f(xs) + 0.7, C.fail, 5); P.text("g(x*)", xs, f(xs) + 0.7, C.fail, "left", "bottom", 7, -2); }
+      P.text("f = g en D", 0.02, 2.3, C.accent, "left", "top");
+      return [["xₙ = ⌊2ⁿx*⌋/2ⁿ", fmt(xn(s.n), 5)], ["f(xₙ) = g(xₙ)", fmt(f(xn(s.n)), 5)], ["f(x*)", fmt(f(xs), 5)], ["g(x*)", disc ? bad(fmt(f(xs) + 0.7, 5) + " ≠ lím g(xₙ)") : good(fmt(f(xs), 5))]];
+    },
+  };
+
+  VIZ.vC931b = {
+    aspect: 1.2,
+    ctrl: [{ type: "range", name: "Q", label: "Q", min: 1, max: 12, step: 1, value: 3 }],
+    draw(ctx, W, H, s) {
+      const P = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-2, 2.4], [0, 5.5]);
+      P.axes({ xt: [-2, -1, 1, 2], yt: [1, 2, 4] });
+      P.fn((x) => 2 ** x, C.muted, 1.2, -2, 2.4, 300, [4, 4]);
+      const seen = new Set(); let cnt = 0;
+      for (let q = 1; q <= s.Q; q++) for (let p = -2 * q; p <= 2.4 * q; p++) {
+        const v = p / q, key = v.toFixed(9); if (seen.has(key)) continue; seen.add(key); cnt++;
+        const isInt = q === 1;
+        P.dot(v, 2 ** v, isInt ? C.ok : C.accent, isInt ? 5 : 2.8);
+      }
+      P.text("f(1) = 2", 1, 2, C.ok, "left", "top", 7, 2);
+      return [["racionales p/q con q ≤ Q", String(cnt)], ["valores fijados", "f(p/q) = 2^(p/q)"]];
+    },
+  };
+
+  // ---------- montaje ----------
+  const live = [];
+  function build(fig) {
+    const key = fig.dataset.viz, spec = VIZ[key];
+    if (!spec) return;
+    const canvas = fig.querySelector("canvas"), ctrl = fig.querySelector(".ctrl"), read = fig.querySelector(".read");
+    canvas.setAttribute("role", "img");
+    canvas.setAttribute("aria-label", fig.querySelector("figcaption")?.textContent.trim() || "Visualización");
+    const state = {};
+    for (const c of spec.ctrl || []) {
+      const id = `${key}-${c.name}`;
+      if (c.type === "range") {
+        state[c.name] = c.value;
+        const row = document.createElement("div"); row.className = "slider";
+        row.innerHTML = `<label for="${id}">${c.label}</label><input type="range" id="${id}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}"><output for="${id}"></output>`;
+        const inp = row.querySelector("input"), out = row.querySelector("output");
+        const sync = () => { state[c.name] = +inp.value; out.textContent = fmt(+inp.value, 2); };
+        sync(); inp.addEventListener("input", () => { sync(); draw(); });
+        ctrl.appendChild(row);
+      } else {
+        state[c.name] = c.value;
+        const fs = document.createElement("fieldset"); fs.className = "pills";
+        fs.innerHTML = c.opts.map(([v, l]) => `<label><input type="radio" name="${id}" id="${id}-${v}" value="${v}"${v === c.value ? " checked" : ""}>${l}</label>`).join("");
+        fs.addEventListener("change", (e) => { state[c.name] = e.target.value; draw(); });
+        ctrl.appendChild(fs);
+      }
+    }
+    function draw() {
+      const w = canvas.clientWidth; if (!w) return;
+      const h = Math.round(w / (spec.aspect || 1.3)), dpr = window.devicePixelRatio || 1;
+      canvas.style.height = h + "px";
+      if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      const rows = spec.draw(ctx, w, h, state) || [];
+      read.innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd${typeof v === "object" ? ` class="${v.cls}"` : ""}>${typeof v === "object" ? v.v : v}</dd>`).join("");
+    }
+    live.push(draw);
+    draw();
+  }
+  function redrawAll() { readColors(); live.forEach((d) => d()); }
+
+  readColors();
+  document.querySelectorAll(".viz").forEach(build);
+  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(redrawAll, 60); }).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawAll);
+  new MutationObserver(redrawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", redrawAll);
+  if (document.fonts) document.fonts.ready.then(redrawAll);
+
+  // ---------- popups ----------
+  const popup = document.getElementById("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+})();
+</script>
