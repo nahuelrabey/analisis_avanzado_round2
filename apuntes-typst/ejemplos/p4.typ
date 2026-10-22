@@ -37,6 +37,8 @@
 
 Los ejemplos están agrupados por *técnica*, no por orden de transcripción, y los bloques siguen el orden en que la guía los necesita. Cada bloque abre con la nota de qué ejercicios de `guias/p4.typ` desbloquea.
 
+Hay más ejemplos, tomados de apuntes de otras universidades y organizados con los mismos criterios, en `ejemplos/p4_alternativos.typ` (tags `O{fuente}-{k}`).
+
 La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_.
 
 #v(6pt)

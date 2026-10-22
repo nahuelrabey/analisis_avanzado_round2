@@ -94,6 +94,32 @@ Preservar siempre todo el contenido existente.
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
+- **`O{fuente}-{k}`** (`O1-3`, `O14-2`): ejemplo o ejercicio resuelto tomado de un apunte universitario de *acceso abierto* ajeno a la materia, transcripto en `apuntes-typst/ejemplos/p{N}_alternativos.typ` ("Ejemplos alternativos --- Práctica N") (un archivo por guía, hermano de `ejemplos/p{N}.typ`, con la misma estructura de bloques). El número `{fuente}` es fijo por documento; la tabla fuente $arrow$ documento (autor, institución, URL, licencia o declaración de acceso) está en el encabezado de ese archivo, y la referencia precisa (sección, ejercicio, página del PDF) va al pie de cada ejemplo. Regla de fidelidad: se transcribe la resolución *de la fuente* (traducida y con la notación del curso); si la fuente sólo da el enunciado o una pista, no se inventa resolución. Numeración vigente:
+
+  | `O` | fuente |
+  |---|---|
+  | `O1` | J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (Cálculo Avanzado, FCEN-UBA, 2014). Consultada y descartada: la edición 2017 (`O2`) trae el mismo material |
+  | `O2` | J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (Cálculo Avanzado, FCEN-UBA, 2017) |
+  | `O3` | A. Daniilidis, _Espacios Métricos_ (MA3801, DIM, U. de Chile) |
+  | `O4` | P. Gajardo, _Análisis I_ (UTFSM, 2021) |
+  | `O5` | E. Maximenko, _Funciones uniformemente continuas_ (ESFM-IPN) |
+  | `O6` | J. Lebl, _Basic Analysis I_ (CC BY-NC-SA) |
+  | `O7` | J. Tyson, _MATH 424 lecture notes: functions_ (UIUC, 2026) |
+  | `O8` | P. Dote, _18.S097 Introduction to Metric Spaces_, Lecture 5 (MIT, 2022) |
+  | `O9` | MIT OCW 18.100C _Real Analysis_ (2012), soluciones del Problem Set 6 (CC BY-NC-SA) |
+  | `O10` | P. Karageorgis, _MA2223 Metric spaces_ (TCD) |
+  | `O11` | D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, _La magia de los espacios métricos_ (BUAP, 2025) |
+  | `O12` | R. G. Wilson, _Notas de Análisis_ (UAM-Iztapalapa) |
+  | `O13` | F. Galaz Fontes, _Notas, Clase 21_ de Análisis I (CIMAT, 2020). Consultada; sus dos ítems duplicaban otros y se descartaron |
+  | `O14` | R. Payá, _Análisis Matemático I_ (U. de Granada, 2024-25) |
+  | `O15` | T. W. Körner, _Metric and Topological Spaces_ (Cambridge, 2021) |
+  | `O16` | S. Chavan, _MTH304 Topology: notes and problems_ (IIT Kanpur) |
+  | `O17` | N. Addington, _A Course in Metric Spaces and Point-Set Topology_ (U. of Oregon) |
+
+  Al usar una fuente nueva se le asigna el siguiente número libre y se agrega acá y en el encabezado del archivo.
+
+  Al cargar un ítem nuevo de una fuente abierta: si repite con la misma demostración algo que ya está en `ejemplos/p{N}.typ` o en el archivo de alternativos, no se carga; si da otra demostración o un contraejemplo distinto, sí. Los ítems descartados y la teoría que las fuentes usan y `apuntes.typ` no tiene se registran en `apuntes-agente/p{N}-teoria-faltante-y-fuentes.md`.
+
 Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
 
 Los tags de pestaña son **globales**: no se reinician por archivo, y las guías citan los ejemplos por tag.
