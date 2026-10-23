@@ -40,7 +40,7 @@ Este archivo complementa a `ejemplos/p4.typ` (que tiene los ejemplos de `notas_m
 La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de abajo); la referencia precisa (sección, número y página del PDF) está al pie de cada uno. Las *definiciones* y *proposiciones* llevan el tag sólo en el comentario del código fuente.
 
 #sublema(titulo: "Fidelidad")[
-  Las resoluciones son *las de la fuente*, traducidas y pasadas a la notación del curso. Si la fuente sólo da el enunciado o una indicación, el ítem no tiene `Resolución`. Los errores de la fuente se transcriben igual y se señalan con una _Nota_. Lo que agregó quien transcribió está marcado como "del transcriptor", "deducción propia" o "razonamiento nuestro". Varias fuentes usan resultados que `apuntes.typ` todavía no tiene (composición, álgebra de continuas, continuidad uniforme, $d(x, A)$, compacidad): el comentario `// ----` de cada ítem lo dice con "falta: ...".
+  Las resoluciones son *las de la fuente*, traducidas y pasadas a la notación del curso. Si la fuente sólo da el enunciado o una indicación, el ítem no tiene `Resolución`. Los errores de la fuente se transcriben igual y se señalan con una _Nota_. Lo que agregó quien transcribió está marcado como "del transcriptor", "deducción propia" o "razonamiento nuestro". El comentario `// ----` de cada ítem cita los resultados del capítulo 5 de `apuntes.typ` que usa (hasta la Observación 5.34) y, con "falta: ...", los que el apunte todavía no tiene: composición, álgebra de continuas, $d(x, A)$, Urysohn, pegado, compacidad.
 ]
 
 #v(6pt)
@@ -104,10 +104,10 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 == Bloque 1 · Herramientas: composición, álgebra de continuas, restricción y pegado
 
 #sublema(titulo: "Qué desbloquea")[
-  La Práctica 4 usa sin decirlo que composiciones, sumas, productos y cocientes de funciones continuas son continuos, y que una función definida a trozos es continua si los trozos pegan bien. `apuntes.typ` todavía no lo enuncia. Este bloque trae las demostraciones de las fuentes: composición por $epsilon$--$delta$, por preimágenes y por sucesiones, restricción, pegado sobre dos cerrados y el contraejemplo del pegado sobre infinitos cerrados. Es la teoría que hace falta para escribir con rigor el *Ejercicio 1*, el *Ejercicio 5* y el cociente de Urysohn del *Ejercicio 11*.
+  La Práctica 4 usa sin decirlo que composiciones, sumas, productos y cocientes de funciones continuas son continuos, y que una función definida a trozos es continua si los trozos pegan bien. `apuntes.typ` todavía no lo enuncia como teorema, aunque ya lo usa: el Ejemplo 5.30 a) dice que $x \/ (1 + abs(x))$ es continua "por ser cociente de continuas", y el Ejercicio 5.32 (la composición de homeomorfismos, Definición 5.29, es un homeomorfismo) necesita la composición. En `ejemplos/p4.typ`, la clase del 07/10 ya probó que suma y producto de continuas son continuas (C9-1.1), que las proyecciones de $RR^n$ lo son (C9-1.2) y que los polinomios lo son (C9-1.6); lo que agrega este bloque es la composición, el cociente, la restricción y el pegado. Este bloque trae las demostraciones de las fuentes: composición por $epsilon$--$delta$, por preimágenes y por sucesiones, restricción, pegado sobre dos cerrados y el contraejemplo del pegado sobre infinitos cerrados. Es la teoría que hace falta para escribir con rigor el *Ejercicio 1*, el *Ejercicio 5* y el cociente de Urysohn del *Ejercicio 11*.
 ]
 
-// ---- O15-1  |  p4: Ej. 1 (herramienta), 5  |  teoría: Def. 5.4, Teo. 5.9; falta: composición de continuas enunciada como teorema  |  nivel: baja (teoría que falta en apuntes.typ)
+// ---- O15-1  |  p4: Ej. 1 (herramienta), 5  |  teoría: Def. 5.4, Teo. 5.9; falta: composición de continuas enunciada como teorema (el Ejercicio 5.32, composición de homeomorfismos, la necesita)  |  nivel: baja (teoría que falta en apuntes.typ)
 #proposicion[Ley de composición, con dos demostraciones (Körner, Lema 3.3 y Teorema 3.3 "new proof")][
   Si $(X, d)$, $(Y, rho)$ y $(Z, sigma)$ son espacios métricos y $g : X -> Y$, $f : Y -> Z$ son continuas, entonces $f compose g$ también lo es.
 ]
@@ -151,7 +151,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (Depto. de Matemática, FCEN-UBA, 2017), Proposición 3.9 y Nota 3.10, pág. 66 del PDF (57 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: publicado en la web de la materia; nota de copyright en la portada que permite la copia sin fines de lucro, sin modificar el texto y respetando la autoría.
 ]
 
-// ---- O2-2  |  p4: Ej. 1 (a) (b), 5, 6, 9  |  teoría: Teo. 5.7 / Def. 5.4; falta: álgebra de funciones continuas a valores reales  |  nivel: baja (teoría)
+// ---- O2-2  |  p4: Ej. 1 (a) (b), 5, 6, 9  |  teoría: Teo. 5.7 / Def. 5.4; suma y producto: C9-1.1 en ejemplos/p4.typ; falta: cociente y álgebra de continuas enunciada en apuntes.typ  |  nivel: baja (teoría)
 #ejemplo[Suma, producto, cociente e inversión son continuas; funciones racionales (Guccione, Ejercicio 3.14 y Nota 3.15)][O2-2][
   Sea $k := RR$ o $CC$ (con la métrica usual, y $k times k$ con $d_infinity$). Pruebe que las funciones
   $ +: k times k &-> k, & (x, y) &|-> x + y, \
@@ -255,7 +255,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Modelos para el *Ejercicio 1 (a), (b)*: decidir la continuidad de un cociente en el origen. Para ver que *no* es continua alcanza una sucesión, una recta o una curva por la que el límite da otra cosa (Teo. 5.7). Para ver que *sí* lo es, se acota $abs(f(x, y))$ por algo que tiende a cero, muchas veces pasando a coordenadas polares.
 ]
 
-// ---- O6-3  |  p4: Ej. 1 (a), (b)  |  teoría: Teo. 5.7, convergencia coordenada a coordenada en RR^2 (C6-1)  |  nivel: alta
+// ---- O6-3  |  p4: Ej. 1 (a), (b)  |  teoría: Teo. 5.7, convergencia coordenada a coordenada en RR^2 (C6-1, C9-1.2); polinomios continuos: C9-1.6  |  nivel: alta
 #ejemplo[Los polinomios en dos variables son continuos; cuidado con los límites por separado (Lebl, Ej. 7.5.3 y Ejerc. 7.5.2)][O6-3][
   #set enum(numbering: "a)")
   + Sea $f : RR^2 -> RR$ un polinomio, es decir,
@@ -436,7 +436,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Qué cambia al cambiar la métrica. Desde un espacio discreto toda función es continua, y hacia un discreto casi ninguna lo es (*Ejercicio 1 (c), (d)*). Y la otra cara de la Obs. 5.12: continua no implica abierta ni cerrada, y abierta no implica continua (*Ejercicio 6*).
 ]
 
-// ---- O10-1  |  p4: Ej. 1 (c)  |  teoría: Def. 5.4, métrica discreta, Obs. "la continuidad depende de las métricas"  |  nivel: alta
+// ---- O10-1  |  p4: Ej. 1 (c)  |  teoría: Def. 5.4, métrica discreta, Obs. "la continuidad depende de las métricas"; Ejemplo 5.17 (desde un discreto toda función es incluso uniformemente continua)  |  nivel: alta
 #ejemplo[Toda función que sale de un espacio con la métrica discreta es continua (Karageorgis, T3--2)][O10-1][
   Sean $X, Y$ espacios métricos y supongamos que la métrica de $X$ es la discreta. Probar que toda función $f : X -> Y$ es continua.
 ]
@@ -451,7 +451,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Karageorgis, _MA2223 -- Tutorial solutions, Part 1. Metric spaces_ (Trinity College Dublin), T3--2, pág. 4 del PDF. #link("https://www.maths.tcd.ie/~pete/ma2223/tut_sol1.pdf")[URL]. Acceso: publicado en la web del docente en la School of Mathematics del TCD; sin licencia explícita. El enunciado "toda función $f : X -> Y$ es continua si $d_X$ es discreta" está también en _Chapter 1. Metric spaces_, diapositiva 10/20 (#link("https://www.maths.tcd.ie/~pete/ma2223/chapter1.pdf")[URL]).
 ]
 
-// ---- O15-3  |  p4: Ej. 1 (c)(d), 6  |  teoría: métrica discreta, Teo. 5.9, Obs. 5.12  |  nivel: alta
+// ---- O15-3  |  p4: Ej. 1 (c)(d), 6  |  teoría: métrica discreta, Teo. 5.9, Obs. 5.12, Def. 5.29 y Ejemplo 5.30 b) (homeomorfismo)  |  nivel: alta
 #ejemplo[Identidad entre la métrica discreta y la usual: continua pero no abierta, abierta pero no continua (Körner, Ej. 3.10)][O15-3][
   Sea $X = RR$ con la métrica discreta $d$ y $Y = RR$ con la métrica usual $rho$.
   + Si $f : X -> Y$ es $f(x) = x$, entonces $f$ es continua pero existen abiertos $U$ de $X$ tales que $f(U)$ no es abierto.
@@ -465,10 +465,12 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 
   _Nota_: el apunte ya observa que $op("id") : (RR^2, delta) -> (RR^2, d_2)$ es continua y la inversa no; lo nuevo acá es el contraste "continua $arrow.r.double.not$ abierta" y "abierta $arrow.r.double.not$ continua" (Körner: "el teorema de preimágenes no funciona en la dirección opuesta"), que es el Ej. 6 de la Práctica 4 en versión discreta. Körner lo refuerza con el Ej. 15.4 (pág. 38): $sin$ es continua con $U = RR$ abierto y $sin(U) = [-1, 1]$ no abierto.
 
+  _Nota del transcriptor_: el par $f$, $g = f^(-1)$ es el del Ejemplo 5.30 b) del curso (en `ejemplos/p4.typ`): $f$ es continua y biyectiva pero no es un homeomorfismo (Definición 5.29). Las dos mitades de este ítem son la misma afirmación vista de dos lados: para una biyección vale $f(U) = (f^(-1))^(-1)(U)$, así que $f$ es abierta si y sólo si $f^(-1)$ es continua.
+
   _Fuente_: T. W. Körner, _Metric and Topological Spaces_ (DPMMS, Cambridge, 2021), Example 3.10, pág. 10, demostración págs. 63--64. #link("https://www.dpmms.cam.ac.uk/~twk10/Top.pdf")[URL]. Acceso: página personal del autor; sin licencia explícita.
 ]
 
-// ---- O2-4  |  p4: Ej. 1 (c) (d), 6  |  teoría: Obs. 5.5 (identidad con la discreta), Teo. 5.9, Ej. 5.10, bolas de $X times Y$ con $d_infinity$  |  nivel: alta
+// ---- O2-4  |  p4: Ej. 1 (c) (d), 6  |  teoría: Def. 5.4 (observación: identidad con la discreta), Teo. 5.9, Ej. 5.10, Def. 5.29 y Ejemplo 5.30 b) (homeomorfismo), bolas de $X times Y$ con $d_infinity$  |  nivel: alta
 #ejemplo[Las proyecciones son abiertas pero no cerradas; continua y biyectiva no implica homeomorfismo (Guccione, Obs. 3.27 y Ejemplos 3.29)][O2-4][
   Una función $f : X -> Z$ es _abierta_ si $f(U)$ es abierto para todo abierto $U$ de $X$, y es _cerrada_ si $f(C)$ es cerrado para todo cerrado $C$ de $X$ (Definición 3.28 de la fuente).
 
@@ -488,6 +490,8 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   es un subconjunto cerrado de $RR^2$ cuya proyección a la primera coordenada es el conjunto $(0, infinity)$, que no es cerrado. Otro ejemplo de una función abierta que en general no es cerrada es la inclusión canónica $i_Y : Y -> X$ de un subconjunto abierto $Y$ de $X$ en $X$. En cambio, si $Y$ es cerrado, entonces $i_Y$ es una función cerrada, que en general no es abierta.
 
   _Nota_: que $p_X (B^X (x, r) times B^Y (y, r)) = B^X (x, r)$ usa que en $X times Y$ con $d_infinity$ las bolas son productos de bolas (Ejemplo 1.25 de la fuente; en el curso, ejemplo C6-1). Para ver que la imagen de un abierto $U$ es abierta basta con esto: si $(x, y) in U$, alguna bola $B((x, y), r) subset.eq U$ y entonces $B(x, r) = p_X (B((x, y), r)) subset.eq p_X (U)$. La fuente también deja como Ejercicio 3.30 (sin resolución) encontrar funciones $f_1, dots, f_8$ entre espacios métricos que realicen las ocho combinaciones posibles de "continua / abierta / cerrada" (por ejemplo, $f_2$ continua pero ni abierta ni cerrada; $f_5$ continua y abierta pero no cerrada; $f_7$ abierta y cerrada pero no continua). Es un buen complemento del Ej. 6 de la Práctica 4 y de la Obs. 5.12 de `apuntes.typ`.
+
+  _Nota del transcriptor_: el ítem 1 es el Ejemplo 5.30 b) del curso (en `ejemplos/p4.typ`): $op("id") : (RR, delta) -> (RR, abs(dot))$ es continua y biyectiva pero no es un homeomorfismo (Definición 5.29), porque su inversa no es continua. Allí se prueba con la sucesión $x + 1\/n$ y el Teorema 5.7; acá, con la preimagen del abierto ${0}$ y el Teorema 5.9.
 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Observación 3.27, Definición 3.28, Ejemplos 3.29 y Ejercicio 3.30, págs. 68–69 del PDF (59–60 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
@@ -544,7 +548,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Funciones que valen una cosa en los racionales y otra en los irracionales. La densidad de $QQ$ y de $RR without QQ$ da las sucesiones para negar continuidad, y una cota del tipo $abs(f(x)) <= abs(x)$ da la continuidad en el único punto bueno (*Ejercicio 2*).
 ]
 
-// ---- O6-2  |  p4: Ej. 2  |  teoría: Teo. 5.7, densidad de QQ y de RR without QQ (Prop. 2 del apunte)  |  nivel: alta
+// ---- O6-2  |  p4: Ej. 2  |  teoría: Teo. 5.7, densidad de QQ y de RR without QQ (Prop. 2, Def. 5.20, Ejemplo 5.21)  |  nivel: alta
 #ejemplo[La función de Dirichlet es discontinua en todo punto (Lebl, Ej. 3.2.11)][O6-2][
   Sea $f : RR -> RR$ la función
   $ f(x) = cases(1 &"si " x in QQ, 0 &"si " x in.not QQ). $
@@ -559,7 +563,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Ejemplo 3.2.11, pág. 126 del PDF. #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O16-3  |  p4: Ej. 2  |  teoría: Def. 5.4 (con bolas/entornos), densidad de Q y de R \ Q  |  nivel: alta
+// ---- O16-3  |  p4: Ej. 2  |  teoría: Def. 5.4 (con bolas/entornos), densidad de Q y de R \ Q (Def. 5.20, Ejemplo 5.21)  |  nivel: alta
 #ejemplo[$f(x) = x$ en $QQ$ y $f(x) = -x$ fuera de $QQ$: continua sólo en $0$ (Chavan, Ejemplo 8.13)][O16-3][
   Sea $f : RR -> RR$ dada por $f(x) = x$ si $x in QQ$ y $f(x) = -x$ si $x in RR without QQ$. Probar que $f$ es continua únicamente en $0$.
 ]
@@ -576,7 +580,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: S. Chavan, _MTH304 Topology: notes and problems_ (IIT Kanpur), Example 8.13, págs. 13--14. #link("https://home.iitk.ac.in/~chavan/topology_mth304.pdf")[URL]. Acceso: página del docente en IIT Kanpur; sin licencia explícita.
 ]
 
-// ---- O7-6  |  p4: Ej. 2  |  teoría: Def. 5.4, Teo. 5.7, densidad  |  nivel: alta
+// ---- O7-6  |  p4: Ej. 2  |  teoría: Def. 5.4, Teo. 5.7, Def. 5.20 (denso), Ejemplo 5.21  |  nivel: alta
 #ejemplo[$x^2$ en los racionales y $0$ en los irracionales: continua sólo en $0$ (Tyson, Ejerc. 3.10)][O7-6][
   Sea $f : RR -> RR$ la función
   $ f(x) = cases(x^2 &"si " x in QQ, 0 &"si " x in.not QQ). $
@@ -596,7 +600,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Para ver que un conjunto definido por igualdades o desigualdades es abierto o cerrado, se lo escribe como preimagen de un abierto o de un cerrado de $RR$ por una función continua (Teo. 5.9 y Ej. 5.10). Es la técnica de los *Ejercicios 3, 4 y 5*.
 ]
 
-// ---- O6-4  |  p4: Ej. 3, 4, 5  |  teoría: Teo. 5.9, Ej. 5.10  |  nivel: alta
+// ---- O6-4  |  p4: Ej. 3, 4, 5  |  teoría: Teo. 5.9, Ej. 5.10; misma técnica que C9-2.1  |  nivel: alta
 #ejemplo[Conjunto de ceros, ${f >= 0}$ y ${f > 0}$ de una función continua (Lebl, Ej. 7.5.9)][O6-4][
   Sea $f : X -> Y$ continua. Si $E subset.eq Y$ es cerrado, entonces $f^(-1)(E)$ es cerrado. En particular, si $f : X -> RR$ es continua, el conjunto de ceros $f^(-1)({0}) = {x in X : f(x) = 0}$ es cerrado, el conjunto $f^(-1)([0, infinity)) = {x in X : f(x) >= 0}$ es cerrado y el conjunto $f^(-1)((0, infinity)) = {x in X : f(x) > 0}$ es abierto.
 ]
@@ -732,10 +736,10 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 == Bloque 6 · Densidad y continuidad
 
 #sublema(titulo: "Qué desbloquea")[
-  Dos usos de la densidad: dos funciones continuas que coinciden en un denso coinciden en todo (*Ejercicio 7*), y la imagen continua y suryectiva de un denso es densa (*Ejercicio 8*). Incluye las caracterizaciones de "denso" por abiertos y por bolas, y otra demostración del Teo. 5.13, que es la herramienta del Ejercicio 8.
+  Dos usos de la densidad: dos funciones continuas que coinciden en un denso coinciden en todo (*Ejercicio 7*), y la imagen continua y suryectiva de un denso es densa (*Ejercicio 8*). Incluye las caracterizaciones de "denso" (Definición 5.20) por abiertos y por bolas, y otra demostración del Teo. 5.13, que es la herramienta del Ejercicio 8. En `ejemplos/p4.typ`, los ejemplos de clase C9-3.2 y C9-3.1 resuelven el Ejercicio 7 (a) y el Ejercicio 8; los ítems de este bloque son otras demostraciones de lo mismo.
 ]
 
-// ---- O3-1  |  p4: Ej. 7, 8  |  teoría: Def. 4.22 (clausura), Prop. 4.46; falta: caracterización de denso por abiertos  |  nivel: alta
+// ---- O3-1  |  p4: Ej. 7, 8  |  teoría: Def. 4.22 (clausura), Prop. 4.46, Def. 5.20 (denso); falta: caracterización de denso por abiertos  |  nivel: alta
 #proposicion[Un conjunto denso "encuentra" todos los abiertos no vacíos (Daniilidis, Prop. 2.2.45)][
   Sea $(X, d)$ un espacio métrico y $D subset.eq X$. Entonces
   $ D "es denso en" X quad <==> quad D inter U != emptyset "para todo abierto" U != emptyset. $
@@ -758,7 +762,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Observación 2.2.46, pág. 84 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL].
 ]
 
-// ---- O4-10  |  p4: Ej. 7, 8  |  teoría: densidad ($overline(D) = X$), abiertos y bolas  |  nivel: media
+// ---- O4-10  |  p4: Ej. 7, 8  |  teoría: Def. 5.20 (denso: $overline(D) = X$), abiertos y bolas; falta: caracterización de denso por bolas  |  nivel: media
 #ejemplo[Caracterización de los densos por cubrimientos con bolas (Gajardo, Ej. resuelto E5 a)][O4-10][
   Considere un espacio métrico $(X, d)$. Pruebe que un conjunto $D subset.eq X$ es denso, si y solamente si, para todo $r > 0$ se tiene que
   $
@@ -776,7 +780,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Gajardo Adaro, _Análisis I_ (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E5) a), pág. 60 del PDF. #link("https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf")[URL]. Acceso: web del departamento, sin licencia explícita.
 ]
 
-// ---- O11-4  |  p4: Ej. 7 (a)  |  teoría: clausura (cerrado ⟺ A = cl A), Lema anterior  |  nivel: alta
+// ---- O11-4  |  p4: Ej. 7 (a)  |  teoría: clausura (cerrado ⟺ A = cl A), Lema anterior; es C9-3.2 de ejemplos/p4.typ con otra demostración  |  nivel: alta
 #ejemplo[Dos continuas que coinciden en $A$ coinciden en $overline(A)$ (BUAP, Lema 5.22)][O11-4][
   Sean $X$ e $Y$ espacios métricos y $A subset.eq X$. Si $f, g : overline(A) -> Y$ son funciones continuas en $overline(A)$ y $f|_A = g|_A$, entonces para cada $x in overline(A)$ se cumple que $f(x) = g(x)$.
 ]
@@ -791,7 +795,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, _La magia de los espacios métricos_ (FCFM, BUAP, 2025), Lema 5.22, pág. 126 del libro (135 del PDF). #link("https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf")[URL]. Acceso: "DR © Benemérita Universidad Autónoma de Puebla", ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.
 ]
 
-// ---- O15-4  |  p4: Ej. 7 (a)(b)  |  teoría: Teo. 5.9, densidad (todo abierto no vacío corta a un denso), Teo. 5.7  |  nivel: alta
+// ---- O15-4  |  p4: Ej. 7 (a)(b)  |  teoría: Teo. 5.9, Def. 5.20 (denso; que todo abierto no vacío corta a un denso sale de la definición), Teo. 5.7; (a) es C9-3.2 con otra demostración  |  nivel: alta
 #ejemplo[Coincidir en un denso implica coincidir; una continua en $[0, 1] inter QQ$ sin extensión continua a $[0, 1]$ (Körner, Ej. 6.8)][O15-4][
   + Sea $X$ un espacio topológico (en particular, métrico) y $(Y, d)$ un espacio métrico. Si $f, g : X -> Y$ son continuas y $f(x) = g(x)$ para todo $x in A$, donde $A$ es denso en $X$, probar que $f(x) = g(x)$ para todo $x in X$.
   + Sea $[0, 1]$ con la métrica euclídea y $A = [0, 1] inter QQ$ con la métrica heredada. Exhibir, con demostración, una función continua $f : A -> RR$ tal que no existe ninguna función continua $tilde(f) : [0, 1] -> RR$ con $tilde(f)(x) = f(x)$ para todo $x in A$.
@@ -813,7 +817,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: T. W. Körner, _Metric and Topological Spaces_ (DPMMS, Cambridge, 2021), Exercise 6.8, pág. 16 (enunciado), solución págs. 68--69. #link("https://www.dpmms.cam.ac.uk/~twk10/Top.pdf")[URL]. Acceso: página personal del autor; sin licencia explícita.
 ]
 
-// ---- O3-2  |  p4: Ej. 7  |  teoría: Teo. 5.7, Prop. 4.46; densidad  |  nivel: media
+// ---- O3-2  |  p4: Ej. 7  |  teoría: Teo. 5.7, Prop. 4.46, Def. 5.20 (denso)  |  nivel: media
 #ejemplo[La continuidad se decide sobre un denso más un punto (Daniilidis, Lema 2.5.16)][O3-2][
   Sean $(X, d)$, $(Y, d')$ espacios métricos, $D subset.eq X$ denso y $f : X -> Y$. Son equivalentes:
   #set enum(numbering: "(i)")
@@ -847,7 +851,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Lema 2.5.16 (Conjuntos densos vs continuidad), págs. 127--128 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL]. Acceso: web del docente; sin licencia explícita.
 ]
 
-// ---- O2-5  |  p4: Ej. 8  |  teoría: Teo. 5.13 ($f(overline(E)) subset.eq overline(f(E))$), densidad  |  nivel: alta
+// ---- O2-5  |  p4: Ej. 8  |  teoría: Teo. 5.13 ($f(overline(E)) subset.eq overline(f(E))$), Def. 5.20 (denso); es C9-3.1 de ejemplos/p4.typ con otra demostración  |  nivel: alta
 #ejemplo[Imagen continua y sobreyectiva de un espacio separable (Guccione, Prop. 5.11)][O2-5][
   Recordemos (Definición 5.1 de la fuente) que $A subset.eq X$ es _denso_ si $overline(A) = X$, y que $X$ es _separable_ si tiene un subconjunto contable (finito o numerable) y denso. Si $X$ es separable y $f : X -> Y$ es continua y sobreyectiva, entonces $Y$ es separable.
 ]
@@ -862,7 +866,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Definición 5.1 y Proposición 5.11, págs. 94 y 96 del PDF (85 y 87 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O9-1  |  p4: Ej. 8  |  teoría: Teo. 5.13 (otra demostración), Def. 4.22, densidad  |  nivel: alta
+// ---- O9-1  |  p4: Ej. 8  |  teoría: Teo. 5.13 (otra demostración), Def. 4.22, Def. 5.20 (denso); el Ej. 8 está resuelto en C9-3.1  |  nivel: alta
 #ejemplo[$f(overline(E)) subset.eq overline(f(E))$ por $epsilon$--$delta$, y la inclusión puede ser estricta (MIT 18.100C, PS6 Prob. 3)][O9-1][
   Sea $f : X -> Y$ continua y $E subset.eq X$. Probar que $f(overline(E)) subset.eq overline(f(E))$, y mostrar con un ejemplo que la inclusión puede ser propia.
 ]
@@ -990,7 +994,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Para b): considerar $sin(n x)$.
 ]
 
-// ---- O14-11  |  p4: Ej. 9 (a)(b)(c), 12  |  teoría: Def. 5.4, métricas en C([0,1]); falta: Lipschitz, continuidad uniforme, aplicaciones lineales  |  nivel: baja (teoría que falta en apuntes.typ)
+// ---- O14-11  |  p4: Ej. 9 (a)(b)(c), 12  |  teoría: Def. 5.4, Def. 5.14 (continuidad uniforme), Def. 5.24 (Lipschitz), métricas en C([0,1]); falta: aplicaciones lineales  |  nivel: baja (las aplicaciones lineales no están en apuntes.typ)
 #proposicion[Aplicación lineal continua $<==>$ acotada $<==>$ Lipschitz (Payá, Apuntes 05, §5.6)][
   Sean $X, Y$ espacios normados y $T : X -> Y$ lineal. Son equivalentes:
   + $T$ es continua;
@@ -1015,7 +1019,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: R. Payá Albert, _Análisis Matemático I_ (UGR, 2024-25), Tema 5, §5.6 "Continuidad de aplicaciones lineales", págs. 7--8 del PDF (57--58 impresas). #link("https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf")[URL]. Acceso: web del docente en la UGR; sin licencia explícita.
 ]
 
-// ---- O8-1  |  p4: Ej. 9 (a), 12  |  teoría: d_infinity en C([a,b]); falta: Lipschitz, contracción  |  nivel: media
+// ---- O8-1  |  p4: Ej. 9 (a), 12  |  teoría: d_infinity en C([a,b]), Def. 5.24 (Lipschitz); falta: contracción  |  nivel: media
 #ejemplo[Un operador integral en $(C([a, b]), d_infinity)$ es Lipschitz (Dote, Ej. 13)][O8-1][
   Sean $lambda in RR$, $g in C([a, b])$ y $k in C([a, b] times [a, b])$. Consideramos el operador $T : C([a, b]) -> C([a, b])$,
   $ T(f)(x) = g(x) + lambda integral_a^b k(x, y) f(y) dif y. $
@@ -1038,7 +1042,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Dote, _18.S097 Introduction to Metric Spaces_, Lecture 5 (MIT, IAP 2022), Ejemplo 13, págs. 6--7 del PDF. #link("https://web.mit.edu/paigeb/www/18.S097/Lect_5.pdf")[URL]. Acceso: publicado en la web personal de la docente en MIT; sin licencia explícita en el documento.
 ]
 
-// ---- O7-7  |  p4: Ej. 9 (a), 10, 11, 12  |  teoría: Def. 5.4, Ej. 5.10, d_infinity en C(X); falta: Lipschitz  |  nivel: media
+// ---- O7-7  |  p4: Ej. 9 (a), 10, 11, 12  |  teoría: Def. 5.4, Ej. 5.10, d_infinity en C(X), Def. 5.24 (Lipschitz)  |  nivel: media
 #ejemplo[Tres enunciados: mínimo de dos distancias, esferas cerradas, evaluación $1$-Lipschitz (Tyson, Ejerc. 3.9, 3.14 y 3.46)][O7-7][
   #set enum(numbering: "a)")
   + (Ejercicio 3.9) Sea $(X, d)$ un espacio métrico, $a, b in X$ con $a != b$, y $h : X -> RR$, $h(x) = min{d(x, a), d(x, b)}$. Probar que $h$ es continua en todo $x_0 in X$.
@@ -1057,7 +1061,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   $d(dot, x_0)$ y $d(dot, A)$ son 1-Lipschitz, $d(x, A) = 0$ si y sólo si $x in overline(A)$, y el cociente $d(x, A) \/ (d(x, A) + d(x, B))$ separa cerrados disjuntos: son los *Ejercicios 10 y 11* completos. Al final, cerrados disjuntos a distancia cero y cuándo la distancia es positiva (contexto del *Ejercicio 16*).
 ]
 
-// ---- O7-1  |  p4: Ej. 10, 12  |  teoría: Def. 5.4, desigualdad triangular (Def. 4.1); falta: Lipschitz  |  nivel: alta
+// ---- O7-1  |  p4: Ej. 10, 12  |  teoría: Def. 5.4, desigualdad triangular (Def. 4.1), Def. 5.24 (Lipschitz)  |  nivel: alta
 #ejemplo[$d_a (x) = d(x, a)$ es continua, y de hecho $1$-Lipschitz (Tyson, Ej. 3.5)][O7-1][
   Sea $(X, d)$ un espacio métrico y fijemos $a in X$. Definimos $d_a : X -> RR$ por $d_a (x) := d(x, a)$. Entonces $d_a$ es continua en todo $x_0 in X$.
 ]
@@ -1094,7 +1098,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Karageorgis, _MA2223 -- Tutorial solutions, Part 1_ (TCD), T2--1, pág. 3 del PDF. #link("https://www.maths.tcd.ie/~pete/ma2223/tut_sol1.pdf")[URL]. Acceso: publicado en la web del docente; sin licencia explícita.
 ]
 
-// ---- O2-7  |  p4: Ej. 10, 12  |  teoría: Def. 4.1 (desigualdad triangular), Def. 4.51; falta: Lipschitz  |  nivel: alta
+// ---- O2-7  |  p4: Ej. 10, 12  |  teoría: Def. 4.1 (desigualdad triangular), Def. 4.51, Def. 5.24 (Lipschitz)  |  nivel: alta
 #proposicion[La distancia de dos puntos a un tercero (Guccione, Prop. 1.2, items 2 y 3)][
   Para cada espacio métrico $X$:
   + $abs(d(x, u) - d(y, u)) <= d(x, y)$ para todo $x, y, u in X$.
@@ -1136,7 +1140,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Proposición 1.2 (pág. 11 del PDF, 2 del apunte), Definición 3.50, Ejemplo 3.55 y Nota 3.56 (pág. 73 del PDF, 64 del apunte), nota [2] del Capítulo 3 (pág. 80 del PDF, 71 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O2-8  |  p4: Ej. 11, 12  |  teoría: Def. 4.22 (clausura), ínfimo (Def. 5); falta: $d(x, A)$, Lipschitz, continuidad uniforme  |  nivel: alta
+// ---- O2-8  |  p4: Ej. 11, 12  |  teoría: Def. 4.22 (clausura), ínfimo (Def. 5), Def. 5.14, Def. 5.24 (Lipschitz), Obs. 5.28; falta: $d(x, A)$  |  nivel: alta
 #definicion[Distancia de un punto a un conjunto (Guccione, Def. 1.39)][
   La distancia de un punto $x$ de un espacio métrico $X$ a un subconjunto $A$ de $X$ es, por definición, el elemento
   $ d(x, A) := inf_(y in A) d(x, y) $
@@ -1179,7 +1183,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Definición 1.39 (pág. 28 del PDF), Proposición 1.52 (pág. 30 del PDF, 21 del apunte), Proposición 2.61 y nota [5] del Capítulo 2 (págs. 57 y 62 del PDF), Proposición 3.51 (pág. 73 del PDF) y Ejemplo 3.57 (pág. 74 del PDF, 65 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O4-4  |  p4: Ej. 10, 11  |  teoría: Teo. 5.9, Ej. 5.10 (preimágenes), O4-1, O4-2  |  nivel: alta
+// ---- O4-4  |  p4: Ej. 10, 11  |  teoría: Teo. 5.9, Ej. 5.10 (preimágenes), O2-8; falta: $d(x, A)$  |  nivel: alta
 #ejemplo[Entornos de un conjunto $B(A, r) = {d(dot, A) < r}$; todo cerrado es intersección numerable de abiertos (Gajardo, Ej. resuelto E6 a)][O4-4][
   Sea $(X, d)$ un espacio métrico y $A subset.eq X$. Dado $r > 0$, considere $B(A, r) := {x in X : d(x, A) < r}$.
   #set enum(numbering: "1)")
@@ -1271,7 +1275,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Definición 1.40 y Ejemplos 1.43, 1.44 y 1.45, págs. 28–29 del PDF (19–20 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O4-3  |  p4: Ej. 11, 16  |  teoría: Prop. 4.46; O4-1, O4-2; falta: compacidad, continua en compacto alcanza mínimo  |  nivel: media
+// ---- O4-3  |  p4: Ej. 11, 16  |  teoría: Prop. 4.46, O2-8; falta: $d(x, A)$, compacidad, continua en compacto alcanza mínimo  |  nivel: media
 #ejemplo[$A$ compacto y $B$ cerrado: $A inter B = nothing <==> d(A, B) > 0$ (Gajardo, Ej. resuelto E4 b)][O4-3][
   Para dos conjuntos no vacíos $A, B subset.eq X$ se define
   $
@@ -1313,7 +1317,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Gajardo Adaro, _Análisis I_ (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E4) b), págs. 57--58 del PDF. #link("https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf")[URL]. Acceso: web del departamento, sin licencia explícita.
 ]
 
-// ---- O14-12  |  p4: Ej. 4, 11, 12  |  teoría: Teo. 5.9, Ej. 5.10, clausura; falta: d(x, A), Lipschitz  |  nivel: alta (enunciados sin resolución en la fuente)
+// ---- O14-12  |  p4: Ej. 4, 11, 12  |  teoría: Teo. 5.9, Ej. 5.10, clausura, Def. 5.14, Def. 5.24 (Lipschitz); falta: d(x, A), composición de uniformemente continuas  |  nivel: alta (enunciados sin resolución en la fuente)
 #ejemplo[Ejercicios propuestos sobre $d(x, A)$, la diagonal y ${f = g}$ (Payá, Apuntes 02, 03 y 05, ejercicios)][O14-12][
   Sea $E$ un espacio métrico con distancia $d$ y $A subset.eq E$ no vacío; se define $d(x, A) = inf {d(x, a) : a in A}$.
   + (Apuntes 02, Ej. 2.12.4) Probar que $overline(A) = {x in E : d(x, A) = 0}$.
@@ -1334,10 +1338,10 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 == Bloque 9 · Lipschitz y continuidad uniforme: definiciones y criterios
 
 #sublema(titulo: "Qué desbloquea")[
-  Definiciones de función Lipschitz y uniformemente continua, y Lipschitz implica uniformemente continua (*Ejercicio 12*). Los dos criterios prácticos para negar continuidad uniforme: un par de sucesiones con $d(x_n, y_n) -> 0$ y $d'(f(x_n), f(y_n))$ que no tiende a cero, o el módulo de continuidad. También se ve que la continuidad uniforme depende de la métrica y no sólo de los abiertos.
+  `apuntes.typ` ya tiene la teoría de este bloque: continuidad uniforme (Definición 5.14), su negación (Observación 5.16) y la caracterización por pares de sucesiones (Proposición 5.18), función Lipschitz (Definición 5.24) y la cadena Lipschitz $==>$ uniformemente continua $==>$ continua sin vueltas (Observación 5.28; la primera implicación es el Ejercicio 5.25). Por eso O6-1, O3-8 y O14-6 son una *segunda lectura*: las mismas definiciones y la misma caracterización contadas por otra fuente. Lo nuevo es el módulo de continuidad (O5-1 a O5-4), que da otro criterio para los *Ejercicios 13 y 15*, y que la continuidad uniforme depende de la métrica y no sólo de los abiertos: la identidad de O14-8 es un homeomorfismo (Definición 5.29) que no es uniformemente continuo. Entrena los *Ejercicios 12, 13 y 15*.
 ]
 
-// ---- O6-1  |  p4: Ej. 12, 13, 14, 15, 16  |  falta: continuidad uniforme, Lipschitz (compara con Def. 5.4)  |  nivel: teoría
+// ---- O6-1  |  p4: Ej. 12, 13, 14, 15, 16  |  teoría: Def. 5.14 (continuidad uniforme), Def. 5.24 (Lipschitz), Obs. 5.28 (Lipschitz ⇒ uniformemente continua ⇒ continua; la primera implicación es el Ejercicio 5.25)  |  nivel: teoría (ya está en apuntes.typ: segunda lectura)
 #definicion[Continuidad uniforme y funciones Lipschitz en espacios métricos (Lebl, Def. 7.5.10 y Ej. 7.5.13)][
   Sean $(X, d_X)$ e $(Y, d_Y)$ espacios métricos. Una función $f : X -> Y$ es *uniformemente continua* si para todo $epsilon > 0$ existe $delta > 0$ tal que, siempre que $p, q in X$ y $d_X (p, q) < delta$, vale $d_Y (f(p), f(q)) < epsilon$.
 
@@ -1361,7 +1365,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I: Introduction to Real Analysis_, vol. I, versión 6.3 (15 de mayo de 2026), Def. 7.5.10 y Ej. 7.5.13 (págs. 291--292 del PDF), Prop. 3.4.8 (pág. 141 del PDF). #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: licencia doble CC BY-NC-SA 4.0 / CC BY-SA 4.0, declarada en la pág. 2 del PDF.
 ]
 
-// ---- O3-8  |  p4: Ej. 13, 14, 15  |  teoría: Def. 4.51 (Cauchy); falta: continuidad uniforme y su caracterización por sucesiones  |  nivel: media
+// ---- O3-8  |  p4: Ej. 13, 14, 15  |  teoría: Def. 4.51 (Cauchy), Def. 5.14, Obs. 5.16 (negación), Prop. 5.18 (la misma caracterización por sucesiones)  |  nivel: media (segunda lectura de la Prop. 5.18)
 #definicion[Continuidad uniforme (Daniilidis, Def. 2.5.1)][
   Sean $(X, d)$, $(Y, d')$ dos espacios métricos. Una función $f : X -> Y$ se dice _uniformemente continua_ si
   $ (forall epsilon > 0)(exists delta > 0)(forall x_1, x_2 in X) quad d(x_1, x_2) < delta ==> d'(f(x_1), f(x_2)) < epsilon. $
@@ -1392,7 +1396,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Proposición 2.5.3 (Caracterización de la continuidad uniforme) y ejemplo siguiente, págs. 118--119 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL]. Acceso: web del docente; sin licencia explícita.
 ]
 
-// ---- O14-6  |  p4: Ej. 13, 15, 16  |  teoría: sucesiones en espacios métricos; falta: continuidad uniforme  |  nivel: media
+// ---- O14-6  |  p4: Ej. 13, 15, 16  |  teoría: sucesiones en espacios métricos, Def. 5.14, Obs. 5.16, Prop. 5.18 (la misma caracterización)  |  nivel: media (segunda lectura de la Prop. 5.18, con contraejemplos)
 #proposicion[Caracterización por sucesiones de la continuidad uniforme (Payá, Apuntes 05, §5.3)][
   Sean $E, F$ espacios métricos y $f : E -> F$. Decimos que $f$ es _uniformemente continua_ cuando
   $ forall epsilon > 0 quad exists delta > 0 : quad x, y in E, d(x, y) < delta ==> d(f(x), f(y)) < epsilon . $
@@ -1409,7 +1413,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: R. Payá Albert, _Análisis Matemático I_ (UGR, 2024-25), Tema 5, §5.3 "Funciones uniformemente continuas", pág. 4 del PDF (54 impresa). Idéntico en la versión 2014-15, Lección 11, §11.1, pág. 2 del PDF. #link("https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf")[URL]. Acceso: web del docente en la UGR; sin licencia explícita.
 ]
 
-// ---- O5-1  |  p4: Ej. 12, 13, 15 (herramienta)  |  falta: continuidad uniforme, módulo de continuidad; usa sup/inf  |  nivel: media
+// ---- O5-1  |  p4: Ej. 12, 13, 15 (herramienta)  |  teoría: Def. 5.14, sup/inf; falta: módulo de continuidad  |  nivel: media
 #definicion[Continuidad uniforme y medidor (módulo) de continuidad uniforme $omega_f$ (Maximenko)][
   Sean $(X, d)$ e $(Y, d')$ espacios métricos y $f : X -> Y$. Se dice que $f$ es *uniformemente continua* si
   $
@@ -1464,7 +1468,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: E. Maximenko, _Funciones uniformemente continuas_ (ESFM-IPN, 2022), diapositivas en págs. 20--23 del PDF. #link("https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf")[URL]. Acceso: web personal del docente, sin licencia explícita.
 ]
 
-// ---- O5-3  |  p4: Ej. 13, 15  |  falta: continuidad uniforme, módulo de continuidad  |  nivel: media (sólo (a)⇒(b) demostrada)
+// ---- O5-3  |  p4: Ej. 13, 15  |  teoría: Def. 5.14; falta: módulo de continuidad  |  nivel: media (sólo (a)⇒(b) demostrada)
 #proposicion[Criterio de continuidad uniforme vía $omega_f$ (Maximenko)][O5-3][
   Sea $f : X -> Y$. Entonces las siguientes condiciones son equivalentes:
   #set enum(numbering: "(a)")
@@ -1490,7 +1494,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: E. Maximenko, _Funciones uniformemente continuas_ (ESFM-IPN, 2022), diapositivas en págs. 24--31 del PDF. #link("https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf")[URL]. Acceso: web personal del docente, sin licencia explícita.
 ]
 
-// ---- O5-4  |  p4: Ej. 13, 15  |  falta: continuidad uniforme, módulo de continuidad  |  nivel: media (sólo enunciado + indicación)
+// ---- O5-4  |  p4: Ej. 13, 15  |  teoría: Def. 5.14, Obs. 5.16; falta: módulo de continuidad  |  nivel: media (sólo enunciado + indicación)
 #ejemplo[Calcular $omega_f$ para $x^2$ en $[-5, 5]$, $x^2$ en $RR$ y $1\/x$ en $(0, +infinity)$ (Maximenko, ejercicios)][O5-4][
   #set enum(numbering: "1)")
   + Sea $f : [-5, 5] -> RR$, $f(x) := x^2$. Calcular $omega_f$ y determinar si $f$ es uniformemente continua.
@@ -1506,7 +1510,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: E. Maximenko, _Funciones uniformemente continuas_ (ESFM-IPN, 2022), diapositivas en págs. 32--34 del PDF. #link("https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf")[URL]. Acceso: web personal del docente, sin licencia explícita.
 ]
 
-// ---- O2-14  |  p4: Ej. 1 (c), 15  |  teoría: Def. 4.8 / 4.9 (acotado, diámetro), métrica discreta; falta: Lipschitz, continuidad uniforme  |  nivel: media
+// ---- O2-14  |  p4: Ej. 1 (c), 15  |  teoría: Def. 4.8 / 4.9 (acotado, diámetro), métrica discreta, Def. 5.14, Def. 5.24 (Lipschitz), Ejemplo 5.17  |  nivel: media
 #ejemplo[Lipschitz manda acotados en acotados; uniformemente continua no: la identidad desde la métrica discreta (Guccione, Prop. 3.62 y Obs. 3.63)][O2-14][
   + (Proposición 3.62) Consideremos una función de Lipschitz $f : X -> Y$. La imagen por $f$ de cada conjunto acotado $A$ de $X$ es un conjunto acotado de $Y$.
   + (Observación 3.63) Para que valga el resultado anterior no basta que $f$ sea uniformemente continua.
@@ -1524,7 +1528,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Proposición 3.62 y Observación 3.63, págs. 74–75 del PDF (65–66 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O11-5  |  p4: Ej. 1 (c), 12, 15  |  falta: continuidad uniforme, Lipschitz  |  nivel: media
+// ---- O11-5  |  p4: Ej. 1 (c), 12, 15  |  teoría: Def. 5.14, Def. 5.24, Obs. 5.28 (el recíproco falla), Ejemplo 5.17 (desde un discreto)  |  nivel: media
 #definicion[Continuidad uniforme y condición de Lipschitz (BUAP, Defs. 5.35 y 5.37)][
   Sean $(X, d)$ y $(Y, d')$ espacios métricos, $A subset.eq X$ y $f : A -> Y$ una función.
   + $f$ es *uniformemente continua* en $A$ si para cada $epsilon > 0$ existe $delta > 0$ tal que para cualesquiera $x, y in A$, si $d(x, y) < delta$, entonces $d'(f(x), f(y)) < epsilon$.
@@ -1550,7 +1554,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, _La magia de los espacios métricos_ (FCFM, BUAP, 2025), Lema 5.36 (ítem 3) y Observación 5.38, págs. 134--135 del libro (143--144 del PDF). #link("https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf")[URL]. Acceso: "DR © Benemérita Universidad Autónoma de Puebla", ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.
 ]
 
-// ---- O14-8  |  p4: Ej. 1 (c)(d) (variante), 15  |  teoría: Obs. "la continuidad depende de las métricas"; falta: continuidad uniforme, métricas equivalentes  |  nivel: media
+// ---- O14-8  |  p4: Ej. 1 (c)(d) (variante), 15  |  teoría: Obs. "la continuidad depende de las métricas", Def. 5.14, Def. 5.29 (la identidad es homeomorfismo sin ser uniformemente continua); falta: métricas equivalentes  |  nivel: media
 #ejemplo[La continuidad uniforme no es una propiedad topológica: la identidad y $rho(x, y) = abs(e^x - e^y)$ (Payá, Apuntes 05, §5.3)][O14-8][
   En $RR$ consideramos la distancia usual y la distancia $rho(x, y) = abs(e^x - e^y)$, que es equivalente a la usual (tiene los mismos abiertos). Sea $E = (RR, abs(dot))$ y $F = (RR, rho)$. Probar que la identidad $f : E -> F$ no es uniformemente continua, aunque sí lo es si en $F$ se usa la distancia usual, o si en $E$ y $F$ se usa $rho$.
 ]
@@ -1572,7 +1576,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Catálogo para los *Ejercicios 13 y 15*: $1\/x$, $x^2$, $sqrt(x)$ (uniformemente continua sin ser Lipschitz), polinomios y funciones periódicas.
 ]
 
-// ---- O2-11  |  p4: Ej. 13, 15  |  teoría: Def. 5.4; falta: continuidad uniforme (Def. 3.33 de la fuente)  |  nivel: alta
+// ---- O2-11  |  p4: Ej. 13, 15  |  teoría: Def. 5.4, Def. 5.14, Obs. 5.16 (negación de la continuidad uniforme)  |  nivel: alta
 #definicion[Función uniformemente continua (Guccione, Def. 3.33)][
   Decimos que una función $f : X -> Y$ es _uniformemente continua_ si para todo $epsilon > 0$ existe $delta > 0$ tal que para todo $x, x' in X$,
   $ d(x, x') < delta ==> d(f(x), f(x')) < epsilon. $
@@ -1592,7 +1596,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Definición 3.33, Observaciones 3.34 y 3.35, pág. 70 del PDF (61 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O6-10  |  p4: Ej. 13  |  falta: continuidad uniforme, Lipschitz  |  nivel: media
+// ---- O6-10  |  p4: Ej. 13  |  teoría: Def. 5.14, Obs. 5.16, Def. 5.24 (Lipschitz)  |  nivel: media
 #ejemplo[$1 \/ x$ no es uniformemente continua en $(0, 1)$; es Lipschitz en $(c, infinity)$ pero no en $(0, infinity)$ (Lebl, Ej. 3.4.3 y Ejerc. 3.4.3--3.4.4)][O6-10][
   #set enum(numbering: "a)")
   + (Ejemplo 3.4.3) La función $f : (0, 1) -> RR$, $f(x) := 1 \/ x$, no es uniformemente continua.
@@ -1614,7 +1618,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Ejemplo 3.4.3 (pág. 138 del PDF) y Ejercicios 3.4.3 y 3.4.4 (pág. 143 del PDF). #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O7-2  |  p4: Ej. 12, 13, 15  |  falta: continuidad uniforme, Lipschitz  |  nivel: media
+// ---- O7-2  |  p4: Ej. 12, 13, 15  |  teoría: Def. 5.14, Prop. 5.18 (par de sucesiones), Def. 5.24, Obs. 5.28 ($x^2$)  |  nivel: media
 #ejemplo[$x^2$ no es uniformemente continua en $RR$ pero es $2M$-Lipschitz en $[-M, M]$ (Tyson, Ej. 3.34)][O7-2][
   La función $f : RR -> RR$, $f(x) = x^2$, no es uniformemente continua. En cambio, su restricción a cualquier intervalo cerrado y acotado $[-M, M]$ es Lipschitz, y por lo tanto uniformemente continua.
 ]
@@ -1633,7 +1637,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Tyson, _MATH 424 Lecture notes: Functions_ (UIUC, 2026), Ejemplo 3.34, pág. 7 del PDF. #link("http://publish.illinois.edu/jeremy-tyson/files/2026/05/functions.pdf")[URL]. Acceso: publicado en la web del docente; sin licencia explícita.
 ]
 
-// ---- O2-12  |  p4: Ej. 12, 13, 15  |  teoría: falta: continuidad uniforme, Lipschitz, pegado (generaliza C6-7 y C6-8), Heine (Cap. 7 de la fuente)  |  nivel: media
+// ---- O2-12  |  p4: Ej. 12, 13, 15  |  teoría: Def. 5.14, Def. 5.24, Obs. 5.28 ($sqrt(x)$), Ejemplo 5.26, Ejercicio 5.27; falta: pegado de continuidad uniforme (generaliza C6-7 y C6-8), Heine (Cap. 7 de la fuente)  |  nivel: media
 #proposicion[Pegado de continuidad uniforme sobre $A_1 union A_2$ (Guccione, Prop. 3.43 y Cor. 3.45)][
   Consideremos una función $f : X -> Y$, y escribamos $X$ como unión $X = A_1 union A_2$ de dos subconjuntos. Supongamos que existe $gamma > 0$ con la siguiente propiedad: para cada par $a, a'$ de elementos de $X$ tales que
   $ a in A_1 without A_2, quad a' in A_2 without A_1 quad "y" quad d(a, a') < gamma, $
@@ -1669,12 +1673,12 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   $ abs(sqrt(a) - sqrt(b)) = 1 / (sqrt(a) + sqrt(b)) abs(a - b), $
   y $1 \/ (sqrt(a) + sqrt(b))$ toma valores arbitrariamente grandes en el intervalo $[0, 1]$.
 
-  _Nota_: (i) En el Ejemplo 3.44 la fuente escribe "$f : [0, 1] -> RR$" y "sobre $[1, infinity]$"; por el contexto (se pega $[0, 1]$ con $[1, +infinity)$) el dominio es $[0, +infinity)$ y el segundo intervalo es $[1, +infinity)$; aquí se transcribió corregido. (ii) El item 1 depende del teorema de Heine (continua sobre compacto $==>$ uniformemente continua), que `apuntes.typ` no tiene todavía; una prueba directa con la definición sale de $abs(sqrt(a) - sqrt(b)) <= sqrt(abs(a - b))$, que la fuente no usa. (iii) El item 2 es la variante "$sqrt(x)$ uniformemente continua y no Lipschitz" pedida para el Ej. 12–13, y además da un ejemplo de función no acotada y uniformemente continua en $[0, +infinity)$ (Ej. 15). (iv) En el item 3 la desigualdad falla si $a = b = 0$ (división por cero); hay que leerla para $(a, b) != (0, 0)$, y con $b = 0$ queda $abs(sqrt(a) - 0) = (1 \/ sqrt(a)) abs(a - 0)$, que es la obstrucción: ninguna constante $K$ cumple $sqrt(a) <= K a$ para $a -> 0^+$.
+  _Nota_: (i) En el Ejemplo 3.44 la fuente escribe "$f : [0, 1] -> RR$" y "sobre $[1, infinity]$"; por el contexto (se pega $[0, 1]$ con $[1, +infinity)$) el dominio es $[0, +infinity)$ y el segundo intervalo es $[1, +infinity)$; aquí se transcribió corregido. (ii) El item 1 depende del teorema de Heine (continua sobre compacto $==>$ uniformemente continua), que `apuntes.typ` no tiene todavía; una prueba directa con la definición sale de $abs(sqrt(a) - sqrt(b)) <= sqrt(abs(a - b))$, que la fuente no usa. En `apuntes.typ` es el Ejercicio 5.27 (desafío). (iii) El item 2 es la variante "$sqrt(x)$ uniformemente continua y no Lipschitz" pedida para el Ej. 12–13, y además da un ejemplo de función no acotada y uniformemente continua en $[0, +infinity)$ (Ej. 15). (iv) En el item 3 la desigualdad falla si $a = b = 0$ (división por cero); hay que leerla para $(a, b) != (0, 0)$, y con $b = 0$ queda $abs(sqrt(a) - 0) = (1 \/ sqrt(a)) abs(a - 0)$, que es la obstrucción: ninguna constante $K$ cumple $sqrt(a) <= K a$ para $a -> 0^+$.
 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Ejemplo 3.37 (pág. 70 del PDF, 61 del apunte), Proposición 3.43, Ejemplo 3.44 y Corolario 3.45 (pág. 72 del PDF, 63 del apunte), Observación 3.52 (pág. 73 del PDF, 64 del apunte), Corolario 7.38 (pág. 118 del PDF, 109 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O6-11  |  p4: Ej. 12, 15  |  falta: continuidad uniforme, Lipschitz; usa O6-7 y el pegado C6-7  |  nivel: media
+// ---- O6-11  |  p4: Ej. 12, 15  |  teoría: Def. 5.14, Def. 5.24, Obs. 5.28 ($sqrt(x)$), Ejemplo 5.26; usa O6-7 y el pegado C6-7  |  nivel: media
 #ejemplo[$sqrt(x)$ es Lipschitz en $[1, infinity)$, no es Lipschitz en $[0, infinity)$, pero es uniformemente continua y no acotada en $[0, infinity)$ (Lebl, Ej. 3.4.10 y comentario)][O6-11][
   #set enum(numbering: "a)")
   + La función $f : [1, infinity) -> RR$, $f(x) := sqrt(x)$, es Lipschitz.
@@ -1699,7 +1703,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Ejemplo 3.4.10 y comentario posterior, págs. 142--143 del PDF. #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O6-12  |  p4: Ej. 7, 12, 15  |  falta: continuidad uniforme, Lipschitz, extensión desde un denso  |  nivel: media
+// ---- O6-12  |  p4: Ej. 7, 12, 15  |  teoría: Def. 5.14, Def. 5.24 (Lipschitz), Teo. 5.22 (extensión desde un denso, para b)), Ejemplo 5.21  |  nivel: media
 #ejemplo[Tres enunciados: polinomios no Lipschitz, extensión desde $QQ$, periódicas (Lebl, Ejerc. 3.4.6, 3.4.9 y 3.4.15)][O6-12][
   #set enum(numbering: "a)")
   + (Ejercicio 3.4.6, difícil) Sea $f : RR -> RR$ un polinomio de grado $d >= 2$. Probar que $f$ no es Lipschitz.
@@ -1711,14 +1715,18 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Ejercicios 3.4.6, 3.4.9 (pág. 143 del PDF) y 3.4.15 (pág. 144 del PDF). #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
+#estrategia[Indicación para b), vía el Teorema 5.22 (del transcriptor)][
+  La fuente no da indicaciones; esta es del transcriptor. b) es un caso particular del Teorema 5.22 de `apuntes.typ` con $M = RR$, $E = QQ$ y $N = RR$. Hay que chequear las tres hipótesis: $QQ$ es denso en $RR$ (Definición 5.20 y Ejemplo 5.21), $RR$ es completo (Teorema 4.57) y $f$ es uniformemente continua por hipótesis. El teorema da $tilde(f) : RR -> RR$ uniformemente continua con $tilde(f)|_QQ = f$, y el Ejercicio 5.23 dice que es la única.
+]
+
 
 == Bloque 11 · Continuidad uniforme, sucesiones de Cauchy y extensión
 
 #sublema(titulo: "Qué desbloquea")[
-  La continuidad uniforme manda sucesiones de Cauchy en sucesiones de Cauchy y la continuidad sola no alcanza (*Ejercicio 14*). Como consecuencia, una función uniformemente continua sobre un denso se extiende a la clausura, y $sin(1\/x)$ no se extiende: otra forma de ver el *Ejercicio 13 (b)*.
+  Que una función uniformemente continua (Definición 5.14) manda sucesiones de Cauchy en sucesiones de Cauchy es el Ejercicio 5.19 de `apuntes.typ` y el *Ejercicio 14* de la práctica; O6-8, O4-7 y O14-9 lo demuestran. La continuidad sola no alcanza: en O2-13 y O3-9 el contraejemplo es incluso un homeomorfismo (Definición 5.29). La consecuencia es el Teorema 5.22: una función uniformemente continua sobre un denso (Definición 5.20) a valores en un completo se extiende a la clausura, y la extensión es única (Ejercicio 5.23). O2-6 y O14-10 son otra lectura de ese teorema, y O2-6 agrega que si la función es una isometría (Definición 5.33) la extensión también lo es, en la línea de la Observación 5.34. O6-9 es la versión en intervalos, con la vuelta, y O3-12 muestra que $sin(1\/x)$ no se extiende: otra forma de ver el *Ejercicio 13 (b)*.
 ]
 
-// ---- O6-8  |  p4: Ej. 14  |  falta: continuidad uniforme; usa Def. 4.51 (Cauchy)  |  nivel: media
+// ---- O6-8  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Def. 5.14; es el Ejercicio 5.19  |  nivel: media
 #ejemplo[Uniformemente continua manda Cauchy en Cauchy; continua sola no alcanza (Lebl, Lema 3.4.5 y Ejerc. 3.4.10)][O6-8][
   #set enum(numbering: "a)")
   + (Lema 3.4.5) Sean $S subset.eq RR$ y $f : S -> RR$ uniformemente continua. Si $(x_n)_(n in NN)$ es una sucesión de Cauchy en $S$, entonces $(f(x_n))_(n in NN)$ es de Cauchy.
@@ -1735,7 +1743,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Lema 3.4.5 (págs. 139--140 del PDF) y Ejercicio 3.4.10 (pág. 143 del PDF). #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O2-13  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy); falta: continuidad uniforme, homeomorfismo  |  nivel: alta
+// ---- O2-13  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Def. 5.14, Def. 5.29 ($1\/x$ es homeomorfismo y no preserva Cauchy); Ejercicio 5.19  |  nivel: alta
 #ejemplo[Continua no preserva Cauchy (ni siquiera un homeomorfismo); uniformemente continua sí (Guccione, Obs. 6.5)][O2-13][
   Una función continua puede transformar una sucesión de Cauchy en una que no lo es, aun si es un homeomorfismo. Pero si $f : X -> Y$ es uniformemente continua y $(x_n)_(n in NN)$ es una sucesión de Cauchy de puntos de $X$, entonces $(f(x_n))_(n in NN)$ también lo es.
 ]
@@ -1750,7 +1758,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Observación 6.5, pág. 101 del PDF (92 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O4-7  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Def. 4.55 (completo), Teo. 5.7; falta: continuidad uniforme  |  nivel: media
+// ---- O4-7  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Def. 4.55 (completo), Teo. 5.7, Def. 5.14; Ejercicio 5.19  |  nivel: media
 #ejemplo[Uniformemente continua con inversa continua transporta la completitud; contiene "u.c. manda Cauchy en Cauchy" (Gajardo, Ej. resuelto E7 a)][O4-7][
   Sean $(X, d)$ e $(Y, d')$ dos espacios métricos y $f : X -> Y$ una función. Si $(Y, d')$ es completo y $f : X -> Y$ es uniformemente continua, biyectiva y su inversa es continua, pruebe que $(X, d)$ es también completo.
 ]
@@ -1767,7 +1775,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Gajardo Adaro, _Análisis I_ (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E7) a), pág. 61 del PDF. #link("https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf")[URL]. Acceso: web del departamento, sin licencia explícita.
 ]
 
-// ---- O14-9  |  p4: Ej. 13, 14  |  teoría: sucesiones de Cauchy (Cap. 4); falta: continuidad uniforme  |  nivel: media
+// ---- O14-9  |  p4: Ej. 13, 14  |  teoría: sucesiones de Cauchy (Cap. 4), Def. 5.14, Obs. 5.16; Ejercicio 5.19  |  nivel: media
 #ejemplo[Uniformemente continua manda Cauchy en Cauchy; $log$ no es uniformemente continua en $(0, +oo)$ (Payá, Uniforme 2014-15, §11.3)][O14-9][
   Sean $E$ y $F$ espacios métricos y $f : E -> F$ uniformemente continua. Si $(x_n)_(n in NN)$ es una sucesión de Cauchy de puntos de $E$, entonces $(f(x_n))_(n in NN)$ es una sucesión de Cauchy en $F$. Deducir que $log : (0, +oo) -> RR$ no es uniformemente continua.
 ]
@@ -1782,7 +1790,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: R. Payá Albert, _Análisis Matemático I_ (UGR, curso 2014-15), Lección 11 "Continuidad uniforme", §11.3 "Extensión de funciones uniformemente continuas", pág. 3 del PDF (65 impresa). #link("https://www.ugr.es/~rpaya/documentos/AnalisisI/2014-15/Uniforme.pdf")[URL]. Acceso: web del docente en la UGR; sin licencia explícita.
 ]
 
-// ---- O3-9  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Cor. 4.47 (cerrados vía sucesiones), Teo. 5.7; falta: continuidad uniforme, homeomorfismo  |  nivel: media
+// ---- O3-9  |  p4: Ej. 14  |  teoría: Def. 4.51 (Cauchy), Cor. 4.47 (cerrados vía sucesiones), Teo. 5.7, Def. 5.14, Def. 5.29 (homeomorfismo)  |  nivel: media
 #ejemplo[Un homeomorfismo cuya inversa no manda Cauchy en Cauchy: $RR$ y la circunferencia pinchada (Daniilidis, Ej. 2.5.5)][O3-9][
   Sea $S$ la circunferencia unitaria de $RR^2$ centrada en el punto $(0, 1)$, es decir,
   $ S = {(x, y) in RR^2 : x^2 + (y - 1)^2 = 1}, $
@@ -1799,7 +1807,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Ejemplo 2.5.5 (Homeomorfismo vs completitud) y Definición 2.5.4, págs. 119--120 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL]. Acceso: web del docente; sin licencia explícita.
 ]
 
-// ---- O3-10  |  p4: Ej. 12, 14  |  teoría: Def. 4.51 (Cauchy), Teo. 4.57 (R completo); falta: Lipschitz  |  nivel: media
+// ---- O3-10  |  p4: Ej. 12, 14  |  teoría: Def. 4.51 (Cauchy), Teo. 4.57 (R completo), Def. 5.24 (Lipschitz)  |  nivel: media
 #ejemplo[La función $x |-> lim_n d(z_n, x)$, con $(z_n)_n$ de Cauchy, es $1$-Lipschitz (Daniilidis, Lema 2.4.33)][O3-10][
   Sea $(z_n)_(n in NN)$ una sucesión de Cauchy en un espacio métrico $(X, d)$. Entonces:
   #set enum(numbering: "(i)")
@@ -1823,7 +1831,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Lema 2.4.33, pág. 116 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL]. Acceso: web del docente; sin licencia explícita.
 ]
 
-// ---- O2-6  |  p4: Ej. 4, 7 (a), 14  |  teoría: Teo. 5.7, Prop. 4.46 (clausura por sucesiones), Def. 4.51 (Cauchy), Def. 4.55 (completo); falta: continuidad uniforme  |  nivel: alta
+// ---- O2-6  |  p4: Ej. 4, 7 (a), 14  |  teoría: Teo. 5.7, Prop. 4.46, Def. 4.51, Def. 4.55, Def. 5.14, Def. 5.20, Teo. 5.22 (la misma extensión; la unicidad es el Ejercicio 5.23), Def. 5.33 y Obs. 5.34 (caso isometría)  |  nivel: alta (segunda lectura del Teo. 5.22)
 #ejemplo[Extensión de funciones definidas sobre un denso: unicidad y existencia (Guccione, Teo. 6.28)][O2-6][
   Supongamos que $A subset.eq X$ es un conjunto denso y $f : A -> Y$ es una función continua. Los siguientes hechos valen:
   + Si $g : X -> Y$ y $h : X -> Y$ son funciones continuas que extienden a $f$, entonces $g = h$.
@@ -1849,7 +1857,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Teorema 6.28, págs. 105–106 del PDF (96–97 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O6-9  |  p4: Ej. 13, 14, 15  |  falta: continuidad uniforme, extensión continua; usa Def. 4.51, Teo. 4.57 (RR completo), Teo. 5.7  |  nivel: media
+// ---- O6-9  |  p4: Ej. 13, 14, 15  |  teoría: Def. 4.51, Teo. 4.57 (RR completo), Teo. 5.7, Def. 5.14, Teo. 5.22 (la ida, en intervalos); la vuelta usa O6-7  |  nivel: media
 #proposicion[Uniformemente continua en $(a, b)$ $<==>$ se extiende con continuidad a $[a, b]$ (Lebl, Prop. 3.4.6)][
   Una función $f : (a, b) -> RR$ es uniformemente continua si y sólo si los límites
   $ L_a := lim_(x -> a) f(x) quad "y" quad L_b := lim_(x -> b) f(x) $
@@ -1875,12 +1883,12 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 
   La fuente agrega una aplicación típica: si $f : (-1, 0) union (0, 1) -> RR$ es uniformemente continua, entonces $lim_(x -> 0) f(x)$ existe y la función tiene una singularidad evitable, es decir, se extiende a una función continua en $(-1, 1)$.
 
-  _Nota_: este criterio decide de un golpe varios casos de p4 Ej. 13 y 15: $1 \/ x$ y $sin(1 \/ x)$ no tienen límite en $0^+$, así que no son uniformemente continuas en $(0, 1)$; y una continua en $(a, b)$ con límites finitos en los extremos sí lo es. Como enunciado "falta en apuntes.typ": extensión por continuidad uniforme.
+  _Nota_: este criterio decide de un golpe varios casos de p4 Ej. 13 y 15: $1 \/ x$ y $sin(1 \/ x)$ no tienen límite en $0^+$, así que no son uniformemente continuas en $(0, 1)$; y una continua en $(a, b)$ con límites finitos en los extremos sí lo es. La ida es un caso del Teorema 5.22 de `apuntes.typ`, con $E = (a, b)$ denso en $[a, b]$ y $RR$ completo; la vuelta todavía no está en el apunte.
 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Proposición 3.4.6, págs. 140--141 del PDF. #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O14-10  |  p4: Ej. 7, 14 (extensión por densidad)  |  teoría: clausura por sucesiones, Cauchy, completitud (Cap. 4), Teo. 5.7; falta: continuidad uniforme  |  nivel: media
+// ---- O14-10  |  p4: Ej. 7, 14 (extensión por densidad)  |  teoría: clausura por sucesiones, Cauchy, completitud (Cap. 4), Teo. 5.7, Def. 5.14, Teo. 5.22 (la misma extensión), Ejercicio 5.23 (unicidad)  |  nivel: media (segunda lectura del Teo. 5.22)
 #proposicion[Extensión de una función uniformemente continua a la clausura (Payá, Uniforme 2014-15, §11.3)][
   Sean $E$ y $F$ espacios métricos, $A subset.eq E$ no vacío y $g : A -> F$. Supongamos que $F$ es completo y que $g$ es uniformemente continua. Entonces existe una única función continua $f : overline(A) -> F$ que extiende a $g$ ($f(a) = g(a)$ para todo $a in A$). De hecho, $f$ es uniformemente continua.
 ]
@@ -1899,7 +1907,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: R. Payá Albert, _Análisis Matemático I_ (UGR, 2014-15), Lección 11, §11.3, págs. 3--4 del PDF (65--66 impresas). #link("https://www.ugr.es/~rpaya/documentos/AnalisisI/2014-15/Uniforme.pdf")[URL]. Acceso: web del docente en la UGR; sin licencia explícita.
 ]
 
-// ---- O3-12  |  p4: Ej. 13, 14  |  teoría: Def. 4.51, Def. 4.55 (completo), Teo. 5.7; falta: continuidad uniforme, extensión a la clausura  |  nivel: baja
+// ---- O3-12  |  p4: Ej. 13, 14  |  teoría: Def. 4.51, Def. 4.55 (completo), Teo. 5.7, Def. 5.14, Teo. 5.22 (extensión a la clausura)  |  nivel: baja
 #proposicion[Extensión continua a un $G_delta$ entre $A$ y $overline(A)$ (Daniilidis, Cor. 2.5.17, sólo enunciado)][
   Sea $(X, d)$ un espacio métrico y sea $(Y, d')$ un espacio métrico *completo*. Sea $A subset.eq X$ y $f : A -> Y$ continua. Entonces existe un conjunto $G subset.eq X$, que es $G_delta$ (intersección numerable de abiertos), tal que $A subset.eq G subset.eq overline(A)$ y existe $phi : G -> Y$ extensión continua de $f$, es decir $phi|_A = f$. Además, dicha extensión se define de forma única. Concretamente,
   $ G = inter.big_(n = 1)^infinity G_n, quad G_n = {x in overline(A) : "existe" delta_x > 0 "con" thick op("diam")_(d') (f(B(x, delta_x) inter A)) < 1 / n}. $
@@ -1934,7 +1942,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   El teorema de Heine explica por qué los contraejemplos de los *Ejercicios 13 y 15* viven en dominios no acotados o no cerrados. Usa compacidad, que es tema de la Práctica 5.
 ]
 
-// ---- O6-7  |  p4: Ej. 13, 15  |  falta: continuidad uniforme; usa Bolzano–Weierstrass en RR y Teo. 5.7  |  nivel: teoría
+// ---- O6-7  |  p4: Ej. 13, 15  |  teoría: Def. 5.14, Teo. 5.7; usa Bolzano–Weierstrass en RR, que apuntes.typ no enuncia; falta: compacidad  |  nivel: teoría
 #proposicion[Continua en $[a, b]$ implica uniformemente continua (Lebl, Teo. 3.4.4)][
   Sea $f : [a, b] -> RR$ una función continua. Entonces $f$ es uniformemente continua.
 ]
@@ -1963,7 +1971,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. Lebl, _Basic Analysis I_, v6.3, Teorema 3.4.4, pág. 139 del PDF. #link("https://www.jirka.org/ra/realanal.pdf")[URL]. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.
 ]
 
-// ---- O14-7  |  p4: Ej. 13 (restricción a [eps, +oo) no cubre), 15  |  falta: continuidad uniforme, compacidad (toda sucesión tiene una parcial convergente)  |  nivel: baja (teoría que falta en apuntes.typ)
+// ---- O14-7  |  p4: Ej. 13 (restricción a [eps, +oo) no cubre), 15  |  teoría: Def. 5.14, Prop. 5.18 (misma técnica); falta: compacidad (toda sucesión tiene una parcial convergente)  |  nivel: baja (teoría que falta en apuntes.typ)
 #proposicion[Teorema de Heine: continua sobre un compacto implica uniformemente continua (Payá, Apuntes 05, §5.3)][
   Sean $E$ y $F$ espacios métricos y $f : E -> F$ continua. Si $E$ es compacto (toda sucesión de puntos de $E$ admite una sucesión parcial convergente en $E$), entonces $f$ es uniformemente continua.
 ]
@@ -1985,7 +1993,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Enunciados que la fuente deja sin resolver, con la indicación de qué pieza de los bloques anteriores los resuelve. Sirven para practicar después de leer el resto.
 ]
 
-// ---- O11-8  |  p4: Ej. 3, 4, 5, 8, 11  |  teoría: Teo. 5.9, Ej. 5.10, densidad; falta: d(x, A), Urysohn  |  nivel: alta
+// ---- O11-8  |  p4: Ej. 3, 4, 5, 8, 11  |  teoría: Teo. 5.9, Ej. 5.10, Def. 5.20 (denso); falta: d(x, A), Urysohn  |  nivel: alta
 #ejemplo[Ejercicios propuestos de continuidad, sin resolución (BUAP, §5.6)][O11-8][
   En todos los casos $X$ e $Y$ son espacios métricos. La fuente sólo da los enunciados.
   + *(Ej. 4)* Sean $A subset.eq X$ y $f : A -> RR$ continua en $A$. Demostrar que si $a in A$ y $c in RR$ con $f(a) < c$, entonces existe una vecindad $V$ de $a$ tal que para cada $x in A inter V$ se cumple que $f(x) < c$.
@@ -2003,7 +2011,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, _La magia de los espacios métricos_ (FCFM, BUAP, 2025), §5.6, Ejercicios 4, 7, 8, 10, 11, 13 y 24, págs. 138--141 del libro (147--150 del PDF). #link("https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf")[URL]. Acceso: "DR © Benemérita Universidad Autónoma de Puebla", ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.
 ]
 
-// ---- O11-9  |  p4: Ej. 13, 14, 15, 16  |  falta: continuidad uniforme  |  nivel: media
+// ---- O11-9  |  p4: Ej. 13, 14, 15, 16  |  teoría: Def. 5.14, Prop. 5.18, Teo. 5.22, Def. 5.24  |  nivel: media
 #ejemplo[Ejercicios propuestos de continuidad uniforme, sin resolución (BUAP, §5.6)][O11-9][
   En todos los casos $X$ e $Y$ son espacios métricos. La fuente sólo da los enunciados.
   + *(Ej. 9)* Si $X$ es completo, $f : X -> Y$ es continua en $X$ y $(x_n)_(n in NN)$ es de Cauchy en $X$, entonces $(f(x_n))_(n in NN)$ es de Cauchy en $Y$.
