@@ -104,7 +104,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 == Bloque 1 · Herramientas: composición, álgebra de continuas, restricción y pegado
 
 #sublema(titulo: "Qué desbloquea")[
-  La Práctica 4 usa sin decirlo que composiciones, sumas, productos y cocientes de funciones continuas son continuos, y que una función definida a trozos es continua si los trozos pegan bien. `apuntes.typ` todavía no lo enuncia como teorema, aunque ya lo usa: el Ejemplo 5.30 a) dice que $x \/ (1 + abs(x))$ es continua "por ser cociente de continuas", y el Ejercicio 5.32 (la composición de homeomorfismos, Definición 5.29, es un homeomorfismo) necesita la composición. Este bloque trae las demostraciones de las fuentes: composición por $epsilon$--$delta$, por preimágenes y por sucesiones, restricción, pegado sobre dos cerrados y el contraejemplo del pegado sobre infinitos cerrados. Es la teoría que hace falta para escribir con rigor el *Ejercicio 1*, el *Ejercicio 5* y el cociente de Urysohn del *Ejercicio 11*.
+  La Práctica 4 usa sin decirlo que composiciones, sumas, productos y cocientes de funciones continuas son continuos, y que una función definida a trozos es continua si los trozos pegan bien. `apuntes.typ` todavía no lo enuncia como teorema, aunque ya lo usa: el Ejemplo 5.30 a) dice que $x \/ (1 + abs(x))$ es continua "por ser cociente de continuas", y el Ejercicio 5.32 (la composición de homeomorfismos, Definición 5.29, es un homeomorfismo) necesita la composición. En `ejemplos/p4.typ`, la clase del 07/10 ya probó que suma y producto de continuas son continuas (C9-1.1), que las proyecciones de $RR^n$ lo son (C9-1.2) y que los polinomios lo son (C9-1.6); lo que agrega este bloque es la composición, el cociente, la restricción y el pegado. Este bloque trae las demostraciones de las fuentes: composición por $epsilon$--$delta$, por preimágenes y por sucesiones, restricción, pegado sobre dos cerrados y el contraejemplo del pegado sobre infinitos cerrados. Es la teoría que hace falta para escribir con rigor el *Ejercicio 1*, el *Ejercicio 5* y el cociente de Urysohn del *Ejercicio 11*.
 ]
 
 // ---- O15-1  |  p4: Ej. 1 (herramienta), 5  |  teoría: Def. 5.4, Teo. 5.9; falta: composición de continuas enunciada como teorema (el Ejercicio 5.32, composición de homeomorfismos, la necesita)  |  nivel: baja (teoría que falta en apuntes.typ)
@@ -151,7 +151,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (Depto. de Matemática, FCEN-UBA, 2017), Proposición 3.9 y Nota 3.10, pág. 66 del PDF (57 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: publicado en la web de la materia; nota de copyright en la portada que permite la copia sin fines de lucro, sin modificar el texto y respetando la autoría.
 ]
 
-// ---- O2-2  |  p4: Ej. 1 (a) (b), 5, 6, 9  |  teoría: Teo. 5.7 / Def. 5.4; falta: álgebra de funciones continuas a valores reales  |  nivel: baja (teoría)
+// ---- O2-2  |  p4: Ej. 1 (a) (b), 5, 6, 9  |  teoría: Teo. 5.7 / Def. 5.4; suma y producto: C9-1.1 en ejemplos/p4.typ; falta: cociente y álgebra de continuas enunciada en apuntes.typ  |  nivel: baja (teoría)
 #ejemplo[Suma, producto, cociente e inversión son continuas; funciones racionales (Guccione, Ejercicio 3.14 y Nota 3.15)][O2-2][
   Sea $k := RR$ o $CC$ (con la métrica usual, y $k times k$ con $d_infinity$). Pruebe que las funciones
   $ +: k times k &-> k, & (x, y) &|-> x + y, \
@@ -255,7 +255,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Modelos para el *Ejercicio 1 (a), (b)*: decidir la continuidad de un cociente en el origen. Para ver que *no* es continua alcanza una sucesión, una recta o una curva por la que el límite da otra cosa (Teo. 5.7). Para ver que *sí* lo es, se acota $abs(f(x, y))$ por algo que tiende a cero, muchas veces pasando a coordenadas polares.
 ]
 
-// ---- O6-3  |  p4: Ej. 1 (a), (b)  |  teoría: Teo. 5.7, convergencia coordenada a coordenada en RR^2 (C6-1)  |  nivel: alta
+// ---- O6-3  |  p4: Ej. 1 (a), (b)  |  teoría: Teo. 5.7, convergencia coordenada a coordenada en RR^2 (C6-1, C9-1.2); polinomios continuos: C9-1.6  |  nivel: alta
 #ejemplo[Los polinomios en dos variables son continuos; cuidado con los límites por separado (Lebl, Ej. 7.5.3 y Ejerc. 7.5.2)][O6-3][
   #set enum(numbering: "a)")
   + Sea $f : RR^2 -> RR$ un polinomio, es decir,
@@ -600,7 +600,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   Para ver que un conjunto definido por igualdades o desigualdades es abierto o cerrado, se lo escribe como preimagen de un abierto o de un cerrado de $RR$ por una función continua (Teo. 5.9 y Ej. 5.10). Es la técnica de los *Ejercicios 3, 4 y 5*.
 ]
 
-// ---- O6-4  |  p4: Ej. 3, 4, 5  |  teoría: Teo. 5.9, Ej. 5.10  |  nivel: alta
+// ---- O6-4  |  p4: Ej. 3, 4, 5  |  teoría: Teo. 5.9, Ej. 5.10; misma técnica que C9-2.1  |  nivel: alta
 #ejemplo[Conjunto de ceros, ${f >= 0}$ y ${f > 0}$ de una función continua (Lebl, Ej. 7.5.9)][O6-4][
   Sea $f : X -> Y$ continua. Si $E subset.eq Y$ es cerrado, entonces $f^(-1)(E)$ es cerrado. En particular, si $f : X -> RR$ es continua, el conjunto de ceros $f^(-1)({0}) = {x in X : f(x) = 0}$ es cerrado, el conjunto $f^(-1)([0, infinity)) = {x in X : f(x) >= 0}$ es cerrado y el conjunto $f^(-1)((0, infinity)) = {x in X : f(x) > 0}$ es abierto.
 ]
@@ -736,7 +736,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
 == Bloque 6 · Densidad y continuidad
 
 #sublema(titulo: "Qué desbloquea")[
-  Dos usos de la densidad: dos funciones continuas que coinciden en un denso coinciden en todo (*Ejercicio 7*), y la imagen continua y suryectiva de un denso es densa (*Ejercicio 8*). Incluye las caracterizaciones de "denso" por abiertos y por bolas, y otra demostración del Teo. 5.13, que es la herramienta del Ejercicio 8.
+  Dos usos de la densidad: dos funciones continuas que coinciden en un denso coinciden en todo (*Ejercicio 7*), y la imagen continua y suryectiva de un denso es densa (*Ejercicio 8*). Incluye las caracterizaciones de "denso" (Definición 5.20) por abiertos y por bolas, y otra demostración del Teo. 5.13, que es la herramienta del Ejercicio 8. En `ejemplos/p4.typ`, los ejemplos de clase C9-3.2 y C9-3.1 resuelven el Ejercicio 7 (a) y el Ejercicio 8; los ítems de este bloque son otras demostraciones de lo mismo.
 ]
 
 // ---- O3-1  |  p4: Ej. 7, 8  |  teoría: Def. 4.22 (clausura), Prop. 4.46, Def. 5.20 (denso); falta: caracterización de denso por abiertos  |  nivel: alta
@@ -780,7 +780,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: P. Gajardo Adaro, _Análisis I_ (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E5) a), pág. 60 del PDF. #link("https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf")[URL]. Acceso: web del departamento, sin licencia explícita.
 ]
 
-// ---- O11-4  |  p4: Ej. 7 (a)  |  teoría: clausura (cerrado ⟺ A = cl A), Lema anterior  |  nivel: alta
+// ---- O11-4  |  p4: Ej. 7 (a)  |  teoría: clausura (cerrado ⟺ A = cl A), Lema anterior; es C9-3.2 de ejemplos/p4.typ con otra demostración  |  nivel: alta
 #ejemplo[Dos continuas que coinciden en $A$ coinciden en $overline(A)$ (BUAP, Lema 5.22)][O11-4][
   Sean $X$ e $Y$ espacios métricos y $A subset.eq X$. Si $f, g : overline(A) -> Y$ son funciones continuas en $overline(A)$ y $f|_A = g|_A$, entonces para cada $x in overline(A)$ se cumple que $f(x) = g(x)$.
 ]
@@ -795,7 +795,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, _La magia de los espacios métricos_ (FCFM, BUAP, 2025), Lema 5.22, pág. 126 del libro (135 del PDF). #link("https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf")[URL]. Acceso: "DR © Benemérita Universidad Autónoma de Puebla", ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.
 ]
 
-// ---- O15-4  |  p4: Ej. 7 (a)(b)  |  teoría: Teo. 5.9, Def. 5.20 (denso; que todo abierto no vacío corta a un denso sale de la definición), Teo. 5.7  |  nivel: alta
+// ---- O15-4  |  p4: Ej. 7 (a)(b)  |  teoría: Teo. 5.9, Def. 5.20 (denso; que todo abierto no vacío corta a un denso sale de la definición), Teo. 5.7; (a) es C9-3.2 con otra demostración  |  nivel: alta
 #ejemplo[Coincidir en un denso implica coincidir; una continua en $[0, 1] inter QQ$ sin extensión continua a $[0, 1]$ (Körner, Ej. 6.8)][O15-4][
   + Sea $X$ un espacio topológico (en particular, métrico) y $(Y, d)$ un espacio métrico. Si $f, g : X -> Y$ son continuas y $f(x) = g(x)$ para todo $x in A$, donde $A$ es denso en $X$, probar que $f(x) = g(x)$ para todo $x in X$.
   + Sea $[0, 1]$ con la métrica euclídea y $A = [0, 1] inter QQ$ con la métrica heredada. Exhibir, con demostración, una función continua $f : A -> RR$ tal que no existe ninguna función continua $tilde(f) : [0, 1] -> RR$ con $tilde(f)(x) = f(x)$ para todo $x in A$.
@@ -851,7 +851,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: Daniilidis, Lema 2.5.16 (Conjuntos densos vs continuidad), págs. 127--128 del PDF. #link("https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf")[URL]. Acceso: web del docente; sin licencia explícita.
 ]
 
-// ---- O2-5  |  p4: Ej. 8  |  teoría: Teo. 5.13 ($f(overline(E)) subset.eq overline(f(E))$), Def. 5.20 (denso)  |  nivel: alta
+// ---- O2-5  |  p4: Ej. 8  |  teoría: Teo. 5.13 ($f(overline(E)) subset.eq overline(f(E))$), Def. 5.20 (denso); es C9-3.1 de ejemplos/p4.typ con otra demostración  |  nivel: alta
 #ejemplo[Imagen continua y sobreyectiva de un espacio separable (Guccione, Prop. 5.11)][O2-5][
   Recordemos (Definición 5.1 de la fuente) que $A subset.eq X$ es _denso_ si $overline(A) = X$, y que $X$ es _separable_ si tiene un subconjunto contable (finito o numerable) y denso. Si $X$ es separable y $f : X -> Y$ es continua y sobreyectiva, entonces $Y$ es separable.
 ]
@@ -866,7 +866,7 @@ La pestaña *`O{fuente}-{k}`* dice de qué documento viene cada ítem (tabla de 
   _Fuente_: J. A. Guccione y J. J. Guccione, _Espacios Métricos_ (FCEN-UBA, 2017), Definición 5.1 y Proposición 5.11, págs. 94 y 96 del PDF (85 y 87 del apunte). #link("https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf")[URL]. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).
 ]
 
-// ---- O9-1  |  p4: Ej. 8  |  teoría: Teo. 5.13 (otra demostración), Def. 4.22, Def. 5.20 (denso)  |  nivel: alta
+// ---- O9-1  |  p4: Ej. 8  |  teoría: Teo. 5.13 (otra demostración), Def. 4.22, Def. 5.20 (denso); el Ej. 8 está resuelto en C9-3.1  |  nivel: alta
 #ejemplo[$f(overline(E)) subset.eq overline(f(E))$ por $epsilon$--$delta$, y la inclusión puede ser estricta (MIT 18.100C, PS6 Prob. 3)][O9-1][
   Sea $f : X -> Y$ continua y $E subset.eq X$. Probar que $f(overline(E)) subset.eq overline(f(E))$, y mostrar con un ejemplo que la inclusión puede ser propia.
 ]
