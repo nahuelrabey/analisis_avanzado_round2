@@ -158,7 +158,7 @@ PP.register(function drawCuenta() {
   const { ctx, w, h } = PP.canvas($id("ej2-c1"), 0.9);
   const mid = Math.round(h * 0.5);
   const T1 = PP.frame(w, h, { x0: 0, x1: 1, y0: -0.05, y1: 1.15 }, { l: 38, r: 12, t: 12, b: h - mid + 8 });
-  const T2 = PP.frame(w, h, { x0: 0, x1: 1, y0: 0, y1: 0.4 }, { l: 38, r: 12, t: mid + 22, b: 26 });
+  const T2 = PP.frame(w, h, { x0: 0, x1: 1, y0: 0, y1: 0.4 }, { l: 38, r: 12, t: mid + 30, b: 26 });
   PP.axes(ctx, T1, { yTicks: 3 });
   PP.axes(ctx, T2, { yTicks: 3 });
   graph(ctx, T1, f2, 0, 1, C("--accent"), 2);
@@ -176,8 +176,6 @@ PP.register(function drawCuenta() {
   PP.path(ctx, pts, C("--seq2"), 2, null, true, C("--area2"));
   PP.label(ctx, "d∞", T2.X(0) + 4, T2.Y(dinf) - 3, C("--muted"), "left", "bottom", 11);
   PP.label(ctx, "x·d∞", T2.X(1) - 4, T2.Y(dinf) + 4, C("--accent"), "right", "top", 11);
-  PP.label(ctx, "x·|f − g|", T2.X(0) + 4, T2.p.t - 4, C("--seq2"), "left", "bottom", 12);
-  PP.label(ctx, "|f − g|", T2.X(0) + 70, T2.p.t - 4, C("--muted"), "left", "bottom", 12);
   PP.read($id("ej2-read"), [
     ["d∞(f, g)", PP.fmt(dinf, 3)],
     ["d₁(Ψf, Ψg)", PP.fmt(d1, 4) + "  (área naranja)"],

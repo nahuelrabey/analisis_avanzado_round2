@@ -185,8 +185,8 @@
     <div class="enun">
       <p>Dados $A, B \subseteq \mathbb{R}$ no vacíos, se define el conjunto suma de $A$ y $B$ como $$A + B = \{a + b : a \in A,\ b \in B\}.$$ Decida si las siguientes afirmaciones son verdaderas o falsas:</p>
       <ol class="items">
-        <li>Si $A, B \subseteq \mathbb{R}$ son acotados, entonces $\sup(A + B) = \sup(A) + \sup(B)$.</li>
-        <li>Si $(a_n)_{n \in \mathbb{N}}$ y $(b_n)_{n \in \mathbb{N}}$ son dos sucesiones acotadas de números reales, entonces $\sup(\{a_n + b_n\}_{n \in \mathbb{N}}) = \sup(\{a_n\}_{n \in \mathbb{N}}) + \sup(\{b_n\}_{n \in \mathbb{N}})$.</li>
+        <li>Si $A, B \subseteq \mathbb{R}$ son acotados, entonces $\sup(A + B)$ $= \sup(A) + \sup(B)$.</li>
+        <li>Si $(a_n)_{n \in \mathbb{N}}$ y $(b_n)_{n \in \mathbb{N}}$ son dos sucesiones acotadas de números reales, entonces $\sup(\{a_n + b_n\}_{n \in \mathbb{N}})$ $= \sup(\{a_n\}_{n \in \mathbb{N}})$ $+ \sup(\{b_n\}_{n \in \mathbb{N}})$.</li>
       </ol>
     </div>
 
@@ -210,11 +210,11 @@
           <figure class="viz">
             <canvas id="r1-1c2025-ej2-c1" aria-label="Tres rectas con los puntos de A, de B y de A + B, y las marcas de alfa, beta y alfa más beta"></canvas>
             <div class="ctrl">
-              <div class="slider"><label for="r1-1c2025-ej2-i">$a = 1 - 1/i$</label><input type="range" id="r1-1c2025-ej2-i" min="1" max="30" value="3"><output id="r1-1c2025-ej2-i-o"></output></div>
-              <div class="slider"><label for="r1-1c2025-ej2-j">$b = \tfrac{1}{2}(1 - 1/j)$</label><input type="range" id="r1-1c2025-ej2-j" min="1" max="30" value="2"><output id="r1-1c2025-ej2-j-o"></output></div>
+              <div class="slider"><label for="r1-1c2025-ej2-i">índice $i$</label><input type="range" id="r1-1c2025-ej2-i" min="1" max="30" value="3"><output id="r1-1c2025-ej2-i-o"></output></div>
+              <div class="slider"><label for="r1-1c2025-ej2-j">índice $j$</label><input type="range" id="r1-1c2025-ej2-j" min="1" max="30" value="2"><output id="r1-1c2025-ej2-j-o"></output></div>
             </div>
             <dl class="read" id="r1-1c2025-ej2-read1" aria-live="polite"></dl>
-            <figcaption>Valores elegidos para el dibujo: $A = \{1 - 1/k : k \in \mathbb{N}\}$, con $\alpha = 1$, y $B = \{\tfrac12(1 - 1/k)\}$, con $\beta = \tfrac12$. Abajo, algunas sumas de $A + B$. Cualquiera sea el par $(a, b)$ que elijas, $x = a + b$ queda a la izquierda de $\alpha + \beta$.</figcaption>
+            <figcaption>Valores elegidos para el dibujo: $A = \{1 - 1/k : k \in \mathbb{N}\}$, con $\alpha = 1$, y $B = \{\tfrac12(1 - 1/k)\}$, con $\beta = \tfrac12$; los sliders eligen $a = 1 - 1/i$ y $b = \tfrac12(1 - 1/j)$. Abajo, algunas sumas de $A + B$. Cualquiera sea el par $(a, b)$ que elijas, $x = a + b$ queda a la izquierda de $\alpha + \beta$.</figcaption>
           </figure>
         </div>
         <div class="step has-viz">
@@ -300,13 +300,13 @@
         <div class="step">
           <div class="step-text">
             <p class="step-title">Conclusión</p>
-            <p>Entonces $\sup(\{a_n + b_n\}_n) = 0 \ne 1 = \sup(\{a_n\}_n) + \sup(\{b_n\}_n)$. $\blacksquare$</p>
+            <p>Entonces $\sup(\{a_n + b_n\}_n) = 0$ $\ne 1 = \sup(\{a_n\}_n) + \sup(\{b_n\}_n)$. $\blacksquare$</p>
           </div>
         </div>
         <div class="step has-viz">
           <div class="step-text">
             <p class="step-title">Lo que sí vale siempre</p>
-            <p><em>Lo que sí vale siempre</em> es $\sup(\{a_n + b_n\}_n) \le \sup(\{a_n\}_n) + \sup(\{b_n\}_n)$, porque $\{a_n + b_n\}_n \subseteq \{a_n\}_n + \{b_n\}_n$ y se aplica el <a href="#r1-1c2025-ej2a">ítem a)</a> junto con la <span class="ref" data-ref="guia-p1-ej5a">Práctica 1, Ej. 5 (a)</span>.</p>
+            <p><em>Lo que sí vale siempre</em> es $\sup(\{a_n + b_n\}_n)$ $\le \sup(\{a_n\}_n) + \sup(\{b_n\}_n)$, porque $\{a_n + b_n\}_n \subseteq \{a_n\}_n + \{b_n\}_n$ y se aplica el <a href="#r1-1c2025-ej2a">ítem a)</a> junto con la <span class="ref" data-ref="guia-p1-ej5a">Práctica 1, Ej. 5 (a)</span>.</p>
           </div>
           <figure class="viz">
             <svg viewBox="0 0 380 270" role="img" aria-label="Tabla de las sumas a_i + b_j para i, j de 1 a 4; la diagonal son los a_n + b_n">

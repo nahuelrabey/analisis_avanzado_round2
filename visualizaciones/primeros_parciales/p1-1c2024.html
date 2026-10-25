@@ -112,7 +112,7 @@
           <div class="step-text">
             <p class="step-title">La codificación $\Phi$ con primos</p>
             <p>Dado $n \in \mathbb{N}$, sea $\varphi : \mathbb{Q} \to \mathbb{N}$ una función inyectiva (que existe porque sabemos que <span class="ref" data-ref="prop-numerabilidad-de-qq">$\mathbb{Q} \approx \mathbb{N}$</span>), y sean $\{p_0, p_1, p_2, \dots, p_n\}$ números naturales primos distintos. Definimos $\Phi : \mathbb{Q}_n[x] \to \mathbb{N}$ de la siguiente manera:
-              $$\Phi\Big(\sum_{j=0}^n a_j x^j\Big) := p_0^{\varphi(a_0)}\, p_1^{\varphi(a_1)} \cdots p_n^{\varphi(a_n)}. \qquad (1)$$
+              $$\begin{aligned}&\Phi\Big(\sum_{j=0}^n a_j x^j\Big) \\ &\quad := p_0^{\varphi(a_0)}\, p_1^{\varphi(a_1)} \cdots p_n^{\varphi(a_n)}. \qquad (1)\end{aligned}$$
               Como la escritura de un polinomio de grado $n$ como la suma en (1) es única (notemos que $a_n \ne 0$), se tiene que $\Phi$ está bien definida.</p>
             <p class="nota"><b>Errata</b>En (1) el original escribe $x_j$ por $x^j$ (también en las sumas del paso siguiente) y pone los exponentes $\varphi(a_1), \varphi(a_2), \dots, \varphi(a_n)$ sobre $p_0, p_1, \dots, p_n$. Acá cada $p_j$ lleva el exponente $\varphi(a_j)$, que es lo que usa la prueba de inyectividad.</p>
           </div>
@@ -236,7 +236,7 @@
             <div class="slider"><label for="p1-1c2024-ej2-w">ancho</label><input type="range" id="p1-1c2024-ej2-w" min="4" max="80" value="18"><output id="p1-1c2024-ej2-w-o"></output></div>
           </div>
           <dl class="read" id="p1-1c2024-ej2-read" aria-live="polite"></dl>
-          <figcaption>Arriba, f (azul) y g = f +  un bulto (naranja); los sliders mueven el bulto y cambian su ancho. Abajo, el área sombreada es ∫₀¹ x·|f − g| dx = d₁(Ψf, Ψg). Como |f − g| ≤ d∞(f, g), queda debajo de la recta x·d∞(f, g), cuyo triángulo tiene área d∞(f, g)/2. Las funciones son elegidas para el dibujo.</figcaption>
+          <figcaption>Arriba, f (azul) y g = f +  un bulto (naranja); los sliders mueven el bulto y cambian su ancho. Abajo, la curva gris es |f − g| y el área naranja es ∫₀¹ x·|f − g| dx = d₁(Ψf, Ψg). Como |f − g| ≤ d∞(f, g), queda debajo de la recta x·d∞(f, g), cuyo triángulo tiene área d∞(f, g)/2. Las funciones son elegidas para el dibujo.</figcaption>
         </figure>
       </div>
 
@@ -377,8 +377,8 @@
         <figure class="viz">
           <canvas id="p1-1c2024-ej4-c1" aria-label="Recta real con la bola de centro x y radio r para la métrica d"></canvas>
           <div class="ctrl">
-            <div class="slider"><label for="p1-1c2024-ej4-x">xₘ</label><input type="range" id="p1-1c2024-ej4-x" min="-200" max="200" value="80"><output id="p1-1c2024-ej4-x-o"></output></div>
-            <div class="slider"><label for="p1-1c2024-ej4-r">ε</label><input type="range" id="p1-1c2024-ej4-r" min="1" max="300" value="50"><output id="p1-1c2024-ej4-r-o"></output></div>
+            <div class="slider"><label for="p1-1c2024-ej4-x">xₘ</label><input type="range" id="p1-1c2024-ej4-x" min="-200" max="200" value="30"><output id="p1-1c2024-ej4-x-o"></output></div>
+            <div class="slider"><label for="p1-1c2024-ej4-r">ε</label><input type="range" id="p1-1c2024-ej4-r" min="1" max="300" value="90"><output id="p1-1c2024-ej4-r-o"></output></div>
           </div>
           <dl class="read" id="p1-1c2024-ej4-read1" aria-live="polite"></dl>
           <figcaption>Los xⱼ con d(xⱼ, xₘ) &lt; ε: el propio xₘ (punto azul) y, si |xₘ| &lt; ε, los xⱼ con |xⱼ| &lt; ε − |xₘ| (intervalo naranja, centrado en 0 y no en xₘ). Si |xₘ| ≥ ε, sólo queda xₘ.</figcaption>
