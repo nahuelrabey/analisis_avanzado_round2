@@ -401,7 +401,7 @@
           <p>Como $u \in E = \overline{X}$, existe $y \in B(u, \rho) \cap X$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>). Entonces:</p>
           <ul class="items">
             <li>$y \in U$, porque $d(u, y) \lt \rho \le s$ y $B(u, s) \subseteq U$;</li>
-            <li>$y \in B(x, r)$, porque $d(x, y) \le d(x, u) + d(u, y) \lt d(x, u) + (r - d(x, u)) = r$ (desigualdad triangular, <span class="ref" data-ref="def-4.1">Definición 4.1</span>);</li>
+            <li>$y \in B(x, r)$, porque $d(x, y) \le d(x, u) + d(u, y)$ $\lt d(x, u) + (r - d(x, u))$ $= r$ (desigualdad triangular, <span class="ref" data-ref="def-4.1">Definición 4.1</span>);</li>
             <li>$y \in X$ por elección.</li>
           </ul>
           <p>Luego $y \in B(x, r) \cap (X \cap U)$, y como $r$ era arbitrario, $x \in \overline{X \cap U}$.</p>
@@ -501,7 +501,7 @@
             <p class="step-title">La bola como intersección</p>
             <p>Para $p = (x, y) \in \mathbb{R}^2$,
             $$\begin{aligned} p \in B_d((0,0), 1) &amp;\iff \max\{\tfrac43 d_\infty(p, 0), d_2(p, 0)\} \lt 1 \\ &amp;\iff d_\infty(p, 0) \lt \tfrac34 \ \text{ y } \ d_2(p, 0) \lt 1 \\ &amp;\iff |x| \lt \tfrac34,\ |y| \lt \tfrac34 \ \text{ y } \ x^2 + y^2 \lt 1. \end{aligned}$$
-            Es decir, $B_d((0,0), 1) = B_{d_\infty}((0,0), \tfrac34) \cap B_{d_2}((0,0), 1)$: el cuadrado abierto de lado $\tfrac32$ centrado en el origen, intersecado con el disco abierto de radio $1$ (<span class="ref" data-ref="def-4.5">bolas, Definición 4.5</span>).</p>
+            Es decir, $B_d((0,0), 1)$ $= B_{d_\infty}((0,0), \tfrac34) \cap B_{d_2}((0,0), 1)$: el cuadrado abierto de lado $\tfrac32$ centrado en el origen, intersecado con el disco abierto de radio $1$ (<span class="ref" data-ref="def-4.5">bolas, Definición 4.5</span>).</p>
           </div>
           <figure class="viz">
             <canvas id="r1-1c2025-ej4-c2" aria-label="La bola unitaria de d en el plano, intersección de un cuadrado y un disco, con un punto p que se puede arrastrar"></canvas>
