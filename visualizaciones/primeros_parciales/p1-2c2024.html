@@ -1,0 +1,371 @@
+<section class="exam" id="p1-2c2024" data-meta="19 de octubre de 2024 · resolución de la cátedra">
+  <header class="exam-head">
+    <h2 id="p1-2c2024-titulo"><span class="bn">Primer parcial · 2C 2024</span>19 de octubre de 2024</h2>
+    <p class="meta">Enunciado y resolución oficial de la cátedra, transcriptos de <code>apuntes-typst/parciales/2024_2c_parcial_1.typ</code>. Las notas marcadas como agregados del repositorio no son de la cátedra. Las cuatro resoluciones están formalizadas en <code>lean/Parciales/Parcial1_2C2024.lean</code>. Se aprobaba con dos ejercicios bien y completos.</p>
+    <a class="back" href="#inicio">Volver al índice</a>
+  </header>
+
+  <!-- ===================== Ejercicio 1 ===================== -->
+  <article class="ej" id="p1-2c2024-ej1" data-short="Ej. 1" data-title="Ínfimo del conjunto suma A + B" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Ínfimo del conjunto suma $A + B$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun">
+      <p>Consideremos $A$ y $B$ conjuntos en $\mathbb{R}$ no vacíos y acotados. Probar que $\inf(A) + \inf(B) = \inf(A + B)$, donde $A + B = \{a + b : a \in A,\ b \in B\}$.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\inf(A) + \inf(B)$ es cota inferior de $A + B$</p>
+          <p>Dado un elemento en $A + B$ podemos escribirlo como $a + b$ con $a \in A$ y $b \in B$. Luego
+          $$a + b \ge \inf(A) + \inf(B)$$
+          y llegamos a que $\inf(A) + \inf(B)$ es una <span class="ref" data-ref="def-4">cota inferior</span> del conjunto suma. <span class="ref" data-ref="def-5">Es decir</span>,
+          $$\inf(A + B) \ge \inf(A) + \inf(B).$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej1-c1" aria-label="Tres rectas: los puntos de A, de B y de A + B; la suma elegida a + b queda a la derecha de ínf A + ínf B"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej1-i"><i>a</i> ∈ <i>A</i></label><input type="range" id="p1-2c2024-ej1-i" min="1" max="12" value="2"><output id="p1-2c2024-ej1-i-o"></output></div>
+            <div class="slider"><label for="p1-2c2024-ej1-j"><i>b</i> ∈ <i>B</i></label><input type="range" id="p1-2c2024-ej1-j" min="1" max="12" value="3"><output id="p1-2c2024-ej1-j-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej1-read" aria-live="polite"></dl>
+          <figcaption>Valores elegidos para el dibujo: <i>A</i> = {1 + 1/<i>k</i>} con ínf(<i>A</i>) = 1 y <i>B</i> = {½ + 1/(2<i>k</i>)} con ínf(<i>B</i>) = ½ (se dibujan los primeros términos). Elegí <i>a</i> y <i>b</i> con los controles: la suma <i>a</i> + <i>b</i> en la tercera recta nunca queda a la izquierda de la línea punteada ínf(<i>A</i>) + ínf(<i>B</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La otra desigualdad, con $\varepsilon/2$</p>
+          <p>Resta ver la otra desigualdad. Fijemos $\varepsilon \gt 0$ cualquiera. <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Existen $a \in A$ y $b \in B$</span> tales que
+          $$\begin{aligned} \inf(A) &\ge a - \varepsilon/2, \\ \inf(B) &\ge b - \varepsilon/2 \end{aligned}$$
+          y así
+          $$\begin{aligned} \inf(A) + \inf(B) &\ge a + b - \varepsilon \\ &\ge \inf(A + B) - \varepsilon \end{aligned}$$
+          pues $a + b \in A + B$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej1-c2" aria-label="Bandas de ancho ε/2 a la derecha de ínf A y de ínf B, y banda de ancho ε a la derecha de ínf A + ínf B"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej1-eps">ε</label><input type="range" id="p1-2c2024-ej1-eps" min="4" max="100" value="40"><output id="p1-2c2024-ej1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej1-read2" aria-live="polite"></dl>
+          <figcaption>Mismos conjuntos que en el paso anterior. Las bandas sombreadas de ancho ε/2 marcan dónde viven el <i>a</i> y el <i>b</i> que da la equivalencia de ínfimo. Su suma cae en la banda de ancho ε de la tercera recta, así que <i>a</i> + <i>b</i> − ε (marca naranja) queda a la izquierda de ínf(<i>A</i>) + ínf(<i>B</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Y <span class="ref" data-ref="ext-epsilon-arbitrario">como $\varepsilon$ era cualquiera</span>, llegamos al resultado.</p>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2024.ej1</code>, <code>ej1_curso</code>. Sólo se usa que $A$ y $B$ estén acotados inferiormente.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 2 ===================== -->
+  <article class="ej" id="p1-2c2024-ej2" data-short="Ej. 2" data-title="Subconjuntos de Q con el mismo cardinal que su complemento" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>Subconjuntos de $\mathbb{Q}$ con el mismo cardinal que su complemento</h3>
+      <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Calcular el cardinal del conjunto $\{B \subseteq \mathbb{Q} : \#B = \#(\mathbb{Q} \setminus B)\}$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cota superior: $\#\mathcal{A} \le \mathbf{c}$</p>
+          <p>Llamemos $\mathcal{A} = \{B \subseteq \mathbb{Q} : \#B = \#(\mathbb{Q} \setminus B)\}$. Notemos que <span class="ref" data-ref="obs-ideas-importantes-y-minimalidad-de">$\mathcal{A} \subseteq \mathcal{P}(\mathbb{Q})$</span> que <span class="ref" data-ref="guia-p2-ej9c">tiene el mismo cardinal que $\mathcal{P}(\mathbb{N})$</span> y que <span class="ref" data-ref="guia-p2-ej10b">es el cardinal de los reales $\mathbf{c}$</span>. Por lo tanto $\#\mathcal{A} \le \mathbf{c}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La función $\mathcal{P}(\mathbb{N}) \to \mathcal{A}$</p>
+          <p>Nuevamente usando que $\mathbf{c} = \#\mathcal{P}(\mathbb{N})$ construimos una <span class="ref" data-ref="def-3.8">función inyectiva</span>
+          $$\begin{aligned} \mathcal{P}(\mathbb{N}) &\to \mathcal{A} \\ B &\mapsto B \cup ((1, 2) \cap \mathbb{Q}) \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 400 318" role="img" aria-label="Cinco ejemplos de B y su imagen B unión ((1,2) ∩ ℚ) sobre la recta">
+            <text class="sv-muted" style="font-size:14px" x="20" y="16">B</text>
+            <text class="sv-muted" style="font-size:14px" x="380" y="16" text-anchor="end">B ∪ ((1, 2) ∩ ℚ) sobre [0, 6.5]</text>
+            <!-- fila 1: B vacío -->
+            <g transform="translate(0,30)">
+              <text class="sv-text" style="font-size:16px" x="20" y="14">B = ∅</text>
+              <line class="sv-axis" x1="20" y1="38" x2="380" y2="38"/>
+              <line class="sv-accent" x1="75.4" y1="38" x2="130.8" y2="38" style="stroke-width:5"/>
+              <circle class="sv-fill-bg sv-accent" cx="75.4" cy="38" r="3.5" style="stroke-width:1.5"/>
+              <circle class="sv-fill-bg sv-accent" cx="130.8" cy="38" r="3.5" style="stroke-width:1.5"/>
+              <circle class="sv-fill-bg sv-axis" cx="186.2" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="241.5" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="296.9" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="352.3" cy="38" r="3"/>
+            </g>
+            <!-- fila 2: B = {1} -->
+            <g transform="translate(0,86)">
+              <text class="sv-text" style="font-size:16px" x="20" y="14">B = {1}</text>
+              <line class="sv-axis" x1="20" y1="38" x2="380" y2="38"/>
+              <line class="sv-accent" x1="75.4" y1="38" x2="130.8" y2="38" style="stroke-width:5"/>
+              <circle class="sv-fill-accent" cx="75.4" cy="38" r="4.5"/>
+              <circle class="sv-fill-bg sv-accent" cx="130.8" cy="38" r="3.5" style="stroke-width:1.5"/>
+              <circle class="sv-fill-bg sv-axis" cx="186.2" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="241.5" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="296.9" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="352.3" cy="38" r="3"/>
+            </g>
+            <!-- fila 3: B = {2, 5} -->
+            <g transform="translate(0,142)">
+              <text class="sv-text" style="font-size:16px" x="20" y="14">B = {2, 5}</text>
+              <line class="sv-axis" x1="20" y1="38" x2="380" y2="38"/>
+              <line class="sv-accent" x1="75.4" y1="38" x2="130.8" y2="38" style="stroke-width:5"/>
+              <circle class="sv-fill-bg sv-accent" cx="75.4" cy="38" r="3.5" style="stroke-width:1.5"/>
+              <circle class="sv-fill-accent" cx="130.8" cy="38" r="4.5"/>
+              <circle class="sv-fill-bg sv-axis" cx="186.2" cy="38" r="3"/><circle class="sv-fill-bg sv-axis" cx="241.5" cy="38" r="3"/><circle class="sv-fill-accent" cx="296.9" cy="38" r="4.5"/><circle class="sv-fill-bg sv-axis" cx="352.3" cy="38" r="3"/>
+            </g>
+            <!-- fila 4: pares -->
+            <g transform="translate(0,198)">
+              <text class="sv-text" style="font-size:16px" x="20" y="14">B = {2, 4, 6, …}</text>
+              <line class="sv-axis" x1="20" y1="38" x2="380" y2="38"/>
+              <line class="sv-accent" x1="75.4" y1="38" x2="130.8" y2="38" style="stroke-width:5"/>
+              <circle class="sv-fill-bg sv-accent" cx="75.4" cy="38" r="3.5" style="stroke-width:1.5"/>
+              <circle class="sv-fill-accent" cx="130.8" cy="38" r="4.5"/>
+              <circle class="sv-fill-bg sv-axis" cx="186.2" cy="38" r="3"/><circle class="sv-fill-accent" cx="241.5" cy="38" r="4.5"/><circle class="sv-fill-bg sv-axis" cx="296.9" cy="38" r="3"/><circle class="sv-fill-accent" cx="352.3" cy="38" r="4.5"/>
+            </g>
+            <!-- fila 5: N -->
+            <g transform="translate(0,254)">
+              <text class="sv-text" style="font-size:16px" x="20" y="14">B = ℕ</text>
+              <line class="sv-axis" x1="20" y1="38" x2="380" y2="38"/>
+              <line class="sv-accent" x1="75.4" y1="38" x2="130.8" y2="38" style="stroke-width:5"/>
+              <circle class="sv-fill-accent" cx="75.4" cy="38" r="4.5"/><circle class="sv-fill-accent" cx="130.8" cy="38" r="4.5"/><circle class="sv-fill-accent" cx="186.2" cy="38" r="4.5"/><circle class="sv-fill-accent" cx="241.5" cy="38" r="4.5"/><circle class="sv-fill-accent" cx="296.9" cy="38" r="4.5"/><circle class="sv-fill-accent" cx="352.3" cy="38" r="4.5"/>
+              <text class="sv-muted" style="font-size:15px" x="75.4" y="60" text-anchor="middle">1</text><text class="sv-muted" style="font-size:15px" x="130.8" y="60" text-anchor="middle">2</text><text class="sv-muted" style="font-size:15px" x="186.2" y="60" text-anchor="middle">3</text><text class="sv-muted" style="font-size:15px" x="241.5" y="60" text-anchor="middle">4</text><text class="sv-muted" style="font-size:15px" x="296.9" y="60" text-anchor="middle">5</text><text class="sv-muted" style="font-size:15px" x="352.3" y="60" text-anchor="middle">6</text>
+            </g>
+          </svg>
+          <figcaption>Casos elegidos para el dibujo. En azul, la imagen <i>B</i> ∪ ((1, 2) ∩ ℚ) restringida a [0; 6.5]: el tramo grueso es (1, 2) ∩ ℚ (siempre el mismo) y los puntos llenos son los naturales de <i>B</i>. Los círculos vacíos son naturales que no están en <i>B</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Está bien definida</p>
+          <p>La función está bien definida pues
+          $$\begin{aligned} \aleph_0 &= \#((1, 2) \cap \mathbb{Q}) \\ &\le \#(B \cup ((1, 2) \cap \mathbb{Q})) \\ &\le \#\mathbb{Q} \le \aleph_0 \end{aligned}$$
+          y
+          $$\begin{aligned} \aleph_0 &= \#((2, 3) \cap \mathbb{Q}) \\ &\le \#(\mathbb{Q} \setminus (B \cup ((1, 2) \cap \mathbb{Q}))) \\ &\le \#\mathbb{Q} \le \aleph_0. \end{aligned}$$</p>
+          <div class="nota">
+            <p><b>Agregado del repositorio</b>(no es parte de la resolución oficial). <em>Por qué $\aleph_0 = \#((1, 2) \cap \mathbb{Q})$.</em> Son dos desigualdades y <span class="ref" data-ref="teo-3.11">Cantor–Bernstein</span>.</p>
+            <ul class="items">
+              <li>$\#((1, 2) \cap \mathbb{Q}) \le \aleph_0$: es un subconjunto de $\mathbb{Q}$ (<span class="ref" data-ref="obs-ideas-importantes-y-minimalidad-de">la inclusión es inyectiva</span>) y <span class="ref" data-ref="prop-numerabilidad-de-qq">$\#\mathbb{Q} = \aleph_0$</span>.</li>
+              <li>$\aleph_0 \le \#((1, 2) \cap \mathbb{Q})$: la función
+              $$\begin{aligned} &\varphi : \mathbb{N} \to (1, 2) \cap \mathbb{Q}, \\ &\varphi(n) = 1 + \frac{1}{n + 1} \end{aligned}$$
+              está bien definida, porque $\frac{1}{n + 1} \in (0, 1) \cap \mathbb{Q}$, y es inyectiva, porque $1 + \frac{1}{n + 1} = 1 + \frac{1}{m + 1}$ implica $n = m$.</li>
+            </ul>
+            <p>Lo mismo vale para $(2, 3) \cap \mathbb{Q}$ con $n \mapsto 2 + \frac{1}{n + 1}$. En general, <span class="ref" data-ref="prop-2">todo intervalo abierto no vacío tiene infinitos racionales</span>, y <span class="ref" data-ref="prop-3.13">todo subconjunto infinito de $\mathbb{Q}$ es numerable</span>.</p>
+          </div>
+          <div class="nota">
+            <p><b>Agregado del repositorio</b>(no es parte de la resolución oficial). <em>Por qué la función está bien definida.</em> Sea $\Phi(B) = B \cup ((1, 2) \cap \mathbb{Q})$ con $B \subseteq \mathbb{N}$. Que $\Phi$ esté bien definida significa que $\Phi(B) \in \mathcal{A}$, es decir, $\#\Phi(B) = \#(\mathbb{Q} \setminus \Phi(B))$. Las dos cadenas de la resolución son <em>independientes</em>: no se compara un lado con el otro, sino que se prueba que <em>los dos valen $\aleph_0$</em>.</p>
+            <p>Cada cadena tiene la forma $\aleph_0 \le \#X \le \aleph_0$, así que $\#X = \aleph_0$ (<span class="ref" data-ref="teo-3.11">Cantor–Bernstein</span>). Cada $\le$ sale de una inclusión (<span class="ref" data-ref="obs-ideas-importantes-y-minimalidad-de">$S \subseteq T \Rightarrow \#S \le \#T$</span>):</p>
+            <ul class="items">
+              <li>Primera cadena, $X = \Phi(B)$:
+              $$(1, 2) \cap \mathbb{Q} \subseteq \Phi(B) \subseteq \mathbb{Q},$$
+              la primera inclusión por definición de la unión y la segunda porque $B \subseteq \mathbb{N} \subseteq \mathbb{Q}$.</li>
+              <li>Segunda cadena, $X = \mathbb{Q} \setminus \Phi(B)$:
+              $$(2, 3) \cap \mathbb{Q} \subseteq \mathbb{Q} \setminus \Phi(B) \subseteq \mathbb{Q}.$$
+              Si $q \in (2, 3) \cap \mathbb{Q}$, entonces $q \notin (1, 2)$ porque $q \gt 2$, y $q \notin B$ porque $B \subseteq \mathbb{N}$ y el intervalo abierto $(2, 3)$ no tiene naturales. Luego $q \notin \Phi(B)$.</li>
+            </ul>
+            <p>Por eso se eligen intervalos sin naturales: así $B$, que puede ser cualquier subconjunto de $\mathbb{N}$, no “invade” ninguno de los dos intervalos. En ambas cadenas el extremo izquierdo vale $\aleph_0$ por la observación anterior, y <span style="white-space:nowrap">$\#\mathbb{Q} = \aleph_0$.</span></p>
+          </div>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej2-c1" aria-label="Recta con Φ(B) arriba y su complemento en ℚ abajo; los intervalos (1,2) y (2,3) quedan siempre de un lado cada uno"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Naturales de <i>B</i> (entre 1 y 6)</legend>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="1">1</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="2" checked>2</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="3" checked>3</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="4">4</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="5" checked>5</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-b" value="6">6</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="p1-2c2024-ej2-read" aria-live="polite"></dl>
+          <figcaption>Arriba Φ(<i>B</i>), abajo ℚ ∖ Φ(<i>B</i>), sobre [0; 6.5] (se elige <i>B</i> ∩ {1, …, 6}; valores elegidos para el dibujo). Los puntos del tramo (1, 2) son φ(<i>n</i>) = 1 + 1/(<i>n</i> + 1) y los del tramo (2, 3) son 2 + 1/(<i>n</i> + 1). Marques los naturales que marques, el primer tramo queda arriba y el segundo abajo: cada lado contiene una copia de ℕ.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cota inferior y conclusión</p>
+          <p>Esto implica que <span class="ref" data-ref="def-3.8">el cardinal de $\mathcal{A}$ no puede ser menor al de $\mathcal{P}(\mathbb{N})$</span>. Por lo tanto $\mathbf{c} \le \#\mathcal{A}$ y <span class="ref" data-ref="teo-3.11">obtenemos $\mathbf{c} = \#\mathcal{A}$</span>.</p>
+          <div class="nota">
+            <p><b>Agregado del repositorio</b>(continúa la observación anterior; no es parte de la resolución oficial). <em>Inyectividad.</em> El texto dice “construimos una función inyectiva” pero no lo verifica. Como $(1, 2)$ no tiene naturales, al cortar con $\mathbb{N}$ se recupera $B$:
+            $$\Phi(B) \cap \mathbb{N} = B.$$
+            Entonces $\Phi(B) = \Phi(B')$ implica $B = \Phi(B) \cap \mathbb{N} = \Phi(B') \cap \mathbb{N} = B'$.</p>
+            <p><em>Conclusión.</em> <span class="ref" data-ref="def-3.8">$\#S \le \#T$ significa que existe una función inyectiva $S \to T$</span>. Las cadenas dan que $\Phi$ va de $\mathcal{P}(\mathbb{N})$ a $\mathcal{A}$, y acabamos de ver que es inyectiva, así que $\mathbf{c} = \#\mathcal{P}(\mathbb{N}) \le \#\mathcal{A}$. Esto es lo que el texto llama “el cardinal de $\mathcal{A}$ no puede ser menor al de $\mathcal{P}(\mathbb{N})$”. Junto con $\#\mathcal{A} \le \mathbf{c}$, <span class="ref" data-ref="teo-3.11">Cantor–Bernstein</span> da $\#\mathcal{A} = \mathbf{c}$.</p>
+          </div>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej2-c2" aria-label="Φ(B) y Φ(B′) en dos rectas; sólo pueden diferir en los naturales"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend><i>B</i></legend>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="1" checked>1</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="2">2</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="3" checked>3</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="4">4</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="5">5</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-u" value="6">6</label>
+            </fieldset>
+            <fieldset class="pills"><legend><i>B′</i></legend>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="1" checked>1</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="2">2</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="3">3</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="4" checked>4</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="5">5</label>
+              <label><input type="checkbox" name="p1-2c2024-ej2-w" value="6">6</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="p1-2c2024-ej2-read2" aria-live="polite"></dl>
+          <figcaption>Ilustra la nota de inyectividad (se elige <i>B</i> ∩ {1, …, 6} y <i>B′</i> ∩ {1, …, 6}; valores elegidos para el dibujo). El tramo (1, 2) ∩ ℚ es igual en las dos imágenes, así que Φ(<i>B</i>) y Φ(<i>B′</i>) sólo pueden diferir en naturales: en rojo, los naturales donde difieren. Si no hay ninguno, <i>B</i> = <i>B′</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\#\mathcal{A} = \mathbf{c}$.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2024.ej2</code> ($\#\mathcal{A} = \mathfrak{c}$), con <code>Φ_mem</code> (las dos cadenas), <code>Φ_injective</code> (la inyectividad que el texto no verifica) y <code>ej2_curso</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 3 ===================== -->
+  <article class="ej" id="p1-2c2024-ej3" data-short="Ej. 3" data-title="Encajes de cerrados con diámetro a cero implican completitud" data-topics="completitud,topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>Encajes de cerrados con diámetro a cero implican completitud</h3>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $(X, d)$ un espacio métrico. Supongamos que toda sucesión $(A_n)_{n \in \mathbb{N}}$ de subconjuntos cerrados y no vacíos tal que $A_{n+1} \subseteq A_n$ para todo $n \in \mathbb{N}$ con $\operatorname{diam}(A_n) \to 0$ cuando $n$ tiende a infinito cumple que $\bigcap_{n \in \mathbb{N}} A_n \ne \emptyset$. Probar que $X$ es completo.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Los conjuntos $A_n$</p>
+          <p>Consideremos una sucesión $(x_n)_{n \in \mathbb{N}} \subseteq X$ <span class="ref" data-ref="def-4.51">de Cauchy</span>, <span class="ref" data-ref="def-4.55">debemos probar que tiene límite</span>. Para cada $n \in \mathbb{N}$ definamos
+          $$A_n = \bigcup_{m = n}^{\infty} B(x_m, 1/n).$$
+          Notemos que $A_n \supseteq A_{n+1}$ y que son no vacíos. Por lo tanto <span class="ref" data-ref="def-4.22">$\overline{A_n}$</span> es <span class="ref" data-ref="ext-clausura-cerrada">cerrado</span>, <span class="ref" data-ref="obs-4.23">no vacío</span> y <span class="ref" data-ref="ext-clausura-monotona">$\overline{A_n} \supseteq \overline{A_{n+1}}$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej3-c1" aria-label="Una sucesión de Cauchy en el plano, la unión de bolas A_n y, adentro, A_(n+1)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej3-n"><i>n</i></label><input type="range" id="p1-2c2024-ej3-n" min="1" max="14" value="2"><output id="p1-2c2024-ej3-n-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej3-read" aria-live="polite"></dl>
+          <figcaption>Valores elegidos para el dibujo: en ℝ² con la distancia euclídea, <i>x<sub>m</sub></i> = (1.6/<i>m</i>)(cos 2.2<i>m</i>, sen 2.2<i>m</i>), que es de Cauchy. En azul <i>A<sub>n</sub></i>, la unión de las bolas <i>B</i>(<i>x<sub>m</sub></i>, 1/<i>n</i>) con <i>m</i> ≥ <i>n</i>; en naranja <i>A</i><sub><i>n</i>+1</sub>, que tiene menos centros y radio más chico, y por eso queda adentro.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El diámetro tiende a cero (<span class="ref" data-ref="def-4.1">desigualdad triangular</span>)</p>
+          <p>Necesitamos estudiar el <span class="ref" data-ref="def-4.9">diámetro</span>. Fijado $\varepsilon \gt 0$ <span class="ref" data-ref="prop-1">existe $n_0$ tal que $1/n_0 \le \varepsilon/5$</span> y $d(x_n, x_m) \lt \varepsilon/5$ si $m, n \ge n_0$ (pues la sucesión es de Cauchy). Entonces, dados dos elementos $a, b \in \overline{A_n}$ con $n \ge n_0$, resulta que <span class="ref" data-ref="def-4.22">existen $a', b' \in A_n$</span> tales que $d(a, a'), d(b, b') \lt \varepsilon/5$. Además existen $x_m$ y $x_j$ elementos de la sucesión tales que $a' \in B(x_m, 1/n)$, $b' \in B(x_j, 1/n)$ (con $m, j \ge n_0$). Entonces
+          $$\begin{aligned} d(a, b) &\le d(a, a') + d(a', b) \\ &\le d(a, a') + d(a', x_m) \\ &\qquad + d(x_m, x_j) + d(x_j, b') \\ &\qquad + d(b', b) \\ &\lt \varepsilon/5 + 1/n + \varepsilon/5 \\ &\qquad + 1/n + \varepsilon/5 \\ &\lt \varepsilon/5 + \varepsilon/5 + \varepsilon/5 \\ &\qquad + \varepsilon/5 + \varepsilon/5 = \varepsilon \end{aligned}$$
+          y probamos que el diámetro tiende a cero.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej3-c2" aria-label="Camino de cinco tramos de a a b pasando por a', x_m, x_j y b'"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej3-eps">ε</label><input type="range" id="p1-2c2024-ej3-eps" min="20" max="250" value="100"><output id="p1-2c2024-ej3-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej3-read2" aria-live="polite"></dl>
+          <figcaption>Misma sucesión que en el paso anterior, con <i>n</i> = <i>n</i><sub>0</sub>; la escala se ajusta a la clausura de <i>A</i><sub><i>n</i><sub>0</sub></sub>. Se toman <i>a</i> y <i>b</i> en el borde, lo más lejos posible, y el camino <i>a</i> → <i>a′</i> → <i>x<sub>m</sub></i> → <i>x<sub>j</sub></i> → <i>b′</i> → <i>b</i> de la cuenta. La lectura compara cada tramo con su cota: la suma queda por debajo de ε.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El punto de la intersección es el límite</p>
+          <p>Entonces existe $x \in \bigcap_{n \in \mathbb{N}} \overline{A_n}$. Resta ver que es <span class="ref" data-ref="def-4.42">el límite de la sucesión original</span>. Dado $\varepsilon \gt 0$ existe $n_0$ tal que si $n \ge n_0$ entonces $\operatorname{diam}(\overline{A_n}) \lt \varepsilon$ y luego $d(x, x_n) \lt \varepsilon$ pues <span class="ref" data-ref="def-4.9">ambos están en $\overline{A_n}$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej3-c3" aria-label="El conjunto A_(n0) con el punto x de la intersección y los términos x_n con n ≥ n0 adentro"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej3-eps3">ε</label><input type="range" id="p1-2c2024-ej3-eps3" min="40" max="400" value="150"><output id="p1-2c2024-ej3-eps3-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej3-read3" aria-live="polite"></dl>
+          <figcaption>Misma sucesión; acá el punto de la intersección es <i>x</i> = (0, 0). Para cada ε se dibuja el primer la clausura de <i>A</i><sub><i>n</i><sub>0</sub></sub> con diámetro menor que ε. Todos los <i>x<sub>n</sub></i> con <i>n</i> ≥ <i>n</i><sub>0</sub> (puntos llenos) están en la clausura de <i>A</i><sub><i>n</i><sub>0</sub></sub> junto con <i>x</i>, así que están a distancia menor que ε de <i>x</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2024.ej3</code>. La hipótesis se formaliza para cerrados <em>acotados</em> y no vacíos: en el curso el diámetro sólo está definido para conjuntos acotados (<span class="ref" data-ref="def-4.9">Definición 4.9</span>), mientras que en Mathlib el diámetro de un conjunto no acotado vale $0$ por convención.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 4 ===================== -->
+  <article class="ej" id="p1-2c2024-ej4" data-short="Ej. 4" data-title="Continua con d1 implica continua con d∞ en C([0, 1])" data-topics="funciones,continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>Continua con $d_1$ implica continua con $d_\infty$ en $C([0, 1])$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $(X, d)$ y $(Y, d')$ espacios métricos con $X = C([0, 1])$ y $\mathcal{F} : X \to Y$ una función. Probar que si $\mathcal{F}$ es continua con $d = d_1$ entonces también es continua con $d = d_\infty$. ¿Vale la recíproca?</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Inclusión de bolas: $B^{d_\infty}(f, r) \subseteq B^{d_1}(f, r)$</p>
+          <p>Primero veamos que dados $f \in X$ y $r \gt 0$ sucede que <span class="ref" data-ref="def-4.5">$B^{d_\infty}(f, r) \subseteq B^{d_1}(f, r)$</span> donde la primera bola está considerada en el espacio $(X, d_\infty)$ y la segunda, en $(X, d_1)$. Entonces sea $g \in X$ tal que $d_\infty(f, g) \lt r$, luego
+          $$\begin{aligned} d_1(f, g) &= \int_0^1 |f(x) - g(x)|\, dx \\ &\le \int_0^1 \max_{z \in [0, 1]} |f(z) - g(z)|\, dx \\ &= d_\infty(f, g) \end{aligned}$$
+          y obtenemos lo buscado.</p>
+          <p class="src">Las dos distancias: <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancias en espacios de funciones</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej4-c1" aria-label="Una función f, una perturbación g con una carpa, el área entre ambas (d1) y la banda f ± d∞"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej4-hh">altura</label><input type="range" id="p1-2c2024-ej4-hh" min="-50" max="50" value="30"><output id="p1-2c2024-ej4-hh-o"></output></div>
+            <div class="slider"><label for="p1-2c2024-ej4-ww">ancho</label><input type="range" id="p1-2c2024-ej4-ww" min="3" max="100" value="25"><output id="p1-2c2024-ej4-ww-o"></output></div>
+            <div class="slider"><label for="p1-2c2024-ej4-r"><i>r</i></label><input type="range" id="p1-2c2024-ej4-r" min="1" max="60" value="20"><output id="p1-2c2024-ej4-r-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej4-read" aria-live="polite"></dl>
+          <figcaption>Valores elegidos para el dibujo: <i>f</i>(<i>x</i>) = 0.4 + 0.3<i>x</i> y <i>g</i> = <i>f</i> más una carpa de la altura y el ancho elegidos, centrada en <i>x</i> = 0.5. El área sombreada es <i>d</i><sub>1</sub>(<i>f</i>, <i>g</i>); la banda punteada es <i>f</i> ± <i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>). El área nunca supera a la del rectángulo de altura <i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>) y base 1: por eso, si <i>g</i> está en la bola de <i>d</i><sub>∞</sub> de radio <i>r</i>, también está en la de <i>d</i><sub>1</sub>.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Continuidad con $d_\infty$</p>
+          <p>Entonces probemos el ejercicio. <span class="ref" data-ref="def-5.4">Por la teórica sabemos</span> que $\mathcal{F}$ es continua con la métrica $d_1$ es equivalente a que dados $f$ y $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que
+          $$\mathcal{F}(B^{d_1}(f, \delta)) \subseteq B(\mathcal{F}(f), \varepsilon)$$
+          donde la última bola es en $(Y, d')$. Por lo anterior tenemos que $\mathcal{F}(B^{d_\infty}(f, \delta)) \subseteq \mathcal{F}(B^{d_1}(f, \delta))$ y así
+          $$\mathcal{F}(B^{d_\infty}(f, \delta)) \subseteq B(\mathcal{F}(f), \varepsilon)$$
+          que prueba la continuidad de $\mathcal{F}$ en $(X, d_\infty)$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 420 250" role="img" aria-label="En X, la bola de d∞ dentro de la de d1; F las manda dentro de la bola de radio ε en Y">
+            <ellipse class="sv-axis" cx="105" cy="128" rx="92" ry="92"/>
+            <text class="sv-muted" x="105" y="24" text-anchor="middle">X = C([0, 1])</text>
+            <path class="sv-area" d="M105 66 C150 70 168 100 162 132 C156 168 128 186 100 184 C64 182 46 156 50 124 C54 92 72 64 105 66 Z"/>
+            <path class="sv-accent" d="M105 66 C150 70 168 100 162 132 C156 168 128 186 100 184 C64 182 46 156 50 124 C54 92 72 64 105 66 Z"/>
+            <path class="sv-area2" d="M105 98 C126 100 134 114 132 130 C130 148 118 156 104 156 C88 156 78 144 78 128 C78 110 90 97 105 98 Z"/>
+            <path class="sv-seq2" d="M105 98 C126 100 134 114 132 130 C130 148 118 156 104 156 C88 156 78 144 78 128 C78 110 90 97 105 98 Z"/>
+            <circle class="sv-fill-accent" cx="105" cy="127" r="3"/>
+            <text class="sv-text" x="110" y="124">f</text>
+            <text class="sv-label-accent" x="105" y="204" text-anchor="middle">B(f, δ) con d₁</text>
+            <text class="sv-label-seq2" x="105" y="146" text-anchor="middle" style="font-size:11px">con d∞</text>
+            <path class="sv-ink" d="M200 112 C230 92 262 92 292 112" style="stroke-width:1.2"/>
+            <path class="sv-ink" d="M286 104 L292 112 L282 114" style="stroke-width:1.2"/>
+            <text class="sv-text" x="246" y="88" text-anchor="middle">𝓕</text>
+            <ellipse class="sv-axis" cx="345" cy="128" rx="68" ry="92"/>
+            <text class="sv-muted" x="345" y="24" text-anchor="middle">Y</text>
+            <circle class="sv-fail" cx="345" cy="128" r="46"/>
+            <path class="sv-area sv-accent" style="stroke-width:1.5" d="M330 108 C350 98 372 108 374 126 C376 144 360 156 344 154 C326 152 316 140 318 126 C319 116 323 112 330 108 Z"/>
+            <path class="sv-area2 sv-seq2" style="stroke-width:1.5" d="M338 118 C350 114 360 120 360 130 C360 140 352 144 344 143 C334 142 330 136 331 128 C331 123 334 120 338 118 Z"/>
+            <circle class="sv-text" cx="345" cy="129" r="3"/>
+            <text class="sv-label-fail" x="345" y="194" text-anchor="middle">B(𝓕(f), ε)</text>
+            <text class="sv-muted" x="210" y="240" text-anchor="middle">azul: 𝓕(bola de d₁) · naranja: 𝓕(bola de d∞)</text>
+          </svg>
+          <figcaption>Esquema (no es un caso concreto). La bola de <i>d</i><sub>∞</sub> está dentro de la de <i>d</i><sub>1</sub> con el mismo radio (paso anterior), así que su imagen está dentro de la imagen de la bola de <i>d</i><sub>1</sub>, que a su vez está dentro de <i>B</i>(𝓕(<i>f</i>), ε). El mismo δ sirve para <i>d</i><sub>∞</sub>.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La recíproca no vale</p>
+          <p>Para la última pregunta <span class="ref" data-ref="guia-p4-ej9">vimos en clase que la función evaluación $\mathcal{E} : X \to \mathbb{R}$ es continua en $d_\infty$ y no en $d_1$</span>, por lo cual no vale la vuelta.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2024-ej4-c2" aria-label="Carpa de altura 1 y base h en 0: área chica pero valor 1 en 0"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2024-ej4-h"><i>h</i></label><input type="range" id="p1-2c2024-ej4-h" min="1" max="100" value="40"><output id="p1-2c2024-ej4-h-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2024-ej4-read2" aria-live="polite"></dl>
+          <figcaption>Ilustra el hecho citado, con 𝓔(<i>f</i>) = <i>f</i>(0) (función elegida para el dibujo; es la “carpa” de la verificación en Lean). <i>g<sub>h</sub></i>(<i>x</i>) = máx{0, 1 − <i>x</i>/<i>h</i>}: al achicar <i>h</i> el área <i>d</i><sub>1</sub>(<i>g<sub>h</sub></i>, 0) = <i>h</i>/2 tiende a 0, pero 𝓔(<i>g<sub>h</sub></i>) = 1 y 𝓔(0) = 0 quedan a distancia 1. Con <i>d</i><sub>∞</sub>, en cambio, <i>d</i><sub>∞</sub>(<i>g<sub>h</sub></i>, 0) = 1 no se achica. Es el mismo fenómeno que la <span class="ref" data-ref="obs-4.4">Observación 4.4</span>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>C01.d1_le_dist</code> (la inclusión de bolas, como $d_1(f, g) \le d_\infty(f, g)$), <code>Parcial1_2C2024.ej4</code> y <code>ej4_reciproca_falsa</code>.</p>
+  </article>
+</section>

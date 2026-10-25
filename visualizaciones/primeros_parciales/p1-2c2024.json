@@ -1,0 +1,191 @@
+{
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente</b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <b>ínfimo</b> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\ne \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:</p><p>a) $i$ es cota inferior de $A$, y<br>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-epsilon-arbitrario": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Desigualdad para todo ε",
+  "enunciado": "<p>Si $x, y \\in \\mathbb{R}$ cumplen $x \\ge y - \\varepsilon$ para todo $\\varepsilon \\gt 0$, entonces $x \\ge y$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "obs-ideas-importantes-y-minimalidad-de": {
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Ideas Importantes y Minimalidad de $\\aleph_0$",
+  "enunciado": "<p>De los resultados anteriores enfatizamos dos ideas importantes:</p><ul><li>Los subconjuntos de conjuntos numerables son a lo sumo numerables (Proposición 3.13).</li><li>Todo conjunto infinito contiene un conjunto numerable (Proposición 3.14).</li></ul><p>Notemos que si $A$ y $B$ son conjuntos tales que $A \\subseteq B$, tenemos que $\\#A \\le \\#B$ ya que la inclusión $\\iota : A \\hookrightarrow B$ es inyectiva. Por lo tanto, gracias a la Proposición 3.14, podemos concluir que si $A$ es un conjunto infinito, entonces $\\aleph_0 \\le \\#A$.</p><p>Lo que podríamos preguntarnos es si existe algún conjunto infinito cuyo cardinal sea estrictamente mayor que $\\aleph_0$. La respuesta es que sí y eso es lo que vemos a continuación.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p2-ej9c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 9 (c)",
+  "titulo": "",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos. Pruebe que: (c) $A \\sim B \\Rightarrow \\mathcal{P}(A) \\sim \\mathcal{P}(B)$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10b": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10 (b)",
+  "titulo": "",
+  "enunciado": "<p>(a) Pruebe que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$. <em>Sugerencia:</em> considere el desarrollo binario de los números del intervalo $[0, 1)$. ¡Ojo!, dicho desarrollo no es único.</p><p>(b) Concluya que $\\#\\mathcal{P}(\\mathbb{N}) = c$.</p><p>(En la guía, $c$ es el cardinal de $\\mathbb{R}$.)</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\ne \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.13": {
+  "tipo": "Proposición",
+  "numero": "3.13",
+  "titulo": "Subconjuntos de Conjuntos Numerables",
+  "enunciado": "<p>Sea $A$ numerable. Si $\\emptyset \\ne B \\subseteq A$, entonces $B$ es a lo sumo numerable.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-2": {
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $\\mathbb{Q}$",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $q \\in \\mathbb{Q}$ tal que $x \\lt q \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <b>completo</b> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <b>de adherencia</b> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <b>clausura</b> de $E$ y lo denotamos $\\overline{E}$. Es decir,</p><p>$$\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-clausura-cerrada": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La clausura es cerrada",
+  "enunciado": "<p>Para todo $E \\subseteq M$, la clausura $\\overline{E}$ es un conjunto cerrado: $\\overline{\\overline{E}} = \\overline{E}$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "obs-4.23": {
+  "tipo": "Observación",
+  "numero": "4.23",
+  "titulo": "",
+  "enunciado": "<p>a) Todos los puntos de $E$ son puntos de adherencia. Dado $x \\in E$, tenemos que $B(x, r) \\cap E$ contiene, al menos, al punto $x$: esto nos dice que es punto de adherencia. Es decir, $E \\subseteq \\overline{E}$.</p><p>b) Con lo que acabamos de observar y teniendo en cuenta la Observación 4.12, tenemos que $$E^\\circ \\subseteq E \\subseteq \\overline{E}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-clausura-monotona": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La clausura es monótona",
+  "enunciado": "<p>Si $A \\subseteq B$, entonces $\\overline{A} \\subseteq \\overline{B}$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (la demostración del Teorema 5.13 lo cita como desafío de la Práctica 3)"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro</b> se define como:</p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <b>espacio métrico</b>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p4-ej9": {
+  "tipo": "Práctica 4",
+  "numero": "Ej. 9",
+  "titulo": "",
+  "enunciado": "<p>Consideramos las funciones $\\mathcal{E}, \\mathcal{I} : C([0, 1]) \\to \\mathbb{R}$ definidas por: $$\\mathcal{E}(f) = f(0), \\quad \\mathcal{I}(f) = \\int_0^1 f(x)\\, dx.$$</p><p>(a) Demuestre que si utilizamos en $C([0, 1])$ la distancia $d_\\infty$ ambas resultan continuas.<br>(b) Demuestre que si en cambio utilizamos en $C([0, 1])$ la distancia $d_1$, $\\mathcal{I}$ es una función continua pero $\\mathcal{E}$ no lo es.<br>(c) Analice si es posible que una función $\\mathcal{F} : C([0, 1]) \\to \\mathbb{R}$ sea continua para la distancia $d_1$ pero no para $d_\\infty$.</p>",
+  "fuente": "guias/p4.typ"
+ },
+ "obs-4.4": {
+  "tipo": "Observación",
+  "numero": "4.4",
+  "titulo": "Comparación entre $d_1$ y $d_\\infty$ en $C([0, 1])$",
+  "enunciado": "<p>La distancia uno y la distancia infinito en el espacio de funciones continuas miden “muy distinto”. Consideremos el siguiente ejemplo: pensemos en el conjunto $$C([0, 1]) = \\{f : [0, 1] \\to \\mathbb{R} \\text{ funciones continuas}\\}$$ y dentro de este conjunto tomemos a las funciones $f(x) = 0$ (la función constantemente cero) y $g_\\varepsilon$ la función continua que vale $0$ en todo el intervalo $[0, 1/2 - \\varepsilon) \\cup (1/2 + \\varepsilon, 1]$, $1$ en $x = 1/2$ y es lineal en el intervalo $[1/2 - \\varepsilon, 1/2 + \\varepsilon]$. Es decir, la función $g_\\varepsilon$ es la función que se ve como en el siguiente diagrama: (diagrama en el apunte).</p><p>Por un lado, observamos que la distancia infinito $d_\\infty(f, g_\\varepsilon) = 1$, independientemente de qué tan chico tomemos al parámetro $\\varepsilon$ (puesto que por diseño, la función $g_\\varepsilon$ siempre va a tomar el valor $1$ en $x = 1/2$). Sin embargo, cuando calculamos la distancia uno entre estas dos funciones, tenemos que el área bajo la curva de $g_\\varepsilon$ se puede pensar como el área del triángulo de base $2\\varepsilon$ y altura $1$: $d_1(f, g_\\varepsilon) = \\varepsilon$. Es decir, si tomamos el parámetro $\\varepsilon$ cada vez más chico, nos queda que las funciones en distancia uno están cada vez más cerca, mientras que si medimos su distancia en la distancia infinito nos queda constantemente $1$.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

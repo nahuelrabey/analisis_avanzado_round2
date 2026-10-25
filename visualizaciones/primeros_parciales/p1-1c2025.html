@@ -1,0 +1,477 @@
+<section class="exam" id="p1-1c2025" data-meta="08/05/2025 · resolución propuesta, verificada en Lean">
+  <header class="exam-head">
+    <h2 id="p1-1c2025-titulo"><span class="bn">Primer parcial · 1C 2025</span>8 de mayo de 2025</h2>
+    <p class="meta">Enunciado transcripto de las dos fotos del examen (<code>parciales/primer_parcial_1c2025.jpg</code> y <code>Enunciado_1C_2025.jpg</code>). Las resoluciones son propuestas del repositorio (<code>apuntes-typst/parciales/2025_1c_parcial_1.typ</code>), cada una verificada en <code>lean/Parciales/Parcial1_1C2025.lean</code> (Lean 4 + Mathlib). En el curso las sucesiones arrancan en $n = 1$; en Lean, en $0$.</p>
+    <a class="back" href="#inicio">Volver al índice</a>
+  </header>
+
+  <!-- ===================== Ejercicio 1 ===================== -->
+  <article class="ej" id="p1-1c2025-ej1" data-short="Ej. 1" data-title="Cardinal de las sucesiones enteras con pasos 1 o 2" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Cardinal de las sucesiones enteras con pasos $1$ o $2$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $A$ el conjunto de sucesiones $(a_n)_{n \in \mathbb{N}}$ de números enteros que cumplen
+      $$a_{n+1} - a_n \in \{1, 2\} \quad \text{para todo } n \in \mathbb{N}.$$
+      Halle el cardinal de $A$.</p>
+    </div>
+    <div class="estrategia"><b>Estrategia</b>
+      <p><em>Una sucesión de $A$ es su primer término más una lista infinita de decisiones.</em> Conocer $(a_n)_n \in A$ es lo mismo que conocer $a_1 \in \mathbb{Z}$ y, para cada $n$, cuál de los dos pasos posibles se dio: $a_{n+1} - a_n = 1$ o $a_{n+1} - a_n = 2$. Eso sugiere la biyección $A \sim \mathbb{Z} \times \{1, 2\}^{\mathbb{N}}$, y $\{1,2\}^{\mathbb{N}} \sim \{0,1\}^{\mathbb{N}}$ tiene cardinal $\mathfrak{c}$ (<span class="ref" data-ref="guia-p2-ej10a">Práctica 2, Ej. 10 (a)</span>). Es el mismo esquema del <span class="ref" data-ref="ext-ejemplo-c3-3">Ejemplo C3-3 de <code>ejemplos/p2.typ</code></span>, con un término inicial libre en vez de fijo.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La codificación</p>
+          <p>Vamos a probar que $\#A = \mathfrak{c} = \#\mathbb{R}$. Definimos
+          $$\begin{aligned} &\Phi : A \to \mathbb{Z} \times \{1, 2\}^{\mathbb{N}}, \\ &\Phi((a_n)_n) = \big(a_1, (a_{n+1} - a_n)_{n \in \mathbb{N}}\big). \end{aligned}$$
+          Está bien definida: $a_1 \in \mathbb{Z}$ y, por la condición que define a $A$, cada diferencia $a_{n+1} - a_n$ está en $\{1, 2\}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2025-ej1-c1" aria-label="Una sucesión de A dibujada como escalera, con sus pasos de 1 o 2 y su codificación"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2025-ej1-z"><i>a</i><sub>1</sub></label><input type="range" id="p1-1c2025-ej1-z" min="-3" max="3" value="0" step="1"><output id="p1-1c2025-ej1-z-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2025-ej1-read" aria-live="polite"></dl>
+          <figcaption>Los primeros diez términos de una sucesión de <i>A</i> (valores elegidos para el dibujo). Tocá una columna para cambiar ese paso entre 1 y 2, y mové <i>a</i><sub>1</sub>. Abajo se lee Φ: el primer término y la lista de pasos. Leída al revés, la misma escalera es la reconstrucción de la sobreyectividad.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Phi$ es inyectiva</p>
+          <p>Sean $(a_n)_n, (b_n)_n \in A$ con $\Phi((a_n)_n) = \Phi((b_n)_n)$. Entonces $a_1 = b_1$ y $a_{n+1} - a_n = b_{n+1} - b_n$ para todo $n$. Por inducción en $n$ resulta $a_n = b_n$ para todo $n$: el caso base es $a_1 = b_1$, y si $a_n = b_n$ entonces
+          $$\begin{aligned} a_{n+1} &= a_n + (a_{n+1} - a_n) \\ &= b_n + (b_{n+1} - b_n) = b_{n+1}. \end{aligned}$$
+          Luego $(a_n)_n = (b_n)_n$.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Phi$ es sobreyectiva</p>
+          <p>Dado $(z, (d_n)_n) \in \mathbb{Z} \times \{1,2\}^{\mathbb{N}}$, definimos recursivamente $a_1 = z$ y $a_{n+1} = a_n + d_n$. Cada $a_n$ es entero (suma de enteros) y $a_{n+1} - a_n = d_n \in \{1, 2\}$, así que $(a_n)_n \in A$; y por construcción
+          $$\begin{aligned} \Phi((a_n)_n) &= \big(a_1, (a_{n+1} - a_n)_n\big) \\ &= (z, (d_n)_n). \end{aligned}$$</p>
+          <p>Por lo tanto $A \sim \mathbb{Z} \times \{1, 2\}^{\mathbb{N}}$ (<span class="ref" data-ref="def-3.1">Definición 3.1</span>) y $\#A = \#(\mathbb{Z} \times \{1,2\}^{\mathbb{N}})$.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cota inferior: $\mathfrak{c} \le \#A$</p>
+          <p>La función $\{0,1\}^{\mathbb{N}} \to \mathbb{Z} \times \{1,2\}^{\mathbb{N}}$, $(b_n)_n \mapsto (0, (b_n + 1)_n)$, es inyectiva (de $(b_n + 1)_n$ se recupera $(b_n)_n$ restando $1$). Como $\{0,1\}^{\mathbb{N}} \sim [0, 1)$ (<span class="ref" data-ref="guia-p2-ej10a">Práctica 2, Ej. 10 (a)</span>) y $[0,1) \sim \mathbb{R}$ (<span class="ref" data-ref="obs-3.21">Observación 3.21</span>), tenemos $\#\{0,1\}^{\mathbb{N}} = \mathfrak{c}$ y entonces $\mathfrak{c} \le \#(\mathbb{Z} \times \{1,2\}^{\mathbb{N}}) = \#A$ (<span class="ref" data-ref="def-3.8">Definición 3.8</span> y <span class="ref" data-ref="obs-3.10">Observación 3.10</span>).</p>
+          <p class="nota"><b>Errata</b>La resolución del <code>.typ</code> cita este resultado (aquí y en la estrategia) como "Práctica 2, Ej. 9 (a)"; en <code>guias/p2.typ</code> el enunciado $[0,1) \sim \{0,1\}^{\mathbb{N}}$ es el Ej. 10 (a). El desajuste está anotado en <code>practica_pre_parcial.typ</code>.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 440 250" role="img" aria-label="Tabla: tres sucesiones de ceros y unos, su imagen en Z por {1,2} a la N y la sucesión de A que les corresponde">
+            <text class="sv-muted" x="12" y="22">(bₙ) ∈ {0,1}ᴺ</text>
+            <text class="sv-muted" x="150" y="22">(0, (bₙ+1)ₙ)</text>
+            <text class="sv-muted" x="300" y="22">Φ⁻¹: sucesión de A</text>
+            <line class="sv-grid" x1="8" y1="32" x2="432" y2="32"/>
+            <g>
+              <text class="sv-text" x="12" y="62">0, 0, 0, 0, …</text>
+              <path class="sv-accent" d="M118 58 H142 M136 53 L142 58 L136 63"/>
+              <text class="sv-label-accent" x="150" y="62">(0; 1, 1, 1, 1, …)</text>
+              <path class="sv-seq2" d="M270 58 H294 M288 53 L294 58 L288 63"/>
+              <text class="sv-label-seq2" x="300" y="62">0, 1, 2, 3, 4, …</text>
+            </g>
+            <g>
+              <text class="sv-text" x="12" y="102">1, 0, 1, 0, …</text>
+              <path class="sv-accent" d="M118 98 H142 M136 93 L142 98 L136 103"/>
+              <text class="sv-label-accent" x="150" y="102">(0; 2, 1, 2, 1, …)</text>
+              <path class="sv-seq2" d="M270 98 H294 M288 93 L294 98 L288 103"/>
+              <text class="sv-label-seq2" x="300" y="102">0, 2, 3, 5, 6, …</text>
+            </g>
+            <g>
+              <text class="sv-text" x="12" y="142">1, 1, 1, 1, …</text>
+              <path class="sv-accent" d="M118 138 H142 M136 133 L142 138 L136 143"/>
+              <text class="sv-label-accent" x="150" y="142">(0; 2, 2, 2, 2, …)</text>
+              <path class="sv-seq2" d="M270 138 H294 M288 133 L294 138 L288 143"/>
+              <text class="sv-label-seq2" x="300" y="142">0, 2, 4, 6, 8, …</text>
+            </g>
+            <line class="sv-grid" x1="8" y1="162" x2="432" y2="162"/>
+            <text class="sv-muted" x="12" y="188">sumar 1 a cada término: inyectiva</text>
+            <text class="sv-muted" x="12" y="210">(restando 1 se recupera (bₙ))</text>
+            <text class="sv-muted" x="300" y="188">la biyección Φ</text>
+            <text class="sv-muted" x="300" y="210">del paso 3</text>
+            <text class="sv-text" x="12" y="240">{0,1}ᴺ ↪ ℤ × {1,2}ᴺ ∼ A, y #{0,1}ᴺ = 𝔠</text>
+          </svg>
+          <figcaption>Tres casos concretos de la inyección (<i>b<sub>n</sub></i>) ↦ (0, (<i>b<sub>n</sub></i> + 1)) y, a la derecha, la sucesión de <i>A</i> que les asigna la biyección Φ del paso anterior (que arranca en <i>a</i><sub>1</sub> = 0). Sucesiones de ceros y unos distintas dan listas de pasos distintas.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cota superior: $\#A \le \mathfrak{c}$</p>
+          <p>Como $\{1,2\} \subseteq \mathbb{Z}$, la inclusión $\mathbb{Z} \times \{1,2\}^{\mathbb{N}} \hookrightarrow \mathbb{Z} \times \mathbb{Z}^{\mathbb{N}}$ es inyectiva. Además $\#(\mathbb{Z}^{\mathbb{N}}) = \mathfrak{c}$ (<a href="#p1-1c2025-ej1-lema">Lema de abajo</a>) y $\#\mathbb{Z} = \aleph_0 \le \mathfrak{c}$, así que
+          $$\begin{aligned} \#(\mathbb{Z} \times \mathbb{Z}^{\mathbb{N}}) &\le \#(\mathbb{R} \times \mathbb{R}) \\ &= \#\mathbb{R}^2 = \mathfrak{c} \end{aligned}$$
+          (si $f : \mathbb{Z} \to \mathbb{R}$ y $g : \mathbb{Z}^{\mathbb{N}} \to \mathbb{R}$ son inyectivas, $(z, a) \mapsto (f(z), g(a))$ es inyectiva; $\#\mathbb{R}^2 = \mathfrak{c}$ es la <span class="ref" data-ref="guia-p2-ej14c">Práctica 2, Ej. 14 (c)</span>). Luego $\#A \le \mathfrak{c}$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 440 230" role="img" aria-label="Cadena de inyecciones de Z por {1,2} a la N en Z por Z a la N y luego en R por R">
+            <rect class="sv-area" x="10" y="20" width="120" height="44" rx="6"/>
+            <text class="sv-text" x="70" y="47" text-anchor="middle">ℤ × {1,2}ᴺ</text>
+            <rect class="sv-area2" x="160" y="20" width="120" height="44" rx="6"/>
+            <text class="sv-text" x="220" y="47" text-anchor="middle">ℤ × ℤᴺ</text>
+            <rect class="sv-area3" x="310" y="20" width="120" height="44" rx="6"/>
+            <text class="sv-text" x="370" y="47" text-anchor="middle">ℝ × ℝ</text>
+            <path class="sv-accent" d="M132 42 H156 M150 37 L156 42 L150 47"/>
+            <path class="sv-seq2" d="M282 42 H306 M300 37 L306 42 L300 47"/>
+            <text class="sv-muted" x="144" y="84" text-anchor="middle">inclusión</text>
+            <text class="sv-muted" x="294" y="84" text-anchor="middle">(f, g)</text>
+            <text class="sv-muted" x="220" y="118" text-anchor="middle">f : ℤ ↪ ℝ (#ℤ = ℵ₀ ≤ 𝔠)</text>
+            <text class="sv-muted" x="220" y="138" text-anchor="middle">g : ℤᴺ ↪ ℝ (Lema: #ℤᴺ = 𝔠)</text>
+            <line class="sv-grid" x1="10" y1="158" x2="430" y2="158"/>
+            <text class="sv-text" x="220" y="186" text-anchor="middle">#A = #(ℤ × {1,2}ᴺ) ≤ #(ℤ × ℤᴺ) ≤ #ℝ² = 𝔠</text>
+            <text class="sv-muted" x="220" y="212" text-anchor="middle">ejemplo: (z, a) ↦ (f(z), g(a)) es inyectiva coordenada a coordenada</text>
+          </svg>
+          <figcaption>La cadena de inyecciones de este paso. Cada flecha es inyectiva, y la composición también, así que el cardinal sólo puede subir de izquierda a derecha.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema 3.11 (Cantor–Schröeder–Bernstein)</span>, $\#A = \mathfrak{c}$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="p1-1c2025-ej1-lema">
+      <h4>Lema: $\#(\mathbb{Z}^{\mathbb{N}}) = \mathfrak{c}$</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\mathfrak{c} \le \#\mathbb{Z}^{\mathbb{N}}$</p>
+            <p>$\{0,1\}^{\mathbb{N}} \subseteq \mathbb{Z}^{\mathbb{N}}$ y $\#\{0,1\}^{\mathbb{N}} = \mathfrak{c}$ (como arriba).</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\#\mathbb{Z}^{\mathbb{N}} \le \mathfrak{c}$: el gráfico es inyectivo</p>
+            <p>Consideramos la función que manda una sucesión a su gráfico,
+            $$\begin{aligned} &G : \mathbb{Z}^{\mathbb{N}} \to \mathcal{P}(\mathbb{N} \times \mathbb{Z}), \\ &G(a) = \{(n, a_n) : n \in \mathbb{N}\} \\ &\text{para } a = (a_n)_n. \end{aligned}$$</p>
+            <p><em>$G$ es inyectiva.</em> Sean $a = (a_n)_n$ y $b = (b_n)_n$ en $\mathbb{Z}^{\mathbb{N}}$ con $G(a) = G(b)$, y fijemos $n \in \mathbb{N}$. El par $(n, a_n)$ pertenece a $G(a)$, luego también a $G(b) = \{(m, b_m) : m \in \mathbb{N}\}$, así que existe $m \in \mathbb{N}$ con $(n, a_n) = (m, b_m)$. Comparando primeras coordenadas, $m = n$; comparando segundas, $a_n = b_m = b_n$. Como $n$ era arbitrario, $a = b$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej1-c2" aria-label="Gráficos de dos sucesiones enteras como conjuntos de puntos de N por Z"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej1-n">columna <i>n</i></label><input type="range" id="p1-1c2025-ej1-n" min="1" max="12" value="5" step="1"><output id="p1-1c2025-ej1-n-o"></output></div>
+              <label class="check"><input type="checkbox" id="p1-1c2025-ej1-b" checked> mostrar también <i>G</i>(<i>b</i>)</label>
+            </div>
+            <dl class="read" id="p1-1c2025-ej1-read2" aria-live="polite"></dl>
+            <figcaption>Los gráficos <i>G</i>(<i>a</i>) (círculos) y <i>G</i>(<i>b</i>) (cruces) de dos sucesiones de ℤ<sup>ℕ</sup> que difieren sólo en <i>n</i> = 5 (valores elegidos para el dibujo). En cada columna <i>n</i> cada gráfico tiene un único punto, (<i>n</i>, <i>a<sub>n</sub></i>): por eso de <i>G</i>(<i>a</i>) se lee <i>a<sub>n</sub></i>, y en la columna 5 los dos conjuntos ya son distintos.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">El codominio tiene cardinal $\mathfrak{c}$</p>
+            <p>Como $\mathbb{N} \times \mathbb{Z} \sim \mathbb{N}$ (<span class="ref" data-ref="guia-p2-ej1c">Práctica 2, Ej. 1 (c)</span>), vale $\mathcal{P}(\mathbb{N} \times \mathbb{Z}) \sim \mathcal{P}(\mathbb{N})$ (<span class="ref" data-ref="guia-p2-ej9c">Práctica 2, Ej. 9 (c)</span>), y $\#\mathcal{P}(\mathbb{N}) = \mathfrak{c}$ (<span class="ref" data-ref="guia-p2-ej10b">Práctica 2, Ej. 10 (b)</span>).</p>
+            <p>Luego $\#\mathbb{Z}^{\mathbb{N}} \le \mathfrak{c}$ (<span class="ref" data-ref="def-3.8">Definición 3.8</span>), y por <span class="ref" data-ref="teo-3.11">Cantor–Schröeder–Bernstein</span>, $\#\mathbb{Z}^{\mathbb{N}} = \mathfrak{c}$.</p>
+            <p class="nota"><b>Errata</b>El <code>.typ</code> cita "Práctica 2, Ej. 8 (c)" para $A \sim B \Rightarrow \mathcal{P}(A) \sim \mathcal{P}(B)$ y "Práctica 2, Ej. 9 (b)" para $\#\mathcal{P}(\mathbb{N}) = \mathfrak{c}$; en <code>guias/p2.typ</code> son el Ej. 9 (c) y el Ej. 10 (b).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2025.ej1</code> ($\#A = \mathfrak{c}$), con <code>equivA : A ≃ ℤ × (ℕ → Bool)</code> como la biyección $\Phi$ (<code>true</code> = paso de longitud $2$) y <code>ej1'</code> ($\#A = \#\mathbb{R}$). El cierre usa aritmética de cardinales de Mathlib ($\aleph_0 \cdot 2^{\aleph_0} = \mathfrak{c}$) en lugar de las dos inyecciones.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 2 ===================== -->
+  <article class="ej" id="p1-1c2025-ej2" data-short="Ej. 2" data-title="Ínfimo de A contra ínfimo de su clausura y de su interior" data-topics="supremo,topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>$\inf(A)$ contra $\inf(\overline{A})$ y $\inf(A^{\circ})$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $A \subseteq \mathbb{R}$ no vacío y acotado. Decida si las siguientes igualdades son verdaderas o falsas, demostrándolas en caso de que sean verdaderas o mostrando un contraejemplo en caso de que sean falsas:</p>
+      <ol class="items">
+        <li>$\inf(A) = \inf(\overline{A})$.</li>
+        <li>$\inf(A) = \inf(A^{\circ})$.</li>
+      </ol>
+    </div>
+
+    <div class="sub" id="p1-1c2025-ej2a">
+      <div class="ej-head"><h4>(a) $\inf(A) = \inf(\overline{A})$</h4><span class="tag v">Verdadera</span></div>
+      <div class="estrategia"><b>Estrategia</b>
+        <p><em>Las cotas inferiores de $A$ pasan a la clausura.</em> El ínfimo de $A$ es cota inferior de $\overline{A}$ (una sucesión de $A$ que converge no puede bajar del ínfimo en el límite), así que $\inf A \le \inf \overline{A}$. La otra desigualdad es gratis porque $A \subseteq \overline{A}$.</p>
+      </div>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\overline{A}$ es no vacío y acotado inferiormente</p>
+            <p>Sea $i = \inf(A)$, que existe por el <span class="ref" data-ref="teo-2">Teorema 2 (completitud en términos de ínfimos)</span>.</p>
+            <p>$\overline{A}$ es no vacío porque $A \subseteq \overline{A}$ (<span class="ref" data-ref="obs-4.23">Observación 4.23</span>). Veamos que $i$ es cota inferior de $\overline{A}$: sea $x \in \overline{A}$. Por la <span class="ref" data-ref="prop-4.46">Proposición 4.46 (a)</span>, existe $(a_n)_n \subseteq A$ con $a_n \to x$. Como $i \le a_n$ para todo $n$, por la <span class="ref" data-ref="guia-p1-ej10">Práctica 1, Ej. 10</span> (los límites respetan $\le$) resulta $i \le x$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej2-c1" aria-label="Un conjunto A en la recta, su clausura y una sucesión de A que converge a un punto de la clausura"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej2-n"><i>n</i></label><input type="range" id="p1-1c2025-ej2-n" min="1" max="40" value="3" step="1"><output id="p1-1c2025-ej2-n-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej2-read1" aria-live="polite"></dl>
+            <figcaption>Con <i>A</i> = {1 + 1/<i>k</i> : <i>k</i> ∈ ℕ} ∪ (2, 3) (valores elegidos para el dibujo), arriba <i>A</i> y abajo cl(<i>A</i>), que agrega 1, 2 y 3. La sucesión <i>a<sub>n</sub></i> = 1 + 1/<i>n</i> ∈ <i>A</i> tiende a <i>x</i> = 1 ∈ cl(<i>A</i>) y nunca baja de <i>i</i> = ínf <i>A</i>: el límite tampoco.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$i \le j$</p>
+            <p>Entonces existe $j = \inf(\overline{A})$ (<span class="ref" data-ref="teo-2">Teorema 2</span>) y, como $i$ es una cota inferior de $\overline{A}$ y $j$ es la <strong>mayor</strong> de ellas (<span class="ref" data-ref="def-5">Definición 5</span>), $i \le j$.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$j \le i$</p>
+            <p>Como $A \subseteq \overline{A}$, toda cota inferior de $\overline{A}$ lo es de $A$; en particular $j$ es cota inferior de $A$, y por ser $i$ la mayor de las cotas inferiores de $A$, $j \le i$. (Es la <span class="ref" data-ref="guia-p1-ej5b">Práctica 1, Ej. 5 (b)</span> con $A \subseteq \overline{A}$.)</p>
+          </div>
+        </div>
+      </div>
+      <p class="conclusion">Por lo tanto $\inf(A) = \inf(\overline{A})$. $\blacksquare$</p>
+    </div>
+
+    <div class="sub" id="p1-1c2025-ej2b">
+      <div class="ej-head"><h4>(b) $\inf(A) = \inf(A^{\circ})$</h4><span class="tag f">Falsa</span></div>
+      <div class="estrategia"><b>Estrategia</b>
+        <p><em>Un punto aislado abajo no sobrevive al interior.</em> El interior tira los puntos que no tienen una bola alrededor dentro de $A$. Si el ínfimo se alcanza en un punto aislado, el interior lo pierde y el ínfimo sube.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">El contraejemplo y su ínfimo: $\inf(A) = 0$</p>
+            <p>Tomemos $A = \{0\} \cup [1, 2]$, que es no vacío y acotado (está contenido en $[0, 2]$).</p>
+            <p>El $0$ es cota inferior de $A$ (todo elemento de $A$ es $0$ o está en $[1,2]$) y $0 \in A$, así que por la <span class="ref" data-ref="prop-6-caracterizacion-de-infimo-y-minimo">Proposición 6 (caracterización de ínfimo y mínimo)</span> $\inf(A) = 0$.</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$A^{\circ} = (1, 2)$</p>
+            <p>Por un lado, $(1,2) = B(3/2, 1/2)$ es abierto (<span class="ref" data-ref="ejem-4.16">es una bola</span>) y $(1,2) \subseteq A$, así que $(1,2) \subseteq A^{\circ}$ por la <span class="ref" data-ref="prop-4.21">Proposición 4.21</span>. Por otro lado, $A^{\circ} \subseteq A$ (<span class="ref" data-ref="obs-4.12">Observación 4.12</span>), y de los puntos de $A$ que no están en $(1,2)$ ninguno es interior:</p>
+            <ul class="items">
+              <li>$0$: para todo $r \gt 0$, $-r/2 \in B(0, r)$ y $-r/2 \notin A$.</li>
+              <li>$1$: para todo $r \gt 0$, el punto $1 - \min(r, 1)/2$ está en $B(1, r)$ y en $(0, 1)$, que es disjunto de $A$.</li>
+              <li>$2$: para todo $r \gt 0$, $2 + r/2 \in B(2, r)$ y $2 + r/2 \notin A$.</li>
+            </ul>
+            <p>Luego $A^{\circ} = (1, 2)$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej2-c2" aria-label="El conjunto {0} unión [1,2] con una bola centrada en 0, 1 o 2 y el punto de la bola que queda fuera de A"></canvas>
+            <div class="ctrl">
+              <fieldset class="pills"><legend>centro de la bola</legend>
+                <label><input type="radio" name="p1-1c2025-ej2-x" value="0" checked><i>x</i> = 0</label>
+                <label><input type="radio" name="p1-1c2025-ej2-x" value="1"><i>x</i> = 1</label>
+                <label><input type="radio" name="p1-1c2025-ej2-x" value="2"><i>x</i> = 2</label>
+                <label><input type="radio" name="p1-1c2025-ej2-x" value="1.5"><i>x</i> = 3/2</label>
+              </fieldset>
+              <div class="slider"><label for="p1-1c2025-ej2-r"><i>r</i></label><input type="range" id="p1-1c2025-ej2-r" min="2" max="150" value="60" step="1"><output id="p1-1c2025-ej2-r-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej2-read2" aria-live="polite"></dl>
+            <figcaption><i>A</i> = {0} ∪ [1, 2] y la bola <i>B</i>(<i>x</i>, <i>r</i>) (el intervalo (<i>x</i> − <i>r</i>, <i>x</i> + <i>r</i>)). Para <i>x</i> = 0, 1, 2 se marca el testigo de la resolución, que está en la bola y no en <i>A</i>, para cualquier <i>r</i>. Para <i>x</i> = 3/2 (punto de (1, 2), agregado para comparar) la bola entra en <i>A</i> en cuanto <i>r</i> ≤ 1/2.</figcaption>
+          </figure>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\inf(A^{\circ}) = 1$</p>
+            <p>El $1$ es cota inferior de $(1,2)$, y para todo $\varepsilon \gt 0$ el punto $1 + \min(\varepsilon, 1)/2 \in (1,2)$ cumple $1 + \min(\varepsilon,1)/2 \lt 1 + \varepsilon$; por la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Proposición 5 (equivalencia de ínfimo)</span>, $\inf((1,2)) = 1$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej2-c3" aria-label="El interior (1,2), la banda de 1 a 1 más epsilon y el punto testigo"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej2-eps">ε</label><input type="range" id="p1-1c2025-ej2-eps" min="2" max="150" value="50" step="1"><output id="p1-1c2025-ej2-eps-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej2-read3" aria-live="polite"></dl>
+            <figcaption>Arriba <i>A</i> con su ínfimo 0; abajo <i>A</i>° = (1, 2) con la banda [1, 1 + ε) y el punto 1 + mín(ε, 1)/2, que siempre cae en la banda y en (1, 2). El ínfimo saltó de 0 a 1.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="conclusion">En conclusión, $\inf(A) = 0 \ne 1 = \inf(A^{\circ})$: la igualdad es falsa. $\blacksquare$</p>
+    </div>
+
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2025.ej2a</code> (para $A$ no vacío y acotado inferiormente) y <code>ej2b</code>, con <code>interior_B</code>, <code>sInf_B</code> y <code>sInf_interior_B</code> para $B = \{0\} \cup [1,2]$.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 3 ===================== -->
+  <article class="ej" id="p1-1c2025-ej3" data-short="Ej. 3" data-title="U abierto si y sólo si U ∩ cl(T) ⊆ cl(U ∩ T) para todo T" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>$U$ abierto $\iff U \cap \overline{T} \subseteq \overline{U \cap T}$ para todo $T$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $(E, d)$ un espacio métrico y sea $U \subseteq E$ un subconjunto. Pruebe que $U$ es abierto si y sólo si para todo $T \subseteq E$ vale $U \cap \overline{T} \subseteq \overline{U \cap T}$.</p>
+    </div>
+    <div class="estrategia"><b>Estrategia</b>
+      <p><em>Ida: achicar la bola. Vuelta: particularizar en $T = E \setminus U$.</em> En la ida, un punto de $U \cap \overline{T}$ tiene una bola dentro de $U$ y toda bola suya toca a $T$; intersecando los dos radios, toda bola toca a $U \cap T$. En la vuelta se elige $T = E \setminus U$: el lado derecho es $\overline{\emptyset} = \emptyset$, así que ningún punto de $U$ es adherente a $E \setminus U$, que es decir que toda bola suya queda dentro de $U$. (Es el <span class="ref" data-ref="ext-ejemplo-c4-6">Ejemplo C4-6 de <code>ejemplos/p3.typ</code></span>, escrito con bolas.)</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">($\Rightarrow$) Achicar la bola</p>
+          <p>Supongamos $U$ abierto y sea $T \subseteq E$. Sea $x \in U \cap \overline{T}$ y sea $r \gt 0$; queremos ver que $B(x, r) \cap (U \cap T) \ne \emptyset$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>). Como $U$ es abierto y $x \in U$, existe $s \gt 0$ con $B(x, s) \subseteq U$ (<span class="ref" data-ref="def-4.11">Definiciones 4.11</span> y <span class="ref" data-ref="def-4.14">4.14</span>). Sea $\rho = \min\{r, s\} \gt 0$. Como $x \in \overline{T}$, existe $y \in B(x, \rho) \cap T$. Entonces $d(x, y) \lt \rho \le s$, así que $y \in B(x, s) \subseteq U$; y $d(x,y) \lt \rho \le r$, así que $y \in B(x, r)$. Luego $y \in B(x, r) \cap (U \cap T)$, que es lo que queríamos. Como $r$ era arbitrario, $x \in \overline{U \cap T}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2025-ej3-c1" aria-label="Un abierto U, un conjunto T con x en su borde, las bolas de radios r, s y rho, y el punto y"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2025-ej3-r"><i>r</i></label><input type="range" id="p1-1c2025-ej3-r" min="5" max="120" value="90" step="1"><output id="p1-1c2025-ej3-r-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2025-ej3-read1" aria-live="polite"></dl>
+          <figcaption>En ℝ² con <i>d</i><sub>2</sub> (valores elegidos para el dibujo): <i>U</i> es un disco abierto y <i>T</i> el semiplano abierto de arriba, con <i>x</i> en su borde, así que <i>x</i> ∈ <i>U</i> ∩ cl(<i>T</i>) sin estar en <i>T</i>. Arrastrá <i>x</i> a lo largo del borde de <i>T</i> (sin salir de <i>U</i>) y mové <i>r</i>. La bola <i>B</i>(<i>x</i>, <i>s</i>) entra en <i>U</i>; la de radio ρ = mín{<i>r</i>, <i>s</i>} (rellena) entra en las dos, y el punto <i>y</i> de <i>B</i>(<i>x</i>, ρ) ∩ <i>T</i> cae en <i>B</i>(<i>x</i>, <i>r</i>) ∩ (<i>U</i> ∩ <i>T</i>).</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">($\Leftarrow$) Si $x \in U$ no fuera interior, $x \in \overline{E \setminus U}$</p>
+          <p>Supongamos que $U \cap \overline{T} \subseteq \overline{U \cap T}$ para todo $T \subseteq E$, y veamos que todo $x \in U$ es interior. Sea $x \in U$ y supongamos, por el absurdo, que ninguna bola centrada en $x$ está contenida en $U$: para todo $r \gt 0$, $B(x, r) \not\subseteq U$, es decir, $B(x, r) \cap (E \setminus U) \ne \emptyset$. Eso dice exactamente que $x \in \overline{E \setminus U}$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2025-ej3-c2" aria-label="Un conjunto U que no es abierto, un punto x de U en su borde y una bola que toca el complemento"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2025-ej3-r2"><i>r</i></label><input type="range" id="p1-1c2025-ej3-r2" min="3" max="100" value="45" step="1"><output id="p1-1c2025-ej3-r2-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2025-ej3-read2" aria-live="polite"></dl>
+          <figcaption>La situación que el absurdo descarta, con un <i>U</i> que no es abierto (valores elegidos para el dibujo): <i>U</i> es el disco cerrado y <i>x</i> está en su borde. Toda bola <i>B</i>(<i>x</i>, <i>r</i>) toca a <i>E</i> ∖ <i>U</i>, o sea <i>x</i> ∈ <i>U</i> ∩ cl(<i>E</i> ∖ <i>U</i>). Pero <i>U</i> ∩ (<i>E</i> ∖ <i>U</i>) = ∅, y la hipótesis con <i>T</i> = <i>E</i> ∖ <i>U</i> diría que <i>x</i> ∈ cl(∅) = ∅.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">($\Leftarrow$) Particularizar en $T = E \setminus U$</p>
+          <p>Aplicando la hipótesis con $T = E \setminus U$,
+          $$\begin{aligned} x \in U \cap \overline{E \setminus U} &\subseteq \overline{U \cap (E \setminus U)} \\ &= \overline{\emptyset} = \emptyset, \end{aligned}$$
+          donde $\overline{\emptyset} = \emptyset$ porque ningún punto cumple $B(x, r) \cap \emptyset \ne \emptyset$. Absurdo. Luego existe $r \gt 0$ con $B(x, r) \subseteq U$, es decir $x \in U^{\circ}$. Como $x \in U$ era arbitrario, $U \subseteq U^{\circ}$; junto con $U^{\circ} \subseteq U$ (<span class="ref" data-ref="obs-4.12">Observación 4.12</span>), $U = U^{\circ}$, y $U$ es abierto (<span class="ref" data-ref="def-4.14">Definición 4.14</span>). $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2025.ej3</code>, para <code>[MetricSpace E]</code>. La ida es el lema de Mathlib <code>IsOpen.inter_closure</code>; la vuelta particulariza en <code>T = Uᶜ</code> y usa <code>closure_compl</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 4 ===================== -->
+  <article class="ej" id="p1-1c2025-ej4" data-short="Ej. 4" data-title="Sucesiones eventualmente nulas con d∞: interior, clausura y no completitud" data-topics="topologia,completitud">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>Sucesiones eventualmente nulas con $d_\infty$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <p>Consideremos el conjunto
+      $$\begin{aligned} X = \{&(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} \mid \\ &\text{existe } n_0 \in \mathbb{N} \text{ tal que} \\ &a_n = 0 \text{ para todo } n \ge n_0\}. \end{aligned}$$
+      Dados $a = (a_n)_{n \in \mathbb{N}}, b = (b_n)_{n \in \mathbb{N}} \in X$, definimos la distancia
+      $$d_\infty(a, b) = \sup\{|a_n - b_n| : n \in \mathbb{N}\}.$$
+      Con esta distancia $(X, d_\infty)$ es un espacio métrico.</p>
+      <ol class="items">
+        <li>Sea $A = \{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} \mid$ $a_n = 0$ para todo $n \ge 4\} \subseteq X$. Calcule $A^{\circ}$ y $\overline{A}$.</li>
+        <li>Pruebe que $(X, d_\infty)$ no es completo.<br><em><strong>Sugerencia:</strong> considere $a = (a_n)_{n \in \mathbb{N}}$ dada por $a_n = 1/n$.</em></li>
+      </ol>
+    </div>
+
+    <div class="sub" id="p1-1c2025-ej4a">
+      <h4>(a) $A^{\circ} = \emptyset$ y $\overline{A} = A$</h4>
+      <div class="estrategia"><b>Estrategia</b>
+        <p><em>Perturbar la cuarta coordenada; pasar al límite coordenada a coordenada.</em> Dado $a \in A$ y una bola $B(a, r)$, la sucesión que coincide con $a$ salvo en la cuarta coordenada, donde vale $r/2$, está en la bola, está en $X$ y no está en $A$: ninguna bola entra en $A$. Para la clausura, una sucesión de elementos de $A$ que converge en $d_\infty$ converge coordenada a coordenada, y las coordenadas $n \ge 4$ son todas $0$, así que el límite también las tiene nulas.</p>
+      </div>
+      <div class="steps">
+        <div class="step has-viz" id="p1-1c2025-ej4-lema">
+          <div class="step-text">
+            <p class="step-title">Lo único que se usa de $d_\infty$</p>
+            <p>Para $a, b \in X$ y cada $n \in \mathbb{N}$ vale $|a_n - b_n| \le d_\infty(a, b)$ (un elemento es menor o igual que el supremo del conjunto). En particular, si $a^{(k)} \to a$ en $(X, d_\infty)$ entonces $a^{(k)}_n \to a_n$ en $\mathbb{R}$ para cada $n$ fijo (<span class="ref" data-ref="guia-p1-ej8">Práctica 1, Ej. 8</span>: $|a^{(k)}_n - a_n|$ está acotado por $d_\infty(a^{(k)}, a) \to 0$).</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej4-c1" aria-label="Dos sucesiones eventualmente nulas, la diferencia en la coordenada n y la distancia del supremo"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej4-n">coordenada <i>n</i></label><input type="range" id="p1-1c2025-ej4-n" min="1" max="10" value="2" step="1"><output id="p1-1c2025-ej4-n-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej4-read1" aria-live="polite"></dl>
+            <figcaption>Dos elementos <i>a</i> (círculos) y <i>b</i> (cuadrados) de <i>X</i>, nulos desde <i>n</i> = 7 (valores elegidos para el dibujo). La línea punteada es <i>d</i><sub>∞</sub>(<i>a</i>, <i>b</i>), la mayor de las diferencias. La diferencia en la coordenada elegida, |<i>a<sub>n</sub></i> − <i>b<sub>n</sub></i>|, nunca la supera.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$A^{\circ} = \emptyset$: perturbar la cuarta coordenada</p>
+            <p>Como $A^{\circ} \subseteq A$ (<span class="ref" data-ref="obs-4.12">Observación 4.12</span>), alcanza con ver que ningún $a \in A$ es interior. Sea $a = (a_n)_n \in A$ y $r \gt 0$. Definimos $b = (b_n)_n$ por $b_4 = r/2$ y $b_n = a_n$ para $n \ne 4$.</p>
+            <ul class="items">
+              <li>$b \in X$: si $n_0$ es tal que $a_n = 0$ para $n \ge n_0$, entonces $b_n = 0$ para $n \ge \max\{n_0, 5\}$.</li>
+              <li>$b \in B(a, r)$: $|a_n - b_n|$ vale $|a_4 - r/2| = r/2$ si $n = 4$ (pues $a_4 = 0$ por ser $a \in A$) y $0$ si no, así que $d_\infty(a, b) = \sup\{0, r/2\} = r/2 \lt r$.</li>
+              <li>$b \notin A$: $b_4 = r/2 \ne 0$.</li>
+            </ul>
+            <p>Luego $B(a, r) \not\subseteq A$ para todo $r \gt 0$, es decir $a \notin A^{\circ}$ (<span class="ref" data-ref="def-4.11">Definición 4.11</span>). Por lo tanto $A^{\circ} = \emptyset$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej4-c2" aria-label="Un elemento a de A, la franja de radio r a su alrededor y la perturbación b con cuarta coordenada r/2"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej4-r"><i>r</i></label><input type="range" id="p1-1c2025-ej4-r" min="4" max="100" value="60" step="1"><output id="p1-1c2025-ej4-r-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej4-read2" aria-live="polite"></dl>
+            <figcaption>Un <i>a</i> ∈ <i>A</i> (círculos; valores elegidos para el dibujo) y la franja |<i>y</i> − <i>a<sub>n</sub></i>| &lt; <i>r</i> en cada coordenada: una sucesión de <i>X</i> está en <i>B</i>(<i>a</i>, <i>r</i>) cuando queda dentro de la franja con margen (supremo &lt; <i>r</i>). La perturbación <i>b</i> (cuadrado) sólo se mueve en <i>n</i> = 4, hasta <i>r</i>/2: queda en la bola pero sale de <i>A</i>, por chica que sea <i>r</i>.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\overline{A} = A$: pasar al límite coordenada a coordenada</p>
+            <p>Siempre $A \subseteq \overline{A}$ (<span class="ref" data-ref="obs-4.23">Observación 4.23</span>). Sea $x \in \overline{A}$. Por la <span class="ref" data-ref="prop-4.46">Proposición 4.46 (a)</span> existe una sucesión $(a^{(k)})_{k \in \mathbb{N}} \subseteq A$ con $a^{(k)} \to x$ en $(X, d_\infty)$. Fijemos $n \ge 4$. Por el <a href="#p1-1c2025-ej4-lema">detalle técnico de arriba</a>, $a^{(k)}_n \to x_n$ en $\mathbb{R}$; pero $a^{(k)}_n = 0$ para todo $k$ (porque $a^{(k)} \in A$), así que la sucesión constante $0$ converge a $x_n$, y por unicidad del límite (<span class="ref" data-ref="prop-5-unicidad-del-limite">Proposición 5 del Cap. 2</span>) $x_n = 0$. Como esto vale para todo $n \ge 4$, $x \in A$. Luego $\overline{A} \subseteq A$ y, por lo tanto, $\overline{A} = A$: $A$ es cerrado (<span class="ref" data-ref="def-4.27">Definición 4.27</span>). $\blacksquare$</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej4-c3" aria-label="Una sucesión de elementos de A que converge en d infinito; las coordenadas desde la cuarta quedan en cero"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej4-k"><i>k</i></label><input type="range" id="p1-1c2025-ej4-k" min="1" max="30" value="2" step="1"><output id="p1-1c2025-ej4-k-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej4-read3" aria-live="polite"></dl>
+            <figcaption>Una sucesión <i>a</i><sup>(<i>k</i>)</sup> ∈ <i>A</i> (cuadrados) que converge en <i>d</i><sub>∞</sub> a <i>x</i> (círculos), con <i>d</i><sub>∞</sub>(<i>a</i><sup>(<i>k</i>)</sup>, <i>x</i>) = 1/<i>k</i> (valores elegidos para el dibujo). En las coordenadas <i>n</i> ≥ 4 (zona sombreada) cada <i>a</i><sup>(<i>k</i>)</sup><sub><i>n</i></sub> vale 0 para todo <i>k</i>, así que el límite <i>x<sub>n</sub></i> también.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="p1-1c2025-ej4b">
+      <h4>(b) $(X, d_\infty)$ no es completo</h4>
+      <div class="estrategia"><b>Estrategia</b>
+        <p><em>Truncar $(1/n)_n$.</em> La sucesión $(1/n)_n$ no está en $X$, pero sus truncadas $a^{(N)} = (1, 1/2, \dots, 1/N, 0, 0, \dots)$ sí. Dos truncadas difieren sólo en coordenadas $n \gt \min\{N, M\}$, donde valen a lo sumo $1/(\min\{N,M\}+1)$: son de Cauchy. Si convergieran en $X$, convergerían coordenada a coordenada a $(1/n)_n$, que no es eventualmente nula.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Las truncadas</p>
+            <p>Para cada $N \in \mathbb{N}$ sea $a^{(N)} \in X$ dada por $a^{(N)}_n = 1/n$ si $n \le N$ y $a^{(N)}_n = 0$ si $n \gt N$ (es eventualmente nula, con $n_0 = N + 1$).</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$(a^{(N)})_N$ es de Cauchy</p>
+            <p>Sean $N \lt M$ (si $N = M$ la distancia es $0$). Las coordenadas de $a^{(N)}$ y $a^{(M)}$ coinciden para $n \le N$ y para $n \gt M$; para $N \lt n \le M$ difieren en $|0 - 1/n| = 1/n \le 1/(N+1)$. Luego
+            $$\begin{aligned} &d_\infty(a^{(N)}, a^{(M)}) \\ &\quad = \sup\{1/n : N \lt n \le M\} \\ &\quad = \frac{1}{N+1} \lt \frac{1}{N}. \end{aligned}$$
+            Dado $\varepsilon \gt 0$, por el Principio de Arquímedes (<span class="ref" data-ref="prop-1">Proposición 1 del Cap. 1</span>) existe $n_0 \in \mathbb{N}$ con $1/n_0 \lt \varepsilon$; si $N, M \ge n_0$, entonces
+            $$\begin{aligned} &d_\infty(a^{(N)}, a^{(M)}) \\ &\quad \lt \frac{1}{\min\{N, M\}} \le \frac{1}{n_0} \lt \varepsilon. \end{aligned}$$
+            Así, $(a^{(N)})_N$ es de Cauchy (<span class="ref" data-ref="def-4.51">Definición 4.51</span>).</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej4-c4" aria-label="Dos truncadas de 1/n y la coordenada donde más difieren"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej4-N"><i>N</i></label><input type="range" id="p1-1c2025-ej4-N" min="1" max="18" value="3" step="1"><output id="p1-1c2025-ej4-N-o"></output></div>
+              <div class="slider"><label for="p1-1c2025-ej4-M"><i>M</i></label><input type="range" id="p1-1c2025-ej4-M" min="1" max="18" value="8" step="1"><output id="p1-1c2025-ej4-M-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej4-read4" aria-live="polite"></dl>
+            <figcaption>La curva punteada es 1/<i>n</i>. Las truncadas <i>a</i><sup>(<i>N</i>)</sup> (círculos) y <i>a</i><sup>(<i>M</i>)</sup> (cuadrados) coinciden salvo en las coordenadas sombreadas, entre mín{<i>N</i>, <i>M</i>} y máx{<i>N</i>, <i>M</i>}; la mayor diferencia es la primera, 1/(mín{<i>N</i>, <i>M</i>} + 1), que se achica al subir los dos índices.</figcaption>
+          </figure>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">No converge en $X$</p>
+            <p>Supongamos que existe $b \in X$ con $a^{(N)} \to b$ en $(X, d_\infty)$. Fijemos $n \in \mathbb{N}$. Por el <a href="#p1-1c2025-ej4-lema">detalle técnico de (a)</a>, $a^{(N)}_n \to b_n$ en $\mathbb{R}$. Pero $a^{(N)}_n = 1/n$ para todo $N \ge n$, así que la sucesión $(a^{(N)}_n)_N$ es eventualmente constante igual a $1/n$ y converge a $1/n$; por <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad del límite</span>, $b_n = 1/n$. Esto vale para todo $n \in \mathbb{N}$, con lo cual $b = (1/n)_n$. Sin embargo, $b \in X$ significa que existe $n_0$ con $b_n = 0$ para $n \ge n_0$, y en particular $1/n_0 = b_{n_0} = 0$: absurdo.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2025-ej4-c5" aria-label="La coordenada n de las truncadas en función de N: vale cero y después queda constante en 1/n"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2025-ej4-nn">coordenada <i>n</i></label><input type="range" id="p1-1c2025-ej4-nn" min="1" max="12" value="4" step="1"><output id="p1-1c2025-ej4-nn-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2025-ej4-read5" aria-live="polite"></dl>
+            <figcaption>Para la coordenada <i>n</i> elegida, los valores <i>a</i><sup>(<i>N</i>)</sup><sub><i>n</i></sub> en función de <i>N</i>: valen 0 mientras <i>N</i> &lt; <i>n</i> y 1/<i>n</i> desde <i>N</i> = <i>n</i>. El único límite posible es 1/<i>n</i>, y ninguna coordenada del candidato <i>b</i> = (1/<i>n</i>) es 0.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="conclusion">Encontramos una sucesión de Cauchy en $X$ que no converge en $X$, de modo que $(X, d_\infty)$ <span class="ref" data-ref="def-4.55">no es completo</span>. $\blacksquare$</p>
+    </div>
+
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2025.ej4a_interior</code>, <code>ej4a_closure</code> y <code>ej4b</code>. $X$ se modela dentro de <code>ℕ →ᵇ ℝ</code> (métrica del supremo) y <code>A4</code> se escribe con <code>∀ n ≥ 3</code> por el corrimiento de índice.</p>
+  </article>
+</section>
