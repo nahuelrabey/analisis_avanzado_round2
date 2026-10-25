@@ -221,12 +221,13 @@
           <p class="step-title">La cuenta (2)</p>
           <p>Dadas <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$f, g \in C[0, 1]$</span>, tenemos que
             $$\begin{aligned}
-              d_1(\Psi(f), \Psi(g)) &= \int_0^1 |x f(x) - x g(x)|\, dx \\
-              &= \int_0^1 x\, |f(x) - g(x)|\, dx \\
-              &\le \int_0^1 x\, d_\infty(f, g)\, dx \\
-              &= d_\infty(f, g) \int_0^1 x\, dx \\
-              &= d_\infty(f, g)\, \frac{x^2}{2}\Big|_0^1 \\
-              &= \frac{d_\infty(f, g)}{2}. \qquad (2)
+              &d_1(\Psi(f), \Psi(g)) \\
+              &\quad = \int_0^1 |x f(x) - x g(x)|\, dx \\
+              &\quad = \int_0^1 x\, |f(x) - g(x)|\, dx \\
+              &\quad \le \int_0^1 x\, d_\infty(f, g)\, dx \\
+              &\quad = d_\infty(f, g) \int_0^1 x\, dx \\
+              &\quad = d_\infty(f, g)\, \frac{x^2}{2}\Big|_0^1 \\
+              &\quad = \frac{d_\infty(f, g)}{2}. \qquad (2)
             \end{aligned}$$</p>
         </div>
         <figure class="viz">
@@ -425,7 +426,7 @@
             veamos que la sucesión $(x_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-4.42">converge a cero también para la métrica $d$</span>. En efecto, dado $\varepsilon \gt 0$, tomemos $n_0 \in \mathbb{N}$ tal que
             $$|x_n| \lt \varepsilon \qquad \forall n \ge n_0.$$
             Entonces para todo $n \ge n_0$, tenemos que
-            $$d(x_n, 0) = \begin{cases} 0, & \text{si } x_n = 0, \\ |x_n| + |0| \lt \varepsilon, & \text{si } x_n \ne 0. \end{cases}$$
+            $$\begin{aligned}&d(x_n, 0) \\ &\quad = \begin{cases} 0, & \text{si } x_n = 0, \\ |x_n| + |0| \lt \varepsilon, & \text{si } x_n \ne 0. \end{cases}\end{aligned}$$
             Como en ambos casos la distancia es menor que $\varepsilon$, esto prueba que
             $$d(x_n, 0) \lt \varepsilon \qquad \forall n \ge n_0,$$
             lo que a su vez muestra que
