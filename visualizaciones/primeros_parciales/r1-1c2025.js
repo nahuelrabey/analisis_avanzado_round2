@@ -228,7 +228,7 @@ function drawE2a() {
   PP.dot(ctx, T.X(a), T.Y(2), 6, C("--accent"));
   PP.dot(ctx, T.X(b), T.Y(1), 6, C("--seq2"));
   PP.dot(ctx, T.X(x), T.Y(0), 6, C("--seq3"));
-  PP.label(ctx, "x = a + b", T.X(x), T.Y(0) - 10, C("--seq3"), "right", "bottom", 12);
+  PP.label(ctx, "x = a + b", T.X(x) - 8, T.Y(0) - 14, C("--seq3"), "right", "bottom", 12);
   PP.read(ID + "-ej2-read1", [
     ["a ∈ A, a ≤ α", PP.fmt(a, 4) + " ≤ 1"],
     ["b ∈ B, b ≤ β", PP.fmt(b, 4) + " ≤ 0.5"],
@@ -464,7 +464,7 @@ function drawE4b() {
     ["|x| < 3/4 y |y| < 3/4", a && b ? "sí" : "no", a && b ? "good" : "bad"],
     ["x² + y² < 1", PP.fmt(p[0] * p[0] + p[1] * p[1], 4) + (c ? " (sí)" : " (no)"), c ? "good" : "bad"],
     ["d(p, 0) = máx{4/3 d∞, d₂}", "máx{" + PP.fmt(4 / 3 * dInf(p, o), 3) + ", " + PP.fmt(d2(p, o), 3) + "} = " + PP.fmt(dd(p, o), 3)],
-    ["p ∈ B_d(0, 1)", inside ? "sí" : "no", inside ? "good" : "bad"],
+    ["p ∈ bola de d, radio 1", inside ? "sí" : "no", inside ? "good" : "bad"],
   ]);
 }
 PP.register(drawE4b, []);
@@ -499,7 +499,7 @@ function drawE4c1() {
     const pts = [];
     for (let k = 0; k <= 180; k++) { const deg = k / 2; pts.push([T.X(deg), T.Y(f(deg * Math.PI / 180))]); }
     PP.path(ctx, pts, col, name === "d" ? 3 : 1.8, dash);
-    const off = { "d∞": 7, "d₂": -7, "d": -7, "4/3 d₂": 7, "4n/3 d∞": 0 }[name];
+    const off = { "d∞": 9, "d₂": -9, "d": -9, "4/3 d₂": 9, "4n/3 d∞": 0 }[name];
     PP.label(ctx, name, T.X(90) + 4, T.Y(f(Math.PI / 2)) + off, col, "left", "middle", 11);
   });
   PP.path(ctx, [[T.X(th), T.Y(0)], [T.X(th), T.Y(2.85)]], C("--ink"), 1, [2, 3]);
@@ -532,9 +532,9 @@ function drawE4c2() {
   PP.path(ctx, ballPath(T, dp, 1), C("--seq2"), 1.6, [5, 4], true);
   PP.path(ctx, ballPath(T, dd, 1), C("--ink"), 2, null, true, C("--area"));
   PP.path(ctx, ballPath(T, dp, 1 / c), C("--seq3"), 2.2, null, true, C("--area3"));
-  PP.label(ctx, "B_" + name + "(0, 1)", T.X(0.72), T.Y(1.0), C("--seq2"), "left", "bottom", 12);
-  PP.label(ctx, "B_d(0, 1)", T.X(-0.98), T.Y(-0.82), C("--ink"), "left", "top", 12);
-  PP.label(ctx, "B_" + name + "(0, 1/c)", T.X(0), T.Y(-0.02), C("--seq3"), "center", "top", 11);
+  PP.label(ctx, "bola de " + name + ", radio 1", T.X(T.box.x1) - 4, T.Y(1.08), C("--seq2"), "right", "bottom", 12);
+  PP.label(ctx, "bola de d, radio 1", T.X(T.box.x0) + 4, T.Y(-1.08), C("--ink"), "left", "top", 12);
+  PP.label(ctx, "radio 1/c", T.X(0), T.Y(-0.04), C("--seq3"), "center", "top", 11);
   const p = E4c.p, o = [0, 0];
   const inSmall = dp(p, o) < 1 / c, inD = dd(p, o) < 1, inBig = dp(p, o) < 1;
   PP.dot(ctx, T.X(p[0]), T.Y(p[1]), 6, C("--ink"));
@@ -542,9 +542,9 @@ function drawE4c2() {
   const yn = (b) => (b ? "sí" : "no");
   PP.read(ID + "-ej4-read4", [
     ["c", which === "2" ? "4/3" : "4n/3 = 8/3"],
-    ["p ∈ B_" + name + "(0, 1/c)", yn(inSmall) + "  (" + name + " = " + PP.fmt(dp(p, o), 3) + ")", inSmall ? "good" : ""],
-    ["p ∈ B_d(0, 1)", yn(inD) + "  (d = " + PP.fmt(dd(p, o), 3) + ")", inD ? "good" : ""],
-    ["p ∈ B_" + name + "(0, 1)", yn(inBig), inBig ? "good" : ""],
+    ["p en la bola de " + name + ", radio 1/c", yn(inSmall) + "  (" + name + " = " + PP.fmt(dp(p, o), 3) + ")", inSmall ? "good" : ""],
+    ["p en la bola de d, radio 1", yn(inD) + "  (d = " + PP.fmt(dd(p, o), 3) + ")", inD ? "good" : ""],
+    ["p en la bola de " + name + ", radio 1", yn(inBig), inBig ? "good" : ""],
     ["¿se respetan las inclusiones?", (!inSmall || inD) && (!inD || inBig) ? "sí" : "no", (!inSmall || inD) && (!inD || inBig) ? "good" : "bad"],
   ]);
 }

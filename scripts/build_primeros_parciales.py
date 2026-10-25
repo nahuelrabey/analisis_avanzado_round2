@@ -13,6 +13,7 @@ Uso:
 
 Valida: ids únicos, que toda referencia data-ref tenga entrada en el glosario,
 que los temas estén en la lista y que cada ejercicio tenga título y tema.
+Si varios exámenes definen la misma clave de glosario, se queda la versión más completa.
 """
 import argparse
 import html
@@ -82,10 +83,17 @@ def main():
         if f_json.exists():
             g = json.loads(f_json.read_text(encoding="utf-8"))
             for k, v in g.items():
+                # Una clave usada por varios exámenes queda con el enunciado más completo (el más largo)
+                # y con el primer título no vacío, para que todos los popups muestren lo mismo.
                 if k not in glossary:
-                    glossary[k] = v
-                elif glossary[k].get("titulo") != v.get("titulo"):
-                    warnings.append(f"glosario: {k} con títulos distintos ({glossary[k].get('titulo')!r} vs {v.get('titulo')!r}); se queda el primero")
+                    glossary[k] = dict(v)
+                    continue
+                cur = glossary[k]
+                if len(v.get("enunciado", "")) > len(cur.get("enunciado", "")):
+                    titulo = cur.get("titulo") or v.get("titulo", "")
+                    glossary[k] = dict(v, titulo=titulo)
+                elif not cur.get("titulo") and v.get("titulo"):
+                    cur["titulo"] = v["titulo"]
         for m in re.finditer(r'\bid="([^"]+)"', body):
             i = m.group(1)
             if i in all_ids:
@@ -107,7 +115,7 @@ def main():
                 if t not in TOPICS:
                     errors.append(f"{aid}: tema desconocido {t!r}")
                 else:
-                    by_topic[t].append((aid, short, short_t, title))
+                    by_topic[t].append((aid, ("Recu " if eid.startswith("r") else "") + short.split(" · ")[1], short_t, title))
             chips.append(f'<li><a href="#{aid}">{html.escape(short_t)}</a></li>')
             n_ejs += 1
         nav.append(
@@ -134,8 +142,8 @@ def main():
         if not items:
             continue
         links = "".join(
-            f'<li><a href="#{aid}" title="{html.escape(title)}">{html.escape(exam_short.split(" · ")[1])} · {html.escape(ej_short)}</a></li>'
-            for aid, exam_short, ej_short, title in items
+            f'<li><a href="#{aid}" title="{html.escape(title)}">{html.escape(exam_label)} · {html.escape(ej_short)}</a></li>'
+            for aid, exam_label, ej_short, title in items
         )
         topics_html.append(
             f'    <section class="tema" id="tema-{t}"><h3>{html.escape(name)}<span class="cnt">{len(items)} ejercicio{"s" if len(items) != 1 else ""}</span></h3>'

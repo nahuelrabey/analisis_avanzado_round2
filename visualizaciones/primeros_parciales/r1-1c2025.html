@@ -1,4 +1,4 @@
-<section class="exam" id="r1-1c2025" data-meta="8 de julio de 2025 · resolución propuesta, verificada en Lean">
+<section class="exam" id="r1-1c2025" data-meta="08/07/2025 · resolución propuesta, verificada en Lean">
   <header class="exam-head">
     <h2 id="r1-1c2025-titulo"><span class="bn">Primer recuperatorio · 1C 2025</span>8 de julio de 2025</h2>
     <p class="meta">Enunciado de la hoja del examen. Resoluciones propuestas en el repositorio (<code>apuntes-typst/parciales/2025_1c_recuperatorio_1.typ</code>), cada una verificada en Lean 4 + Mathlib en <code>lean/Parciales/Recu1_1C2025.lean</code>. En el curso las sucesiones arrancan en $n = 1$; en Lean, en $0$. Ningún argumento depende de eso.</p>
@@ -30,7 +30,7 @@
         <div class="step-text">
           <p class="step-title">La codificación $\Phi$</p>
           <p><b>Cota inferior.</b> Para $b = (b_n)_n \in \{0,1\}^{\mathbb{N}}$ definimos $s_1 = 0$ y $s_{n+1} = s_n + b_n$, es decir $s_n = b_1 + \cdots + b_{n-1}$ (la cantidad de unos entre $b_1, \dots, b_{n-1}$), y
-          $$\Phi : \{0,1\}^{\mathbb{N}} \to \mathbb{Z}^{\mathbb{N}}, \quad \Phi(b) = \left(2^{s_n}\right)_{n \in \mathbb{N}}.$$</p>
+          $$\begin{aligned} &amp;\Phi : \{0,1\}^{\mathbb{N}} \to \mathbb{Z}^{\mathbb{N}}, \\ &amp;\Phi(b) = \left(2^{s_n}\right)_{n \in \mathbb{N}}. \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <canvas id="r1-1c2025-ej1-c1" aria-label="Tabla con los primeros diez términos de b, de s_n y de Phi(b)_n; tocando una columna se cambia el bit b_n"></canvas>
@@ -63,7 +63,7 @@
         <div class="step-text">
           <p class="step-title">$\Phi$ es inyectiva</p>
           <p>Sean $b, b' \in \{0,1\}^{\mathbb{N}}$ con $\Phi(b) = \Phi(b')$ y llamemos $s_n, s'_n$ a los respectivos exponentes. Para cada $n$, $2^{s_n} = 2^{s'_n}$ y, como $k \mapsto 2^k$ es inyectiva en $\mathbb{N}_0$ (es estrictamente creciente), $s_n = s'_n$. Entonces
-          $$b_n = s_{n+1} - s_n = s'_{n+1} - s'_n = b'_n \quad \text{para todo } n,$$
+          $$\begin{aligned} b_n &amp;= s_{n+1} - s_n \\ &amp;= s'_{n+1} - s'_n = b'_n \quad \text{para todo } n, \end{aligned}$$
           es decir $b = b'$.</p>
         </div>
         <figure class="viz">
@@ -130,7 +130,7 @@
           <div class="step-text">
             <p class="step-title">La función gráfico</p>
             <p><b>$\#\mathbb{Z}^{\mathbb{N}} \le \mathfrak{c}$:</b> consideramos la función que manda una sucesión a su gráfico,
-            $$G : \mathbb{Z}^{\mathbb{N}} \to \mathcal{P}(\mathbb{N} \times \mathbb{Z}), \quad G(a) = \{(n, a_n) : n \in \mathbb{N}\} \quad \text{para } a = (a_n)_n.$$</p>
+            $$\begin{aligned} &amp;G : \mathbb{Z}^{\mathbb{N}} \to \mathcal{P}(\mathbb{N} \times \mathbb{Z}), \\ &amp;G(a) = \{(n, a_n) : n \in \mathbb{N}\} \\ &amp;\text{para } a = (a_n)_n. \end{aligned}$$</p>
           </div>
           <figure class="viz">
             <svg viewBox="0 0 380 230" role="img" aria-label="El gráfico de una sucesión de enteros como subconjunto de N x Z: un único punto en cada columna">
@@ -138,13 +138,13 @@
               <circle cx="76" cy="200" r="2" class="sv-grid"/><circle cx="76" cy="170" r="2" class="sv-grid"/><circle cx="76" cy="140" r="2" class="sv-grid"/><circle cx="76" cy="110" r="2" class="sv-grid"/><circle cx="76" cy="80" r="2" class="sv-grid"/><circle cx="76" cy="50" r="2" class="sv-grid"/><circle cx="76" cy="20" r="2" class="sv-grid"/><circle cx="114" cy="200" r="2" class="sv-grid"/><circle cx="114" cy="170" r="2" class="sv-grid"/><circle cx="114" cy="140" r="2" class="sv-grid"/><circle cx="114" cy="110" r="2" class="sv-grid"/><circle cx="114" cy="80" r="2" class="sv-grid"/><circle cx="114" cy="50" r="2" class="sv-grid"/><circle cx="114" cy="20" r="2" class="sv-grid"/><circle cx="152" cy="200" r="2" class="sv-grid"/><circle cx="152" cy="170" r="2" class="sv-grid"/><circle cx="152" cy="140" r="2" class="sv-grid"/><circle cx="152" cy="110" r="2" class="sv-grid"/><circle cx="152" cy="80" r="2" class="sv-grid"/><circle cx="152" cy="50" r="2" class="sv-grid"/><circle cx="152" cy="20" r="2" class="sv-grid"/><circle cx="190" cy="200" r="2" class="sv-grid"/><circle cx="190" cy="170" r="2" class="sv-grid"/><circle cx="190" cy="140" r="2" class="sv-grid"/><circle cx="190" cy="110" r="2" class="sv-grid"/><circle cx="190" cy="80" r="2" class="sv-grid"/><circle cx="190" cy="50" r="2" class="sv-grid"/><circle cx="190" cy="20" r="2" class="sv-grid"/><circle cx="228" cy="200" r="2" class="sv-grid"/><circle cx="228" cy="170" r="2" class="sv-grid"/><circle cx="228" cy="140" r="2" class="sv-grid"/><circle cx="228" cy="110" r="2" class="sv-grid"/><circle cx="228" cy="80" r="2" class="sv-grid"/><circle cx="228" cy="50" r="2" class="sv-grid"/><circle cx="228" cy="20" r="2" class="sv-grid"/><circle cx="266" cy="200" r="2" class="sv-grid"/><circle cx="266" cy="170" r="2" class="sv-grid"/><circle cx="266" cy="140" r="2" class="sv-grid"/><circle cx="266" cy="110" r="2" class="sv-grid"/><circle cx="266" cy="80" r="2" class="sv-grid"/><circle cx="266" cy="50" r="2" class="sv-grid"/><circle cx="266" cy="20" r="2" class="sv-grid"/><circle cx="304" cy="200" r="2" class="sv-grid"/><circle cx="304" cy="170" r="2" class="sv-grid"/><circle cx="304" cy="140" r="2" class="sv-grid"/><circle cx="304" cy="110" r="2" class="sv-grid"/><circle cx="304" cy="80" r="2" class="sv-grid"/><circle cx="304" cy="50" r="2" class="sv-grid"/><circle cx="304" cy="20" r="2" class="sv-grid"/><circle cx="342" cy="200" r="2" class="sv-grid"/><circle cx="342" cy="170" r="2" class="sv-grid"/><circle cx="342" cy="140" r="2" class="sv-grid"/><circle cx="342" cy="110" r="2" class="sv-grid"/><circle cx="342" cy="80" r="2" class="sv-grid"/><circle cx="342" cy="50" r="2" class="sv-grid"/><circle cx="342" cy="20" r="2" class="sv-grid"/>
               <path d="M40,14 L40,206 M40,110 L366,110" class="sv-axis"/>
               <circle cx="76" cy="80" r="6" class="sv-fill-accent"/><circle cx="114" cy="170" r="6" class="sv-fill-accent"/><circle cx="152" cy="20" r="6" class="sv-fill-accent"/><circle cx="190" cy="110" r="6" class="sv-fill-accent"/><circle cx="228" cy="110" r="6" class="sv-fill-accent"/><circle cx="266" cy="50" r="6" class="sv-fill-accent"/><circle cx="304" cy="140" r="6" class="sv-fill-accent"/><circle cx="342" cy="80" r="6" class="sv-fill-accent"/>
-              <text x="76" y="126" text-anchor="middle" class="sv-muted">1</text><text x="114" y="96" text-anchor="middle" class="sv-muted">2</text><text x="152" y="126" text-anchor="middle" class="sv-muted">3</text><text x="190" y="96" text-anchor="middle" class="sv-muted">4</text><text x="228" y="96" text-anchor="middle" class="sv-muted">5</text><text x="266" y="126" text-anchor="middle" class="sv-muted">6</text><text x="304" y="96" text-anchor="middle" class="sv-muted">7</text><text x="342" y="126" text-anchor="middle" class="sv-muted">8</text>
-              <text x="370" y="126" text-anchor="end" class="sv-muted">n</text>
+              <text x="76" y="220" text-anchor="middle" class="sv-muted">1</text><text x="114" y="220" text-anchor="middle" class="sv-muted">2</text><text x="152" y="220" text-anchor="middle" class="sv-muted">3</text><text x="190" y="220" text-anchor="middle" class="sv-muted">4</text><text x="228" y="220" text-anchor="middle" class="sv-muted">5</text><text x="266" y="220" text-anchor="middle" class="sv-muted">6</text><text x="304" y="220" text-anchor="middle" class="sv-muted">7</text><text x="342" y="220" text-anchor="middle" class="sv-muted">8</text>
+              <text x="372" y="220" text-anchor="end" class="sv-muted">n</text>
               <text x="30" y="26" text-anchor="end" class="sv-muted">ℤ</text>
               <text x="30" y="114" text-anchor="end" class="sv-muted">0</text>
               <text x="30" y="54" text-anchor="end" class="sv-muted">2</text>
               <text x="30" y="174" text-anchor="end" class="sv-muted">−2</text>
-              <text x="190" y="222" text-anchor="middle" class="sv-label-seq3">columna n = 4</text>
+              
             </svg>
             <figcaption>$G(a)$ para $a = (1, -2, 3, 0, 0, 2, -1, 1, \dots)$ (valores elegidos para el dibujo): un punto $(n, a_n)$ por columna. La columna resaltada tiene un solo punto, $(4, a_4) = (4, 0)$; de esa columna se lee $a_4$.</figcaption>
           </figure>
@@ -333,8 +333,7 @@
                 <text x="140" y="149">−1</text><text x="210" y="149">0</text><text x="280" y="149">0</text><text x="346" y="149">0</text>
                 <text x="140" y="209">−1</text><text x="210" y="209">0</text><text x="280" y="209">0</text><text x="346" y="209">0</text>
               </g>
-              <text x="190" y="252" text-anchor="middle" class="sv-muted">⋮</text>
-              <text x="250" y="262" text-anchor="middle" class="sv-label-seq3">diagonal: {aₙ + bₙ} = {0}</text>
+                            <text x="250" y="262" text-anchor="middle" class="sv-label-seq3">diagonal: {aₙ + bₙ} = {0}</text>
             </svg>
             <figcaption>Las sumas $a_i + b_j$ del contraejemplo. Toda la tabla es $\{a_n\} + \{b_n\}$, con supremo $1$ (recuadro verde, $a_1 + b_2$). La diagonal sombreada es $\{a_n + b_n\}$, un subconjunto, con supremo $0$. Por eso vale $\le$ y no siempre $=$.</figcaption>
           </figure>
@@ -368,12 +367,12 @@
             <path d="M60,150 C40,80 120,30 200,48 C280,64 340,90 320,150 C300,200 180,206 120,192 C86,184 68,172 60,150 Z" class="sv-area"/>
             <path d="M60,150 C40,80 120,30 200,48 C280,64 340,90 320,150 C300,200 180,206 120,192 C86,184 68,172 60,150 Z" class="sv-accent sv-dash"/>
             <text x="250" y="96" class="sv-label-accent">U</text>
-            <circle cx="304" cy="176" r="44" class="sv-seq2 sv-dash"/>
-            <circle cx="304" cy="176" r="4" class="sv-fill-seq2"/>
-            <text x="312" y="192" class="sv-label-seq2">z</text>
-            <text x="352" y="128" text-anchor="middle" class="sv-label-seq2">B(z, r)</text>
-            <circle cx="284" cy="160" r="5" class="sv-fill-ok"/>
-            <text x="276" y="150" text-anchor="end" class="sv-label-ok">y ∈ X ∩ U</text>
+            <circle cx="334" cy="150" r="40" class="sv-seq2 sv-dash"/>
+            <circle cx="334" cy="150" r="4" class="sv-fill-seq2"/>
+            <text x="342" y="166" class="sv-label-seq2">z</text>
+            <text x="378" y="102" text-anchor="end" class="sv-label-seq2">B(z, r)</text>
+            <circle cx="304" cy="140" r="5" class="sv-fill-ok"/>
+            <text x="292" y="132" text-anchor="end" class="sv-label-ok">y ∈ X ∩ U</text>
             <text x="190" y="214" text-anchor="middle" class="sv-muted">y ∈ B(z, r) ∩ U, así que B(z, r) ∩ U ≠ ∅</text>
           </svg>
           <figcaption>Esquema (forma de $U$ y posiciones elegidas para el dibujo): el punto $y$ que la definición de clausura da en $B(z, r) \cap (X \cap U)$ ya sirve como testigo de $B(z, r) \cap U \ne \emptyset$.</figcaption>
@@ -468,7 +467,7 @@
         <div class="step">
           <div class="step-text">
             <p class="step-title">(iii) Simetría</p>
-            <p>$$\begin{aligned} d(x, y) &amp;= \max\{\tfrac43 d_\infty(x, y), d_2(x, y)\} \\ &amp;= \max\{\tfrac43 d_\infty(y, x), d_2(y, x)\} = d(y, x), \end{aligned}$$ por la simetría de $d_\infty$ y de $d_2$.</p>
+            <p>$$\begin{aligned} d(x, y) &amp;= \max\{\tfrac43 d_\infty(x, y), d_2(x, y)\} \\ &amp;= \max\{\tfrac43 d_\infty(y, x), d_2(y, x)\} \\ &amp;= d(y, x), \end{aligned}$$ por la simetría de $d_\infty$ y de $d_2$.</p>
           </div>
         </div>
         <div class="step has-viz">
@@ -500,7 +499,7 @@
           <div class="step-text">
             <p class="step-title">La bola como intersección</p>
             <p>Para $p = (x, y) \in \mathbb{R}^2$,
-            $$\begin{aligned} p \in B_d((0,0), 1) &amp;\iff \max\{\tfrac43 d_\infty(p, 0), d_2(p, 0)\} \lt 1 \\ &amp;\iff d_\infty(p, 0) \lt \tfrac34 \ \text{ y } \ d_2(p, 0) \lt 1 \\ &amp;\iff |x| \lt \tfrac34,\ |y| \lt \tfrac34 \ \text{ y } \ x^2 + y^2 \lt 1. \end{aligned}$$
+            $$\begin{aligned} &amp;p \in B_d((0,0), 1) \\ &amp;\iff \max\{\tfrac43 d_\infty(p, 0), d_2(p, 0)\} \lt 1 \\ &amp;\iff d_\infty(p, 0) \lt \tfrac34 \ \text{ y } \ d_2(p, 0) \lt 1 \\ &amp;\iff |x| \lt \tfrac34,\ |y| \lt \tfrac34 \ \text{ y } \ x^2 + y^2 \lt 1. \end{aligned}$$
             Es decir, $B_d((0,0), 1)$ $= B_{d_\infty}((0,0), \tfrac34) \cap B_{d_2}((0,0), 1)$: el cuadrado abierto de lado $\tfrac32$ centrado en el origen, intersecado con el disco abierto de radio $1$ (<span class="ref" data-ref="def-4.5">bolas, Definición 4.5</span>).</p>
           </div>
           <figure class="viz">
@@ -570,7 +569,7 @@
           <div class="step-text">
             <p class="step-title">Equivalencia</p>
             <p>Sean $d'$ cualquiera de $d_2$ o $d_\infty$ y $c \ge 1$ tal que $d' \le d \le c\, d'$ (con $c = 4/3$ o $c = 4n/3$). Para $x \in \mathbb{R}^n$ y $r \gt 0$:
-            $$B_d(x, r) \subseteq B_{d'}(x, r) \quad \text{y} \quad B_{d'}(x, r/c) \subseteq B_d(x, r),$$
+            $$\begin{aligned} B_d(x, r) &amp;\subseteq B_{d'}(x, r) \quad \text{y} \\ B_{d'}(x, r/c) &amp;\subseteq B_d(x, r), \end{aligned}$$
             pues $d'(x, y) \le d(x, y) \lt r$ en el primer caso y $d(x, y) \le c\, d'(x, y) \lt r$ en el segundo. Entonces un conjunto $G$ es <span class="ref" data-ref="def-4.14">abierto</span> para $d$ si y sólo si lo es para $d'$: si $G$ es $d$-abierto y $x \in G$, hay $r \gt 0$ con $B_d(x, r) \subseteq G$, y entonces $B_{d'}(x, r/c) \subseteq B_d(x, r) \subseteq G$; recíprocamente, si $G$ es $d'$-abierto y $B_{d'}(x, r) \subseteq G$, entonces $B_d(x, r) \subseteq B_{d'}(x, r) \subseteq G$. Luego $d$ es equivalente a $d_2$ y a $d_\infty$ (tienen los mismos abiertos; de hecho son uniformemente equivalentes).</p>
           </div>
           <figure class="viz">
