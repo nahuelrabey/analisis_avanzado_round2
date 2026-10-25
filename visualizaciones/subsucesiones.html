@@ -1,0 +1,989 @@
+<title>Subsucesiones</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: una columna de secciones en orden de dependencia (definición → herencia del límite → partir ℕ → construir a mano → Bolzano–Weierstrass → espacios métricos → Práctica 4). Cada resultado es una ficha; las que tienen dibujo ponen el texto a la izquierda y el dibujo interactivo a la derecha. Misma familia visual que «Álgebra de límites». */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.20);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.16);
+    --seq3: #0f7a6f;
+    --seq4: #8a3fa0;
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.14);
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0; --seq4: #d08ae6;
+      --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0; --seq4: #d08ae6;
+    --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 2.4rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.5rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+  h2 .bn { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+  ol.items, ul.items { margin: 0 0 0.8rem; padding-left: 1.4rem; }
+  ol.items { list-style: lower-alpha; }
+  ol.items li, ul.items li { margin-bottom: 0.35rem; }
+
+  .ladder { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.25rem; list-style: none; padding: 0; margin: 0.4rem 0 0; font-family: var(--font-ui); font-size: 0.86rem; }
+  .ladder li { display: flex; align-items: center; gap: 0.25rem; }
+  .ladder li + li::before { content: "→"; color: var(--muted); margin-right: 0.15rem; }
+  .ladder a { display: inline-block; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; background: var(--panel); }
+  .ladder a:hover { border-color: var(--accent); color: var(--accent); }
+  .ladder a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ladder .k { color: var(--muted); margin-right: 0.3rem; font-variant-numeric: tabular-nums; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 1rem; }
+  button { font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer; }
+  button:hover { background: var(--band); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .block { display: grid; gap: 1.2rem; scroll-margin-top: 1rem; }
+  .unlock { max-width: 78ch; color: var(--muted); margin: 0; }
+  .unlock b { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; scroll-margin-top: 1rem; min-width: 0; }
+  .ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
+  .tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0.05rem 0.4rem; white-space: nowrap; }
+  .tag.def { color: var(--seq3); border-color: var(--seq3); }
+  .tag.guia { color: var(--seq2); border-color: var(--seq2); }
+  .tag.agente { color: var(--muted); border-color: var(--muted); }
+  .src { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .ex-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 1.4rem; align-items: start; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+  .ex-text { min-width: 0; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin-bottom: 0.9rem; }
+  .enun.def { border-left-color: var(--seq3); }
+  .enun.agente { border-left-color: var(--muted); border-left-style: dashed; }
+  .enun p:last-child, .proof p:last-child { margin-bottom: 0; }
+  .nota { font-size: 0.95rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.6rem; margin-top: 0.8rem; }
+  .nota b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+  .receta { font-size: 0.97rem; background: var(--band); border-radius: 6px; padding: 0.6rem 0.85rem; margin: 0 0 0.9rem; }
+  .receta b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; margin-right: 0.3rem; }
+
+  details.proof { border-top: 1px solid var(--rule); padding-top: 0.55rem; }
+  details.proof > summary { cursor: pointer; font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); list-style-position: outside; margin-left: 1rem; }
+  details.proof > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  details.proof > summary .from { color: var(--muted); margin-left: 0.4rem; }
+  details.proof[open] > summary { margin-bottom: 0.6rem; }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  #popup .psrc { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  .viz { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 0.6rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; }
+  @media (max-width: 900px) { .viz { position: static; } }
+  .viz canvas { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); aspect-ratio: 4 / 3; }
+  .ctrl { display: grid; gap: 0.45rem; }
+  .slider { display: grid; grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr) 4.4rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .pills legend { color: var(--muted); font-size: 0.8rem; padding: 0; margin-bottom: 0.25rem; float: left; width: 100%; }
+  .pills label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.85rem; position: relative; }
+  .pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .pills label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pills label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.1rem 0.9rem; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .read dt { color: var(--muted); }
+  .read dd { margin: 0; overflow-wrap: anywhere; }
+  .read .good { color: var(--ok); }
+  .read .bad { color: var(--fail); }
+  .viz figcaption { color: var(--muted); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.5; }
+
+  .tbl-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tr:last-child td { border-bottom: 0; }
+  footer { color: var(--muted); font-family: var(--font-ui); font-size: 0.85rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+
+<header class="intro">
+  <p class="eyebrow">Análisis Avanzado 2026 · repaso de las Prácticas 1 y 3, rumbo a la Práctica 4</p>
+  <h1>Subsucesiones</h1>
+  <p>Una subsucesión es quedarse con infinitos términos de una sucesión sin cambiarles el orden. Con esa idea se hacen cuatro cosas: probar que algo <i>no</i> converge, probar que algo converge partiendo $\mathbb{N}$ en pedazos, fabricar a mano una subsucesión con la propiedad que haga falta y, con Bolzano–Weierstrass, sacar convergencia de donde sólo hay acotación. La Práctica 4 usa las cuatro, por ejemplo para ver que $\pi_1 : X \times Y \to X$ puede no ser cerrada.</p>
+  <p>Los números son los de <code>apuntes.typ</code>. Pasá el mouse (o tocá) sobre las palabras <span class="ref" tabindex="0" data-ref="defsub">subrayadas así</span> para ver el enunciado que se usa. Las demostraciones están plegadas para que intentes cada una antes de leerla. Lo que no está en las notas ni en los ejemplos del repositorio lleva la etiqueta <span class="tag agente">agente</span>.</p>
+  <ol class="ladder" aria-label="Secciones, en orden de dependencia">
+    <li><a href="#definicion"><span class="k">1</span>Qué es</a></li>
+    <li><a href="#herencia"><span class="k">2</span>Heredan el límite</a></li>
+    <li><a href="#partir"><span class="k">3</span>Partir ℕ</a></li>
+    <li><a href="#construir"><span class="k">4</span>Construir a mano</a></li>
+    <li><a href="#bw"><span class="k">5</span>Bolzano–Weierstrass</a></li>
+    <li><a href="#metricos"><span class="k">6</span>Espacios métricos</a></li>
+    <li><a href="#p4"><span class="k">7</span>Hacia la Práctica 4</a></li>
+    <li><a href="#indice"><span class="k">8</span>Índice</a></li>
+  </ol>
+  <div class="tools">
+    <button type="button" id="open-all">Abrir todas las demostraciones</button>
+    <button type="button" id="close-all">Cerrar todas</button>
+  </div>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="block" id="definicion" aria-labelledby="h-def">
+  <h2 id="h-def"><span class="bn">Sección 1 · Práctica 1</span>Qué es (y qué no es) una subsucesión</h2>
+  <p class="unlock"><b>Para qué sirve</b>Todo lo que sigue depende de una sola condición sobre los índices: $n_1 \lt n_2 \lt n_3 \lt \cdots$. De ahí sale la desigualdad $n_k \ge k$, que es la que se usa en las demostraciones.</p>
+
+  <article class="ex" id="defsub">
+    <div class="ex-head"><span class="tag def">Def.</span><span class="tag">11</span><h3>Subsucesión</h3><span class="src">apunte, Ejemplo 2.22</span></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun def">
+          <p>Una <b>subsucesión</b> de $(a_n)_{n \in \mathbb{N}}$ es una sucesión de la forma $(a_{n_k})_{k}$ donde $n_k$ es estrictamente creciente, es decir, $n_1 \lt n_2 \lt n_3 \lt \cdots$.</p>
+        </div>
+        <div class="enun">
+          <p class="lbl">Ejemplo 11</p>
+          <p>Sea $(a_n) = (1, \tfrac12, \tfrac13, \dots)$. Entonces $(a_{2k}) = (\tfrac12, \tfrac14, \tfrac16, \dots)$ es una subsucesión.</p>
+          <p>$(b_n) = (\tfrac12, \tfrac14, 1, \tfrac15, \tfrac16, \dots)$ <b>no</b> lo es: no respeta el orden original. $(c_n) = (1, 1, \tfrac12, \tfrac13, \dots)$ <b>tampoco</b>: repite el primer término.</p>
+        </div>
+        <p class="receta"><b>Cómo leer el dibujo</b>Abajo, cada $k$ se une con el índice $n_k$ que elige. En una subsucesión las flechas nunca se cruzan ni se juntan, y cada una apunta a la derecha de la anterior. Por eso $n_k \ge k$: la flecha $k$ nunca puede ir a la izquierda de $k$.</p>
+        <details class="proof">
+          <summary>Por qué $n_k \ge k$<span class="from">deducción del agente</span></summary>
+          <p>Por inducción en $k$. $n_1 \ge 1$ porque $n_1 \in \mathbb{N}$. Si $n_k \ge k$, como $n_{k+1} \gt n_k$ y son naturales, $n_{k+1} \ge n_k + 1 \ge k + 1$.</p>
+          <p>Es el hecho que usa la <a href="#propsub">Proposición de la Sección 2</a> cuando dice «los índices elegidos son infinitos y crecientes, así que hay uno más grande que $n_0$».</p>
+        </details>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-def" aria-label="Los términos de 1/n y las flechas de cada k al índice n_k elegido"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Índices elegidos</legend>
+            <label><input type="radio" name="def-pat" value="even" checked>$n_k = 2k$</label>
+            <label><input type="radio" name="def-pat" value="mod4">$n_k = 4k - 3$</label>
+            <label><input type="radio" name="def-pat" value="sq">$n_k = k^2$</label>
+            <label><input type="radio" name="def-pat" value="b11">$(b_n)$ del Ej. 11</label>
+            <label><input type="radio" name="def-pat" value="c11">$(c_n)$ del Ej. 11</label>
+          </fieldset>
+        </div>
+        <dl class="read" id="def-read" aria-live="polite"></dl>
+        <figcaption>Arriba, $a_n = 1/n$ en gris y los términos elegidos en color. Las flechas rojas marcan dónde se rompe $n_{k} \gt n_{k-1}$.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="block" id="herencia" aria-labelledby="h-her">
+  <h2 id="h-her"><span class="bn">Sección 2 · Práctica 1</span>Las subsucesiones heredan el límite</h2>
+  <p class="unlock"><b>Para qué sirve</b>Es la única proposición de la teoría sobre subsucesiones en las notas, y casi todo lo demás es usarla al derecho (para calcular límites) o al revés (para probar que no hay límite).</p>
+
+  <article class="ex" id="propsub">
+    <div class="ex-head"><span class="tag">Prop.</span><h3>Convergencia de subsucesiones</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun"><p>Si $\lim_{n \to \infty} a_n = \ell$, entonces toda subsucesión también converge a $\ell$.</p></div>
+        <p class="receta"><b>Receta</b>El $n_0$ de la <span class="ref" tabindex="0" data-ref="def7">convergencia</span> de $(a_n)$ no tiene por qué ser un índice elegido. Se toma el primer índice elegido que lo supera, $n_{k_0} \ge n_0$, y desde ahí todos los elegidos también lo superan.</p>
+        <details class="proof">
+          <summary>Demostración<span class="from">apunte</span></summary>
+          <p>Sea $(a_{n_k})_k$ una subsucesión y $\varepsilon \gt 0$. Como $a_n \to \ell$, existe $n_0$ con $|a_n - \ell| \lt \varepsilon$ para todo $n \ge n_0$.</p>
+          <p>Estamos tentados a elegir el mismo índice para la subsucesión, pero $n_0$ puede no ser uno de los elegidos (si la subsucesión son los pares, $n_0$ podría ser impar). Lo que sí sabemos es que los índices elegidos son infinitos y crecientes: existe $n_{k_0} \gt n_0$. Para $k \gt k_0$, $n_k \gt n_{k_0} \gt n_0$, y entonces</p>
+          $$|a_{n_k} - \ell| \lt \varepsilon \quad \text{para todo } k \ge k_0.$$
+        </details>
+        <details class="proof">
+          <summary>Uso al derecho: $r^n \to 0$ cerrando $\ell = \ell^2$<span class="from">ejemplos/p1.typ, Ejemplo 12</span></summary>
+          <p>Sea $r \in (0, 1)$. $(r^n)$ es decreciente y acotada, así que converge a algún $\ell$ (<span class="ref" tabindex="0" data-ref="prop8">Prop. 8</span>, versión decreciente). La subsucesión de los pares también tiende a $\ell$, y por álgebra de límites</p>
+          $$a_{2k} = r^k \cdot r^k \to \ell \cdot \ell.$$
+          <p>Por <span class="ref" tabindex="0" data-ref="prop5">unicidad</span>, $\ell = \ell^2$, o sea $\ell = 0$ o $\ell = 1$. Como $|a_n - 1| \ge 1 - r$ para todo $n$, $\ell = 0$.</p>
+        </details>
+        <p class="nota"><b>Ojo</b>La subsucesión sirve para <i>calcular</i> el límite sólo si ya se sabe que existe. Por ejemplo, $(-1)^{2k} \to 1$, pero $(-1)^n$ no converge.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-her" aria-label="Una sucesión que converge a 1, la banda épsilon, el índice n0 y el primer índice elegido que lo supera"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Subsucesión</legend>
+            <label><input type="radio" name="her-pat" value="even" checked>pares</label>
+            <label><input type="radio" name="her-pat" value="odd">impares</label>
+            <label><input type="radio" name="her-pat" value="tri">$3k$</label>
+            <label><input type="radio" name="her-pat" value="sq">$k^2$</label>
+          </fieldset>
+          <div class="slider"><label for="her-eps">$\varepsilon$</label><input type="range" id="her-eps" min="3" max="60" value="22"><output id="her-eps-o"></output></div>
+        </div>
+        <dl class="read" id="her-read" aria-live="polite"></dl>
+        <figcaption>$a_n = 1 + \frac{1.4\,(-1)^n}{n^{0.7}}$. La línea gris es el $n_0$ de $(a_n)$; la verde, el primer índice elegido $n_{k_0} \ge n_0$. Con $k^2$ los índices elegidos son escasos y $n_{k_0}$ puede quedar bastante más lejos que $n_0$.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="block" id="partir" aria-labelledby="h-par">
+  <h2 id="h-par"><span class="bn">Sección 3 · Práctica 1, Ej. 16</span>Partir $\mathbb{N}$: dos usos opuestos</h2>
+  <p class="unlock"><b>Para qué sirve</b>Si $\mathbb{N}$ se parte en finitas familias de índices (pares e impares, restos módulo 3, …), las subsucesiones correspondientes cuentan toda la historia. Límites distintos: no converge. Todas al mismo límite: converge, con $n_0 = \max$ de los umbrales.</p>
+
+  <article class="ex" id="restos">
+    <div class="ex-head"><span class="tag">Prop.</span><span class="tag guia">Guía 1 · Ej. 16</span><span class="tag">C2-2</span><h3>Por clases de restos</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun">
+          <p class="lbl">Contrarrecíproco de la Sección 2</p>
+          <p>Si dos subsucesiones de $(a_n)$ convergen a límites distintos, $(a_n)$ no converge.</p>
+        </div>
+        <details class="proof">
+          <summary>$a_n = \cos(\tfrac{n}{2}\pi)$ no converge<span class="from">ejemplos/p1.typ</span></summary>
+          <p>$a_{4k+1} = \cos(2k\pi + \tfrac{\pi}{2}) = 0$ para todo $k$, así que $a_{4k+1} \to 0$. $a_{4k} = \cos(2k\pi) = 1$, así que $a_{4k} \to 1$. Como $0 \ne 1$, $(a_n)$ no converge.</p>
+        </details>
+        <div class="enun" style="margin-top: 0.9rem;">
+          <p class="lbl">Guía 1 · Ej. 16</p>
+          <p>(a) Si $(x_{2k})$ y $(x_{2k-1})$ convergen al mismo límite, $(x_n)$ converge.</p>
+          <p>(b) Si $(x_{2k})$, $(x_{2k-1})$ y $(x_{3k})$ convergen, $(x_n)$ converge.</p>
+        </div>
+        <details class="proof">
+          <summary>(a): partir y tomar el máximo<span class="from">guía 1 resuelta</span></summary>
+          <p>Sea $\ell$ el límite común y $\varepsilon \gt 0$. Hay $k_1$ con $|x_{2k} - \ell| \lt \varepsilon$ para $k \ge k_1$, y $k_2$ con $|x_{2k-1} - \ell| \lt \varepsilon$ para $k \ge k_2$. Sea $n_0 = \max(2k_1, 2k_2 - 1)$ y $n \ge n_0$.</p>
+          <p>Si $n = 2k$ es par, $2k \ge 2k_1$ da $k \ge k_1$. Si $n = 2k - 1$ es impar, $2k - 1 \ge 2k_2 - 1$ da $k \ge k_2$. En los dos casos, $|x_n - \ell| \lt \varepsilon$.</p>
+        </details>
+        <details class="proof">
+          <summary>(b): los múltiplos de 6 como puente<span class="from">guía 1 resuelta</span></summary>
+          <p>Sean $\ell_1, \ell_2, \ell_3$ los tres límites. $(x_{6k})$ es subsucesión de los pares ($x_{6k} = x_{2(3k)}$) y de los múltiplos de 3 ($x_{6k} = x_{3(2k)}$). Por la Sección 2 tiende a $\ell_1$ y a $\ell_3$, y por <span class="ref" tabindex="0" data-ref="prop5">unicidad</span>, $\ell_1 = \ell_3$.</p>
+          <p>Igual con $(x_{6k-3})$, que es subsucesión de los impares ($x_{6k-3} = x_{2(3k-1)-1}$) y de los múltiplos de 3 ($x_{6k-3} = x_{3(2k-1)}$): $\ell_2 = \ell_3$. Se termina con (a).</p>
+        </details>
+        <details class="proof">
+          <summary>C2-2: tres clases de restos, prueba directa<span class="from">Clase 2</span></summary>
+          <p>Si $(a_{3k})$, $(a_{3k+1})$, $(a_{3k+2})$ tienden a $L$, dado $\varepsilon$ hay $k_0, k_1, k_2$ para cada una. Como $\mathbb{N}$ es la unión disjunta de las tres familias, con</p>
+          $$n_0 \ge \max\{3k_0,\ 3k_1 + 1,\ 3k_2 + 2\}$$
+          <p>todo $n \ge n_0$ cae en alguna familia con su índice $k$ más allá del umbral. La prueba por el absurdo está en la Sección 4.</p>
+        </details>
+        <div class="enun" style="margin-top: 0.9rem;">
+          <p class="lbl">Desafíos P1 · Verdadero o falso 4</p>
+          <p>Si $a_{2n} \to 3$ y $a_{3n} \to 3$, entonces $a_n \to 3$.</p>
+        </div>
+        <details class="proof">
+          <summary>Es falso: un contraejemplo<span class="from">propuesto por el agente</span></summary>
+          <p>Pares y múltiplos de 3 no cubren $\mathbb{N}$: faltan los $n = 6k \pm 1$. Sea $a_n = 3$ si $2 \mid n$ o $3 \mid n$, y $a_n = 0$ si no. Entonces $a_{2n} = 3$ y $a_{3n} = 3$ para todo $n$, pero $a_{6k+1} = 0 \to 0 \ne 3$. Comparar con el Ej. 16 (b), que agrega los impares y así cubre todo.</p>
+        </details>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-par" aria-label="Términos de la sucesión coloreados por clase de índices, con el límite de cada clase"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Sucesión</legend>
+            <label><input type="radio" name="par-seq" value="ej16" checked>$2 + \frac{3(-1)^n}{n}$</label>
+            <label><input type="radio" name="par-seq" value="c22">C2-2</label>
+            <label><input type="radio" name="par-seq" value="cos">$\cos(\frac{n}{2}\pi)$</label>
+            <label><input type="radio" name="par-seq" value="alt">$(-1)^n + \frac1n$</label>
+            <label><input type="radio" name="par-seq" value="vf4">V o F 4</label>
+          </fieldset>
+          <div class="slider"><label for="par-eps">$\varepsilon$</label><input type="range" id="par-eps" min="3" max="60" value="25"><output id="par-eps-o"></output></div>
+        </div>
+        <dl class="read" id="par-read" aria-live="polite"></dl>
+        <figcaption>Cada color es una familia de índices. Si todas tienen el mismo límite, las líneas punteadas son los umbrales de cada familia (en índices $n$) y la sólida es $n_0$, el máximo. Si no, se dibuja el límite de cada familia y ninguna banda sirve. La sucesión de C2-2 es una elegida para el dibujo.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <article class="ex" id="prodacot">
+    <div class="ex-head"><span class="tag">Prop.</span><h3>Acotadas con subsucesiones nulas alternadas</h3><span class="src">ejemplos/p1.typ</span></div>
+    <div class="enun"><p>Si $(a_n)$ y $(b_n)$ son acotadas, $a_{2k} \to 0$ y $b_{2k-1} \to 0$, entonces $c_n = a_n b_n \to 0$.</p></div>
+    <details class="proof">
+      <summary>Resolución<span class="from">ejemplos/p1.typ</span></summary>
+      <p>Sean $|a_n| \le M_1$ y $|b_n| \le M_2$. Dado $\varepsilon$, hay $k_1$ con $|a_{2k}| \lt \varepsilon / M_2$ para $k \ge k_1$ y $k_2$ con $|b_{2k-1}| \lt \varepsilon / M_1$ para $k \ge k_2$. Con $n_0 = \max\{2k_1, 2k_2 - 1\}$: si $n = 2k$ es par, $|c_n| \le |a_{2k}| M_2 \lt \varepsilon$; si $n = 2k - 1$ es impar, $|c_n| \le M_1 |b_{2k-1}| \lt \varepsilon$.</p>
+    </details>
+    <p class="nota"><b>Es el mismo molde</b>Ninguna de las dos sucesiones converge necesariamente: en cada familia de índices, un factor nulo compensa la cota del otro (Guía 1, Ej. 11), y el $\max$ junta las dos familias como en el Ej. 16 (a).</p>
+  </article>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="block" id="construir" aria-labelledby="h-con">
+  <h2 id="h-con"><span class="bn">Sección 4 · Práctica 1, Ej. 13–15</span>Construir una subsucesión a mano</h2>
+  <p class="unlock"><b>Para qué sirve</b>Muchas veces no hay fórmula para $n_k$: se lo elige recursivamente. El molde es siempre el mismo. Si para todo $N$ hay un índice $n \ge N$ con la propiedad $P$, se elige $n_1$, después se busca $n_2$ a partir de $N = n_1 + 1$, y así. El «$+1$» garantiza que los índices crecen.</p>
+
+  <article class="ex" id="mala">
+    <div class="ex-head"><span class="tag guia">Guía 1 · Ej. 15</span><span class="tag guia">Ej. 14</span><h3>La subsucesión mala y la subsucesión que se escapa</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun">
+          <p class="lbl">Lema · la subsucesión mala</p>
+          <p>Si $(x_n)$ no converge a $\ell$, existen $\varepsilon_0 \gt 0$ y una subsucesión con $|x_{n_k} - \ell| \ge \varepsilon_0$ para todo $k$.</p>
+        </div>
+        <details class="proof">
+          <summary>Demostración<span class="from">guía 1 resuelta, Ej. 15 · C2-2</span></summary>
+          <p>Que $x_n \not\to \ell$ es, por la <span class="ref" tabindex="0" data-ref="def9neg">negación de la convergencia</span>, que existe $\varepsilon_0 \gt 0$ tal que para todo $N$ hay $n \ge N$ con $|x_n - \ell| \ge \varepsilon_0$.</p>
+          <p>Con $N = 1$ hay $n_1$. Elegidos $n_1 \lt \dots \lt n_k$, con $N = n_k + 1$ hay $n_{k+1} \ge n_k + 1 \gt n_k$ con $|x_{n_{k+1}} - \ell| \ge \varepsilon_0$.</p>
+        </details>
+        <div class="enun" style="margin-top: 0.9rem;">
+          <p class="lbl">Guía 1 · Ej. 15</p>
+          <p>Si toda subsucesión de $(x_n)$ tiene una sub-subsucesión que converge a $\ell$, entonces $x_n \to \ell$.</p>
+        </div>
+        <details class="proof">
+          <summary>Demostración<span class="from">guía 1 resuelta</span></summary>
+          <p>Si no, el lema da una subsucesión con $|x_{n_k} - \ell| \ge \varepsilon_0$ para todo $k$. Por hipótesis tiene una sub-subsucesión $x_{n_{k_j}} \to \ell$: con $\varepsilon = \varepsilon_0$ hay $j_0$ con $|x_{n_{k_{j_0}}} - \ell| \lt \varepsilon_0$, contra $|x_{n_{k_{j_0}}} - \ell| \ge \varepsilon_0$.</p>
+        </details>
+        <details class="proof">
+          <summary>C2-2 por el absurdo: palomar<span class="from">Clase 2</span></summary>
+          <p>Si $(a_n)$ no tiende a $L$, el lema da $\varepsilon$ y una subsucesión mala. Infinitos índices $n_k$ repartidos en tres familias (restos módulo 3): alguna tiene infinitos. Esos forman una subsucesión de una de las tres familias, que tiende a $L$, pero sus términos están todos a distancia $\ge \varepsilon$. Absurdo.</p>
+        </details>
+        <div class="enun" style="margin-top: 0.9rem;">
+          <p class="lbl">Guía 1 · Ej. 14</p>
+          <p>Si $(x_n)$ no está acotada superiormente, tiene una subsucesión que <span class="ref" tabindex="0" data-ref="def8">diverge a $+\infty$</span>.</p>
+        </div>
+        <details class="proof">
+          <summary>Demostración<span class="from">guía 1 resuelta</span></summary>
+          <p><b>Sublema.</b> Para todo $K$ y todo $N$ hay $n \gt N$ con $x_n \gt K$. Si no, $\max\{x_1, \dots, x_N, K\}$ sería cota superior de toda la sucesión.</p>
+          <p>Con $K = 1$, $N = 1$ sale $n_1$. Elegidos $n_1 \lt \dots \lt n_k$ con $x_{n_j} \gt j$, el sublema con $K = k + 1$ y $N = n_k$ da $n_{k+1} \gt n_k$ con $x_{n_{k+1}} \gt k + 1$. Dado $M \gt 0$, por <span class="ref" tabindex="0" data-ref="arq">Arquímedes</span> hay $k_0 \ge M$, y para $k \ge k_0$, $x_{n_k} \gt k \ge M$.</p>
+        </details>
+        <p class="nota"><b>Ej. 13, el mismo molde</b>Si $A \subseteq \mathbb{R}$ no vacío y acotado superiormente no tiene máximo, hay $(a_n) \subseteq A$ estrictamente creciente con $a_n \to \sup A$. Se elige $a_{n+1} \in A$ con $\max\{a_n, s - 1/n\} \lt a_{n+1}$, que existe porque $s$ no se alcanza. Es la <span class="ref" tabindex="0" data-ref="supeq2">Equivalencia del supremo 2</span>, pidiendo además que crezca.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-con" aria-label="Elección recursiva de los índices n_k: el índice desde el que se busca y el término elegido"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Construcción</legend>
+            <label><input type="radio" name="con-mode" value="bad" checked>mala (Ej. 15)</label>
+            <label><input type="radio" name="con-mode" value="big">$x_{n_k} \gt k$ (Ej. 14)</label>
+          </fieldset>
+          <div class="slider"><label for="con-k">paso $k$</label><input type="range" id="con-k" min="1" max="10" value="3"><output id="con-k-o"></output></div>
+          <div class="slider" id="con-eps-row"><label for="con-eps">$\varepsilon_0$</label><input type="range" id="con-eps" min="10" max="55" value="35"><output id="con-eps-o"></output></div>
+        </div>
+        <dl class="read" id="con-read" aria-live="polite"></dl>
+        <figcaption>La zona sombreada son los índices que se saltean en el paso $k$: se busca desde $N = n_{k-1} + 1$ y se toma el primero que cumple la propiedad. Mala: la sucesión elegida para el dibujo no converge a $\ell = 0$ y los términos con $|x_n| \ge \varepsilon_0$ aparecen cada tanto. Ej. 14: los términos grandes aparecen sólo en los múltiplos de 4.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 5 -->
+<section class="block" id="bw" aria-labelledby="h-bw">
+  <h2 id="h-bw"><span class="bn">Sección 5 · Prácticas 1 y 3</span>Bolzano–Weierstrass: de acotada a convergente</h2>
+  <p class="unlock"><b>Para qué sirve</b>Es la forma de conseguir una sucesión convergente cuando sólo se sabe que algo está acotado. Las notas no lo enuncian, pero se usa en C2-3, en C4-1 y en la Práctica 4. La demostración ya está escondida en la de $\mathbb{R}$ completo.</p>
+
+  <article class="ex" id="bwteo">
+    <div class="ex-head"><span class="tag agente">agente</span><span class="tag">Teo. 4.57</span><h3>Toda sucesión acotada en $\mathbb{R}$ tiene una subsucesión convergente</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun agente">
+          <p><b>Bolzano–Weierstrass.</b> Si $(x_n) \subseteq \mathbb{R}$ está <span class="ref" tabindex="0" data-ref="def9acot">acotada</span>, existe una subsucesión $(x_{n_j})_j$ convergente.</p>
+        </div>
+        <p class="receta"><b>De dónde sale</b>La demostración del <span class="ref" tabindex="0" data-ref="teo457">Teorema 4.57</span> toma una sucesión de Cauchy, usa sólo que está acotada (Teo. 4.54 a) y construye una subsucesión convergente. Al final usa Cauchy para que converja toda la sucesión. Cortándola antes queda Bolzano–Weierstrass (deducción del agente).</p>
+        <details class="proof">
+          <summary>Demostración, siguiendo al Teorema 4.57<span class="from">apunte, adaptada</span></summary>
+          <p><b>Ínfimos de las colas.</b> Sea $X_k = \{x_n : n \gt k\}$. Están acotados, así que existe $a_k = \inf X_k$. Como $X_1 \supseteq X_2 \supseteq \cdots$, los ínfimos suben: $a_1 \le a_2 \le \cdots$. Además $a_k \le \sup X_k \le \sup X_1$. Por la <span class="ref" tabindex="0" data-ref="prop8">Prop. 8</span>, $a_k \to x$ para algún $x \in \mathbb{R}$.</p>
+          <p><b>La subsucesión.</b> Con $n_0 = 1$: elegidos $n_1 \lt \dots \lt n_{j-1}$, como $a_{n_{j-1}} = \inf X_{n_{j-1}}$, el número $a_{n_{j-1}} + 1/j$ ya no es cota inferior de $X_{n_{j-1}}$. Hay entonces $n_j \gt n_{j-1}$ con</p>
+          $$a_{n_{j-1}} \le x_{n_j} \lt a_{n_{j-1}} + \tfrac1j.$$
+          <p>Buscar en $X_{n_{j-1}}$ y no en $X_j$ es lo que hace que los índices crezcan. <b>Convergencia:</b> $(a_{n_{j-1}})_j$ es subsucesión de $(a_k)$, así que tiende a $x$, y $a_{n_{j-1}} + 1/j \to x$. Por sándwich, $x_{n_j} \to x$.</p>
+        </details>
+        <details class="proof">
+          <summary>Uso: C1-3, una convergente de enteros es finalmente constante<span class="from">ejemplos/p1.typ</span></summary>
+          <p>Con $\varepsilon = 1/2$: desde cierto $n_1$, $|a_n - a_{n_1}| \le |a_n - L| + |a_{n_1} - L| \lt 1$, y dos enteros a distancia menor que 1 son iguales. Se combina con Bolzano–Weierstrass: <i>una sucesión acotada de naturales tiene una subsucesión finalmente constante</i>.</p>
+        </details>
+        <details class="proof">
+          <summary>Uso: C2-3, si $a_n / b_n \to r \notin \mathbb{Q}$, ninguna está acotada<span class="from">Clase 2</span></summary>
+          <p>Si $(a_n) \subseteq \mathbb{N}$ estuviera acotada, una subsucesión convergente sería finalmente constante, $a_{n_k} = a$. Entonces $b_{n_k} = a \cdot \frac{b_{n_k}}{a} \to \frac{a}{r}$: es una convergente de naturales y, por C1-3, finalmente constante, $b_{n_k} = b$. Pero entonces $b/a = 1/r \in \mathbb{Q}$, absurdo.</p>
+        </details>
+        <details class="proof">
+          <summary>Uso: C4-1, la clausura de $\{\tfrac1n + \tfrac1m\}$<span class="from">ejemplos/p3.typ</span></summary>
+          <p>Si $\tfrac{1}{n_k} + \tfrac{1}{m_k} \to a$, se separa en casos. Si $(n_k)$ y $(m_k)$ están acotadas, Bolzano–Weierstrass dos veces (primero a una y, sobre esa subsucesión, a la otra) las vuelve finalmente constantes: $a = \tfrac1n + \tfrac1m \in A$. Si alguna no está acotada, el Ej. 14 da una subsucesión que tiende a $+\infty$, y el límite es $\tfrac1m$ o $0$. Notar la técnica de <i>sub-subsucesiones</i>: cada extracción se hace sobre la anterior, así que lo ya logrado se conserva.</p>
+        </details>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-bw" aria-label="Una sucesión acotada, la cola donde se busca, la ventana entre el ínfimo y el ínfimo más 1 sobre j y la subsucesión elegida"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="bw-j">paso $j$</label><input type="range" id="bw-j" min="1" max="10" value="3"><output id="bw-j-o"></output></div>
+        </div>
+        <dl class="read" id="bw-read" aria-live="polite"></dl>
+        <figcaption>$x_n = 0.7 \operatorname{sen} n + 1.1\,(-1)^n/\sqrt{n}$: acotada y sin límite. Se busca en la cola sombreada $X_{n_{j-1}}$. La ventana es $[a_{n_{j-1}}, a_{n_{j-1}} + 1/j)$ y se toma el primer término que cae adentro. Los ínfimos se calculan sobre los primeros 6000 términos.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 6 -->
+<section class="block" id="metricos" aria-labelledby="h-met">
+  <h2 id="h-met"><span class="bn">Sección 6 · Práctica 3</span>En espacios métricos</h2>
+  <p class="unlock"><b>Para qué sirve</b>La definición y la Sección 2 pasan sin cambios a $(M, d)$, cambiando $|a_n - \ell|$ por $d(x_n, x)$. Lo que <i>no</i> pasa es Bolzano–Weierstrass: en un espacio cualquiera, acotada no alcanza.</p>
+
+  <div class="pair">
+    <article class="ex" id="t454c">
+      <div class="ex-head"><span class="tag">Teo. 4.54 c</span><h3>Cauchy con una subsucesión convergente converge</h3></div>
+      <div class="enun"><p>Si $(x_n)$ es <span class="ref" tabindex="0" data-ref="def451">de Cauchy</span> y $x_{n_k} \to x$, entonces $x_n \to x$.</p></div>
+      <details class="proof">
+        <summary>Demostración<span class="from">apunte · desafíos P3</span></summary>
+        <p>Dado $\varepsilon$, hay $n_0$ con $d(x_n, x_m) \lt \varepsilon/2$ para $n, m \ge n_0$, y $k_0$ con $d(x_{n_k}, x) \lt \varepsilon/2$ para $k \ge k_0$. Para $n \ge n_0$,</p>
+        $$d(x_n, x) \le d(x_n, x_{n_k}) + d(x_{n_k}, x) \lt \varepsilon,$$
+        <p>eligiendo un $k$ con $k \ge k_0$ y $n_k \ge n_0$. Existe porque $n_k \ge k$ (Sección 1): sirve $k = \max\{k_0, n_0\}$.</p>
+      </details>
+      <p class="nota"><b>Junto con BW</b>da $\mathbb{R}$ completo: Cauchy $\Rightarrow$ acotada $\Rightarrow$ subsucesión convergente $\Rightarrow$ converge.</p>
+    </article>
+
+    <article class="ex" id="c447">
+      <div class="ex-head"><span class="tag">Prop. 4.46</span><span class="tag">Cor. 4.47</span><h3>Clausura y cerrados por sucesiones</h3></div>
+      <div class="enun">
+        <p>$x \in \overline{E}$ si y sólo si existe $(x_n) \subseteq E$ con $x_n \to x$.</p>
+        <p>$E$ es cerrado si y sólo si para toda $(x_n) \subseteq E$ con $x_n \to x$ se tiene $x \in E$.</p>
+      </div>
+      <p class="nota"><b>Obs. 4.48</b>El corolario no dice que toda sucesión de $E$ converja. En la práctica, para usarlo con una sucesión que no converge, primero hay que extraerle una subsucesión que sí: es lo que pasa en la Sección 7.</p>
+    </article>
+
+    <article class="ex" id="c53">
+      <div class="ex-head"><span class="tag">C5-3</span><h3>Finitos valores: palomar; infinitos valores: términos distintos</h3><span class="src">ejemplos/p3.typ</span></div>
+      <div class="enun"><p>En $\mathbb{R}$ con $d(x, y) = |x| + |y|$ si $x \ne y$, toda sucesión de Cauchy converge.</p></div>
+      <details class="proof">
+        <summary>La idea con subsucesiones<span class="from">Clase 5</span></summary>
+        <p>Si $\{a_n\}$ es <b>finito</b>, algún valor se repite infinitas veces: hay una subsucesión constante, que converge. Si es <b>infinito</b>, hay una subsucesión de términos distintos dos a dos; ahí $d(a_{n_k}, a_{n_{k'}}) = |a_{n_k}| + |a_{n_{k'}}| \lt \varepsilon$ fuerza $a_{n_k} \to 0$. En los dos casos se termina con el Teo. 4.54 c.</p>
+      </details>
+      <p class="nota"><b>Molde</b>«finitos valores o infinitos valores» es una partición útil cuando no hay orden: el palomar da una subsucesión constante.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ 7 -->
+<section class="block" id="p4" aria-labelledby="h-p4">
+  <h2 id="h-p4"><span class="bn">Sección 7 · Práctica 4</span>Por qué $\pi_1$ puede no ser cerrada</h2>
+  <p class="unlock"><b>Para qué sirve</b>Es el ejemplo C6-1, leído con las herramientas de esta página. El intento de prueba necesita una subsucesión convergente que no siempre existe.</p>
+
+  <article class="ex" id="proy">
+    <div class="ex-head"><span class="tag">C6-1</span><span class="tag">Teo. 5.7</span><h3>La idea que falla, y cuándo funciona</h3><span class="src">ejemplos/p4.typ</span></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun">
+          <p class="lbl">Idea (de la clase)</p>
+          <p>Sea $F \subseteq X \times Y$ cerrado. Si $(x_n) \subseteq \pi_1(F)$ cumple $x_n \to x$, querríamos ver que $x \in \pi_1(F)$, es decir, que existe $q \in F$ con $x_q = x$. Como $x_n \in \pi_1(F)$, existe $q_n \in F$ con $x_{q_n} = x_n$. <b>Lo ideal sería que $q_n \to q$ para algún $q$</b>: al ser $F$ <span class="ref" tabindex="0" data-ref="cor447">cerrado</span>, $q \in F$, y como la primera coordenada converge, $x_q = \lim x_n = x$. El problema es que <b>las segundas coordenadas $(y_{q_n})_n$ no tienen por qué converger, o tener subsucesiones convergentes</b>.</p>
+        </div>
+        <details class="proof">
+          <summary>Cuando falla: la hipérbola<span class="from">ejemplos/p4.typ</span></summary>
+          <p>$F = \{q \in \mathbb{R}^2 : x_q y_q = 1\}$ es cerrado y $\pi_1(F) = \mathbb{R} \setminus \{0\}$ no lo es: $1/n \in \mathbb{R} \setminus \{0\}$ y $1/n \to 0 \notin \mathbb{R} \setminus \{0\}$, así que por el Corolario 4.47 no es cerrado. Ningún ejercicio de la guía 3 lo dice tal cual; el argumento es el mismo que el del Ej. 3 (g) para $\{1/n : n \in \mathbb{N}\}$. Ojo: el Ej. 4 (a) ($\{x\}$ es cerrado) da que $\mathbb{R} \setminus \{0\}$ es <i>abierto</i>, que no es lo mismo que no ser cerrado. Los testigos de $x_n = 1/n$ son $q_n = (1/n, n)$. Las segundas coordenadas $y_{q_n} = n$ no están acotadas, y ninguna subsucesión de $(n)$ converge (toda subsucesión de una que tiende a $+\infty$ también tiende a $+\infty$).</p>
+        </details>
+        <details class="proof">
+          <summary>Cuando funciona: $Y$ acotado y cerrado en $\mathbb{R}$<span class="from">agente</span></summary>
+          <p>Si $Y = [a, b]$, las $y_{q_n}$ están acotadas. Por Bolzano–Weierstrass hay una subsucesión $y_{q_{n_j}} \to y$, con $y \in [a, b]$ por ser cerrado. La subsucesión $x_{n_j}$ sigue tendiendo a $x$ (Sección 2), así que $q_{n_j} \to (x, y)$ <span class="ref" tabindex="0" data-ref="coord">coordenada a coordenada</span>, es decir, en $d_\infty$. Como $F$ es cerrado, $(x, y) \in F$ y $x \in \pi_1(F)$. Es la idea de la clase, corregida: no hace falta que $q_n$ converja, alcanza con una subsucesión.</p>
+          <p>Para $X \times Y$ general hace falta que $Y$ sea compacto: es lo que viene después en la materia.</p>
+        </details>
+        <p class="nota"><b>Teo. 5.7 al revés</b>Para probar que $f$ no es continua en $x$ alcanza con <i>una</i> sucesión $x_n \to x$ con $f(x_n) \not\to f(x)$ (<span class="ref" tabindex="0" data-ref="teo57">Teorema 5.7</span>). Lo más cómodo suele ser exhibir dos subsucesiones de $f(x_n)$ con límites distintos, como en la Sección 3.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="cv-p4" aria-label="El cerrado F, los testigos q_n, sus sombras x_n y las segundas coordenadas"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Cerrado $F$</legend>
+            <label><input type="radio" name="p4-mode" value="hyp" checked>hipérbola $xy = 1$</label>
+            <label><input type="radio" name="p4-mode" value="sin">$y = \operatorname{sen}(1/x)$ y el segmento</label>
+          </fieldset>
+          <div class="slider"><label for="p4-n">términos</label><input type="range" id="p4-n" min="2" max="60" value="12"><output id="p4-n-o"></output></div>
+        </div>
+        <dl class="read" id="p4-read" aria-live="polite"></dl>
+        <figcaption>Hipérbola: $q_n = (1/n, n)$ suben y se van del dibujo, y el $0$ queda hueco. Seno: $F = \{(x, \operatorname{sen}(1/x)) : x \ne 0\} \cup (\{0\} \times [-1, 1])$ y $q_n = (x_n, \operatorname{sen}(1/x_n))$ con $x_n = 1/(n + 0.5)$. Las alturas rebotan en $[-1, 1]$, y en verde hay una subsucesión que converge, al punto $(0, 0.3) \in F$.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 8 -->
+<section class="block" id="indice" aria-labelledby="h-idx">
+  <h2 id="h-idx"><span class="bn">Sección 8</span>Dónde está cada cosa en el repositorio</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Resultado</th><th>En <code>apuntes.typ</code></th><th>Ejemplos y guías</th></tr></thead>
+      <tbody>
+        <tr><td>Subsucesión; convergencia de subsucesiones</td><td>Def. y Prop. (sin número), cap. 2</td><td><code>ejemplos/p1.typ</code> Ej. 11, 12; Bloque 6</td></tr>
+        <tr><td>Dos subsucesiones con límites distintos</td><td>—</td><td><code>ejemplos/p1.typ</code> «No convergencia de $\cos(n\pi/2)$»</td></tr>
+        <tr><td>Partir $\mathbb{N}$ en familias</td><td>—</td><td>Guía 1 Ej. 16; C2-2 (I); <code>desafios/p1.typ</code> V o F 4</td></tr>
+        <tr><td>Subsucesión mala; sub-subsucesiones</td><td>—</td><td>Guía 1 Ej. 15; C2-2 (II)</td></tr>
+        <tr><td>Subsucesión que diverge; creciente al supremo</td><td>Equivalencia del supremo 2</td><td>Guía 1 Ej. 13, 14 (<code>guias-agente/guia_1_resuelta_agente.typ</code>)</td></tr>
+        <tr><td>Bolzano–Weierstrass</td><td>No enunciado; implícito en Teo. 4.57</td><td>C2-3; C4-1 (<code>ejemplos/p3.typ</code>); <code>p4_alternativos.typ</code> O6-7</td></tr>
+        <tr><td>Enteros convergentes son finalmente constantes</td><td>—</td><td>C1-3 (<code>ejemplos/p1.typ</code>)</td></tr>
+        <tr><td>Cauchy con subsucesión convergente</td><td>Teo. 4.54 c</td><td><code>desafios/p3.typ</code> «Elección del índice»; C5-3</td></tr>
+        <tr><td>Clausura y cerrados por sucesiones</td><td>Prop. 4.46, Cor. 4.47, Obs. 4.48</td><td>C5-4 (<code>ejemplos/p3.typ</code>)</td></tr>
+        <tr><td>$\pi_1$ no cerrada</td><td>—</td><td>C6-1 (<code>ejemplos/p4.typ</code>, Bloque 4)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>Los contraejemplos marcados como propuestos por el agente, la versión de Bolzano–Weierstrass extraída del Teorema 4.57 y el caso «$Y$ acotado y cerrado» de la Sección 7 no están en las notas ni en los ejemplos del repositorio. Las sucesiones de los dibujos sin fuente son elegidas para ilustrar.</footer>
+</section>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="defsub">
+    <div class="pop-title">Definición · Subsucesión</div>
+    <p>Una subsucesión de $(a_n)_{n \in \mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente: $n_1 \lt n_2 \lt n_3 \lt \cdots$.</p>
+  </div>
+  <div data-key="def7">
+    <div class="pop-title">Definición 7 · Convergencia</div>
+    <p>$(a_n)$ converge a $\ell \in \mathbb{R}$ si para todo $\varepsilon \gt 0$ existe $n_0 \in \mathbb{N}$ tal que $|a_n - \ell| \lt \varepsilon$ para todo $n \ge n_0$.</p>
+  </div>
+  <div data-key="def9neg">
+    <div class="pop-title">Definición 9 · Negación de la convergencia</div>
+    <p>$(a_n)$ no converge a $L$ si existe $\varepsilon_0 \gt 0$ tal que para todo $N \in \mathbb{N}$ existe $n \ge N$ con $|a_n - L| \ge \varepsilon_0$.</p>
+    <p class="psrc">Las notas la enuncian para todo candidato $L$ a la vez (no converge a ningún $L$).</p>
+  </div>
+  <div data-key="def8">
+    <div class="pop-title">Definición 8 · Divergencia</div>
+    <p>$(a_n)$ diverge a $+\infty$ si para todo $M \gt 0$ existe $n_0$ tal que $a_n \gt M$ para todo $n \ge n_0$. Análogamente a $-\infty$, con $a_n \lt -M$.</p>
+  </div>
+  <div data-key="prop5">
+    <div class="pop-title">Proposición 5 · Unicidad del límite</div>
+    <p>Si $a_n \to \ell_1$ y $a_n \to \ell_2$, con $\ell_1, \ell_2 \in \mathbb{R}$, entonces $\ell_1 = \ell_2$.</p>
+  </div>
+  <div data-key="prop8">
+    <div class="pop-title">Proposición 8 · Monótonas</div>
+    <p>Si $(a_n)$ es monótona creciente y acotada, converge, y $\lim a_n = \sup\{a_n : n \in \mathbb{N}\}$. (Decreciente y acotada inferiormente: converge al ínfimo, Guía 1 Ej. 12.)</p>
+  </div>
+  <div data-key="def9acot">
+    <div class="pop-title">Definición 9 · Sucesión acotada</div>
+    <p>$(a_n)$ está acotada si $\{a_n : n \in \mathbb{N}\}$ está acotado, es decir, si existe $M \gt 0$ con $|a_n| \le M$ para todo $n$.</p>
+    <p class="psrc">En las notas hay dos definiciones con el número 9: ésta y la negación de la convergencia.</p>
+  </div>
+  <div data-key="arq">
+    <div class="pop-title">Teorema 1 · Principio de Arquímedes</div>
+    <p>Si $x \in \mathbb{R}$, existe $n \in \mathbb{N}$ tal que $x \le n$.</p>
+  </div>
+  <div data-key="supeq2">
+    <div class="pop-title">Proposición · Equivalencia del supremo 2</div>
+    <p>Sea $A \subseteq \mathbb{R}$ no vacío y acotado superiormente. $s = \sup A$ si y sólo si $s$ es cota superior de $A$ y existe $(a_n) \subseteq A$ con $a_n \to s$.</p>
+  </div>
+  <div data-key="teo457">
+    <div class="pop-title">Teorema 4.57 · $\mathbb{R}$ es completo</div>
+    <p>$(\mathbb{R}, |\cdot|)$ es completo. La demostración construye, con los ínfimos $a_k = \inf\{x_n : n \gt k\}$, una subsucesión convergente, y concluye con el Teorema 4.54 c.</p>
+  </div>
+  <div data-key="def451">
+    <div class="pop-title">Definición 4.51 · Sucesión de Cauchy</div>
+    <p>$(x_n)$ es de Cauchy si para todo $\varepsilon \gt 0$ existe $n_0$ tal que $d(x_n, x_m) \lt \varepsilon$ para todo $n, m \ge n_0$.</p>
+  </div>
+  <div data-key="cor447">
+    <div class="pop-title">Corolario 4.47 · Cerrados vía sucesiones</div>
+    <p>$E \subseteq M$ es cerrado si y sólo si para toda sucesión $(x_n) \subseteq E$ con $x_n \to x$ se tiene $x \in E$.</p>
+  </div>
+  <div data-key="teo57">
+    <div class="pop-title">Teorema 5.7 · Continuidad por sucesiones</div>
+    <p>$f : (M, d) \to (N, d')$ es continua en $x$ si y sólo si para toda $(x_n) \subseteq M$ con $x_n \to x$ se tiene $f(x_n) \to f(x)$.</p>
+  </div>
+  <div data-key="coord">
+    <div class="pop-title">Convergencia coordenada a coordenada</div>
+    <p>En $X \times Y$ con $d_\infty$, $(x_n, y_n) \to (x, y)$ si y sólo si $x_n \to x$ e $y_n \to y$.</p>
+    <p class="psrc">ejemplos/p4.typ, observación posterior a C6-1.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const val = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+  const fmt = (v, d = 3) => (Math.abs(v) < 5e-4 ? 0 : v).toFixed(d);
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"), area: g("--area"),
+             seq2: g("--seq2"), area2: g("--area2"), seq3: g("--seq3"), seq4: g("--seq4"), ok: g("--ok"), okband: g("--okband"),
+             fail: g("--fail"), panel: g("--panel"), bg: g("--bg"), mono: g("--font-mono") };
+  }
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+  // Marco con escala lineal; caja en píxeles [l, r] × [t, b].
+  function frame(ctx, C, box, xr, yr, opt = {}) {
+    const X = (x) => box.l + (x - xr[0]) / (xr[1] - xr[0]) * (box.r - box.l);
+    const Y = (y) => box.b - (y - yr[0]) / (yr[1] - yr[0]) * (box.b - box.t);
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted;
+    for (const y of opt.yt || []) {
+      ctx.beginPath(); ctx.moveTo(box.l, Y(y)); ctx.lineTo(box.r, Y(y)); ctx.stroke();
+      ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillText(String(y), box.l - 6, Y(y));
+    }
+    for (const x of opt.xt || []) {
+      ctx.beginPath(); ctx.moveTo(X(x), box.b); ctx.lineTo(X(x), box.b + 4); ctx.stroke();
+      ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(String(x), X(x), box.b + 6);
+    }
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.1;
+    ctx.beginPath(); ctx.moveTo(box.l, box.t); ctx.lineTo(box.l, box.b); ctx.lineTo(box.r, box.b); ctx.stroke();
+    if (opt.xl) { ctx.fillStyle = C.muted; ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(opt.xl, box.r, box.b - 3); }
+    return { X, Y };
+  }
+  const dot = (ctx, x, y, r, fill) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); };
+  const ring = (ctx, x, y, r, stroke, fill) => { ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); };
+  function seg(ctx, x1, y1, x2, y2, color, width = 1, dash) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width; if (dash) ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function label(ctx, C, s, x, y, color, align = "left", base = "bottom") {
+    ctx.font = "11px " + C.mono; ctx.fillStyle = color || C.ink; ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(s, x, y);
+  }
+  function arrow(ctx, x1, y1, x2, y2, color, width = 1.3) {
+    seg(ctx, x1, y1, x2, y2, color, width);
+    const a = Math.atan2(y2 - y1, x2 - x1), L = 6;
+    ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - L * Math.cos(a - 0.4), y2 - L * Math.sin(a - 0.4)); ctx.lineTo(x2 - L * Math.cos(a + 0.4), y2 - L * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+  }
+  const setRead = (id, rows) => { $(id).innerHTML = rows.map(([k, v, c]) => `<dt>${k}</dt><dd class="${c || ""}">${v}</dd>`).join(""); };
+  const box = (w, h, l = 42, r = 12, t = 12, b = 26) => ({ l, r: w - r, t, b: h - b });
+  // Menor N tal que cond(n) vale para todo n ≥ N dentro de los índices dados (hasta lim); null si no existe.
+  function threshold(cond, idx, lim = 20000) {
+    let last = 0;
+    for (const n of idx(lim)) if (!cond(n)) last = n;
+    return last >= lim * 0.95 ? null : last + 1;
+  }
+
+  // ===================================================== 1 · definición
+  const PAT = {
+    even: (k) => 2 * k, mod4: (k) => 4 * k - 3, sq: (k) => k * k,
+    b11: (k) => [2, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13][k - 1], c11: (k) => [1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11][k - 1],
+  };
+  function drawDef() {
+    const C = colors(), { ctx, w, h } = setup($("cv-def"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const N = 24, pat = PAT[val("def-pat")];
+    const B = box(w, h * 0.58, 42, 12, 12, 8);
+    const F = frame(ctx, C, B, [0.3, N + 0.7], [0, 1.08], { yt: [0, 0.5, 1] });
+    for (let n = 1; n <= N; n++) dot(ctx, F.X(n), F.Y(1 / n), 3, C.muted);
+    const ks = []; for (let k = 1; k <= 12; k++) { const n = pat(k); if (n && n <= N) ks.push([k, n]); }
+    const yN = h * 0.70, yK = h * 0.90;
+    label(ctx, C, "n", 8, yN, C.muted, "left", "middle"); label(ctx, C, "k", 8, yK, C.muted, "left", "middle");
+    for (let n = 1; n <= N; n++) { label(ctx, C, String(n), F.X(n), yN - 7, C.muted, "center", "bottom"); dot(ctx, F.X(n), yN, 2, C.rule); }
+    for (let k = 1; k <= 12; k++) { label(ctx, C, String(k), F.X(k), yK + 7, C.muted, "center", "top"); dot(ctx, F.X(k), yK, 2, C.rule); }
+    let badAt = null, prev = 0;
+    ks.forEach(([k, n]) => {
+      const bad = n <= prev; if (bad && badAt === null) badAt = k; prev = Math.max(prev, n);
+      const col = bad ? C.fail : C.accent;
+      arrow(ctx, F.X(k), yK - 3, F.X(n), yN + 4, col, bad ? 2 : 1.3);
+      seg(ctx, F.X(n), yN - 18, F.X(n), F.Y(1 / n) + 5, col, 0.8, [2, 3]);
+      dot(ctx, F.X(n), F.Y(1 / n), 4.5, col);
+    });
+    const list = ks.map(([, n]) => n).join(", ");
+    const ok = badAt === null;
+    setRead("def-read", [
+      ["n_k", list + ", …"],
+      ["¿n₁ < n₂ < …?", ok ? "sí: es subsucesión" : `no: falla en k = ${badAt}`, ok ? "good" : "bad"],
+      ["n_k ≥ k", ok ? "vale para todo k" : "—", ok ? "good" : ""],
+    ]);
+  }
+
+  // ===================================================== 2 · herencia
+  const herA = (n) => 1 + 1.4 * (n % 2 ? -1 : 1) / Math.pow(n, 0.7);
+  const HPAT = { even: (k) => 2 * k, odd: (k) => 2 * k - 1, tri: (k) => 3 * k, sq: (k) => k * k };
+  function drawHer() {
+    const C = colors(), { ctx, w, h } = setup($("cv-her"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const eps = +$("her-eps").value / 100; $("her-eps-o").textContent = eps.toFixed(2);
+    const pat = HPAT[val("her-pat")];
+    const n0 = threshold((n) => Math.abs(herA(n) - 1) < eps, function* (L) { for (let n = 1; n <= L; n++) yield n; });
+    let k0 = 1; while (pat(k0) < n0) k0++;
+    const nk0 = pat(k0);
+    const N = Math.max(60, Math.min(400, Math.ceil(Math.max(n0, nk0) * 1.15)));
+    const B = box(w, h);
+    const F = frame(ctx, C, B, [0, N + 1], [-0.5, 2.5], { yt: [0, 1, 2], xt: [1, Math.round(N / 2), N], xl: "n" });
+    ctx.fillStyle = C.band; ctx.fillRect(B.l, F.Y(1 + eps), B.r - B.l, F.Y(1 - eps) - F.Y(1 + eps));
+    seg(ctx, B.l, F.Y(1), B.r, F.Y(1), C.accent, 1, [4, 3]);
+    const chosen = new Set(); for (let k = 1; pat(k) <= N; k++) chosen.add(pat(k));
+    const r = N > 150 ? 1.6 : 2.6;
+    for (let n = 1; n <= N; n++) dot(ctx, F.X(n), F.Y(herA(n)), chosen.has(n) ? r + 1.4 : r, chosen.has(n) ? (n >= nk0 ? C.ok : C.seq2) : C.rule);
+    seg(ctx, F.X(n0), B.t, F.X(n0), B.b, C.muted, 1.2, [4, 3]);
+    label(ctx, C, "n₀ = " + n0, F.X(n0) + 4, B.t + 2, C.muted, "left", "top");
+    seg(ctx, F.X(nk0), B.t + 16, F.X(nk0), B.b, C.ok, 1.6);
+    label(ctx, C, "n_k₀ = " + nk0, F.X(nk0) + 4, B.t + 18, C.ok, "left", "top");
+    label(ctx, C, "ℓ = 1", B.r - 2, F.Y(1) - 3, C.accent, "right", "bottom");
+    setRead("her-read", [
+      ["n₀ de (a_n)", String(n0)],
+      ["k₀", String(k0)],
+      ["n_k₀", `${nk0} ≥ n₀`, "good"],
+      ["", `|a_{n_k} − 1| < ${eps.toFixed(2)} para k ≥ ${k0}`, "good"],
+    ]);
+  }
+
+  // ===================================================== 3 · partir ℕ
+  const PSEQ = {
+    ej16: { a: (n) => 2 + 3 * (n % 2 ? -1 : 1) / n, cls: [["x_{2k}", (n) => n % 2 === 0, 2], ["x_{2k−1}", (n) => n % 2 === 1, 2]], yr: [-1.2, 4] },
+    c22: { a: (n) => n % 3 === 0 ? 1 + 2.5 / n : n % 3 === 1 ? 1 - 3 / n : 1 + 4 * Math.sin(n) / n,
+           cls: [["a_{3k}", (n) => n % 3 === 0, 1], ["a_{3k+1}", (n) => n % 3 === 1, 1], ["a_{3k+2}", (n) => n % 3 === 2, 1]], yr: [-2.2, 3] },
+    cos: { a: (n) => Math.round(Math.cos(n * Math.PI / 2)),
+           cls: [["a_{4k+1}", (n) => n % 4 === 1, 0], ["a_{4k+2}", (n) => n % 4 === 2, -1], ["a_{4k+3}", (n) => n % 4 === 3, 0], ["a_{4k}", (n) => n % 4 === 0, 1]], yr: [-1.5, 1.5] },
+    alt: { a: (n) => (n % 2 ? -1 : 1) + 1 / n, cls: [["x_{2k}", (n) => n % 2 === 0, 1], ["x_{2k−1}", (n) => n % 2 === 1, -1]], yr: [-1.5, 1.8] },
+    vf4: { a: (n) => (n % 2 === 0 || n % 3 === 0) ? 3 : 0,
+           cls: [["2 | n o 3 | n", (n) => n % 2 === 0 || n % 3 === 0, 3], ["n = 6k ± 1", (n) => n % 2 !== 0 && n % 3 !== 0, 0]], yr: [-0.8, 3.8] },
+  };
+  function drawPar() {
+    const C = colors(), { ctx, w, h } = setup($("cv-par"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const eps = +$("par-eps").value / 100; $("par-eps-o").textContent = eps.toFixed(2);
+    const S = PSEQ[val("par-seq")], cols = [C.accent, C.seq2, C.seq3, C.seq4];
+    const lims = S.cls.map((c) => c[2]), same = lims.every((l) => l === lims[0]);
+    let th = [], n0 = null;
+    if (same) {
+      th = S.cls.map(([, inC]) => threshold((n) => !inC(n) || Math.abs(S.a(n) - lims[0]) < eps, function* (L) { for (let n = 1; n <= L; n++) yield n; }));
+      n0 = Math.max(...th);
+    }
+    const N = Math.max(48, Math.min(400, n0 ? Math.ceil(n0 * 1.2) : 48));
+    const B = box(w, h);
+    const yt = []; for (let y = Math.ceil(S.yr[0]); y <= S.yr[1]; y++) yt.push(y);
+    const F = frame(ctx, C, B, [0, N + 1], S.yr, { yt, xt: [1, Math.round(N / 2), N], xl: "n" });
+    if (same) {
+      ctx.fillStyle = C.band; ctx.fillRect(B.l, F.Y(lims[0] + eps), B.r - B.l, F.Y(lims[0] - eps) - F.Y(lims[0] + eps));
+      seg(ctx, B.l, F.Y(lims[0]), B.r, F.Y(lims[0]), C.ink, 1, [4, 3]);
+    } else {
+      [...new Set(lims)].forEach((l) => { const i = lims.indexOf(l); seg(ctx, B.l, F.Y(l), B.r, F.Y(l), cols[i], 1.2, [5, 4]); });
+    }
+    const r = N > 150 ? 1.8 : 3;
+    for (let n = 1; n <= N; n++) { const i = S.cls.findIndex(([, inC]) => inC(n)); dot(ctx, F.X(n), F.Y(S.a(n)), r, cols[i]); }
+    if (same) {
+      th.forEach((t, i) => seg(ctx, F.X(t), B.t, F.X(t), B.b, cols[i], 1.1, [3, 3]));
+      seg(ctx, F.X(n0), B.t, F.X(n0), B.b, C.ink, 1.8);
+      label(ctx, C, "n₀ = " + n0, F.X(n0) + 4, B.t + 2, C.ink, "left", "top");
+    }
+    const rows = S.cls.map(([lab], i) => [
+      `<span style="color:${cols[i]}">●</span> ${lab}`,
+      same ? `→ ${lims[i]}; umbral n ≥ ${th[i]}` : `→ ${lims[i]}`,
+    ]);
+    rows.push(same ? ["n₀ = max", `${n0}: |a_n − ${lims[0]}| < ${eps.toFixed(2)} para n ≥ ${n0}`, "good"]
+                   : ["", `límites distintos ⇒ (a_n) no converge`, "bad"]);
+    setRead("par-read", rows);
+  }
+
+  // ===================================================== 4 · construir
+  const conBad = (n) => (n % 5 === 0 || n % 7 === 3) ? 0.62 + 0.25 * Math.sin(n) : 0.9 / n;
+  const conBig = (n) => n % 4 === 0 ? 1.25 * Math.sqrt(n) : 1.2 * Math.sin(n * 1.7) / Math.sqrt(n);
+  function drawCon() {
+    const C = colors(), { ctx, w, h } = setup($("cv-con"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const mode = val("con-mode"), K = +$("con-k").value, eps = +$("con-eps").value / 100;
+    $("con-k-o").textContent = K; $("con-eps-o").textContent = eps.toFixed(2);
+    $("con-eps-row").hidden = mode !== "bad";
+    const x = mode === "bad" ? conBad : conBig;
+    const P = mode === "bad" ? (n) => Math.abs(x(n)) >= eps : null;
+    const idx = []; let prev = 0;
+    for (let k = 1; k <= K; k++) {
+      let n = prev + 1;
+      if (mode === "bad") while (!P(n)) n++; else while (!(x(n) > k)) n++;
+      idx.push(n); prev = n;
+    }
+    const N = Math.max(40, Math.ceil(prev * 1.15) + 2);
+    const yr = mode === "bad" ? [-0.15, 1.0] : [-1.4, Math.max(4, 1.25 * Math.sqrt(N) + 0.6)];
+    const B = box(w, h);
+    const yt = mode === "bad" ? [0, 0.5, 1] : Array.from({ length: Math.floor(yr[1] / 2) + 1 }, (_, i) => 2 * i);
+    const F = frame(ctx, C, B, [0, N + 1], yr, { yt, xt: [1, Math.round(N / 2), N], xl: "n" });
+    const from = (idx[K - 2] || 0) + 1, to = idx[K - 1];
+    ctx.fillStyle = C.band; ctx.fillRect(F.X(from - 0.5), B.t, F.X(to + 0.5) - F.X(from - 0.5), B.b - B.t);
+    if (mode === "bad") {
+      ctx.fillStyle = C.okband; ctx.fillRect(B.l, F.Y(eps), B.r - B.l, F.Y(Math.max(yr[0], -eps)) - F.Y(eps));
+      seg(ctx, B.l, F.Y(eps), B.r, F.Y(eps), C.fail, 1.2, [5, 4]);
+      label(ctx, C, "|x_n − 0| = ε₀", B.r - 2, F.Y(eps) - 3, C.fail, "right", "bottom");
+    } else {
+      seg(ctx, B.l, F.Y(K), B.r, F.Y(K), C.fail, 1.2, [5, 4]);
+      label(ctx, C, "altura k = " + K, B.r - 2, F.Y(K) - 3, C.fail, "right", "bottom");
+    }
+    const r = N > 150 ? 1.7 : 2.6, set = new Set(idx);
+    for (let n = 1; n <= N; n++) if (!set.has(n)) dot(ctx, F.X(n), F.Y(x(n)), r, C.muted);
+    seg(ctx, F.X(from), B.t, F.X(from), B.b, C.muted, 1, [2, 3]);
+    label(ctx, C, "N = " + from, F.X(from) + 3, B.t + 2, C.muted, "left", "top");
+    idx.forEach((n, i) => {
+      const last = i === K - 1;
+      dot(ctx, F.X(n), F.Y(x(n)), last ? 5.5 : 4, last ? C.accent : C.seq2);
+      if (i >= K - 4) label(ctx, C, "n" + String(i + 1).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[d]).join(""), F.X(n), F.Y(x(n)) - 7, last ? C.accent : C.seq2, "center", "bottom");
+    });
+    setRead("con-read", [
+      ["paso k", String(K)],
+      ["se busca desde", `N = n_{k−1} + 1 = ${from}`],
+      ["se elige", `n_${K} = ${to}` + (mode === "bad" ? `, |x_n| = ${fmt(Math.abs(x(to)))} ≥ ${eps.toFixed(2)}` : `, x_n = ${fmt(x(to), 2)} > ${K}`), "good"],
+      ["n₁, n₂, …", idx.join(", ")],
+    ]);
+  }
+
+  // ===================================================== 5 · Bolzano–Weierstrass
+  const bwX = (n) => 0.7 * Math.sin(n) + 1.1 * (n % 2 ? -1 : 1) / Math.sqrt(n);
+  const BWN = 6000;
+  const BW_INF = (() => {          // inf de la cola {x_n : n > k}, para k = 0..BWN−1 (aproximado con BWN términos)
+    const v = new Float64Array(BWN + 2); v[BWN] = Infinity;
+    for (let k = BWN - 1; k >= 0; k--) v[k] = Math.min(v[k + 1], bwX(k + 1));
+    return v;
+  })();
+  const BW_LIM = BW_INF[BWN - 400];
+  function drawBW() {
+    const C = colors(), { ctx, w, h } = setup($("cv-bw"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const J = +$("bw-j").value; $("bw-j-o").textContent = J;
+    const ns = [1]; // n_0 = 1 (convención de las notas)
+    for (let j = 1; j <= J; j++) {
+      const p = ns[j - 1], a = BW_INF[p];
+      let n = p + 1; while (!(bwX(n) < a + 1 / j)) n++;
+      ns.push(n);
+    }
+    const nPrev = ns[J - 1], nj = ns[J], a = BW_INF[nPrev];
+    const N = Math.max(40, Math.ceil(nj * 1.25) + 3);
+    const B = box(w, h);
+    const F = frame(ctx, C, B, [0, N + 1], [-2, 1.6], { yt: [-2, -1, 0, 1], xt: [1, Math.round(N / 2), N], xl: "n" });
+    ctx.fillStyle = C.band; ctx.fillRect(F.X(nPrev + 0.5), B.t, B.r - F.X(nPrev + 0.5), B.b - B.t);
+    label(ctx, C, "X_{n_{j−1}}", B.r - 2, B.t + 2, C.muted, "right", "top");
+    ctx.fillStyle = C.okband; ctx.fillRect(F.X(nPrev + 0.5), F.Y(a + 1 / J), B.r - F.X(nPrev + 0.5), F.Y(a) - F.Y(a + 1 / J));
+    seg(ctx, B.l, F.Y(a), B.r, F.Y(a), C.fail, 1.2);
+    label(ctx, C, "a = inf", B.l + 4, F.Y(a) + 3, C.fail, "left", "top");
+    seg(ctx, F.X(nPrev + 0.5), F.Y(a + 1 / J), B.r, F.Y(a + 1 / J), C.accent, 1.2, [5, 4]);
+    seg(ctx, B.l, F.Y(BW_LIM), B.r, F.Y(BW_LIM), C.ink, 1, [2, 3]);
+    label(ctx, C, "x = lim a_k", B.l + 4, F.Y(BW_LIM) - 3, C.ink, "left", "bottom");
+    const set = new Set(ns.slice(1)), r = N > 150 ? 1.6 : 2.5;
+    for (let n = 1; n <= N; n++) if (!set.has(n)) dot(ctx, F.X(n), F.Y(bwX(n)), r, n <= nPrev ? C.rule : C.muted);
+    ns.slice(1).forEach((n, i) => dot(ctx, F.X(n), F.Y(bwX(n)), i === J - 1 ? 5.5 : 4, i === J - 1 ? C.accent : C.ok));
+    seg(ctx, F.X(nPrev), B.t, F.X(nPrev), B.b, C.muted, 1, [2, 3]);
+    setRead("bw-read", [
+      ["j", String(J)],
+      ["n_{j−1}", String(nPrev)],
+      ["a_{n_{j−1}} = inf X", fmt(a)],
+      ["ventana", `[${fmt(a)}, ${fmt(a + 1 / J)})`],
+      ["n_j, x_{n_j}", `${nj}, ${fmt(bwX(nj))}`, "good"],
+      ["x ≈", fmt(BW_LIM)],
+    ]);
+  }
+
+  // ===================================================== 7 · Práctica 4
+  const YSTAR = 0.3;
+  function drawP4() {
+    const C = colors(), { ctx, w, h } = setup($("cv-p4"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const mode = val("p4-mode"), M = +$("p4-n").value; $("p4-n-o").textContent = M;
+    const B = box(w, h, 36, 12, 12, 26);
+    if (mode === "hyp") {
+      const F = frame(ctx, C, B, [-0.15, 1.15], [-0.6, 9], { yt: [0, 2, 4, 6, 8], xt: [0, 0.5, 1] });
+      seg(ctx, F.X(0), B.t, F.X(0), B.b, C.rule, 1);
+      ctx.strokeStyle = C.accent; ctx.lineWidth = 2.2; ctx.beginPath();
+      for (let i = 0; i <= 300; i++) { const x = 1 / 9 + (1.15 - 1 / 9) * i / 300; i ? ctx.lineTo(F.X(x), F.Y(1 / x)) : ctx.moveTo(F.X(x), F.Y(1 / x)); }
+      ctx.stroke();
+      label(ctx, C, "F: xy = 1", F.X(0.75), F.Y(1 / 0.75) - 6, C.accent, "left", "bottom");
+      seg(ctx, F.X(-0.15), F.Y(0), F.X(1.15), F.Y(0), C.ok, 3);
+      for (let n = 1; n <= M; n++) {
+        const x = 1 / n, y = n;
+        if (y <= 8.8) { seg(ctx, F.X(x), F.Y(y), F.X(x), F.Y(0), C.muted, 0.8, [2, 3]); dot(ctx, F.X(x), F.Y(y), 3.5, C.seq2); }
+        seg(ctx, F.X(x), F.Y(0) - 4, F.X(x), F.Y(0) + 4, C.ink, 1);
+      }
+      ring(ctx, F.X(0), F.Y(0), 5, C.fail, C.bg);
+      label(ctx, C, "0 ∉ π₁(F)", F.X(0) + 7, F.Y(0) - 6, C.fail, "left", "bottom");
+      setRead("p4-read", [
+        ["x_n = 1/n", `${fmt(1 / M, 4)} → 0`, "good"],
+        ["y_{q_n} = n", `${M} → +∞`, "bad"],
+        ["subsucesión convergente de (y_{q_n})", "no hay: no está acotada", "bad"],
+        ["π₁(F)", "ℝ \\ {0}, no cerrado", "bad"],
+      ]);
+    } else {
+      const F = frame(ctx, C, B, [-0.12, 0.75], [-1.35, 1.35], { yt: [-1, 0, 1], xt: [0, 0.25, 0.5, 0.75] });
+      ctx.strokeStyle = C.accent; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (let i = 0; i <= 5000; i++) { const t = 1 / 0.75 + (220 - 1 / 0.75) * i / 5000, x = 1 / t; i ? ctx.lineTo(F.X(x), F.Y(Math.sin(t))) : ctx.moveTo(F.X(x), F.Y(Math.sin(t))); }
+      ctx.stroke();
+      seg(ctx, F.X(0), F.Y(-1), F.X(0), F.Y(1), C.accent, 3.2);
+      label(ctx, C, "{0} × [−1, 1] ⊆ F", F.X(0) + 6, F.Y(-1) + 2, C.accent, "left", "top");
+      seg(ctx, F.X(-0.12), F.Y(0), F.X(0.75), F.Y(0), C.rule, 1);
+      const sub = []; let p = 0;
+      for (let j = 1; ; j++) { let n = p + 1; while (Math.abs(Math.sin(n + 0.5) - YSTAR) >= 1 / j) n++; if (n > M) break; sub.push(n); p = n; }
+      const S = new Set(sub);
+      for (let n = 1; n <= M; n++) {
+        const x = 1 / (n + 0.5), y = Math.sin(n + 0.5), s = S.has(n);
+        dot(ctx, F.X(x), F.Y(y), s ? 4.5 : 3, s ? C.ok : C.seq2);
+        seg(ctx, F.X(x), F.Y(0) - 3, F.X(x), F.Y(0) + 3, C.ink, 1);
+      }
+      ring(ctx, F.X(0), F.Y(YSTAR), 5.5, C.ok, C.bg);
+      label(ctx, C, "(0, 0.3)", F.X(0) - 7, F.Y(YSTAR), C.ok, "right", "middle");
+      setRead("p4-read", [
+        ["x_n = 1/(n + 0.5)", `${fmt(1 / (M + 0.5), 4)} → 0`, "good"],
+        ["y_{q_n} = sen(n + 0.5)", "acotada en [−1, 1], no converge"],
+        ["subsucesión verde", sub.length ? `n_j = ${sub.join(", ")}` : "—"],
+        ["", "q_{n_j} → (0, 0.3) ∈ F ⇒ 0 ∈ π₁(F)", "good"],
+      ]);
+    }
+  }
+
+  // ===================================================== cableado
+  const DRAW = [
+    [drawDef, ["def-pat"], []], [drawHer, ["her-pat"], ["her-eps"]], [drawPar, ["par-seq"], ["par-eps"]],
+    [drawCon, ["con-mode"], ["con-k", "con-eps"]], [drawBW, [], ["bw-j"]], [drawP4, ["p4-mode"], ["p4-n"]],
+  ];
+  for (const [fn, radios, sliders] of DRAW) {
+    radios.forEach((n) => document.querySelectorAll(`input[name="${n}"]`).forEach((el) => el.addEventListener("change", fn)));
+    sliders.forEach((id) => $(id).addEventListener("input", fn));
+  }
+  const drawAll = () => DRAW.forEach(([fn]) => fn());
+
+  $("open-all").addEventListener("click", () => document.querySelectorAll("details.proof").forEach((d) => (d.open = true)));
+  $("close-all").addEventListener("click", () => document.querySelectorAll("details.proof").forEach((d) => (d.open = false)));
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  new ResizeObserver(drawAll).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+  new MutationObserver(drawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", drawAll);
+  drawAll();
+})();
+</script>
