@@ -1,0 +1,163 @@
+{
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-2": {
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado inferiormente y no vacío. Entonces existe $i = \\inf(A) \\in \\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3": {
+  "tipo": "Proposición",
+  "numero": "3",
+  "titulo": "Equivalencia de supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado superiormente. Entonces $s = \\sup(A)$ si y sólo si se cumple:</p><p>a) $s$ es cota superior, y</p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $s - \\varepsilon \\lt a_\\varepsilon \\le s$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:</p><p>a) $i$ es cota inferior de $A$, y</p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo</b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <b>ínfimo</b> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;</p><p>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo</b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul class=\"items\"><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\neq \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-3.12": {
+  "tipo": "Ejemplo",
+  "numero": "3.12",
+  "titulo": "Numerabilidad de $\\mathbb{N} \\times \\mathbb{N}$ vía Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $\\mathbb{N} \\times \\mathbb{N}$ es numerable.</p>",
+  "fuente": "ejemplos/p2.typ (Ejemplo 14, rotulado “Ejemplo 3.12”); no es una caja de apuntes.typ"
+ },
+ "guia-p2-ej6a": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 6 (a)",
+  "titulo": "Unión numerable de contables",
+  "enunciado": "<p>Sea $\\{A_n\\}_{n \\in \\mathbb{N}}$ una familia de conjuntos contables. Pruebe que $\\bigcup_{n \\in \\mathbb{N}} A_n$ es contable.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej14c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 14 (c)",
+  "titulo": "Cardinal de $\\mathbb{R}^k$",
+  "enunciado": "<p>Calcule el cardinal de $\\mathbb{R}^k$ para cada $k \\in \\mathbb{N}$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <b>espacio métrico</b>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p3-ej4b": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4 (b)",
+  "titulo": "Las bolas abiertas son abiertas",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.</p><p>(b) Pruebe que $B(x, r)$ es un conjunto abierto.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej4e": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4 (e)",
+  "titulo": "Clausura de la bola abierta",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.</p><p>(d) Pruebe que $\\overline{B}(x, r) = \\{y \\in E : d(x, y) \\le r\\}$ es un conjunto cerrado.</p><p>(e) Deduzca que $\\overline{B(x, r)} \\subseteq \\overline{B}(x, r)$.</p>",
+  "fuente": "guias/p3.typ (se incluye el ítem (d), donde se define $\\overline{B}(x, r)$)"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <b>de adherencia</b> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\neq \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <b>clausura</b> de $E$ y lo denotamos $\\overline{E}$. Es decir,</p><p>$$\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\neq \\emptyset\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-monotonia-clausura": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Monotonía de la clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Si $A \\subseteq B \\subseteq M$, entonces $\\overline{A} \\subseteq \\overline{B}$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p>",
+  "fuente": "apuntes.typ (sin los dibujos)"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>continua en $x$</i> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <i>después</i> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ (sin el dibujo)"
+ }
+}

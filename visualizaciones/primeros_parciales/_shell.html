@@ -134,7 +134,7 @@
   .viz { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 0.55rem; font-family: var(--font-ui); font-size: 0.86rem; min-width: 0; }
   @media (max-width: 900px) { .viz { position: static; } }
   .viz canvas { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); touch-action: pan-y; }
-  .viz svg { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 6px; background: var(--bg); }
+  .viz > svg { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 6px; background: var(--bg); }
   .ctrl { display: grid; gap: 0.45rem; }
   .slider { display: grid; grid-template-columns: minmax(4.5rem, auto) minmax(0, 1fr) 4.2rem; align-items: center; gap: 0.6rem; }
   .slider label { color: var(--muted); }
