@@ -356,7 +356,7 @@ window.PP = (() => {
 
   const G = JSON.parse(document.getElementById("glosario").textContent);
   const pop = document.getElementById("popup");
-  let current = null, hideTimer = 0;
+  let current = null, hideTimer = 0, shownAt = 0;
   function render(key) {
     const g = G[key];
     if (!g) return `<div class="pop-title">Referencia</div><p>${key}</p>`;
@@ -373,7 +373,7 @@ window.PP = (() => {
   function show(el) {
     clearTimeout(hideTimer);
     if (current === el && !pop.hidden) return;
-    current = el;
+    current = el; shownAt = performance.now();
     pop.innerHTML = render(el.dataset.ref);
     pop.hidden = false; place(el);
     if (window.MathJax && MathJax.typesetPromise) {
@@ -390,7 +390,8 @@ window.PP = (() => {
     el.addEventListener("mouseleave", () => hide(180));
     el.addEventListener("focus", () => show(el));
     el.addEventListener("blur", () => hide(120));
-    el.addEventListener("click", (e) => { e.preventDefault(); if (current === el && !pop.hidden) hide(); else show(el); });
+    /* El foco (o el mouseenter) ya abre el popup justo antes del clic: un clic inmediato no lo cierra; uno posterior, sí. */
+    el.addEventListener("click", (e) => { e.preventDefault(); if (current === el && !pop.hidden && performance.now() - shownAt > 400) hide(); else show(el); });
     el.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
   });
   pop.addEventListener("mouseenter", () => clearTimeout(hideTimer));
