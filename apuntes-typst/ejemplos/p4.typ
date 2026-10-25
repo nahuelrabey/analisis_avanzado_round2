@@ -614,7 +614,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $
   Como $f$ es Lipschitz, es uniformemente continua.
 
-  *b)* Veamos que *no es uniformemente continua*. Para ello, razonamos como para ver que una $f$ no es Lipschitz: *existen $epsilon > 0$ y $(x_n)_n subset.eq RR$, $(y_n)_n subset.eq RR$ tales que $abs(x_n - y_n) -> 0$ pero*
+  *b)* Veamos que *no es uniformemente continua*. Para ello, razonamos como para ver que una $f$ no es Lipschitz: *existen $epsilon > 0$ y $(x_n)_n subset.eq (0, +infinity)$, $(y_n)_n subset.eq (0, +infinity)$ tales que $abs(x_n - y_n) -> 0$ pero*
   $
   abs(f(x_n) - f(y_n)) >= epsilon " para todo " n.
   $
