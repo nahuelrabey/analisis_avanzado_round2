@@ -1,0 +1,719 @@
+<title>Proyecciones de X × Y</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: el plano X × Y (con X = Y = ℝ) queda fijo a la izquierda y la resolución avanza paso a paso a la derecha. Misma familia visual que visualizaciones/integral_lipschitz.html. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.18);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.16);
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.13);
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.24);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.2); --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.24);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.2); --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.07rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1120px; margin: 0 auto; display: grid; gap: 1.6rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0 0 0.5rem; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.9rem; }
+  .intro { max-width: 70ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.15rem; }
+
+  .theorem {
+    background: var(--panel); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 1rem 1.2rem; max-width: 78ch;
+  }
+  .theorem p:last-child, .theorem ol:last-child { margin-bottom: 0; }
+  .theorem b { font-family: var(--font-ui); }
+  .theorem ol { list-style: lower-alpha; padding-left: 1.6rem; margin: 0.4rem 0 0; display: grid; gap: 0.3rem; }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  #popup .src { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  .proof { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 1.6rem; align-items: start; }
+  @media (max-width: 860px) { .proof { grid-template-columns: minmax(0, 1fr); } }
+  .stage {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px);
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0.9rem;
+    display: grid; gap: 0.7rem; font-family: var(--font-ui); font-size: 0.9rem;
+  }
+  @media (max-width: 860px) { .stage { position: static; } }
+  canvas { width: 100%; max-width: 100%; display: block; aspect-ratio: 1 / 1; border-radius: 6px; touch-action: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; color: var(--muted); font-size: 0.82rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .sw { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; border: 1px solid var(--rule); }
+  .slider { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 3.6rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .check { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--accent); }
+  .pairs { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; }
+  .pairs legend { font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+  .pairs label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; font-size: 0.86rem; }
+  .pairs input { position: absolute; opacity: 0; pointer-events: none; }
+  .pairs label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pairs label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hint { color: var(--muted); font-size: 0.82rem; margin: 0; }
+  .readout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.15rem 0.9rem; font-family: var(--font-mono); font-size: 0.84rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .readout dt { color: var(--muted); }
+  .readout dd { margin: 0; overflow-wrap: anywhere; }
+  .good { color: var(--ok); }
+  .bad { color: var(--fail); }
+
+  .steps { display: grid; gap: 0.8rem; min-width: 0; }
+  .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.9rem; }
+  .nav .count { color: var(--muted); margin-right: auto; font-variant-numeric: tabular-nums; }
+  button {
+    font: inherit; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--accent);
+    border-radius: 6px; padding: 0.35rem 0.85rem; cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--band); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toc { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-ui); font-size: 0.82rem; }
+  .toc button { border-color: var(--rule); color: var(--muted); padding: 0.2rem 0.6rem; font-weight: 400; }
+  .toc button[aria-current="step"] { border-color: var(--accent); color: var(--accent); background: var(--band); font-weight: 500; }
+
+  .step { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem 1.2rem; min-width: 0; }
+  .step .kicker { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+  .look { margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px dashed var(--rule); font-size: 0.97rem; color: var(--muted); }
+  .look strong { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+  .note { color: var(--muted); font-size: 0.95rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header class="intro">
+    <p class="eyebrow">Análisis Avanzado · Práctica 4 · Bloque 4 · C6-1</p>
+    <h1>Proyecciones de $X \times Y$ y continuidad coordenada a coordenada</h1>
+  </header>
+
+  <section class="theorem" aria-label="Enunciado">
+    <p><b>Clase 6 · Ejemplo 1.</b> Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. Pensamos a $X \times Y$ con <span class="ref" tabindex="0" data-ref="dinf">$d_\infty$</span>.</p>
+    <ol>
+      <li>Probar que $\pi_1 : X \times Y \to X$, $(x, y) \mapsto x$, y $\pi_2 : X \times Y \to Y$, $(x, y) \mapsto y$ son <span class="ref" tabindex="0" data-ref="def54">continuas</span> y <span class="ref" tabindex="0" data-ref="defab">abiertas</span>, pero pueden <b>no ser cerradas</b>.</li>
+      <li>Sea $(Z, \delta)$ un espacio métrico y sea $f : Z \to X \times Y$ una aplicación. Probar que $f$ es continua si y sólo si $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$ lo son.</li>
+    </ol>
+  </section>
+
+  <p class="intro note">En el dibujo $X = Y = \mathbb{R}$, así que $X \times Y$ es el plano con $d_\infty$ y $\pi_1$ es «tirar la sombra sobre el eje horizontal». Los puntos del plano se llaman $p, q$, con coordenadas $p = (x_p, y_p)$. Los puntos grandes del dibujo se pueden arrastrar. Pasá el mouse (o tocá) sobre las palabras subrayadas para ver el enunciado que se usa, y avanzá con los botones o con las flechas del teclado.</p>
+
+  <section class="proof" aria-label="Resolución paso a paso">
+    <div class="stage">
+      <canvas id="cv" role="img" aria-label="El plano X × Y con la métrica del máximo y la proyección sobre el eje X"></canvas>
+      <div class="legend" id="legend"></div>
+      <div class="slider" id="ctl-r" data-steps="0 2"><label for="s-r">$r$</label><input type="range" id="s-r" min="0.3" max="2" step="0.01" value="1.2"><output id="o-r" for="s-r"></output></div>
+      <div class="slider" id="ctl-eps" data-steps="1 6"><label for="s-eps">$\varepsilon$</label><input type="range" id="s-eps" min="0.05" max="1.6" step="0.01" value="0.9"><output id="o-eps" for="s-eps"></output></div>
+      <div class="slider" id="ctl-n" data-steps="4"><label for="s-n">$n$</label><input type="range" id="s-n" min="1" max="40" step="1" value="6"><output id="o-n" for="s-n"></output></div>
+      <div class="slider" id="ctl-z" data-steps="5"><label for="s-z">$z$</label><input type="range" id="s-z" min="0" max="1" step="0.005" value="0.3"><output id="o-z" for="s-z"></output></div>
+      <label class="check" id="ctl-disk" data-steps="0"><input type="checkbox" id="c-disk"><span>Mostrar también la bola euclídea</span></label>
+      <fieldset class="pairs" id="ctl-f" data-steps="5 6">
+        <legend>La aplicación $f$</legend>
+        <label><input type="radio" name="fkind" id="f-cont" value="cont" checked><span>$f$ continua</span></label>
+        <label><input type="radio" name="fkind" id="f-jump" value="jump"><span>$f_2$ salta en $z_0$</span></label>
+      </fieldset>
+      <p class="hint" id="hint"></p>
+      <dl class="readout" id="readout"></dl>
+    </div>
+
+    <div class="steps">
+      <div class="nav">
+        <span class="count" id="count"></span>
+        <button type="button" id="prev">← Anterior</button>
+        <button type="button" id="next">Siguiente →</button>
+      </div>
+      <ol class="toc" id="toc"></ol>
+
+      <article class="step" data-title="La bola es un cuadrado">
+        <div class="kicker">Antes de empezar</div>
+        <h3>Con $d_\infty$, la bola de $X \times Y$ es un producto de bolas</h3>
+        <p>La métrica es $d_\infty(q, p) = \max\{d_1(x_q, x_p),\, d_2(y_q, y_p)\}$. Un máximo es menor que $r$ exactamente cuando las dos cantidades lo son, así que la <span class="ref" tabindex="0" data-ref="bola">bola abierta</span> es</p>
+        $$ \begin{aligned} B(p, r) &= \{q : \max\{d_1(x_q, x_p), d_2(y_q, y_p)\} \lt r\} \\ &= \{q : d_1(x_q, x_p) \lt r \text{ y } d_2(y_q, y_p) \lt r\} \\ &= B(x_p, r) \times B(y_p, r). \end{aligned} $$
+        <p>En $\mathbb{R}^2$ es el cuadrado abierto $(x_p - r, x_p + r) \times (y_p - r, y_p + r)$.</p>
+        <div class="look"><strong>En el dibujo</strong>Arrastrá $q$. Está en la bola cuando las <em>dos</em> distancias coordenadas son menores que $r$. El manuscrito dibuja un disco: es la bola euclídea, que tiene la misma sombra sobre el eje $X$.</div>
+      </article>
+
+      <article class="step" data-title="π₁ continua">
+        <div class="kicker">a) · Continuidad</div>
+        <h3>$\pi_1$ no agranda distancias</h3>
+        <p>Por la <span class="ref" tabindex="0" data-ref="def54">Definición 5.4</span>: dado $p$ y $\varepsilon \gt 0$ hay que encontrar $\delta \gt 0$ tal que $d_\infty(q, p) \lt \delta$ implique $d_1(\pi_1(q), \pi_1(p)) = d_1(x_q, x_p) \lt \varepsilon$. Como $d_1(x_q, x_p)$ es uno de los dos números cuyo máximo es $d_\infty$,</p>
+        $$ d_1(x_q, x_p) \le \max\{d_1(x_q, x_p), d_2(y_q, y_p)\} = d_\infty(q, p), \qquad (*) $$
+        <p>y alcanza con $\delta \le \varepsilon$ (el dibujo toma $\delta = \varepsilon$). La desigualdad $(*)$ dice además que $\pi_1$ es Lipschitz de constante $1$.</p>
+        <div class="look"><strong>En el dibujo</strong>El cuadrado es $B(p, \delta)$ y la franja vertical es todo lo que $\pi_1$ manda a $B(x_p, \varepsilon)$, es decir $\pi_1^{-1}(B(x_p, \varepsilon))$. El cuadrado queda adentro de la franja. Arrastrá $q$ dentro del cuadrado: su sombra nunca sale de $B(x_p, \varepsilon)$.</div>
+      </article>
+
+      <article class="step" data-title="Paso 1: bolas">
+        <div class="kicker">a) · Abierta · Paso 1</div>
+        <h3>La proyección de una bola es una bola</h3>
+        <p>Veamos que $\pi_1(B(p, r)) = B(x_p, r)$. Por el paso anterior,</p>
+        $$ \pi_1(B(p, r)) = \{x \in X : \text{existe } y \in Y \text{ con } d_1(x, x_p) \lt r \text{ y } d_2(y, y_p) \lt r\}. $$
+        <p>($\subseteq$) Todo $x \in \pi_1(B(p, r))$ cumple $d_1(x, x_p) \lt r$, es decir, $x \in B(x_p, r)$.</p>
+        <p>($\supseteq$) Dado $x \in B(x_p, r)$, el punto $q = (x, y_p)$ cumple $d_\infty(q, p) = \max\{d_1(x, x_p), 0\} \lt r$. Entonces $q \in B(p, r)$ y $x = \pi_1(q)$.</p>
+        <p>En particular $\pi_1(B(p, r))$ es abierto. Con sólo ($\supseteq$) no alcanza: dice que $x_p$ es <span class="ref" tabindex="0" data-ref="interior">punto interior</span> de la proyección, pero no que lo sean todos sus puntos.</p>
+        <div class="look"><strong>En el dibujo</strong>Arrastrá el punto $x$ sobre el eje. Si está en el intervalo abierto, la recta vertical por $x$ corta al cuadrado y $q = (x, y_p)$ es un testigo. En los extremos $x_p \pm r$ la recta sólo toca el borde, que no está en la bola.</div>
+      </article>
+
+      <article class="step" data-title="Paso 2: abiertos">
+        <div class="kicker">a) · Abierta · Paso 2</div>
+        <h3>De bolas a abiertos cualesquiera</h3>
+        <p>Sea $U \subseteq X \times Y$ <span class="ref" tabindex="0" data-ref="abierto">abierto</span>. Para cada $p \in U$ existe $r_p \gt 0$ con $B(p, r_p) \subseteq U$, así que $U = \bigcup_{p \in U} B(p, r_p)$. La imagen de una unión es la unión de las imágenes, y por el Paso 1</p>
+        $$ \pi_1(U) = \bigcup_{p \in U} \pi_1(B(p, r_p)) = \bigcup_{p \in U} B(x_p, r_p). $$
+        <p>Es una <span class="ref" tabindex="0" data-ref="union">unión de abiertos</span>, por lo tanto abierta. Esto prueba que $\pi_1$ es una <span class="ref" tabindex="0" data-ref="defab">función abierta</span>.</p>
+        <div class="look"><strong>En el dibujo</strong>$U$ son dos manchas abiertas. Los cuadrados tenues son algunas bolas $B(p, r_p) \subseteq U$. Arrastrá $p$ dentro de $U$: el dibujo usa el $r_p$ más grande posible, y la sombra $B(x_p, r_p)$ siempre cae dentro de $\pi_1(U)$, en verde.</div>
+      </article>
+
+      <article class="step" data-title="No cerrada">
+        <div class="kicker">a) · No cerrada</div>
+        <h3>La hipérbola: un cerrado cuya sombra no es cerrada</h3>
+        <p>Sea $F = \{q \in \mathbb{R}^2 : x_q y_q = 1\}$. Es $F = g^{-1}(\{1\})$ con $g(q) = x_q y_q$, que es <span class="ref" tabindex="0" data-ref="pol">continua por ser un polinomio</span>; como $\{1\}$ es cerrado, $F$ es <span class="ref" tabindex="0" data-ref="ej510">cerrado</span>. Pero</p>
+        $$ \pi_1(F) = \{x \in \mathbb{R} : \text{existe } y \text{ con } xy = 1\} = \mathbb{R} \setminus \{0\}, $$
+        <p>que no es cerrado: $x_n = 1/n \in \pi_1(F)$ y $x_n \to 0 \notin \pi_1(F)$ (<span class="ref" tabindex="0" data-ref="cer447">Corolario 4.47</span>).</p>
+        <p><i>Por qué falla.</i> Los testigos son $q_n = (1/n, n) \in F$. Si $q_n$ convergiera a algún $q$, por ser $F$ cerrado sería $q \in F$ con $x_q = 0$. Pero las segundas coordenadas $y_{q_n} = n$ no convergen ni tienen subsucesiones convergentes. Es otro caso de la <span class="ref" tabindex="0" data-ref="obs512">Observación 5.12</span>: continua no implica cerrada.</p>
+        <div class="look"><strong>En el dibujo</strong>Subí $n$. Las sombras $1/n$ se amontonan contra el $0$, que queda hueco, mientras los $q_n$ suben por la rama de la hipérbola y salen del dibujo.</div>
+      </article>
+
+      <article class="step" data-title="b) ⇒">
+        <div class="kicker">b) · Ida</div>
+        <h3>Si $f$ es continua, sus coordenadas también</h3>
+        <p>Toda $f : Z \to X \times Y$ se escribe $f(z) = (f_1(z), f_2(z))$ con $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$. Si $f$ es continua, como $\pi_1$ y $\pi_2$ lo son por a), $f_1$ y $f_2$ son continuas por ser <span class="ref" tabindex="0" data-ref="comp">composición de continuas</span>.</p>
+        <div class="look"><strong>En el dibujo</strong>Acá $Z = [0, 1]$ y $f$ recorre la curva. Mové $z$: $f_1(z)$ es la sombra de $f(z)$ sobre el eje $X$ y $f_2(z)$ la sombra sobre el eje $Y$. Con «$f_2$ salta en $z_0$» la curva se corta en dos y la sombra sobre $Y$ salta, mientras que la de $X$ no.</div>
+      </article>
+
+      <article class="step" data-title="b) ⇐">
+        <div class="kicker">b) · Vuelta</div>
+        <h3>Dos coordenadas que convergen dan un punto que converge</h3>
+        <p>Usamos el <span class="ref" tabindex="0" data-ref="teo57">Teorema 5.7</span>. Sea $z_n \to z_0$ en $Z$. Como $f_1, f_2$ son continuas en $z_0$, $f_1(z_n) \to f_1(z_0)$ y $f_2(z_n) \to f_2(z_0)$. Dado $\varepsilon \gt 0$ existen $n_1, n_2$ con</p>
+        $$ \begin{aligned} d_1(f_1(z_0), f_1(z_n)) &\lt \varepsilon \quad \text{para todo } n \ge n_1, \\ d_2(f_2(z_0), f_2(z_n)) &\lt \varepsilon \quad \text{para todo } n \ge n_2. \end{aligned} $$
+        <p>Para $n \ge n_0 = \max\{n_1, n_2\}$ valen las dos, y entonces</p>
+        $$ d_\infty(f(z_0), f(z_n)) = \max\{d_1(f_1(z_0), f_1(z_n)),\, d_2(f_2(z_0), f_2(z_n))\} \lt \varepsilon. $$
+        <p>Así $f(z_n) \to f(z_0)$ y $f$ es continua. $\square$</p>
+        <p>Con $f = \mathrm{id}_{X \times Y}$ sale la <span class="ref" tabindex="0" data-ref="obsconv">observación</span>: en $X \times Y$ con $d_\infty$, converger es converger coordenada a coordenada.</p>
+        <div class="look"><strong>En el dibujo</strong>Los puntos son $f(z_n)$ con $z_n = z_0 + (-1)^n \cdot 0.4/n$. La franja vertical es $d_1 \lt \varepsilon$, la horizontal es $d_2 \lt \varepsilon$, y su intersección es la bola $B(f(z_0), \varepsilon)$. Achicá $\varepsilon$ y mirá $n_1$, $n_2$ y $n_0$. Con «$f_2$ salta» la mitad de los puntos nunca entra a la franja horizontal: no existe $n_2$, y $f$ tampoco es continua.</div>
+      </article>
+    </div>
+  </section>
+
+  <p class="note">Fuente: <code>apuntes-typst/ejemplos/p4.typ</code>, Bloque 4, ejemplo C6-1 (Clase 6 · Ejemplo 1). Los enunciados de las ventanas son los de <code>apuntes-typst/apuntes.typ</code> salvo donde se indica. La definición de función abierta y cerrada y el teorema de composición de continuas no están enunciados en las notas de la materia.</p>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="dinf">
+    <div class="pop-title">Distancia infinito en $X \times Y$</div>
+    <p>$d_\infty\big((x, y), (x', y')\big) = \max\{d_1(x, x'),\, d_2(y, y')\}$.</p>
+    <p class="src">ejemplos/p4.typ, Bloque 4. En $\mathbb{R}^n$ es $d_\infty(x, y) = \max_i |x_i - y_i|$.</p>
+  </div>
+  <div data-key="bola">
+    <div class="pop-title">Definición 4.5 · Bola abierta</div>
+    <p>Sea $(M, d)$ un espacio métrico, $x_0 \in M$ y $r \gt 0$. La bola abierta es $B(x_0, r) = \{y \in M : d(x_0, y) \lt r\}$.</p>
+  </div>
+  <div data-key="interior">
+    <div class="pop-title">Definición 4.11 · Punto interior</div>
+    <p>Sea $E \subseteq M$ y $x \in E$. $x$ es <em>punto interior</em> de $E$ si existe $r \gt 0$ tal que $B(x, r) \subseteq E$.</p>
+  </div>
+  <div data-key="abierto">
+    <div class="pop-title">Definición 4.14 · Conjunto abierto</div>
+    <p>$A \subseteq M$ es <em>abierto</em> si $A = A^\circ$: todos sus puntos son interiores (Definición 4.11), es decir, para cada $x \in A$ existe $r \gt 0$ con $B(x, r) \subseteq A$.</p>
+  </div>
+  <div data-key="union">
+    <div class="pop-title">Teorema 4.17 · Unión de abiertos</div>
+    <p>Sea $(A_i)_{i \in I}$ una familia de abiertos, con $I$ arbitrario (finito o infinito, numerable o no). Entonces $\bigcup_{i \in I} A_i$ es abierto.</p>
+  </div>
+  <div data-key="cer447">
+    <div class="pop-title">Corolario 4.47 · Cerrados vía sucesiones</div>
+    <p>$E \subseteq M$ es cerrado si y sólo si para toda sucesión $(x_n) \subseteq E$ con $x_n \to x$ se tiene que $x \in E$.</p>
+  </div>
+  <div data-key="def54">
+    <div class="pop-title">Definición 5.4 · Función continua</div>
+    <p>$f : (M, d) \to (N, d')$ es <em>continua en $x$</em> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d(y, x) \lt \delta$ implica $d'(f(y), f(x)) \lt \varepsilon$. Equivalentemente, $f(B(x, \delta)) \subseteq B(f(x), \varepsilon)$.</p>
+    <p>$f$ es continua (en $M$) si es continua en todo $x \in M$.</p>
+  </div>
+  <div data-key="teo57">
+    <div class="pop-title">Teorema 5.7 · Continuidad por sucesiones</div>
+    <p>Sea $f : (M, d) \to (N, d')$ y $x \in M$. $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n) \subseteq M$ con $x_n \to x$ se tiene que $f(x_n) \to f(x)$.</p>
+  </div>
+  <div data-key="ej510">
+    <div class="pop-title">Ejercicio 5.10 · Continuidad por cerrados</div>
+    <p>$f : (M, d) \to (N, d')$ es continua si y sólo si $f^{-1}(F)$ es cerrado para todo $F \subseteq N$ cerrado.</p>
+    <p class="src">Desafío de la Práctica 4. Es el Teorema 5.9 (preimágenes de abiertos) pasado a complementos.</p>
+  </div>
+  <div data-key="obs512">
+    <div class="pop-title">Observación 5.12</div>
+    <p>La imagen de un abierto (o cerrado) por una continua no tiene por qué ser abierta (o cerrada). $e^x$ es continua, $\mathbb{R}$ es cerrado y $e^{\mathbb{R}} = (0, +\infty)$ no lo es. $x^2$ es continua y manda el abierto $(-1, 1)$ en $[0, 1)$, que no es abierto.</p>
+  </div>
+  <div data-key="defab">
+    <div class="pop-title">Función abierta y función cerrada</div>
+    <p>$f : (M, d) \to (N, d')$ es <em>abierta</em> si $f(U)$ es abierto en $N$ para todo $U \subseteq M$ abierto, y <em>cerrada</em> si $f(F)$ es cerrado en $N$ para todo $F \subseteq M$ cerrado.</p>
+    <p>Comparar con el Teorema 5.9, que pide lo mismo con <em>preimágenes</em>.</p>
+    <p class="src">ejemplos/p4.typ, Bloque 4. No figura en las notas de la materia; la clase la usa sin enunciarla.</p>
+  </div>
+  <div data-key="comp">
+    <div class="pop-title">Composición de continuas</div>
+    <p>Si $f : M \to N$ y $g : N \to P$ son continuas, $g \circ f$ es continua. Por el Teorema 5.9: si $A \subseteq P$ es abierto, $(g \circ f)^{-1}(A) = f^{-1}(g^{-1}(A))$ es abierto.</p>
+    <p class="src">No está enunciado como teorema en apuntes.typ.</p>
+  </div>
+  <div data-key="pol">
+    <div class="pop-title">Clase 9 · Proposición 1.6 (C9-1.6)</div>
+    <p>Los polinomios en varias variables son funciones continuas de $\mathbb{R}^n$ a $\mathbb{R}$. En particular $g(q) = x_q y_q$ es continua en $\mathbb{R}^2$.</p>
+    <p class="src">ejemplos/p4.typ, Bloque 3.</p>
+  </div>
+  <div data-key="obsconv">
+    <div class="pop-title">Convergencia coordenada a coordenada</div>
+    <p>En $X \times Y$ con $d_\infty$, $(x_n, y_n) \to (x, y)$ si y sólo si $x_n \to x$ e $y_n \to y$.</p>
+    <p>Ida: $d_1(x_n, x) \le d_\infty\big((x_n, y_n), (x, y)\big)$. Vuelta: el máximo de dos cantidades que tienden a $0$ tiende a $0$.</p>
+    <p class="src">ejemplos/p4.typ, observación posterior a C6-1.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const steps = [...document.querySelectorAll(".step")];
+  let cur = 0;
+
+  // ---------- estado arrastrable (coordenadas del mundo) ----------
+  const P0 = { x: 2.4, y: 2.6 };              // centro p de los pasos 0–2
+  const S = { q: { x: 3.1, y: 2.1 }, xa: 3.2, pU: { x: 3.6, y: 2.2 } };
+  let drag = null;
+
+  // ---------- conjunto abierto U del Paso 2: dos elipses abiertas ----------
+  const ELL = [
+    { cx: 1.35, cy: 3.55, a: 0.85, b: 0.5, t: 0.45 },
+    { cx: 3.75, cy: 1.85, a: 0.7, b: 1.1, t: -0.35 },
+  ];
+  const inEll = (e, x, y) => {
+    const dx = x - e.cx, dy = y - e.cy, c = Math.cos(e.t), s = Math.sin(e.t);
+    const u = dx * c + dy * s, v = -dx * s + dy * c;
+    return (u / e.a) ** 2 + (v / e.b) ** 2 < 1;
+  };
+  const inU = (x, y) => ELL.some((e) => inEll(e, x, y));
+  // Radio d∞ más grande con el cuadrado B(p, r) ⊆ U (bisección sobre el borde del cuadrado).
+  function rMax(p) {
+    if (!inU(p.x, p.y)) return 0;
+    const ok = (r) => {
+      for (let k = 0; k < 64; k++) {
+        const s = (k / 16) % 1 * 2 - 1, side = Math.floor(k / 16);
+        const [dx, dy] = [[s, -1], [1, s], [-s, 1], [-1, -s]][side];
+        if (!inU(p.x + dx * r, p.y + dy * r)) return false;
+      }
+      return true;
+    };
+    let lo = 0, hi = 2;
+    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; ok(m) ? (lo = m) : (hi = m); }
+    return lo * 0.999;
+  }
+  // π₁(U) como unión de intervalos (barrido en x).
+  const PROJ = (() => {
+    const runs = []; let start = null;
+    const N = 1200, x0 = -0.6, x1 = 5.4;
+    for (let i = 0; i <= N; i++) {
+      const x = x0 + (x1 - x0) * i / N;
+      let hit = false;
+      for (let j = 0; j <= 400 && !hit; j++) hit = inU(x, -0.6 + 6 * j / 400);
+      if (hit && start === null) start = x;
+      if (!hit && start !== null) { runs.push([start, x]); start = null; }
+    }
+    return runs;
+  })();
+  const SEEDS = [];
+  for (let x = 0.4; x < 5; x += 0.45) for (let y = 0.4; y < 5; y += 0.45) if (inU(x, y)) SEEDS.push({ x, y, r: rMax({ x, y }) });
+
+  // ---------- la aplicación f : [0,1] → ℝ² de la parte b) ----------
+  const Z0 = 0.45, JUMP = 1.3;
+  const fKind = () => document.querySelector('input[name="fkind"]:checked').value;
+  const f1 = (z) => 0.5 + 4 * z;
+  const f2 = (z, kind) => 2.2 + 1.2 * Math.sin(2 * Math.PI * 0.95 * z) + 0.5 * z - (kind === "jump" && z > Z0 ? JUMP : 0);
+  const zn = (n) => Z0 + ((n % 2 ? -1 : 1) * 0.4) / n;
+
+  // ---------- ventana del mundo por paso ----------
+  const VIEW = (s) => (s === 4 ? [-2.6, 4.4] : [-0.6, 5.4]);
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"), area: g("--area"),
+             seq2: g("--seq2"), area2: g("--area2"), ok: g("--ok"), okband: g("--okband"), fail: g("--fail"), panel: g("--panel"), mono: g("--font-mono") };
+  }
+  let M = null; // transformación actual
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const [a, b] = VIEW(cur), pad = 26, sc = (Math.min(w, h) - 2 * pad) / (b - a);
+    M = { X: (x) => pad + (x - a) * sc, Y: (y) => h - pad - (y - a) * sc, ix: (px) => a + (px - pad) / sc, iy: (py) => a + (h - pad - py) / sc, sc, a, b };
+    return { ctx, w, h };
+  }
+
+  // ---------- primitivas en coordenadas del mundo ----------
+  const W = {
+    rect(ctx, x0, y0, x1, y1, fill, stroke, dash) {
+      const X = M.X(x0), Y = M.Y(y1), w = M.X(x1) - X, h = M.Y(y0) - Y;
+      if (fill) { ctx.fillStyle = fill; ctx.fillRect(X, Y, w, h); }
+      if (stroke) { ctx.save(); ctx.strokeStyle = stroke; ctx.lineWidth = 1.4; if (dash) ctx.setLineDash(dash); ctx.strokeRect(X, Y, w, h); ctx.restore(); }
+    },
+    line(ctx, x0, y0, x1, y1, color, width = 1, dash) {
+      ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width; if (dash) ctx.setLineDash(dash);
+      ctx.beginPath(); ctx.moveTo(M.X(x0), M.Y(y0)); ctx.lineTo(M.X(x1), M.Y(y1)); ctx.stroke(); ctx.restore();
+    },
+    dot(ctx, x, y, r, fill, ring) {
+      ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(M.X(x), M.Y(y), r, 0, 2 * Math.PI); ctx.fill();
+      if (ring) { ctx.strokeStyle = ring; ctx.lineWidth = 2; ctx.stroke(); }
+    },
+    hollow(ctx, x, y, r, color, bg) {
+      ctx.fillStyle = bg; ctx.strokeStyle = color; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.arc(M.X(x), M.Y(y), r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+    },
+    text(ctx, C, s, x, y, color, align = "left", base = "bottom", dx = 0, dy = 0) {
+      ctx.font = "12px " + C.mono; ctx.fillStyle = color || C.ink; ctx.textAlign = align; ctx.textBaseline = base;
+      ctx.fillText(s, M.X(x) + dx, M.Y(y) + dy);
+    },
+  };
+  // Intervalo abierto sobre el eje X (o Y si vertical) con extremos huecos.
+  function openInterval(ctx, C, a, b, color, vertical = false) {
+    if (vertical) { W.line(ctx, 0, a, 0, b, color, 4); W.hollow(ctx, 0, a, 4, color, C.panel); W.hollow(ctx, 0, b, 4, color, C.panel); }
+    else { W.line(ctx, a, 0, b, 0, color, 4); W.hollow(ctx, a, 0, 4, color, C.panel); W.hollow(ctx, b, 0, 4, color, C.panel); }
+  }
+  function axes(ctx, C) {
+    const { a, b } = M;
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1;
+    for (let t = Math.ceil(a); t <= b; t++) {
+      ctx.beginPath(); ctx.moveTo(M.X(t), M.Y(a)); ctx.lineTo(M.X(t), M.Y(b)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(M.X(a), M.Y(t)); ctx.lineTo(M.X(b), M.Y(t)); ctx.stroke();
+    }
+    W.line(ctx, a, 0, b, 0, C.ink, 1.2); W.line(ctx, 0, a, 0, b, C.ink, 1.2);
+    W.text(ctx, C, "X", b, 0, C.ink, "right", "top", -2, 4);
+    W.text(ctx, C, "Y", 0, b, C.ink, "left", "top", 6, 2);
+    ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted;
+    for (let t = Math.ceil(a); t <= b - 0.5; t++) if (t) {
+      ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(t, M.X(t), M.Y(0) + 4);
+      ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillText(t, M.X(0) - 5, M.Y(t));
+    }
+  }
+  function setLegend(items) {
+    $("legend").innerHTML = items.map(([c, t]) => `<span><i class="sw" style="background:var(${c})"></i>${t}</span>`).join("");
+  }
+  function setReadout(rows) {
+    $("readout").innerHTML = rows.map(([k, v, cls]) => `<dt>${k}</dt><dd class="${cls || ""}">${v}</dd>`).join("");
+  }
+  const fmt = (v, d = 3) => (Math.abs(v) < 5e-4 ? 0 : v).toFixed(d);
+  // Menor N tal que la condición vale para todo n ≥ N (hasta 4000); null si no existe.
+  function firstFrom(cond) {
+    let last = 0;
+    for (let n = 1; n <= 4000; n++) if (!cond(n)) last = n;
+    return last >= 3990 ? null : last + 1;
+  }
+
+  // Puntos arrastrables del paso actual.
+  function handles() {
+    if (cur === 0 || cur === 1) return [{ key: "q", x: S.q.x, y: S.q.y }];
+    if (cur === 2) return [{ key: "xa", x: S.xa, y: 0 }];
+    if (cur === 3) return [{ key: "pU", x: S.pU.x, y: S.pU.y }];
+    return [];
+  }
+
+  function draw() {
+    const C = colors(), { ctx, w, h } = setup($("cv"));
+    ctx.fillStyle = C.panel; ctx.fillRect(0, 0, w, h);
+    const r = +$("s-r").value, eps = +$("s-eps").value, n = +$("s-n").value, z = +$("s-z").value;
+    $("o-r").textContent = r.toFixed(2); $("o-eps").textContent = eps.toFixed(2); $("o-n").textContent = n; $("o-z").textContent = z.toFixed(3);
+    document.querySelectorAll("[data-steps]").forEach((el) => (el.hidden = !el.dataset.steps.split(" ").includes(String(cur))));
+    axes(ctx, C);
+    const p = P0;
+    let hint = "";
+
+    if (cur === 0) {
+      const q = S.q, d1 = Math.abs(q.x - p.x), d2 = Math.abs(q.y - p.y), dinf = Math.max(d1, d2), inside = dinf < r;
+      W.rect(ctx, p.x - r, p.y - r, p.x + r, p.y + r, C.area, C.accent, [5, 4]);
+      if ($("c-disk").checked) {
+        ctx.save(); ctx.strokeStyle = C.seq2; ctx.fillStyle = C.area2; ctx.lineWidth = 1.4; ctx.setLineDash([3, 3]);
+        ctx.beginPath(); ctx.arc(M.X(p.x), M.Y(p.y), r * M.sc, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); ctx.restore();
+      }
+      W.line(ctx, p.x - r, p.y - r, p.x - r, 0, C.muted, 1, [2, 3]); W.line(ctx, p.x + r, p.y - r, p.x + r, 0, C.muted, 1, [2, 3]);
+      W.line(ctx, p.x - r, p.y - r, 0, p.y - r, C.muted, 1, [2, 3]); W.line(ctx, p.x - r, p.y + r, 0, p.y + r, C.muted, 1, [2, 3]);
+      openInterval(ctx, C, p.x - r, p.x + r, C.accent); openInterval(ctx, C, p.y - r, p.y + r, C.accent, true);
+      // las dos distancias coordenadas
+      W.line(ctx, p.x, p.y, q.x, p.y, C.seq2, 2); W.line(ctx, q.x, p.y, q.x, q.y, C.ok, 2);
+      W.dot(ctx, p.x, p.y, 4, C.ink); W.text(ctx, C, "p", p.x, p.y, C.ink, "right", "bottom", -5, -3);
+      W.dot(ctx, q.x, q.y, 7, inside ? C.ok : C.fail, C.panel); W.text(ctx, C, "q", q.x, q.y, C.ink, "left", "bottom", 8, -4);
+      W.text(ctx, C, "B(p, r)", p.x + r, p.y + r, C.accent, "right", "bottom", 0, -4);
+      setLegend([["--area", "B(p, r) = B(x_p, r) × B(y_p, r)"], ["--seq2", "d₁(x_q, x_p)"], ["--ok", "d₂(y_q, y_p)"]].concat($("c-disk").checked ? [["--area2", "bola euclídea"]] : []));
+      setReadout([["d₁(x_q, x_p)", fmt(d1)], ["d₂(y_q, y_p)", fmt(d2)], ["d∞(q, p)", fmt(dinf)], ["¿q ∈ B(p, r)?", inside ? "sí: las dos < r" : "no: alguna ≥ r", inside ? "good" : "bad"]]);
+      hint = "Arrastrá q.";
+    } else if (cur === 1) {
+      const q = S.q, d = eps, dx = Math.abs(q.x - p.x), dinf = Math.max(dx, Math.abs(q.y - p.y));
+      W.rect(ctx, p.x - eps, M.a, p.x + eps, M.b, C.okband);
+      W.line(ctx, p.x - eps, M.a, p.x - eps, M.b, C.ok, 1, [4, 4]); W.line(ctx, p.x + eps, M.a, p.x + eps, M.b, C.ok, 1, [4, 4]);
+      W.rect(ctx, p.x - d, p.y - d, p.x + d, p.y + d, C.area, C.accent, [5, 4]);
+      openInterval(ctx, C, p.x - eps, p.x + eps, C.ok);
+      W.text(ctx, C, "π₁⁻¹(B(x_p, ε))", p.x + eps, M.b, C.ok, "left", "top", 4, 4);
+      W.text(ctx, C, "B(p, δ)", p.x + d, p.y + d, C.accent, "right", "bottom", 0, -4);
+      W.line(ctx, q.x, q.y, q.x, 0, C.muted, 1.2, [3, 3]);
+      const good = dx < eps;
+      W.dot(ctx, q.x, 0, 5, good ? C.ok : C.fail);
+      W.text(ctx, C, "π₁(q)", q.x, 0, C.ink, "center", "top", 0, 18);
+      W.dot(ctx, p.x, p.y, 4, C.ink); W.text(ctx, C, "p", p.x, p.y, C.ink, "right", "bottom", -5, -3);
+      W.dot(ctx, q.x, q.y, 7, dinf < d ? C.accent : C.muted, C.panel); W.text(ctx, C, "q", q.x, q.y, C.ink, "left", "bottom", 8, -4);
+      setLegend([["--area", "B(p, δ), con δ = ε"], ["--okband", "puntos con sombra en B(x_p, ε)"]]);
+      setReadout([["d₁(x_q, x_p)", fmt(dx), good ? "good" : "bad"], ["≤ d∞(q, p)", fmt(dinf)], ["δ = ε", fmt(eps)],
+        ["", dinf < d ? "d∞ < δ ⇒ d₁ < ε" : good ? "q fuera de B(p, δ), igual cae en la franja" : "q fuera de la franja", dinf < d || good ? "good" : "bad"]]);
+      hint = "Arrastrá q y mové ε.";
+    } else if (cur === 2) {
+      const x = S.xa, inI = Math.abs(x - p.x) < r;
+      W.rect(ctx, p.x - r, p.y - r, p.x + r, p.y + r, C.area, C.accent, [5, 4]);
+      W.line(ctx, p.x, p.y, p.x + r, p.y, C.accent, 1); W.text(ctx, C, "r", p.x + r / 2, p.y, C.accent, "center", "top", 0, 3);
+      W.line(ctx, p.x - r, p.y - r, p.x - r, 0, C.muted, 1, [2, 3]); W.line(ctx, p.x + r, p.y - r, p.x + r, 0, C.muted, 1, [2, 3]);
+      openInterval(ctx, C, p.x - r, p.x + r, C.ok);
+      W.line(ctx, x, M.a, x, M.b, inI ? C.ok : C.fail, 1.2, [5, 4]);
+      if (inI) {
+        W.line(ctx, x, p.y - r, x, p.y + r, C.ok, 3);
+        W.dot(ctx, x, p.y, 6, C.ok, C.panel); W.text(ctx, C, "q = (x, y_p)", x, p.y, C.ok, "left", "bottom", 8, -6);
+      }
+      W.dot(ctx, p.x, p.y, 4, C.ink); W.text(ctx, C, "p", p.x, p.y, C.ink, "right", "bottom", -5, -3);
+      W.dot(ctx, x, 0, 7, inI ? C.ok : C.fail, C.panel); W.text(ctx, C, "x", x, 0, C.ink, "center", "top", 0, 10);
+      W.text(ctx, C, "π₁(B(p, r)) = B(x_p, r)", p.x, 0, C.ok, "center", "bottom", 0, -8);
+      setLegend([["--area", "B(p, r)"], ["--ok", "B(x_p, r) y la parte de la vertical dentro de B(p, r)"]]);
+      setReadout([["d₁(x, x_p)", fmt(Math.abs(x - p.x))], ["r", fmt(r)],
+        ["testigo", inI ? `q = (${fmt(x, 2)}, ${fmt(p.y, 2)}) ∈ B(p, r)` : "ninguno: la vertical no entra al cuadrado", inI ? "good" : "bad"]]);
+      hint = "Arrastrá x sobre el eje horizontal y mové r.";
+    } else if (cur === 3) {
+      ctx.save(); ctx.fillStyle = C.area; ctx.strokeStyle = C.accent; ctx.lineWidth = 1.4; ctx.setLineDash([5, 4]);
+      for (const e of ELL) { ctx.beginPath(); ctx.ellipse(M.X(e.cx), M.Y(e.cy), e.a * M.sc, e.b * M.sc, -e.t, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); }
+      ctx.restore();
+      ctx.save(); ctx.globalAlpha = 0.45;
+      for (const s of SEEDS) W.rect(ctx, s.x - s.r, s.y - s.r, s.x + s.r, s.y + s.r, null, C.muted);
+      ctx.restore();
+      for (const [a, b] of PROJ) openInterval(ctx, C, a, b, C.ok);
+      W.text(ctx, C, "U", ELL[0].cx - 0.3, ELL[0].cy + 0.15, C.accent, "center", "middle");
+      W.text(ctx, C, "U", ELL[1].cx + 0.1, ELL[1].cy + 0.7, C.accent, "center", "middle");
+      const q = S.pU, rp = rMax(q);
+      W.rect(ctx, q.x - rp, q.y - rp, q.x + rp, q.y + rp, C.area2, C.seq2);
+      W.line(ctx, q.x - rp, q.y - rp, q.x - rp, 0, C.seq2, 1, [2, 3]); W.line(ctx, q.x + rp, q.y - rp, q.x + rp, 0, C.seq2, 1, [2, 3]);
+      W.line(ctx, q.x - rp, 0.13, q.x + rp, 0.13, C.seq2, 3);
+      W.dot(ctx, q.x, q.y, 7, C.seq2, C.panel); W.text(ctx, C, "p", q.x, q.y, C.ink, "left", "bottom", 8, -4);
+      W.text(ctx, C, "π₁(U)", PROJ[0][0], 0, C.ok, "left", "top", 0, 18);
+      setLegend([["--area", "U abierto"], ["--area2", "B(p, r_p) ⊆ U"], ["--seq2", "B(x_p, r_p)"], ["--ok", "π₁(U)"]]);
+      setReadout([["p", `(${fmt(q.x, 2)}, ${fmt(q.y, 2)})`], ["r_p", fmt(rp)], ["B(x_p, r_p)", `(${fmt(q.x - rp, 2)}, ${fmt(q.x + rp, 2)})`],
+        ["π₁(U)", PROJ.map(([a, b]) => `(${fmt(a, 2)}, ${fmt(b, 2)})`).join(" ∪ ")]]);
+      hint = "Arrastrá p dentro de U.";
+    } else if (cur === 4) {
+      // hipérbola xy = 1 (dos ramas)
+      ctx.save(); ctx.strokeStyle = C.accent; ctx.lineWidth = 2.4;
+      for (const sg of [1, -1]) {
+        ctx.beginPath(); let first = true;
+        for (let i = 0; i <= 400; i++) {
+          const x = sg * (1 / 4.4 + (4.4 - 1 / 4.4) * i / 400), y = 1 / x;
+          if (Math.abs(y) > 4.4 || Math.abs(x) > 4.4) continue;
+          first ? ctx.moveTo(M.X(x), M.Y(y)) : ctx.lineTo(M.X(x), M.Y(y)); first = false;
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+      W.text(ctx, C, "F: xy = 1", 2.2, 1 / 2.2, C.accent, "left", "bottom", 4, -4);
+      // π₁(F) = ℝ \ {0}
+      W.line(ctx, M.a, 0, M.b, 0, C.ok, 4);
+      W.hollow(ctx, 0, 0, 5.5, C.fail, C.panel);
+      W.text(ctx, C, "0 ∉ π₁(F)", 0, 0, C.fail, "left", "top", 6, 6);
+      for (let k = 1; k <= n; k++) {
+        const x = 1 / k, y = k, last = k === n;
+        if (y < M.b - 0.1) {
+          W.line(ctx, x, y, x, 0, C.muted, 1, [2, 3]);
+          W.dot(ctx, x, y, last ? 6 : 4, last ? C.seq2 : C.muted, last ? C.panel : null);
+        }
+        W.line(ctx, x, -0.12, x, 0.12, last ? C.seq2 : C.ink, last ? 2.4 : 1.2);
+      }
+      if (n >= 5) {
+        W.line(ctx, 1 / n + 0.25, 2.8, 1 / n + 0.25, 4.2, C.seq2, 1.4);
+        W.text(ctx, C, "q_n = (1/n, n) ↑", 1 / n + 0.32, 4.2, C.seq2, "left", "top", 0, 2);
+      } else W.text(ctx, C, "q_n", 1 / n, n, C.seq2, "left", "bottom", 8, -4);
+      setLegend([["--accent", "F cerrado"], ["--ok", "π₁(F) = ℝ \\ {0}"], ["--seq2", "q_n y su sombra x_n = 1/n"]]);
+      setReadout([["x_n = 1/n", fmt(1 / n, 4)], ["y_n = n", String(n)], ["d(x_n, 0)", fmt(1 / n, 4) + " → 0", "good"],
+        ["d∞(q_n, F ∩ {x = 0})", "F no tiene puntos con x = 0", "bad"]]);
+      hint = "Mové n.";
+    } else {
+      const kind = fKind();
+      // curva f([0,1])
+      ctx.save(); ctx.strokeStyle = C.accent; ctx.lineWidth = 2.2;
+      const N = 400; ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = i / N, X = M.X(f1(t)), Y = M.Y(f2(t, kind));
+        if (i === 0 || (kind === "jump" && t > Z0 && (i - 1) / N <= Z0)) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+      }
+      ctx.stroke(); ctx.restore();
+      if (kind === "jump") { W.dot(ctx, f1(Z0), f2(Z0, kind), 4.5, C.accent); W.hollow(ctx, f1(Z0), f2(Z0, kind) - JUMP, 4.5, C.accent, C.panel); }
+      W.text(ctx, C, "f([0, 1])", f1(1), f2(1, kind), C.accent, "right", "bottom", 0, -8);
+
+      if (cur === 5) {
+        const a = f1(z), b = f2(z, kind);
+        W.line(ctx, a, b, a, 0, C.muted, 1, [3, 3]); W.line(ctx, a, b, 0, b, C.muted, 1, [3, 3]);
+        W.dot(ctx, a, 0, 5.5, C.seq2); W.dot(ctx, 0, b, 5.5, C.ok);
+        W.text(ctx, C, "f₁(z)", a, 0, C.seq2, "center", "top", 0, 18);
+        W.text(ctx, C, "f₂(z)", 0, b, C.ok, "left", "bottom", 8, -4);
+        W.dot(ctx, a, b, 7, C.accent, C.panel); W.text(ctx, C, "f(z)", a, b, C.ink, "left", "bottom", 8, -6);
+        setLegend([["--accent", "f(z) = (f₁(z), f₂(z))"], ["--seq2", "f₁ = π₁ ∘ f"], ["--ok", "f₂ = π₂ ∘ f"]]);
+        setReadout([["z", fmt(z)], ["f₁(z)", fmt(a)], ["f₂(z)", fmt(b)]].concat(kind === "jump" ? [["z₀", fmt(Z0) + " (f₂ salta " + JUMP + ")"]] : []));
+        hint = "Mové z.";
+      } else {
+        const A = f1(Z0), B = f2(Z0, kind);
+        W.rect(ctx, A - eps, M.a, A + eps, M.b, C.band);
+        W.rect(ctx, M.a, B - eps, M.b, B + eps, C.okband);
+        W.rect(ctx, A - eps, B - eps, A + eps, B + eps, null, C.ink, [5, 4]);
+        openInterval(ctx, C, A - eps, A + eps, C.accent); openInterval(ctx, C, B - eps, B + eps, C.ok, true);
+        const c1 = (k) => Math.abs(f1(zn(k)) - A) < eps, c2 = (k) => Math.abs(f2(zn(k), kind) - B) < eps;
+        const n1 = firstFrom(c1), n2 = firstFrom(c2), n0 = n1 && n2 ? Math.max(n1, n2) : null;
+        for (let k = 60; k >= 1; k--) {
+          const x = f1(zn(k)), y = f2(zn(k), kind), both = c1(k) && c2(k);
+          W.dot(ctx, x, y, k <= 3 ? 5 : 3.5, both ? C.ok : C.fail);
+          if (k <= 3) W.text(ctx, C, "f(z" + "₁₂₃"[k - 1] + ")", x, y, C.muted, "left", "top", 5, 3);
+        }
+        W.dot(ctx, A, B, 5, C.ink, C.panel); W.text(ctx, C, "f(z₀)", A, B, C.ink, "right", "bottom", -6, -5);
+        setLegend([["--band", "d₁(f₁(z₀), ·) < ε"], ["--okband", "d₂(f₂(z₀), ·) < ε"], ["--ok", "f(z_n) ∈ B(f(z₀), ε)"], ["--fail", "f(z_n) fuera"]]);
+        setReadout([["ε", fmt(eps, 2)], ["n₁", n1 ?? "no existe", n1 ? "" : "bad"], ["n₂", n2 ?? "no existe", n2 ? "" : "bad"],
+          ["n₀ = max{n₁, n₂}", n0 ?? "no existe", n0 ? "good" : "bad"],
+          ["", n0 ? "f(z_n) ∈ B(f(z₀), ε) para n ≥ " + n0 : "f₂(z_n) no tiende a f₂(z₀)", n0 ? "good" : "bad"]]);
+        hint = "Mové ε y cambiá la aplicación.";
+      }
+    }
+    $("hint").textContent = hint;
+  }
+
+  // ---------- arrastre ----------
+  const cv = $("cv");
+  function evPos(e) { const r = cv.getBoundingClientRect(); return { px: e.clientX - r.left, py: e.clientY - r.top }; }
+  cv.addEventListener("pointerdown", (e) => {
+    const { px, py } = evPos(e);
+    const hit = handles().find((hd) => Math.hypot(M.X(hd.x) - px, M.Y(hd.y) - py) < 16);
+    if (hit) { drag = hit.key; cv.setPointerCapture(e.pointerId); e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    const { px, py } = evPos(e);
+    if (!drag) { cv.style.cursor = handles().some((hd) => Math.hypot(M.X(hd.x) - px, M.Y(hd.y) - py) < 16) ? "grab" : "default"; return; }
+    const clamp = (v) => Math.min(M.b - 0.15, Math.max(M.a + 0.15, v));
+    const x = clamp(M.ix(px)), y = clamp(M.iy(py));
+    if (drag === "q") S.q = { x, y };
+    else if (drag === "xa") S.xa = x;
+    else if (drag === "pU" && inU(x, y)) S.pU = { x, y };
+    draw();
+  });
+  const end = () => { drag = null; };
+  cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end);
+
+  // ---------- navegación ----------
+  const toc = $("toc");
+  steps.forEach((s, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = s.dataset.title; b.id = "toc-" + i;
+    b.addEventListener("click", () => go(i));
+    li.appendChild(b); toc.appendChild(li);
+  });
+  function go(i) {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => (s.hidden = k !== cur));
+    toc.querySelectorAll("button").forEach((b, k) => (k === cur ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
+    $("prev").disabled = cur === 0; $("next").disabled = cur === steps.length - 1;
+    $("count").textContent = "Paso " + (cur + 1) + " de " + steps.length;
+    hidePopup();
+    draw();
+  }
+  $("prev").addEventListener("click", () => go(cur - 1));
+  $("next").addEventListener("click", () => go(cur + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("input")) return;
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft") go(cur - 1);
+    if (e.key === "Escape") hidePopup();
+  });
+  ["s-r", "s-eps", "s-n", "s-z", "c-disk"].forEach((id) => $(id).addEventListener("input", draw));
+  document.querySelectorAll('input[name="fkind"]').forEach((r) => r.addEventListener("change", draw));
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  new ResizeObserver(draw).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", draw);
+
+  go(0);
+})();
+</script>

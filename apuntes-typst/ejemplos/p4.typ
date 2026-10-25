@@ -198,6 +198,14 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   y se concluye lo deseado.
 ]
 
+#resolucion[Solución propia: por $epsilon$--$delta$][
+  Recordemos que $d_oo (x, y) = max_(k <= n) abs(x_k - y_k)$. Sea $epsilon > 0$ y tomemos $delta = epsilon$. Si $x, y in RR^n$ cumplen $d_oo (x, y) < delta$, entonces
+  $ abs(pi_i (x) - pi_i (y)) = abs(x_i - y_i) <= max_(k <= n) abs(x_k - y_k) = d_oo (x, y) < epsilon. $
+  La desigualdad del medio no es estricta: si la coordenada $i$ es la que realiza el máximo, vale la igualdad. La estricta la aporta $d_oo (x, y) < delta$.
+
+  Como $delta$ no depende de $y$, la cuenta prueba algo más fuerte: $abs(pi_i (x) - pi_i (y)) <= d_oo (x, y)$, es decir, $pi_i$ es Lipschitz con constante $1$ y, por lo tanto, uniformemente continua (Bloque 5).
+]
+
 #ejemplo[Los polinomios en varias variables son continuos (Clase 9 · Proposición 1.6)][C9-1.6][
   Los polinomios en varias variables (Definición 1.4) son funciones continuas de $RR^n$ a $RR$.
 ]
@@ -214,6 +222,52 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Probar que el conjunto $A = {(x, y) in RR^2 : x^3 >= x^2 + y - x}$ es cerrado con la métrica dada por la distancia $d_oo$.
 
   _Observación 2.1 (de la clase)_: puede graficarse el conjunto: es la región por debajo de la curva $y = x^3 - x^2 + x$, es decir $A = {(x, y) : y <= x^3 - x^2 + x}$.
+
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let azul = rgb("#1e3a8a")
+      let rojo = rgb("#b91c1c")
+      // Escala: 1 unidad en x = 1.8 cm, 1 unidad en y = 0.55 cm.
+      let (sx, sy) = (1.8, 0.55)
+      let (xmin, xmax, ymin, ymax) = (-1.2, 1.8, -4.5, 4.5)
+      let g(x) = calc.pow(x, 3) - calc.pow(x, 2) + x
+      let n = 80
+      let curva = range(n + 1).map(k => {
+        let x = xmin + (xmax - xmin) * k / n
+        (x * sx, g(x) * sy)
+      })
+
+      // Región A: debajo de la curva, recortada a la ventana.
+      line(
+        ..curva, (xmax * sx, ymin * sy), (xmin * sx, ymin * sy),
+        close: true, fill: azul.lighten(85%), stroke: none,
+      )
+
+      // Ejes.
+      line((xmin * sx - 0.2, 0), (xmax * sx + 0.3, 0), mark: (end: ">"), stroke: 0.8pt)
+      line((0, ymin * sy - 0.2), (0, ymax * sy + 0.3), mark: (end: ">"), stroke: 0.8pt)
+      content((xmax * sx + 0.3, -0.1), anchor: "north", text(size: 9pt, $x$))
+      content((-0.1, ymax * sy + 0.3), anchor: "east", text(size: 9pt, $y$))
+      for x in (-1, 1) {
+        line((x * sx, -0.08), (x * sx, 0.08), stroke: 0.6pt)
+        content((x * sx, -0.15), anchor: "north", text(size: 8pt, $#x$))
+      }
+      for y in (-4, -2, 2, 4) {
+        line((-0.08, y * sy), (0.08, y * sy), stroke: 0.6pt)
+        content((-0.15, y * sy), anchor: "east", text(size: 8pt, $#y$))
+      }
+
+      // Borde: la curva f = 0 (trazo lleno: pertenece a A).
+      line(..curva, stroke: 1.4pt + azul)
+      content((1.45 * sx, g(1.45) * sy), anchor: "east", padding: 0.15,
+        text(size: 9pt, fill: azul, $y = x^3 - x^2 + x$))
+
+      // Rótulos de las regiones.
+      content((1.1 * sx, -2.5 * sy), text(size: 11pt, fill: azul, $A = {f >= 0}$))
+      content((-0.6 * sx, 2.6 * sy), text(size: 10pt, fill: rojo, ${f < 0}$))
+    })
+  ]]
 ]
 
 #estrategia[Pasar todo de un lado y leer el conjunto como ${f >= 0}$][
