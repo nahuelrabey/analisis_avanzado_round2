@@ -1,0 +1,184 @@
+{
+ "def-3.1": {
+  "tipo": "Definición",
+  "numero": "3.1",
+  "titulo": "Conjuntos Coordinables",
+  "enunciado": "<p>Sean $X, Y$ dos conjuntos. Decimos que son <strong>coordinables</strong> si existe una función biyectiva $f : X \\to Y$. Cuando esto ocurre, escribimos $X \\sim Y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.5": {
+  "tipo": "Definición",
+  "numero": "3.5",
+  "titulo": "Cardinal de un Conjunto",
+  "enunciado": "<p>El cardinal de un conjunto $X$ se define como la clase de equivalencia de los conjuntos coordinables con $X$:</p><p>$$\\#X = \\operatorname{card}(X) := \\{Y : X \\sim Y\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul class=\"items\"><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.1": {
+  "tipo": "Definición",
+  "numero": "5.1",
+  "titulo": "Imagen y Preimagen de un Conjunto",
+  "enunciado": "<p>Dada una función $f : M \\to N$, y dados conjuntos $A \\subseteq M$ y $B \\subseteq N$,</p><p>$$\\begin{aligned} f(A) &= \\{f(x) \\in N : x \\in A\\} \\subseteq N \\quad \\text{y} \\\\ f^{-1}(B) &= \\{x \\in M : f(x) \\in B\\} \\subseteq M. \\end{aligned}$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-7": {
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión y $\\ell \\in \\mathbb{R}$. Decimos que $(a_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que si $n \\ge n_0$, $|a_n - \\ell| \\lt \\varepsilon$. Notamos $\\lim_{n \\to \\infty} a_n = \\ell$ o $a_n \\to \\ell$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-conjunto-de-partes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto de partes",
+  "enunciado": "<p>Dado un conjunto $A$, el <b>conjunto de partes</b> de $A$ es el conjunto de todos sus subconjuntos: $$\\mathcal{P}(A) = \\{B : B \\subseteq A\\}.$$ Para conjuntos $X$, $Y$, $Y^X$ denota el conjunto de todas las funciones $X \\to Y$; por ejemplo, $\\{0, 1\\}^A$ son las funciones de $A$ en $\\{0, 1\\}$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-monotona": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función monótona",
+  "enunciado": "<p>Sea $D \\subseteq \\mathbb{R}$. Una función $f : D \\to \\mathbb{R}$ es <b>creciente</b> si $x \\le y$ implica $f(x) \\le f(y)$ para todos $x, y \\in D$, y <b>decreciente</b> si $x \\le y$ implica $f(x) \\ge f(y)$. Es <b>monótona</b> si es creciente o decreciente.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p2-ej1": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 1",
+  "titulo": "Cardinal de cuatro conjuntos de enteros y racionales",
+  "enunciado": "<p>Halle el cardinal de los siguientes conjuntos:</p> <ol class=\"items\"> <li>$\\mathbb{Z}_{\\le -3}$</li> <li>$5\\mathbb{Z}$</li> <li>$\\mathbb{Z} \\times \\mathbb{N}$</li> <li>$(-1, 1) \\cap \\mathbb{Q}$</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej2": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 2",
+  "titulo": "La unión de dos contables es contable",
+  "enunciado": "<p>Sea $A$ y $B$ conjuntos contables. Pruebe que $A \\cup B$ es contable.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej3": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 3",
+  "titulo": "Sacar un contable de un conjunto con resto infinito no cambia el cardinal",
+  "enunciado": "<p>Sean $A \\subseteq B$ conjuntos tales que $A$ es contable y $B \\setminus A$ es infinito.</p> <ol class=\"items\"> <li>Pruebe que existe $C \\subseteq B \\setminus A$ tal que $C \\sim C \\cup A$.</li> <li>Deduzca que $B \\setminus A \\sim B$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej4": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 4",
+  "titulo": "Cardinal de los irracionales",
+  "enunciado": "<p>Halle el cardinal del conjunto de los números irracionales.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej5": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 5",
+  "titulo": "Disjuntar una sucesión de conjuntos",
+  "enunciado": "<p>Sea $(A_n)_{n \\in \\mathbb{N}}$ una sucesión de conjuntos y sea $A = \\bigcup_{n \\in \\mathbb{N}} A_n$.</p> <ol class=\"items\"> <li>Encuentre una sucesión $(B_n)_{n \\in \\mathbb{N}}$ de conjuntos disjuntos dos a dos tales que: <ul class=\"items\"> <li>$B_n \\subseteq A_n$ para todo $n \\in \\mathbb{N}$, y</li> <li>$\\bigcup_{n \\le m} B_n = \\bigcup_{n \\le m} A_n$ para todo $m \\in \\mathbb{N}$.</li> </ul></li> <li>Pruebe que para toda sucesión $(B_n)_{n \\in \\mathbb{N}}$ como arriba se tiene que $A = \\bigcup_{n \\in \\mathbb{N}} B_n$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej6": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 6",
+  "titulo": "Uniones numerables de contables y palabras de un alfabeto finito",
+  "enunciado": "<ol class=\"items\"> <li>Sea $\\{A_n\\}_{n \\in \\mathbb{N}}$ una familia de conjuntos contables. Pruebe que $\\bigcup_{n \\in \\mathbb{N}} A_n$ es contable.</li> <li>Sea $A$ un conjunto finito y no vacío y $S = \\bigcup_{m \\in \\mathbb{N}} A^m$. Pruebe que $\\# S = \\aleph_0$.<br> <em><b>Deduzca que, dado un alfabeto (esto es, un conjunto de símbolos) finito, hay más números reales que palabras (esto es, sucesiones finitas de símbolos) definibles con ese alfabeto para nombrarlos.</b></em></li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej7": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 7",
+  "titulo": "Uniones de conjuntos con el cardinal de ℝ",
+  "enunciado": "<p>Sea $c$ el cardinal de $\\mathbb{R}$. Pruebe las siguientes afirmaciones:</p> <ol class=\"items\"> <li>Si $\\# A = c$ y $\\# B = c$, entonces $\\# (A \\cup B) = c$.</li> <li>Si $\\# A_n = c$ para todo $n \\in \\mathbb{N}$, entonces $\\# \\left(\\bigcup_{n \\in \\mathbb{N}} A_n\\right) = c$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej8": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 8",
+  "titulo": "Partes de A y funciones de A en {0, 1}",
+  "enunciado": "<p>Sea $A$ un conjunto.</p> <ol class=\"items\"> <li>Pruebe que $\\mathcal{P}(A) \\sim \\{0, 1\\}^A$.</li> <li>Concluya que si $\\# A = n$ entonces $\\# \\mathcal{P}(A) = 2^n$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej9": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 9",
+  "titulo": "Partes de una intersección, de una unión y de conjuntos coordinables",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos. Pruebe que:</p> <ol class=\"items\"> <li>$\\mathcal{P}(A) \\cap \\mathcal{P}(B) = \\mathcal{P}(A \\cap B)$.</li> <li>$\\mathcal{P}(A) \\cup \\mathcal{P}(B) \\subseteq \\mathcal{P}(A \\cup B)$.</li> <li>$A \\sim B \\Rightarrow \\mathcal{P}(A) \\sim \\mathcal{P}(B)$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10",
+  "titulo": "[0, 1) es coordinable con las sucesiones de ceros y unos",
+  "enunciado": "<ol class=\"items\"> <li>Pruebe que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$.<br> <em><b>Sugerencia:</b> considere el desarrollo binario de los números del intervalo $[0, 1)$. ¡Ojo!, dicho desarrollo no es único.</em></li> <li>Concluya que $\\# \\mathcal{P}(\\mathbb{N}) = c$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej11": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 11",
+  "titulo": "Subconjuntos finitos de un numerable",
+  "enunciado": "<p>Pruebe que si $A$ es numerable entonces $\\mathcal{P}_f(A) = \\{B \\subseteq A : B \\text{ es finito}\\}$ es numerable.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej12": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 12",
+  "titulo": "Primos numerables y ℕ como unión de numerables disjuntos",
+  "enunciado": "<ol class=\"items\"> <li>Pruebe que el conjunto de números primos es numerable.</li> <li>Escriba a $\\mathbb{N}$ como unión numerable de conjuntos numerables disjuntos dos a dos.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej13": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 13",
+  "titulo": "Subconjuntos de ℕ infinitos con complemento infinito",
+  "enunciado": "<p>Calcule el cardinal del conjunto $\\{B \\subseteq \\mathbb{N} : \\# B = \\# (\\mathbb{N} \\setminus B) = \\aleph_0\\}$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej14": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 14",
+  "titulo": "Cardinal de productos: P(ℕ) × P(ℕ), [0, 1) × [0, 1) y ℝ^k",
+  "enunciado": "<ol class=\"items\"> <li>Calcule el cardinal de $\\mathcal{P}(\\mathbb{N}) \\times \\mathcal{P}(\\mathbb{N})$.</li> <li>Calcule el cardinal de $[0, 1) \\times [0, 1)$.</li> <li>Calcule el cardinal de $\\mathbb{R}^k$ para cada $k \\in \\mathbb{N}$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej15": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 15",
+  "titulo": "Cardinal de los polinomios con coeficientes reales",
+  "enunciado": "<p>Calcule el cardinal de $\\mathbb{R}[X]$, esto es, el conjunto formado por todos los polinomios con coeficientes reales.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej16": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 16",
+  "titulo": "Sucesiones enteras convergentes y sucesiones racionales periódicas",
+  "enunciado": "<p>Calcule el cardinal de los siguientes conjuntos:</p> <ol class=\"items\"> <li>$\\{(a_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{Z} : (a_n)_{n \\in \\mathbb{N}} \\text{ converge}\\}$.</li> <li>$\\{(a_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{Q} : (a_n)_{n \\in \\mathbb{N}} \\text{ es periódica}\\}$.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej17": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 17",
+  "titulo": "Familias de intervalos disjuntos y discontinuidades de una monótona",
+  "enunciado": "<ol class=\"items\"> <li>Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\\{A_i\\}_{i \\in I}$ indexada por $I$ tal que: <ul class=\"items\"> <li>$\\# A_i \\gt 1$ para todo $i \\in I$.</li> <li>$A_i \\cap A_j = \\emptyset$ si $i \\neq j$.</li> </ul> Pruebe que $I$ es contable.</li> <li>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ una función monótona. Pruebe que el conjunto de sus discontinuidades es contable.</li> </ol>",
+  "fuente": "guias/p2.typ"
+ }
+}

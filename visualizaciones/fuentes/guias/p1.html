@@ -1,0 +1,371 @@
+<p class="edicion" id="guiap1-edicion">Edición 2026 · sigue la guía 2026 (<code>apuntes-docentes/guias/p1.pdf</code>): el ejercicio de punto fijo de 2025 ya no forma parte de la práctica (queda al final, como anexo), entraron los ejercicios 8 y 9 y del 7 en adelante la numeración corre un lugar. Los ejercicios 1 a 6 no cambiaron.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap1-ej1" data-short="Ej. 1" data-title="Si x es menor que y + ε para todo ε, entonces x ≤ y" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Si $x \lt y + \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x \le y$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Probar que si $x \lt y + \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x \le y$. Deducir que si $|x - y| \lt \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x = y$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej1-c" aria-label="Recta real con los puntos x e y arrastrables y la marca y más epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej1-eps">ε</label><input type="range" id="guiap1-ej1-eps" min="1" max="100" value="40"><output id="guiap1-ej1-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej1-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá <i>x</i> e <i>y</i> sobre la recta. La zona sombreada son los números menores que <i>y</i> + ε. La hipótesis pide que <i>x</i> caiga ahí para <b>todos</b> los ε &gt; 0 a la vez; el slider prueba de a uno.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap1-ej2" data-short="Ej. 2" data-title="Enteros, racionales e irracionales entre dos reales" data-topics="supremo,densidad">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Enteros, racionales e irracionales entre dos reales</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a><a class="tag topic" href="#tema-densidad">densidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Sean $x, y \in \mathbb{R}$ tales que $y - x \gt 1$. Probar que existe un entero entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{R}$ tales que $x \lt y$. Probar que existe un racional entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{Q}$ tales que $x \lt y$. Probar que existe un irracional entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{R}$ tales que $x \lt y$. Probar que existe un irracional entre $x$ e $y$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej2-c" aria-label="Recta real con x e y arrastrables, los enteros y los racionales de denominador n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej2-n">denominador <i>n</i></label><input type="range" id="guiap1-ej2-n" min="1" max="12" value="3"><output id="guiap1-ej2-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej2-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá <i>x</i> e <i>y</i>. Las rayas largas son los enteros; las cortas, las fracciones <i>m</i>/<i>n</i> con el denominador <i>n</i> del slider. Con <i>n</i> = 1 se ven sólo los enteros, que es la situación del ítem (a).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap1-ej3" data-short="Ej. 3" data-title="Equivalencia del ínfimo" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Equivalencia del ínfimo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$ no vacío y <span class="ref" data-ref="def-4">acotado inferiormente</span>. Probar la siguiente equivalencia:
+      $$ i = \inf A \iff \left\{ \begin{aligned} &i \le a \text{ para todo } a \in A, \\ &\text{para todo } \varepsilon \gt 0 \text{ existe } a \in A \\ &\quad \text{tal que } i \le a \lt i + \varepsilon. \end{aligned} \right. $$</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej3-c" aria-label="Los puntos 1 más 1 sobre n, un candidato i y la banda de i a i más epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej3-i">candidato <i>i</i></label><input type="range" id="guiap1-ej3-i" min="50" max="150" value="80"><output id="guiap1-ej3-i-o"></output></div>
+        <div class="slider"><label for="guiap1-ej3-eps">ε</label><input type="range" id="guiap1-ej3-eps" min="1" max="60" value="25"><output id="guiap1-ej3-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej3-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto elegido para el dibujo: <i>A</i> = {1 + 1/<i>n</i> : <i>n</i> ∈ ℕ} (se ven los primeros 60 puntos). La raya es un candidato <i>i</i> y la banda es [<i>i</i>, <i>i</i> + ε). La lectura dice si se cumplen las dos condiciones de la derecha para ese <i>i</i> y ese ε.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap1-ej4" data-short="Ej. 4" data-title="Supremo, ínfimo, máximo y mínimo de cuatro conjuntos" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Supremo, ínfimo, máximo y mínimo de cuatro conjuntos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Hallar, si existen, <span class="ref" data-ref="def-2">supremo</span>, <span class="ref" data-ref="def-5">ínfimo</span>, <span class="ref" data-ref="def-3">máximo</span> y <span class="ref" data-ref="def-6-minimo">mínimo</span> de los siguientes subconjuntos de $\mathbb{R}$, y probar que lo son:</p>
+      <ol class="items">
+        <li>$(a, b]$</li>
+        <li>$B = \{1/2^n : n \in \mathbb{N}\}$</li>
+        <li>$B \cup \{0\}$</li>
+        <li>$\{x^2 - x - 1 : x \in \mathbb{R}\}$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej4-c" aria-label="Los conjuntos del ejercicio dibujados sobre la recta"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Conjunto</legend>
+          <label><input type="radio" name="guiap1-ej4-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="d">(d)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej4-N">puntos</label><input type="range" id="guiap1-ej4-N" min="1" max="12" value="6"><output id="guiap1-ej4-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej4-read" aria-live="polite"></dl>
+      <figcaption>En (a) se usan <i>a</i> = 1 y <i>b</i> = 3 (valores elegidos): el círculo vacío es un extremo que no está en el conjunto. En (b) y (c) el slider dice cuántos términos 1/2<sup><i>n</i></sup> se dibujan. En (d) se ve la parábola <i>y</i> = <i>x</i>² − <i>x</i> − 1 y, sobre el eje vertical, los valores que toma en una grilla de <i>x</i> (el slider la afina).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap1-ej5" data-short="Ej. 5" data-title="Supremo e ínfimo de un subconjunto" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Supremo e ínfimo de un subconjunto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $A \subseteq B \subseteq \mathbb{R}$, con $A \neq \emptyset$. Probar las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Si $B$ está <span class="ref" data-ref="def-1">acotado superiormente</span>, entonces $A$ también lo está, y $\sup A \le \sup B$ (<span class="ref" data-ref="def-2">supremo</span>).</li>
+        <li>Si $B$ está <span class="ref" data-ref="def-4">acotado inferiormente</span>, entonces $A$ también lo está, e $\inf B \le \inf A$ (<span class="ref" data-ref="def-5">ínfimo</span>).</li>
+        <li>Si $A$ no está acotado, entonces $B$ tampoco lo está.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 150" role="img" aria-label="Un conjunto B sobre la recta y, adentro, un subconjunto A formado por un tramo y dos puntos">
+        <line x1="10" y1="96" x2="350" y2="96" class="sv-axis"/>
+        <rect x="40" y="86" width="270" height="20" rx="4" class="sv-area2"/>
+        <line x1="40" y1="96" x2="310" y2="96" class="sv-seq2"/>
+        <text x="40" y="128" class="sv-label-seq2">B</text>
+        <line x1="120" y1="96" x2="200" y2="96" class="sv-accent" style="stroke-width:5"/>
+        <circle cx="90" cy="96" r="5" class="sv-fill-accent"/>
+        <circle cx="250" cy="96" r="5" class="sv-fill-accent"/>
+        <text x="160" y="76" text-anchor="middle" class="sv-label-accent">A</text>
+        <path d="M90 66 Q90 56 120 56 L200 56 Q250 56 250 66" class="sv-accent sv-dash" style="stroke-width:1"/>
+        <text x="180" y="30" text-anchor="middle" class="sv-muted">A ⊆ B ⊆ ℝ, A ≠ ∅</text>
+      </svg>
+      <figcaption>Un ejemplo elegido para el dibujo: <i>B</i> es el tramo naranja y <i>A</i> (en azul) es un tramo más dos puntos sueltos, todos dentro de <i>B</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap1-ej6" data-short="Ej. 6" data-title="Supremo e ínfimo de −A y de cA" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Supremo e ínfimo de $-A$ y de $cA$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dados un conjunto de números reales $A$ y $c \in \mathbb{R}$, denotamos $cA = \{ca : a \in A\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Probar las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Probar que si $A$ está <span class="ref" data-ref="def-1">acotado superiormente</span>, entonces $-A$ está <span class="ref" data-ref="def-4">acotado inferiormente</span> e $\inf(-A) = -\sup A$ (<span class="ref" data-ref="def-5">ínfimo</span>, <span class="ref" data-ref="def-2">supremo</span>).</li>
+        <li>Probar que si $c \gt 0$ y $A$ está acotado superiormente, entonces $cA$ está acotado superiormente y $\sup(cA) = c \sup(A)$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej6-c" aria-label="Tres filas: el conjunto A, su reflejado menos A y su escalado c por A"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej6-cc"><i>c</i></label><input type="range" id="guiap1-ej6-cc" min="10" max="250" value="150"><output id="guiap1-ej6-cc-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej6-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto elegido para el dibujo: <i>A</i> = {−1} ∪ [0.5, 1.5]. La segunda fila es −<i>A</i> (el reflejo respecto de 0) y la tercera es <i>c</i><i>A</i>, con el <i>c</i> &gt; 0 del slider.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap1-ej7" data-short="Ej. 7" data-title="Tres límites por definición" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Tres límites por definición</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Probar, usando la <span class="ref" data-ref="def-7">definición de límite</span>:</p>
+      <ol class="items">
+        <li>$\displaystyle \lim_{n \to \infty} \frac{3 - 2n}{n + 1} = -2$.</li>
+        <li>$\displaystyle \lim_{n \to \infty} \frac{\sin(n)}{n} = 0$.</li>
+        <li>$\displaystyle \lim_{n \to \infty} \frac{2^n - 3}{2^n + 4} = 1$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej7-c" aria-label="Términos de la sucesión elegida y la banda de ancho epsilon alrededor del límite"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión</legend>
+          <label><input type="radio" name="guiap1-ej7-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej7-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej7-it" value="c">(c)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej7-eps">ε</label><input type="range" id="guiap1-ej7-eps" min="1" max="50" value="20"><output id="guiap1-ej7-eps-o"></output></div>
+        <div class="slider"><label for="guiap1-ej7-N">términos</label><input type="range" id="guiap1-ej7-N" min="5" max="60" value="25"><output id="guiap1-ej7-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej7-read" aria-live="polite"></dl>
+      <figcaption>Los puntos son los primeros términos de la sucesión del ítem elegido; la raya verde es el límite que da el enunciado y la banda tiene ancho ε para cada lado. Los puntos naranjas son los que quedan fuera de la banda entre los dibujados.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap1-ej8" data-short="Ej. 8" data-title="Acotar la distancia al límite por una sucesión que tiende a 0" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Acotar $|x_n - \ell|$ por una sucesión que tiende a $0$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}}$ y $(a_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales. Probar que si $|x_n - \ell| \le a_n$ para todo $n \in \mathbb{N}$ y $a_n \underset{n \to \infty}{\longrightarrow} 0$ entonces $x_n \underset{n \to \infty}{\longrightarrow} \ell$ (<span class="ref" data-ref="def-7">convergencia</span>).</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej8-c" aria-label="La sucesión x_n encerrada entre ell menos a_n y ell más a_n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej8-N">términos</label><input type="range" id="guiap1-ej8-N" min="5" max="80" value="30"><output id="guiap1-ej8-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej8-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: ℓ = 1, <i>a<sub>n</sub></i> = 2/√<i>n</i> y <i>x<sub>n</sub></i> = 1 + <i>a<sub>n</sub></i> sen(<i>n</i>), que cumplen |<i>x<sub>n</sub></i> − ℓ| ≤ <i>a<sub>n</sub></i>. Las curvas punteadas son ℓ ± <i>a<sub>n</sub></i>: el embudo que encierra a la sucesión.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap1-ej9" data-short="Ej. 9" data-title="Límite de la suma, con límites finitos e infinitos" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Límite de la suma, con límites finitos e infinitos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ son <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $x_n \underset{n \to \infty}{\longrightarrow} \ell_1$ e $y_n \underset{n \to \infty}{\longrightarrow} \ell_2$, probar que $x_n + y_n \underset{n \to \infty}{\longrightarrow} \ell_1 + \ell_2$ para el caso en que:</p>
+      <ol class="items">
+        <li>$\ell_1, \ell_2 \in \mathbb{R}$ (<span class="ref" data-ref="def-7">convergencia</span>).</li>
+        <li>$\ell_1 \in \mathbb{R}$ y $\ell_2 = \infty$ (<span class="ref" data-ref="def-8">divergencia a $+\infty$</span>).</li>
+        <li>$\ell_1 = +\infty = \ell_2$.</li>
+        <li>Pensar por qué no vale en el caso en que $\ell_1 = +\infty$ y $\ell_2 = -\infty$. Dar un contraejemplo para este caso.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej9-c" aria-label="Dos sucesiones elegidas y, opcionalmente, su suma"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Caso</legend>
+          <label><input type="radio" name="guiap1-ej9-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej9-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej9-it" value="c">(c)</label>
+        </fieldset>
+        <label class="check"><input type="checkbox" id="guiap1-ej9-sum" checked>mostrar <i>x<sub>n</sub></i> + <i>y<sub>n</sub></i></label>
+        <div class="slider"><label for="guiap1-ej9-N">términos</label><input type="range" id="guiap1-ej9-N" min="5" max="40" value="20"><output id="guiap1-ej9-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej9-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas para el dibujo, una por caso: (a) <i>x<sub>n</sub></i> = 1 + (−1)<sup><i>n</i></sup>/<i>n</i>, <i>y<sub>n</sub></i> = 2 − 1/<i>n</i>; (b) la misma <i>x<sub>n</sub></i> e <i>y<sub>n</sub></i> = <i>n</i>/3; (c) <i>x<sub>n</sub></i> = √<i>n</i>, <i>y<sub>n</sub></i> = <i>n</i>/4. El ítem (d) pide un contraejemplo, así que no se dibuja.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap1-ej10" data-short="Ej. 10" data-title="Las desigualdades pasan al límite" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Las desigualdades pasan al límite</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}}, (y_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $x_n \underset{n \to \infty}{\longrightarrow} \ell_1$ e $y_n \underset{n \to \infty}{\longrightarrow} \ell_2$ (<span class="ref" data-ref="def-7">convergencia</span>). Probar que si $x_n \le y_n$ para todo $n$, entonces $\ell_1 \le \ell_2$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej10-c" aria-label="Dos sucesiones con x_n menor o igual que y_n en cada n"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ejemplo</legend>
+          <label><input type="radio" name="guiap1-ej10-it" value="0" checked>límites distintos</label>
+          <label><input type="radio" name="guiap1-ej10-it" value="1">límites iguales</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej10-N">términos</label><input type="range" id="guiap1-ej10-N" min="5" max="50" value="25"><output id="guiap1-ej10-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej10-read" aria-live="polite"></dl>
+      <figcaption>Ejemplos elegidos: <i>x<sub>n</sub></i> = 1 − 1/<i>n</i> (azul) y, como <i>y<sub>n</sub></i> (naranja), 3/2 + (−1)<sup><i>n</i></sup>/(2<i>n</i>) o 1 + 1/<i>n</i>. En cada <i>n</i> el segmento gris une <i>x<sub>n</sub></i> con <i>y<sub>n</sub></i>. El segundo ejemplo muestra que <i>x<sub>n</sub></i> &lt; <i>y<sub>n</sub></i> estricto no da ℓ₁ &lt; ℓ₂ estricto.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap1-ej11" data-short="Ej. 11" data-title="Nula por acotada es nula" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Nula por acotada es nula</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ son <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $(x_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-7">converge</span> a $0$ e $(y_n)_{n \in \mathbb{N}}$ está <span class="ref" data-ref="def-9-sucesion-acotada">acotada</span>, probar que $(x_n y_n)_{n \in \mathbb{N}}$ converge a $0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej11-c" aria-label="Una sucesión que tiende a cero, una sucesión acotada y su producto"></canvas>
+      <div class="ctrl">
+        <label class="check"><input type="checkbox" id="guiap1-ej11-prod" checked>mostrar <i>x<sub>n</sub></i> <i>y<sub>n</sub></i></label>
+        <div class="slider"><label for="guiap1-ej11-N">términos</label><input type="range" id="guiap1-ej11-N" min="5" max="80" value="40"><output id="guiap1-ej11-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej11-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos: <i>x<sub>n</sub></i> = 1/√<i>n</i> (azul), <i>y<sub>n</sub></i> = 1.5 cos(<i>n</i>) (naranja), que vive en la franja |<i>y</i>| ≤ <i>M</i> = 1.5, y el producto (verde azulado).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap1-ej12" data-short="Ej. 12" data-title="Sucesiones decrecientes" data-topics="sucesiones,supremo">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Sucesiones decrecientes</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ <span class="ref" data-ref="def-10">decreciente</span>. Probar que:</p>
+      <ol class="items">
+        <li>Si $(x_n)_{n \in \mathbb{N}}$ es <span class="ref" data-ref="def-4">acotada inferiormente</span>, entonces tiene <span class="ref" data-ref="def-7">límite</span> y
+          $$ \lim_{n \to \infty} x_n = \inf\{x_n : n \in \mathbb{N}\}. $$</li>
+        <li>Si $(x_n)_{n \in \mathbb{N}}$ es no acotada inferiormente, entonces $x_n \underset{n \to \infty}{\longrightarrow} -\infty$ (<span class="ref" data-ref="def-8">divergencia</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej12-c" aria-label="Una sucesión decreciente acotada inferiormente o no acotada inferiormente"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Caso</legend>
+          <label><input type="radio" name="guiap1-ej12-it" value="a" checked>(a) acotada inf.</label>
+          <label><input type="radio" name="guiap1-ej12-it" value="b">(b) no acotada inf.</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej12-N">términos</label><input type="range" id="guiap1-ej12-N" min="5" max="60" value="25"><output id="guiap1-ej12-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej12-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas para el dibujo: (a) <i>x<sub>n</sub></i> = 1 + 2/<i>n</i>; (b) <i>x<sub>n</sub></i> = 2 − √<i>n</i>. Las dos son decrecientes; cada término queda por debajo del anterior (los segmentos grises).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap1-ej13" data-short="Ej. 13" data-title="Sin máximo, el supremo es límite de una sucesión estrictamente creciente" data-topics="supremo,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Sin máximo, el supremo es límite de una sucesión estrictamente creciente</h3>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq \mathbb{R}$ <span class="ref" data-ref="def-1">acotado superiormente</span> y no vacío. Probar que si $A$ no tiene <span class="ref" data-ref="def-3">máximo</span> entonces existe $(a_n)_{n \in \mathbb{N}} \subseteq A$ <span class="ref" data-ref="def-10">estrictamente creciente</span> tal que $a_n \underset{n \to \infty}{\longrightarrow} \sup(A)$ (<span class="ref" data-ref="def-2">supremo</span>).</p></div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap1-ej14" data-short="Ej. 14" data-title="Una sucesión no acotada superiormente tiene una subsucesión que diverge a +∞" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>No acotada superiormente: una subsucesión diverge a $+\infty$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ una sucesión no <span class="ref" data-ref="def-1">acotada superiormente</span>. Probar que existe una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(x_{n_k})_{k \in \mathbb{N}}$ que <span class="ref" data-ref="def-8">diverge a $+\infty$</span>.</p></div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap1-ej15" data-short="Ej. 15" data-title="Si toda subsucesión tiene una subsubsucesión que converge a ℓ, la sucesión converge a ℓ" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Si toda subsucesión tiene una subsubsucesión que converge a $\ell$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ y $\ell \in \mathbb{R}$. Probar que si toda <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(x_{n_k})_{k \in \mathbb{N}}$ tiene una (sub)subsucesión $(x_{n_{k_j}})_{j \in \mathbb{N}}$ que <span class="ref" data-ref="def-7">converge</span> a $\ell$, entonces la sucesión $(x_n)_{n \in \mathbb{N}}$ converge a $\ell$.</p></div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap1-ej16" data-short="Ej. 16" data-title="Convergencia a partir de pares, impares y múltiplos de 3" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Convergencia a partir de pares, impares y múltiplos de $3$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$. Probar:</p>
+      <ol class="items">
+        <li>Si $(x_{2k})_{k \in \mathbb{N}}$ y $(x_{2k-1})_{k \in \mathbb{N}}$ son <span class="ref" data-ref="def-7">convergentes</span>, y sus límites coinciden, entonces $(x_n)_{n \in \mathbb{N}}$ es convergente.</li>
+        <li>Si $(x_{2k})_{k \in \mathbb{N}}$, $(x_{2k-1})_{k \in \mathbb{N}}$ y $(x_{3k})_{k \in \mathbb{N}}$ son convergentes, entonces $(x_n)_{n \in \mathbb{N}}$ es convergente.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej16-c" aria-label="Términos de una sucesión coloreados según el índice sea par, impar o múltiplo de 3"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ítem</legend>
+          <label><input type="radio" name="guiap1-ej16-it" value="a" checked>(a) pares e impares</label>
+          <label><input type="radio" name="guiap1-ej16-it" value="b">(b) y múltiplos de 3</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej16-N">términos</label><input type="range" id="guiap1-ej16-N" min="6" max="60" value="24"><output id="guiap1-ej16-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej16-read" aria-live="polite"></dl>
+      <figcaption>Sucesión elegida para el dibujo: <i>x<sub>n</sub></i> = 1 + (−1)<sup><i>n</i></sup>/<i>n</i>. Azul: índices pares (<i>x</i><sub>2<i>k</i></sub>); naranja: impares (<i>x</i><sub>2<i>k</i>−1</sub>); en (b), un anillo verde marca los índices múltiplos de 3 (<i>x</i><sub>3<i>k</i></sub>), que reparten entre pares e impares.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"></div>
+</article>
+
+<!-- ===================== ANEXO ===================== -->
+<section class="bloque" id="guiap1-anexo">
+<h2><span class="bn">Anexo</span>Ejercicio de la edición 2025</h2>
+<div class="ej" id="guiap1-anexo-ej7-2025">
+  <div class="ej-head"><span class="tag">Anexo</span><h3>Punto fijo de una función creciente</h3>
+    <span class="src">Ejercicio 7 de la edición 2025</span>
+    <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="nota"><b>Anexo: ejercicio de la edición 2025</b>La guía 2026 no incluye el ejercicio de punto fijo, que figuraba como <strong>Ejercicio 7</strong> en la edición anterior. Se conserva acá porque es el único ejercicio de toda la práctica que se apoya sólo en el Cap. 1 y estaba marcado como el siguiente a resolver.</div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [a, b] \to [a, b]$ <span class="ref" data-ref="ext-funcion-monotona">creciente</span>. Supongamos que $f(a) \gt a$. Sea
+      $$ x_0 = \sup(\{x \in [a, b] : f(x) \gt x\}). $$
+      Pruebe que $f(x_0) = x_0$ (<span class="ref" data-ref="def-2">supremo</span>).</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-anexo-c" aria-label="Gráfico de una función creciente con un salto, la diagonal y el conjunto donde f(x) es mayor que x"></canvas>
+      <dl class="read" id="guiap1-anexo-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> creciente elegida para el dibujo, en [<i>a</i>, <i>b</i>] = [0, 1] y con un salto en 0.6: <i>f</i>(<i>x</i>) = 0.35 + 0.3<i>x</i> si <i>x</i> &lt; 0.6 y <i>f</i>(<i>x</i>) = 0.75 + 0.2<i>x</i> si <i>x</i> ≥ 0.6. La recta punteada es <i>y</i> = <i>x</i>; la franja sobre el eje horizontal es el conjunto {<i>x</i> : <i>f</i>(<i>x</i>) &gt; <i>x</i>}, que no tiene por qué ser un intervalo.</figcaption>
+    </figure>
+  </div>
+</div>
+</section>
+
+<p class="nota" id="guiap1-resolucion">Esta página trae sólo los enunciados. La resolución completa de la guía está en <code>apuntes-typst/guias-agente/guia_1_resuelta_agente.typ</code> (verificada en Lean).</p>
