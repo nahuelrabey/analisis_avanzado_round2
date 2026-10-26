@@ -1,0 +1,226 @@
+{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.33": {
+  "tipo": "Definición",
+  "numero": "4.33",
+  "titulo": "Punto de Acumulación y Conjunto Derivado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <b>punto de acumulación</b> de $E$ si para todo radio $r \\gt 0$ tenemos que existe un $y \\in B(x, r) \\cap E$ con $y \\neq x$.</p><p>Definimos el <b>conjunto derivado</b> de $E$ como $$E' = \\{x \\in M : x \\text{ es punto de acumulación}\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.38": {
+  "tipo": "Definición",
+  "numero": "4.38",
+  "titulo": "Punto de Frontera y Frontera de un Conjunto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <b>punto de frontera</b> de $E$ si para todo $r \\gt 0$, $B(x, r) \\cap E \\neq \\emptyset$ y $B(x, r) \\cap E^c \\neq \\emptyset$.</p><p>Al conjunto de los puntos de frontera lo llamamos la <b>frontera</b> de $E$ y lo notamos $$\\partial E = \\{x \\in M : x \\text{ es punto de frontera de } E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado</b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro</b> se define como:</p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:</p><p>1. <b>Distancia euclídea ($d_2$):</b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$</p><p>2. <b>Distancia taxista ($d_1$):</b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$</p><p>3. <b>Distancia del máximo ($d_\\infty$):</b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-metricas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métricas equivalentes",
+  "enunciado": "<p>Dos métricas $d$ y $d'$ sobre un mismo conjunto $M$ son <b>equivalentes</b> si existen constantes $\\alpha, \\beta \\gt 0$ tales que $$\\alpha\\, d(x, y) \\le d'(x, y) \\le \\beta\\, d(x, y) \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ (la Observación «La continuidad depende de las métricas» la menciona para $d_1$, $d_2$ y $d_\\infty$)"
+ },
+ "guia-p3-ej1": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 1",
+  "titulo": "Seis espacios métricos y sus bolas abiertas",
+  "enunciado": "<p>Pruebe que los siguientes son espacios métricos. Dibuje, en cada caso, una bola abierta.</p> <ol class=\"items\"> <li>$\\mathbb{R}$ con $d(x, y) = |x - y|$.</li> <li>$\\mathbb{R}^n$ con $d_2(x, y) = \\left(\\sum_{i=1}^n (x_i - y_i)^2\\right)^{1/2}$.</li> <li>$\\mathbb{R}^n$ con $d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|$.</li> <li>$\\mathbb{R}^n$ con $d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|$.</li> <li>$C([0, 1])$ con $d_\\infty(f, g) = \\max_{0 \\le t \\le 1} |f(t) - g(t)|$.</li> <li>$E$ un conjunto no vacío, con la métrica $$ \\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases} $$</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej2": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 2",
+  "titulo": "¿Cuáles son métricas en ℝ?",
+  "enunciado": "<p>Decida cuáles de las siguientes funciones definidas en $\\mathbb{R} \\times \\mathbb{R}$ son métricas en $\\mathbb{R}$:</p> <ol class=\"items\"> <li>$d(x, y) = (x - y)^2$</li> <li>$d(x, y) = \\sqrt{|x - y|}$</li> <li>$d(x, y) = |x^2 - y^2|$</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej3": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 3",
+  "titulo": "Interior y clausura de ocho subconjuntos de ℝ",
+  "enunciado": "<p>Halle interior y clausura de cada uno de los siguientes subconjuntos de $\\mathbb{R}$. Determine cuáles son abiertos o cerrados.</p> <ol class=\"items\"> <li>$[0, 1]$</li> <li>$(0, 1)$</li> <li>$\\mathbb{Q}$</li> <li>$\\mathbb{Q} \\cap [0, 1]$</li> <li>$\\mathbb{Z}$</li> <li>$[0, 1) \\cup \\{2\\}$</li> <li>$\\{1/n : n \\in \\mathbb{N}\\}$</li> <li>$\\{1/n : n \\in \\mathbb{N}\\} \\cup \\{0\\}$</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej4": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4",
+  "titulo": "Puntos, bolas abiertas, bolas cerradas y anillos",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.</p> <ol class=\"items\"> <li>Pruebe que $\\{x\\}$ es un conjunto cerrado.</li> <li>Pruebe que $B(x, r)$ es un conjunto abierto.</li> <li>Pruebe que si $r \\gt r' \\gt 0$ entonces $\\overline{B(x, r')} \\subseteq B(x, r)$.</li> <li>Pruebe que $\\overline{B}(x, r) = \\{y \\in E : d(x, y) \\le r\\}$ es un conjunto cerrado.</li> <li>Deduzca que $\\overline{B(x, r)} \\subseteq \\overline{B}(x, r)$.</li> <li>Dé un ejemplo en que $\\overline{B(x, r)}$ sea un subconjunto propio de $\\overline{B}(x, r)$.</li> <li>Pruebe que $\\{y \\in E : 2 \\lt d(y, x) \\lt 3\\}$ es un conjunto abierto.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej5": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 5",
+  "titulo": "Complemento del interior y de la clausura",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $A \\subseteq E$. Pruebe que:</p> <ol class=\"items\"> <li>$E \\setminus A^{\\circ} = \\overline{E \\setminus A}$.</li> <li>$E \\setminus \\overline{A} = (E \\setminus A)^{\\circ}$.</li> </ol> <p>¿Son ciertas las igualdades $\\overline{A} = \\overline{A^{\\circ}}$ y $A^{\\circ} = (\\overline{A})^{\\circ}$?</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej6": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 6",
+  "titulo": "Interior y clausura de uniones e intersecciones",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sean $A, B \\subseteq E$. Pruebe que:</p> <ol class=\"items\"> <li>$(A \\cap B)^{\\circ} = A^{\\circ} \\cap B^{\\circ}$.</li> <li>$A^{\\circ} \\cup B^{\\circ} \\subseteq (A \\cup B)^{\\circ}$.</li> <li>$\\overline{A \\cup B} = \\overline{A} \\cup \\overline{B}$.</li> <li>$\\overline{A \\cap B} \\subseteq \\overline{A} \\cap \\overline{B}$.</li> </ol> <p>Encuentre ejemplos en que no valga la igualdad en (b) y (d).</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej7": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 7",
+  "titulo": "Diámetro: monotonía y clausura",
+  "enunciado": "<p>Sean $E$ un espacio métrico y $A, B \\subseteq E$ subconjuntos acotados de $E$.</p> <ol class=\"items\"> <li>Pruebe que si $A \\subseteq B$ entonces $\\operatorname{diam}(A) \\le \\operatorname{diam}(B)$.</li> <li>Pruebe que $\\operatorname{diam}(A) = \\operatorname{diam}(\\overline{A})$.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej8": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 8",
+  "titulo": "Frontera y puntos de acumulación de los conjuntos del Ejercicio 3",
+  "enunciado": "<p>Halle frontera y puntos de acumulación de cada uno de los subconjuntos de $\\mathbb{R}$ del Ejercicio 3.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej9": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 9",
+  "titulo": "La frontera vía clausura e interior",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $A \\subseteq E$.</p> <ol class=\"items\"> <li>Pruebe que $\\partial A = \\overline{A} \\setminus A^{\\circ}$, y concluya que $\\partial A$ es cerrado.</li> <li>Pruebe que $\\partial A = \\overline{A} \\cap \\overline{E \\setminus A}$, y concluir que $\\partial A = \\partial(E \\setminus A)$.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej10": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 10",
+  "titulo": "Distancia de un punto a un conjunto",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Dados $A \\subseteq E$ no vacío y $x \\in E$, se define la <em>distancia de $x$ a $A$</em> como $$ d(x, A) = \\inf\\{d(x, a) : a \\in A\\}. $$ Pruebe que para todos $x, y \\in E$ y $r \\gt 0$:</p> <ol class=\"items\"> <li>$|d(x, A) - d(y, A)| \\le d(x, y)$.</li> <li>$x \\in A \\Rightarrow d(x, A) = 0$.</li> <li>$d(x, A) = 0 \\iff x \\in \\overline{A}$.</li> <li>$B_A(r) = \\{x \\in E : d(x, A) \\lt r\\}$ es abierto.</li> <li>$\\overline{B}_A(r) = \\{x \\in E : d(x, A) \\le r\\}$ es cerrado.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej11": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 11",
+  "titulo": "La distancia entre conjuntos no es una distancia",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Consideremos el conjunto $\\mathcal{X} = \\{A \\subseteq E : A \\neq \\emptyset\\}$. Definimos la función $\\hat{d} : \\mathcal{X} \\times \\mathcal{X} \\to \\mathbb{R}$ como $$ \\hat{d}(A, B) = \\inf\\{d(a, b) : a \\in A, b \\in B\\}. $$ Determine si las siguientes afirmaciones son verdaderas o falsas:</p> <ol class=\"items\"> <li>$\\hat{d}(A, B) = \\hat{d}(\\overline{A}, B)$.</li> <li>$\\hat{d}(A, B) = 0 \\iff A \\cap B \\neq \\emptyset$.</li> <li>$\\hat{d}(A, B) = 0 \\iff \\overline{A} \\cap \\overline{B} \\neq \\emptyset$.</li> <li>$\\hat{d}(A, B) \\le \\hat{d}(A, C) + \\hat{d}(C, B)$.</li> </ol> <p>Concluya que $\\hat{d}$ no es una distancia.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej12": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 12",
+  "titulo": "d1, d2 y d∞ son equivalentes en ℝ^n",
+  "enunciado": "<p>Considere en $\\mathbb{R}^n$ las distancias $d_1$, $d_2$ y $d_\\infty$.</p> <ol class=\"items\"> <li>Pruebe que estas tres distancias son equivalentes; más aún, pruebe que $$ \\begin{aligned} d_\\infty(x, y) &\\le d_2(x, y) \\le d_1(x, y) \\\\ &\\le n\\, d_\\infty(x, y). \\end{aligned} $$</li> <li>Denotemos por $B_1(x, r)$, $B_2(x, r)$ y $B_\\infty(x, r)$ a la bola de centro $x$ y radio $r$ para cada una de las distancias, respectivamente. Deduzca de (a) que $$ \\begin{aligned} B_1(x, r) &\\subseteq B_2(x, r) \\subseteq B_\\infty(x, r) \\\\ &\\subseteq B_1(x, nr). \\end{aligned} $$ Compare estas contenciones con los dibujos hechos en el Ejercicio 1.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej13": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 13",
+  "titulo": "La distancia es continua en sucesiones",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico y sean $(x_n)_{n \\in \\mathbb{N}}$, $(y_n)_{n \\in \\mathbb{N}}$ sucesiones en $E$.</p> <ol class=\"items\"> <li>Si $\\lim_{n \\to \\infty} x_n = x$ y $\\lim_{n \\to \\infty} y_n = y$, pruebe que $\\lim_{n \\to \\infty} d(x_n, y_n) = d(x, y)$.</li> <li>Si $(x_n)_{n \\in \\mathbb{N}}$, $(y_n)_{n \\in \\mathbb{N}}$ son dos sucesiones de Cauchy en $E$, pruebe que la sucesión de números reales $(d(x_n, y_n))_{n \\in \\mathbb{N}}$ es convergente.</li> </ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej14": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 14",
+  "titulo": "ℝ^n es completo con d1, d2 y d∞",
+  "enunciado": "<p>Pruebe que $(\\mathbb{R}^n, d_1)$, $(\\mathbb{R}^n, d_2)$ y $(\\mathbb{R}^n, d_\\infty)$ son completos.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej15": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 15",
+  "titulo": "Un cerrado de un completo es completo",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $A \\subseteq E$ un subconjunto de $E$. Pruebe que si $A$ es cerrado entonces el espacio métrico $(A, d)$ es completo.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej16": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 16",
+  "titulo": "Teorema de la intersección de Cantor",
+  "enunciado": "<p><b>Teorema de la intersección (Cantor).</b> Sea $E$ un espacio métrico completo. Sea $(A_n)_{n \\in \\mathbb{N}}$ una sucesión de subconjuntos cerrados, acotados y no vacíos de $E$ tales que</p> <ul class=\"items\"> <li>$A_{n+1} \\subseteq A_n$ para todo $n \\ge 1$.</li> <li>$\\lim_{n \\to \\infty} \\operatorname{diam}(A_n) = 0$.</li> </ul> <p>Pruebe que existe un único elemento $x \\in \\bigcap_{n \\in \\mathbb{N}} A_n$.</p>",
+  "fuente": "guias/p3.typ"
+ }
+}

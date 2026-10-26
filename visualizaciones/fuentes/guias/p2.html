@@ -1,0 +1,377 @@
+<p class="edicion" id="guiap2-edicion">Edición 2026 · sigue la guía 2026 (<code>apuntes-docentes/guias/p2.pdf</code>), cotejada ítem por ítem con la edición 2025: numeración y enunciados idénticos (17 ejercicios, 33 incisos, más el “Recuerde”); sólo cambió el encabezado.</p>
+
+<div class="nota" id="guiap2-consulta"><b>Consulta docente: ¿el conjunto vacío es contable?</b>
+  <p>La <span class="ref" data-ref="def-3.6">Definición 3.6</span> (<code>apuntes.typ</code>) dice que $A$ es <strong>finito</strong> si existe $n \in \mathbb{N}$ y una biyección $\{1, \dots, n\} \to A$, y <strong>contable</strong> si es finito o numerable. Como en este apunte $\mathbb{N} = \{1, 2, 3, \dots\}$ arranca en $1$, ningún $\{1, \dots, n\}$ es vacío, y tampoco hay biyección $\mathbb{N} \to \emptyset$. Leída al pie de la letra, entonces, <strong>$\emptyset$ no es contable</strong>.</p>
+  <p>Eso choca con la convención habitual de la bibliografía, donde $\emptyset$ es finito y $\#\emptyset = 0$. Y las dos lecturas no se pueden mezclar, porque cada una hace verdadera una cosa distinta:</p>
+  <ul class="items">
+    <li><strong>(A) Definición 3.6 literal:</strong> $\emptyset$ contable: no · contable $\iff \# \le \aleph_0$: <strong>falso</strong> (falla $\Leftarrow$) · contable $\Rightarrow A \neq \emptyset$: sí.</li>
+    <li><strong>(B) convención habitual:</strong> $\emptyset$ contable: sí · contable $\iff \# \le \aleph_0$: verdadero · contable $\Rightarrow A \neq \emptyset$: <strong>falso</strong>.</li>
+  </ul>
+  <p>El contraejemplo que separa las dos es $\emptyset$ mismo: $\#\emptyset \le \aleph_0$ es verdadero (la función vacía $\emptyset \to \mathbb{N}$ es vacuamente inyectiva, tal como observa el apunte después de la <span class="ref" data-ref="prop-3.9">Proposición 3.9</span>), pero bajo (A) $\emptyset$ no es contable. Si las dos columnas de la derecha valieran a la vez, la Proposición 3.9 no tendría por qué pedir $A \neq \emptyset$ como hipótesis separada.</p>
+  <p><strong>Qué se usa en <code>guias/p2.typ</code>.</strong> Las soluciones del <strong>Ejercicio 2</strong> y del <strong>Ejercicio 6 (a)</strong> están escritas bajo la lectura (A): descartan los casos con $\emptyset$ por la propia hipótesis de contabilidad. Si el docente usa (B), esas dos soluciones necesitan un caso extra (trivial en ambas, pero hay que escribirlo). El resto de los ejercicios transcritos no depende de esto.</p>
+  <p><strong>Para preguntar:</strong> ¿la cátedra considera a $\emptyset$ finito (y por lo tanto contable), o la Definición 3.6 se lee literalmente como está transcripta?</p>
+</div>
+
+<div class="nota" id="guiap2-recuerde"><b>Recuerde</b>Dadas $f : X \to Y$, $g : Y \to Z$ y dados $A, B \subseteq X$ y $C, D \subseteq Y$, se tiene (<span class="ref" data-ref="def-5.1">imagen y preimagen</span>):
+  <ol class="items">
+    <li>$f(A \cup B) = f(A) \cup f(B)$.</li>
+    <li>$f(A \cap B) \subseteq f(A) \cap f(B)$.</li>
+    <li>$f^{-1}(C \cup D) = f^{-1}(C) \cup f^{-1}(D)$.</li>
+    <li>$f^{-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D)$.</li>
+    <li>$A \subseteq f^{-1}(f(A))$. Si $f$ es inyectiva vale la igualdad.</li>
+    <li>$f(f^{-1}(C)) \subseteq C$. Si $f$ es sobreyectiva vale la igualdad.</li>
+    <li>$X \setminus f^{-1}(D) = f^{-1}(Y \setminus D)$.</li>
+    <li>Si $f$ y $g$ son inyectivas (resp. sobreyectivas, biyectivas), entonces $g \circ f$ es inyectiva (resp. sobreyectiva, biyectiva).</li>
+  </ol>
+</div>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap2-ej1" data-short="Ej. 1" data-title="Cardinal de cuatro conjuntos de enteros y racionales" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Cardinal de cuatro conjuntos de enteros y racionales</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Halle el <span class="ref" data-ref="def-3.5">cardinal</span> de los siguientes conjuntos:</p>
+      <ol class="items">
+        <li>$\mathbb{Z}_{\le -3}$</li>
+        <li>$5\mathbb{Z}$</li>
+        <li>$\mathbb{Z} \times \mathbb{N}$</li>
+        <li>$(-1, 1) \cap \mathbb{Q}$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej1-c" aria-label="Algunos elementos del conjunto elegido"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Conjunto</legend>
+          <label><input type="radio" name="guiap2-ej1-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap2-ej1-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap2-ej1-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap2-ej1-it" value="d">(d)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap2-ej1-K">tamaño</label><input type="range" id="guiap2-ej1-K" min="2" max="9" value="5"><output id="guiap2-ej1-K-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej1-read" aria-live="polite"></dl>
+      <figcaption>Una ventana finita de cada conjunto; el slider la agranda. En (a) y (b), puntos de la recta; en (c), los pares (<i>m</i>, <i>n</i>) del retículo con |<i>m</i>| ≤ tamaño y <i>n</i> ≤ tamaño; en (d), las fracciones <i>p</i>/<i>q</i> de (−1, 1) con denominador <i>q</i> ≤ tamaño, una fila por <i>q</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap2-ej2" data-short="Ej. 2" data-title="La unión de dos contables es contable" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>La unión de dos contables es contable</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Sea $A$ y $B$ conjuntos <span class="ref" data-ref="def-3.6">contables</span>. Pruebe que $A \cup B$ es contable.</p></div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap2-ej3" data-short="Ej. 3" data-title="Sacar un contable de un conjunto con resto infinito no cambia el cardinal" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Sacar un contable no cambia el cardinal</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $A \subseteq B$ conjuntos tales que $A$ es <span class="ref" data-ref="def-3.6">contable</span> y $B \setminus A$ es infinito.</p>
+      <ol class="items">
+        <li>Pruebe que existe $C \subseteq B \setminus A$ tal que $C \sim C \cup A$ (<span class="ref" data-ref="def-3.1">coordinables</span>).</li>
+        <li>Deduzca que $B \setminus A \sim B$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 190" role="img" aria-label="Un conjunto B con un subconjunto contable A y el resto B menos A infinito">
+        <rect x="12" y="20" width="336" height="150" rx="14" class="sv-seq2"/>
+        <text x="26" y="42" class="sv-label-seq2">B</text>
+        <rect x="34" y="62" width="96" height="88" rx="10" class="sv-area"/>
+        <rect x="34" y="62" width="96" height="88" rx="10" class="sv-accent"/>
+        <text x="82" y="82" text-anchor="middle" class="sv-label-accent">A contable</text>
+        <circle cx="58" cy="108" r="4" class="sv-fill-accent"/><circle cx="82" cy="108" r="4" class="sv-fill-accent"/><circle cx="106" cy="108" r="4" class="sv-fill-accent"/>
+        <text x="82" y="134" text-anchor="middle" class="sv-muted">a₁, a₂, …</text>
+        <text x="245" y="58" text-anchor="middle" class="sv-label-seq2">B ∖ A infinito</text>
+        <circle cx="170" cy="90" r="3.5" class="sv-fill-seq2"/><circle cx="195" cy="118" r="3.5" class="sv-fill-seq2"/><circle cx="222" cy="86" r="3.5" class="sv-fill-seq2"/>
+        <circle cx="250" cy="126" r="3.5" class="sv-fill-seq2"/><circle cx="276" cy="94" r="3.5" class="sv-fill-seq2"/><circle cx="300" cy="134" r="3.5" class="sv-fill-seq2"/>
+        <circle cx="318" cy="80" r="3.5" class="sv-fill-seq2"/><circle cx="160" cy="140" r="3.5" class="sv-fill-seq2"/>
+        <text x="300" y="112" class="sv-muted">…</text>
+      </svg>
+      <figcaption>Los datos del ejercicio: <i>A</i> ⊆ <i>B</i>, <i>A</i> contable (se puede enumerar) y lo que queda, <i>B</i> ∖ <i>A</i>, infinito.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap2-ej4" data-short="Ej. 4" data-title="Cardinal de los irracionales" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Cardinal de los irracionales</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Halle el <span class="ref" data-ref="def-3.5">cardinal</span> del conjunto de los números irracionales.</p></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap2-ej5" data-short="Ej. 5" data-title="Disjuntar una sucesión de conjuntos" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Disjuntar una sucesión de conjuntos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(A_n)_{n \in \mathbb{N}}$ una sucesión de conjuntos y sea $A = \bigcup_{n \in \mathbb{N}} A_n$.</p>
+      <ol class="items">
+        <li>Encuentre una sucesión $(B_n)_{n \in \mathbb{N}}$ de conjuntos disjuntos dos a dos tales que:
+          <ul class="items">
+            <li>$B_n \subseteq A_n$ para todo $n \in \mathbb{N}$, y</li>
+            <li>$\bigcup_{n \le m} B_n = \bigcup_{n \le m} A_n$ para todo $m \in \mathbb{N}$.</li>
+          </ul></li>
+        <li>Pruebe que para toda sucesión $(B_n)_{n \in \mathbb{N}}$ como arriba se tiene que $A = \bigcup_{n \in \mathbb{N}} B_n$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej5-c" aria-label="Intervalos A_1 a A_m que se superponen y su unión"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap2-ej5-m"><i>m</i></label><input type="range" id="guiap2-ej5-m" min="1" max="7" value="4"><output id="guiap2-ej5-m-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej5-read" aria-live="polite"></dl>
+      <figcaption>Conjuntos elegidos para el dibujo: <i>A<sub>n</sub></i> = [<i>n</i>/2 − 1/2, <i>n</i>/2 + 3/5], intervalos que se pisan. Cada fila es un <i>A<sub>n</sub></i> con <i>n</i> ≤ <i>m</i>; la barra de abajo es la unión de los <i>A<sub>n</sub></i> con <i>n</i> ≤ <i>m</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap2-ej6" data-short="Ej. 6" data-title="Uniones numerables de contables y palabras de un alfabeto finito" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Uniones numerables de contables y palabras de un alfabeto finito</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Sea $\{A_n\}_{n \in \mathbb{N}}$ una familia de conjuntos <span class="ref" data-ref="def-3.6">contables</span>. Pruebe que $\bigcup_{n \in \mathbb{N}} A_n$ es contable.</li>
+        <li>Sea $A$ un conjunto finito y no vacío y $S = \bigcup_{m \in \mathbb{N}} A^m$. Pruebe que $\# S = \aleph_0$ (<span class="ref" data-ref="def-3.5">cardinal</span>).<br>
+          <em><b>Deduzca que, dado un alfabeto (esto es, un conjunto de símbolos) finito, hay más números reales que palabras (esto es, sucesiones finitas de símbolos) definibles con ese alfabeto para nombrarlos.</b></em></li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej6-c" aria-label="Las palabras de longitud m sobre un alfabeto chico"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Alfabeto <i>A</i></legend>
+          <label><input type="radio" name="guiap2-ej6-A" value="1">{a}</label>
+          <label><input type="radio" name="guiap2-ej6-A" value="2" checked>{a, b}</label>
+          <label><input type="radio" name="guiap2-ej6-A" value="3">{a, b, c}</label>
+        </fieldset>
+        <div class="slider"><label for="guiap2-ej6-m">longitud <i>m</i></label><input type="range" id="guiap2-ej6-m" min="1" max="4" value="3"><output id="guiap2-ej6-m-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej6-read" aria-live="polite"></dl>
+      <figcaption>Cada casilla es un elemento de <i>A</i><sup><i>m</i></sup>, escrito como palabra: (a, b, b) es “abb”. <i>S</i> junta las palabras de todas las longitudes <i>m</i> ∈ ℕ.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap2-ej7" data-short="Ej. 7" data-title="Uniones de conjuntos con el cardinal de ℝ" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Uniones de conjuntos con el cardinal de $\mathbb{R}$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Sea $c$ el <span class="ref" data-ref="def-3.5">cardinal</span> de $\mathbb{R}$. Pruebe las siguientes afirmaciones:</p>
+    <ol class="items">
+      <li>Si $\# A = c$ y $\# B = c$, entonces $\# (A \cup B) = c$.</li>
+      <li>Si $\# A_n = c$ para todo $n \in \mathbb{N}$, entonces $\# \left(\bigcup_{n \in \mathbb{N}} A_n\right) = c$.</li>
+    </ol>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap2-ej8" data-short="Ej. 8" data-title="Partes de A y funciones de A en {0, 1}" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Partes de $A$ y funciones de $A$ en $\{0, 1\}$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A$ un conjunto.</p>
+      <ol class="items">
+        <li>Pruebe que $\mathcal{P}(A) \sim \{0, 1\}^A$ (<span class="ref" data-ref="ext-conjunto-de-partes">partes de $A$</span>, <span class="ref" data-ref="def-3.1">coordinables</span>).</li>
+        <li>Concluya que si $\# A = n$ entonces $\# \mathcal{P}(A) = 2^n$ (<span class="ref" data-ref="def-3.6">conjunto finito</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 230" role="img" aria-label="Diagrama de los subconjuntos de 1, 2, 3 ordenados por inclusión">
+        <g class="sv-grid">
+          <line x1="180" y1="196" x2="80" y2="146"/><line x1="180" y1="196" x2="180" y2="146"/><line x1="180" y1="196" x2="280" y2="146"/>
+          <line x1="80" y1="146" x2="80" y2="84"/><line x1="80" y1="146" x2="180" y2="84"/>
+          <line x1="180" y1="146" x2="80" y2="84"/><line x1="180" y1="146" x2="280" y2="84"/>
+          <line x1="280" y1="146" x2="180" y2="84"/><line x1="280" y1="146" x2="280" y2="84"/>
+          <line x1="80" y1="84" x2="180" y2="34"/><line x1="180" y1="84" x2="180" y2="34"/><line x1="280" y1="84" x2="180" y2="34"/>
+        </g>
+        <rect x="150" y="184" width="60" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="180" y="201" text-anchor="middle" class="sv-text">∅</text>
+        <rect x="50" y="134" width="60" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="80" y="151" text-anchor="middle" class="sv-text">{1}</text>
+        <rect x="150" y="134" width="60" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="180" y="151" text-anchor="middle" class="sv-text">{2}</text>
+        <rect x="250" y="134" width="60" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="280" y="151" text-anchor="middle" class="sv-text">{3}</text>
+        <rect x="45" y="72" width="70" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="80" y="89" text-anchor="middle" class="sv-text">{1, 2}</text>
+        <rect x="145" y="72" width="70" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="180" y="89" text-anchor="middle" class="sv-text">{1, 3}</text>
+        <rect x="245" y="72" width="70" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="280" y="89" text-anchor="middle" class="sv-text">{2, 3}</text>
+        <rect x="140" y="22" width="80" height="24" rx="6" class="sv-accent" style="fill:var(--panel)"/><text x="180" y="39" text-anchor="middle" class="sv-text">{1, 2, 3}</text>
+      </svg>
+      <figcaption>Un caso chico, elegido para el dibujo: los subconjuntos de <i>A</i> = {1, 2, 3}, de abajo hacia arriba por cantidad de elementos; cada raya une un subconjunto con otro que tiene un elemento más.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap2-ej9" data-short="Ej. 9" data-title="Partes de una intersección, de una unión y de conjuntos coordinables" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Partes de una intersección, de una unión y de conjuntos coordinables</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Sean $A$ y $B$ conjuntos. Pruebe que (<span class="ref" data-ref="ext-conjunto-de-partes">partes de un conjunto</span>):</p>
+    <ol class="items">
+      <li>$\mathcal{P}(A) \cap \mathcal{P}(B) = \mathcal{P}(A \cap B)$.</li>
+      <li>$\mathcal{P}(A) \cup \mathcal{P}(B) \subseteq \mathcal{P}(A \cup B)$.</li>
+      <li>$A \sim B \Rightarrow \mathcal{P}(A) \sim \mathcal{P}(B)$ (<span class="ref" data-ref="def-3.1">coordinables</span>).</li>
+    </ol>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap2-ej10" data-short="Ej. 10" data-title="[0, 1) es coordinable con las sucesiones de ceros y unos" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>$[0, 1) \sim \{0, 1\}^{\mathbb{N}}$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Pruebe que $[0, 1) \sim \{0, 1\}^{\mathbb{N}}$ (<span class="ref" data-ref="def-3.1">coordinables</span>).<br>
+          <em><b>Sugerencia:</b> considere el desarrollo binario de los números del intervalo $[0, 1)$. ¡Ojo!, dicho desarrollo no es único.</em></li>
+        <li>Concluya que $\# \mathcal{P}(\mathbb{N}) = c$ (<span class="ref" data-ref="ext-conjunto-de-partes">partes de $\mathbb{N}$</span>, <span class="ref" data-ref="def-3.5">cardinal</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej10-c" aria-label="Desarrollo binario de un número de 0 a 1: en cada nivel, la mitad del intervalo diádico en la que cae"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap2-ej10-x"><i>x</i></label><input type="range" id="guiap2-ej10-x" min="0" max="1023" value="653"><output id="guiap2-ej10-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej10-read" aria-live="polite"></dl>
+      <figcaption>La sugerencia, dibujada: en el nivel <i>k</i> se parte el intervalo diádico del nivel anterior en dos mitades y el dígito <i>b<sub>k</sub></i> dice en cuál cae <i>x</i> (0 = izquierda, 1 = derecha). El slider recorre los múltiplos de 1/1024; justo esos números (los de desarrollo finito) tienen también un segundo desarrollo que termina en unos, que la lectura muestra.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap2-ej11" data-short="Ej. 11" data-title="Subconjuntos finitos de un numerable" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Subconjuntos finitos de un numerable</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Pruebe que si $A$ es <span class="ref" data-ref="def-3.6">numerable</span> entonces $\mathcal{P}_f(A) = \{B \subseteq A : B \text{ es finito}\}$ es numerable.</p></div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap2-ej12" data-short="Ej. 12" data-title="Primos numerables y ℕ como unión de numerables disjuntos" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Primos numerables y $\mathbb{N}$ como unión de numerables disjuntos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Pruebe que el conjunto de números primos es <span class="ref" data-ref="def-3.6">numerable</span>.</li>
+        <li>Escriba a $\mathbb{N}$ como unión numerable de conjuntos numerables disjuntos dos a dos.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej12-c" aria-label="Los naturales del 1 al 100 en una grilla, con los primos marcados"></canvas>
+      <dl class="read" id="guiap2-ej12-read" aria-live="polite"></dl>
+      <figcaption>Los naturales del 1 al 100 en filas de diez; los primos, en azul. Sirve de mapa para el ítem (a); el (b) queda para hacer.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap2-ej13" data-short="Ej. 13" data-title="Subconjuntos de ℕ infinitos con complemento infinito" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Subconjuntos de $\mathbb{N}$ infinitos con complemento infinito</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Calcule el <span class="ref" data-ref="def-3.5">cardinal</span> del conjunto $\{B \subseteq \mathbb{N} : \# B = \# (\mathbb{N} \setminus B) = \aleph_0\}$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap2-ej13-c" aria-label="Tira de los naturales del 1 al 60 marcando un subconjunto B y su complemento"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Un elemento <i>B</i> del conjunto</legend>
+          <label><input type="radio" name="guiap2-ej13-B" value="par" checked>pares</label>
+          <label><input type="radio" name="guiap2-ej13-B" value="tres">múltiplos de 3</label>
+          <label><input type="radio" name="guiap2-ej13-B" value="primo">primos</label>
+          <label><input type="radio" name="guiap2-ej13-B" value="cuad">cuadrados</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap2-ej13-read" aria-live="polite"></dl>
+      <figcaption>Cuatro ejemplos de <i>B</i> ⊆ ℕ con <i>B</i> y ℕ ∖ <i>B</i> infinitos: azul es <i>B</i>, naranja es ℕ ∖ <i>B</i> (se ven del 1 al 60). Cada <i>B</i> es una tira de dos colores; el ejercicio pregunta cuántas tiras así hay.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap2-ej14" data-short="Ej. 14" data-title="Cardinal de productos: P(ℕ) × P(ℕ), [0, 1) × [0, 1) y ℝ^k" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Cardinal de productos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun">
+    <ol class="items">
+      <li>Calcule el <span class="ref" data-ref="def-3.5">cardinal</span> de $\mathcal{P}(\mathbb{N}) \times \mathcal{P}(\mathbb{N})$ (<span class="ref" data-ref="ext-conjunto-de-partes">partes de $\mathbb{N}$</span>).</li>
+      <li>Calcule el cardinal de $[0, 1) \times [0, 1)$.</li>
+      <li>Calcule el cardinal de $\mathbb{R}^k$ para cada $k \in \mathbb{N}$.</li>
+    </ol>
+  </div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap2-ej15" data-short="Ej. 15" data-title="Cardinal de los polinomios con coeficientes reales" data-topics="cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Cardinal de $\mathbb{R}[X]$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="enun"><p>Calcule el <span class="ref" data-ref="def-3.5">cardinal</span> de $\mathbb{R}[X]$, esto es, el conjunto formado por todos los polinomios con coeficientes reales.</p></div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap2-ej16" data-short="Ej. 16" data-title="Sucesiones enteras convergentes y sucesiones racionales periódicas" data-topics="cardinalidad,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Sucesiones enteras convergentes y racionales periódicas</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Calcule el <span class="ref" data-ref="def-3.5">cardinal</span> de los siguientes conjuntos:</p>
+      <ol class="items">
+        <li>$\{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{Z} : (a_n)_{n \in \mathbb{N}} \text{ converge}\}$ (<span class="ref" data-ref="def-7">convergencia</span>).</li>
+        <li>$\{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{Q} : (a_n)_{n \in \mathbb{N}} \text{ es periódica}\}$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej16-c" aria-label="Una sucesión racional periódica con el período elegido"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap2-ej16-p">período <i>p</i></label><input type="range" id="guiap2-ej16-p" min="1" max="6" value="3"><output id="guiap2-ej16-p-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej16-read" aria-live="polite"></dl>
+      <figcaption>Un elemento del conjunto del ítem (b), con valores elegidos: la sucesión repite el bloque formado por los primeros <i>p</i> números de la lista 1/2, −1, 3/4, 0, 2, −1/3. Las franjas grises marcan cada repetición del bloque.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"></div>
+</article>
+
+<!-- ===================== EJERCICIO 17 ===================== -->
+<article class="ej" id="guiap2-ej17" data-short="Ej. 17" data-title="Familias de intervalos disjuntos y discontinuidades de una monótona" data-topics="cardinalidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 17</span><h3>Intervalos disjuntos y discontinuidades de una función monótona</h3>
+    <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\{A_i\}_{i \in I}$ indexada por $I$ tal que:
+          <ul class="items">
+            <li>$\# A_i \gt 1$ para todo $i \in I$.</li>
+            <li>$A_i \cap A_j = \emptyset$ si $i \neq j$.</li>
+          </ul>
+          Pruebe que $I$ es <span class="ref" data-ref="def-3.6">contable</span>.</li>
+        <li>Sea $f : \mathbb{R} \to \mathbb{R}$ una <span class="ref" data-ref="ext-funcion-monotona">función monótona</span>. Pruebe que el conjunto de sus discontinuidades (<span class="ref" data-ref="def-5.4">función continua</span>) es contable.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap2-ej17-c" aria-label="Una familia de intervalos disjuntos o el gráfico de una función creciente con saltos"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ítem</legend>
+          <label><input type="radio" name="guiap2-ej17-it" value="a" checked>(a) intervalos</label>
+          <label><input type="radio" name="guiap2-ej17-it" value="b">(b) monótona</label>
+        </fieldset>
+        <div class="slider"><label for="guiap2-ej17-N">cantidad</label><input type="range" id="guiap2-ej17-N" min="2" max="12" value="6"><output id="guiap2-ej17-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap2-ej17-read" aria-live="polite"></dl>
+      <figcaption>Ejemplos elegidos para el dibujo. En (a), los intervalos abiertos (1/(<i>k</i>+1), 1/<i>k</i>), disjuntos dos a dos y cada uno con más de un punto, para <i>k</i> hasta “cantidad”. En (b), una <i>f</i> creciente con un salto en cada 1/<i>k</i> (<i>f</i>(<i>x</i>) = <i>x</i>/2 más 1/(2<i>k</i>) por cada 1/<i>k</i> ≤ <i>x</i>), con tantos saltos como diga “cantidad”.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="17"></div>
+</article>
+
+<p class="nota" id="guiap2-resolucion">Esta página trae sólo los enunciados. La resolución completa de la guía está en <code>apuntes-typst/guias-agente/guia_2_resuelta_agente.typ</code> (verificada en Lean).</p>

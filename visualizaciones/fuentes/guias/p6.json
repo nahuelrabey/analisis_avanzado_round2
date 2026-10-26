@@ -1,0 +1,149 @@
+{
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <b>cerrado</b> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado</b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p><p>(En el apunte viene con un esquema ilustrativo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro</b> se define como:</p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-cauchy-schwarz": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Desigualdad de Cauchy-Schwarz (en $\\ell^2$)",
+  "enunciado": "<p>Si $a = (a_n)_{n}$ y $b = (b_n)_{n}$ son sucesiones de cuadrado sumable, entonces $$\\sum_{n=1}^\\infty |a_n b_n| \\le \\Big(\\sum_{n=1}^\\infty |a_n|^2\\Big)^{1/2} \\Big(\\sum_{n=1}^\\infty |b_n|^2\\Big)^{1/2}.$$ (Es la desigualdad de Cauchy-Schwarz de $\\mathbb{R}^N$, $\\sum_{n \\le N} |a_n b_n| \\le (\\sum_{n \\le N} a_n^2)^{1/2} (\\sum_{n \\le N} b_n^2)^{1/2}$, pasada al límite en $N$.)</p>",
+  "fuente": "Resultado del curso (álgebra lineal); todavía no está en apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio compacto",
+  "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto</b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.</p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$</i>.</p>",
+  "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
+ },
+ "ext-espacio-de-banach": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio de Banach",
+  "enunciado": "<p>Un espacio normado $(E, \\|\\cdot\\|)$ es un <b>espacio de Banach</b> si es completo con la métrica $d(x, y) = \\|x - y\\|$, es decir, si toda sucesión de Cauchy en $E$ converge a un elemento de $E$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcional-lineal": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Funcional lineal",
+  "enunciado": "<p>Una <b>funcional lineal</b> sobre un espacio vectorial $E$ es un operador lineal $\\varphi : E \\to \\mathbb{R}$ (a valores en el cuerpo de escalares).</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-hiperplano": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Hiperplano",
+  "enunciado": "<p>Un subespacio $S$ de un espacio vectorial $E$ es un <b>hiperplano</b> si $S \\neq E$ y existe $v \\in E$ tal que $E = S + \\langle v \\rangle$ (es decir, $S$ tiene codimensión $1$). Equivalentemente, $S = \\ker \\varphi$ para alguna funcional lineal $\\varphi : E \\to \\mathbb{R}$ no nula.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-norma": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Norma y espacio normado",
+  "enunciado": "<p>Sea $E$ un $\\mathbb{R}$-espacio vectorial. Una <b>norma</b> en $E$ es una función $\\|\\cdot\\| : E \\to \\mathbb{R}$ tal que, para todos $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$:</p><p>(i) $\\|x\\| \\ge 0$, y $\\|x\\| = 0$ si y sólo si $x = 0$.<br>(ii) $\\|\\lambda x\\| = |\\lambda|\\, \\|x\\|$.<br>(iii) $\\|x + y\\| \\le \\|x\\| + \\|y\\|$ (desigualdad triangular).</p><p>El par $(E, \\|\\cdot\\|)$ es un <b>espacio normado</b>, y $d(x, y) = \\|x - y\\|$ es una métrica en $E$: todas las nociones métricas (bolas, abiertos, convergencia, completitud) se refieren a ella.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-normas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Normas equivalentes",
+  "enunciado": "<p>Dos normas $\\|\\cdot\\|$ y $\\|\\cdot\\|'$ sobre un mismo espacio vectorial $E$ son <b>equivalentes</b> si existen constantes $c, C \\gt 0$ tales que $$c\\, \\|x\\| \\le \\|x\\|' \\le C\\, \\|x\\| \\quad \\text{para todo } x \\in E.$$ En ese caso definen los mismos abiertos, las mismas sucesiones convergentes y las mismas sucesiones de Cauchy.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-acotado": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Operador acotado y norma de un operador",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$, $(F, \\|\\cdot\\|_F)$ espacios normados y $T : E \\to F$ lineal. $T$ es <b>acotado</b> si existe $C \\ge 0$ tal que $$\\|T x\\|_F \\le C\\, \\|x\\|_E \\quad \\text{para todo } x \\in E.$$ En ese caso, la <b>norma</b> de $T$ es la menor de esas constantes: $$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\|_F \\le C \\|x\\|_E \\ \\ \\forall x \\in E\\}.$$</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-lineal": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Operador lineal",
+  "enunciado": "<p>Sean $E$, $F$ espacios vectoriales sobre $\\mathbb{R}$. Una función $T : E \\to F$ es un <b>operador lineal</b> (o transformación lineal) si $$T(x + y) = T x + T y \\quad \\text{y} \\quad T(\\lambda x) = \\lambda\\, T x$$ para todos $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$. Se suele escribir $Tx$ en lugar de $T(x)$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p6-ej5": {
+  "tipo": "Práctica 6",
+  "numero": "Ej. 5",
+  "titulo": "",
+  "enunciado": "<p>Sea $\\mathbb{R}_n[t]$ el conjunto de los polinomios de grado menor o igual que $n$ con coeficientes en $\\mathbb{R}$. Consideremos para $p \\in \\mathbb{R}_n[t]$ las normas $$\\|p\\|_\\infty = \\max_{0 \\le t \\le 1} |p(t)| \\quad \\text{y} \\quad \\|p\\|_1 = \\int_0^1 |p(t)|\\, dt.$$</p><p>(a) ¿Son $(\\mathbb{R}_n[t], \\|\\cdot\\|_\\infty)$ y $(\\mathbb{R}_n[t], \\|\\cdot\\|_1)$ espacios de Banach? ¿Por qué?<br>(b) Justifique por qué ambas normas resultan equivalentes en $\\mathbb{R}_n[t]$ para todo $n \\in \\mathbb{N}$.<br>(c) Si $\\mathbb{R}[t]$ denota el conjunto de todos los polinomios con coeficientes en $\\mathbb{R}$, pruebe que ahí las normas $\\|\\cdot\\|_\\infty$ y $\\|\\cdot\\|_1$ no son equivalentes. ¿Hay alguna contradicción con el ítem anterior, que afirma que las normas son equivalentes para polinomios de grado hasta $n$ para todo $n \\in \\mathbb{N}$?</p>",
+  "fuente": "guias/p6.typ"
+ }
+}

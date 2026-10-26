@@ -1,0 +1,2405 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ejemplos · Práctica 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#ejemplos">Ejemplos</a></li><li><span aria-current="page">Práctica 2</span></li></ol><div class="pager"><a href="../ejemplos/p1.html" title="Ejemplos · Práctica 1">← Anterior</a><a href="../ejemplos/p3.html" title="Ejemplos · Práctica 3">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Ejemplos resueltos · 16 ejemplos</p>
+  <h1>Práctica 2</h1>
+  <p>Cardinalidad. Los ejemplos de <code>apuntes-typst/ejemplos/p2.typ</code>, con la resolución partida en pasos y un dibujo en cada paso que se puede dibujar. Cada resultado subrayado con puntos muestra su enunciado.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#ejp2-b1">Bloque 1 · Cardinalidad</a><ul class="chips"><li><a href="#ejp2-13" title="Coordinabilidad de N con los pares, con Z y con Q+">13</a></li><li><a href="#ejp2-a1-5-6a" title="Q es numerable partiéndolo en bloques finitos">A1.5.6a</a></li><li><a href="#ejp2-14" title="Numerabilidad de N × N vía Cantor-Schröeder-Bernstein">14</a></li><li><a href="#ejp2-15" title="Coordinabilidad de R con (0, 1)">15</a></li><li><a href="#ejp2-a1-5-6b" title="R no es numerable, sin usar desarrollos decimales">A1.5.6b</a></li><li><a href="#ejp2-c2-4" title="Cinco cálculos de cardinal: Z × Z, (0,1) ∩ Q, πQ, Q + Q y las sucesiones enteras convergentes">C2-4</a></li><li><a href="#ejp2-a1-5-8" title="Un conjunto de reales positivos con todas sus sumas finitas acotadas es contable">A1.5.8</a></li><li><a href="#ejp2-a1-5-9" title="Los números algebraicos son numerables">A1.5.9</a></li><li><a href="#ejp2-prop" title="Transportar funciones: si A ~ X y B ~ Y entonces B^A ~ Y^X">Prop</a></li><li><a href="#ejp2-prop-2" title="Pegar funciones sobre dominios disjuntos: C^A × C^B ~ C^(A ∪ B)">Prop</a></li><li><a href="#ejp2-c3-2" title="Ley exponencial y el cardinal de N^N y sus subconjuntos">C3-2</a></li><li><a href="#ejp2-c3-1" title="Cardinal de un subconjunto de R^3 definido por condiciones">C3-1</a></li><li><a href="#ejp2-c3-3" title="Cardinal de las sucesiones enteras que se mueven de a un paso">C3-3</a></li><li><a href="#ejp2-c3-4" title="Una familia con condición local de contabilidad es contable">C3-4</a></li><li><a href="#ejp2-guia-3" title="Cardinal de las sucesiones binarias que valen 1 finitas veces">guía-3</a></li><li><a href="#ejp2-guia-4" title="Cardinal de Ω = {B ⊆ Z : #B ≠ #(Z ∖ B)}">guía-4</a></li></ul></div></nav>
+
+<section class="bloque" id="ejp2-b1">
+  <h2><span class="bn">Bloque 1</span>Cardinalidad</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>El <a href="../guias/p2.html#guiap2-ej1" class="xg" data-guia="p2" data-ej="1">Ejercicio 1</a> de la Práctica 2 (cardinalidad de subconjuntos de $\mathbb{Z}$, múltiplos y productos) requiere construir biyecciones o inyecciones explícitas. La partición de $\mathbb{N}$ en pares e impares para coordinar con $\mathbb{Z}$ es el modelo fundamental para entrelazar conjuntos o cubrir signos opuestos. El uso del Teorema de Cantor-Schröeder-Bernstein y la codificación con factores primos ($2^n 3^m$) desbloquea el producto cartesiano de conjuntos numerables. Por último, transportar una función con las biyecciones dadas ($h \mapsto g \circ h \circ f^{-1}$) es la herramienta detrás de los <a href="../guias/p2.html#guiap2-ej8" class="xg" data-guia="p2" data-ej="8">Ejercicios 8</a> y <a href="../guias/p2.html#guiap2-ej9" class="xg" data-guia="p2" data-ej="9">9</a> (c), donde hay que coordinar conjuntos de funciones y partes de un conjunto.</p><p>La numeración de ejercicios es la de la guía 2026 (<code>apuntes-docentes/guias/p2.pdf</code>).</p></div>
+
+  <!-- ===================== 13 · Ejemplo 3.3 ===================== -->
+  <article class="ej" id="ejp2-13" data-short="13" data-title="Coordinabilidad de N con los pares, con Z y con Q+" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">13</span>
+      <h3>Coordinabilidad de $\mathbb{N}$ con los pares, con $\mathbb{Z}$ y con $\mathbb{Q}^+$</h3>
+      <span class="src">Ejemplo 3.3 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>$\mathbb{N} \sim \{\text{números naturales pares}\}$. Son <span class="ref" data-ref="def-3.1">coordinables</span> mediante la función $f(n) = 2n$, que es biyectiva.</li>
+          <li>$\mathbb{N} \sim \mathbb{Z}$: podemos tomar la función
+            $$f(n) = \begin{cases} \tfrac{n}{2} & \text{si } n \text{ es par}, \\[4pt] -\left(\tfrac{n-1}{2}\right) & \text{si } n \text{ es impar}. \end{cases}$$</li>
+          <li>$\mathbb{N} \sim \mathbb{Q}^+ = \{q \in \mathbb{Q} : q \gt 0\}$: para ver esto, vamos a hacer el siguiente procedimiento.
+            <p>Pensemos que armamos una grilla infinita donde ubicamos a la fracción $m/n$ en la columna $m$ y fila $n$. Nuestra biyección $f : \mathbb{N} \to \mathbb{Q}^+$ va a recorrer la grilla como en el gráfico que hicimos, teniendo en cuenta que debemos "saltarnos" a los repetidos: las fracciones $1/1$ y $2/2$ representan el mismo número, y queremos que nuestra $f$ sea inyectiva.</p>
+            <p>Nos quedaría:
+              $$\begin{aligned} &f(1) = 1, \quad f(2) = 2, \quad f(3) = \tfrac12, \\ &f(4) = \tfrac13, \quad f(5) = 3, \quad \dots \end{aligned}$$</p></li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp2-13-c1" aria-label="Grilla de fracciones m sobre n recorrida en zigzag por diagonales, salteando las fracciones repetidas"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp2-13-k">valores de <i>f</i></label><input type="range" id="ejp2-13-k" min="1" max="17" value="9"><output id="ejp2-13-k-o"></output></div>
+        </div>
+        <dl class="read" id="ejp2-13-read1" aria-live="polite"></dl>
+        <figcaption>El gráfico del Typst: la fracción <i>m</i>/<i>n</i> está en la columna <i>m</i> y la fila <i>n</i>. La flecha recorre las diagonales en zigzag; las cruces marcan las fracciones que no están en forma irreducible (2/2, 2/4, 3/3, 4/2, …), que se saltean. Cada punto con número es un valor <i>f</i>(<i>k</i>); el slider dice cuántos se recorrieron.</figcaption>
+      </figure>
+    </div>
+    <div class="estrategia"><b>Estrategia</b><p>Informalmente, notemos que esta función le asigna a cada número natural par su mitad y con esto estaríamos "cubriendo" los enteros positivos. Por otro lado, "cubrimos" los enteros negativos y el cero con los naturales impares asignándole a cada uno, $-$ la mitad de su par anterior.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Inyectiva</p>
+          <p>Formalmente tenemos que probar que $f$ resulta biyectiva.</p>
+          <p><b>Inyectiva:</b> supongamos que $n \neq m$. Si $n$ es par y $m$ es impar, entonces $f(n) \neq f(m)$ porque uno es positivo y el otro negativo. Si ambos son pares, es fácil ver que $f(n) \neq f(m)$ porque $n/2 \neq m/2$. Si ambos son impares podemos hacer un razonamiento parecido.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-13-c2" aria-label="Flechas de los naturales a los enteros: los pares van a los positivos y los impares al cero y los negativos"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-13-N"><i>n</i> ≤</label><input type="range" id="ejp2-13-N" min="2" max="20" value="10"><output id="ejp2-13-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-13-read2" aria-live="polite"></dl>
+          <figcaption>Arriba ℕ, abajo ℤ. Las flechas azules salen de los pares y caen en los positivos; las naranjas salen de los impares y caen en el 0 y los negativos. Nunca llegan dos flechas al mismo entero.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Sobreyectiva</p>
+          <p><b>Sobreyectiva:</b> sea $a \in \mathbb{Z}$. Si $a \gt 0$, entonces $a = f(2a)$, dado que $2a$ es un número natural par. Si $a \le 0$, entonces $a = f(-2a + 1)$, dado que $-2a + 1$ es un número natural impar.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-13-c3" aria-label="Un entero a elegido y su preimagen 2a o menos 2a más 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-13-a"><i>a</i> ∈ ℤ</label><input type="range" id="ejp2-13-a" min="-8" max="8" value="-3"><output id="ejp2-13-a-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-13-read3" aria-live="polite"></dl>
+          <figcaption>Elegí un entero <i>a</i>: la flecha resaltada es la que lo alcanza, desde 2<i>a</i> si <i>a</i> &gt; 0 o desde −2<i>a</i> + 1 si <i>a</i> ≤ 0.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== A1.5.6a ===================== -->
+  <article class="ej" id="ejp2-a1-5-6a" data-short="A1.5.6a" data-title="Q es numerable partiéndolo en bloques finitos" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">A1.5.6a</span>
+      <h3>$\mathbb{Q}$ es numerable partiéndolo en bloques finitos</h3>
+      <span class="src">Abbott, Teorema 1.5.6 (i)</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Probar que $\mathbb{Q}$ es <span class="ref" data-ref="def-3.6">numerable</span>, sin construir ninguna fórmula explícita: agrupando los racionales en pedazos finitos y listándolos uno tras otro.</p></div>
+    <div class="estrategia"><b>Estrategia · Cuando la fórmula es incómoda, se lista por bloques</b><p>El <a href="#ejp2-13">Ejemplo 3.3 (c)</a> recorre la grilla de $\mathbb{Q}^+$ en diagonal salteando repetidos, y ahí la biyección existe pero escribirla es un engorro. La alternativa es partir $\mathbb{Q}$ en <em>bloques finitos</em>: si cada bloque tiene finitos elementos y hay una cantidad numerable de bloques, la lista se arma concatenándolos, y todo elemento cae en una posición finita.</p><p>La señal es tener un <em>parámetro natural</em> que ordene el conjunto en capas finitas. Para una fracción irreducible $p/q$ el parámetro natural es $p + q$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Los bloques $A_n$</p>
+          <p>Definimos $A_1 = \{0\}$ y, para cada $n \ge 2$,
+            $$\begin{aligned} A_n = \Big\{\pm \frac{p}{q} :\ &p, q \in \mathbb{N} \text{ coprimos} \\ &\text{con } p + q = n\Big\}. \end{aligned}$$</p>
+          <p>Los primeros bloques son
+            $$\begin{aligned} A_1 &= \{0\}, \quad A_2 = \{1/1, -1/1\}, \\ A_3 &= \{1/2, -1/2, 2/1, -2/1\}, \\ A_4 &= \{1/3, -1/3, 3/1, -3/1\}, \\ A_5 &= \{1/4, -1/4, 2/3, -2/3, \\ &\qquad 3/2, -3/2, 4/1, -4/1\}. \end{aligned}$$</p>
+          <p>Notemos que en $A_4$ no aparece $2/2$, porque no está escrito en forma irreducible (ya apareció como $1/1$ en $A_2$).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a156a-c1" aria-label="Los bloques A1 a AK escritos en filas, con los elementos de cada bloque y su tamaño"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-a156a-K">bloques hasta</label><input type="range" id="ejp2-a156a-K" min="2" max="9" value="6"><output id="ejp2-a156a-K-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a156a-read1" aria-live="polite"></dl>
+          <figcaption>Una fila por bloque. En cada fila, los ±<i>p</i>/<i>q</i> con <i>p</i> + <i>q</i> = <i>n</i> y <i>p</i>, <i>q</i> coprimos (cada uno son dos elementos, el positivo y su opuesto); en gris y tachados, los pares que no son coprimos y por eso no entran. El número de la derecha es el tamaño del bloque.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Las dos observaciones que hacen funcionar todo</p>
+          <ol class="items">
+            <li><b>Cada $A_n$ es finito.</b> Hay a lo sumo $n - 1$ pares $(p, q) \in \mathbb{N} \times \mathbb{N}$ con $p + q = n$, y cada uno aporta a lo sumo dos elementos.</li>
+            <li><b>Cada racional aparece en exactamente un bloque.</b> Escrito en forma irreducible como $\pm p/q$, el número cae en $A_{p+q}$ y en ningún otro: los $A_n$ son disjuntos dos a dos.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La lista</p>
+          <p>La correspondencia con $\mathbb{N}$ se obtiene listando consecutivamente los elementos de $A_1$, después los de $A_2$, después los de $A_3$, y así siguiendo. Es <em>sobreyectiva</em>: por ejemplo $22/7 \in A_{29}$, y como $A_1 \cup \dots \cup A_{28}$ es finito, $22/7$ aparece en un lugar finito de la lista; el mismo razonamiento vale para cualquier $p/q$. Es <em>inyectiva</em> porque los bloques son disjuntos y dentro de cada bloque no repetimos elementos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a156a-c2" aria-label="La lista como una cinta partida en bloques; se marca el lugar donde cae la fracción elegida"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-a156a-p"><i>p</i></label><input type="range" id="ejp2-a156a-p" min="1" max="30" value="22"><output id="ejp2-a156a-p-o"></output></div>
+            <div class="slider"><label for="ejp2-a156a-q"><i>q</i></label><input type="range" id="ejp2-a156a-q" min="1" max="30" value="7"><output id="ejp2-a156a-q-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a156a-read2" aria-live="polite"></dl>
+          <figcaption>La cinta es la lista <i>A</i>₁, <i>A</i>₂, <i>A</i>₃, … puesta en fila, con cada bloque de un ancho proporcional a su tamaño (los bloques alternan de tono). Elegí <i>p</i> y <i>q</i>: la fracción se simplifica, cae en el bloque <i>A</i><sub><i>p</i>+<i>q</i></sub> de su forma irreducible y la marca muestra su lugar, que siempre es finito. Abajo, ampliado, el tramo de ese bloque con su lugar en la lista debajo de cada elemento. Arranca en 22/7, el ejemplo del texto.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Qué técnica es ésta</b>Es <em>unión numerable de conjuntos finitos</em>, el caso más manso del resultado que se trabaja en <code>ruta_union_contables.typ</code>. Vale la pena notar que Abbott no escribe la fórmula de la biyección y aclara que intentarlo no es un buen uso del tiempo: lo que hay que ver es que cada elemento ocupa una posición finita en la lista.<br>La misma maniobra resuelve varios ítems de la Práctica 2: en el <a href="#ejp2-c2-4">Ejemplo C2-4 (b)</a> aparece como $(0,1) \cap \mathbb{Q} = \bigsqcup_{m \in \mathbb{N}} \{m/n : 0 \lt m \lt n\}$, con cada pedazo finito.</div>
+  </article>
+
+  <!-- ===================== 14 · Ejemplo 3.12 ===================== -->
+  <article class="ej" id="ejp2-14" data-short="14" data-title="Numerabilidad de N × N vía Cantor-Schröeder-Bernstein" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">14</span>
+      <h3>Numerabilidad de $\mathbb{N} \times \mathbb{N}$ vía Cantor-Schröeder-Bernstein</h3>
+      <span class="src">Ejemplo 3.12 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Usemos el <span class="ref" data-ref="teo-3.11">Teorema de Cantor-Schröeder-Bernstein</span> para ver que $\mathbb{N} \times \mathbb{N}$ es <span class="ref" data-ref="def-3.6">numerable</span>.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\#\mathbb{N} \le \#(\mathbb{N} \times \mathbb{N})$</p>
+          <p>Sea $f : \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ la función $f(n) = (n, 1)$. La función $f$ es inyectiva, lo que nos dice que $\#\mathbb{N} \le \#(\mathbb{N} \times \mathbb{N})$ (<span class="ref" data-ref="def-3.8">Definición 3.8</span>).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\#(\mathbb{N} \times \mathbb{N}) \le \#\mathbb{N}$</p>
+          <p>Sea $g : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ la función $g(n, m) = 2^n 3^m$. La función $g$ es inyectiva (por <span class="ref" data-ref="ext-tfa">descomposición única en factores primos</span>), con lo cual $\#(\mathbb{N} \times \mathbb{N}) \le \#\mathbb{N}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-14-c1" aria-label="Grilla de pares n, m con el valor 2 a la n por 3 a la m en cada casilla; la fila m igual a 1 es la imagen de f"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-14-n"><i>n</i></label><input type="range" id="ejp2-14-n" min="1" max="5" value="3"><output id="ejp2-14-n-o"></output></div>
+            <div class="slider"><label for="ejp2-14-m"><i>m</i></label><input type="range" id="ejp2-14-m" min="1" max="5" value="2"><output id="ejp2-14-m-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-14-read1" aria-live="polite"></dl>
+          <figcaption>Cada casilla (<i>n</i>, <i>m</i>) lleva el natural <i>g</i>(<i>n</i>, <i>m</i>) = 2<sup><i>n</i></sup>·3<sup><i>m</i></sup>. La fila sombreada es la imagen de <i>f</i>, los pares (<i>n</i>, 1). Para la casilla elegida, la lectura recupera (<i>n</i>, <i>m</i>) contando cuántas veces se puede dividir por 2 y por 3: por eso no hay dos casillas con el mismo número.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== 15 · Ejemplo 3.20 ===================== -->
+  <article class="ej" id="ejp2-15" data-short="15" data-title="Coordinabilidad de R con (0, 1)" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">15</span>
+      <h3>Coordinabilidad de $\mathbb{R}$ con $(0, 1)$</h3>
+      <span class="src">Ejemplo 3.20 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Veamos que $\mathbb{R} \sim (0, 1)$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\mathbb{R} \sim (-1, 1)$</p>
+          <p>Para esto, vemos primero que $\mathbb{R} \sim (-1, 1)$ vía la función
+            $$\begin{aligned} &f : \mathbb{R} \to (-1, 1), \\ &f(x) = \frac{x}{1 + |x|}, \end{aligned}$$
+            que resulta biyectiva. Esto lo podemos ver, por ejemplo, comprobando que $f^{-1}(x) = \dfrac{x}{1 - |x|}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-15-c1" aria-label="Gráfico de f de x igual a x sobre 1 más módulo de x, entre las asíntotas menos 1 y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-15-x"><i>x</i></label><input type="range" id="ejp2-15-x" min="-100" max="100" value="30"><output id="ejp2-15-x-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-15-read1" aria-live="polite"></dl>
+          <figcaption>El gráfico de <i>f</i> en [−10, 10]: sube siempre y se pega a las rectas punteadas ±1 sin tocarlas. Para el <i>x</i> elegido, la lectura aplica <i>f</i> y después <i>f</i><sup>−1</sup>(<i>y</i>) = <i>y</i>/(1 − |<i>y</i>|) y vuelve a <i>x</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$(-1, 1) \sim (0, 1)$</p>
+          <p>Por otro lado, podemos probar también que $(-1, 1) \sim (0, 1)$, vía la función
+            $$\begin{aligned} &g : (-1, 1) \to (0, 1), \\ &g(x) = \frac{x + 1}{2}, \end{aligned}$$
+            que también resulta biyectiva.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Transitividad</p>
+          <p>Por transitividad de la <span class="ref" data-ref="prop-3.2">relación de equivalencia</span> concluimos que $\mathbb{R} \sim (0, 1)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-15-c2" aria-label="Tres rectas: R, el intervalo menos 1 1 y el intervalo 0 1, con flechas de f y de g"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-15-x2"><i>x</i></label><input type="range" id="ejp2-15-x2" min="-100" max="100" value="-25"><output id="ejp2-15-x2-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-15-read2" aria-live="polite"></dl>
+          <figcaption>Arriba un tramo de ℝ (de −10 a 10), en el medio (−1, 1) y abajo (0, 1), las dos últimas estiradas al mismo ancho. Las flechas finas llevan algunos enteros elegidos para el dibujo; la gruesa lleva el <i>x</i> del slider por <i>f</i> y después por <i>g</i>. La composición <i>g</i> ∘ <i>f</i> es la biyección ℝ → (0, 1).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== A1.5.6b ===================== -->
+  <article class="ej" id="ejp2-a1-5-6b" data-short="A1.5.6b" data-title="R no es numerable, sin usar desarrollos decimales" data-topics="cardinalidad,supremo">
+    <div class="ej-head">
+      <span class="tag">A1.5.6b</span>
+      <h3>$\mathbb{R}$ no es numerable, sin usar desarrollos decimales</h3>
+      <span class="src">Abbott, Teorema 1.5.6 (ii)</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Probar que $\mathbb{R}$ no es numerable atrapando al número que falta con una sucesión de intervalos cerrados encajados, en lugar de fabricarlo dígito a dígito.</p></div>
+    <div class="estrategia"><b>Estrategia · La misma contradicción, pero con intervalos en vez de dígitos</b><p>La demostración del <span class="ref" data-ref="teo-3.19">Teorema 3.19</span> supone que existe una lista $(x_n)_{n \in \mathbb{N}}$ de todos los reales y construye un $y$ que no está en ella, eligiendo cada dígito de $y$ distinto del correspondiente de $x_n$. El precio es que hay que discutir la no unicidad del desarrollo decimal (<span class="ref" data-ref="ext-obs-3-22">Observación 3.22</span>, que en <code>desafios/p2.typ</code> figura como desafío).</p><p>La versión de Abbott produce el mismo $y$ <em>sin escribirlo</em>: en vez de controlar sus dígitos, se lo encierra en una sucesión de intervalos cerrados encajados, cada uno de los cuales deja afuera un término más de la lista. El número que la propiedad de intervalos encajados entrega no puede estar en la lista, y no hubo que representarlo de ninguna manera particular.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Suponer una lista</p>
+          <p>Supongamos que $\mathbb{R}$ es numerable, es decir que podemos escribir
+            $$\mathbb{R} = \{x_1, x_2, x_3, \dots\}.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Intervalos encajados que esquivan la lista</p>
+          <p>Construimos inductivamente intervalos cerrados y acotados $I_1 \supseteq I_2 \supseteq I_3 \supseteq \dots$ tales que $x_n \notin I_n$ para todo $n$:</p>
+          <ul class="items">
+            <li>Tomamos $I_1$ cualquier intervalo cerrado con $x_1 \notin I_1$ (por ejemplo $I_1 = [x_1 + 1, x_1 + 2]$).</li>
+            <li>Dado $I_n = [a, b]$ con $a \lt b$, consideramos los dos intervalos cerrados <em>disjuntos</em>
+              $$\begin{aligned} &\left[a,\ a + \frac{b - a}{3}\right] \quad \text{y} \\ &\left[b - \frac{b - a}{3},\ b\right]. \end{aligned}$$
+              Como son disjuntos, $x_{n+1}$ puede pertenecer a lo sumo a uno de los dos; elegimos como $I_{n+1}$ al otro. Así se cumplen $I_{n+1} \subseteq I_n$ y $x_{n+1} \notin I_{n+1}$.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a156b-c1" aria-label="Filas de intervalos encajados, cada una ampliada tres veces respecto de la anterior; en cada fila el término siguiente de la lista y el tercio elegido que lo deja afuera"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-a156b-n">pasos</label><input type="range" id="ejp2-a156b-n" min="1" max="8" value="5"><output id="ejp2-a156b-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a156b-read1" aria-live="polite"></dl>
+          <figcaption>La primera fila muestra <i>x</i>₁ = 0,3 e <i>I</i>₁ = [<i>x</i>₁ + 1, <i>x</i>₁ + 2]. Cada fila siguiente amplía el intervalo de la anterior al ancho completo, lo parte en tercios y marca <i>x</i><sub><i>n</i>+1</sub>; el tercio sombreado es <i>I</i><sub><i>n</i>+1</sub>, el que no lo contiene (si no está en ninguno, se toma el de la izquierda). Los términos de la lista son valores elegidos para el dibujo, puestos cerca del intervalo de turno para que la elección se vea: una lista cualquiera casi siempre cae afuera.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El punto común no está en la lista</p>
+          <p>Por la <span class="ref" data-ref="ext-intervalos-encajados">propiedad de los intervalos encajados</span> existe $x \in \bigcap_{n \in \mathbb{N}} I_n$. Pero si $x$ estuviera en la lista, sería $x = x_{n_0}$ para algún $n_0 \in \mathbb{N}$, y por construcción $x_{n_0} \notin I_{n_0}$, mientras que $x \in \bigcap_{n \in \mathbb{N}} I_n \subseteq I_{n_0}$. Absurdo.</p>
+          <p>Por lo tanto $x$ es un número real que no aparece en la lista, lo que contradice que la lista fuera todo $\mathbb{R}$. Concluimos que $\mathbb{R}$ no es numerable.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>La propiedad de intervalos encajados no está en el apunte del curso</b>Abbott la usa como resultado previo (su Teorema 1.4.1), pero en <code>notas_materia.pdf</code> no aparece, así que conviene tenerla probada:
+      <p><em>Enunciado.</em> Si $I_n = [a_n, b_n]$ son intervalos cerrados y acotados con $I_{n+1} \subseteq I_n$ para todo $n$, entonces $\bigcap_{n \in \mathbb{N}} I_n \neq \emptyset$.</p>
+      <p><em>Demostración.</em> Del encaje se sigue que $a_n \le b_m$ para <em>todo</em> par $n, m$: si $n \le m$ vale $a_n \le a_m \le b_m$, y si $n \gt m$ vale $a_n \le b_n \le b_m$. Entonces el conjunto $A = \{a_n : n \in \mathbb{N}\}$ es no vacío y está acotado superiormente (por cualquier $b_m$), así que por el <span class="ref" data-ref="ax-completitud">axioma de completitud</span> existe $x = \sup(A)$. Como $x$ es cota superior, $a_n \le x$ para todo $n$; y como cada $b_m$ es cota superior de $A$ y $x$ es la menor de ellas, $x \le b_m$ para todo $m$. Luego $x \in [a_n, b_n]$ para todo $n$. $\blacksquare$</p>
+      <p>Las dos hipótesis se usan: <em>cerrados</em> para que el supremo pertenezca al intervalo, y <em>acotados</em> para poder tomar supremo. Con $I_n = (0, 1/n)$ la intersección es vacía.</p></div>
+  </article>
+
+  <!-- ===================== C2-4 ===================== -->
+  <article class="ej" id="ejp2-c2-4" data-short="C2-4" data-title="Cinco cálculos de cardinal: Z × Z, (0,1) ∩ Q, πQ, Q + Q y las sucesiones enteras convergentes" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">C2-4</span>
+      <h3>Cinco cálculos de cardinal: $\mathbb{Z} \times \mathbb{Z}$, $(0,1) \cap \mathbb{Q}$, $\pi\mathbb{Q}$, $\mathbb{Q} + \mathbb{Q}$ y las sucesiones enteras convergentes</h3>
+      <span class="src">Clase 2 · Ejemplo 4</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Calcular el cardinal de los siguientes conjuntos:</p>
+      <ol class="items">
+        <li>$\mathbb{Z} \times \mathbb{Z}$.</li>
+        <li>$(0, 1) \cap \mathbb{Q}$.</li>
+        <li>$\{\pi q : q \in \mathbb{Q}\}$.</li>
+        <li>$\mathbb{Q} + \mathbb{Q} = \{a + b : a \in \mathbb{Q},\ b \in \mathbb{Q}\}$.</li>
+        <li>$\{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{Z} :$ $(a_n)_{n \in \mathbb{N}}$ es convergente$\}$.</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia · Tres recetas que se repiten</b><p>Los cinco ítems salen con alguna de estas tres, y casi todos admiten más de un camino:</p>
+      <ol class="items" style="list-style: decimal">
+        <li><b>Componer biyecciones conocidas.</b> Teniendo $\mathbb{Z} \sim \mathbb{N}$ y $\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$, cualquier construcción armada sobre $\mathbb{Z}$ se transporta.</li>
+        <li><b>Escribir el conjunto como unión contable de contables.</b> Es la receta más flexible: partirlo en pedazos indexados por algo contable y ver que cada pedazo es contable.</li>
+        <li><b>Encajar entre conjuntos conocidos.</b> Una inyección hacia un contable ya da contable; si además el conjunto es infinito, es numerable.</li>
+      </ol>
+      <p>El ítem (d) agrega una cuarta, que es la <span class="ref" data-ref="prop-3.9">Proposición 3.9</span> de <code>apuntes.typ</code>: para probar que $A$ es contable alcanza con exhibir una <em>suryección</em> desde un conjunto contable.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(a) La biyección $F : \mathbb{Z} \times \mathbb{Z} \to \mathbb{N} \times \mathbb{N}$</p>
+          <p><b>$\mathbb{Z} \times \mathbb{Z}$ es numerable.</b> La función
+            $$\begin{aligned} &f : \mathbb{Z} \to \mathbb{N}, \\ &f(n) = \begin{cases} 2n & \text{si } n \ge 0, \\ 2(-n) - 1 & \text{si } n \lt 0, \end{cases} \end{aligned}$$
+            es biyectiva. Entonces $F : \mathbb{Z} \times \mathbb{Z} \to \mathbb{N} \times \mathbb{N}$, $F(n, m) = (f(n), f(m))$, también lo es:</p>
+          <ul class="items">
+            <li><em>inyectiva:</em> $F(n, m) = F(n', m')$ equivale a $f(n) = f(n')$ y $f(m) = f(m')$; como $f$ es inyectiva, $n = n'$ y $m = m'$;</li>
+            <li><em>suryectiva:</em> dado $(y_1, y_2) \in \mathbb{N} \times \mathbb{N}$, como $f$ es suryectiva existen $n, m \in \mathbb{Z}$ con $f(n) = y_1$ y $f(m) = y_2$, y entonces $F(n, m) = (y_1, y_2)$.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(a) De $\mathbb{N} \times \mathbb{N}$ a $\mathbb{N}$</p>
+          <p>Finalmente, $\mathbb{N} \times \mathbb{N} \to \mathbb{N}$ dada por $(n, m) \mapsto 2^n (2m - 1)$ es biyectiva, porque todo natural se escribe de forma única como una potencia de $2$ por un impar (<span class="ref" data-ref="ext-tfa">Teorema Fundamental de la Aritmética</span>). Componiendo, $\mathbb{Z} \times \mathbb{Z} \sim \mathbb{N}$, luego $\mathbb{Z} \times \mathbb{Z}$ es numerable.</p>
+          <div class="nota"><b>Nota de esta versión</b>Con la convención del curso, $\mathbb{N} = \{1, 2, \dots\}$, la $f$ de arriba cae en $\mathbb{N}_0 = \mathbb{N} \cup \{0\}$ (porque $f(0) = 0$), y $(n, m) \mapsto 2^n(2m - 1)$ es biyectiva de $\mathbb{N}_0 \times \mathbb{N}$ en $\mathbb{N}$ (con $n \ge 1$ sólo da números pares). El argumento cierra igual leyendo $\mathbb{N}_0$ donde corresponde, ya que $\mathbb{N}_0 \sim \mathbb{N}$.</div>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c24-c1" aria-label="Tabla de 2 a la n por un impar: cada natural aparece en exactamente una casilla"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c24-k">natural <i>k</i></label><input type="range" id="ejp2-c24-k" min="1" max="96" value="40"><output id="ejp2-c24-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c24-read1" aria-live="polite"></dl>
+          <figcaption>La columna es el exponente <i>n</i> de 2 y la fila el impar 2<i>m</i> − 1; la casilla lleva 2<i>ⁿ</i>(2<i>m</i> − 1). Para que la tabla cubra todos los naturales, el exponente arranca en 0 (ver la nota). Elegí un natural <i>k</i>: se ilumina su única casilla, la que dan sus factores 2 y su parte impar.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(a) Otra resolución</p>
+          <p>Podemos escribir $\mathbb{Z} \times \mathbb{Z} = \bigsqcup_{n \in \mathbb{Z}} A_n$ con $A_n = \{n\} \times \mathbb{Z}$. Como $A_n \sim \mathbb{Z}$ para cada $n$, resulta que $\mathbb{Z} \times \mathbb{Z}$ es unión contable de numerables y por lo tanto es numerable.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(b) Paso 1: $\mathbb{Q}_{\gt 0}$ es numerable</p>
+          <p><b>$(0, 1) \cap \mathbb{Q}$ es numerable.</b> La función $\mathbb{Q}_{\gt 0} \to \mathbb{N} \times \mathbb{N}$ que a $x = a/b$ con $(a, b) = 1$ le asigna $(a, b)$ es inyectiva (cada racional positivo tiene una única representación como fracción irreducible), y $\mathbb{N} \times \mathbb{N}$ es numerable por la parte (a). Así que $\mathbb{Q}_{\gt 0}$ es coordinable con un subconjunto de un numerable, es decir, es <span class="ref" data-ref="prop-3.13">contable</span>; siendo infinito, es numerable.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(b) Paso 2: biyección auxiliar $(0, +\infty) \to (0, 1)$</p>
+          <p>Consideramos $f : (0, +\infty) \to (0, 1)$, $f(x) = x/(x+1)$.</p>
+          <ul class="items">
+            <li><em>bien definida:</em> $0 \lt x \lt x + 1$, con lo cual $0 \lt x/(x+1) \lt 1$;</li>
+            <li><em>inyectiva:</em> $$\begin{aligned} &\frac{x}{x+1} = \frac{y}{y+1} \\ &\iff x(y+1) = (x+1)y \\ &\iff xy + x = xy + y \\ &\iff x = y; \end{aligned}$$</li>
+            <li><em>suryectiva:</em> dado $y \in (0, 1)$, de $x/(x+1) = y$ se despeja $x - yx = y$, o sea $x = y/(1-y) \gt 0$.</li>
+          </ul>
+          <p>Luego $f$ es biyectiva, con inversa $f^{-1}(y) = y/(1-y)$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(b) Paso 3: restricción de $f$ a $\mathbb{Q}_{\gt 0}$</p>
+          <p>Idea general a recordar: <em>si $f : A \to B$ es biyección y $A_0 \subseteq A$ es tal que $f(A_0) = B_0$ exactamente, entonces $f|_{A_0} : A_0 \to B_0$ también es biyección.</em></p>
+          <p>Acá se aplica con $A_0 = \mathbb{Q}_{\gt 0}$ y $B_0 = (0, 1) \cap \mathbb{Q}$. Hay que verificar que $f(\mathbb{Q}_{\gt 0}) = (0, 1) \cap \mathbb{Q}$:</p>
+          <ul class="items">
+            <li>si $x \in \mathbb{Q}_{\gt 0}$, entonces $f(x) = x/(x+1)$ es cociente de racionales, y ya sabemos que $f(x) \in (0, 1)$; luego $f(x) \in (0, 1) \cap \mathbb{Q}$;</li>
+            <li>si $y \in (0, 1) \cap \mathbb{Q}$, entonces $x = f^{-1}(y) = y/(1-y)$ es cociente de racionales, y como $y \in (0, 1)$ sabemos que $x \in (0, +\infty)$; luego $x \in \mathbb{Q}_{\gt 0}$ y $f(x) = y$.</li>
+          </ul>
+          <p>Por lo tanto $f$ manda $\mathbb{Q}_{\gt 0}$ biyectivamente sobre $(0, 1) \cap \mathbb{Q}$, es decir,
+            $$\mathbb{Q}_{\gt 0} \sim (0, 1) \cap \mathbb{Q}.$$</p>
+          <p>Como $\mathbb{Q}_{\gt 0}$ es numerable (Paso 1) y la numerabilidad se preserva por biyecciones, $(0, 1) \cap \mathbb{Q}$ es numerable.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c24-c2" aria-label="Gráfico de x sobre x más 1 con un racional p sobre q y su imagen p sobre p más q"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c24-p"><i>p</i></label><input type="range" id="ejp2-c24-p" min="1" max="12" value="3"><output id="ejp2-c24-p-o"></output></div>
+            <div class="slider"><label for="ejp2-c24-q"><i>q</i></label><input type="range" id="ejp2-c24-q" min="1" max="12" value="2"><output id="ejp2-c24-q-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c24-read2" aria-live="polite"></dl>
+          <figcaption>El gráfico de <i>f</i>(<i>x</i>) = <i>x</i>/(<i>x</i>+1) en (0, 12], por debajo de la asíntota 1. Para <i>x</i> = <i>p</i>/<i>q</i> racional la cuenta da <i>f</i>(<i>x</i>) = <i>p</i>/(<i>p</i>+<i>q</i>), otra fracción; y la vuelta <i>y</i>/(1 − <i>y</i>) devuelve <i>p</i>/<i>q</i>. Los racionales van a racionales en las dos direcciones.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(b) Otras formas</p>
+          <p>La inclusión $(0,1) \cap \mathbb{Q} \hookrightarrow \mathbb{Q}$ es inyectiva, así que el conjunto es contable; como contiene a $\{1/n : n \in \mathbb{N},\ n \ge 2\}$, es infinito, y por lo tanto numerable. También sirve escribirlo como $\bigsqcup_{m \in \mathbb{N}} A_m$ con $A_m = \{m/n : 0 \lt m \lt n\}$, que es unión contable de conjuntos finitos.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(c) $\{\pi q : q \in \mathbb{Q}\}$ es numerable</p>
+          <p>La función $\mathbb{Q} \to \{\pi q : q \in \mathbb{Q}\}$, $q \mapsto \pi q$, es biyectiva.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(d) $\mathbb{Q} + \mathbb{Q}$ es numerable</p>
+          <p>Como $\mathbb{Q} + \mathbb{Q} \subseteq \mathbb{Q}$, es contable; y como es infinito, es numerable.</p>
+          <p><em>Otra forma, con suryecciones:</em> la función $\mathbb{Q} \times \mathbb{Q} \to \mathbb{Q} + \mathbb{Q}$, $(a, b) \mapsto a + b$, es suryectiva ($a$ es la imagen de $(a, 0)$). Alcanza entonces con el siguiente lema, que es la <span class="ref" data-ref="prop-3.9">Proposición 3.9</span> de <code>apuntes.typ</code> leída en el caso contable.</p>
+          <div class="nota"><b>Lema: una suryección desde un contable alcanza</b>Si $f : \mathbb{N} \to A$ es suryectiva, entonces $A$ es contable.
+            <p><em>Demostración:</em> dado $a \in A$ existe $n_a \in \mathbb{N}$ con $f(n_a) = a$; definimos $\tilde f : A \to \mathbb{N}$, $a \mapsto n_a$, que es inyectiva.</p>
+            <p><em>Nota:</em> acá el "elegir" $n_a$ se puede hacer sin <span class="ref" data-ref="ext-axioma-de-eleccion">axioma de elección</span> tomando $n_a = \min\{n \in \mathbb{N} : f(n) = a\}$, por el <span class="ref" data-ref="ext-buena-ordenacion">principio de buena ordenación</span>. En general, si $f : B \to A$ es suryectiva existe $\tilde f : A \to B$ inyectiva, pero elegir una preimagen para cada $a$ sí requiere el axioma de elección.</p></div>
+          <p>Como <span class="ref" data-ref="prop-numerabilidad-de-qq">$\mathbb{Q} \sim \mathbb{N}$</span>, componiendo obtenemos una suryección $\mathbb{N} \to \mathbb{Q} + \mathbb{Q}$, y por el lema $\mathbb{Q} + \mathbb{Q}$ es contable.</p>
+          <p><em>Una manera más:</em> $\mathbb{Q} + \mathbb{Q} = \bigsqcup_{a \in \mathbb{Q}} (a + \mathbb{Q})$, y $a + \mathbb{Q} \sim \mathbb{Q}$ vía $q \mapsto a + q$. Es unión contable de contables.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(e) Las sucesiones enteras convergentes</p>
+          <p><b>$\{(a_n)_n \subseteq \mathbb{Z} : (a_n)_n \text{ es convergente}\}$ es numerable.</b> Por el <span class="ref" data-ref="ext-ejemplo-c1-3">Ejemplo C1-3</span>, una sucesión convergente de enteros es finalmente constante: existe $n_0 \in \mathbb{N}$ tal que $a_n = a_{n_0}$ para todo $n \ge n_0$. Entonces
+            $$\begin{aligned} &\{(a_n)_n \subseteq \mathbb{Z} : (a_n)_n \text{ converge}\} \\ &\qquad = \bigsqcup_{(a, k) \in \mathbb{Z} \times \mathbb{N}} A_{a,k}, \\ &\text{donde } A_{a,k} = \{(a_n)_n \subseteq \mathbb{Z} : \\ &\qquad\qquad a_n = a \text{ para todo } n \ge k\}. \end{aligned}$$</p>
+          <p>Cada $A_{a,k}$ es contable, porque la función $A_{a,k} \to \mathbb{Z}^{k-1}$, $(a_n)_n \mapsto (a_1, a_2, \dots, a_{k-1})$, es biyectiva y $\mathbb{Z}^{k-1}$ es numerable. Como $\mathbb{Z} \times \mathbb{N}$ es contable, el conjunto es unión contable de contables y por lo tanto contable; siendo infinito, es numerable.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c24-c3" aria-label="Una sucesión de enteros que desde el lugar k vale siempre a; los primeros k menos 1 términos forman la tupla"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c24-kk"><i>k</i></label><input type="range" id="ejp2-c24-kk" min="1" max="9" value="5"><output id="ejp2-c24-kk-o"></output></div>
+            <div class="slider"><label for="ejp2-c24-aa"><i>a</i></label><input type="range" id="ejp2-c24-aa" min="-3" max="3" value="1"><output id="ejp2-c24-aa-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c24-read3" aria-live="polite"></dl>
+          <figcaption>Una sucesión de <i>A</i><sub><i>a</i>,<i>k</i></sub>: desde el lugar <i>k</i> todos los términos valen <i>a</i> (en verde). Los primeros <i>k</i> − 1 términos (en azul, valores elegidos para el dibujo) son libres, y son exactamente la tupla de ℤ<sup><i>k</i>−1</sup> que le asigna la biyección.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Sobre la observación del manuscrito en (a)</b>Después del ítem (a) el manuscrito anota una observación sobre particiones de $\mathbb{N}$: dado $N \in \mathbb{N}$ vale $\mathbb{N} = \bigsqcup_{i=1}^N B_i$ con $B_i = \{kN + i : k \in \mathbb{N}_0\}$ y $1 \le i \le N$, y también hay particiones infinitas, por ejemplo indexadas por primos,
+      $$\begin{aligned} B_2 &= \{n \in \mathbb{N} : 2 \mid n\}, \\ B_3 &= \{n \in \mathbb{N} : 2 \nmid n \text{ y } 3 \mid n\}, \\ B_p &= \{n \in \mathbb{N} : q \nmid n \text{ para todo primo } q \lt p \\ &\qquad \text{pero } p \mid n\}. \end{aligned}$$
+      El paso final del manuscrito, que quería armar la biyección $\mathbb{Z} \times \mathbb{Z} = \bigsqcup_m A_m \to \bigsqcup_{p \in P} B_p = \mathbb{N}$, queda incompleto en el original (aparece una familia $h_{g(m)}$ que nunca se define), así que no se transcribe: para (a) ya alcanza con cualquiera de las dos resoluciones de arriba.</div>
+  </article>
+
+  <!-- ===================== A1.5.8 ===================== -->
+  <article class="ej" id="ejp2-a1-5-8" data-short="A1.5.8" data-title="Un conjunto de reales positivos con todas sus sumas finitas acotadas es contable" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">A1.5.8</span>
+      <h3>Un conjunto de reales positivos con todas sus sumas finitas acotadas es contable</h3>
+      <span class="src">Abbott, Ejercicio 1.5.8</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $B$ un conjunto de números reales positivos tal que la suma de los elementos de cualquier subconjunto finito de $B$ es siempre menor o igual a $2$. Probar que $B$ es finito o <span class="ref" data-ref="def-3.6">numerable</span>.</p></div>
+    <div class="estrategia"><b>Estrategia · Partir por tamaño</b><p>No hay ninguna biyección a la vista ni ninguna estructura que copiar: lo único que se sabe de $B$ es una cota sobre sus sumas finitas. La idea es que <em>no puede haber muchos elementos grandes</em>, porque unos pocos ya se comerían el presupuesto de $2$.</p><p>Eso sugiere cortar $B$ en capas según el tamaño: $B_n = \{x \in B : x \gt 1/n\}$. Cada capa tiene que ser finita por la cota, y las capas cubren todo $B$ porque ningún elemento de $B$ es $0$ y vale el Principio de Arquímedes. De nuevo, unión numerable de finitos.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cada $B_n$ es finito</p>
+          <p>Para cada $n \in \mathbb{N}$ definimos
+            $$B_n = \{x \in B : x \gt 1/n\}.$$</p>
+          <p><b>Cada $B_n$ es finito.</b> Supongamos que $B_n$ tuviera al menos $2n + 1$ elementos y tomemos $2n + 1$ de ellos, digamos $x_1, \dots, x_{2n+1}$. Como cada uno es mayor que $1/n$,
+            $$\begin{aligned} \sum_{i=1}^{2n+1} x_i &\gt (2n+1) \cdot \frac1n \\ &= 2 + \frac1n \gt 2, \end{aligned}$$
+            y encontramos un subconjunto finito de $B$ cuya suma supera $2$, contra la hipótesis. Luego $B_n$ tiene a lo sumo $2n$ elementos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a158-c1" aria-label="Elementos de un conjunto B de ejemplo sobre la recta; los mayores que 1 sobre n forman la capa B n"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Conjunto <i>B</i> del dibujo</legend>
+              <label><input type="radio" name="ejp2-a158-set" value="pot" checked>{1/2<sup><i>k</i></sup> : <i>k</i> ≥ 0}</label>
+              <label><input type="radio" name="ejp2-a158-set" value="cuad">{1/<i>k</i>² : <i>k</i> ≥ 1}</label>
+            </fieldset>
+            <div class="slider"><label for="ejp2-a158-n"><i>n</i></label><input type="range" id="ejp2-a158-n" min="1" max="12" value="4"><output id="ejp2-a158-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a158-read1" aria-live="polite"></dl>
+          <figcaption>Dos conjuntos elegidos para el dibujo que cumplen la hipótesis (sus sumas finitas no pasan de 2 y de π²/6 ≈ 1,64). La banda es (1/<i>n</i>, +∞): los puntos dentro son la capa <i>B</i><sub><i>n</i></sub>, y la lectura compara cuántos hay con la cota 2<i>n</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las capas cubren $B$</p>
+          <p>Sea $x \in B$. Como $x \gt 0$, por el <span class="ref" data-ref="prop-1">Principio de Arquímedes (Proposición 1 de <code>apuntes.typ</code>)</span> existe $n \in \mathbb{N}$ con $1/n \lt x$, es decir $x \in B_n$. Por lo tanto
+            $$B = \bigcup_{n \in \mathbb{N}} B_n.$$</p>
+          <p>Así, $B$ es una unión numerable de conjuntos finitos y en consecuencia es <span class="ref" data-ref="def-3.6">contable</span>: finito o numerable.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a158-c2" aria-label="Un elemento x de B y el primer n con 1 sobre n menor que x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-a158-j">elemento</label><input type="range" id="ejp2-a158-j" min="1" max="10" value="5"><output id="ejp2-a158-j-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a158-read2" aria-live="polite"></dl>
+          <figcaption>Mismo conjunto que el dibujo anterior. Elegí un elemento <i>x</i>: las marcas son 1, 1/2, 1/3, …, y la resaltada es el primer 1/<i>n</i> que queda a la izquierda de <i>x</i>. Ese <i>n</i> es una capa que contiene a <i>x</i>; por más chico que sea <i>x</i>, la marca siempre llega.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>La misma forma en la Práctica 2</b>El Ejercicio 12 (a) de la Práctica 2 — una familia de intervalos disjuntos dos a dos, cada uno con más de un punto, tiene que estar indexada por un conjunto contable — tiene exactamente esta estructura: no hay biyección para construir, hay que <em>cortar en capas contables</em> y usar que un conjunto no puede tener demasiados elementos "grandes" (allá, intervalos que contienen un racional distinto cada uno). El <a href="#ejp2-c3-4">Ejemplo C3-4</a> es la versión con entornos.</div>
+    <div class="nota"><b>Nota de esta versión</b>En la guía 2026 el ejercicio de la familia de intervalos es el <a href="../guias/p2.html#guiap2-ej17" class="xg" data-guia="p2" data-ej="17">Ejercicio 17</a> (a); el 12 (a) pide probar que los primos son numerables.</div>
+  </article>
+
+  <!-- ===================== A1.5.9 ===================== -->
+  <article class="ej" id="ejp2-a1-5-9" data-short="A1.5.9" data-title="Los números algebraicos son numerables" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">A1.5.9</span>
+      <h3>Los números algebraicos son numerables</h3>
+      <span class="src">Abbott, Ejercicio 1.5.9</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Un número $x \in \mathbb{R}$ se dice <b>algebraico</b> si existen enteros $a_0, a_1, \dots, a_n \in \mathbb{Z}$, no todos nulos, tales que
+      $$a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 = 0,$$
+      es decir, si es raíz de un polinomio no nulo con coeficientes enteros. Los reales que no son algebraicos se llaman <b>trascendentes</b>.</p>
+      <ol class="items">
+        <li>Probar que $\sqrt{2}$, $\sqrt[3]{2}$ y $\sqrt{2} + \sqrt{3}$ son algebraicos.</li>
+        <li>Fijado $n \in \mathbb{N}$, sea $A_n$ el conjunto de los números algebraicos que son raíces de polinomios de grado $n$ con coeficientes enteros. Probar que $A_n$ es contable.</li>
+        <li>Concluir que el conjunto de todos los números algebraicos es numerable. ¿Qué se deduce sobre los trascendentes?</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia · Dos uniones encadenadas</b><p>Es el ejemplo que junta todas las herramientas del bloque, y conviene ver el esqueleto antes de las cuentas:</p>
+      <ol class="items" style="list-style: decimal">
+        <li>Un polinomio de grado $n$ <em>es</em> su lista de coeficientes: los polinomios de grado $n$ con coeficientes enteros se identifican con un subconjunto de $\mathbb{Z}^{n+1}$, que es numerable por ser producto finito de numerables.</li>
+        <li>Cada polinomio no nulo aporta <em>finitas</em> raíces (a lo sumo $n$).</li>
+        <li>Entonces $A_n$ es una unión, indexada por un numerable, de conjuntos finitos.</li>
+        <li>Y el conjunto de todos los algebraicos es $\bigcup_{n \in \mathbb{N}} A_n$: otra vez unión numerable, ahora de contables.</li>
+      </ol></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(a) Tres algebraicos</p>
+          <p>$\sqrt{2}$ es raíz de $x^2 - 2$ y $\sqrt[3]{2}$ es raíz de $x^3 - 2$. Para $x = \sqrt{2} + \sqrt{3}$ elevamos al cuadrado dos veces:
+            $$\begin{aligned} x^2 &= 5 + 2\sqrt{6} \\ \Longrightarrow \quad x^2 - 5 &= 2\sqrt{6} \\ \Longrightarrow \quad (x^2 - 5)^2 &= 24, \end{aligned}$$
+            de donde $x^4 - 10x^2 + 25 = 24$, es decir que $\sqrt{2} + \sqrt{3}$ es raíz de $x^4 - 10x^2 + 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a159-c1" aria-label="Gráfico del polinomio elegido y su raíz marcada sobre el eje"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Número</legend>
+              <label><input type="radio" name="ejp2-a159-pol" value="0" checked>√2</label>
+              <label><input type="radio" name="ejp2-a159-pol" value="1">∛2</label>
+              <label><input type="radio" name="ejp2-a159-pol" value="2">√2 + √3</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp2-a159-read1" aria-live="polite"></dl>
+          <figcaption>El polinomio con coeficientes enteros de cada caso y el número marcado sobre el eje: el gráfico lo cruza justo ahí. Para √2 + √3 ≈ 3,146 se ven además las otras tres raíces de <i>x</i>⁴ − 10<i>x</i>² + 1 (son ±√2 ± √3).</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(b) $A_n$ es contable</p>
+          <p>Llamemos $P_n$ al conjunto de los polinomios de grado $n$ con coeficientes enteros. La función que a $p(x) = a_n x^n + \dots + a_0$ le asigna la tupla $(a_0, a_1, \dots, a_n)$ es inyectiva de $P_n$ en $\mathbb{Z}^{n+1}$, y $\mathbb{Z}^{n+1}$ es numerable (producto finito de conjuntos numerables, iterando el <span class="ref" data-ref="ejem-3.12">Ejemplo 3.12</span>). Por la <span class="ref" data-ref="prop-3.13">Proposición 3.13</span>, $P_n$ es contable.</p>
+          <p>Para cada $p \in P_n$, el conjunto $R_p$ de sus raíces reales es finito: tiene a lo sumo $n$ elementos, porque $p$ no es el <span class="ref" data-ref="ext-raices-finitas">polinomio nulo</span>. Entonces
+            $$A_n = \bigcup_{p \in P_n} R_p$$
+            es una unión indexada por un conjunto contable de conjuntos finitos, y por lo tanto $A_n$ es contable.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-a159-c2" aria-label="Raíces reales de todos los polinomios enteros de grado n con coeficientes acotados por H, marcadas sobre la recta"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-a159-n">grado <i>n</i></label><input type="range" id="ejp2-a159-n" min="1" max="3" value="2"><output id="ejp2-a159-n-o"></output></div>
+            <div class="slider"><label for="ejp2-a159-H">|<i>a<sub>i</sub></i>| ≤ <i>H</i></label><input type="range" id="ejp2-a159-H" min="1" max="4" value="2"><output id="ejp2-a159-H-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-a159-read2" aria-live="polite"></dl>
+          <figcaption>Todas las raíces reales en [−3, 3] de los polinomios de grado <i>n</i> con coeficientes enteros de módulo a lo sumo <i>H</i> (el corte en <i>H</i> es del dibujo). Para cada <i>H</i> son finitos polinomios, cada uno con a lo sumo <i>n</i> raíces; al subir <i>H</i> la recta se llena, pero cada punto aparece en algún paso finito.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(c) Todos los algebraicos, y los trascendentes</p>
+          <p>El conjunto de todos los números algebraicos es
+            $$A = \bigcup_{n \in \mathbb{N}} A_n,$$
+            unión numerable de contables, así que $A$ es contable. Además $A$ es infinito, porque contiene a $\mathbb{Q}$: todo racional $p/q$ es raíz de $qx - p$. Luego $A$ es numerable.</p>
+          <p>Sea $T = \mathbb{R} \setminus A$ el conjunto de los trascendentes. Si $T$ fuera contable, entonces $\mathbb{R} = A \cup T$ sería unión de dos contables y por lo tanto contable, contradiciendo el <span class="ref" data-ref="teo-3.19">Teorema 3.19</span>. Concluimos que $T$ no es contable: <em>existen números trascendentes</em> y, de hecho, son "casi todos" los reales.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Por qué este ejemplo vale la pena</b>Es el mismo movimiento que el cardinal de los irracionales (<a href="../guias/p2.html#guiap2-ej4" class="xg" data-guia="p2" data-ej="4">Ejercicio 4</a> de la Práctica 2), pero con un conjunto que no se puede describir de manera explícita: la existencia de números trascendentes se demuestra <em>contando</em>, sin exhibir ninguno. Exhibir uno concreto ($e$, $\pi$) es muchísimo más difícil que probar que hay una cantidad no numerable.<br>Para la Práctica 2 la parte reutilizable es la identificación <em>polinomio $\longleftrightarrow$ tupla de coeficientes</em>, que es la que resuelve el Ejercicio 13 (cardinal de $\mathbb{R}[X]$): con coeficientes reales en lugar de enteros, la misma identificación da $\mathbb{R}[X] \sim \bigcup_{n \in \mathbb{N}} \mathbb{R}^{n+1}$.</div>
+    <div class="nota"><b>Nota de esta versión</b>En la guía 2026 el cardinal de $\mathbb{R}[X]$ es el <a href="../guias/p2.html#guiap2-ej15" class="xg" data-guia="p2" data-ej="15">Ejercicio 15</a>; el 13 es el de $\{B \subseteq \mathbb{N} : \#B = \#(\mathbb{N} \setminus B) = \aleph_0\}$.</div>
+  </article>
+
+  <!-- ===================== Prop · B^A ~ Y^X ===================== -->
+  <article class="ej" id="ejp2-prop" data-short="Prop" data-title="Transportar funciones: si A ~ X y B ~ Y entonces B^A ~ Y^X" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>Transportar funciones: si $A \sim X$ y $B \sim Y$ entonces $B^A \sim Y^X$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $A, B, X, Y$ conjuntos no vacíos, y notemos $B^A = \{h : h \text{ es una función } A \to B\}$ al conjunto de todas las funciones de $A$ en $B$.</p><p>Probar que si $A \sim X$ y $B \sim Y$, entonces $B^A \sim Y^X$.</p></div>
+    <div class="estrategia"><b>Estrategia · Entrar y salir con las biyecciones que ya tenemos</b><p>Un elemento de $B^A$ es una función $h : A \to B$, y lo que queremos es fabricar con ella una función $X \to Y$. Las biyecciones $f : A \to X$ y $g : B \to Y$ son justamente los adaptadores que faltan: entramos por $f^{-1}$, atravesamos con $h$ y salimos por $g$,
+      $$X \xrightarrow{\ f^{-1}\ } A \xrightarrow{\ h\ } B \xrightarrow{\ g\ } Y,$$
+      o sea $\varphi(h) = g \circ h \circ f^{-1}$. Recorriendo el camino al revés aparece sola la candidata a inversa, $\psi(k) = g^{-1} \circ k \circ f$.</p><p>Para probar que $\varphi$ es biyectiva conviene exhibir su inversa antes que verificar inyectividad y sobreyectividad por separado. <em>Pero ojo:</em> exhibir una inversa obliga a chequear las <em>dos</em> composiciones, $\psi \circ \varphi = \operatorname{id}_{B^A}$ y $\varphi \circ \psi = \operatorname{id}_{Y^X}$. Con una sola alcanza para la inyectividad de $\varphi$, no para su biyectividad.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las candidatas</p>
+          <p>Como $A \sim X$ y $B \sim Y$, existen biyecciones $f : A \to X$ y $g : B \to Y$; por ser biyectivas, existen también sus inversas $f^{-1} : X \to A$ y $g^{-1} : Y \to B$.</p>
+          <p>Definimos
+            $$\begin{aligned} \varphi &: B^A \to Y^X, \quad \varphi(h) = g \circ h \circ f^{-1}, \\ \psi &: Y^X \to B^A, \quad \psi(k) = g^{-1} \circ k \circ f. \end{aligned}$$</p>
+          <p>Las dos están bien definidas: si $h : A \to B$, la composición $g \circ h \circ f^{-1}$ recorre $X \to A \to B \to Y$ y por lo tanto es una función de $X$ en $Y$, es decir $\varphi(h) \in Y^X$. Simétricamente, si $k : X \to Y$, entonces $g^{-1} \circ k \circ f$ recorre $A \to X \to Y \to B$ y $\psi(k) \in B^A$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-prop-c1" aria-label="Cuatro columnas X, A, B, Y con las flechas de f inversa, h y g; la composición da phi de h"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-prop-h"><i>h</i> número</label><input type="range" id="ejp2-prop-h" min="1" max="8" value="3"><output id="ejp2-prop-h-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-prop-read1" aria-live="polite"></dl>
+          <figcaption>Un caso finito elegido para el dibujo: <i>A</i> y <i>X</i> con tres elementos, <i>B</i> e <i>Y</i> con dos, y biyecciones fijas <i>f</i> y <i>g</i>. El slider recorre las 2³ = 8 funciones <i>h</i> : <i>A</i> → <i>B</i>. Para cada <i>x</i>, seguí las flechas <i>x</i> → <i>f</i><sup>−1</sup>(<i>x</i>) → <i>h</i>(…) → <i>g</i>(…): eso es φ(<i>h</i>)(<i>x</i>). La lectura aplica después ψ y recupera <i>h</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Primera composición: $\psi \circ \varphi = \operatorname{id}_{B^A}$</p>
+          <p>Sea $h \in B^A$. Usando la asociatividad de la composición para reagrupar,
+            $$\begin{aligned} \psi(\varphi(h)) &= \psi(g \circ h \circ f^{-1}) \\ &= g^{-1} \circ (g \circ h \circ f^{-1}) \circ f \\ &= (g^{-1} \circ g) \circ h \circ (f^{-1} \circ f) \\ &= \operatorname{id}_B \circ h \circ \operatorname{id}_A \\ &= h. \end{aligned}$$</p>
+          <p>Como esto vale para todo $h \in B^A$, tenemos $\psi \circ \varphi = \operatorname{id}_{B^A}$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Segunda composición: $\varphi \circ \psi = \operatorname{id}_{Y^X}$</p>
+          <p>Sea $k \in Y^X$. De la misma manera,
+            $$\begin{aligned} \varphi(\psi(k)) &= \varphi(g^{-1} \circ k \circ f) \\ &= g \circ (g^{-1} \circ k \circ f) \circ f^{-1} \\ &= (g \circ g^{-1}) \circ k \circ (f \circ f^{-1}) \\ &= \operatorname{id}_Y \circ k \circ \operatorname{id}_X \\ &= k, \end{aligned}$$
+            y por lo tanto $\varphi \circ \psi = \operatorname{id}_{Y^X}$.</p>
+          <p>Esta segunda cuenta <em>no</em> es la primera escrita al revés: acá las identidades que se arman son $g \circ g^{-1} = \operatorname{id}_Y$ y $f \circ f^{-1} = \operatorname{id}_X$, mientras que en la primera eran $g^{-1} \circ g = \operatorname{id}_B$ y $f^{-1} \circ f = \operatorname{id}_A$. Son composiciones distintas, y por eso hace falta hacer las dos: una sola de ellas prueba que $\varphi$ es inyectiva, pero no que sea sobreyectiva.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Habiendo verificado ambas, $\psi = \varphi^{-1}$ y $\varphi : B^A \to Y^X$ resulta biyectiva. Es decir, $B^A \sim Y^X$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Dónde se usa</b>Encadenado con el <a href="../guias/p2.html#guiap2-ej8" class="xg" data-guia="p2" data-ej="8">Ejercicio 8</a> (a) de la Práctica 2 ($\mathcal{P}(A) \sim \{0, 1\}^A$), este ejemplo da el <a href="../guias/p2.html#guiap2-ej9" class="xg" data-guia="p2" data-ej="9">Ejercicio 9</a> (c) casi gratis. Si $A \sim B$, entonces
+      $$\mathcal{P}(A) \sim \{0, 1\}^A \sim \{0, 1\}^B \sim \mathcal{P}(B),$$
+      donde el paso del medio es exactamente este resultado, aplicado con la biyección dada $A \to B$ y con $\operatorname{id}_{\{0, 1\}}$ del otro lado.</div>
+  </article>
+
+  <!-- ===================== Prop · C^A × C^B ~ C^(A∪B) ===================== -->
+  <article class="ej" id="ejp2-prop-2" data-short="Prop" data-title="Pegar funciones sobre dominios disjuntos: C^A × C^B ~ C^(A ∪ B)" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>Pegar funciones sobre dominios disjuntos: $C^A \times C^B \sim C^{A \cup B}$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $A, B, C$ conjuntos no vacíos tales que $A \cap B = \emptyset$. Probar que
+      $$C^A \times C^B \sim C^{A \cup B}.$$</p></div>
+    <div class="estrategia"><b>Estrategia · Un par de funciones es lo mismo que una función partida en dos</b><p>Darse una función $h : A \cup B \to C$, cuando $A$ y $B$ son disjuntos, es exactamente lo mismo que decir por separado qué hace sobre $A$ y qué hace sobre $B$. Esa frase <em>es</em> la biyección: en un sentido <em>pegamos</em> el par $(f, g)$ en una sola función, y en el otro <em>restringimos</em> $h$ a cada pedazo.</p><p>El punto delicado no es ninguna de las dos verificaciones, sino que el pegado sea realmente una función: si hubiera algún $x \in A \cap B$ con $f(x) \neq g(x)$, la fórmula le asignaría dos valores distintos a un mismo punto. <em>Ahí, y sólo ahí, se usa la hipótesis $A \cap B = \emptyset$</em>: ni la inyectividad ni la sobreyectividad la necesitan.</p></div>
+    <div class="sub">
+      <h4>Resolución · Vía inyectividad y sobreyectividad</h4>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Definición de $\varphi$, y por qué está bien definida</p>
+            <p>Un elemento de $C^A \times C^B$ es un par $(f, g)$ con $f : A \to C$ y $g : B \to C$. Dado un par así, definimos $\varphi_{f,g} : A \cup B \to C$ por
+              $$\varphi_{f,g}(x) = \begin{cases} f(x) & \text{si } x \in A, \\ g(x) & \text{si } x \in B, \end{cases}$$
+              y con eso definimos $\varphi : C^A \times C^B \to C^{A \cup B}$ como $\varphi(f, g) = \varphi_{f,g}$.</p>
+            <p><b>$\varphi$ está bien definida.</b> Sea $x \in A \cup B$. Por definición de unión, $x \in A$ o $x \in B$, así que los dos casos cubren todo el dominio. Y como $A \cap B = \emptyset$, no puede pasar que $x$ esté en los dos a la vez: los casos son excluyentes. Por lo tanto a cada $x \in A \cup B$ le corresponde un único valor, $\varphi_{f,g}$ es una función de $A \cup B$ en $C$ y $\varphi(f, g) \in C^{A \cup B}$. Notemos que <em>éste es el único lugar del ejercicio donde se usa la hipótesis de disjunción</em>.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="ejp2-prop2-c1" aria-label="Una función f sobre A y otra g sobre B pegadas en una sola función sobre la unión; si A y B se cortan aparece un punto con dos valores"></canvas>
+            <div class="ctrl">
+              <fieldset class="pills"><legend><i>A</i> y <i>B</i></legend>
+                <label><input type="radio" name="ejp2-prop2-dis" value="si" checked>disjuntos</label>
+                <label><input type="radio" name="ejp2-prop2-dis" value="no">se cortan</label>
+              </fieldset>
+              <div class="slider"><label for="ejp2-prop2-par">par (<i>f</i>, <i>g</i>)</label><input type="range" id="ejp2-prop2-par" min="1" max="6" value="2"><output id="ejp2-prop2-par-o"></output></div>
+            </div>
+            <dl class="read" id="ejp2-prop2-read1" aria-live="polite"></dl>
+            <figcaption>Un caso elegido para el dibujo: <i>C</i> = {0, 1, 2}, <i>A</i> = {1, 2, 3} y <i>B</i> = {4, 5}; cada barra es el valor en ese punto, azul para <i>f</i> y naranja para <i>g</i>. Con «se cortan», <i>B</i> pasa a ser {3, 4, 5}: en el 3 hay dos barras, y si no coinciden el «pegado» le daría dos valores (en rojo). Ese es el único lugar donde importa la disjunción.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\varphi$ es inyectiva</p>
+            <p>Sean $(f, g)$ y $(\tilde f, \tilde g)$ en $C^A \times C^B$ tales que $\varphi(f, g) = \varphi(\tilde f, \tilde g)$. Que dos funciones sean iguales significa que coinciden en cada punto del dominio, es decir
+              $$\begin{aligned} &\varphi_{f,g}(x) = \varphi_{\tilde f, \tilde g}(x) \\ &\text{para todo } x \in A \cup B. \end{aligned}$$</p>
+            <p>Tomemos primero $x \in A$. Por la definición de ambas funciones, $f(x) = \varphi_{f,g}(x) = \varphi_{\tilde f, \tilde g}(x) = \tilde f(x)$. Como esto vale para <em>todo</em> $x \in A$, y $f$ y $\tilde f$ tienen el mismo dominio y el mismo codominio, resulta $f = \tilde f$. Tomando ahora $x \in B$ se obtiene de la misma forma $g = \tilde g$. Luego $(f, g) = (\tilde f, \tilde g)$ y $\varphi$ es inyectiva.</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\varphi$ es sobreyectiva</p>
+            <p>Sea $h \in C^{A \cup B}$, es decir, $h : A \cup B \to C$. Como $A \subseteq A \cup B$ y $B \subseteq A \cup B$, podemos restringir $h$ a cada pedazo y definir
+              $$\begin{aligned} f &= h|_A : A \to C, \\ g &= h|_B : B \to C, \end{aligned}$$
+              o sea $f(x) = h(x)$ para todo $x \in A$ y $g(x) = h(x)$ para todo $x \in B$. Estas dos funciones existen sin necesidad de ninguna hipótesis: restringir una función a un subconjunto de su dominio siempre da una función. Tenemos entonces $(f, g) \in C^A \times C^B$.</p>
+            <p>Falta ver que ese par es efectivamente una preimagen de $h$, o sea que $\varphi(f, g) = h$. Las dos son funciones de $A \cup B$ en $C$, así que alcanza con compararlas punto a punto. Sea $x \in A \cup B$:</p>
+            <ul class="items">
+              <li>si $x \in A$, entonces $\varphi_{f,g}(x) = f(x) = h(x)$;</li>
+              <li>si $x \in B$, entonces $\varphi_{f,g}(x) = g(x) = h(x)$.</li>
+            </ul>
+            <p>En cualquier caso $\varphi_{f,g}(x) = h(x)$, con lo cual $\varphi(f, g) = h$ y $\varphi$ es sobreyectiva.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="ejp2-prop2-c2" aria-label="Una función h sobre la unión partida en su restricción a A y su restricción a B"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="ejp2-prop2-h"><i>h</i> número</label><input type="range" id="ejp2-prop2-h" min="1" max="12" value="5"><output id="ejp2-prop2-h-o"></output></div>
+            </div>
+            <dl class="read" id="ejp2-prop2-read2" aria-live="polite"></dl>
+            <figcaption>Mismos <i>A</i> = {1, 2, 3}, <i>B</i> = {4, 5} y <i>C</i> = {0, 1, 2}. Arriba una <i>h</i> sobre <i>A</i> ∪ <i>B</i> (algunas de las 3⁵ posibles); abajo sus dos restricciones, <i>h</i>|<sub><i>A</i></sub> y <i>h</i>|<sub><i>B</i></sub>. Pegarlas de nuevo devuelve exactamente <i>h</i>.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Conclusión</p>
+            <p>Siendo $\varphi$ inyectiva y sobreyectiva, es biyectiva, y por lo tanto $C^A \times C^B \sim C^{A \cup B}$.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub">
+      <h4>Alternativa · Construyendo $\varphi^{-1}$ explícitamente</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">La candidata $\psi$</p>
+            <p>El argumento de sobreyectividad de arriba, en el fondo, ya construye la inversa: dado $h$, el par que se exhibe es siempre el mismo, $(h|_A, h|_B)$. Vale la pena escribirlo directamente, con el mismo esquema del <a href="#ejp2-prop">ejemplo anterior</a> ($B^A \sim Y^X$): exhibir la candidata y verificar las <em>dos</em> composiciones.</p>
+            <p>Definimos
+              $$\begin{aligned} &\psi : C^{A \cup B} \to C^A \times C^B, \\ &\psi(h) = (h|_A, h|_B). \end{aligned}$$</p>
+            <p><b>$\psi$ está bien definida</b> (y sin usar ninguna hipótesis sobre $A$ y $B$): las restricciones de $h$ a los subconjuntos $A$ y $B$ de su dominio son funciones $A \to C$ y $B \to C$, así que $\psi(h) \in C^A \times C^B$.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\psi \circ \varphi = \operatorname{id}_{C^A \times C^B}$</p>
+            <p>Sea $(f, g) \in C^A \times C^B$ y llamemos $h = \varphi(f, g) = \varphi_{f,g}$. Por la definición de $\varphi_{f,g}$ tenemos $h(x) = f(x)$ para todo $x \in A$, es decir $h|_A = f$; y $h(x) = g(x)$ para todo $x \in B$, es decir $h|_B = g$. Entonces
+              $$\begin{aligned} \psi(\varphi(f, g)) &= \psi(h) = (h|_A, h|_B) \\ &= (f, g). \end{aligned}$$</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\varphi \circ \psi = \operatorname{id}_{C^{A \cup B}}$</p>
+            <p>Sea $h \in C^{A \cup B}$ y llamemos $f = h|_A$ y $g = h|_B$, de modo que $\psi(h) = (f, g)$. Las funciones $\varphi(f, g)$ y $h$ van ambas de $A \cup B$ en $C$, así que las comparamos punto a punto: si $x \in A$ entonces $\varphi_{f,g}(x) = f(x) = h(x)$, y si $x \in B$ entonces $\varphi_{f,g}(x) = g(x) = h(x)$. Como $A \cup B$ no tiene otros elementos,
+              $$\varphi(\psi(h)) = \varphi(f, g) = h.$$</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Conclusión</p>
+            <p>Verificadas las dos composiciones, $\varphi$ es biyectiva con $\varphi^{-1} = \psi$.</p>
+            <p>Observemos que la hipótesis $A \cap B = \emptyset$ no reaparece en ningún paso de esta segunda resolución: se gastó entera en que $\varphi$ estuviera bien definida. La construcción de $\psi$ y las dos verificaciones valen para $A$ y $B$ cualesquiera — lo que falla sin disjunción es el punto de partida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== C3-2 ===================== -->
+  <article class="ej" id="ejp2-c3-2" data-short="C3-2" data-title="Ley exponencial y el cardinal de N^N y sus subconjuntos" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">C3-2</span>
+      <h3>Ley exponencial y el cardinal de $\mathbb{N}^{\mathbb{N}}$ y sus subconjuntos</h3>
+      <span class="src">Clase 3 · Ejercicio 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Hallar el cardinal de:</p>
+      <ol class="items">
+        <li>$\mathbb{N}^{\mathbb{N}}$.</li>
+        <li>$A = \{(a_n)_n \in \mathbb{N}^{\mathbb{N}} :$ $a_n \neq a_m$ si $n \neq m\}$ (las sucesiones inyectivas).</li>
+        <li>$A = \{(a_n)_n \in \mathbb{N}^{\mathbb{N}} :$ $a_n \mid a_{n+1}$ para todo $n \in \mathbb{N}\}$.</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia · Contar con exponentes, y después justificar</b><p>Si tratamos a los cardinales como si fueran números, el ítem (a) se "adivina" en una línea:
+      $$\begin{aligned} \#\mathbb{N}^{\mathbb{N}} = \aleph_0^{\aleph_0} &\le (2^{\aleph_0})^{\aleph_0} \\ &= 2^{\aleph_0 \times \aleph_0} = 2^{\aleph_0}. \end{aligned}$$</p>
+      <p>Esto <em>no es un argumento formal</em>, pero dice exactamente qué hay que probar: el paso $(2^{\aleph_0})^{\aleph_0} = 2^{\aleph_0 \times \aleph_0}$ es la <em>ley exponencial</em> $(A^B)^C \sim A^{B \times C}$, y el resto son coordinabilidades que ya conocemos. Los ítems (b) y (c) son subconjuntos de $\mathbb{N}^{\mathbb{N}}$: para ellos la inyección hacia $\mathbb{R}$ sale gratis de (a), y lo que hay que construir es la inyección de vuelta.</p></div>
+    <div class="nota"><b>Lema auxiliar: la ley exponencial</b>Para conjuntos $A$, $B$, $C$ cualesquiera vale $(A^B)^C \sim A^{B \times C}$.
+      <p>Un elemento de $(A^B)^C$ es una función $f : C \to A^B$, y uno de $A^{B \times C}$ es una función $g : B \times C \to A$. Definimos
+        $$\begin{aligned} &\Phi : (A^B)^C \to A^{B \times C}, \\ &\Phi(f)(b, c) := (f(c))(b), \end{aligned}$$
+        donde usamos que $f(c) \in A^B$, o sea que $f(c)$ es a su vez una función. Definimos también
+        $$\begin{aligned} &\Psi : A^{B \times C} \to (A^B)^C, \\ &[\Psi(g)(c)](b) := g(b, c). \end{aligned}$$</p>
+      <p>Las dos están bien definidas, y
+        $$\begin{aligned} \Phi(\Psi(g))(b, c) &= [\Psi(g)(c)](b) = g(b, c), \\ &\quad \text{es decir } \Phi \circ \Psi = \operatorname{id}_{A^{B \times C}}, \\ [\Psi(\Phi(f))(c)](b) &= \Phi(f)(b, c) = (f(c))(b), \\ &\quad \text{es decir } \Psi \circ \Phi = \operatorname{id}_{(A^B)^C}. \end{aligned}$$</p>
+      <p>Concluimos que $(A^B)^C \sim A^{B \times C}$. Es el mismo esquema de los dos ejemplos anteriores: exhibir la inversa y verificar las dos composiciones.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(a) Una inyección $\mathbb{R} \to \mathbb{N}^{\mathbb{N}}$</p>
+          <p><b>$\mathbb{N}^{\mathbb{N}} \sim \mathbb{R}$.</b> Una inyección en un sentido es fácil: $f : \{0,1\}^{\mathbb{N}} \to \mathbb{N}^{\mathbb{N}}$, $f((a_n)_n) = (a_n)_n$, es inyectiva, y como $\{0,1\}^{\mathbb{N}} \sim \mathbb{R}$, tenemos $\mathbb{R} \to \mathbb{N}^{\mathbb{N}}$ inyectiva.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(a) La otra inyección y Cantor-Schröeder-Bernstein</p>
+          <p>Para la otra, la inclusión da una inyección $\mathbb{N}^{\mathbb{N}} \to \mathbb{R}^{\mathbb{N}}$, y ahora encadenamos:
+            $$\begin{aligned} \mathbb{R}^{\mathbb{N}} &\sim (\{0,1\}^{\mathbb{N}})^{\mathbb{N}} \sim \{0,1\}^{\mathbb{N} \times \mathbb{N}} \\ &\sim \mathcal{P}(\mathbb{N} \times \mathbb{N}) \sim \mathcal{P}(\mathbb{N}), \end{aligned}$$
+            donde el primer paso usa $\mathbb{R} \sim \{0,1\}^{\mathbb{N}}$, el segundo es la <em>ley exponencial</em>, el tercero es el <a href="../guias/p2.html#guiap2-ej8" class="xg" data-guia="p2" data-ej="8">Ejercicio 8</a> (a) de la Práctica 2 y el último usa $\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$ (<a href="#ejp2-14">Ejemplo 14</a>). Como $\mathcal{P}(\mathbb{N}) \sim \mathbb{R}$, resulta $\mathbb{R}^{\mathbb{N}} \sim \mathbb{R}$ y por lo tanto existe $p : \mathbb{N}^{\mathbb{N}} \to \mathbb{R}$ inyectiva. Por el <span class="ref" data-ref="teo-3.11">Teorema de Cantor-Schröeder-Bernstein</span>, $\mathbb{N}^{\mathbb{N}} \sim \mathbb{R}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c32-c1" aria-label="Ley exponencial: una tabla de ceros y unos leída como sucesión de sucesiones o como función de pares"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Leer la tabla como</legend>
+              <label><input type="radio" name="ejp2-c32-modo" value="fil" checked><i>f</i> : <i>C</i> → <i>A</i><sup><i>B</i></sup> (por filas)</label>
+              <label><input type="radio" name="ejp2-c32-modo" value="par"><i>g</i> : <i>B</i> × <i>C</i> → <i>A</i> (por casillas)</label>
+            </fieldset>
+            <div class="slider"><label for="ejp2-c32-b"><i>b</i></label><input type="range" id="ejp2-c32-b" min="1" max="8" value="3"><output id="ejp2-c32-b-o"></output></div>
+            <div class="slider"><label for="ejp2-c32-c"><i>c</i></label><input type="range" id="ejp2-c32-c" min="1" max="5" value="2"><output id="ejp2-c32-c-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c32-read1" aria-live="polite"></dl>
+          <figcaption>El paso central de la cadena, con <i>A</i> = {0, 1} y <i>B</i> = <i>C</i> = ℕ (un recorte de 5 × 8 con valores elegidos para el dibujo). La misma tabla es una sucesión de sucesiones binarias, <i>f</i> : <i>C</i> → <i>A</i><sup><i>B</i></sup> (cada fila es <i>f</i>(<i>c</i>)), o una función de pares, <i>g</i> : <i>B</i> × <i>C</i> → <i>A</i>. La casilla resaltada muestra que Φ(<i>f</i>)(<i>b</i>, <i>c</i>) = (<i>f</i>(<i>c</i>))(<i>b</i>): no se cambia ningún dato, sólo cómo se lee.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(b) La enumeración creciente</p>
+          <p><b>Las sucesiones inyectivas.</b> Por (a) tenemos $f : A \to \mathbb{R}$ inyectiva. Para la vuelta construimos
+            $$g : \{B \subseteq \mathbb{N} : \#B = \aleph_0\} \to A$$
+            que a cada subconjunto infinito de $\mathbb{N}$ le asigna su <em>enumeración creciente</em>, definida inductivamente:
+            $$\begin{aligned} g(B)_1 &:= \min(B), \\ g(B)_{k+1} &:= \min\big(B \setminus \{g(B)_i : \\ &\qquad\qquad i \le k\}\big), \end{aligned}$$
+            todos bien definidos por el <span class="ref" data-ref="ext-buena-ordenacion">principio de buena ordenación</span> y porque $B$, al ser infinito, nunca se agota. Por construcción $g(B)_1 \lt g(B)_2 \lt \dots$, así que $g(B)$ es una sucesión inyectiva y $g$ está bien definida.</p>
+          <p>$g$ es inyectiva: si $B \neq \tilde B$, sea $m$ el mínimo elemento en el que difieren, digamos $m \in B \setminus \tilde B$. Como $B$ y $\tilde B$ coinciden por debajo de $m$, sus enumeraciones crecientes coinciden en los primeros $j$ lugares, donde $j = \#\{x \in B : x \lt m\}$, y en el lugar $j + 1$ vale $g(B)_{j+1} = m$ mientras que $g(\tilde B)_{j+1} \gt m$. Luego $g(B) \neq g(\tilde B)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c32-c2" aria-label="Dos subconjuntos infinitos de N y sus enumeraciones crecientes, que difieren en el lugar j más 1"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Par de conjuntos</legend>
+              <label><input type="radio" name="ejp2-c32-par" value="0" checked>pares con 7 / pares</label>
+              <label><input type="radio" name="ejp2-c32-par" value="1">impares / primos</label>
+              <label><input type="radio" name="ejp2-c32-par" value="2">múltiplos de 3 / sin el 9</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp2-c32-read2" aria-live="polite"></dl>
+          <figcaption>Dos conjuntos infinitos elegidos para el dibujo, <i>B</i> arriba y <i>B̃</i> abajo, recortados a un tramo inicial de ℕ. Los números chicos sobre cada elemento son su lugar en la enumeración creciente. La raya marca <i>m</i>, el primer elemento donde difieren: a su izquierda las dos enumeraciones coinciden (<i>j</i> lugares) y en el lugar <i>j</i> + 1 ya son distintas, aunque <i>m</i> no esté en el lugar <i>m</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(b) Los subconjuntos infinitos de $\mathbb{N}$ tienen cardinal $\mathfrak{c}$</p>
+          <p>Falta ver que $\{B \subseteq \mathbb{N} : \#B = \aleph_0\} \sim \mathbb{R}$. Por el <a href="../guias/p2.html#guiap2-ej11" class="xg" data-guia="p2" data-ej="11">Ejercicio 11</a> de la Práctica 2, $\{B \subseteq \mathbb{N} : B \text{ finito}\}$ es numerable; como
+            $$\begin{aligned} \mathcal{P}(\mathbb{N}) = \;&\{B \subseteq \mathbb{N} : B \text{ finito}\} \\ &\sqcup \{B \subseteq \mathbb{N} : \#B = \aleph_0\} \end{aligned}$$
+            y $\mathcal{P}(\mathbb{N}) \sim \mathbb{R}$, por el <a href="../guias/p2.html#guiap2-ej3" class="xg" data-guia="p2" data-ej="3">Ejercicio 3</a> (a) de la Práctica 2 el segundo pedazo tiene cardinal $\mathfrak{c}$. Existe entonces $g : \mathbb{R} \to A$ inyectiva y, por <span class="ref" data-ref="teo-3.11">Cantor-Schröeder-Bernstein</span>, $A \sim \mathbb{R}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(c) Las cadenas de divisibilidad</p>
+          <p>Por (a), existe $f : A \to \mathbb{R}$ inyectiva. Para la vuelta, notemos que si $a_n \mid a_{n+1}$ entonces $a_{n+1} = k_n a_n$ para algún $k_n \in \mathbb{N}$, y por lo tanto la sucesión queda determinada por $a_1$ y por $(k_n)_n$:
+            $$\begin{aligned} &a_1, \quad a_2 = k_1 a_1, \quad a_3 = k_2 k_1 a_1, \\ &\dots, \quad a_{n+1} = k_n \cdots k_1 a_1. \end{aligned}$$</p>
+          <p>Definimos entonces $g : \mathbb{N} \times \mathbb{N}^{\mathbb{N}} \to A$ por
+            $$\begin{aligned} &(g(a, (k_n)_n))_m := a \cdot \prod_{i=1}^{m-1} k_i, \\ &\text{con la convención } \prod_{i=1}^{0} k_i = 1. \end{aligned}$$</p>
+          <p>Está bien definida, porque
+            $$\begin{aligned} a_{m+1} &= a \prod_{i=1}^{m} k_i = \Big(a \prod_{i=1}^{m-1} k_i\Big) k_m \\ &= a_m k_m, \end{aligned}$$
+            o sea $a_m \mid a_{m+1}$.</p>
+          <p>Es inyectiva: si $(a_m)_m = g(a, (k_n)_n)$ y $(b_m)_m = g(\tilde a, (\tilde k_n)_n)$ cumplen $a_m = b_m$ para todo $m$, entonces $a = a_1 = b_1 = \tilde a$; y dado $n \in \mathbb{N}$, de $a_n k_n = a_{n+1} = b_{n+1} = b_n \tilde k_n$ con $a_n = b_n \neq 0$ se concluye $k_n = \tilde k_n$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c32-c3" aria-label="Cadena de divisibilidad: a1 y los factores k n generan cada término multiplicando"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c32-a"><i>a</i></label><input type="range" id="ejp2-c32-a" min="1" max="6" value="3"><output id="ejp2-c32-a-o"></output></div>
+            <fieldset class="pills"><legend>Factores (<i>k<sub>n</sub></i>)</legend>
+              <label><input type="radio" name="ejp2-c32-ks" value="0" checked>2, 1, 3, 1, 2, …</label>
+              <label><input type="radio" name="ejp2-c32-ks" value="1">1, 1, 1, 1, 1, …</label>
+              <label><input type="radio" name="ejp2-c32-ks" value="2">2, 2, 2, 2, 2, …</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp2-c32-read3" aria-live="polite"></dl>
+          <figcaption>La sucesión <i>g</i>(<i>a</i>, (<i>k<sub>n</sub></i>)) con valores elegidos para el dibujo: cada flecha multiplica por <i>k<sub>n</sub></i>, así que cada término divide al siguiente. La lectura hace el camino inverso, <i>k<sub>n</sub></i> = <i>a</i><sub><i>n</i>+1</sub>/<i>a<sub>n</sub></i>: por eso <i>g</i> es inyectiva.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(c) Cantor-Schröeder-Bernstein</p>
+          <p>Por último, $\mathbb{N} \times \mathbb{N}^{\mathbb{N}} \sim \mathbb{N} \times \mathbb{R}$ por (a), y $\mathbb{N} \times \mathbb{R} \sim \mathbb{R}$: en efecto, $\mathbb{N} \times \mathbb{R} = \bigsqcup_{m \in \mathbb{N}} \{m\} \times \mathbb{R}$ con $\{m\} \times \mathbb{R} \sim \mathbb{R}$, o sea que es unión contable de conjuntos de cardinal $\mathfrak{c}$ y por lo tanto tiene cardinal $\mathfrak{c}$ (<a href="../guias/p2.html#guiap2-ej7" class="xg" data-guia="p2" data-ej="7">Ejercicio 7</a> (b) de la Práctica 2). Existe entonces $g : \mathbb{R} \to A$ inyectiva y, por <span class="ref" data-ref="teo-3.11">Cantor-Schröeder-Bernstein</span>, $A \sim \mathbb{R}$.</p>
+          <p><em>Observación:</em> la función $g : \mathbb{N} \times \mathbb{N}^{\mathbb{N}} \to A$ del ítem (c) es, de hecho, biyectiva.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Corrección al manuscrito en (b)</b>El original prueba la inyectividad de $g$ así: "supongamos $B \neq \tilde B$; sea $k = \min\{k \in \mathbb{N} : k \in B \setminus \tilde B\}$; por definición $g(B)_k \neq g(\tilde B)_k$".<br>El paso usa a $k$ a la vez como <em>elemento</em> de $B$ y como <em>índice</em> de la sucesión, y eso no cierra: el elemento $m$ donde los conjuntos empiezan a diferir no tiene por qué ocupar el lugar $m$ de la enumeración. La conclusión igual vale, y arreglarlo es contar cuántos elementos de $B$ hay por debajo de $m$ para saber en qué lugar aparece; es la versión que se transcribió arriba.</div>
+    <div class="nota"><b>Nota de esta versión</b>El resultado de la guía que se usa en (b) para el pedazo de los subconjuntos infinitos es el <a href="../guias/p2.html#guiap2-ej3" class="xg" data-guia="p2" data-ej="3">Ejercicio 3</a> (b) ($B \setminus A \sim B$ cuando $A \subseteq B$ es contable y $B \setminus A$ es infinito), que se deduce del (a).</div>
+  </article>
+
+  <!-- ===================== C3-1 ===================== -->
+  <article class="ej" id="ejp2-c3-1" data-short="C3-1" data-title="Cardinal de un subconjunto de R^3 definido por condiciones" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">C3-1</span>
+      <h3>Cardinal de un subconjunto de $\mathbb{R}^3$ definido por condiciones</h3>
+      <span class="src">Clase 3 · Ejercicio 1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Hallar el cardinal de
+      $$\begin{aligned} X = \{(x, y, z) \in \mathbb{R}^3 :\ &x \in \mathbb{Q},\ y \in \mathbb{R} \setminus \mathbb{Q}, \\ &z \in \mathbb{N} \text{ es par}\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia · Sándwich: una inyección para cada lado</b><p>Cuando el conjunto está "encajado" entre dos conjuntos de cardinal conocido, no hace falta construir ninguna biyección: se exhibe una inyección en cada sentido y se invoca Cantor-Schröeder-Bernstein. Para la inyección que sale de $X$ alcanza con la inclusión en $\mathbb{R}^3$; para la que entra, basta con encontrar <em>una sola</em> copia grande adentro de $X$, fijando todas las coordenadas menos una.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\#X \le \#\mathbb{R}$</p>
+          <p>Como $X \subseteq \mathbb{R}^3$, la inclusión da una función inyectiva $X \to \mathbb{R}^3$. Y como $\mathbb{R}^3 \sim \mathbb{R}$ (<a href="../guias/p2.html#guiap2-ej14" class="xg" data-guia="p2" data-ej="14">Ejercicio 14</a> (c) de la Práctica 2), componiendo obtenemos $f : X \to \mathbb{R}$ inyectiva, es decir $\#X \le \#\mathbb{R}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\#\mathbb{R} \le \#X$</p>
+          <p>Por otro lado, la función
+            $$g : \mathbb{R} \setminus \mathbb{Q} \to X, \quad g(y) = (0, y, 2)$$
+            es inyectiva (si $g(y) = g(y')$, comparando la segunda coordenada, $y = y'$), y está bien definida porque $0 \in \mathbb{Q}$, $y \in \mathbb{R} \setminus \mathbb{Q}$ y $2 \in \mathbb{N}$ es par. Como $\mathbb{R} \sim \mathbb{R} \setminus \mathbb{Q}$ (el cardinal de los irracionales es $\mathfrak{c}$, <a href="../guias/p2.html#guiap2-ej4" class="xg" data-guia="p2" data-ej="4">Ejercicio 4</a> de la Práctica 2), componiendo obtenemos $g : \mathbb{R} \to X$ inyectiva, o sea $\#\mathbb{R} \le \#X$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 230" role="img" aria-label="Sándwich: los irracionales entran en X por g, X entra en R al cubo por la inclusión, y R al cubo es coordinable con R">
+            <rect x="12" y="20" width="100" height="40" rx="6" class="sv-seq2"/>
+            <text x="62" y="45" text-anchor="middle" class="sv-text">ℝ ∖ ℚ</text>
+            <rect x="130" y="20" width="100" height="40" rx="6" class="sv-accent"/>
+            <text x="180" y="45" text-anchor="middle" class="sv-text">X</text>
+            <rect x="248" y="20" width="100" height="40" rx="6" class="sv-ok"/>
+            <text x="298" y="45" text-anchor="middle" class="sv-text">ℝ³</text>
+            <line x1="112" y1="40" x2="128" y2="40" class="sv-seq2"/><path d="M122 35 L129 40 L122 45" class="sv-seq2"/>
+            <line x1="230" y1="40" x2="246" y2="40" class="sv-ok"/><path d="M240 35 L247 40 L240 45" class="sv-ok"/>
+            <text x="120" y="78" text-anchor="middle" class="sv-label-seq2">g(y) = (0, y, 2)</text>
+            <text x="238" y="78" text-anchor="middle" class="sv-label-ok">inclusión</text>
+            <rect x="12" y="110" width="100" height="40" rx="6" class="sv-seq2 sv-dash"/>
+            <text x="62" y="135" text-anchor="middle" class="sv-text">ℝ</text>
+            <rect x="248" y="110" width="100" height="40" rx="6" class="sv-ok sv-dash"/>
+            <text x="298" y="135" text-anchor="middle" class="sv-text">ℝ</text>
+            <line x1="62" y1="64" x2="62" y2="106" class="sv-axis"/>
+            <text x="70" y="92" class="sv-muted">∼ (Ej. 4)</text>
+            <line x1="298" y1="64" x2="298" y2="106" class="sv-axis"/>
+            <text x="252" y="92" text-anchor="end" class="sv-muted">∼ (Ej. 14 c)</text>
+            <text x="180" y="128" text-anchor="middle" class="sv-label-seq2">#ℝ ≤ #X</text>
+            <text x="180" y="146" text-anchor="middle" class="sv-label-ok">#X ≤ #ℝ</text>
+            <rect x="60" y="176" width="240" height="38" rx="8" class="sv-accent"/>
+            <text x="180" y="200" text-anchor="middle" class="sv-label-accent">CSB: #X = #ℝ</text>
+          </svg>
+          <figcaption>El sándwich: a la izquierda, la copia de los irracionales que vive adentro de <i>X</i> (la recta {0} × (ℝ ∖ ℚ) × {2}); a la derecha, la inclusión de <i>X</i> en ℝ³. Con ℝ ∖ ℚ ∼ ℝ ∼ ℝ³ quedan las dos desigualdades, y Cantor-Schröeder-Bernstein las junta.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cantor-Schröeder-Bernstein</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema de Cantor-Schröeder-Bernstein</span> existe $F : X \to \mathbb{R}$ biyectiva, y concluimos que $\#X = \#\mathbb{R} = \mathfrak{c}$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== C3-3 ===================== -->
+  <article class="ej" id="ejp2-c3-3" data-short="C3-3" data-title="Cardinal de las sucesiones enteras que se mueven de a un paso" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">C3-3</span>
+      <h3>Cardinal de las sucesiones enteras que se mueven de a un paso</h3>
+      <span class="src">Clase 3 · Ejercicio 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Hallar el cardinal de
+      $$\begin{aligned} A = \{(a_n)_n \subseteq \mathbb{Z} :\ &|a_{n+1} - a_n| = 1 \\ &\text{para todo } n \in \mathbb{N}\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia · Cuando en cada paso hay dos opciones, aparece $\{0,1\}^{\mathbb{N}}$</b><p>Si $a_1 = 1$, entonces $a_2 \in \{0, 2\}$; para cada uno de esos hay de nuevo dos posibilidades, y así siguiendo. El esquema es un árbol binario:
+      $$a_1 = 1 \to \begin{cases} a_2 = 2 \to \begin{cases} a_3 = 3 \to \ \vdots \\ a_3 = 1 \to \ \vdots \end{cases} \\[10pt] a_2 = 0 \to \begin{cases} a_3 = 1 \to \ \vdots \\ a_3 = -1 \to \ \vdots \end{cases} \end{cases}$$</p>
+      <p>En cada paso hay exactamente <em>dos posibilidades</em>, $a_{n+1} = a_n + 1$ o $a_{n+1} = a_n - 1$. Elegir un elemento de $A$ con $a_1$ fijo es entonces lo mismo que elegir una sucesión de decisiones binarias: eso es lo que sugiere codificar con $\{0,1\}^{\mathbb{N}}$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La codificación $f : \{0,1\}^{\mathbb{N}} \to A$</p>
+          <p>Definimos $f : \{0,1\}^{\mathbb{N}} \to A$ mandando $(b_k)_k$ a la sucesión $a_n := f((b_k)_k)_n$ dada por
+            $$\begin{cases} a_1 = 1, \\ a_{n+1} = a_n + 1 & \text{si } b_n = 1, \\ a_{n+1} = a_n - 1 & \text{si } b_n = 0, \end{cases}$$
+            o, de manera más compacta, $a_1 = 1$ y $a_{n+1} = a_n + (-1)^{b_n + 1}$ para todo $n \in \mathbb{N}$.</p>
+          <p>Por ejemplo, si $b_1 = 1$, $b_2 = 0$, $b_3 = 0$, $b_4 = 1$, $b_5 = 0$, $b_6 = 0$, $b_7 = 1$, $\dots$, queda
+            $$\begin{aligned} &a_1 = 1,\ a_2 = 2,\ a_3 = 1, \\ &a_4 = 0,\ a_5 = 1,\ a_6 = 0, \\ &a_7 = -1,\ a_8 = 0,\ \dots \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c33-c1" aria-label="Fila de bits b n que se pueden tocar para cambiarlos y el camino a n que generan sobre la red de todos los caminos posibles"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c33-N">términos</label><input type="range" id="ejp2-c33-N" min="4" max="12" value="8"><output id="ejp2-c33-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c33-read1" aria-live="polite"></dl>
+          <figcaption>Arriba los bits <i>b</i>₁, <i>b</i>₂, …: tocá uno para cambiarlo. Abajo, en gris, el árbol de todos los caminos posibles desde <i>a</i>₁ = 1, y en azul el que eligen los bits (un 1 sube, un 0 baja). Arranca con los bits del ejemplo del texto. Cambiar un solo bit cambia el camino desde ese paso: dos sucesiones de bits distintas dan sucesiones distintas.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$f$ está bien definida y es inyectiva</p>
+          <ul class="items">
+            <li><b>$f$ está bien definida:</b> $|a_{n+1} - a_n| = |(-1)^{b_n + 1}| = 1$, así que $f((b_k)_k) \in A$.</li>
+            <li><b>$f$ es inyectiva:</b> sean $a_n := f((b_k)_k)_n$ y $\tilde a_n := f((c_k)_k)_n$ con $a_n = \tilde a_n$ para todo $n \in \mathbb{N}$. Entonces
+              $$\begin{aligned} a_n + (-1)^{b_n + 1} &= a_{n+1} = \tilde a_{n+1} \\ &= \tilde a_n + (-1)^{c_n + 1} \\ &\text{para todo } n \in \mathbb{N}, \end{aligned}$$
+              y como $a_n = \tilde a_n$ resulta $(-1)^{b_n} = (-1)^{c_n}$. Siendo $b_n, c_n \in \{0, 1\}$, se sigue $b_n = c_n$ para todo $n$.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La inyección de vuelta y Cantor-Schröeder-Bernstein</p>
+          <p>Por otra parte, $A \subseteq \mathbb{Z}^{\mathbb{N}}$, y como $\mathbb{Z} \sim \mathbb{N}$ vale $\mathbb{Z}^{\mathbb{N}} \sim \mathbb{N}^{\mathbb{N}} \sim \{0,1\}^{\mathbb{N}}$ (esta última por el ítem (a) del <a href="#ejp2-c3-2">Ejercicio C3-2</a>). Existe entonces $g : A \to \{0,1\}^{\mathbb{N}}$ inyectiva.</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema de Cantor-Schröeder-Bernstein</span>, $A \sim \{0,1\}^{\mathbb{N}} \sim \mathbb{R}$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>El manuscrito original dice $A \subseteq \mathbb{N}^{\mathbb{N}}$, pero $A$ contiene sucesiones con el cero y con enteros negativos (mirá el ejemplo de arriba, con $a_4 = 0$ y $a_7 = -1$), así que en rigor $A \subseteq \mathbb{Z}^{\mathbb{N}}$; se agregó el paso $\mathbb{Z} \sim \mathbb{N}$ para completar el argumento.</div>
+  </article>
+
+  <!-- ===================== C3-4 ===================== -->
+  <article class="ej" id="ejp2-c3-4" data-short="C3-4" data-title="Una familia con condición local de contabilidad es contable" data-topics="cardinalidad,densidad">
+    <div class="ej-head">
+      <span class="tag">C3-4</span>
+      <h3>Una familia con condición local de contabilidad es contable</h3>
+      <span class="src">Clase 3 · Ejercicio 4</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $\mathcal{F}$ una familia de subconjuntos no vacíos de $\mathbb{R}$ tal que para cada $x \in \mathbb{R}$ existe $\varepsilon_x \gt 0$ con
+      $$\begin{aligned} \#\{F \in \mathcal{F} :\ &F \cap (x - \varepsilon_x, x + \varepsilon_x) \\ &\neq \emptyset\} \le \aleph_0. \end{aligned}$$
+      Probar que $\mathcal{F}$ es <span class="ref" data-ref="def-3.6">contable</span>.</p></div>
+    <div class="estrategia"><b>Estrategia · Pasar de un índice no contable a uno contable</b><p>La hipótesis da un entorno bueno alrededor de <em>cada</em> real, y los reales no son contables: si armamos la unión indexada por $\mathbb{R}$ no ganamos nada, porque unión no contable de contables no tiene por qué ser contable. Hay que reindexar por algo contable.</p><p>Lo natural es usar intervalos <em>con centro y radio racionales</em>: hay una cantidad contable de ellos, y por densidad de $\mathbb{Q}$ todo entorno $(x - \varepsilon_x, x + \varepsilon_x)$ contiene uno de ellos que además contiene a $x$. Cada intervalo racional que entra adentro de un entorno bueno hereda la contabilidad, y ahí sí la unión es contable de contables.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Reindexar por pares racionales</p>
+          <p>Llamemos, para $q \in \mathbb{Q}$ y $r \in \mathbb{Q}_{\gt 0}$,
+            $$\begin{aligned} \mathcal{F}_{q,r} = \{F \in \mathcal{F} :\ &F \cap (q - r, q + r) \\ &\neq \emptyset\}, \end{aligned}$$
+            y sea
+            $$\begin{aligned} P = \{&(q, r) \in \mathbb{Q} \times \mathbb{Q}_{\gt 0} : \\ &\mathcal{F}_{q,r} \text{ es contable}\}. \end{aligned}$$</p>
+          <p>Como $\mathbb{Q} \times \mathbb{Q}_{\gt 0}$ es contable (es un subconjunto de $\mathbb{Q} \times \mathbb{Q}$, numerable por ser producto de numerables), $P$ es contable. Afirmamos que
+            $$\mathcal{F} = \bigcup_{(q,r) \in P} \mathcal{F}_{q,r}.$$</p>
+          <p>La contención $\supseteq$ es clara, porque cada $\mathcal{F}_{q,r}$ es un subconjunto de $\mathcal{F}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La contención $\subseteq$</p>
+          <p>Para la otra, sea $F \in \mathcal{F}$. Como $F \neq \emptyset$, podemos tomar $x \in F$, y la hipótesis nos da $\varepsilon_x \gt 0$ tal que $\{G \in \mathcal{F} :$ $G \cap (x - \varepsilon_x, x + \varepsilon_x) \neq \emptyset\}$ es contable. Por <span class="ref" data-ref="prop-2">densidad de $\mathbb{Q}$</span> elegimos $q \in \mathbb{Q}$ con $|x - q| \lt \varepsilon_x / 2$, y de nuevo por densidad un racional $r$ con
+            $$|x - q| \lt r \lt \varepsilon_x / 2.$$</p>
+          <p>Con esa elección:</p>
+          <ul class="items">
+            <li>$x \in (q - r, q + r)$, porque $|x - q| \lt r$;</li>
+            <li>$(q - r, q + r) \subseteq (x - \varepsilon_x, x + \varepsilon_x)$, porque si $|y - q| \lt r$ entonces
+              $$\begin{aligned} |y - x| &\le |y - q| + |q - x| \\ &\lt r + \varepsilon_x / 2 \\ &\lt \varepsilon_x / 2 + \varepsilon_x / 2 = \varepsilon_x. \end{aligned}$$</li>
+          </ul>
+          <p>De la segunda propiedad se sigue que $\mathcal{F}_{q,r} \subseteq \{G \in \mathcal{F} :$ $G \cap (x - \varepsilon_x, x + \varepsilon_x) \neq \emptyset\}$, que es contable; luego $\mathcal{F}_{q,r}$ es contable y $(q, r) \in P$. De la primera, $x \in F \cap (q - r, q + r)$, así que $F \in \mathcal{F}_{q,r}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-c34-c1" aria-label="Un punto x con su entorno bueno, un racional q cerca de x y un radio racional r; el intervalo racional contiene a x y queda dentro del entorno"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp2-c34-eps">ε<sub><i>x</i></sub></label><input type="range" id="ejp2-c34-eps" min="10" max="150" value="80"><output id="ejp2-c34-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp2-c34-read1" aria-live="polite"></dl>
+          <figcaption>Arrastrá <i>x</i> sobre la recta y cambiá ε<sub><i>x</i></sub> (valores del dibujo). La banda clara es el entorno bueno (<i>x</i> − ε<sub><i>x</i></sub>, <i>x</i> + ε<sub><i>x</i></sub>); la marca interna es la mitad del radio. El dibujo busca el racional <i>q</i> de menor denominador con |<i>x</i> − <i>q</i>| &lt; ε<sub><i>x</i></sub>/2 y después un racional <i>r</i> entre |<i>x</i> − <i>q</i>| y ε<sub><i>x</i></sub>/2: el intervalo (<i>q</i> − <i>r</i>, <i>q</i> + <i>r</i>), en verde, contiene a <i>x</i> y queda adentro del entorno.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Concluimos que $\mathcal{F} \subseteq \bigcup_{(q,r) \in P} \mathcal{F}_{q,r}$ y por lo tanto vale la igualdad. Siendo $P$ contable y cada $\mathcal{F}_{q,r}$ con $(q,r) \in P$ contable, $\mathcal{F}$ es unión contable de contables y por lo tanto es contable.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Corrección al manuscrito</b>El original indexa directamente por $\mathbb{Q}$: aplica la hipótesis en cada $q \in \mathbb{Q}$ para obtener $\varepsilon_q \gt 0$, define $\mathcal{F}_q = \{F : F \cap (q - \varepsilon_q, q + \varepsilon_q) \neq \emptyset\}$ y, para cubrir un $F$ con $x \in F$ irracional, pide un $q \in \mathbb{Q}$ con $|x - q| \lt \varepsilon_q$.<br>Ese último paso no se puede conseguir. El $\varepsilon_q$ viene dado por la hipótesis <em>en $q$</em>, no lo elegimos nosotros, y nada impide que los $\varepsilon_q$ de todos los racionales cercanos a $x$ sean mucho más chicos que la distancia de $x$ a ellos; la densidad de $\mathbb{Q}$ da racionales arbitrariamente cerca de $x$, pero no controla el radio que cada uno trae puesto.<br>La reparación es no dejar que el radio venga impuesto: se lo elige uno, racional, adentro del entorno bueno de $x$. Eso es lo que hace la resolución de arriba, y es <em>razonamiento agregado</em>, no transcripción del manuscrito.</div>
+  </article>
+
+  <!-- ===================== guía-3 ===================== -->
+  <article class="ej" id="ejp2-guia-3" data-short="guía-3" data-title="Cardinal de las sucesiones binarias que valen 1 finitas veces" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">guía-3</span>
+      <h3>Cardinal de las sucesiones binarias que valen $1$ finitas veces</h3>
+      <span class="src">Avanzada · Práctica</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $A \subseteq \{0,1\}^{\mathbb{N}}$ el conjunto de las sucesiones de ceros y unos que toman el valor $1$ sólo finitas veces (es decir, son eventualmente $0$). ¿Qué cardinal tiene $A$?</p></div>
+    <div class="estrategia"><b>Estrategia · Partir por la cantidad de unos, y para cada cantidad fija anotar sus posiciones</b><p>Como cada sucesión de $A$ tiene finitos unos, tiene sentido agrupar $A$ según <em>cuántos</em> unos tiene cada una. Fijada esa cantidad $k$, una sucesión de $A_k$ queda completamente determinada por las $k$ posiciones (ordenadas) donde vale $1$ — el resto son ceros — así que $A_k$ se inyecta en $\mathbb{N}^k$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cota inferior: $A$ es infinito</p>
+          <p>Para cada $m \in \mathbb{N}$, sea $(e^m_k)_{k \in \mathbb{N}}$ la sucesión con $e^m_k = 1$ si $k = m$ y $e^m_k = 0$ si no. La familia $\{(e^m_k)_k : m \in \mathbb{N}\} \subseteq A$ es numerable (sucesiones distintas para $m$ distintos), así que $A$ es infinito.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Partición por cantidad de unos</p>
+          <p>Escribimos $A = \bigcup_{k \in \mathbb{N}_0} A_k$, con $A_k = \{(a_n)_n \in A :$ $(a_n)_n$ tiene exactamente $k$ unos$\}$.</p>
+          <ul class="items">
+            <li>$A_0 = \{(0,0,0,\dots)\}$: un solo elemento.</li>
+            <li>$A_1 = \{(e^m_k)_k : m \in \mathbb{N}\}$: numerable, biyectando con $m \in \mathbb{N}$.</li>
+            <li>Para $k \ge 2$: la función $A_k \to \mathbb{N}^k$ que manda $(a_n)_n$ a $(m_1, \dots, m_k)$ con $m_1 \lt \dots \lt m_k$ las posiciones donde vale $1$, es inyectiva — dos sucesiones de $A_k$ con las mismas $k$ posiciones en $1$ coinciden en esas posiciones y en el resto (todo ceros), así que son la misma sucesión. Como $\mathbb{N}^k$ es numerable, $A_k$ es contable.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-g3-c1" aria-label="Sucesión binaria con finitos unos; se pueden tocar las casillas para prender o apagar unos y se lee la k-upla de posiciones"></canvas>
+          <dl class="read" id="ejp2-g3-read1" aria-live="polite"></dl>
+          <figcaption>Una sucesión de <i>A</i>, recortada a sus primeros 16 términos (desde ahí todo es 0). Tocá una casilla para prender o apagar un 1. La lectura dice en qué <i>A<sub>k</sub></i> está y cuál es la <i>k</i>-upla ordenada de posiciones que la determina.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>$A$ es unión numerable de conjuntos contables, así que $A$ es contable; combinado con ser infinito, $A$ es numerable: $\#A = \aleph_0$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== guía-4 ===================== -->
+  <article class="ej" id="ejp2-guia-4" data-short="guía-4" data-title="Cardinal de Ω = {B ⊆ Z : #B ≠ #(Z ∖ B)}" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">guía-4</span>
+      <h3>Cardinal de $\Omega = \{B \subseteq \mathbb{Z} : \#B \neq \#(\mathbb{Z} \setminus B)\}$</h3>
+      <span class="src">Parcial 2023</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $\Omega \subseteq \mathcal{P}(\mathbb{Z})$ definido como $\Omega = \{B \subseteq \mathbb{Z} : \#B \neq \#(\mathbb{Z} \setminus B)\}$. ¿Cuál es el cardinal de $\Omega$?</p></div>
+    <div class="estrategia"><b>Estrategia · $\Omega$ es exactamente finitos $\cup$ cofinitos, y cada mitad es numerable</b><p>La clave es notar que la condición que define a $\Omega$ es <em>simétrica</em> entre $B$ y su complemento, así que $\Omega$ se parte en dos mitades del mismo tamaño: los subconjuntos finitos y los de complemento finito (cofinitos). Cada mitad se cuenta con la misma técnica del ejemplo anterior (partir por tamaño y encajar en $\mathbb{Z}^k$).</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Omega = \Omega_F \cup \Omega_{\text{cof}}$</p>
+          <p>Con $\Omega_F = \{B \subseteq \mathbb{Z} : B \text{ finito}\}$ y $\Omega_{\text{cof}} = \{B \subseteq \mathbb{Z} : \mathbb{Z} \setminus B \text{ finito}\}$ (unión disjunta, porque $\mathbb{Z}$ es infinito: ningún subconjunto puede ser finito y cofinito a la vez).</p>
+          <p>$\supseteq)$ Si $B$ es finito, $\mathbb{Z} \setminus B$ es infinito, así que $\#B \neq \#(\mathbb{Z} \setminus B)$ y $B \in \Omega$. Por simetría de la condición que define a $\Omega$, si $B \in \Omega$ entonces $\mathbb{Z} \setminus B \in \Omega$ también; en particular, todo $B$ cofinito está en $\Omega$.</p>
+          <p>$\subseteq)$ Sea $B \in \Omega$. Si $B$ no fuera finito, sería infinito y, al ser $B \subseteq \mathbb{Z}$ numerable, resultaría $\#B = \aleph_0$. Si además $\mathbb{Z} \setminus B$ fuera infinito, también sería numerable, y entonces $\#B = \#(\mathbb{Z} \setminus B) = \aleph_0$, contradiciendo $B \in \Omega$. Luego $\mathbb{Z} \setminus B$ debe ser finito, es decir $B \in \Omega_{\text{cof}}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp2-g4-c1" aria-label="Un tramo de Z con un subconjunto finito B marcado y su complemento cofinito"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Mostrar</legend>
+              <label><input type="radio" name="ejp2-g4-ver" value="B" checked><i>B</i> (finito)</label>
+              <label><input type="radio" name="ejp2-g4-ver" value="C">ℤ ∖ <i>B</i> (cofinito)</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp2-g4-read1" aria-live="polite"></dl>
+          <figcaption>Un tramo de ℤ (de −8 a 8; afuera, la recta sigue igual que en los bordes). Tocá los enteros para armar un <i>B</i> finito. Con «ℤ ∖ <i>B</i>» se ve el complemento, que tiene todos los demás enteros: es el cofinito que le corresponde por la biyección <i>B</i> ↦ ℤ ∖ <i>B</i>. La lectura da la <i>k</i>-upla ordenada de <i>B</i>, su lugar en ℤ<sup><i>k</i></sup>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\#\Omega_F = \#\Omega_{\text{cof}}$</p>
+          <p>Vía la biyección $\Omega_F \to \Omega_{\text{cof}}$, $B \mapsto \mathbb{Z} \setminus B$ (con inversa la misma operación).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\#\Omega_F = \aleph_0$</p>
+          <p>Escribimos $\Omega_F = \bigcup_{k \in \mathbb{N}_0} \Omega_{F,k}$ con $\Omega_{F,k} = \{B \subseteq \mathbb{Z} : \#B = k\}$. Cada $\Omega_{F,k}$ es contable: la función que manda $B \in \Omega_{F,k}$ a la $k$-upla ordenada de sus elementos es inyectiva hacia $\mathbb{Z}^k$, que es numerable (como en el <a href="#ejp2-guia-3">Ejemplo guía-3</a>). Como $\Omega_F$ es infinito (contiene, por ejemplo, todos los singuletes $\{n\}$, $n \in \mathbb{Z}$) y es unión numerable de contables, $\Omega_F$ es numerable.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>$\#\Omega_{\text{cof}} = \#\Omega_F = \aleph_0$, y $\Omega = \Omega_F \cup \Omega_{\text{cof}}$ es unión de dos numerables, así que $\#\Omega = \aleph_0$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Pregunta abierta en el margen (sin resolver)</b>La clase deja anotada, sin resolver, la pregunta complementaria: ¿cuál es el cardinal de $\Omega' = \{A \subseteq \mathbb{Z} : \#A = \#(\mathbb{Z} \setminus A)\}$? Como $\Omega' = \mathcal{P}(\mathbb{Z}) \setminus \Omega$ y $\Omega$ es numerable mientras que $\mathcal{P}(\mathbb{Z}) \sim \mathbb{R}$, la respuesta debería ser $\#\Omega' = \mathfrak{c}$ (quitarle un numerable a un conjunto de cardinal $\mathfrak{c}$ no cambia su cardinal), pero esa propiedad de aritmética cardinal no está probada en el apunte, así que no se completa acá.</div>
+  </article>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/ejemplos/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.1": {
+  "tipo": "Definición",
+  "numero": "3.1",
+  "titulo": "Conjuntos Coordinables",
+  "enunciado": "<p>Sean $X, Y$ dos conjuntos. Decimos que son <strong>coordinables<\/strong> si existe una función biyectiva $f : X \\to Y$. Cuando esto ocurre, escribimos $X \\sim Y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:<\/p><ul class=\"items\"><li><b>finito<\/b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<\/li><li><b>infinito<\/b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<\/li><li><b>numerable<\/b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<\/li><li><b>a lo sumo numerable<\/b> o <b>contable<\/b> si es finito o numerable.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.<\/p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\neq \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-3.12": {
+  "tipo": "Ejemplo",
+  "numero": "3.12",
+  "titulo": "Numerabilidad de $\\mathbb{N} \\times \\mathbb{N}$ vía Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $\\mathbb{N} \\times \\mathbb{N}$ es numerable.<\/p>",
+  "fuente": "ejemplos/p2.typ (Ejemplo 14, rotulado “Ejemplo 3.12”); no es una caja de apuntes.typ"
+ },
+ "ext-axioma-de-eleccion": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Axioma de elección",
+  "enunciado": "<p>Si $(X_i)_{i \\in I}$ es una familia de conjuntos no vacíos, existe una función $c : I \\to \\bigcup_{i \\in I} X_i$ con $c(i) \\in X_i$ para todo $i \\in I$: se puede elegir simultáneamente un elemento de cada conjunto.<\/p>",
+  "fuente": "Axioma de la teoría de conjuntos; no está enunciado en apuntes.typ (la demostración de la Proposición 3.9 lo menciona)"
+ },
+ "ext-buena-ordenacion": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Principio de buena ordenación",
+  "enunciado": "<p>Todo subconjunto no vacío de $\\mathbb{N}$ tiene mínimo.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-ejemplo-c1-3": {
+  "tipo": "Ejemplo",
+  "numero": "C1-3",
+  "titulo": "Una sucesión convergente de enteros es finalmente constante",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión convergente tal que existe $n_0 \\in \\mathbb{N}$ para el cual $a_n \\in \\mathbb{Z}$ para todo $n \\gt n_0$. Probar que existen $n_1 \\in \\mathbb{N}$ y $a \\in \\mathbb{R}$ tales que $a_n = a$ para todo $n \\ge n_1$.<\/p>",
+  "fuente": "ejemplos/p1.typ (Clase 1 · Ejemplo 3); no está enunciado en apuntes.typ"
+ },
+ "ext-intervalos-encajados": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Propiedad de los intervalos encajados",
+  "enunciado": "<p>Si $I_n = [a_n, b_n]$ son intervalos cerrados y acotados con $I_{n+1} \\subseteq I_n$ para todo $n$, entonces $\\bigcap_{n \\in \\mathbb{N}} I_n \\neq \\emptyset$.<\/p>",
+  "fuente": "Abbott, Teorema 1.4.1; no está en apuntes.typ (la nota del Ejemplo A1.5.6b la demuestra)"
+ },
+ "ext-obs-3-22": {
+  "tipo": "Observación",
+  "numero": "3.22",
+  "titulo": "No unicidad del desarrollo decimal",
+  "enunciado": "<p>En la demostración de que el intervalo $(0, 1)$ no es numerable (Teorema 3.19) se usa el desarrollo decimal de los números reales para construir un $y \\in (0, 1)$ con $y \\neq x_n$ para todo $n \\in \\mathbb{N}$. Sin embargo, el desarrollo decimal de un número real no siempre es único: por ejemplo, $$0{,}1 = 0{,}0999999\\dots$$ (y en general, cualquier número con desarrollo decimal finito admite una representación alternativa terminada en una cola infinita de nueves).<\/p>",
+  "fuente": "notas_materia.pdf; en el repositorio figura como desafío en desafios/p2.typ. No está en apuntes.typ"
+ },
+ "ext-raices-finitas": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Un polinomio no nulo tiene finitas raíces",
+  "enunciado": "<p>Un polinomio no nulo $p$ de grado $n$ con coeficientes reales tiene a lo sumo $n$ raíces reales. En particular, $\\{x \\in \\mathbb{R} : p(x) = 0\\}$ es finito.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-tfa": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Teorema fundamental de la aritmética",
+  "enunciado": "<p>Todo número natural $N \\ge 2$ se escribe como producto de primos, y esa escritura es única salvo el orden de los factores. En particular, si $p_0, \\dots, p_n$ son primos distintos y $p_0^{e_0} \\cdots p_n^{e_n} = p_0^{f_0} \\cdots p_n^{f_n}$ con $e_j, f_j \\in \\mathbb{N}_0$, entonces $e_j = f_j$ para todo $j$.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-2": {
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $\\mathbb{Q}$",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $q \\in \\mathbb{Q}$ tal que $x \\lt q \\lt y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.13": {
+  "tipo": "Proposición",
+  "numero": "3.13",
+  "titulo": "Subconjuntos de Conjuntos Numerables",
+  "enunciado": "<p>Sea $A$ numerable. Si $\\emptyset \\ne B \\subseteq A$, entonces $B$ es a lo sumo numerable.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.2": {
+  "tipo": "Proposición",
+  "numero": "3.2",
+  "titulo": "Relación de equivalencia",
+  "enunciado": "<p>La relación $\\sim$ es una relación de equivalencia.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.19": {
+  "tipo": "Teorema",
+  "numero": "3.19",
+  "titulo": "No numerabilidad de $\\mathbb{R}$",
+  "enunciado": "<p>El conjunto de los números reales $\\mathbb{R}$ no es numerable.<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* ejemplos/p2 */
+(() => {
+"use strict";
+/* Dibujos de los ejemplos de la Práctica 2 (cardinalidad). Usa window.PP. */
+const C = (t) => PP.css(t);
+const FONT = (s, w) => (w ? w + " " : "") + s + "px 'IBM Plex Sans', system-ui, sans-serif";
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; };
+const neg = (s) => String(s).replace("-", "−");
+const frac = (p, q) => { const g = gcd(p, q) || 1; p /= g; q /= g; if (q < 0) { p = -p; q = -q; } return q === 1 ? neg(p) : neg(p) + "/" + q; };
+const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹", SUB = "₀₁₂₃₄₅₆₇₈₉";
+const sup = (n) => String(n).split("").map((d) => (d === "-" ? "⁻" : SUP[+d])).join("");
+const sub = (n) => String(n).split("").map((d) => SUB[+d]).join("");
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Flecha recta con punta. */
+function arrow(ctx, x0, y0, x1, y1, color, width, dash, head) {
+  PP.path(ctx, [[x0, y0], [x1, y1]], color, width || 1.5, dash);
+  const a = Math.atan2(y1 - y0, x1 - x0), L = head || 7;
+  PP.path(ctx, [[x1 - L * Math.cos(a - 0.4), y1 - L * Math.sin(a - 0.4)], [x1, y1], [x1 - L * Math.cos(a + 0.4), y1 - L * Math.sin(a + 0.4)]], color, width || 1.5);
+}
+
+/* Toque o arrastre sobre un canvas: handler(px, py, tipo) con coordenadas en píxeles CSS. */
+function pointer(id, handler, drag) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.cursor = drag ? "grab" : "pointer";
+  if (drag) cv.style.touchAction = "none";
+  let active = false;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const [px, py] = pos(e);
+    const took = handler(px, py, "down");
+    if (drag && took) { active = true; cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  if (drag) {
+    cv.addEventListener("pointermove", (e) => { if (!active) return; const [px, py] = pos(e); handler(px, py, "move"); });
+    const end = () => { active = false; cv.style.cursor = "grab"; };
+    cv.addEventListener("pointerup", end);
+    cv.addEventListener("pointercancel", end);
+  }
+}
+
+/* ===================== 13 · ℕ ∼ ℤ y ℕ ∼ ℚ⁺ ===================== */
+
+/* Recorrido en zigzag de la grilla m/n (columna m, fila n), diagonales d = m + n. */
+const ZZ_SIZE = 6;
+const ZZ_ORDER = (() => {
+  const out = [];
+  for (let d = 2; d <= ZZ_SIZE + 1; d++) {
+    const ms = [];
+    for (let m = 1; m <= d - 1; m++) ms.push(m);
+    if (d % 2 === 1) ms.reverse();
+    ms.forEach((m) => out.push({ m, n: d - m, rep: gcd(m, d - m) > 1 }));
+  }
+  return out;
+})();
+
+PP.register(function zigzag() {
+  const k = PP.val("ejp2-13-k");
+  PP.out("ejp2-13-k-o", String(k));
+  const { ctx, w, h } = PP.canvas("ejp2-13-c1", 0.92);
+  const L = 44, Tp = 34, s = Math.min((w - L - 14) / ZZ_SIZE, (h - Tp - 14) / ZZ_SIZE);
+  const X = (m) => L + (m - 0.5) * s, Y = (n) => Tp + (n - 0.5) * s;
+  PP.label(ctx, "numeradores (m)", L + ZZ_SIZE * s / 2, 12, C("--muted"), "center", "middle", 11);
+  for (let m = 1; m <= ZZ_SIZE; m++) PP.label(ctx, "m=" + m, X(m), Tp - 6, C("--muted"), "center", "bottom", 10);
+  for (let n = 1; n <= ZZ_SIZE; n++) PP.label(ctx, "n=" + n, L - 6, Y(n), C("--muted"), "right", "middle", 10);
+  // camino hasta el k-ésimo valor no repetido
+  let cnt = 0, last = 0;
+  const vis = [];
+  for (let i = 0; i < ZZ_ORDER.length; i++) {
+    const c = ZZ_ORDER[i];
+    if (!c.rep) { cnt++; vis.push({ c, idx: cnt }); }
+    last = i;
+    if (cnt === k) break;
+  }
+  const pts = ZZ_ORDER.slice(0, last + 1).map((c) => [X(c.m), Y(c.n)]);
+  if (pts.length > 1) {
+    PP.path(ctx, pts, C("--accent"), 2);
+    const a = pts[pts.length - 2], b = pts[pts.length - 1];
+    const t = 1 - 9 / Math.hypot(b[0] - a[0], b[1] - a[1]);
+    arrow(ctx, a[0], a[1], a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, C("--accent"), 2, null, 8);
+  }
+  // puntos, fracciones y repetidos
+  const fs = Math.max(9, Math.min(11, s / 4.6));
+  for (let n = 1; n <= ZZ_SIZE; n++) for (let m = 1; m <= ZZ_SIZE; m++) {
+    const rep = gcd(m, n) > 1;
+    PP.dot(ctx, X(m), Y(n), 3, C(rep ? "--muted" : "--ink"));
+    PP.label(ctx, m + "/" + n, X(m), Y(n) - 6, C("--muted"), "center", "bottom", fs);
+    if (rep) {
+      const r = 6;
+      PP.path(ctx, [[X(m) - r, Y(n) - r], [X(m) + r, Y(n) + r]], C("--fail"), 2);
+      PP.path(ctx, [[X(m) - r, Y(n) + r], [X(m) + r, Y(n) - r]], C("--fail"), 2);
+    }
+  }
+  vis.forEach(({ c, idx }) => {
+    PP.dot(ctx, X(c.m), Y(c.n), 5.5, C("--accent"));
+    PP.label(ctx, String(idx), X(c.m) + 6, Y(c.n) + 4, C("--accent"), "left", "top", 10);
+  });
+  const vals = vis.map(({ c, idx }) => "f(" + idx + ") = " + frac(c.m, c.n));
+  const skipped = ZZ_ORDER.slice(0, last + 1).filter((c) => c.rep).map((c) => c.m + "/" + c.n);
+  PP.read("ejp2-13-read1", [
+    ["últimos valores", vals.slice(-3).join(", ")],
+    ["salteados", skipped.length ? skipped.join(", ") : "ninguno todavía"],
+    ["¿repetidos?", "no (sólo irreducibles)", "good"],
+  ]);
+}, ["ejp2-13-k"]);
+
+const f13 = (n) => (n % 2 === 0 ? n / 2 : -(n - 1) / 2);
+
+/* Dos filas, ℕ arriba y ℤ abajo, con las flechas de f. */
+function drawNZ(cid, Nmax, zMin, zMax, hi) {
+  const { ctx, w, h } = PP.canvas(cid, 0.5);
+  const yT = 34, yB = h - 34, l = 26, r = 14;
+  const XN = (n) => l + (n - 1) / Math.max(1, Nmax - 1) * (w - l - r);
+  const XZ = (z) => l + (z - zMin) / Math.max(1, zMax - zMin) * (w - l - r);
+  PP.label(ctx, "ℕ", 4, yT, C("--ink"), "left", "middle", 13);
+  PP.label(ctx, "ℤ", 4, yB, C("--ink"), "left", "middle", 13);
+  for (let n = 1; n <= Nmax; n++) {
+    const z = f13(n);
+    if (z < zMin || z > zMax) continue;
+    const even = n % 2 === 0;
+    const on = hi === null || hi === n;
+    const col = on ? C(even ? "--accent" : "--seq2") : C("--rule");
+    arrow(ctx, XN(n), yT + 7, XZ(z), yB - 8, col, on && hi !== null ? 2.5 : 1.3, null, 6);
+  }
+  const fs = Nmax > 14 ? 9 : 11;
+  for (let n = 1; n <= Nmax; n++) {
+    const on = hi === null || hi === n;
+    PP.dot(ctx, XN(n), yT, on ? 3.5 : 2.5, on ? C(n % 2 === 0 ? "--accent" : "--seq2") : C("--muted"));
+    PP.label(ctx, String(n), XN(n), yT - 6, on ? C("--ink") : C("--muted"), "center", "bottom", fs);
+  }
+  for (let z = zMin; z <= zMax; z++) {
+    const on = hi === null || f13(hi) === z;
+    PP.dot(ctx, XZ(z), yB, on ? 3.5 : 2.5, on ? C(z > 0 ? "--accent" : "--seq2") : C("--muted"));
+    PP.label(ctx, neg(z), XZ(z), yB + 7, on ? C("--ink") : C("--muted"), "center", "top", fs);
+  }
+}
+
+PP.register(function nz1() {
+  const N = PP.val("ejp2-13-N");
+  PP.out("ejp2-13-N-o", String(N));
+  const zMin = -Math.ceil(N / 2) + 1, zMax = Math.floor(N / 2);
+  drawNZ("ejp2-13-c2", N, zMin, zMax, null);
+  const imgs = [];
+  for (let n = 1; n <= N; n++) imgs.push(f13(n));
+  PP.read("ejp2-13-read2", [
+    ["pares ↦", "1, 2, …, " + zMax + " (positivos)"],
+    ["impares ↦", "0, −1, …, " + neg(zMin) + " (cero y negativos)"],
+    ["imágenes distintas", imgs.length + " de " + N + (new Set(imgs).size === N ? " ✓" : ""), "good"],
+  ]);
+}, ["ejp2-13-N"]);
+
+PP.register(function nz2() {
+  const a = PP.val("ejp2-13-a");
+  PP.out("ejp2-13-a-o", neg(a));
+  const n = a > 0 ? 2 * a : -2 * a + 1;
+  drawNZ("ejp2-13-c3", 17, -8, 8, n);
+  PP.read("ejp2-13-read3", [
+    ["a", neg(a) + (a > 0 ? "  (positivo)" : "  (≤ 0)")],
+    ["preimagen", a > 0 ? "2a = " + n + " (par)" : "−2a + 1 = " + n + " (impar)"],
+    ["f(" + n + ")", neg(f13(n)) + " = a ✓", "good"],
+  ]);
+}, ["ejp2-13-a"]);
+
+/* ===================== A1.5.6a · ℚ por bloques ===================== */
+
+function blockElems(n) {
+  if (n === 1) return [{ s: "0", ok: true }];
+  const out = [];
+  for (let p = 1; p <= n - 1; p++) out.push({ s: p + "/" + (n - p), ok: gcd(p, n - p) === 1 });
+  return out;
+}
+const blockSize = (n) => (n === 1 ? 1 : 2 * blockElems(n).filter((e) => e.ok).length);
+
+PP.register(function bloques() {
+  const K = PP.val("ejp2-a156a-K");
+  PP.out("ejp2-a156a-K-o", "A" + sub(K));
+  const rowH = 30;
+  const el = document.getElementById("ejp2-a156a-c1");
+  const W = el.clientWidth || 480;
+  const { ctx, w, h } = PP.canvas(el, (K * rowH + 26) / W);
+  const L = 34, R = 34;
+  const cw = (w - L - R) / Math.max(1, K - 1);
+  const fs = Math.max(8.5, Math.min(12, cw / 3.6));
+  let total = 0;
+  for (let n = 1; n <= K; n++) {
+    const y = 16 + (n - 0.5) * rowH;
+    if (n % 2 === 0) PP.rect(ctx, 2, y - rowH / 2 + 2, w - 4, rowH - 4, null, C("--band"));
+    PP.label(ctx, "A" + sub(n), 6, y, C("--ink"), "left", "middle", 12);
+    const els = blockElems(n);
+    els.forEach((e, i) => {
+      const x = L + (i + 0.5) * cw;
+      const txt = n === 1 ? "0" : "±" + e.s;
+      PP.label(ctx, txt, x, y, e.ok ? C("--accent") : C("--muted"), "center", "middle", fs);
+      if (!e.ok) {
+        ctx.save(); ctx.font = FONT(fs); const tw = ctx.measureText(txt).width; ctx.restore();
+        PP.path(ctx, [[x - tw / 2, y], [x + tw / 2, y]], C("--fail"), 1.5);
+      }
+    });
+    const sz = blockSize(n);
+    total += sz;
+    PP.label(ctx, String(sz), w - 6, y, C("--muted"), "right", "middle", 11);
+  }
+  PP.label(ctx, "tamaño", w - 6, 8, C("--muted"), "right", "middle", 10);
+  PP.read("ejp2-a156a-read1", [
+    ["|A₁|, …, |A" + sub(K) + "|", Array.from({ length: K }, (_, i) => blockSize(i + 1)).join(", ")],
+    ["elementos hasta A" + sub(K), String(total) + " (finitos)"],
+    ["cota del texto", "|Aₙ| ≤ 2(n − 1)", "good"],
+  ]);
+}, ["ejp2-a156a-K"]);
+
+PP.register(function cinta() {
+  const p0 = PP.val("ejp2-a156a-p"), q0 = PP.val("ejp2-a156a-q");
+  PP.out("ejp2-a156a-p-o", String(p0)); PP.out("ejp2-a156a-q-o", String(q0));
+  const g = gcd(p0, q0), p = p0 / g, q = q0 / g, n = p + q;
+  let before = 0;
+  for (let j = 1; j < n; j++) before += blockSize(j);
+  let idx = 0;
+  for (let pp = 1; pp < p; pp++) if (gcd(pp, n - pp) === 1) idx += 2;
+  const pos = before + idx + 1;
+  const last = n + 1;
+  let tot = 0; const sizes = [];
+  for (let j = 1; j <= last; j++) { sizes.push(blockSize(j)); tot += blockSize(j); }
+  const { ctx, w, h } = PP.canvas("ejp2-a156a-c2", 0.4);
+  const l = 14, r = 14, y0 = 40, th = 26;
+  const Xp = (k) => l + k / tot * (w - l - r);
+  let acc = 0;
+  sizes.forEach((sz, i) => {
+    const x0 = Xp(acc), x1 = Xp(acc + sz);
+    PP.rect(ctx, x0, y0, Math.max(0.6, x1 - x0), th, null, i % 2 ? C("--area") : C("--area2"));
+    if (x1 - x0 > 16 || i + 1 === n) PP.label(ctx, "A" + sub(i + 1), (x0 + x1) / 2, y0 + th + 4, i + 1 === n ? C("--ink") : C("--muted"), "center", "top", 10);
+    acc += sz;
+  });
+  PP.rect(ctx, Xp(0), y0, Xp(tot) - Xp(0), th, C("--rule"), null);
+  const xm = Xp(pos - 0.5);
+  PP.path(ctx, [[xm, y0 - 14], [xm, y0 + th]], C("--accent"), 2.5);
+  PP.dot(ctx, xm, y0 - 14, 4, C("--accent"));
+  PP.label(ctx, frac(p, q) + " en el lugar " + pos, clamp(xm, l + 60, w - r - 120), y0 - 20, C("--accent"), "center", "bottom", 12);
+  // zoom del bloque Aₙ alrededor de p/q
+  const elems = [];
+  for (let pp = 1; pp < n; pp++) if (gcd(pp, n - pp) === 1) { elems.push(pp + "/" + (n - pp)); elems.push("−" + pp + "/" + (n - pp)); }
+  const show = Math.min(elems.length, w < 420 ? 5 : 7);
+  const st = clamp(idx - Math.floor(show / 2), 0, elems.length - show);
+  const yz = y0 + th + 52, gap = 6;
+  const bw = Math.min(64, (w - l - r - 40) / show - gap);
+  const zx0 = (w - show * (bw + gap)) / 2;
+  const segA = Xp(before), segB = Xp(before + blockSize(n));
+  PP.path(ctx, [[segA, y0 + th], [zx0, yz - 12]], C("--muted"), 1, [3, 3]);
+  PP.path(ctx, [[segB, y0 + th], [zx0 + show * (bw + gap) - gap, yz - 12]], C("--muted"), 1, [3, 3]);
+  for (let i = 0; i < show; i++) {
+    const e = st + i, x = zx0 + i * (bw + gap), sel = e === idx;
+    PP.rect(ctx, x, yz - 12, bw, 24, sel ? C("--accent") : C("--rule"), sel ? C("--area") : null);
+    PP.label(ctx, elems[e], x + bw / 2, yz, sel ? C("--ink") : C("--muted"), "center", "middle", Math.min(12, bw / 3.6));
+    PP.label(ctx, String(before + e + 1), x + bw / 2, yz + 16, sel ? C("--accent") : C("--muted"), "center", "top", 9.5);
+  }
+  if (st > 0) PP.label(ctx, "…", zx0 - 4, yz, C("--muted"), "right", "middle", 12);
+  if (st + show < elems.length) PP.label(ctx, "…", zx0 + show * (bw + gap), yz, C("--muted"), "left", "middle", 12);
+  PP.label(ctx, "la cinta dibujada llega al lugar " + tot, w - r, h - 4, C("--muted"), "right", "bottom", 10);
+  PP.read("ejp2-a156a-read2", [
+    ["fracción", p0 + "/" + q0 + (g > 1 ? " = " + p + "/" + q + " (irreducible)" : " (ya irreducible)")],
+    ["bloque", "A" + sub(n) + "  (p + q = " + n + ")"],
+    ["antes de Aₙ", "|A₁| + … + |A" + sub(n - 1) + "| = " + before],
+    ["lugar en la lista", String(pos) + " (finito)", "good"],
+  ]);
+}, ["ejp2-a156a-p", "ejp2-a156a-q"]);
+
+/* ===================== 14 · g(n, m) = 2ⁿ3ᵐ ===================== */
+
+PP.register(function grilla23() {
+  const n = PP.val("ejp2-14-n"), m = PP.val("ejp2-14-m");
+  PP.out("ejp2-14-n-o", String(n)); PP.out("ejp2-14-m-o", String(m));
+  const { ctx, w, h } = PP.canvas("ejp2-14-c1", 0.72);
+  const L = 44, Tp = 30, S = 5;
+  const cw = (w - L - 10) / S, chh = (h - Tp - 10) / S;
+  PP.label(ctx, "n →", L - 6, Tp - 14, C("--muted"), "right", "middle", 11);
+  for (let i = 1; i <= S; i++) PP.label(ctx, String(i), L + (i - 0.5) * cw, Tp - 6, C("--muted"), "center", "bottom", 11);
+  for (let j = 1; j <= S; j++) PP.label(ctx, "m=" + j, L - 6, Tp + (j - 0.5) * chh, C("--muted"), "right", "middle", 11);
+  PP.rect(ctx, L, Tp, S * cw, chh, null, C("--area3"));
+  for (let j = 1; j <= S; j++) for (let i = 1; i <= S; i++) {
+    const x = L + (i - 1) * cw, y = Tp + (j - 1) * chh;
+    const sel = i === n && j === m;
+    PP.rect(ctx, x + 1, y + 1, cw - 2, chh - 2, sel ? C("--accent") : C("--rule"), sel ? C("--area") : null);
+    PP.label(ctx, String(Math.pow(2, i) * Math.pow(3, j)), x + cw / 2, y + chh / 2, sel ? C("--ink") : C("--muted"), "center", "middle", Math.min(12, cw / 3.6));
+  }
+  PP.label(ctx, "imagen de f", L + S * cw - 4, Tp + 3, C("--seq3"), "right", "top", 10);
+  let v = Math.pow(2, n) * Math.pow(3, m), a = 0, b = 0;
+  while (v % 2 === 0) { v /= 2; a++; }
+  while (v % 3 === 0) { v /= 3; b++; }
+  PP.read("ejp2-14-read1", [
+    ["g(" + n + ", " + m + ")", "2" + sup(n) + "·3" + sup(m) + " = " + Math.pow(2, n) * Math.pow(3, m)],
+    ["÷2 hasta no poder", a + " veces → n = " + a],
+    ["÷3 hasta no poder", b + " veces → m = " + b],
+    ["se recupera (n, m)", a === n && b === m ? "sí ✓" : "no", "good"],
+    ["¿está en la imagen de f?", m === 1 ? "sí: (" + n + ", 1) = f(" + n + ")" : "no (m ≠ 1)"],
+  ]);
+}, ["ejp2-14-n", "ejp2-14-m"]);
+
+/* ===================== 15 · ℝ ∼ (0, 1) ===================== */
+
+const f15 = (x) => x / (1 + Math.abs(x));
+const finv15 = (y) => y / (1 - Math.abs(y));
+
+PP.register(function graf15() {
+  const x = PP.val("ejp2-15-x") / 10;
+  PP.out("ejp2-15-x-o", PP.fmt(x, 1));
+  const { ctx, w, h } = PP.canvas("ejp2-15-c1", 0.62);
+  const T = PP.frame(w, h, { x0: -10, x1: 10, y0: -1.25, y1: 1.25 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: "f(x)" });
+  [-1, 1].forEach((v) => PP.path(ctx, [[T.X(-10), T.Y(v)], [T.X(10), T.Y(v)]], C("--muted"), 1.2, [5, 4]));
+  const pts = [];
+  for (let i = 0; i <= 400; i++) { const t = -10 + 20 * i / 400; pts.push([T.X(t), T.Y(f15(t))]); }
+  PP.path(ctx, pts, C("--accent"), 2.2);
+  const y = f15(x);
+  PP.path(ctx, [[T.X(x), T.Y(0)], [T.X(x), T.Y(y)], [T.X(-10), T.Y(y)]], C("--seq2"), 1.3, [3, 3]);
+  PP.dot(ctx, T.X(x), T.Y(y), 5, C("--seq2"));
+  PP.label(ctx, "f(x)", T.X(-10) + 4, T.Y(y) + (y > 0 ? 4 : -4), C("--seq2"), "left", y > 0 ? "top" : "bottom", 11);
+  PP.read("ejp2-15-read1", [
+    ["x", PP.fmt(x, 3)],
+    ["y = f(x)", PP.fmt(y, 5) + "  (|y| < 1)"],
+    ["f⁻¹(y) = y/(1 − |y|)", PP.fmt(finv15(y), 3) + " = x ✓", "good"],
+  ]);
+}, ["ejp2-15-x"]);
+
+PP.register(function rectas15() {
+  const xs = PP.val("ejp2-15-x2") / 10;
+  PP.out("ejp2-15-x2-o", PP.fmt(xs, 1));
+  const { ctx, w, h } = PP.canvas("ejp2-15-c2", 0.62);
+  const l = 30, r = 30, ys = [32, h / 2, h - 34];
+  const X1 = (x) => l + (x + 10) / 20 * (w - l - r);
+  const X2 = (y) => l + (y + 1) / 2 * (w - l - r);
+  const X3 = (z) => l + z * (w - l - r);
+  const names = ["ℝ", "(−1, 1)", "(0, 1)"];
+  ys.forEach((y, i) => {
+    PP.path(ctx, [[l, y], [w - r, y]], C("--muted"), 1.5, i === 0 ? [2, 3] : null);
+    PP.label(ctx, names[i], 4, y - 8, C("--ink"), "left", "bottom", 12);
+  });
+  // extremos abiertos
+  [[X2(-1), ys[1]], [X2(1), ys[1]], [X3(0), ys[2]], [X3(1), ys[2]]].forEach(([x, y]) => PP.circle(ctx, x, y, 4, C("--muted"), C("--panel")));
+  PP.label(ctx, "−1", X2(-1), ys[1] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "1", X2(1), ys[1] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "0", X3(0), ys[2] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "1", X3(1), ys[2] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "−10", X1(-10), ys[0] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "10", X1(10), ys[0] + 7, C("--muted"), "center", "top", 10);
+  PP.label(ctx, "f", w - 8, (ys[0] + ys[1]) / 2, C("--accent"), "right", "middle", 12);
+  PP.label(ctx, "g", w - 8, (ys[1] + ys[2]) / 2, C("--seq3"), "right", "middle", 12);
+  [-8, -4, -2, -1, 0, 1, 2, 4, 8].forEach((x) => {
+    const y = f15(x), z = (y + 1) / 2;
+    PP.path(ctx, [[X1(x), ys[0]], [X2(y), ys[1]]], C("--rule"), 1.2);
+    PP.path(ctx, [[X2(y), ys[1]], [X3(z), ys[2]]], C("--rule"), 1.2);
+    PP.dot(ctx, X1(x), ys[0], 2.5, C("--muted"));
+    PP.dot(ctx, X2(y), ys[1], 2.5, C("--muted"));
+    PP.dot(ctx, X3(z), ys[2], 2.5, C("--muted"));
+  });
+  const y = f15(xs), z = (y + 1) / 2;
+  arrow(ctx, X1(xs), ys[0] + 4, X2(y), ys[1] - 5, C("--accent"), 2.5);
+  arrow(ctx, X2(y), ys[1] + 4, X3(z), ys[2] - 5, C("--seq3"), 2.5);
+  PP.dot(ctx, X1(xs), ys[0], 5, C("--accent"));
+  PP.dot(ctx, X2(y), ys[1], 5, C("--accent"));
+  PP.dot(ctx, X3(z), ys[2], 5, C("--seq3"));
+  PP.read("ejp2-15-read2", [
+    ["x ∈ ℝ", PP.fmt(xs, 3)],
+    ["f(x) ∈ (−1, 1)", PP.fmt(y, 5)],
+    ["g(f(x)) ∈ (0, 1)", PP.fmt(z, 5), "good"],
+  ]);
+}, ["ejp2-15-x2"]);
+
+/* ===================== A1.5.6b · intervalos encajados ===================== */
+
+const X1_B = 0.3;
+/* Posición relativa de x_{n+1} dentro de I_n = [a, b] (valores elegidos para el dibujo). */
+const U_B = [0.2, 0.85, 0.5, 0.12, 1.2, 0.74, 0.3, 0.9, -0.15];
+function encajados(N) {
+  const I = [[X1_B + 1, X1_B + 2]];
+  const xs = [X1_B];
+  const choice = [];
+  for (let k = 0; k < N; k++) {
+    const [a, b] = I[k], t = (b - a) / 3;
+    const x = a + U_B[k] * (b - a);
+    xs.push(x);
+    const inL = x >= a && x <= a + t, inR = x >= b - t && x <= b;
+    const side = inL ? "der" : "izq";
+    choice.push({ side, where: inL ? "tercio izquierdo" : inR ? "tercio derecho" : "ninguno de los dos" });
+    I.push(side === "izq" ? [a, a + t] : [b - t, b]);
+  }
+  return { I, xs, choice };
+}
+
+PP.register(function intervalos() {
+  const N = PP.val("ejp2-a156b-n");
+  PP.out("ejp2-a156b-n-o", String(N));
+  const { I, xs, choice } = encajados(N);
+  const rowH = 46;
+  const el = document.getElementById("ejp2-a156b-c1");
+  const W = el.clientWidth || 480;
+  const { ctx, w, h } = PP.canvas(el, ((N + 1) * rowH + 18) / W);
+  const l = 30, r = 12;
+  // fila 0: x₁ e I₁ en escala normal
+  {
+    const y = 26, lo = X1_B - 0.6, hi = X1_B + 2.6;
+    const Xs = (x) => l + (x - lo) / (hi - lo) * (w - l - r);
+    PP.path(ctx, [[l, y], [w - r, y]], C("--muted"), 1);
+    PP.rect(ctx, Xs(I[0][0]), y - 6, Xs(I[0][1]) - Xs(I[0][0]), 12, C("--accent"), C("--area"));
+    PP.dot(ctx, Xs(xs[0]), y, 5, C("--fail"));
+    PP.label(ctx, "x₁", Xs(xs[0]), y - 8, C("--fail"), "center", "bottom", 11);
+    PP.label(ctx, "I₁", (Xs(I[0][0]) + Xs(I[0][1])) / 2, y - 8, C("--accent"), "center", "bottom", 11);
+    PP.label(ctx, "ℝ", 4, y, C("--muted"), "left", "middle", 11);
+  }
+  for (let k = 1; k <= N; k++) {
+    const y = 26 + k * rowH;
+    const [a, b] = I[k - 1], span = b - a;
+    const lo = a - 0.12 * span, hi = b + 0.12 * span;
+    const Xs = (x) => l + (x - lo) / (hi - lo) * (w - l - r);
+    // conector desde la fila anterior
+    PP.label(ctx, "I" + sub(k), 4, y, C("--ink"), "left", "middle", 11);
+    PP.path(ctx, [[Xs(a), y], [Xs(b), y]], C("--muted"), 2);
+    const t = span / 3;
+    PP.rect(ctx, Xs(a), y - 7, Xs(a + t) - Xs(a), 14, C("--rule"), null);
+    PP.rect(ctx, Xs(b - t), y - 7, Xs(b) - Xs(b - t), 14, C("--rule"), null);
+    const nx = choice[k - 1].side === "izq" ? [a, a + t] : [b - t, b];
+    PP.rect(ctx, Xs(nx[0]), y - 7, Xs(nx[1]) - Xs(nx[0]), 14, C("--accent"), C("--area"));
+    PP.label(ctx, "I" + sub(k + 1), (Xs(nx[0]) + Xs(nx[1])) / 2, y + 9, C("--accent"), "center", "top", 10);
+    const x = xs[k];
+    const xp = clamp(Xs(x), l, w - r);
+    PP.dot(ctx, xp, y, 4.5, C("--fail"));
+    PP.label(ctx, "x" + sub(k + 1) + (Xs(x) !== xp ? (Xs(x) < xp ? " ←" : " →") : ""), xp, y - 9, C("--fail"), "center", "bottom", 10);
+    if (k < N) {
+      const yn = y + rowH;
+      PP.path(ctx, [[Xs(nx[0]), y + 7], [l + 0.12 / 1.24 * (w - l - r), yn - 7]], C("--rule"), 1, [3, 3]);
+      PP.path(ctx, [[Xs(nx[1]), y + 7], [l + 1.12 / 1.24 * (w - l - r), yn - 7]], C("--rule"), 1, [3, 3]);
+    }
+  }
+  const [aN, bN] = I[N];
+  PP.read("ejp2-a156b-read1", [
+    ["x" + sub(N + 1) + " cae en", choice[N - 1].where],
+    ["I" + sub(N + 1), "[" + PP.fmt(aN, 6) + ", " + PP.fmt(bN, 6) + "]"],
+    ["largo", "1/3" + sup(N) + " = " + PP.fmt(1 / Math.pow(3, N), 6)],
+    ["xₖ ∉ Iₖ para k ≤ " + (N + 1), xs.every((x, i) => x < I[i][0] || x > I[i][1]) ? "sí ✓" : "no", "good"],
+  ]);
+}, ["ejp2-a156b-n"]);
+
+/* ===================== C2-4 ===================== */
+
+PP.register(function potImpar() {
+  const k = PP.val("ejp2-c24-k");
+  PP.out("ejp2-c24-k-o", String(k));
+  let n = 0, o = k;
+  while (o % 2 === 0) { o /= 2; n++; }
+  const m = (o + 1) / 2;
+  const NC = 6, NR = 8;
+  const { ctx, w, h } = PP.canvas("ejp2-c24-c1", 0.8);
+  const L = 50, Tp = 30, B = 22;
+  const cw = (w - L - 8) / NC, chh = (h - Tp - B) / NR;
+  PP.label(ctx, "2ⁿ con n =", L - 4, Tp - 6, C("--muted"), "right", "bottom", 10);
+  for (let i = 0; i < NC; i++) PP.label(ctx, String(i), L + (i + 0.5) * cw, Tp - 6, i === n ? C("--accent") : C("--muted"), "center", "bottom", 11);
+  for (let j = 1; j <= NR; j++) PP.label(ctx, "×" + (2 * j - 1), L - 6, Tp + (j - 0.5) * chh, j === m ? C("--accent") : C("--muted"), "right", "middle", 11);
+  for (let j = 1; j <= NR; j++) for (let i = 0; i < NC; i++) {
+    const x = L + i * cw, y = Tp + (j - 1) * chh, v = Math.pow(2, i) * (2 * j - 1);
+    const sel = i === n && j === m;
+    PP.rect(ctx, x + 1, y + 1, cw - 2, chh - 2, sel ? C("--accent") : C("--rule"), sel ? C("--area") : null);
+    PP.label(ctx, String(v), x + cw / 2, y + chh / 2, sel ? C("--ink") : C("--muted"), "center", "middle", Math.min(12, cw / 3.4));
+  }
+  if (m > NR || n >= NC) PP.label(ctx, "la casilla de " + k + " está fuera del recorte (fila ×" + o + ", columna " + n + ")", w / 2, h - 4, C("--seq2"), "center", "bottom", 11);
+  PP.read("ejp2-c24-read1", [
+    ["k", String(k)],
+    ["k = 2ⁿ·(2m − 1)", "2" + sup(n) + "·" + o],
+    ["(n, m)", "(" + n + ", " + m + ")", "good"],
+  ]);
+}, ["ejp2-c24-k"]);
+
+PP.register(function restriccion() {
+  const p0 = PP.val("ejp2-c24-p"), q0 = PP.val("ejp2-c24-q");
+  PP.out("ejp2-c24-p-o", String(p0)); PP.out("ejp2-c24-q-o", String(q0));
+  const g = gcd(p0, q0), p = p0 / g, q = q0 / g;
+  const x = p / q, y = x / (x + 1);
+  const { ctx, w, h } = PP.canvas("ejp2-c24-c2", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: 12.5, y0: 0, y1: 1.12 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: "x/(x+1)" });
+  PP.path(ctx, [[T.X(0), T.Y(1)], [T.X(12.5), T.Y(1)]], C("--muted"), 1.2, [5, 4]);
+  const pts = [];
+  for (let i = 1; i <= 300; i++) { const t = 12.5 * i / 300; pts.push([T.X(t), T.Y(t / (t + 1))]); }
+  PP.path(ctx, pts, C("--accent"), 2.2);
+  PP.circle(ctx, T.X(0), T.Y(0), 4, C("--accent"), C("--panel"));
+  PP.path(ctx, [[T.X(x), T.Y(0)], [T.X(x), T.Y(y)], [T.X(0), T.Y(y)]], C("--seq2"), 1.3, [3, 3]);
+  PP.dot(ctx, T.X(x), T.Y(y), 5.5, C("--seq2"));
+  PP.label(ctx, frac(p, q), T.X(x), T.Y(0) - 4, C("--seq2"), "center", "bottom", 11);
+  PP.label(ctx, frac(p, p + q), T.X(0) + 4, T.Y(y) - 3, C("--seq2"), "left", "bottom", 11);
+  PP.read("ejp2-c24-read2", [
+    ["x = p/q", p0 + "/" + q0 + (g > 1 ? " = " + frac(p, q) : "")],
+    ["f(x) = p/(p+q)", frac(p, p + q) + " ≈ " + PP.fmt(y, 4) + "  ∈ (0, 1) ∩ ℚ", "good"],
+    ["f⁻¹(y) = y/(1 − y)", "(" + frac(p, p + q) + ")/(" + frac(q, p + q) + ") = " + frac(p, q) + " ✓", "good"],
+  ]);
+}, ["ejp2-c24-p", "ejp2-c24-q"]);
+
+const LIBRES = [2, -1, 3, 0, -2, 1, 3, -3, 2]; // valores elegidos para el dibujo
+PP.register(function finalConst() {
+  const k = PP.val("ejp2-c24-kk"), a = PP.val("ejp2-c24-aa");
+  PP.out("ejp2-c24-kk-o", String(k)); PP.out("ejp2-c24-aa-o", neg(a));
+  const M = 14;
+  const seq = Array.from({ length: M }, (_, i) => (i + 1 < k ? LIBRES[i] : a));
+  const { ctx, w, h } = PP.canvas("ejp2-c24-c3", 0.6);
+  const T = PP.frame(w, h, { x0: 0.3, x1: M + 0.7, y0: -3.6, y1: 3.6 }, { l: 34 });
+  PP.axes(ctx, T, { xLabel: "n", intX: true, yTicks: 7 });
+  if (k > 1) PP.rect(ctx, T.X(0.5), T.Y(3.6), T.X(k - 0.5) - T.X(0.5), T.Y(-3.6) - T.Y(3.6), null, C("--band"));
+  PP.path(ctx, [[T.X(k - 0.5), T.Y(3.6)], [T.X(k - 0.5), T.Y(-3.6)]], C("--ok"), 1.5, [4, 3]);
+  PP.path(ctx, [[T.X(k - 0.5), T.Y(a)], [T.X(M + 0.7), T.Y(a)]], C("--ok"), 1.2, [2, 3]);
+  PP.label(ctx, "desde n = " + k + ": aₙ = " + neg(a), T.X(M + 0.7) - 2, T.Y(a) + (a > 2 ? 6 : -6), C("--ok"), "right", a > 2 ? "top" : "bottom", 11);
+  seq.forEach((v, i) => PP.dot(ctx, T.X(i + 1), T.Y(v), 4.5, C(i + 1 < k ? "--accent" : "--ok")));
+  const tup = seq.slice(0, k - 1).map(neg);
+  PP.read("ejp2-c24-read3", [
+    ["sucesión", seq.slice(0, 10).map(neg).join(", ") + ", …"],
+    ["en Aₐ,ₖ", "a = " + neg(a) + ", k = " + k],
+    ["tupla en ℤ" + sup(k - 1), k === 1 ? "( ) (ℤ⁰ tiene un solo elemento)" : "(" + tup.join(", ") + ")", "good"],
+  ]);
+}, ["ejp2-c24-kk", "ejp2-c24-aa"]);
+
+/* ===================== A1.5.8 · capas Bₙ ===================== */
+
+function conjB() {
+  return PP.radio("ejp2-a158-set") === "cuad"
+    ? Array.from({ length: 24 }, (_, i) => 1 / ((i + 1) * (i + 1)))
+    : Array.from({ length: 14 }, (_, i) => Math.pow(2, -i));
+}
+const nomB = (j) => (PP.radio("ejp2-a158-set") === "cuad" ? (j === 1 ? "1" : "1/" + j * j) : (j === 1 ? "1" : "1/" + Math.pow(2, j - 1)));
+
+PP.register(function capas() {
+  const n = PP.val("ejp2-a158-n");
+  PP.out("ejp2-a158-n-o", String(n));
+  const B = conjB();
+  const { ctx, w, h } = PP.canvas("ejp2-a158-c1", 0.34);
+  const T = PP.frame(w, h, { x0: 0, x1: 1.08, y0: 0, y1: 1 }, { l: 14, r: 14, t: 26, b: 30 });
+  PP.rect(ctx, T.X(1 / n), T.Y(1), T.X(1.08) - T.X(1 / n), T.Y(0) - T.Y(1), null, C("--band"));
+  PP.path(ctx, [[T.X(0), T.Y(0.35)], [T.X(1.08), T.Y(0.35)]], C("--muted"), 1);
+  [0, 0.25, 0.5, 0.75, 1].forEach((v) => {
+    PP.path(ctx, [[T.X(v), T.Y(0.35) - 4], [T.X(v), T.Y(0.35) + 4]], C("--muted"), 1);
+    PP.label(ctx, PP.fmt(v, 2), T.X(v), T.Y(0.35) + 8, C("--muted"), "center", "top", 10);
+  });
+  PP.path(ctx, [[T.X(1 / n), T.Y(1)], [T.X(1 / n), T.Y(0)]], C("--accent"), 1.5, [5, 4]);
+  PP.label(ctx, "1/" + n, T.X(1 / n) + 4, T.Y(1) + 2, C("--accent"), "left", "top", 11);
+  let cnt = 0, sum = 0;
+  B.forEach((x) => {
+    const inn = x > 1 / n;
+    if (inn) { cnt++; sum += x; }
+    PP.dot(ctx, T.X(x), T.Y(0.35), inn ? 5 : 3, C(inn ? "--accent" : "--seq2"));
+  });
+  PP.label(ctx, "Bₙ = {x ∈ B : x > 1/n}", T.X(1.08) - 2, T.Y(1) - 4, C("--accent"), "right", "bottom", 11);
+  PP.read("ejp2-a158-read1", [
+    ["#B" + sub(n), String(cnt)],
+    ["cota 2n", String(2 * n)],
+    ["#Bₙ ≤ 2n", cnt <= 2 * n ? "sí ✓" : "no", "good"],
+    ["suma de Bₙ", PP.fmt(sum, 4) + " ≤ 2"],
+  ]);
+}, ["ejp2-a158-n", "input[name=\"ejp2-a158-set\"]"]);
+
+PP.register(function arquimedes() {
+  const B = conjB();
+  const maxJ = PP.radio("ejp2-a158-set") === "cuad" ? 10 : 8;
+  const sl = document.getElementById("ejp2-a158-j");
+  if (+sl.max !== maxJ) { sl.max = String(maxJ); if (+sl.value > maxJ) sl.value = String(maxJ); }
+  const j = PP.val("ejp2-a158-j");
+  const x = B[j - 1];
+  const n = Math.floor(1 / x) + 1;
+  PP.out("ejp2-a158-j-o", nomB(j));
+  const { ctx, w, h } = PP.canvas("ejp2-a158-c2", 0.3);
+  const hi = Math.min(1.08, 2.2 * x);
+  const T = PP.frame(w, h, { x0: 0, x1: hi, y0: 0, y1: 1 }, { l: 14, r: 14, t: 20, b: 30 });
+  const y0 = T.Y(0.5);
+  PP.path(ctx, [[T.X(0), y0], [T.X(hi), y0]], C("--muted"), 1);
+  PP.label(ctx, "0", T.X(0), y0 + 8, C("--muted"), "center", "top", 10);
+  for (let m = 1; m <= 3 * n; m++) {
+    const v = 1 / m;
+    if (v > hi) continue;
+    const isN = m === n;
+    PP.path(ctx, [[T.X(v), y0 - (isN ? 14 : 6)], [T.X(v), y0 + (isN ? 14 : 6)]], isN ? C("--accent") : C("--rule"), isN ? 2.2 : 1);
+  }
+  PP.rect(ctx, T.X(1 / n), y0 - 10, T.X(hi) - T.X(1 / n), 20, null, C("--band"));
+  PP.label(ctx, "1/" + n, T.X(1 / n), y0 + 16, C("--accent"), "center", "top", 11);
+  PP.dot(ctx, T.X(x), y0, 6, C("--seq2"));
+  PP.label(ctx, "x = " + nomB(j), T.X(x), y0 - 16, C("--seq2"), "center", "bottom", 12);
+  PP.read("ejp2-a158-read2", [
+    ["x", nomB(j) + " = " + PP.fmt(x, 6)],
+    ["primer n con 1/n < x", String(n)],
+    ["x ∈ B" + sub(n), "sí ✓", "good"],
+  ]);
+}, ["ejp2-a158-j", "input[name=\"ejp2-a158-set\"]"]);
+
+/* ===================== A1.5.9 · algebraicos ===================== */
+
+const POLS = [
+  { name: "x² − 2", c: [-2, 0, 1], root: Math.SQRT2, rn: "√2", box: [-2.4, 2.4, -2.6, 4] },
+  { name: "x³ − 2", c: [-2, 0, 0, 1], root: Math.cbrt(2), rn: "∛2", box: [-1.9, 1.9, -9, 5] },
+  { name: "x⁴ − 10x² + 1", c: [1, 0, -10, 0, 1], root: Math.SQRT2 + Math.sqrt(3), rn: "√2 + √3", box: [-3.6, 3.6, -26, 30] },
+];
+const evalP = (c, x) => c.reduceRight((acc, a) => acc * x + a, 0);
+
+PP.register(function polis() {
+  const P = POLS[+PP.radio("ejp2-a159-pol")];
+  const [x0, x1, y0, y1] = P.box;
+  const { ctx, w, h } = PP.canvas("ejp2-a159-c1", 0.62);
+  const T = PP.frame(w, h, { x0, x1, y0, y1 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: P.name });
+  const pts = [];
+  for (let i = 0; i <= 400; i++) {
+    const t = x0 + (x1 - x0) * i / 400, v = evalP(P.c, t);
+    pts.push([T.X(t), T.Y(clamp(v, y0 - 5, y1 + 5))]);
+  }
+  ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, w - T.p.l - T.p.r, h - T.p.t - T.p.b); ctx.clip();
+  PP.path(ctx, pts, C("--accent"), 2.2);
+  ctx.restore();
+  if (P.c.length === 5) {
+    [-P.root, Math.SQRT2 - Math.sqrt(3), Math.sqrt(3) - Math.SQRT2].forEach((r) => PP.dot(ctx, T.X(r), T.Y(0), 3.5, C("--muted")));
+  }
+  PP.dot(ctx, T.X(P.root), T.Y(0), 6, C("--seq2"));
+  PP.label(ctx, P.rn, T.X(P.root), T.Y(0) - 8, C("--seq2"), P.root > x1 - 0.6 ? "right" : "center", "bottom", 12);
+  PP.read("ejp2-a159-read1", [
+    ["polinomio", P.name + "  (coeficientes enteros)"],
+    ["número", P.rn + " ≈ " + PP.fmt(P.root, 6)],
+    ["p(número)", PP.fmt(evalP(P.c, P.root), 10) + " (cero, salvo redondeo)", "good"],
+  ]);
+}, ["input[name=\"ejp2-a159-pol\"]"]);
+
+/* Raíces reales de un polinomio de grado ≤ 3 (coeficientes c[0] + c[1]x + …). */
+function raices(c) {
+  const n = c.length - 1;
+  if (n === 1) return [-c[0] / c[1]];
+  if (n === 2) {
+    const [cc, b, a] = c, d = b * b - 4 * a * cc;
+    if (d < 0) return [];
+    if (d === 0) return [-b / (2 * a)];
+    const s = Math.sqrt(d);
+    return [(-b - s) / (2 * a), (-b + s) / (2 * a)];
+  }
+  const Bd = 1 + Math.max(...c.slice(0, n).map((x) => Math.abs(x / c[n])));
+  const crit = raices([c[1], 2 * c[2], 3 * c[3]]).filter((x) => x > -Bd && x < Bd).sort((a, b) => a - b);
+  const cuts = [-Bd, ...crit, Bd], out = [];
+  for (let i = 0; i + 1 < cuts.length; i++) {
+    let a = cuts[i], b = cuts[i + 1], fa = evalP(c, a), fb = evalP(c, b);
+    if (Math.abs(fa) < 1e-12) { out.push(a); continue; }
+    if (fa * fb > 0) continue;
+    for (let it = 0; it < 80; it++) { const m = (a + b) / 2, fm = evalP(c, m); if (fa * fm <= 0) { b = m; fb = fm; } else { a = m; fa = fm; } }
+    out.push((a + b) / 2);
+  }
+  if (Math.abs(evalP(c, Bd)) < 1e-12) out.push(Bd);
+  return out;
+}
+const ROOTS_CACHE = {};
+function raicesGrado(n, Hmax) {
+  const key = n + ":" + Hmax;
+  if (ROOTS_CACHE[key]) return ROOTS_CACHE[key];
+  const map = new Map();
+  let polys = 0;
+  const c = new Array(n + 1).fill(0);
+  const rec = (i) => {
+    if (i < 0) {
+      if (c[n] === 0) return;
+      polys++;
+      const ht = Math.max(...c.map(Math.abs));
+      raices(c.slice()).forEach((r) => {
+        if (r < -3 || r > 3) return;
+        const k = r.toFixed(9);
+        if (!map.has(k) || map.get(k).ht > ht) map.set(k, { r, ht });
+      });
+      return;
+    }
+    for (let v = -Hmax; v <= Hmax; v++) { c[i] = v; rec(i - 1); }
+  };
+  rec(n);
+  ROOTS_CACHE[key] = { list: [...map.values()], polys };
+  return ROOTS_CACHE[key];
+}
+
+PP.register(function raicesDib() {
+  const n = PP.val("ejp2-a159-n"), H = PP.val("ejp2-a159-H");
+  PP.out("ejp2-a159-n-o", String(n)); PP.out("ejp2-a159-H-o", String(H));
+  const { list } = raicesGrado(n, 4);
+  const rowH = Math.max(34, 130 / H);
+  const el = document.getElementById("ejp2-a159-c2");
+  const W = el.clientWidth || 480;
+  const { ctx, w, h } = PP.canvas(el, (H * rowH + 50) / W);
+  const l = 44, r = 12;
+  const X = (x) => l + (x + 3) / 6 * (w - l - r);
+  let cnt = 0, polys = 0;
+  for (let hh = 1; hh <= H; hh++) {
+    const y = 18 + (hh - 0.5) * rowH;
+    PP.label(ctx, "H = " + hh, 4, y, C("--muted"), "left", "middle", 11);
+    PP.path(ctx, [[l, y], [w - r, y]], C("--rule"), 1);
+    list.forEach(({ r: x, ht }) => {
+      if (ht > hh) return;
+      PP.path(ctx, [[X(x), y - 8], [X(x), y + 8]], ht === hh ? C("--accent") : C("--muted"), ht === hh ? 1.6 : 1);
+    });
+  }
+  list.forEach(({ ht }) => { if (ht <= H) cnt++; });
+  polys = 2 * H * Math.pow(2 * H + 1, n);
+  const yb = 18 + H * rowH + 6;
+  [-3, -2, -1, 0, 1, 2, 3].forEach((v) => PP.label(ctx, neg(v), X(v), yb, C("--muted"), "center", "top", 10));
+  PP.read("ejp2-a159-read2", [
+    ["polinomios de grado " + n, "2H·(2H + 1)" + sup(n) + " = " + polys + " (finitos)"],
+    ["raíces distintas en [−3, 3]", String(cnt)],
+    ["cada polinomio aporta", "a lo sumo " + n + " raíces", "good"],
+  ]);
+}, ["ejp2-a159-n", "ejp2-a159-H"]);
+
+/* ===================== Prop · φ(h) = g ∘ h ∘ f⁻¹ ===================== */
+
+const FINV = [2, 0, 1]; // f⁻¹: x₁ ↦ a₃, x₂ ↦ a₁, x₃ ↦ a₂  (f: a₁ ↦ x₂, a₂ ↦ x₃, a₃ ↦ x₁)
+const G = [1, 0];       // g: b₁ ↦ y₂, b₂ ↦ y₁
+PP.register(function transporte() {
+  const idx = PP.val("ejp2-prop-h") - 1;
+  const hv = [0, 1, 2].map((i) => (idx >> i) & 1); // h(aᵢ) = b_{hv[i]+1}
+  PP.out("ejp2-prop-h-o", String(idx + 1));
+  const { ctx, w, h } = PP.canvas("ejp2-prop-c1", 0.66);
+  const cols = [0.09, 0.36, 0.64, 0.91].map((t) => t * w);
+  const yTop = 46, yBot = h - 20;
+  const Y3 = (i) => yTop + (i + 0.5) / 3 * (yBot - yTop);
+  const Y2 = (i) => yTop + (i + 1) / 3 * (yBot - yTop);
+  const names = ["X", "A", "B", "Y"];
+  names.forEach((nm, i) => PP.label(ctx, nm, cols[i], 16, C("--ink"), "center", "middle", 14, "bold"));
+  [["f⁻¹", 0], ["h", 1], ["g", 2]].forEach(([t, i]) => PP.label(ctx, t, (cols[i] + cols[i + 1]) / 2, 30, C("--muted"), "center", "middle", 12));
+  const colors = [C("--accent"), C("--seq2"), C("--seq3")];
+  for (let xi = 0; xi < 3; xi++) {
+    const ai = FINV[xi], bi = hv[ai], yi = G[bi];
+    const col = colors[xi], off = (xi - 1) * 2;
+    arrow(ctx, cols[0] + 14, Y3(xi) + off, cols[1] - 14, Y3(ai) + off, col, 1.8, null, 6);
+    arrow(ctx, cols[1] + 14, Y3(ai) + off, cols[2] - 14, Y2(bi) + off, col, 1.8, null, 6);
+    arrow(ctx, cols[2] + 14, Y2(bi) + off, cols[3] - 14, Y2(yi) + off, col, 1.8, null, 6);
+  }
+  for (let i = 0; i < 3; i++) {
+    PP.label(ctx, "x" + sub(i + 1), cols[0], Y3(i), colors[i], "center", "middle", 13);
+    PP.label(ctx, "a" + sub(i + 1), cols[1], Y3(i), C("--ink"), "center", "middle", 13);
+  }
+  for (let i = 0; i < 2; i++) {
+    PP.label(ctx, "b" + sub(i + 1), cols[2], Y2(i), C("--ink"), "center", "middle", 13);
+    PP.label(ctx, "y" + sub(i + 1), cols[3], Y2(i), C("--ink"), "center", "middle", 13);
+  }
+  const phi = [0, 1, 2].map((xi) => G[hv[FINV[xi]]]);
+  const F = [1, 2, 0]; // f(aᵢ) = x_{F[i]+1}
+  const GINV = [1, 0];
+  const back = [0, 1, 2].map((ai) => GINV[phi[F[ai]]]);
+  PP.read("ejp2-prop-read1", [
+    ["h", hv.map((b, i) => "a" + sub(i + 1) + "↦b" + sub(b + 1)).join(", ")],
+    ["φ(h) = g∘h∘f⁻¹", phi.map((y, i) => "x" + sub(i + 1) + "↦y" + sub(y + 1)).join(", ")],
+    ["ψ(φ(h)) = g⁻¹∘φ(h)∘f", back.map((b, i) => "a" + sub(i + 1) + "↦b" + sub(b + 1)).join(", ")],
+    ["¿ψ(φ(h)) = h?", back.every((b, i) => b === hv[i]) ? "sí ✓" : "no", "good"],
+  ]);
+}, ["ejp2-prop-h"]);
+
+/* ===================== Prop · pegar funciones ===================== */
+
+const PARES = [
+  { f: [2, 0, 1], g: [1, 2, 0] },
+  { f: [1, 2, 0], g: [2, 1, 1] },
+  { f: [0, 1, 2], g: [2, 0, 2] },
+  { f: [2, 2, 1], g: [0, 1, 0] },
+  { f: [1, 0, 0], g: [0, 2, 1] },
+  { f: [0, 0, 2], g: [1, 1, 2] },
+];
+
+/* Barras de valores en {0, 1, 2} sobre los puntos 1..5. */
+function barras(ctx, T, items) {
+  items.forEach(({ x, v, col, dx }) => {
+    const bw = Math.min(16, (T.X(1) - T.X(0)) * 0.28);
+    const cx = T.X(x) + (dx || 0) * bw * 0.65;
+    if (v > 0) PP.rect(ctx, cx - bw / 2, T.Y(v), bw, T.Y(0) - T.Y(v), col, col);
+    PP.dot(ctx, cx, T.Y(v), 3.5, col);
+  });
+}
+function ejeValores(ctx, T, y0, y1) {
+  [0, 1, 2].forEach((v) => {
+    PP.path(ctx, [[T.X(0.4), T.Y(v)], [T.X(5.6), T.Y(v)]], C("--rule"), 1);
+    PP.label(ctx, String(v), T.X(0.4) - 4, T.Y(v), C("--muted"), "right", "middle", 10);
+  });
+}
+
+PP.register(function pegar() {
+  const k = PP.val("ejp2-prop2-par") - 1;
+  PP.out("ejp2-prop2-par-o", String(k + 1));
+  const dis = PP.radio("ejp2-prop2-dis") !== "no";
+  const P = PARES[k];
+  const A = [1, 2, 3], Bs = dis ? [4, 5] : [3, 4, 5];
+  const gv = (x) => P.g[x - 3];
+  const { ctx, w, h } = PP.canvas("ejp2-prop2-c1", 0.62);
+  const T = PP.frame(w, h, { x0: 0.4, x1: 5.6, y0: -0.9, y1: 2.5 }, { l: 26, r: 10, t: 14, b: 16 });
+  ejeValores(ctx, T);
+  const items = [];
+  A.forEach((x) => items.push({ x, v: P.f[x - 1], col: C("--accent"), dx: !dis && x === 3 ? -1 : 0 }));
+  Bs.forEach((x) => items.push({ x, v: gv(x), col: C("--seq2"), dx: !dis && x === 3 ? 1 : 0 }));
+  const conflict = !dis && P.f[2] !== gv(3);
+  if (conflict) PP.rect(ctx, T.X(2.6), T.Y(2.45), T.X(3.4) - T.X(2.6), T.Y(-0.1) - T.Y(2.45), C("--fail"), C("--failband"));
+  barras(ctx, T, items);
+  for (let x = 1; x <= 5; x++) PP.label(ctx, String(x), T.X(x), T.Y(-0.15), C("--ink"), "center", "top", 11);
+  // llaves de A y B
+  const yA = T.Y(-0.55), yB = T.Y(-0.8);
+  PP.path(ctx, [[T.X(0.75), yA], [T.X(3.25), yA]], C("--accent"), 3);
+  PP.label(ctx, "A", T.X(0.62), yA, C("--accent"), "right", "middle", 11);
+  PP.path(ctx, [[T.X(dis ? 3.75 : 2.75), yB], [T.X(5.25), yB]], C("--seq2"), 3);
+  PP.label(ctx, "B", T.X(5.4), yB, C("--seq2"), "left", "middle", 11);
+  if (conflict) PP.label(ctx, "¿" + P.f[2] + " o " + gv(3) + "?", T.X(3), T.Y(2.45) - 2, C("--fail"), "center", "bottom", 11);
+  const pegada = [1, 2, 3, 4, 5].map((x) => (x <= 3 ? P.f[x - 1] : gv(x)));
+  PP.read("ejp2-prop2-read1", [
+    ["f en A", A.map((x) => x + "↦" + P.f[x - 1]).join(", ")],
+    ["g en B", Bs.map((x) => x + "↦" + gv(x)).join(", ")],
+    dis ? ["φ(f, g)", pegada.map((v, i) => (i + 1) + "↦" + v).join(", ") + "  (función ✓)", "good"]
+      : conflict ? ["φ(f, g)(3)", "f(3) = " + P.f[2] + " ≠ g(3) = " + gv(3) + ": no es función", "bad"]
+        : ["φ(f, g)(3)", "f(3) = g(3) = " + P.f[2] + ": esta vez zafa, pero otro par falla"],
+  ]);
+}, ["ejp2-prop2-par", "input[name=\"ejp2-prop2-dis\"]"]);
+
+PP.register(function restringir() {
+  const k = PP.val("ejp2-prop2-h");
+  PP.out("ejp2-prop2-h-o", String(k));
+  let code = (k * 97 + 31) % 243;
+  const hv = [];
+  for (let i = 0; i < 5; i++) { hv.push(code % 3); code = Math.floor(code / 3); }
+  const { ctx, w, h } = PP.canvas("ejp2-prop2-c2", 0.7);
+  const half = h / 2;
+  const T1 = PP.frame(w, half, { x0: 0.4, x1: 5.6, y0: -0.5, y1: 2.5 }, { l: 26, r: 10, t: 18, b: 6 });
+  ejeValores(ctx, T1);
+  PP.label(ctx, "h sobre A ∪ B", T1.X(5.6), 10, C("--ink"), "right", "middle", 11);
+  barras(ctx, T1, hv.map((v, i) => ({ x: i + 1, v, col: C(i < 3 ? "--accent" : "--seq2") })));
+  for (let x = 1; x <= 5; x++) PP.label(ctx, String(x), T1.X(x), T1.Y(-0.1), C("--muted"), "center", "top", 10);
+  ctx.save(); ctx.translate(0, half);
+  const T2 = PP.frame(w, half, { x0: 0.4, x1: 5.6, y0: -0.5, y1: 2.5 }, { l: 26, r: 10, t: 18, b: 6 });
+  ejeValores(ctx, T2);
+  PP.path(ctx, [[T2.X(3.5), T2.Y(2.5)], [T2.X(3.5), T2.Y(-0.5)]], C("--muted"), 1.2, [4, 3]);
+  PP.label(ctx, "h|A", T2.X(2), 8, C("--accent"), "center", "middle", 11);
+  PP.label(ctx, "h|B", T2.X(4.5), 8, C("--seq2"), "center", "middle", 11);
+  barras(ctx, T2, hv.map((v, i) => ({ x: i < 3 ? i + 1 : i + 1, v, col: C(i < 3 ? "--accent" : "--seq2"), dx: i < 3 ? -0.6 : 0.6 })));
+  for (let x = 1; x <= 5; x++) PP.label(ctx, String(x), T2.X(x) + (x <= 3 ? -6 : 6), T2.Y(-0.1), C("--muted"), "center", "top", 10);
+  ctx.restore();
+  PP.path(ctx, [[8, half], [w - 8, half]], C("--rule"), 1);
+  PP.read("ejp2-prop2-read2", [
+    ["h", hv.map((v, i) => (i + 1) + "↦" + v).join(", ")],
+    ["ψ(h) = (h|A, h|B)", "(" + hv.slice(0, 3).join(", ") + ") , (" + hv.slice(3).join(", ") + ")"],
+    ["φ(h|A, h|B) = h", "sí ✓", "good"],
+  ]);
+}, ["ejp2-prop2-h"]);
+
+/* ===================== C3-2 ===================== */
+
+const TABLA = [
+  [1, 0, 1, 1, 0, 0, 1, 0],
+  [0, 0, 1, 0, 1, 1, 0, 1],
+  [1, 1, 1, 0, 0, 1, 0, 0],
+  [0, 1, 0, 0, 1, 0, 1, 1],
+  [1, 0, 0, 1, 1, 1, 0, 1],
+];
+PP.register(function leyExp() {
+  const b = PP.val("ejp2-c32-b"), c = PP.val("ejp2-c32-c");
+  PP.out("ejp2-c32-b-o", String(b)); PP.out("ejp2-c32-c-o", String(c));
+  const modo = PP.radio("ejp2-c32-modo");
+  const { ctx, w, h } = PP.canvas("ejp2-c32-c1", 0.6);
+  const L = 56, Tp = 30, NB = 8, NC = 5;
+  const cw = (w - L - 26) / NB, chh = (h - Tp - 12) / NC;
+  PP.label(ctx, "b →", L - 6, Tp - 8, C("--muted"), "right", "bottom", 11);
+  for (let i = 1; i <= NB; i++) PP.label(ctx, String(i), L + (i - 0.5) * cw, Tp - 6, i === b ? C("--accent") : C("--muted"), "center", "bottom", 11);
+  PP.label(ctx, "…", L + NB * cw + 12, Tp - 6, C("--muted"), "center", "bottom", 11);
+  for (let j = 1; j <= NC; j++) {
+    const y = Tp + (j - 1) * chh;
+    PP.label(ctx, modo === "fil" ? "f(" + j + ")" : "c=" + j, L - 6, y + chh / 2, j === c ? C("--accent") : C("--muted"), "right", "middle", 11);
+    if (modo === "fil" && j === c) PP.rect(ctx, L, y + 1, NB * cw, chh - 2, C("--seq2"), C("--area2"));
+    for (let i = 1; i <= NB; i++) {
+      const x = L + (i - 1) * cw;
+      const sel = i === b && j === c;
+      PP.rect(ctx, x + 1, y + 1, cw - 2, chh - 2, sel ? C("--accent") : C("--rule"), sel ? C("--area") : null);
+      PP.label(ctx, String(TABLA[j - 1][i - 1]), x + cw / 2, y + chh / 2, sel ? C("--ink") : C("--muted"), "center", "middle", 12);
+    }
+    PP.label(ctx, "…", L + NB * cw + 12, y + chh / 2, C("--muted"), "center", "middle", 11);
+  }
+  const v = TABLA[c - 1][b - 1];
+  PP.read("ejp2-c32-read1", modo === "fil" ? [
+    ["f(" + c + ") ∈ {0,1}ᴺ", "(" + TABLA[c - 1].join(", ") + ", …)"],
+    ["(f(" + c + "))(" + b + ")", String(v)],
+    ["Φ(f)(" + b + ", " + c + ")", String(v) + " (mismo dato)", "good"],
+  ] : [
+    ["g = Φ(f)", "una casilla por par (b, c)"],
+    ["g(" + b + ", " + c + ")", String(v)],
+    ["[Ψ(g)(" + c + ")](" + b + ")", String(v) + " (mismo dato)", "good"],
+  ]);
+}, ["ejp2-c32-b", "ejp2-c32-c", "input[name=\"ejp2-c32-modo\"]"]);
+
+const esPrimo = (n) => { if (n < 2) return false; for (let d = 2; d * d <= n; d++) if (n % d === 0) return false; return true; };
+const PARES_B = [
+  { B: (x) => x % 2 === 0 || x === 7, Bt: (x) => x % 2 === 0, nB: "pares ∪ {7}", nBt: "pares" },
+  { B: (x) => x % 2 === 1, Bt: esPrimo, nB: "impares", nBt: "primos" },
+  { B: (x) => x % 3 === 0, Bt: (x) => x % 3 === 0 && x !== 9, nB: "múltiplos de 3", nBt: "múltiplos de 3 sin el 9" },
+];
+PP.register(function enumeracion() {
+  const P = PARES_B[+PP.radio("ejp2-c32-par")];
+  const { ctx, w, h } = PP.canvas("ejp2-c32-c2", 0.5);
+  const M = w < 420 ? 14 : 20;
+  const L = 22, R = 8, cw = (w - L - R) / M;
+  const rows = [{ f: P.B, y: h * 0.33, name: "B" }, { f: P.Bt, y: h * 0.78, name: "B̃" }];
+  let m = 0;
+  for (let x = 1; x <= M; x++) if (P.B(x) !== P.Bt(x)) { m = x; break; }
+  const j = Array.from({ length: m - 1 }, (_, i) => i + 1).filter(P.B).length;
+  const fs = Math.min(11, cw * 0.62);
+  const enums = rows.map((rw) => Array.from({ length: M }, (_, i) => i + 1).filter(rw.f));
+  PP.path(ctx, [[L + (m - 0.5) * cw, 10], [L + (m - 0.5) * cw, h - 6]], C("--fail"), 1.5, [4, 3]);
+  PP.label(ctx, "m = " + m, clamp(L + (m - 0.5) * cw + 4, 0, w - 50), 10, C("--fail"), "left", "top", 11);
+  rows.forEach((rw, ri) => {
+    PP.label(ctx, rw.name, 4, rw.y, C("--ink"), "left", "middle", 13);
+    let pos = 0;
+    for (let x = 1; x <= M; x++) {
+      const cx = L + (x - 0.5) * cw, inn = rw.f(x);
+      if (inn) pos++;
+      const isJ1 = inn && pos === j + 1;
+      PP.circle(ctx, cx, rw.y, Math.min(9, cw * 0.45), inn ? C(isJ1 ? "--fail" : "--accent") : C("--rule"), inn ? C(isJ1 ? "--failband" : "--area") : null);
+      PP.label(ctx, String(x), cx, rw.y, inn ? C("--ink") : C("--muted"), "center", "middle", fs);
+      if (inn) PP.label(ctx, String(pos), cx, rw.y - Math.min(9, cw * 0.45) - 3, isJ1 ? C("--fail") : C("--muted"), "center", "bottom", Math.min(9, fs));
+    }
+  });
+  const [e1, e2] = enums;
+  PP.read("ejp2-c32-read2", [
+    ["B / B̃", P.nB + " / " + P.nBt],
+    ["primeros j lugares", j === 0 ? "ninguno (j = 0)" : "(" + e1.slice(0, j).join(", ") + ") en los dos"],
+    ["lugar j + 1 = " + (j + 1), "g(B) da " + e1[j] + ", g(B̃) da " + e2[j], "good"],
+  ]);
+}, ["input[name=\"ejp2-c32-par\"]"]);
+
+const KS = [[2, 1, 3, 1, 2, 1], [1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2]];
+PP.register(function cadena() {
+  const a = PP.val("ejp2-c32-a");
+  PP.out("ejp2-c32-a-o", String(a));
+  const ks = KS[+PP.radio("ejp2-c32-ks")];
+  const seq = [a];
+  ks.forEach((k) => seq.push(seq[seq.length - 1] * k));
+  const { ctx, w, h } = PP.canvas("ejp2-c32-c3", 0.3);
+  const n = seq.length, l = 8, r = 8;
+  const slot = (w - l - r) / n, bw = Math.min(54, slot * 0.72), y = h * 0.5, bh = 34;
+  seq.forEach((v, i) => {
+    const cx = l + (i + 0.5) * slot;
+    PP.rect(ctx, cx - bw / 2, y - bh / 2, bw, bh, C(i === 0 ? "--seq2" : "--accent"), C(i === 0 ? "--area2" : "--area"));
+    PP.label(ctx, String(v), cx, y, C("--ink"), "center", "middle", Math.min(13, bw / 2.6));
+    PP.label(ctx, "a" + sub(i + 1), cx, y + bh / 2 + 4, C("--muted"), "center", "top", 11);
+    if (i < n - 1) {
+      const nx = l + (i + 1.5) * slot;
+      arrow(ctx, cx + bw / 2 + 1, y - 6, nx - bw / 2 - 1, y - 6, C("--muted"), 1.3, null, 5);
+      PP.label(ctx, "×" + ks[i], (cx + nx) / 2, y - bh / 2 - 6, C("--seq3"), "center", "bottom", 12);
+    }
+  });
+  PP.label(ctx, "a₁ = a", l + 0.5 * slot, y - bh / 2 - 6, C("--seq2"), "center", "bottom", 11);
+  PP.read("ejp2-c32-read3", [
+    ["(aₘ)", seq.join(", ") + ", …"],
+    ["aₙ | aₙ₊₁", "sí ✓"],
+    ["kₙ = aₙ₊₁/aₙ", seq.slice(1).map((v, i) => v / seq[i]).join(", ") + ", …  (se recuperan)", "good"],
+  ]);
+}, ["ejp2-c32-a", "input[name=\"ejp2-c32-ks\"]"]);
+
+/* ===================== C3-3 · caminos de a un paso ===================== */
+
+const BITS = [1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0];
+let C33 = null;
+function caminos() {
+  const N = PP.val("ejp2-c33-N");
+  PP.out("ejp2-c33-N-o", String(N));
+  const { ctx, w, h } = PP.canvas("ejp2-c33-c1", 0.82);
+  const l = 30, r = 14, bitH = 26, tTop = bitH + 20;
+  const X = (n) => l + (n - 1) / (N - 1) * (w - l - r);
+  const vmin = 1 - (N - 1), vmax = 1 + (N - 1);
+  const Y = (v) => tTop + (vmax - v) / (vmax - vmin) * (h - tTop - 22);
+  // árbol de todos los caminos
+  for (let n = 1; n < N; n++) for (let v = 1 - (n - 1); v <= 1 + (n - 1); v += 2) {
+    PP.path(ctx, [[X(n), Y(v)], [X(n + 1), Y(v + 1)]], C("--rule"), 1);
+    PP.path(ctx, [[X(n), Y(v)], [X(n + 1), Y(v - 1)]], C("--rule"), 1);
+  }
+  // bits
+  const cells = [];
+  for (let n = 1; n < N; n++) {
+    const cx = (X(n) + X(n + 1)) / 2, bw = Math.min(26, (X(2) - X(1)) * 0.8);
+    cells.push({ x0: cx - bw / 2, x1: cx + bw / 2, i: n - 1 });
+    const on = BITS[n - 1] === 1;
+    PP.rect(ctx, cx - bw / 2, 4, bw, bitH - 6, C(on ? "--accent" : "--muted"), on ? C("--area") : null);
+    PP.label(ctx, String(BITS[n - 1]), cx, 4 + (bitH - 6) / 2, C("--ink"), "center", "middle", 12);
+  }
+  PP.label(ctx, "b", 4, 4 + (bitH - 6) / 2, C("--muted"), "left", "middle", 12);
+  // camino
+  const a = [1];
+  for (let n = 1; n < N; n++) a.push(a[n - 1] + (BITS[n - 1] === 1 ? 1 : -1));
+  PP.path(ctx, a.map((v, i) => [X(i + 1), Y(v)]), C("--accent"), 2.5);
+  a.forEach((v, i) => PP.dot(ctx, X(i + 1), Y(v), 4, C("--accent")));
+  PP.label(ctx, "a₁ = 1", X(1) + 6, Y(1), C("--accent"), "left", "middle", 11);
+  PP.path(ctx, [[X(1), Y(0)], [X(N), Y(0)]], C("--muted"), 1, [2, 3]);
+  PP.label(ctx, "0", l - 6, Y(0), C("--muted"), "right", "middle", 10);
+  for (let n = 1; n <= N; n++) PP.label(ctx, String(n), X(n), h - 4, C("--muted"), "center", "bottom", 10);
+  C33 = { cells, bitH };
+  PP.read("ejp2-c33-read1", [
+    ["(bₙ)", BITS.slice(0, N - 1).join(", ")],
+    ["(aₙ)", a.map(neg).join(", ")],
+    ["|aₙ₊₁ − aₙ| = 1", "en todos los pasos ✓", "good"],
+  ]);
+}
+PP.register(caminos, ["ejp2-c33-N"]);
+pointer("ejp2-c33-c1", (px, py) => {
+  if (!C33 || py > C33.bitH + 2) return false;
+  const c = C33.cells.find((c) => px >= c.x0 - 3 && px <= c.x1 + 3);
+  if (!c) return false;
+  BITS[c.i] = 1 - BITS[c.i];
+  caminos();
+  return true;
+});
+
+/* ===================== C3-4 · intervalos racionales ===================== */
+
+let X34 = 1.2345, T34 = null;
+function racionalCerca(x, tol) {
+  for (let d = 1; d <= 400; d++) { const p = Math.round(x * d); if (Math.abs(x - p / d) < tol) return [p, d]; }
+  return [Math.round(x * 400), 400];
+}
+function racionalEntre(lo, hi) {
+  for (let d = 1; d <= 2000; d++) { const p = Math.floor(lo * d) + 1; if (p / d < hi) return [p, d]; }
+  return null;
+}
+function entornos() {
+  const eps = PP.val("ejp2-c34-eps") / 100;
+  PP.out("ejp2-c34-eps-o", PP.fmt(eps, 2));
+  const x = X34;
+  const [qp, qd] = racionalCerca(x, eps / 2), q = qp / qd;
+  const rr = racionalEntre(Math.abs(x - q), eps / 2);
+  const r = rr ? rr[0] / rr[1] : eps / 4;
+  const { ctx, w, h } = PP.canvas("ejp2-c34-c1", 0.5);
+  const T = PP.frame(w, h, { x0: -0.6, x1: 3.1, y0: 0, y1: 1 }, { l: 12, r: 12, t: 10, b: 26 });
+  T34 = T;
+  const y0 = T.Y(0.3);
+  PP.path(ctx, [[T.X(-0.6), y0], [T.X(3.1), y0]], C("--muted"), 1);
+  for (let v = 0; v <= 3; v++) {
+    PP.path(ctx, [[T.X(v), y0 - 4], [T.X(v), y0 + 4]], C("--muted"), 1);
+    PP.label(ctx, String(v), T.X(v), y0 + 8, C("--muted"), "center", "top", 10);
+  }
+  PP.rect(ctx, T.X(x - eps), T.Y(0.95), T.X(x + eps) - T.X(x - eps), T.Y(0.05) - T.Y(0.95), null, C("--band"));
+  PP.path(ctx, [[T.X(x - eps), T.Y(0.95)], [T.X(x - eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
+  PP.path(ctx, [[T.X(x + eps), T.Y(0.95)], [T.X(x + eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
+  [x - eps / 2, x + eps / 2].forEach((v) => PP.path(ctx, [[T.X(v), T.Y(0.85)], [T.X(v), T.Y(0.75)]], C("--accent"), 1.5));
+  PP.label(ctx, "x ± εₓ/2", T.X(x - eps / 2) - 4, T.Y(0.8), C("--accent"), "right", "middle", 10);
+  PP.label(ctx, "x − εₓ", T.X(x - eps) + 3, T.Y(0.95), C("--accent"), "left", "top", 10);
+  PP.label(ctx, "x + εₓ", T.X(x + eps) - 3, T.Y(0.95), C("--accent"), "right", "top", 10);
+  const yi = T.Y(0.55);
+  PP.rect(ctx, T.X(q - r), yi - 6, T.X(q + r) - T.X(q - r), 12, C("--ok"), C("--okband"));
+  PP.label(ctx, "(q − r, q + r)", T.X(q), yi - 8, C("--ok"), "center", "bottom", 10);
+  PP.dot(ctx, T.X(q), yi, 4, C("--seq2"));
+  PP.dot(ctx, T.X(q), y0, 4, C("--seq2"));
+  PP.label(ctx, "q", T.X(q), y0 - 6, C("--seq2"), "center", "bottom", 11);
+  PP.path(ctx, [[T.X(x), yi + 10], [T.X(x), y0]], C("--accent"), 1, [2, 2]);
+  PP.dot(ctx, T.X(x), y0, 6.5, C("--accent"));
+  PP.label(ctx, "x", T.X(x) + 8, y0 + 4, C("--accent"), "left", "top", 12);
+  const okIn = Math.abs(x - q) < r, okSub = q - r >= x - eps - 1e-12 && q + r <= x + eps + 1e-12;
+  PP.read("ejp2-c34-read1", [
+    ["x, εₓ", PP.fmt(x, 4) + ", " + PP.fmt(eps, 2)],
+    ["q", frac(qp, qd) + "  (|x − q| = " + PP.fmt(Math.abs(x - q), 4) + ")"],
+    ["r", (rr ? frac(rr[0], rr[1]) : PP.fmt(r, 4)) + "  (< εₓ/2 = " + PP.fmt(eps / 2, 4) + ")"],
+    ["x ∈ (q − r, q + r)", okIn ? "sí ✓" : "no", okIn ? "good" : "bad"],
+    ["(q − r, q + r) ⊆ entorno", okSub ? "sí ✓" : "no", okSub ? "good" : "bad"],
+  ]);
+}
+PP.register(entornos, ["ejp2-c34-eps"]);
+pointer("ejp2-c34-c1", (px, py, t) => {
+  if (!T34) return false;
+  X34 = clamp(T34.iX(px), -0.4, 2.9);
+  entornos();
+  return true;
+}, true);
+
+/* ===================== guía-3 · finitos unos ===================== */
+
+const UNOS = new Set([2, 5, 9]);
+let G3 = null;
+function finitosUnos() {
+  const M = 16;
+  const { ctx, w, h } = PP.canvas("ejp2-g3-c1", 0.32);
+  const l = 6, r = 30, cw = (w - l - r) / M, y = h * 0.42, bh = Math.min(30, cw * 1.3);
+  for (let i = 1; i <= M; i++) {
+    const x = l + (i - 1) * cw, on = UNOS.has(i);
+    PP.rect(ctx, x + 1, y - bh / 2, cw - 2, bh, C(on ? "--accent" : "--rule"), on ? C("--area") : null);
+    PP.label(ctx, on ? "1" : "0", x + cw / 2, y, on ? C("--ink") : C("--muted"), "center", "middle", Math.min(13, cw * 0.7));
+    PP.label(ctx, String(i), x + cw / 2, y + bh / 2 + 4, on ? C("--accent") : C("--muted"), "center", "top", Math.min(10, cw * 0.6));
+  }
+  PP.label(ctx, "0 …", w - 4, y, C("--muted"), "right", "middle", 12);
+  PP.label(ctx, "tocá una casilla", l, 6, C("--muted"), "left", "top", 10);
+  G3 = { l, cw, y, bh };
+  const pos = [...UNOS].sort((a, b) => a - b);
+  PP.read("ejp2-g3-read1", [
+    ["cantidad de unos", "k = " + pos.length + "  →  está en A" + sub(pos.length)],
+    ["posiciones", pos.length ? "(" + pos.join(", ") + ") ∈ ℕ" + sup(pos.length) : "ninguna: es (0, 0, 0, …), el único elemento de A₀"],
+    ["la sucesión se reconstruye", "unos en esas posiciones, ceros en el resto ✓", "good"],
+  ]);
+}
+PP.register(finitosUnos, []);
+pointer("ejp2-g3-c1", (px, py) => {
+  if (!G3 || Math.abs(py - G3.y) > G3.bh / 2 + 4) return false;
+  const i = Math.floor((px - G3.l) / G3.cw) + 1;
+  if (i < 1 || i > 16) return false;
+  if (UNOS.has(i)) UNOS.delete(i); else UNOS.add(i);
+  finitosUnos();
+  return true;
+});
+
+/* ===================== guía-4 · finitos y cofinitos ===================== */
+
+const BZ = new Set([-3, 0, 4]);
+let G4 = null;
+function finCofin() {
+  const lo = -8, hi = 8, M = hi - lo + 1;
+  const comp = PP.radio("ejp2-g4-ver") === "C";
+  const { ctx, w, h } = PP.canvas("ejp2-g4-c1", 0.32);
+  const l = 22, r = 22, cw = (w - l - r) / M, y = h * 0.45, rad = Math.min(11, cw * 0.46);
+  PP.path(ctx, [[4, y], [w - 4, y]], C("--muted"), 1);
+  PP.label(ctx, "…", 4, y - 4, comp ? C("--seq2") : C("--muted"), "left", "bottom", 13);
+  PP.label(ctx, "…", w - 4, y - 4, comp ? C("--seq2") : C("--muted"), "right", "bottom", 13);
+  for (let z = lo; z <= hi; z++) {
+    const cx = l + (z - lo + 0.5) * cw, inB = BZ.has(z), on = comp ? !inB : inB;
+    PP.circle(ctx, cx, y, rad, on ? C(comp ? "--seq2" : "--accent") : C("--rule"), on ? C(comp ? "--area2" : "--area") : C("--panel"));
+    PP.label(ctx, neg(z), cx, y + rad + 4, on ? C("--ink") : C("--muted"), "center", "top", Math.min(10, cw * 0.55));
+  }
+  PP.label(ctx, comp ? "ℤ ∖ B: todos menos " + BZ.size : "B: " + BZ.size + " elementos", w / 2, 6, C(comp ? "--seq2" : "--accent"), "center", "top", 11);
+  G4 = { l, cw, y, rad, lo, hi };
+  const el = [...BZ].sort((a, b) => a - b);
+  PP.read("ejp2-g4-read1", [
+    ["B", el.length ? "{" + el.map(neg).join(", ") + "}" : "∅"],
+    ["k-upla ordenada", el.length ? "(" + el.map(neg).join(", ") + ") ∈ ℤ" + sup(el.length) : "( ) (k = 0)"],
+    ["ℤ ∖ B", "infinito, con complemento finito: cofinito", "good"],
+  ]);
+}
+PP.register(finCofin, ["input[name=\"ejp2-g4-ver\"]"]);
+pointer("ejp2-g4-c1", (px, py) => {
+  if (!G4 || Math.abs(py - G4.y) > G4.rad + 6) return false;
+  const z = Math.floor((px - G4.l) / G4.cw) + G4.lo;
+  if (z < G4.lo || z > G4.hi) return false;
+  if (BZ.has(z)) BZ.delete(z); else BZ.add(z);
+  finCofin();
+  return true;
+});
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

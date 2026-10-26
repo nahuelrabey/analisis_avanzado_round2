@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ejemplos · Práctica 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#ejemplos">Ejemplos</a></li><li><span aria-current="page">Práctica 6</span></li></ol><div class="pager"><a href="../ejemplos/p5.html" title="Ejemplos · Práctica 5">← Anterior</a><a aria-disabled="true">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Ejemplos resueltos · 2 ejemplos</p>
+  <h1>Práctica 6</h1>
+  <p>Espacios normados y operadores. Los ejemplos de <code>apuntes-typst/ejemplos/p6.typ</code>, con la resolución partida en pasos y un dibujo en cada paso que se puede dibujar. Cada resultado subrayado con puntos muestra su enunciado.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#ejp6-b1">Bloque 1 · Completitud en espacios normados</a><ul class="chips"><li><a href="#ejp6-c8-4" title="E es de Banach si y sólo si toda sucesión de Cauchy en la esfera unitaria converge">C8-4</a></li></ul></div><div class="toc-group"><a href="#ejp6-b2">Bloque 2 · Operadores lineales: continuidad y acotación</a><ul class="chips"><li><a href="#ejp6-c8-5" title="T lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas">C8-5</a></li></ul></div></nav>
+
+<!-- ===================== BLOQUE 1 ===================== -->
+<section class="bloque" id="ejp6-b1">
+  <h2><span class="bn">Bloque 1</span>Completitud en espacios normados</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>En un <span class="ref" data-ref="ext-norma">espacio normado</span>, la completitud se puede chequear sobre la esfera unitaria $S = \{x : \|x\| = 1\}$: si toda sucesión de Cauchy de $S$ converge, el espacio es <span class="ref" data-ref="ext-espacio-de-banach">de Banach</span>. La técnica es <b>normalizar</b> una sucesión de Cauchy que no tiende a $0$ y controlar el error con la desigualdad $\big|\|x_n\| - \|x_m\|\big| \le \|x_n - x_m\|$. Sirve como modelo para el <a href="../guias/p6.html#guiap6-ej6" class="xg" data-guia="p6" data-ej="6">Ejercicio 6</a> (completitud de $\ell^\infty$) y el <a href="../guias/p6.html#guiap6-ej7" class="xg" data-guia="p6" data-ej="7">Ejercicio 7</a> de la Práctica 6, y repasa el <span class="ref" data-ref="guia-p3-ej15">Ejercicio 15 de la Práctica 3</span> (cerrado de completo es completo).</p></div>
+
+  <article class="ej" id="ejp6-c8-4" data-short="C8-4" data-title="E es de Banach si y sólo si toda sucesión de Cauchy en la esfera unitaria converge" data-topics="normados,completitud">
+    <div class="ej-head">
+      <span class="tag">C8-4</span>
+      <h3>$E$ es de Banach si y sólo si toda sucesión de Cauchy en la esfera unitaria converge</h3>
+      <span class="src">Clase 8 · Ejercicio 4</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, \|\cdot\|)$ un <span class="ref" data-ref="ext-norma">espacio normado</span>. Sea
+      $$S = \{x \in E : \|x\| = 1\}.$$
+      Probar que $E$ es un <span class="ref" data-ref="ext-espacio-de-banach">espacio de Banach</span> si y sólo si toda <span class="ref" data-ref="def-4.51">sucesión de Cauchy</span> $(x_n)_{n \ge 1} \subseteq S$ converge.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow)$</p>
+          <p>La implicación $\Rightarrow)$ es porque $S$ es <span class="ref" data-ref="def-4.27">cerrado</span>, y por el <span class="ref" data-ref="guia-p3-ej15">Ejercicio 15 de la Práctica 3</span>, es <span class="ref" data-ref="def-4.55">completo</span>.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow)$: $(\|x_n\|)_n$ es de Cauchy</p>
+          <p>Para la vuelta, sea $(x_n)_n \subseteq E$ de Cauchy. Si $x_n \to 0$, no hay nada que probar. Supongamos que $x_n \not\to 0$. Tenemos que $(\|x_n\|)_n$ es de Cauchy, porque
+            $$\|x_n\| \le \|x_n - x_m\| + \|x_m\|,$$
+            entonces
+            $$\|x_n\| - \|x_m\| \le \|x_n - x_m\|,$$
+            y por simetría,
+            $$\|x_m\| - \|x_n\| \le \|x_n - x_m\|.$$
+            Entonces
+            $$\big|\|x_n\| - \|x_m\|\big| \le \|x_n - x_m\|,$$
+            y el segundo término se puede hacer menor a $\varepsilon \gt 0$ para todo $n, m$ suficientemente grande, porque $(x_n)_n$ es de Cauchy.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp6-c8-4-cv1" aria-label="Dos puntos arrastrables del plano, las esferas centradas en 0 que pasan por ellos y la distancia entre los puntos"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Norma del dibujo en ℝ²</legend>
+              <label><input type="radio" name="ejp6-c8-4-nrm" value="2" checked>‖·‖₂</label>
+              <label><input type="radio" name="ejp6-c8-4-nrm" value="1">‖·‖₁</label>
+              <label><input type="radio" name="ejp6-c8-4-nrm" value="inf">‖·‖<sub>∞</sub></label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp6-c8-4-read1" aria-live="polite"></dl>
+          <figcaption>Un caso particular: <i>E</i> = ℝ² con la norma elegida. Arrastrá <i>x<sub>n</sub></i> o <i>x<sub>m</sub></i>. Las curvas finas son las esferas centradas en 0 de radios ‖<i>x<sub>n</sub></i>‖ y ‖<i>x<sub>m</sub></i>‖; la punteada es la esfera de centro <i>x<sub>m</sub></i> y radio ‖<i>x<sub>n</sub></i> − <i>x<sub>m</sub></i>‖, que pasa por <i>x<sub>n</sub></i>. La diferencia de radios nunca supera ese radio.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\|x_n\| \to L \gt 0$: se puede normalizar</p>
+          <p>Por lo tanto $(\|x_n\|)_n$ converge, porque <span class="ref" data-ref="teo-4.57">$\mathbb{R}$ es completo</span>; digamos $\|x_n\| \to L$. Además, $L \neq 0$; caso contrario, $\|x_n\| \to 0$ equivale a decir que $x_n \to 0$. Como $\|x_n\| \ge 0$, $L \gt 0$. Entonces existen $n_0 \in \mathbb{N}$ y $\delta \gt 0$ tales que $\|x_n\| \ge \delta$ para todo $n \ge n_0$. Por lo tanto, podemos <em>normalizar</em> $(x_n)_n$. Para todo $n \ge n_0$ definimos $y_n = x_n / \|x_n\|$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp6-c8-4-cv2" aria-label="Una sucesión convergente del plano y su normalizada sobre la esfera unitaria"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp6-c8-4-N">términos <i>N</i></label><input type="range" id="ejp6-c8-4-N" min="1" max="40" value="6"><output id="ejp6-c8-4-N-o"></output></div>
+            <fieldset class="pills"><legend>Norma del dibujo en ℝ²</legend>
+              <label><input type="radio" name="ejp6-c8-4-nrm2" value="2" checked>‖·‖₂</label>
+              <label><input type="radio" name="ejp6-c8-4-nrm2" value="1">‖·‖₁</label>
+              <label><input type="radio" name="ejp6-c8-4-nrm2" value="inf">‖·‖<sub>∞</sub></label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp6-c8-4-read2" aria-live="polite"></dl>
+          <figcaption>Valores elegidos: en ℝ², <i>x<sub>n</sub></i> = (1,5 + 0,6/<i>n</i>)·(cos θ<sub><i>n</i></sub>, sen θ<sub><i>n</i></sub>) con θ<sub><i>n</i></sub> = 0,5 + 1/<i>n</i> (naranja). En azul, <i>y<sub>n</sub></i> = <i>x<sub>n</sub></i>/‖<i>x<sub>n</sub></i>‖, sobre la esfera unitaria <i>S</i> de la norma elegida. El anillo verde es el límite <i>L</i>·<i>y</i> de las <i>x<sub>n</sub></i>.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$(y_n)_{n \ge n_0}$ es de Cauchy en $S$</p>
+          <p>Se tiene que
+            $$\begin{aligned} &\|y_n - y_m\| = \Big\| \frac{x_n}{\|x_n\|} - \frac{x_m}{\|x_m\|} \Big\| \\ &\quad = \Big\| \frac{\|x_m\| \cdot x_n - x_m \cdot \|x_n\|}{\|x_n\| \cdot \|x_m\|} \Big\| \\ &\quad \le \frac{1}{\|x_n\| \cdot \|x_m\|} \Big[ \big\| \|x_m\| \cdot x_n - L \cdot x_n \big\| \\ &\qquad\quad + \|L x_n - L x_m\| \\ &\qquad\quad + \big\| L x_m - x_m \cdot \|x_n\| \big\| \Big] \\ &\quad \le \frac{1}{\|x_n\| \cdot \|x_m\|} \Big[ \big|\|x_m\| - L\big| \cdot \|x_n\| \\ &\qquad\quad + \|x_n - x_m\| \cdot L \\ &\qquad\quad + \big|L - \|x_n\|\big| \cdot \|x_m\| \Big]. \end{aligned}$$
+            Como $\|x_n\| \to L \neq 0$, el lado derecho tiende a $0$. Por lo tanto $(y_n)_{n \ge n_0}$ es de Cauchy. Como $S$ es completo, $y_n \to y$ con $y \in S$.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$x_n \to L \cdot y$</p>
+          <p>Pero entonces $y_n = x_n / \|x_n\| \to y$ implica que $x_n$ converge a $L \cdot y$, ya que para todo $n \ge n_0$,
+            $$\begin{aligned} \|x_n - L \cdot y\| &\le \Big\| x_n - \frac{x_n}{\|x_n\|} \cdot L \Big\| \\ &\qquad + \Big\| \frac{x_n}{\|x_n\|} \cdot L - L \cdot y \Big\| \\ &= \Big| 1 - \frac{L}{\|x_n\|} \Big| \cdot \|x_n\| \\ &\qquad + \Big\| \frac{x_n}{\|x_n\|} - y \Big\| \cdot L \\ &= \Big| \frac{\|x_n\| - L}{\|x_n\|} \Big| \cdot \|x_n\| \\ &\qquad + \|y_n - y\| \cdot L, \end{aligned}$$
+            y el lado derecho tiende a $0$. Concluimos que $(x_n)_n$ es convergente. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>"El lado derecho tiende a $0$" en la cota de $\|y_n - y_m\|$ quiere decir: dado $\varepsilon \gt 0$, los tres sumandos del corchete son $\lt \varepsilon$ para $n, m$ grandes (por $\|x_n\| \to L$ y la condición de Cauchy), y el factor $1 / (\|x_n\| \|x_m\|) \le 1 / \delta^2$ está acotado. "Como $S$ es completo" es la hipótesis: toda Cauchy en $S$ converge, y el límite queda en $S$ porque $S$ es <span class="ref" data-ref="cor-4.47">cerrado</span>.</div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 2 ===================== -->
+<section class="bloque" id="ejp6-b2">
+  <h2><span class="bn">Bloque 2</span>Operadores lineales: continuidad y acotación</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Para un <span class="ref" data-ref="ext-operador-lineal-acotado">operador lineal</span>, continuidad equivale a mandar acotados en acotados (<a href="../guias/p6.html#guiap6-ej8" class="xg" data-guia="p6" data-ej="8">Ejercicio 8</a> de la Práctica 6). Este ejemplo agrega otra caracterización por sucesiones nulas, con el truco de reescalar $x_n$ por $\sqrt{n}\, \|x_n\|$ para fabricar una sucesión que tiende a $0$ con imágenes no acotadas. Es la herramienta para refutar continuidad en el <a href="../guias/p6.html#guiap6-ej12" class="xg" data-guia="p6" data-ej="12">Ejercicio 12</a> (el operador derivada) y complementa las fórmulas del <a href="../guias/p6.html#guiap6-ej9" class="xg" data-guia="p6" data-ej="9">Ejercicio 9</a>.</p></div>
+
+  <article class="ej" id="ejp6-c8-5" data-short="C8-5" data-title="T lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas" data-topics="normados,continuidad">
+    <div class="ej-head">
+      <span class="tag">C8-5</span>
+      <h3>$T$ lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas</h3>
+      <span class="src">Clase 8 · Ejercicio 5</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $E, F$ <span class="ref" data-ref="ext-norma">espacios normados</span>. Sea $T : E \to F$ una <span class="ref" data-ref="ext-operador-lineal-acotado">transformación lineal</span>. Probar que $T$ es <span class="ref" data-ref="def-5.4">continua</span> si y sólo si para toda sucesión $(x_n)_{n \ge 1}$ en $E$ que tiende a $0$, $(T(x_n))_n$ es <span class="ref" data-ref="def-4.49">acotada</span>.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow)$</p>
+          <p>La implicación $\Rightarrow)$ es consecuencia directa de la continuidad, pues <span class="ref" data-ref="teo-5.7">$T(x_n) \to T(0) = 0$</span>.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow)$: alcanza con mandar acotados en acotados</p>
+          <p>Para la implicación $\Leftarrow)$, alcanza con ver que para todo $A \subseteq E$ <span class="ref" data-ref="def-4.8">acotado</span>, $T(A)$ es acotado, porque por el <span class="ref" data-ref="guia-p6-ej8">Ejercicio 8 de la Práctica 6</span> esto equivale a que $T$ sea continua. Si <em>existiera $A \subseteq E$ acotado con $T(A)$ no acotado</em>, entonces para todo $n \in \mathbb{N}$ existe $x_n \in A$ tal que $\|T(x_n)\| \ge n$. Por lo tanto $(T(x_n))_n$ no está acotada. Esto no finaliza la prueba, porque $x_n$ no tiene por qué tender a $0$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 220" role="img" aria-label="A acotado dentro de la bola de radio R en E; T manda los puntos x_n a puntos T(x_n) cada vez más lejos del origen en F">
+            <text x="80" y="18" text-anchor="middle" class="sv-text">E</text>
+            <text x="262" y="18" text-anchor="middle" class="sv-text">F</text>
+            <circle cx="80" cy="115" r="62" class="sv-axis sv-dash"/>
+            <text x="80" y="198" text-anchor="middle" class="sv-muted">B(0, R)</text>
+            <path d="M52 92 C 70 70, 112 78, 116 104 C 120 130, 96 150, 70 142 C 46 134, 38 110, 52 92 Z" class="sv-area"/>
+            <path d="M52 92 C 70 70, 112 78, 116 104 C 120 130, 96 150, 70 142 C 46 134, 38 110, 52 92 Z" class="sv-accent"/>
+            <text x="98" y="160" class="sv-label-accent">A</text>
+            <circle cx="80" cy="115" r="2.5" class="sv-fill-ok"/>
+            <text x="84" y="128" class="sv-muted">0</text>
+            <circle cx="64" cy="100" r="3.5" class="sv-fill-seq2"/><text x="56" y="96" text-anchor="end" class="sv-label-seq2">x₁</text>
+            <circle cx="104" cy="98" r="3.5" class="sv-fill-seq2"/><text x="108" y="94" class="sv-label-seq2">x₂</text>
+            <circle cx="92" cy="134" r="3.5" class="sv-fill-seq2"/><text x="96" y="146" class="sv-label-seq2">x₃</text>
+            <line x1="140" y1="115" x2="178" y2="115" class="sv-axis"/><path d="M172 110 L180 115 L172 120" class="sv-axis"/>
+            <text x="159" y="108" text-anchor="middle" class="sv-text">T</text>
+            <circle cx="262" cy="115" r="2.5" class="sv-fill-ok"/>
+            <circle cx="262" cy="115" r="26" class="sv-grid"/>
+            <circle cx="262" cy="115" r="52" class="sv-grid"/>
+            <circle cx="262" cy="115" r="78" class="sv-grid"/>
+            <text x="262" y="86" text-anchor="middle" class="sv-muted">1</text>
+            <text x="262" y="60" text-anchor="middle" class="sv-muted">2</text>
+            <text x="262" y="34" text-anchor="middle" class="sv-muted">3</text>
+            <circle cx="292" cy="107" r="3.5" class="sv-fill-seq2"/><text x="298" y="104" class="sv-label-seq2">T(x₁)</text>
+            <circle cx="214" cy="140" r="3.5" class="sv-fill-seq2"/><text x="206" y="156" text-anchor="middle" class="sv-label-seq2">T(x₂)</text>
+            <circle cx="318" cy="178" r="3.5" class="sv-fill-seq2"/><text x="318" y="196" text-anchor="middle" class="sv-label-seq2">T(x₃)</text>
+            <text x="180" y="214" text-anchor="middle" class="sv-label-fail">‖T(xₙ)‖ ≥ n: T(A) no acotado</text>
+          </svg>
+          <figcaption>Esquema de la suposición por el absurdo: los <i>x<sub>n</sub></i> viven en el acotado <i>A</i> ⊆ <i>B</i>(0, <i>R</i>), pero cada <i>T</i>(<i>x<sub>n</sub></i>) queda fuera de la bola de radio <i>n</i> de <i>F</i> (círculos finos). Los <i>x<sub>n</sub></i> no tienen por qué acercarse a 0.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Reescalar por $\sqrt{n_k}\, \|x_{n_k}\|$</p>
+          <p>Si $x_n \not\to 0$, existen $(x_{n_k})_k$ y $\delta \gt 0$ tales que $\|x_{n_k}\| \gt \delta$ para todo $k \in \mathbb{N}$. Entonces, para todo $k \in \mathbb{N}$, sea
+            $$y_k = \frac{x_{n_k}}{\sqrt{n_k}\, \|x_{n_k}\|}.$$
+            Tenemos que $\|y_k\| = 1 / \sqrt{n_k} \to 0$, y
+            $$\begin{aligned} \|T(y_k)\| &= \Big\| \frac{T(x_{n_k})}{\sqrt{n_k}\, \|x_{n_k}\|} \Big\| \\ &\ge \frac{n_k}{\sqrt{n_k}\, \|x_{n_k}\|} = \frac{\sqrt{n_k}}{\|x_{n_k}\|}. \end{aligned}$$</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Usar que $A$ es acotado</p>
+          <p>Como $A$ está acotado, $A \subseteq B(0, R)$ para algún $R \gt 0$. Entonces $\|x_n\| \le R$, por lo tanto
+            $$\|T(y_k)\| \ge \frac{\sqrt{n_k}}{R},$$
+            y concluimos que $(T(y_k))_k$ no está acotada, con $y_k \to 0$. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp6-c8-5-cv1" aria-label="Las normas de y_k decrecen a 0 mientras la cota inferior de las normas de T(y_k) crece sin límite"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp6-c8-5-R"><i>R</i></label><input type="range" id="ejp6-c8-5-R" min="5" max="50" value="20"><output id="ejp6-c8-5-R-o"></output></div>
+          </div>
+          <dl class="read" id="ejp6-c8-5-read1" aria-live="polite"></dl>
+          <figcaption>Sólo las dos fórmulas del paso, con <i>n<sub>k</sub></i> = <i>k</i> (valores elegidos para el dibujo): en azul ‖<i>y<sub>k</sub></i>‖ = 1/√<i>n<sub>k</sub></i>, que tiende a 0; en naranja la cota √<i>n<sub>k</sub></i>/<i>R</i> por debajo de ‖<i>T</i>(<i>y<sub>k</sub></i>)‖, que crece sin techo. Un <i>R</i> más grande la hace crecer más despacio, pero no la frena.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>El caso $x_n \to 0$ no se trata en el manuscrito: en ese caso $(T(x_n))_n$ ya contradice la hipótesis directamente. De hecho, la subsucesión y el $\delta$ no se usan en la cota final (que sólo necesita $\|x_{n_k}\| \le R$); alcanza con $x_n \neq 0$, que vale porque $\|T(x_n)\| \ge n \gt 0$ y $T(0) = 0$, para definir $y_n = x_n / (\sqrt{n}\, \|x_n\|)$ con toda la sucesión.</div>
+  </article>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/ejemplos/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.49": {
+  "tipo": "Definición",
+  "numero": "4.49",
+  "titulo": "Sucesión acotada",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión dentro de $M$. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es <em>acotada<\/em> si el conjunto $$A = \\{x_n : n \\in \\mathbb{N}\\} \\subseteq M$$ es un conjunto acotado.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy<\/em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo<\/strong> si toda sucesión de Cauchy tiene límite en $M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado<\/b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.<\/p><p>(En el apunte, la definición viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-espacio-de-banach": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio de Banach",
+  "enunciado": "<p>Un espacio normado $(E, \\|\\cdot\\|)$ es un <b>espacio de Banach<\/b> si es completo con la métrica $d(x, y) = \\|x - y\\|$, es decir, si toda sucesión de Cauchy en $E$ converge a un elemento de $E$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-norma": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio normado",
+  "enunciado": "<p>Sea $E$ un espacio vectorial real. Una <b>norma<\/b> en $E$ es una función $\\|\\cdot\\| : E \\to \\mathbb{R}$ tal que, para todo $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$:<\/p><p>(i) $\\|x\\| \\ge 0$, y $\\|x\\| = 0$ si y sólo si $x = 0$;<br>(ii) $\\|\\lambda x\\| = |\\lambda|\\, \\|x\\|$;<br>(iii) $\\|x + y\\| \\le \\|x\\| + \\|y\\|$ (desigualdad triangular).<\/p><p>El par $(E, \\|\\cdot\\|)$ es un <b>espacio normado<\/b>; es un espacio métrico con $d(x, y) = \\|x - y\\|$, y las nociones métricas (convergencia, Cauchy, abiertos, bolas, acotados) se refieren a esa distancia.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-lineal-acotado": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Operador lineal y operador acotado",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$ y $(F, \\|\\cdot\\|_F)$ espacios normados. Una función $T : E \\to F$ es un <b>operador lineal<\/b> (o transformación lineal) si $T(\\lambda x + \\mu y) = \\lambda T(x) + \\mu T(y)$ para todo $x, y \\in E$ y $\\lambda, \\mu \\in \\mathbb{R}$; en particular $T(0) = 0$. $T$ es <b>acotado<\/b> si existe $C \\ge 0$ tal que $\\|T x\\|_F \\le C \\|x\\|_E$ para todo $x \\in E$; la <b>norma<\/b> de $T$ es $\\|T\\| = \\inf\\{C \\ge 0 : \\|T x\\|_F \\le C \\|x\\|_E \\ \\forall x \\in E\\}$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p3-ej15": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 15",
+  "titulo": "Un cerrado de un completo es completo",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $A \\subseteq E$ un subconjunto de $E$. Pruebe que si $A$ es cerrado entonces el espacio métrico $(A, d)$ es completo.<\/p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p6-ej8": {
+  "tipo": "Práctica 6",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$, $(F, \\|\\cdot\\|_F)$ espacios normados. Sea $T : E \\to F$ un operador lineal. Pruebe que son equivalentes:<\/p><ol type=\"a\"><li>$T$ es continuo en $0$.<\/li><li>Existe $x_0 \\in E$ tal que $T$ es continuo en $x_0$.<\/li><li>$T$ es continuo.<\/li><li>$T$ es uniformemente continuo.<\/li><li>$T$ es acotado.<\/li><li>Para todo $A \\subseteq E$ acotado, $T(A)$ es acotado.<\/li><\/ol>",
+  "fuente": "guias/p6.typ"
+ },
+ "teo-4.57": {
+  "tipo": "Teorema",
+  "numero": "4.57",
+  "titulo": "$\\mathbb{R}$ es completo",
+  "enunciado": "<p>$(\\mathbb{R}, |\\cdot|)$ es completo.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* ejemplos/p6 */
+(() => {
+"use strict";
+/* Dibujos de los ejemplos de la Práctica 6 (espacios normados). Usa window.PP. */
+const ID = "ejp6";
+const C = (t) => PP.css(t);
+
+/* Marco con la misma escala en x y en y, centrado en (0, 0). */
+function eqFrame(w, h, half, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = 2 * half * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0: -half, x1: half, y0: -span / 2, y1: span / 2 }, p);
+}
+function norm(v, kind) {
+  const [a, b] = v;
+  if (kind === "1") return Math.abs(a) + Math.abs(b);
+  if (kind === "inf") return Math.max(Math.abs(a), Math.abs(b));
+  return Math.hypot(a, b);
+}
+/* Esfera {‖z − c‖ = r} de la norma elegida, como polígono en coordenadas de pantalla. */
+function sphere(T, c, r, kind) {
+  const pts = [];
+  for (let i = 0; i <= 160; i++) {
+    const t = 2 * Math.PI * i / 160, d = [Math.cos(t), Math.sin(t)], s = r / norm(d, kind);
+    pts.push([T.X(c[0] + s * d[0]), T.Y(c[1] + s * d[1])]);
+  }
+  return pts;
+}
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+const nrmName = (k) => (k === "1" ? "‖·‖₁" : k === "inf" ? "‖·‖∞" : "‖·‖₂");
+
+/* ===================== C8-4 ===================== */
+
+/* Paso 2: |‖xₙ‖ − ‖xₘ‖| ≤ ‖xₙ − xₘ‖ con puntos arrastrables. */
+const P1 = { n: [1.3, 0.8], m: [0.6, 0.3] };
+let T1 = null;
+function c84Triang() {
+  const kind = PP.radio(ID + "-c8-4-nrm") || "2";
+  const { ctx, w, h } = PP.canvas(ID + "-c8-4-cv1", 0.85);
+  const T = eqFrame(w, h, 2.3, { l: 10, r: 10, t: 10, b: 10 });
+  T1 = T;
+  PP.path(ctx, [[T.X(-2.3), T.Y(0)], [T.X(2.3), T.Y(0)]], C("--rule"), 1);
+  PP.path(ctx, [[T.X(0), T.Y(T.box.y0)], [T.X(0), T.Y(T.box.y1)]], C("--rule"), 1);
+  const nn = norm(P1.n, kind), nm = norm(P1.m, kind);
+  const dv = [P1.n[0] - P1.m[0], P1.n[1] - P1.m[1]], dd = norm(dv, kind);
+  PP.path(ctx, sphere(T, [0, 0], nn, kind), C("--accent"), 1.2);
+  PP.path(ctx, sphere(T, [0, 0], nm, kind), C("--seq2"), 1.2);
+  PP.path(ctx, sphere(T, P1.m, dd, kind), C("--ok"), 1.5, [5, 4], true, C("--okband"));
+  PP.path(ctx, [[T.X(P1.m[0]), T.Y(P1.m[1])], [T.X(P1.n[0]), T.Y(P1.n[1])]], C("--ok"), 2.5);
+  PP.dot(ctx, T.X(0), T.Y(0), 3.5, C("--ink"));
+  PP.label(ctx, "0", T.X(0) - 5, T.Y(0) + 4, C("--muted"), "right", "top", 11);
+  PP.dot(ctx, T.X(P1.n[0]), T.Y(P1.n[1]), 7, C("--accent"));
+  PP.dot(ctx, T.X(P1.m[0]), T.Y(P1.m[1]), 7, C("--seq2"));
+  PP.label(ctx, "xₙ", T.X(P1.n[0]) + 9, T.Y(P1.n[1]) - 5, C("--accent"), "left", "bottom", 13);
+  PP.label(ctx, "xₘ", T.X(P1.m[0]) + 9, T.Y(P1.m[1]) + 5, C("--seq2"), "left", "top", 13);
+  const gap = Math.abs(nn - nm);
+  PP.read(ID + "-c8-4-read1", [
+    ["norma", nrmName(kind)],
+    ["‖xₙ‖, ‖xₘ‖", PP.fmt(nn, 3) + ", " + PP.fmt(nm, 3)],
+    ["|‖xₙ‖ − ‖xₘ‖|", PP.fmt(gap, 3)],
+    ["‖xₙ − xₘ‖", PP.fmt(dd, 3)],
+    ["¿|‖xₙ‖ − ‖xₘ‖| ≤ ‖xₙ − xₘ‖?", gap <= dd + 1e-9 ? "sí" : "no", gap <= dd + 1e-9 ? "good" : "bad"],
+  ]);
+}
+PP.register(c84Triang, ["input[name='" + ID + "-c8-4-nrm']"]);
+draggable(ID + "-c8-4-cv1", () => T1, (px, py, T) => {
+  const d = (p) => Math.hypot(px - T.X(p[0]), py - T.Y(p[1]));
+  const dn = d(P1.n), dm = d(P1.m);
+  if (Math.min(dn, dm) > 26) return null;
+  return dn <= dm ? "n" : "m";
+}, (k, x, y, T) => {
+  P1[k] = [Math.max(T.box.x0 + 0.1, Math.min(T.box.x1 - 0.1, x)), Math.max(T.box.y0 + 0.1, Math.min(T.box.y1 - 0.1, y))];
+}, c84Triang);
+
+/* Paso 3: la sucesión y su normalizada sobre la esfera unitaria. */
+const xs = (n) => { const r = 1.5 + 0.6 / n, t = 0.5 + 1 / n; return [r * Math.cos(t), r * Math.sin(t)]; };
+PP.register(function c84Normalizar() {
+  const N = PP.val(ID + "-c8-4-N");
+  PP.out(ID + "-c8-4-N-o", String(N));
+  const kind = PP.radio(ID + "-c8-4-nrm2") || "2";
+  const { ctx, w, h } = PP.canvas(ID + "-c8-4-cv2", 0.9);
+  const T = eqFrame(w, h, 2.6, { l: 10, r: 10, t: 10, b: 10 });
+  PP.path(ctx, [[T.X(-2.6), T.Y(0)], [T.X(2.6), T.Y(0)]], C("--rule"), 1);
+  PP.path(ctx, [[T.X(0), T.Y(T.box.y0)], [T.X(0), T.Y(T.box.y1)]], C("--rule"), 1);
+  PP.path(ctx, sphere(T, [0, 0], 1, kind), C("--accent"), 1.8, null, true, C("--band"));
+  PP.label(ctx, "S", T.X(-0.72), T.Y(-0.72), C("--accent"), "center", "middle", 14);
+  const lim = [1.5 * Math.cos(0.5), 1.5 * Math.sin(0.5)], L = norm(lim, kind), yl = [lim[0] / L, lim[1] / L];
+  for (let n = 1; n <= N; n++) {
+    const x = xs(n), nx = norm(x, kind), y = [x[0] / nx, x[1] / nx], last = n === N;
+    if (last) PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(x[0]), T.Y(x[1])]], C("--muted"), 1, [3, 3]);
+    PP.dot(ctx, T.X(x[0]), T.Y(x[1]), last ? 6 : 3, C("--seq2"));
+    PP.dot(ctx, T.X(y[0]), T.Y(y[1]), last ? 6 : 3, C("--accent"));
+  }
+  PP.circle(ctx, T.X(lim[0]), T.Y(lim[1]), 8, C("--ok"), null, null, 2);
+  PP.label(ctx, "L·y", T.X(lim[0]) + 10, T.Y(lim[1]) - 8, C("--ok"), "left", "bottom", 12);
+  const xN = xs(N), nN = norm(xN, kind), yN = [xN[0] / nN, xN[1] / nN];
+  const label = (p, t, col) => PP.label(ctx, t, T.X(p[0]) - 8, T.Y(p[1]) + 6, col, "right", "top", 12);
+  label(xN, "x" + (N === 1 ? "₁" : "_N"), C("--seq2"));
+  label(yN, "y" + (N === 1 ? "₁" : "_N"), C("--accent"));
+  PP.read(ID + "-c8-4-read2", [
+    ["norma", nrmName(kind)],
+    ["‖x_N‖", PP.fmt(nN, 4)],
+    ["L = lím ‖xₙ‖", PP.fmt(L, 4)],
+    ["‖y_N‖", PP.fmt(norm(yN, kind), 4), "good"],
+    ["‖y_N − y‖", PP.fmt(norm([yN[0] - yl[0], yN[1] - yl[1]], kind), 4)],
+  ]);
+}, [ID + "-c8-4-N", "input[name='" + ID + "-c8-4-nrm2']"]);
+
+/* ===================== C8-5 ===================== */
+
+PP.register(function c85() {
+  const R = PP.val(ID + "-c8-5-R") / 10;
+  PP.out(ID + "-c8-5-R-o", PP.fmt(R, 1));
+  const K = 60;
+  const { ctx, w, h } = PP.canvas(ID + "-c8-5-cv1", 0.62);
+  const ymax = Math.max(1.6, Math.sqrt(K) / R * 1.08);
+  const T = PP.frame(w, h, { x0: 0, x1: K + 1, y0: 0, y1: ymax }, { l: 40, r: 12, t: 14, b: 28 });
+  PP.axes(ctx, T, { xLabel: "k", intX: true, xTicks: 6, yTicks: 5 });
+  const a = [], b = [];
+  for (let k = 1; k <= K; k++) { a.push([T.X(k), T.Y(1 / Math.sqrt(k))]); b.push([T.X(k), T.Y(Math.sqrt(k) / R)]); }
+  PP.path(ctx, a, C("--accent"), 2.5);
+  PP.path(ctx, b, C("--seq2"), 2.5);
+  for (let k = 1; k <= K; k += 6) { PP.dot(ctx, T.X(k), T.Y(1 / Math.sqrt(k)), 3, C("--accent")); PP.dot(ctx, T.X(k), T.Y(Math.sqrt(k) / R), 3, C("--seq2")); }
+  PP.label(ctx, "‖yₖ‖ = 1/√nₖ", T.X(K) - 2, T.Y(1 / Math.sqrt(K)) - 6, C("--accent"), "right", "bottom", 12);
+  PP.label(ctx, "√nₖ / R ≤ ‖T(yₖ)‖", T.X(K) - 2, T.Y(Math.sqrt(K) / R) + 8, C("--seq2"), "right", "top", 12);
+  PP.read(ID + "-c8-5-read1", [
+    ["R", PP.fmt(R, 1)],
+    ["‖y₆₀‖", PP.fmt(1 / Math.sqrt(K), 4)],
+    ["cota para ‖T(y₆₀)‖", PP.fmt(Math.sqrt(K) / R, 3)],
+    ["k con √k / R > 100", String(Math.round(100 * R) ** 2 + 1) + " (y así para cualquier techo)", "bad"],
+  ]);
+}, [ID + "-c8-5-R"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+{
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5.18": {
+  "tipo": "Proposición",
+  "numero": "5.18",
+  "titulo": "Caracterización de continuidad uniforme por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}} \\subseteq M$ tal que $d(x_n, y_n) \\to 0$ entonces $d'(f(x_n), f(y_n)) \\to 0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$</i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.28": {
+  "tipo": "Observación",
+  "numero": "5.28",
+  "titulo": "Lipschitz, uniformemente continua y continua",
+  "enunciado": "<p>Resumiendo lo que vimos hasta ahora, tenemos las siguientes implicaciones $$\\text{Lipschitz} \\Longrightarrow \\text{uniformemente continua} \\Longrightarrow \\text{continua},$$ y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = \\sqrt{x}$ es uniformemente continua pero no Lipschitz).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.</li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.13": {
+  "tipo": "Teorema",
+  "numero": "5.13",
+  "titulo": "Caracterización de continuidad por clausuras",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(\\overline{E}) \\subseteq \\overline{f(E)}$ para todo $E \\subseteq M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.16": {
+  "tipo": "Observación",
+  "numero": "5.16",
+  "titulo": "Negación de la continuidad uniforme",
+  "enunciado": "<p>Pensemos qué significa negar que una función sea uniformemente continua. Por definición, una función <b>no</b> es uniformemente continua si existe un $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$, $f(B(x, \\delta)) \\not\\subseteq B(x, \\delta)$ para algún $x \\in M$ (acá el $x$ podría depender de $\\delta$).</p><p>Equivalentemente, podríamos decir que: existe $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$ existen $x, y$ tal que $d(x, y) \\lt \\delta$ pero $d'(f(x), f(y)) \\ge \\varepsilon$.</p><p><i>Nota</i>: la bola de la derecha está mal escrita en las notas: negando la Definición 5.14 debería ser $f(B(x, \\delta)) \\not\\subseteq B(f(x), \\varepsilon)$, que es lo que dice la versión equivalente con $x, y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.22": {
+  "tipo": "Teorema",
+  "numero": "5.22",
+  "titulo": "Extensión de funciones uniformemente continuas desde un denso",
+  "enunciado": "<p>Sea $(M, d)$, $(N, d')$ dos espacios métricos, $E \\subseteq M$ un conjunto denso, $(N, d')$ completo y sea $f : E \\to N$ una función uniformemente continua. Entonces existe una función $\\tilde{f} : M \\to N$ uniformemente continua tal que $\\tilde{f}|_E = f$ (es decir, $\\tilde{f}(x) = f(x)$ para todo $x \\in E$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo</i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.</p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos</i>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.33": {
+  "tipo": "Definición",
+  "numero": "5.33",
+  "titulo": "Isometría",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es una <i>isometría</i> si $$d'(f(x), f(y)) = d(x, y) \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.34": {
+  "tipo": "Observación",
+  "numero": "5.34",
+  "titulo": "Una isometría es un homeomorfismo con su imagen",
+  "enunciado": "<p>Veamos que si $f : (M, d) \\to (N, d')$ es una isometría entonces $f : (M, d) \\to (\\operatorname{Im}(f), d') \\subseteq (N, d')$ es un homeomorfismo:</p><ul class=\"items\"><li>$f$ es continua, dado que es Lipschitz de constante $1$.</li><li>$f$ siempre es inyectiva: si $f(x) = f(y)$, entonces $0 = d'(f(x), f(y)) = d(x, y) \\Rightarrow x = y$. En principio no podemos garantizar que $f$ sea sobreyectiva y por esto es que no decimos que $f$ sea un homeomorfismo con $N$, sino con su imagen dentro de $N$.</li><li>$f^{-1} : \\operatorname{Im}(f) \\to M$ es continua. Si $z, w \\in \\operatorname{Im}(f)$ tenemos que existen $x, y \\in M$ tal que $f(x) = z$ y $f(y) = w$. Pero entonces $$d(f^{-1}(z), f^{-1}(w)) = d(x, y) = d'(f(x), f(y)) = d'(z, w),$$ lo que nos dice que $f^{-1}$ es también una isometría y por lo tanto continua (y Lipschitz).</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.57": {
+  "tipo": "Teorema",
+  "numero": "4.57",
+  "titulo": "$\\mathbb{R}$ es completo",
+  "enunciado": "<p>$(\\mathbb{R}, |\\cdot|)$ es completo.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.9": {
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(A) \\subseteq M$ es abierto para todo $A \\subseteq N$ abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejap-5.10": {
+  "tipo": "Ejercicio",
+  "numero": "5.10",
+  "titulo": "Continuidad por cerrados",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$. Probar que $f$ es continua si y sólo si $f^{-1}(F)$ es cerrado para todo $F \\subseteq N$ cerrado.</p>",
+  "fuente": "apuntes.typ (Ejercicio 5.10; enunciado en desafios/p4.typ, desafío de la Práctica 4)"
+ },
+ "ejap-5.19": {
+  "tipo": "Ejercicio",
+  "numero": "5.19",
+  "titulo": "Uniformemente continua manda Cauchy en Cauchy",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función uniformemente continua. Probar que $(f(x_n))_{n \\in \\mathbb{N}} \\subseteq N$ es una sucesión de Cauchy para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ de Cauchy.</p><p>¿Vale que si $(f(x_n))_{n \\in \\mathbb{N}}$ es de Cauchy para toda $(x_n)_{n \\in \\mathbb{N}}$ de Cauchy entonces $f$ es uniformemente continua?</p><p><i>Sugerencia: pensar qué pasa en el caso en que $M$ y $N$ sean completos. Por ejemplo, podría ser $M = N = (\\mathbb{R}, |\\cdot|)$.</i></p>",
+  "fuente": "apuntes.typ (Ejercicio 5.19; enunciado en desafios/p4.typ, desafío de la Práctica 4)"
+ },
+ "ejap-5.23": {
+  "tipo": "Ejercicio",
+  "numero": "5.23",
+  "titulo": "Unicidad de la extensión",
+  "enunciado": "<p>Probar que la extensión $\\tilde{f}$ del teorema anterior (Teorema 5.22) es única.</p>",
+  "fuente": "apuntes.typ (Ejercicio 5.23; enunciado en desafios/p4.typ, desafío de la Práctica 4)"
+ },
+ "ejap-5.27": {
+  "tipo": "Ejercicio",
+  "numero": "5.27",
+  "titulo": "$\\sqrt{x}$ es uniformemente continua en $[0, +\\infty)$",
+  "enunciado": "<p>En el ejemplo anterior (Ejemplo 5.26 b)) vimos que $\\sqrt{x}$ no es Lipschitz si la pensamos como función en $[0, +\\infty)$. Probar que $\\sqrt{x}$ es uniformemente continua en $[0, +\\infty)$.</p><p><i>Sugerencia: Usar que</i> $$|\\sqrt{x} - \\sqrt{y}|^2 \\le |\\sqrt{x} - \\sqrt{y}| \\cdot |\\sqrt{x} + \\sqrt{y}|.$$</p>",
+  "fuente": "apuntes.typ (Ejercicio 5.27; enunciado en desafios/p4.typ, desafío de la Práctica 4)"
+ },
+ "ejem-5.21": {
+  "tipo": "Ejemplo",
+  "numero": "5.21",
+  "titulo": "$\\mathbb{Q}$ y $\\mathbb{I} = \\mathbb{R} \\setminus \\mathbb{Q}$ son densos en $\\mathbb{R}$",
+  "enunciado": "<ol class=\"items\"><li>$\\mathbb{Q} \\subseteq (\\mathbb{R}, |\\cdot|)$ es un conjunto denso.</li><li>$\\mathbb{I} = \\mathbb{R} \\setminus \\mathbb{Q} \\subseteq (\\mathbb{R}, |\\cdot|)$ el conjunto de los números irracionales también es denso.</li></ol>",
+  "fuente": "Notas de la materia; transcripto en ejemplos/p4.typ (ítem 38)"
+ },
+ "ext-bolzano-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano–Weierstrass en $\\mathbb{R}$",
+  "enunciado": "<p>Toda sucesión acotada de números reales tiene una subsucesión convergente.</p>",
+  "fuente": "Resultado del curso (Práctica 1); no está enunciado en apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio compacto (por sucesiones)",
+  "enunciado": "<p>Un espacio métrico $(E, d)$ es <i>compacto</i> si toda sucesión de puntos de $E$ tiene una subsucesión que converge a un punto de $E$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ (tema de la Práctica 5)"
+ }
+}

@@ -1,0 +1,448 @@
+<section class="exam" id="p1-1c2024" data-meta="1er cuatrimestre 2024 · resolución de la cátedra">
+  <header class="exam-head">
+    <h2 id="p1-1c2024-titulo"><span class="bn">Primer parcial · 1C 2024</span>Primer cuatrimestre de 2024</h2>
+    <p class="meta">Enunciado y soluciones oficiales de la cátedra, transcriptos en <code>apuntes-typst/parciales/2024_1c_parcial_1.typ</code>. Las cuatro soluciones están formalizadas en <code>lean/Parciales/Parcial1_1C2024.lean</code>.</p>
+    <a class="back" href="#inicio">Volver al índice</a>
+  </header>
+
+  <!-- ===================== Ejercicio 1 ===================== -->
+  <article class="ej" id="p1-1c2024-ej1" data-short="Ej. 1" data-title="Cardinal de ℚ[x] y de los algebraicos" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Cardinal de $\mathbb{Q}[x]$ y de los algebraicos</h3>
+      <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Calcular el cardinal de:</p>
+      <ol class="items">
+        <li>El conjunto de polinomios de una variable con coeficientes racionales, $\mathbb{Q}[x]$.</li>
+        <li>El conjunto $\mathcal{A}$ de los números reales algebraicos, definido por
+          $$\begin{aligned}\mathcal{A} := \{\alpha \in \mathbb{R} :{} &\exists\, p \in \mathbb{Q}[x] \setminus \{0\},\\ &p(\alpha) = 0\}.\end{aligned}$$
+          Sugerencia: Use el ítem (a).</li>
+      </ol>
+    </div>
+
+    <div class="sub" id="p1-1c2024-ej1a">
+      <h4>(a) El cardinal de $\mathbb{Q}[x]$</h4>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\mathbb{Q}[x]$ es infinito</p>
+            <p>Primero notemos que existe una función inyectiva $\Psi : \mathbb{N} \to \mathbb{Q}[x]$ tal que $\Psi(n) = n$, es decir que envía cada número natural $n$ al polinomio de grado cero que puede identificarse naturalmente con $n$. Por lo tanto, <span class="ref" data-ref="def-3.8">$\#(\mathbb{Q}[x]) \ge \#(\mathbb{N})$</span>, así que si vemos que $\mathbb{Q}[x]$ es <span class="ref" data-ref="def-3.6">contable, se sigue que es numerable</span>.</p>
+          </div>
+          <figure class="viz">
+            <svg viewBox="0 0 360 200" role="img" aria-label="Flechas de 1, 2, 3 en los naturales a los polinomios constantes 1, 2, 3; otros polinomios quedan sin flecha">
+              <defs>
+                <marker id="p1-1c2024-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-fill-accent"/></marker>
+              </defs>
+              <rect x="14" y="26" width="92" height="160" rx="12" class="sv-grid"/>
+              <rect x="196" y="26" width="150" height="160" rx="12" class="sv-grid"/>
+              <text x="60" y="18" text-anchor="middle" class="sv-text">ℕ</text>
+              <text x="271" y="18" text-anchor="middle" class="sv-text">ℚ[x]</text>
+              <text x="60" y="58" text-anchor="middle" class="sv-text">1</text>
+              <text x="60" y="98" text-anchor="middle" class="sv-text">2</text>
+              <text x="60" y="138" text-anchor="middle" class="sv-text">3</text>
+              <text x="60" y="172" text-anchor="middle" class="sv-muted">⋮</text>
+              <path d="M74,54 L218,54" class="sv-accent" marker-end="url(#p1-1c2024-arrow)"/>
+              <path d="M74,94 L218,94" class="sv-accent" marker-end="url(#p1-1c2024-arrow)"/>
+              <path d="M74,134 L218,134" class="sv-accent" marker-end="url(#p1-1c2024-arrow)"/>
+              <text x="146" y="48" text-anchor="middle" class="sv-label-accent">Ψ</text>
+              <text x="234" y="58" class="sv-label-accent">1</text>
+              <text x="234" y="98" class="sv-label-accent">2</text>
+              <text x="234" y="138" class="sv-label-accent">3</text>
+              <text x="290" y="58" class="sv-muted">x</text>
+              <text x="290" y="98" class="sv-muted">1/2</text>
+              <text x="282" y="138" class="sv-muted">x² − 2</text>
+              <text x="234" y="172" class="sv-muted">⋮</text>
+              <text x="290" y="172" class="sv-muted">⋮</text>
+            </svg>
+            <figcaption>Ψ manda cada n al polinomio constante n. Dos naturales distintos van a dos polinomios distintos, así que Ψ es inyectiva. En gris, polinomios a los que no llega ninguna flecha.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Partir por grado</p>
+            <p>Para cada $n \in \mathbb{N}_0$, sea $\mathbb{Q}_n[x]$ el conjunto de polinomios de grado $n$. Luego,
+              $$\mathbb{Q}[x] = \{0\} \cup \bigcup_{n \in \mathbb{N}_0} \mathbb{Q}_n[x].$$
+              (el cero lo ponemos aparte porque no tiene grado). Hemos escrito a $\mathbb{Q}[x]$ como una unión contable de conjuntos. Como <span class="ref" data-ref="guia-p2-ej6a">las uniones contables de conjuntos contables son contables</span>, basta ver que cada uno de esos conjuntos es contable. Es claro que $\{0\}$ es contable porque es <span class="ref" data-ref="def-3.6">finito</span>, y también que $\mathbb{Q}_0[x]$ es contable porque podemos identificar cada polinomio de grado cero con un número racional y sabemos que <span class="ref" data-ref="prop-numerabilidad-de-qq">los racionales son contables</span>. Por lo tanto, para completar la prueba de que $\mathbb{Q}[x]$ es contable (y por lo que ya dijimos, numerable), basta con ver que para cada $n \in \mathbb{N}$ fijo, se tiene que $\mathbb{Q}_n[x]$ es contable.</p>
+            <p class="nota"><b>Errata</b>El original dice «el conjunto de polinomios de grado $\mathbb{N}$»; debería decir «de grado $n$».</p>
+          </div>
+          <figure class="viz">
+            <svg viewBox="0 0 360 200" role="img" aria-label="Q[x] partido en el cero y los polinomios de grado 0, 1, 2 y siguientes">
+              <text x="8" y="22" class="sv-text">ℚ[x] =</text>
+              <rect x="8" y="36" width="56" height="112" rx="8" class="sv-ink"/>
+              <rect x="78" y="36" width="56" height="112" rx="8" class="sv-ink"/>
+              <rect x="148" y="36" width="56" height="112" rx="8" class="sv-accent"/>
+              <rect x="218" y="36" width="56" height="112" rx="8" class="sv-accent"/>
+              <rect x="288" y="36" width="56" height="112" rx="8" class="sv-accent sv-dash"/>
+              <text x="71" y="96" text-anchor="middle" class="sv-muted">∪</text>
+              <text x="141" y="96" text-anchor="middle" class="sv-muted">∪</text>
+              <text x="211" y="96" text-anchor="middle" class="sv-muted">∪</text>
+              <text x="281" y="96" text-anchor="middle" class="sv-muted">∪</text>
+              <text x="36" y="56" text-anchor="middle" class="sv-text">{0}</text>
+              <text x="106" y="56" text-anchor="middle" class="sv-text">ℚ₀[x]</text>
+              <text x="176" y="56" text-anchor="middle" class="sv-label-accent">ℚ₁[x]</text>
+              <text x="246" y="56" text-anchor="middle" class="sv-label-accent">ℚ₂[x]</text>
+              <text x="316" y="56" text-anchor="middle" class="sv-label-accent">ℚ₃[x]</text>
+              <text x="36" y="84" text-anchor="middle" class="sv-muted">0</text>
+              <text x="106" y="84" text-anchor="middle" class="sv-muted">1</text>
+              <text x="106" y="104" text-anchor="middle" class="sv-muted">−2</text>
+              <text x="106" y="124" text-anchor="middle" class="sv-muted">1/2</text>
+              <text x="176" y="84" text-anchor="middle" class="sv-muted">x</text>
+              <text x="176" y="104" text-anchor="middle" class="sv-muted">3x − 1</text>
+              <text x="176" y="124" text-anchor="middle" class="sv-muted">x/2 + 5</text>
+              <text x="246" y="84" text-anchor="middle" class="sv-muted">x²</text>
+              <text x="246" y="104" text-anchor="middle" class="sv-muted">x² − 2</text>
+              <text x="246" y="124" text-anchor="middle" class="sv-muted">2x² + x</text>
+              <text x="316" y="84" text-anchor="middle" class="sv-muted">x³</text>
+              <text x="316" y="104" text-anchor="middle" class="sv-muted">x³ − x</text>
+              <text x="316" y="124" text-anchor="middle" class="sv-muted">…</text>
+              <text x="36" y="170" text-anchor="middle" class="sv-label-ok">finito</text>
+              <text x="106" y="170" text-anchor="middle" class="sv-label-ok">≈ ℚ</text>
+              <text x="246" y="170" text-anchor="middle" class="sv-label-accent">falta ver: contables</text>
+              <path d="M150,180 L342,180" class="sv-accent"/>
+              <text x="246" y="196" text-anchor="middle" class="sv-muted">uno por cada n ∈ ℕ</text>
+            </svg>
+            <figcaption>Cada polinomio no nulo cae en exactamente una caja, la de su grado. Las dos primeras ya son contables; las de grado n ≥ 1 (en azul) son las que resuelve el paso siguiente. Los polinomios de ejemplo son elegidos para el dibujo.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">La codificación $\Phi$ con primos</p>
+            <p>Dado $n \in \mathbb{N}$, sea $\varphi : \mathbb{Q} \to \mathbb{N}$ una función inyectiva (que existe porque sabemos que <span class="ref" data-ref="prop-numerabilidad-de-qq">$\mathbb{Q} \approx \mathbb{N}$</span>), y sean $\{p_0, p_1, p_2, \dots, p_n\}$ números naturales primos distintos. Definimos $\Phi : \mathbb{Q}_n[x] \to \mathbb{N}$ de la siguiente manera:
+              $$\begin{aligned}&\Phi\Big(\sum_{j=0}^n a_j x^j\Big) \\ &\quad := p_0^{\varphi(a_0)}\, p_1^{\varphi(a_1)} \cdots p_n^{\varphi(a_n)}. \qquad (1)\end{aligned}$$
+              Como la escritura de un polinomio de grado $n$ como la suma en (1) es única (notemos que $a_n \ne 0$), se tiene que $\Phi$ está bien definida.</p>
+            <p class="nota"><b>Errata</b>En (1) el original escribe $x_j$ por $x^j$ (también en las sumas del paso siguiente) y pone los exponentes $\varphi(a_1), \varphi(a_2), \dots, \varphi(a_n)$ sobre $p_0, p_1, \dots, p_n$. Acá cada $p_j$ lleva el exponente $\varphi(a_j)$, que es lo que usa la prueba de inyectividad.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2024-ej1-c1" aria-label="Diagrama: cada coeficiente a_j pasa por phi a un exponente del primo p_j; el producto es Phi(p)"></canvas>
+            <div class="ctrl">
+              <fieldset class="pills">
+                <legend>Grado n</legend>
+                <label><input type="radio" name="p1-1c2024-ej1-grado" value="0">0</label>
+                <label><input type="radio" name="p1-1c2024-ej1-grado" value="1">1</label>
+                <label><input type="radio" name="p1-1c2024-ej1-grado" value="2" checked>2</label>
+                <label><input type="radio" name="p1-1c2024-ej1-grado" value="3">3</label>
+              </fieldset>
+              <div class="slider"><label for="p1-1c2024-ej1-a0">a₀</label><input type="range" id="p1-1c2024-ej1-a0" min="1" max="20" value="4"><output id="p1-1c2024-ej1-a0-o"></output></div>
+              <div class="slider"><label for="p1-1c2024-ej1-a1">a₁</label><input type="range" id="p1-1c2024-ej1-a1" min="1" max="20" value="6"><output id="p1-1c2024-ej1-a1-o"></output></div>
+              <div class="slider"><label for="p1-1c2024-ej1-a2">a₂</label><input type="range" id="p1-1c2024-ej1-a2" min="1" max="20" value="3"><output id="p1-1c2024-ej1-a2-o"></output></div>
+              <div class="slider"><label for="p1-1c2024-ej1-a3">a₃</label><input type="range" id="p1-1c2024-ej1-a3" min="1" max="20" value="2"><output id="p1-1c2024-ej1-a3-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2024-ej1-read" aria-live="polite"></dl>
+            <figcaption>Elegí el grado y los coeficientes. Para el dibujo, φ es una enumeración de ℚ elegida a mano: 0, 1, −1, 1/2, −1/2, 2, −2, 1/3, … reciben 1, 2, 3, 4, …, y los primos son 2, 3, 5, 7. Leyendo los exponentes de Φ(p) se recuperan los φ(aⱼ) y, con ellos, los coeficientes. Si aₙ = 0 el polinomio no es de grado n.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\Phi$ es inyectiva</p>
+            <p>Ahora bien, si
+              $$\Phi\Big(\sum_{j=0}^n a_j x^j\Big) = \Phi\Big(\sum_{j=0}^n b_j x^j\Big),$$
+              entonces por <span class="ref" data-ref="ext-tfa">la unicidad de la descomposición en primos en $\mathbb{N}$</span>, tenemos que $p_j^{\varphi(a_j)} = p_j^{\varphi(b_j)}$ para cada $0 \le j \le n$. Como $\varphi$ es inyectiva, se sigue que $a_j = b_j$ para todo $0 \le j \le n$, así que $\sum_{j=0}^n a_j x^j = \sum_{j=0}^n b_j x^j$. Hemos probado así que $\Phi$ es una función inyectiva de $\mathbb{Q}_n[x]$ a $\mathbb{N}$, y por lo tanto, que $\mathbb{Q}_n[x]$ es contable. Por lo dicho anteriormente, esto completa la demostración de que $\mathbb{Q}[x]$ es numerable.</p>
+          </div>
+        </div>
+      </div>
+      <p class="conclusion">Conclusión: $\mathbb{Q}[x]$ es numerable, $\#\mathbb{Q}[x] = \aleph_0$.</p>
+    </div>
+
+    <div class="sub" id="p1-1c2024-ej1b">
+      <h4>(b) El cardinal de los algebraicos $\mathcal{A}$</h4>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Las raíces de cada polinomio</p>
+            <p>Para cada $p \in \mathbb{Q}[x]$, sea $R_p := \{x \in \mathbb{R} : p(x) = 0\}$. Notemos que <span class="ref" data-ref="ext-raices-finitas">$R_p$ es finito</span>. Como <span class="ref" data-ref="guia-p2-ej6a">las uniones contables de conjuntos contables son contables</span>, por (a) el conjunto
+              $$\mathcal{B} := \bigcup_{p \in \mathbb{Q}[x]} R_p$$
+              es contable.</p>
+            <p class="nota"><b>Observación</b>Para $p = 0$ se tiene $R_0 = \mathbb{R}$, que no es finito: la unión se entiende sobre los $p \ne 0$, como en la definición de $\mathcal{A}$. La formalización en Lean lo escribe así (<code>R_finite</code> pide $p \ne 0$ y <code>𝒜_eq</code> es $\mathcal{A} = \bigcup_{p \ne 0} R_p$).</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2024-ej1b-c1" aria-label="Gráfico de un polinomio con coeficientes racionales y sus raíces reales marcadas"></canvas>
+            <div class="ctrl">
+              <fieldset class="pills">
+                <legend>Polinomio p</legend>
+                <label><input type="radio" name="p1-1c2024-ej1b-pol" value="0" checked>x² − 2</label>
+                <label><input type="radio" name="p1-1c2024-ej1b-pol" value="1">x³ − x</label>
+                <label><input type="radio" name="p1-1c2024-ej1b-pol" value="2">2x² − 3x + 1</label>
+                <label><input type="radio" name="p1-1c2024-ej1b-pol" value="3">x³ − 3x + 1</label>
+                <label><input type="radio" name="p1-1c2024-ej1b-pol" value="4">x² + 1</label>
+              </fieldset>
+            </div>
+            <dl class="read" id="p1-1c2024-ej1b-read" aria-live="polite"></dl>
+            <figcaption>Cada polinomio no nulo corta al eje en finitos puntos: ése es Rₚ (puntos naranjas). Las raíces pueden no ser racionales, como ±√2, y Rₚ puede ser vacío, como para x² + 1. ℬ junta los Rₚ de todos los polinomios. Los polinomios son elegidos para el dibujo.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">$\mathbb{Q} \subset \mathcal{B}$, así que $\mathcal{B}$ es numerable</p>
+            <p>Más aún, como para cada $\alpha \in \mathbb{Q}$, se tiene que $\alpha \in R_p$ para $p(x) = x - \alpha$, tenemos que $\mathbb{Q} \subset \mathcal{B}$, así que $\mathcal{B}$ no es finito. Por lo tanto, $\mathcal{B}$ es <span class="ref" data-ref="def-3.6">numerable</span>.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-1c2024-ej1b-c2" aria-label="Recta y = x - alfa que corta al eje en alfa"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-1c2024-ej1b-alpha">α</label><input type="range" id="p1-1c2024-ej1b-alpha" min="-16" max="16" value="6"><output id="p1-1c2024-ej1b-alpha-o"></output></div>
+            </div>
+            <dl class="read" id="p1-1c2024-ej1b-read2" aria-live="polite"></dl>
+            <figcaption>Para cada racional α (acá, múltiplos de 1/8), el polinomio x − α tiene coeficientes racionales y su única raíz es α. Así cada racional aparece en algún Rₚ.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">$\mathcal{B} = \mathcal{A}$</p>
+            <p>Afirmamos que $\mathcal{B} = \mathcal{A}$. En efecto, si $x \in \mathcal{B}$, entonces existe $p \in \mathbb{Q}[x]$ tal que $x \in R_p$. Luego, $p(x) = 0$, lo que implica que $x \in \mathcal{A}$. Por otra parte, si $y \in \mathcal{A}$, entonces existe $p \in \mathbb{Q}[x]$ tal que $p(y) = 0$. Por lo tanto, $y \in R_p \subset \mathcal{B}$. Hemos probado que $\mathcal{A} = \mathcal{B}$, y como $\mathcal{B}$ es numerable, $\mathcal{A}$ es numerable.</p>
+          </div>
+        </div>
+      </div>
+      <p class="conclusion">Conclusión: $\mathcal{A}$ es numerable, $\#\mathcal{A} = \aleph_0$.</p>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2024.ej1a : #ℚ[X] = ℵ₀</code>, <code>ej1b : #𝒜 = ℵ₀</code>. En (a) Lean hace la misma partición por grado pero inyecta con (grado, coeficientes) en lugar de primos; (b) sigue el texto.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 2 ===================== -->
+  <article class="ej" id="p1-1c2024-ej2" data-short="Ej. 2" data-title="Ψ(f)(x) = x f(x), de d∞ a d₁, es uniformemente continua" data-topics="continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>$\Psi(f)(x) = x f(x)$, de $(C[0,1], d_\infty)$ a $(C[0,1], d_1)$, es uniformemente continua</h3>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $\Psi : (C[0, 1], d_\infty) \to (C[0, 1], d_1)$ dada por
+        $$\begin{aligned}&(\Psi(f))(x) = x f(x) \\ &\forall f \in C[0, 1],\ \forall x \in [0, 1].\end{aligned}$$
+        Probar que $\Psi$ es uniformemente continua.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La cuenta (2)</p>
+          <p>Dadas <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$f, g \in C[0, 1]$</span>, tenemos que
+            $$\begin{aligned}
+              &d_1(\Psi(f), \Psi(g)) \\
+              &\quad = \int_0^1 |x f(x) - x g(x)|\, dx \\
+              &\quad = \int_0^1 x\, |f(x) - g(x)|\, dx \\
+              &\quad \le \int_0^1 x\, d_\infty(f, g)\, dx \\
+              &\quad = d_\infty(f, g) \int_0^1 x\, dx \\
+              &\quad = d_\infty(f, g)\, \frac{x^2}{2}\Big|_0^1 \\
+              &\quad = \frac{d_\infty(f, g)}{2}. \qquad (2)
+            \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej2-c1" aria-label="Arriba f y g; abajo la función x por |f - g| con su área, debajo de la recta x por d infinito"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej2-c">dónde</label><input type="range" id="p1-1c2024-ej2-c" min="0" max="100" value="70"><output id="p1-1c2024-ej2-c-o"></output></div>
+            <div class="slider"><label for="p1-1c2024-ej2-w">ancho</label><input type="range" id="p1-1c2024-ej2-w" min="4" max="80" value="18"><output id="p1-1c2024-ej2-w-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej2-read" aria-live="polite"></dl>
+          <figcaption>Arriba, f (azul) y g = f +  un bulto (naranja); los sliders mueven el bulto y cambian su ancho. Abajo, la curva gris es |f − g| y el área naranja es ∫₀¹ x·|f − g| dx = d₁(Ψf, Ψg). Como |f − g| ≤ d∞(f, g), queda debajo de la recta x·d∞(f, g), cuyo triángulo tiene área d∞(f, g)/2. Las funciones son elegidas para el dibujo.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Lipschitz, luego uniformemente continua</p>
+          <p>Esto prueba que $\Psi$ es <span class="ref" data-ref="def-5.24">Lipschitz</span>, y por lo visto en la clase práctica, es <span class="ref" data-ref="obs-5.28">uniformemente continua</span>.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">O directamente por definición, con $\delta = \varepsilon$</p>
+          <p>Sin usar que Lipschitz implica uniformemente continua, podemos igualmente usar (2) para ver que $\Psi$ es uniformemente continua, por ejemplo <span class="ref" data-ref="def-5.14">por definición</span>: dado $\varepsilon \gt 0$, sea $\delta = \varepsilon$. Se sigue de (2) que si $d_\infty(f, g) \lt \delta$, entonces
+            $$d_1(\Psi(f), \Psi(g)) \lt \frac{\delta}{2} = \frac{\varepsilon}{2} \lt \varepsilon.$$
+            Esto prueba por definición que $\Psi$ es uniformemente continua.</p>
+          <p class="nota"><b>Nota al margen</b>Aunque no vamos a hacerlo de esta manera, también es posible resolver este ejercicio usando <span class="ref" data-ref="prop-5.18">la equivalencia de continuidad uniforme por sucesiones</span> que se vio en la clase práctica, y que dice que dados espacios métricos $(X, d_X)$ e $(Y, d_Y)$, una función $f : (X, d_X) \to (Y, d_Y)$ es uniformemente continua si y solo si dadas sucesiones $(x_n)_{n \in \mathbb{N}}, (x'_n)_{n \in \mathbb{N}} \subset X$ tales que $d_X(x_n, x'_n) \underset{n \to +\infty}{\longrightarrow} 0$, se tiene que $d_Y(f(x_n), f(x'_n)) \underset{n \to +\infty}{\longrightarrow} 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej2-c2" aria-label="f con la banda de ancho delta alrededor y una g que entra o no en la banda"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej2-eps">ε</label><input type="range" id="p1-1c2024-ej2-eps" min="5" max="100" value="40"><output id="p1-1c2024-ej2-eps-o"></output></div>
+            <div class="slider"><label for="p1-1c2024-ej2-r">d∞/δ</label><input type="range" id="p1-1c2024-ej2-r" min="0" max="150" value="80"><output id="p1-1c2024-ej2-r-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej2-read2" aria-live="polite"></dl>
+          <figcaption>La banda es la bola B(f, δ) de d∞ con δ = ε. Mientras g (verde) quede adentro, d₁(Ψf, Ψg) queda por debajo de ε/2. Con el segundo slider en 1 o más, g sale de la banda (rojo) y la hipótesis d∞(f, g) &lt; δ ya no vale. Acá g = f + rδ·cos(3πx), elegida para el dibujo.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2024.d1_Ψ_le</code> (la cuenta (2)) y <code>ej2</code> (continuidad uniforme por definición, con $\delta = \varepsilon$).</p>
+  </article>
+
+  <!-- ===================== Ejercicio 3 ===================== -->
+  <article class="ej" id="p1-1c2024-ej3" data-short="Ej. 3" data-title="Con X compacto, f(clausura de A) = clausura de f(A)" data-topics="continuidad,compacidad,topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>Con $X$ compacto, $f(\overline{A}) = \overline{f(A)}$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $X$, $Y$ espacios métricos y $f : X \to Y$ una función continua. Probar que si $X$ es compacto, entonces $f(\overline{A}) = \overline{f(A)}$ para cualquier subconjunto $A$ de $X$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La inclusión $f(\overline{A}) \subset \overline{f(A)}$ ya se conoce</p>
+          <p>La inclusión $f(\overline{A}) \subset \overline{f(A)}$ vale por la continuidad de $f$ (y sin necesidad de que $X$ sea compacto), y <span class="ref" data-ref="teo-5.13">este resultado se vio en la clase teórica</span>, así que puede usarse en el parcial y no hace falta probarlo. De todas maneras, se puede probar por ejemplo usando <span class="ref" data-ref="teo-5.7">la equivalencia de continuidad por sucesiones</span> (también vista en la teórica), del siguiente modo:</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Prueba de $f(\overline{A}) \subset \overline{f(A)}$ por sucesiones</p>
+          <p>Dado $y \in f(\overline{A})$, tomamos $x \in \overline{A}$ tal que $f(x) = y$. Como $x \in \overline{A}$, <span class="ref" data-ref="prop-4.46">existe una sucesión $(a_n)_{n \in \mathbb{N}} \subset A$</span> tal que
+            $$\lim_{n \to +\infty} a_n = x. \qquad (3)$$
+            Por la <span class="ref" data-ref="teo-5.7">continuidad de $f$</span>, tenemos que
+            $$\lim_{n \to +\infty} f(a_n) = f(x) = y. \qquad (4)$$
+            Puesto que la sucesión $(f(a_n))_{n \in \mathbb{N}}$ está en $f(A)$, esto <span class="ref" data-ref="prop-4.46">prueba que</span>
+            $$y \in \overline{f(A)}.$$
+            Como $y$ es un elemento de $f(\overline{A})$ elegido arbitrariamente, esto concluye la prueba de que $f(\overline{A}) \subset \overline{f(A)}$.</p>
+          <p class="nota"><b>Errata</b>El original dice «la sucesión $(a_n)_{n \in \mathbb{N}}$ está en $f(A)$»; la que está en $f(A)$ es $(f(a_n))_{n \in \mathbb{N}}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej3-c1" aria-label="Gráfico de f sobre [0,1]; una sucesión a_n en A que tiende a un borde x de A, y sus imágenes tendiendo a f(x)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej3-n">n</label><input type="range" id="p1-1c2024-ej3-n" min="1" max="30" value="4"><output id="p1-1c2024-ej3-n-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej3-read1" aria-live="polite"></dl>
+          <figcaption>X = [0, 1], f(x) = 4x(1 − x) y A = (0.1, 0.3) ∪ (0.7, 0.9) (en azul sobre el eje horizontal), elegidos para el dibujo. El punto x = 0.3 está en Ā pero no en A. Los aₙ ∈ A tienden a x y sus imágenes f(aₙ) ∈ f(A) (en naranja sobre el eje vertical) tienden a y = f(x).</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La recíproca, por compacidad</p>
+          <p>Para probar la inclusión recíproca, es decir que $f(\overline{A}) \supset \overline{f(A)}$, podemos usar el siguiente argumento: Como <span class="ref" data-ref="obs-4.23">$A \subset \overline{A}$</span>, tenemos que $f(A) \subset f(\overline{A})$. Por lo tanto, tomando clausura obtenemos
+            $$\overline{f(A)} \subset \overline{f(\overline{A})}. \qquad (5)$$
+            Ahora bien, como $\overline{A}$ es un subconjunto cerrado del espacio compacto $X$, <span class="ref" data-ref="ext-cerrado-en-compacto">se tiene que $\overline{A}$ es compacto</span>. Como $f$ es continua, <span class="ref" data-ref="ext-imagen-compacto">manda compactos en compactos</span>, así que $f(\overline{A})$ es compacto. Como <span class="ref" data-ref="ext-compacto-cerrado">los compactos son cerrados</span>, $f(\overline{A})$ es cerrado, así que <span class="ref" data-ref="def-4.27">$f(\overline{A}) = \overline{f(\overline{A})}$</span>, lo que junto con (5) nos da que $\overline{f(A)} \subset f(\overline{A})$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej3-c2" aria-label="El conjunto A o su clausura sobre el eje horizontal y su imagen por f sobre el eje vertical"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills">
+              <legend>Conjunto</legend>
+              <label><input type="radio" name="p1-1c2024-ej3-modo" value="A" checked>A y f(A)</label>
+              <label><input type="radio" name="p1-1c2024-ej3-modo" value="C">Ā y f(Ā)</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="p1-1c2024-ej3-read2" aria-live="polite"></dl>
+          <figcaption>Mismos f y A que antes. f(A) es un intervalo abierto: le faltan sus extremos. Ā es cerrado en el compacto [0, 1], y su imagen f(Ā) es un intervalo cerrado que contiene a f(A); por eso contiene también a la clausura de f(A). Círculos huecos: extremos que no están; puntos llenos: extremos que están.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Otra forma: la recíproca por sucesiones</p>
+          <p>Una manera alternativa de probar que $\overline{f(A)} \subset f(\overline{A})$ es por medio de sucesiones: Sea $y \in \overline{f(A)}$. Por hipótesis, <span class="ref" data-ref="prop-4.46">existe una sucesión $(y_n)_{n \in \mathbb{N}} \subset f(A)$</span> tal que
+            $$\lim_{n \to +\infty} y_n = y. \qquad (6)$$
+            Ahora bien, para cada $n \in \mathbb{N}$, existe $a_n \in A$ tal que $f(a_n) = y_n$. Por <span class="ref" data-ref="ext-compacto-sucesiones">la compacidad de $X$, existen $x \in X$ y una subsucesión</span> $(a_{n_k})_{k \in \mathbb{N}}$ de $(a_n)_{n \in \mathbb{N}}$ tales que
+            $$\lim_{k \to \infty} a_{n_k} = x. \qquad (7)$$
+            Como $f$ es <span class="ref" data-ref="teo-5.7">continua</span>, esto implica que
+            $$\lim_{k \to \infty} f(a_{n_k}) = f(x). \qquad (8)$$
+            Se sigue de (6) y (8) que $f(x) = y$, y <span class="ref" data-ref="prop-4.46">se sigue de (7) que $x \in \overline{A}$</span>. Esto prueba que $y \in f(\overline{A})$, lo que concluye la demostración porque $y$ es un elemento de $y \in \overline{f(A)}$ elegido arbitrariamente.</p>
+          <p class="nota"><b>Nota al margen</b>La convergencia en (3) y (7) es en $X$ con la distancia de $X$, mientras que la convergencia en (4), (6) y (8), es en $Y$ con la distancia de $Y$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej3-c3" aria-label="Sucesión y_n en f(A) que tiende a y; preimágenes a_n que alternan entre dos ramas y una subsucesión que converge"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej3-m">n</label><input type="range" id="p1-1c2024-ej3-m" min="1" max="30" value="7"><output id="p1-1c2024-ej3-m-o"></output></div>
+            <label class="check"><input type="checkbox" id="p1-1c2024-ej3-sub" checked>marcar la subsucesión aₙₖ = a₂ₖ</label>
+          </div>
+          <dl class="read" id="p1-1c2024-ej3-read3" aria-live="polite"></dl>
+          <figcaption>Mismos f y A. y = 0.84 está en la clausura de f(A) pero no en f(A), y yₙ → y con yₙ ∈ f(A). Cada yₙ tiene dos preimágenes en A; para el dibujo elegimos aₙ alternando entre ellas, así que (aₙ) no converge. La subsucesión de índices pares (azul) converge a x = 0.7 ∈ Ā, con f(x) = y.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_1C2024.ej3</code>. La inclusión $f(\overline{A}) \subset \overline{f(A)}$ es el lema de Mathlib <code>image_closure_subset_closure_image</code>; la recíproca sigue el argumento por compacidad. La alternativa por sucesiones no está formalizada.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 4 ===================== -->
+  <article class="ej" id="p1-1c2024-ej4" data-short="Ej. 4" data-title="ℝ con d(x, y) = |x| + |y| (x ≠ y) es completo" data-topics="completitud,metricas">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>$\mathbb{R}$ con $d(x,y) = |x| + |y|$ (si $x \ne y$) es completo</h3>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea la métrica $d : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$, definida por
+        $$d(x, y) = \begin{cases} 0, & \text{si } x = y, \\ |x| + |y|, & \text{si } x \ne y. \end{cases}$$
+        Probar que $(\mathbb{R}, d)$ es un espacio métrico completo (no hace falta probar que $d$ es una métrica).</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Qué quiere decir ser de Cauchy para $d$</p>
+          <p>Sea $(x_n)_{n \in \mathbb{N}} \subset \mathbb{R}$ una <span class="ref" data-ref="def-4.51">sucesión de Cauchy</span> con respecto a la métrica $d$. Para ver que converge, veamos primero qué implica ser de Cauchy para esta métrica. Dado $\varepsilon \gt 0$, existe $n(\varepsilon) \in \mathbb{N}$ tal que para todo $j, m \ge n(\varepsilon)$, se tiene que $d(x_j, x_m) \lt \varepsilon$. Esto implica que o bien $x_j = x_m$, o bien $|x_j| + |x_m| \lt \varepsilon$. Consideremos entonces dos casos:</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej4-c1" aria-label="Recta real con la bola de centro x y radio r para la métrica d"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej4-x">xₘ</label><input type="range" id="p1-1c2024-ej4-x" min="-200" max="200" value="30"><output id="p1-1c2024-ej4-x-o"></output></div>
+            <div class="slider"><label for="p1-1c2024-ej4-r">ε</label><input type="range" id="p1-1c2024-ej4-r" min="1" max="300" value="90"><output id="p1-1c2024-ej4-r-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej4-read1" aria-live="polite"></dl>
+          <figcaption>Los xⱼ con d(xⱼ, xₘ) &lt; ε: el propio xₘ (punto azul) y, si |xₘ| &lt; ε, los xⱼ con |xⱼ| &lt; ε − |xₘ| (intervalo naranja, centrado en 0 y no en xₘ). Si |xₘ| ≥ ε, sólo queda xₘ.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso 1: $|x_n| \not\to 0$. Una subsucesión constante</p>
+          <p>Si
+            $$|x_n| \underset{n \to +\infty}{\not\longrightarrow} 0,$$
+            entonces <span class="ref" data-ref="ext-no-converge-subsucesion">existen $\varepsilon_0 \gt 0$ y una subsucesión $(x_{n_k})_{k \in \mathbb{N}}$</span> tales que $|x_{n_k}| \ge \varepsilon_0$ para todo $k \in \mathbb{N}$. Tomemos $n(\varepsilon_0)$ como antes, es decir, de manera que para todo $j, m \ge n(\varepsilon_0)$, se tiene que $d(x_j, x_m) \lt \varepsilon_0$. Ahora elijamos $k_0 \in \mathbb{N}$ de manera que si $k \ge k_0$, entonces $n_k \ge n(\varepsilon_0)$. Tenemos entonces que si $j \gt k_0$, entonces
+            $$d(x_{n_j}, x_{n_{k_0}}) \lt \varepsilon_0. \qquad (9)$$
+            Ahora bien, por la elección de la subsucesión $(x_{n_k})_{k \in \mathbb{N}}$, se tiene que
+            $$|x_{n_j}| + |x_{n_{k_0}}| \ge 2\varepsilon_0. \qquad (10)$$
+            Se sigue de (9) y (10) que
+            $$d(x_{n_j}, x_{n_{k_0}}) \lt |x_{n_j}| + |x_{n_{k_0}}|.$$
+            Esto solo es posible si $x_{n_j} = x_{n_{k_0}}$. Pero como $j$ es cualquier natural mayor que $k_0$, esto prueba que
+            $$x_{n_k} = x_{n_{k_0}} \qquad \forall k \ge k_0.$$</p>
+          <p class="nota"><b>Errata</b>El original escribe $x_{n_j} = x_{n_{k_0}}\ \forall k \ge k_0$: el término usa el índice $j$ y el cuantificador es sobre $k$. Acá se escribe todo con $k$, como en la oración siguiente.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej4-c2" aria-label="Términos de una sucesión de Cauchy para d; los que están lejos de 0 forman una subsucesión que se vuelve constante"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej4-e0">ε₀</label><input type="range" id="p1-1c2024-ej4-e0" min="5" max="60" value="30"><output id="p1-1c2024-ej4-e0-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej4-read2" aria-live="polite"></dl>
+          <figcaption>Una sucesión de Cauchy para d con |xₙ| ↛ 0, elegida para el dibujo: siete términos sueltos y después 0.6 para siempre. La franja es |x| &lt; ε₀; los términos fuera de ella (naranja) forman la subsucesión (xₙₖ). A partir de n(ε₀) (línea vertical) todos esos términos valen lo mismo que xₙₖ₀ (verde).</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Caso 1: la sucesión converge</p>
+          <p>Como hay infinitos valores de $k \in \mathbb{N}$ para los cuales $x_{n_k} = x_{n_{k_0}}$, la sucesión $(x_n)_{n \in \mathbb{N}}$ tiene una <span class="ref" data-ref="def-subsucesion">subsucesión</span> constante, y por lo tanto convergente para la métrica $d$. Como <span class="ref" data-ref="teo-4.54">toda sucesión de Cauchy que tiene una subsucesión convergente es convergente</span> (lo que se vio en la clase práctica), se sigue que $(x_n)_{n \in \mathbb{N}}$ es convergente en la métrica $d$ (y, aunque no hace falta esto, se puede decir que converge a $x_{n_{k_0}}$ porque tiene una subsucesión que converge a $x_{n_{k_0}}$).</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso 2: $|x_n| \to 0$. Converge a $0$ para $d$</p>
+          <p>Si
+            $$|x_n| \underset{n \to +\infty}{\longrightarrow} 0,$$
+            veamos que la sucesión $(x_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-4.42">converge a cero también para la métrica $d$</span>. En efecto, dado $\varepsilon \gt 0$, tomemos $n_0 \in \mathbb{N}$ tal que
+            $$|x_n| \lt \varepsilon \qquad \forall n \ge n_0.$$
+            Entonces para todo $n \ge n_0$, tenemos que
+            $$\begin{aligned}&d(x_n, 0) \\ &\quad = \begin{cases} 0, & \text{si } x_n = 0, \\ |x_n| + |0| \lt \varepsilon, & \text{si } x_n \ne 0. \end{cases}\end{aligned}$$
+            Como en ambos casos la distancia es menor que $\varepsilon$, esto prueba que
+            $$d(x_n, 0) \lt \varepsilon \qquad \forall n \ge n_0,$$
+            lo que a su vez muestra que
+            $$x_n \overset{d}{\underset{n \to +\infty}{\longrightarrow}} 0.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-1c2024-ej4-c3" aria-label="Distancias d(x_n, 0) de una sucesión que tiende a 0, con la franja de altura epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-1c2024-ej4-eps">ε</label><input type="range" id="p1-1c2024-ej4-eps" min="5" max="60" value="15"><output id="p1-1c2024-ej4-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-1c2024-ej4-read3" aria-live="polite"></dl>
+          <figcaption>Elegida para el dibujo: xₙ = 0 si n es múltiplo de 4 y xₙ = (−1)ⁿ·1.1/n si no. Puntos grises: los xₙ; barras: d(xₙ, 0), que vale 0 cuando xₙ = 0 y |xₙ| cuando no. Desde n₀ (verde) todas las barras quedan debajo de ε.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="conclusion">Como hemos considerado todos los casos posibles, hemos probado que $(\mathbb{R}, d)$ es <span class="ref" data-ref="def-4.55">completo</span>.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>instance : CompleteSpace Rd</code> en <code>Parcial1_1C2024</code>. La dicotomía está organizada al revés: o la sucesión es eventualmente constante, o converge a $0$ porque $d(x_n, 0) \le |x_n|$ (<code>Rd.dist_zero_le</code>); el Caso 1 queda cubierto sin pasar por subsucesiones.</p>
+  </article>
+</section>

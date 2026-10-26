@@ -1,0 +1,184 @@
+{
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\ne \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p2-ej6a": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 6 (a)",
+  "titulo": "Unión numerable de contables",
+  "enunciado": "<p>Sea $\\{A_n\\}_{n \\in \\mathbb{N}}$ una familia de conjuntos contables. Pruebe que $\\bigcup_{n \\in \\mathbb{N}} A_n$ es contable.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "ext-tfa": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Teorema fundamental de la aritmética",
+  "enunciado": "<p>Todo número natural $N \\ge 2$ se escribe como producto de primos, y esa escritura es única salvo el orden de los factores. En particular, si $p_0, \\dots, p_n$ son primos distintos y $p_0^{e_0} \\cdots p_n^{e_n} = p_0^{f_0} \\cdots p_n^{f_n}$ con $e_j, f_j \\in \\mathbb{N}_0$, entonces $e_j = f_j$ para todo $j$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-raices-finitas": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Un polinomio no nulo tiene finitas raíces",
+  "enunciado": "<p>Un polinomio no nulo $p$ de grado $n$ con coeficientes reales tiene a lo sumo $n$ raíces reales. En particular, $\\{x \\in \\mathbb{R} : p(x) = 0\\}$ es finito.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><ol><li><b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</li><li><b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$</i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.28": {
+  "tipo": "Observación",
+  "numero": "5.28",
+  "titulo": "Lipschitz, uniformemente continua y continua",
+  "enunciado": "<p>Resumiendo lo que vimos hasta ahora, tenemos las siguientes implicaciones $$\\text{Lipschitz} \\Longrightarrow \\text{uniformemente continua} \\Longrightarrow \\text{continua},$$ y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = \\sqrt{x}$ es uniformemente continua pero no Lipschitz).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5.18": {
+  "tipo": "Proposición",
+  "numero": "5.18",
+  "titulo": "Caracterización de continuidad uniforme por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}} \\subseteq M$ tal que $d(x_n, y_n) \\to 0$ entonces $d'(f(x_n), f(y_n)) \\to 0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.13": {
+  "tipo": "Teorema",
+  "numero": "5.13",
+  "titulo": "Caracterización de continuidad por clausuras",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(\\overline{E}) \\subseteq \\overline{f(E)}$ para todo $E \\subseteq M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.</li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.23": {
+  "tipo": "Observación",
+  "numero": "4.23",
+  "titulo": "",
+  "enunciado": "<ol type=\"a\"><li>Todos los puntos de $E$ son puntos de adherencia. Dado $x \\in E$, tenemos que $B(x, r) \\cap E$ contiene, al menos, al punto $x$: esto nos dice que es punto de adherencia. Es decir, $E \\subseteq \\overline{E}$.</li><li>Con lo que acabamos de observar y teniendo en cuenta la Observación 4.12, tenemos que $$E^\\circ \\subseteq E \\subseteq \\overline{E}.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <b>cerrado</b> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-cerrado-en-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Cerrado dentro de un compacto",
+  "enunciado": "<p>Si $X$ es un espacio métrico compacto y $F \\subseteq X$ es cerrado, entonces $F$ es compacto.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-imagen-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La imagen continua de un compacto es compacta",
+  "enunciado": "<p>Sean $X$, $Y$ espacios métricos y $f : X \\to Y$ continua. Si $K \\subseteq X$ es compacto, entonces $f(K)$ es compacto.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto-cerrado": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Los compactos son cerrados",
+  "enunciado": "<p>En un espacio métrico, todo subconjunto compacto es cerrado.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto-sucesiones": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Compacidad por sucesiones",
+  "enunciado": "<p>Si $X$ es un espacio métrico compacto, toda sucesión $(a_n)_{n \\in \\mathbb{N}} \\subseteq X$ tiene una subsucesión $(a_{n_k})_{k \\in \\mathbb{N}}$ que converge a un punto $x \\in X$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <i>de Cauchy</i> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-no-converge-subsucesion": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "No converger a ℓ da una subsucesión lejos de ℓ",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$ y $\\ell \\in \\mathbb{R}$. Si $(a_n)$ no converge a $\\ell$, existen $\\varepsilon_0 \\gt 0$ y una subsucesión $(a_{n_k})_{k \\in \\mathbb{N}}$ tales que $|a_{n_k} - \\ell| \\ge \\varepsilon_0$ para todo $k \\in \\mathbb{N}$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (sale de negar la Definición 7 de convergencia)"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.54": {
+  "tipo": "Teorema",
+  "numero": "4.54",
+  "titulo": "Sucesiones de Cauchy, acotadas y convergentes",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión.</p><ol type=\"a\"><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy, entonces es acotada.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es convergente, entonces es de Cauchy.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy y tiene una subsucesión convergente, entonces $(x_n)$ es convergente.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <b>completo</b> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

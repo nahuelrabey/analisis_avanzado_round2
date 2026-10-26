@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ejemplos · Práctica 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#ejemplos">Ejemplos</a></li><li><span aria-current="page">Práctica 5</span></li></ol><div class="pager"><a href="../ejemplos/p4alt.html" title="Ejemplos · Práctica 4 · alternativos">← Anterior</a><a href="../ejemplos/p6.html" title="Ejemplos · Práctica 6">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Ejemplos resueltos · 6 ejemplos</p>
+  <h1>Práctica 5</h1>
+  <p>Compacidad. Los ejemplos de <code>apuntes-typst/ejemplos/p5.typ</code>, con la resolución partida en pasos y un dibujo en cada paso que se puede dibujar. Cada resultado subrayado con puntos muestra su enunciado.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#ejp5-b1">Bloque 1 · Compacidad por definición (sucesiones)</a><ul class="chips"><li><a href="#ejp5-c7-2" title="Una sucesión convergente junto con su límite es un compacto">C7-2</a></li></ul></div><div class="toc-group"><a href="#ejp5-b2">Bloque 2 · Compactos y cerrados</a><ul class="chips"><li><a href="#ejp5-c7-3" title="F es cerrado si y sólo si K ∩ F es compacto para todo compacto K">C7-3</a></li></ul></div><div class="toc-group"><a href="#ejp5-b3">Bloque 3 · Productos de compactos</a><ul class="chips"><li><a href="#ejp5-c7-1" title="Producto finito de compactos con d∞ es compacto">C7-1</a></li></ul></div><div class="toc-group"><a href="#ejp5-b4">Bloque 4 · Cerrado y acotado no alcanza: bolas en espacios de funciones</a><ul class="chips"><li><a href="#ejp5-c8-3" title="C(ℝ, [0, 1]) con d∞ no tiene un subconjunto denso numerable, y su bola cerrada unitaria no es compacta">C8-3</a></li></ul></div><div class="toc-group"><a href="#ejp5-b5">Bloque 5 · Compacidad y funciones continuas: encajes de compactos</a><ul class="chips"><li><a href="#ejp5-c8-2" title="f continua conmuta con intersecciones decrecientes de compactos; compacto invariante f(K) = K">C8-2</a></li></ul></div><div class="toc-group"><a href="#ejp5-b6">Bloque 6 · Compacidad y punto fijo</a><ul class="chips"><li><a href="#ejp5-c8-1" title="En un compacto, una función que achica distancias tiene un único punto fijo">C8-1</a></li></ul></div><div class="toc-group"><a href="#ejp5-huecos">Notas · Huecos frente a la Práctica 5</a><ul class="chips"></ul></div></nav>
+
+<!-- ===================== BLOQUE 1 ===================== -->
+<section class="bloque" id="ejp5-b1">
+  <h2><span class="bn">Bloque 1</span>Compacidad por definición (sucesiones)</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Un espacio métrico $K$ es <span class="ref" data-ref="ext-compacto">compacto</span> si toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$. El <a href="../guias/p5.html#guiap5-ej1" class="xg" data-guia="p5" data-ej="1">Ejercicio 1</a> de la Práctica 5 pide probar <em>por definición</em> que $K = \{0\} \cup \{1/n : n \in \mathbb{N}\}$ es compacto: es exactamente el ejemplo de este bloque con $x_n = 1/n$ y $x = 0$. La maniobra a aprender es cómo tratar una sucesión arbitraria $(y_n)_n$ del conjunto, que <b>no</b> tiene por qué ser una subsucesión de $(x_n)_n$: se separa según tome finitos o infinitos valores. Esa misma partición resuelve el <a href="../guias/p5.html#guiap5-ej6" class="xg" data-guia="p5" data-ej="6">Ejercicio 6</a> (compactos de un espacio discreto) y es la base del <a href="../guias/p5.html#guiap5-ej7" class="xg" data-guia="p5" data-ej="7">Ejercicio 7</a> (unión finita de compactos: alguno de los finitos compactos contiene infinitos términos).</p></div>
+
+  <article class="ej" id="ejp5-c7-2" data-short="C7-2" data-title="Una sucesión convergente junto con su límite es un compacto" data-topics="compacidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C7-2</span>
+      <h3>Una sucesión convergente junto con su límite es un compacto</h3>
+      <span class="src">Clase 7 · Ejercicio 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $X$ un espacio métrico y $(x_n)_n \subseteq X$ una sucesión <span class="ref" data-ref="def-4.42">convergente</span> con límite $x$. Probar que el conjunto $\{x_n : n \in \mathbb{N}\} \cup \{x\}$ es <span class="ref" data-ref="ext-compacto">compacto</span> (con la métrica inducida por la de $X$).</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Finitos valores: alguno se repite infinitas veces. Infinitos valores: se extrae una subsucesión de $(x_n)_n$.</em> Una sucesión $(y_n)_n$ del conjunto puede ser, por ejemplo, constante igual a $x_1$, o constante igual a $x$: no es en general una subsucesión de $(x_n)_n$. Si toma finitos valores, uno de ellos aparece infinitas veces y da una subsucesión constante, que converge. Si toma infinitos valores distintos, se la puede recorrer eligiendo términos que sean $x_{K_k}$ con $K_k$ estrictamente creciente: eso es una subsucesión de $(x_n)_n$, así que converge a $x$, que está en el conjunto.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Planteo</p>
+          <p>Vamos por <span class="ref" data-ref="ext-compacto">definición</span>. Sea $(y_n)_n \subseteq \{x_n : n \in \mathbb{N}\} \cup \{x\}$ una sucesión. Queremos ver que $(y_n)_n$ admite alguna <span class="ref" data-ref="def-subsucesion">subsucesión</span> convergente en el conjunto. Dividimos en dos casos.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Si $(y_n)_n$ toma sólo finitos valores</p>
+          <p>Si $(y_n)_n$ toma sólo finitos valores $\{y_{j_1}, y_{j_2}, \dots, y_{j_m}\}$, entonces alguno de estos valores debe ocurrir infinitas veces: hay algún $j_i$ tal que para todo $k$ existe $n_k \ge k$ con $y_{n_k} = y_{j_i}$. Tomando la subsucesión $(y_{n_k})_k$, que es constante, se obtiene lo pedido.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c7-2-cv1" aria-label="Una sucesión y_n que toma tres valores del conjunto; se resaltan los índices donde vale el valor elegido"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Valor que se sigue</legend>
+              <label><input type="radio" name="ejp5-c7-2-val" value="0" checked><i>x</i>₁</label>
+              <label><input type="radio" name="ejp5-c7-2-val" value="1"><i>x</i>₃</label>
+              <label><input type="radio" name="ejp5-c7-2-val" value="2"><i>x</i></label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp5-c7-2-read1" aria-live="polite"></dl>
+          <figcaption>Valores elegidos para el dibujo: <i>x<sub>n</sub></i> = 1/<i>n</i> en ℝ, <i>x</i> = 0, y una <i>y<sub>n</sub></i> que recorre <i>x</i>₁, <i>x</i>₃, <i>x</i> en ciclo. A la izquierda, el conjunto {<i>x<sub>n</sub></i>} ∪ {<i>x</i>}. Los puntos grandes son la subsucesión constante (<i>y<sub>n<sub>k</sub></sub></i>) del valor elegido: aparece infinitas veces.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Si $(y_n)_n$ toma infinitos valores distintos</p>
+          <p>Si $(y_n)_n$ toma infinitos valores distintos, inductivamente para cada $k$ hay algún $n_k \ge k$, $n_k \gt n_{k-1}$, tal que $y_{n_k} = x_{K_k}$ para cierto $K_k \ge k$, $K_k \gt K_{k-1}$. Esto termina el problema: $(y_{n_k})_k$ es una subsucesión de $(y_n)_n$, pero además es una subsucesión de $(x_n)_n$, y <span class="ref" data-ref="prop-convergencia-de-subsucesiones">una subsucesión de una sucesión convergente es convergente</span>. Más aún, $y_{n_k} \to x$, que está en nuestro conjunto.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c7-2-cv2" aria-label="Una sucesión y_n con infinitos valores y la subsucesión elegida con índices K_k crecientes"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp5-c7-2-N">términos <i>N</i></label><input type="range" id="ejp5-c7-2-N" min="8" max="40" value="20"><output id="ejp5-c7-2-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c7-2-read2" aria-live="polite"></dl>
+          <figcaption>Valores elegidos: <i>x<sub>n</sub></i> = 1/<i>n</i>, <i>x</i> = 0; en los <i>n</i> impares <i>y<sub>n</sub></i> = <i>x</i> y en los pares <i>y<sub>n</sub></i> recorre <i>x</i>₂, <i>x</i>₁, <i>x</i>₄, <i>x</i>₃, <i>x</i>₆, <i>x</i>₅, … (no es una subsucesión de (<i>x<sub>n</sub></i>)). Los puntos grandes son los <i>y<sub>n<sub>k</sub></sub></i> = <i>x<sub>K<sub>k</sub></sub></i> elegidos con <i>n<sub>k</sub></i> y <i>K<sub>k</sub></i> estrictamente crecientes; la etiqueta es <i>K<sub>k</sub></i>.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Existencia de los $n_k$</p>
+          <p>Sobre la existencia de los $n_k$, es cuestión de ver los cuantificadores. Supongamos que no: hay algún $k$ para el cual no existe ningún $n \ge \max\{k, n_{k-1} + 1\}$ con $y_n = x_K$, $K \ge \max\{k, K_{k-1} + 1\}$. Entonces la cola $\{y_n : n \ge \max\{k, n_{k-1} + 1\}\}$ no interseca a $\{x_K : K \ge \max\{k, K_{k-1} + 1\}\}$, y por lo tanto está incluida en su complemento dentro del conjunto, que es finito (son los primeros $x_K$ y el punto $x$). Junto con los finitos términos anteriores a la cola, $(y_n)_n$ tomaría finitos valores, lo cual es absurdo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Corrección al manuscrito</b>El original pide $n_k \ge n_{k-1}$ y $K_k \ge K_{k-1}$; para que $(x_{K_k})_k$ sea una subsucesión de $(x_n)_n$ hace falta $K_k \gt K_{k-1}$, estricto. Como los $y_{n_k}$ se eligen con valores distintos dos a dos, los $K_k$ son distintos y se los puede tomar estrictamente crecientes, que es lo que se escribió arriba. El absurdo final también necesita observar que los términos anteriores a la cola son finitos: el original sólo dice que la cola "está incluida en un complemento finito".</div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 2 ===================== -->
+<section class="bloque" id="ejp5-b2">
+  <h2><span class="bn">Bloque 2</span>Compactos y cerrados</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Dos hechos se usan todo el tiempo: <span class="ref" data-ref="ext-compacto-cerrado">un compacto es cerrado</span>, y <span class="ref" data-ref="ext-cerrado-en-compacto">un cerrado dentro de un compacto es compacto</span>. El <a href="../guias/p5.html#guiap5-ej4" class="xg" data-guia="p5" data-ej="4">Ejercicio 4</a> de la Práctica 5 (intersección de una familia de cerrados en la que al menos uno es compacto) es exactamente la "ida" del ejemplo de este bloque; la "vuelta" muestra cómo se <b>caracteriza</b> a los cerrados por medio de los compactos, y de paso enseña la táctica de probar un "para todo $K$" por contrarrecíproco, construyendo el compacto $K$ que falla. El compacto que se construye es el del <a href="#ejp5-b1">Bloque 1</a>. El <a href="../guias/p5.html#guiap5-ej5" class="xg" data-guia="p5" data-ej="5">Ejercicio 5</a> (compacidad $\iff$ encajes de cerrados no vacíos tienen intersección no vacía) usa la misma caracterización de cerrado por sucesiones, y es la herramienta que después usa el <a href="#ejp5-b5">Bloque 5</a>.</p></div>
+
+  <article class="ej" id="ejp5-c7-3" data-short="C7-3" data-title="F es cerrado si y sólo si K ∩ F es compacto para todo compacto K" data-topics="compacidad,topologia">
+    <div class="ej-head">
+      <span class="tag">C7-3</span>
+      <h3>$F$ es cerrado si y sólo si $K \cap F$ es compacto para todo compacto $K$</h3>
+      <span class="src">Clase 7 · Ejercicio 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $X$ un espacio métrico. Mostrar que $F \subseteq X$ es <span class="ref" data-ref="def-4.27">cerrado</span> si y sólo si para todo <span class="ref" data-ref="ext-compacto">compacto</span> $K \subseteq X$, $K \cap F$ es compacto.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Probar un "para todo" por contrarrecíproco: negar y construir el $K$ que falla.</em> Casi siempre, cuando uno quiere probar un "para todo" conviene ir por contrarrecíproco. La ventaja es que al negar el enunciado hay que probar un "existe", y eso en principio es más fácil porque se hace por construcción. Acá: si $F$ no es cerrado, hay una sucesión $(x_n)_n \subseteq F$ convergente con $\lim x_n \notin F$, y el compacto $K = \{x_n\} \cup \{\lim x_n\}$ (<a href="#ejp5-b1">Bloque 1</a>) corta a $F$ exactamente en $\{x_n : n \in \mathbb{N}\}$, que no es compacto.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow)$</p>
+          <p>Es el <span class="ref" data-ref="guia-p5-ej4">Ejercicio 4 de la Práctica 5</span>: $K$ compacto es <span class="ref" data-ref="ext-compacto-cerrado">cerrado</span>, así que $K \cap F$ es un cerrado contenido en el compacto $K$, y por lo tanto <span class="ref" data-ref="ext-cerrado-en-compacto">compacto</span>.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow)$ por contrarrecíproco</p>
+          <p>Supongamos que $F$ no es cerrado; queremos ver que hay algún compacto $K$ tal que $K \cap F$ no es compacto. Como estamos trabajando con sucesiones, conviene usar la <span class="ref" data-ref="cor-4.47">caracterización de cerrado por sucesiones</span>: $F$ es cerrado si y sólo si para toda sucesión convergente $(x_n)_n \subseteq F$, $\lim_{n \to \infty} x_n \in F$. Que $F$ <em>no</em> sea cerrado dice entonces que hay una sucesión convergente $(x_n)_n \subseteq F$ con $\lim_{n \to \infty} x_n \notin F$. Tomamos
+            $$K = \{x_n : n \in \mathbb{N}\} \cup \{\lim_{n \to \infty} x_n\},$$
+            que es compacto por <a href="#ejp5-c7-2">C7-2</a>. Entonces $K \cap F = \{x_n : n \in \mathbb{N}\}$, que no es compacto: la sucesión $(x_n)_n$ no tiene ninguna subsucesión convergente en $K \cap F$, porque <span class="ref" data-ref="prop-convergencia-de-subsucesiones">toda subsucesión suya converge</span> a $\lim x_n \notin F$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c7-3-cv1" aria-label="Un conjunto no cerrado F del plano, una sucesión de F que converge a un punto fuera de F, y el compacto K formado por la sucesión y su límite"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp5-c7-3-N">términos <i>N</i></label><input type="range" id="ejp5-c7-3-N" min="3" max="40" value="12"><output id="ejp5-c7-3-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c7-3-read1" aria-live="polite"></dl>
+          <figcaption>Un caso elegido para el dibujo: <i>X</i> = ℝ² y <i>F</i> el disco abierto de radio 1 (sombreado; no es cerrado). La sucesión <i>x<sub>n</sub></i> de <i>F</i> converge al punto <i>p</i> del borde, que no está en <i>F</i>. <i>K</i> son los puntos más <i>p</i>; <i>K</i> ∩ <i>F</i> son sólo los puntos, y les falta justo el límite.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Detalle que el manuscrito omite</b>La clase anota "la ida es un ejercicio de la guía (?)": es el <span class="ref" data-ref="guia-p5-ej4">Ejercicio 4 de la Práctica 5</span>. Para la última afirmación se usa la <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad del límite</span> (toda subsucesión de $(x_n)_n$ converge al mismo punto, que no está en $K \cap F$); en particular ningún valor $x_n$ se repite infinitas veces, porque si no ese valor sería el límite, y el límite no está en $F$.</div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 3 ===================== -->
+<section class="bloque" id="ejp5-b3">
+  <h2><span class="bn">Bloque 3</span>Productos de compactos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>El <a href="../guias/p5.html#guiap5-ej3" class="xg" data-guia="p5" data-ej="3">Ejercicio 3</a> de la Práctica 5 pide ver que $S = \{x + y : x, y \in K\}$ y $P = \{x y : x, y \in K\}$ son compactos cuando $K \subseteq \mathbb{R}$ lo es: son imágenes de $K \times K$ por las funciones continuas $(x, y) \mapsto x + y$ y $(x, y) \mapsto x y$, así que lo que hace falta es saber que $K \times K$ es compacto con $d_\infty$, que es el ejemplo de este bloque, y que <span class="ref" data-ref="ext-imagen-compacto">la imagen continua de un compacto es compacta</span> (<a href="#ejp5-b5">Bloque 5</a>). El mismo producto $K \times K$ aparece en la nota del docente del <a href="#ejp5-b6">Bloque 6</a> y en el <a href="../guias/p5.html#guiap5-ej9" class="xg" data-guia="p5" data-ej="9">Ejercicio 9</a> (distancia entre un compacto y un cerrado disjuntos).</p><p>La enseñanza técnica es la extracción <b>anidada</b> de subsucesiones: primero una subsucesión convergente de la primera coordenada y, <em>sobre esos índices</em>, una de la segunda. Usar el mismo subíndice $k$ para las dos coordenadas es un error común.</p></div>
+
+  <article class="ej" id="ejp5-c7-1" data-short="C7-1" data-title="Producto finito de compactos con d∞ es compacto" data-topics="compacidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C7-1</span>
+      <h3>Producto finito de compactos con $d_\infty$ es compacto</h3>
+      <span class="src">Clase 7 · Ejercicio 1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Mostrar que dados finitos espacios <span class="ref" data-ref="ext-compacto">compactos</span> $\{(K_i, d_i)\}_{1 \le i \le n}$, su producto $\prod_{i=1}^n K_i$ con la métrica
+      $$\begin{aligned} &d_\infty((x_1, \dots, x_n), (y_1, \dots, y_n)) \\ &\qquad := \max_{1 \le i \le n} d_i(x_i, y_i) \end{aligned}$$
+      es compacto.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Caso $n = 2$ con subsucesiones anidadas, después inducción.</em> Probar directamente por definición para $n$ coordenadas se puede, pero es complicarse de más: se prueba el caso $n = 2$ y después se hace inducción, como para ver que la unión de $n$ cerrados es cerrada. En el caso $n = 2$ el espacio es el producto con la métrica $d_\infty$ de siempre, donde una sucesión converge si y sólo si convergen sus dos coordenadas.</p>
+      <p><b>El error común.</b> Una primera estrategia sería extraer una subsucesión convergente $(x_{n_k})_k$ de $(x_n)_n$ (se puede, porque $K_1$ es compacto), extraer otra subsucesión convergente $(y_{n_k})_k$ de $(y_n)_n$ y considerar $(x_{n_k}, y_{n_k})_k$. <b>Esto está mal</b>: estamos asumiendo que las dos subsucesiones tienen los mismos índices. Podría ser que la subsucesión convergente de $(x_n)_n$ sea $(x_{2n})_n$ y la de $(y_n)_n$ sea $(y_{2n+1})_n$, y no hay forma de quedarse con una subsucesión de $(x_n, y_n)_n$ que tome índices pares en la primera coordenada e impares en la segunda. El error viene de usar el mismo subíndice $k$ para las dos, y es común, así que cuidado. Lo correcto: extraer la subsucesión de la segunda coordenada <b>sobre los índices</b> de la primera.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso $n = 2$: subsucesiones anidadas</p>
+          <p>Sea $(x_n, y_n)_{n \in \mathbb{N}} \subseteq K_1 \times K_2$ una sucesión. Como $(x_n)_n \subseteq K_1$ está contenida en un compacto, admite una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(x_{n_k})_k$ convergente. Ahora $(y_{n_k})_k \subseteq K_2$ es una sucesión contenida en un compacto, y por lo tanto admite una subsucesión $(y_{n_{k_j}})_j$ convergente. Además, $(x_{n_{k_j}})_j$ es una subsucesión de $(x_{n_k})_k$, que era convergente, así que <span class="ref" data-ref="prop-convergencia-de-subsucesiones">es convergente</span>. Como ambas coordenadas convergen, $(x_{n_{k_j}}, y_{n_{k_j}})_j$ es una sub-sub-sucesión convergente de $(x_n, y_n)_n$, y en particular una subsucesión convergente, como queríamos. Esto prueba el caso $n = 2$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c7-1-cv1" aria-label="Sucesión en el cuadrado K1 por K2, con la extracción anidada de subsucesiones o con el error de usar índices distintos"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Extracción</legend>
+              <label><input type="radio" name="ejp5-c7-1-modo" value="ok" checked>anidada</label>
+              <label><input type="radio" name="ejp5-c7-1-modo" value="err">error común</label>
+            </fieldset>
+            <div class="slider"><label for="ejp5-c7-1-N">términos <i>N</i></label><input type="range" id="ejp5-c7-1-N" min="8" max="40" value="24"><output id="ejp5-c7-1-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c7-1-read1" aria-live="polite"></dl>
+          <figcaption>Valores elegidos: <i>K</i>₁ = <i>K</i>₂ = [0, 1]; <i>x<sub>n</sub></i> se acerca a 0,88 en los <i>n</i> pares y a 0,12 en los impares; <i>y<sub>n</sub></i> vale 0,5 en los impares y alterna entre cerca de 0,88 (<i>n</i> múltiplo de 4) y cerca de 0,12 en los pares. Abajo, la tira de índices. «Anidada»: <i>n<sub>k</sub></i> = 2<i>k</i> para <i>x</i> y, sobre ellos, <i>n<sub>k<sub>j</sub></sub></i> = 4<i>j</i> para <i>y</i>. «Error común»: pares para <i>x</i>, impares para <i>y</i>; los pares (<i>x</i><sub>2<i>k</i></sub>, <i>y</i><sub>2<i>k</i>+1</sub>) (cruces) no son términos de la sucesión.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Inducción</p>
+          <p>Supongamos que el producto de $n$ compactos es compacto, y sean $K_1, \dots, K_{n+1}$ compactos. Tenemos que
+            $$\prod_{i=1}^{n+1} K_i = \prod_{i=1}^n K_i \times K_{n+1}.$$
+            Esto es un producto de dos compactos, ya que el primer factor es compacto por hipótesis inductiva. Como ya probamos que el producto de dos compactos es compacto, esto concluye la inducción.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Dos comentarios del docente</b><p><em>Asociatividad.</em> Hay un detalle: habría que probar que el producto es asociativo, es decir, que $(\prod_{i=1}^n K_i) \times K_{n+1}$ con la $d_\infty$ "de dos factores" (el máximo entre la $d_\infty$ de $n$ factores y $d_{n+1}$) es el mismo espacio métrico que $\prod_{i=1}^{n+1} K_i$ con la $d_\infty$ de $n + 1$ factores. Es inmediato porque un máximo de máximos es el máximo de todo, pero hay que decirlo.</p><p><em>La vuelta.</em> Vale el recíproco: si el producto es compacto, cada factor lo es. Las herramientas (las proyecciones son continuas, y <span class="ref" data-ref="ext-imagen-compacto">la imagen continua de un compacto es compacta</span>) llegan recién en la clase siguiente; ver el <a href="#ejp5-b5">Bloque 5</a>.</p></div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 4 ===================== -->
+<section class="bloque" id="ejp5-b4">
+  <h2><span class="bn">Bloque 4</span>Cerrado y acotado no alcanza: bolas en espacios de funciones</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>En $\mathbb{R}^n$ compacto equivale a cerrado y acotado (<span class="ref" data-ref="ext-heine-borel">Heine–Borel</span>). El <a href="../guias/p5.html#guiap5-ej10" class="xg" data-guia="p5" data-ej="10">Ejercicio 10</a> de la Práctica 5 muestra que en $(C[0, 1], d_\infty)$ eso falla: la bola cerrada $\overline{B}(f_0, 1)$ es cerrada y acotada pero no compacta. La técnica es exhibir una sucesión en la bola cuyos términos están a distancia $\ge 1$ dos a dos: entonces ninguna subsucesión es <span class="ref" data-ref="def-4.51">de Cauchy</span>, y en particular ninguna converge. El ejemplo de este bloque hace exactamente eso en $C(\mathbb{R}, [0, 1])$ con las funciones $f_S$ que valen $0$ en $S \subseteq \mathbb{N}$ y $1$ en $\mathbb{N} \setminus S$; para el Ejercicio 10 hay que fabricar en $[0, 1]$ una familia con la misma propiedad (por ejemplo, "picos" de altura $1$ con soportes disjuntos). El enunciado principal del ejemplo (no hay un denso numerable) es un resultado sobre densidad, pero su construcción es la que importa acá, y la nota del docente al final la convierte en la no compacidad de la bola cerrada.</p></div>
+
+  <article class="ej" id="ejp5-c8-3" data-short="C8-3" data-title="C(ℝ, [0, 1]) con d∞ no tiene un subconjunto denso numerable, y su bola cerrada unitaria no es compacta" data-topics="compacidad,densidad,cardinalidad">
+    <div class="ej-head">
+      <span class="tag">C8-3</span>
+      <h3>$C(\mathbb{R}, [0, 1])$ con $d_\infty$ no tiene un subconjunto denso numerable, y su bola cerrada unitaria no es compacta</h3>
+      <span class="src">Clase 8 · Ejercicio 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $$\begin{aligned} &C(\mathbb{R}, [0, 1]) \\ &\quad = \{f : \mathbb{R} \to [0, 1] : f \text{ es continua}\} \end{aligned}$$ con <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_\infty$</span>. Probar que no existe un subconjunto <span class="ref" data-ref="def-5.20">denso</span> <span class="ref" data-ref="def-3.6">numerable</span> en $C(\mathbb{R}, [0, 1])$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Una familia no numerable de bolas abiertas disjuntas: cada una tiene que contener un punto del denso.</em> Es la generalización del <span class="ref" data-ref="guia-p2-ej17">Ejercicio 17 de la Práctica 2</span>: si $Y$ es denso y $\{U_i\}_{i \in I}$ es una familia de abiertos no vacíos y disjuntos dos a dos, cada $U_i$ contiene algún $y_i \in Y$ e $i \mapsto y_i$ es inyectiva, así que $\# I \le \# Y$. Para fabricar la familia se usa el <span class="ref" data-ref="guia-p4-ej11">Ejercicio 11 de la Práctica 4</span> (versión de Urysohn en $\mathbb{R}$): para cada $S \subseteq \mathbb{N}$ hay $f_S$ continua que vale $0$ en $S$ y $1$ en $\mathbb{N} \setminus S$. Dos de ellas distintas están a distancia $d_\infty \ge 1$, así que las bolas $B(f_S, 1/2)$ son disjuntas, y hay $\# \mathcal{P}(\mathbb{N})$ de ellas.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El lema</p>
+          <p>Usamos el siguiente lema, que generaliza el <span class="ref" data-ref="guia-p2-ej17">Ejercicio 17 de la Práctica 2</span>.</p>
+          <p><em>Lema.</em> Sea $(X, d)$ un espacio métrico y supongamos que existe $Y \subseteq X$ contable con $\overline{Y} = X$. Si $\{U_i\}_{i \in I}$ es una familia de abiertos tales que (I) $U_i \neq \emptyset$ para todo $i \in I$, y (II) $U_i \cap U_j = \emptyset$ si $i \neq j$, entonces $I$ es contable. (Por <span class="ref" data-ref="def-5.20">densidad</span>, cada $U_i$ contiene algún $y_i \in Y$; por (II), $i \mapsto y_i$ es inyectiva.)</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las funciones $f_S$, a distancia $\ge 1$</p>
+          <p>Construyamos una familia de abiertos de $C(\mathbb{R}, [0, 1])$ que cumpla (I) y (II). Por el <span class="ref" data-ref="guia-p4-ej11">Ejercicio 11 de la Práctica 4</span>, dados dos cerrados $A, B \subseteq \mathbb{R}$ no vacíos y disjuntos, existe $f : \mathbb{R} \to [0, 1]$ continua con $f|_A = 0$ y $f|_B = 1$. Para $S \subseteq \mathbb{N}$, tomando $A = S$ y $B = \mathbb{N} \setminus S$ (cerrados de $\mathbb{R}$), sea $f_S : \mathbb{R} \to [0, 1]$ continua con $f_S|_S = 0$ y $f_S|_{\mathbb{N} \setminus S} = 1$ (si $S = \emptyset$ o $S = \mathbb{N}$, sirven las constantes $1$ y $0$). Notemos que:</p>
+          <p>Si $S, S' \subseteq \mathbb{N}$ y $S \neq S'$, existe $x \in S \setminus S'$ o $x \in S' \setminus S$; sin pérdida de generalidad, lo primero. Entonces $f_S(x) = 0$ y $f_{S'}(x) = 1$, por lo tanto
+            $$\begin{aligned} |f_S(x) - f_{S'}(x)| &= 1 \\ &\le \|f_S - f_{S'}\|_\infty. \quad (*) \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c8-3-cv1" aria-label="Dos funciones f_S y f_S' que valen 0 en S y 1 fuera de S sobre los naturales, y un natural donde difieren en 1"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Conjuntos <i>S</i> y <i>S</i>′</legend>
+              <label><input type="radio" name="ejp5-c8-3-par" value="0" checked>pares / múltiplos de 3</label>
+              <label><input type="radio" name="ejp5-c8-3-par" value="1">{3} / {6}</label>
+              <label><input type="radio" name="ejp5-c8-3-par" value="2">∅ / primos</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="ejp5-c8-3-read1" aria-live="polite"></dl>
+          <figcaption>Para el dibujo, cada <i>f<sub>S</sub></i> es lineal entre naturales consecutivos y constante antes de 1 (no es la función del Ejercicio 11, pero cumple lo mismo: es continua, con valores en [0, 1], 0 en <i>S</i> y 1 en ℕ ∖ <i>S</i>). La raya vertical marca el primer natural de <i>S</i> ∖ <i>S</i>′ o de <i>S</i>′ ∖ <i>S</i>: ahí las dos funciones difieren en 1. El segundo par, <i>S</i> = {3} y <i>S</i>′ = {6}, son dos de las <i>f<sub>n</sub></i> de la Observación.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Una familia no numerable de bolas disjuntas</p>
+          <p>Sea $I = \mathcal{P}(\mathbb{N})$, que no es contable, y $U_S = B(f_S, 1/2)$ para $S \in I$. Cada $U_S$ es no vacío, y si $g \in U_S \cap U_{S'}$ con $S \neq S'$, entonces $\|f_S - f_{S'}\|_\infty \lt 1/2 + 1/2 = 1$, contra $(*)$: la familia $\{U_S\}_{S \in I}$ es una familia de abiertos no vacíos, disjuntos, no contable.</p>
+          <p>Por el lema, $C(\mathbb{R}, [0, 1])$ no admite un subconjunto denso contable.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 210" role="img" aria-label="Bolas de radio un medio centradas en funciones f_S distintas, con centros a distancia al menos uno: no se cortan">
+            <circle cx="70" cy="95" r="48" class="sv-area"/><circle cx="70" cy="95" r="48" class="sv-accent"/>
+            <circle cx="180" cy="95" r="48" class="sv-area2"/><circle cx="180" cy="95" r="48" class="sv-seq2"/>
+            <circle cx="290" cy="95" r="48" class="sv-area3"/><circle cx="290" cy="95" r="48" class="sv-seq3"/>
+            <circle cx="70" cy="95" r="3.5" class="sv-fill-accent"/><circle cx="180" cy="95" r="3.5" class="sv-fill-seq2"/><circle cx="290" cy="95" r="3.5" class="sv-fill-seq3"/>
+            <text x="70" y="88" text-anchor="middle" class="sv-label-accent">f_S</text>
+            <text x="180" y="88" text-anchor="middle" class="sv-label-seq2">f_S′</text>
+            <text x="290" y="88" text-anchor="middle" class="sv-label-seq3">f_S″</text>
+            <line x1="70" y1="95" x2="118" y2="95" class="sv-axis sv-dash"/>
+            <text x="94" y="112" text-anchor="middle" class="sv-muted">1/2</text>
+            <line x1="70" y1="160" x2="180" y2="160" class="sv-axis"/>
+            <line x1="70" y1="154" x2="70" y2="166" class="sv-axis"/><line x1="180" y1="154" x2="180" y2="166" class="sv-axis"/>
+            <text x="125" y="178" text-anchor="middle" class="sv-muted">d∞ ≥ 1</text>
+            <line x1="180" y1="160" x2="290" y2="160" class="sv-axis"/>
+            <line x1="290" y1="154" x2="290" y2="166" class="sv-axis"/>
+            <text x="235" y="178" text-anchor="middle" class="sv-muted">d∞ ≥ 1</text>
+            <text x="180" y="24" text-anchor="middle" class="sv-text">U_S = B(f_S, 1/2), una por cada S ⊆ ℕ</text>
+            <text x="180" y="202" text-anchor="middle" class="sv-label-ok">disjuntas dos a dos · tantas como 𝒫(ℕ)</text>
+          </svg>
+          <figcaption>Esquema: tres de las bolas <i>U<sub>S</sub></i>. Sus centros están a distancia ≥ 1 por (∗), y dos bolas de radio 1/2 con centros a distancia ≥ 1 no se cortan. Si hubiera un denso numerable, cada bola tendría que contener un punto suyo distinto.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Observación · La bola cerrada $\overline{B}(0, 1)$ de $C(\mathbb{R}, [0, 1])$ no es compacta</b><p>La misma idea muestra que $\overline{B}(0, 1)$ <em>no es <span class="ref" data-ref="ext-compacto">compacta</span></em>. Si $S_n = \{n\}$ y $f_n = f_{S_n}$, entonces $(f_n)_n \subseteq \overline{B}(0, 1)$ (las $f_n$ toman valores en $[0, 1]$) y no admite subsucesiones convergentes: si $(f_{n_k})_k$ es una subsucesión, por $(*)$, para $k \neq k'$,
+      $$\|f_{n_k} - f_{n_{k'}}\|_\infty = \|f_{S_{n_k}} - f_{S_{n_{k'}}}\|_\infty \ge 1,$$
+      así que no puede ser <span class="ref" data-ref="def-4.51">de Cauchy</span>, y por lo tanto <span class="ref" data-ref="teo-4.54">tampoco convergente</span>. Es el mismo mecanismo que pide el <span class="ref" data-ref="guia-p5-ej10">Ejercicio 10 de la Práctica 5</span> para $\overline{B}(f_0, 1)$ en $(C[0, 1], d_\infty)$.</p></div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 5 ===================== -->
+<section class="bloque" id="ejp5-b5">
+  <h2><span class="bn">Bloque 5</span>Compacidad y funciones continuas: encajes de compactos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p><span class="ref" data-ref="ext-imagen-compacto">La imagen continua de un compacto es compacta</span>, y por lo tanto <span class="ref" data-ref="ext-compacto-cerrado">cerrada</span>. Con eso y el <a href="../guias/p5.html#guiap5-ej5" class="xg" data-guia="p5" data-ej="5">Ejercicio 5</a> de la Práctica 5 (en un compacto, todo encaje decreciente de cerrados no vacíos tiene intersección no vacía) el ejemplo de este bloque prueba que $f$ "conmuta" con intersecciones decrecientes de compactos, y de ahí fabrica un compacto invariante $K = \bigcap_n f^n(X)$. La maniobra central —tomar $x_n \in A_n$ con $f(x_n) = y$, extraer una subsucesión convergente en $A_1$ y ver que el límite queda en <b>todos</b> los $A_n$ porque cada cola de la subsucesión vive en $A_n$ cerrado— es la que piden el <a href="../guias/p5.html#guiap5-ej11" class="xg" data-guia="p5" data-ej="11">Ejercicio 11</a> (una función continua y positiva en un compacto está acotada lejos de $0$) y el <a href="../guias/p5.html#guiap5-ej13" class="xg" data-guia="p5" data-ej="13">Ejercicio 13</a> (biyección continua desde un compacto es homeomorfismo: la imagen de un cerrado es compacta, luego cerrada). También cierra la "vuelta" pendiente del <a href="#ejp5-b3">Bloque 3</a>.</p></div>
+
+  <article class="ej" id="ejp5-c8-2" data-short="C8-2" data-title="f continua conmuta con intersecciones decrecientes de compactos; compacto invariante f(K) = K" data-topics="compacidad,continuidad">
+    <div class="ej-head">
+      <span class="tag">C8-2</span>
+      <h3>$f$ continua conmuta con intersecciones decrecientes de compactos; compacto invariante $f(K) = K$</h3>
+      <span class="src">Clase 8 · Ejercicio 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $X$ e $Y$ espacios métricos y sea $f : X \to Y$ <span class="ref" data-ref="def-5.4">continua</span>.</p>
+      <ol class="items">
+        <li>Supongamos que $(A_n)_n \subseteq X$ es una familia de <span class="ref" data-ref="ext-compacto">compactos</span> con $A_n \supseteq A_{n+1}$ para todo $n$. Probar que
+          $$f\Big(\bigcap_n A_n\Big) = \bigcap_n f(A_n).$$</li>
+        <li>Si $X = Y$ es compacto, probar que existe $K \subseteq X$ compacto no vacío tal que $f(K) = K$.</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Un $y$ en todas las imágenes tiene preimágenes $x_n \in A_n$; la subsucesión convergente de $(x_n)_n$ cae en cada $A_j$ porque sus colas viven en $A_j$ cerrado.</em> La inclusión $f(\bigcap A_n) \subseteq \bigcap f(A_n)$ vale siempre. Para la otra, dado $y \in \bigcap f(A_n)$ se elige $x_n \in A_n$ con $f(x_n) = y$; los $x_n$ están en el compacto $A_1$, así que una subsucesión converge a algún $x$. Como $n_k \ge k$, la cola $(x_{n_{k+j}})_k$ está en $A_{j+1}$, que es cerrado, y entonces $x \in A_{j+1}$ para todo $j$. Por continuidad, $f(x) = \lim f(x_{n_k}) = y$. Para (b), se aplica (a) a $A_n = f^n(X)$, que decrecen porque $f(X) \subseteq X$; el <span class="ref" data-ref="guia-p5-ej5">Ejercicio 5 de la Práctica 5</span> garantiza que la intersección no es vacía.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Una inclusión y la no vacuidad</p>
+          <p>Siempre $f(\bigcap_n A_n) \subseteq \bigcap_n f(A_n)$. Veamos la otra contención. Supongamos $A_n \neq \emptyset$ para todo $n$; en caso contrario, $f(\bigcap_n A_n) = \bigcap_n f(A_n) = \emptyset$. Por el <span class="ref" data-ref="guia-p5-ej5">Ejercicio 5 de la Práctica 5</span> (aplicado en el compacto $A_1$, del que los $A_n$ son cerrados), $\bigcap_n A_n \neq \emptyset$. Además, como $f$ es continua, $f(A_n)$ es <span class="ref" data-ref="ext-imagen-compacto">compacto</span>, y por lo tanto <span class="ref" data-ref="ext-compacto-cerrado">cerrado</span>, para todo $n$, y $f(A_n) \supseteq f(A_{n+1})$; de nuevo por el Ejercicio 5 (ahora en $f(A_1)$), $\bigcap_n f(A_n) \neq \emptyset$.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Preimágenes $x_n \in A_n$ y una subsucesión convergente</p>
+          <p>Sea $y \in \bigcap_n f(A_n)$. Entonces para todo $n$ existe $x_n \in A_n$ tal que $y = f(x_n)$. Como $x_n \in A_n \subseteq A_1$, $(x_n)_n \subseteq A_1$, y como $A_1$ es compacto existe $(x_{n_k})_k$ con $x_{n_k} \to x \in A_1$. Si vemos que $x \in A_n$ para todo $n$, resultará <span class="ref" data-ref="teo-5.7">$y = f(x_{n_k}) \to f(x)$</span>, o sea $f(x) = y$ e $y \in f(\bigcap_n A_n)$.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) El límite está en todos los $A_n$</p>
+          <p>Dado que $x_{n_k} \in A_{n_k}$ para todo $k$, y que $n_k \ge k$:</p>
+          <ul class="items">
+            <li>$x \in A_1$, pues $(x_{n_k})_k \subseteq A_1$ y $A_1$ es <span class="ref" data-ref="cor-4.47">cerrado</span>.</li>
+            <li>$x \in A_2$, pues $x_{n_{k+1}} \in A_{n_{k+1}} \subseteq A_{k+1} \subseteq A_2$ para todo $k \in \mathbb{N}$; como $x_{n_{k+1}} \to x$ y $A_2$ es cerrado, $x \in A_2$.</li>
+            <li>En general, $x_{n_{k+j}} \in A_{n_{k+j}} \subseteq A_{k+j} \subseteq A_{j+1}$ para todo $k \in \mathbb{N}$, y $x_{n_{k+j}} \to x$ cuando $k \to +\infty$. Como $A_{j+1}$ es cerrado, $x \in A_{j+1}$.</li>
+          </ul>
+          <p>Probamos que $x \in A_{j+1}$ para todo $j \in \mathbb{N}_0$, es decir, $x \in \bigcap_n A_n$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c8-2-cv1" aria-label="Intervalos encajados A_1 a A_8, los términos x_{n_k} de la subsucesión, y la cola que vive en A_j"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp5-c8-2-j"><i>j</i></label><input type="range" id="ejp5-c8-2-j" min="0" max="6" value="2"><output id="ejp5-c8-2-j-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c8-2-read1" aria-live="polite"></dl>
+          <figcaption>Valores elegidos: <i>X</i> = ℝ, <i>A<sub>n</sub></i> = [−1/<i>n</i>, 1 + 1/<i>n</i>], <i>f</i>(<i>t</i>) = (mín{<i>t</i>, 0})², <i>y</i> = 0, <i>x<sub>n</sub></i> = 1 + 1/<i>n</i> ∈ <i>A<sub>n</sub></i> (con <i>f</i>(<i>x<sub>n</sub></i>) = 0) y <i>n<sub>k</sub></i> = 2<i>k</i>. Cada fila es un <i>A<sub>n</sub></i>; cada <i>x<sub>n<sub>k</sub></sub></i> está dibujado en la fila de su <i>A<sub>n<sub>k</sub></sub></i>. Los puntos resaltados son la cola <i>k</i> ≥ 1 de (<i>x<sub>n<sub>k+j</sub></sub></i>): todos caen dentro de la banda <i>A</i><sub><i>j</i>+1</sub>, y su límite <i>x</i> = 1 también.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) Los $A_n = f^n(X)$ decrecen</p>
+          <p>Sea $A_n = f^n(X)$. Como $f$ es continua y $X$ compacto, cada $A_n$ es <span class="ref" data-ref="ext-imagen-compacto">compacto</span>. Además $f(X) \subseteq X$, por lo tanto
+            $$\begin{aligned} A_{n+1} &= f^{n+1}(X) = f^n(f(X)) \\ &\subseteq f^n(X) = A_n. \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c8-2-cv2" aria-label="Gráfico de una f de [0,1] en [0,1] y los intervalos encajados f a la n de X"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp5-c8-2-n"><i>n</i></label><input type="range" id="ejp5-c8-2-n" min="0" max="10" value="2"><output id="ejp5-c8-2-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c8-2-read2" aria-live="polite"></dl>
+          <figcaption>Valores elegidos: <i>X</i> = [0, 1] y <i>f</i>(<i>t</i>) = 0,19 + 0,62 <i>t</i> − 0,08 sen(2π<i>t</i>), continua y creciente, así que <i>f<sup>n</sup></i>(<i>X</i>) es el intervalo entre <i>f<sup>n</sup></i>(0) y <i>f<sup>n</sup></i>(1). Las bandas debajo del gráfico son <i>X</i> ⊇ <i>A</i>₁ ⊇ <i>A</i>₂ ⊇ … hasta <i>A<sub>n</sub></i> (la más oscura); el escalón muestra cómo se obtiene cada extremo aplicando <i>f</i>. Los bordes se estabilizan cerca de 0,3 y 0,7.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) $K = \bigcap_n A_n$ cumple $f(K) = K$</p>
+          <p>Sea $K = \bigcap_{n \ge 1} A_n$. Por el ítem (a), $f(K) = \bigcap_n f(A_n)$, y por otro lado
+            $$\begin{aligned} \bigcap_n f(A_n) &= \bigcap_n f(f^n(X)) = \bigcap_n f^{n+1}(X) \\ &= \bigcap_{n=2}^{+\infty} A_n \overset{(*)}{=} \bigcap_{n=1}^{+\infty} A_n = K, \end{aligned}$$
+            donde $(*)$ es porque $\bigcap_{n=1}^{+\infty} A_n \subseteq \bigcap_{n=2}^{+\infty} A_n$ por definición, y $\bigcap_{n=2}^{+\infty} A_n \subseteq A_1 \cap \bigcap_{n=2}^{+\infty} A_n = \bigcap_{n=1}^{+\infty} A_n$ ya que $A_n \subseteq A_1$ para todo $n$. Así $f(K) = K$. Resta ver que $K$ es compacto y no vacío: los $A_n$ son cerrados no vacíos con $A_n \supseteq A_{n+1}$, así que por el <span class="ref" data-ref="guia-p5-ej5">Ejercicio 5 de la Práctica 5</span>, $K \neq \emptyset$; y $K$ es compacto porque <span class="ref" data-ref="ext-cerrado-en-compacto">es cerrado y está contenido en el compacto $X$</span>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Corrección al manuscrito</b>El original escribe "sea $K = \bigcap_n f(A_n)$" y a renglón seguido usa $K = \bigcap_{n=1}^{+\infty} A_n$; con la primera definición la cadena de igualdades no cierra. La definición correcta, que es la que se usó arriba, es $K = \bigcap_{n \ge 1} f^n(X)$. (Las dos intersecciones coinciden al final, pero eso es lo que se está probando.)</div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 6 ===================== -->
+<section class="bloque" id="ejp5-b6">
+  <h2><span class="bn">Bloque 6</span>Compacidad y punto fijo</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>El ejemplo de este bloque termina invocando el <span class="ref" data-ref="ext-punto-fijo-banach">teorema de punto fijo de Banach</span> (una contracción de un espacio métrico completo tiene un único punto fijo), que <code>guias/p5.typ</code> da por conocido pero no enuncia ni demuestra: los <a href="../guias/p5.html#guiap5-ej15" class="xg" data-guia="p5" data-ej="15">Ejercicios 15</a>, <a href="../guias/p5.html#guiap5-ej16" class="xg" data-guia="p5" data-ej="16">16</a> y <a href="../guias/p5.html#guiap5-ej17" class="xg" data-guia="p5" data-ej="17">17</a> de la Práctica 5 lo usan o preguntan qué falla cuando no se cumplen sus hipótesis, y el <a href="../guias/p5.html#guiap5-ej14" class="xg" data-guia="p5" data-ej="14">Ejercicio 14</a> es la observación de que el conjunto de puntos fijos de una continua es cerrado. El único ejercicio de punto fijo anterior en las guías era el Ej. 7 de la Práctica 1 de 2025 (anexo de <code>guias/p1.typ</code>), que es de otra naturaleza (monotonía, sin métrica). Lo que sí enseña este ejemplo, y sirve para los <a href="../guias/p5.html#guiap5-ej18" class="xg" data-guia="p5" data-ej="18">Ejercicios 18</a> y <a href="../guias/p5.html#guiap5-ej19" class="xg" data-guia="p5" data-ej="19">19</a>, es la conexión compacidad $\to$ punto fijo: en un compacto, "achicar distancias" alcanza, aunque el argumento del manuscrito para conseguir una constante $\alpha \lt 1$ tiene un hueco (ver la corrección al final).</p></div>
+
+  <article class="ej" id="ejp5-c8-1" data-short="C8-1" data-title="En un compacto, una función que achica distancias tiene un único punto fijo" data-topics="compacidad,completitud">
+    <div class="ej-head">
+      <span class="tag">C8-1</span>
+      <h3>En un compacto, una función que achica distancias tiene un único punto fijo</h3>
+      <span class="src">Clase 8 · Ejercicio 1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sea $K$ <span class="ref" data-ref="ext-compacto">compacto</span>. Si $f : K \to K$ cumple que $d(f(x), f(y)) \lt d(x, y)$ para todo $x \neq y$ en $K$, entonces $f$ posee un único punto fijo $a \in K$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Intentar reducir a Banach: usar la compacidad para conseguir $\alpha \lt 1$.</em> La idea es similar a la del <span class="ref" data-ref="ext-punto-fijo-banach">teorema de punto fijo de Banach</span>: considerar $x_n = f^n(x)$, ver que $x_n \to x_0 \in K$ y $f(x_0) = x_0$. Esa demostración usa $d(f(x), f(y)) \le \alpha\, d(x, y)$ con $0 \le \alpha \lt 1$. ¿Cómo usar que acá sólo tenemos "$\alpha = 1$"? El manuscrito intenta probar que la compacidad <b>fuerza</b> la existencia de un $\alpha \lt 1$: si no, hay pares $(x_n, y_n)$ con $d(f(x_n), f(y_n)) \ge (1 - 1/n)\, d(x_n, y_n)$; se extraen subsucesiones convergentes (anidadas, como en <a href="#ejp5-c7-1">C7-1</a>) a $x, y$, y se pasa al límite para obtener $d(x, y) \le d(f(x), f(y)) \lt d(x, y)$. Como $K$ compacto es <span class="ref" data-ref="ext-compacto-completo">completo</span>, Banach termina.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si no existiera $\alpha$</p>
+          <p>Veamos que <em>existe $0 \le \alpha \lt 1$ tal que $d(f(x), f(y)) \lt \alpha\, d(x, y)$</em>. Si no existiera, para todo $n \in \mathbb{N}$ existen $x_n, y_n \in K$ tales que
+            $$\begin{aligned} &d(f(x_n), f(y_n)) \\ &\quad \ge \Big(1 - \frac1n\Big) d(x_n, y_n). \quad (1) \end{aligned}$$</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Subsucesiones anidadas y la cota $(2)$</p>
+          <p>Como $K$ es compacto, existe $(x_{n_k})_k$ convergente en $K$. De nuevo usamos la compacidad para hallar $(y_{n_{k_j}})_j$ convergente en $K$; en particular $(x_{n_{k_j}})_j$ converge en $K$. Sean $x, y \in K$ con $x_{n_{k_j}} \to x$, $y_{n_{k_j}} \to y$. Como
+            $$\begin{aligned} &d(f(x_{n_{k_j}}), f(y_{n_{k_j}})) \\ &\quad \le d(f(x_{n_{k_j}}), f(x)) \\ &\qquad + d(f(x), f(y)) \\ &\qquad + d(f(y), f(y_{n_{k_j}})) \\ &\quad \lt d(x_{n_{k_j}}, x) + d(f(x), f(y)) \\ &\qquad + d(y, y_{n_{k_j}}), \end{aligned}$$
+            tomando límite concluimos que
+            $$\begin{aligned} \lim_{j \to \infty} d(f(x_{n_{k_j}}), f(y_{n_{k_j}})) &\le d(f(x), f(y)) \\ &\lt d(x, y). \quad (2) \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp5-c8-1-cv1" aria-label="El gráfico de seno en [0,1] con la cuerda entre 0 y x_n, cuya pendiente se acerca a 1 mientras x_n tiende a 0"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp5-c8-1-n"><i>n</i></label><input type="range" id="ejp5-c8-1-n" min="1" max="400" value="4"><output id="ejp5-c8-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp5-c8-1-read1" aria-live="polite"></dl>
+          <figcaption>Ilustra la corrección del final con su ejemplo: <i>K</i> = [0, 1], <i>f</i> = sen, y los pares (valores elegidos) <i>x<sub>n</sub></i> = 1/√<i>n</i>, <i>y<sub>n</sub></i> = 0, que cumplen (1). La cuerda azul une (0, 0) con (<i>x<sub>n</sub></i>, sen <i>x<sub>n</sub></i>); la punteada tiene pendiente 1 − 1/<i>n</i>. Al subir <i>n</i>, <i>x<sub>n</sub></i> e <i>y<sub>n</sub></i> se juntan: los dos límites valen 0, y en (2) no se puede usar <i>d</i>(<i>f</i>(<i>x</i>), <i>f</i>(<i>y</i>)) &lt; <i>d</i>(<i>x</i>, <i>y</i>).</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La cota $(3)$ y el absurdo</p>
+          <p>Por otro lado, de $(1)$ sale que
+            $$\Big(1 - \frac1n\Big) d(x_n, y_n) \le d(f(x_n), f(y_n)),$$
+            y como $\lim_{n \to \infty} (1 - 1/n)\, d(x_n, y_n) = d(x, y)$ (a lo largo de la subsucesión $n_{k_j}$), queda
+            $$d(x, y) \le d(f(x), f(y)). \quad (3)$$
+            Combinando $(2)$ y $(3)$,
+            $$d(x, y) \le d(f(x), f(y)) \lt d(x, y),$$
+            que es absurdo.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Banach</p>
+          <p>Entonces existe $0 \le \alpha \lt 1$ tal que $d(f(x), f(y)) \lt \alpha\, d(x, y)$. Como $K$ es compacto, es <span class="ref" data-ref="ext-compacto-completo">completo</span>; por lo tanto podemos usar el <span class="ref" data-ref="ext-punto-fijo-banach">teorema de punto fijo de Banach</span> para concluir que $f$ tiene un único punto fijo.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Nota del docente</p>
+          <p>La prueba anterior se basó en probar que $F : K \times K \to \mathbb{R}$, $F(x, y) = d(f(x), f(y)) - d(x, y)$, tiene un máximo negativo. Esto sale de que $K \times K$ es compacto con $d_\infty$ (<a href="#ejp5-c7-1">C7-1</a>) y de que, para esta métrica, $F$ es continua.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Corrección al manuscrito: el argumento tiene un hueco, y el $\alpha \lt 1$ no siempre existe</b><p>En $(2)$, la desigualdad "$d(f(x), f(y)) \lt d(x, y)$" necesita $x \neq y$, pero los límites $x$ e $y$ de las subsucesiones pueden coincidir; en ese caso $(2)$ y $(3)$ dicen $0 \le 0$ y no hay absurdo. (El manuscrito además escribe la hipótesis como "para todo $x, y \in K$", que en $x = y$ es imposible.) Y el resultado intermedio es falso en general: $f(x) = \sin x$ en $K = [0, 1]$ cumple $|\sin x - \sin y| \lt |x - y|$ para $x \neq y$, pero $|\sin x - \sin 0| / |x - 0| \to 1$ cuando $x \to 0^+$, así que no hay ningún $\alpha \lt 1$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, de modo que el máximo de $F$ es $0$, no negativo.</p><p>La conclusión del ejercicio sí es cierta (es el teorema de Edelstein): el camino estándar, que no está en el manuscrito, es minimizar la función continua $x \mapsto d(x, f(x))$ en el compacto $K$ y ver que el mínimo tiene que valer $0$. La unicidad sí sale como en Banach: dos puntos fijos distintos $a \neq b$ darían $d(a, b) = d(f(a), f(b)) \lt d(a, b)$.</p></div>
+  </article>
+</section>
+
+<!-- ===================== HUECOS ===================== -->
+<section class="bloque" id="ejp5-huecos">
+  <h2><span class="bn">Notas</span>Huecos frente a la Práctica 5</h2>
+  <div class="desbloquea"><p>Sin ejemplo transcripto todavía: el <span class="ref" data-ref="guia-p5-ej2">Ej. 2</span> (un compacto de $\mathbb{R}$ tiene máximo y mínimo), el <span class="ref" data-ref="guia-p5-ej8">Ej. 8</span> (la distancia a un compacto se realiza), el <span class="ref" data-ref="guia-p5-ej9">Ej. 9</span> ($\hat{d}(A, B) \gt 0$ para compacto y cerrado disjuntos), el <span class="ref" data-ref="guia-p5-ej12">Ej. 12</span> (continuidad uniforme en $\mathbb{R}$ con límites nulos en $\pm\infty$) y, salvo por la conexión conceptual del <a href="#ejp5-b6">Bloque 6</a>, todo el tramo de <b>punto fijo</b> (<span class="ref" data-ref="guia-p5-ej14">Ej. 14</span>–<span class="ref" data-ref="guia-p5-ej19">19</span>): en particular no hay ningún ejemplo de verificar que una función es una contracción (<span class="ref" data-ref="guia-p5-ej15">Ej. 15</span>) ni de usar iteradas $f^n$ (<span class="ref" data-ref="guia-p5-ej17">Ej. 17</span>).</p>
+    <p>Los Ejercicios 4 y 5 de <code>clases/punto_fijo.typ</code> (<code>C8-4</code>: un normado es Banach si y sólo si las Cauchy de la esfera unitaria convergen; <code>C8-5</code>: una transformación lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas) no son de compacidad: pertenecen a completitud (Práctica 3, Ej. 14–16) y a operadores lineales (Práctica 6, Ej. 8), y quedan en el archivo de clase hasta que exista <code>ejemplos/p6.typ</code>.</p>
+    <p class="nota"><b>Nota de esta versión</b><code>ejemplos/p6.typ</code> ya existe y trae los dos: <a href="p6.html#ejp6-c8-4">C8-4</a> y <a href="p6.html#ejp6-c8-5">C8-5</a> en la página de ejemplos de la Práctica 6.</p></div>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/ejemplos/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:<\/p><ul class=\"items\"><li><b>finito<\/b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<\/li><li><b>infinito<\/b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<\/li><li><b>numerable<\/b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<\/li><li><b>a lo sumo numerable<\/b> o <b>contable<\/b> si es finito o numerable.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión<\/b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.<\/p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge<\/b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy<\/em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso<\/em> en $M$ si $\\overline{E} = M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-cerrado-en-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Cerrado dentro de un compacto",
+  "enunciado": "<p>Si $X$ es un espacio métrico compacto y $F \\subseteq X$ es cerrado, entonces $F$ es compacto.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto compacto",
+  "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto<\/b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.<\/p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$<\/i>.<\/p>",
+  "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
+ },
+ "ext-compacto-cerrado": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Los compactos son cerrados",
+  "enunciado": "<p>En un espacio métrico, todo subconjunto compacto es cerrado.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto-completo": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Los compactos son completos",
+  "enunciado": "<p>Todo espacio métrico compacto es completo.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-heine-borel": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Heine–Borel",
+  "enunciado": "<p>Un subconjunto $K \\subseteq \\mathbb{R}^n$ (con cualquiera de las distancias $d_1$, $d_2$, $d_\\infty$) es compacto si y sólo si es cerrado y acotado.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-imagen-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La imagen continua de un compacto es compacta",
+  "enunciado": "<p>Sean $X$, $Y$ espacios métricos y $f : X \\to Y$ continua. Si $K \\subseteq X$ es compacto, entonces $f(K)$ es compacto.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-punto-fijo-banach": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Punto fijo de Banach",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $f : E \\to E$ una <b>contracción<\/b>, es decir, existe $0 \\le \\alpha \\lt 1$ tal que $d(f(x), f(y)) \\le \\alpha\\, d(x, y)$ para todo $x, y \\in E$. Entonces $f$ tiene un único punto fijo $a \\in E$ ($f(a) = a$). Además, para cualquier $x \\in E$, la sucesión $x_n = f^n(x)$ converge a $a$.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (guias/p5.typ lo da por conocido)"
+ },
+ "guia-p2-ej17": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 17",
+  "titulo": "Familias de intervalos disjuntos y discontinuidades de una monótona",
+  "enunciado": "<ol class=\"items\"> <li>Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\\{A_i\\}_{i \\in I}$ indexada por $I$ tal que: <ul class=\"items\"> <li>$\\# A_i \\gt 1$ para todo $i \\in I$.<\/li> <li>$A_i \\cap A_j = \\emptyset$ si $i \\neq j$.<\/li> <\/ul> Pruebe que $I$ es contable.<\/li> <li>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ una función monótona. Pruebe que el conjunto de sus discontinuidades es contable.<\/li> <\/ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p4-ej11": {
+  "tipo": "Práctica 4",
+  "numero": "Ej. 11",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico.<\/p><ol type=\"a\"><li>Sea $A \\subseteq E$, y sea $g : E \\to \\mathbb{R}$ dada por $g(x) = d(x, A)$. (i) Pruebe que $g$ es continua. (ii) Pruebe que si $A$ es cerrado entonces $g(x) \\gt 0$ para todo $x \\notin A$.<\/li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos, y sea $h : E \\to [0, 1]$ dada por $$h(x) = \\frac{d(x, A)}{d(x, A) + d(x, B)}.$$ Pruebe que $h$ es continua, y que $h(x) = 0$ $\\forall x \\in A$ y $h(x) = 1$ $\\forall x \\in B$.<\/li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos. Pruebe que existen conjuntos abiertos y disjuntos $U$ y $V$ tales que $A \\subseteq U$ y $B \\subseteq V$.<\/li><\/ol><p><em>Nota: esta última afirmación está comprendida en el llamado Lema de Urysohn.<\/em><\/p>",
+  "fuente": "guias/p4.typ"
+ },
+ "guia-p5-ej10": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 10",
+  "titulo": "",
+  "enunciado": "<p>Consideremos en $(C[0, 1], d_\\infty)$ la función $f_0$ nula. Pruebe que $\\overline{B(f_0, 1)}$ no es compacta (pero sí es cerrada y acotada). ¿Qué pasa si cambiamos $d_\\infty$ por $d_1$?<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej12": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 12",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ continua tal que $$\\lim_{x \\to -\\infty} f(x) = \\lim_{x \\to +\\infty} f(x) = 0.$$ Pruebe que $f$ es uniformemente continua en $\\mathbb{R}$.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej14": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 14",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $f : E \\to E$ continua. Pruebe que el conjunto de puntos fijos de $f$ es cerrado.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej15": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 15",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ dada por $f(x) = \\frac{1}{2} \\arctan(x) + 3$. Pruebe que $f$ es una contracción.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej17": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 17",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $f : E \\to E$ una función. Para $n \\in \\mathbb{N}$ denotemos por $f^n : E \\to E$ a la función $f \\circ f \\circ \\dots \\circ f$ ($n$ veces). Pruebe las siguientes afirmaciones:<\/p><ol type=\"a\"><li>Si $x \\in E$ es punto fijo de $f$, entonces es punto fijo de $f^n$.<\/li><li>Si $E$ es completo y existe $n \\in \\mathbb{N}$ tal que $f^n$ es una contracción, entonces existe un único punto fijo de $f$ en $E$. <em>Sugerencia: pruebe que si $x \\in E$ es punto fijo de $f^n$, entonces $f(x)$ también lo es.<\/em><\/li><li>Deduzca que existe un único $x \\in \\mathbb{R}$ tal que $\\cos(x) = x$.<\/li><\/ol>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej19": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 19",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : [a, b] \\to [a, b]$ continua. Pruebe que $f$ tiene un punto fijo.<\/p><p><em>Sugerencia: use el teorema de Bolzano.<\/em><\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej2": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 2",
+  "titulo": "",
+  "enunciado": "<p>Sea $K$ un subconjunto compacto no vacío de $\\mathbb{R}$. Pruebe que $K$ tiene mínimo y máximo.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej4": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 4",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $\\{F_i\\}_{i \\in I}$ una familia de subconjuntos cerrados de $E$. Pruebe que si existe $i_0 \\in I$ tal que $F_{i_0}$ es compacto, entonces $\\bigcap_{i \\in I} F_i$ es compacto.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej5": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 5",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico. Pruebe que $E$ es compacto si y solo si para toda sucesión $(F_n)_{n \\ge 1}$ decreciente (es decir, $F_{n+1} \\subseteq F_n$ para todo $n \\in \\mathbb{N}$) de cerrados no vacíos de $E$ se tiene que $\\bigcap_{n \\ge 1} F_n \\neq \\emptyset$.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej8": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que en un espacio métrico $(E, d)$ la distancia de un punto a un compacto <em>se realiza<\/em>. Esto es, que para todo compacto $K \\subseteq E$ y para todo $x \\in E$ existe $y \\in K$ tal que $d(x, y) = d(x, K)$.<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej9": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 9",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico, y sea $\\hat{d}$ la función definida en el Ejercicio 11 de la Práctica 3. Pruebe que si $A \\subseteq E$ es compacto, $B \\subseteq E$ es cerrado y se cumple que $A \\cap B = \\emptyset$, entonces $\\hat{d}(A, B) \\gt 0$. ¿Sucede lo mismo si $A$ es solo cerrado?<\/p>",
+  "fuente": "guias/p5.typ"
+ },
+ "prop-5-unicidad-del-limite": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión de términos reales. Supongamos que $a_n \\to \\ell_1$ y $a_n \\to \\ell_2$ al mismo tiempo, con $\\ell_1, \\ell_2 \\in \\mathbb{R}$. Entonces $\\ell_1 = \\ell_2$.<\/p><p>Es decir, el límite de una sucesión es único.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-convergencia-de-subsucesiones": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de subsucesiones",
+  "enunciado": "<p>Si $\\lim_{n \\to \\infty} a_n = \\ell$, entonces toda subsucesión también converge a $\\ell$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.54": {
+  "tipo": "Teorema",
+  "numero": "4.54",
+  "titulo": "Sucesiones de Cauchy, acotadas y convergentes",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión.<\/p><ol type=\"a\"><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy, entonces es acotada.<\/li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es convergente, entonces es de Cauchy.<\/li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy y tiene una subsucesión convergente, entonces $(x_n)$ es convergente.<\/li><\/ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* ejemplos/p5 */
+(() => {
+"use strict";
+/* Dibujos de los ejemplos de la Práctica 5 (compacidad). Usa window.PP. */
+const ID = "ejp5";
+const C = (t) => PP.css(t);
+const SUB = "₀₁₂₃₄₅₆₇₈₉";
+const sub = (n) => String(n).split("").map((d) => SUB[+d]).join("");
+const FONT = "'IBM Plex Sans', system-ui, sans-serif";
+
+/* Marco con la misma escala en x y en y. */
+function eqFrame(w, h, x0, x1, yc, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0, x1, y0: yc - span / 2, y1: yc + span / 2 }, p);
+}
+function listar(arr, max) {
+  const s = arr.slice(0, max).join(", ");
+  return arr.length > max ? s + ", …" : s;
+}
+function cross(ctx, x, y, r, color) {
+  PP.path(ctx, [[x - r, y - r], [x + r, y + r]], color, 2);
+  PP.path(ctx, [[x - r, y + r], [x + r, y - r]], color, 2);
+}
+
+/* ===================== C7-2 ===================== */
+
+/* y_n con finitos valores: recorre x_1, x_3, x en ciclo. */
+const C72_VALS = [{ name: "x₁", v: 1 }, { name: "x₃", v: 1 / 3 }, { name: "x", v: 0 }];
+PP.register(function c72Finitos() {
+  const sel = +(PP.radio(ID + "-c7-2-val") || 0);
+  const N = 24;
+  const { ctx, w, h } = PP.canvas(ID + "-c7-2-cv1", 0.62);
+  const T = PP.frame(w, h, { x0: -3, x1: N + 0.8, y0: -0.08, y1: 1.12 }, { l: 34, r: 10, t: 16, b: 28 });
+  PP.axes(ctx, T, { xLabel: "n", intX: true, xTicks: 6 });
+  // el conjunto {x_n} ∪ {x}
+  const xs = T.X(-1.6);
+  PP.label(ctx, "conjunto", xs, T.p.t - 2, C("--muted"), "center", "top", 10);
+  for (let n = 1; n <= 60; n++) PP.dot(ctx, xs, T.Y(1 / n), n <= 6 ? 3 : 1.6, C("--muted"));
+  PP.dot(ctx, xs, T.Y(0), 3.5, C("--ok"));
+  // los valores que toma la y_n
+  C72_VALS.forEach((o, i) => {
+    PP.path(ctx, [[T.X(0.5), T.Y(o.v)], [T.X(N + 0.6), T.Y(o.v)]], i === sel ? C("--accent") : C("--rule"), 1, [4, 4]);
+  });
+  const idx = [];
+  for (let n = 1; n <= N; n++) {
+    const k = (n - 1) % 3;
+    const on = k === sel;
+    if (on) idx.push(n);
+    PP.dot(ctx, T.X(n), T.Y(C72_VALS[k].v), on ? 6 : 3, on ? C("--accent") : C("--seq2"));
+  }
+  PP.label(ctx, "y" + "ₙ" + " = " + C72_VALS[sel].name, T.X(N + 0.6), T.Y(C72_VALS[sel].v) - 4, C("--accent"), "right", "bottom", 12);
+  PP.read(ID + "-c7-2-read1", [
+    ["valores que toma (yₙ)", "x₁ = 1, x₃ = 1/3, x = 0: tres"],
+    ["nₖ con yₙₖ = " + C72_VALS[sel].name, listar(idx, 7)],
+    ["¿nₖ ≥ k?", "sí (nₖ = 3k − " + (2 - sel) + ")", "good"],
+    ["(yₙₖ)ₖ", "constante = " + PP.fmt(C72_VALS[sel].v, 3) + ", converge", "good"],
+  ]);
+}, ["input[name='" + ID + "-c7-2-val']"]);
+
+/* y_n con infinitos valores: impares → x, pares → x_σ(m) con σ = 2,1,4,3,6,5,… */
+function c72K(n) { // índice K de y_n = x_K; 0 significa el límite x
+  if (n % 2 === 1) return 0;
+  const m = n / 2;
+  return m % 2 === 1 ? m + 1 : m - 1;
+}
+PP.register(function c72Infinitos() {
+  const N = PP.val(ID + "-c7-2-N");
+  PP.out(ID + "-c7-2-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(ID + "-c7-2-cv2", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: N + 0.8, y0: -0.08, y1: 1.12 }, { l: 34, r: 10, t: 16, b: 28 });
+  PP.axes(ctx, T, { xLabel: "n", yLabel: "yₙ", intX: true, xTicks: 6 });
+  PP.path(ctx, [[T.X(0.3), T.Y(0)], [T.X(N + 0.8), T.Y(0)]], C("--ok"), 2);
+  PP.label(ctx, "x = 0", T.X(N + 0.6), T.Y(0) - 3, C("--ok"), "right", "bottom", 11);
+  // elección inductiva de n_k y K_k
+  const chosen = [];
+  let pn = 0, pK = 0, k = 1;
+  for (let n = 1; n <= N; n++) {
+    const K = c72K(n);
+    if (n >= k && n > pn && K >= Math.max(k, pK + 1)) { chosen.push([n, K]); pn = n; pK = K; k++; }
+  }
+  const isChosen = new Set(chosen.map((c) => c[0]));
+  for (let n = 1; n <= N; n++) {
+    const K = c72K(n), v = K === 0 ? 0 : 1 / K;
+    if (!isChosen.has(n)) PP.dot(ctx, T.X(n), T.Y(v), 3, K === 0 ? C("--muted") : C("--seq2"));
+  }
+  const pts = chosen.map(([n, K]) => [T.X(n), T.Y(1 / K)]);
+  PP.path(ctx, pts, C("--accent"), 1.2, [4, 3]);
+  chosen.forEach(([n, K], i) => {
+    PP.dot(ctx, T.X(n), T.Y(1 / K), 6, C("--accent"));
+    if (i < 5) PP.label(ctx, "K" + sub(i + 1) + "=" + K, T.X(n) + 5, T.Y(1 / K) - 5, C("--accent"), "left", "bottom", 11);
+  });
+  PP.read(ID + "-c7-2-read2", [
+    ["nₖ", listar(chosen.map((c) => c[0]), 6)],
+    ["Kₖ (yₙₖ = x_Kₖ)", listar(chosen.map((c) => c[1]), 6)],
+    ["¿nₖ y Kₖ estrictamente crecientes?", "sí", "good"],
+    ["último yₙₖ elegido", chosen.length ? "1/" + chosen[chosen.length - 1][1] + " → x = 0" : "—"],
+  ]);
+}, [ID + "-c7-2-N"]);
+
+/* ===================== C7-3 ===================== */
+
+PP.register(function c73() {
+  const N = PP.val(ID + "-c7-3-N");
+  PP.out(ID + "-c7-3-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(ID + "-c7-3-cv1", 0.7);
+  const T = eqFrame(w, h, -1.45, 1.45, 0, { l: 10, r: 10, t: 10, b: 10 });
+  const r = T.X(1) - T.X(0);
+  PP.circle(ctx, T.X(0), T.Y(0), r, C("--accent"), C("--area"), [5, 4]);
+  PP.label(ctx, "F (disco abierto)", T.X(-0.55), T.Y(-0.1), C("--accent"), "center", "middle", 12);
+  const th0 = 0.6;
+  const pt = (n) => { const rr = 1 - 1 / (n + 1), th = th0 + 0.9 / n; return [rr * Math.cos(th), rr * Math.sin(th)]; };
+  const p = [Math.cos(th0), Math.sin(th0)];
+  for (let n = 1; n <= N; n++) {
+    const [a, b] = pt(n);
+    PP.dot(ctx, T.X(a), T.Y(b), n === N ? 5 : 3.5, C("--seq2"));
+    if (n <= 3) PP.label(ctx, "x" + sub(n), T.X(a) - 6, T.Y(b), C("--seq2"), "right", "middle", 12);
+  }
+  PP.circle(ctx, T.X(p[0]), T.Y(p[1]), 6, C("--fail"), C("--panel"), null, 2);
+  PP.label(ctx, "p = lím xₙ ∉ F", T.X(p[0]) + 9, T.Y(p[1]) - 4, C("--fail"), "left", "bottom", 12);
+  const [aN, bN] = pt(N);
+  PP.read(ID + "-c7-3-read1", [
+    ["d(x_N, p)", PP.fmt(Math.hypot(aN - p[0], bN - p[1]), 4)],
+    ["¿p ∈ F?", "no", "bad"],
+    ["K", "{xₙ} ∪ {p}: compacto (C7-2)"],
+    ["K ∩ F", "{xₙ}: le falta el límite", "bad"],
+  ]);
+}, [ID + "-c7-3-N"]);
+
+/* ===================== C7-1 ===================== */
+
+function c71x(n) { return 0.5 + 0.38 * (n % 2 === 0 ? 1 : -1) * (1 - 0.7 / n); }
+function c71y(n) {
+  if (n % 2 === 1) return 0.5 + 0.22 / n * (((n - 1) / 2) % 2 === 0 ? 1 : -1);
+  return 0.5 + 0.38 * (n % 4 === 0 ? 1 : -1) * (1 - 0.7 / n);
+}
+PP.register(function c71() {
+  const modo = PP.radio(ID + "-c7-1-modo") || "ok";
+  const N = PP.val(ID + "-c7-1-N");
+  PP.out(ID + "-c7-1-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(ID + "-c7-1-cv1", 0.95);
+  const stripH = 3 * 20 + 18;
+  const s = Math.min(w - 70, h - stripH - 30);
+  const ox = (w - s) / 2 + 10, oy = 12;
+  const X = (u) => ox + u * s, Y = (v) => oy + (1 - v) * s;
+  PP.rect(ctx, ox, oy, s, s, C("--rule"), C("--panel"));
+  ctx.save(); ctx.font = "11px " + FONT; ctx.fillStyle = C("--muted");
+  ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText("K₁ = [0, 1]", ox + s / 2, oy + s + 3);
+  ctx.save(); ctx.translate(ox - 6, oy + s / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = "bottom"; ctx.fillText("K₂ = [0, 1]", 0, 0); ctx.restore();
+  ctx.restore();
+  for (let n = 1; n <= N; n++) PP.dot(ctx, X(c71x(n)), Y(c71y(n)), 2.6, C("--muted"));
+  const rows = modo === "ok"
+    ? [["n", () => true, C("--muted")], ["nₖ = 2k", (n) => n % 2 === 0, C("--accent")], ["nₖⱼ = 4j", (n) => n % 4 === 0, C("--ok")]]
+    : [["n", () => true, C("--muted")], ["x: pares", (n) => n % 2 === 0, C("--accent")], ["y: impares", (n) => n % 2 === 1, C("--fail")]];
+  if (modo === "ok") {
+    for (let n = 2; n <= N; n += 2) PP.dot(ctx, X(c71x(n)), Y(c71y(n)), 4, n % 4 === 0 ? C("--ok") : C("--accent"));
+    const pts = [];
+    for (let n = 4; n <= N; n += 4) pts.push([X(c71x(n)), Y(c71y(n))]);
+    PP.path(ctx, pts, C("--ok"), 1.2, [4, 3]);
+    PP.circle(ctx, X(0.88), Y(0.88), 9, C("--ok"), null, null, 2);
+    PP.label(ctx, "límite (0,88; 0,88)", X(0.88) - 12, Y(0.88) - 10, C("--ok"), "right", "bottom", 11);
+  } else {
+    for (let n = 2; n <= N; n += 2) PP.dot(ctx, X(c71x(n)), Y(c71y(n)), 3.5, C("--accent"));
+    for (let n = 1; n <= N; n += 2) PP.dot(ctx, X(c71x(n)), Y(c71y(n)), 3.5, C("--fail"));
+    for (let k = 1; 2 * k + 1 <= N; k++) cross(ctx, X(c71x(2 * k)), Y(c71y(2 * k + 1)), 4, C("--fail"));
+    PP.label(ctx, "(x₂ₖ, y₂ₖ₊₁): no son términos", X(0.88), Y(0.5) - 12, C("--fail"), "right", "bottom", 11);
+  }
+  // tira de índices
+  const sy = oy + s + 22, lw = 76, cw = Math.max(4, (w - lw - 14) / N);
+  rows.forEach(([lab, f, col], i) => {
+    const y = sy + i * 20;
+    PP.label(ctx, lab, 6, y + 7, col, "left", "middle", 11);
+    for (let n = 1; n <= N; n++) {
+      const on = f(n);
+      PP.rect(ctx, lw + (n - 1) * cw + 1, y, cw - 2, 14, null, on ? col : C("--rule"));
+    }
+  });
+  PP.read(ID + "-c7-1-read1", modo === "ok" ? [
+    ["x a lo largo de nₖ = 2k", "→ 0,88"],
+    ["y a lo largo de nₖⱼ = 4j (sobre los nₖ)", "→ 0,88"],
+    ["(xₙₖⱼ, yₙₖⱼ)", "subsucesión de (xₙ, yₙ) que converge", "good"],
+  ] : [
+    ["x a lo largo de los pares", "→ 0,88"],
+    ["y a lo largo de los impares", "→ 0,5"],
+    ["(x₂ₖ, y₂ₖ₊₁)", "no es una subsucesión de (xₙ, yₙ)", "bad"],
+    ["y a lo largo de los pares", "no converge (salta entre 0,12 y 0,88)", "bad"],
+  ]);
+}, ["input[name='" + ID + "-c7-1-modo']", ID + "-c7-1-N"]);
+
+/* ===================== C8-3 ===================== */
+
+const PRIMOS = new Set([2, 3, 5, 7, 11, 13]);
+const C83_PARES = [
+  { s: (n) => n % 2 === 0, sp: (n) => n % 3 === 0, ls: "pares", lsp: "múltiplos de 3" },
+  { s: (n) => n === 3, sp: (n) => n === 6, ls: "{3}", lsp: "{6}" },
+  { s: () => false, sp: (n) => PRIMOS.has(n), ls: "∅", lsp: "primos" },
+];
+function fS(inS, t) {
+  if (t <= 1) return inS(1) ? 0 : 1;
+  const a = Math.floor(t), fa = inS(a) ? 0 : 1, fb = inS(a + 1) ? 0 : 1;
+  return fa + (fb - fa) * (t - a);
+}
+PP.register(function c83() {
+  const P = C83_PARES[+(PP.radio(ID + "-c8-3-par") || 0)];
+  const M = 12;
+  const { ctx, w, h } = PP.canvas(ID + "-c8-3-cv1", 0.58);
+  const T = PP.frame(w, h, { x0: 0, x1: M + 0.6, y0: -0.18, y1: 1.3 }, { l: 30, r: 10, t: 12, b: 28 });
+  PP.axes(ctx, T, { intX: true, xTicks: 12, yTicks: 2, xLabel: "t" });
+  const curve = (inS) => { const pts = []; for (let i = 0; i <= 400; i++) { const t = T.box.x0 + (M + 0.6) * i / 400; pts.push([T.X(t), T.Y(fS(inS, t))]); } return pts; };
+  PP.path(ctx, curve(P.s), C("--accent"), 4);
+  PP.path(ctx, curve(P.sp), C("--seq2"), 2, [6, 4]);
+  let x = null;
+  for (let n = 1; n <= M; n++) if (P.s(n) !== P.sp(n)) { x = n; break; }
+  if (x !== null) {
+    PP.rect(ctx, T.X(x) - 7, T.Y(1.08), 14, T.Y(-0.04) - T.Y(1.08), null, C("--okband"));
+    PP.path(ctx, [[T.X(x), T.Y(0)], [T.X(x), T.Y(1)]], C("--ok"), 2.5);
+    PP.label(ctx, "|f_S(x) − f_S′(x)| = 1", T.X(x) + 9, T.Y(1.2), C("--ok"), "left", "middle", 11);
+  }
+  for (let n = 1; n <= M; n++) {
+    PP.dot(ctx, T.X(n), T.Y(P.s(n) ? 0 : 1), 4, C("--accent"));
+    PP.dot(ctx, T.X(n), T.Y(P.sp(n) ? 0 : 1), 2.5, C("--seq2"));
+  }
+  PP.label(ctx, "— f_S", T.X(0.1), T.Y(0.78), C("--accent"), "left", "middle", 12);
+  PP.label(ctx, "-- f_S′", T.X(0.1), T.Y(0.62), C("--seq2"), "left", "middle", 12);
+  const lst = (f) => { const a = []; for (let n = 1; n <= M; n++) if (f(n)) a.push(n); return a.length ? "{" + a.join(", ") + "}" : "∅"; };
+  PP.read(ID + "-c8-3-read1", [
+    ["S = " + P.ls + " (hasta 12)", lst(P.s)],
+    ["S′ = " + P.lsp + " (hasta 12)", lst(P.sp)],
+    ["primer x en S Δ S′", x === null ? "—" : String(x) + (P.s(x) ? " ∈ S ∖ S′" : " ∈ S′ ∖ S")],
+    ["‖f_S − f_S′‖∞", "≥ 1", "good"],
+  ]);
+}, ["input[name='" + ID + "-c8-3-par']"]);
+
+/* ===================== C8-2 ===================== */
+
+/* (a) colas de la subsucesión dentro de A_{j+1}. */
+PP.register(function c82Colas() {
+  const j = PP.val(ID + "-c8-2-j");
+  PP.out(ID + "-c8-2-j-o", String(j));
+  const R = 14;
+  const { ctx, w, h } = PP.canvas(ID + "-c8-2-cv1", 0.78);
+  const T = PP.frame(w, h, { x0: -1.2, x1: 2.25, y0: R + 0.8, y1: 0.2 }, { l: 40, r: 10, t: 10, b: 26 });
+  // ojo: y0 > y1 para que A_1 quede arriba
+  const lo = -1 / (j + 1), hi = 1 + 1 / (j + 1);
+  PP.rect(ctx, T.X(lo), T.p.t, T.X(hi) - T.X(lo), h - T.p.t - T.p.b, null, C("--okband"));
+  ctx.save(); ctx.font = "11px " + FONT; ctx.fillStyle = C("--muted"); ctx.textAlign = "center"; ctx.textBaseline = "top";
+  [-1, 0, 1, 2].forEach((v) => ctx.fillText(String(v).replace("-", "−"), T.X(v), h - T.p.b + 6));
+  ctx.restore();
+  for (let n = 1; n <= R; n++) {
+    const y = T.Y(n);
+    PP.path(ctx, [[T.X(-1 / n), y], [T.X(1 + 1 / n), y]], n === j + 1 ? C("--ok") : C("--accent"), n === j + 1 ? 4 : 2.2);
+    PP.label(ctx, "A" + sub(n), T.p.l - 5, y, n === j + 1 ? C("--ok") : C("--muted"), "right", "middle", 10.5);
+  }
+  PP.path(ctx, [[T.X(1), T.p.t], [T.X(1), h - T.p.b]], C("--ok"), 1.5, [4, 3]);
+  PP.label(ctx, "x = 1", T.X(1) + 4, h - T.p.b - 2, C("--ok"), "left", "bottom", 11);
+  for (let k = 1; 2 * k <= R; k++) {
+    const n = 2 * k, tail = k >= j + 1;
+    PP.dot(ctx, T.X(1 + 1 / n), T.Y(n), tail ? 6 : 3.5, tail ? C("--seq2") : C("--muted"));
+  }
+  PP.read(ID + "-c8-2-read1", [
+    ["A" + sub(j + 1), "[" + PP.fmt(lo, 3) + ", " + PP.fmt(hi, 3) + "]"],
+    ["cola (xₙₖ₊ⱼ)ₖ", "nₖ₊ⱼ = 2(k + " + j + ") ≥ " + (j + 1)],
+    ["¿la cola está en A" + sub(j + 1) + "?", "sí", "good"],
+    ["límite x = 1 ∈ A" + sub(j + 1), "sí (A" + sub(j + 1) + " cerrado)", "good"],
+  ]);
+}, [ID + "-c8-2-j"]);
+
+/* (b) imágenes iteradas f^n(X) con X = [0, 1]. */
+const c82f = (t) => 0.19 + 0.62 * t - 0.08 * Math.sin(2 * Math.PI * t);
+PP.register(function c82Iteradas() {
+  const n = PP.val(ID + "-c8-2-n");
+  PP.out(ID + "-c8-2-n-o", String(n));
+  const { ctx, w, h } = PP.canvas(ID + "-c8-2-cv2", 0.8);
+  const bandsH = 11 * 8 + 14;
+  const s = w - 60, sh = h - bandsH - 20;
+  const ox = 44, oy = 10;
+  const X = (u) => ox + u * s, Y = (v) => oy + (1 - v) * sh;
+  PP.rect(ctx, ox, oy, s, sh, C("--rule"), C("--panel"));
+  ctx.save(); ctx.font = "11px " + FONT; ctx.fillStyle = C("--muted"); ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  [0, 0.5, 1].forEach((v) => ctx.fillText(PP.fmt(v, 1).replace(".", ","), ox - 5, Y(v)));
+  ctx.restore();
+  PP.path(ctx, [[X(0), Y(0)], [X(1), Y(1)]], C("--muted"), 1, [4, 4]);
+  const g = []; for (let i = 0; i <= 200; i++) { const t = i / 200; g.push([X(t), Y(c82f(t))]); }
+  PP.path(ctx, g, C("--seq3"), 2.5);
+  PP.label(ctx, "f", X(0.06), Y(c82f(0.06)) - 6, C("--seq3"), "left", "bottom", 13);
+  // escalones desde 0 y desde 1
+  [0, 1].forEach((t0) => {
+    let t = t0; const st = [[X(t), Y(t)]];
+    for (let m = 0; m < n; m++) { const v = c82f(t); st.push([X(t), Y(v)]); st.push([X(v), Y(v)]); t = v; }
+    PP.path(ctx, st, C("--accent"), 1.3);
+  });
+  // bandas A_0 ... A_n debajo
+  const by = oy + sh + 12;
+  let a = 0, b = 1;
+  for (let m = 0; m <= n; m++) {
+    const y = by + m * 8;
+    PP.rect(ctx, X(a), y, X(b) - X(a), 6, null, m === n ? C("--accent") : C("--area"));
+    if (m < n) { a = c82f(a); b = c82f(b); }
+  }
+  PP.label(ctx, "A" + sub(n), X(b) + 5, by + n * 8 + 3, C("--accent"), "left", "middle", 11);
+  PP.read(ID + "-c8-2-read2", [
+    ["A" + sub(n) + " = f" + (n === 0 ? "⁰" : "ⁿ") + "(X)", "[" + PP.fmt(a, 4) + ", " + PP.fmt(b, 4) + "]"],
+    ["longitud", PP.fmt(b - a, 4)],
+    ["¿A" + sub(n + 1) + " ⊆ A" + sub(n) + "?", "sí", "good"],
+  ]);
+}, [ID + "-c8-2-n"]);
+
+/* ===================== C8-1 ===================== */
+
+PP.register(function c81() {
+  const n = PP.val(ID + "-c8-1-n");
+  PP.out(ID + "-c8-1-n-o", String(n));
+  const { ctx, w, h } = PP.canvas(ID + "-c8-1-cv1", 0.68);
+  const T = PP.frame(w, h, { x0: -0.04, x1: 1.06, y0: -0.06, y1: 1.02 }, { l: 38, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xLabel: "t", xTicks: 5, yTicks: 5 });
+  PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(1.0), T.Y(1.0)]], C("--muted"), 1, [3, 4]);
+  PP.label(ctx, "pendiente 1", T.X(0.86), T.Y(0.86) - 6, C("--muted"), "right", "bottom", 11);
+  const g = []; for (let i = 0; i <= 200; i++) { const t = i / 200; g.push([T.X(t), T.Y(Math.sin(t))]); }
+  PP.path(ctx, g, C("--seq3"), 2.5);
+  PP.label(ctx, "sen", T.X(1) - 2, T.Y(Math.sin(1)) + 6, C("--seq3"), "right", "top", 12);
+  const xn = 1 / Math.sqrt(n), q = 1 - 1 / n;
+  PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(1.0), T.Y(q)]], C("--seq2"), 1.5, [6, 4]);
+  PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(xn), T.Y(Math.sin(xn))]], C("--accent"), 2.5);
+  PP.dot(ctx, T.X(xn), T.Y(Math.sin(xn)), 4.5, C("--accent"));
+  PP.dot(ctx, T.X(xn), T.Y(0), 5, C("--accent"));
+  PP.dot(ctx, T.X(0), T.Y(0), 5, null, C("--seq2"));
+  PP.label(ctx, "xₙ", T.X(xn), T.Y(0) - 7, C("--accent"), "center", "bottom", 12);
+  PP.label(ctx, "yₙ", T.X(0) - 6, T.Y(0) - 6, C("--seq2"), "right", "bottom", 12);
+  const ratio = Math.sin(xn) / xn;
+  PP.read(ID + "-c8-1-read1", [
+    ["xₙ = 1/√n, yₙ = 0", PP.fmt(xn, 4) + ", 0"],
+    ["d(f(xₙ), f(yₙ)) / d(xₙ, yₙ)", PP.fmt(ratio, 5)],
+    ["1 − 1/n", PP.fmt(q, 5)],
+    ["¿vale (1)?", ratio >= q ? "sí" : "no", ratio >= q ? "good" : "bad"],
+    ["límites x, y", "0 y 0: x = y", "bad"],
+  ]);
+}, [ID + "-c8-1-n"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

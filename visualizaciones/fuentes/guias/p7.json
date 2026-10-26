@@ -1,0 +1,65 @@
+{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-convergencia-puntual": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia puntual",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge puntualmente</b> a $f$ si para cada $a \\in A$ la sucesión $(f_n(a))_{n \\ge 1}$ converge a $f(a)$ en $Y$:</p><p>$$\\begin{aligned}&\\forall a \\in A \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$</p><p>El $n_0$ puede depender de $a$ y de $\\varepsilon$. La función $f$ se llama <b>límite puntual</b> de la sucesión.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-convergencia-uniforme": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia uniforme",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge uniformemente</b> a $f$ (en $A$) si</p><p>$$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 \\quad \\forall a \\in A : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$</p><p>Ahora el $n_0$ depende sólo de $\\varepsilon$: sirve para todos los puntos de $A$ a la vez (comparar con la convergencia puntual). Equivalentemente, $\\sup_{a \\in A} d(f_n(a), f(a)) \\to 0$ cuando $n \\to \\infty$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-espacio-bx": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "El espacio $B(X)$ de las funciones acotadas",
+  "enunciado": "<p>Para un conjunto $X$, $B(X)$ es el conjunto de las funciones $f : X \\to \\mathbb{R}$ acotadas, es decir, tales que existe $M \\ge 0$ con $|f(x)| \\le M$ para todo $x \\in X$. En $B(X)$ se usa la norma $$\\|f\\|_\\infty = \\sup_{x \\in X} |f(x)|,$$ con su distancia $d_\\infty(f, g) = \\|f - g\\|_\\infty$ (la misma que en $C([a, b])$).</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-uniformemente-acotada": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Sucesión de funciones uniformemente acotada",
+  "enunciado": "<p>Una sucesión de funciones $f_n : X \\to \\mathbb{R}$ es <b>uniformemente acotada</b> si existe $M \\gt 0$ tal que $|f_n(x)| \\le M$ para todo $x \\in X$ y todo $n \\in \\mathbb{N}$; es decir, si es acotada en $(B(X), \\|\\cdot\\|_\\infty)$.</p>",
+  "fuente": "Práctica 7, Ejercicio 4 (b); todavía no está en apuntes.typ"
+ }
+}

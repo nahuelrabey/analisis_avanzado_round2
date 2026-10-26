@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 1</span></li></ol><div class="pager"><a aria-disabled="true">← Anterior</a><a href="../guias/p2.html" title="Guía · Práctica 2">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 16 ejercicios</p>
+  <h1>Práctica 1</h1>
+  <p>Números reales, supremo e ínfimo, sucesiones. Los enunciados de <code>apuntes-typst/guias/p1.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap1-ej1" title="Si x es menor que y + ε para todo ε, entonces x ≤ y">Ej. 1</a></li><li><a href="#guiap1-ej2" title="Enteros, racionales e irracionales entre dos reales">Ej. 2</a></li><li><a href="#guiap1-ej3" title="Equivalencia del ínfimo">Ej. 3</a></li><li><a href="#guiap1-ej4" title="Supremo, ínfimo, máximo y mínimo de cuatro conjuntos">Ej. 4</a></li><li><a href="#guiap1-ej5" title="Supremo e ínfimo de un subconjunto">Ej. 5</a></li><li><a href="#guiap1-ej6" title="Supremo e ínfimo de −A y de cA">Ej. 6</a></li><li><a href="#guiap1-ej7" title="Tres límites por definición">Ej. 7</a></li><li><a href="#guiap1-ej8" title="Acotar la distancia al límite por una sucesión que tiende a 0">Ej. 8</a></li><li><a href="#guiap1-ej9" title="Límite de la suma, con límites finitos e infinitos">Ej. 9</a></li><li><a href="#guiap1-ej10" title="Las desigualdades pasan al límite">Ej. 10</a></li><li><a href="#guiap1-ej11" title="Nula por acotada es nula">Ej. 11</a></li><li><a href="#guiap1-ej12" title="Sucesiones decrecientes">Ej. 12</a></li><li><a href="#guiap1-ej13" title="Sin máximo, el supremo es límite de una sucesión estrictamente creciente">Ej. 13</a></li><li><a href="#guiap1-ej14" title="Una sucesión no acotada superiormente tiene una subsucesión que diverge a +∞">Ej. 14</a></li><li><a href="#guiap1-ej15" title="Si toda subsucesión tiene una subsubsucesión que converge a ℓ, la sucesión converge a ℓ">Ej. 15</a></li><li><a href="#guiap1-ej16" title="Convergencia a partir de pares, impares y múltiplos de 3">Ej. 16</a></li></ul></div><div class="toc-group"><a href="#guiap1-anexo">Anexo · Ejercicio de la edición 2025</a><ul class="chips"></ul></div></nav>
+
+<p class="edicion" id="guiap1-edicion">Edición 2026 · sigue la guía 2026 (<code>apuntes-docentes/guias/p1.pdf</code>): el ejercicio de punto fijo de 2025 ya no forma parte de la práctica (queda al final, como anexo), entraron los ejercicios 8 y 9 y del 7 en adelante la numeración corre un lugar. Los ejercicios 1 a 6 no cambiaron.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap1-ej1" data-short="Ej. 1" data-title="Si x es menor que y + ε para todo ε, entonces x ≤ y" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Si $x \lt y + \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x \le y$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Probar que si $x \lt y + \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x \le y$. Deducir que si $|x - y| \lt \varepsilon$ para todo $\varepsilon \gt 0$, entonces $x = y$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej1-c" aria-label="Recta real con los puntos x e y arrastrables y la marca y más epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej1-eps">ε</label><input type="range" id="guiap1-ej1-eps" min="1" max="100" value="40"><output id="guiap1-ej1-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej1-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá <i>x</i> e <i>y</i> sobre la recta. La zona sombreada son los números menores que <i>y</i> + ε. La hipótesis pide que <i>x</i> caiga ahí para <b>todos</b> los ε &gt; 0 a la vez; el slider prueba de a uno.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b3" title="Bloque 3 · Límite por definición">Ej. Práctica 1 · Bloque 3 · Límite por definición</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap1-ej2" data-short="Ej. 2" data-title="Enteros, racionales e irracionales entre dos reales" data-topics="supremo,densidad">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Enteros, racionales e irracionales entre dos reales</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Sean $x, y \in \mathbb{R}$ tales que $y - x \gt 1$. Probar que existe un entero entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{R}$ tales que $x \lt y$. Probar que existe un racional entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{Q}$ tales que $x \lt y$. Probar que existe un irracional entre $x$ e $y$.</li>
+        <li>Sean $x, y \in \mathbb{R}$ tales que $x \lt y$. Probar que existe un irracional entre $x$ e $y$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej2-c" aria-label="Recta real con x e y arrastrables, los enteros y los racionales de denominador n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej2-n">denominador <i>n</i></label><input type="range" id="guiap1-ej2-n" min="1" max="12" value="3"><output id="guiap1-ej2-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej2-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá <i>x</i> e <i>y</i>. Las rayas largas son los enteros; las cortas, las fracciones <i>m</i>/<i>n</i> con el denominador <i>n</i> del slider. Con <i>n</i> = 1 se ven sólo los enteros, que es la situación del ítem (a).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b2" title="Bloque 2 · Densidad y completitud: por qué ℚ no alcanza">Ej. Práctica 1 · Bloque 2 · Densidad y completitud: por qué ℚ no alcanza</a></li><li><a href="../ejemplos/p1.html#ejp1-c1-5" title="C1-5 · Parte entera: el único n ∈ ℤ con n ≤ x &lt; n+1">Ej. Práctica 1 · C1-5 · Parte entera: el único n ∈ ℤ con n ≤ x &lt; n+1</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li><li><a href="../ejemplos/p4.html#ejp4-38" title="38 · ℚ e 𝕀 = ℝ ∖ ℚ son densos en ℝ">Ej. Práctica 4 · 38 · ℚ e 𝕀 = ℝ ∖ ℚ son densos en ℝ</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap1-ej3" data-short="Ej. 3" data-title="Equivalencia del ínfimo" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Equivalencia del ínfimo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$ no vacío y <span class="ref" data-ref="def-4">acotado inferiormente</span>. Probar la siguiente equivalencia:
+      $$ i = \inf A \iff \left\{ \begin{aligned} &i \le a \text{ para todo } a \in A, \\ &\text{para todo } \varepsilon \gt 0 \text{ existe } a \in A \\ &\quad \text{tal que } i \le a \lt i + \varepsilon. \end{aligned} \right. $$</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej3-c" aria-label="Los puntos 1 más 1 sobre n, un candidato i y la banda de i a i más epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej3-i">candidato <i>i</i></label><input type="range" id="guiap1-ej3-i" min="50" max="150" value="80"><output id="guiap1-ej3-i-o"></output></div>
+        <div class="slider"><label for="guiap1-ej3-eps">ε</label><input type="range" id="guiap1-ej3-eps" min="1" max="60" value="25"><output id="guiap1-ej3-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej3-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto elegido para el dibujo: <i>A</i> = {1 + 1/<i>n</i> : <i>n</i> ∈ ℕ} (se ven los primeros 60 puntos). La raya es un candidato <i>i</i> y la banda es [<i>i</i>, <i>i</i> + ε). La lectura dice si se cumplen las dos condiciones de la derecha para ese <i>i</i> y ese ε.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b4" title="Bloque 4 · La equivalencia del supremo por sucesiones">Ej. Práctica 1 · Bloque 4 · La equivalencia del supremo por sucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap1-ej4" data-short="Ej. 4" data-title="Supremo, ínfimo, máximo y mínimo de cuatro conjuntos" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Supremo, ínfimo, máximo y mínimo de cuatro conjuntos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Hallar, si existen, <span class="ref" data-ref="def-2">supremo</span>, <span class="ref" data-ref="def-5">ínfimo</span>, <span class="ref" data-ref="def-3">máximo</span> y <span class="ref" data-ref="def-6-minimo">mínimo</span> de los siguientes subconjuntos de $\mathbb{R}$, y probar que lo son:</p>
+      <ol class="items">
+        <li>$(a, b]$</li>
+        <li>$B = \{1/2^n : n \in \mathbb{N}\}$</li>
+        <li>$B \cup \{0\}$</li>
+        <li>$\{x^2 - x - 1 : x \in \mathbb{R}\}$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej4-c" aria-label="Los conjuntos del ejercicio dibujados sobre la recta"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Conjunto</legend>
+          <label><input type="radio" name="guiap1-ej4-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap1-ej4-it" value="d">(d)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej4-N">puntos</label><input type="range" id="guiap1-ej4-N" min="1" max="12" value="6"><output id="guiap1-ej4-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej4-read" aria-live="polite"></dl>
+      <figcaption>En (a) se usan <i>a</i> = 1 y <i>b</i> = 3 (valores elegidos): el círculo vacío es un extremo que no está en el conjunto. En (b) y (c) el slider dice cuántos términos 1/2<sup><i>n</i></sup> se dibujan. En (d) se ve la parábola <i>y</i> = <i>x</i>² − <i>x</i> − 1 y, sobre el eje vertical, los valores que toma en una grilla de <i>x</i> (el slider la afina).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b1" title="Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición">Ej. Práctica 1 · Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap1-ej5" data-short="Ej. 5" data-title="Supremo e ínfimo de un subconjunto" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Supremo e ínfimo de un subconjunto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $A \subseteq B \subseteq \mathbb{R}$, con $A \neq \emptyset$. Probar las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Si $B$ está <span class="ref" data-ref="def-1">acotado superiormente</span>, entonces $A$ también lo está, y $\sup A \le \sup B$ (<span class="ref" data-ref="def-2">supremo</span>).</li>
+        <li>Si $B$ está <span class="ref" data-ref="def-4">acotado inferiormente</span>, entonces $A$ también lo está, e $\inf B \le \inf A$ (<span class="ref" data-ref="def-5">ínfimo</span>).</li>
+        <li>Si $A$ no está acotado, entonces $B$ tampoco lo está.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 150" role="img" aria-label="Un conjunto B sobre la recta y, adentro, un subconjunto A formado por un tramo y dos puntos">
+        <line x1="10" y1="96" x2="350" y2="96" class="sv-axis"/>
+        <rect x="40" y="86" width="270" height="20" rx="4" class="sv-area2"/>
+        <line x1="40" y1="96" x2="310" y2="96" class="sv-seq2"/>
+        <text x="40" y="128" class="sv-label-seq2">B</text>
+        <line x1="120" y1="96" x2="200" y2="96" class="sv-accent" style="stroke-width:5"/>
+        <circle cx="90" cy="96" r="5" class="sv-fill-accent"/>
+        <circle cx="250" cy="96" r="5" class="sv-fill-accent"/>
+        <text x="160" y="76" text-anchor="middle" class="sv-label-accent">A</text>
+        <path d="M90 66 Q90 56 120 56 L200 56 Q250 56 250 66" class="sv-accent sv-dash" style="stroke-width:1"/>
+        <text x="180" y="30" text-anchor="middle" class="sv-muted">A ⊆ B ⊆ ℝ, A ≠ ∅</text>
+      </svg>
+      <figcaption>Un ejemplo elegido para el dibujo: <i>B</i> es el tramo naranja y <i>A</i> (en azul) es un tramo más dos puntos sueltos, todos dentro de <i>B</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b1" title="Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición">Ej. Práctica 1 · Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap1-ej6" data-short="Ej. 6" data-title="Supremo e ínfimo de −A y de cA" data-topics="supremo">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Supremo e ínfimo de $-A$ y de $cA$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dados un conjunto de números reales $A$ y $c \in \mathbb{R}$, denotamos $cA = \{ca : a \in A\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Probar las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Probar que si $A$ está <span class="ref" data-ref="def-1">acotado superiormente</span>, entonces $-A$ está <span class="ref" data-ref="def-4">acotado inferiormente</span> e $\inf(-A) = -\sup A$ (<span class="ref" data-ref="def-5">ínfimo</span>, <span class="ref" data-ref="def-2">supremo</span>).</li>
+        <li>Probar que si $c \gt 0$ y $A$ está acotado superiormente, entonces $cA$ está acotado superiormente y $\sup(cA) = c \sup(A)$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej6-c" aria-label="Tres filas: el conjunto A, su reflejado menos A y su escalado c por A"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej6-cc"><i>c</i></label><input type="range" id="guiap1-ej6-cc" min="10" max="250" value="150"><output id="guiap1-ej6-cc-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej6-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto elegido para el dibujo: <i>A</i> = {−1} ∪ [0.5, 1.5]. La segunda fila es −<i>A</i> (el reflejo respecto de 0) y la tercera es <i>c</i><i>A</i>, con el <i>c</i> &gt; 0 del slider.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b1" title="Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición">Ej. Práctica 1 · Bloque 1 · Supremo, ínfimo, máximo y mínimo por definición</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap1-ej7" data-short="Ej. 7" data-title="Tres límites por definición" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Tres límites por definición</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Probar, usando la <span class="ref" data-ref="def-7">definición de límite</span>:</p>
+      <ol class="items">
+        <li>$\displaystyle \lim_{n \to \infty} \frac{3 - 2n}{n + 1} = -2$.</li>
+        <li>$\displaystyle \lim_{n \to \infty} \frac{\sin(n)}{n} = 0$.</li>
+        <li>$\displaystyle \lim_{n \to \infty} \frac{2^n - 3}{2^n + 4} = 1$.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej7-c" aria-label="Términos de la sucesión elegida y la banda de ancho epsilon alrededor del límite"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión</legend>
+          <label><input type="radio" name="guiap1-ej7-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej7-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej7-it" value="c">(c)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej7-eps">ε</label><input type="range" id="guiap1-ej7-eps" min="1" max="50" value="20"><output id="guiap1-ej7-eps-o"></output></div>
+        <div class="slider"><label for="guiap1-ej7-N">términos</label><input type="range" id="guiap1-ej7-N" min="5" max="60" value="25"><output id="guiap1-ej7-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej7-read" aria-live="polite"></dl>
+      <figcaption>Los puntos son los primeros términos de la sucesión del ítem elegido; la raya verde es el límite que da el enunciado y la banda tiene ancho ε para cada lado. Los puntos naranjas son los que quedan fuera de la banda entre los dibujados.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b3" title="Bloque 3 · Límite por definición">Ej. Práctica 1 · Bloque 3 · Límite por definición</a></li><li><a href="../ejemplos/p1.html#ejp1-c1-1-1" title="C1-1.1 · Límite de a_n = 1/2^n acotando por 1/m">Ej. Práctica 1 · C1-1.1 · Límite de a_n = 1/2^n acotando por 1/m</a></li><li><a href="../ejemplos/p1.html#ejp1-c1-1-2" title="C1-1.2 · Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el numerador">Ej. Práctica 1 · C1-1.2 · Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el num…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap1-ej8" data-short="Ej. 8" data-title="Acotar la distancia al límite por una sucesión que tiende a 0" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Acotar $|x_n - \ell|$ por una sucesión que tiende a $0$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}}$ y $(a_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales. Probar que si $|x_n - \ell| \le a_n$ para todo $n \in \mathbb{N}$ y $a_n \underset{n \to \infty}{\longrightarrow} 0$ entonces $x_n \underset{n \to \infty}{\longrightarrow} \ell$ (<span class="ref" data-ref="def-7">convergencia</span>).</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej8-c" aria-label="La sucesión x_n encerrada entre ell menos a_n y ell más a_n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap1-ej8-N">términos</label><input type="range" id="guiap1-ej8-N" min="5" max="80" value="30"><output id="guiap1-ej8-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej8-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: ℓ = 1, <i>a<sub>n</sub></i> = 2/√<i>n</i> y <i>x<sub>n</sub></i> = 1 + <i>a<sub>n</sub></i> sen(<i>n</i>), que cumplen |<i>x<sub>n</sub></i> − ℓ| ≤ <i>a<sub>n</sub></i>. Las curvas punteadas son ℓ ± <i>a<sub>n</sub></i>: el embudo que encierra a la sucesión.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b3" title="Bloque 3 · Límite por definición">Ej. Práctica 1 · Bloque 3 · Límite por definición</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap1-ej9" data-short="Ej. 9" data-title="Límite de la suma, con límites finitos e infinitos" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Límite de la suma, con límites finitos e infinitos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ son <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $x_n \underset{n \to \infty}{\longrightarrow} \ell_1$ e $y_n \underset{n \to \infty}{\longrightarrow} \ell_2$, probar que $x_n + y_n \underset{n \to \infty}{\longrightarrow} \ell_1 + \ell_2$ para el caso en que:</p>
+      <ol class="items">
+        <li>$\ell_1, \ell_2 \in \mathbb{R}$ (<span class="ref" data-ref="def-7">convergencia</span>).</li>
+        <li>$\ell_1 \in \mathbb{R}$ y $\ell_2 = \infty$ (<span class="ref" data-ref="def-8">divergencia a $+\infty$</span>).</li>
+        <li>$\ell_1 = +\infty = \ell_2$.</li>
+        <li>Pensar por qué no vale en el caso en que $\ell_1 = +\infty$ y $\ell_2 = -\infty$. Dar un contraejemplo para este caso.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej9-c" aria-label="Dos sucesiones elegidas y, opcionalmente, su suma"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Caso</legend>
+          <label><input type="radio" name="guiap1-ej9-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap1-ej9-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap1-ej9-it" value="c">(c)</label>
+        </fieldset>
+        <label class="check"><input type="checkbox" id="guiap1-ej9-sum" checked>mostrar <i>x<sub>n</sub></i> + <i>y<sub>n</sub></i></label>
+        <div class="slider"><label for="guiap1-ej9-N">términos</label><input type="range" id="guiap1-ej9-N" min="5" max="40" value="20"><output id="guiap1-ej9-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej9-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas para el dibujo, una por caso: (a) <i>x<sub>n</sub></i> = 1 + (−1)<sup><i>n</i></sup>/<i>n</i>, <i>y<sub>n</sub></i> = 2 − 1/<i>n</i>; (b) la misma <i>x<sub>n</sub></i> e <i>y<sub>n</sub></i> = <i>n</i>/3; (c) <i>x<sub>n</sub></i> = √<i>n</i>, <i>y<sub>n</sub></i> = <i>n</i>/4. El ítem (d) pide un contraejemplo, así que no se dibuja.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap1-ej10" data-short="Ej. 10" data-title="Las desigualdades pasan al límite" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Las desigualdades pasan al límite</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}}, (y_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $x_n \underset{n \to \infty}{\longrightarrow} \ell_1$ e $y_n \underset{n \to \infty}{\longrightarrow} \ell_2$ (<span class="ref" data-ref="def-7">convergencia</span>). Probar que si $x_n \le y_n$ para todo $n$, entonces $\ell_1 \le \ell_2$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej10-c" aria-label="Dos sucesiones con x_n menor o igual que y_n en cada n"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ejemplo</legend>
+          <label><input type="radio" name="guiap1-ej10-it" value="0" checked>límites distintos</label>
+          <label><input type="radio" name="guiap1-ej10-it" value="1">límites iguales</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej10-N">términos</label><input type="range" id="guiap1-ej10-N" min="5" max="50" value="25"><output id="guiap1-ej10-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej10-read" aria-live="polite"></dl>
+      <figcaption>Ejemplos elegidos: <i>x<sub>n</sub></i> = 1 − 1/<i>n</i> (azul) y, como <i>y<sub>n</sub></i> (naranja), 3/2 + (−1)<sup><i>n</i></sup>/(2<i>n</i>) o 1 + 1/<i>n</i>. En cada <i>n</i> el segmento gris une <i>x<sub>n</sub></i> con <i>y<sub>n</sub></i>. El segundo ejemplo muestra que <i>x<sub>n</sub></i> &lt; <i>y<sub>n</sub></i> estricto no da ℓ₁ &lt; ℓ₂ estricto.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap1-ej11" data-short="Ej. 11" data-title="Nula por acotada es nula" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Nula por acotada es nula</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ son <span class="ref" data-ref="def-6-sucesiones">sucesiones</span> de números reales tales que $(x_n)_{n \in \mathbb{N}}$ <span class="ref" data-ref="def-7">converge</span> a $0$ e $(y_n)_{n \in \mathbb{N}}$ está <span class="ref" data-ref="def-9-sucesion-acotada">acotada</span>, probar que $(x_n y_n)_{n \in \mathbb{N}}$ converge a $0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-ej11-c" aria-label="Una sucesión que tiende a cero, una sucesión acotada y su producto"></canvas>
+      <div class="ctrl">
+        <label class="check"><input type="checkbox" id="guiap1-ej11-prod" checked>mostrar <i>x<sub>n</sub></i> <i>y<sub>n</sub></i></label>
+        <div class="slider"><label for="guiap1-ej11-N">términos</label><input type="range" id="guiap1-ej11-N" min="5" max="80" value="40"><output id="guiap1-ej11-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej11-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos: <i>x<sub>n</sub></i> = 1/√<i>n</i> (azul), <i>y<sub>n</sub></i> = 1.5 cos(<i>n</i>) (naranja), que vive en la franja |<i>y</i>| ≤ <i>M</i> = 1.5, y el producto (verde azulado).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-c1-1-2" title="C1-1.2 · Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el numerador">Ej. Práctica 1 · C1-1.2 · Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el num…</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap1-ej12" data-short="Ej. 12" data-title="Sucesiones decrecientes" data-topics="sucesiones,supremo">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Sucesiones decrecientes</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ <span class="ref" data-ref="def-10">decreciente</span>. Probar que:</p>
+      <ol class="items">
+        <li>Si $(x_n)_{n \in \mathbb{N}}$ es <span class="ref" data-ref="def-4">acotada inferiormente</span>, entonces tiene <span class="ref" data-ref="def-7">límite</span> y
+          $$ \lim_{n \to \infty} x_n = \inf\{x_n : n \in \mathbb{N}\}. $$</li>
+        <li>Si $(x_n)_{n \in \mathbb{N}}$ es no acotada inferiormente, entonces $x_n \underset{n \to \infty}{\longrightarrow} -\infty$ (<span class="ref" data-ref="def-8">divergencia</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej12-c" aria-label="Una sucesión decreciente acotada inferiormente o no acotada inferiormente"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Caso</legend>
+          <label><input type="radio" name="guiap1-ej12-it" value="a" checked>(a) acotada inf.</label>
+          <label><input type="radio" name="guiap1-ej12-it" value="b">(b) no acotada inf.</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej12-N">términos</label><input type="range" id="guiap1-ej12-N" min="5" max="60" value="25"><output id="guiap1-ej12-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej12-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas para el dibujo: (a) <i>x<sub>n</sub></i> = 1 + 2/<i>n</i>; (b) <i>x<sub>n</sub></i> = 2 − √<i>n</i>. Las dos son decrecientes; cada término queda por debajo del anterior (los segmentos grises).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b6" title="Bloque 6 · Monotonía, álgebra de límites y subsucesiones">Ej. Práctica 1 · Bloque 6 · Monotonía, álgebra de límites y subsucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap1-ej13" data-short="Ej. 13" data-title="Sin máximo, el supremo es límite de una sucesión estrictamente creciente" data-topics="supremo,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Sin máximo, el supremo es límite de una sucesión estrictamente creciente</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq \mathbb{R}$ <span class="ref" data-ref="def-1">acotado superiormente</span> y no vacío. Probar que si $A$ no tiene <span class="ref" data-ref="def-3">máximo</span> entonces existe $(a_n)_{n \in \mathbb{N}} \subseteq A$ <span class="ref" data-ref="def-10">estrictamente creciente</span> tal que $a_n \underset{n \to \infty}{\longrightarrow} \sup(A)$ (<span class="ref" data-ref="def-2">supremo</span>).</p></div>
+  <div class="preparan" data-ej="13"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b4" title="Bloque 4 · La equivalencia del supremo por sucesiones">Ej. Práctica 1 · Bloque 4 · La equivalencia del supremo por sucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-b6" title="Bloque 6 · Monotonía, álgebra de límites y subsucesiones">Ej. Práctica 1 · Bloque 6 · Monotonía, álgebra de límites y subsucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap1-ej14" data-short="Ej. 14" data-title="Una sucesión no acotada superiormente tiene una subsucesión que diverge a +∞" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>No acotada superiormente: una subsucesión diverge a $+\infty$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ una sucesión no <span class="ref" data-ref="def-1">acotada superiormente</span>. Probar que existe una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(x_{n_k})_{k \in \mathbb{N}}$ que <span class="ref" data-ref="def-8">diverge a $+\infty$</span>.</p></div>
+  <div class="preparan" data-ej="14"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b6" title="Bloque 6 · Monotonía, álgebra de límites y subsucesiones">Ej. Práctica 1 · Bloque 6 · Monotonía, álgebra de límites y subsucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-c2-3" title="C2-3 · Si a_n/b_n tiende a un irracional, ninguna está acotada">Ej. Práctica 1 · C2-3 · Si a_n/b_n tiende a un irracional, ninguna está acota…</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li><li><a href="../ejemplos/p3.html#ejp3-c4-1" title="C4-1 · Interior, clausura, aislados, acumulación y frontera de A = {1/n + 1/m : n,m ∈ N}">Ej. Práctica 3 · C4-1 · Interior, clausura, aislados, acumulación y frontera …</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap1-ej15" data-short="Ej. 15" data-title="Si toda subsucesión tiene una subsubsucesión que converge a ℓ, la sucesión converge a ℓ" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Si toda subsucesión tiene una subsubsucesión que converge a $\ell$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="enun"><p>Sean $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ y $\ell \in \mathbb{R}$. Probar que si toda <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(x_{n_k})_{k \in \mathbb{N}}$ tiene una (sub)subsucesión $(x_{n_{k_j}})_{j \in \mathbb{N}}$ que <span class="ref" data-ref="def-7">converge</span> a $\ell$, entonces la sucesión $(x_n)_{n \in \mathbb{N}}$ converge a $\ell$.</p></div>
+  <div class="preparan" data-ej="15"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b6" title="Bloque 6 · Monotonía, álgebra de límites y subsucesiones">Ej. Práctica 1 · Bloque 6 · Monotonía, álgebra de límites y subsucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-c2-2" title="C2-2 · Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) convergen al mismo límite">Ej. Práctica 1 · C2-2 · Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) …</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap1-ej16" data-short="Ej. 16" data-title="Convergencia a partir de pares, impares y múltiplos de 3" data-topics="sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Convergencia a partir de pares, impares y múltiplos de $3$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$. Probar:</p>
+      <ol class="items">
+        <li>Si $(x_{2k})_{k \in \mathbb{N}}$ y $(x_{2k-1})_{k \in \mathbb{N}}$ son <span class="ref" data-ref="def-7">convergentes</span>, y sus límites coinciden, entonces $(x_n)_{n \in \mathbb{N}}$ es convergente.</li>
+        <li>Si $(x_{2k})_{k \in \mathbb{N}}$, $(x_{2k-1})_{k \in \mathbb{N}}$ y $(x_{3k})_{k \in \mathbb{N}}$ son convergentes, entonces $(x_n)_{n \in \mathbb{N}}$ es convergente.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap1-ej16-c" aria-label="Términos de una sucesión coloreados según el índice sea par, impar o múltiplo de 3"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ítem</legend>
+          <label><input type="radio" name="guiap1-ej16-it" value="a" checked>(a) pares e impares</label>
+          <label><input type="radio" name="guiap1-ej16-it" value="b">(b) y múltiplos de 3</label>
+        </fieldset>
+        <div class="slider"><label for="guiap1-ej16-N">términos</label><input type="range" id="guiap1-ej16-N" min="6" max="60" value="24"><output id="guiap1-ej16-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap1-ej16-read" aria-live="polite"></dl>
+      <figcaption>Sucesión elegida para el dibujo: <i>x<sub>n</sub></i> = 1 + (−1)<sup><i>n</i></sup>/<i>n</i>. Azul: índices pares (<i>x</i><sub>2<i>k</i></sub>); naranja: impares (<i>x</i><sub>2<i>k</i>−1</sub>); en (b), un anillo verde marca los índices múltiplos de 3 (<i>x</i><sub>3<i>k</i></sub>), que reparten entre pares e impares.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p1.html#ejp1-b5" title="Bloque 5 · Negar la convergencia">Ej. Práctica 1 · Bloque 5 · Negar la convergencia</a></li><li><a href="../ejemplos/p1.html#ejp1-b6" title="Bloque 6 · Monotonía, álgebra de límites y subsucesiones">Ej. Práctica 1 · Bloque 6 · Monotonía, álgebra de límites y subsucesiones</a></li><li><a href="../ejemplos/p1.html#ejp1-c2-2" title="C2-2 · Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) convergen al mismo límite">Ej. Práctica 1 · C2-2 · Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) …</a></li><li><a href="../ejemplos/p1.html#ejp1-huecos" title="Notas finales · Huecos frente a la Práctica 1">Ej. Práctica 1 · Notas finales · Huecos frente a la Práctica 1</a></li></ul></div>
+</article>
+
+<!-- ===================== ANEXO ===================== -->
+<section class="bloque" id="guiap1-anexo">
+<h2><span class="bn">Anexo</span>Ejercicio de la edición 2025</h2>
+<div class="ej" id="guiap1-anexo-ej7-2025">
+  <div class="ej-head"><span class="tag">Anexo</span><h3>Punto fijo de una función creciente</h3>
+    <span class="src">Ejercicio 7 de la edición 2025</span>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="nota"><b>Anexo: ejercicio de la edición 2025</b>La guía 2026 no incluye el ejercicio de punto fijo, que figuraba como <strong>Ejercicio 7</strong> en la edición anterior. Se conserva acá porque es el único ejercicio de toda la práctica que se apoya sólo en el Cap. 1 y estaba marcado como el siguiente a resolver.</div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [a, b] \to [a, b]$ <span class="ref" data-ref="ext-funcion-monotona">creciente</span>. Supongamos que $f(a) \gt a$. Sea
+      $$ x_0 = \sup(\{x \in [a, b] : f(x) \gt x\}). $$
+      Pruebe que $f(x_0) = x_0$ (<span class="ref" data-ref="def-2">supremo</span>).</p></div>
+    <figure class="viz">
+      <canvas id="guiap1-anexo-c" aria-label="Gráfico de una función creciente con un salto, la diagonal y el conjunto donde f(x) es mayor que x"></canvas>
+      <dl class="read" id="guiap1-anexo-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> creciente elegida para el dibujo, en [<i>a</i>, <i>b</i>] = [0, 1] y con un salto en 0.6: <i>f</i>(<i>x</i>) = 0.35 + 0.3<i>x</i> si <i>x</i> &lt; 0.6 y <i>f</i>(<i>x</i>) = 0.75 + 0.2<i>x</i> si <i>x</i> ≥ 0.6. La recta punteada es <i>y</i> = <i>x</i>; la franja sobre el eje horizontal es el conjunto {<i>x</i> : <i>f</i>(<i>x</i>) &gt; <i>x</i>}, que no tiene por qué ser un intervalo.</figcaption>
+    </figure>
+  </div>
+</div>
+</section>
+
+<p class="nota" id="guiap1-resolucion">Esta página trae sólo los enunciados. La resolución completa de la guía está en <code>apuntes-typst/guias-agente/guia_1_resuelta_agente.typ</code> (verificada en Lean).</p>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-1": {
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ ($A \\neq \\emptyset$) se dice <b>acotado superiormente<\/b> si existe un $c \\in \\mathbb{R}$ tal que $a \\le c$ para todo $a \\in A$. Al número $c$ se le denomina <b>cota superior<\/b> de $A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-10": {
+  "tipo": "Definición",
+  "numero": "10",
+  "titulo": "Sucesión Monótona",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ es <b>monótona creciente<\/b> (análogamente <b>decreciente<\/b>) si $a_n \\le a_{n+1}$ (análogamente $a_n \\ge a_{n+1}$) para todo $n$ o a partir de algún $n_0$ en adelante.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo<\/em> de $A$ si:<\/p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.<\/p><p>Es decir, el supremo es la <em>menor de las cotas superiores<\/em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo<\/b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente<\/b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior<\/b> de $A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo<\/strong> de $A$ si:<\/p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).<\/p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo<\/b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-sucesiones": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Sucesiones",
+  "enunciado": "<p>Una <b>sucesión<\/b> es una función $a : \\mathbb{N} \\to \\mathbb{R}$, es decir, una asignación que a cada número natural le asigna un único número real. La notación usual es $a_n = a(n) \\in \\mathbb{R}$ para el elemento que $a$ le asigna a $n$ y para referirnos a la sucesión entera, usamos $a = (a_n)_{n \\in \\mathbb{N}}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-7": {
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión y $\\ell \\in \\mathbb{R}$. Decimos que $(a_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que si $n \\ge n_0$, $|a_n - \\ell| \\lt \\varepsilon$. Notamos $\\lim_{n \\to \\infty} a_n = \\ell$ o $a_n \\to \\ell$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-8": {
+  "tipo": "Definición",
+  "numero": "8",
+  "titulo": "Divergencia de Sucesiones",
+  "enunciado": "<p>Decimos que una sucesión $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $+\\infty$<\/b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\gt M$. Notamos $\\lim_{n \\to \\infty} a_n = +\\infty$ o $a_n \\to +\\infty$.<\/p><p>Similarmente, decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $-\\infty$<\/b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\lt -M$. Notamos $\\lim_{n \\to \\infty} a_n = -\\infty$ o $a_n \\to -\\infty$.<\/p><p>Decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge<\/b> si no converge o diverge a $\\pm\\infty$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-sucesion-acotada": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Sucesión Acotada",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ está <b>acotada<\/b> si el conjunto $\\{a_n : n \\in \\mathbb{N}\\} \\subseteq \\mathbb{R}$ está acotado.<\/p><p>Es decir, si existe $M \\gt 0$ tal que $|a_n| \\le M$ para todo $n \\in \\mathbb{N}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-funcion-monotona": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función monótona",
+  "enunciado": "<p>Sea $D \\subseteq \\mathbb{R}$. Una función $f : D \\to \\mathbb{R}$ es <b>creciente<\/b> si $x \\le y$ implica $f(x) \\le f(y)$ para todos $x, y \\in D$, y <b>decreciente<\/b> si $x \\le y$ implica $f(x) \\ge f(y)$. Es <b>monótona<\/b> si es creciente o decreciente.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p1 */
+(() => {
+"use strict";
+/* Dibujos de la guía de la Práctica 1 (enunciados). Usa window.PP. */
+const G = "guiap1";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const SUB = "₀₁₂₃₄₅₆₇₈₉";
+const sub = (n) => String(n).split("").map((d) => SUB[+d]).join("");
+
+/* Arrastre de puntos: pick(px, py, T) devuelve un id o null; move(id, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Recta real horizontal con marcas enteras, a la altura y0 (en píxeles). */
+function realLine(ctx, T, y0, x0, x1, step) {
+  PP.path(ctx, [[T.X(x0), y0], [T.X(x1), y0]], C("--muted"), 1.2);
+  for (let k = Math.ceil(x0 / step) * step; k <= x1 + 1e-9; k += step) {
+    PP.path(ctx, [[T.X(k), y0 - 4], [T.X(k), y0 + 4]], C("--muted"), 1);
+    PP.label(ctx, PP.fmt(k, 2), T.X(k), y0 + 7, C("--muted"), "center", "top", 11);
+  }
+}
+
+/* Gráfico de una o más sucesiones: series = [{f, color, ring}], con banda opcional. */
+function seqPlot(cid, N, series, opts) {
+  const o = Object.assign({ y0: -1, y1: 1, lines: [], band: null, links: null }, opts || {});
+  const { ctx, w, h } = PP.canvas(cid, 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: N + 1, y0: o.y0, y1: o.y1 }, { l: 40, r: 12, t: 14, b: 28 });
+  if (o.band) {
+    const [lo, hi] = o.band;
+    const a = clamp(lo, o.y0, o.y1), b = clamp(hi, o.y0, o.y1);
+    PP.rect(ctx, T.X(0), T.Y(b), T.X(N + 1) - T.X(0), T.Y(a) - T.Y(b), null, C("--band"));
+  }
+  PP.axes(ctx, T, { xLabel: "n", intX: true });
+  o.lines.forEach(([v, color, txt, dash]) => {
+    if (v < o.y0 || v > o.y1) return;
+    PP.path(ctx, [[T.X(0), T.Y(v)], [T.X(N + 1), T.Y(v)]], color, 1.6, dash || []);
+    if (txt) PP.label(ctx, txt, T.X(N + 1) - 4, T.Y(v) - 3, color, "right", "bottom", 11);
+  });
+  if (o.links) {
+    for (let n = 1; n <= N; n++) {
+      const a = o.links[0](n), b = o.links[1](n);
+      PP.path(ctx, [[T.X(n), T.Y(clamp(a, o.y0, o.y1))], [T.X(n), T.Y(clamp(b, o.y0, o.y1))]], C("--rule"), 1.5);
+    }
+  }
+  const r = N <= 30 ? 3.4 : N <= 60 ? 2.6 : 2;
+  series.forEach((s) => {
+    for (let n = 1; n <= N; n++) {
+      const v = s.f(n);
+      if (v < o.y0 - 1e-9 || v > o.y1 + 1e-9) continue;
+      const col = typeof s.color === "function" ? s.color(n, v) : s.color;
+      if (col) PP.dot(ctx, T.X(n), T.Y(v), r, col);
+      if (s.ring && s.ring(n)) PP.circle(ctx, T.X(n), T.Y(v), r + 3.5, C("--seq3"), null, null, 2);
+    }
+  });
+  return { ctx, T, w, h };
+}
+
+/* ===================== Ejercicio 1 ===================== */
+const e1 = { x: 1.45, y: 1, T: null };
+function drawEj1() {
+  const eps = PP.val(G + "-ej1-eps") / 100;
+  PP.out(G + "-ej1-eps-o", PP.fmt(eps, 2));
+  const { ctx, w, h } = PP.canvas(G + "-ej1-c", 0.42);
+  const T = PP.frame(w, h, { x0: -0.5, x1: 3, y0: 0, y1: 1 }, { l: 16, r: 16, t: 10, b: 10 });
+  e1.T = T;
+  const y0 = h * 0.62;
+  // zona x < y + ε
+  PP.rect(ctx, T.X(-0.5), y0 - 18, T.X(e1.y + eps) - T.X(-0.5), 36, null, C("--band"));
+  realLine(ctx, T, y0, -0.5, 3, 0.5);
+  PP.path(ctx, [[T.X(e1.y + eps), y0 - 24], [T.X(e1.y + eps), y0 + 24]], C("--accent"), 1.5, [5, 4]);
+  PP.label(ctx, "y + ε", T.X(e1.y + eps), y0 - 26, C("--accent"), "center", "bottom", 12);
+  PP.dot(ctx, T.X(e1.y), y0, 7, C("--seq2"));
+  PP.label(ctx, "y", T.X(e1.y), y0 - 12, C("--seq2"), "center", "bottom", 13);
+  const ok = e1.x < e1.y + eps;
+  PP.dot(ctx, T.X(e1.x), y0, 7, C("--ink"));
+  PP.label(ctx, "x", T.X(e1.x), y0 + 26, C("--ink"), "center", "top", 13);
+  PP.read(G + "-ej1-read", [
+    ["x, y", PP.fmt(e1.x, 2) + ", " + PP.fmt(e1.y, 2)],
+    ["y + ε", PP.fmt(e1.y + eps, 3)],
+    ["¿x < y + ε para este ε?", ok ? "sí" : "no", ok ? "good" : "bad"],
+  ]);
+}
+PP.register(drawEj1, [G + "-ej1-eps"]);
+draggable(G + "-ej1-c", () => e1.T,
+  (px, py, T) => { const dx = Math.abs(px - T.X(e1.x)), dy = Math.abs(px - T.X(e1.y)); return Math.min(dx, dy) > 22 ? null : dx <= dy ? "x" : "y"; },
+  (id, x) => { e1[id] = Math.round(clamp(x, -0.4, 2.9) * 100) / 100; }, drawEj1);
+
+/* ===================== Ejercicio 2 ===================== */
+const e2 = { x: 0.35, y: 1.15, T: null };
+function drawEj2() {
+  const n = PP.val(G + "-ej2-n");
+  PP.out(G + "-ej2-n-o", String(n));
+  const { ctx, w, h } = PP.canvas(G + "-ej2-c", 0.42);
+  const T = PP.frame(w, h, { x0: -1.2, x1: 3.2, y0: 0, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  e2.T = T;
+  const y0 = h * 0.58;
+  if (e2.x > e2.y) { const t = e2.x; e2.x = e2.y; e2.y = t; }
+  PP.rect(ctx, T.X(e2.x), y0 - 26, T.X(e2.y) - T.X(e2.x), 52, null, C("--band"));
+  PP.path(ctx, [[T.X(-1.2), y0], [T.X(3.2), y0]], C("--muted"), 1.2);
+  let between = 0, ints = 0;
+  for (let m = Math.ceil(-1.2 * n); m <= 3.2 * n; m++) {
+    const q = m / n;
+    const isInt = m % n === 0;
+    const inside = q > e2.x && q < e2.y;
+    if (inside) between++;
+    if (inside && isInt) ints++;
+    const L = isInt ? 12 : 6;
+    PP.path(ctx, [[T.X(q), y0 - L], [T.X(q), y0 + L]], inside ? C("--accent") : C("--muted"), isInt ? 1.8 : 1.1);
+    if (isInt) PP.label(ctx, String(m / n).replace("-", "−"), T.X(q), y0 + 16, C("--muted"), "center", "top", 11);
+  }
+  PP.dot(ctx, T.X(e2.x), y0, 7, C("--seq2"));
+  PP.label(ctx, "x", T.X(e2.x), y0 - 30, C("--seq2"), "center", "bottom", 13);
+  PP.dot(ctx, T.X(e2.y), y0, 7, C("--seq2"));
+  PP.label(ctx, "y", T.X(e2.y), y0 - 30, C("--seq2"), "center", "bottom", 13);
+  PP.read(G + "-ej2-read", [
+    ["x, y", PP.fmt(e2.x, 2) + ", " + PP.fmt(e2.y, 2)],
+    ["y − x", PP.fmt(e2.y - e2.x, 2)],
+    ["enteros entre x e y", String(ints)],
+    ["fracciones m/" + n + " entre x e y", String(between)],
+  ]);
+}
+PP.register(drawEj2, [G + "-ej2-n"]);
+draggable(G + "-ej2-c", () => e2.T,
+  (px, py, T) => { const dx = Math.abs(px - T.X(e2.x)), dy = Math.abs(px - T.X(e2.y)); return Math.min(dx, dy) > 22 ? null : dx <= dy ? "x" : "y"; },
+  (id, x) => { e2[id] = Math.round(clamp(x, -1.1, 3.1) * 100) / 100; }, drawEj2);
+
+/* ===================== Ejercicio 3 ===================== */
+PP.register(function drawEj3() {
+  const i = PP.val(G + "-ej3-i") / 100, eps = PP.val(G + "-ej3-eps") / 100;
+  PP.out(G + "-ej3-i-o", PP.fmt(i, 2)); PP.out(G + "-ej3-eps-o", PP.fmt(eps, 2));
+  const { ctx, w, h } = PP.canvas(G + "-ej3-c", 0.42);
+  const T = PP.frame(w, h, { x0: 0.4, x1: 2.1, y0: 0, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y0 = h * 0.55;
+  PP.rect(ctx, T.X(i), y0 - 22, T.X(i + eps) - T.X(i), 44, null, C("--band"));
+  realLine(ctx, T, y0, 0.5, 2, 0.5);
+  let cota = true, hit = 0;
+  for (let n = 1; n <= 60; n++) {
+    const a = 1 + 1 / n;
+    if (a < i) cota = false;
+    const inBand = a >= i && a < i + eps;
+    if (inBand) hit++;
+    PP.dot(ctx, T.X(a), y0, n <= 10 ? 4 : 2.6, inBand ? C("--accent") : C("--seq2"));
+  }
+  PP.path(ctx, [[T.X(i), y0 - 30], [T.X(i), y0 + 30]], C("--ink"), 2);
+  PP.label(ctx, "i", T.X(i), y0 - 32, C("--ink"), "center", "bottom", 13);
+  PP.label(ctx, "i + ε", T.X(i + eps), y0 + 26, C("--accent"), "center", "top", 11);
+  PP.read(G + "-ej3-read", [
+    ["¿i ≤ a para todo a dibujado?", cota ? "sí" : "no", cota ? "good" : "bad"],
+    ["puntos de A en [i, i + ε)", String(hit) + (hit === 60 ? " o más" : ""), hit > 0 ? "good" : "bad"],
+  ]);
+}, [G + "-ej3-i", G + "-ej3-eps"]);
+
+/* ===================== Ejercicio 4 ===================== */
+PP.register(function drawEj4() {
+  const it = PP.radio(G + "-ej4-it"), N = PP.val(G + "-ej4-N");
+  PP.out(G + "-ej4-N-o", String(N));
+  if (it === "d") {
+    const { ctx, w, h } = PP.canvas(G + "-ej4-c", 0.62);
+    const T = PP.frame(w, h, { x0: -2, x1: 3, y0: -2, y1: 5 }, { l: 40, r: 12, t: 14, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yLabel: "y" });
+    const f = (x) => x * x - x - 1;
+    const pts = [];
+    for (let k = 0; k <= 200; k++) { const x = -2 + 5 * k / 200; pts.push([T.X(x), T.Y(f(x))]); }
+    PP.path(ctx, pts, C("--accent"), 2);
+    const step = 1 / N;
+    let cnt = 0;
+    for (let x = -2; x <= 3 + 1e-9; x += step) {
+      const v = f(x);
+      if (v > 5) continue;
+      cnt++;
+      PP.dot(ctx, T.X(x), T.Y(v), 2.4, C("--accent"));
+      PP.path(ctx, [[T.X(x), T.Y(v)], [T.X(0), T.Y(v)]], C("--rule"), 1);
+      PP.dot(ctx, T.X(0), T.Y(v), 3, C("--seq2"));
+    }
+    PP.read(G + "-ej4-read", [["conjunto", "{x² − x − 1 : x ∈ ℝ}"], ["x de la grilla", "paso 1/" + N + " en [−2, 3]"], ["valores dibujados", String(cnt)]]);
+    return;
+  }
+  const { ctx, w, h } = PP.canvas(G + "-ej4-c", 0.42);
+  const box = it === "a" ? { x0: 0, x1: 4, y0: 0, y1: 1 } : { x0: -0.1, x1: 0.6, y0: 0, y1: 1 };
+  const T = PP.frame(w, h, box, { l: 16, r: 16, t: 10, b: 10 });
+  const y0 = h * 0.55;
+  realLine(ctx, T, y0, box.x0 < 0 ? 0 : box.x0, box.x1, it === "a" ? 1 : 0.1);
+  if (it === "a") {
+    PP.path(ctx, [[T.X(1), y0], [T.X(3), y0]], C("--accent"), 5);
+    PP.circle(ctx, T.X(1), y0, 6, C("--accent"), C("--bg"), null, 2);
+    PP.dot(ctx, T.X(3), y0, 6, C("--accent"));
+    PP.label(ctx, "a", T.X(1), y0 - 12, C("--accent"), "center", "bottom", 13);
+    PP.label(ctx, "b", T.X(3), y0 - 12, C("--accent"), "center", "bottom", 13);
+    PP.read(G + "-ej4-read", [["conjunto", "(a, b] con a = 1, b = 3"]]);
+    return;
+  }
+  for (let n = 1; n <= N; n++) {
+    const v = 1 / Math.pow(2, n);
+    if (v < box.x0) continue;
+    PP.dot(ctx, T.X(v), y0, n <= 5 ? 5 : 3.4, C("--accent"));
+    if (n <= 4) PP.label(ctx, "1/" + Math.pow(2, n), T.X(v), y0 - 12, C("--accent"), "center", "bottom", 11);
+  }
+  if (it === "c") {
+    PP.dot(ctx, T.X(0), y0, 6, C("--seq2"));
+    PP.label(ctx, "0", T.X(0), y0 - 12, C("--seq2"), "center", "bottom", 12);
+  }
+  PP.read(G + "-ej4-read", [
+    ["conjunto", it === "b" ? "B = {1/2ⁿ : n ∈ ℕ}" : "B ∪ {0}"],
+    ["términos dibujados", "n = 1, …, " + N],
+    ["menor término dibujado", "1/2" + (N > 1 ? "^" + N : "") + " = " + PP.fmt(1 / Math.pow(2, N), 5)],
+  ]);
+}, ["input[name='" + G + "-ej4-it']", G + "-ej4-N"]);
+
+/* ===================== Ejercicio 6 ===================== */
+PP.register(function drawEj6() {
+  const c = PP.val(G + "-ej6-cc") / 100;
+  PP.out(G + "-ej6-cc-o", PP.fmt(c, 2));
+  const { ctx, w, h } = PP.canvas(G + "-ej6-c", 0.62);
+  const T = PP.frame(w, h, { x0: -4.6, x1: 4.6, y0: 0, y1: 1 }, { l: 36, r: 14, t: 10, b: 10 });
+  const rows = [["A", 1, C("--accent")], ["−A", -1, C("--seq2")], ["cA", c, C("--seq3")]];
+  rows.forEach(([name, k, col], j) => {
+    const y = h * (0.2 + 0.3 * j);
+    realLine(ctx, T, y, -4, 4, 1);
+    PP.label(ctx, name, 6, y, col, "left", "middle", 13);
+    const a1 = k * 0.5, a2 = k * 1.5, p = k * -1;
+    PP.path(ctx, [[T.X(Math.min(a1, a2)), y], [T.X(Math.max(a1, a2)), y]], col, 6);
+    PP.dot(ctx, T.X(a1), y, 4, col); PP.dot(ctx, T.X(a2), y, 4, col);
+    PP.dot(ctx, T.X(p), y, 5.5, col);
+  });
+  PP.read(G + "-ej6-read", [
+    ["A", "{−1} ∪ [0.5, 1.5]"],
+    ["−A", "{1} ∪ [−1.5, −0.5]"],
+    ["cA", "{" + PP.fmt(-c, 2) + "} ∪ [" + PP.fmt(0.5 * c, 3) + ", " + PP.fmt(1.5 * c, 3) + "]"],
+  ]);
+}, [G + "-ej6-cc"]);
+
+/* ===================== Ejercicio 7 ===================== */
+PP.register(function drawEj7() {
+  const it = PP.radio(G + "-ej7-it"), eps = PP.val(G + "-ej7-eps") / 100, N = PP.val(G + "-ej7-N");
+  PP.out(G + "-ej7-eps-o", PP.fmt(eps, 2)); PP.out(G + "-ej7-N-o", String(N));
+  const D = {
+    a: { f: (n) => (3 - 2 * n) / (n + 1), l: -2, y0: -2.4, y1: 0.7, txt: "(3 − 2n)/(n + 1)" },
+    b: { f: (n) => Math.sin(n) / n, l: 0, y0: -0.6, y1: 0.95, txt: "sen(n)/n" },
+    c: { f: (n) => (Math.pow(2, n) - 3) / (Math.pow(2, n) + 4), l: 1, y0: -0.3, y1: 1.25, txt: "(2ⁿ − 3)/(2ⁿ + 4)" },
+  }[it];
+  let out = 0;
+  seqPlot(G + "-ej7-c", N, [{ f: D.f, color: (n, v) => { const o = Math.abs(v - D.l) >= eps; if (o) out++; return o ? C("--seq2") : C("--accent"); } }],
+    { y0: D.y0, y1: D.y1, band: [D.l - eps, D.l + eps], lines: [[D.l, C("--ok"), "ℓ = " + PP.fmt(D.l)]] });
+  PP.read(G + "-ej7-read", [
+    ["xₙ", D.txt],
+    ["límite del enunciado", PP.fmt(D.l)],
+    ["términos dibujados fuera de la banda", String(out)],
+  ]);
+}, ["input[name='" + G + "-ej7-it']", G + "-ej7-eps", G + "-ej7-N"]);
+
+/* ===================== Ejercicio 8 ===================== */
+PP.register(function drawEj8() {
+  const N = PP.val(G + "-ej8-N");
+  PP.out(G + "-ej8-N-o", String(N));
+  const a = (n) => 2 / Math.sqrt(n), x = (n) => 1 + a(n) * Math.sin(n);
+  const { ctx, T } = seqPlot(G + "-ej8-c", N, [], { y0: -1.2, y1: 3.2, lines: [[1, C("--ok"), "ℓ = 1"]] });
+  const up = [], dn = [];
+  for (let k = 0; k <= 200; k++) { const n = 1 + (N - 1) * k / 200; up.push([T.X(n), T.Y(1 + a(n))]); dn.push([T.X(n), T.Y(1 - a(n))]); }
+  PP.path(ctx, up, C("--seq2"), 1.5, [5, 4]); PP.path(ctx, dn, C("--seq2"), 1.5, [5, 4]);
+  for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(n), T.Y(x(n)), N <= 30 ? 3.4 : 2.6, C("--accent"));
+  PP.read(G + "-ej8-read", [
+    ["n = " + N, "xₙ = " + PP.fmt(x(N), 4)],
+    ["aₙ", PP.fmt(a(N), 4)],
+    ["|xₙ − ℓ| ≤ aₙ", "sí", "good"],
+  ]);
+}, [G + "-ej8-N"]);
+
+/* ===================== Ejercicio 9 ===================== */
+PP.register(function drawEj9() {
+  const it = PP.radio(G + "-ej9-it"), N = PP.val(G + "-ej9-N"), sum = document.getElementById(G + "-ej9-sum").checked;
+  PP.out(G + "-ej9-N-o", String(N));
+  const xa = (n) => 1 + Math.pow(-1, n) / n;
+  const D = {
+    a: { x: xa, y: (n) => 2 - 1 / n, y0: -0.2, y1: 3.8, lx: "ℓ₁ = 1", ly: "ℓ₂ = 2" },
+    b: { x: xa, y: (n) => n / 3, y0: -0.2, y1: 16, lx: "ℓ₁ = 1", ly: "ℓ₂ = +∞" },
+    c: { x: (n) => Math.sqrt(n), y: (n) => n / 4, y0: -0.2, y1: 17, lx: "ℓ₁ = +∞", ly: "ℓ₂ = +∞" },
+  }[it];
+  const ser = [{ f: D.x, color: C("--accent") }, { f: D.y, color: C("--seq2") }];
+  if (sum) ser.push({ f: (n) => D.x(n) + D.y(n), color: C("--seq3") });
+  const lines = it === "a" ? [[1, C("--accent"), "", [4, 4]], [2, C("--seq2"), "", [4, 4]]] : it === "b" ? [[1, C("--accent"), "", [4, 4]]] : [];
+  seqPlot(G + "-ej9-c", N, ser, { y0: D.y0, y1: D.y1, lines });
+  const rows = [["xₙ (azul)", D.lx], ["yₙ (naranja)", D.ly], ["n = " + N, "xₙ + yₙ = " + PP.fmt(D.x(N) + D.y(N), 3)]];
+  PP.read(G + "-ej9-read", rows);
+}, ["input[name='" + G + "-ej9-it']", G + "-ej9-N", G + "-ej9-sum"]);
+
+/* ===================== Ejercicio 10 ===================== */
+PP.register(function drawEj10() {
+  const it = PP.radio(G + "-ej10-it"), N = PP.val(G + "-ej10-N");
+  PP.out(G + "-ej10-N-o", String(N));
+  const x = (n) => 1 - 1 / n;
+  const y = it === "0" ? (n) => 1.5 + Math.pow(-1, n) / (2 * n) : (n) => 1 + 1 / n;
+  const l2 = it === "0" ? 1.5 : 1;
+  seqPlot(G + "-ej10-c", N, [{ f: x, color: C("--accent") }, { f: y, color: C("--seq2") }],
+    { y0: -0.1, y1: 2.1, links: [x, y], lines: [[1, C("--accent"), "", [4, 4]], [l2, C("--seq2"), "", [4, 4]]] });
+  let okAll = true;
+  for (let n = 1; n <= N; n++) if (x(n) > y(n)) okAll = false;
+  PP.read(G + "-ej10-read", [
+    ["¿xₙ ≤ yₙ en los dibujados?", okAll ? "sí" : "no", okAll ? "good" : "bad"],
+    ["ℓ₁, ℓ₂", "1, " + PP.fmt(l2)],
+  ]);
+}, ["input[name='" + G + "-ej10-it']", G + "-ej10-N"]);
+
+/* ===================== Ejercicio 11 ===================== */
+PP.register(function drawEj11() {
+  const N = PP.val(G + "-ej11-N"), prod = document.getElementById(G + "-ej11-prod").checked;
+  PP.out(G + "-ej11-N-o", String(N));
+  const x = (n) => 1 / Math.sqrt(n), y = (n) => 1.5 * Math.cos(n);
+  const ser = [{ f: x, color: C("--accent") }, { f: y, color: C("--seq2") }];
+  if (prod) ser.push({ f: (n) => x(n) * y(n), color: C("--seq3") });
+  seqPlot(G + "-ej11-c", N, ser, { y0: -1.8, y1: 1.8, band: [-1.5, 1.5], lines: [[1.5, C("--seq2"), "M", [4, 4]], [-1.5, C("--seq2"), "−M", [4, 4]]] });
+  PP.read(G + "-ej11-read", [
+    ["xₙ = 1/√n", "→ 0"],
+    ["|yₙ| ≤ M", "M = 1.5"],
+    ["n = " + N, "xₙ yₙ = " + PP.fmt(x(N) * y(N), 4)],
+  ]);
+}, [G + "-ej11-N", G + "-ej11-prod"]);
+
+/* ===================== Ejercicio 12 ===================== */
+PP.register(function drawEj12() {
+  const it = PP.radio(G + "-ej12-it"), N = PP.val(G + "-ej12-N");
+  PP.out(G + "-ej12-N-o", String(N));
+  const f = it === "a" ? (n) => 1 + 2 / n : (n) => 2 - Math.sqrt(n);
+  const y0 = it === "a" ? 0 : 2 - Math.sqrt(N) - 0.5, y1 = it === "a" ? 3.2 : 1.3;
+  const { ctx, T } = seqPlot(G + "-ej12-c", N, [], { y0, y1 });
+  for (let n = 1; n < N; n++) PP.path(ctx, [[T.X(n), T.Y(f(n))], [T.X(n + 1), T.Y(f(n + 1))]], C("--rule"), 1.5);
+  for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(n), T.Y(f(n)), N <= 30 ? 3.4 : 2.6, C("--accent"));
+  PP.read(G + "-ej12-read", [
+    ["xₙ", it === "a" ? "1 + 2/n" : "2 − √n"],
+    ["n = " + N, "xₙ = " + PP.fmt(f(N), 4)],
+    ["¿xₙ₊₁ ≤ xₙ?", "sí, siempre", "good"],
+  ]);
+}, ["input[name='" + G + "-ej12-it']", G + "-ej12-N"]);
+
+/* ===================== Ejercicio 16 ===================== */
+PP.register(function drawEj16() {
+  const it = PP.radio(G + "-ej16-it"), N = PP.val(G + "-ej16-N");
+  PP.out(G + "-ej16-N-o", String(N));
+  const f = (n) => 1 + Math.pow(-1, n) / n;
+  seqPlot(G + "-ej16-c", N, [{ f, color: (n) => (n % 2 === 0 ? C("--accent") : C("--seq2")), ring: it === "b" ? (n) => n % 3 === 0 : null }],
+    { y0: -0.1, y1: 1.65 });
+  const idx = (pred) => { const a = []; for (let n = 1; n <= Math.min(N, 12); n++) if (pred(n)) a.push(n); return a.join(", ") + (N > 12 ? ", …" : ""); };
+  const rows = [["pares (azul)", idx((n) => n % 2 === 0)], ["impares (naranja)", idx((n) => n % 2 === 1)]];
+  if (it === "b") rows.push(["múltiplos de 3 (anillo)", idx((n) => n % 3 === 0)]);
+  PP.read(G + "-ej16-read", rows);
+}, ["input[name='" + G + "-ej16-it']", G + "-ej16-N"]);
+
+/* ===================== Anexo ===================== */
+PP.register(function drawAnexo() {
+  const { ctx, w, h } = PP.canvas(G + "-anexo-c", 0.8);
+  const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -0.08, y1: 1.02 }, { l: 40, r: 14, t: 14, b: 28 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: "y", xTicks: 5, yTicks: 5 });
+  const f = (x) => (x < 0.6 ? 0.35 + 0.3 * x : 0.75 + 0.2 * x);
+  PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(1), T.Y(1)]], C("--muted"), 1.2, [5, 4]);
+  // conjunto {f(x) > x}
+  const yb = T.Y(-0.04);
+  let start = null;
+  for (let k = 0; k <= 1000; k++) {
+    const x = k / 1000, inS = f(x) > x;
+    if (inS && start === null) start = x;
+    if ((!inS || k === 1000) && start !== null) { PP.path(ctx, [[T.X(start), yb], [T.X(x), yb]], C("--seq2"), 6); start = null; }
+  }
+  PP.path(ctx, [[T.X(0), T.Y(f(0))], [T.X(0.6), T.Y(f(0.6 - 1e-9))]], C("--accent"), 2.4);
+  PP.path(ctx, [[T.X(0.6), T.Y(f(0.6))], [T.X(1), T.Y(f(1))]], C("--accent"), 2.4);
+  PP.circle(ctx, T.X(0.6), T.Y(0.35 + 0.18), 4, C("--accent"), C("--bg"), null, 2);
+  PP.dot(ctx, T.X(0.6), T.Y(f(0.6)), 4, C("--accent"));
+  PP.label(ctx, "f", T.X(0.3), T.Y(f(0.3)) - 6, C("--accent"), "center", "bottom", 13);
+  PP.label(ctx, "y = x", T.X(0.92), T.Y(0.92) + 4, C("--muted"), "left", "top", 11);
+  PP.read(G + "-anexo-read", [
+    ["f(a) = f(0)", "0.35 > 0 = a", "good"],
+    ["{x : f(x) > x} (naranja)", "[0, 0.5) ∪ [0.6, 0.9375)"],
+  ]);
+}, []);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

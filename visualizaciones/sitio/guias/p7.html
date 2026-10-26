@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 7</span></li></ol><div class="pager"><a href="../guias/p6.html" title="Guía · Práctica 6">← Anterior</a><a href="../guias/p8.html" title="Guía · Práctica 8">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 8 ejercicios</p>
+  <h1>Práctica 7</h1>
+  <p>Sucesiones de funciones. Los enunciados de <code>apuntes-typst/guias/p7.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap7-ej1" title="Negación de la convergencia uniforme">Ej. 1</a></li><li><a href="#guiap7-ej2" title="Convergencia puntual y uniforme de cuatro sucesiones">Ej. 2</a></li><li><a href="#guiap7-ej3" title="Límites puntuales y convergencia uniforme en subconjuntos">Ej. 3</a></li><li><a href="#guiap7-ej4" title="Límite uniforme de funciones acotadas">Ej. 4</a></li><li><a href="#guiap7-ej5" title="n x^2/(1 + n x^2) y sus derivadas">Ej. 5</a></li><li><a href="#guiap7-ej6" title="Suma y producto de sucesiones uniformemente convergentes">Ej. 6</a></li><li><a href="#guiap7-ej7" title="El límite uniforme de uniformemente continuas es uniformemente continuo">Ej. 7</a></li><li><a href="#guiap7-ej8" title="Derivadas uniformemente acotadas y límite puntual continuo">Ej. 8</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap7-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p7.typ</code>) · 8 ejercicios. La convergencia puntual y uniforme todavía no está en <code>apuntes.typ</code>: sus popups dan la definición estándar del curso.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap7-ej1" data-short="Ej. 1" data-title="Negación de la convergencia uniforme" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Negación de la convergencia uniforme</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A$ un conjunto, y sea $(Y, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Sea $f : A \to Y$, y para cada $n \in \mathbb{N}$, sea $f_n : A \to Y$.</p>
+      <p>Pruebe que la sucesión $(f_n)_{n \ge 1}$ <em>no</em> <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a $f$ si y solo si existen $\alpha \gt 0$, una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(f_{n_k})_{k \ge 1}$ y una sucesión $(a_k)_{k \ge 1} \subseteq A$ tales que
+      $$d(f_{n_k}(a_k), f(a_k)) \ge \alpha \quad \forall k \in \mathbb{N}.$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej1-c" aria-label="Triángulos de altura 1 que se corren hacia la derecha; en el pico de cada uno la distancia a la función nula es 1, mayor que alfa"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej1-k"><i>k</i></label><input type="range" id="guiap7-ej1-k" min="1" max="10" value="3"><output id="guiap7-ej1-k-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej1-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido (no es de la guía) de la situación del enunciado: <i>A</i> = [0, +∞), <i>Y</i> = ℝ, <i>f</i> = 0 y <i>f<sub>n</sub></i>(<i>x</i>) = máx(0, 1 − |<i>x</i> − <i>n</i>|), un triángulo de altura 1 centrado en <i>n</i>. Con α = 1/2, <i>n<sub>k</sub></i> = <i>k</i> y <i>a<sub>k</sub></i> = <i>k</i>, el segmento vertical mide la distancia <i>d</i>(<i>f<sub>n<sub>k</sub></sub></i>(<i>a<sub>k</sub></i>), <i>f</i>(<i>a<sub>k</sub></i>)) y queda siempre por encima de la línea punteada α. En gris, los triángulos anteriores.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap7-ej2" data-short="Ej. 2" data-title="Convergencia puntual y uniforme de cuatro sucesiones" data-topics="convergencia-funciones,funciones">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Puntual y uniforme: cuatro sucesiones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Analice la <span class="ref" data-ref="ext-convergencia-puntual">convergencia puntual</span> y <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> de las siguientes sucesiones de funciones:</p>
+      <ol class="items">
+        <li>$f_n : \mathbb{R} \to \mathbb{R}$, $f_n(x) = \frac{1}{n} \sin(n x)$.</li>
+        <li>$f_n : \mathbb{R} \to \mathbb{R}$, $f_n(x) = \sin(x/n)$.</li>
+        <li>$f_n : \mathbb{R}^2 \to \mathbb{R}^2$, $f_n(x, y) = \frac{n}{n + 1} (x, y)$.</li>
+        <li>$f_n : C([0, 1]) \to C([0, 1])$, $f_n(\varphi) = \frac{n}{n + 1} \varphi$.</li>
+      </ol>
+      <p>Aquí en $C([0, 1])$ consideramos la <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancia $d_\infty$</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej2-c" aria-label="Gráfico de f_n para el ítem elegido, con un slider de n"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap7-ej2-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="d">(d)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej2-n"><i>n</i></label><input type="range" id="guiap7-ej2-n" min="1" max="40" value="3"><output id="guiap7-ej2-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej2-read" aria-live="polite"></dl>
+      <figcaption>En (a) y (b), el gráfico de <i>f<sub>n</sub></i> (en gris, el de <i>f</i><sub><i>n</i>−1</sub>); arrastrá la línea vertical para leer <i>f<sub>n</sub></i>(<i>x</i>). En (c), cada punto de una grilla de ℝ² con una flecha hasta su imagen <i>f<sub>n</sub></i>(<i>x</i>, <i>y</i>); el punto grande se arrastra. En (d), una φ ∈ <i>C</i>([0, 1]) elegida para el dibujo, φ(<i>t</i>) = 0,4 + <i>t</i> + 0,3 sen(8<i>t</i>) (punteada), y su imagen <i>f<sub>n</sub></i>(φ).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap7-ej3" data-short="Ej. 3" data-title="Límites puntuales y convergencia uniforme en subconjuntos" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Límites puntuales y uniformidad en subconjuntos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Encuentre el <span class="ref" data-ref="ext-convergencia-puntual">límite puntual</span> de la sucesión de funciones $f_n : A \to \mathbb{R}$ en cada uno de los siguientes casos:
+          <ol class="items" style="list-style: lower-roman">
+            <li>$f_n(x) = x^n$, $A = (-1, 1]$.</li>
+            <li>$f_n(x) = x^{-n} e^x$, $A = (1, +\infty)$.</li>
+            <li>$f_n(x) = n^2 x (1 - x^2)^n$, $A = [0, 1]$.</li>
+            <li>$f_n(x) = x e^{-n x^2}$, $A = \mathbb{R}$.</li>
+          </ol></li>
+        <li>Para la sucesión de <b>i.</b>, pruebe que la convergencia es <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> sobre $(0, 1/2)$, y para la de <b>ii.</b>, que es uniforme sobre $[2, 5]$.</li>
+        <li>¿Es uniforme la convergencia de la sucesión sobre $A$ en alguno de los casos?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej3-c" aria-label="Gráficos de f_n sobre A para el caso elegido"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Caso</legend>
+          <label><input type="radio" name="guiap7-ej3-it" value="1" checked>i.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="2">ii.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="3">iii.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="4">iv.</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej3-n"><i>n</i></label><input type="range" id="guiap7-ej3-n" min="1" max="30" value="4"><output id="guiap7-ej3-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej3-read" aria-live="polite"></dl>
+      <figcaption>El gráfico de <i>f<sub>n</sub></i> sobre <i>A</i> (en gris, los tres anteriores). Un círculo vacío marca un extremo que no está en <i>A</i>. En i. y ii. la franja sombreada es el subconjunto del ítem (b): (0, 1/2) y [2, 5]. En ii. el dibujo se corta en <i>x</i> = 6 y en <i>y</i> = 4; en iii. la escala vertical se ajusta a <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap7-ej4" data-short="Ej. 4" data-title="Límite uniforme de funciones acotadas" data-topics="convergencia-funciones,funciones">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Límite uniforme en $B(X)$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $X$ un conjunto y sea <span class="ref" data-ref="ext-espacio-bx">$B(X)$</span> el conjunto de las funciones acotadas de $X$ en $\mathbb{R}$. Sea $(f_n)_{n \ge 1}$ una sucesión en $B(X)$.</p>
+      <ol class="items">
+        <li>Si $(f_n)_{n \ge 1}$ <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a $f : X \to \mathbb{R}$, muestre que $f \in B(X)$. ¿Sigue valiendo esto si la convergencia es solamente <span class="ref" data-ref="ext-convergencia-puntual">puntual</span>?</li>
+        <li>Si $(f_n)_{n \ge 1}$ converge uniformemente en $X$, muestre que existe $M \gt 0$ tal que $|f_n(x)| \le M$ para todo $x \in X$ y todo $n \in \mathbb{N}$. En otras palabras, la sucesión $(f_n)_{n \ge 1}$ es <em>uniformemente acotada</em>, o es <em>acotada en</em> $(B(X), \|\cdot\|_\infty)$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej4-c" aria-label="Varias funciones f_n dentro de una misma franja de altura M"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej4-n"><i>n</i></label><input type="range" id="guiap7-ej4-n" min="1" max="30" value="5"><output id="guiap7-ej4-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej4-read" aria-live="polite"></dl>
+      <figcaption>Qué quiere decir <em>uniformemente acotada</em> en el ítem (b), con un ejemplo elegido: <i>X</i> = [0, 2π] y <i>f<sub>n</sub></i>(<i>x</i>) = sen <i>x</i> + cos(<i>nx</i>)/<i>n</i>. Se dibujan <i>f</i><sub>1</sub>, …, <i>f<sub>n</sub></i> (la última en color): una sola franja |<i>y</i>| ≤ <i>M</i>, con <i>M</i> = 2, las contiene a todas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap7-ej5" data-short="Ej. 5" data-title="n x^2/(1 + n x^2) y sus derivadas" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>$f_n(x) = \frac{n x^2}{1 + n x^2}$ y sus derivadas</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(f_n)_{n \ge 1}$ la sucesión de funciones dada por
+      $$f_n : [0, 1] \to \mathbb{R}, \quad f_n(x) = \frac{n x^2}{1 + n x^2}.$$</p>
+      <p>Estudie la <span class="ref" data-ref="ext-convergencia-puntual">convergencia puntual</span> y <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> de las sucesiones $(f_n)_{n \ge 1}$ y $(f_n')_{n \ge 1}$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej5-c" aria-label="Gráfico de f_n o de su derivada en [0, 1]"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Sucesión</legend>
+          <label><input type="radio" name="guiap7-ej5-q" value="f" checked><i>f<sub>n</sub></i></label>
+          <label><input type="radio" name="guiap7-ej5-q" value="d"><i>f<sub>n</sub></i>′</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej5-n"><i>n</i></label><input type="range" id="guiap7-ej5-n" min="1" max="200" value="10"><output id="guiap7-ej5-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej5-read" aria-live="polite"></dl>
+      <figcaption>En color, <i>f<sub>n</sub></i> (o <i>f<sub>n</sub></i>′(<i>x</i>) = 2<i>nx</i>/(1 + <i>nx</i>²)²) en [0, 1]; en gris, los de <i>n</i> = 1, 2, 5, 10, 20, 50 y 100 que sean menores que el elegido. Con <i>f<sub>n</sub></i>′ la escala vertical se ajusta a <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap7-ej6" data-short="Ej. 6" data-title="Suma y producto de sucesiones uniformemente convergentes" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Suma y producto de límites uniformes</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="enun"><p>Sea $X$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $(f_n)_{n \ge 1}, (g_n)_{n \ge 1} : X \to \mathbb{R}$ dos sucesiones de funciones que <span class="ref" data-ref="ext-convergencia-uniforme">convergen uniformemente</span> a funciones $f, g : X \to \mathbb{R}$, respectivamente. Pruebe que:</p>
+    <ol class="items">
+      <li>La sucesión $(f_n + g_n)_{n \ge 1}$ converge uniformemente a $f + g$.</li>
+      <li>Si ambas sucesiones están <span class="ref" data-ref="ext-uniformemente-acotada">uniformemente acotadas</span>, entonces $(f_n g_n)_{n \ge 1}$ converge uniformemente a $f g$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap7-ej7" data-short="Ej. 7" data-title="El límite uniforme de uniformemente continuas es uniformemente continuo" data-topics="convergencia-funciones,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Límite uniforme de uniformemente continuas</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $X, Y$ <span class="ref" data-ref="def-4.1">espacios métricos</span>, y sea $(f_n)_{n \ge 1}$ una sucesión de funciones $f_n : X \to Y$ <span class="ref" data-ref="def-5.14">uniformemente continuas</span> que <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a una función $f : X \to Y$. Pruebe que $f$ es uniformemente continua.</p></div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap7-ej8" data-short="Ej. 8" data-title="Derivadas uniformemente acotadas y límite puntual continuo" data-topics="convergencia-funciones,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Derivadas acotadas por $c$: el límite puntual es continuo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(f_n)_{n \ge 1} : [a, b] \to \mathbb{R}$ una sucesión de funciones derivables que <span class="ref" data-ref="ext-convergencia-puntual">converge puntualmente</span> a una función $f : [a, b] \to \mathbb{R}$. Pruebe que si existe $c \gt 0$ tal que $|f_n'(x)| \le c$ para todo $x \in [a, b]$ y para todo $n \in \mathbb{N}$, entonces $f$ es <span class="ref" data-ref="def-5.4">continua</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej8-c" aria-label="Gráfico de f_n con la recta tangente en un punto arrastrable"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej8-n"><i>n</i></label><input type="range" id="guiap7-ej8-n" min="1" max="100" value="4"><output id="guiap7-ej8-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej8-read" aria-live="polite"></dl>
+      <figcaption>La hipótesis con un ejemplo elegido: [<i>a</i>, <i>b</i>] = [−1, 1] y <i>f<sub>n</sub></i>(<i>x</i>) = √(<i>x</i>² + 1/<i>n</i>), derivables con |<i>f<sub>n</sub></i>′(<i>x</i>)| = |<i>x</i>|/√(<i>x</i>² + 1/<i>n</i>) ≤ 1, así que <i>c</i> = 1 sirve para todos los <i>n</i>. El segmento es la tangente en <i>x</i>₀ (arrastrá el punto): su pendiente nunca pasa de <i>c</i>. En gris, <i>f</i><sub>1</sub> y <i>f</i><sub>2</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua<\/i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$<\/p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes<\/i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).<\/p><p><i>Nota<\/i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$<\/b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-convergencia-puntual": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia puntual",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge puntualmente<\/b> a $f$ si para cada $a \\in A$ la sucesión $(f_n(a))_{n \\ge 1}$ converge a $f(a)$ en $Y$:<\/p><p>$$\\begin{aligned}&\\forall a \\in A \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$<\/p><p>El $n_0$ puede depender de $a$ y de $\\varepsilon$. La función $f$ se llama <b>límite puntual<\/b> de la sucesión.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-convergencia-uniforme": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia uniforme",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge uniformemente<\/b> a $f$ (en $A$) si<\/p><p>$$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 \\quad \\forall a \\in A : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$<\/p><p>Ahora el $n_0$ depende sólo de $\\varepsilon$: sirve para todos los puntos de $A$ a la vez (comparar con la convergencia puntual). Equivalentemente, $\\sup_{a \\in A} d(f_n(a), f(a)) \\to 0$ cuando $n \\to \\infty$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-espacio-bx": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "El espacio $B(X)$ de las funciones acotadas",
+  "enunciado": "<p>Para un conjunto $X$, $B(X)$ es el conjunto de las funciones $f : X \\to \\mathbb{R}$ acotadas, es decir, tales que existe $M \\ge 0$ con $|f(x)| \\le M$ para todo $x \\in X$. En $B(X)$ se usa la norma $$\\|f\\|_\\infty = \\sup_{x \\in X} |f(x)|,$$ con su distancia $d_\\infty(f, g) = \\|f - g\\|_\\infty$ (la misma que en $C([a, b])$).<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-uniformemente-acotada": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Sucesión de funciones uniformemente acotada",
+  "enunciado": "<p>Una sucesión de funciones $f_n : X \\to \\mathbb{R}$ es <b>uniformemente acotada<\/b> si existe $M \\gt 0$ tal que $|f_n(x)| \\le M$ para todo $x \\in X$ y todo $n \\in \\mathbb{N}$; es decir, si es acotada en $(B(X), \\|\\cdot\\|_\\infty)$.<\/p>",
+  "fuente": "Práctica 7, Ejercicio 4 (b); todavía no está en apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p7 */
+(() => {
+"use strict";
+/* Dibujos de la guía 7 (sucesiones de funciones). Usa window.PP. */
+const ID = "guiap7";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const FONT = "11px 'IBM Plex Sans', system-ui, sans-serif";
+
+/* Recorta el dibujo al rectángulo de datos del marco. */
+function clipPlot(ctx, T) {
+  ctx.beginPath();
+  ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b);
+  ctx.clip();
+}
+
+/* Gráfico de f en [x0, x1], cortado fuera del marco. */
+function curve(ctx, T, f, x0, x1, color, width, dash, N) {
+  N = N || 600;
+  const span = Math.abs(T.box.y1 - T.box.y0);
+  const lo = Math.min(T.box.y0, T.box.y1) - span, hi = Math.max(T.box.y0, T.box.y1) + span;
+  ctx.save(); clipPlot(ctx, T);
+  ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = width || 1.5; ctx.setLineDash(dash || []);
+  let pen = false;
+  for (let i = 0; i <= N; i++) {
+    const x = x0 + (x1 - x0) * i / N, y = f(x);
+    if (!isFinite(y) || y < lo || y > hi) { pen = false; continue; }
+    if (pen) ctx.lineTo(T.X(x), T.Y(y)); else { ctx.moveTo(T.X(x), T.Y(y)); pen = true; }
+  }
+  ctx.stroke(); ctx.restore();
+}
+
+/* Arrastre sobre un canvas: pick(px, py, T) devuelve un id o null; move(id, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Marco con la misma escala en x y en y, centrado verticalmente en cy. */
+function eqFrame(w, h, x0, x1, cy, pad) {
+  const p = Object.assign({ l: 36, r: 12, t: 12, b: 28 }, pad || {});
+  const half = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r) / 2;
+  return PP.frame(w, h, { x0, x1, y0: cy - half, y1: cy + half }, p);
+}
+
+/* ===================== Ejercicio 1 ===================== */
+(function () {
+  const tri = (n) => (x) => Math.max(0, 1 - Math.abs(x - n));
+  const draw = function ej1() {
+    const k = PP.val(ID + "-ej1-k");
+    PP.out(ID + "-ej1-k-o", String(k));
+    const { ctx, w, h } = PP.canvas(ID + "-ej1-c", 0.56);
+    const T = PP.frame(w, h, { x0: 0, x1: 11.5, y0: -0.12, y1: 1.3 }, { l: 34, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 4, xTicks: 6 });
+    const alpha = 0.5;
+    // f = 0
+    PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(11.5), T.Y(0)]], C("--ok"), 2.5);
+    PP.label(ctx, "f = 0", T.X(11.3), T.Y(0) - 4, C("--ok"), "right", "bottom", 11);
+    // α
+    PP.path(ctx, [[T.X(0), T.Y(alpha)], [T.X(11.5), T.Y(alpha)]], C("--fail"), 1.5, [5, 4]);
+    PP.label(ctx, "α = 1/2", T.X(0.15), T.Y(alpha) - 3, C("--fail"), "left", "bottom", 11);
+    for (let j = 1; j < k; j++) curve(ctx, T, tri(j), 0, 11.5, C("--muted"), 1, null, 400);
+    curve(ctx, T, tri(k), 0, 11.5, C("--accent"), 2.5, null, 800);
+    // distancia en a_k
+    PP.path(ctx, [[T.X(k), T.Y(0)], [T.X(k), T.Y(1)]], C("--seq2"), 3);
+    PP.dot(ctx, T.X(k), T.Y(1), 5, C("--accent"));
+    PP.dot(ctx, T.X(k), T.Y(0), 4, C("--ok"));
+    PP.label(ctx, "a" + "ₖ = " + k, T.X(k), T.Y(0) + 4, C("--seq2"), "center", "top", 11);
+    PP.label(ctx, "f" + "ₙₖ", T.X(k) + 8, T.Y(1.08), C("--accent"), "left", "middle", 12);
+    PP.read(ID + "-ej1-read", [
+      ["n<sub>k</sub> = a<sub>k</sub>", String(k)],
+      ["f<sub>n<sub>k</sub></sub>(a<sub>k</sub>)", "1"],
+      ["f(a<sub>k</sub>)", "0"],
+      ["d(f<sub>n<sub>k</sub></sub>(a<sub>k</sub>), f(a<sub>k</sub>))", "1 ≥ α = 0.5", "good"],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej1-k"]);
+})();
+
+/* ===================== Ejercicio 2 ===================== */
+(function () {
+  const S = { a: 1.2, b: 12, d: 0.55, p: [2, 1.5] };
+  const phi = (t) => 0.4 + t + 0.3 * Math.sin(8 * t);
+  let lastT = null, lastIt = "a";
+  const box = {
+    a: { x0: -6.6, x1: 6.6, y0: -1.25, y1: 1.25 },
+    b: { x0: -40, x1: 40, y0: -1.25, y1: 1.25 },
+    d: { x0: 0, x1: 1, y0: -0.1, y1: 1.9 },
+  };
+  const fn = {
+    a: (n) => (x) => Math.sin(n * x) / n,
+    b: (n) => (x) => Math.sin(x / n),
+    d: (n) => (t) => n / (n + 1) * phi(t),
+  };
+  const draw = function ej2() {
+    const it = PP.radio(ID + "-ej2-it") || "a";
+    const n = PP.val(ID + "-ej2-n");
+    PP.out(ID + "-ej2-n-o", String(n));
+    lastIt = it;
+    const { ctx, w, h } = PP.canvas(ID + "-ej2-c", 0.66);
+    if (it === "c") {
+      const T = eqFrame(w, h, -4.2, 4.2, 0);
+      lastT = T;
+      PP.axes(ctx, T, { xLabel: "x", yLabel: "y", xTicks: 8, yTicks: 6 });
+      const r = n / (n + 1);
+      for (let x = -3; x <= 3; x++) for (let y = -3; y <= 3; y++) {
+        if (T.Y(y) < T.p.t + 6 || T.Y(y) > T.h - T.p.b - 8) continue;
+        PP.dot(ctx, T.X(x), T.Y(y), 2.5, C("--muted"));
+        PP.path(ctx, [[T.X(x), T.Y(y)], [T.X(r * x), T.Y(r * y)]], C("--accent"), 1.5);
+        PP.dot(ctx, T.X(r * x), T.Y(r * y), 2.5, C("--accent"));
+      }
+      const [px, py] = S.p;
+      PP.path(ctx, [[T.X(px), T.Y(py)], [T.X(r * px), T.Y(r * py)]], C("--seq2"), 2.5);
+      PP.dot(ctx, T.X(px), T.Y(py), 7, C("--panel"), C("--seq2"));
+      PP.dot(ctx, T.X(r * px), T.Y(r * py), 5, C("--seq2"));
+      const side = px > 1.5 ? ["right", -9] : ["left", 9];
+      PP.label(ctx, "(x, y)", T.X(px) + side[1], T.Y(py) - 6, C("--seq2"), side[0], "bottom", 12);
+      PP.label(ctx, "fₙ(x, y)", T.X(r * px) + side[1], T.Y(r * py) + 6, C("--seq2"), side[0], "top", 12);
+      PP.read(ID + "-ej2-read", [
+        ["n/(n+1)", PP.fmt(r, 4)],
+        ["(x, y)", "(" + PP.fmt(px, 2) + ", " + PP.fmt(py, 2) + ")"],
+        ["f<sub>n</sub>(x, y)", "(" + PP.fmt(r * px, 3) + ", " + PP.fmt(r * py, 3) + ")"],
+      ]);
+      return;
+    }
+    const B = box[it];
+    const T = PP.frame(w, h, B, { l: 38, r: 12, t: 12, b: 28 });
+    lastT = T;
+    PP.axes(ctx, T, { xLabel: it === "d" ? "t" : "x", yTicks: 5, xTicks: 6 });
+    const x0 = S[it];
+    if (it === "d") {
+      curve(ctx, T, phi, 0, 1, C("--muted"), 1.8, [5, 4]);
+      curve(ctx, T, fn.d(n), 0, 1, C("--accent"), 2.5);
+      PP.label(ctx, "φ", T.X(0.98), T.Y(phi(0.98)) - 6, C("--muted"), "right", "bottom", 12);
+    } else {
+      if (n > 1) curve(ctx, T, fn[it](n - 1), B.x0, B.x1, C("--muted"), 1, null, 1200);
+      curve(ctx, T, fn[it](n), B.x0, B.x1, C("--accent"), 2.2, null, 1500);
+    }
+    const y = fn[it](n)(x0);
+    PP.path(ctx, [[T.X(x0), T.p.t], [T.X(x0), T.h - T.p.b]], C("--seq2"), 1.2, [4, 4]);
+    PP.dot(ctx, T.X(x0), T.Y(y), 5, C("--seq2"));
+    PP.dot(ctx, T.X(x0), T.h - T.p.b, 6, C("--panel"), C("--seq2"));
+    const rows = it === "d"
+      ? [["n/(n+1)", PP.fmt(n / (n + 1), 4)], ["t", PP.fmt(x0, 3)], ["φ(t)", PP.fmt(phi(x0), 4)], ["f<sub>n</sub>(φ)(t)", PP.fmt(y, 4)]]
+      : [["f<sub>n</sub>(x)", it === "a" ? "sen(nx)/n" : "sen(x/n)"], ["x", PP.fmt(x0, 3)], ["f<sub>n</sub>(x)", PP.fmt(y, 4)]];
+    PP.read(ID + "-ej2-read", rows);
+  };
+  PP.register(draw, [ID + "-ej2-n", "input[name=" + ID + "-ej2-it]"]);
+  draggable(ID + "-ej2-c", () => lastT,
+    (px, py, T) => {
+      if (lastIt === "c") {
+        const [x, y] = S.p;
+        return Math.hypot(px - T.X(x), py - T.Y(y)) < 22 ? "p" : null;
+      }
+      return Math.abs(px - T.X(S[lastIt])) < 22 ? "x" : null;
+    },
+    (k, x, y, T) => {
+      if (k === "p") S.p = [clamp(x, -3.8, 3.8), clamp(y, Math.min(T.box.y0, T.box.y1) + 0.3, Math.max(T.box.y0, T.box.y1) - 0.3)];
+      else S[lastIt] = clamp(x, box[lastIt].x0, box[lastIt].x1);
+    }, draw);
+})();
+
+/* ===================== Ejercicio 3 ===================== */
+(function () {
+  const F = {
+    1: { f: (n) => (x) => Math.pow(x, n), x0: -1, x1: 1, box: { x0: -1.1, x1: 1.1, y0: -1.15, y1: 1.15 }, A: "(−1, 1]", ext: [[-1, false], [1, true]], strip: [0, 0.5, "(0, 1/2)"], tex: "xⁿ" },
+    2: { f: (n) => (x) => Math.exp(x) / Math.pow(x, n), x0: 1, x1: 6, box: { x0: 0.8, x1: 6.1, y0: -0.2, y1: 4 }, A: "(1, +∞)", ext: [[1, false]], strip: [2, 5, "[2, 5]"], tex: "x⁻ⁿ eˣ" },
+    3: { f: (n) => (x) => n * n * x * Math.pow(1 - x * x, n), x0: 0, x1: 1, box: null, A: "[0, 1]", ext: [[0, true], [1, true]], tex: "n² x (1 − x²)ⁿ" },
+    4: { f: (n) => (x) => x * Math.exp(-n * x * x), x0: -3, x1: 3, box: { x0: -3, x1: 3, y0: -0.5, y1: 0.5 }, A: "ℝ", ext: [], tex: "x e^(−n x²)" },
+  };
+  const draw = function ej3() {
+    const it = PP.radio(ID + "-ej3-it") || "1";
+    const n = PP.val(ID + "-ej3-n");
+    PP.out(ID + "-ej3-n-o", String(n));
+    const c = F[it];
+    let box = c.box;
+    if (!box) {
+      let m = 0;
+      for (let k = Math.max(1, n - 3); k <= n; k++) for (let i = 0; i <= 400; i++) m = Math.max(m, c.f(k)(i / 400));
+      box = { x0: -0.05, x1: 1.05, y0: -0.06 * m, y1: 1.12 * m };
+    }
+    const { ctx, w, h } = PP.canvas(ID + "-ej3-c", 0.64);
+    const T = PP.frame(w, h, box, { l: 42, r: 12, t: 12, b: 28 });
+    if (c.strip) {
+      PP.rect(ctx, T.X(c.strip[0]), T.p.t, T.X(c.strip[1]) - T.X(c.strip[0]), T.h - T.p.t - T.p.b, null, C("--band"));
+      PP.label(ctx, c.strip[2], (T.X(c.strip[0]) + T.X(c.strip[1])) / 2, T.p.t + 4, C("--accent"), "center", "top", 11);
+    }
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 6 });
+    for (let k = Math.max(1, n - 3); k < n; k++) curve(ctx, T, c.f(k), c.x0, c.x1, C("--muted"), 1, null, 900);
+    curve(ctx, T, c.f(n), c.x0, c.x1, C("--accent"), 2.4, null, 1500);
+    c.ext.forEach(([x, closed]) => {
+      const y = c.f(n)(x);
+      if (!isFinite(y) || y > Math.max(box.y0, box.y1)) return;
+      PP.dot(ctx, T.X(x), T.Y(y), 4.5, closed ? C("--accent") : C("--bg"), C("--accent"));
+    });
+    PP.read(ID + "-ej3-read", [
+      ["f<sub>n</sub>(x)", c.tex],
+      ["A", c.A],
+      ["n", String(n)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej3-n", "input[name=" + ID + "-ej3-it]"]);
+})();
+
+/* ===================== Ejercicio 4 ===================== */
+(function () {
+  const f = (n) => (x) => Math.sin(x) + Math.cos(n * x) / n;
+  const draw = function ej4() {
+    const n = PP.val(ID + "-ej4-n");
+    PP.out(ID + "-ej4-n-o", String(n));
+    const M = 2;
+    const { ctx, w, h } = PP.canvas(ID + "-ej4-c", 0.6);
+    const T = PP.frame(w, h, { x0: 0, x1: 2 * Math.PI, y0: -2.6, y1: 2.6 }, { l: 34, r: 12, t: 12, b: 28 });
+    PP.rect(ctx, T.p.l, T.Y(M), T.w - T.p.l - T.p.r, T.Y(-M) - T.Y(M), null, C("--okband"));
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 6 });
+    [M, -M].forEach((m) => PP.path(ctx, [[T.p.l, T.Y(m)], [T.w - T.p.r, T.Y(m)]], C("--ok"), 1.5, [5, 4]));
+    PP.label(ctx, "M = 2", T.w - T.p.r - 4, T.Y(M) - 3, C("--ok"), "right", "bottom", 11);
+    PP.label(ctx, "−M", T.w - T.p.r - 4, T.Y(-M) + 3, C("--ok"), "right", "top", 11);
+    for (let k = 1; k < n; k++) curve(ctx, T, f(k), 0, 2 * Math.PI, C("--muted"), 0.8, null, 700);
+    curve(ctx, T, f(n), 0, 2 * Math.PI, C("--accent"), 2.3, null, 1200);
+    let m = 0;
+    for (let k = 1; k <= n; k++) for (let i = 0; i <= 600; i++) m = Math.max(m, Math.abs(f(k)(2 * Math.PI * i / 600)));
+    PP.read(ID + "-ej4-read", [
+      ["f<sub>n</sub>(x)", "sen x + cos(nx)/n"],
+      ["máx |f<sub>k</sub>(x)|, k ≤ n", "≈ " + PP.fmt(m, 3)],
+      ["M", "2", "good"],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej4-n"]);
+})();
+
+/* ===================== Ejercicio 5 ===================== */
+(function () {
+  const f = (n) => (x) => n * x * x / (1 + n * x * x);
+  const df = (n) => (x) => 2 * n * x / Math.pow(1 + n * x * x, 2);
+  const draw = function ej5() {
+    const q = PP.radio(ID + "-ej5-q") || "f";
+    const n = PP.val(ID + "-ej5-n");
+    PP.out(ID + "-ej5-n-o", String(n));
+    const g = q === "f" ? f : df;
+    const top = q === "f" ? 1.08 : Math.max(1.2, 1.12 * 0.6496 * Math.sqrt(n));
+    const { ctx, w, h } = PP.canvas(ID + "-ej5-c", 0.62);
+    const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -0.04 * top, y1: top }, { l: 40, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+    [1, 2, 5, 10, 20, 50, 100].filter((k) => k < n).forEach((k) => curve(ctx, T, g(k), 0, 1, C("--muted"), 1, null, 800));
+    curve(ctx, T, g(n), 0, 1, C("--accent"), 2.4, null, 1500);
+    PP.label(ctx, q === "f" ? "fₙ" : "fₙ′", T.X(0.97), T.Y(g(n)(0.97)) - 6, C("--accent"), "right", "bottom", 12);
+    PP.read(ID + "-ej5-read", [
+      [q === "f" ? "f<sub>n</sub>(x)" : "f<sub>n</sub>′(x)", q === "f" ? "nx²/(1 + nx²)" : "2nx/(1 + nx²)²"],
+      ["n", String(n)],
+      [q === "f" ? "f<sub>n</sub>(1)" : "f<sub>n</sub>′(1)", PP.fmt(g(n)(1), 4)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej5-n", "input[name=" + ID + "-ej5-q]"]);
+})();
+
+/* ===================== Ejercicio 8 ===================== */
+(function () {
+  const S = { x0: 0.35 };
+  let lastT = null;
+  const f = (n) => (x) => Math.sqrt(x * x + 1 / n);
+  const df = (n) => (x) => x / Math.sqrt(x * x + 1 / n);
+  const draw = function ej8() {
+    const n = PP.val(ID + "-ej8-n");
+    PP.out(ID + "-ej8-n-o", String(n));
+    const { ctx, w, h } = PP.canvas(ID + "-ej8-c", 0.62);
+    const T = PP.frame(w, h, { x0: -1.08, x1: 1.08, y0: -0.05, y1: 1.55 }, { l: 36, r: 12, t: 12, b: 28 });
+    lastT = T;
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 4, xTicks: 5 });
+    [1, 2].filter((k) => k < n).forEach((k) => curve(ctx, T, f(k), -1, 1, C("--muted"), 1));
+    curve(ctx, T, f(n), -1, 1, C("--accent"), 2.4, null, 1200);
+    [-1, 1].forEach((x) => PP.dot(ctx, T.X(x), T.Y(f(n)(x)), 4, C("--accent")));
+    const x0 = S.x0, y0 = f(n)(x0), m = df(n)(x0), d = 0.32;
+    PP.path(ctx, [[T.X(x0 - d), T.Y(y0 - m * d)], [T.X(x0 + d), T.Y(y0 + m * d)]], C("--seq2"), 2.2);
+    PP.dot(ctx, T.X(x0), T.Y(y0), 7, C("--panel"), C("--seq2"));
+    PP.dot(ctx, T.X(x0), T.Y(y0), 3, C("--seq2"));
+    PP.read(ID + "-ej8-read", [
+      ["x₀", PP.fmt(x0, 3)],
+      ["f<sub>n</sub>′(x₀)", PP.fmt(m, 4)],
+      ["|f<sub>n</sub>′(x₀)| ≤ c = 1", Math.abs(m) <= 1 ? "sí" : "no", "good"],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej8-n"]);
+  draggable(ID + "-ej8-c", () => lastT,
+    (px, py, T) => {
+      const n = PP.val(ID + "-ej8-n");
+      return Math.hypot(px - T.X(S.x0), py - T.Y(f(n)(S.x0))) < 24 ? "x" : null;
+    },
+    (k, x) => { S.x0 = clamp(x, -1, 1); }, draw);
+})();
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

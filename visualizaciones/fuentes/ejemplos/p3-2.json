@@ -1,0 +1,268 @@
+{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "cor-4.58": {
+  "tipo": "Corolario",
+  "numero": "4.58",
+  "titulo": "$\\mathbb{R}^n$ es completo",
+  "enunciado": "<p>$(\\mathbb{R}^n, d_\\infty)$ es completo.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo</em> de $A$ si:</p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.</p><p>Es decir, el supremo es la <em>menor de las cotas superiores</em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.33": {
+  "tipo": "Definición",
+  "numero": "4.33",
+  "titulo": "Punto de Acumulación y Conjunto Derivado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <strong>punto de acumulación</strong> de $E$ si para todo radio $r \\gt 0$ tenemos que existe un $y \\in B(x, r) \\cap E$ con $y \\ne x$.</p><p>Definimos el <strong>conjunto derivado</strong> de $E$ como $$E' = \\{x \\in M : x \\text{ es punto de acumulación}\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.38": {
+  "tipo": "Definición",
+  "numero": "4.38",
+  "titulo": "Punto de Frontera y Frontera de un Conjunto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <strong>punto de frontera</strong> de $E$ si para todo $r \\gt 0$, $B(x, r) \\cap E \\ne \\emptyset$ y $B(x, r) \\cap E^c \\ne \\emptyset$.</p><p>Al conjunto de los puntos de frontera lo llamamos la <strong>frontera</strong> de $E$ y lo notamos $$\\partial E = \\{x \\in M : x \\text{ es punto de frontera de } E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <strong>acotado</strong> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro</b> se define como:</p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:</p><ol><li><b>Distancia euclídea ($d_2$):</b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$</li><li><b>Distancia taxista ($d_1$):</b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$</li><li><b>Distancia del máximo ($d_\\infty$):</b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-bolzano-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano-Weierstrass",
+  "enunciado": "<p>Toda sucesión acotada de números reales tiene una subsucesión convergente.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-clausura-monotona": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La clausura es monótona",
+  "enunciado": "<p>Si $A \\subseteq B$, entonces $\\overline{A} \\subseteq \\overline{B}$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (la demostración del Teorema 5.13 lo cita como desafío de la Práctica 3)"
+ },
+ "ext-clausura-via-abiertos": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Clausura vía abiertos",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico y $T \\subseteq E$. Entonces $x \\in \\overline{T}$ si y sólo si todo abierto $V$ con $x \\in V$ cumple $V \\cap T \\ne \\emptyset$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-convergencia-uniforme": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia uniforme",
+  "enunciado": "<p>Sean $f_n, f : [a, b] \\to \\mathbb{R}$. Decimos que $(f_n)_{n \\in \\mathbb{N}}$ <b>converge uniformemente</b> a $f$ en $[a, b]$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que $|f_n(x) - f(x)| \\lt \\varepsilon$ para todo $n \\ge n_0$ y todo $x \\in [a, b]$. Es decir, si $\\sup_{x \\in [a, b]} |f_n(x) - f(x)| \\to 0$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-metrica-discreta": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métrica discreta",
+  "enunciado": "<p>En un conjunto no vacío $E$, la <b>métrica discreta</b> es $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\ne y. \\end{cases}$$ (Es la del Ejercicio 1 (f) de la Práctica 3.)</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-metricas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métricas equivalentes",
+  "enunciado": "<p>Dos métricas $d$ y $d'$ en un conjunto $E$ son <b>equivalentes</b> si definen los mismos abiertos. Equivalentemente, para todo $x \\in E$ y todo $r \\gt 0$ existen $r', r'' \\gt 0$ con $B_d(x, r') \\subseteq B_{d'}(x, r)$ y $B_{d'}(x, r'') \\subseteq B_d(x, r)$. Por ejemplo, $d_1$, $d_2$ y $d_\\infty$ en $\\mathbb{R}^n$ son equivalentes (Ejercicio 12 de la Práctica 3).</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-unicidad-limite-metrico": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Unicidad del límite en un espacio métrico",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Si $x_n \\to x$ y $x_n \\to y$, entonces $x = y$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "obs-4.23": {
+  "tipo": "Observación",
+  "numero": "4.23",
+  "titulo": "",
+  "enunciado": "<ol type=\"a\"><li>Todos los puntos de $E$ son puntos de adherencia. Dado $x \\in E$, tenemos que $B(x, r) \\cap E$ contiene, al menos, al punto $x$: esto nos dice que es punto de adherencia. Es decir, $E \\subseteq \\overline{E}$.</li><li>Con lo que acabamos de observar y teniendo en cuenta la Observación 4.12, tenemos que $$E^\\circ \\subseteq E \\subseteq \\overline{E}.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.32": {
+  "tipo": "Observación",
+  "numero": "4.32",
+  "titulo": "$\\mathbb{Q}$ no es ni abierto ni cerrado en $\\mathbb{R}$",
+  "enunciado": "<p>Muchas veces pensamos que cerrado es lo contrario de abierto. Y tiene sentido, porque tenemos cierta dualidad entre los conceptos: un conjunto es abierto si y sólo si su complemento es cerrado o un conjunto es cerrado si y sólo si su complemento es abierto. Pero esto no quiere decir que sólo existan estas dos opciones: que un conjunto <b>no sea abierto no significa que sea cerrado</b> necesariamente.</p><p>Hay muchos ejemplos de conjuntos que no son ni cerrados ni abiertos (pensá a ver si se te ocurre alguno). Uno de esos ejemplos es el conjunto de los números racionales $\\mathbb{Q} \\subseteq (\\mathbb{R}, |\\cdot|)$.</p><ul><li>$\\overline{\\mathbb{Q}} = \\mathbb{R}$: Si $x \\in \\mathbb{R}$, $B(x, r) = (x - r, x + r)$. Como sabemos que cualquier intervalo abierto contiene números racionales, sabemos que $(x-r, x+r) \\cap \\mathbb{Q} \\ne \\emptyset$ y por lo tanto $x \\in \\overline{\\mathbb{Q}}$. Esto nos dice que $\\mathbb{Q}$ no es cerrado.</li><li>$\\mathbb{Q}^{\\circ} = \\emptyset$: sea $x \\in \\mathbb{Q}$. Como $B(x, r) = (x - r, x + r)$ contiene números irracionales, tenemos que $B(x, r) \\cap \\mathbb{Q}^c \\ne \\emptyset$ para todo $r \\gt 0$. Esto nos dice que $B(x, r) \\not\\subseteq \\mathbb{Q}$ para ningún $r \\gt 0$, con lo cual $x \\notin \\mathbb{Q}^{\\circ}$. En particular, esto nos dice que $\\mathbb{Q}$ tampoco es abierto.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.36": {
+  "tipo": "Proposición",
+  "numero": "4.36",
+  "titulo": "Clausura como unión con el conjunto derivado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $\\overline{E} = E \\cup E'$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.</li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-algebra-de-limites": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}}$ y $(b_n)_{n \\in \\mathbb{N}}$ sucesiones reales tales que $\\lim_{n \\to \\infty} a_n = a$, $\\lim_{n \\to \\infty} b_n = b$, con $a, b \\in \\mathbb{R}$. Entonces:</p><ol type=\\\"a\\\"><li>$\\lim_{n \\to \\infty} (c \\cdot a_n) = c \\cdot a$ para todo $c \\in \\mathbb{R}$.</li><li>$\\lim_{n \\to \\infty} (a_n + b_n) = a + b$.</li><li>$\\lim_{n \\to \\infty} (a_n b_n) = a b$.</li><li>Si $b \\ne 0$, entonces $\\lim_{n \\to \\infty} (a_n / b_n) = a / b$.</li><li>Si $a_n \\le b_n$ para todo $n \\ge n_0$ entonces $a \\le b$.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.18": {
+  "tipo": "Teorema",
+  "numero": "4.18",
+  "titulo": "Intersección finita de abiertos es abierta",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Sean $A_1, \\dots, A_n$ conjuntos abiertos. Entonces $A = \\bigcap_{i=1}^n A_i$ es abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.29": {
+  "tipo": "Teorema",
+  "numero": "4.29",
+  "titulo": "Cerrados vía complemento abierto",
+  "enunciado": "<p>$F$ es un conjunto cerrado si y sólo si $F^c$ es un conjunto abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.31": {
+  "tipo": "Teorema",
+  "numero": "4.31",
+  "titulo": "Intersección arbitraria y unión finita de cerrados",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Entonces:</p><ol type=\\\"a\\\"><li>Si $\\{F_i\\}_{i \\in I}$ es una familia de conjuntos cerrados, entonces $F = \\bigcap_{i \\in I} F_i$ es cerrado.</li><li>Si $\\{F_i\\}_{i=1}^n$ son conjuntos cerrados, entonces $F = \\bigcup_{i=1}^n F_i$ es cerrado.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.54": {
+  "tipo": "Teorema",
+  "numero": "4.54",
+  "titulo": "Sucesiones de Cauchy, acotadas y convergentes",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión.</p><ol type=\"a\"><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy, entonces es acotada.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es convergente, entonces es de Cauchy.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy y tiene una subsucesión convergente, entonces $(x_n)$ es convergente.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.57": {
+  "tipo": "Teorema",
+  "numero": "4.57",
+  "titulo": "$\\mathbb{R}$ es completo",
+  "enunciado": "<p>$(\\mathbb{R}, |\\cdot|)$ es completo.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

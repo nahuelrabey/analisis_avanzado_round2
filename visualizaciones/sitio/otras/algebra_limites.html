@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root { color-scheme: light dark; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; font: 14px system-ui; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:40;font:13px 'IBM Plex Sans',system-ui,sans-serif;padding:6px 16px;background:Canvas;color:CanvasText;border-bottom:1px solid rgba(128,128,128,.35)"><a href="../index.html#otras" style="color:inherit">← Visualizaciones</a></div>
+<title>Álgebra de límites</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: una columna de secciones que siguen la escalera del apunte (convergencia → herramientas → álgebra → ±∞ → monotonía → espacios métricos → Práctica 4). Cada resultado es una ficha; las que tienen dibujo ponen el texto a la izquierda y el dibujo interactivo a la derecha (apilados en pantallas angostas). Misma familia visual que las otras páginas de visualizaciones/. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.20);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.16);
+    --seq3: #0f7a6f;
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.14);
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0;
+      --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0;
+    --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 2.4rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.5rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+  h2 .bn { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+  ol.items, ul.items { margin: 0 0 0.8rem; padding-left: 1.4rem; }
+  ol.items { list-style: lower-alpha; }
+  ol.items li, ul.items li { margin-bottom: 0.35rem; }
+  a { color: var(--accent); }
+
+  /* Escalera de dependencias del encabezado: el orden es información (cada paso usa el anterior). */
+  .ladder { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.25rem; list-style: none; padding: 0; margin: 0.4rem 0 0; font-family: var(--font-ui); font-size: 0.86rem; }
+  .ladder li { display: flex; align-items: center; gap: 0.25rem; }
+  .ladder li + li::before { content: "→"; color: var(--muted); margin-right: 0.15rem; }
+  .ladder a { display: inline-block; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; background: var(--panel); }
+  .ladder a:hover { border-color: var(--accent); color: var(--accent); }
+  .ladder a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ladder .k { color: var(--muted); margin-right: 0.3rem; font-variant-numeric: tabular-nums; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-family: var(--font-ui); font-size: 0.86rem; color: var(--muted); }
+  button { font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer; }
+  button:hover { background: var(--band); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .block { display: grid; gap: 1.2rem; scroll-margin-top: 1rem; }
+  .unlock { max-width: 78ch; color: var(--muted); margin: 0; }
+  .unlock b { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; scroll-margin-top: 1rem; min-width: 0; }
+  .ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
+  .tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0.05rem 0.4rem; white-space: nowrap; }
+  .tag.def { color: var(--seq3); border-color: var(--seq3); }
+  .tag.guia { color: var(--seq2); border-color: var(--seq2); }
+  .src { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .ex-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 1.4rem; align-items: start; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+  .ex-text { min-width: 0; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin-bottom: 0.9rem; }
+  .enun.def { border-left-color: var(--seq3); }
+  .enun p:last-child, .proof p:last-child { margin-bottom: 0; }
+  .nota { font-size: 0.95rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.6rem; margin-top: 0.8rem; }
+  .nota b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+  .receta { font-size: 0.97rem; background: var(--band); border-radius: 6px; padding: 0.6rem 0.85rem; margin: 0 0 0.9rem; }
+  .receta b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; margin-right: 0.3rem; }
+
+  details.proof { border-top: 1px solid var(--rule); padding-top: 0.55rem; }
+  details.proof > summary { cursor: pointer; font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); list-style-position: outside; margin-left: 1rem; }
+  details.proof > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  details.proof > summary .from { color: var(--muted); margin-left: 0.4rem; }
+  details.proof[open] > summary { margin-bottom: 0.6rem; }
+
+  .viz { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 0.6rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; }
+  @media (max-width: 900px) { .viz { position: static; } }
+  .viz canvas { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); touch-action: pan-y; }
+  .ctrl { display: grid; gap: 0.45rem; }
+  .slider { display: grid; grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr) 4.4rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .pills legend { color: var(--muted); font-size: 0.8rem; padding: 0; margin-bottom: 0.25rem; float: left; width: 100%; }
+  .pills label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.85rem; position: relative; }
+  .pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .pills label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pills label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .check { display: flex; align-items: center; gap: 0.45rem; color: var(--muted); }
+  .check input { accent-color: var(--accent); }
+  .read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.1rem 0.9rem; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .read dt { color: var(--muted); }
+  .read dd { margin: 0; overflow-wrap: anywhere; }
+  .read .good { color: var(--ok); }
+  .read .bad { color: var(--fail); }
+  .viz figcaption { color: var(--muted); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.5; }
+
+  .tbl-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tr:last-child td { border-bottom: 0; }
+  td .tag { margin-right: 0.25rem; }
+  footer { color: var(--muted); font-family: var(--font-ui); font-size: 0.85rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+
+<header class="intro">
+  <p class="eyebrow">Análisis Avanzado 2026 · repaso de las Prácticas 1 y 3, rumbo a la Práctica 4</p>
+  <h1>Álgebra de límites</h1>
+  <p>Todo lo que el curso dice sobre límites de sucesiones, en el orden en que se construye: la definición, las tres herramientas que se usan en todas las demostraciones, el álgebra propiamente dicha, los límites infinitos, la monotonía y, al final, el salto a espacios métricos. La Práctica 4 usa todo esto a través del Teorema 5.7: una función es continua si y sólo si manda sucesiones convergentes en sucesiones convergentes.</p>
+  <p>Los números de definiciones y resultados son los de <code>apuntes.typ</code>. Cuando el apunte deja una demostración como ejercicio, la que aparece acá es la de la guía resuelta del repositorio, y se indica. Las demostraciones están plegadas para que intentes cada una antes de leerla.</p>
+  <ol class="ladder" aria-label="Secciones, en orden de dependencia">
+    <li><a href="#convergencia"><span class="k">1</span>Convergencia</a></li>
+    <li><a href="#herramientas"><span class="k">2</span>Tres herramientas</a></li>
+    <li><a href="#algebra"><span class="k">3</span>Álgebra</a></li>
+    <li><a href="#infinito"><span class="k">4</span>Límites infinitos</a></li>
+    <li><a href="#monotonia"><span class="k">5</span>Monotonía y subsucesiones</a></li>
+    <li><a href="#metricos"><span class="k">6</span>Espacios métricos</a></li>
+    <li><a href="#p4"><span class="k">7</span>Hacia la Práctica 4</a></li>
+    <li><a href="#indice"><span class="k">8</span>Índice</a></li>
+  </ol>
+  <div class="tools" style="margin-top: 1rem;">
+    <button type="button" id="open-all">Abrir todas las demostraciones</button>
+    <button type="button" id="close-all">Cerrar todas</button>
+  </div>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="block" id="convergencia" aria-labelledby="h-conv">
+  <h2 id="h-conv"><span class="bn">Sección 1 · Práctica 1</span>Qué quiere decir $a_n \to \ell$</h2>
+  <p class="unlock"><b>Para qué sirve</b>Toda demostración de esta página arranca igual: «sea $\varepsilon > 0$», y termina igual: «para todo $n \ge n_0$». Entre medio hay que fabricar el $n_0$.</p>
+
+  <article class="ex" id="def7">
+    <div class="ex-head"><span class="tag def">Def. 6 y 7</span><h3>Sucesión y convergencia</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun def">
+          <p>Una <b>sucesión</b> es una función $a : \mathbb{N} \to \mathbb{R}$; se escribe $a_n = a(n)$ y $(a_n)_{n \in \mathbb{N}}$ para la sucesión entera.</p>
+          <p>Sea $\ell \in \mathbb{R}$. $(a_n)_{n\in\mathbb{N}}$ <b>converge</b> a $\ell$ si para todo $\varepsilon > 0$ existe $n_0 \in \mathbb{N}$ tal que si $n \ge n_0$, $|a_n - \ell| \lt \varepsilon$. Se nota $\lim_{n\to\infty} a_n = \ell$ o $a_n \to \ell$.</p>
+        </div>
+        <div class="enun def">
+          <p class="lbl">Def. 9 · Negación de la convergencia</p>
+          <p>$(a_n)$ <b>no converge</b> si para todo candidato $L \in \mathbb{R}$ existe $\varepsilon_0 > 0$ tal que para todo $N \in \mathbb{N}$ existe $n \ge N$ con $|a_n - L| \ge \varepsilon_0$.</p>
+        </div>
+        <p class="receta"><b>Cómo leer el dibujo</b>La banda es $(\ell - \varepsilon, \ell + \varepsilon)$. El $n_0$ que aparece es el <i>menor</i> que sirve: desde ahí, todos los puntos quedan adentro. Achicá $\varepsilon$ y el $n_0$ crece; en $(-1)^n$ no hay $\ell$ que funcione con $\varepsilon \le 1$, que es el Ejemplo 9.</p>
+        <details class="proof">
+          <summary>Ejemplo 8: $1/n \to 0$<span class="from">apunte, Ejemplo 2.4</span></summary>
+          <p>Sea $\varepsilon > 0$. $\;|1/n - 0| \lt \varepsilon \iff 1/\varepsilon \lt n$. Por el Principio de Arquímedes existe $n_0 \in \mathbb{N}$ con $1/\varepsilon \lt n_0$, y si $n \ge n_0$ entonces $1/n \le 1/n_0 \lt \varepsilon$.</p>
+        </details>
+        <details class="proof">
+          <summary>C1-1.2: $\dfrac{(-1)^n + 2}{\sqrt{n+3}} \to 0$<span class="from">Clase 1</span></summary>
+          <p>El numerador oscila pero está acotado: $|(-1)^n + 2| \le 3$, así que $\left|\frac{(-1)^n+2}{\sqrt{n+3}}\right| \le \frac{3}{\sqrt{n+3}}$. Por Arquímedes hay $m$ con $1/m \lt (\varepsilon/3)^2$, o sea $1/\sqrt m \lt \varepsilon/3$; con $n_0 = \max\{m - 3, 1\}$ y $n \ge n_0$ queda $\frac{3}{\sqrt{n+3}} \le \frac{3}{\sqrt m} \lt \varepsilon$.</p>
+        </details>
+        <details class="proof">
+          <summary>Ejemplo 9: $(-1)^n$ no converge<span class="from">apunte, Ejemplo 2.5</span></summary>
+          <p>Sea $\ell \ge 0$ y $\varepsilon = 1/2$. Dado $n_0$, se elige $n \ge n_0$ impar: $|(-1)^n - \ell| = \ell + 1 \ge 1/2$. Si $\ell \lt 0$, la cuenta es la misma con un $n$ par.</p>
+        </details>
+      </div>
+      <figure class="viz" id="viz-conv">
+        <canvas id="cv-conv" height="300" aria-label="Términos de la sucesión elegida y la banda de ancho épsilon alrededor del candidato a límite"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills" id="conv-seq">
+            <legend>Sucesión</legend>
+            <label><input type="radio" name="conv-seq" value="inv" checked>$1/n$</label>
+            <label><input type="radio" name="conv-seq" value="pow2">$1/2^n$</label>
+            <label><input type="radio" name="conv-seq" value="osc">$\frac{(-1)^n+2}{\sqrt{n+3}}$</label>
+            <label><input type="radio" name="conv-seq" value="g7a">$\frac{3-2n}{n+1}$</label>
+            <label><input type="radio" name="conv-seq" value="g7b">$\frac{\operatorname{sen} n}{n}$</label>
+            <label><input type="radio" name="conv-seq" value="alt">$(-1)^n$</label>
+          </fieldset>
+          <div class="slider"><label for="conv-eps">$\varepsilon$</label><input type="range" id="conv-eps" min="0" max="100" value="55"><output id="conv-eps-o"></output></div>
+          <div class="slider"><label for="conv-ell">candidato $\ell$</label><input type="range" id="conv-ell" min="-150" max="150" value="0"><output id="conv-ell-o"></output></div>
+          <label class="check"><input type="checkbox" id="conv-M">Mostrar la cota $M$ de la Proposición 7</label>
+        </div>
+        <dl class="read" id="conv-read" aria-live="polite"></dl>
+        <figcaption>El candidato $\ell$ arranca en el límite; movelo y el $n_0$ deja de existir.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="block" id="herramientas" aria-labelledby="h-herr">
+  <h2 id="h-herr"><span class="bn">Sección 2 · Práctica 1</span>Las tres herramientas que se usan siempre</h2>
+  <p class="unlock"><b>Para qué sirve</b>Las demostraciones del álgebra de límites se arman con estas tres piezas: unicidad (para poder hablar de <i>el</i> límite), acotación (para el producto) y conservación del signo (para el cociente).</p>
+
+  <div class="pair">
+    <article class="ex" id="prop5">
+      <div class="ex-head"><span class="tag">Prop. 5</span><h3>Unicidad del límite</h3></div>
+      <div class="enun"><p>Si $a_n \to \ell_1$ y $a_n \to \ell_2$, con $\ell_1, \ell_2 \in \mathbb{R}$, entonces $\ell_1 = \ell_2$.</p></div>
+      <p class="receta"><b>Receta</b>Sumar y restar $a_n$, desigualdad triangular, $\varepsilon/2 + \varepsilon/2$ con $n \ge \max(n_1, n_2)$.</p>
+      <details class="proof">
+        <summary>Demostración<span class="from">apunte</span></summary>
+        <p>Dado $\varepsilon > 0$ hay $n_1$ con $|a_n - \ell_1| \lt \varepsilon/2$ para $n \ge n_1$ y $n_2$ con $|a_n - \ell_2| \lt \varepsilon/2$ para $n \ge n_2$. Con $n \ge n_1, n_2$:</p>
+        $$|\ell_1 - \ell_2| \le |\ell_1 - a_n| + |a_n - \ell_2| \lt \varepsilon.$$
+        <p>Como $\varepsilon$ es arbitrario, por el Ejercicio 1 de la guía 1, $\ell_1 = \ell_2$.</p>
+      </details>
+    </article>
+
+    <article class="ex" id="prop7">
+      <div class="ex-head"><span class="tag">Prop. 7</span><h3>Toda sucesión convergente está acotada</h3></div>
+      <div class="enun"><p>Si $a_n \to \ell \in \mathbb{R}$, existe $M > 0$ con $|a_n| \le M$ para todo $n$ (Def. 9, sucesión acotada).</p></div>
+      <p class="receta"><b>Receta</b>$\varepsilon = 1$ controla la cola; los finitos primeros términos se acotan con un máximo. En el dibujo de la Sección 1, la casilla «cota $M$» dibuja exactamente este $M$.</p>
+      <details class="proof">
+        <summary>Demostración<span class="from">apunte</span></summary>
+        <p>Con $\varepsilon = 1$ existe $n_0$ tal que $|a_n - \ell| \lt 1$ si $n \ge n_0$; entonces $|a_n| \le |a_n - \ell| + |\ell| \lt 1 + |\ell|$. Para los anteriores alcanza con</p>
+        $$M = \max\{|a_1|, |a_2|, \dots, |a_{n_0}|,\ 1 + |\ell|\}.$$
+      </details>
+    </article>
+
+    <article class="ex" id="ej214">
+      <div class="ex-head"><span class="tag">Ej. 2.14</span><h3>Conservación del signo</h3><span class="src">notas de la materia · desafíos P1</span></div>
+      <div class="enun">
+        <p>Sea $a_n \to a$.</p>
+        <ol class="items">
+          <li>Si $a > 0$, existe $n_0$ con $a_n \ge a/2$ para todo $n \ge n_0$.</li>
+          <li>Si $a \lt 0$, existe $n_0$ con $a_n \le a/2$ para todo $n \ge n_0$.</li>
+          <li>Si $a \ne 0$, existe $n_0$ con $|a_n| \ge |a|/2 > 0$ para todo $n \ge n_0$.</li>
+        </ol>
+      </div>
+      <details class="proof">
+        <summary>Demostración de a)<span class="from">desafíos P1, solución</span></summary>
+        <p>Con $\varepsilon = a/2 > 0$ hay $n_0$ con $|a_n - a| \lt a/2$ para $n \ge n_0$, es decir $-a/2 \lt a_n - a \lt a/2$, de donde $a/2 \lt a_n$. El b) es igual con $\varepsilon = -a/2$, y el c) junta los dos casos.</p>
+      </details>
+      <p class="nota"><b>Ojo</b>Con $a = 0$ no se puede concluir nada parecido: $(-1)^n/n \to 0$ cambia de signo siempre.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="block" id="algebra" aria-labelledby="h-alg">
+  <h2 id="h-alg"><span class="bn">Sección 3 · Práctica 1</span>El álgebra de límites</h2>
+  <p class="unlock"><b>Para qué sirve</b>Calcular límites sin volver a la definición. Cada ítem se demuestra repartiendo el $\varepsilon$ entre dos sucesiones y tomando $n_0 = \max(n_1, n_2)$: eso es lo que muestra el laboratorio.</p>
+
+  <article class="ex" id="prop6">
+    <div class="ex-head"><span class="tag">Prop. 6</span><h3>Álgebra de límites</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun">
+          <p>Sean $(a_n)$, $(b_n)$ sucesiones reales con $a_n \to a$ y $b_n \to b$, $a, b \in \mathbb{R}$. Entonces:</p>
+          <ol class="items">
+            <li>$c \cdot a_n \to c \cdot a$ para todo $c \in \mathbb{R}$.</li>
+            <li>$a_n + b_n \to a + b$.</li>
+            <li>$a_n b_n \to a b$.</li>
+            <li>Si $b \ne 0$, $a_n / b_n \to a / b$.</li>
+            <li>Si $a_n \le b_n$ para todo $n \ge n_0$, entonces $a \le b$.</li>
+          </ol>
+        </div>
+        <details class="proof">
+          <summary>a) $c \cdot a_n \to c \cdot a$<span class="from">apunte</span></summary>
+          <p>Si $c = 0$ es trivial. Si $c \ne 0$, dado $\varepsilon > 0$ existe $n_0$ con $|a_n - a| \lt \varepsilon/|c|$ para $n \ge n_0$, y entonces $|c\,a_n - c\,a| = |c|\,|a_n - a| \lt \varepsilon$.</p>
+        </details>
+        <details class="proof">
+          <summary>b) $a_n + b_n \to a + b$<span class="from">el apunte la deja como ejercicio · guía 1 resuelta, Ej. 9 (a)</span></summary>
+          <p>Dado $\varepsilon > 0$, hay $n_1$ con $|a_n - a| \lt \varepsilon/2$ si $n \ge n_1$ y $n_2$ con $|b_n - b| \lt \varepsilon/2$ si $n \ge n_2$. Con $n_0 = \max(n_1, n_2)$ y $n \ge n_0$,</p>
+          $$|(a_n + b_n) - (a + b)| \le |a_n - a| + |b_n - b| \lt \tfrac{\varepsilon}{2} + \tfrac{\varepsilon}{2} = \varepsilon.$$
+        </details>
+        <details class="proof">
+          <summary>c) $a_n b_n \to a b$<span class="from">apunte</span></summary>
+          <p>Por la Prop. 7 existe $M > 0$ con $|a_n| \le M$. Sea $n_1$ con $|b_n - b| \lt \varepsilon/(2M)$ para $n \ge n_1$. Si $b = 0$: $|a_n b_n| \le M|b_n| \lt \varepsilon/2$. Si $b \ne 0$, sea $n_2$ con $|a_n - a| \lt \varepsilon/(2|b|)$ para $n \ge n_2$; con $n \ge \max(n_1, n_2)$,</p>
+          $$\begin{aligned}|a_n b_n - ab| &\le |a_n|\,|b_n - b| + |b|\,|a_n - a| \\ &\lt M \tfrac{\varepsilon}{2M} + |b|\tfrac{\varepsilon}{2|b|} = \varepsilon.\end{aligned}$$
+        </details>
+        <details class="proof">
+          <summary>d) $a_n / b_n \to a / b$<span class="from">apunte</span></summary>
+          <p>Como $a_n/b_n = a_n \cdot (1/b_n)$, por c) alcanza con ver $1/b_n \to 1/b$. Por el Ej. 2.14 c) existen $c = |b|/2 > 0$ y $n_1$ con $|b_n| \ge c$ para $n \ge n_1$. Sea $n_2$ con $|b_n - b| \lt \varepsilon\,|b|\,c$ para $n \ge n_2$. Para $n \ge \max(n_1, n_2)$,</p>
+          $$\left|\frac{1}{b_n} - \frac{1}{b}\right| = \frac{|b - b_n|}{|b_n|\,|b|} \le \frac{|b_n - b|}{c\,|b|} \lt \varepsilon.$$
+        </details>
+        <details class="proof">
+          <summary>e) $a_n \le b_n \Rightarrow a \le b$<span class="from">el apunte la deja como ejercicio · guía 1 resuelta, Ej. 10</span></summary>
+          <p>Por el absurdo, si $a > b$ sea $\varepsilon = (a - b)/2 > 0$; notar que $a - \varepsilon = b + \varepsilon$. Hay $n_1$ con $|a_n - a| \lt \varepsilon$ y $n_2$ con $|b_n - b| \lt \varepsilon$ para $n$ mayores. En $n = \max(n_1, n_2, n_0)$:</p>
+          $$b_n \lt b + \varepsilon = a - \varepsilon \lt a_n,$$
+          <p>contra $a_n \le b_n$.</p>
+        </details>
+      </div>
+      <figure class="viz" id="viz-alg">
+        <canvas id="cv-alg" height="300" aria-label="La sucesión resultado de la operación, la banda épsilon y los índices n1, n2 y n0 de la demostración"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Operación</legend>
+            <label><input type="radio" name="alg-op" value="sum" checked>b) suma</label>
+            <label><input type="radio" name="alg-op" value="prod">c) producto</label>
+            <label><input type="radio" name="alg-op" value="inv">d) $1/b_n$</label>
+          </fieldset>
+          <fieldset class="pills"><legend>$a_n$</legend>
+            <label><input type="radio" name="alg-a" value="a1" checked>$2 + \frac1n$</label>
+            <label><input type="radio" name="alg-a" value="a2">$\frac{n}{n+1}$</label>
+            <label><input type="radio" name="alg-a" value="a3">$3 + \frac{(-1)^n}{n}$</label>
+          </fieldset>
+          <fieldset class="pills"><legend>$b_n$</legend>
+            <label><input type="radio" name="alg-b" value="b1" checked>$-1 + \frac2n$</label>
+            <label><input type="radio" name="alg-b" value="b2">$\frac12 + \frac{\operatorname{sen} n}{n}$</label>
+            <label><input type="radio" name="alg-b" value="b3">$1 - \frac{1}{n^2}$</label>
+          </fieldset>
+          <div class="slider"><label for="alg-eps">$\varepsilon$</label><input type="range" id="alg-eps" min="0" max="100" value="45"><output id="alg-eps-o"></output></div>
+        </div>
+        <dl class="read" id="alg-read" aria-live="polite"></dl>
+        <figcaption>Las líneas punteadas son los $n_1$ y $n_2$ que pide la demostración; la sólida es $n_0 = \max(n_1, n_2)$. El $n^*$ es el menor índice que de verdad sirve: la demostración no busca el óptimo, sólo uno que alcance.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <div class="pair">
+    <article class="ex" id="ej8">
+      <div class="ex-head"><span class="tag guia">Guía 1 · Ej. 8</span><h3>Dominar por algo que tiende a cero</h3></div>
+      <div class="enun"><p>Si $|x_n - \ell| \le a_n$ para todo $n$ y $a_n \to 0$, entonces $x_n \to \ell$.</p></div>
+      <details class="proof">
+        <summary>Demostración<span class="from">guía 1 resuelta</span></summary>
+        <p>El $n_0$ de $a_n \to 0$ sirve tal cual: para $n \ge n_0$, $|x_n - \ell| \le a_n \le |a_n - 0| \lt \varepsilon$.</p>
+      </details>
+      <p class="nota"><b>Se usa en</b>los Ej. 7 (b) y (c): $\left|\frac{\operatorname{sen} n}{n}\right| \le \frac1n$ y $\frac{7}{2^n + 4} \le \frac{7}{2^n} \le \frac7n$.</p>
+    </article>
+
+    <article class="ex" id="ej11">
+      <div class="ex-head"><span class="tag guia">Guía 1 · Ej. 11</span><h3>Nula por acotada es nula</h3></div>
+      <div class="enun"><p>Si $x_n \to 0$ e $(y_n)$ está acotada, entonces $x_n y_n \to 0$.</p></div>
+      <details class="proof">
+        <summary>Demostración<span class="from">guía 1 resuelta</span></summary>
+        <p>Sea $M > 0$ con $|y_n| \le M$. Dado $\varepsilon$, hay $n_0$ con $|x_n| \lt \varepsilon/M$ para $n \ge n_0$, y $|x_n y_n| \le M |x_n| \lt \varepsilon$.</p>
+      </details>
+      <p class="nota"><b>Ojo</b>No es un caso de la Prop. 6 c): $(y_n)$ no tiene por qué converger. Es la misma cuenta que el caso $b = 0$ de esa demostración.</p>
+    </article>
+
+    <article class="ex" id="raiz">
+      <div class="ex-head"><span class="tag">Prop</span><h3>Si $a_n \to \ell$ con $a_n \ge 0$, entonces $\sqrt{a_n} \to \sqrt{\ell}$</h3><span class="src">ejemplos de la Práctica 1</span></div>
+      <details class="proof">
+        <summary>Demostración<span class="from">ejemplos/p1.typ</span></summary>
+        <p><b>Si $\ell > 0$:</b> con el conjugado, $|\sqrt{a_n} - \sqrt\ell| = \frac{|a_n - \ell|}{\sqrt{a_n} + \sqrt\ell} \le \frac{|a_n - \ell|}{\sqrt\ell}$, así que alcanza $|a_n - \ell| \lt \varepsilon\sqrt\ell$.</p>
+        <p><b>Si $\ell = 0$:</b> se pide $a_n \lt \varepsilon^2$ y se toma raíz, que es creciente.</p>
+      </details>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="block" id="infinito" aria-labelledby="h-inf">
+  <h2 id="h-inf"><span class="bn">Sección 4 · Práctica 1</span>Límites infinitos</h2>
+  <p class="unlock"><b>Para qué sirve</b>Con $\pm\infty$ el cuantificador cambia: ya no es «para todo $\varepsilon$» sino «para todo $M$». La mitad del álgebra sigue valiendo y la otra mitad no.</p>
+
+  <article class="ex" id="def8">
+    <div class="ex-head"><span class="tag def">Def. 8</span><h3>Divergencia a $\pm\infty$, y la suma</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun def">
+          <p>$a_n \to +\infty$ si para todo $M > 0$ existe $n_0$ tal que $a_n > M$ para todo $n \ge n_0$; $a_n \to -\infty$ si para todo $M > 0$ existe $n_0$ tal que $a_n \lt -M$ para todo $n \ge n_0$. $(a_n)$ <b>diverge</b> si no converge ni diverge a $\pm\infty$.</p>
+        </div>
+        <div class="enun">
+          <p class="lbl">Guía 1 · Ej. 9</p>
+          <p>Si $x_n \to \ell_1$ e $y_n \to \ell_2$, entonces $x_n + y_n \to \ell_1 + \ell_2$ cuando (a) $\ell_1, \ell_2 \in \mathbb{R}$; (b) $\ell_1 \in \mathbb{R}$, $\ell_2 = +\infty$; (c) $\ell_1 = \ell_2 = +\infty$. (d) No vale con $\ell_1 = +\infty$, $\ell_2 = -\infty$.</p>
+        </div>
+        <details class="proof">
+          <summary>(b) $\ell_1 \in \mathbb{R}$, $y_n \to +\infty$<span class="from">guía 1 resuelta</span></summary>
+          <p>Sea $M > 0$. Con $\varepsilon = 1$, $x_n > \ell_1 - 1$ desde $n_1$. Con $M' = \max(M + 1 - \ell_1, 1) > 0$, la Def. 8 da $y_n > M' \ge M + 1 - \ell_1$ desde $n_2$. Sumando, para $n \ge \max(n_1, n_2)$: $x_n + y_n > M$.</p>
+        </details>
+        <details class="proof">
+          <summary>(c) las dos a $+\infty$<span class="from">guía 1 resuelta</span></summary>
+          <p>$x_n > M/2$ desde $n_1$ e $y_n > M/2$ desde $n_2$; sumando, $x_n + y_n > M$ desde $\max(n_1, n_2)$.</p>
+        </details>
+        <details class="proof">
+          <summary>(d) por qué falla con $+\infty$ y $-\infty$<span class="from">guía 1 resuelta</span></summary>
+          <p>En (b) y (c) las dos sucesiones aportan una cota <i>inferior</i>, y sumar cotas inferiores da una cota inferior. Si $y_n \to -\infty$ sólo hay cota <i>superior</i>, y $x_n + y_n$ puede hacer cualquier cosa: es el dibujo.</p>
+        </details>
+        <div class="enun" style="margin-top: 0.9rem;">
+          <p class="lbl">Desafío · Ej. 4 de las notas</p>
+          <p>¿Cuáles de los ítems a)–e) de la Prop. 6 siguen valiendo si $a = \pm\infty$ y $b \in \mathbb{R}$, o si $a = -\infty$ y $b = +\infty$? Queda para pensar: la página no lo resuelve.</p>
+        </div>
+      </div>
+      <figure class="viz" id="viz-inf">
+        <canvas id="cv-inf" height="280" aria-label="Las sucesiones x_n, y_n y su suma para el par elegido"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Par de la guía 1 resuelta, Ej. 9 (d)</legend>
+            <label><input type="radio" name="inf-pair" value="0" checked>$n$ y $-n$</label>
+            <label><input type="radio" name="inf-pair" value="1">$2n$ y $-n$</label>
+            <label><input type="radio" name="inf-pair" value="2">$n$ y $-2n$</label>
+          </fieldset>
+        </div>
+        <dl class="read" id="inf-read" aria-live="polite"></dl>
+        <figcaption>Las tres veces $x_n \to +\infty$ e $y_n \to -\infty$, y la suma termina en tres lugares distintos. Por eso «$\infty - \infty$» no tiene valor.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 5 -->
+<section class="block" id="monotonia" aria-labelledby="h-mon">
+  <h2 id="h-mon"><span class="bn">Sección 5 · Práctica 1</span>Monotonía y subsucesiones: primero existe, después se calcula</h2>
+  <p class="unlock"><b>Para qué sirve</b>Cuando no se puede despejar $n_0$, se prueba que el límite <i>existe</i> (monótona y acotada) y después se lo calcula con álgebra de límites y unicidad, cerrando una ecuación.</p>
+
+  <div class="pair">
+    <article class="ex" id="prop8">
+      <div class="ex-head"><span class="tag def">Def. 10</span><span class="tag">Prop. 8</span><h3>Monótona y acotada converge</h3></div>
+      <div class="enun">
+        <p>$(a_n)$ es <b>monótona creciente</b> (decreciente) si $a_n \le a_{n+1}$ ($a_n \ge a_{n+1}$) para todo $n$ o a partir de algún $n_0$.</p>
+        <p>Si $(a_n)$ es monótona creciente y acotada, converge, y $\lim a_n = \sup\{a_n : n \in \mathbb{N}\}$.</p>
+      </div>
+      <details class="proof">
+        <summary>Demostración<span class="from">apunte</span></summary>
+        <p>Sea $s = \sup\{a_n\}$ y $\varepsilon > 0$. Por la equivalencia del supremo hay $a_{n_0}$ con $s - \varepsilon \lt a_{n_0} \le s$. Por ser creciente, si $n \ge n_0$: $|s - a_n| = s - a_n \le s - a_{n_0} \lt \varepsilon$.</p>
+      </details>
+      <p class="nota"><b>Espejo</b>Guía 1, Ej. 12: decreciente y acotada inferiormente converge al ínfimo; decreciente no acotada inferiormente tiende a $-\infty$. La guía resuelta advierte que «decreciente a partir de $n_0$» da el ínfimo de la cola, no el de todos los términos.</p>
+    </article>
+
+    <article class="ex" id="subs">
+      <div class="ex-head"><span class="tag def">Def.</span><span class="tag">Prop.</span><h3>Subsucesiones heredan el límite</h3></div>
+      <div class="enun">
+        <p>Una <b>subsucesión</b> de $(a_n)$ es $(a_{n_k})_{k}$ con $n_1 \lt n_2 \lt n_3 \lt \cdots$.</p>
+        <p>Si $a_n \to \ell$, toda subsucesión converge a $\ell$.</p>
+      </div>
+      <details class="proof">
+        <summary>Idea de la demostración<span class="from">apunte</span></summary>
+        <p>El $n_0$ de $a_n \to \ell$ puede no ser un índice elegido, pero los índices elegidos son infinitos y crecientes: hay $n_{k_0} > n_0$, y para $k \ge k_0$ también $n_k > n_0$.</p>
+      </details>
+      <p class="nota"><b>Uso típico</b>Contrarrecíproco: dos subsucesiones con límites distintos prueban que no converge. Y la Guía 1, Ej. 16: si $(a_{2k})$ y $(a_{2k-1})$ convergen al mismo límite, $(a_n)$ converge.</p>
+    </article>
+
+    <article class="ex" id="ej12">
+      <div class="ex-head"><span class="tag">12</span><h3>$r^n \to 0$ si $r \in (0,1)$, cerrando $\ell = \ell^2$</h3><span class="src">apunte, Ejemplo 2.24</span></div>
+      <details class="proof">
+        <summary>Resolución<span class="from">ejemplos/p1.typ</span></summary>
+        <p>$r^{n+1} \lt r^n$: decreciente y acotada, así que existe $\ell$. La subsucesión de los pares cumple $a_{2k} = r^k \cdot r^k \to \ell \cdot \ell$ por álgebra de límites, y también $a_{2k} \to \ell$. Por unicidad, $\ell = \ell^2$: $\ell = 0$ o $\ell = 1$. Como $|a_n - 1| \ge 1 - r$ para todo $n$, $\ell = 0$.</p>
+      </details>
+      <p class="nota"><b>C1-2</b>Mismo esquema para todo $x$: $x^n \to 0$ si $|x| \lt 1$, $x^n \to 1$ si $x = 1$, y diverge si $|x| > 1$ o $x = -1$. El cierre es $L = Lx$.</p>
+    </article>
+  </div>
+
+  <article class="ex" id="c21">
+    <div class="ex-head"><span class="tag">C2-1</span><h3>Recursión $a_1 = \sqrt2$, $a_{n+1} = \sqrt{2 + a_n}$</h3><span class="src">Clase 2</span></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun"><p>Probar que $(a_n)$ es monótona y acotada superiormente por $2$, y calcular su límite.</p></div>
+        <p class="receta"><b>Receta</b>Hacer primero la cuenta del límite: si $a_n \to L$, de $a_{n+1}^2 = 2 + a_n$ sale $L^2 = 2 + L$, o sea $L = 2$ o $L = -1$. Quedan dos problemas: por qué converge, y cuál raíz es.</p>
+        <details class="proof">
+          <summary>Resolución<span class="from">Clase 2</span></summary>
+          <p><b>Creciente</b>, por inducción: $a_1 = \sqrt2 \le \sqrt{2 + \sqrt2} = a_2$; si $a_k \le a_{k+1}$, entonces $a_{k+1} = \sqrt{2 + a_k} \le \sqrt{2 + a_{k+1}} = a_{k+2}$.</p>
+          <p><b>Acotada por 2</b>, por inducción: $a_1 \le 2$; si $a_k \le 2$, $a_{k+1} = \sqrt{2 + a_k} \le \sqrt4 = 2$.</p>
+          <p>Por la Prop. 8 converge. Como $a_n > 0$ para todo $n$, $L \ge 0$, y entonces $L = 2$.</p>
+        </details>
+      </div>
+      <figure class="viz" id="viz-web">
+        <canvas id="cv-web" height="300" aria-label="Diagrama de telaraña de la recursión: la curva raíz de 2 más t, la diagonal y los primeros pasos"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="web-a1">$a_1$</label><input type="range" id="web-a1" min="-200" max="700" value="141"><output id="web-a1-o"></output></div>
+          <div class="slider"><label for="web-k">pasos</label><input type="range" id="web-k" min="1" max="14" value="6"><output id="web-k-o"></output></div>
+        </div>
+        <dl class="read" id="web-read" aria-live="polite"></dl>
+        <figcaption>Cada escalón va de $a_n$ a $a_{n+1} = \sqrt{2 + a_n}$ y vuelve a la diagonal. El punto fijo es $(2, 2)$. $L = -1$ es raíz de $L^2 = 2 + L$ pero no está sobre la curva: $\sqrt{2 + (-1)} = 1$. Otros valores de $a_1$ salen del ejemplo y son sólo para explorar.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 6 -->
+<section class="block" id="metricos" aria-labelledby="h-met">
+  <h2 id="h-met"><span class="bn">Sección 6 · Práctica 3</span>En un espacio métrico, todo se reduce a $d(x_n, x) \to 0$</h2>
+  <p class="unlock"><b>Para qué sirve</b>La definición es la de $\mathbb{R}$ con $|a_n - \ell|$ cambiado por $d(x_n, x)$. Lo que cambia de un espacio a otro es qué quiere decir, en concreto, $d(x_n, x) \lt \varepsilon$.</p>
+
+  <div class="pair">
+    <article class="ex" id="def442">
+      <div class="ex-head"><span class="tag def">Def. 4.42</span><span class="tag">Obs. 4.43</span><h3>Convergencia en $(M, d)$</h3></div>
+      <div class="enun def">
+        <p>$(x_n)_{n \in \mathbb{N}} \subseteq M$ <b>converge</b> a $x \in M$ si para todo $\varepsilon > 0$ existe $n_0 \in \mathbb{N}$ tal que $d(x_n, x) \lt \varepsilon$ para todo $n \ge n_0$.</p>
+      </div>
+      <div class="enun"><p>$x_n \to x$ en $M$ $\iff$ $d(x_n, x) \to 0$ en $\mathbb{R}$.</p></div>
+      <p class="nota"><b>Consecuencia</b>Todo lo de las secciones anteriores se aplica a la sucesión real $d(x_n, x)$. Por ejemplo, el Ej. 8 de la guía 1 (dominar por algo que tiende a cero) es la herramienta de siempre para probar $d(x_n, x) \to 0$.</p>
+    </article>
+
+    <article class="ex" id="g3ej13">
+      <div class="ex-head"><span class="tag guia">Guía 3 · Ej. 13</span><h3>La distancia pasa al límite</h3></div>
+      <div class="enun">
+        <p>(a) Si $x_n \to x$ e $y_n \to y$, entonces $d(x_n, y_n) \to d(x, y)$.</p>
+        <p>(b) Si $(x_n)$, $(y_n)$ son de Cauchy, $(d(x_n, y_n))$ converge.</p>
+      </div>
+      <details class="proof">
+        <summary>Demostración de (a)<span class="from">guía 3 resuelta</span></summary>
+        <p><b>Cota clave.</b> Por la desigualdad triangular, en los dos sentidos,</p>
+        $$|d(a, b) - d(a', b')| \le d(a, a') + d(b, b').$$
+        <p>Con $(a, b, a', b') = (x_n, y_n, x, y)$ y $n \ge \max(n_1, n_2)$: $|d(x_n, y_n) - d(x, y)| \le d(x_n, x) + d(y_n, y) \lt \varepsilon/2 + \varepsilon/2$. Es la Prop. 6 b) disfrazada.</p>
+        <p>(b) La misma cota muestra que $d(x_n, y_n)$ es de Cauchy en $\mathbb{R}$, que es completo (Teo. 4.57).</p>
+      </details>
+    </article>
+
+    <article class="ex" id="rn">
+      <div class="ex-head"><span class="tag">Cor. 4.58</span><span class="tag">C9-1.2</span><h3>En $(\mathbb{R}^n, d_\infty)$ se converge coordenada a coordenada</h3></div>
+      <div class="enun"><p>$v_k \to v$ en $(\mathbb{R}^n, d_\infty)$ si y sólo si $x_i^k \to x_i$ en $\mathbb{R}$ para cada coordenada $i$.</p></div>
+      <details class="proof">
+        <summary>Las dos desigualdades<span class="from">apunte, Cor. 4.58 · Clase 9</span></summary>
+        <p>$(\Rightarrow)$ $|x_i^k - x_i| \le \max_{1 \le j \le n} |x_j^k - x_j| = d_\infty(v_k, v)$.</p>
+        <p>$(\Leftarrow)$ Con $k_i$ para cada coordenada y $k_0 = \max\{k_1, \dots, k_n\}$, todas las coordenadas están a menos de $\varepsilon$, y entonces $d_\infty(v_k, v) \lt \varepsilon$. Es el $\max(n_1, n_2)$ del álgebra, con $n$ índices.</p>
+      </details>
+    </article>
+  </div>
+
+  <article class="ex" id="ej30">
+    <div class="ex-head"><span class="tag">30</span><h3>Dos espacios donde converger quiere decir otra cosa</h3><span class="src">apunte, Ejemplo 4.45</span></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun">
+          <ol class="items">
+            <li>En $(M, \delta)$ con la métrica discreta, ¿cómo son las sucesiones convergentes?</li>
+            <li>En $(C([a, b]), d_\infty)$, ¿qué significa $f_n \to f$?</li>
+          </ol>
+        </div>
+        <details class="proof">
+          <summary>Resolución<span class="from">ejemplos/p3.typ</span></summary>
+          <p>a) Si $0 \lt \varepsilon \lt 1$, $\delta(x_n, x) \lt \varepsilon$ sólo si $x_n = x$. Las convergentes son las <b>eventualmente constantes</b>.</p>
+          <p>b) $d_\infty(f_n, f) = \sup_{x \in [a,b]} |f_n(x) - f(x)|$, así que $f_n \to f$ si para todo $\varepsilon > 0$ hay $n_0$ con $|f_n(x) - f(x)| \lt \varepsilon$ <b>para todo</b> $x \in [a, b]$ a la vez: la gráfica de $f_n$ queda dentro de la banda. Es la <b>convergencia uniforme</b>.</p>
+        </details>
+      </div>
+      <figure class="viz" id="viz-band">
+        <canvas id="cv-band" height="280" aria-label="La función f, la banda f más y menos épsilon y la función f_n"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="band-n">$n$</label><input type="range" id="band-n" min="1" max="40" value="3"><output id="band-n-o"></output></div>
+          <div class="slider"><label for="band-eps">$\varepsilon$</label><input type="range" id="band-eps" min="2" max="60" value="20"><output id="band-eps-o"></output></div>
+        </div>
+        <dl class="read" id="band-read" aria-live="polite"></dl>
+        <figcaption>Sucesión elegida para el dibujo: $f(x) = \tfrac12 + \tfrac14 \operatorname{sen}(2\pi x)$ y $f_n(x) = f(x) + \tfrac1n \operatorname{sen}(2\pi n x)$ en $[0, 1]$, con $d_\infty(f_n, f) = \tfrac1n$.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <article class="ex" id="cauchy">
+    <div class="ex-head"><span class="tag def">Def. 4.51</span><span class="tag">Teo. 4.54</span><span class="tag">31</span><h3>Cauchy: converger sin nombrar el límite</h3></div>
+    <div class="ex-grid">
+      <div class="ex-text">
+        <div class="enun def"><p>$(x_n)$ es <b>de Cauchy</b> si para todo $\varepsilon > 0$ existe $n_0$ tal que $d(x_n, x_m) \lt \varepsilon$ para todo $n, m \ge n_0$. $(M, d)$ es <b>completo</b> (Def. 4.55) si toda sucesión de Cauchy tiene límite en $M$.</p></div>
+        <div class="enun">
+          <p><b>Teo. 4.54.</b> (a) De Cauchy implica acotada. (b) Convergente implica de Cauchy. (c) De Cauchy con una subsucesión convergente implica convergente.</p>
+          <p><b>Teo. 4.57.</b> $(\mathbb{R}, |\cdot|)$ es completo. <b>Cor. 4.58.</b> $(\mathbb{R}^n, d_\infty)$ es completo.</p>
+        </div>
+        <details class="proof">
+          <summary>(b) convergente implica de Cauchy<span class="from">apunte</span></summary>
+          <p>Con $d(x_n, x) \lt \varepsilon/2$ desde $n_0$: $d(x_n, x_m) \le d(x_n, x) + d(x, x_m) \lt \varepsilon$ para $n, m \ge n_0$.</p>
+        </details>
+        <details class="proof">
+          <summary>(c) Cauchy más subsucesión convergente<span class="from">apunte</span></summary>
+          <p>$d(x_n, x) \le d(x_n, x_{n_k}) + d(x_{n_k}, x) \lt \varepsilon/2 + \varepsilon/2$, eligiendo un $n_k$ que sea a la vez $\ge n_0$ (Cauchy) y $\ge n_{k_0}$ (convergencia de la subsucesión).</p>
+        </details>
+        <p class="nota"><b>Ejemplo 31</b>$(1/n)$ es de Cauchy en $\mathbb{R}$ y también en $((0, 1], |\cdot|)$, pero ahí no converge: el candidato, $0$, no está en el espacio. Lo mismo pasa en $(C([0,1]), d_1)$ con funciones que se empinan hacia un salto.</p>
+      </div>
+      <figure class="viz" id="viz-cau">
+        <canvas id="cv-cau" height="200" aria-label="Los puntos 1 sobre n en el intervalo (0, 1] y la cola a partir de n0"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="cau-eps">$\varepsilon$</label><input type="range" id="cau-eps" min="0" max="100" value="55"><output id="cau-eps-o"></output></div>
+        </div>
+        <dl class="read" id="cau-read" aria-live="polite"></dl>
+        <figcaption>Desde $n_0 > 1/\varepsilon$, dos términos cualesquiera de la cola están a menos de $\varepsilon$: la cola entra en $(0, 1/n_0]$. Cauchy se cumple, pero el agujero en $0$ deja a la sucesión sin límite en $(0, 1]$.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ============================================================ 7 -->
+<section class="block" id="p4" aria-labelledby="h-p4">
+  <h2 id="h-p4"><span class="bn">Sección 7 · Práctica 4</span>Por qué esto vuelve en continuidad</h2>
+  <p class="unlock"><b>Para qué sirve</b>El Teorema 5.7 convierte cada resultado sobre sucesiones en uno sobre funciones continuas.</p>
+
+  <div class="pair">
+    <article class="ex" id="teo57">
+      <div class="ex-head"><span class="tag">Teo. 5.7</span><h3>Continuidad por sucesiones</h3></div>
+      <div class="enun"><p>$f : (M, d) \to (N, d')$ es continua en $x$ si y sólo si para toda sucesión $(x_n) \subseteq M$ con $x_n \to x$ se tiene $f(x_n) \to f(x)$ en $N$.</p></div>
+      <p class="nota"><b>Para negar</b>alcanza con <i>una</i> sucesión $x_n \to x$ con $f(x_n) \not\to f(x)$, por ejemplo dos subsucesiones con límites distintos (Sección 5).</p>
+    </article>
+
+    <article class="ex" id="c911">
+      <div class="ex-head"><span class="tag">C9-1.1</span><span class="tag">C9-1.6</span><h3>Suma y producto de continuas; polinomios</h3><span class="src">Clase 9, en ejemplos/p4.typ</span></div>
+      <div class="enun"><p>Si $f, g : X \to \mathbb{R}$ son continuas, $f + g$ y $f \cdot g$ también. En consecuencia los polinomios en varias variables son continuos.</p></div>
+      <details class="proof">
+        <summary>Resolución<span class="from">Clase 9</span></summary>
+        <p>Sea $x_n \to x$. Por continuidad $f(x_n) \to f(x)$ y $g(x_n) \to g(x)$, y por la Prop. 6 b), $(f + g)(x_n) = f(x_n) + g(x_n) \to f(x) + g(x)$. El producto es igual con la Prop. 6 c). Los polinomios son sumas y productos de constantes y proyecciones, que son continuas (C9-1.2).</p>
+      </details>
+      <p class="nota"><b>Y además</b>la Prop. 5.18 (continuidad uniforme por pares de sucesiones con $d(x_n, y_n) \to 0$) y el Teo. 5.22 (extensión desde un denso, vía Cauchy y completitud) usan las Secciones 5 y 6 directamente.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ 8 -->
+<section class="block" id="indice" aria-labelledby="h-idx">
+  <h2 id="h-idx"><span class="bn">Sección 8</span>Dónde está cada cosa en el repositorio</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Resultado</th><th>En <code>apuntes.typ</code></th><th>En las guías</th><th>Ejemplos</th></tr></thead>
+      <tbody>
+        <tr><td>Convergencia y su negación</td><td>Def. 7, Def. 9 (negación)</td><td>P1 Ej. 7</td><td><span class="tag">8</span><span class="tag">9</span><span class="tag">C1-1.1</span><span class="tag">C1-1.2</span></td></tr>
+        <tr><td>Unicidad del límite</td><td>Prop. 5</td><td>P1 Ej. 1 (la usa)</td><td></td></tr>
+        <tr><td>Convergente implica acotada</td><td>Prop. 7; en métricos, Ej. 4.50 (desafío)</td><td></td><td></td></tr>
+        <tr><td>Conservación del signo</td><td>Ej. 2.14 (en desafíos/p1.typ)</td><td></td><td></td></tr>
+        <tr><td>Álgebra de límites a)–e)</td><td>Prop. 6 (b y e como ejercicio)</td><td>P1 Ej. 9 (a), Ej. 10</td><td><span class="tag">12</span><span class="tag">C1-2</span><span class="tag">C2-1</span></td></tr>
+        <tr><td>Dominar por algo que tiende a 0; nula por acotada</td><td></td><td>P1 Ej. 8, Ej. 11</td><td><span class="tag">C1-1.2</span></td></tr>
+        <tr><td>Límites infinitos</td><td>Def. 8</td><td>P1 Ej. 9 (b)–(d), Ej. 12 (b), Ej. 14</td><td></td></tr>
+        <tr><td>Monotonía</td><td>Def. 10, Prop. 8</td><td>P1 Ej. 12, Ej. 13</td><td><span class="tag">12</span><span class="tag">C2-1</span></td></tr>
+        <tr><td>Subsucesiones</td><td>Def. y Prop. de subsucesiones</td><td>P1 Ej. 14, 15, 16</td><td><span class="tag">11</span><span class="tag">C2-2</span></td></tr>
+        <tr><td>Convergencia en métricos</td><td>Def. 4.42, Obs. 4.43, Prop. 4.46</td><td>P3 Ej. 13</td><td><span class="tag">30</span></td></tr>
+        <tr><td>Cauchy y completitud</td><td>Def. 4.51, Teo. 4.54, Def. 4.55, Teo. 4.57, Cor. 4.58</td><td>P3 Ej. 13 (b), 14, 15, 16</td><td><span class="tag">31</span><span class="tag">32</span></td></tr>
+        <tr><td>Continuidad por sucesiones</td><td>Teo. 5.7, Prop. 5.18</td><td>P4 Ej. 1, 2, 14</td><td><span class="tag">C9-1.1</span><span class="tag">C9-1.6</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p>Fuentes: <code>apuntes-typst/apuntes.typ</code> (capítulos de sucesiones, espacios métricos y continuidad), <code>guias-agente/guia_1_resuelta_agente.typ</code> y <code>guia_3_resuelta_agente.typ</code> (verificadas en Lean), <code>desafios/p1.typ</code>, <code>ejemplos/p1.typ</code>, <code>ejemplos/p3.typ</code> y <code>ejemplos/p4.typ</code>. Las sucesiones de los dibujos de la Sección 3 y de la banda de la Sección 6 son ejemplos elegidos para la visualización.</p>
+</footer>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- utilidades comunes ----------
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const fmt = (x, d = 3) => {
+    if (!isFinite(x)) return x > 0 ? "+∞" : "−∞";
+    const s = Number(x).toFixed(d).replace(/\.?0+$/, "");
+    return s.replace("-", "−");
+  };
+  const epsFromSlider = (v) => Math.pow(10, -2 + 2 * v / 100); // 0.01 … 1
+  const radio = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+  const setRead = (el, rows) => {
+    el.innerHTML = rows.map(([k, v, cls]) => `<dt>${k}</dt><dd${cls ? ` class="${cls}"` : ""}>${v}</dd>`).join("");
+  };
+
+  // Canvas en alta resolución con un sistema de coordenadas de datos.
+  function setup(canvas, ratio) {
+    const w = canvas.clientWidth || 480;
+    const h = Math.max(200, Math.round(w * ratio));
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.height = h + "px";
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    return { ctx, w, h };
+  }
+  function frame(ctx, w, h, box, pad) {
+    const p = Object.assign({ l: 46, r: 14, t: 14, b: 30 }, pad || {});
+    const X = (x) => p.l + (x - box.x0) / (box.x1 - box.x0) * (w - p.l - p.r);
+    const Y = (y) => h - p.b - (y - box.y0) / (box.y1 - box.y0) * (h - p.t - p.b);
+    return { X, Y, p };
+  }
+  function niceStep(span, target) {
+    const raw = span / target, m = Math.pow(10, Math.floor(Math.log10(raw)));
+    const f = raw / m;
+    return (f < 1.5 ? 1 : f < 3.5 ? 2 : f < 7.5 ? 5 : 10) * m;
+  }
+  function axes(ctx, w, h, box, T, opts) {
+    const o = Object.assign({ xLabel: "n", yTicks: 5, xTicks: 6, intX: true }, opts || {});
+    ctx.save();
+    ctx.font = "11px 'IBM Plex Sans', system-ui, sans-serif";
+    ctx.fillStyle = css("--muted");
+    ctx.strokeStyle = css("--rule");
+    ctx.lineWidth = 1;
+    const ys = niceStep(box.y1 - box.y0, o.yTicks);
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (let y = Math.ceil(box.y0 / ys) * ys; y <= box.y1 + 1e-9; y += ys) {
+      const py = T.Y(y);
+      ctx.beginPath(); ctx.moveTo(T.p.l, py); ctx.lineTo(w - T.p.r, py); ctx.stroke();
+      ctx.fillText(fmt(y, 2), T.p.l - 6, py);
+    }
+    let xs = niceStep(box.x1 - box.x0, o.xTicks);
+    if (o.intX) xs = Math.max(1, Math.round(xs));
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    const start = o.intX ? Math.max(xs, Math.ceil(box.x0 / xs) * xs) : Math.ceil(box.x0 / xs) * xs;
+    for (let x = start; x <= box.x1 + 1e-9; x += xs) {
+      ctx.fillText(fmt(x, 2), T.X(x), h - T.p.b + 6);
+    }
+    ctx.textAlign = "right";
+    ctx.fillText(o.xLabel, w - T.p.r, h - T.p.b + 6 + 12 > h ? h - 12 : h - T.p.b + 6);
+    ctx.restore();
+  }
+  function dot(ctx, x, y, r, fill) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); }
+  function vline(ctx, x, y0, y1, color, dash, width) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width || 1.5; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke(); ctx.restore();
+  }
+  function label(ctx, text, x, y, color, align, base) {
+    ctx.save(); ctx.font = "12px 'IBM Plex Sans', system-ui, sans-serif"; ctx.fillStyle = color;
+    ctx.textAlign = align || "left"; ctx.textBaseline = base || "bottom"; ctx.fillText(text, x, y); ctx.restore();
+  }
+
+  // Menor n0 tal que |s(n) − L| < tol para todo n0 ≤ n ≤ H. Devuelve null si los términos malos llegan hasta el final del horizonte.
+  const H = 4000;
+  function threshold(s, L, tol) {
+    let lastBad = 0;
+    for (let n = 1; n <= H; n++) if (!(Math.abs(s(n) - L) < tol)) lastBad = n;
+    if (lastBad > H * 0.75) return null;
+    return lastBad + 1;
+  }
+
+  const draws = [];
+  const redrawAll = () => draws.forEach((f) => f());
+
+  // ---------- 1. explorador ε–n0 ----------
+  (function conv() {
+    const SEQ = {
+      inv: { f: (n) => 1 / n, lim: 0, name: "1/n" },
+      pow2: { f: (n) => 1 / Math.pow(2, n), lim: 0, name: "1/2ⁿ" },
+      osc: { f: (n) => (Math.pow(-1, n) + 2) / Math.sqrt(n + 3), lim: 0, name: "((−1)ⁿ+2)/√(n+3)" },
+      g7a: { f: (n) => (3 - 2 * n) / (n + 1), lim: -2, name: "(3−2n)/(n+1)" },
+      g7b: { f: (n) => Math.sin(n) / n, lim: 0, name: "sen(n)/n" },
+      alt: { f: (n) => Math.pow(-1, n), lim: null, name: "(−1)ⁿ" },
+    };
+    const cv = document.getElementById("cv-conv");
+    const eps = document.getElementById("conv-eps"), ell = document.getElementById("conv-ell"), chkM = document.getElementById("conv-M");
+    const epsO = document.getElementById("conv-eps-o"), ellO = document.getElementById("conv-ell-o"), read = document.getElementById("conv-read");
+    let last = null;
+    function resetEll() {
+      const s = SEQ[radio("conv-seq")];
+      ell.value = Math.round((s.lim === null ? 0 : s.lim) * 100);
+      ell.min = Math.round(((s.lim === null ? 0 : s.lim) - 1.5) * 100);
+      ell.max = Math.round(((s.lim === null ? 0 : s.lim) + 1.5) * 100);
+    }
+    function draw() {
+      const key = radio("conv-seq"); if (key !== last) { resetEll(); last = key; }
+      const s = SEQ[key], e = epsFromSlider(+eps.value), L = +ell.value / 100;
+      epsO.textContent = fmt(e, 3); ellO.textContent = fmt(L, 2);
+      const n0 = threshold(s.f, L, e);
+      const nMax = Math.min(400, Math.max(40, n0 ? Math.ceil(n0 * 1.35) + 5 : 60));
+      let yMin = Infinity, yMax = -Infinity;
+      for (let n = 1; n <= nMax; n++) { const v = s.f(n); yMin = Math.min(yMin, v); yMax = Math.max(yMax, v); }
+      yMin = Math.min(yMin, L - e); yMax = Math.max(yMax, L + e);
+      let M = null;
+      if (chkM.checked && s.lim !== null) {
+        const n1 = threshold(s.f, s.lim, 1);
+        M = 1 + Math.abs(s.lim);
+        for (let n = 1; n <= n1; n++) M = Math.max(M, Math.abs(s.f(n)));
+        yMin = Math.min(yMin, -M); yMax = Math.max(yMax, M);
+      }
+      const padY = (yMax - yMin) * 0.08 || 0.5;
+      const box = { x0: 0, x1: nMax + 1, y0: yMin - padY, y1: yMax + padY };
+      const { ctx, w, h } = setup(cv, 0.62);
+      const T = frame(ctx, w, h, box);
+      axes(ctx, w, h, box, T);
+      // banda
+      ctx.fillStyle = css("--area");
+      ctx.fillRect(T.X(box.x0), T.Y(L + e), T.X(box.x1) - T.X(box.x0), T.Y(L - e) - T.Y(L + e));
+      ctx.save(); ctx.strokeStyle = css("--accent"); ctx.setLineDash([4, 4]); ctx.beginPath();
+      ctx.moveTo(T.X(box.x0), T.Y(L)); ctx.lineTo(T.X(box.x1), T.Y(L)); ctx.stroke(); ctx.restore();
+      label(ctx, "ℓ + ε", T.X(box.x1) - 4, T.Y(L + e) - 2, css("--accent"), "right");
+      label(ctx, "ℓ − ε", T.X(box.x1) - 4, T.Y(L - e) + 2, css("--accent"), "right", "top");
+      if (M !== null) {
+        ctx.save(); ctx.strokeStyle = css("--seq2"); ctx.setLineDash([6, 3]); ctx.lineWidth = 1.4;
+        [M, -M].forEach((y) => { ctx.beginPath(); ctx.moveTo(T.X(box.x0), T.Y(y)); ctx.lineTo(T.X(box.x1), T.Y(y)); ctx.stroke(); });
+        ctx.restore();
+        label(ctx, "M", T.p.l + 4, T.Y(M) - 2, css("--seq2"));
+        label(ctx, "−M", T.p.l + 4, T.Y(-M) + 2, css("--seq2"), "left", "top");
+      }
+      if (n0) { vline(ctx, T.X(n0), T.p.t, h - T.p.b, css("--ink"), [], 1.2); label(ctx, "n₀ = " + n0, T.X(n0) + 4, T.p.t + 14, css("--ink")); }
+      const r = nMax > 150 ? 1.8 : nMax > 70 ? 2.4 : 3.2;
+      for (let n = 1; n <= nMax; n++) {
+        const v = s.f(n), inside = Math.abs(v - L) < e;
+        dot(ctx, T.X(n), T.Y(v), r, inside ? (n0 && n >= n0 ? css("--ok") : css("--accent")) : css("--fail"));
+      }
+      const rows = [["sucesión", s.name], ["ε", fmt(e, 4)], ["candidato ℓ", fmt(L, 2) + (s.lim !== null && Math.abs(L - s.lim) < 1e-9 ? "  (el límite)" : "")]];
+      if (n0) rows.push(["n₀ mínimo", String(n0), "good"], ["desde n₀", "todos los términos dentro de la banda", "good"]);
+      else rows.push(["n₀", "ninguno: siempre aparecen términos fuera", "bad"]);
+      if (chkM.checked) rows.push(["Prop. 7", s.lim === null ? "no aplica: no converge" : "M = máx(|a₁|,…,|aₙ₀|, 1+|ℓ|) = " + fmt(M, 3)]);
+      setRead(read, rows);
+    }
+    document.querySelectorAll('input[name="conv-seq"]').forEach((i) => i.addEventListener("change", draw));
+    [eps, ell, chkM].forEach((i) => i.addEventListener("input", draw));
+    draws.push(draw);
+  })();
+
+  // ---------- 2. laboratorio n0 = máx(n1, n2) ----------
+  (function alg() {
+    const A = {
+      a1: { f: (n) => 2 + 1 / n, lim: 2, name: "2 + 1/n" },
+      a2: { f: (n) => n / (n + 1), lim: 1, name: "n/(n+1)" },
+      a3: { f: (n) => 3 + Math.pow(-1, n) / n, lim: 3, name: "3 + (−1)ⁿ/n" },
+    };
+    const B = {
+      b1: { f: (n) => -1 + 2 / n, lim: -1, name: "−1 + 2/n" },
+      b2: { f: (n) => 0.5 + Math.sin(n) / n, lim: 0.5, name: "1/2 + sen(n)/n" },
+      b3: { f: (n) => 1 - 1 / (n * n), lim: 1, name: "1 − 1/n²" },
+    };
+    const cv = document.getElementById("cv-alg"), eps = document.getElementById("alg-eps");
+    const epsO = document.getElementById("alg-eps-o"), read = document.getElementById("alg-read");
+    function draw() {
+      const op = radio("alg-op"), a = A[radio("alg-a")], b = B[radio("alg-b")], e = epsFromSlider(+eps.value);
+      epsO.textContent = fmt(e, 3);
+      let s, L, n1, n2, rows = [], tol1, tol2, why1, why2;
+      if (op === "sum") {
+        s = (n) => a.f(n) + b.f(n); L = a.lim + b.lim;
+        tol1 = e / 2; tol2 = e / 2;
+        n1 = threshold(a.f, a.lim, tol1); n2 = threshold(b.f, b.lim, tol2);
+        why1 = "|aₙ − a| < ε/2 = " + fmt(tol1, 4); why2 = "|bₙ − b| < ε/2 = " + fmt(tol2, 4);
+      } else if (op === "prod") {
+        s = (n) => a.f(n) * b.f(n); L = a.lim * b.lim;
+        let M = 0; for (let n = 1; n <= H; n++) M = Math.max(M, Math.abs(a.f(n)));
+        tol1 = e / (2 * M); tol2 = e / (2 * Math.abs(b.lim));
+        n1 = threshold(b.f, b.lim, tol1); n2 = threshold(a.f, a.lim, tol2);
+        why1 = "|bₙ − b| < ε/(2M) = " + fmt(tol1, 4) + "  con M = " + fmt(M, 3); why2 = "|aₙ − a| < ε/(2|b|) = " + fmt(tol2, 4);
+      } else {
+        s = (n) => 1 / b.f(n); L = 1 / b.lim;
+        const c = Math.abs(b.lim) / 2;
+        let lastBad = 0; for (let n = 1; n <= H; n++) if (!(Math.abs(b.f(n)) >= c)) lastBad = n;
+        n1 = lastBad + 1; tol2 = e * Math.abs(b.lim) * c;
+        n2 = threshold(b.f, b.lim, tol2);
+        why1 = "|bₙ| ≥ c = |b|/2 = " + fmt(c, 3) + "  (Ej. 2.14)"; why2 = "|bₙ − b| < ε·|b|·c = " + fmt(tol2, 4);
+      }
+      const n0 = Math.max(n1, n2), nStar = threshold(s, L, e);
+      const nMax = Math.min(600, Math.max(30, Math.ceil(Math.max(n0, nStar || 0) * 1.3) + 4));
+      let yMin = Infinity, yMax = -Infinity;
+      for (let n = 1; n <= nMax; n++) { const v = s(n); if (isFinite(v)) { yMin = Math.min(yMin, v); yMax = Math.max(yMax, v); } }
+      yMin = Math.min(yMin, L - e); yMax = Math.max(yMax, L + e);
+      const clipLo = L - 6, clipHi = L + 6; yMin = Math.max(yMin, clipLo); yMax = Math.min(yMax, clipHi);
+      const padY = (yMax - yMin) * 0.08 || 0.5;
+      const box = { x0: 0, x1: nMax + 1, y0: yMin - padY, y1: yMax + padY };
+      const { ctx, w, h } = setup(cv, 0.62);
+      const T = frame(ctx, w, h, box);
+      axes(ctx, w, h, box, T);
+      ctx.fillStyle = css("--area");
+      ctx.fillRect(T.X(box.x0), T.Y(L + e), T.X(box.x1) - T.X(box.x0), T.Y(L - e) - T.Y(L + e));
+      vline(ctx, T.X(n1), T.p.t, h - T.p.b, css("--seq2"), [5, 4], 1.4);
+      vline(ctx, T.X(n2), T.p.t, h - T.p.b, css("--seq3"), [2, 3], 1.6);
+      vline(ctx, T.X(n0), T.p.t, h - T.p.b, css("--ink"), [], 1.3);
+      label(ctx, "n₁", T.X(n1) + 3, T.p.t + 12, css("--seq2"));
+      label(ctx, "n₂", T.X(n2) + 3, T.p.t + 26, css("--seq3"));
+      label(ctx, "n₀", T.X(n0) + 3, T.p.t + 40, css("--ink"));
+      const r = nMax > 150 ? 1.8 : nMax > 70 ? 2.4 : 3.2;
+      for (let n = 1; n <= nMax; n++) {
+        const v = s(n); if (!isFinite(v) || v < box.y0 || v > box.y1) continue;
+        dot(ctx, T.X(n), T.Y(v), r, Math.abs(v - L) < e ? (n >= n0 ? css("--ok") : css("--accent")) : css("--fail"));
+      }
+      const opName = op === "sum" ? "aₙ + bₙ" : op === "prod" ? "aₙ · bₙ" : "1/bₙ";
+      const limName = op === "sum" ? "a + b" : op === "prod" ? "a · b" : "1/b";
+      rows = [
+        ["sucesión", opName + " → " + limName + " = " + fmt(L, 4)],
+        ["n₁", n1 + "   para " + why1],
+        ["n₂", n2 + "   para " + why2],
+        ["n₀ = máx", String(n0), "good"],
+        ["n* real", nStar ? String(nStar) + (nStar < n0 ? "  (menor: la demostración sobra)" : "") : "—"],
+      ];
+      if (op === "inv") rows.push(["después", "aₙ/bₙ = aₙ · (1/bₙ) y se usa c)"]);
+      setRead(read, rows);
+    }
+    document.querySelectorAll('input[name="alg-op"], input[name="alg-a"], input[name="alg-b"]').forEach((i) => i.addEventListener("change", draw));
+    eps.addEventListener("input", draw);
+    draws.push(draw);
+  })();
+
+  // ---------- 3. ∞ − ∞ ----------
+  (function inf() {
+    const PAIRS = [
+      { x: (n) => n, y: (n) => -n, nx: "n", ny: "−n", sum: "0 para todo n: converge a 0" },
+      { x: (n) => 2 * n, y: (n) => -n, nx: "2n", ny: "−n", sum: "n → +∞" },
+      { x: (n) => n, y: (n) => -2 * n, nx: "n", ny: "−2n", sum: "−n → −∞" },
+    ];
+    const cv = document.getElementById("cv-inf"), read = document.getElementById("inf-read");
+    function draw() {
+      const P = PAIRS[+radio("inf-pair")], N = 20;
+      const box = { x0: 0, x1: N + 1, y0: -42, y1: 42 };
+      const { ctx, w, h } = setup(cv, 0.6);
+      const T = frame(ctx, w, h, box);
+      axes(ctx, w, h, box, T, { yTicks: 6 });
+      ctx.save(); ctx.strokeStyle = css("--muted"); ctx.beginPath(); ctx.moveTo(T.X(0), T.Y(0)); ctx.lineTo(T.X(box.x1), T.Y(0)); ctx.stroke(); ctx.restore();
+      const series = [[P.x, css("--accent"), "xₙ = " + P.nx], [P.y, css("--seq2"), "yₙ = " + P.ny], [(n) => P.x(n) + P.y(n), css("--ok"), "xₙ + yₙ"]];
+      series.forEach(([f, col, name], k) => {
+        ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = k === 2 ? 2.4 : 1.4; ctx.beginPath();
+        for (let n = 1; n <= N; n++) { const px = T.X(n), py = T.Y(f(n)); n === 1 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); }
+        ctx.stroke(); ctx.restore();
+        for (let n = 1; n <= N; n++) dot(ctx, T.X(n), T.Y(f(n)), k === 2 ? 3 : 2.2, col);
+        label(ctx, name, T.p.l + 8, T.p.t + 14 + 15 * k, col);
+      });
+      setRead(read, [["xₙ", P.nx + " → +∞"], ["yₙ", P.ny + " → −∞"], ["xₙ + yₙ", P.sum, "good"]]);
+    }
+    document.querySelectorAll('input[name="inf-pair"]').forEach((i) => i.addEventListener("change", draw));
+    draws.push(draw);
+  })();
+
+  // ---------- 4. telaraña de a_{n+1} = √(2 + a_n) ----------
+  (function web() {
+    const cv = document.getElementById("cv-web"), a1 = document.getElementById("web-a1"), k = document.getElementById("web-k");
+    const a1O = document.getElementById("web-a1-o"), kO = document.getElementById("web-k-o"), read = document.getElementById("web-read");
+    const g = (t) => Math.sqrt(2 + t);
+    function draw() {
+      const x0 = +a1.value / 100, steps = +k.value;
+      a1O.textContent = fmt(x0, 2); kO.textContent = steps;
+      const box = { x0: -2.4, x1: 7.4, y0: -1.6, y1: 3.6 };
+      const { ctx, w, h } = setup(cv, 0.62);
+      const T = frame(ctx, w, h, box, { l: 34 });
+      axes(ctx, w, h, box, T, { xLabel: "t", intX: false, xTicks: 8 });
+      ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, w - T.p.l - T.p.r, h - T.p.t - T.p.b); ctx.clip();
+      // diagonal y = t
+      ctx.strokeStyle = css("--muted"); ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(T.X(box.x0), T.Y(box.x0)); ctx.lineTo(T.X(box.x1), T.Y(box.x1)); ctx.stroke(); ctx.setLineDash([]);
+      // curva y = √(2 + t)
+      ctx.strokeStyle = css("--accent"); ctx.lineWidth = 2.2; ctx.beginPath();
+      for (let i = 0; i <= 300; i++) { const t = -2 + i * (box.x1 + 2) / 300, px = T.X(t), py = T.Y(g(t)); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+      ctx.stroke();
+      // telaraña
+      ctx.strokeStyle = css("--seq2"); ctx.lineWidth = 1.4; ctx.beginPath();
+      let t = x0; ctx.moveTo(T.X(t), T.Y(Math.max(box.y0, Math.min(box.y1, t))));
+      const terms = [t];
+      for (let i = 0; i < steps; i++) { const nx = g(t); ctx.lineTo(T.X(t), T.Y(nx)); ctx.lineTo(T.X(nx), T.Y(nx)); t = nx; terms.push(t); }
+      ctx.stroke();
+      ctx.restore();
+      dot(ctx, T.X(2), T.Y(2), 4.5, css("--ok")); label(ctx, "L = 2", T.X(2) + 6, T.Y(2) + 2, css("--ok"), "left", "top");
+      dot(ctx, T.X(-1), T.Y(-1), 4, css("--fail")); label(ctx, "L = −1, raíz espuria", T.X(-1) + 6, T.Y(-1) + 2, css("--fail"), "left", "top");
+      label(ctx, "y = √(2 + t)", T.X(5.2), T.Y(g(5.2)) - 6, css("--accent"), "left");
+      label(ctx, "y = t", T.X(3.3), T.Y(3.3) - 4, css("--muted"), "right");
+      const mono = terms[1] >= terms[0] ? "creciente" : "decreciente";
+      setRead(read, [
+        ["términos", terms.slice(0, 7).map((v) => fmt(v, 4)).join(", ") + (terms.length > 7 ? ", …" : "")],
+        ["a_" + (steps + 1), fmt(terms[terms.length - 1], 6)],
+        ["monotonía", Math.abs(x0 - 2) < 1e-9 ? "constante: a₁ ya es el punto fijo" : mono + (Math.abs(x0 - Math.SQRT2) < 0.006 ? " (el caso del ejemplo)" : " (exploración)")],
+      ]);
+    }
+    [a1, k].forEach((i) => i.addEventListener("input", draw));
+    draws.push(draw);
+  })();
+
+  // ---------- 5. banda de d∞ en C([0,1]) ----------
+  (function band() {
+    const cv = document.getElementById("cv-band"), nS = document.getElementById("band-n"), eS = document.getElementById("band-eps");
+    const nO = document.getElementById("band-n-o"), eO = document.getElementById("band-eps-o"), read = document.getElementById("band-read");
+    const f = (x) => 0.5 + 0.25 * Math.sin(2 * Math.PI * x);
+    function draw() {
+      const n = +nS.value, e = +eS.value / 100;
+      nO.textContent = n; eO.textContent = fmt(e, 2);
+      const fn = (x) => f(x) + Math.sin(2 * Math.PI * n * x) / n;
+      const box = { x0: 0, x1: 1, y0: -0.75, y1: 1.75 };
+      const { ctx, w, h } = setup(cv, 0.6);
+      const T = frame(ctx, w, h, box, { l: 40 });
+      axes(ctx, w, h, box, T, { xLabel: "x", intX: false, xTicks: 5 });
+      const K = 500, pts = (g) => { const a = []; for (let i = 0; i <= K; i++) { const x = i / K; a.push([T.X(x), T.Y(g(x))]); } return a; };
+      const up = pts((x) => f(x) + e), lo = pts((x) => f(x) - e);
+      ctx.fillStyle = css("--area"); ctx.beginPath();
+      up.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+      lo.slice().reverse().forEach(([x, y]) => ctx.lineTo(x, y)); ctx.closePath(); ctx.fill();
+      const stroke = (arr, col, wd, dash) => { ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.setLineDash(dash || []); ctx.beginPath(); arr.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.stroke(); ctx.restore(); };
+      stroke(up, css("--accent"), 1, [4, 4]); stroke(lo, css("--accent"), 1, [4, 4]);
+      stroke(pts(f), css("--accent"), 2.4);
+      const inside = 1 / n < e;
+      stroke(pts(fn), inside ? css("--ok") : css("--fail"), 1.6);
+      label(ctx, "f", T.X(0.02), T.Y(f(0.02)) - 4, css("--accent"));
+      label(ctx, "fₙ", T.X(0.97), T.Y(fn(0.97)) - 6, inside ? css("--ok") : css("--fail"), "right");
+      const n0 = Math.floor(1 / e) + 1;
+      setRead(read, [
+        ["d∞(fₙ, f)", "sup |sen(2πnx)|/n = 1/" + n + " = " + fmt(1 / n, 4)],
+        ["¿dentro?", inside ? "sí: |fₙ(x) − f(x)| < ε para todo x" : "no: en algún x se sale de la banda", inside ? "good" : "bad"],
+        ["n₀", n0 + "  (el menor n con 1/n < ε)"],
+      ]);
+    }
+    [nS, eS].forEach((i) => i.addEventListener("input", draw));
+    draws.push(draw);
+  })();
+
+  // ---------- 6. Cauchy en (0, 1] ----------
+  (function cau() {
+    const cv = document.getElementById("cv-cau"), eS = document.getElementById("cau-eps");
+    const eO = document.getElementById("cau-eps-o"), read = document.getElementById("cau-read");
+    function draw() {
+      const e = Math.pow(10, -1.6 + 1.6 * +eS.value / 100); // ≈ 0.025 … 1
+      eO.textContent = fmt(e, 3);
+      const n0 = Math.floor(1 / e) + 1;
+      const box = { x0: -0.06, x1: 1.04, y0: -1, y1: 1 };
+      const { ctx, w, h } = setup(cv, 0.36);
+      const T = frame(ctx, w, h, box, { l: 14, r: 14, t: 10, b: 34 });
+      const y = T.Y(0);
+      ctx.save(); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(T.X(0), y); ctx.lineTo(T.X(1), y); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = css("--area"); ctx.fillRect(T.X(0), y - 16, T.X(1 / n0) - T.X(0), 32);
+      for (let n = 1; n <= 300; n++) dot(ctx, T.X(1 / n), y, n >= n0 ? 3 : 3.4, n >= n0 ? css("--ok") : css("--accent"));
+      ctx.beginPath(); ctx.arc(T.X(0), y, 5, 0, Math.PI * 2); ctx.fillStyle = css("--bg"); ctx.fill(); ctx.strokeStyle = css("--fail"); ctx.lineWidth = 1.8; ctx.stroke();
+      label(ctx, "0 ∉ (0, 1]", T.X(0) - 2, y + 22, css("--fail"), "left", "top");
+      label(ctx, "1", T.X(1), y + 22, css("--muted"), "center", "top");
+      label(ctx, "1/n₀", T.X(1 / n0), y - 20, css("--ok"), "center");
+      setRead(read, [
+        ["n₀", n0 + "  (n₀ > 1/ε)"],
+        ["para n, m ≥ n₀", "|1/n − 1/m| < 1/n₀ = " + fmt(1 / n0, 4) + " < ε", "good"],
+        ["límite en (0, 1]", "no existe: el único candidato es 0", "bad"],
+      ]);
+    }
+    eS.addEventListener("input", draw);
+    draws.push(draw);
+  })();
+
+  // ---------- abrir y cerrar demostraciones ----------
+  document.getElementById("open-all").addEventListener("click", () => document.querySelectorAll("details.proof").forEach((d) => (d.open = true)));
+  document.getElementById("close-all").addEventListener("click", () => document.querySelectorAll("details.proof").forEach((d) => (d.open = false)));
+
+  // ---------- redibujar con el tamaño y el tema ----------
+  redrawAll();
+  let pending = 0;
+  const later = () => { cancelAnimationFrame(pending); pending = requestAnimationFrame(redrawAll); };
+  if (window.ResizeObserver) { const ro = new ResizeObserver(later); document.querySelectorAll(".viz canvas").forEach((c) => ro.observe(c)); }
+  window.addEventListener("resize", later);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", later);
+  new MutationObserver(later).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+})();
+</script>
+
+</body>
+</html>

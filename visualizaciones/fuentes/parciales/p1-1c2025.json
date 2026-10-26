@@ -1,0 +1,226 @@
+{
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo</strong> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-2": {
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado inferiormente y no vacío. Entonces existe $i = \\inf(A) \\in \\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\ne \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:</p><p>a) $i$ es cota inferior de $A$, y<br>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-caracterizacion-de-infimo-y-minimo": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Caracterización de Ínfimo y Mínimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado inferiormente y no vacío. Si $t$ es una cota inferior y $t \\in A$ entonces $t = \\inf(A) = \\min(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-unicidad-del-limite": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión de términos reales. Supongamos que $a_n \\to \\ell_1$ y $a_n \\to \\ell_2$ al mismo tiempo, con $\\ell_1, \\ell_2 \\in \\mathbb{R}$. Entonces $\\ell_1 = \\ell_2$.</p><p>Es decir, el límite de una sucesión es único.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.1": {
+  "tipo": "Definición",
+  "numero": "3.1",
+  "titulo": "Conjuntos Coordinables",
+  "enunciado": "<p>Sean $X, Y$ dos conjuntos. Decimos que son <strong>coordinables</strong> si existe una función biyectiva $f : X \\to Y$. Cuando esto ocurre, escribimos $X \\sim Y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\ne \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-3.10": {
+  "tipo": "Observación",
+  "numero": "3.10",
+  "titulo": "Buena Definición y Propiedades del Orden entre Cardinales",
+  "enunciado": "<p>Tenemos que ver que $\\le$ está bien definida, es decir que la relación no depende de los representantes elegidos (recordemos que la definición de cardinal involucra una clase de equivalencia). Es decir, tenemos que ver que si $\\#A \\le \\#B$ y $A \\sim X$, $B \\sim Y$ entonces $\\#X \\le \\#Y$. Como $\\#A \\le \\#B$ sabemos que existe $f : A \\to B$ inyectiva y como $A \\sim X$ y $B \\sim Y$ deben existir funciones $h : A \\to X$ y $g : B \\to Y$ biyectivas. Como la composición de funciones inyectivas resulta inyectiva, tenemos que $g \\circ f \\circ h^{-1} : X \\to Y$ es también inyectiva, lo que nos dice que $\\#X \\le \\#Y$.</p><p>Nos gustaría ver también que $\\le$ define una relación de orden entre los cardinales. Tenemos que:</p><p>• <strong>es reflexiva:</strong> $\\#A \\le \\#A$ vía $\\operatorname{id} : A \\to A$.<br>• <strong>es transitiva:</strong> si $\\#A \\le \\#B$ y $\\#B \\le \\#C$ entonces tenemos funciones $f : A \\to B$ y $g : B \\to C$ inyectivas. Sabemos que la composición $g \\circ f : A \\to C$ también es inyectiva, lo que nos dice que $\\#A \\le \\#C$.</p><p>Sin embargo, la <strong>antisimetría</strong> de la relación no es tan inmediata de probar y es el contenido del siguiente resultado.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-3.21": {
+  "tipo": "Observación",
+  "numero": "3.21",
+  "titulo": "Coordinabilidad de $\\mathbb{R}$ con Intervalos",
+  "enunciado": "<p>De hecho, podemos probar que $\\mathbb{R}$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $\\mathbb{R} \\sim (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $\\mathbb{R}$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $\\mathbb{R} \\sim [a, b]$, podemos pensar que $\\mathbb{R} \\sim (a, b)$ y $(a, b) \\sim [a, b]$ dado que $(a, b) = [a, b] \\setminus \\{a, b\\}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] \\sim (a, b)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.12": {
+  "tipo": "Observación",
+  "numero": "4.12",
+  "titulo": "$E^{\\circ} \\subseteq E$, inclusión posiblemente estricta",
+  "enunciado": "<p>Por definición, sabemos que $E^{\\circ} \\subseteq E$ pero la inclusión puede ser estricta.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-4.16": {
+  "tipo": "Ejemplo",
+  "numero": "4.16 (b)",
+  "titulo": "Las bolas abiertas son abiertas",
+  "enunciado": "<p>En cualquier espacio métrico, toda bola abierta $B(x, r)$ es un conjunto abierto.</p>",
+  "fuente": "apuntes.typ lo cita como «Ejemplo 4.16 b), desafío de la Práctica 3» (Observación 4.19 y Teorema 5.9), pero el ejemplo no está como caja"
+ },
+ "prop-4.21": {
+  "tipo": "Proposición",
+  "numero": "4.21",
+  "titulo": "El interior es el abierto más grande contenido en $E$",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $E \\subseteq M$ un subconjunto. Sea $A \\subseteq E$ un conjunto abierto. Entonces $A \\subseteq E^{\\circ}$. Es decir, el interior es el conjunto abierto más grande contenido dentro de $E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.23": {
+  "tipo": "Observación",
+  "numero": "4.23",
+  "titulo": "",
+  "enunciado": "<p>a) Todos los puntos de $E$ son puntos de adherencia. Dado $x \\in E$, tenemos que $B(x, r) \\cap E$ contiene, al menos, al punto $x$: esto nos dice que es punto de adherencia. Es decir, $E \\subseteq \\overline{E}$.</p><p>b) Con lo que acabamos de observar y teniendo en cuenta la Observación 4.12, tenemos que $E^{\\circ} \\subseteq E \\subseteq \\overline{E}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><p>a) $x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.<br>b) $x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $d(x_n, x_m) \\lt \\varepsilon$, para todo $n, m \\ge n_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p1-ej5b": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 5 (b)",
+  "titulo": "",
+  "enunciado": "<p>Sean $A \\subseteq B \\subseteq \\mathbb{R}$, con $A \\ne \\emptyset$. Probar: (b) Si $B$ está acotado inferiormente, entonces $A$ también lo está, e $\\inf B \\le \\inf A$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej8": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}}$ y $(a_n)_{n \\in \\mathbb{N}}$ sucesiones de números reales. Probar que si $|x_n - \\ell| \\le a_n$ para todo $n \\in \\mathbb{N}$ y $a_n \\to 0$ entonces $x_n \\to \\ell$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej10": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 10",
+  "titulo": "",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}}$ sucesiones de números reales tales que $x_n \\to \\ell_1$ e $y_n \\to \\ell_2$. Probar que si $x_n \\le y_n$ para todo $n$, entonces $\\ell_1 \\le \\ell_2$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p2-ej1c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 1 (c)",
+  "titulo": "",
+  "enunciado": "<p>Halle el cardinal de los siguientes conjuntos: (c) $\\mathbb{Z} \\times \\mathbb{N}$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej9c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 9 (c)",
+  "titulo": "",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos. Pruebe que: (c) $A \\sim B \\Rightarrow \\mathcal{P}(A) \\sim \\mathcal{P}(B)$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10a": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10 (a)",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$.</p><p><em>Sugerencia: considere el desarrollo binario de los números del intervalo $[0, 1)$. ¡Ojo!, dicho desarrollo no es único.</em></p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10b": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10 (b)",
+  "titulo": "",
+  "enunciado": "<p>(Tras probar que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$.) Concluya que $\\#\\mathcal{P}(\\mathbb{N}) = c$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej14c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 14 (c)",
+  "titulo": "",
+  "enunciado": "<p>Calcule el cardinal de $\\mathbb{R}^k$ para cada $k \\in \\mathbb{N}$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "ext-ejemplo-c3-3": {
+  "tipo": "Ejemplo",
+  "numero": "C3-3",
+  "titulo": "Cardinal de las sucesiones enteras que se mueven de a un paso",
+  "enunciado": "<p>Hallar el cardinal de $A = \\{(a_n)_n \\subseteq \\mathbb{Z} : |a_{n+1} - a_n| = 1 \\text{ para todo } n \\in \\mathbb{N}\\}$.</p>",
+  "fuente": "ejemplos/p2.typ (Clase 3 · Ejercicio 3); no está enunciado en apuntes.typ"
+ },
+ "ext-ejemplo-c4-6": {
+  "tipo": "Ejemplo",
+  "numero": "C4-6",
+  "titulo": "$U$ abierto si y sólo si $U \\cap \\overline{T} \\subseteq \\overline{U \\cap T}$ para todo $T$",
+  "enunciado": "<p>Sea $(E,d)$ un espacio métrico y $U \\subseteq E$. Probar que $U$ es abierto si y sólo si para todo $T \\subseteq E$, $U \\cap \\overline{T} \\subseteq \\overline{U \\cap T}$.</p>",
+  "fuente": "ejemplos/p3.typ (Clase 4 · Ejercicio 6); no está enunciado en apuntes.typ"
+ }
+}

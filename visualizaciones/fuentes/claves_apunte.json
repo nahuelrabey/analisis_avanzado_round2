@@ -1,0 +1,744 @@
+[
+ {
+  "clave": "def-1",
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "linea": 101
+ },
+ {
+  "clave": "def-2",
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "linea": 105
+ },
+ {
+  "clave": "ax-completitud",
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "linea": 115
+ },
+ {
+  "clave": "teo-1",
+  "tipo": "Teorema",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes",
+  "linea": 119
+ },
+ {
+  "clave": "prop-1",
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "linea": 127
+ },
+ {
+  "clave": "prop-2",
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $QQ$",
+  "linea": 135
+ },
+ {
+  "clave": "prop-3",
+  "tipo": "Proposición",
+  "numero": "3",
+  "titulo": "Equivalencia de supremo",
+  "linea": 151
+ },
+ {
+  "clave": "def-3",
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "linea": 218
+ },
+ {
+  "clave": "prop-4",
+  "tipo": "Proposición",
+  "numero": "4",
+  "titulo": "Caracterización de Supremo y Máximo",
+  "linea": 222
+ },
+ {
+  "clave": "def-4",
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "linea": 236
+ },
+ {
+  "clave": "def-5",
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "linea": 240
+ },
+ {
+  "clave": "teo-2",
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "linea": 250
+ },
+ {
+  "clave": "prop-5-equivalencia-de-infimo",
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "linea": 264
+ },
+ {
+  "clave": "def-6-minimo",
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "linea": 294
+ },
+ {
+  "clave": "prop-6-caracterizacion-de-infimo-y-minimo",
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Caracterización de Ínfimo y Mínimo",
+  "linea": 298
+ },
+ {
+  "clave": "def-6-sucesiones",
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Sucesiones",
+  "linea": 313
+ },
+ {
+  "clave": "def-7",
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "linea": 317
+ },
+ {
+  "clave": "def-8",
+  "tipo": "Definición",
+  "numero": "8",
+  "titulo": "Divergencia de Sucesiones",
+  "linea": 348
+ },
+ {
+  "clave": "prop-5-unicidad-del-limite",
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "linea": 356
+ },
+ {
+  "clave": "def-9-negacion-de-la-convergencia-no",
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Negación de la Convergencia (No Convergencia / Divergencia)",
+  "linea": 376
+ },
+ {
+  "clave": "prop-6-algebra-de-limites",
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "linea": 384
+ },
+ {
+  "clave": "def-9-sucesion-acotada",
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Sucesión Acotada",
+  "linea": 450
+ },
+ {
+  "clave": "prop-7",
+  "tipo": "Proposición",
+  "numero": "7",
+  "titulo": "Toda sucesión convergente está acotada",
+  "linea": 456
+ },
+ {
+  "clave": "def-10",
+  "tipo": "Definición",
+  "numero": "10",
+  "titulo": "Sucesión Monótona",
+  "linea": 468
+ },
+ {
+  "clave": "prop-8",
+  "tipo": "Proposición",
+  "numero": "8",
+  "titulo": "Convergencia de sucesiones monótonas crecientes",
+  "linea": 472
+ },
+ {
+  "clave": "prop-equivalencia-del-supremo-2",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Equivalencia del supremo 2",
+  "linea": 491
+ },
+ {
+  "clave": "def-subsucesion",
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "linea": 515
+ },
+ {
+  "clave": "prop-convergencia-de-subsucesiones",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de subsucesiones",
+  "linea": 519
+ },
+ {
+  "clave": "def-serie",
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Serie",
+  "linea": 539
+ },
+ {
+  "clave": "def-limite-y-convergencia-de-series",
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Límite y Convergencia de Series",
+  "linea": 544
+ },
+ {
+  "clave": "prop-condicion-necesaria-de-convergencia",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Condición necesaria de convergencia",
+  "linea": 551
+ },
+ {
+  "clave": "prop-algebra-de-series",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Álgebra de Series",
+  "linea": 564
+ },
+ {
+  "clave": "prop-convergencia-de-series-de-terminos",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de series de términos no negativos",
+  "linea": 570
+ },
+ {
+  "clave": "teo-criterio-de-comparacion",
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Criterio de Comparación",
+  "linea": 578
+ },
+ {
+  "clave": "def-3.1",
+  "tipo": "Definición",
+  "numero": "3.1",
+  "titulo": "Conjuntos Coordinables",
+  "linea": 586
+ },
+ {
+  "clave": "prop-3.2",
+  "tipo": "Proposición",
+  "numero": "3.2",
+  "titulo": "Relación de equivalencia",
+  "linea": 590
+ },
+ {
+  "clave": "def-3.5",
+  "tipo": "Definición",
+  "numero": "3.5",
+  "titulo": "Cardinal de un Conjunto",
+  "linea": 602
+ },
+ {
+  "clave": "def-3.6",
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "linea": 608
+ },
+ {
+  "clave": "obs-3.7",
+  "tipo": "Observación",
+  "numero": "3.7",
+  "titulo": "Enumeración de un Conjunto Numerable",
+  "linea": 617
+ },
+ {
+  "clave": "def-3.8",
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "linea": 621
+ },
+ {
+  "clave": "prop-3.9",
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $<=$ vía sobreyecciones",
+  "linea": 627
+ },
+ {
+  "clave": "obs-por-que-pedimos-anothing",
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Por qué pedimos $A != nothing$",
+  "linea": 631
+ },
+ {
+  "clave": "obs-3.10",
+  "tipo": "Observación",
+  "numero": "3.10",
+  "titulo": "Buena Definición y Propiedades del Orden entre Cardinales",
+  "linea": 671
+ },
+ {
+  "clave": "teo-3.11",
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "linea": 707
+ },
+ {
+  "clave": "prop-3.13",
+  "tipo": "Proposición",
+  "numero": "3.13",
+  "titulo": "Subconjuntos de Conjuntos Numerables",
+  "linea": 711
+ },
+ {
+  "clave": "prop-3.14",
+  "tipo": "Proposición",
+  "numero": "3.14",
+  "titulo": "Todo Conjunto Infinito Contiene un Subconjunto Numerable",
+  "linea": 719
+ },
+ {
+  "clave": "obs-ideas-importantes-y-minimalidad-de",
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Ideas Importantes y Minimalidad de $aleph_0$",
+  "linea": 727
+ },
+ {
+  "clave": "prop-numerabilidad-de-qq",
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $QQ$",
+  "linea": 738
+ },
+ {
+  "clave": "teo-3.19",
+  "tipo": "Teorema",
+  "numero": "3.19",
+  "titulo": "No numerabilidad de $RR$",
+  "linea": 743
+ },
+ {
+  "clave": "obs-3.21",
+  "tipo": "Observación",
+  "numero": "3.21",
+  "titulo": "Coordinabilidad de $RR$ con Intervalos",
+  "linea": 765
+ },
+ {
+  "clave": "def-4.1",
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "linea": 769
+ },
+ {
+  "clave": "def-distancias-en-rrn",
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $RR^n$",
+  "linea": 781
+ },
+ {
+  "clave": "def-distancias-en-espacios-de-funciones",
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "linea": 870
+ },
+ {
+  "clave": "obs-4.4",
+  "tipo": "Observación",
+  "numero": "4.4",
+  "titulo": "Comparación entre $d_1$ y $d_oo$ en $C([0, 1])$",
+  "linea": 965
+ },
+ {
+  "clave": "def-4.5",
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "linea": 1022
+ },
+ {
+  "clave": "def-4.8",
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "linea": 1030
+ },
+ {
+  "clave": "def-4.9",
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "linea": 1065
+ },
+ {
+  "clave": "def-4.11",
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "linea": 1070
+ },
+ {
+  "clave": "obs-4.12",
+  "tipo": "Observación",
+  "numero": "4.12",
+  "titulo": "$E^compose subset.eq E$, inclusión posiblemente estricta",
+  "linea": 1107
+ },
+ {
+  "clave": "def-4.14",
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "linea": 1111
+ },
+ {
+  "clave": "teo-4.17",
+  "tipo": "Teorema",
+  "numero": "4.17",
+  "titulo": "Unión arbitraria de abiertos es abierta",
+  "linea": 1115
+ },
+ {
+  "clave": "teo-4.18",
+  "tipo": "Teorema",
+  "numero": "4.18",
+  "titulo": "Intersección finita de abiertos es abierta",
+  "linea": 1122
+ },
+ {
+  "clave": "obs-4.19",
+  "tipo": "Observación",
+  "numero": "4.19",
+  "titulo": "El teorema anterior no vale para infinitos abiertos",
+  "linea": 1131
+ },
+ {
+  "clave": "prop-4.21",
+  "tipo": "Proposición",
+  "numero": "4.21",
+  "titulo": "El interior es el abierto más grande contenido en $E$",
+  "linea": 1137
+ },
+ {
+  "clave": "def-4.22",
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "linea": 1144
+ },
+ {
+  "clave": "obs-4.23",
+  "tipo": "Observación",
+  "numero": "4.23",
+  "titulo": "",
+  "linea": 1180
+ },
+ {
+  "clave": "def-4.27",
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "linea": 1187
+ },
+ {
+  "clave": "teo-4.29",
+  "tipo": "Teorema",
+  "numero": "4.29",
+  "titulo": "Cerrados vía complemento abierto",
+  "linea": 1191
+ },
+ {
+  "clave": "teo-4.31",
+  "tipo": "Teorema",
+  "numero": "4.31",
+  "titulo": "Intersección arbitraria y unión finita de cerrados",
+  "linea": 1200
+ },
+ {
+  "clave": "obs-4.32",
+  "tipo": "Observación",
+  "numero": "4.32",
+  "titulo": "$QQ$ no es ni abierto ni cerrado en $RR$",
+  "linea": 1213
+ },
+ {
+  "clave": "def-4.33",
+  "tipo": "Definición",
+  "numero": "4.33",
+  "titulo": "Punto de Acumulación y Conjunto Derivado",
+  "linea": 1222
+ },
+ {
+  "clave": "prop-4.36",
+  "tipo": "Proposición",
+  "numero": "4.36",
+  "titulo": "Clausura como unión con el conjunto derivado",
+  "linea": 1229
+ },
+ {
+  "clave": "cor-4.37",
+  "tipo": "Corolario",
+  "numero": "4.37",
+  "titulo": "Cerrados vía puntos de acumulación",
+  "linea": 1238
+ },
+ {
+  "clave": "def-4.38",
+  "tipo": "Definición",
+  "numero": "4.38",
+  "titulo": "Punto de Frontera y Frontera de un Conjunto",
+  "linea": 1247
+ },
+ {
+  "clave": "prop-4.40",
+  "tipo": "Proposición",
+  "numero": "4.40",
+  "titulo": "Clausura como unión con la frontera",
+  "linea": 1284
+ },
+ {
+  "clave": "def-4.42",
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "linea": 1293
+ },
+ {
+  "clave": "obs-4.43",
+  "tipo": "Observación",
+  "numero": "4.43",
+  "titulo": "",
+  "linea": 1300
+ },
+ {
+  "clave": "prop-4.46",
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "linea": 1305
+ },
+ {
+  "clave": "cor-4.47",
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "linea": 1336
+ },
+ {
+  "clave": "obs-4.48",
+  "tipo": "Observación",
+  "numero": "4.48",
+  "titulo": "",
+  "linea": 1342
+ },
+ {
+  "clave": "def-4.49",
+  "tipo": "Definición",
+  "numero": "4.49",
+  "titulo": "Sucesión acotada",
+  "linea": 1346
+ },
+ {
+  "clave": "def-4.51",
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "linea": 1352
+ },
+ {
+  "clave": "teo-4.54",
+  "tipo": "Teorema",
+  "numero": "4.54",
+  "titulo": "Sucesiones de Cauchy, acotadas y convergentes",
+  "linea": 1358
+ },
+ {
+  "clave": "def-4.55",
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "linea": 1390
+ },
+ {
+  "clave": "teo-4.57",
+  "tipo": "Teorema",
+  "numero": "4.57",
+  "titulo": "$RR$ es completo",
+  "linea": 1394
+ },
+ {
+  "clave": "cor-4.58",
+  "tipo": "Corolario",
+  "numero": "4.58",
+  "titulo": "$RR^n$ es completo",
+  "linea": 1701
+ },
+ {
+  "clave": "def-5.1",
+  "tipo": "Definición",
+  "numero": "5.1",
+  "titulo": "Imagen y Preimagen de un Conjunto",
+  "linea": 1721
+ },
+ {
+  "clave": "def-5.4",
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "linea": 1729
+ },
+ {
+  "clave": "obs-la-continuidad-depende-de-las",
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "La continuidad depende de las métricas",
+  "linea": 1777
+ },
+ {
+  "clave": "teo-5.7",
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "linea": 1789
+ },
+ {
+  "clave": "obs-en-la-hipotesis-es-una",
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "En $(<==)$, la hipótesis es una máquina: hay que verificar que la sucesión entra",
+  "linea": 1810
+ },
+ {
+  "clave": "teo-5.9",
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "linea": 1817
+ },
+ {
+  "clave": "obs-5.12",
+  "tipo": "Observación",
+  "numero": "5.12",
+  "titulo": "La imagen de un abierto (o cerrado) no tiene por qué ser abierta (o cerrada)",
+  "linea": 1832
+ },
+ {
+  "clave": "teo-5.13",
+  "tipo": "Teorema",
+  "numero": "5.13",
+  "titulo": "Caracterización de continuidad por clausuras",
+  "linea": 1846
+ },
+ {
+  "clave": "def-5.14",
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "linea": 1865
+ },
+ {
+  "clave": "obs-5.15",
+  "tipo": "Observación",
+  "numero": "5.15",
+  "titulo": "Continuidad vs. continuidad uniforme",
+  "linea": 1879
+ },
+ {
+  "clave": "obs-5.16",
+  "tipo": "Observación",
+  "numero": "5.16",
+  "titulo": "Negación de la continuidad uniforme",
+  "linea": 1883
+ },
+ {
+  "clave": "prop-5.18",
+  "tipo": "Proposición",
+  "numero": "5.18",
+  "titulo": "Caracterización de continuidad uniforme por sucesiones",
+  "linea": 1891
+ },
+ {
+  "clave": "def-5.20",
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "linea": 1910
+ },
+ {
+  "clave": "teo-5.22",
+  "tipo": "Teorema",
+  "numero": "5.22",
+  "titulo": "Extensión de funciones uniformemente continuas desde un denso",
+  "linea": 1914
+ },
+ {
+  "clave": "def-5.24",
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "linea": 1955
+ },
+ {
+  "clave": "obs-derivada-acotada-implica-lipschitz",
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Derivada acotada implica Lipschitz",
+  "linea": 1960
+ },
+ {
+  "clave": "obs-5.28",
+  "tipo": "Observación",
+  "numero": "5.28",
+  "titulo": "Lipschitz, uniformemente continua y continua",
+  "linea": 1968
+ },
+ {
+  "clave": "def-5.29",
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "linea": 1974
+ },
+ {
+  "clave": "def-5.33",
+  "tipo": "Definición",
+  "numero": "5.33",
+  "titulo": "Isometría",
+  "linea": 1980
+ },
+ {
+  "clave": "obs-5.34",
+  "tipo": "Observación",
+  "numero": "5.34",
+  "titulo": "Una isometría es un homeomorfismo con su imagen",
+  "linea": 1987
+ }
+]

@@ -1,0 +1,395 @@
+<section class="exam" id="p1-2c2025" data-meta="16/10/2025 · resolución propuesta, verificada en Lean">
+  <header class="exam-head">
+    <h2 id="p1-2c2025-titulo"><span class="bn">Primer parcial · 2C 2025</span>16 de octubre de 2025</h2>
+    <p class="meta">Enunciado: foto del parcial (la fuente no trae resolución). Resoluciones propuestas en el repositorio, escritas con las cajas de <code>apuntes.typ</code> y los enunciados de las guías, cada una verificada en <code>lean/Parciales/Parcial1_2C2025.lean</code> (Lean 4 + Mathlib, sin <code>sorry</code>). En el curso $\mathbb{N} = \{1, 2, \dots\}$.</p>
+    <a class="back" href="#inicio">Volver al índice</a>
+  </header>
+
+  <!-- ===================== EJERCICIO 1 ===================== -->
+  <article class="ej" id="p1-2c2025-ej1" data-short="Ej. 1" data-title="Supremo e ínfimo de {m/(m+n)}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Supremo e ínfimo de $\{m/(m+n)\}$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Calcular, si existen, el supremo y el ínfimo de
+      $$A = \left\{\frac{m}{m+n} : m \in \mathbb{N},\ n \in \mathbb{N}\right\}.$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Fijar una de las dos variables y mandar la otra a infinito.</em> Todo elemento está estrictamente entre $0$ y $1$. Con $n = 1$ y $m \to \infty$, $m/(m+1) = 1 - 1/(m+1)$ se acerca a $1$ tanto como se quiera; con $m = 1$ y $n \to \infty$, $1/(1+n)$ se acerca a $0$. Las <span class="ref" data-ref="prop-3">Proposiciones 3</span> y <span class="ref" data-ref="prop-5-equivalencia-de-infimo">5</span> (equivalencias de supremo e ínfimo) hacen el resto.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cotas</p>
+          <p>$A \neq \emptyset$ (contiene a $1/2$, con $m = n = 1$).</p>
+          <p>Para $m, n \in \mathbb{N}$ vale $0 \lt m \lt m + n$, así que $0 \lt m/(m+n) \lt 1$. Luego $0$ es cota inferior y $1$ es cota superior de $A$; por el <span class="ref" data-ref="ax-completitud">Axioma de Completitud</span> y el <span class="ref" data-ref="teo-2">Teorema 2</span> existen $\sup(A)$ e $\inf(A)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c1" aria-label="Elementos m/(m+n) de A con m y n hasta N, ubicados entre las cotas 0 y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-N"><i>m</i>, <i>n</i> ≤ <i>N</i></label><input type="range" id="p1-2c2025-ej1-N" min="1" max="30" value="8"><output id="p1-2c2025-ej1-N-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read1" aria-live="polite"></dl>
+          <figcaption>Cada fila es un <i>n</i> fijo y sus puntos son los <i>m</i>/(<i>m</i>+<i>n</i>) con <i>m</i> ≤ <i>N</i>. Las rayas verdes son las cotas 0 y 1. Al subir <i>N</i> aparecen puntos cada vez más cerca de las dos rayas, pero ninguno las toca.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\sup(A) = 1$</p>
+          <p>Sea $\varepsilon \gt 0$. Por el <span class="ref" data-ref="prop-1">Principio de Arquímedes (Proposición 1)</span> existe $m \in \mathbb{N}$ con $1/m \lt \varepsilon$. Tomando $n = 1$,
+            $$\begin{aligned} \frac{m}{m+1} &= 1 - \frac{1}{m+1} \\ &\gt 1 - \frac1m \gt 1 - \varepsilon, \end{aligned}$$
+            y $m/(m+1) \in A$. Como $1$ es cota superior y para todo $\varepsilon \gt 0$ hay un $a_\varepsilon \in A$ con $1 - \varepsilon \lt a_\varepsilon$, la <span class="ref" data-ref="prop-3">Proposición 3 (equivalencia de supremo)</span> da $\sup(A) = 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c2" aria-label="Sucesión m/(m+1) entrando en la banda entre 1 menos epsilon y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-eps">ε</label><input type="range" id="p1-2c2025-ej1-eps" min="3" max="50" value="20"><output id="p1-2c2025-ej1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read2" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>m</i>/(<i>m</i>+1), es decir los elementos de <i>A</i> con <i>n</i> = 1. La banda es (1 − ε, 1]. El punto grande es el que da Arquímedes: el primer <i>m</i> con 1/<i>m</i> &lt; ε. Ya cae en la banda, y la raya del 1 no la cruza nadie.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\inf(A) = 0$</p>
+          <p>Sea $\varepsilon \gt 0$ y, de nuevo por <span class="ref" data-ref="prop-1">Arquímedes</span>, $n \in \mathbb{N}$ con $1/n \lt \varepsilon$. Tomando $m = 1$, $1/(1+n) \lt 1/n \lt \varepsilon$ y $1/(1+n) \in A$. Como $0$ es cota inferior y para todo $\varepsilon \gt 0$ hay $a_\varepsilon \in A$ con $a_\varepsilon \lt 0 + \varepsilon$, la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Proposición 5 (equivalencia de ínfimo)</span> da $\inf(A) = 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c3" aria-label="Sucesión 1/(1+n) entrando en la banda entre 0 y epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-eps2">ε</label><input type="range" id="p1-2c2025-ej1-eps2" min="3" max="50" value="20"><output id="p1-2c2025-ej1-eps2-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read3" aria-live="polite"></dl>
+          <figcaption>Ahora los puntos son 1/(1+<i>n</i>) (los elementos con <i>m</i> = 1) y la banda es [0, ε). El punto grande es el primer <i>n</i> con 1/<i>n</i> &lt; ε; como 1/(1+<i>n</i>) &lt; 1/<i>n</i>, también cae en la banda.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">No hay <span class="ref" data-ref="def-3">máximo</span> ni <span class="ref" data-ref="def-6-minimo">mínimo</span></p>
+          <p>$1 \notin A$ y $0 \notin A$ porque todo elemento cumple $0 \lt m/(m+n) \lt 1$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\sup(A) = 1$ e $\inf(A) = 0$; ninguno de los dos se alcanza.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej1_sSup</code>, <code>ej1_sInf</code>: usan <code>csSup_eq_of_forall_le_of_forall_lt_exists_gt</code> y su dual (las Proposiciones 3 y 5), con el $m$ de <code>exists_nat_gt</code>. <code>ej1_one_notMem</code> y <code>ej1_zero_notMem</code> certifican que no hay máximo ni mínimo.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 2 ===================== -->
+  <article class="ej" id="p1-2c2025-ej2" data-short="Ej. 2" data-title="Cardinal de un conjunto de sucesiones racionales" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>Cardinal de un conjunto de sucesiones racionales</h3>
+      <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Calcular el cardinal de
+      $$\begin{aligned} &A = \{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{Q} : \exists\, k \in \mathbb{N} \\ &\qquad \text{tal que } a_{n+k} = (a_k)^n\ \ \forall\, n \in \mathbb{N}\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Una sucesión de $A$ está determinada por sus primeros $k$ términos.</em> Si $k$ es el testigo, los términos $a_{k+1}, a_{k+2}, \dots$ son $a_k, a_k^2, \dots$: la sucesión queda fijada por $(a_1, \dots, a_k) \in \mathbb{Q}^k$. Entonces $A$ es unión numerable (en $k$) de imágenes de $\mathbb{Q}^k$, cada una contable; y es infinito porque contiene a las $(q, q, q^2, q^3, \dots)$ para todo $q \in \mathbb{Q}$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las funciones $\varphi_k$ caen en $A$</p>
+          <p><b>$A$ es contable.</b> Para cada $k \in \mathbb{N}$ definimos $\varphi_k : \mathbb{Q}^k \to \mathbb{Q}^{\mathbb{N}}$ por
+            $$\begin{aligned} &\varphi_k(q_1, \dots, q_k) = (b_n)_{n \in \mathbb{N}}, \\ &b_n = \begin{cases} q_n & \text{si } n \le k, \\ q_k^{\,n-k} & \text{si } n \gt k. \end{cases} \end{aligned}$$
+            Cada $\varphi_k(q_1, \dots, q_k)$ está en $A$ con testigo $k$: para $n \in \mathbb{N}$, $b_{n+k} = q_k^{\,n+k-k} = q_k^{\,n} = (b_k)^n$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej2-c1" aria-label="Los primeros nueve términos de phi_k aplicada a una tupla: k libres y el resto potencias de q_k"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej2-k"><i>k</i></label><input type="range" id="p1-2c2025-ej2-k" min="1" max="4" value="3"><output id="p1-2c2025-ej2-k-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej2-read1" aria-live="polite"></dl>
+          <figcaption>La cinta muestra <i>b</i>₁, …, <i>b</i>₉ para la tupla (<i>q</i>₁, <i>q</i>₂, <i>q</i>₃, <i>q</i>₄) = (3, −1, 1/2, −2/3) cortada en <i>k</i> (valores elegidos para el dibujo). Las celdas azules son los <i>k</i> valores libres; las naranjas son <i>q<sub>k</sub></i><sup><i>n</i>−<i>k</i></sup>, y debajo de cada una está el exponente. Leída al revés, es el paso siguiente: los primeros <i>k</i> términos de una sucesión de <i>A</i> alcanzan para reconstruirla.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Toda sucesión de $A$ es un $\varphi_k$</p>
+          <p>Recíprocamente, si $(a_n)_n \in A$ con testigo $k$, entonces $(a_n)_n = \varphi_k(a_1, \dots, a_k)$: para $n \le k$ es obvio, y para $n \gt k$, escribiendo $n = (n - k) + k$ con $n - k \in \mathbb{N}$, la condición da $a_n = (a_k)^{n-k}$. Por lo tanto
+            $$A = \bigcup_{k \in \mathbb{N}} \varphi_k(\mathbb{Q}^k).$$</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cada pedazo es contable, y la unión también</p>
+          <p>Como $\mathbb{Q} \sim \mathbb{N}$ (<span class="ref" data-ref="prop-numerabilidad-de-qq">Numerabilidad de $\mathbb{Q}$</span>), $\mathbb{Q}^k \sim \mathbb{N}^k \sim \mathbb{N}$ (<span class="ref" data-ref="guia-p2-ej14c">Práctica 2, Ej. 14 (c)</span>, con $\mathbb{N}$ en lugar de $\mathbb{R}$: $\mathbb{N}^k$ es numerable por inducción en $k$ usando $\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$, <span class="ref" data-ref="ejem-3.12">Ejemplo 3.12</span>). Entonces $\varphi_k(\mathbb{Q}^k)$ es imagen sobreyectiva de un conjunto numerable, luego contable (<span class="ref" data-ref="prop-3.9">Proposición 3.9</span>). <span class="ref" data-ref="guia-p2-ej6a">Una unión numerable de conjuntos contables es contable (Práctica 2, Ej. 6 (a))</span>, así que $A$ es <span class="ref" data-ref="def-3.6">contable</span>: $\#A \le \aleph_0$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 250" role="img" aria-label="Cadena de coordinabilidades: Q a la k, N a la k y N; phi_k sobre su imagen; unión de las imágenes igual a A">
+            <rect x="10" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="45" y="40" text-anchor="middle" class="sv-text">ℚᵏ</text>
+            <rect x="145" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="180" y="40" text-anchor="middle" class="sv-text">ℕᵏ</text>
+            <rect x="280" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="315" y="40" text-anchor="middle" class="sv-text">ℕ</text>
+            <line x1="84" y1="35" x2="141" y2="35" class="sv-axis"/>
+            <text x="112" y="31" text-anchor="middle" class="sv-label-accent">∼</text>
+            <text x="112" y="66" text-anchor="middle" class="sv-muted">ℚ ∼ ℕ</text>
+            <line x1="219" y1="35" x2="276" y2="35" class="sv-axis"/>
+            <text x="247" y="31" text-anchor="middle" class="sv-label-accent">∼</text>
+            <text x="247" y="66" text-anchor="middle" class="sv-muted">ℕ×ℕ ∼ ℕ, ind.</text>
+            <line x1="45" y1="56" x2="45" y2="104" class="sv-seq2"/>
+            <path d="M39 96 L45 106 L51 96" class="sv-seq2"/>
+            <text x="54" y="86" class="sv-label-seq2">φₖ sobreyectiva</text>
+            <text x="54" y="101" class="sv-muted">sobre su imagen</text>
+            <rect x="10" y="110" width="110" height="34" rx="6" class="sv-seq2"/>
+            <text x="65" y="132" text-anchor="middle" class="sv-text">φₖ(ℚᵏ)</text>
+            <text x="130" y="125" class="sv-label-ok">contable</text>
+            <text x="130" y="140" class="sv-muted">(Prop. 3.9)</text>
+            <rect x="10" y="170" width="340" height="66" rx="8" class="sv-ok"/>
+            <rect x="20" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="56" y="198" text-anchor="middle" class="sv-text">φ₁(ℚ)</text>
+            <rect x="100" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="136" y="198" text-anchor="middle" class="sv-text">φ₂(ℚ²)</text>
+            <rect x="180" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="216" y="198" text-anchor="middle" class="sv-text">φ₃(ℚ³)</text>
+            <text x="276" y="198" text-anchor="middle" class="sv-text">∪ …</text>
+            <text x="180" y="226" text-anchor="middle" class="sv-label-ok">A = ⋃ₖ φₖ(ℚᵏ) contable (P2, Ej. 6 a)</text>
+            <line x1="65" y1="148" x2="65" y2="166" class="sv-axis sv-dash"/>
+          </svg>
+          <figcaption>Arriba, la cadena ℚ<sup><i>k</i></sup> ∼ ℕ<sup><i>k</i></sup> ∼ ℕ. En el medio, φ<sub><i>k</i></sub> manda ese numerable sobre su imagen, que por eso es contable. Abajo, <i>A</i> es la unión numerable de esas imágenes.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$A$ es infinito</p>
+          <p>La función $\psi : \mathbb{Q} \to A$, $\psi(q) = (q, q, q^2, q^3, \dots)$ (es decir $a_1 = q$ y $a_n = q^{n-1}$ para $n \ge 2$) toma valores en $A$ con testigo $k = 1$: $a_{n+1} = q^n = (a_1)^n$. Es inyectiva porque $\psi(q)_1 = q$. Luego $\aleph_0 = \#\mathbb{Q} \le \#A$ (<span class="ref" data-ref="def-3.8">Definición 3.8</span>).</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 180" role="img" aria-label="La función psi manda cada racional q a la sucesión q, q, q al cuadrado, q al cubo; la primera coordenada es q">
+            <text x="10" y="18" class="sv-muted">q ∈ ℚ</text>
+            <text x="130" y="18" class="sv-muted">ψ(q) = (q, q, q², q³, q⁴, …)</text>
+            <g>
+              <text x="30" y="52" text-anchor="middle" class="sv-label-accent">2</text>
+              <line x1="44" y1="48" x2="118" y2="48" class="sv-axis"/><path d="M112 44 L120 48 L112 52" class="sv-axis"/>
+              <text x="130" y="52" class="sv-text">(<tspan class="sv-label-accent">2</tspan>, 2, 4, 8, 16, …)</text>
+            </g>
+            <g>
+              <text x="30" y="92" text-anchor="middle" class="sv-label-accent">−1</text>
+              <line x1="44" y1="88" x2="118" y2="88" class="sv-axis"/><path d="M112 84 L120 88 L112 92" class="sv-axis"/>
+              <text x="130" y="92" class="sv-text">(<tspan class="sv-label-accent">−1</tspan>, −1, 1, −1, 1, …)</text>
+            </g>
+            <g>
+              <text x="30" y="132" text-anchor="middle" class="sv-label-accent">1/2</text>
+              <line x1="44" y1="128" x2="118" y2="128" class="sv-axis"/><path d="M112 124 L120 128 L112 132" class="sv-axis"/>
+              <text x="130" y="132" class="sv-text">(<tspan class="sv-label-accent">1/2</tspan>, 1/2, 1/4, 1/8, 1/16, …)</text>
+            </g>
+            <text x="10" y="168" class="sv-muted">la 1.ª coordenada devuelve q: q ≠ q′ ⇒ ψ(q) ≠ ψ(q′)</text>
+          </svg>
+          <figcaption>Tres racionales elegidos para el dibujo y sus sucesiones ψ(<i>q</i>). En azul, la primera coordenada: es el mismo <i>q</i>, así que dos racionales distintos dan sucesiones distintas.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cantor–Schröeder–Bernstein</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema 3.11 (Cantor–Schröeder–Bernstein)</span>, $\#A = \aleph_0$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\#A = \aleph_0$.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej2</code>: <code>extiende k</code> es $\varphi_k$, <code>A2_subset</code> y <code>A2_countable</code> dan la contabilidad, <code>geom q</code> es $\psi(q)$ y <code>A2_infinite</code> la inyectividad; cierra con <code>Cardinal.mk_eq_aleph0</code>. En Lean los índices arrancan en $0$.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 3 ===================== -->
+  <article class="ej" id="p1-2c2025-ej3" data-short="Ej. 3" data-title="Separar dos puntos por abiertos con clausuras disjuntas" data-topics="topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>Separar dos puntos por abiertos con clausuras disjuntas</h3>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico. Probar que dados $x, y \in E$ con $x \neq y$ existen dos abiertos $U, V$ tales que $x \in U$, $y \in V$ y $\overline{U} \cap \overline{V} = \emptyset$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Bolas de radio un tercio de la distancia.</em> Con $r = d(x, y) \gt 0$, las bolas $B(x, r/3)$ y $B(y, r/3)$ tienen clausuras dentro de las bolas cerradas del mismo radio, y dos bolas cerradas de radio $r/3$ centradas a distancia $r$ no se tocan: un punto común daría $r \le r/3 + r/3$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $U$ y $V$</p>
+          <p>Sea $r = d(x, y)$; como $x \neq y$, $r \gt 0$ (<span class="ref" data-ref="def-4.1">Definición 4.1 (ii)</span>). Tomamos
+            $$U = B(x, r/3), \quad V = B(y, r/3).$$
+            Son abiertos (<span class="ref" data-ref="guia-p3-ej4b">Práctica 3, Ej. 4 (b)</span>), $x \in U$ e $y \in V$ porque $d(x, x) = 0 \lt r/3$ y lo mismo para $y$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej3-c1" aria-label="Dos puntos x e y del plano con las bolas de radio un tercio de su distancia"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Métrica del dibujo en ℝ²</legend>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="2" checked><i>d</i>₂</label>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="1"><i>d</i>₁</label>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="inf"><i>d</i><sub>∞</sub></label>
+            </fieldset>
+          </div>
+          <dl class="read" id="p1-2c2025-ej3-read1" aria-live="polite"></dl>
+          <figcaption>Un caso particular, <i>E</i> = ℝ² con la métrica elegida. Arrastrá <i>x</i> o <i>y</i>. Las regiones sombreadas son <i>U</i> y <i>V</i>; el borde punteado marca las bolas cerradas de radio <i>r</i>/3. Entre las dos queda siempre un tramo de largo <i>r</i>/3 sin tocar.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las clausuras no se cortan</p>
+          <p>Por la <span class="ref" data-ref="guia-p3-ej4e">Práctica 3, Ej. 4 (e)</span>, $\overline{U} \subseteq \overline{B}(x, r/3) = \{z : d(x, z) \le r/3\}$ y $\overline{V} \subseteq \overline{B}(y, r/3)$. Si existiera $z \in \overline{U} \cap \overline{V}$, tendríamos $d(x, z) \le r/3$ y $d(z, y) \le r/3$, y por la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>
+            $$\begin{aligned} r = d(x, y) &\le d(x, z) + d(z, y) \\ &\le \frac r3 + \frac r3 = \frac{2r}{3} \lt r, \end{aligned}$$
+            absurdo. Luego $\overline{U} \cap \overline{V} = \emptyset$. $\blacksquare$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej3-c2" aria-label="Un punto z que se arrastra; la suma de sus distancias a x y a y nunca baja de r"></canvas>
+          <dl class="read" id="p1-2c2025-ej3-read2" aria-live="polite"></dl>
+          <figcaption>Mismos <i>x</i>, <i>y</i> y métrica que el dibujo anterior. Arrastrá <i>z</i>: puede entrar en una de las dos bolas cerradas, pero nunca en las dos, porque <i>d</i>(<i>x</i>, <i>z</i>) + <i>d</i>(<i>z</i>, <i>y</i>) no baja de <i>r</i> y estar en las dos pediría a lo sumo 2<i>r</i>/3.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej3</code>: enunciado idéntico. La inclusión $\overline{B(x, s)} \subseteq \overline{B}(x, s)$ es <code>Metric.closure_ball_subset_closedBall</code>, y el absurdo final es <code>linarith</code> con <code>dist_triangle x z y</code>.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 4 ===================== -->
+  <article class="ej" id="p1-2c2025-ej4" data-short="Ej. 4" data-title="Clausura de una unión de conjuntos separados" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>Clausura de una unión de conjuntos separados</h3>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico. Recordemos que para $A, B \subseteq E$ no vacíos se define
+      $$\tilde d(A, B) = \inf\{d(a, b) : a \in A,\ b \in B\}.$$
+      Sea $(M_n)_{n \in \mathbb{N}} \subseteq E$ una familia de conjuntos no vacíos.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>En (b), una bola chica alrededor de $x$ sólo puede tocar a un $M_n$.</em> (a) es la <span class="ref" data-ref="ext-clausura-monotona">monotonía de la clausura</span>. En (b), si $x$ es adherente a la unión, alguna bola $B(x, \varepsilon/2)$ contiene un punto $y_0 \in M_{n_0}$. Cualquier otro punto de la unión en esa bola está a distancia $\lt \varepsilon$ de $y_0$, y la separación $\tilde d(M_n, M_m) \gt \varepsilon$ lo obliga a estar en el mismo $M_{n_0}$. Así, todas las bolas centradas en $x$ tocan a $M_{n_0}$.</p></div>
+
+    <div class="sub" id="p1-2c2025-ej4a">
+      <h4>Ítem a)</h4>
+      <div class="enun"><p>Probar que
+        $$\bigcup_{n \in \mathbb{N}} \overline{M_n} \subseteq \overline{\bigcup_{n \in \mathbb{N}} M_n}.$$</p></div>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Un punto adherente a un $M_n$ es adherente a la unión</p>
+            <p>Sea $x \in \bigcup_n \overline{M_n}$: existe $n$ con $x \in \overline{M_n}$. Dado $r \gt 0$, existe $y \in B(x, r) \cap M_n$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>), y como $M_n \subseteq \bigcup_m M_m$, $y \in B(x, r) \cap \bigcup_m M_m$. Luego $x \in \overline{\bigcup_m M_m}$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-2c2025-ej4-c1" aria-label="Un punto x en el borde de M2; cada bola B(x, r) contiene un punto y de M2, que también es de la unión"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-2c2025-ej4-r1"><i>r</i></label><input type="range" id="p1-2c2025-ej4-r1" min="5" max="200" value="80"><output id="p1-2c2025-ej4-r1-o"></output></div>
+            </div>
+            <dl class="read" id="p1-2c2025-ej4-read1" aria-live="polite"></dl>
+            <figcaption>En ℝ², cuatro discos abiertos hacen de <i>M</i>₁, …, <i>M</i>₄ (valores elegidos para el dibujo). <i>x</i> está en el borde de <i>M</i>₂: no es de <i>M</i>₂, pero sí de cl(<i>M</i>₂). Para cada <i>r</i>, el punto <i>y</i> está en <i>B</i>(<i>x</i>, <i>r</i>) ∩ <i>M</i>₂, y por lo tanto en la unión.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="p1-2c2025-ej4b">
+      <h4>Ítem b)</h4>
+      <div class="enun"><p>Supongamos que existe $\varepsilon \gt 0$ tal que $\tilde d(M_n, M_m) \gt \varepsilon$ para todo $n \neq m$. Probar que
+        $$\overline{\bigcup_{n \in \mathbb{N}} M_n} = \bigcup_{n \in \mathbb{N}} \overline{M_n}.$$</p></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Basta una inclusión</p>
+            <p>Por (a) basta ver $\overline{\bigcup_n M_n} \subseteq \bigcup_n \overline{M_n}$.</p>
+          </div>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Un lema sobre $\tilde d$</p>
+            <p>Si $a \in A$ y $b \in B$, entonces $\tilde d(A, B) \le d(a, b)$, porque <span class="ref" data-ref="def-5">el ínfimo es cota inferior</span> del conjunto $\{d(a, b) : a \in A,\ b \in B\}$ (que es no vacío y acotado inferiormente por $0$, así que el ínfimo existe, <span class="ref" data-ref="teo-2">Teorema 2</span>). En particular, de $\tilde d(M_n, M_m) \gt \varepsilon$ se deduce $d(a, b) \gt \varepsilon$ para todo $a \in M_n$, $b \in M_m$, cuando $n \neq m$.</p>
+          </div>
+          <figure class="viz">
+            <svg viewBox="0 0 360 190" role="img" aria-label="Dos conjuntos A y B; la distancia entre un punto a de A y un punto b de B es al menos la distancia entre los conjuntos">
+              <circle cx="85" cy="95" r="58" class="sv-area"/>
+              <circle cx="85" cy="95" r="58" class="sv-accent"/>
+              <circle cx="275" cy="95" r="52" class="sv-area3"/>
+              <circle cx="275" cy="95" r="52" class="sv-seq3"/>
+              <text x="40" y="40" class="sv-label-accent">A</text>
+              <text x="318" y="40" class="sv-label-seq3">B</text>
+              <line x1="143" y1="95" x2="223" y2="95" class="sv-ink sv-dash"/>
+              <text x="183" y="86" text-anchor="middle" class="sv-text">d̃(A, B)</text>
+              <line x1="60" y1="130" x2="300" y2="62" class="sv-seq2"/>
+              <circle cx="60" cy="130" r="4" class="sv-fill-seq2"/>
+              <circle cx="300" cy="62" r="4" class="sv-fill-seq2"/>
+              <text x="52" y="150" text-anchor="middle" class="sv-label-seq2">a</text>
+              <text x="310" y="54" class="sv-label-seq2">b</text>
+              <text x="183" y="130" text-anchor="middle" class="sv-label-seq2">d(a, b)</text>
+              <text x="180" y="180" text-anchor="middle" class="sv-muted">d̃(A, B) ≤ d(a, b) para todo a ∈ A, b ∈ B</text>
+            </svg>
+            <figcaption>Dos discos elegidos para el dibujo. <i>d̃</i>(<i>A</i>, <i>B</i>) es el ínfimo de todos los largos <i>d</i>(<i>a</i>, <i>b</i>), así que ningún segmento naranja puede ser más corto que el tramo punteado. Si <i>d̃</i> &gt; ε, todo segmento entre los dos conjuntos mide más que ε.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">La bola $B(x, \varepsilon/2)$ elige un $M_{n_0}$</p>
+            <p>Sea $x \in \overline{\bigcup_n M_n}$. Como $B(x, \varepsilon/2) \cap \bigcup_n M_n \neq \emptyset$, existen $n_0 \in \mathbb{N}$ e $y_0 \in M_{n_0}$ con $d(x, y_0) \lt \varepsilon/2$. Afirmamos que $x \in \overline{M_{n_0}}$.</p>
+            <p>Sea $r \gt 0$ y $\rho = \min\{r, \varepsilon/2\} \gt 0$. Existe $y \in B(x, \rho) \cap \bigcup_n M_n$, digamos $y \in M_m$. Si fuera $m \neq n_0$, por el lema
+              $$\begin{aligned} \varepsilon \lt d(y, y_0) &\le d(y, x) + d(x, y_0) \\ &\lt \frac\varepsilon2 + \frac\varepsilon2 = \varepsilon, \end{aligned}$$
+              absurdo. Luego $m = n_0$, es decir $y \in M_{n_0}$, y además $d(x, y) \lt \rho \le r$, así que $y \in B(x, r) \cap M_{n_0}$. Como $r$ era arbitrario, $x \in \overline{M_{n_0}} \subseteq \bigcup_n \overline{M_n}$. $\blacksquare$</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-2c2025-ej4-c2" aria-label="Conjuntos separados por más de epsilon; la bola de radio epsilon sobre dos alrededor de x toca a lo sumo uno"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-2c2025-ej4-r2"><i>r</i></label><input type="range" id="p1-2c2025-ej4-r2" min="5" max="200" value="120"><output id="p1-2c2025-ej4-r2-o"></output></div>
+            </div>
+            <dl class="read" id="p1-2c2025-ej4-read2" aria-live="polite"></dl>
+            <figcaption>Los mismos cuatro discos, con ε = 1: entre dos cualesquiera hay más de 1 de distancia (valores elegidos para el dibujo). Arrastrá <i>x</i>. La circunferencia punteada es <i>B</i>(<i>x</i>, ε/2); tiene diámetro ε, así que toca a lo sumo un disco, que es el <i>M</i><sub><i>n</i>₀</sub>. La bola sombreada es <i>B</i>(<i>x</i>, ρ) con ρ = mín{<i>r</i>, ε/2}, y el punto <i>y</i> que contiene es siempre de <i>M</i><sub><i>n</i>₀</sub>.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej4a</code>, <code>ej4b</code>: <code>dtilde_le</code> es el lema (<code>csInf_le</code>), <code>ej4a</code> es <code>Set.iUnion_subset</code> + <code>closure_mono</code>, y <code>ej4b</code> sigue la resolución con <code>Metric.mem_closure_iff</code> (la Definición 4.22) y el radio <code>min r (ε/2)</code>.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 5 ===================== -->
+  <article class="ej" id="p1-2c2025-ej5" data-short="Ej. 5" data-title="Continuidad de la evaluación F(f, x) = f(x)" data-topics="continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">Ej. 5</span>
+      <h3>Continuidad de la evaluación $F(f, x) = f(x)$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun"><p>Sea $C([0, 1]) = \{f : [0, 1] \to \mathbb{R} : f \text{ es continua}\}$ visto como espacio métrico con la métrica <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_\infty$</span>. Definimos una métrica en $C([0, 1]) \times [0, 1]$ mediante
+      $$\begin{aligned} &d((f, x), (g, y)) \\ &\quad := \max\{d_\infty(f, g),\ |x - y|\}. \end{aligned}$$
+      Sea $F : C([0, 1]) \times [0, 1] \to \mathbb{R}$ la función definida como $F(f, x) = f(x)$. Probar que $F$ es continua.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Separar en “cambiar la función” y “mover el punto”.</em> $|f(x) - g(y)| \le |f(x) - g(x)| + |g(x) - g(y)|$. El primer sumando es a lo sumo $d_\infty(f, g)$; el segundo es chico porque $g$ es continua en $y$. Cada uno se controla con una coordenada de la métrica producto.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que probar</p>
+          <p>Usamos la <span class="ref" data-ref="def-5.4">definición de continuidad en un punto</span>: $F$ es continua en $(g, y)$ si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d((f, x), (g, y)) \lt \delta$ implica $|F(f, x) - F(g, y)| \lt \varepsilon$.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $\delta$</p>
+          <p>Fijemos $(g, y) \in C([0,1]) \times [0,1]$ y $\varepsilon \gt 0$. Como <span class="ref" data-ref="def-5.4">$g$ es continua en $y$</span>, existe $\delta_1 \gt 0$ tal que $|x - y| \lt \delta_1$ implica $|g(x) - g(y)| \lt \varepsilon/2$ (para $x \in [0,1]$). Sea $\delta = \min\{\delta_1, \varepsilon/2\} \gt 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej5-c1" aria-label="Gráfico de g con la banda de altura epsilon sobre dos alrededor de g(y) y la ventana de ancho delta 1 alrededor de y"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej5-y"><i>y</i></label><input type="range" id="p1-2c2025-ej5-y" min="0" max="100" value="42"><output id="p1-2c2025-ej5-y-o"></output></div>
+            <div class="slider"><label for="p1-2c2025-ej5-eps">ε</label><input type="range" id="p1-2c2025-ej5-eps" min="4" max="80" value="30"><output id="p1-2c2025-ej5-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej5-read1" aria-live="polite"></dl>
+          <figcaption>Una <i>g</i> elegida para el dibujo. La banda horizontal es (<i>g</i>(<i>y</i>) − ε/2, <i>g</i>(<i>y</i>) + ε/2); la vertical es la ventana |<i>x</i> − <i>y</i>| &lt; δ₁ más ancha (calculada numéricamente) en la que el gráfico de <i>g</i> no se sale de esa banda. δ es el menor entre δ₁ y ε/2.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La cuenta</p>
+          <p>Sea $(f, x)$ con $d((f, x), (g, y)) \lt \delta$. Como $d$ es un máximo, $d_\infty(f, g) \lt \delta \le \varepsilon/2$ y $|x - y| \lt \delta \le \delta_1$. Entonces, usando que $|f(x) - g(x)| \le {}$ $\sup_t |f(t) - g(t)| = d_\infty(f, g)$,
+            $$\begin{aligned} &|F(f, x) - F(g, y)| = |f(x) - g(y)| \\ &\quad \le |f(x) - g(x)| + |g(x) - g(y)| \\ &\quad \lt \frac\varepsilon2 + \frac\varepsilon2 = \varepsilon. \end{aligned}$$
+            Como $(g, y)$ era arbitrario, $F$ es continua. $\blacksquare$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej5-c2" aria-label="Tubo de radio delta alrededor de g, una f adentro del tubo y los dos tramos que suman menos que epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej5-s"><i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>)/δ</label><input type="range" id="p1-2c2025-ej5-s" min="0" max="100" value="80"><output id="p1-2c2025-ej5-s-o"></output></div>
+            <div class="slider"><label for="p1-2c2025-ej5-u">(<i>x</i> − <i>y</i>)/δ</label><input type="range" id="p1-2c2025-ej5-u" min="-98" max="98" value="70"><output id="p1-2c2025-ej5-u-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej5-read2" aria-live="polite"></dl>
+          <figcaption>Mismos <i>g</i>, <i>y</i> y ε que el dibujo anterior. El tubo sombreado es {<i>d</i><sub>∞</sub>(·, <i>g</i>) &lt; δ} y la curva naranja es una <i>f</i> adentro (elegida para el dibujo). El tramo naranja vertical es |<i>f</i>(<i>x</i>) − <i>g</i>(<i>x</i>)| y el verde, |<i>g</i>(<i>x</i>) − <i>g</i>(<i>y</i>)|: cada uno mide menos que ε/2, así que <i>f</i>(<i>x</i>) cae en la banda (<i>g</i>(<i>y</i>) − ε, <i>g</i>(<i>y</i>) + ε).</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej5</code>: <code>C(unitInterval, ℝ)</code> con la métrica $d_\infty$ de Mathlib, y la métrica producto es exactamente $\max\{d_\infty, |\cdot|\}$ (<code>dist_prod_eq</code>). Sigue la cuenta con <code>Metric.continuous_iff</code>, <code>ContinuousMap.dist_apply_le_dist</code> y la continuidad de <code>g</code> en <code>y</code>.</p>
+  </article>
+</section>

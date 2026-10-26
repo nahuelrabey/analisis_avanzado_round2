@@ -1,0 +1,452 @@
+<section class="exam" id="r1-2c2025" data-meta="04/12/2025 · resolución propuesta, verificada en Lean">
+  <header class="exam-head">
+    <h2 id="r1-2c2025-titulo"><span class="bn">Recuperatorio del primer parcial · 2C 2025</span>4 de diciembre de 2025</h2>
+    <p class="meta">Enunciado transcripto de la foto del recuperatorio (<code>parciales/recuperatorio_1_2c2025.jpg</code>), que no trae resolución. Las resoluciones son las propuestas en <code>apuntes-typst/parciales/2025_2c_recuperatorio_1.typ</code>, cada una verificada en <code>lean/Parciales/Recu1_2C2025.lean</code> (Lean 4 + Mathlib).</p>
+    <a class="back" href="#inicio">Volver al índice</a>
+  </header>
+
+  <!-- ===================== Ejercicio 1 ===================== -->
+  <article class="ej" id="r1-2c2025-ej1" data-short="Ej. 1" data-title="Máximo, supremo e ínfimo de 1/(n²−8n+18)" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Máximo, supremo e ínfimo de $\{1/(n^2-8n+18)\}$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Calcular, si existen, el supremo, ínfimo, máximo y mínimo de $$A = \left\{\frac{1}{n^2 - 8n + 18} : n \in \mathbb{N}\right\}.$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Completar cuadrados en el denominador.</em> $n^2 - 8n + 18 = (n-4)^2 + 2$ vale al menos $2$, y vale exactamente $2$ sólo en $n = 4$. Así el elemento más grande es $a_4 = 1/2$, y los demás bajan hacia $0$ sin llegar.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El denominador</p>
+          <p>Para $n \in \mathbb{N}$ sea $D_n = n^2 - 8n + 18 = (n-4)^2 + 2$. Entonces $D_n \ge 2 \gt 0$, con $D_4 = 2$, así que todos los elementos de $A$ están bien definidos y son positivos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej1-c1" aria-label="Los valores D_n para n de 1 a 10 sobre la parábola (t−4)²+2, con el mínimo D₄ = 2"></canvas>
+          <figcaption>Los puntos son <i>D<sub>n</sub></i> para <i>n</i> = 1, …, 10; la curva punteada es (<i>t</i> − 4)² + 2 con <i>t</i> real. La recta horizontal es 2: ningún <i>D<sub>n</sub></i> queda por debajo y sólo <i>D</i><sub>4</sub> la toca.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Máximo y supremo</p>
+          <p>Para todo $n$, $D_n \ge 2 = D_4$, luego $1/D_n \le 1/2 = a_4$. Es decir, $1/2$ es <span class="ref" data-ref="def-1">cota superior</span> de $A$ y $1/2 \in A$. Por la <span class="ref" data-ref="prop-4">Proposición 4 (caracterización de supremo y máximo)</span>, $\sup(A) = \max(A) = 1/2$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej1-c2" aria-label="Los elementos a_n de A para n de 1 a 16 y la cota superior 1/2"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej1-n"><i>n</i></label><input type="range" id="r1-2c2025-ej1-n" min="1" max="16" value="6"><output id="r1-2c2025-ej1-n-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej1-read2" aria-live="polite"></dl>
+          <figcaption>Los elementos <i>a<sub>n</sub></i> = 1/<i>D<sub>n</sub></i> de <i>A</i>. Todos quedan por debajo de la línea 1/2, y el de <i>n</i> = 4 está sobre ella: 1/2 es cota superior y pertenece a <i>A</i>. Mové <i>n</i> para leer cada término.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ínfimo: el $0$ es cota inferior</p>
+          <p>Como $1/D_n \gt 0$ para todo $n$, el $0$ es <span class="ref" data-ref="def-4">cota inferior</span>. Falta ver que, para todo $\varepsilon \gt 0$, hay un elemento de $A$ menor que $\varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $n$</p>
+          <p>Sea $\varepsilon \gt 0$. Por el <span class="ref" data-ref="teo-1">Principio de Arquímedes (Teorema 1)</span> existe $n \in \mathbb{N}$ con $n \gt 4 + 1/\varepsilon$. Entonces $$n - 4 \gt 1/\varepsilon \gt 0.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej1-c3" aria-label="Banda de altura ε sobre el cero y el primer n mayor que 4 + 1/ε"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej1-eps">ε</label><input type="range" id="r1-2c2025-ej1-eps" min="2" max="50" value="12"><output id="r1-2c2025-ej1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej1-read3" aria-live="polite"></dl>
+          <figcaption>La banda verde es [0, ε) y la línea vertical marca 4 + 1/ε. El dibujo toma el menor <i>n</i> con <i>n</i> &gt; 4 + 1/ε (cualquiera más grande también sirve) y muestra que su <i>a<sub>n</sub></i> cae en la banda, como se prueba en los pasos que siguen.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Una desigualdad auxiliar</p>
+          <p>Para todo $t \in \mathbb{R}$ vale $t^2 + 2 \gt t$. Pasando todo a un lado, es lo mismo que $t^2 - t + 2 \gt 0$. Completando cuadrados, como $(t - 1/2)^2 = t^2 - t + 1/4$, $$\begin{aligned} & t^2 - t + 2 \\ & \quad = (t - 1/2)^2 - 1/4 + 2 \\ & \quad = (t - 1/2)^2 + 7/4 \\ & \quad \ge 7/4 \gt 0, \end{aligned}$$ porque un cuadrado es siempre $\ge 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej1-c4" aria-label="Las curvas y = t² + 2 e y = t y la distancia vertical entre ellas"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej1-t"><i>t</i></label><input type="range" id="r1-2c2025-ej1-t" min="-40" max="60" value="25"><output id="r1-2c2025-ej1-t-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej1-read4" aria-live="polite"></dl>
+          <figcaption>La parábola <i>y</i> = <i>t</i>² + 2 va siempre por encima de la recta <i>y</i> = <i>t</i>. El segmento vertical mide <i>t</i>² − <i>t</i> + 2 = (<i>t</i> − 1/2)² + 7/4, que es mínimo en <i>t</i> = 1/2 y nunca baja de 7/4.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Acotar $D_n$</p>
+          <p>Aplicando la desigualdad auxiliar con $t = n - 4$: $$D_n = (n-4)^2 + 2 \gt n - 4 \gt 1/\varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión: el ínfimo</p>
+          <p>Invirtiendo (los dos lados son positivos), $1/D_n \lt \varepsilon$. Como $0$ es cota inferior y para todo $\varepsilon \gt 0$ hay un elemento de $A$ menor que $0 + \varepsilon$, la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Proposición 5 (equivalencia de ínfimo)</span> da $\inf(A) = 0$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">No hay mínimo</p>
+          <p>$0 \notin A$ porque todos los elementos son positivos (<span class="ref" data-ref="def-6-minimo">Definición 6</span>).</p>
+        </div>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\max(A) = \sup(A) = 1/2$, $\inf(A) = 0$ y no hay mínimo.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Recu1_2C2025.ej1_sSup</code>, <code>ej1_sInf</code>, <code>ej1_no_min</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 2 ===================== -->
+  <article class="ej" id="r1-2c2025-ej2" data-short="Ej. 2" data-title="Cardinal de las funciones Q → N que valen 3 salvo en finitos puntos" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>Funciones $\mathbb{Q} \to \mathbb{N}$ que valen $3$ salvo en finitos puntos</h3>
+      <span class="topics"><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Calcular el cardinal del conjunto $$\begin{aligned} C = \{f : \mathbb{Q} \to \mathbb{N} :\ & f(q) = 3 \text{ para todo} \\ & q \in \mathbb{Q} \text{ salvo finitos}\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Una función de $C$ es su "gráfico reducido", que es un conjunto finito.</em> $f$ queda determinada por el conjunto finito $G(f) = \{(q, f(q)) : f(q) \neq 3\} \subseteq \mathbb{Q} \times \mathbb{N}$: afuera de las primeras coordenadas de $G(f)$ vale $3$. Los subconjuntos finitos de un conjunto numerable forman un conjunto numerable (<span class="ref" data-ref="guia-p2-ej11">Práctica 2, Ej. 11</span>), y eso acota $\#C$ por $\aleph_0$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Plan</p>
+          <p>Probamos las dos desigualdades $\#C \le \aleph_0$ y $\aleph_0 \le \#C$, y cerramos con <span class="ref" data-ref="teo-3.11">Cantor–Schröeder–Bernstein</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$C$ es <span class="ref" data-ref="def-3.6">contable</span>: las excepciones y el código de $f$</p>
+          <p>La idea es que cada $f \in C$ queda determinada por una cantidad finita de datos: dónde no vale $3$ y cuánto vale ahí.</p>
+          <p><em>Las excepciones.</em> Para $f \in C$ sea $$E_f = \{q \in \mathbb{Q} : f(q) \neq 3\}.$$ Por la definición de $C$, $E_f$ es finito.</p>
+          <p><em>El código de $f$.</em> Definimos $$G(f) = \{(q, f(q)) : q \in E_f\} \subseteq \mathbb{Q} \times \mathbb{N},$$ los pares (lugar de la excepción, valor que toma ahí).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej2-c1" aria-label="Una función de C: vale 3 salvo en unos pocos racionales, que forman su código G(f)"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Función de ejemplo</legend>
+              <label><input type="radio" name="r1-2c2025-ej2-f" value="0" checked><i>f</i></label>
+              <label><input type="radio" name="r1-2c2025-ej2-f" value="1"><i>g</i></label>
+              <label><input type="radio" name="r1-2c2025-ej2-f" value="2">constante 3</label>
+            </fieldset>
+          </div>
+          <dl class="read" id="r1-2c2025-ej2-read1" aria-live="polite"></dl>
+          <figcaption>Tres funciones de <i>C</i> con valores elegidos para el dibujo, sobre <i>q</i> ∈ [−3, 3]. La línea horizontal es el valor 3 (se dibuja continua, aunque el dominio es ℚ); los huecos son los puntos de <i>E<sub>f</sub></i> y los puntos naranjas, los pares de <i>G</i>(<i>f</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$G(f)$ es finito</p>
+          <p>Es la imagen de $E_f$ por $q \mapsto (q, f(q))$, y <span class="ref" data-ref="ext-imagen-finita">la imagen de un conjunto finito es finita</span>. Así $$G : C \to \mathcal{P}_f(\mathbb{Q} \times \mathbb{N}),$$ donde $\mathcal{P}_f(\mathbb{Q} \times \mathbb{N})$ es el conjunto de subconjuntos finitos de $\mathbb{Q} \times \mathbb{N}$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$G$ es inyectiva</p>
+          <p>Sean $f, g \in C$ con $G(f) = G(g)$. Para ver que $f = g$, fijamos $q \in \mathbb{Q}$ y vemos que $f(q) = g(q)$ en cada caso:</p>
+          <ul class="items">
+            <li>Si $f(q) \neq 3$: entonces $(q, f(q)) \in G(f) = G(g)$. Así que existe $q'$ con $g(q') \neq 3$ y $$(q', g(q')) = (q, f(q)).$$ Comparando coordenadas, $q' = q$ y $g(q) = f(q)$.</li>
+            <li>Si $g(q) \neq 3$: es el caso anterior con los papeles de $f$ y $g$ cambiados, y da $f(q) = g(q)$.</li>
+            <li>Si no, $f(q) = 3 = g(q)$, y también coinciden.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El codominio es numerable</p>
+          <p>Por la <span class="ref" data-ref="prop-numerabilidad-de-qq">Numerabilidad de $\mathbb{Q}$ (Ejemplo 3.12)</span>, $$\mathbb{Q} \times \mathbb{N} \sim \mathbb{N} \times \mathbb{N} \sim \mathbb{N},$$ así que $\mathcal{P}_f(\mathbb{Q} \times \mathbb{N})$ es numerable (<span class="ref" data-ref="guia-p2-ej11">Práctica 2, Ej. 11</span>).</p>
+          <p class="nota"><b>Nota</b>La resolución del <code>.typ</code> cita "Práctica 2, Ej. 10" (también en la estrategia). En <code>guias/p2.typ</code> el enunciado sobre $\mathcal{P}_f(A)$ es el Ej. 11; el 10 es $[0, 1) \sim \{0, 1\}^{\mathbb{N}}$. La equivalencia $\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$ se usa como <span class="ref" data-ref="ext-nxn-numerable">resultado de la cursada</span>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión: $\#C \le \aleph_0$</p>
+          <p>$G$ inyecta $C$ en un conjunto numerable. Por la <span class="ref" data-ref="def-3.8">Definición 3.8</span>, $\#C \le \aleph_0$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$C$ es infinito: la familia $f_k$</p>
+          <p>Basta meter una copia de $\mathbb{N}$ adentro de $C$.</p>
+          <p><em>Una familia de funciones.</em> Para $k \in \mathbb{N}$ sea $f_k : \mathbb{Q} \to \mathbb{N}$ con $$f_k(0) = k \quad \text{y} \quad f_k(q) = 3 \text{ si } q \neq 0.$$</p>
+          <p><em>Cada $f_k$ está en $C$.</em> Sus excepciones cumplen $E_{f_k} \subseteq \{0\}$, que es finito.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej2-c2" aria-label="La función f_k: vale 3 salvo en q = 0, donde vale k"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej2-k"><i>k</i></label><input type="range" id="r1-2c2025-ej2-k" min="1" max="7" value="5"><output id="r1-2c2025-ej2-k-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej2-read2" aria-live="polite"></dl>
+          <figcaption><i>f<sub>k</sub></i> sólo puede apartarse del 3 en <i>q</i> = 0. Con <i>k</i> = 3 no se aparta y <i>E</i><sub><i>f</i>₃</sub> = ∅: por eso la inclusión es <i>E</i><sub><i>f<sub>k</sub></i></sub> ⊆ {0} y no una igualdad. Funciones con <i>k</i> distintos difieren en 0.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$k \mapsto f_k$ es inyectiva</p>
+          <p>Si $f_k = f_j$, evaluando en $0$: $$k = f_k(0) = f_j(0) = j.$$</p>
+          <p><em>Conclusión.</em> $\aleph_0 = \#\mathbb{N} \le \#C$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cierre</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema 3.11 (Cantor–Schröeder–Bernstein)</span>, $\#C = \aleph_0$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 440 190" role="img" aria-label="Esquema: N se inyecta en C por k ↦ f_k, y C se inyecta en P_f(Q×N), que es numerable">
+            <defs>
+              <marker id="r1-2c2025-ej2-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-fill-accent"/></marker>
+            </defs>
+            <rect x="14" y="62" width="70" height="46" rx="8" class="sv-ink"/>
+            <text x="49" y="91" text-anchor="middle" class="sv-text">ℕ</text>
+            <rect x="170" y="62" width="70" height="46" rx="8" class="sv-ink"/>
+            <text x="205" y="91" text-anchor="middle" class="sv-text">C</text>
+            <rect x="318" y="62" width="110" height="46" rx="8" class="sv-ink"/>
+            <text x="373" y="91" text-anchor="middle" class="sv-text">𝒫<tspan baseline-shift="sub" font-size="10">f</tspan>(ℚ × ℕ)</text>
+            <line x1="88" y1="85" x2="164" y2="85" class="sv-accent" marker-end="url(#r1-2c2025-ej2-arr)"/>
+            <text x="126" y="76" text-anchor="middle" class="sv-label-accent">k ↦ fₖ</text>
+            <text x="126" y="104" text-anchor="middle" class="sv-muted">inyectiva</text>
+            <line x1="244" y1="85" x2="312" y2="85" class="sv-accent" marker-end="url(#r1-2c2025-ej2-arr)"/>
+            <text x="278" y="76" text-anchor="middle" class="sv-label-accent">G</text>
+            <text x="278" y="104" text-anchor="middle" class="sv-muted">inyectiva</text>
+            <text x="373" y="128" text-anchor="middle" class="sv-muted">numerable</text>
+            <text x="49" y="40" text-anchor="middle" class="sv-label-ok">ℵ₀ ≤ #C</text>
+            <text x="300" y="40" text-anchor="middle" class="sv-label-ok">#C ≤ ℵ₀</text>
+            <text x="220" y="168" text-anchor="middle" class="sv-text">Cantor–Schröeder–Bernstein: #C = ℵ₀</text>
+          </svg>
+          <figcaption>Las dos inyecciones de la resolución: la de la izquierda da ℵ₀ ≤ #<i>C</i> y la de la derecha, como 𝒫<sub><i>f</i></sub>(ℚ × ℕ) es numerable, #<i>C</i> ≤ ℵ₀.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\#C = \aleph_0$.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Recu1_2C2025.ej2</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 3 ===================== -->
+  <article class="ej" id="r1-2c2025-ej3" data-short="Ej. 3" data-title="Un abierto que corta la clausura de B corta a B" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>Un abierto que corta a $\overline{B}$ corta a $B$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La bola que da la apertura de $A$ es la que toca a $B$.</em> Un punto $x \in A \cap \overline{B}$ tiene una bola $B(x, r) \subseteq A$ (abierto) y esa misma bola corta a $B$ (adherencia). Sin apertura, un punto aislado de $A$ pegado a $B$ rompe todo.</p></div>
+
+    <div class="sub" id="r1-2c2025-ej3a">
+      <h4>Ítem a)</h4>
+      <div class="enun"><p>Sea $(E, d)$ un espacio métrico y sean $A, B \subseteq E$ con $A$ abierto. Probar que si $A \cap \overline{B} \neq \emptyset$, entonces $A \cap B \neq \emptyset$.</p></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">La bola que da la apertura de $A$</p>
+            <p>Sea $x \in A \cap \overline{B}$. Como $A$ es abierto y $x \in A$, existe $r \gt 0$ con $B(x, r) \subseteq A$ (<span class="ref" data-ref="def-4.11">Definiciones 4.11</span> y <span class="ref" data-ref="def-4.14">4.14</span>).</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Esa bola toca a $B$</p>
+            <p>Como $x \in \overline{B}$, existe $y \in B(x, r) \cap B$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>). Entonces $y \in A$ (por $B(x, r) \subseteq A$) e $y \in B$, así que $y \in A \cap B \neq \emptyset$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="r1-2c2025-ej3-c1" aria-label="Dos discos abiertos A y B en el plano, un punto x de A en el borde de B, la bola B(x, r) dentro de A y un punto y de esa bola en B"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="r1-2c2025-ej3-th">posición de <i>x</i></label><input type="range" id="r1-2c2025-ej3-th" min="-60" max="60" value="20"><output id="r1-2c2025-ej3-th-o"></output></div>
+            </div>
+            <dl class="read" id="r1-2c2025-ej3-read1" aria-live="polite"></dl>
+            <figcaption>Un caso elegido para el dibujo, en ℝ²: <i>A</i> y <i>B</i> son discos abiertos y <i>x</i> está en el borde de <i>B</i>, así que <i>x</i> ∈ <span style="text-decoration:overline"><i>B</i></span> pero <i>x</i> ∉ <i>B</i>. La bola punteada es una <i>B</i>(<i>x</i>, <i>r</i>) ⊆ <i>A</i>; el punto verde <i>y</i> está en esa bola y en <i>B</i>. Mové <i>x</i> por el borde de <i>B</i>.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="r1-2c2025-ej3b">
+      <h4>Ítem b) <span class="tag f">No</span></h4>
+      <div class="enun"><p>Supongamos que $(E, d) = (\mathbb{R}, |\cdot|)$, $A, B \subseteq \mathbb{R}$ pero $A$ no necesariamente es abierto. ¿Sigue valiendo la afirmación del ítem a)?</p></div>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Contraejemplo</p>
+            <p><b>No.</b> En $(\mathbb{R}, |\cdot|)$ tomemos $A = \{0\}$ y $B = (0, 1)$. Por un lado $\overline{B} = [0, 1]$ (como en el <span class="ref" data-ref="ejem-4.35">Ejemplo 27 de <code>ejemplos/p3.typ</code></span>, que calcula la clausura de $(0,1) \cup \{2\}$), así que $0 \in A \cap \overline{B}$ y $A \cap \overline{B} \neq \emptyset$. Por otro lado $0 \notin (0, 1)$, así que $A \cap B = \emptyset$.</p>
+          </div>
+          <figure class="viz">
+            <svg viewBox="0 0 420 170" role="img" aria-label="Recta real con A = {0}, B = (0,1) y la clausura de B igual a [0,1]">
+              <text x="16" y="38" class="sv-label-accent">A = {0}</text>
+              <line x1="110" y1="34" x2="404" y2="34" class="sv-grid"/>
+              <circle cx="140" cy="34" r="5" class="sv-fill-accent"/>
+              <text x="16" y="82" class="sv-label-seq2">B = (0, 1)</text>
+              <line x1="110" y1="78" x2="404" y2="78" class="sv-grid"/>
+              <line x1="145" y1="78" x2="345" y2="78" class="sv-seq2" style="stroke-width:4"/>
+              <circle cx="140" cy="78" r="5" class="sv-fill-bg sv-seq2"/>
+              <circle cx="350" cy="78" r="5" class="sv-fill-bg sv-seq2"/>
+              <text x="16" y="126" class="sv-label-seq3">B̄ = [0, 1]</text>
+              <line x1="110" y1="122" x2="404" y2="122" class="sv-grid"/>
+              <line x1="140" y1="122" x2="350" y2="122" class="sv-seq3" style="stroke-width:4"/>
+              <circle cx="140" cy="122" r="5" class="sv-fill-seq3"/>
+              <circle cx="350" cy="122" r="5" class="sv-fill-seq3"/>
+              <line x1="140" y1="22" x2="140" y2="140" class="sv-axis sv-dash"/>
+              <text x="140" y="158" text-anchor="middle" class="sv-muted">0</text>
+              <text x="350" y="158" text-anchor="middle" class="sv-muted">1</text>
+            </svg>
+            <figcaption>Sobre la línea punteada del 0: el punto de <i>A</i> está en <span style="text-decoration:overline"><i>B</i></span> (punto lleno abajo) pero no en <i>B</i> (círculo vacío en el medio).</figcaption>
+          </figure>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Qué falla</p>
+            <p>El ítem a) falla porque $A = \{0\}$ no es abierto: ninguna bola $B(0, r) = (-r, r)$ está contenida en $\{0\}$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="r1-2c2025-ej3-c2" aria-label="La bola (−r, r) alrededor de 0, que no está contenida en {0}"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="r1-2c2025-ej3-r"><i>r</i></label><input type="range" id="r1-2c2025-ej3-r" min="3" max="80" value="35"><output id="r1-2c2025-ej3-r-o"></output></div>
+            </div>
+            <dl class="read" id="r1-2c2025-ej3-read2" aria-live="polite"></dl>
+            <figcaption>La banda es <i>B</i>(0, <i>r</i>) = (−<i>r</i>, <i>r</i>). Por chico que sea <i>r</i>, la bola tiene puntos distintos de 0 (el dibujo marca <i>r</i>/2), así que no entra en <i>A</i> = {0}: no hay una bola como la del ítem a).</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Recu1_2C2025.ej3a</code>, <code>ej3b</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 4 ===================== -->
+  <article class="ej" id="r1-2c2025-ej4" data-short="Ej. 4" data-title="Bola y convergencia con la métrica discreta en la segunda coordenada" data-topics="metricas,sucesiones">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>La métrica discreta en la segunda coordenada</h3>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $\delta : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ la métrica discreta en $\mathbb{R}$ dada por $$\delta(x, y) = \begin{cases} 1 & \text{si } x \neq y, \\ 0 & \text{si } x = y. \end{cases}$$ Sea $d : \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R}$ la métrica definida como $$\begin{aligned} & d((x_1, y_1), (x_2, y_2)) \\ & \quad = \sqrt{|x_1 - x_2|^2 + \delta(y_1, y_2)^2}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La segunda coordenada sólo aporta $0$ o $1$.</em> $\delta(y_1, y_2)^2$ vale $0$ si $y_1 = y_2$ y $1$ si no. Para que $d \lt 1/2$ hace falta $\delta = 0$, es decir, la misma segunda coordenada; y para una sucesión que converge a $(0, 0)$ hace falta que la segunda coordenada sea eventualmente $0$.</p></div>
+
+    <div class="sub" id="r1-2c2025-ej4a">
+      <h4>Ítem a)</h4>
+      <div class="enun"><p>Probar que en el espacio métrico $(\mathbb{R}^2, d)$ vale que $B((0, 0), 1/2) = (-1/2, 1/2) \times \{0\}$.</p></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Pertenencia a la <span class="ref" data-ref="def-4.5">bola</span></p>
+            <p>Sea $p = (x, y) \in \mathbb{R}^2$. Como $\sqrt{\cdot}$ es creciente y $1/2 \gt 0$, $$\begin{aligned} p \in B((0,0), 1/2) &\iff \sqrt{|x|^2 + \delta(y, 0)^2} \lt 1/2 \\ &\iff x^2 + \delta(y, 0)^2 \lt 1/4. \end{aligned}$$</p>
+          </div>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Dos casos según $y$</p>
+            <ul class="items">
+              <li>Si $y \neq 0$, entonces $\delta(y, 0) = 1$ y $x^2 + 1 \ge 1 \gt 1/4$: $p \notin B((0,0), 1/2)$.</li>
+              <li>Si $y = 0$, entonces $\delta(y, 0) = 0$ y la condición es $x^2 \lt 1/4$, es decir $|x| \lt 1/2$, es decir $x \in (-1/2, 1/2)$.</li>
+            </ul>
+          </div>
+          <figure class="viz">
+            <canvas id="r1-2c2025-ej4-c1" aria-label="El plano con la bola B((0,0), 1/2) de la métrica d, que es el segmento (−1/2, 1/2) × {0}, y un punto arrastrable"></canvas>
+            <dl class="read" id="r1-2c2025-ej4-read1" aria-live="polite"></dl>
+            <figcaption>El segmento grueso es (−1/2, 1/2) × {0}. Arrastrá (o tocá) el punto <i>p</i>: fuera del eje <i>y</i> = 0 la cuenta tiene δ(<i>y</i>, 0)² = 1 y <i>p</i> queda afuera aunque esté cerca del origen. El punto se pega al eje cuando lo acercás.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Conclusión</p>
+            <p>Luego $$\begin{aligned} B((0,0), 1/2) &= \{(x, 0) : |x| \lt 1/2\} \\ &= (-1/2, 1/2) \times \{0\}. \end{aligned}$$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="r1-2c2025-ej4b">
+      <h4>Ítem b) <span class="tag f">No converge</span></h4>
+      <div class="enun"><p>Decidir si la sucesión $(1/n, 1/n)_{n \in \mathbb{N}}$ converge a $(0, 0)$ con la métrica $d$.</p></div>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">La distancia al origen no baja de $1$</p>
+            <p><b>No converge a $(0,0)$.</b> Para todo $n \in \mathbb{N}$, $1/n \neq 0$, así que $\delta(1/n, 0) = 1$ y $$d((1/n, 1/n), (0, 0)) = \sqrt{1/n^2 + 1} \ge \sqrt{1} = 1.$$</p>
+          </div>
+          <figure class="viz">
+            <canvas id="r1-2c2025-ej4-c2" aria-label="Los puntos (1/n, 1/n) en el plano, que se acercan al origen en el dibujo pero están a distancia d al menos 1"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="r1-2c2025-ej4-n"><i>n</i></label><input type="range" id="r1-2c2025-ej4-n" min="1" max="25" value="4"><output id="r1-2c2025-ej4-n-o"></output></div>
+            </div>
+            <dl class="read" id="r1-2c2025-ej4-read2" aria-live="polite"></dl>
+            <figcaption>Los términos (1/<i>n</i>, 1/<i>n</i>) en el plano. En el dibujo se acercan al origen, pero su segunda coordenada nunca es 0, así que δ(1/<i>n</i>, 0) = 1 y la distancia <i>d</i> al origen nunca baja de 1.</figcaption>
+          </figure>
+        </div>
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Contradicción con $\varepsilon = 1$</p>
+            <p>Si la sucesión convergiera a $(0,0)$, tomando $\varepsilon = 1$ en la <span class="ref" data-ref="def-4.42">Definición 4.42</span> habría $n_0$ con $d((1/n, 1/n), (0,0)) \lt 1$ para $n \ge n_0$, contradiciendo lo anterior.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="r1-2c2025-ej4-c3" aria-label="La distancia d de cada término al origen, comparada con ε = 1"></canvas>
+            <div class="ctrl">
+              <fieldset class="pills"><legend>Sucesión</legend>
+                <label><input type="radio" name="r1-2c2025-ej4-s" value="a" checked>(1/<i>n</i>, 1/<i>n</i>)</label>
+                <label><input type="radio" name="r1-2c2025-ej4-s" value="b">(1/<i>n</i>, 0)</label>
+              </fieldset>
+            </div>
+            <dl class="read" id="r1-2c2025-ej4-read3" aria-live="polite"></dl>
+            <figcaption>Cada barra es <i>d</i>(<i>x<sub>n</sub></i>, (0, 0)) para <i>n</i> = 1, …, 30, y la línea es ε = 1. Con (1/<i>n</i>, 1/<i>n</i>) ninguna barra baja de la línea, así que no hay <i>n</i>₀. Con (1/<i>n</i>, 0) (el paso siguiente) las barras son 1/<i>n</i> y bajan a 0.</figcaption>
+          </figure>
+        </div>
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Lo que sí converge</p>
+            <p>(Lo que sí converge a $(0, 0)$ con $d$ es, por ejemplo, $(1/n, 0)_n$: ahí la segunda coordenada ya es $0$ y $d((1/n, 0), (0,0)) = 1/n \to 0$.)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Recu1_2C2025.ej4a</code>, <code>ej4b</code>.</p>
+  </article>
+
+  <!-- ===================== Ejercicio 5 ===================== -->
+  <article class="ej" id="r1-2c2025-ej5" data-short="Ej. 5" data-title="Continuidad vía interior de preimágenes" data-topics="continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 5</span>
+      <h3>Continuidad: $f^{-1}(B^\circ) \subseteq (f^{-1}(B))^\circ$</h3>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sean $(E, d)$ y $(E', d')$ espacios métricos y $f : E \to E'$ una función. Probar que $f$ es continua si y sólo si $f^{-1}(B^\circ) \subseteq (f^{-1}(B))^\circ$ para todo $B \subseteq E'$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Bolas en el codominio versus bolas en el dominio.</em> Continuidad en $x$ dice: toda bola $B(f(x), \varepsilon)$ contiene la imagen de alguna bola $B(x, \delta)$. La inclusión del enunciado dice lo mismo con "bola" reemplazada por "abierto contenido en $B$": la ida es la definición, y la vuelta se obtiene tomando $B = B(f(x), \varepsilon)$, que es abierta y por lo tanto su propio interior.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La definición que se usa</p>
+          <p>Usamos <span class="ref" data-ref="def-5.4">la definición</span>: $f$ es continua si para todo $x \in E$ y todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d(x, x') \lt \delta$ implica $d'(f(x), f(x')) \lt \varepsilon$; equivalentemente, $f(B(x, \delta)) \subseteq B(f(x), \varepsilon)$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">($\Rightarrow$)</p>
+          <p>Sea $B \subseteq E'$ y $x \in f^{-1}(B^\circ)$, es decir $f(x) \in B^\circ$. Por la <span class="ref" data-ref="def-4.11">Definición 4.11</span> existe $\varepsilon \gt 0$ con $B(f(x), \varepsilon) \subseteq B$. Por continuidad en $x$ existe $\delta \gt 0$ con $$f(B(x, \delta)) \subseteq B(f(x), \varepsilon) \subseteq B,$$ es decir $B(x, \delta) \subseteq f^{-1}(B)$. Luego $x$ es punto interior de $f^{-1}(B)$: $x \in (f^{-1}(B))^\circ$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej5-c1" aria-label="Gráfico de una función continua, el conjunto B en el eje vertical, la bola B(f(x), ε) dentro de B y la bola B(x, δ) dentro de la preimagen de B"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej5-x1"><i>x</i></label><input type="range" id="r1-2c2025-ej5-x1" min="0" max="400" value="195"><output id="r1-2c2025-ej5-x1-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej5-read1" aria-live="polite"></dl>
+          <figcaption>Un caso elegido para el dibujo: <i>E</i> = <i>E′</i> = ℝ, <i>f</i>(<i>t</i>) = 1 + 0.8 sen(1.7<i>t</i>) y <i>B</i> = [0.5, 1.4] (banda gris, en el eje vertical). La banda azul es <i>B</i>(<i>f</i>(<i>x</i>), ε) ⊆ <i>B</i>; el tramo azul del eje horizontal es <i>B</i>(<i>x</i>, δ), con el δ más grande que sirve, y el verde es <i>f</i><sup>−1</sup>(<i>B</i>). Si <i>f</i>(<i>x</i>) ∉ <i>B</i>° no hay nada que probar.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">($\Leftarrow$) Elegir $B$</p>
+          <p>Sea $x \in E$ y $\varepsilon \gt 0$. Tomemos $B = B(f(x), \varepsilon)$, que es un abierto de $E'$ (<span class="ref" data-ref="guia-p3-ej4b">Práctica 3, Ej. 4 (b)</span>), así que $B^\circ = B$ (<span class="ref" data-ref="def-4.14">Definición 4.14</span>). Como $f(x) \in B$, tenemos $$x \in f^{-1}(B) = f^{-1}(B^\circ) \subseteq (f^{-1}(B))^\circ$$ por hipótesis.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">($\Leftarrow$) El $\delta$</p>
+          <p>Por la <span class="ref" data-ref="def-4.11">Definición 4.11</span> existe $\delta \gt 0$ con $B(x, \delta) \subseteq f^{-1}(B)$, es decir: si $d(x, x') \lt \delta$ entonces $f(x') \in B(f(x), \varepsilon)$, o sea $d'(f(x), f(x')) \lt \varepsilon$. Luego $f$ es continua en $x$, y como $x$ era arbitrario, $f$ es continua.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="r1-2c2025-ej5-c2" aria-label="La bola B(f(x), ε) en el eje vertical, su preimagen en el eje horizontal y la bola B(x, δ) contenida en ella"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="r1-2c2025-ej5-x2"><i>x</i></label><input type="range" id="r1-2c2025-ej5-x2" min="0" max="400" value="350"><output id="r1-2c2025-ej5-x2-o"></output></div>
+            <div class="slider"><label for="r1-2c2025-ej5-e2">ε</label><input type="range" id="r1-2c2025-ej5-e2" min="5" max="80" value="30"><output id="r1-2c2025-ej5-e2-o"></output></div>
+          </div>
+          <dl class="read" id="r1-2c2025-ej5-read2" aria-live="polite"></dl>
+          <figcaption>La misma <i>f</i> de ejemplo. Ahora <i>B</i> = <i>B</i>(<i>f</i>(<i>x</i>), ε) (banda azul) y su preimagen <i>f</i><sup>−1</sup>(<i>B</i>) es lo verde del eje horizontal. Como <i>x</i> es interior de esa preimagen, entra una bola <i>B</i>(<i>x</i>, δ) (tramo azul, con el δ más grande): sobre ella el gráfico queda dentro de la banda.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Recu1_2C2025.ej5</code>.</p>
+  </article>
+</section>

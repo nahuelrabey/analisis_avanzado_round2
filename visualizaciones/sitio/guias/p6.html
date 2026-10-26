@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 6</span></li></ol><div class="pager"><a href="../guias/p5.html" title="Guía · Práctica 5">← Anterior</a><a href="../guias/p7.html" title="Guía · Práctica 7">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 13 ejercicios</p>
+  <h1>Práctica 6</h1>
+  <p>Espacios normados. Los enunciados de <code>apuntes-typst/guias/p6.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap6-ej1" title="Las normas 1, 2 e infinito en ℝⁿ">Ej. 1</a></li><li><a href="#guiap6-ej2" title="Bolas en un espacio normado: clausura, diámetro y convexidad">Ej. 2</a></li><li><a href="#guiap6-ej3" title="Los promedios de Cesàro de una sucesión convergente">Ej. 3</a></li><li><a href="#guiap6-ej4" title="Clausura, interior y cerrados de subespacios">Ej. 4</a></li><li><a href="#guiap6-ej5" title="Normas infinito y 1 en polinomios">Ej. 5</a></li><li><a href="#guiap6-ej6" title="ℓ∞: la bola cerrada no es compacta y no es separable">Ej. 6</a></li><li><a href="#guiap6-ej7" title="Las sucesiones finitas de suma cero son densas">Ej. 7</a></li><li><a href="#guiap6-ej8" title="Operadores lineales: continuidad equivale a acotación">Ej. 8</a></li><li><a href="#guiap6-ej9" title="Tres fórmulas para la norma de un operador">Ej. 9</a></li><li><a href="#guiap6-ej10" title="Evaluación e integral como funcionales en C([0,1])">Ej. 10</a></li><li><a href="#guiap6-ej11" title="El operador integral con núcleo continuo">Ej. 11</a></li><li><a href="#guiap6-ej12" title="La derivada en polinomios no es continua">Ej. 12</a></li><li><a href="#guiap6-ej13" title="ℓ²: la bola cerrada y la funcional Σ aₙ/n">Ej. 13</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap6-edicion">Encabezado de la fuente: Análisis Avanzado · Segundo cuatrimestre de 2025 · Práctica 6.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap6-ej1" data-short="Ej. 1" data-title="Las normas 1, 2 e infinito en ℝⁿ" data-topics="normados,metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Las normas $1$, $2$ e $\infty$ en $\mathbb{R}^n$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que $\|\cdot\|_1$, $\|\cdot\|_2$ y $\|\cdot\|_\infty$ definen <span class="ref" data-ref="ext-norma">normas</span> en $\mathbb{R}^n$, donde
+      $$\begin{aligned} \|x\|_1 &= \sum_{i=1}^n |x_i|, \\ \|x\|_2 &= \Big(\sum_{i=1}^n x_i^2\Big)^{1/2} \quad \text{y} \\ \|x\|_\infty &= \max_{1 \le i \le n} |x_i|. \end{aligned}$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej1-c" aria-label="Las bolas unitarias de las normas 1, 2 e infinito en el plano y un punto arrastrable"></canvas>
+      <dl class="read" id="guiap6-ej1-read" aria-live="polite"></dl>
+      <figcaption>En ℝ² (<i>n</i> = 2): los conjuntos {‖<i>x</i>‖ = 1} de las tres normas, ‖·‖<sub>1</sub> (rombo, naranja), ‖·‖<sub>2</sub> (círculo, azul) y ‖·‖<sub>∞</sub> (cuadrado, verde). Arrastrá <i>x</i> para leer sus tres normas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap6-ej2" data-short="Ej. 2" data-title="Bolas en un espacio normado: clausura, diámetro y convexidad" data-topics="normados,topologia">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Bolas en un espacio normado</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span>. Pruebe que se verifican:</p>
+      <ol class="items">
+        <li>Si $x \in E$ y $r \gt 0$, $\overline{B(x, r)} = \overline{B}(x, r)$ (es decir, la <span class="ref" data-ref="def-4.22">clausura</span> de la bola abierta es la <span class="ref" data-ref="def-4.5">bola cerrada</span>).</li>
+        <li>$\operatorname{diam}(B(x, r)) = 2r$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+        <li>Si $y, z \in B(x, r)$ entonces para todo $t \in [0, 1]$, $t y + (1 - t) z \in B(x, r)$ (es decir, toda bola es <em>convexa</em>).</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej2-c" aria-label="Una bola de un espacio normado en el plano, dos puntos y, z arrastrables y el punto t y más (1 menos t) z"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Norma en ℝ²</legend>
+          <label><input type="radio" name="guiap6-ej2-m" value="2" checked>‖·‖<sub>2</sub></label>
+          <label><input type="radio" name="guiap6-ej2-m" value="1">‖·‖<sub>1</sub></label>
+          <label><input type="radio" name="guiap6-ej2-m" value="inf">‖·‖<sub>∞</sub></label>
+        </fieldset>
+        <div class="slider"><label for="guiap6-ej2-t"><i>t</i></label><input type="range" id="guiap6-ej2-t" min="0" max="100" value="35"><output id="guiap6-ej2-t-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej2-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ², <i>x</i> = 0 y <i>r</i> = 2 (valores elegidos): la bola <i>B</i>(<i>x</i>, <i>r</i>) sombreada, su borde punteado. Arrastrá <i>y</i> y <i>z</i>; el punto negro es <i>t y</i> + (1 − <i>t</i>) <i>z</i>, sobre el segmento que los une.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap6-ej3" data-short="Ej. 3" data-title="Los promedios de Cesàro de una sucesión convergente" data-topics="normados,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Promedios de una sucesión convergente</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span>. Sean $(x_n)_{n \in \mathbb{N}} \subseteq E$ y $x_0 \in E$ tales que <span class="ref" data-ref="def-4.42">$\lim_{n \to \infty} x_n = x_0$</span>. Pruebe que si definimos $(y_n)_{n \in \mathbb{N}} \subseteq E$ por
+      $$y_n = \frac{x_1 + x_2 + \dots + x_n}{n},$$
+      entonces $\lim_{n \to \infty} y_n = x_0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej3-c" aria-label="Una sucesión del plano que converge a x0 y la sucesión de sus promedios"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap6-ej3-N">términos <i>n</i> ≤</label><input type="range" id="guiap6-ej3-N" min="1" max="200" value="25"><output id="guiap6-ej3-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej3-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida para el dibujo en (ℝ², ‖·‖<sub>2</sub>): <i>x<sub>n</sub></i> = <i>x</i><sub>0</sub> + (3/√<i>n</i>)(cos 2<i>n</i>, sen 2<i>n</i>) con <i>x</i><sub>0</sub> = (1, 0.5). En naranja los <i>x<sub>n</sub></i>, en azul los promedios <i>y<sub>n</sub></i>; el último dibujado de cada una, más grande.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap6-ej4" data-short="Ej. 4" data-title="Clausura, interior y cerrados de subespacios" data-topics="normados,topologia,densidad">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Subespacios: clausura, interior, dimensión finita e hiperplanos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span> y $S \subseteq E$ un subespacio (vectorial). Pruebe que:</p>
+    <ol class="items">
+      <li><span class="ref" data-ref="def-4.22">$\overline{S}$</span> también es un subespacio.</li>
+      <li>Si $S \neq E$, entonces <span class="ref" data-ref="def-4.11">$S^{\circ}$</span> $= \emptyset$.</li>
+      <li>Si $\dim(S) \lt \infty$, entonces $S$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      <li>Si $S$ es un <span class="ref" data-ref="ext-hiperplano">hiperplano</span>, entonces $S$ es o bien <span class="ref" data-ref="def-5.20">denso</span> o bien cerrado en $E$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap6-ej5" data-short="Ej. 5" data-title="Normas infinito y 1 en polinomios" data-topics="normados,completitud">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Las normas $\|\cdot\|_\infty$ y $\|\cdot\|_1$ en polinomios</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\mathbb{R}_n[t]$ el conjunto de los polinomios de grado menor o igual que $n$ con coeficientes en $\mathbb{R}$. Consideremos para $p \in \mathbb{R}_n[t]$ las <span class="ref" data-ref="ext-norma">normas</span>
+      $$\begin{aligned} \|p\|_\infty &= \max_{0 \le t \le 1} |p(t)| \quad \text{y} \\ \|p\|_1 &= \int_0^1 |p(t)|\, dt. \end{aligned}$$</p>
+      <ol class="items">
+        <li>¿Son $(\mathbb{R}_n[t], \|\cdot\|_\infty)$ y $(\mathbb{R}_n[t], \|\cdot\|_1)$ <span class="ref" data-ref="ext-espacio-de-banach">espacios de Banach</span>? ¿Por qué?</li>
+        <li>Justifique por qué ambas normas resultan <span class="ref" data-ref="ext-normas-equivalentes">equivalentes</span> en $\mathbb{R}_n[t]$ para todo $n \in \mathbb{N}$.</li>
+        <li>Si $\mathbb{R}[t]$ denota el conjunto de todos los polinomios con coeficientes en $\mathbb{R}$, pruebe que ahí las normas $\|\cdot\|_\infty$ y $\|\cdot\|_1$ no son equivalentes. ¿Hay alguna contradicción con el ítem anterior, que afirma que las normas son equivalentes para polinomios de grado hasta $n$ para todo $n \in \mathbb{N}$?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej5-c" aria-label="Un polinomio de grado a lo sumo 3 en [0,1] con valores arrastrables, el área bajo su módulo y su máximo"></canvas>
+      <dl class="read" id="guiap6-ej5-read" aria-live="polite"></dl>
+      <figcaption>Un <i>p</i> ∈ ℝ<sub>3</sub>[<i>t</i>] (elegido para el dibujo) determinado por sus valores en <i>t</i> = 0, 1/3, 2/3, 1: arrastrá esos cuatro puntos. El área sombreada, entre el gráfico de <i>p</i> y el eje, mide ‖<i>p</i>‖<sub>1</sub> y la raya punteada marca ‖<i>p</i>‖<sub>∞</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap6-ej6" data-short="Ej. 6" data-title="ℓ∞: la bola cerrada no es compacta y no es separable" data-topics="normados,compacidad,densidad,cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>El espacio $\ell^\infty$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Definimos $\ell^\infty$ como el espacio de todas las sucesiones acotadas de números reales:
+      $$\begin{aligned} \ell^\infty = \{&a = (a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} : \\ &\sup_{n \in \mathbb{N}} |a_n| \lt +\infty\} \end{aligned}$$
+      con la norma
+      $$\|a\|_\infty = \sup_{n \in \mathbb{N}} |a_n|.$$</p>
+      <ol class="items">
+        <li>Pruebe que la <span class="ref" data-ref="def-4.5">bola cerrada</span> de centro $0$ y radio $1$ de $\ell^\infty$ no es <span class="ref" data-ref="ext-compacto">compacta</span>.</li>
+        <li>Pruebe que no hay ningún conjunto <span class="ref" data-ref="def-3.6">numerable</span> <span class="ref" data-ref="def-5.20">denso</span> en $\ell^\infty$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej6-c" aria-label="Los primeros términos de una sucesión acotada y la banda de su norma infinito"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión <i>a</i></legend>
+          <label><input type="radio" name="guiap6-ej6-a" value="alt" checked>(−1)<sup><i>n</i></sup>(1 − 1/<i>n</i>)</label>
+          <label><input type="radio" name="guiap6-ej6-a" value="sin">sen <i>n</i></label>
+          <label><input type="radio" name="guiap6-ej6-a" value="dec">2/<i>n</i></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej6-read" aria-live="polite"></dl>
+      <figcaption>Tres elementos de ℓ<sup>∞</sup> elegidos para el dibujo, con sus primeros 60 términos. La banda punteada es ±‖<i>a</i>‖<sub>∞</sub>: el supremo de |<i>a<sub>n</sub></i>|, que puede no alcanzarse.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p6.html#ejp6-b1" title="Bloque 1 · Completitud en espacios normados">Ej. Práctica 6 · Bloque 1 · Completitud en espacios normados</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap6-ej7" data-short="Ej. 7" data-title="Las sucesiones finitas de suma cero son densas" data-topics="normados,densidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Sucesiones finitas de suma cero</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E \subseteq \ell^\infty$ el (sub)<span class="ref" data-ref="ext-norma">espacio normado</span> definido como
+      $$\begin{aligned} E = \{a \in \ell^\infty : {} &\text{existe } n_0 \in \mathbb{N} \\ &\text{tal que } a_n = 0 \\ &\text{para todo } n \ge n_0\}, \end{aligned}$$
+      dentro del cual consideramos el subespacio
+      $$S = \Big\{a \in E : \sum_{n \ge 1} a_n = 0\Big\}.$$
+      Pruebe que $S$ es <span class="ref" data-ref="def-5.20">denso</span> en $E$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej7-c" aria-label="Una sucesión con finitos términos no nulos representada con barras arrastrables"></canvas>
+      <dl class="read" id="guiap6-ej7-read" aria-live="polite"></dl>
+      <figcaption>Un elemento <i>a</i> ∈ <i>E</i> con <i>a<sub>n</sub></i> = 0 para <i>n</i> ≥ 9 (valores elegidos): arrastrá la punta de cada barra. La lectura dice su suma, que decide si <i>a</i> ∈ <i>S</i>, y su norma ‖<i>a</i>‖<sub>∞</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p6.html#ejp6-b1" title="Bloque 1 · Completitud en espacios normados">Ej. Práctica 6 · Bloque 1 · Completitud en espacios normados</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap6-ej8" data-short="Ej. 8" data-title="Operadores lineales: continuidad equivale a acotación" data-topics="normados,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Continuidad de un operador lineal</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $(E, \|\cdot\|_E)$, $(F, \|\cdot\|_F)$ <span class="ref" data-ref="ext-norma">espacios normados</span>. Sea $T : E \to F$ un <span class="ref" data-ref="ext-operador-lineal">operador lineal</span>. Pruebe que son equivalentes:</p>
+    <ol class="items">
+      <li>$T$ es <span class="ref" data-ref="def-5.4">continuo en $0$</span>.</li>
+      <li>Existe $x_0 \in E$ tal que $T$ es continuo en $x_0$.</li>
+      <li>$T$ es continuo.</li>
+      <li>$T$ es <span class="ref" data-ref="def-5.14">uniformemente continuo</span>.</li>
+      <li>$T$ es <span class="ref" data-ref="ext-operador-acotado">acotado</span>.</li>
+      <li>Para todo $A \subseteq E$ <span class="ref" data-ref="def-4.8">acotado</span>, $T(A)$ es acotado.</li>
+    </ol></div>
+  <div class="preparan" data-ej="8"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p6.html#ejp6-b2" title="Bloque 2 · Operadores lineales: continuidad y acotación">Ej. Práctica 6 · Bloque 2 · Operadores lineales: continuidad y acotación</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap6-ej9" data-short="Ej. 9" data-title="Tres fórmulas para la norma de un operador" data-topics="normados">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Fórmulas para $\|T\|$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(E, \|\cdot\|_E)$, $(F, \|\cdot\|_F)$ espacios normados, y sea $T : E \to F$ <span class="ref" data-ref="ext-operador-lineal">lineal</span> y <span class="ref" data-ref="def-5.4">continuo</span>. Verifique las siguientes fórmulas:
+      $$\begin{aligned} \|T\| &= \sup_{\|x\|_E \le 1} \|T x\|_F \\ &= \sup_{\|x\|_E = 1} \|T x\|_F \\ &= \sup_{x \neq 0} \frac{\|T x\|_F}{\|x\|_E}. \end{aligned}$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej9-c" aria-label="La bola unitaria del plano y su imagen por una transformación lineal, con el punto de norma máxima"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap6-ej9-a"><i>a</i></label><input type="range" id="guiap6-ej9-a" min="-200" max="200" value="150"><output id="guiap6-ej9-a-o"></output></div>
+        <div class="slider"><label for="guiap6-ej9-b"><i>b</i></label><input type="range" id="guiap6-ej9-b" min="-200" max="200" value="80"><output id="guiap6-ej9-b-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej9-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido para el dibujo: <i>T</i> : (ℝ², ‖·‖<sub>2</sub>) → (ℝ², ‖·‖<sub>2</sub>), <i>T</i>(<i>x</i>, <i>y</i>) = (<i>a x</i> + <i>b y</i>, 0.6 <i>y</i>). Gris: la bola unitaria; azul: su imagen <i>T</i>(<i>B</i>). La lectura estima numéricamente los tres supremos del enunciado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p6.html#ejp6-b2" title="Bloque 2 · Operadores lineales: continuidad y acotación">Ej. Práctica 6 · Bloque 2 · Operadores lineales: continuidad y acotación</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap6-ej10" data-short="Ej. 10" data-title="Evaluación e integral como funcionales en C([0,1])" data-topics="normados,continuidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Evaluación e integral como funcionales</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en $C([0, 1])$ las <span class="ref" data-ref="ext-norma">normas</span>
+      $$\begin{aligned} \|f\|_\infty &= \max_{x \in [0, 1]} |f(x)| \quad \text{y} \\ \|f\|_1 &= \int_0^1 |f(x)|\, dt. \end{aligned}$$
+      Sean $\mathcal{E}, \mathcal{I} : C([0, 1]) \to \mathbb{R}$ las <span class="ref" data-ref="ext-funcional-lineal">funcionales lineales</span> definidas por
+      $$\mathcal{E} f = f(0), \quad \mathcal{I} f = \int_0^1 f(x)\, dx.$$
+      Decida, para cada una de las normas, si cada una de las funcionales es <span class="ref" data-ref="def-5.4">continua</span>; en caso afirmativo, acote su <span class="ref" data-ref="ext-operador-acotado">norma</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej10-c" aria-label="Función continua poligonal en [0,1] con nodos arrastrables, su valor en 0 y el área bajo su gráfico"></canvas>
+      <dl class="read" id="guiap6-ej10-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá los nodos para armar una <i>f</i> ∈ <i>C</i>([0, 1]) poligonal. El punto grande es (0, 𝓔<i>f</i>) y el área sombreada (azul arriba, naranja abajo) suma 𝓘<i>f</i>. La lectura da también las dos normas de <i>f</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="nota"><b>Nota de esta versión</b>En la fórmula de $\|f\|_1$ la variable de integración aparece como $dt$ mientras el integrando está escrito en $x$; se transcribe tal como está en <code>guias/p6.typ</code>, y se entiende $\|f\|_1 = \int_0^1 |f(x)|\, dx$.</div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap6-ej11" data-short="Ej. 11" data-title="El operador integral con núcleo continuo" data-topics="normados,funciones">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Un operador integral</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en $C([0, 1])$ la norma infinito. Fijada $k : [0, 1] \times [0, 1] \to \mathbb{R}$ continua, sea $K : C([0, 1]) \to C([0, 1])$ dada por
+      $$(K f)(x) = \int_0^1 k(x, y) f(y)\, dy.$$
+      Pruebe que $K$ es <span class="ref" data-ref="ext-operador-lineal">lineal</span> y <span class="ref" data-ref="def-5.4">continua</span>. Acote su <span class="ref" data-ref="ext-operador-acotado">norma</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej11-c" aria-label="Una función f poligonal arrastrable y su imagen Kf por el operador integral"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Núcleo <i>k</i>(<i>x</i>, <i>y</i>)</legend>
+          <label><input type="radio" name="guiap6-ej11-k" value="xy" checked><i>x y</i></label>
+          <label><input type="radio" name="guiap6-ej11-k" value="min">mín(<i>x</i>, <i>y</i>)</label>
+          <label><input type="radio" name="guiap6-ej11-k" value="cos">cos(π(<i>x</i> − <i>y</i>))</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej11-read" aria-live="polite"></dl>
+      <figcaption>Tres núcleos elegidos para el dibujo. En azul una <i>f</i> poligonal (arrastrá sus nodos) y en verde <i>K f</i>, calculada numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap6-ej12" data-short="Ej. 12" data-title="La derivada en polinomios no es continua" data-topics="normados,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>La derivada en $\mathbb{R}[t]$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\mathbb{R}[t]$ el espacio de polinomios, con la norma $\|\cdot\|_\infty$ definida en el <span class="ref" data-ref="guia-p6-ej5">Ejercicio 5</span>. Sea $\delta : \mathbb{R}[t] \to \mathbb{R}[t]$ dado por $(\delta p)(t) = p'(t)$, donde $p'$ denota el derivado de $p$. Probar que $\delta$ es un <span class="ref" data-ref="ext-operador-lineal">operador lineal</span> que no es <span class="ref" data-ref="def-5.4">continuo</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej12-c" aria-label="Un polinomio de grado a lo sumo 3 con valores arrastrables y su derivada en [0,1]"></canvas>
+      <dl class="read" id="guiap6-ej12-read" aria-live="polite"></dl>
+      <figcaption>Un <i>p</i> de grado ≤ 3 (azul) determinado por sus valores en <i>t</i> = 0, 1/3, 2/3, 1, que se arrastran, y su derivada δ<i>p</i> = <i>p</i>′ (naranja), en [0, 1]. La lectura compara las normas ‖·‖<sub>∞</sub> de los dos.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p6.html#ejp6-b2" title="Bloque 2 · Operadores lineales: continuidad y acotación">Ej. Práctica 6 · Bloque 2 · Operadores lineales: continuidad y acotación</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap6-ej13" data-short="Ej. 13" data-title="ℓ²: la bola cerrada y la funcional Σ aₙ/n" data-topics="normados,compacidad,series">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>El espacio $\ell^2$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-normados">normados</a><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\ell^2$ el espacio vectorial de todas las sucesiones de cuadrado sumable:
+      $$\begin{aligned} \ell^2 = \{&a = (a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} : \\ &\textstyle\sum_{n=1}^\infty |a_n|^2 \lt +\infty\}. \end{aligned}$$
+      Para $a \in \ell^2$ definimos
+      $$\|a\|_2 = \Big(\sum_{n=1}^\infty |a_n|^2\Big)^{1/2}.$$</p>
+      <ol class="items">
+        <li>¿Es <span class="ref" data-ref="ext-compacto">compacta</span> la <span class="ref" data-ref="def-4.5">bola cerrada</span> de centro $0$ y radio $1$ de $\ell^2$?</li>
+        <li>Pruebe que $\gamma : \ell^2 \to \mathbb{R}$ dada por
+          $$\gamma(a) = \sum_{n=1}^\infty \frac{a_n}{n}$$
+          es una <span class="ref" data-ref="ext-funcional-lineal">funcional lineal</span> <span class="ref" data-ref="def-5.4">continua</span>.
+          <p><em>Sugerencia: use la <span class="ref" data-ref="ext-cauchy-schwarz">desigualdad de Cauchy-Schwarz</span>.</em></p></li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej13-c" aria-label="Los primeros términos de una sucesión de cuadrado sumable y las sumas parciales de gamma"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión <i>a</i></legend>
+          <label><input type="radio" name="guiap6-ej13-a" value="inv" checked>1/<i>n</i></label>
+          <label><input type="radio" name="guiap6-ej13-a" value="alt">(−1)<sup><i>n</i></sup>/<i>n</i><sup>0.75</sup></label>
+          <label><input type="radio" name="guiap6-ej13-a" value="geo">2<sup>−<i>n</i></sup></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej13-read" aria-live="polite"></dl>
+      <figcaption>Tres elementos de ℓ² elegidos para el dibujo. Barras: <i>a<sub>n</sub></i> para <i>n</i> ≤ 30. Línea verde: las sumas parciales Σ<sub><i>k</i> ≤ <i>n</i></sub> <i>a<sub>k</sub></i>/<i>k</i> de la serie que define γ(<i>a</i>). Los valores de la lectura se calculan con 20000 términos.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:<\/p><ul class=\"items\"><li><b>finito<\/b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<\/li><li><b>infinito<\/b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<\/li><li><b>numerable<\/b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<\/li><li><b>a lo sumo numerable<\/b> o <b>contable<\/b> si es finito o numerable.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior<\/strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.<\/p><p>El <strong>interior<\/strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia<\/strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.<\/p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura<\/strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión<\/b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.<\/p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge<\/b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:<\/p><ul><li><b>Bola abierta:<\/b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<\/li><li><b>Bola cerrada:<\/b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<\/li><li><b>Esfera:<\/b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado<\/b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.<\/p><p>(En el apunte, la definición viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro<\/b> se define como:<\/p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua<\/i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$<\/p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes<\/i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).<\/p><p><i>Nota<\/i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$<\/b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso<\/em> en $M$ si $\\overline{E} = M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-cauchy-schwarz": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Desigualdad de Cauchy-Schwarz (en $\\ell^2$)",
+  "enunciado": "<p>Si $a = (a_n)_{n}$ y $b = (b_n)_{n}$ son sucesiones de cuadrado sumable, entonces $$\\sum_{n=1}^\\infty |a_n b_n| \\le \\Big(\\sum_{n=1}^\\infty |a_n|^2\\Big)^{1/2} \\Big(\\sum_{n=1}^\\infty |b_n|^2\\Big)^{1/2}.$$ (Es la desigualdad de Cauchy-Schwarz de $\\mathbb{R}^N$, $\\sum_{n \\le N} |a_n b_n| \\le (\\sum_{n \\le N} a_n^2)^{1/2} (\\sum_{n \\le N} b_n^2)^{1/2}$, pasada al límite en $N$.)<\/p>",
+  "fuente": "Resultado del curso (álgebra lineal); todavía no está en apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto compacto",
+  "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto<\/b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.<\/p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$<\/i>.<\/p>",
+  "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
+ },
+ "ext-espacio-de-banach": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio de Banach",
+  "enunciado": "<p>Un espacio normado $(E, \\|\\cdot\\|)$ es un <b>espacio de Banach<\/b> si es completo con la métrica $d(x, y) = \\|x - y\\|$, es decir, si toda sucesión de Cauchy en $E$ converge a un elemento de $E$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcional-lineal": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Funcional lineal",
+  "enunciado": "<p>Una <b>funcional lineal<\/b> sobre un espacio vectorial $E$ es un operador lineal $\\varphi : E \\to \\mathbb{R}$ (a valores en el cuerpo de escalares).<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-hiperplano": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Hiperplano",
+  "enunciado": "<p>Un subespacio $S$ de un espacio vectorial $E$ es un <b>hiperplano<\/b> si $S \\neq E$ y existe $v \\in E$ tal que $E = S + \\langle v \\rangle$ (es decir, $S$ tiene codimensión $1$). Equivalentemente, $S = \\ker \\varphi$ para alguna funcional lineal $\\varphi : E \\to \\mathbb{R}$ no nula.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-norma": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio normado",
+  "enunciado": "<p>Sea $E$ un espacio vectorial real. Una <b>norma<\/b> en $E$ es una función $\\|\\cdot\\| : E \\to \\mathbb{R}$ tal que, para todo $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$:<\/p><p>(i) $\\|x\\| \\ge 0$, y $\\|x\\| = 0$ si y sólo si $x = 0$;<br>(ii) $\\|\\lambda x\\| = |\\lambda|\\, \\|x\\|$;<br>(iii) $\\|x + y\\| \\le \\|x\\| + \\|y\\|$ (desigualdad triangular).<\/p><p>El par $(E, \\|\\cdot\\|)$ es un <b>espacio normado<\/b>; es un espacio métrico con $d(x, y) = \\|x - y\\|$, y las nociones métricas (convergencia, Cauchy, abiertos, bolas, acotados) se refieren a esa distancia.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-normas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Normas equivalentes",
+  "enunciado": "<p>Dos normas $\\|\\cdot\\|$ y $\\|\\cdot\\|'$ sobre un mismo espacio vectorial $E$ son <b>equivalentes<\/b> si existen constantes $c, C \\gt 0$ tales que $$c\\, \\|x\\| \\le \\|x\\|' \\le C\\, \\|x\\| \\quad \\text{para todo } x \\in E.$$ En ese caso definen los mismos abiertos, las mismas sucesiones convergentes y las mismas sucesiones de Cauchy.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-acotado": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Operador acotado y norma de un operador",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$, $(F, \\|\\cdot\\|_F)$ espacios normados y $T : E \\to F$ lineal. $T$ es <b>acotado<\/b> si existe $C \\ge 0$ tal que $$\\|T x\\|_F \\le C\\, \\|x\\|_E \\quad \\text{para todo } x \\in E.$$ En ese caso, la <b>norma<\/b> de $T$ es la menor de esas constantes: $$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\|_F \\le C \\|x\\|_E \\ \\ \\forall x \\in E\\}.$$<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-lineal": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Aplicación lineal",
+  "enunciado": "<p>Sean $E$, $F$ espacios vectoriales sobre $\\mathbb{R}$. Una función $T : E \\to F$ es un <b>operador lineal<\/b> (o transformación lineal) si $$T(x + y) = T x + T y \\quad \\text{y} \\quad T(\\lambda x) = \\lambda\\, T x$$ para todos $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$. Se suele escribir $Tx$ en lugar de $T(x)$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p6-ej5": {
+  "tipo": "Práctica 6",
+  "numero": "Ej. 5",
+  "titulo": "",
+  "enunciado": "<p>Sea $\\mathbb{R}_n[t]$ el conjunto de los polinomios de grado menor o igual que $n$ con coeficientes en $\\mathbb{R}$. Consideremos para $p \\in \\mathbb{R}_n[t]$ las normas $$\\|p\\|_\\infty = \\max_{0 \\le t \\le 1} |p(t)| \\quad \\text{y} \\quad \\|p\\|_1 = \\int_0^1 |p(t)|\\, dt.$$<\/p><p>(a) ¿Son $(\\mathbb{R}_n[t], \\|\\cdot\\|_\\infty)$ y $(\\mathbb{R}_n[t], \\|\\cdot\\|_1)$ espacios de Banach? ¿Por qué?<br>(b) Justifique por qué ambas normas resultan equivalentes en $\\mathbb{R}_n[t]$ para todo $n \\in \\mathbb{N}$.<br>(c) Si $\\mathbb{R}[t]$ denota el conjunto de todos los polinomios con coeficientes en $\\mathbb{R}$, pruebe que ahí las normas $\\|\\cdot\\|_\\infty$ y $\\|\\cdot\\|_1$ no son equivalentes. ¿Hay alguna contradicción con el ítem anterior, que afirma que las normas son equivalentes para polinomios de grado hasta $n$ para todo $n \\in \\mathbb{N}$?<\/p>",
+  "fuente": "guias/p6.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p6 */
+(() => {
+"use strict";
+/* Dibujos de la guía de la Práctica 6 (espacios normados). Usa window.PP. */
+const P = "guiap6";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Marco con la misma escala en x y en y, centrado verticalmente en yc. */
+function eqFrame(w, h, x0, x1, yc, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0, x1, y0: yc - span / 2, y1: yc + span / 2 }, p);
+}
+
+/* Recorta el dibujo al rectángulo de datos del marco T (hay que llamar a ctx.restore() después). */
+function clipBox(ctx, T) {
+  ctx.save(); ctx.beginPath();
+  ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b); ctx.clip();
+}
+
+/* Gráfico de f en [a, b]; corta el trazo donde f no es finita, se va muy lejos o donde brk(x1, x2) lo pide. */
+function plotFn(ctx, T, f, a, b, color, width, dash, n, brk) {
+  n = n || 600;
+  const span = T.box.y1 - T.box.y0;
+  let seg = [], px = null;
+  const flush = () => { if (seg.length > 1) PP.path(ctx, seg, color, width, dash); seg = []; };
+  for (let i = 0; i <= n; i++) {
+    const x = a + (b - a) * i / n, y = f(x);
+    if (!isFinite(y) || y < T.box.y0 - 4 * span || y > T.box.y1 + 4 * span) { flush(); px = null; continue; }
+    if (px !== null && brk && brk(px, x)) flush();
+    seg.push([T.X(x), T.Y(y)]); px = x;
+  }
+  flush();
+}
+
+/* Arrastre de puntos sobre un canvas: pick(px, py, T) devuelve un índice o null; move(i, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Índice del punto (de una lista [[x, y], …]) más cercano al píxel, o null si está lejos. */
+function nearest(pts, px, py, T, tol) {
+  let best = null, bd = tol || 18;
+  pts.forEach(([x, y], i) => { const d = Math.hypot(T.X(x) - px, T.Y(y) - py); if (d < bd) { bd = d; best = i; } });
+  return best;
+}
+
+/* Poligonal por nodos (xs, ys): valor, integral, integral del módulo y máximo del módulo. */
+function pwl(xs, ys) {
+  const f = (x) => {
+    for (let i = 0; i < xs.length - 1; i++) {
+      if (x <= xs[i + 1] || i === xs.length - 2) { const t = (x - xs[i]) / (xs[i + 1] - xs[i]); return ys[i] + t * (ys[i + 1] - ys[i]); }
+    }
+    return ys[ys.length - 1];
+  };
+  let I = 0, I1 = 0;
+  for (let i = 0; i < xs.length - 1; i++) {
+    const dx = xs[i + 1] - xs[i], a = ys[i], b = ys[i + 1];
+    I += (a + b) / 2 * dx;
+    if (a * b >= 0) I1 += Math.abs(a + b) / 2 * dx;
+    else I1 += dx / 2 * (a * a + b * b) / (Math.abs(a) + Math.abs(b));
+  }
+  return { f, I, I1, sup: Math.max(...ys.map(Math.abs)) };
+}
+
+/* Sombrea el área entre la poligonal y el eje: arriba con c1, abajo con c2. */
+function shadeArea(ctx, T, xs, ys, c1, c2) {
+  const poly = [[T.X(xs[0]), T.Y(0)], ...xs.map((x, i) => [T.X(x), T.Y(ys[i])]), [T.X(xs[xs.length - 1]), T.Y(0)]];
+  [[T.p.t, T.Y(0) - T.p.t, c1], [T.Y(0), T.h - T.p.b - T.Y(0), c2]].forEach(([y, hh, c]) => {
+    if (hh <= 0) return;
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, y, T.w - T.p.l - T.p.r, hh); ctx.clip();
+    PP.path(ctx, poly, null, 0, null, true, c); ctx.restore();
+  });
+}
+
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; };
+
+const norm = (m, v) => {
+  const ax = Math.abs(v[0]), ay = Math.abs(v[1]);
+  return m === "1" ? ax + ay : m === "inf" ? Math.max(ax, ay) : Math.hypot(ax, ay);
+};
+/* Borde de la bola de radio r (centro c) de la norma m, como lista de puntos del plano. */
+const ballPts = (m, c, r) => {
+  if (m === "1") return [[c[0] + r, c[1]], [c[0], c[1] + r], [c[0] - r, c[1]], [c[0], c[1] - r]];
+  if (m === "inf") return [[c[0] + r, c[1] + r], [c[0] - r, c[1] + r], [c[0] - r, c[1] - r], [c[0] + r, c[1] - r]];
+  return Array.from({ length: 120 }, (_, k) => [c[0] + r * Math.cos(k * Math.PI / 60), c[1] + r * Math.sin(k * Math.PI / 60)]);
+};
+const toPx = (T, pts) => pts.map(([x, y]) => [T.X(x), T.Y(y)]);
+const SUBS = "₀₁₂₃₄₅₆₇₈₉";
+const sub = (n) => String(n).split("").map((d) => SUBS[+d]).join("");
+
+/* Polinomio de grado ≤ 3 por sus valores en t = 0, 1/3, 2/3, 1 (Lagrange). */
+const TN = [0, 1 / 3, 2 / 3, 1];
+const lag = (v) => (t) => {
+  let s = 0;
+  for (let i = 0; i < 4; i++) {
+    let L = 1;
+    for (let j = 0; j < 4; j++) if (j !== i) L *= (t - TN[j]) / (TN[i] - TN[j]);
+    s += v[i] * L;
+  }
+  return s;
+};
+
+/* ===================== Ejercicio 1 ===================== */
+(() => {
+  const pt = [[0.8, 0.5]];
+  let T = null;
+  const cid = P + "-ej1-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.8);
+    T = eqFrame(w, h, -1.9, 1.9, 0);
+    PP.path(ctx, [[T.X(-1.9), T.Y(0)], [T.X(1.9), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    [["1", C("--seq2")], ["2", C("--accent")], ["inf", C("--ok")]].forEach(([m, col]) => PP.path(ctx, toPx(T, ballPts(m, [0, 0], 1)), col, 2, null, true));
+    [["‖x‖₁ = 1", C("--seq2")], ["‖x‖₂ = 1", C("--accent")], ["‖x‖∞ = 1", C("--ok")]].forEach(([t, col], k) =>
+      PP.label(ctx, t, T.p.l + 4, T.p.t + 4 + 16 * k, col, "left", "top", 12));
+    const x = pt[0];
+    PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(x[0]), T.Y(x[1])]], C("--ink"), 1, [3, 3]);
+    PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 7, C("--ink"), C("--bg"));
+    PP.label(ctx, "x", T.X(x[0]) + 9, T.Y(x[1]) - 4, C("--ink"), "left", "bottom", 13);
+    PP.read(P + "-ej1-read", [
+      ["x", "(" + PP.fmt(x[0], 2) + ", " + PP.fmt(x[1], 2) + ")"],
+      ["‖x‖₁", PP.fmt(norm("1", x), 3)],
+      ["‖x‖₂", PP.fmt(norm("2", x), 3)],
+      ["‖x‖∞", PP.fmt(norm("inf", x), 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(pt, px, py, T, 24),
+    (i, x, y, T) => { pt[0] = [clamp(Math.round(x * 20) / 20, -1.8, 1.8), clamp(Math.round(y * 20) / 20, T.box.y0 + 0.1, T.box.y1 - 0.1)]; }, draw);
+})();
+
+/* ===================== Ejercicio 2 ===================== */
+(() => {
+  const pts = [[1.2, 0.8], [-0.9, -1.1]];
+  const r = 2;
+  let T = null;
+  const cid = P + "-ej2-c";
+  function draw() {
+    const m = PP.radio(P + "-ej2-m") || "2";
+    const t = PP.val(P + "-ej2-t") / 100;
+    PP.out(P + "-ej2-t-o", PP.fmt(t, 2));
+    const { ctx, w, h } = PP.canvas(cid, 0.8);
+    T = eqFrame(w, h, -3, 3, 0);
+    PP.path(ctx, [[T.X(-3), T.Y(0)], [T.X(3), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    PP.path(ctx, toPx(T, ballPts(m, [0, 0], r)), C("--accent"), 1.6, [5, 4], true, C("--band"));
+    PP.dot(ctx, T.X(0), T.Y(0), 3.5, C("--accent"));
+    PP.label(ctx, "x = 0", T.X(0) + 5, T.Y(0) + 4, C("--accent"), "left", "top", 11);
+    const [y, z] = pts;
+    const p = [t * y[0] + (1 - t) * z[0], t * y[1] + (1 - t) * z[1]];
+    PP.path(ctx, [[T.X(y[0]), T.Y(y[1])], [T.X(z[0]), T.Y(z[1])]], C("--muted"), 1.6);
+    PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 7, C("--seq2"), C("--bg"));
+    PP.dot(ctx, T.X(z[0]), T.Y(z[1]), 7, C("--seq3"), C("--bg"));
+    PP.label(ctx, "y", T.X(y[0]) + 9, T.Y(y[1]) - 4, C("--seq2"), "left", "bottom", 13);
+    PP.label(ctx, "z", T.X(z[0]) + 9, T.Y(z[1]) - 4, C("--seq3"), "left", "bottom", 13);
+    PP.dot(ctx, T.X(p[0]), T.Y(p[1]), 5, C("--ink"));
+    const ny = norm(m, y), nz = norm(m, z), np = norm(m, p);
+    const cls = (v) => (v < r ? "good" : "bad");
+    PP.read(P + "-ej2-read", [
+      ["‖y − x‖", PP.fmt(ny, 3), cls(ny)],
+      ["‖z − x‖", PP.fmt(nz, 3), cls(nz)],
+      ["‖t y + (1 − t) z − x‖", PP.fmt(np, 3), cls(np)],
+      ["r", String(r)],
+    ]);
+  }
+  PP.register(draw, ["input[name='" + P + "-ej2-m']", P + "-ej2-t"]);
+  draggable(cid, () => T, (px, py, T) => nearest(pts, px, py, T, 22),
+    (i, x, y, T) => { pts[i] = [clamp(Math.round(x * 20) / 20, -2.9, 2.9), clamp(Math.round(y * 20) / 20, T.box.y0 + 0.1, T.box.y1 - 0.1)]; }, draw);
+})();
+
+/* ===================== Ejercicio 3 ===================== */
+(() => {
+  const x0 = [1, 0.5];
+  const xn = (n) => [x0[0] + 3 / Math.sqrt(n) * Math.cos(2 * n), x0[1] + 3 / Math.sqrt(n) * Math.sin(2 * n)];
+  PP.register(function () {
+    const N = PP.val(P + "-ej3-N");
+    PP.out(P + "-ej3-N-o", String(N));
+    const { ctx, w, h } = PP.canvas(P + "-ej3-c", 0.8);
+    const T = eqFrame(w, h, -2.6, 4.6, 0.5);
+    PP.path(ctx, [[T.X(-2.6), T.Y(0)], [T.X(4.6), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    const xs = [], ys = [];
+    let sx = 0, sy = 0;
+    for (let n = 1; n <= N; n++) { const p = xn(n); xs.push(p); sx += p[0]; sy += p[1]; ys.push([sx / n, sy / n]); }
+    xs.forEach((p, k) => PP.dot(ctx, T.X(p[0]), T.Y(p[1]), k === N - 1 ? 5.5 : 2.6, C("--seq2")));
+    PP.path(ctx, toPx(T, ys), C("--accent"), 1.2);
+    ys.forEach((p, k) => PP.dot(ctx, T.X(p[0]), T.Y(p[1]), k === N - 1 ? 5.5 : 2.6, C("--accent")));
+    const X0 = T.X(x0[0]), Y0 = T.Y(x0[1]);
+    PP.path(ctx, [[X0 - 7, Y0], [X0 + 7, Y0]], C("--ink"), 2);
+    PP.path(ctx, [[X0, Y0 - 7], [X0, Y0 + 7]], C("--ink"), 2);
+    PP.label(ctx, "x₀", X0 + 8, Y0 + 4, C("--ink"), "left", "top", 13);
+    const d = (p) => Math.hypot(p[0] - x0[0], p[1] - x0[1]);
+    PP.read(P + "-ej3-read", [
+      ["n", String(N)],
+      ["‖xₙ − x₀‖", PP.fmt(d(xs[N - 1]), 3)],
+      ["‖yₙ − x₀‖", PP.fmt(d(ys[N - 1]), 3)],
+    ]);
+  }, [P + "-ej3-N"]);
+})();
+
+/* ===================== Ejercicio 5 ===================== */
+(() => {
+  const v = [0.6, -0.9, 0.5, 1.2];
+  let T = null;
+  const cid = P + "-ej5-c";
+  function draw() {
+    const p = lag(v);
+    const n = 1000;
+    let sup = 0, I1 = 0;
+    const pts = [];
+    for (let i = 0; i <= n; i++) { const t = i / n, y = p(t); pts.push([t, y]); sup = Math.max(sup, Math.abs(y)); if (i) I1 += (Math.abs(y) + Math.abs(pts[i - 1][1])) / 2 / n; }
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -2.2, y1: 2.2 }, { l: 36, r: 12, t: 12, b: 26 });
+    shadeArea(ctx, T, pts.map((q) => q[0]), pts.map((q) => q[1]), C("--area"), C("--area"));
+    PP.axes(ctx, T, { xTicks: 5 });
+    [sup, -sup].forEach((s) => PP.path(ctx, [[T.X(0), T.Y(s)], [T.X(1), T.Y(s)]], C("--seq2"), 1.4, [5, 4]));
+    PP.label(ctx, "±‖p‖∞", T.X(1) - 2, T.Y(sup) - 3, C("--seq2"), "right", "bottom", 11);
+    clipBox(ctx, T);
+    PP.path(ctx, toPx(T, pts), C("--accent"), 2.4);
+    ctx.restore();
+    TN.forEach((t, i) => PP.dot(ctx, T.X(t), T.Y(v[i]), 6, C("--accent"), C("--bg")));
+    PP.read(P + "-ej5-read", [
+      ["‖p‖∞", PP.fmt(sup, 3)],
+      ["‖p‖₁", PP.fmt(I1, 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(TN.map((t, i) => [t, v[i]]), px, py, T),
+    (i, x, y) => { v[i] = clamp(Math.round(y * 50) / 50, -2, 2); }, draw);
+})();
+
+/* ===================== Ejercicio 6 ===================== */
+(() => {
+  const seqs = {
+    alt: { f: (n) => (n % 2 ? -1 : 1) * (1 - 1 / n), sup: 1, txt: "1 (no se alcanza)" },
+    sin: { f: (n) => Math.sin(n), sup: 1, txt: "1 (no se alcanza)" },
+    dec: { f: (n) => 2 / n, sup: 2, txt: "2 (en n = 1)" },
+  };
+  PP.register(function () {
+    const s = seqs[PP.radio(P + "-ej6-a") || "alt"];
+    const N = 60;
+    const { ctx, w, h } = PP.canvas(P + "-ej6-c", 0.6);
+    const T = PP.frame(w, h, { x0: 0, x1: N + 1, y0: -2.3, y1: 2.3 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.rect(ctx, T.X(0), T.Y(s.sup), T.X(N + 1) - T.X(0), T.Y(-s.sup) - T.Y(s.sup), null, C("--band"));
+    PP.axes(ctx, T, { xTicks: 6, intX: true });
+    [s.sup, -s.sup].forEach((y) => PP.path(ctx, [[T.X(0), T.Y(y)], [T.X(N + 1), T.Y(y)]], C("--ok"), 1.4, [5, 4]));
+    PP.label(ctx, "±‖a‖∞", T.X(N + 1) - 2, T.Y(s.sup) - 3, C("--ok"), "right", "bottom", 11);
+    let mx = 0;
+    for (let n = 1; n <= N; n++) {
+      const a = s.f(n); mx = Math.max(mx, Math.abs(a));
+      PP.path(ctx, [[T.X(n), T.Y(0)], [T.X(n), T.Y(a)]], C("--accent"), 1);
+      PP.dot(ctx, T.X(n), T.Y(a), 3, C("--accent"));
+    }
+    PP.read(P + "-ej6-read", [
+      ["‖a‖∞ = sup |aₙ|", s.txt],
+      ["máx |aₙ| con n ≤ 60", PP.fmt(mx, 4)],
+    ]);
+  }, ["input[name='" + P + "-ej6-a']"]);
+})();
+
+/* ===================== Ejercicio 7 ===================== */
+(() => {
+  const a = [0.6, -0.3, 0.8, -0.5, 0.2, -0.4, 0.3, 0.1];
+  const N = 12;
+  let T = null;
+  const cid = P + "-ej7-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.6);
+    T = PP.frame(w, h, { x0: 0.3, x1: N + 0.7, y0: -1.2, y1: 1.2 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 12, intX: true });
+    PP.rect(ctx, T.X(8.6), T.p.t, T.X(N + 0.7) - T.X(8.6), h - T.p.t - T.p.b, null, C("--band"));
+    PP.label(ctx, "aₙ = 0 (n ≥ 9)", T.X(N + 0.6), T.p.t + 4, C("--muted"), "right", "top", 11);
+    const bw = Math.max(6, (T.X(2) - T.X(1)) * 0.55);
+    for (let n = 1; n <= N; n++) {
+      const v = n <= 8 ? a[n - 1] : 0;
+      if (n <= 8) {
+        PP.rect(ctx, T.X(n) - bw / 2, Math.min(T.Y(v), T.Y(0)), bw, Math.abs(T.Y(v) - T.Y(0)), null, v >= 0 ? C("--area") : C("--area2"));
+        PP.path(ctx, [[T.X(n) - bw / 2, T.Y(v)], [T.X(n) + bw / 2, T.Y(v)]], v >= 0 ? C("--accent") : C("--seq2"), 3);
+        PP.dot(ctx, T.X(n), T.Y(v), 4, v >= 0 ? C("--accent") : C("--seq2"));
+      } else PP.dot(ctx, T.X(n), T.Y(0), 3, C("--muted"));
+    }
+    const sum = a.reduce((s, x) => s + x, 0);
+    const inS = Math.abs(sum) < 1e-9;
+    PP.read(P + "-ej7-read", [
+      ["Σ aₙ", PP.fmt(inS ? 0 : sum, 3), inS ? "good" : ""],
+      ["¿a ∈ S?", inS ? "sí" : "no"],
+      ["‖a‖∞", PP.fmt(Math.max(...a.map(Math.abs)), 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(a.map((v, i) => [i + 1, v]), px, py, T, 20),
+    (i, x, y) => { a[i] = clamp(Math.round(y * 20) / 20, -1.1, 1.1); }, draw);
+})();
+
+/* ===================== Ejercicio 9 ===================== */
+PP.register(function () {
+  const a = PP.val(P + "-ej9-a") / 100, b = PP.val(P + "-ej9-b") / 100;
+  PP.out(P + "-ej9-a-o", PP.fmt(a, 2));
+  PP.out(P + "-ej9-b-o", PP.fmt(b, 2));
+  const Tm = (v) => [a * v[0] + b * v[1], 0.6 * v[1]];
+  const { ctx, w, h } = PP.canvas(P + "-ej9-c", 0.8);
+  const T = eqFrame(w, h, -3.6, 3.6, 0);
+  PP.path(ctx, [[T.X(-3.6), T.Y(0)], [T.X(3.6), T.Y(0)]], C("--rule"), 1);
+  PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+  const circ = ballPts("2", [0, 0], 1);
+  PP.path(ctx, toPx(T, circ), C("--muted"), 1.6, null, true, C("--band"));
+  PP.path(ctx, toPx(T, circ.map(Tm)), C("--accent"), 2, null, true, C("--area"));
+  let s1 = 0, arg = [1, 0], sBall = 0, sRatio = 0;
+  for (let k = 0; k < 1440; k++) {
+    const th = k * Math.PI / 720, u = [Math.cos(th), Math.sin(th)];
+    const nv = norm("2", Tm(u));
+    if (nv > s1) { s1 = nv; arg = u; }
+    for (const r of [0.25, 0.5, 0.75, 1]) sBall = Math.max(sBall, norm("2", Tm([r * u[0], r * u[1]])));
+    for (const r of [0.3, 1.7, 4]) sRatio = Math.max(sRatio, norm("2", Tm([r * u[0], r * u[1]])) / r);
+  }
+  const Ta = Tm(arg);
+  PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(Ta[0]), T.Y(Ta[1])]], C("--seq2"), 1.4, [4, 3]);
+  PP.dot(ctx, T.X(arg[0]), T.Y(arg[1]), 5, C("--ink"));
+  PP.dot(ctx, T.X(Ta[0]), T.Y(Ta[1]), 5, C("--seq2"));
+  PP.label(ctx, "x", T.X(arg[0]) + 6, T.Y(arg[1]) - 4, C("--ink"), "left", "bottom", 12);
+  PP.label(ctx, "Tx", T.X(Ta[0]) + 6, T.Y(Ta[1]) - 4, C("--seq2"), "left", "bottom", 12);
+  PP.label(ctx, "T(B)", T.p.l + 4, T.p.t + 4, C("--accent"), "left", "top", 12);
+  PP.read(P + "-ej9-read", [
+    ["sup ‖Tx‖ con ‖x‖ ≤ 1", PP.fmt(sBall, 4)],
+    ["sup ‖Tx‖ con ‖x‖ = 1", PP.fmt(s1, 4)],
+    ["sup ‖Tx‖/‖x‖ con x ≠ 0", PP.fmt(sRatio, 4)],
+  ]);
+}, [P + "-ej9-a", P + "-ej9-b"]);
+
+/* ===================== Ejercicio 10 ===================== */
+(() => {
+  const xs = [0, 0.2, 0.4, 0.6, 0.8, 1];
+  const ys = [0.9, 0.3, -0.4, 0.2, 0.7, 0.5];
+  let T = null;
+  const cid = P + "-ej10-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -1.6, y1: 1.6 }, { l: 36, r: 12, t: 12, b: 26 });
+    const F = pwl(xs, ys);
+    shadeArea(ctx, T, xs, ys, C("--area"), C("--area2"));
+    PP.axes(ctx, T, { xTicks: 5 });
+    PP.path(ctx, xs.map((x, i) => [T.X(x), T.Y(ys[i])]), C("--accent"), 2.4);
+    xs.forEach((x, i) => PP.dot(ctx, T.X(x), T.Y(ys[i]), i === 0 ? 7 : 5, i === 0 ? C("--ink") : C("--accent"), C("--bg")));
+    PP.label(ctx, "(0, 𝓔f)", T.X(0) + 10, T.Y(ys[0]) - 6, C("--ink"), "left", "bottom", 12);
+    PP.read(P + "-ej10-read", [
+      ["𝓔f = f(0)", PP.fmt(ys[0], 3)],
+      ["𝓘f = ∫ f", PP.fmt(F.I, 3)],
+      ["‖f‖∞", PP.fmt(F.sup, 3)],
+      ["‖f‖₁", PP.fmt(F.I1, 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(xs.map((x, i) => [x, ys[i]]), px, py, T),
+    (i, x, y) => { ys[i] = clamp(Math.round(y * 50) / 50, -1.5, 1.5); }, draw);
+})();
+
+/* ===================== Ejercicio 11 ===================== */
+(() => {
+  const xs = [0, 0.2, 0.4, 0.6, 0.8, 1];
+  const ys = [1, 0.4, -0.6, -0.2, 0.8, 0.3];
+  const ks = {
+    xy: (x, y) => x * y,
+    min: (x, y) => Math.min(x, y),
+    cos: (x, y) => Math.cos(Math.PI * (x - y)),
+  };
+  let T = null;
+  const cid = P + "-ej11-c";
+  function draw() {
+    const k = ks[PP.radio(P + "-ej11-k") || "xy"];
+    const F = pwl(xs, ys);
+    const M = 300, Kf = [];
+    for (let i = 0; i <= 150; i++) {
+      const x = i / 150;
+      let s = 0;
+      for (let j = 0; j <= M; j++) { const y = j / M, wgt = j === 0 || j === M ? 0.5 : 1; s += wgt * k(x, y) * F.f(y); }
+      Kf.push([x, s / M]);
+    }
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -1.6, y1: 1.6 }, { l: 36, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 5 });
+    PP.path(ctx, xs.map((x, i) => [T.X(x), T.Y(ys[i])]), C("--accent"), 2.2);
+    xs.forEach((x, i) => PP.dot(ctx, T.X(x), T.Y(ys[i]), 5, C("--accent"), C("--bg")));
+    PP.path(ctx, toPx(T, Kf), C("--ok"), 2.6);
+    PP.label(ctx, "f", T.X(xs[0]) + 8, T.Y(ys[0]) - 4, C("--accent"), "left", "bottom", 13);
+    PP.label(ctx, "Kf", T.X(1) - 2, T.Y(Kf[Kf.length - 1][1]) - 6, C("--ok"), "right", "bottom", 13);
+    PP.read(P + "-ej11-read", [
+      ["‖f‖∞", PP.fmt(F.sup, 3)],
+      ["‖Kf‖∞", PP.fmt(Math.max(...Kf.map((q) => Math.abs(q[1]))), 3)],
+    ]);
+  }
+  PP.register(draw, ["input[name='" + P + "-ej11-k']"]);
+  draggable(cid, () => T, (px, py, T) => nearest(xs.map((x, i) => [x, ys[i]]), px, py, T),
+    (i, x, y) => { ys[i] = clamp(Math.round(y * 50) / 50, -1.5, 1.5); }, draw);
+})();
+
+/* ===================== Ejercicio 12 ===================== */
+(() => {
+  const v = [0.2, 0.9, -0.5, 0.4];
+  let T = null;
+  const cid = P + "-ej12-c";
+  function draw() {
+    const p = lag(v), hh = 1e-4;
+    const dp = (t) => (p(Math.min(1, t + hh)) - p(Math.max(0, t - hh))) / (Math.min(1, t + hh) - Math.max(0, t - hh));
+    let sp = 0, sd = 0;
+    for (let i = 0; i <= 400; i++) { const t = i / 400; sp = Math.max(sp, Math.abs(p(t))); sd = Math.max(sd, Math.abs(dp(t))); }
+    const Y = Math.max(1.6, sd * 1.12, sp * 1.12);
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -Y, y1: Y }, { l: 36, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 5 });
+    clipBox(ctx, T);
+    plotFn(ctx, T, dp, 0, 1, C("--seq2"), 2.2, null, 400);
+    plotFn(ctx, T, p, 0, 1, C("--accent"), 2.6, null, 400);
+    ctx.restore();
+    TN.forEach((t, i) => PP.dot(ctx, T.X(t), T.Y(v[i]), 6, C("--accent"), C("--bg")));
+    PP.label(ctx, "p", T.X(0) + 8, T.Y(v[0]) - 6, C("--accent"), "left", "bottom", 13);
+    PP.label(ctx, "δp = p′", T.X(1) - 2, T.Y(dp(1)) - 6, C("--seq2"), "right", "bottom", 12);
+    PP.read(P + "-ej12-read", [
+      ["‖p‖∞", PP.fmt(sp, 3)],
+      ["‖δp‖∞", PP.fmt(sd, 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(TN.map((t, i) => [t, v[i]]), px, py, T),
+    (i, x, y) => { v[i] = clamp(Math.round(y * 50) / 50, -1.5, 1.5); }, draw);
+})();
+
+/* ===================== Ejercicio 13 ===================== */
+(() => {
+  const seqs = {
+    inv: (n) => 1 / n,
+    alt: (n) => (n % 2 ? -1 : 1) / Math.pow(n, 0.75),
+    geo: (n) => Math.pow(2, -n),
+  };
+  PP.register(function () {
+    const f = seqs[PP.radio(P + "-ej13-a") || "inv"];
+    const N = 30;
+    let n2 = 0, g = 0;
+    const partial = [];
+    for (let n = 1; n <= 20000; n++) { const a = f(n); n2 += a * a; g += a / n; if (n <= N) partial.push([n, g]); }
+    const vals = [];
+    for (let n = 1; n <= N; n++) vals.push(f(n));
+    const lo = Math.min(0, ...vals, ...partial.map((q) => q[1])), hi = Math.max(0, ...vals, ...partial.map((q) => q[1]));
+    const m = (hi - lo) * 0.1;
+    const { ctx, w, h } = PP.canvas(P + "-ej13-c", 0.6);
+    const T = PP.frame(w, h, { x0: 0, x1: N + 1, y0: lo - m, y1: hi + m }, { l: 38, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 6, intX: true });
+    const bw = Math.max(3, (T.X(2) - T.X(1)) * 0.55);
+    vals.forEach((a, k) => PP.rect(ctx, T.X(k + 1) - bw / 2, Math.min(T.Y(a), T.Y(0)), bw, Math.abs(T.Y(a) - T.Y(0)), null, C("--area")));
+    PP.path(ctx, toPx(T, partial), C("--ok"), 2.2);
+    partial.forEach(([n, s]) => PP.dot(ctx, T.X(n), T.Y(s), 2.4, C("--ok")));
+    PP.label(ctx, "Σ aₖ/k", T.X(N) - 2, T.Y(partial[N - 1][1]) - 6, C("--ok"), "right", "bottom", 12);
+    PP.label(ctx, "aₙ", T.X(1) + 8, T.Y(vals[0]) + (vals[0] >= 0 ? 4 : -4), C("--accent"), "left", vals[0] >= 0 ? "top" : "bottom", 12);
+    PP.read(P + "-ej13-read", [
+      ["‖a‖₂", PP.fmt(Math.sqrt(n2), 4)],
+      ["γ(a) = Σ aₙ/n", PP.fmt(g, 4)],
+    ]);
+  }, ["input[name='" + P + "-ej13-a']"]);
+})();
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

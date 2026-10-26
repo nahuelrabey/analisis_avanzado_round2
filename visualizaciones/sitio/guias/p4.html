@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 4</span></li></ol><div class="pager"><a href="../guias/p3.html" title="Guía · Práctica 3">← Anterior</a><a href="../guias/p5.html" title="Guía · Práctica 5">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 16 ejercicios</p>
+  <h1>Práctica 4</h1>
+  <p>Funciones continuas. Los enunciados de <code>apuntes-typst/guias/p4.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap4-ej1" title="Cuáles de estas funciones son continuas">Ej. 1</a></li><li><a href="#guiap4-ej2" title="x en los racionales, 0 en los irracionales: continua sólo en 0">Ej. 2</a></li><li><a href="#guiap4-ej3" title="Conservación del signo">Ej. 3</a></li><li><a href="#guiap4-ej4" title="Donde f y g difieren es abierto; donde coinciden, cerrado">Ej. 4</a></li><li><a href="#guiap4-ej5" title="Conjuntos abiertos y cerrados definidos por funciones continuas">Ej. 5</a></li><li><a href="#guiap4-ej6" title="Continuas que no mandan abiertos en abiertos ni cerrados en cerrados">Ej. 6</a></li><li><a href="#guiap4-ej7" title="Dos continuas que coinciden en un denso son iguales">Ej. 7</a></li><li><a href="#guiap4-ej8" title="La imagen continua y suryectiva de un denso es densa">Ej. 8</a></li><li><a href="#guiap4-ej9" title="Evaluación e integral en C([0,1]) con d∞ y d1">Ej. 9</a></li><li><a href="#guiap4-ej10" title="La distancia a un punto es continua">Ej. 10</a></li><li><a href="#guiap4-ej11" title="Distancia a un conjunto y la función de Urysohn">Ej. 11</a></li><li><a href="#guiap4-ej12" title="Las funciones de los Ejercicios 10 y 11 son Lipschitz">Ej. 12</a></li><li><a href="#guiap4-ej13" title="1/x y sen(1/x) no son uniformemente continuas">Ej. 13</a></li><li><a href="#guiap4-ej14" title="Las uniformemente continuas mandan Cauchy en Cauchy">Ej. 14</a></li><li><a href="#guiap4-ej15" title="Ejemplos: acotada continua no uniforme, no acotada uniforme">Ej. 15</a></li><li><a href="#guiap4-ej16" title="Uniformemente continua y conjuntos a distancia cero">Ej. 16</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap4-edicion">Edición 2026 (<code>apuntes-docentes/guias/p4.pdf</code>) · cotejada ítem por ítem con la edición 2025: numeración y enunciados idénticos (16 ejercicios, 34 incisos); sólo cambió el encabezado.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap4-ej1" data-short="Ej. 1" data-title="Cuáles de estas funciones son continuas" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>¿Cuáles de estas funciones son continuas?</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Decida cuáles de las siguientes funciones son <span class="ref" data-ref="def-5.4">continuas</span>:</p>
+      <ol class="items">
+        <li>$f : (\mathbb{R}^2, d_2) \to (\mathbb{R}, d_2)$, $f(x, y) = x^2 + y^2$.</li>
+        <li>$f : (\mathbb{R}^2, d_2) \to (\mathbb{R}, d_2)$,
+          $$f(x, y) = \begin{cases} \dfrac{x^2 y}{\frac{1}{2} x^2 + (x-1)^2 y^2} & \text{si } (x, y) \neq (0, 0), \\[4pt] 0 & \text{si } (x, y) = (0, 0). \end{cases}$$</li>
+        <li>$\operatorname{id}_{\mathbb{R}^2} : (\mathbb{R}^2, \delta) \to (\mathbb{R}^2, d_2)$, la función identidad.</li>
+        <li>$\operatorname{id}_{\mathbb{R}^2} : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, \delta)$, la función identidad.</li>
+      </ol>
+      <p>Aquí $d_2$ es la <span class="ref" data-ref="def-distancias-en-rrn">métrica euclídea usual</span>, y $\delta$ es la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. ¿Cambia algo si en lugar de $d_2$ consideramos $d_1$ o $d_\infty$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej1-c" aria-label="Mapa de colores de la función del ítem (b) alrededor del origen"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej1-R">ventana</label><input type="range" id="guiap4-ej1-R" min="0" max="100" value="80"><output id="guiap4-ej1-R-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej1-read" aria-live="polite"></dl>
+      <figcaption>La función del ítem (b) en el cuadrado [−<i>R</i>, <i>R</i>]², pintada con una intensidad que crece con |<i>f</i>| (azul si <i>f</i> &gt; 0, naranja si <i>f</i> &lt; 0; color pleno a partir de |<i>f</i>| = 2). El punto marca el origen, donde <i>f</i> vale 0 por definición. Achicá la ventana para mirar cerca del origen.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b2" title="Bloque 2 · Continuidad por definición ($\varepsilon$–$\delta$)">Ej. Práctica 4 · Bloque 2 · Continuidad por definición ($\varepsilon$–$\delta…</a></li><li><a href="../ejemplos/p4.html#ejp4-c9-1-6" title="C9-1.6 · Los polinomios en varias variables son continuos">Ej. Práctica 4 · C9-1.6 · Los polinomios en varias variables son continuos</a></li><li><a href="../ejemplos/p4.html#ejp4-b4" title="Bloque 4 · Continuidad en productos y proyecciones">Ej. Práctica 4 · Bloque 4 · Continuidad en productos y proyecciones</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b1" title="Bloque 1 · Herramientas: composición, álgebra de continuas, restricción y pegado">Ej. Práctica 4 · alternativos · Bloque 1 · Herramientas: composición, álgebra de continuas, …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-1-prop" title="Prop. · Ley de composición, con dos demostraciones">Ej. Práctica 4 · alternativos · Prop. · Ley de composición, con dos demostraciones</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-2" title="O2-2 · Suma, producto, cociente e inversión son continuas; funciones racionales">Ej. Práctica 4 · alternativos · O2-2 · Suma, producto, cociente e inversión son continuas; f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-4-prop" title="Prop. · Continuidad y restricciones: carácter local de la continuidad">Ej. Práctica 4 · alternativos · Prop. · Continuidad y restricciones: carácter local de la co…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-3-prop" title="Prop. · Pegado de funciones continuas sobre dos cerrados">Ej. Práctica 4 · alternativos · Prop. · Pegado de funciones continuas sobre dos cerrados</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-3" title="O2-3 · Una función definida a trozos en R² es continua">Ej. Práctica 4 · alternativos · O2-3 · Una función definida a trozos en R² es continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-5" title="O16-5 · Problema de la restricción: continua en cada [1/n, 1] y en {0} pero no en [0, 1]; sí vale con abiertos">Ej. Práctica 4 · alternativos · O16-5 · Problema de la restricción: continua en cada [1/n, 1…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b2" title="Bloque 2 · Decidir continuidad en $\mathbb{R}^2$: sucesiones, cotas y polares">Ej. Práctica 4 · alternativos · Bloque 2 · Decidir continuidad en $\mathbb{R}^2$: sucesiones…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-3" title="O6-3 · Los polinomios en dos variables son continuos; cuidado con los límites por separado">Ej. Práctica 4 · alternativos · O6-3 · Los polinomios en dos variables son continuos; cuidad…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-2" title="O15-2 · (f, g) : R² → R² es continua si f y g lo son; continuidad de xy y de f(x)g(y)">Ej. Práctica 4 · alternativos · O15-2 · (f, g) : R² → R² es continua si f y g lo son; contin…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-5" title="O17-5 · Continua en cada variable por separado pero no continua: xy/(x² + y²)">Ej. Práctica 4 · alternativos · O17-5 · Continua en cada variable por separado pero no conti…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-1" title="O14-1 · Tres campos escalares en el origen: límites direccionales, acotación y cambio de variable">Ej. Práctica 4 · alternativos · O14-1 · Tres campos escalares en el origen: límites direccio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-2" title="O14-2 · Continua exactamente fuera de la recta x + y = 0">Ej. Práctica 4 · alternativos · O14-2 · Continua exactamente fuera de la recta x + y = 0</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-3" title="O14-3 · Continuidad en el origen con una función auxiliar y una acotación">Ej. Práctica 4 · alternativos · O14-3 · Continuidad en el origen con una función auxiliar y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b3" title="Bloque 3 · La continuidad depende de las métricas: discreta, identidad, funciones abiertas y cerradas">Ej. Práctica 4 · alternativos · Bloque 3 · La continuidad depende de las métricas: discreta,…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o10-1" title="O10-1 · Toda función que sale de un espacio con la métrica discreta es continua">Ej. Práctica 4 · alternativos · O10-1 · Toda función que sale de un espacio con la métrica d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-3" title="O15-3 · Identidad entre la métrica discreta y la usual: continua pero no abierta, abierta pero no continua">Ej. Práctica 4 · alternativos · O15-3 · Identidad entre la métrica discreta y la usual: cont…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-4" title="O2-4 · Las proyecciones son abiertas pero no cerradas; continua y biyectiva no implica homeomorfismo">Ej. Práctica 4 · alternativos · O2-4 · Las proyecciones son abiertas pero no cerradas; conti…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-4" title="O17-4 · Discontinuidad vista en una preimagen: f(x) = x² salvo f(0) = 1">Ej. Práctica 4 · alternativos · O17-4 · Discontinuidad vista en una preimagen: f(x) = x² sal…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-14" title="O2-14 · Lipschitz manda acotados en acotados; uniformemente continua no">Ej. Práctica 4 · alternativos · O2-14 · Lipschitz manda acotados en acotados; uniformemente …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5-def" title="Def. · Continuidad uniforme y condición de Lipschitz (BUAP)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y condición de Lipschitz (BUAP)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5" title="O11-5 · Desde un espacio discreto todo es uniformemente continuo; uniformemente continua no implica Lipschitz">Ej. Práctica 4 · alternativos · O11-5 · Desde un espacio discreto todo es uniformemente cont…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-8" title="O14-8 · La continuidad uniforme no es una propiedad topológica: la identidad y ρ(x, y) = |e^x − e^y|">Ej. Práctica 4 · alternativos · O14-8 · La continuidad uniforme no es una propiedad topológi…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap4-ej2" data-short="Ej. 2" data-title="x en los racionales, 0 en los irracionales: continua sólo en 0" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>$x$ en $\mathbb{Q}$, $0$ fuera de $\mathbb{Q}$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ dada por
+      $$f(x) = \begin{cases} x & \text{si } x \in \mathbb{Q}, \\ 0 & \text{si } x \notin \mathbb{Q}. \end{cases}$$
+      Pruebe que $f$ es <span class="ref" data-ref="def-5.4">continua</span> únicamente en $x = 0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej2-c" aria-label="Gráfico de f: puntos racionales sobre la recta y igual a x y la recta y igual a 0 para los irracionales"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej2-q">denominador ≤</label><input type="range" id="guiap4-ej2-q" min="1" max="30" value="8"><output id="guiap4-ej2-q-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej2-read" aria-live="polite"></dl>
+      <figcaption>Los puntos azules son (<i>p</i>/<i>q</i>, <i>p</i>/<i>q</i>) para los racionales de [−2, 2] con denominador <i>q</i> hasta el valor elegido; la recta naranja es <i>y</i> = 0, el valor de <i>f</i> en los irracionales. Un gráfico sólo puede mostrar finitos racionales: subiendo el denominador, los puntos azules llenan la diagonal punteada.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b7" title="Bloque 7 · Conjuntos densos">Ej. Práctica 4 · Bloque 7 · Conjuntos densos</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-1-prop" title="Prop. · Composición y restricción de funciones continuas">Ej. Práctica 4 · alternativos · Prop. · Composición y restricción de funciones continuas</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-1" title="O2-1 · La restricción puede ser continua sin que la función lo sea: la característica de Q">Ej. Práctica 4 · alternativos · O2-1 · La restricción puede ser continua sin que la función …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b4" title="Bloque 4 · Funciones definidas distinto en $\mathbb{Q}$ y en $\mathbb{R} \setminus \mathbb{Q}$">Ej. Práctica 4 · alternativos · Bloque 4 · Funciones definidas distinto en $\mathbb{Q}$ y en…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-2" title="O6-2 · La función de Dirichlet es discontinua en todo punto">Ej. Práctica 4 · alternativos · O6-2 · La función de Dirichlet es discontinua en todo punto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-3" title="O16-3 · f(x) = x en Q y f(x) = -x fuera de Q: continua sólo en 0">Ej. Práctica 4 · alternativos · O16-3 · f(x) = x en Q y f(x) = -x fuera de Q: continua sólo …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-6" title="O7-6 · x² en los racionales y 0 en los irracionales: continua sólo en 0">Ej. Práctica 4 · alternativos · O7-6 · x² en los racionales y 0 en los irracionales: continu…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap4-ej3" data-short="Ej. 3" data-title="Conservación del signo" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Conservación del signo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>, y sea $x_0 \in E$. Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="def-5.4">continua en $x_0$</span>. Pruebe que si $f(x_0) \gt 0$ entonces existe $r \gt 0$ tal que $f(x) \gt 0$ para todo <span class="ref" data-ref="def-4.5">$x \in B(x_0, r)$</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej3-c" aria-label="Gráfico de una función real con un punto x0 y un intervalo alrededor donde la función es positiva"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej3-x">x<sub>0</sub></label><input type="range" id="guiap4-ej3-x" min="-100" max="600" value="100"><output id="guiap4-ej3-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej3-read" aria-live="polite"></dl>
+      <figcaption>Una función elegida para el dibujo, <i>f</i>(<i>x</i>) = sen <i>x</i> + 0.35, con <i>E</i> = ℝ. Si <i>f</i>(<i>x</i><sub>0</sub>) &gt; 0, la franja sombreada y el segmento verde son la bola <i>B</i>(<i>x</i><sub>0</sub>, <i>r</i>) más grande (calculada numéricamente) donde <i>f</i> sigue positiva. Acercá <i>x</i><sub>0</sub> a un cero de <i>f</i> y mirá cómo se achica <i>r</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4alt.html#ejp4alt-b5" title="Bloque 5 · Conjuntos definidos por igualdades y desigualdades: preimágenes">Ej. Práctica 4 · alternativos · Bloque 5 · Conjuntos definidos por igualdades y desigualdade…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-4" title="O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiva} de una función continua">Ej. Práctica 4 · alternativos · O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiv…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-8" title="O11-8 · Ejercicios propuestos de continuidad, sin resolución">Ej. Práctica 4 · alternativos · O11-8 · Ejercicios propuestos de continuidad, sin resolución</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap4-ej4" data-short="Ej. 4" data-title="Donde f y g difieren es abierto; donde coinciden, cerrado" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Donde $f \neq g$ es abierto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f, g : E \to E'$ funciones <span class="ref" data-ref="def-5.4">continuas</span>.</p>
+      <ol class="items">
+        <li>Pruebe que $\{x \in E : f(x) \neq g(x)\}$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>Deduzca que $\{x \in E : f(x) = g(x)\}$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej4-c" aria-label="Gráficos de f igual a seno y g constante, con los conjuntos donde difieren y donde coinciden marcados en el eje"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej4-c0">valor de <i>g</i></label><input type="range" id="guiap4-ej4-c0" min="-120" max="120" value="50"><output id="guiap4-ej4-c0-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej4-read" aria-live="polite"></dl>
+      <figcaption>Funciones elegidas para el dibujo, con <i>E</i> = [0, 4π] y <i>E'</i> = ℝ: <i>f</i>(<i>x</i>) = sen <i>x</i> (azul) y <i>g</i> constante (verde). Sobre el eje, en azul, el conjunto {<i>f</i> ≠ <i>g</i>}; los puntos naranjas son {<i>f</i> = <i>g</i>}. Probá <i>g</i> = 1: los puntos de tangencia también cuentan.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b3" title="Bloque 3 · Continuidad por sucesiones y por preimágenes de abiertos">Ej. Práctica 4 · Bloque 3 · Continuidad por sucesiones y por preimágenes de a…</a></li><li><a href="../ejemplos/p4.html#ejp4-b4" title="Bloque 4 · Continuidad en productos y proyecciones">Ej. Práctica 4 · Bloque 4 · Continuidad en productos y proyecciones</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-6-prop" title="Prop. · Lema del pegado con finitos cerrados, y max{f, g} es continua">Ej. Práctica 4 · alternativos · Prop. · Lema del pegado con finitos cerrados, y max{f, g} es…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b5" title="Bloque 5 · Conjuntos definidos por igualdades y desigualdades: preimágenes">Ej. Práctica 4 · alternativos · Bloque 5 · Conjuntos definidos por igualdades y desigualdade…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-4" title="O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiva} de una función continua">Ej. Práctica 4 · alternativos · O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiv…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-5" title="O4-5 · Combinaciones lineales de continuas; conjuntos {f − g ≥ α} cerrados y {f + g &lt; β} abiertos">Ej. Práctica 4 · alternativos · O4-5 · Combinaciones lineales de continuas; conjuntos {f − g…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-4" title="O16-4 · El conjunto donde f supera a g es abierto">Ej. Práctica 4 · alternativos · O16-4 · El conjunto donde f supera a g es abierto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-3" title="O11-3 · {f = g} es cerrado, vía h(x) = d&#x27;(f(x), g(x))">Ej. Práctica 4 · alternativos · O11-3 · {f = g} es cerrado, vía h(x) = d&#x27;(f(x), g(x))</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o9-2" title="O9-2 · El conjunto de ceros de una continua es cerrado, por preimágenes y por clausuras">Ej. Práctica 4 · alternativos · O9-2 · El conjunto de ceros de una continua es cerrado, por …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-12" title="O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y {f = g}">Ej. Práctica 4 · alternativos · O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-6" title="O2-6 · Extensión de funciones definidas sobre un denso: unicidad y existencia">Ej. Práctica 4 · alternativos · O2-6 · Extensión de funciones definidas sobre un denso: unic…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-8" title="O11-8 · Ejercicios propuestos de continuidad, sin resolución">Ej. Práctica 4 · alternativos · O11-8 · Ejercicios propuestos de continuidad, sin resolución</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap4-ej5" data-short="Ej. 5" data-title="Conjuntos abiertos y cerrados definidos por funciones continuas" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Abiertos y cerrados definidos por ecuaciones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Considerando en cada $\mathbb{R}^n$ la <span class="ref" data-ref="def-distancias-en-rrn">métrica euclídea $d_2$</span>, pruebe que:</p>
+      <ol class="items">
+        <li>$$\{(x, y) \in \mathbb{R}^2 : x^2 + y \sin(e^x - 1) = -2\}$$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+        <li>$$\{(x, y, z) \in \mathbb{R}^3 : -1 \le x^3 - 3y^4 + z - 2 \le 3\}$$ es cerrado.</li>
+        <li>$$\{(x_1, x_2, x_3, x_4, x_5) \in \mathbb{R}^5 : 3 \lt x_1 - x_2\}$$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+      </ol>
+      <p>¿Cambia algo si en lugar de $d_2$ consideramos las métricas $d_1$ o $d_\infty$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej5-c" aria-label="La curva x al cuadrado más y por seno de e a la x menos 1 igual a menos 2 en el plano"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej5-y">alto de la ventana</label><input type="range" id="guiap4-ej5-y" min="4" max="40" value="14"><output id="guiap4-ej5-y-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej5-read" aria-live="polite"></dl>
+      <figcaption>El conjunto del ítem (a): donde sen(<i>e<sup>x</sup></i> − 1) ≠ 0 es el gráfico de <i>y</i> = −(2 + <i>x</i>²)/sen(<i>e<sup>x</sup></i> − 1), y las rectas punteadas son los <i>x</i> donde sen(<i>e<sup>x</sup></i> − 1) = 0, a los que la curva no llega. Los conjuntos de (b) y (c) viven en ℝ³ y ℝ⁵ y no se dibujan.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b3" title="Bloque 3 · Continuidad por sucesiones y por preimágenes de abiertos">Ej. Práctica 4 · Bloque 3 · Continuidad por sucesiones y por preimágenes de a…</a></li><li><a href="../ejemplos/p4.html#ejp4-c9-1-6" title="C9-1.6 · Los polinomios en varias variables son continuos">Ej. Práctica 4 · C9-1.6 · Los polinomios en varias variables son continuos</a></li><li><a href="../ejemplos/p4.html#ejp4-b4" title="Bloque 4 · Continuidad en productos y proyecciones">Ej. Práctica 4 · Bloque 4 · Continuidad en productos y proyecciones</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b1" title="Bloque 1 · Herramientas: composición, álgebra de continuas, restricción y pegado">Ej. Práctica 4 · alternativos · Bloque 1 · Herramientas: composición, álgebra de continuas, …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-1-prop" title="Prop. · Ley de composición, con dos demostraciones">Ej. Práctica 4 · alternativos · Prop. · Ley de composición, con dos demostraciones</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-2" title="O2-2 · Suma, producto, cociente e inversión son continuas; funciones racionales">Ej. Práctica 4 · alternativos · O2-2 · Suma, producto, cociente e inversión son continuas; f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-4-prop" title="Prop. · Continuidad y restricciones: carácter local de la continuidad">Ej. Práctica 4 · alternativos · Prop. · Continuidad y restricciones: carácter local de la co…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-3-prop" title="Prop. · Pegado de funciones continuas sobre dos cerrados">Ej. Práctica 4 · alternativos · Prop. · Pegado de funciones continuas sobre dos cerrados</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-3" title="O2-3 · Una función definida a trozos en R² es continua">Ej. Práctica 4 · alternativos · O2-3 · Una función definida a trozos en R² es continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b5" title="Bloque 5 · Conjuntos definidos por igualdades y desigualdades: preimágenes">Ej. Práctica 4 · alternativos · Bloque 5 · Conjuntos definidos por igualdades y desigualdade…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-4" title="O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiva} de una función continua">Ej. Práctica 4 · alternativos · O6-4 · Conjunto de ceros, {f ≥ 0} y {f estrictamente positiv…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o10-2" title="O10-2 · {x : |f(x)| &lt; r} es abierto, como preimagen de (-r, r)">Ej. Práctica 4 · alternativos · O10-2 · {x : |f(x)| &lt; r} es abierto, como preimagen de (-r, …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-5" title="O4-5 · Combinaciones lineales de continuas; conjuntos {f − g ≥ α} cerrados y {f + g &lt; β} abiertos">Ej. Práctica 4 · alternativos · O4-5 · Combinaciones lineales de continuas; conjuntos {f − g…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-4" title="O16-4 · El conjunto donde f supera a g es abierto">Ej. Práctica 4 · alternativos · O16-4 · El conjunto donde f supera a g es abierto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o9-2" title="O9-2 · El conjunto de ceros de una continua es cerrado, por preimágenes y por clausuras">Ej. Práctica 4 · alternativos · O9-2 · El conjunto de ceros de una continua es cerrado, por …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-2" title="O16-2 · El funcional de evaluación es continuo para d∞, y {f : f(t0) ≠ 0} es abierto">Ej. Práctica 4 · alternativos · O16-2 · El funcional de evaluación es continuo para d∞, y {f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-3" title="O17-3 · Las funciones que se anulan en S forman un cerrado de (C([0,1]), d∞), pero no de d1">Ej. Práctica 4 · alternativos · O17-3 · Las funciones que se anulan en S forman un cerrado d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-8" title="O11-8 · Ejercicios propuestos de continuidad, sin resolución">Ej. Práctica 4 · alternativos · O11-8 · Ejercicios propuestos de continuidad, sin resolución</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap4-ej6" data-short="Ej. 6" data-title="Continuas que no mandan abiertos en abiertos ni cerrados en cerrados" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Imagen de abiertos y de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f, g : \mathbb{R} \to \mathbb{R}$ dadas por $f(x) = x^2$, $g(x) = x^2 / (1 + x^2)$. Pruebe que:</p>
+      <ol class="items">
+        <li>$f$ es <span class="ref" data-ref="def-5.4">continua</span>, y sin embargo existe $G \subseteq \mathbb{R}$ <span class="ref" data-ref="def-4.14">abierto</span> tal que <span class="ref" data-ref="def-5.1">$f(G)$</span> no es abierto.</li>
+        <li>$g$ es continua, y sin embargo existe $F \subseteq \mathbb{R}$ <span class="ref" data-ref="def-4.27">cerrado</span> tal que $g(F)$ no es cerrado.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej6-c" aria-label="Gráficos de f igual a x al cuadrado y de g igual a x al cuadrado sobre uno más x al cuadrado"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap4-ej6-f" value="f" checked><i>f</i>(<i>x</i>) = <i>x</i>²</label>
+          <label><input type="radio" name="guiap4-ej6-f" value="g"><i>g</i>(<i>x</i>) = <i>x</i>²/(1 + <i>x</i>²)</label>
+        </fieldset>
+      </div>
+      <figcaption>Los gráficos de las dos funciones del enunciado en [−4, 4]. La recta punteada en <i>y</i> = 1 es la asíntota horizontal de <i>g</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-2" title="O2-2 · Suma, producto, cociente e inversión son continuas; funciones racionales">Ej. Práctica 4 · alternativos · O2-2 · Suma, producto, cociente e inversión son continuas; f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b3" title="Bloque 3 · La continuidad depende de las métricas: discreta, identidad, funciones abiertas y cerradas">Ej. Práctica 4 · alternativos · Bloque 3 · La continuidad depende de las métricas: discreta,…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-3" title="O15-3 · Identidad entre la métrica discreta y la usual: continua pero no abierta, abierta pero no continua">Ej. Práctica 4 · alternativos · O15-3 · Identidad entre la métrica discreta y la usual: cont…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-4" title="O2-4 · Las proyecciones son abiertas pero no cerradas; continua y biyectiva no implica homeomorfismo">Ej. Práctica 4 · alternativos · O2-4 · Las proyecciones son abiertas pero no cerradas; conti…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-2" title="O11-2 · |x| en [-1, 1] manda un abierto a un no abierto">Ej. Práctica 4 · alternativos · O11-2 · |x| en [-1, 1] manda un abierto a un no abierto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-3" title="O7-3 · Preimágenes de intervalos por x² son abiertas, pero la imagen de (-1, 1) no lo es">Ej. Práctica 4 · alternativos · O7-3 · Preimágenes de intervalos por x² son abiertas, pero l…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-4" title="O17-4 · Discontinuidad vista en una preimagen: f(x) = x² salvo f(0) = 1">Ej. Práctica 4 · alternativos · O17-4 · Discontinuidad vista en una preimagen: f(x) = x² sal…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap4-ej7" data-short="Ej. 7" data-title="Dos continuas que coinciden en un denso son iguales" data-topics="continuidad,densidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Dos continuas que coinciden en un denso</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f, g : E \to E'$ funciones <span class="ref" data-ref="def-5.4">continuas</span>.</p>
+      <ol class="items">
+        <li>Sea $D \subseteq E$ un subconjunto <span class="ref" data-ref="def-5.20">denso</span>. Pruebe que si $f|_D = g|_D$, entonces $f = g$.</li>
+        <li>Concluya que la función $\mathcal{R} :$ <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$C([0, 1])$</span> $\to \{f : \mathbb{Q} \cap [0, 1] \to \mathbb{R}\}$ dada por $\mathcal{R}(f) = f|_{\mathbb{Q} \cap [0, 1]}$ es inyectiva.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej7-c" aria-label="Una función continua en [0,1] y sus valores en los racionales con denominador acotado"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej7-q">denominador ≤</label><input type="range" id="guiap4-ej7-q" min="1" max="40" value="6"><output id="guiap4-ej7-q-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej7-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> ∈ <i>C</i>([0, 1]) elegida para el dibujo (línea punteada) y los puntos de 𝓡(<i>f</i>) que se pueden mostrar: los valores de <i>f</i> en los racionales de [0, 1] con denominador hasta el valor elegido.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b7" title="Bloque 7 · Conjuntos densos">Ej. Práctica 4 · Bloque 7 · Conjuntos densos</a></li><li><a href="../ejemplos/p4.html#ejp4-c9-3-2" title="C9-3.2 · Dos continuas que coinciden en un denso coinciden en todo">Ej. Práctica 4 · C9-3.2 · Dos continuas que coinciden en un denso coinciden e…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-1-prop" title="Prop. · Composición y restricción de funciones continuas">Ej. Práctica 4 · alternativos · Prop. · Composición y restricción de funciones continuas</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-1" title="O2-1 · La restricción puede ser continua sin que la función lo sea: la característica de Q">Ej. Práctica 4 · alternativos · O2-1 · La restricción puede ser continua sin que la función …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b6" title="Bloque 6 · Densidad y continuidad">Ej. Práctica 4 · alternativos · Bloque 6 · Densidad y continuidad</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-1-prop" title="Prop. · Un conjunto denso encuentra todos los abiertos no vacíos">Ej. Práctica 4 · alternativos · Prop. · Un conjunto denso encuentra todos los abiertos no va…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-10" title="O4-10 · Caracterización de los densos por cubrimientos con bolas">Ej. Práctica 4 · alternativos · O4-10 · Caracterización de los densos por cubrimientos con b…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-4" title="O11-4 · Dos continuas que coinciden en A coinciden en la clausura de A">Ej. Práctica 4 · alternativos · O11-4 · Dos continuas que coinciden en A coinciden en la cla…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o15-4" title="O15-4 · Coincidir en un denso implica coincidir; una continua en [0,1] ∩ Q sin extensión continua">Ej. Práctica 4 · alternativos · O15-4 · Coincidir en un denso implica coincidir; una continu…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-2" title="O3-2 · La continuidad se decide sobre un denso más un punto">Ej. Práctica 4 · alternativos · O3-2 · La continuidad se decide sobre un denso más un punto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-6" title="O4-6 · Si f(cl A) ⊆ cl f(A) para todo A, entonces f es continua: prueba por sucesiones">Ej. Práctica 4 · alternativos · O4-6 · Si f(cl A) ⊆ cl f(A) para todo A, entonces f es conti…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-12" title="O6-12 · Tres enunciados: polinomios no Lipschitz, extensión desde ℚ, periódicas">Ej. Práctica 4 · alternativos · O6-12 · Tres enunciados: polinomios no Lipschitz, extensión …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-6" title="O2-6 · Extensión de funciones definidas sobre un denso: unicidad y existencia">Ej. Práctica 4 · alternativos · O2-6 · Extensión de funciones definidas sobre un denso: unic…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-10-prop" title="Prop. · Extensión de una función uniformemente continua a la clausura">Ej. Práctica 4 · alternativos · Prop. · Extensión de una función uniformemente continua a la…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap4-ej8" data-short="Ej. 8" data-title="La imagen continua y suryectiva de un denso es densa" data-topics="continuidad,densidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>La imagen de un denso por una continua suryectiva</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f : E \to E'$ una función <span class="ref" data-ref="def-5.4">continua</span> y suryectiva. Pruebe que si $D$ es <span class="ref" data-ref="def-5.20">denso</span> en $E$ entonces $f(D)$ es denso en $E'$.</p></div>
+  <div class="preparan" data-ej="8"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b7" title="Bloque 7 · Conjuntos densos">Ej. Práctica 4 · Bloque 7 · Conjuntos densos</a></li><li><a href="../ejemplos/p4.html#ejp4-c9-3-1" title="C9-3.1 · La imagen continua de un denso es densa">Ej. Práctica 4 · C9-3.1 · La imagen continua de un denso es densa</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b6" title="Bloque 6 · Densidad y continuidad">Ej. Práctica 4 · alternativos · Bloque 6 · Densidad y continuidad</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-1-prop" title="Prop. · Un conjunto denso encuentra todos los abiertos no vacíos">Ej. Práctica 4 · alternativos · Prop. · Un conjunto denso encuentra todos los abiertos no va…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-10" title="O4-10 · Caracterización de los densos por cubrimientos con bolas">Ej. Práctica 4 · alternativos · O4-10 · Caracterización de los densos por cubrimientos con b…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-5" title="O2-5 · Imagen continua y sobreyectiva de un espacio separable">Ej. Práctica 4 · alternativos · O2-5 · Imagen continua y sobreyectiva de un espacio separabl…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o9-1" title="O9-1 · f(cl E) ⊆ cl f(E) por ε-δ, y la inclusión puede ser estricta">Ej. Práctica 4 · alternativos · O9-1 · f(cl E) ⊆ cl f(E) por ε-δ, y la inclusión puede ser e…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-6" title="O4-6 · Si f(cl A) ⊆ cl f(A) para todo A, entonces f es continua: prueba por sucesiones">Ej. Práctica 4 · alternativos · O4-6 · Si f(cl A) ⊆ cl f(A) para todo A, entonces f es conti…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-8" title="O11-8 · Ejercicios propuestos de continuidad, sin resolución">Ej. Práctica 4 · alternativos · O11-8 · Ejercicios propuestos de continuidad, sin resolución</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap4-ej9" data-short="Ej. 9" data-title="Evaluación e integral en C([0,1]) con d∞ y d1" data-topics="continuidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Evaluación e integral en $C([0,1])$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideramos las funciones $\mathcal{E}, \mathcal{I} :$ <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$C([0, 1])$</span> $\to \mathbb{R}$ definidas por:
+      $$\mathcal{E}(f) = f(0), \quad \mathcal{I}(f) = \int_0^1 f(x)\, dx.$$</p>
+      <ol class="items">
+        <li>Demuestre que si utilizamos en $C([0, 1])$ la distancia $d_\infty$ ambas resultan <span class="ref" data-ref="def-5.4">continuas</span>.</li>
+        <li>Demuestre que si en cambio utilizamos en $C([0, 1])$ la distancia $d_1$, $\mathcal{I}$ es una función continua pero $\mathcal{E}$ no lo es.</li>
+        <li>Analice si es posible que una función $\mathcal{F} : C([0, 1]) \to \mathbb{R}$ sea continua para la distancia $d_1$ pero no para $d_\infty$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej9-c" aria-label="Función continua poligonal en [0,1] con nodos arrastrables, su valor en 0 y el área bajo su gráfico"></canvas>
+      <dl class="read" id="guiap4-ej9-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá los nodos para armar una <i>f</i> ∈ <i>C</i>([0, 1]) poligonal. El punto grande es (0, 𝓔(<i>f</i>)); el área sombreada (azul arriba del eje, naranja abajo) es la que suma 𝓘(<i>f</i>). Debajo, las dos distancias de <i>f</i> a la función nula.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b5" title="Bloque 5 · Funciones Lipschitz">Ej. Práctica 4 · Bloque 5 · Funciones Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-2" title="O2-2 · Suma, producto, cociente e inversión son continuas; funciones racionales">Ej. Práctica 4 · alternativos · O2-2 · Suma, producto, cociente e inversión son continuas; f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b7" title="Bloque 7 · Funciones sobre $C([0, 1])$: $d_1$ contra $d_\infty$">Ej. Práctica 4 · alternativos · Bloque 7 · Funciones sobre $C([0, 1])$: $d_1$ contra $d_\inf…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-1" title="O17-1 · En C([0,1]): converge en d1 y no en d∞; la integral es continua para ambas y f ↦ f(0) sólo para d∞">Ej. Práctica 4 · alternativos · O17-1 · En C([0,1]): converge en d1 y no en d∞; la integral …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-1" title="O16-1 · La bola unidad de (C[0,1], d∞) no es abierta en d1, pero la de d1 sí es abierta en d∞">Ej. Práctica 4 · alternativos · O16-1 · La bola unidad de (C[0,1], d∞) no es abierta en d1, …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-2" title="O16-2 · El funcional de evaluación es continuo para d∞, y {f : f(t0) ≠ 0} es abierto">Ej. Práctica 4 · alternativos · O16-2 · El funcional de evaluación es continuo para d∞, y {f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-3" title="O17-3 · Las funciones que se anulan en S forman un cerrado de (C([0,1]), d∞), pero no de d1">Ej. Práctica 4 · alternativos · O17-3 · Las funciones que se anulan en S forman un cerrado d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-6" title="O6-6 · El operador derivada es continuo con dC1 y no con d∞">Ej. Práctica 4 · alternativos · O6-6 · El operador derivada es continuo con dC1 y no con d∞</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-11-prop" title="Prop. · Aplicación lineal continua ⟺ acotada ⟺ Lipschitz">Ej. Práctica 4 · alternativos · Prop. · Aplicación lineal continua ⟺ acotada ⟺ Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o8-1" title="O8-1 · Un operador integral en (C([a,b]), d∞) es Lipschitz">Ej. Práctica 4 · alternativos · O8-1 · Un operador integral en (C([a,b]), d∞) es Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-7" title="O7-7 · Mínimo de dos distancias, esferas cerradas, evaluación 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-7 · Mínimo de dos distancias, esferas cerradas, evaluació…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap4-ej10" data-short="Ej. 10" data-title="La distancia a un punto es continua" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>La distancia a un punto es continua</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>.</p>
+      <ol class="items">
+        <li>Sea $x_0 \in E$, y sea $f : E \to \mathbb{R}$ dada por $f(x) = d(x, x_0)$. Pruebe que $f$ es <span class="ref" data-ref="def-5.4">continua</span>.</li>
+        <li>Usando esto rehaga los ítems (b), (d) y (g) del <span class="ref" data-ref="guia-p3-ej4">Ejercicio 4 de la Práctica 3</span>.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej10-c" aria-label="Curvas de nivel de la distancia a un punto x0 en el plano, para tres métricas"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Métrica en ℝ²</legend>
+          <label><input type="radio" name="guiap4-ej10-m" value="2" checked><i>d</i><sub>2</sub></label>
+          <label><input type="radio" name="guiap4-ej10-m" value="1"><i>d</i><sub>1</sub></label>
+          <label><input type="radio" name="guiap4-ej10-m" value="inf"><i>d</i><sub>∞</sub></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap4-ej10-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ²: las curvas son los niveles <i>f</i> = 1, 2, 3 de <i>f</i>(<i>x</i>) = <i>d</i>(<i>x</i>, <i>x</i><sub>0</sub>). Arrastrá <i>x</i><sub>0</sub> (azul) y <i>x</i> (naranja).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-7" title="O7-7 · Mínimo de dos distancias, esferas cerradas, evaluación 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-7 · Mínimo de dos distancias, esferas cerradas, evaluació…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b8" title="Bloque 8 · Distancia a un punto y a un conjunto; lema de Urysohn">Ej. Práctica 4 · alternativos · Bloque 8 · Distancia a un punto y a un conjunto; lema de Ury…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-1" title="O7-1 · d_a(x) = d(x, a) es continua, y de hecho 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-1 · d_a(x) = d(x, a) es continua, y de hecho 1-Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o10-3" title="O10-3 · El complemento de la bola cerrada es abierto, a mano">Ej. Práctica 4 · alternativos · O10-3 · El complemento de la bola cerrada es abierto, a mano</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-7-prop" title="Prop. · La distancia de dos puntos a un tercero">Ej. Práctica 4 · alternativos · Prop. · La distancia de dos puntos a un tercero</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-7" title="O2-7 · La función distancia d : X × X → R≥0 es Lipschitz">Ej. Práctica 4 · alternativos · O2-7 · La función distancia d : X × X → R≥0 es Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-4" title="O4-4 · Entornos B(A, r) de un conjunto; todo cerrado es intersección numerable de abiertos">Ej. Práctica 4 · alternativos · O4-4 · Entornos B(A, r) de un conjunto; todo cerrado es inte…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap4-ej11" data-short="Ej. 11" data-title="Distancia a un conjunto y la función de Urysohn" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Distancia a un conjunto y separación de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico.</p>
+      <ol class="items">
+        <li>Sea $A \subseteq E$, y sea $g : E \to \mathbb{R}$ dada por $g(x) =$ <span class="ref" data-ref="guia-p3-ej10">$d(x, A)$</span>.
+          <ol class="items" style="list-style-type: lower-roman">
+            <li>Pruebe que $g$ es <span class="ref" data-ref="def-5.4">continua</span>.</li>
+            <li>Pruebe que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces $g(x) \gt 0$ para todo $x \notin A$.</li>
+          </ol></li>
+        <li>Sean $A, B \subseteq E$ cerrados, no vacíos y disjuntos, y sea $h : E \to [0, 1]$ dada por
+          $$h(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}.$$
+          Pruebe que $h$ es continua, y que $h(x) = 0$ $\forall x \in A$ y $h(x) = 1$ $\forall x \in B$.</li>
+        <li>Sean $A, B \subseteq E$ cerrados, no vacíos y disjuntos. Pruebe que existen conjuntos <span class="ref" data-ref="def-4.14">abiertos</span> y disjuntos $U$ y $V$ tales que $A \subseteq U$ y $B \subseteq V$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej11-c" aria-label="Las funciones d(x,A), d(x,B) y h sobre la recta, con A y B dos intervalos cerrados"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej11-b">posición de <i>B</i></label><input type="range" id="guiap4-ej11-b" min="-100" max="200" value="80"><output id="guiap4-ej11-b-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej11-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: <i>E</i> = ℝ, <i>A</i> = [−3, −1.5] y <i>B</i> = [<i>b</i>, <i>b</i> + 1.5] (el control mueve <i>b</i>). En naranja <i>d</i>(<i>x</i>, <i>A</i>), en verde <i>d</i>(<i>x</i>, <i>B</i>) y en azul <i>h</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="nota"><b>Nota</b><em>esta última afirmación está comprendida en el llamado Lema de Urysohn.</em></div>
+  <div class="preparan" data-ej="11"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4alt.html#ejp4alt-b1" title="Bloque 1 · Herramientas: composición, álgebra de continuas, restricción y pegado">Ej. Práctica 4 · alternativos · Bloque 1 · Herramientas: composición, álgebra de continuas, …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-2" title="O2-2 · Suma, producto, cociente e inversión son continuas; funciones racionales">Ej. Práctica 4 · alternativos · O2-2 · Suma, producto, cociente e inversión son continuas; f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-7" title="O7-7 · Mínimo de dos distancias, esferas cerradas, evaluación 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-7 · Mínimo de dos distancias, esferas cerradas, evaluació…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b8" title="Bloque 8 · Distancia a un punto y a un conjunto; lema de Urysohn">Ej. Práctica 4 · alternativos · Bloque 8 · Distancia a un punto y a un conjunto; lema de Ury…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8-def" title="Def. · Distancia de un punto a un conjunto">Ej. Práctica 4 · alternativos · Def. · Distancia de un punto a un conjunto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8-prop" title="Prop. · d(·, A) es 1-Lipschitz, y d(x, A) = 0 caracteriza la clausura">Ej. Práctica 4 · alternativos · Prop. · d(·, A) es 1-Lipschitz, y d(x, A) = 0 caracteriza la…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8" title="O2-8 · x ↦ d(x, A) es una función corta; toda función de Lipschitz es uniformemente continua">Ej. Práctica 4 · alternativos · O2-8 · x ↦ d(x, A) es una función corta; toda función de Lip…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-4" title="O4-4 · Entornos B(A, r) de un conjunto; todo cerrado es intersección numerable de abiertos">Ej. Práctica 4 · alternativos · O4-4 · Entornos B(A, r) de un conjunto; todo cerrado es inte…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-9" title="O2-9 · Lema de Urysohn para espacios métricos y separación de cerrados disjuntos">Ej. Práctica 4 · alternativos · O2-9 · Lema de Urysohn para espacios métricos y separación d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o12-3" title="O12-3 · Separar cerrados disjuntos con d_E − d_F">Ej. Práctica 4 · alternativos · O12-3 · Separar cerrados disjuntos con d_E − d_F</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-10" title="O2-10 · Distancias concretas entre conjuntos; cerrados disjuntos a distancia cero">Ej. Práctica 4 · alternativos · O2-10 · Distancias concretas entre conjuntos; cerrados disju…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-3" title="O4-3 · A compacto y B cerrado: disjuntos si y sólo si d(A, B) es positiva">Ej. Práctica 4 · alternativos · O4-3 · A compacto y B cerrado: disjuntos si y sólo si d(A, B…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-12" title="O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y {f = g}">Ej. Práctica 4 · alternativos · O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-8" title="O11-8 · Ejercicios propuestos de continuidad, sin resolución">Ej. Práctica 4 · alternativos · O11-8 · Ejercicios propuestos de continuidad, sin resolución</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap4-ej12" data-short="Ej. 12" data-title="Las funciones de los Ejercicios 10 y 11 son Lipschitz" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Las funciones de los Ejercicios 10 y 11 son Lipschitz</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Pruebe que las funciones $f$ y $g$ de los ejercicios <span class="ref" data-ref="guia-p4-ej10">10</span> y <span class="ref" data-ref="guia-p4-ej11">11</span> son de tipo <span class="ref" data-ref="def-5.24">Lipschitz</span>. Deduzca que son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>.</p></div>
+  <div class="preparan" data-ej="12"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b5" title="Bloque 5 · Funciones Lipschitz">Ej. Práctica 4 · Bloque 5 · Funciones Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o17-1" title="O17-1 · En C([0,1]): converge en d1 y no en d∞; la integral es continua para ambas y f ↦ f(0) sólo para d∞">Ej. Práctica 4 · alternativos · O17-1 · En C([0,1]): converge en d1 y no en d∞; la integral …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-2" title="O16-2 · El funcional de evaluación es continuo para d∞, y {f : f(t0) ≠ 0} es abierto">Ej. Práctica 4 · alternativos · O16-2 · El funcional de evaluación es continuo para d∞, y {f…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-11-prop" title="Prop. · Aplicación lineal continua ⟺ acotada ⟺ Lipschitz">Ej. Práctica 4 · alternativos · Prop. · Aplicación lineal continua ⟺ acotada ⟺ Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o8-1" title="O8-1 · Un operador integral en (C([a,b]), d∞) es Lipschitz">Ej. Práctica 4 · alternativos · O8-1 · Un operador integral en (C([a,b]), d∞) es Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-7" title="O7-7 · Mínimo de dos distancias, esferas cerradas, evaluación 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-7 · Mínimo de dos distancias, esferas cerradas, evaluació…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-1" title="O7-1 · d_a(x) = d(x, a) es continua, y de hecho 1-Lipschitz">Ej. Práctica 4 · alternativos · O7-1 · d_a(x) = d(x, a) es continua, y de hecho 1-Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-7-prop" title="Prop. · La distancia de dos puntos a un tercero">Ej. Práctica 4 · alternativos · Prop. · La distancia de dos puntos a un tercero</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-7" title="O2-7 · La función distancia d : X × X → R≥0 es Lipschitz">Ej. Práctica 4 · alternativos · O2-7 · La función distancia d : X × X → R≥0 es Lipschitz</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8-def" title="Def. · Distancia de un punto a un conjunto">Ej. Práctica 4 · alternativos · Def. · Distancia de un punto a un conjunto</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8-prop" title="Prop. · d(·, A) es 1-Lipschitz, y d(x, A) = 0 caracteriza la clausura">Ej. Práctica 4 · alternativos · Prop. · d(·, A) es 1-Lipschitz, y d(x, A) = 0 caracteriza la…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-8" title="O2-8 · x ↦ d(x, A) es una función corta; toda función de Lipschitz es uniformemente continua">Ej. Práctica 4 · alternativos · O2-8 · x ↦ d(x, A) es una función corta; toda función de Lip…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-12" title="O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y {f = g}">Ej. Práctica 4 · alternativos · O14-12 · Ejercicios propuestos sobre d(x, A), la diagonal y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b9" title="Bloque 9 · Lipschitz y continuidad uniforme: definiciones y criterios">Ej. Práctica 4 · alternativos · Bloque 9 · Lipschitz y continuidad uniforme: definiciones y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-def" title="Def. · Continuidad uniforme y funciones Lipschitz en espacios métricos">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y funciones Lipschitz en espacio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-prop" title="Prop. · Lipschitz implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Lipschitz implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1-def" title="Def. · Continuidad uniforme y medidor (módulo) de continuidad uniforme ω_f">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y medidor (módulo) de continuida…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1" title="O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f">Ej. Práctica 4 · alternativos · O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5-def" title="Def. · Continuidad uniforme y condición de Lipschitz (BUAP)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y condición de Lipschitz (BUAP)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5" title="O11-5 · Desde un espacio discreto todo es uniformemente continuo; uniformemente continua no implica Lipschitz">Ej. Práctica 4 · alternativos · O11-5 · Desde un espacio discreto todo es uniformemente cont…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-2" title="O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipschitz en [−M, M]">Ej. Práctica 4 · alternativos · O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipsc…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12-prop" title="Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂">Ej. Práctica 4 · alternativos · Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12" title="O2-12 · √x es uniformemente continua en [0, +∞) pero no es de Lipschitz en [0, 1]">Ej. Práctica 4 · alternativos · O2-12 · √x es uniformemente continua en [0, +∞) pero no es d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-11" title="O6-11 · √x es Lipschitz en [1, ∞), no es Lipschitz en [0, ∞), pero es uniformemente continua y no acotada en [0, ∞)">Ej. Práctica 4 · alternativos · O6-11 · √x es Lipschitz en [1, ∞), no es Lipschitz en [0, ∞)…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-12" title="O6-12 · Tres enunciados: polinomios no Lipschitz, extensión desde ℚ, periódicas">Ej. Práctica 4 · alternativos · O6-12 · Tres enunciados: polinomios no Lipschitz, extensión …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-10" title="O3-10 · La función x ↦ lim d(zₙ, x), con (zₙ) de Cauchy, es 1-Lipschitz">Ej. Práctica 4 · alternativos · O3-10 · La función x ↦ lim d(zₙ, x), con (zₙ) de Cauchy, es …</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap4-ej13" data-short="Ej. 13" data-title="1/x y sen(1/x) no son uniformemente continuas" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>$1/x$ y $\sin(1/x)$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Verifique que la función $f(x) = 1/x$ no es <span class="ref" data-ref="def-5.14">uniformemente continua</span> en $(0, +\infty)$. ¿Y en $[\varepsilon, +\infty)$ para $\varepsilon \gt 0$?</li>
+        <li>Verifique que la función $f(x) = \sin(1/x)$ no es uniformemente continua en $(0, 1)$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej13-c" aria-label="Gráfico de 1 sobre x o de seno de 1 sobre x cerca de 0"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap4-ej13-f" value="inv" checked>1/<i>x</i></label>
+          <label><input type="radio" name="guiap4-ej13-f" value="sin">sen(1/<i>x</i>)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap4-ej13-e">ε (ítem a)</label><input type="range" id="guiap4-ej13-e" min="5" max="150" value="40"><output id="guiap4-ej13-e-o"></output></div>
+      </div>
+      <figcaption>Las dos funciones del enunciado en (0, 3] y (0, 1). Para 1/<i>x</i>, la parte resaltada del eje y del gráfico es el dominio [ε, +∞) de la segunda pregunta del ítem (a).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b6" title="Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y pegado">Ej. Práctica 4 · Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-5" title="O16-5 · Problema de la restricción: continua en cada [1/n, 1] y en {0} pero no en [0, 1]; sí vale con abiertos">Ej. Práctica 4 · alternativos · O16-5 · Problema de la restricción: continua en cada [1/n, 1…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o16-6-prop" title="Prop. · Lema del pegado con finitos cerrados, y max{f, g} es continua">Ej. Práctica 4 · alternativos · Prop. · Lema del pegado con finitos cerrados, y max{f, g} es…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b9" title="Bloque 9 · Lipschitz y continuidad uniforme: definiciones y criterios">Ej. Práctica 4 · alternativos · Bloque 9 · Lipschitz y continuidad uniforme: definiciones y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-def" title="Def. · Continuidad uniforme y funciones Lipschitz en espacios métricos">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y funciones Lipschitz en espacio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-prop" title="Prop. · Lipschitz implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Lipschitz implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8-def" title="Def. · Continuidad uniforme (Daniilidis)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme (Daniilidis)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8" title="O3-8 · Caracterización de la continuidad uniforme por pares de sucesiones">Ej. Práctica 4 · alternativos · O3-8 · Caracterización de la continuidad uniforme por pares …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-6-prop" title="Prop. · Caracterización por sucesiones de la continuidad uniforme (Payá)">Ej. Práctica 4 · alternativos · Prop. · Caracterización por sucesiones de la continuidad uni…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1-def" title="Def. · Continuidad uniforme y medidor (módulo) de continuidad uniforme ω_f">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y medidor (módulo) de continuida…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1" title="O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f">Ej. Práctica 4 · alternativos · O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-2" title="O5-2 · ω_f es creciente">Ej. Práctica 4 · alternativos · O5-2 · ω_f es creciente</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-3" title="O5-3 · Criterio de continuidad uniforme vía ω_f">Ej. Práctica 4 · alternativos · O5-3 · Criterio de continuidad uniforme vía ω_f</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-4" title="O5-4 · Calcular ω_f para x² en [−5, 5], x² en R y 1/x en (0, +∞)">Ej. Práctica 4 · alternativos · O5-4 · Calcular ω_f para x² en [−5, 5], x² en R y 1/x en (0,…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b10" title="Bloque 10 · Ejemplos y contraejemplos de continuidad uniforme">Ej. Práctica 4 · alternativos · Bloque 10 · Ejemplos y contraejemplos de continuidad uniform…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-11-def" title="Def. · Función uniformemente continua">Ej. Práctica 4 · alternativos · Def. · Función uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-11" title="O2-11 · 1/x es continua pero no uniformemente continua en (0, +∞)">Ej. Práctica 4 · alternativos · O2-11 · 1/x es continua pero no uniformemente continua en (0…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-10" title="O6-10 · 1/x no es uniformemente continua en (0, 1); es Lipschitz en (c, ∞) pero no en (0, ∞)">Ej. Práctica 4 · alternativos · O6-10 · 1/x no es uniformemente continua en (0, 1); es Lipsc…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-2" title="O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipschitz en [−M, M]">Ej. Práctica 4 · alternativos · O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipsc…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12-prop" title="Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂">Ej. Práctica 4 · alternativos · Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12" title="O2-12 · √x es uniformemente continua en [0, +∞) pero no es de Lipschitz en [0, 1]">Ej. Práctica 4 · alternativos · O2-12 · √x es uniformemente continua en [0, +∞) pero no es d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b11" title="Bloque 11 · Continuidad uniforme, sucesiones de Cauchy y extensión">Ej. Práctica 4 · alternativos · Bloque 11 · Continuidad uniforme, sucesiones de Cauchy y ext…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-9" title="O14-9 · Uniformemente continua manda Cauchy en Cauchy; log no es uniformemente continua en (0, +∞)">Ej. Práctica 4 · alternativos · O14-9 · Uniformemente continua manda Cauchy en Cauchy; log n…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-9-prop" title="Prop. · Uniformemente continua en (a, b) ⟺ se extiende con continuidad a [a, b]">Ej. Práctica 4 · alternativos · Prop. · Uniformemente continua en (a, b) ⟺ se extiende con c…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-10-prop" title="Prop. · Extensión de una función uniformemente continua a la clausura">Ej. Práctica 4 · alternativos · Prop. · Extensión de una función uniformemente continua a la…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-12-prop" title="Prop. · Extensión continua a un G_δ entre A y su clausura">Ej. Práctica 4 · alternativos · Prop. · Extensión continua a un G_δ entre A y su clausura</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-12" title="O3-12 · Uniformemente continua ⟹ se extiende a la clausura; sin(1/t) no se extiende">Ej. Práctica 4 · alternativos · O3-12 · Uniformemente continua ⟹ se extiende a la clausura; …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b12" title="Bloque 12 · Anticipo de la Práctica 5: continua en un compacto es uniformemente continua">Ej. Práctica 4 · alternativos · Bloque 12 · Anticipo de la Práctica 5: continua en un compac…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-7-prop" title="Prop. · Continua en [a, b] implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Continua en [a, b] implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-7-prop" title="Prop. · Teorema de Heine: continua sobre un compacto implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Teorema de Heine: continua sobre un compacto implica…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-9" title="O11-9 · Ejercicios propuestos de continuidad uniforme, sin resolución">Ej. Práctica 4 · alternativos · O11-9 · Ejercicios propuestos de continuidad uniforme, sin r…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap4-ej14" data-short="Ej. 14" data-title="Las uniformemente continuas mandan Cauchy en Cauchy" data-topics="continuidad,completitud">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Uniformemente continuas y sucesiones de Cauchy</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span></div>
+  <div class="enun"><p>Sean $E, E'$ espacios métricos y sea $f : E \to E'$ una función <span class="ref" data-ref="def-5.14">uniformemente continua</span>. Sea $(x_n)_{n \in \mathbb{N}}$ una <span class="ref" data-ref="def-4.51">sucesión de Cauchy</span> en $E$. Pruebe que $(f(x_n))_{n \in \mathbb{N}}$ es una sucesión de Cauchy en $E'$.</p></div>
+  <div class="preparan" data-ej="14"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b6" title="Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y pegado">Ej. Práctica 4 · Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-def" title="Def. · Continuidad uniforme y funciones Lipschitz en espacios métricos">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y funciones Lipschitz en espacio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-prop" title="Prop. · Lipschitz implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Lipschitz implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8-def" title="Def. · Continuidad uniforme (Daniilidis)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme (Daniilidis)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8" title="O3-8 · Caracterización de la continuidad uniforme por pares de sucesiones">Ej. Práctica 4 · alternativos · O3-8 · Caracterización de la continuidad uniforme por pares …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b11" title="Bloque 11 · Continuidad uniforme, sucesiones de Cauchy y extensión">Ej. Práctica 4 · alternativos · Bloque 11 · Continuidad uniforme, sucesiones de Cauchy y ext…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-8" title="O6-8 · Uniformemente continua manda Cauchy en Cauchy; continua sola no alcanza">Ej. Práctica 4 · alternativos · O6-8 · Uniformemente continua manda Cauchy en Cauchy; contin…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-13" title="O2-13 · Continua no preserva Cauchy (ni siquiera un homeomorfismo); uniformemente continua sí">Ej. Práctica 4 · alternativos · O2-13 · Continua no preserva Cauchy (ni siquiera un homeomor…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-7" title="O4-7 · Uniformemente continua con inversa continua transporta la completitud">Ej. Práctica 4 · alternativos · O4-7 · Uniformemente continua con inversa continua transport…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-9" title="O14-9 · Uniformemente continua manda Cauchy en Cauchy; log no es uniformemente continua en (0, +∞)">Ej. Práctica 4 · alternativos · O14-9 · Uniformemente continua manda Cauchy en Cauchy; log n…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-9" title="O3-9 · Un homeomorfismo cuya inversa no manda Cauchy en Cauchy: ℝ y la circunferencia pinchada">Ej. Práctica 4 · alternativos · O3-9 · Un homeomorfismo cuya inversa no manda Cauchy en Cauc…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-10" title="O3-10 · La función x ↦ lim d(zₙ, x), con (zₙ) de Cauchy, es 1-Lipschitz">Ej. Práctica 4 · alternativos · O3-10 · La función x ↦ lim d(zₙ, x), con (zₙ) de Cauchy, es …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-6" title="O2-6 · Extensión de funciones definidas sobre un denso: unicidad y existencia">Ej. Práctica 4 · alternativos · O2-6 · Extensión de funciones definidas sobre un denso: unic…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-9-prop" title="Prop. · Uniformemente continua en (a, b) ⟺ se extiende con continuidad a [a, b]">Ej. Práctica 4 · alternativos · Prop. · Uniformemente continua en (a, b) ⟺ se extiende con c…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-10-prop" title="Prop. · Extensión de una función uniformemente continua a la clausura">Ej. Práctica 4 · alternativos · Prop. · Extensión de una función uniformemente continua a la…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-12-prop" title="Prop. · Extensión continua a un G_δ entre A y su clausura">Ej. Práctica 4 · alternativos · Prop. · Extensión continua a un G_δ entre A y su clausura</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-12" title="O3-12 · Uniformemente continua ⟹ se extiende a la clausura; sin(1/t) no se extiende">Ej. Práctica 4 · alternativos · O3-12 · Uniformemente continua ⟹ se extiende a la clausura; …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-9" title="O11-9 · Ejercicios propuestos de continuidad uniforme, sin resolución">Ej. Práctica 4 · alternativos · O11-9 · Ejercicios propuestos de continuidad uniforme, sin r…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap4-ej15" data-short="Ej. 15" data-title="Ejemplos: acotada continua no uniforme, no acotada uniforme" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Acotación y continuidad uniforme</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun">
+    <ol class="items">
+      <li>Dé un ejemplo de una función $f : \mathbb{R} \to \mathbb{R}$ acotada y <span class="ref" data-ref="def-5.4">continua</span> pero no <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</li>
+      <li>Dé un ejemplo de una función $f : \mathbb{R} \to \mathbb{R}$ no acotada y uniformemente continua.</li>
+    </ol></div>
+  <div class="preparan" data-ej="15"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b6" title="Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y pegado">Ej. Práctica 4 · Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b9" title="Bloque 9 · Lipschitz y continuidad uniforme: definiciones y criterios">Ej. Práctica 4 · alternativos · Bloque 9 · Lipschitz y continuidad uniforme: definiciones y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-def" title="Def. · Continuidad uniforme y funciones Lipschitz en espacios métricos">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y funciones Lipschitz en espacio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-prop" title="Prop. · Lipschitz implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Lipschitz implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8-def" title="Def. · Continuidad uniforme (Daniilidis)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme (Daniilidis)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o3-8" title="O3-8 · Caracterización de la continuidad uniforme por pares de sucesiones">Ej. Práctica 4 · alternativos · O3-8 · Caracterización de la continuidad uniforme por pares …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-6-prop" title="Prop. · Caracterización por sucesiones de la continuidad uniforme (Payá)">Ej. Práctica 4 · alternativos · Prop. · Caracterización por sucesiones de la continuidad uni…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1-def" title="Def. · Continuidad uniforme y medidor (módulo) de continuidad uniforme ω_f">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y medidor (módulo) de continuida…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-1" title="O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f">Ej. Práctica 4 · alternativos · O5-1 · Cota superior para d&#x27;(f(a), f(b)) en términos de ω_f</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-2" title="O5-2 · ω_f es creciente">Ej. Práctica 4 · alternativos · O5-2 · ω_f es creciente</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-3" title="O5-3 · Criterio de continuidad uniforme vía ω_f">Ej. Práctica 4 · alternativos · O5-3 · Criterio de continuidad uniforme vía ω_f</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o5-4" title="O5-4 · Calcular ω_f para x² en [−5, 5], x² en R y 1/x en (0, +∞)">Ej. Práctica 4 · alternativos · O5-4 · Calcular ω_f para x² en [−5, 5], x² en R y 1/x en (0,…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-14" title="O2-14 · Lipschitz manda acotados en acotados; uniformemente continua no">Ej. Práctica 4 · alternativos · O2-14 · Lipschitz manda acotados en acotados; uniformemente …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5-def" title="Def. · Continuidad uniforme y condición de Lipschitz (BUAP)">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y condición de Lipschitz (BUAP)</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-5" title="O11-5 · Desde un espacio discreto todo es uniformemente continuo; uniformemente continua no implica Lipschitz">Ej. Práctica 4 · alternativos · O11-5 · Desde un espacio discreto todo es uniformemente cont…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-8" title="O14-8 · La continuidad uniforme no es una propiedad topológica: la identidad y ρ(x, y) = |e^x − e^y|">Ej. Práctica 4 · alternativos · O14-8 · La continuidad uniforme no es una propiedad topológi…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b10" title="Bloque 10 · Ejemplos y contraejemplos de continuidad uniforme">Ej. Práctica 4 · alternativos · Bloque 10 · Ejemplos y contraejemplos de continuidad uniform…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-11-def" title="Def. · Función uniformemente continua">Ej. Práctica 4 · alternativos · Def. · Función uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-11" title="O2-11 · 1/x es continua pero no uniformemente continua en (0, +∞)">Ej. Práctica 4 · alternativos · O2-11 · 1/x es continua pero no uniformemente continua en (0…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o7-2" title="O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipschitz en [−M, M]">Ej. Práctica 4 · alternativos · O7-2 · x² no es uniformemente continua en ℝ pero es 2M-Lipsc…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12-prop" title="Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂">Ej. Práctica 4 · alternativos · Prop. · Pegado de continuidad uniforme sobre A₁ ∪ A₂</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-12" title="O2-12 · √x es uniformemente continua en [0, +∞) pero no es de Lipschitz en [0, 1]">Ej. Práctica 4 · alternativos · O2-12 · √x es uniformemente continua en [0, +∞) pero no es d…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-11" title="O6-11 · √x es Lipschitz en [1, ∞), no es Lipschitz en [0, ∞), pero es uniformemente continua y no acotada en [0, ∞)">Ej. Práctica 4 · alternativos · O6-11 · √x es Lipschitz en [1, ∞), no es Lipschitz en [0, ∞)…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-12" title="O6-12 · Tres enunciados: polinomios no Lipschitz, extensión desde ℚ, periódicas">Ej. Práctica 4 · alternativos · O6-12 · Tres enunciados: polinomios no Lipschitz, extensión …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-9-prop" title="Prop. · Uniformemente continua en (a, b) ⟺ se extiende con continuidad a [a, b]">Ej. Práctica 4 · alternativos · Prop. · Uniformemente continua en (a, b) ⟺ se extiende con c…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b12" title="Bloque 12 · Anticipo de la Práctica 5: continua en un compacto es uniformemente continua">Ej. Práctica 4 · alternativos · Bloque 12 · Anticipo de la Práctica 5: continua en un compac…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-7-prop" title="Prop. · Continua en [a, b] implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Continua en [a, b] implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-7-prop" title="Prop. · Teorema de Heine: continua sobre un compacto implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Teorema de Heine: continua sobre un compacto implica…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-9" title="O11-9 · Ejercicios propuestos de continuidad uniforme, sin resolución">Ej. Práctica 4 · alternativos · O11-9 · Ejercicios propuestos de continuidad uniforme, sin r…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap4-ej16" data-short="Ej. 16" data-title="Uniformemente continua y conjuntos a distancia cero" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Conjuntos a distancia cero</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="enun"><p>Sea $f : (E, d) \to (E', d')$ una función <span class="ref" data-ref="def-5.14">uniformemente continua</span>, y sean $A, B \subseteq E$ conjuntos no vacíos tales que <span class="ref" data-ref="guia-p3-ej11">$d(A, B) = 0$</span>. Pruebe que $d'(f(A), f(B)) = 0$.</p></div>
+  <div class="preparan" data-ej="16"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b6" title="Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y pegado">Ej. Práctica 4 · Bloque 6 · Continuidad uniforme: ejemplos, contraejemplos y …</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-b8" title="Bloque 8 · Distancia a un punto y a un conjunto; lema de Urysohn">Ej. Práctica 4 · alternativos · Bloque 8 · Distancia a un punto y a un conjunto; lema de Ury…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o2-10" title="O2-10 · Distancias concretas entre conjuntos; cerrados disjuntos a distancia cero">Ej. Práctica 4 · alternativos · O2-10 · Distancias concretas entre conjuntos; cerrados disju…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o4-3" title="O4-3 · A compacto y B cerrado: disjuntos si y sólo si d(A, B) es positiva">Ej. Práctica 4 · alternativos · O4-3 · A compacto y B cerrado: disjuntos si y sólo si d(A, B…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-def" title="Def. · Continuidad uniforme y funciones Lipschitz en espacios métricos">Ej. Práctica 4 · alternativos · Def. · Continuidad uniforme y funciones Lipschitz en espacio…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o6-1-prop" title="Prop. · Lipschitz implica uniformemente continua">Ej. Práctica 4 · alternativos · Prop. · Lipschitz implica uniformemente continua</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o14-6-prop" title="Prop. · Caracterización por sucesiones de la continuidad uniforme (Payá)">Ej. Práctica 4 · alternativos · Prop. · Caracterización por sucesiones de la continuidad uni…</a></li><li><a href="../ejemplos/p4alt.html#ejp4alt-o11-9" title="O11-9 · Ejercicios propuestos de continuidad uniforme, sin resolución">Ej. Práctica 4 · alternativos · O11-9 · Ejercicios propuestos de continuidad uniforme, sin r…</a></li></ul></div>
+</article>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto<\/strong> si $A = A^{\\circ}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:<\/p><ul><li><b>Bola abierta:<\/b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<\/li><li><b>Bola cerrada:<\/b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<\/li><li><b>Esfera:<\/b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy<\/em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.1": {
+  "tipo": "Definición",
+  "numero": "5.1",
+  "titulo": "Imagen y Preimagen de un Conjunto",
+  "enunciado": "<p>Dada una función $f : M \\to N$, y dados conjuntos $A \\subseteq M$ y $B \\subseteq N$,<\/p><p>$$\\begin{aligned} f(A) &= \\{f(x) \\in N : x \\in A\\} \\subseteq N \\quad \\text{y} \\\\ f^{-1}(B) &= \\{x \\in M : f(x) \\in B\\} \\subseteq M. \\end{aligned}$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua<\/i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$<\/p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes<\/i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).<\/p><p><i>Nota<\/i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$<\/b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso<\/em> en $M$ si $\\overline{E} = M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$<\/i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:<\/p><ol><li><b>Distancia euclídea ($d_2$):<\/b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$<\/li><li><b>Distancia taxista ($d_1$):<\/b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$<\/li><li><b>Distancia del máximo ($d_\\infty$):<\/b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$<\/li><\/ol><p>(En el apunte, un dibujo de cada distancia entre dos puntos de $\\mathbb{R}^2$.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-metrica-discreta": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métrica discreta",
+  "enunciado": "<p>Sea $E$ un conjunto no vacío. La <b>métrica discreta<\/b> en $E$ es $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ Un espacio métrico con esta métrica se llama <b>discreto<\/b>. Para $r \\le 1$, la bola $B(x, r)$ es $\\{x\\}$.<\/p>",
+  "fuente": "Guía de la Práctica 3, Ejercicio 1 (f); el apunte la usa (observación «La continuidad depende de las métricas») pero no la define en una caja"
+ },
+ "guia-p3-ej10": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 10",
+  "titulo": "Distancia de un punto a un conjunto",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Dados $A \\subseteq E$ no vacío y $x \\in E$, se define la <em>distancia de $x$ a $A$<\/em> como $$ d(x, A) = \\inf\\{d(x, a) : a \\in A\\}. $$ Pruebe que para todos $x, y \\in E$ y $r \\gt 0$:<\/p> <ol class=\"items\"> <li>$|d(x, A) - d(y, A)| \\le d(x, y)$.<\/li> <li>$x \\in A \\Rightarrow d(x, A) = 0$.<\/li> <li>$d(x, A) = 0 \\iff x \\in \\overline{A}$.<\/li> <li>$B_A(r) = \\{x \\in E : d(x, A) \\lt r\\}$ es abierto.<\/li> <li>$\\overline{B}_A(r) = \\{x \\in E : d(x, A) \\le r\\}$ es cerrado.<\/li> <\/ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej11": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 11",
+  "titulo": "La distancia entre conjuntos no es una distancia",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Consideremos el conjunto $\\mathcal{X} = \\{A \\subseteq E : A \\neq \\emptyset\\}$. Definimos la función $\\hat{d} : \\mathcal{X} \\times \\mathcal{X} \\to \\mathbb{R}$ como $$ \\hat{d}(A, B) = \\inf\\{d(a, b) : a \\in A, b \\in B\\}. $$ Determine si las siguientes afirmaciones son verdaderas o falsas:<\/p> <ol class=\"items\"> <li>$\\hat{d}(A, B) = \\hat{d}(\\overline{A}, B)$.<\/li> <li>$\\hat{d}(A, B) = 0 \\iff A \\cap B \\neq \\emptyset$.<\/li> <li>$\\hat{d}(A, B) = 0 \\iff \\overline{A} \\cap \\overline{B} \\neq \\emptyset$.<\/li> <li>$\\hat{d}(A, B) \\le \\hat{d}(A, C) + \\hat{d}(C, B)$.<\/li> <\/ol> <p>Concluya que $\\hat{d}$ no es una distancia.<\/p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej4": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4",
+  "titulo": "Puntos, bolas abiertas, bolas cerradas y anillos",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.<\/p> <ol class=\"items\"> <li>Pruebe que $\\{x\\}$ es un conjunto cerrado.<\/li> <li>Pruebe que $B(x, r)$ es un conjunto abierto.<\/li> <li>Pruebe que si $r \\gt r' \\gt 0$ entonces $\\overline{B(x, r')} \\subseteq B(x, r)$.<\/li> <li>Pruebe que $\\overline{B}(x, r) = \\{y \\in E : d(x, y) \\le r\\}$ es un conjunto cerrado.<\/li> <li>Deduzca que $\\overline{B(x, r)} \\subseteq \\overline{B}(x, r)$.<\/li> <li>Dé un ejemplo en que $\\overline{B(x, r)}$ sea un subconjunto propio de $\\overline{B}(x, r)$.<\/li> <li>Pruebe que $\\{y \\in E : 2 \\lt d(y, x) \\lt 3\\}$ es un conjunto abierto.<\/li> <\/ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p4-ej10": {
+  "tipo": "Práctica 4",
+  "numero": "Ej. 10",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico.<\/p><p>(a) Sea $x_0 \\in E$, y sea $f : E \\to \\mathbb{R}$ dada por $f(x) = d(x, x_0)$. Pruebe que $f$ es continua.<br>(b) Usando esto rehaga los ítems (b), (d) y (g) del Ejercicio 4 de la Práctica 3.<\/p>",
+  "fuente": "guias/p4.typ"
+ },
+ "guia-p4-ej11": {
+  "tipo": "Práctica 4",
+  "numero": "Ej. 11",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico.<\/p><ol type=\"a\"><li>Sea $A \\subseteq E$, y sea $g : E \\to \\mathbb{R}$ dada por $g(x) = d(x, A)$. (i) Pruebe que $g$ es continua. (ii) Pruebe que si $A$ es cerrado entonces $g(x) \\gt 0$ para todo $x \\notin A$.<\/li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos, y sea $h : E \\to [0, 1]$ dada por $$h(x) = \\frac{d(x, A)}{d(x, A) + d(x, B)}.$$ Pruebe que $h$ es continua, y que $h(x) = 0$ $\\forall x \\in A$ y $h(x) = 1$ $\\forall x \\in B$.<\/li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos. Pruebe que existen conjuntos abiertos y disjuntos $U$ y $V$ tales que $A \\subseteq U$ y $B \\subseteq V$.<\/li><\/ol><p><em>Nota: esta última afirmación está comprendida en el llamado Lema de Urysohn.<\/em><\/p>",
+  "fuente": "guias/p4.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p4 */
+(() => {
+"use strict";
+/* Dibujos de la guía de la Práctica 4 (funciones continuas). Usa window.PP. */
+const P = "guiap4";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Marco con la misma escala en x y en y, centrado verticalmente en yc. */
+function eqFrame(w, h, x0, x1, yc, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0, x1, y0: yc - span / 2, y1: yc + span / 2 }, p);
+}
+
+/* Recorta el dibujo al rectángulo de datos del marco T (hay que llamar a ctx.restore() después). */
+function clipBox(ctx, T) {
+  ctx.save(); ctx.beginPath();
+  ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b); ctx.clip();
+}
+
+/* Gráfico de f en [a, b]; corta el trazo donde f no es finita, se va muy lejos o donde brk(x1, x2) lo pide. */
+function plotFn(ctx, T, f, a, b, color, width, dash, n, brk) {
+  n = n || 600;
+  const span = T.box.y1 - T.box.y0;
+  let seg = [], px = null;
+  const flush = () => { if (seg.length > 1) PP.path(ctx, seg, color, width, dash); seg = []; };
+  for (let i = 0; i <= n; i++) {
+    const x = a + (b - a) * i / n, y = f(x);
+    if (!isFinite(y) || y < T.box.y0 - 4 * span || y > T.box.y1 + 4 * span) { flush(); px = null; continue; }
+    if (px !== null && brk && brk(px, x)) flush();
+    seg.push([T.X(x), T.Y(y)]); px = x;
+  }
+  flush();
+}
+
+/* Arrastre de puntos sobre un canvas: pick(px, py, T) devuelve un índice o null; move(i, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Índice del punto (de una lista [[x, y], …]) más cercano al píxel, o null si está lejos. */
+function nearest(pts, px, py, T, tol) {
+  let best = null, bd = tol || 18;
+  pts.forEach(([x, y], i) => { const d = Math.hypot(T.X(x) - px, T.Y(y) - py); if (d < bd) { bd = d; best = i; } });
+  return best;
+}
+
+/* Poligonal por nodos (xs, ys): valor, integral, integral del módulo y máximo del módulo. */
+function pwl(xs, ys) {
+  const f = (x) => {
+    for (let i = 0; i < xs.length - 1; i++) {
+      if (x <= xs[i + 1] || i === xs.length - 2) { const t = (x - xs[i]) / (xs[i + 1] - xs[i]); return ys[i] + t * (ys[i + 1] - ys[i]); }
+    }
+    return ys[ys.length - 1];
+  };
+  let I = 0, I1 = 0;
+  for (let i = 0; i < xs.length - 1; i++) {
+    const dx = xs[i + 1] - xs[i], a = ys[i], b = ys[i + 1];
+    I += (a + b) / 2 * dx;
+    if (a * b >= 0) I1 += Math.abs(a + b) / 2 * dx;
+    else I1 += dx / 2 * (a * a + b * b) / (Math.abs(a) + Math.abs(b));
+  }
+  return { f, I, I1, sup: Math.max(...ys.map(Math.abs)) };
+}
+
+/* Sombrea el área entre la poligonal y el eje: arriba con c1, abajo con c2. */
+function shadeArea(ctx, T, xs, ys, c1, c2) {
+  const poly = [[T.X(xs[0]), T.Y(0)], ...xs.map((x, i) => [T.X(x), T.Y(ys[i])]), [T.X(xs[xs.length - 1]), T.Y(0)]];
+  [[T.p.t, T.Y(0) - T.p.t, c1], [T.Y(0), T.h - T.p.b - T.Y(0), c2]].forEach(([y, hh, c]) => {
+    if (hh <= 0) return;
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, y, T.w - T.p.l - T.p.r, hh); ctx.clip();
+    PP.path(ctx, poly, null, 0, null, true, c); ctx.restore();
+  });
+}
+
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; };
+
+/* ===================== Ejercicio 1 ===================== */
+(() => {
+  const f = (x, y) => (x === 0 && y === 0 ? 0 : (x * x * y) / (0.5 * x * x + (x - 1) * (x - 1) * y * y));
+  PP.register(function () {
+    const v = PP.val(P + "-ej1-R");
+    const R = 0.02 * Math.pow(150, v / 100);
+    PP.out(P + "-ej1-R-o", "R = " + PP.fmt(R, R < 0.1 ? 3 : 2));
+    const { ctx, w, h } = PP.canvas(P + "-ej1-c", 0.86);
+    const T = eqFrame(w, h, -R * (w / h) * 1.0, R * (w / h) * 1.0, 0, { l: 10, r: 10, t: 10, b: 10 });
+    const cell = 4;
+    let mx = 0;
+    const pos = C("--accent"), neg = C("--seq2");
+    ctx.save();
+    for (let px = T.p.l; px < w - T.p.r; px += cell) {
+      for (let py = T.p.t; py < h - T.p.b; py += cell) {
+        const x = T.iX(px + cell / 2), y = T.iY(py + cell / 2);
+        if (Math.abs(x) > R || Math.abs(y) > R) continue;
+        const z = f(x, y);
+        if (!isFinite(z)) continue;
+        mx = Math.max(mx, Math.abs(z));
+        ctx.globalAlpha = Math.pow(Math.min(1, Math.abs(z) / 2), 0.7);
+        ctx.fillStyle = z > 0 ? pos : neg;
+        ctx.fillRect(px, py, cell, cell);
+      }
+    }
+    ctx.restore();
+    // cuadrado de la ventana y ejes
+    PP.rect(ctx, T.X(-R), T.Y(R), T.X(R) - T.X(-R), T.Y(-R) - T.Y(R), C("--rule"), null);
+    PP.path(ctx, [[T.X(-R), T.Y(0)], [T.X(R), T.Y(0)]], C("--muted"), 1);
+    PP.path(ctx, [[T.X(0), T.Y(-R)], [T.X(0), T.Y(R)]], C("--muted"), 1);
+    PP.dot(ctx, T.X(0), T.Y(0), 4.5, C("--ink"));
+    PP.label(ctx, "x", T.X(R) - 4, T.Y(0) - 4, C("--muted"), "right", "bottom", 12);
+    PP.label(ctx, "y", T.X(0) + 5, T.Y(R) + 4, C("--muted"), "left", "top", 12);
+    PP.label(ctx, PP.fmt(R, 3), T.X(R) - 4, T.Y(0) + 4, C("--muted"), "right", "top", 11);
+    PP.read(P + "-ej1-read", [
+      ["ventana", "[−" + PP.fmt(R, 3) + ", " + PP.fmt(R, 3) + "]²"],
+      ["máx |f| en la grilla", PP.fmt(mx, 4)],
+      ["f(0, 0)", "0 (por definición)"],
+    ]);
+  }, [P + "-ej1-R"]);
+})();
+
+/* ===================== Ejercicio 2 ===================== */
+PP.register(function () {
+  const Q = PP.val(P + "-ej2-q");
+  PP.out(P + "-ej2-q-o", String(Q));
+  const { ctx, w, h } = PP.canvas(P + "-ej2-c", 0.7);
+  const T = PP.frame(w, h, { x0: -2.15, x1: 2.15, y0: -2.2, y1: 2.2 }, { l: 34, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xTicks: 8, yTicks: 8 });
+  PP.path(ctx, [[T.X(-2.15), T.Y(-2.15)], [T.X(2.15), T.Y(2.15)]], C("--muted"), 1, [3, 4]);
+  PP.path(ctx, [[T.X(-2.15), T.Y(0)], [T.X(2.15), T.Y(0)]], C("--seq2"), 2.5);
+  let cnt = 0;
+  const r = Q <= 6 ? 3.6 : Q <= 15 ? 2.6 : 1.8;
+  for (let q = 1; q <= Q; q++) {
+    for (let p = -2 * q; p <= 2 * q; p++) {
+      if (gcd(p, q) !== 1 && !(p === 0 && q === 1)) continue;
+      const x = p / q; cnt++;
+      PP.dot(ctx, T.X(x), T.Y(x), r, C("--accent"));
+    }
+  }
+  PP.label(ctx, "y = 0 (irracionales)", T.X(2.1), T.Y(0) + 5, C("--seq2"), "right", "top", 11);
+  PP.label(ctx, "y = x (racionales)", T.X(-2.05), T.Y(1.9), C("--accent"), "left", "top", 11);
+  PP.read(P + "-ej2-read", [
+    ["racionales dibujados", String(cnt)],
+    ["denominador máximo", String(Q)],
+  ]);
+}, [P + "-ej2-q"]);
+
+/* ===================== Ejercicio 3 ===================== */
+(() => {
+  const f = (x) => Math.sin(x) + 0.35;
+  PP.register(function () {
+    const x0 = PP.val(P + "-ej3-x") / 100;
+    PP.out(P + "-ej3-x-o", PP.fmt(x0, 2));
+    const { ctx, w, h } = PP.canvas(P + "-ej3-c", 0.62);
+    const T = PP.frame(w, h, { x0: -1.5, x1: 7, y0: -1, y1: 1.6 }, { l: 34, r: 12, t: 12, b: 26 });
+    const fx = f(x0);
+    let r = null;
+    if (fx > 0) {
+      const step = 0.001, cap = 4;
+      let a = 0; while (a < cap && f(x0 - a - step) > 0) a += step;
+      let b = 0; while (b < cap && f(x0 + b + step) > 0) b += step;
+      r = Math.min(a, b);
+      PP.rect(ctx, T.X(x0 - r), T.p.t, T.X(x0 + r) - T.X(x0 - r), h - T.p.t - T.p.b, null, C("--band"));
+    }
+    PP.axes(ctx, T, { xTicks: 8 });
+    clipBox(ctx, T);
+    plotFn(ctx, T, f, -1.5, 7, C("--accent"), 2.2);
+    if (r !== null) {
+      plotFn(ctx, T, f, x0 - r, x0 + r, C("--ok"), 3.2, null, 200);
+      PP.path(ctx, [[T.X(x0 - r), T.Y(0)], [T.X(x0 + r), T.Y(0)]], C("--ok"), 4);
+      PP.dot(ctx, T.X(x0 - r), T.Y(0), 4.5, C("--bg"), C("--ok"));
+      PP.dot(ctx, T.X(x0 + r), T.Y(0), 4.5, C("--bg"), C("--ok"));
+    }
+    ctx.restore();
+    PP.path(ctx, [[T.X(x0), T.Y(0)], [T.X(x0), T.Y(fx)]], C("--ink"), 1, [3, 3]);
+    PP.dot(ctx, T.X(x0), T.Y(fx), 5, C("--ink"));
+    PP.dot(ctx, T.X(x0), T.Y(0), 3.5, C("--ink"));
+    PP.label(ctx, "x₀", T.X(x0) + 4, T.Y(0) + 4, C("--ink"), "left", "top", 12);
+    PP.label(ctx, "f(x₀)", T.X(x0) + 7, T.Y(fx) - 4, C("--ink"), "left", "bottom", 12);
+    PP.read(P + "-ej3-read", [
+      ["f(x₀)", PP.fmt(fx, 3), fx > 0 ? "good" : "bad"],
+      ["r (la mayor bola con f > 0)", r === null ? "f(x₀) ≤ 0: no se aplica" : PP.fmt(r, 3)],
+    ]);
+  }, [P + "-ej3-x"]);
+})();
+
+/* ===================== Ejercicio 4 ===================== */
+PP.register(function () {
+  const c = PP.val(P + "-ej4-c0") / 100;
+  PP.out(P + "-ej4-c0-o", PP.fmt(c, 2));
+  const L = 4 * Math.PI;
+  const { ctx, w, h } = PP.canvas(P + "-ej4-c", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: L, y0: -1.75, y1: 1.4 }, { l: 34, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xTicks: 6 });
+  clipBox(ctx, T);
+  plotFn(ctx, T, Math.sin, 0, L, C("--accent"), 2.2);
+  PP.path(ctx, [[T.X(0), T.Y(c)], [T.X(L), T.Y(c)]], C("--ok"), 2);
+  ctx.restore();
+  // puntos donde f = g
+  const pts = [];
+  if (Math.abs(c) <= 1) {
+    const a = Math.asin(c);
+    for (let k = -1; k <= 2; k++) {
+      [a + 2 * k * Math.PI, Math.PI - a + 2 * k * Math.PI].forEach((x) => { if (x >= -1e-9 && x <= L + 1e-9 && !pts.some((p) => Math.abs(p - x) < 1e-6)) pts.push(x); });
+    }
+  }
+  pts.sort((u, v) => u - v);
+  const yb = -1.55;
+  PP.path(ctx, [[T.X(0), T.Y(yb)], [T.X(L), T.Y(yb)]], C("--accent"), 5);
+  pts.forEach((x) => {
+    PP.dot(ctx, T.X(x), T.Y(yb), 6, C("--bg"));
+    PP.dot(ctx, T.X(x), T.Y(yb), 4, C("--seq2"));
+    PP.path(ctx, [[T.X(x), T.Y(yb)], [T.X(x), T.Y(c)]], C("--seq2"), 1, [2, 3]);
+    PP.dot(ctx, T.X(x), T.Y(c), 3.5, C("--seq2"));
+  });
+  PP.label(ctx, "{f ≠ g}", T.X(L) - 2, T.Y(yb) - 5, C("--accent"), "right", "bottom", 11);
+  PP.read(P + "-ej4-read", [
+    ["g(x)", "= " + PP.fmt(c, 2) + " (constante)"],
+    ["puntos de {f = g} en [0, 4π]", String(pts.length)],
+  ]);
+}, [P + "-ej4-c0"]);
+
+/* ===================== Ejercicio 5 ===================== */
+(() => {
+  const s = (x) => Math.sin(Math.exp(x) - 1);
+  const yOf = (x) => -(2 + x * x) / s(x);
+  const x0 = -3, x1 = 2.5;
+  const poles = [];
+  for (let k = 0; ; k++) { const x = Math.log(1 + k * Math.PI); if (x > x1) break; poles.push(x); }
+  PP.register(function () {
+    const H = PP.val(P + "-ej5-y");
+    PP.out(P + "-ej5-y-o", "±" + H);
+    const { ctx, w, h } = PP.canvas(P + "-ej5-c", 0.72);
+    const T = PP.frame(w, h, { x0, x1, y0: -H, y1: H }, { l: 38, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 6, yTicks: 6 });
+    poles.forEach((x) => PP.path(ctx, [[T.X(x), T.p.t], [T.X(x), h - T.p.b]], C("--muted"), 1, [4, 4]));
+    clipBox(ctx, T);
+    plotFn(ctx, T, yOf, x0, x1, C("--accent"), 2.2, null, 4000, (a, b) => s(a) * s(b) <= 0);
+    ctx.restore();
+    PP.label(ctx, "x² + y sen(eˣ − 1) = −2", T.p.l + 6, T.p.t + 4, C("--accent"), "left", "top", 12);
+    PP.read(P + "-ej5-read", [
+      ["sen(eˣ − 1) = 0 en x =", poles.map((x) => PP.fmt(x, 3)).join(", ") + ", …"],
+      ["ventana", "x ∈ [−3, 2,5], y ∈ [−" + H + ", " + H + "]"],
+    ]);
+  }, [P + "-ej5-y"]);
+})();
+
+/* ===================== Ejercicio 6 ===================== */
+PP.register(function () {
+  const which = PP.radio(P + "-ej6-f") || "f";
+  const { ctx, w, h } = PP.canvas(P + "-ej6-c", 0.62);
+  const box = which === "f" ? { x0: -4, x1: 4, y0: -1, y1: 10 } : { x0: -4, x1: 4, y0: -0.15, y1: 1.25 };
+  const T = PP.frame(w, h, box, { l: 36, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xTicks: 8 });
+  clipBox(ctx, T);
+  if (which === "f") {
+    plotFn(ctx, T, (x) => x * x, -4, 4, C("--accent"), 2.4);
+  } else {
+    PP.path(ctx, [[T.X(-4), T.Y(1)], [T.X(4), T.Y(1)]], C("--muted"), 1.2, [5, 4]);
+    plotFn(ctx, T, (x) => (x * x) / (1 + x * x), -4, 4, C("--seq3"), 2.4);
+  }
+  ctx.restore();
+  PP.label(ctx, which === "f" ? "f(x) = x²" : "g(x) = x²/(1 + x²)", T.p.l + 8, T.p.t + 4, which === "f" ? C("--accent") : C("--seq3"), "left", "top", 13);
+  if (which === "g") PP.label(ctx, "y = 1", T.X(4) - 4, T.Y(1) - 4, C("--muted"), "right", "bottom", 11);
+}, ["input[name='" + P + "-ej6-f']"]);
+
+/* ===================== Ejercicio 7 ===================== */
+(() => {
+  const f = (x) => 0.5 + 0.32 * Math.sin(2 * Math.PI * x) + 0.12 * Math.cos(5 * Math.PI * x);
+  PP.register(function () {
+    const Q = PP.val(P + "-ej7-q");
+    PP.out(P + "-ej7-q-o", String(Q));
+    const { ctx, w, h } = PP.canvas(P + "-ej7-c", 0.62);
+    const T = PP.frame(w, h, { x0: -0.03, x1: 1.03, y0: 0, y1: 1 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 5 });
+    plotFn(ctx, T, f, 0, 1, C("--muted"), 1.2, [4, 4]);
+    let cnt = 0;
+    const r = Q <= 8 ? 3.6 : Q <= 20 ? 2.6 : 1.8;
+    for (let q = 1; q <= Q; q++) {
+      for (let p = 0; p <= q; p++) {
+        if (gcd(p, q) !== 1 && !(p === 0 && q === 1)) continue;
+        cnt++;
+        PP.dot(ctx, T.X(p / q), T.Y(f(p / q)), r, C("--accent"));
+      }
+    }
+    PP.read(P + "-ej7-read", [
+      ["racionales de [0, 1] dibujados", String(cnt)],
+      ["denominador máximo", String(Q)],
+    ]);
+  }, [P + "-ej7-q"]);
+})();
+
+/* ===================== Ejercicio 9 ===================== */
+(() => {
+  const xs = [0, 0.2, 0.4, 0.6, 0.8, 1];
+  const ys = [0.9, 0.3, -0.4, 0.2, 0.7, 0.5];
+  let T = null;
+  const cid = P + "-ej9-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -1.6, y1: 1.6 }, { l: 36, r: 12, t: 12, b: 26 });
+    const F = pwl(xs, ys);
+    shadeArea(ctx, T, xs, ys, C("--area"), C("--area2"));
+    PP.axes(ctx, T, { xTicks: 5 });
+    PP.path(ctx, xs.map((x, i) => [T.X(x), T.Y(ys[i])]), C("--accent"), 2.4);
+    xs.forEach((x, i) => PP.dot(ctx, T.X(x), T.Y(ys[i]), i === 0 ? 7 : 5, i === 0 ? C("--ink") : C("--accent"), C("--bg")));
+    PP.label(ctx, "(0, 𝓔(f))", T.X(0) + 10, T.Y(ys[0]) - 6, C("--ink"), "left", "bottom", 12);
+    PP.read(P + "-ej9-read", [
+      ["𝓔(f) = f(0)", PP.fmt(ys[0], 3)],
+      ["𝓘(f) = ∫ f", PP.fmt(F.I, 3)],
+      ["d∞(f, 0) = máx |f|", PP.fmt(F.sup, 3)],
+      ["d₁(f, 0) = ∫ |f|", PP.fmt(F.I1, 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(xs.map((x, i) => [x, ys[i]]), px, py, T),
+    (i, x, y) => { ys[i] = clamp(Math.round(y * 50) / 50, -1.5, 1.5); }, draw);
+})();
+
+/* ===================== Ejercicio 10 ===================== */
+(() => {
+  const pts = [[-1, 0.5], [2, 1.5]];
+  let T = null;
+  const cid = P + "-ej10-c";
+  const dist = (m, a, b) => {
+    const dx = Math.abs(a[0] - b[0]), dy = Math.abs(a[1] - b[1]);
+    return m === "1" ? dx + dy : m === "inf" ? Math.max(dx, dy) : Math.hypot(dx, dy);
+  };
+  function draw() {
+    const m = PP.radio(P + "-ej10-m") || "2";
+    const { ctx, w, h } = PP.canvas(cid, 0.75);
+    T = eqFrame(w, h, -5, 5, 0);
+    PP.path(ctx, [[T.X(-5), T.Y(0)], [T.X(5), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    const [cx, cy] = pts[0];
+    [1, 2, 3].forEach((r, k) => {
+      const col = [C("--accent"), C("--seq3"), C("--muted")][k];
+      let poly;
+      if (m === "2") { PP.circle(ctx, T.X(cx), T.Y(cy), T.X(cx + r) - T.X(cx), col, null, null, 1.6); }
+      else {
+        poly = m === "1" ? [[cx + r, cy], [cx, cy + r], [cx - r, cy], [cx, cy - r]] : [[cx + r, cy + r], [cx - r, cy + r], [cx - r, cy - r], [cx + r, cy - r]];
+        PP.path(ctx, poly.map(([x, y]) => [T.X(x), T.Y(y)]), col, 1.6, null, true);
+      }
+      PP.label(ctx, String(r), T.X(cx + (m === "inf" ? r : r)) + 3, T.Y(cy) - 2, col, "left", "bottom", 11);
+    });
+    PP.path(ctx, [[T.X(cx), T.Y(cy)], [T.X(pts[1][0]), T.Y(pts[1][1])]], C("--ink"), 1, [3, 3]);
+    PP.dot(ctx, T.X(cx), T.Y(cy), 7, C("--accent"), C("--bg"));
+    PP.label(ctx, "x₀", T.X(cx) - 8, T.Y(cy) + 6, C("--accent"), "right", "top", 13);
+    PP.dot(ctx, T.X(pts[1][0]), T.Y(pts[1][1]), 7, C("--seq2"), C("--bg"));
+    PP.label(ctx, "x", T.X(pts[1][0]) + 9, T.Y(pts[1][1]) - 4, C("--seq2"), "left", "bottom", 13);
+    const name = m === "1" ? "d₁" : m === "inf" ? "d∞" : "d₂";
+    PP.read(P + "-ej10-read", [
+      ["x₀", "(" + PP.fmt(cx, 2) + ", " + PP.fmt(cy, 2) + ")"],
+      ["x", "(" + PP.fmt(pts[1][0], 2) + ", " + PP.fmt(pts[1][1], 2) + ")"],
+      ["f(x) = " + name + "(x, x₀)", PP.fmt(dist(m, pts[1], pts[0]), 3)],
+    ]);
+  }
+  PP.register(draw, ["input[name='" + P + "-ej10-m']"]);
+  draggable(cid, () => T, (px, py, T) => nearest(pts, px, py, T, 22),
+    (i, x, y, T) => { pts[i] = [clamp(Math.round(x * 10) / 10, -4.8, 4.8), clamp(Math.round(y * 10) / 10, T.box.y0 + 0.2, T.box.y1 - 0.2)]; }, draw);
+})();
+
+/* ===================== Ejercicio 11 ===================== */
+(() => {
+  const dInt = (x, a, b) => (x < a ? a - x : x > b ? x - b : 0);
+  PP.register(function () {
+    const b = PP.val(P + "-ej11-b") / 100;
+    PP.out(P + "-ej11-b-o", "b = " + PP.fmt(b, 2));
+    const A = [-3, -1.5], B = [b, b + 1.5];
+    const dA = (x) => dInt(x, A[0], A[1]), dB = (x) => dInt(x, B[0], B[1]);
+    const hh = (x) => dA(x) / (dA(x) + dB(x));
+    const { ctx, w, h } = PP.canvas(P + "-ej11-c", 0.66);
+    const T = PP.frame(w, h, { x0: -4.5, x1: 4.5, y0: -0.35, y1: 2.6 }, { l: 32, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 9, yTicks: 5 });
+    PP.path(ctx, [[T.X(-4.5), T.Y(1)], [T.X(4.5), T.Y(1)]], C("--rule"), 1, [4, 4]);
+    clipBox(ctx, T);
+    plotFn(ctx, T, dA, -4.5, 4.5, C("--seq2"), 2, null, 900);
+    plotFn(ctx, T, dB, -4.5, 4.5, C("--seq3"), 2, null, 900);
+    plotFn(ctx, T, hh, -4.5, 4.5, C("--accent"), 3, null, 900);
+    ctx.restore();
+    const ya = -0.2;
+    PP.path(ctx, [[T.X(A[0]), T.Y(ya)], [T.X(A[1]), T.Y(ya)]], C("--seq2"), 6);
+    PP.path(ctx, [[T.X(B[0]), T.Y(ya)], [T.X(B[1]), T.Y(ya)]], C("--seq3"), 6);
+    PP.label(ctx, "A", T.X((A[0] + A[1]) / 2), T.Y(ya) - 6, C("--seq2"), "center", "bottom", 13);
+    PP.label(ctx, "B", T.X((B[0] + B[1]) / 2), T.Y(ya) - 6, C("--seq3"), "center", "bottom", 13);
+    PP.label(ctx, "h", T.X(4.3), T.Y(hh(4.3)) - 5, C("--accent"), "right", "bottom", 13);
+    PP.label(ctx, "d(x, A)", T.X(0.6), T.Y(Math.min(2.4, dA(0.6))) - 4, C("--seq2"), "center", "bottom", 11);
+    PP.read(P + "-ej11-read", [
+      ["A", "[−3, −1.5]"],
+      ["B", "[" + PP.fmt(B[0], 2) + ", " + PP.fmt(B[1], 2) + "]"],
+      ["separación entre A y B", PP.fmt(B[0] - A[1], 2)],
+    ]);
+  }, [P + "-ej11-b"]);
+})();
+
+/* ===================== Ejercicio 13 ===================== */
+PP.register(function () {
+  const which = PP.radio(P + "-ej13-f") || "inv";
+  const eps = PP.val(P + "-ej13-e") / 100;
+  PP.out(P + "-ej13-e-o", PP.fmt(eps, 2));
+  const { ctx, w, h } = PP.canvas(P + "-ej13-c", 0.62);
+  if (which === "inv") {
+    const T = PP.frame(w, h, { x0: 0, x1: 3, y0: 0, y1: 10 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.rect(ctx, T.X(eps), T.p.t, T.X(3) - T.X(eps), h - T.p.t - T.p.b, null, C("--band"));
+    PP.axes(ctx, T, { xTicks: 6 });
+    clipBox(ctx, T);
+    plotFn(ctx, T, (x) => 1 / x, 0.05, 3, C("--muted"), 1.6, null, 800);
+    plotFn(ctx, T, (x) => 1 / x, eps, 3, C("--accent"), 2.6, null, 800);
+    ctx.restore();
+    PP.path(ctx, [[T.X(eps), T.Y(0)], [T.X(3), T.Y(0)]], C("--accent"), 5);
+    PP.dot(ctx, T.X(eps), T.Y(0), 4.5, C("--accent"));
+    PP.label(ctx, "[ε, +∞)", T.X(eps) + 6, T.Y(0) - 6, C("--accent"), "left", "bottom", 12);
+    PP.label(ctx, "f(x) = 1/x", T.X(3) - 4, T.p.t + 4, C("--accent"), "right", "top", 13);
+  } else {
+    const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -1.25, y1: 1.25 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xTicks: 5 });
+    clipBox(ctx, T);
+    // muestreo uniforme en t = 1/x para seguir las oscilaciones
+    const pts = [];
+    for (let t = 1; t <= 400; t += 0.02) pts.push([T.X(1 / t), T.Y(Math.sin(t))]);
+    PP.path(ctx, pts, C("--accent"), 1.4);
+    ctx.restore();
+    PP.label(ctx, "f(x) = sen(1/x)", T.X(1) - 4, T.p.t + 4, C("--accent"), "right", "top", 13);
+  }
+}, ["input[name='" + P + "-ej13-f']", P + "-ej13-e"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

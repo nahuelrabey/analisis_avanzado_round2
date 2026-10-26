@@ -1,0 +1,93 @@
+{
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul class=\"items\"><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado</b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p><p>(En el apunte, la definición viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-casi-todo-punto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "En casi todo punto",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una propiedad vale <b>en casi todo punto</b> de $E$ (c.t.p.) si el conjunto de los $x \\in E$ en los que no vale es nulo, es decir, tiene medida $0$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-conjunto-nulo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto nulo (de medida cero)",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ es <b>nulo</b> (o de medida nula) si para todo $\\varepsilon \\gt 0$ existe una sucesión de intervalos abiertos $(I_k)_{k \\ge 1}$ tal que $A \\subseteq \\bigcup_{k} I_k$ y $\\sum_{k} \\ell(I_k) \\lt \\varepsilon$. Equivalentemente, $\\mu^*(A) = 0$, donde $\\mu^*$ es la medida exterior de Lebesgue.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-diferencia-simetrica": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Diferencia simétrica",
+  "enunciado": "<p>La <b>diferencia simétrica</b> de dos conjuntos $A$ y $B$ es $$A \\,\\Delta\\, B = (A \\setminus B) \\cup (B \\setminus A),$$ los puntos que están en exactamente uno de los dos.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medible-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto medible Lebesgue",
+  "enunciado": "<p>Sea $\\mu^*$ la medida exterior de Lebesgue. Un conjunto $A \\subseteq \\mathbb{R}$ es <b>medible Lebesgue</b> si para todo $T \\subseteq \\mathbb{R}$ $$\\mu^*(T) = \\mu^*(T \\cap A) + \\mu^*(T \\setminus A)$$ (criterio de Carathéodory). La familia de los conjuntos medibles Lebesgue se nota $\\mathcal{M}$, y es una $\\sigma$-álgebra de subconjuntos de $\\mathbb{R}$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medida-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Medida de Lebesgue",
+  "enunciado": "<p>La <b>medida de Lebesgue</b> es la restricción de la medida exterior a los conjuntos medibles: $$\\mu = \\mu^*\\big|_{\\mathcal{M}} : \\mathcal{M} \\to [0, +\\infty].$$ Es $\\sigma$-aditiva: si $(A_n)_{n \\in \\mathbb{N}} \\subseteq \\mathcal{M}$ son disjuntos dos a dos, entonces $\\mu\\big(\\bigcup_{n} A_n\\big) = \\sum_{n} \\mu(A_n)$. Un conjunto $A \\in \\mathcal{M}$ tiene <b>medida finita</b> si $\\mu(A) \\lt +\\infty$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-sigma-algebra": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "$\\sigma$-álgebra",
+  "enunciado": "<p>Sea $X$ un conjunto. Una familia $\\mathcal{A}$ de subconjuntos de $X$ es una <b>$\\sigma$-álgebra</b> si:</p><ul class=\"items\"><li>$X \\in \\mathcal{A}$;</li><li>si $A \\in \\mathcal{A}$, entonces $X \\setminus A \\in \\mathcal{A}$ (es cerrada por complementos);</li><li>si $A_n \\in \\mathcal{A}$ para todo $n \\in \\mathbb{N}$, entonces $\\bigcup_{n \\in \\mathbb{N}} A_n \\in \\mathcal{A}$ (es cerrada por uniones numerables).</li></ul>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}

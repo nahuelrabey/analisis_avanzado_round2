@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 9</span></li></ol><div class="pager"><a href="../guias/p8.html" title="Guía · Práctica 8">← Anterior</a><a aria-disabled="true">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 13 ejercicios</p>
+  <h1>Práctica 9</h1>
+  <p>Funciones medibles e integración. Los enunciados de <code>apuntes-typst/guias/p9.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap9-ej1" title="El módulo de una función simple es simple">Ej. 1</a></li><li><a href="#guiap9-ej2" title="Cuatro caracterizaciones de función medible">Ej. 2</a></li><li><a href="#guiap9-ej3" title="Conjuntos de nivel, f menor o igual que g, igualdad en casi todo punto">Ej. 3</a></li><li><a href="#guiap9-ej4" title="Operaciones con funciones medibles">Ej. 4</a></li><li><a href="#guiap9-ej5" title="Las funciones monótonas son medibles">Ej. 5</a></li><li><a href="#guiap9-ej6" title="Continua, o continua en casi todo punto, implica medible">Ej. 6</a></li><li><a href="#guiap9-ej7" title="Supremo e ínfimo de una sucesión de funciones medibles">Ej. 7</a></li><li><a href="#guiap9-ej8" title="Integral de una serie de funciones no negativas">Ej. 8</a></li><li><a href="#guiap9-ej9" title="Invariancia de la integral por traslaciones">Ej. 9</a></li><li><a href="#guiap9-ej10" title="Medible y acotada en un conjunto de medida finita es integrable">Ej. 10</a></li><li><a href="#guiap9-ej11" title="Integrales iguales en todo medible implica igualdad en casi todo punto">Ej. 11</a></li><li><a href="#guiap9-ej12" title="Fatou falla sin no negatividad">Ej. 12</a></li><li><a href="#guiap9-ej13" title="Integral sobre una unión numerable disjunta o creciente">Ej. 13</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap9-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p9.typ</code>) · 13 ejercicios. Funciones medibles e integral de Lebesgue todavía no están en <code>apuntes.typ</code>: los popups dan la definición estándar del curso.</p>
+
+<p class="cita" id="guiap9-convencion"><em>En lo que sigue $\mathcal{M}$ será la <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de los <span class="ref" data-ref="ext-medible-lebesgue">conjuntos medibles Lebesgue</span> de $\mathbb{R}$ y $\mu$ la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span>. Además, $E$ denotará a un subconjunto medible Lebesgue de $\mathbb{R}$.</em></p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap9-ej1" data-short="Ej. 1" data-title="El módulo de una función simple es simple" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>$|f|$ es simple</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f$ una <span class="ref" data-ref="ext-funcion-simple">función simple</span>. Pruebe que $|f|$ es simple.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej1-c" aria-label="Una función simple con cuatro escalones arrastrables y, opcionalmente, su módulo"></canvas>
+      <div class="ctrl">
+        <label class="check"><input type="checkbox" id="guiap9-ej1-abs" checked>mostrar |<i>f</i>|</label>
+      </div>
+      <dl class="read" id="guiap9-ej1-read" aria-live="polite"></dl>
+      <figcaption>Una función simple elegida, <i>f</i> = <i>a</i><sub>1</sub>χ<sub><i>A</i><sub>1</sub></sub> + … + <i>a</i><sub>4</sub>χ<sub><i>A</i><sub>4</sub></sub> en [0, 1], con los <i>A<sub>i</sub></i> intervalos para poder dibujarla (en general son medibles cualesquiera). Arrastrá cada escalón para cambiar su valor <i>a<sub>i</sub></i>. En naranja, |<i>f</i>|.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap9-ej2" data-short="Ej. 2" data-title="Cuatro caracterizaciones de función medible" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Cuatro caracterizaciones de medible</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que dada una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> $\mathcal{A}$ de subconjuntos de $X$ y dada $f : X \to \mathbb{R}$, son equivalentes:</p>
+      <ol class="items">
+        <li>$\{x \in X : f(x) \gt a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \le a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \ge a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \lt a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+      </ol>
+      <p>Concluya que si $X \in \mathcal{M}$ y $\mathcal{A} = \mathcal{M}$, entonces $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span> si y solo si vale alguno de (y por lo tanto, todos) los ítems de arriba.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej2-c" aria-label="Gráfico de una función con una recta horizontal y = a arrastrable; el conjunto de los x que cumplen la condición elegida se marca sobre el eje"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Conjunto</legend>
+          <label><input type="radio" name="guiap9-ej2-op" value="gt" checked><i>f</i> &gt; <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="le"><i>f</i> ≤ <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="ge"><i>f</i> ≥ <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="lt"><i>f</i> &lt; <i>a</i></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej2-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> elegida en <i>X</i> = [0, 1]. Arrastrá la recta <i>y</i> = <i>a</i>; en verde, sobre el eje, el conjunto {<i>x</i> ∈ <i>X</i> : <i>f</i>(<i>x</i>) &gt; <i>a</i>} (o el que elijas). Los extremos de la lectura son aproximados.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap9-ej3" data-short="Ej. 3" data-title="Conjuntos de nivel, f menor o igual que g, igualdad en casi todo punto" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>$\{f = a\}$, $\{f \le g\}$ e igualdad c.t.p.</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$. Pruebe que:</p>
+      <ol class="items">
+        <li>Si $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span> entonces $\{x \in E : f(x) = a\} \in \mathcal{M}$ para todo $a \in \mathbb{R}$.</li>
+        <li>Si $f$ y $g$ son medibles entonces $\{x \in E : f(x) \le g(x)\} \in \mathcal{M}$.</li>
+        <li>Si $f$ es medible y $f(x) = g(x)$ para <span class="ref" data-ref="ext-casi-todo-punto">casi todo</span> $x \in E$, entonces $g$ es medible.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej3-c" aria-label="Los conjuntos de los tres ítems para funciones f y g elegidas"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej3-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap9-ej3-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap9-ej3-it" value="c">(c)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej3-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [0, 1] y funciones elegidas. (a): el conjunto {<i>f</i> = <i>a</i>} sobre el eje; arrastrá la recta <i>y</i> = <i>a</i>. (b): en verde, {<i>f</i> ≤ <i>g</i>}. (c): <i>g</i> coincide con <i>f</i> salvo en cuatro puntos elegidos (un conjunto nulo), marcados con sus valores.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap9-ej4" data-short="Ej. 4" data-title="Operaciones con funciones medibles" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Operaciones con funciones medibles</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$ funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span>. Pruebe que:</p>
+    <ol class="items">
+      <li>$f + g$ es medible.</li>
+      <li>$\alpha f$ es medible para todo $\alpha \in \mathbb{R}$.</li>
+      <li>$f^2$ es medible.</li>
+      <li>$f \cdot g$ es medible.<br><em>Sugerencia:</em> $f \cdot g = \frac{(f + g)^2 - (f - g)^2}{4}$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap9-ej5" data-short="Ej. 5" data-title="Las funciones monótonas son medibles" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Las monótonas son medibles</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ <span class="ref" data-ref="ext-funcion-monotona">monótona</span>. Pruebe que $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span>.</p></div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap9-ej6" data-short="Ej. 6" data-title="Continua, o continua en casi todo punto, implica medible" data-topics="integracion,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Continua (en casi todo punto) implica medible</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [0, 1] \to \mathbb{R}$ una función. Pruebe que:</p>
+      <ol class="items">
+        <li>Si $f$ es <span class="ref" data-ref="def-5.4">continua</span> en $[0, 1]$, entonces es <span class="ref" data-ref="ext-funcion-medible">medible</span>.</li>
+        <li>Si $f$ es continua en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $[0, 1]$ (esto es, si su conjunto de discontinuidades es <span class="ref" data-ref="ext-conjunto-nulo">nulo</span>), entonces es medible.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej6-c" aria-label="Una función continua y una función escalonada con discontinuidades en los puntos 1/k"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej6-it" value="a">(a)</label>
+          <label><input type="radio" name="guiap9-ej6-it" value="b" checked>(b)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej6-read" aria-live="polite"></dl>
+      <figcaption>Ejemplos elegidos de cada hipótesis. (a): <i>f</i>(<i>x</i>) = 0,5 + 0,35 sen(5<i>x</i>), continua. (b): <i>f</i>(0) = 0 y <i>f</i> = 1/<i>k</i> en (1/(<i>k</i>+1), 1/<i>k</i>]; las rayas rojas del eje marcan sus discontinuidades, 1/2, 1/3, 1/4, … (se dibujan las primeras).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap9-ej7" data-short="Ej. 7" data-title="Supremo e ínfimo de una sucesión de funciones medibles" data-topics="integracion,supremo">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3><span class="ref" data-ref="def-2">$\sup_n f_n$</span> e <span class="ref" data-ref="def-5">$\inf_n f_n$</span> son medibles</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dada una sucesión $(f_n)_n$ de funciones en $E$, consideremos las funciones
+      $$S(x) = \sup_{n \in \mathbb{N}} f_n(x) \quad \text{y} \quad I(x) = \inf_{n \in \mathbb{N}} f_n(x).$$
+      Pruebe que si las funciones $f_n$ son <span class="ref" data-ref="ext-funcion-medible">medibles</span>, entonces $S$ e $I$ también lo son.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej7-c" aria-label="Varias funciones f_n y las envolventes superior e inferior de las primeras N"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej7-N"><i>N</i></label><input type="range" id="guiap9-ej7-N" min="1" max="30" value="4"><output id="guiap9-ej7-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej7-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida en <i>E</i> = [0, 2π]: <i>f<sub>n</sub></i>(<i>x</i>) = (1/2 + 1/(<i>n</i>+1)) sen(<i>x</i> + <i>n</i>), en gris para <i>n</i> ≤ <i>N</i>. En verde, máx<sub><i>n</i>≤<i>N</i></sub> <i>f<sub>n</sub></i>(<i>x</i>); en naranja, mín<sub><i>n</i>≤<i>N</i></sub> <i>f<sub>n</sub></i>(<i>x</i>). <i>S</i> e <i>I</i> toman el supremo y el ínfimo sobre todos los <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap9-ej8" data-short="Ej. 8" data-title="Integral de una serie de funciones no negativas" data-topics="integracion,series">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3><span class="ref" data-ref="ext-integral-lebesgue">Integral</span> de una serie de funciones no negativas</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a><a class="tag topic" href="../index.html#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dada $(f_n)_n$ una sucesión de funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span> y no negativas con $f_n : E \to \mathbb{R}$ para todo $n \in \mathbb{N}$, sea $f(x) = \sum_{n=1}^{\infty} f_n(x)$. Pruebe que $f$ es medible, y que
+      $$\int_E f \, d\mu = \sum_{n=1}^{\infty} \int_E f_n \, d\mu.$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej8-c" aria-label="Sumas parciales de una serie de funciones no negativas apiladas como franjas"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej8-N"><i>N</i></label><input type="range" id="guiap9-ej8-N" min="1" max="8" value="3"><output id="guiap9-ej8-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej8-read" aria-live="polite"></dl>
+      <figcaption>Una serie elegida en <i>E</i> = [0, 1]: <i>f<sub>n</sub></i>(<i>x</i>) = <i>x<sup>n</sup></i>/<i>n</i>!, con suma <i>f</i>(<i>x</i>) = <i>e<sup>x</sup></i> − 1 (punteada). Cada franja es un <i>f<sub>n</sub></i> apilado sobre los anteriores, hasta <i>n</i> = <i>N</i>; su área es ∫<i>f<sub>n</sub></i> = 1/(<i>n</i>+1)!.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap9-ej9" data-short="Ej. 9" data-title="Invariancia de la integral por traslaciones" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Invariancia por traslaciones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-funcion-medible">medible</span>, no negativa e <span class="ref" data-ref="ext-integrable">integrable</span>. Pruebe que si $A \in \mathcal{M}$, entonces
+      $$\int_A f(x + y) \, d\mu(x) = \int_{A + y} f(x) \, d\mu(x)$$
+      para todo $y \in \mathbb{R}$ tal que $A + y \subseteq E$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej9-c" aria-label="Arriba, el área bajo x ↦ f(x + y) sobre A; abajo, el área bajo f sobre A + y"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej9-y"><i>y</i></label><input type="range" id="guiap9-ej9-y" min="-25" max="25" value="12"><output id="guiap9-ej9-y-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej9-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ, <i>f</i>(<i>x</i>) = e<sup>−(<i>x</i>−1)²/3</sup>(1 + 0,4 sen 3<i>x</i>) y <i>A</i> = [−2, −1] ∪ [0, 1], elegidos. Arriba, el área bajo <i>x</i> ↦ <i>f</i>(<i>x</i> + <i>y</i>) sobre <i>A</i>; abajo, el área bajo <i>f</i> sobre <i>A</i> + <i>y</i>. Las integrales de la lectura son numéricas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap9-ej10" data-short="Ej. 10" data-title="Medible y acotada en un conjunto de medida finita es integrable" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Acotada en medida finita es integrable</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-funcion-medible">medible</span> y acotada. Supongamos que $E$ tiene <span class="ref" data-ref="ext-medida-lebesgue">medida finita</span>. Pruebe que $f$ es <span class="ref" data-ref="ext-integrable">integrable</span>.</p></div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap9-ej11" data-short="Ej. 11" data-title="Integrales iguales en todo medible implica igualdad en casi todo punto" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Integrales iguales en todo medible</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$ funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span> e <span class="ref" data-ref="ext-integrable">integrables</span> tales que para todo $A \subseteq E$ medible se tiene que $\int_A f \, d\mu = \int_A g \, d\mu$. Pruebe que $f = g$ en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $E$.</p></div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap9-ej12" data-short="Ej. 12" data-title="Fatou falla sin no negatividad" data-topics="integracion,convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Fatou falla sin no negatividad</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a><a class="tag topic" href="../index.html#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E = [0, +\infty)$. Considere, para cada $n \in \mathbb{N}$, $f_n : E \to \mathbb{R}$ dada por <span class="ref" data-ref="ext-funcion-caracteristica">$f_n = (-1/n) \chi_{[0, n]}$</span>. Pruebe que la sucesión $(f_n)_n$ <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a la función nula en $E$. Pruebe que, sin embargo <span class="ref" data-ref="ext-integral-lebesgue">$\int_E f_n \, d\mu = -1$</span>, de manera que
+      $$\liminf_{n \to \infty} \int_E f_n \, d\mu = -1 \lt 0 = \int_E \liminf_{n \to \infty} f_n \, d\mu.$$
+      Deduzca que el <span class="ref" data-ref="ext-lema-fatou">lema de Fatou</span> no vale si las funciones $f_n$ no son no negativas, aún cuando converjan uniformemente.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej12-c" aria-label="La función f_n, un escalón de altura menos 1 sobre n y largo n, con su área sombreada"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej12-n"><i>n</i></label><input type="range" id="guiap9-ej12-n" min="1" max="30" value="3"><output id="guiap9-ej12-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej12-read" aria-live="polite"></dl>
+      <figcaption>La <i>f<sub>n</sub></i> del enunciado en [0, 32]: vale −1/<i>n</i> en [0, <i>n</i>] y 0 después. El rectángulo sombreado (bajo el eje) es la región entre su gráfico y el eje.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap9-ej13" data-short="Ej. 13" data-title="Integral sobre una unión numerable disjunta o creciente" data-topics="integracion,series">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Integral sobre uniones disjuntas o crecientes</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-integracion">integracion</a><a class="tag topic" href="../index.html#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-integrable">integrable</span> y $(E_n)_{n \in \mathbb{N}}$ una sucesión de subconjuntos medibles de $E$ tales que $E = \bigcup_{n \in \mathbb{N}} E_n$. Pruebe que:</p>
+      <ol class="items">
+        <li>Si los $E_n$ son disjuntos dos a dos entonces
+          $$\int_E f \, d\mu = \sum_{n=1}^{\infty} \int_{E_n} f \, d\mu.$$</li>
+        <li>Si $(E_n)_{n \in \mathbb{N}}$ es creciente entonces
+          $$\begin{aligned} &\lim_{n \to \infty} \int_{E_n} f \, d\mu = \int_E f \, d\mu \quad \text{y} \\ &\lim_{n \to \infty} \int_{E \setminus E_n} f \, d\mu = 0. \end{aligned}$$</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej13-c" aria-label="Una función integrable en [0, infinito) con los conjuntos E_n sombreados"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej13-it" value="a" checked>(a) disjuntos</label>
+          <label><input type="radio" name="guiap9-ej13-it" value="b">(b) crecientes</label>
+        </fieldset>
+        <div class="slider"><label for="guiap9-ej13-n"><i>n</i></label><input type="range" id="guiap9-ej13-n" min="1" max="12" value="3"><output id="guiap9-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej13-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [0, +∞) y <i>f</i>(<i>x</i>) = e<sup>−<i>x</i>/2</sup> cos(2<i>x</i>), integrable, elegidos (se dibuja hasta <i>x</i> = 12). (a): <i>E<sub>k</sub></i> = [<i>k</i> − 1, <i>k</i>), sombreados hasta <i>k</i> = <i>n</i> en colores alternados. (b): <i>E<sub>n</sub></i> = [0, <i>n</i>) en azul y <i>E</i> \ <i>E<sub>n</sub></i> en naranja. Las integrales de la lectura son exactas para este <i>f</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo<\/em> de $A$ si:<\/p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.<\/p><p>Es decir, el supremo es la <em>menor de las cotas superiores<\/em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo<\/strong> de $A$ si:<\/p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).<\/p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-casi-todo-punto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "En casi todo punto",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una propiedad vale <b>en casi todo punto<\/b> de $E$ (c.t.p.) si el conjunto de los $x \\in E$ en los que no vale es nulo, es decir, tiene medida $0$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-conjunto-nulo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto nulo (de medida cero)",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ es <b>nulo<\/b> (o de medida nula) si para todo $\\varepsilon \\gt 0$ existe una sucesión de intervalos abiertos $(I_k)_{k \\ge 1}$ tal que $A \\subseteq \\bigcup_{k} I_k$ y $\\sum_{k} \\ell(I_k) \\lt \\varepsilon$. Equivalentemente, $\\mu^*(A) = 0$, donde $\\mu^*$ es la medida exterior de Lebesgue.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-convergencia-uniforme": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia uniforme",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge uniformemente<\/b> a $f$ (en $A$) si<\/p><p>$$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 \\quad \\forall a \\in A : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$<\/p><p>Ahora el $n_0$ depende sólo de $\\varepsilon$: sirve para todos los puntos de $A$ a la vez (comparar con la convergencia puntual). Equivalentemente, $\\sup_{a \\in A} d(f_n(a), f(a)) \\to 0$ cuando $n \\to \\infty$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-caracteristica": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función característica",
+  "enunciado": "<p>La <b>función característica<\/b> de un conjunto $A \\subseteq X$ es $\\chi_A : X \\to \\mathbb{R}$, $$\\chi_A(x) = \\begin{cases} 1 & \\text{si } x \\in A, \\\\ 0 & \\text{si } x \\notin A. \\end{cases}$$<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-medible": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función medible",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una función $f : E \\to \\mathbb{R}$ es <b>medible<\/b> (Lebesgue) si $f^{-1}(U) \\in \\mathcal{M}$ para todo abierto $U \\subseteq \\mathbb{R}$.<\/p><p>Muchos textos toman como definición $\\{x \\in E : f(x) \\gt a\\} \\in \\mathcal{M}$ para todo $a \\in \\mathbb{R}$; el Ejercicio 2 de la Práctica 9 muestra que da lo mismo.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-monotona": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función monótona",
+  "enunciado": "<p>Sea $D \\subseteq \\mathbb{R}$. Una función $f : D \\to \\mathbb{R}$ es <b>creciente<\/b> si $x \\le y$ implica $f(x) \\le f(y)$ para todos $x, y \\in D$, y <b>decreciente<\/b> si $x \\le y$ implica $f(x) \\ge f(y)$. Es <b>monótona<\/b> si es creciente o decreciente.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-simple": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función simple",
+  "enunciado": "<p>Una función $\\varphi : E \\to \\mathbb{R}$ es <b>simple<\/b> si es de la forma $$\\varphi = \\sum_{i=1}^{n} a_i \\chi_{A_i},$$ con $n \\in \\mathbb{N}$, $a_1, \\dots, a_n \\in \\mathbb{R}$ y $A_1, \\dots, A_n \\in \\mathcal{M}$. Equivalentemente, si es medible y toma finitos valores; si $a_1, \\dots, a_n$ son sus valores distintos, se puede tomar $A_i = \\{x \\in E : \\varphi(x) = a_i\\}$ (representación canónica).<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-integrable": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función integrable",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una función medible $f : E \\to \\mathbb{R}$ es <b>integrable<\/b> en $E$ si $\\int_E |f| \\, d\\mu \\lt +\\infty$; equivalentemente, si $\\int_E f^+ \\, d\\mu$ y $\\int_E f^- \\, d\\mu$ son finitas.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-integral-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Integral de Lebesgue",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. La integral se define en tres etapas:<\/p><ul class=\"items\"><li>si $\\varphi = \\sum_{i=1}^{n} a_i \\chi_{A_i}$ es simple y no negativa, $\\int_E \\varphi \\, d\\mu = \\sum_{i=1}^{n} a_i \\, \\mu(A_i \\cap E)$;<\/li><li>si $f : E \\to [0, +\\infty]$ es medible, $$\\int_E f \\, d\\mu = \\sup \\Big\\{ \\int_E \\varphi \\, d\\mu : \\varphi \\text{ simple},\\ 0 \\le \\varphi \\le f \\Big\\};$$<\/li><li>si $f$ es medible e integrable, $\\int_E f \\, d\\mu = \\int_E f^+ \\, d\\mu - \\int_E f^- \\, d\\mu$, con $f^+ = \\max(f, 0)$ y $f^- = \\max(-f, 0)$.<\/li><\/ul><p>Para $A \\in \\mathcal{M}$, $A \\subseteq E$, se nota $\\int_A f \\, d\\mu = \\int_E f \\chi_A \\, d\\mu$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-lema-fatou": {
+  "tipo": "Lema",
+  "numero": "",
+  "titulo": "Lema de Fatou",
+  "enunciado": "<p>Sea $(f_n)_{n}$ una sucesión de funciones medibles y no negativas en $E \\in \\mathcal{M}$. Entonces $$\\int_E \\liminf_{n \\to \\infty} f_n \\, d\\mu \\le \\liminf_{n \\to \\infty} \\int_E f_n \\, d\\mu.$$<\/p>",
+  "fuente": "Resultado del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medible-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto medible Lebesgue",
+  "enunciado": "<p>Sea $\\mu^*$ la medida exterior de Lebesgue. Un conjunto $A \\subseteq \\mathbb{R}$ es <b>medible Lebesgue<\/b> si para todo $T \\subseteq \\mathbb{R}$ $$\\mu^*(T) = \\mu^*(T \\cap A) + \\mu^*(T \\setminus A)$$ (criterio de Carathéodory). La familia de los conjuntos medibles Lebesgue se nota $\\mathcal{M}$, y es una $\\sigma$-álgebra de subconjuntos de $\\mathbb{R}$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medida-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Medida de Lebesgue",
+  "enunciado": "<p>La <b>medida de Lebesgue<\/b> es la restricción de la medida exterior a los conjuntos medibles: $$\\mu = \\mu^*\\big|_{\\mathcal{M}} : \\mathcal{M} \\to [0, +\\infty].$$ Es $\\sigma$-aditiva: si $(A_n)_{n \\in \\mathbb{N}} \\subseteq \\mathcal{M}$ son disjuntos dos a dos, entonces $\\mu\\big(\\bigcup_{n} A_n\\big) = \\sum_{n} \\mu(A_n)$. Un conjunto $A \\in \\mathcal{M}$ tiene <b>medida finita<\/b> si $\\mu(A) \\lt +\\infty$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-sigma-algebra": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "$\\sigma$-álgebra",
+  "enunciado": "<p>Sea $X$ un conjunto. Una familia $\\mathcal{A}$ de subconjuntos de $X$ es una <b>$\\sigma$-álgebra<\/b> si:<\/p><ul class=\"items\"><li>$X \\in \\mathcal{A}$;<\/li><li>si $A \\in \\mathcal{A}$, entonces $X \\setminus A \\in \\mathcal{A}$ (es cerrada por complementos);<\/li><li>si $A_n \\in \\mathcal{A}$ para todo $n \\in \\mathbb{N}$, entonces $\\bigcup_{n \\in \\mathbb{N}} A_n \\in \\mathcal{A}$ (es cerrada por uniones numerables).<\/li><\/ul>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p9 */
+(() => {
+"use strict";
+/* Dibujos de la guía 9 (funciones medibles e integración). Usa window.PP. */
+const ID = "guiap9";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const fx = (x, d) => PP.fmt(x, d === undefined ? 3 : d);
+const SUB = "₀₁₂₃₄₅₆₇₈₉";
+const sub = (n) => String(n).split("").map((d) => SUB[+d]).join("");
+
+function clipPlot(ctx, T) {
+  ctx.beginPath();
+  ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b);
+  ctx.clip();
+}
+
+/* Gráfico de f en [x0, x1], cortado al marco. */
+function curve(ctx, T, f, x0, x1, color, width, dash, N) {
+  N = N || 600;
+  ctx.save(); clipPlot(ctx, T);
+  ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = width || 1.5; ctx.setLineDash(dash || []);
+  let pen = false;
+  for (let i = 0; i <= N; i++) {
+    const x = x0 + (x1 - x0) * i / N, y = f(x);
+    if (!isFinite(y)) { pen = false; continue; }
+    if (pen) ctx.lineTo(T.X(x), T.Y(y)); else { ctx.moveTo(T.X(x), T.Y(y)); pen = true; }
+  }
+  ctx.stroke(); ctx.restore();
+}
+
+/* Región entre el gráfico de f y g (por defecto, el eje) sobre [a, b]. */
+function fillBetween(ctx, T, f, a, b, color, g) {
+  if (b <= a) return;
+  g = g || (() => 0);
+  const N = 200, pts = [];
+  for (let i = 0; i <= N; i++) { const x = a + (b - a) * i / N; pts.push([T.X(x), T.Y(f(x))]); }
+  for (let i = N; i >= 0; i--) { const x = a + (b - a) * i / N; pts.push([T.X(x), T.Y(g(x))]); }
+  ctx.save(); clipPlot(ctx, T); PP.path(ctx, pts, null, 0, null, true, color); ctx.restore();
+}
+
+/* Simpson en [a, b]. */
+function simpson(f, a, b, n) {
+  n = n || 400; if (b <= a) return 0;
+  const h = (b - a) / n; let s = f(a) + f(b);
+  for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * f(a + i * h);
+  return s * h / 3;
+}
+
+/* Tramos de [x0, x1] donde vale cond(x) (muestreo). */
+function runs(cond, x0, x1, N) {
+  N = N || 1200;
+  const out = []; let start = null;
+  for (let i = 0; i <= N; i++) {
+    const x = x0 + (x1 - x0) * i / N, ok = cond(x);
+    if (ok && start === null) start = x;
+    if (!ok && start !== null) { out.push([start, x0 + (x1 - x0) * (i - 1) / N]); start = null; }
+  }
+  if (start !== null) out.push([start, x1]);
+  return out;
+}
+function runsText(R, x0, x1, strict) {
+  if (!R.length) return "∅";
+  return "≈ " + R.map(([a, b]) => {
+    const l = Math.abs(a - x0) < 1e-9 ? "[" : strict ? "(" : "[";
+    const r = Math.abs(b - x1) < 1e-9 ? "]" : strict ? ")" : "]";
+    return Math.abs(b - a) < 1e-9 ? "{" + fx(a, 2) + "}" : l + fx(a, 2) + ", " + fx(b, 2) + r;
+  }).join(" ∪ ");
+}
+/* Marca los tramos R sobre el eje y en el gráfico. */
+function markRuns(ctx, T, R, f) {
+  R.forEach(([a, b]) => {
+    PP.rect(ctx, T.X(a), T.p.t, Math.max(2, T.X(b) - T.X(a)), T.h - T.p.t - T.p.b, null, C("--okband"));
+  });
+}
+function markRunsTop(ctx, T, R, f) {
+  R.forEach(([a, b]) => {
+    if (f) curve(ctx, T, f, a, b, C("--ok"), 3.2, null, Math.max(20, Math.round((b - a) * 600)));
+    ctx.save(); ctx.strokeStyle = C("--ok"); ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(T.X(a), T.Y(0)); ctx.lineTo(Math.max(T.X(b), T.X(a) + 2), T.Y(0)); ctx.stroke(); ctx.restore();
+  });
+}
+
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Recta horizontal y = a, arrastrable. */
+function levelLine(ctx, T, a, label) {
+  PP.path(ctx, [[T.p.l, T.Y(a)], [T.w - T.p.r, T.Y(a)]], C("--seq2"), 1.8, [6, 4]);
+  PP.dot(ctx, T.w - T.p.r - 10, T.Y(a), 6, C("--panel"), C("--seq2"));
+  PP.label(ctx, label || "y = a", T.w - T.p.r - 20, T.Y(a) - 5, C("--seq2"), "right", "bottom", 12);
+}
+
+/* ===================== Ejercicio 1 ===================== */
+(function () {
+  const IV = [[0, 0.25], [0.25, 0.5], [0.5, 0.8], [0.8, 1]];
+  const S = { v: [0.8, -0.6, 0.3, -1.2] };
+  let lastT = null;
+  const steps = (ctx, T, vals, color, width) => {
+    vals.forEach((v, i) => {
+      const [a, b] = IV[i];
+      PP.path(ctx, [[T.X(a), T.Y(v)], [T.X(b), T.Y(v)]], color, width);
+      PP.dot(ctx, T.X(a), T.Y(v), 4, color);
+      if (i < IV.length - 1) PP.dot(ctx, T.X(b), T.Y(v), 4, C("--bg"), color);
+      else PP.dot(ctx, T.X(b), T.Y(v), 4, color);
+    });
+  };
+  const draw = function ej1() {
+    const showAbs = document.getElementById(ID + "-ej1-abs").checked;
+    const { ctx, w, h } = PP.canvas(ID + "-ej1-c", 0.6);
+    const T = PP.frame(w, h, { x0: -0.03, x1: 1.03, y0: -1.65, y1: 1.65 }, { l: 36, r: 12, t: 12, b: 28 });
+    lastT = T;
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 6, xTicks: 5 });
+    IV.forEach(([a, b], i) => PP.label(ctx, "A" + sub(i + 1), T.X((a + b) / 2), T.h - T.p.b - 4, C("--muted"), "center", "bottom", 11));
+    steps(ctx, T, S.v, C("--accent"), showAbs ? 4.5 : 3);
+    if (showAbs) steps(ctx, T, S.v.map(Math.abs), C("--seq2"), 2);
+    PP.label(ctx, "f", T.X(0.02), T.Y(S.v[0]) - 6, C("--accent"), "left", "bottom", 13);
+    const rows = [["valores de f", S.v.map((v) => fx(v, 2)).join(", ")]];
+    if (showAbs) rows.push(["valores de |f|", S.v.map((v) => fx(Math.abs(v), 2)).join(", ")]);
+    PP.read(ID + "-ej1-read", rows);
+  };
+  PP.register(draw, [ID + "-ej1-abs"]);
+  draggable(ID + "-ej1-c", () => lastT,
+    (px, py, T) => {
+      const x = T.iX(px);
+      const i = IV.findIndex(([a, b]) => x >= a && x <= b);
+      return i >= 0 && Math.abs(py - T.Y(S.v[i])) < 22 ? i : null;
+    },
+    (i, x, y) => { S.v[i] = clamp(Math.round(y * 20) / 20, -1.5, 1.5); }, draw);
+})();
+
+/* ===================== Ejercicio 2 ===================== */
+(function () {
+  const f = (x) => 0.45 + 0.3 * Math.sin(9 * x) + 0.3 * x;
+  const S = { a: 0.62 };
+  const OPS = {
+    gt: [(v, a) => v > a, "f(x) > a", true],
+    le: [(v, a) => v <= a, "f(x) ≤ a", false],
+    ge: [(v, a) => v >= a, "f(x) ≥ a", false],
+    lt: [(v, a) => v < a, "f(x) < a", true],
+  };
+  let lastT = null;
+  const draw = function ej2() {
+    const op = OPS[PP.radio(ID + "-ej2-op") || "gt"];
+    const { ctx, w, h } = PP.canvas(ID + "-ej2-c", 0.6);
+    const T = PP.frame(w, h, { x0: -0.03, x1: 1.03, y0: -0.08, y1: 1.2 }, { l: 36, r: 12, t: 12, b: 28 });
+    lastT = T;
+    const R = runs((x) => op[0](f(x), S.a), 0, 1);
+    markRuns(ctx, T, R);
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+    curve(ctx, T, f, 0, 1, C("--accent"), 2);
+    markRunsTop(ctx, T, R, f);
+    levelLine(ctx, T, S.a);
+    PP.read(ID + "-ej2-read", [
+      ["a", fx(S.a, 2)],
+      ["{x ∈ X : " + op[1] + "}", runsText(R, 0, 1, op[2])],
+    ]);
+  };
+  PP.register(draw, ["input[name=" + ID + "-ej2-op]"]);
+  draggable(ID + "-ej2-c", () => lastT,
+    (px, py, T) => (Math.abs(py - T.Y(S.a)) < 22 ? "a" : null),
+    (k, x, y) => { S.a = clamp(Math.round(y * 100) / 100, 0, 1.15); }, draw);
+})();
+
+/* ===================== Ejercicio 3 ===================== */
+(function () {
+  const f = (x) => 0.5 + 0.35 * Math.sin(7 * x);
+  const g = (x) => 0.3 + 0.5 * x;
+  const P = [[0.2, 0.15], [0.45, 0.95], [0.7, 0.2], [0.9, 1.0]];
+  const S = { a: 0.7 };
+  let lastT = null, lastIt = "a";
+  const draw = function ej3() {
+    const it = PP.radio(ID + "-ej3-it") || "a";
+    lastIt = it;
+    const { ctx, w, h } = PP.canvas(ID + "-ej3-c", 0.6);
+    const T = PP.frame(w, h, { x0: -0.03, x1: 1.03, y0: -0.08, y1: 1.12 }, { l: 36, r: 12, t: 12, b: 28 });
+    lastT = T;
+    if (it === "b") {
+      const R = runs((x) => f(x) <= g(x), 0, 1);
+      markRuns(ctx, T, R);
+      PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+      curve(ctx, T, g, 0, 1, C("--seq2"), 2);
+      curve(ctx, T, f, 0, 1, C("--accent"), 2);
+      markRunsTop(ctx, T, R, null);
+      PP.label(ctx, "f", T.X(0.02), T.Y(f(0.02)) - 6, C("--accent"), "left", "bottom", 13);
+      PP.label(ctx, "g", T.X(1), T.Y(g(1)) + 6, C("--seq2"), "right", "top", 13);
+      PP.read(ID + "-ej3-read", [["{x ∈ E : f(x) ≤ g(x)}", runsText(R, 0, 1, false)]]);
+      return;
+    }
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+    if (it === "a") {
+      curve(ctx, T, f, 0, 1, C("--accent"), 2);
+      levelLine(ctx, T, S.a);
+      const roots = [], N = 2000;
+      for (let i = 0; i < N; i++) {
+        const x0 = i / N, x1 = (i + 1) / N, u = f(x0) - S.a, v = f(x1) - S.a;
+        if (u === 0) roots.push(x0);
+        else if (u * v < 0) roots.push(x0 + (x1 - x0) * u / (u - v));
+      }
+      roots.forEach((r) => {
+        PP.path(ctx, [[T.X(r), T.Y(S.a)], [T.X(r), T.Y(0)]], C("--ok"), 1, [3, 3]);
+        PP.dot(ctx, T.X(r), T.Y(0), 5, C("--ok"));
+        PP.dot(ctx, T.X(r), T.Y(S.a), 4, C("--ok"));
+      });
+      PP.read(ID + "-ej3-read", [["a", fx(S.a, 2)], ["{x ∈ E : f(x) = a}", roots.length ? "≈ {" + roots.map((r) => fx(r, 3)).join(", ") + "}" : "∅"]]);
+      return;
+    }
+    // (c)
+    curve(ctx, T, f, 0, 1, C("--accent"), 3.5);
+    curve(ctx, T, f, 0, 1, C("--seq2"), 1.5, [5, 4]);
+    P.forEach(([x, v]) => {
+      PP.dot(ctx, T.X(x), T.Y(f(x)), 4.5, C("--bg"), C("--seq2"));
+      PP.path(ctx, [[T.X(x), T.Y(f(x))], [T.X(x), T.Y(v)]], C("--muted"), 1, [2, 3]);
+      PP.dot(ctx, T.X(x), T.Y(v), 4.5, C("--seq2"));
+    });
+    PP.label(ctx, "f", T.X(0.02), T.Y(f(0.02)) - 6, C("--accent"), "left", "bottom", 13);
+    PP.read(ID + "-ej3-read", [
+      ["{x ∈ E : f(x) ≠ g(x)}", "{" + P.map(([x]) => fx(x, 2)).join(", ") + "}"],
+      ["g en esos puntos", P.map(([, v]) => fx(v, 2)).join(", ")],
+    ]);
+  };
+  PP.register(draw, ["input[name=" + ID + "-ej3-it]"]);
+  draggable(ID + "-ej3-c", () => lastT,
+    (px, py, T) => (lastIt === "a" && Math.abs(py - T.Y(S.a)) < 22 ? "a" : null),
+    (k, x, y) => { S.a = clamp(Math.round(y * 100) / 100, 0, 1.08); }, draw);
+})();
+
+/* ===================== Ejercicio 6 ===================== */
+(function () {
+  const fa = (x) => 0.5 + 0.35 * Math.sin(5 * x);
+  const draw = function ej6() {
+    const it = PP.radio(ID + "-ej6-it") || "b";
+    const { ctx, w, h } = PP.canvas(ID + "-ej6-c", 0.6);
+    const T = PP.frame(w, h, { x0: -0.03, x1: 1.04, y0: -0.08, y1: 1.12 }, { l: 36, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+    if (it === "a") {
+      curve(ctx, T, fa, 0, 1, C("--accent"), 2.4);
+      [0, 1].forEach((x) => PP.dot(ctx, T.X(x), T.Y(fa(x)), 4, C("--accent")));
+      PP.read(ID + "-ej6-read", [["f(x)", "0.5 + 0.35 sen(5x)"], ["discontinuidades", "ninguna"]]);
+      return;
+    }
+    for (let k = 2; k <= 60; k++) {
+      const x = 1 / k;
+      if (T.X(x) - T.p.l < 1) break;
+      PP.path(ctx, [[T.X(x), T.Y(0) - 5], [T.X(x), T.Y(0) + 5]], C("--fail"), 1.5);
+    }
+    for (let k = 1; k <= 200; k++) {
+      const a = 1 / (k + 1), b = 1 / k;
+      PP.path(ctx, [[T.X(a), T.Y(1 / k)], [T.X(b), T.Y(1 / k)]], C("--accent"), 2.4);
+      if (k <= 6) {
+        PP.dot(ctx, T.X(b), T.Y(1 / k), 3.6, C("--accent"));
+        PP.dot(ctx, T.X(a), T.Y(1 / k), 3.6, C("--bg"), C("--accent"));
+      }
+    }
+    PP.dot(ctx, T.X(0), T.Y(0), 3.6, C("--accent"));
+    PP.read(ID + "-ej6-read", [
+      ["f(x)", "1/k si 1/(k+1) < x ≤ 1/k; f(0) = 0"],
+      ["discontinuidades", "1/2, 1/3, 1/4, …", "bad"],
+    ]);
+  };
+  PP.register(draw, ["input[name=" + ID + "-ej6-it]"]);
+})();
+
+/* ===================== Ejercicio 7 ===================== */
+(function () {
+  const f = (n) => (x) => (0.5 + 1 / (n + 1)) * Math.sin(x + n);
+  const draw = function ej7() {
+    const N = PP.val(ID + "-ej7-N");
+    PP.out(ID + "-ej7-N-o", String(N));
+    const { ctx, w, h } = PP.canvas(ID + "-ej7-c", 0.6);
+    const T = PP.frame(w, h, { x0: 0, x1: 2 * Math.PI, y0: -1.1, y1: 1.1 }, { l: 36, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 6 });
+    for (let n = 1; n <= N; n++) curve(ctx, T, f(n), 0, 2 * Math.PI, C("--muted"), 0.9, null, 300);
+    const S = (x) => { let m = -Infinity; for (let n = 1; n <= N; n++) m = Math.max(m, f(n)(x)); return m; };
+    const I = (x) => { let m = Infinity; for (let n = 1; n <= N; n++) m = Math.min(m, f(n)(x)); return m; };
+    curve(ctx, T, S, 0, 2 * Math.PI, C("--ok"), 2.6, null, 800);
+    curve(ctx, T, I, 0, 2 * Math.PI, C("--seq2"), 2.6, null, 800);
+    PP.read(ID + "-ej7-read", [
+      ["máx<sub>n≤N</sub> f<sub>n</sub>(π)", fx(S(Math.PI), 4)],
+      ["mín<sub>n≤N</sub> f<sub>n</sub>(π)", fx(I(Math.PI), 4)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej7-N"]);
+})();
+
+/* ===================== Ejercicio 8 ===================== */
+(function () {
+  const fact = (n) => (n <= 1 ? 1 : n * fact(n - 1));
+  const s = (k) => (x) => { let t = 0; for (let n = 1; n <= k; n++) t += Math.pow(x, n) / fact(n); return t; };
+  const draw = function ej8() {
+    const N = PP.val(ID + "-ej8-N");
+    PP.out(ID + "-ej8-N-o", String(N));
+    const { ctx, w, h } = PP.canvas(ID + "-ej8-c", 0.6);
+    const T = PP.frame(w, h, { x0: 0, x1: 1, y0: 0, y1: 1.8 }, { l: 36, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 5 });
+    const cols = [C("--area"), C("--area3"), C("--area2")];
+    for (let k = 1; k <= N; k++) fillBetween(ctx, T, s(k), 0, 1, cols[(k - 1) % 3], s(k - 1));
+    curve(ctx, T, (x) => Math.exp(x) - 1, 0, 1, C("--muted"), 1.6, [5, 4]);
+    curve(ctx, T, s(N), 0, 1, C("--accent"), 2.2);
+    PP.label(ctx, "f = eˣ − 1", T.X(0.97), T.Y(Math.E - 1) - 4, C("--muted"), "right", "bottom", 11);
+    let tot = 0;
+    for (let n = 1; n <= N; n++) tot += 1 / fact(n + 1);
+    PP.read(ID + "-ej8-read", [
+      ["∫f<sub>1</sub> + … + ∫f<sub>N</sub>", fx(tot, 5)],
+      ["∫ f dμ = e − 2", fx(Math.E - 2, 5)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej8-N"]);
+})();
+
+/* ===================== Ejercicio 9 ===================== */
+(function () {
+  const f = (x) => Math.exp(-((x - 1) * (x - 1)) / 3) * (1 + 0.4 * Math.sin(3 * x));
+  const A = [[-2, -1], [0, 1]];
+  const draw = function ej9() {
+    const y = PP.val(ID + "-ej9-y") / 10;
+    PP.out(ID + "-ej9-y-o", fx(y, 1));
+    const { ctx, w, h } = PP.canvas(ID + "-ej9-c", 0.95);
+    const box = { x0: -4.5, x1: 6, y0: -0.12, y1: 1.5 };
+    const T1 = PP.frame(w, h, box, { l: 34, r: 12, t: 10, b: h / 2 + 12 });
+    const T2 = PP.frame(w, h, box, { l: 34, r: 12, t: h / 2 + 18, b: 26 });
+    const g = (x) => f(x + y);
+    [T1, T2].forEach((T) => PP.axes(ctx, T, { yTicks: 3, xTicks: 6 }));
+    A.forEach(([a, b]) => fillBetween(ctx, T1, g, a, b, C("--area")));
+    A.forEach(([a, b]) => fillBetween(ctx, T2, f, a + y, b + y, C("--area2")));
+    curve(ctx, T1, g, box.x0, box.x1, C("--accent"), 2);
+    curve(ctx, T2, f, box.x0, box.x1, C("--seq2"), 2);
+    A.forEach(([a, b]) => {
+      PP.path(ctx, [[T1.X(a), T1.Y(0)], [T1.X(b), T1.Y(0)]], C("--accent"), 4);
+      PP.path(ctx, [[T2.X(a + y), T2.Y(0)], [T2.X(b + y), T2.Y(0)]], C("--seq2"), 4);
+    });
+    PP.label(ctx, "x ↦ f(x + y) sobre A", T1.p.l + 6, T1.p.t + 2, C("--accent"), "left", "top", 12);
+    PP.label(ctx, "f sobre A + y", T2.p.l + 6, T2.p.t + 2, C("--seq2"), "left", "top", 12);
+    const i1 = A.reduce((s, [a, b]) => s + simpson(g, a, b), 0);
+    const i2 = A.reduce((s, [a, b]) => s + simpson(f, a + y, b + y), 0);
+    PP.read(ID + "-ej9-read", [
+      ["A + y", "[" + fx(-2 + y, 2) + ", " + fx(-1 + y, 2) + "] ∪ [" + fx(y, 2) + ", " + fx(1 + y, 2) + "]"],
+      ["∫<sub>A</sub> f(x + y) dμ(x)", fx(i1, 4)],
+      ["∫<sub>A+y</sub> f(x) dμ(x)", fx(i2, 4)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej9-y"]);
+})();
+
+/* ===================== Ejercicio 12 ===================== */
+(function () {
+  const draw = function ej12() {
+    const n = PP.val(ID + "-ej12-n");
+    PP.out(ID + "-ej12-n-o", String(n));
+    const { ctx, w, h } = PP.canvas(ID + "-ej12-c", 0.5);
+    const T = PP.frame(w, h, { x0: 0, x1: 32, y0: -1.15, y1: 0.25 }, { l: 40, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 3, xTicks: 6 });
+    const v = -1 / n;
+    PP.rect(ctx, T.X(0), T.Y(0), T.X(n) - T.X(0), T.Y(v) - T.Y(0), null, C("--area2"));
+    PP.path(ctx, [[T.X(0), T.Y(v)], [T.X(n), T.Y(v)]], C("--accent"), 2.6);
+    PP.path(ctx, [[T.X(n), T.Y(0)], [T.X(32), T.Y(0)]], C("--accent"), 2.6);
+    PP.dot(ctx, T.X(0), T.Y(v), 4, C("--accent"));
+    PP.dot(ctx, T.X(n), T.Y(v), 4, C("--accent"));
+    PP.dot(ctx, T.X(n), T.Y(0), 4, C("--bg"), C("--accent"));
+    PP.label(ctx, "fₙ", T.X(n / 2), T.Y(v) + 4, C("--accent"), "center", "top", 12);
+    PP.read(ID + "-ej12-read", [
+      ["altura en [0, n]", "−1/n = " + fx(v, 4)],
+      ["largo del soporte", String(n)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej12-n"]);
+})();
+
+/* ===================== Ejercicio 13 ===================== */
+(function () {
+  const f = (x) => Math.exp(-x / 2) * Math.cos(2 * x);
+  const F = (x) => Math.exp(-x / 2) * (-0.5 * Math.cos(2 * x) + 2 * Math.sin(2 * x)) / 4.25;
+  const draw = function ej13() {
+    const it = PP.radio(ID + "-ej13-it") || "a";
+    const n = PP.val(ID + "-ej13-n");
+    PP.out(ID + "-ej13-n-o", String(n));
+    const { ctx, w, h } = PP.canvas(ID + "-ej13-c", 0.58);
+    const T = PP.frame(w, h, { x0: 0, x1: 12.2, y0: -0.65, y1: 1.08 }, { l: 40, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 3, xTicks: 6 });
+    const total = -F(0);
+    if (it === "a") {
+      for (let k = 1; k <= n; k++) {
+        fillBetween(ctx, T, f, k - 1, k, k % 2 ? C("--area") : C("--area3"));
+        PP.path(ctx, [[T.X(k - 1), T.Y(0)], [T.X(k), T.Y(0)]], k % 2 ? C("--accent") : C("--seq3"), 4);
+      }
+      curve(ctx, T, f, 0, 12.2, C("--ink"), 1.6);
+      PP.read(ID + "-ej13-read", [
+        ["∫<sub>E<sub>1</sub></sub> f + … + ∫<sub>E<sub>n</sub></sub> f", fx(F(n) - F(0), 5)],
+        ["∫<sub>E</sub> f dμ", fx(total, 5)],
+      ]);
+    } else {
+      fillBetween(ctx, T, f, 0, n, C("--area"));
+      fillBetween(ctx, T, f, n, 12.2, C("--area2"));
+      PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(n), T.Y(0)]], C("--accent"), 4);
+      PP.path(ctx, [[T.X(n), T.Y(0)], [T.X(12.2), T.Y(0)]], C("--seq2"), 4);
+      curve(ctx, T, f, 0, 12.2, C("--ink"), 1.6);
+      PP.label(ctx, "Eₙ", T.X(n / 2), T.Y(0) + 6, C("--accent"), "center", "top", 12);
+      PP.read(ID + "-ej13-read", [
+        ["∫<sub>E<sub>n</sub></sub> f dμ", fx(F(n) - F(0), 5)],
+        ["∫<sub>E \\ E<sub>n</sub></sub> f dμ", fx(-F(n), 5)],
+        ["∫<sub>E</sub> f dμ", fx(total, 5)],
+      ]);
+    }
+  };
+  PP.register(draw, [ID + "-ej13-n", "input[name=" + ID + "-ej13-it]"]);
+})();
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

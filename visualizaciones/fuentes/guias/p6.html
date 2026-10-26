@@ -1,0 +1,275 @@
+<p class="edicion" id="guiap6-edicion">Encabezado de la fuente: Análisis Avanzado · Segundo cuatrimestre de 2025 · Práctica 6.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap6-ej1" data-short="Ej. 1" data-title="Las normas 1, 2 e infinito en ℝⁿ" data-topics="normados,metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Las normas $1$, $2$ e $\infty$ en $\mathbb{R}^n$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que $\|\cdot\|_1$, $\|\cdot\|_2$ y $\|\cdot\|_\infty$ definen <span class="ref" data-ref="ext-norma">normas</span> en $\mathbb{R}^n$, donde
+      $$\begin{aligned} \|x\|_1 &= \sum_{i=1}^n |x_i|, \\ \|x\|_2 &= \Big(\sum_{i=1}^n x_i^2\Big)^{1/2} \quad \text{y} \\ \|x\|_\infty &= \max_{1 \le i \le n} |x_i|. \end{aligned}$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej1-c" aria-label="Las bolas unitarias de las normas 1, 2 e infinito en el plano y un punto arrastrable"></canvas>
+      <dl class="read" id="guiap6-ej1-read" aria-live="polite"></dl>
+      <figcaption>En ℝ² (<i>n</i> = 2): los conjuntos {‖<i>x</i>‖ = 1} de las tres normas, ‖·‖<sub>1</sub> (rombo, naranja), ‖·‖<sub>2</sub> (círculo, azul) y ‖·‖<sub>∞</sub> (cuadrado, verde). Arrastrá <i>x</i> para leer sus tres normas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap6-ej2" data-short="Ej. 2" data-title="Bolas en un espacio normado: clausura, diámetro y convexidad" data-topics="normados,topologia">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Bolas en un espacio normado</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span>. Pruebe que se verifican:</p>
+      <ol class="items">
+        <li>Si $x \in E$ y $r \gt 0$, $\overline{B(x, r)} = \overline{B}(x, r)$ (es decir, la <span class="ref" data-ref="def-4.22">clausura</span> de la bola abierta es la <span class="ref" data-ref="def-4.5">bola cerrada</span>).</li>
+        <li>$\operatorname{diam}(B(x, r)) = 2r$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+        <li>Si $y, z \in B(x, r)$ entonces para todo $t \in [0, 1]$, $t y + (1 - t) z \in B(x, r)$ (es decir, toda bola es <em>convexa</em>).</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej2-c" aria-label="Una bola de un espacio normado en el plano, dos puntos y, z arrastrables y el punto t y más (1 menos t) z"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Norma en ℝ²</legend>
+          <label><input type="radio" name="guiap6-ej2-m" value="2" checked>‖·‖<sub>2</sub></label>
+          <label><input type="radio" name="guiap6-ej2-m" value="1">‖·‖<sub>1</sub></label>
+          <label><input type="radio" name="guiap6-ej2-m" value="inf">‖·‖<sub>∞</sub></label>
+        </fieldset>
+        <div class="slider"><label for="guiap6-ej2-t"><i>t</i></label><input type="range" id="guiap6-ej2-t" min="0" max="100" value="35"><output id="guiap6-ej2-t-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej2-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ², <i>x</i> = 0 y <i>r</i> = 2 (valores elegidos): la bola <i>B</i>(<i>x</i>, <i>r</i>) sombreada, su borde punteado. Arrastrá <i>y</i> y <i>z</i>; el punto negro es <i>t y</i> + (1 − <i>t</i>) <i>z</i>, sobre el segmento que los une.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap6-ej3" data-short="Ej. 3" data-title="Los promedios de Cesàro de una sucesión convergente" data-topics="normados,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Promedios de una sucesión convergente</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span>. Sean $(x_n)_{n \in \mathbb{N}} \subseteq E$ y $x_0 \in E$ tales que <span class="ref" data-ref="def-4.42">$\lim_{n \to \infty} x_n = x_0$</span>. Pruebe que si definimos $(y_n)_{n \in \mathbb{N}} \subseteq E$ por
+      $$y_n = \frac{x_1 + x_2 + \dots + x_n}{n},$$
+      entonces $\lim_{n \to \infty} y_n = x_0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej3-c" aria-label="Una sucesión del plano que converge a x0 y la sucesión de sus promedios"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap6-ej3-N">términos <i>n</i> ≤</label><input type="range" id="guiap6-ej3-N" min="1" max="200" value="25"><output id="guiap6-ej3-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej3-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida para el dibujo en (ℝ², ‖·‖<sub>2</sub>): <i>x<sub>n</sub></i> = <i>x</i><sub>0</sub> + (3/√<i>n</i>)(cos 2<i>n</i>, sen 2<i>n</i>) con <i>x</i><sub>0</sub> = (1, 0.5). En naranja los <i>x<sub>n</sub></i>, en azul los promedios <i>y<sub>n</sub></i>; el último dibujado de cada una, más grande.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap6-ej4" data-short="Ej. 4" data-title="Clausura, interior y cerrados de subespacios" data-topics="normados,topologia,densidad">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Subespacios: clausura, interior, dimensión finita e hiperplanos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-norma">espacio normado</span> y $S \subseteq E$ un subespacio (vectorial). Pruebe que:</p>
+    <ol class="items">
+      <li><span class="ref" data-ref="def-4.22">$\overline{S}$</span> también es un subespacio.</li>
+      <li>Si $S \neq E$, entonces <span class="ref" data-ref="def-4.11">$S^{\circ}$</span> $= \emptyset$.</li>
+      <li>Si $\dim(S) \lt \infty$, entonces $S$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      <li>Si $S$ es un <span class="ref" data-ref="ext-hiperplano">hiperplano</span>, entonces $S$ es o bien <span class="ref" data-ref="def-5.20">denso</span> o bien cerrado en $E$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap6-ej5" data-short="Ej. 5" data-title="Normas infinito y 1 en polinomios" data-topics="normados,completitud">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Las normas $\|\cdot\|_\infty$ y $\|\cdot\|_1$ en polinomios</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-completitud">completitud</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\mathbb{R}_n[t]$ el conjunto de los polinomios de grado menor o igual que $n$ con coeficientes en $\mathbb{R}$. Consideremos para $p \in \mathbb{R}_n[t]$ las <span class="ref" data-ref="ext-norma">normas</span>
+      $$\begin{aligned} \|p\|_\infty &= \max_{0 \le t \le 1} |p(t)| \quad \text{y} \\ \|p\|_1 &= \int_0^1 |p(t)|\, dt. \end{aligned}$$</p>
+      <ol class="items">
+        <li>¿Son $(\mathbb{R}_n[t], \|\cdot\|_\infty)$ y $(\mathbb{R}_n[t], \|\cdot\|_1)$ <span class="ref" data-ref="ext-espacio-de-banach">espacios de Banach</span>? ¿Por qué?</li>
+        <li>Justifique por qué ambas normas resultan <span class="ref" data-ref="ext-normas-equivalentes">equivalentes</span> en $\mathbb{R}_n[t]$ para todo $n \in \mathbb{N}$.</li>
+        <li>Si $\mathbb{R}[t]$ denota el conjunto de todos los polinomios con coeficientes en $\mathbb{R}$, pruebe que ahí las normas $\|\cdot\|_\infty$ y $\|\cdot\|_1$ no son equivalentes. ¿Hay alguna contradicción con el ítem anterior, que afirma que las normas son equivalentes para polinomios de grado hasta $n$ para todo $n \in \mathbb{N}$?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej5-c" aria-label="Un polinomio de grado a lo sumo 3 en [0,1] con valores arrastrables, el área bajo su módulo y su máximo"></canvas>
+      <dl class="read" id="guiap6-ej5-read" aria-live="polite"></dl>
+      <figcaption>Un <i>p</i> ∈ ℝ<sub>3</sub>[<i>t</i>] (elegido para el dibujo) determinado por sus valores en <i>t</i> = 0, 1/3, 2/3, 1: arrastrá esos cuatro puntos. El área sombreada, entre el gráfico de <i>p</i> y el eje, mide ‖<i>p</i>‖<sub>1</sub> y la raya punteada marca ‖<i>p</i>‖<sub>∞</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap6-ej6" data-short="Ej. 6" data-title="ℓ∞: la bola cerrada no es compacta y no es separable" data-topics="normados,compacidad,densidad,cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>El espacio $\ell^\infty$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Definimos $\ell^\infty$ como el espacio de todas las sucesiones acotadas de números reales:
+      $$\begin{aligned} \ell^\infty = \{&a = (a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} : \\ &\sup_{n \in \mathbb{N}} |a_n| \lt +\infty\} \end{aligned}$$
+      con la norma
+      $$\|a\|_\infty = \sup_{n \in \mathbb{N}} |a_n|.$$</p>
+      <ol class="items">
+        <li>Pruebe que la <span class="ref" data-ref="def-4.5">bola cerrada</span> de centro $0$ y radio $1$ de $\ell^\infty$ no es <span class="ref" data-ref="ext-compacto">compacta</span>.</li>
+        <li>Pruebe que no hay ningún conjunto <span class="ref" data-ref="def-3.6">numerable</span> <span class="ref" data-ref="def-5.20">denso</span> en $\ell^\infty$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej6-c" aria-label="Los primeros términos de una sucesión acotada y la banda de su norma infinito"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión <i>a</i></legend>
+          <label><input type="radio" name="guiap6-ej6-a" value="alt" checked>(−1)<sup><i>n</i></sup>(1 − 1/<i>n</i>)</label>
+          <label><input type="radio" name="guiap6-ej6-a" value="sin">sen <i>n</i></label>
+          <label><input type="radio" name="guiap6-ej6-a" value="dec">2/<i>n</i></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej6-read" aria-live="polite"></dl>
+      <figcaption>Tres elementos de ℓ<sup>∞</sup> elegidos para el dibujo, con sus primeros 60 términos. La banda punteada es ±‖<i>a</i>‖<sub>∞</sub>: el supremo de |<i>a<sub>n</sub></i>|, que puede no alcanzarse.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap6-ej7" data-short="Ej. 7" data-title="Las sucesiones finitas de suma cero son densas" data-topics="normados,densidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Sucesiones finitas de suma cero</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-densidad">densidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E \subseteq \ell^\infty$ el (sub)<span class="ref" data-ref="ext-norma">espacio normado</span> definido como
+      $$\begin{aligned} E = \{a \in \ell^\infty : {} &\text{existe } n_0 \in \mathbb{N} \\ &\text{tal que } a_n = 0 \\ &\text{para todo } n \ge n_0\}, \end{aligned}$$
+      dentro del cual consideramos el subespacio
+      $$S = \Big\{a \in E : \sum_{n \ge 1} a_n = 0\Big\}.$$
+      Pruebe que $S$ es <span class="ref" data-ref="def-5.20">denso</span> en $E$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej7-c" aria-label="Una sucesión con finitos términos no nulos representada con barras arrastrables"></canvas>
+      <dl class="read" id="guiap6-ej7-read" aria-live="polite"></dl>
+      <figcaption>Un elemento <i>a</i> ∈ <i>E</i> con <i>a<sub>n</sub></i> = 0 para <i>n</i> ≥ 9 (valores elegidos): arrastrá la punta de cada barra. La lectura dice su suma, que decide si <i>a</i> ∈ <i>S</i>, y su norma ‖<i>a</i>‖<sub>∞</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap6-ej8" data-short="Ej. 8" data-title="Operadores lineales: continuidad equivale a acotación" data-topics="normados,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Continuidad de un operador lineal</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $(E, \|\cdot\|_E)$, $(F, \|\cdot\|_F)$ <span class="ref" data-ref="ext-norma">espacios normados</span>. Sea $T : E \to F$ un <span class="ref" data-ref="ext-operador-lineal">operador lineal</span>. Pruebe que son equivalentes:</p>
+    <ol class="items">
+      <li>$T$ es <span class="ref" data-ref="def-5.4">continuo en $0$</span>.</li>
+      <li>Existe $x_0 \in E$ tal que $T$ es continuo en $x_0$.</li>
+      <li>$T$ es continuo.</li>
+      <li>$T$ es <span class="ref" data-ref="def-5.14">uniformemente continuo</span>.</li>
+      <li>$T$ es <span class="ref" data-ref="ext-operador-acotado">acotado</span>.</li>
+      <li>Para todo $A \subseteq E$ <span class="ref" data-ref="def-4.8">acotado</span>, $T(A)$ es acotado.</li>
+    </ol></div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap6-ej9" data-short="Ej. 9" data-title="Tres fórmulas para la norma de un operador" data-topics="normados">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Fórmulas para $\|T\|$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $(E, \|\cdot\|_E)$, $(F, \|\cdot\|_F)$ espacios normados, y sea $T : E \to F$ <span class="ref" data-ref="ext-operador-lineal">lineal</span> y <span class="ref" data-ref="def-5.4">continuo</span>. Verifique las siguientes fórmulas:
+      $$\begin{aligned} \|T\| &= \sup_{\|x\|_E \le 1} \|T x\|_F \\ &= \sup_{\|x\|_E = 1} \|T x\|_F \\ &= \sup_{x \neq 0} \frac{\|T x\|_F}{\|x\|_E}. \end{aligned}$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej9-c" aria-label="La bola unitaria del plano y su imagen por una transformación lineal, con el punto de norma máxima"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap6-ej9-a"><i>a</i></label><input type="range" id="guiap6-ej9-a" min="-200" max="200" value="150"><output id="guiap6-ej9-a-o"></output></div>
+        <div class="slider"><label for="guiap6-ej9-b"><i>b</i></label><input type="range" id="guiap6-ej9-b" min="-200" max="200" value="80"><output id="guiap6-ej9-b-o"></output></div>
+      </div>
+      <dl class="read" id="guiap6-ej9-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido para el dibujo: <i>T</i> : (ℝ², ‖·‖<sub>2</sub>) → (ℝ², ‖·‖<sub>2</sub>), <i>T</i>(<i>x</i>, <i>y</i>) = (<i>a x</i> + <i>b y</i>, 0.6 <i>y</i>). Gris: la bola unitaria; azul: su imagen <i>T</i>(<i>B</i>). La lectura estima numéricamente los tres supremos del enunciado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap6-ej10" data-short="Ej. 10" data-title="Evaluación e integral como funcionales en C([0,1])" data-topics="normados,continuidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Evaluación e integral como funcionales</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en $C([0, 1])$ las <span class="ref" data-ref="ext-norma">normas</span>
+      $$\begin{aligned} \|f\|_\infty &= \max_{x \in [0, 1]} |f(x)| \quad \text{y} \\ \|f\|_1 &= \int_0^1 |f(x)|\, dt. \end{aligned}$$
+      Sean $\mathcal{E}, \mathcal{I} : C([0, 1]) \to \mathbb{R}$ las <span class="ref" data-ref="ext-funcional-lineal">funcionales lineales</span> definidas por
+      $$\mathcal{E} f = f(0), \quad \mathcal{I} f = \int_0^1 f(x)\, dx.$$
+      Decida, para cada una de las normas, si cada una de las funcionales es <span class="ref" data-ref="def-5.4">continua</span>; en caso afirmativo, acote su <span class="ref" data-ref="ext-operador-acotado">norma</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej10-c" aria-label="Función continua poligonal en [0,1] con nodos arrastrables, su valor en 0 y el área bajo su gráfico"></canvas>
+      <dl class="read" id="guiap6-ej10-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá los nodos para armar una <i>f</i> ∈ <i>C</i>([0, 1]) poligonal. El punto grande es (0, 𝓔<i>f</i>) y el área sombreada (azul arriba, naranja abajo) suma 𝓘<i>f</i>. La lectura da también las dos normas de <i>f</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="nota"><b>Nota de esta versión</b>En la fórmula de $\|f\|_1$ la variable de integración aparece como $dt$ mientras el integrando está escrito en $x$; se transcribe tal como está en <code>guias/p6.typ</code>, y se entiende $\|f\|_1 = \int_0^1 |f(x)|\, dx$.</div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap6-ej11" data-short="Ej. 11" data-title="El operador integral con núcleo continuo" data-topics="normados,funciones">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Un operador integral</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en $C([0, 1])$ la norma infinito. Fijada $k : [0, 1] \times [0, 1] \to \mathbb{R}$ continua, sea $K : C([0, 1]) \to C([0, 1])$ dada por
+      $$(K f)(x) = \int_0^1 k(x, y) f(y)\, dy.$$
+      Pruebe que $K$ es <span class="ref" data-ref="ext-operador-lineal">lineal</span> y <span class="ref" data-ref="def-5.4">continua</span>. Acote su <span class="ref" data-ref="ext-operador-acotado">norma</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej11-c" aria-label="Una función f poligonal arrastrable y su imagen Kf por el operador integral"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Núcleo <i>k</i>(<i>x</i>, <i>y</i>)</legend>
+          <label><input type="radio" name="guiap6-ej11-k" value="xy" checked><i>x y</i></label>
+          <label><input type="radio" name="guiap6-ej11-k" value="min">mín(<i>x</i>, <i>y</i>)</label>
+          <label><input type="radio" name="guiap6-ej11-k" value="cos">cos(π(<i>x</i> − <i>y</i>))</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej11-read" aria-live="polite"></dl>
+      <figcaption>Tres núcleos elegidos para el dibujo. En azul una <i>f</i> poligonal (arrastrá sus nodos) y en verde <i>K f</i>, calculada numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap6-ej12" data-short="Ej. 12" data-title="La derivada en polinomios no es continua" data-topics="normados,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>La derivada en $\mathbb{R}[t]$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\mathbb{R}[t]$ el espacio de polinomios, con la norma $\|\cdot\|_\infty$ definida en el <span class="ref" data-ref="guia-p6-ej5">Ejercicio 5</span>. Sea $\delta : \mathbb{R}[t] \to \mathbb{R}[t]$ dado por $(\delta p)(t) = p'(t)$, donde $p'$ denota el derivado de $p$. Probar que $\delta$ es un <span class="ref" data-ref="ext-operador-lineal">operador lineal</span> que no es <span class="ref" data-ref="def-5.4">continuo</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej12-c" aria-label="Un polinomio de grado a lo sumo 3 con valores arrastrables y su derivada en [0,1]"></canvas>
+      <dl class="read" id="guiap6-ej12-read" aria-live="polite"></dl>
+      <figcaption>Un <i>p</i> de grado ≤ 3 (azul) determinado por sus valores en <i>t</i> = 0, 1/3, 2/3, 1, que se arrastran, y su derivada δ<i>p</i> = <i>p</i>′ (naranja), en [0, 1]. La lectura compara las normas ‖·‖<sub>∞</sub> de los dos.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap6-ej13" data-short="Ej. 13" data-title="ℓ²: la bola cerrada y la funcional Σ aₙ/n" data-topics="normados,compacidad,series">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>El espacio $\ell^2$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $\ell^2$ el espacio vectorial de todas las sucesiones de cuadrado sumable:
+      $$\begin{aligned} \ell^2 = \{&a = (a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R} : \\ &\textstyle\sum_{n=1}^\infty |a_n|^2 \lt +\infty\}. \end{aligned}$$
+      Para $a \in \ell^2$ definimos
+      $$\|a\|_2 = \Big(\sum_{n=1}^\infty |a_n|^2\Big)^{1/2}.$$</p>
+      <ol class="items">
+        <li>¿Es <span class="ref" data-ref="ext-compacto">compacta</span> la <span class="ref" data-ref="def-4.5">bola cerrada</span> de centro $0$ y radio $1$ de $\ell^2$?</li>
+        <li>Pruebe que $\gamma : \ell^2 \to \mathbb{R}$ dada por
+          $$\gamma(a) = \sum_{n=1}^\infty \frac{a_n}{n}$$
+          es una <span class="ref" data-ref="ext-funcional-lineal">funcional lineal</span> <span class="ref" data-ref="def-5.4">continua</span>.
+          <p><em>Sugerencia: use la <span class="ref" data-ref="ext-cauchy-schwarz">desigualdad de Cauchy-Schwarz</span>.</em></p></li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap6-ej13-c" aria-label="Los primeros términos de una sucesión de cuadrado sumable y las sumas parciales de gamma"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Sucesión <i>a</i></legend>
+          <label><input type="radio" name="guiap6-ej13-a" value="inv" checked>1/<i>n</i></label>
+          <label><input type="radio" name="guiap6-ej13-a" value="alt">(−1)<sup><i>n</i></sup>/<i>n</i><sup>0.75</sup></label>
+          <label><input type="radio" name="guiap6-ej13-a" value="geo">2<sup>−<i>n</i></sup></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap6-ej13-read" aria-live="polite"></dl>
+      <figcaption>Tres elementos de ℓ² elegidos para el dibujo. Barras: <i>a<sub>n</sub></i> para <i>n</i> ≤ 30. Línea verde: las sumas parciales Σ<sub><i>k</i> ≤ <i>n</i></sub> <i>a<sub>k</sub></i>/<i>k</i> de la serie que define γ(<i>a</i>). Los valores de la lectura se calculan con 20000 términos.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>

@@ -1,0 +1,191 @@
+{
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo</em> de $A$ si:</p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.</p><p>Es decir, el supremo es la <em>menor de las cotas superiores</em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3": {
+  "tipo": "Proposición",
+  "numero": "3",
+  "titulo": "Equivalencia de supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\ne \\emptyset$ y acotado superiormente. Entonces $s = \\sup(A)$ si y sólo si se cumple:</p><p>a) $s$ es cota superior, y<br>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $s - \\varepsilon \\lt a_\\varepsilon \\le s$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4": {
+  "tipo": "Proposición",
+  "numero": "4",
+  "titulo": "Caracterización de Supremo y Máximo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Si $t$ es una cota superior y $t \\in A$ entonces $t = \\sup(A)$ (y también es el máximo).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\ne \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-3.21": {
+  "tipo": "Observación",
+  "numero": "3.21",
+  "titulo": "Coordinabilidad de $\\mathbb{R}$ con Intervalos",
+  "enunciado": "<p>De hecho, podemos probar que $\\mathbb{R}$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $\\mathbb{R} \\sim (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $\\mathbb{R}$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $\\mathbb{R} \\sim [a, b]$, podemos pensar que $\\mathbb{R} \\sim (a, b)$ y $(a, b) \\sim [a, b]$ dado que $(a, b) = [a, b] \\setminus \\{a, b\\}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] \\sim (a, b)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><p><em>Bola abierta:</em> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<br><em>Bola cerrada:</em> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<br><em>Esfera:</em> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <em>punto interior</em> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <em>interior</em> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^\\circ$. Es decir, $$E^\\circ = \\{x \\in E : x \\text{ es punto interior de } E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <em>abierto</em> si $A = A^\\circ$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <em>de adherencia</em> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <em>clausura</em> de $E$ y lo denotamos $\\overline{E}$. Es decir, $$\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.43": {
+  "tipo": "Observación",
+  "numero": "4.43",
+  "titulo": "",
+  "enunciado": "<p>Si tenemos una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ y $x \\in M$, entonces podemos formar la sucesión de las distancias de $x_n$ a $x$, $d(x_n, x) \\in \\mathbb{R}_{\\ge 0}$. Por definición de convergencia en $\\mathbb{R}$, tenemos que $$x_n \\to x \\quad (\\text{en } M) \\quad \\Leftrightarrow \\quad d(x_n, x) \\to 0 \\quad (\\text{en } \\mathbb{R}).$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <em>completo</em> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p1-ej1": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 1",
+  "titulo": "",
+  "enunciado": "<p>Probar que si $x \\lt y + \\varepsilon$ para todo $\\varepsilon \\gt 0$, entonces $x \\le y$. Deducir que si $|x - y| \\lt \\varepsilon$ para todo $\\varepsilon \\gt 0$, entonces $x = y$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej5a": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 5 (a)",
+  "titulo": "",
+  "enunciado": "<p>Sean $A \\subseteq B \\subseteq \\mathbb{R}$, con $A \\ne \\emptyset$. Probar las siguientes afirmaciones:</p><p>(a) Si $B$ está acotado superiormente, entonces $A$ también lo está, y $\\sup A \\le \\sup B$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej8": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}}$ y $(a_n)_{n \\in \\mathbb{N}}$ sucesiones de números reales. Probar que si $|x_n - \\ell| \\le a_n$ para todo $n \\in \\mathbb{N}$ y $a_n \\to 0$ entonces $x_n \\to \\ell$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p2-ej1c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 1 (c)",
+  "titulo": "",
+  "enunciado": "<p>Halle el cardinal de los siguientes conjuntos: … (c) $\\mathbb{Z} \\times \\mathbb{N}$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej9c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 9 (c)",
+  "titulo": "",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos. Pruebe que:</p><p>(c) $A \\sim B \\Rightarrow \\mathcal{P}(A) \\sim \\mathcal{P}(B)$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10a": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10 (a)",
+  "titulo": "",
+  "enunciado": "<p>(a) Pruebe que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$.</p><p><em>Sugerencia:</em> considere el desarrollo binario de los números del intervalo $[0, 1)$. ¡Ojo!, dicho desarrollo no es único.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej10b": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 10 (b)",
+  "titulo": "",
+  "enunciado": "<p>(a) Pruebe que $[0, 1) \\sim \\{0, 1\\}^{\\mathbb{N}}$.<br>(b) Concluya que $\\#\\mathcal{P}(\\mathbb{N}) = c$.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p3-ej1b": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 1 (b)",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que los siguientes son espacios métricos. Dibuje, en cada caso, una bola abierta.</p><p>(b) $\\mathbb{R}^n$ con $d_2(x, y) = \\left(\\sum_{i=1}^n (x_i - y_i)^2\\right)^{1/2}$.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej1d": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 1 (d)",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que los siguientes son espacios métricos. Dibuje, en cada caso, una bola abierta.</p><p>(d) $\\mathbb{R}^n$ con $d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|$.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej12a": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 12 (a)",
+  "titulo": "",
+  "enunciado": "<p>Considere en $\\mathbb{R}^n$ las distancias $d_1$, $d_2$ y $d_\\infty$.</p><p>(a) Pruebe que estas tres distancias son equivalentes; más aún, pruebe que $$d_\\infty(x, y) \\le d_2(x, y) \\le d_1(x, y) \\le n\\, d_\\infty(x, y).$$</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej14": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 14",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que $(\\mathbb{R}^n, d_1)$, $(\\mathbb{R}^n, d_2)$ y $(\\mathbb{R}^n, d_\\infty)$ son completos.</p>",
+  "fuente": "guias/p3.typ"
+ }
+}

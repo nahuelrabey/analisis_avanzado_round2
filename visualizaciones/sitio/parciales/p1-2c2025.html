@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primer parcial · 2C 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#parciales">Primeros parciales</a></li><li><span aria-current="page">Primer parcial · 2C 2025</span></li></ol><div class="pager"><a href="../parciales/r1-1c2025.html" title="Recuperatorio · 1C 2025">← Anterior</a><a href="../parciales/r1-2c2025.html" title="Recuperatorio · 2C 2025">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Primeros parciales resueltos · 5 ejercicios</p>
+  <h1>Primer parcial · 2C 2025</h1>
+  <p>16/10/2025 · resolución propuesta, verificada en Lean. Cada ejercicio, paso a paso: los dibujos se pueden mover y cada resultado subrayado con puntos muestra su enunciado al pasar el mouse, al enfocarlo o al tocarlo.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#p1-2c2025-ej1" title="Supremo e ínfimo de {m/(m+n)}">Ej. 1</a></li><li><a href="#p1-2c2025-ej2" title="Cardinal de un conjunto de sucesiones racionales">Ej. 2</a></li><li><a href="#p1-2c2025-ej3" title="Separar dos puntos por abiertos con clausuras disjuntas">Ej. 3</a></li><li><a href="#p1-2c2025-ej4" title="Clausura de una unión de conjuntos separados">Ej. 4</a></li><li><a href="#p1-2c2025-ej5" title="Continuidad de la evaluación F(f, x) = f(x)">Ej. 5</a></li></ul></div></nav>
+
+<section class="exam" id="p1-2c2025" data-meta="16/10/2025 · resolución propuesta, verificada en Lean">
+  <header class="exam-head">
+    <h2 id="p1-2c2025-titulo"><span class="bn">Primer parcial · 2C 2025</span>16 de octubre de 2025</h2>
+    <p class="meta">Enunciado: foto del parcial (la fuente no trae resolución). Resoluciones propuestas en el repositorio, escritas con las cajas de <code>apuntes.typ</code> y los enunciados de las guías, cada una verificada en <code>lean/Parciales/Parcial1_2C2025.lean</code> (Lean 4 + Mathlib, sin <code>sorry</code>). En el curso $\mathbb{N} = \{1, 2, \dots\}$.</p>
+    <a class="back" href="#top">Volver al índice</a>
+  </header>
+
+  <!-- ===================== EJERCICIO 1 ===================== -->
+  <article class="ej" id="p1-2c2025-ej1" data-short="Ej. 1" data-title="Supremo e ínfimo de {m/(m+n)}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">Ej. 1</span>
+      <h3>Supremo e ínfimo de $\{m/(m+n)\}$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Calcular, si existen, el supremo y el ínfimo de
+      $$A = \left\{\frac{m}{m+n} : m \in \mathbb{N},\ n \in \mathbb{N}\right\}.$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Fijar una de las dos variables y mandar la otra a infinito.</em> Todo elemento está estrictamente entre $0$ y $1$. Con $n = 1$ y $m \to \infty$, $m/(m+1) = 1 - 1/(m+1)$ se acerca a $1$ tanto como se quiera; con $m = 1$ y $n \to \infty$, $1/(1+n)$ se acerca a $0$. Las <span class="ref" data-ref="prop-3">Proposiciones 3</span> y <span class="ref" data-ref="prop-5-equivalencia-de-infimo">5</span> (equivalencias de supremo e ínfimo) hacen el resto.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cotas</p>
+          <p>$A \neq \emptyset$ (contiene a $1/2$, con $m = n = 1$).</p>
+          <p>Para $m, n \in \mathbb{N}$ vale $0 \lt m \lt m + n$, así que $0 \lt m/(m+n) \lt 1$. Luego $0$ es cota inferior y $1$ es cota superior de $A$; por el <span class="ref" data-ref="ax-completitud">Axioma de Completitud</span> y el <span class="ref" data-ref="teo-2">Teorema 2</span> existen $\sup(A)$ e $\inf(A)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c1" aria-label="Elementos m/(m+n) de A con m y n hasta N, ubicados entre las cotas 0 y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-N"><i>m</i>, <i>n</i> ≤ <i>N</i></label><input type="range" id="p1-2c2025-ej1-N" min="1" max="30" value="8"><output id="p1-2c2025-ej1-N-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read1" aria-live="polite"></dl>
+          <figcaption>Cada fila es un <i>n</i> fijo y sus puntos son los <i>m</i>/(<i>m</i>+<i>n</i>) con <i>m</i> ≤ <i>N</i>. Las rayas verdes son las cotas 0 y 1. Al subir <i>N</i> aparecen puntos cada vez más cerca de las dos rayas, pero ninguno las toca.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\sup(A) = 1$</p>
+          <p>Sea $\varepsilon \gt 0$. Por el <span class="ref" data-ref="prop-1">Principio de Arquímedes (Proposición 1)</span> existe $m \in \mathbb{N}$ con $1/m \lt \varepsilon$. Tomando $n = 1$,
+            $$\begin{aligned} \frac{m}{m+1} &= 1 - \frac{1}{m+1} \\ &\gt 1 - \frac1m \gt 1 - \varepsilon, \end{aligned}$$
+            y $m/(m+1) \in A$. Como $1$ es cota superior y para todo $\varepsilon \gt 0$ hay un $a_\varepsilon \in A$ con $1 - \varepsilon \lt a_\varepsilon$, la <span class="ref" data-ref="prop-3">Proposición 3 (equivalencia de supremo)</span> da $\sup(A) = 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c2" aria-label="Sucesión m/(m+1) entrando en la banda entre 1 menos epsilon y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-eps">ε</label><input type="range" id="p1-2c2025-ej1-eps" min="3" max="50" value="20"><output id="p1-2c2025-ej1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read2" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>m</i>/(<i>m</i>+1), es decir los elementos de <i>A</i> con <i>n</i> = 1. La banda es (1 − ε, 1]. El punto grande es el que da Arquímedes: el primer <i>m</i> con 1/<i>m</i> &lt; ε. Ya cae en la banda, y la raya del 1 no la cruza nadie.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\inf(A) = 0$</p>
+          <p>Sea $\varepsilon \gt 0$ y, de nuevo por <span class="ref" data-ref="prop-1">Arquímedes</span>, $n \in \mathbb{N}$ con $1/n \lt \varepsilon$. Tomando $m = 1$, $1/(1+n) \lt 1/n \lt \varepsilon$ y $1/(1+n) \in A$. Como $0$ es cota inferior y para todo $\varepsilon \gt 0$ hay $a_\varepsilon \in A$ con $a_\varepsilon \lt 0 + \varepsilon$, la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Proposición 5 (equivalencia de ínfimo)</span> da $\inf(A) = 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej1-c3" aria-label="Sucesión 1/(1+n) entrando en la banda entre 0 y epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej1-eps2">ε</label><input type="range" id="p1-2c2025-ej1-eps2" min="3" max="50" value="20"><output id="p1-2c2025-ej1-eps2-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej1-read3" aria-live="polite"></dl>
+          <figcaption>Ahora los puntos son 1/(1+<i>n</i>) (los elementos con <i>m</i> = 1) y la banda es [0, ε). El punto grande es el primer <i>n</i> con 1/<i>n</i> &lt; ε; como 1/(1+<i>n</i>) &lt; 1/<i>n</i>, también cae en la banda.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">No hay <span class="ref" data-ref="def-3">máximo</span> ni <span class="ref" data-ref="def-6-minimo">mínimo</span></p>
+          <p>$1 \notin A$ y $0 \notin A$ porque todo elemento cumple $0 \lt m/(m+n) \lt 1$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\sup(A) = 1$ e $\inf(A) = 0$; ninguno de los dos se alcanza.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej1_sSup</code>, <code>ej1_sInf</code>: usan <code>csSup_eq_of_forall_le_of_forall_lt_exists_gt</code> y su dual (las Proposiciones 3 y 5), con el $m$ de <code>exists_nat_gt</code>. <code>ej1_one_notMem</code> y <code>ej1_zero_notMem</code> certifican que no hay máximo ni mínimo.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 2 ===================== -->
+  <article class="ej" id="p1-2c2025-ej2" data-short="Ej. 2" data-title="Cardinal de un conjunto de sucesiones racionales" data-topics="cardinalidad">
+    <div class="ej-head">
+      <span class="tag">Ej. 2</span>
+      <h3>Cardinal de un conjunto de sucesiones racionales</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Calcular el cardinal de
+      $$\begin{aligned} &A = \{(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{Q} : \exists\, k \in \mathbb{N} \\ &\qquad \text{tal que } a_{n+k} = (a_k)^n\ \ \forall\, n \in \mathbb{N}\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Una sucesión de $A$ está determinada por sus primeros $k$ términos.</em> Si $k$ es el testigo, los términos $a_{k+1}, a_{k+2}, \dots$ son $a_k, a_k^2, \dots$: la sucesión queda fijada por $(a_1, \dots, a_k) \in \mathbb{Q}^k$. Entonces $A$ es unión numerable (en $k$) de imágenes de $\mathbb{Q}^k$, cada una contable; y es infinito porque contiene a las $(q, q, q^2, q^3, \dots)$ para todo $q \in \mathbb{Q}$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las funciones $\varphi_k$ caen en $A$</p>
+          <p><b>$A$ es contable.</b> Para cada $k \in \mathbb{N}$ definimos $\varphi_k : \mathbb{Q}^k \to \mathbb{Q}^{\mathbb{N}}$ por
+            $$\begin{aligned} &\varphi_k(q_1, \dots, q_k) = (b_n)_{n \in \mathbb{N}}, \\ &b_n = \begin{cases} q_n & \text{si } n \le k, \\ q_k^{\,n-k} & \text{si } n \gt k. \end{cases} \end{aligned}$$
+            Cada $\varphi_k(q_1, \dots, q_k)$ está en $A$ con testigo $k$: para $n \in \mathbb{N}$, $b_{n+k} = q_k^{\,n+k-k} = q_k^{\,n} = (b_k)^n$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej2-c1" aria-label="Los primeros nueve términos de phi_k aplicada a una tupla: k libres y el resto potencias de q_k"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej2-k"><i>k</i></label><input type="range" id="p1-2c2025-ej2-k" min="1" max="4" value="3"><output id="p1-2c2025-ej2-k-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej2-read1" aria-live="polite"></dl>
+          <figcaption>La cinta muestra <i>b</i>₁, …, <i>b</i>₉ para la tupla (<i>q</i>₁, <i>q</i>₂, <i>q</i>₃, <i>q</i>₄) = (3, −1, 1/2, −2/3) cortada en <i>k</i> (valores elegidos para el dibujo). Las celdas azules son los <i>k</i> valores libres; las naranjas son <i>q<sub>k</sub></i><sup><i>n</i>−<i>k</i></sup>, y debajo de cada una está el exponente. Leída al revés, es el paso siguiente: los primeros <i>k</i> términos de una sucesión de <i>A</i> alcanzan para reconstruirla.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Toda sucesión de $A$ es un $\varphi_k$</p>
+          <p>Recíprocamente, si $(a_n)_n \in A$ con testigo $k$, entonces $(a_n)_n = \varphi_k(a_1, \dots, a_k)$: para $n \le k$ es obvio, y para $n \gt k$, escribiendo $n = (n - k) + k$ con $n - k \in \mathbb{N}$, la condición da $a_n = (a_k)^{n-k}$. Por lo tanto
+            $$A = \bigcup_{k \in \mathbb{N}} \varphi_k(\mathbb{Q}^k).$$</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cada pedazo es contable, y la unión también</p>
+          <p>Como $\mathbb{Q} \sim \mathbb{N}$ (<span class="ref" data-ref="prop-numerabilidad-de-qq">Numerabilidad de $\mathbb{Q}$</span>), $\mathbb{Q}^k \sim \mathbb{N}^k \sim \mathbb{N}$ (<span class="ref" data-ref="guia-p2-ej14c">Práctica 2, Ej. 14 (c)</span>, con $\mathbb{N}$ en lugar de $\mathbb{R}$: $\mathbb{N}^k$ es numerable por inducción en $k$ usando $\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$, <span class="ref" data-ref="ejem-3.12">Ejemplo 3.12</span>). Entonces $\varphi_k(\mathbb{Q}^k)$ es imagen sobreyectiva de un conjunto numerable, luego contable (<span class="ref" data-ref="prop-3.9">Proposición 3.9</span>). <span class="ref" data-ref="guia-p2-ej6a">Una unión numerable de conjuntos contables es contable (Práctica 2, Ej. 6 (a))</span>, así que $A$ es <span class="ref" data-ref="def-3.6">contable</span>: $\#A \le \aleph_0$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 250" role="img" aria-label="Cadena de coordinabilidades: Q a la k, N a la k y N; phi_k sobre su imagen; unión de las imágenes igual a A">
+            <rect x="10" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="45" y="40" text-anchor="middle" class="sv-text">ℚᵏ</text>
+            <rect x="145" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="180" y="40" text-anchor="middle" class="sv-text">ℕᵏ</text>
+            <rect x="280" y="18" width="70" height="34" rx="6" class="sv-accent"/>
+            <text x="315" y="40" text-anchor="middle" class="sv-text">ℕ</text>
+            <line x1="84" y1="35" x2="141" y2="35" class="sv-axis"/>
+            <text x="112" y="31" text-anchor="middle" class="sv-label-accent">∼</text>
+            <text x="112" y="66" text-anchor="middle" class="sv-muted">ℚ ∼ ℕ</text>
+            <line x1="219" y1="35" x2="276" y2="35" class="sv-axis"/>
+            <text x="247" y="31" text-anchor="middle" class="sv-label-accent">∼</text>
+            <text x="247" y="66" text-anchor="middle" class="sv-muted">ℕ×ℕ ∼ ℕ, ind.</text>
+            <line x1="45" y1="56" x2="45" y2="104" class="sv-seq2"/>
+            <path d="M39 96 L45 106 L51 96" class="sv-seq2"/>
+            <text x="54" y="86" class="sv-label-seq2">φₖ sobreyectiva</text>
+            <text x="54" y="101" class="sv-muted">sobre su imagen</text>
+            <rect x="10" y="110" width="110" height="34" rx="6" class="sv-seq2"/>
+            <text x="65" y="132" text-anchor="middle" class="sv-text">φₖ(ℚᵏ)</text>
+            <text x="130" y="125" class="sv-label-ok">contable</text>
+            <text x="130" y="140" class="sv-muted">(Prop. 3.9)</text>
+            <rect x="10" y="170" width="340" height="66" rx="8" class="sv-ok"/>
+            <rect x="20" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="56" y="198" text-anchor="middle" class="sv-text">φ₁(ℚ)</text>
+            <rect x="100" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="136" y="198" text-anchor="middle" class="sv-text">φ₂(ℚ²)</text>
+            <rect x="180" y="180" width="72" height="26" rx="5" class="sv-seq2"/>
+            <text x="216" y="198" text-anchor="middle" class="sv-text">φ₃(ℚ³)</text>
+            <text x="276" y="198" text-anchor="middle" class="sv-text">∪ …</text>
+            <text x="180" y="226" text-anchor="middle" class="sv-label-ok">A = ⋃ₖ φₖ(ℚᵏ) contable (P2, Ej. 6 a)</text>
+            <line x1="65" y1="148" x2="65" y2="166" class="sv-axis sv-dash"/>
+          </svg>
+          <figcaption>Arriba, la cadena ℚ<sup><i>k</i></sup> ∼ ℕ<sup><i>k</i></sup> ∼ ℕ. En el medio, φ<sub><i>k</i></sub> manda ese numerable sobre su imagen, que por eso es contable. Abajo, <i>A</i> es la unión numerable de esas imágenes.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$A$ es infinito</p>
+          <p>La función $\psi : \mathbb{Q} \to A$, $\psi(q) = (q, q, q^2, q^3, \dots)$ (es decir $a_1 = q$ y $a_n = q^{n-1}$ para $n \ge 2$) toma valores en $A$ con testigo $k = 1$: $a_{n+1} = q^n = (a_1)^n$. Es inyectiva porque $\psi(q)_1 = q$. Luego $\aleph_0 = \#\mathbb{Q} \le \#A$ (<span class="ref" data-ref="def-3.8">Definición 3.8</span>).</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 180" role="img" aria-label="La función psi manda cada racional q a la sucesión q, q, q al cuadrado, q al cubo; la primera coordenada es q">
+            <text x="10" y="18" class="sv-muted">q ∈ ℚ</text>
+            <text x="130" y="18" class="sv-muted">ψ(q) = (q, q, q², q³, q⁴, …)</text>
+            <g>
+              <text x="30" y="52" text-anchor="middle" class="sv-label-accent">2</text>
+              <line x1="44" y1="48" x2="118" y2="48" class="sv-axis"/><path d="M112 44 L120 48 L112 52" class="sv-axis"/>
+              <text x="130" y="52" class="sv-text">(<tspan class="sv-label-accent">2</tspan>, 2, 4, 8, 16, …)</text>
+            </g>
+            <g>
+              <text x="30" y="92" text-anchor="middle" class="sv-label-accent">−1</text>
+              <line x1="44" y1="88" x2="118" y2="88" class="sv-axis"/><path d="M112 84 L120 88 L112 92" class="sv-axis"/>
+              <text x="130" y="92" class="sv-text">(<tspan class="sv-label-accent">−1</tspan>, −1, 1, −1, 1, …)</text>
+            </g>
+            <g>
+              <text x="30" y="132" text-anchor="middle" class="sv-label-accent">1/2</text>
+              <line x1="44" y1="128" x2="118" y2="128" class="sv-axis"/><path d="M112 124 L120 128 L112 132" class="sv-axis"/>
+              <text x="130" y="132" class="sv-text">(<tspan class="sv-label-accent">1/2</tspan>, 1/2, 1/4, 1/8, 1/16, …)</text>
+            </g>
+            <text x="10" y="168" class="sv-muted">la 1.ª coordenada devuelve q: q ≠ q′ ⇒ ψ(q) ≠ ψ(q′)</text>
+          </svg>
+          <figcaption>Tres racionales elegidos para el dibujo y sus sucesiones ψ(<i>q</i>). En azul, la primera coordenada: es el mismo <i>q</i>, así que dos racionales distintos dan sucesiones distintas.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cantor–Schröeder–Bernstein</p>
+          <p>Por el <span class="ref" data-ref="teo-3.11">Teorema 3.11 (Cantor–Schröeder–Bernstein)</span>, $\#A = \aleph_0$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <p class="conclusion">Conclusión: $\#A = \aleph_0$.</p>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej2</code>: <code>extiende k</code> es $\varphi_k$, <code>A2_subset</code> y <code>A2_countable</code> dan la contabilidad, <code>geom q</code> es $\psi(q)$ y <code>A2_infinite</code> la inyectividad; cierra con <code>Cardinal.mk_eq_aleph0</code>. En Lean los índices arrancan en $0$.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 3 ===================== -->
+  <article class="ej" id="p1-2c2025-ej3" data-short="Ej. 3" data-title="Separar dos puntos por abiertos con clausuras disjuntas" data-topics="topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">Ej. 3</span>
+      <h3>Separar dos puntos por abiertos con clausuras disjuntas</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico. Probar que dados $x, y \in E$ con $x \neq y$ existen dos abiertos $U, V$ tales que $x \in U$, $y \in V$ y $\overline{U} \cap \overline{V} = \emptyset$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Bolas de radio un tercio de la distancia.</em> Con $r = d(x, y) \gt 0$, las bolas $B(x, r/3)$ y $B(y, r/3)$ tienen clausuras dentro de las bolas cerradas del mismo radio, y dos bolas cerradas de radio $r/3$ centradas a distancia $r$ no se tocan: un punto común daría $r \le r/3 + r/3$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $U$ y $V$</p>
+          <p>Sea $r = d(x, y)$; como $x \neq y$, $r \gt 0$ (<span class="ref" data-ref="def-4.1">Definición 4.1 (ii)</span>). Tomamos
+            $$U = B(x, r/3), \quad V = B(y, r/3).$$
+            Son abiertos (<span class="ref" data-ref="guia-p3-ej4b">Práctica 3, Ej. 4 (b)</span>), $x \in U$ e $y \in V$ porque $d(x, x) = 0 \lt r/3$ y lo mismo para $y$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej3-c1" aria-label="Dos puntos x e y del plano con las bolas de radio un tercio de su distancia"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Métrica del dibujo en ℝ²</legend>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="2" checked><i>d</i>₂</label>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="1"><i>d</i>₁</label>
+              <label><input type="radio" name="p1-2c2025-ej3-met" value="inf"><i>d</i><sub>∞</sub></label>
+            </fieldset>
+          </div>
+          <dl class="read" id="p1-2c2025-ej3-read1" aria-live="polite"></dl>
+          <figcaption>Un caso particular, <i>E</i> = ℝ² con la métrica elegida. Arrastrá <i>x</i> o <i>y</i>. Las regiones sombreadas son <i>U</i> y <i>V</i>; el borde punteado marca las bolas cerradas de radio <i>r</i>/3. Entre las dos queda siempre un tramo de largo <i>r</i>/3 sin tocar.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las clausuras no se cortan</p>
+          <p>Por la <span class="ref" data-ref="guia-p3-ej4e">Práctica 3, Ej. 4 (e)</span>, $\overline{U} \subseteq \overline{B}(x, r/3) = \{z : d(x, z) \le r/3\}$ y $\overline{V} \subseteq \overline{B}(y, r/3)$. Si existiera $z \in \overline{U} \cap \overline{V}$, tendríamos $d(x, z) \le r/3$ y $d(z, y) \le r/3$, y por la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>
+            $$\begin{aligned} r = d(x, y) &\le d(x, z) + d(z, y) \\ &\le \frac r3 + \frac r3 = \frac{2r}{3} \lt r, \end{aligned}$$
+            absurdo. Luego $\overline{U} \cap \overline{V} = \emptyset$. $\blacksquare$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej3-c2" aria-label="Un punto z que se arrastra; la suma de sus distancias a x y a y nunca baja de r"></canvas>
+          <dl class="read" id="p1-2c2025-ej3-read2" aria-live="polite"></dl>
+          <figcaption>Mismos <i>x</i>, <i>y</i> y métrica que el dibujo anterior. Arrastrá <i>z</i>: puede entrar en una de las dos bolas cerradas, pero nunca en las dos, porque <i>d</i>(<i>x</i>, <i>z</i>) + <i>d</i>(<i>z</i>, <i>y</i>) no baja de <i>r</i> y estar en las dos pediría a lo sumo 2<i>r</i>/3.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej3</code>: enunciado idéntico. La inclusión $\overline{B(x, s)} \subseteq \overline{B}(x, s)$ es <code>Metric.closure_ball_subset_closedBall</code>, y el absurdo final es <code>linarith</code> con <code>dist_triangle x z y</code>.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 4 ===================== -->
+  <article class="ej" id="p1-2c2025-ej4" data-short="Ej. 4" data-title="Clausura de una unión de conjuntos separados" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">Ej. 4</span>
+      <h3>Clausura de una unión de conjuntos separados</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico. Recordemos que para $A, B \subseteq E$ no vacíos se define
+      $$\tilde d(A, B) = \inf\{d(a, b) : a \in A,\ b \in B\}.$$
+      Sea $(M_n)_{n \in \mathbb{N}} \subseteq E$ una familia de conjuntos no vacíos.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>En (b), una bola chica alrededor de $x$ sólo puede tocar a un $M_n$.</em> (a) es la <span class="ref" data-ref="ext-clausura-monotona">monotonía de la clausura</span>. En (b), si $x$ es adherente a la unión, alguna bola $B(x, \varepsilon/2)$ contiene un punto $y_0 \in M_{n_0}$. Cualquier otro punto de la unión en esa bola está a distancia $\lt \varepsilon$ de $y_0$, y la separación $\tilde d(M_n, M_m) \gt \varepsilon$ lo obliga a estar en el mismo $M_{n_0}$. Así, todas las bolas centradas en $x$ tocan a $M_{n_0}$.</p></div>
+
+    <div class="sub" id="p1-2c2025-ej4a">
+      <h4>Ítem a)</h4>
+      <div class="enun"><p>Probar que
+        $$\bigcup_{n \in \mathbb{N}} \overline{M_n} \subseteq \overline{\bigcup_{n \in \mathbb{N}} M_n}.$$</p></div>
+      <div class="steps">
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Un punto adherente a un $M_n$ es adherente a la unión</p>
+            <p>Sea $x \in \bigcup_n \overline{M_n}$: existe $n$ con $x \in \overline{M_n}$. Dado $r \gt 0$, existe $y \in B(x, r) \cap M_n$ (<span class="ref" data-ref="def-4.22">Definición 4.22</span>), y como $M_n \subseteq \bigcup_m M_m$, $y \in B(x, r) \cap \bigcup_m M_m$. Luego $x \in \overline{\bigcup_m M_m}$.</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-2c2025-ej4-c1" aria-label="Un punto x en el borde de M2; cada bola B(x, r) contiene un punto y de M2, que también es de la unión"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-2c2025-ej4-r1"><i>r</i></label><input type="range" id="p1-2c2025-ej4-r1" min="5" max="200" value="80"><output id="p1-2c2025-ej4-r1-o"></output></div>
+            </div>
+            <dl class="read" id="p1-2c2025-ej4-read1" aria-live="polite"></dl>
+            <figcaption>En ℝ², cuatro discos abiertos hacen de <i>M</i>₁, …, <i>M</i>₄ (valores elegidos para el dibujo). <i>x</i> está en el borde de <i>M</i>₂: no es de <i>M</i>₂, pero sí de cl(<i>M</i>₂). Para cada <i>r</i>, el punto <i>y</i> está en <i>B</i>(<i>x</i>, <i>r</i>) ∩ <i>M</i>₂, y por lo tanto en la unión.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub" id="p1-2c2025-ej4b">
+      <h4>Ítem b)</h4>
+      <div class="enun"><p>Supongamos que existe $\varepsilon \gt 0$ tal que $\tilde d(M_n, M_m) \gt \varepsilon$ para todo $n \neq m$. Probar que
+        $$\overline{\bigcup_{n \in \mathbb{N}} M_n} = \bigcup_{n \in \mathbb{N}} \overline{M_n}.$$</p></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-text">
+            <p class="step-title">Basta una inclusión</p>
+            <p>Por (a) basta ver $\overline{\bigcup_n M_n} \subseteq \bigcup_n \overline{M_n}$.</p>
+          </div>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">Un lema sobre $\tilde d$</p>
+            <p>Si $a \in A$ y $b \in B$, entonces $\tilde d(A, B) \le d(a, b)$, porque <span class="ref" data-ref="def-5">el ínfimo es cota inferior</span> del conjunto $\{d(a, b) : a \in A,\ b \in B\}$ (que es no vacío y acotado inferiormente por $0$, así que el ínfimo existe, <span class="ref" data-ref="teo-2">Teorema 2</span>). En particular, de $\tilde d(M_n, M_m) \gt \varepsilon$ se deduce $d(a, b) \gt \varepsilon$ para todo $a \in M_n$, $b \in M_m$, cuando $n \neq m$.</p>
+          </div>
+          <figure class="viz">
+            <svg viewBox="0 0 360 190" role="img" aria-label="Dos conjuntos A y B; la distancia entre un punto a de A y un punto b de B es al menos la distancia entre los conjuntos">
+              <circle cx="85" cy="95" r="58" class="sv-area"/>
+              <circle cx="85" cy="95" r="58" class="sv-accent"/>
+              <circle cx="275" cy="95" r="52" class="sv-area3"/>
+              <circle cx="275" cy="95" r="52" class="sv-seq3"/>
+              <text x="40" y="40" class="sv-label-accent">A</text>
+              <text x="318" y="40" class="sv-label-seq3">B</text>
+              <line x1="143" y1="95" x2="223" y2="95" class="sv-ink sv-dash"/>
+              <text x="183" y="86" text-anchor="middle" class="sv-text">d̃(A, B)</text>
+              <line x1="60" y1="130" x2="300" y2="62" class="sv-seq2"/>
+              <circle cx="60" cy="130" r="4" class="sv-fill-seq2"/>
+              <circle cx="300" cy="62" r="4" class="sv-fill-seq2"/>
+              <text x="52" y="150" text-anchor="middle" class="sv-label-seq2">a</text>
+              <text x="310" y="54" class="sv-label-seq2">b</text>
+              <text x="183" y="130" text-anchor="middle" class="sv-label-seq2">d(a, b)</text>
+              <text x="180" y="180" text-anchor="middle" class="sv-muted">d̃(A, B) ≤ d(a, b) para todo a ∈ A, b ∈ B</text>
+            </svg>
+            <figcaption>Dos discos elegidos para el dibujo. <i>d̃</i>(<i>A</i>, <i>B</i>) es el ínfimo de todos los largos <i>d</i>(<i>a</i>, <i>b</i>), así que ningún segmento naranja puede ser más corto que el tramo punteado. Si <i>d̃</i> &gt; ε, todo segmento entre los dos conjuntos mide más que ε.</figcaption>
+          </figure>
+        </div>
+
+        <div class="step has-viz">
+          <div class="step-text">
+            <p class="step-title">La bola $B(x, \varepsilon/2)$ elige un $M_{n_0}$</p>
+            <p>Sea $x \in \overline{\bigcup_n M_n}$. Como $B(x, \varepsilon/2) \cap \bigcup_n M_n \neq \emptyset$, existen $n_0 \in \mathbb{N}$ e $y_0 \in M_{n_0}$ con $d(x, y_0) \lt \varepsilon/2$. Afirmamos que $x \in \overline{M_{n_0}}$.</p>
+            <p>Sea $r \gt 0$ y $\rho = \min\{r, \varepsilon/2\} \gt 0$. Existe $y \in B(x, \rho) \cap \bigcup_n M_n$, digamos $y \in M_m$. Si fuera $m \neq n_0$, por el lema
+              $$\begin{aligned} \varepsilon \lt d(y, y_0) &\le d(y, x) + d(x, y_0) \\ &\lt \frac\varepsilon2 + \frac\varepsilon2 = \varepsilon, \end{aligned}$$
+              absurdo. Luego $m = n_0$, es decir $y \in M_{n_0}$, y además $d(x, y) \lt \rho \le r$, así que $y \in B(x, r) \cap M_{n_0}$. Como $r$ era arbitrario, $x \in \overline{M_{n_0}} \subseteq \bigcup_n \overline{M_n}$. $\blacksquare$</p>
+          </div>
+          <figure class="viz">
+            <canvas id="p1-2c2025-ej4-c2" aria-label="Conjuntos separados por más de epsilon; la bola de radio epsilon sobre dos alrededor de x toca a lo sumo uno"></canvas>
+            <div class="ctrl">
+              <div class="slider"><label for="p1-2c2025-ej4-r2"><i>r</i></label><input type="range" id="p1-2c2025-ej4-r2" min="5" max="200" value="120"><output id="p1-2c2025-ej4-r2-o"></output></div>
+            </div>
+            <dl class="read" id="p1-2c2025-ej4-read2" aria-live="polite"></dl>
+            <figcaption>Los mismos cuatro discos, con ε = 1: entre dos cualesquiera hay más de 1 de distancia (valores elegidos para el dibujo). Arrastrá <i>x</i>. La circunferencia punteada es <i>B</i>(<i>x</i>, ε/2); tiene diámetro ε, así que toca a lo sumo un disco, que es el <i>M</i><sub><i>n</i>₀</sub>. La bola sombreada es <i>B</i>(<i>x</i>, ρ) con ρ = mín{<i>r</i>, ε/2}, y el punto <i>y</i> que contiene es siempre de <i>M</i><sub><i>n</i>₀</sub>.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej4a</code>, <code>ej4b</code>: <code>dtilde_le</code> es el lema (<code>csInf_le</code>), <code>ej4a</code> es <code>Set.iUnion_subset</code> + <code>closure_mono</code>, y <code>ej4b</code> sigue la resolución con <code>Metric.mem_closure_iff</code> (la Definición 4.22) y el radio <code>min r (ε/2)</code>.</p>
+  </article>
+
+  <!-- ===================== EJERCICIO 5 ===================== -->
+  <article class="ej" id="p1-2c2025-ej5" data-short="Ej. 5" data-title="Continuidad de la evaluación F(f, x) = f(x)" data-topics="continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">Ej. 5</span>
+      <h3>Continuidad de la evaluación $F(f, x) = f(x)$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun"><p>Sea $C([0, 1]) = \{f : [0, 1] \to \mathbb{R} : f \text{ es continua}\}$ visto como espacio métrico con la métrica <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_\infty$</span>. Definimos una métrica en $C([0, 1]) \times [0, 1]$ mediante
+      $$\begin{aligned} &d((f, x), (g, y)) \\ &\quad := \max\{d_\infty(f, g),\ |x - y|\}. \end{aligned}$$
+      Sea $F : C([0, 1]) \times [0, 1] \to \mathbb{R}$ la función definida como $F(f, x) = f(x)$. Probar que $F$ es continua.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Separar en “cambiar la función” y “mover el punto”.</em> $|f(x) - g(y)| \le |f(x) - g(x)| + |g(x) - g(y)|$. El primer sumando es a lo sumo $d_\infty(f, g)$; el segundo es chico porque $g$ es continua en $y$. Cada uno se controla con una coordenada de la métrica producto.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que probar</p>
+          <p>Usamos la <span class="ref" data-ref="def-5.4">definición de continuidad en un punto</span>: $F$ es continua en $(g, y)$ si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que $d((f, x), (g, y)) \lt \delta$ implica $|F(f, x) - F(g, y)| \lt \varepsilon$.</p>
+        </div>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $\delta$</p>
+          <p>Fijemos $(g, y) \in C([0,1]) \times [0,1]$ y $\varepsilon \gt 0$. Como <span class="ref" data-ref="def-5.4">$g$ es continua en $y$</span>, existe $\delta_1 \gt 0$ tal que $|x - y| \lt \delta_1$ implica $|g(x) - g(y)| \lt \varepsilon/2$ (para $x \in [0,1]$). Sea $\delta = \min\{\delta_1, \varepsilon/2\} \gt 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej5-c1" aria-label="Gráfico de g con la banda de altura epsilon sobre dos alrededor de g(y) y la ventana de ancho delta 1 alrededor de y"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej5-y"><i>y</i></label><input type="range" id="p1-2c2025-ej5-y" min="0" max="100" value="42"><output id="p1-2c2025-ej5-y-o"></output></div>
+            <div class="slider"><label for="p1-2c2025-ej5-eps">ε</label><input type="range" id="p1-2c2025-ej5-eps" min="4" max="80" value="30"><output id="p1-2c2025-ej5-eps-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej5-read1" aria-live="polite"></dl>
+          <figcaption>Una <i>g</i> elegida para el dibujo. La banda horizontal es (<i>g</i>(<i>y</i>) − ε/2, <i>g</i>(<i>y</i>) + ε/2); la vertical es la ventana |<i>x</i> − <i>y</i>| &lt; δ₁ más ancha (calculada numéricamente) en la que el gráfico de <i>g</i> no se sale de esa banda. δ es el menor entre δ₁ y ε/2.</figcaption>
+        </figure>
+      </div>
+
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La cuenta</p>
+          <p>Sea $(f, x)$ con $d((f, x), (g, y)) \lt \delta$. Como $d$ es un máximo, $d_\infty(f, g) \lt \delta \le \varepsilon/2$ y $|x - y| \lt \delta \le \delta_1$. Entonces, usando que $|f(x) - g(x)| \le {}$ $\sup_t |f(t) - g(t)| = d_\infty(f, g)$,
+            $$\begin{aligned} &|F(f, x) - F(g, y)| = |f(x) - g(y)| \\ &\quad \le |f(x) - g(x)| + |g(x) - g(y)| \\ &\quad \lt \frac\varepsilon2 + \frac\varepsilon2 = \varepsilon. \end{aligned}$$
+            Como $(g, y)$ era arbitrario, $F$ es continua. $\blacksquare$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="p1-2c2025-ej5-c2" aria-label="Tubo de radio delta alrededor de g, una f adentro del tubo y los dos tramos que suman menos que epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="p1-2c2025-ej5-s"><i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>)/δ</label><input type="range" id="p1-2c2025-ej5-s" min="0" max="100" value="80"><output id="p1-2c2025-ej5-s-o"></output></div>
+            <div class="slider"><label for="p1-2c2025-ej5-u">(<i>x</i> − <i>y</i>)/δ</label><input type="range" id="p1-2c2025-ej5-u" min="-98" max="98" value="70"><output id="p1-2c2025-ej5-u-o"></output></div>
+          </div>
+          <dl class="read" id="p1-2c2025-ej5-read2" aria-live="polite"></dl>
+          <figcaption>Mismos <i>g</i>, <i>y</i> y ε que el dibujo anterior. El tubo sombreado es {<i>d</i><sub>∞</sub>(·, <i>g</i>) &lt; δ} y la curva naranja es una <i>f</i> adentro (elegida para el dibujo). El tramo naranja vertical es |<i>f</i>(<i>x</i>) − <i>g</i>(<i>x</i>)| y el verde, |<i>g</i>(<i>x</i>) − <i>g</i>(<i>y</i>)|: cada uno mide menos que ε/2, así que <i>f</i>(<i>x</i>) cae en la banda (<i>g</i>(<i>y</i>) − ε, <i>g</i>(<i>y</i>) + ε).</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="lean"><b>Verificado en Lean</b><code>Parcial1_2C2025.ej5</code>: <code>C(unitInterval, ℝ)</code> con la métrica $d_\infty$ de Mathlib, y la métrica producto es exactamente $\max\{d_\infty, |\cdot|\}$ (<code>dist_prod_eq</code>). Sigue la cuenta con <code>Metric.continuous_iff</code>, <code>ContinuousMap.dist_apply_le_dist</code> y la continuidad de <code>g</code> en <code>y</code>.</p>
+  </article>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/parciales/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo<\/b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:<\/p><ul class=\"items\"><li><b>finito<\/b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<\/li><li><b>infinito<\/b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<\/li><li><b>numerable<\/b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<\/li><li><b>a lo sumo numerable<\/b> o <b>contable<\/b> si es finito o numerable.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.<\/p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\neq \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia<\/strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.<\/p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura<\/strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo<\/strong> de $A$ si:<\/p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).<\/p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo<\/b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-3.12": {
+  "tipo": "Ejemplo",
+  "numero": "3.12",
+  "titulo": "Numerabilidad de $\\mathbb{N} \\times \\mathbb{N}$ vía Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $\\mathbb{N} \\times \\mathbb{N}$ es numerable.<\/p>",
+  "fuente": "ejemplos/p2.typ (Ejemplo 14, rotulado “Ejemplo 3.12”); no es una caja de apuntes.typ"
+ },
+ "ext-clausura-monotona": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La clausura es monótona",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Si $A \\subseteq B \\subseteq M$, entonces $\\overline{A} \\subseteq \\overline{B}$.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "guia-p2-ej14c": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 14 (c)",
+  "titulo": "Cardinal de $\\mathbb{R}^k$",
+  "enunciado": "<p>Calcule el cardinal de $\\mathbb{R}^k$ para cada $k \\in \\mathbb{N}$.<\/p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p2-ej6a": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 6 (a)",
+  "titulo": "Unión numerable de contables",
+  "enunciado": "<p>Sea $\\{A_n\\}_{n \\in \\mathbb{N}}$ una familia de conjuntos contables. Pruebe que $\\bigcup_{n \\in \\mathbb{N}} A_n$ es contable.<\/p>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p3-ej4b": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4 (b)",
+  "titulo": "Las bolas abiertas son abiertas",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.<\/p><p>(b) Pruebe que $B(x, r)$ es un conjunto abierto.<\/p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej4e": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4 (e)",
+  "titulo": "Clausura de la bola abierta",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.<\/p><p>(d) Pruebe que $\\overline{B}(x, r) = \\{y \\in E : d(x, y) \\le r\\}$ es un conjunto cerrado.<\/p><p>(e) Deduzca que $\\overline{B(x, r)} \\subseteq \\overline{B}(x, r)$.<\/p>",
+  "fuente": "guias/p3.typ (se incluye el ítem (d), donde se define $\\overline{B}(x, r)$)"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3": {
+  "tipo": "Proposición",
+  "numero": "3",
+  "titulo": "Equivalencia de supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado superiormente. Entonces $s = \\sup(A)$ si y sólo si se cumple:<\/p><p>a) $s$ es cota superior, y<\/p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $s - \\varepsilon \\lt a_\\varepsilon \\le s$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:<\/p><p>a) $i$ es cota inferior de $A$, y<\/p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-2": {
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado inferiormente y no vacío. Entonces existe $i = \\inf(A) \\in \\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* parciales/p1-2c2025 */
+(() => {
+"use strict";
+/* Dibujos del primer parcial 2C 2025. Usa window.PP (ver _shell.html). */
+const ID = "p1-2c2025";
+const C = (t) => PP.css(t);
+const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹", SUB = "₀₁₂₃₄₅₆₇₈₉";
+const sup = (n) => String(n).split("").map((d) => SUP[+d]).join("");
+const sub = (n) => String(n).split("").map((d) => SUB[+d]).join("");
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Marco con la misma escala en x y en y (para bolas que se vean redondas). */
+function eqFrame(w, h, x0, x1, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0, x1, y0: 0, y1: span }, p);
+}
+
+/* Arrastre de puntos sobre un canvas: pick(px, py) devuelve un id o null; move(id, x, y) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* ===================== Ejercicio 1 ===================== */
+
+/* Paso 1: los elementos m/(m+n) con m, n ≤ N, una fila por n. */
+PP.register(function ej1Cotas() {
+  const N = PP.val(ID + "-ej1-N");
+  PP.out(ID + "-ej1-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(ID + "-ej1-c1", 0.62);
+  const T = PP.frame(w, h, { x0: -0.08, x1: 1.08, y0: N + 0.8, y1: 0.2 }, { l: 40, r: 14, t: 22, b: 30 });
+  // inversión de y: fila n = 1 arriba
+  const Yr = (n) => T.p.t + (n - 0.2) / (N + 0.6) * (h - T.p.t - T.p.b);
+  ctx.save();
+  ctx.font = "11px 'IBM Plex Sans', system-ui, sans-serif";
+  ctx.fillStyle = C("--muted"); ctx.strokeStyle = C("--rule"); ctx.lineWidth = 1;
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  [0, 0.25, 0.5, 0.75, 1].forEach((v) => {
+    ctx.beginPath(); ctx.moveTo(T.X(v), T.p.t); ctx.lineTo(T.X(v), h - T.p.b); ctx.stroke();
+    ctx.fillText(PP.fmt(v, 2), T.X(v), h - T.p.b + 6);
+  });
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  const every = N <= 10 ? 1 : N <= 20 ? 2 : 5;
+  for (let n = 1; n <= N; n++) if (n === 1 || n % every === 0) ctx.fillText("n=" + n, T.p.l - 4, Yr(n));
+  ctx.restore();
+  // cotas
+  PP.path(ctx, [[T.X(0), T.p.t - 8], [T.X(0), h - T.p.b]], C("--ok"), 2.5);
+  PP.path(ctx, [[T.X(1), T.p.t - 8], [T.X(1), h - T.p.b]], C("--ok"), 2.5);
+  PP.label(ctx, "cota inferior 0", T.X(0) + 4, T.p.t - 6, C("--ok"), "left", "middle", 11);
+  PP.label(ctx, "cota superior 1", T.X(1) - 4, T.p.t - 6, C("--ok"), "right", "middle", 11);
+  const r = N <= 10 ? 3.6 : N <= 20 ? 2.6 : 2;
+  let lo = 1, hi = 0;
+  for (let n = 1; n <= N; n++) {
+    for (let m = 1; m <= N; m++) {
+      const a = m / (m + n);
+      lo = Math.min(lo, a); hi = Math.max(hi, a);
+      PP.dot(ctx, T.X(a), Yr(n), r, C("--accent"));
+    }
+  }
+  PP.read(ID + "-ej1-read1", [
+    ["puntos dibujados", String(N * N)],
+    ["menor dibujado", "1/(1+" + N + ") = " + PP.fmt(lo, 4)],
+    ["mayor dibujado", N + "/(" + N + "+1) = " + PP.fmt(hi, 4)],
+    ["¿0 ∈ A? ¿1 ∈ A?", "no, no", "good"],
+  ]);
+}, [ID + "-ej1-N"]);
+
+/* Pasos 2 y 3: sucesiones dentro de A que entran en la banda ε. */
+function ej1Banda(cid, sid, rid, modo) {
+  return function () {
+    const eps = PP.val(sid) / 100;
+    PP.out(sid + "-o", PP.fmt(eps, 2));
+    const k = Math.floor(1 / eps) + 1; // primer natural con 1/k < ε
+    const M = clamp(Math.max(k + 6, 12), 12, 45);
+    const { ctx, w, h } = PP.canvas(cid, 0.62);
+    const sup = modo === "sup";
+    const box = sup ? { x0: 0, x1: M + 1, y0: 0.4, y1: 1.06 } : { x0: 0, x1: M + 1, y0: -0.04, y1: 0.58 };
+    const T = PP.frame(w, h, box);
+    // banda
+    const b0 = sup ? Math.max(1 - eps, box.y0) : 0, b1 = sup ? 1 : Math.min(eps, box.y1);
+    PP.rect(ctx, T.X(box.x0), T.Y(b1), T.X(box.x1) - T.X(box.x0), T.Y(b0) - T.Y(b1), null, C("--band"));
+    PP.axes(ctx, T, { xLabel: sup ? "m" : "n", yLabel: sup ? "m/(m+1)" : "1/(1+n)", intX: true });
+    const edge = sup ? 1 - eps : eps;
+    if (edge > box.y0 && edge < box.y1) {
+      PP.path(ctx, [[T.X(box.x0), T.Y(edge)], [T.X(box.x1), T.Y(edge)]], C("--accent"), 1.5, [5, 4]);
+      PP.label(ctx, sup ? "1 − ε" : "ε", T.X(box.x1) - 4, T.Y(edge) + (sup ? 3 : -3), C("--accent"), "right", sup ? "top" : "bottom", 12);
+    }
+    const lim = sup ? 1 : 0;
+    PP.path(ctx, [[T.X(box.x0), T.Y(lim)], [T.X(box.x1), T.Y(lim)]], C("--ok"), 2);
+    if (sup) PP.label(ctx, "1 = sup A", T.X(box.x1) - 4, T.Y(1) - 3, C("--ok"), "right", "bottom", 12);
+    else PP.label(ctx, "0 = ínf A", T.p.l + 6, T.Y(0) - 3, C("--ok"), "left", "bottom", 12);
+    for (let j = 1; j <= M; j++) {
+      const a = sup ? j / (j + 1) : 1 / (1 + j);
+      const inBand = sup ? a > 1 - eps : a < eps;
+      PP.dot(ctx, T.X(j), T.Y(a), j === k ? 6 : 3, inBand ? C("--accent") : C("--seq2"));
+    }
+    const ak = sup ? k / (k + 1) : 1 / (1 + k);
+    PP.dot(ctx, T.X(k), T.Y(ak), 9, null, C("--ink"));
+    PP.label(ctx, (sup ? "m = " : "n = ") + k, T.X(k), T.Y(ak) + (sup ? 12 : -12), C("--ink"), "center", sup ? "top" : "bottom", 12);
+    PP.read(rid, sup ? [
+      ["ε", PP.fmt(eps, 3)],
+      ["m de Arquímedes", k + "   (1/m = " + PP.fmt(1 / k, 4) + " < ε)"],
+      ["a_ε = m/(m+1)", PP.fmt(ak, 4)],
+      ["1 − ε", PP.fmt(1 - eps, 4)],
+      ["¿1 − ε < a_ε?", "sí", "good"],
+    ] : [
+      ["ε", PP.fmt(eps, 3)],
+      ["n de Arquímedes", k + "   (1/n = " + PP.fmt(1 / k, 4) + " < ε)"],
+      ["a_ε = 1/(1+n)", PP.fmt(ak, 4)],
+      ["¿a_ε < 0 + ε?", "sí", "good"],
+    ]);
+  };
+}
+PP.register(ej1Banda(ID + "-ej1-c2", ID + "-ej1-eps", ID + "-ej1-read2", "sup"), [ID + "-ej1-eps"]);
+PP.register(ej1Banda(ID + "-ej1-c3", ID + "-ej1-eps2", ID + "-ej1-read3", "inf"), [ID + "-ej1-eps2"]);
+
+/* ===================== Ejercicio 2 ===================== */
+
+const TUPLA = [[3, 1], [-1, 1], [1, 2], [-2, 3]]; // q1..q4 (valores elegidos)
+function fracPow(p, q, e) { return [Math.pow(p, e), Math.pow(q, e)]; }
+function fracStr(f) {
+  const [p, q] = f;
+  const s = (p < 0 ? "−" : "") + Math.abs(p);
+  return q === 1 ? s : s + "/" + q;
+}
+function drawFrac(ctx, f, x, y, color) {
+  const [p, q] = f;
+  const sgn = p < 0 ? "−" : "";
+  if (q === 1) { PP.label(ctx, sgn + Math.abs(p), x, y, color, "center", "middle", 12); return; }
+  PP.label(ctx, sgn + Math.abs(p), x, y - 2, color, "center", "bottom", 11);
+  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = 1;
+  const wd = Math.max(ctx.measureText(String(q)).width, 14) * 0.75 + 4;
+  ctx.beginPath(); ctx.moveTo(x - wd, y); ctx.lineTo(x + wd, y); ctx.stroke(); ctx.restore();
+  PP.label(ctx, String(q), x, y + 2, color, "center", "top", 11);
+}
+
+PP.register(function ej2Cinta() {
+  const k = PP.val(ID + "-ej2-k");
+  PP.out(ID + "-ej2-k-o", String(k));
+  const { ctx, w, h } = PP.canvas(ID + "-ej2-c1", 0.5);
+  const NC = 9, padX = 8;
+  const cw = (w - 2 * padX) / NC;
+  const top = Math.max(44, h * 0.3), ch = Math.min(56, h * 0.34);
+  const qk = TUPLA[k - 1];
+  const vals = [];
+  for (let n = 1; n <= NC; n++) vals.push(n <= k ? TUPLA[n - 1] : fracPow(qk[0], qk[1], n - k));
+  // llaves
+  const xA = padX, xB = padX + k * cw, xE = padX + NC * cw;
+  PP.path(ctx, [[xA + 2, top - 10], [xA + 2, top - 16], [xB - 2, top - 16], [xB - 2, top - 10]], C("--accent"), 1.5);
+  PP.label(ctx, k === 1 ? "libre" : "libres", (xA + xB) / 2, top - 20, C("--accent"), "center", "bottom", 11);
+  PP.path(ctx, [[xB + 2, top - 10], [xB + 2, top - 16], [xE - 2, top - 16], [xE - 2, top - 10]], C("--seq2"), 1.5);
+  PP.label(ctx, "potencias de q" + sub(k), (xB + xE) / 2, top - 20, C("--seq2"), "center", "bottom", 11);
+  for (let i = 0; i < NC; i++) {
+    const n = i + 1, x = padX + i * cw;
+    const free = n <= k;
+    PP.rect(ctx, x + 1.5, top, cw - 3, ch, free ? C("--accent") : C("--seq2"), free ? C("--area") : C("--area2"));
+    PP.label(ctx, "b" + sub(n), x + cw / 2, top + ch + 4, C("--muted"), "center", "top", 11);
+    drawFrac(ctx, vals[i], x + cw / 2, top + ch / 2, C("--ink"));
+    if (!free) PP.label(ctx, "q" + sub(k) + sup(n - k), x + cw / 2, top + ch + 20, C("--seq2"), "center", "top", 12);
+    else PP.label(ctx, "q" + sub(n), x + cw / 2, top + ch + 20, C("--accent"), "center", "top", 12);
+  }
+  const t = TUPLA.slice(0, k).map(fracStr).join(", ");
+  const bk = fracStr(qk);
+  PP.read(ID + "-ej2-read1", [
+    ["testigo k", String(k)],
+    ["(q₁, …, q" + sub(k) + ")", "(" + t + ")"],
+    ["b" + sub(k + 1) + " = (b" + sub(k) + ")¹", fracStr(vals[k]) + " = (" + bk + ")¹", "good"],
+    ["b" + sub(k + 2) + " = (b" + sub(k) + ")²", fracStr(vals[k + 1]) + " = (" + bk + ")²", "good"],
+    ["b" + sub(k + 3) + " = (b" + sub(k) + ")³", fracStr(vals[k + 2]) + " = (" + bk + ")³", "good"],
+  ]);
+}, [ID + "-ej2-k"]);
+
+/* ===================== Ejercicio 3 ===================== */
+
+const E3 = { x: [2.6, 3.2], y: [7.2, 2.2], z: null, T1: null, T2: null };
+function met3() { return PP.radio(ID + "-ej3-met") || "2"; }
+function dist(a, b, m) {
+  const dx = Math.abs(a[0] - b[0]), dy = Math.abs(a[1] - b[1]);
+  return m === "1" ? dx + dy : m === "inf" ? Math.max(dx, dy) : Math.hypot(dx, dy);
+}
+function ball(ctx, T, c, r, m, stroke, fill, dash) {
+  const s = T.X(1) - T.X(0), cx = T.X(c[0]), cy = T.Y(c[1]), R = r * s;
+  if (m === "2") { PP.circle(ctx, cx, cy, R, stroke, fill, dash, 1.6); return; }
+  const pts = m === "1"
+    ? [[cx + R, cy], [cx, cy - R], [cx - R, cy], [cx, cy + R]]
+    : [[cx + R, cy + R], [cx + R, cy - R], [cx - R, cy - R], [cx - R, cy + R]];
+  PP.path(ctx, pts, stroke, 1.6, dash, true, fill);
+}
+const metName = { "2": "d₂ (euclídea)", "1": "d₁", "inf": "d∞" };
+
+function ej3Uno() {
+  const m = met3();
+  const { ctx, w, h } = PP.canvas(ID + "-ej3-c1", 0.62);
+  const T = eqFrame(w, h, 0, 10); E3.T1 = T;
+  const { x, y } = E3;
+  const r = dist(x, y, m);
+  ball(ctx, T, x, r / 3, m, null, C("--area"));
+  ball(ctx, T, y, r / 3, m, null, C("--area3"));
+  ball(ctx, T, x, r / 3, m, C("--accent"), null, [5, 4]);
+  ball(ctx, T, y, r / 3, m, C("--seq3"), null, [5, 4]);
+  PP.path(ctx, [[T.X(x[0]), T.Y(x[1])], [T.X(y[0]), T.Y(y[1])]], C("--muted"), 1, [2, 3]);
+  PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 5, C("--accent"));
+  PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 5, C("--seq3"));
+  PP.label(ctx, "x", T.X(x[0]) + 7, T.Y(x[1]) - 5, C("--accent"), "left", "bottom", 13);
+  PP.label(ctx, "y", T.X(y[0]) + 7, T.Y(y[1]) - 5, C("--seq3"), "left", "bottom", 13);
+  PP.label(ctx, "U", T.X(x[0]), T.Y(x[1]) + 10, C("--accent"), "center", "top", 12);
+  PP.label(ctx, "V", T.X(y[0]), T.Y(y[1]) + 10, C("--seq3"), "center", "top", 12);
+  PP.label(ctx, "arrastrá x o y", w - 12, h - 10, C("--muted"), "right", "bottom", 11);
+  PP.read(ID + "-ej3-read1", [
+    ["métrica", metName[m]],
+    ["r = d(x, y)", PP.fmt(r, 3)],
+    ["radio r/3", PP.fmt(r / 3, 3)],
+    ["x ∈ U, y ∈ V", "sí", "good"],
+    ["¿B̄(x, r/3) ∩ B̄(y, r/3) = ∅?", "sí", "good"],
+  ]);
+}
+function ej3Dos() {
+  const m = met3();
+  const { ctx, w, h } = PP.canvas(ID + "-ej3-c2", 0.62);
+  const T = eqFrame(w, h, 0, 10); E3.T2 = T;
+  const { x, y } = E3;
+  if (!E3.z) E3.z = [(x[0] + y[0]) / 2, (x[1] + y[1]) / 2 + 0.6];
+  const z = E3.z;
+  const r = dist(x, y, m), dxz = dist(x, z, m), dzy = dist(z, y, m);
+  const inX = dxz <= r / 3 + 1e-9, inY = dzy <= r / 3 + 1e-9;
+  ball(ctx, T, x, r / 3, m, C("--accent"), C("--band"), [5, 4]);
+  ball(ctx, T, y, r / 3, m, C("--seq3"), C("--area3"), [5, 4]);
+  PP.path(ctx, [[T.X(x[0]), T.Y(x[1])], [T.X(z[0]), T.Y(z[1])]], C("--accent"), 2);
+  PP.path(ctx, [[T.X(z[0]), T.Y(z[1])], [T.X(y[0]), T.Y(y[1])]], C("--seq3"), 2);
+  PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 5, C("--accent"));
+  PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 5, C("--seq3"));
+  PP.dot(ctx, T.X(z[0]), T.Y(z[1]), 6, C("--seq2"));
+  PP.label(ctx, "x", T.X(x[0]) - 7, T.Y(x[1]) - 5, C("--accent"), "right", "bottom", 13);
+  PP.label(ctx, "y", T.X(y[0]) + 7, T.Y(y[1]) - 5, C("--seq3"), "left", "bottom", 13);
+  PP.label(ctx, "z", T.X(z[0]) + 8, T.Y(z[1]) - 6, C("--seq2"), "left", "bottom", 13);
+  PP.label(ctx, "arrastrá z", w - 12, h - 10, C("--muted"), "right", "bottom", 11);
+  PP.read(ID + "-ej3-read2", [
+    ["r = d(x, y)", PP.fmt(r, 3)],
+    ["d(x, z)", PP.fmt(dxz, 3) + (inX ? "  ≤ r/3: z ∈ B̄(x, r/3)" : "  > r/3")],
+    ["d(z, y)", PP.fmt(dzy, 3) + (inY ? "  ≤ r/3: z ∈ B̄(y, r/3)" : "  > r/3")],
+    ["d(x, z) + d(z, y)", PP.fmt(dxz + dzy, 3) + " ≥ r = " + PP.fmt(r, 3), "good"],
+    ["¿z en las dos bolas cerradas?", inX && inY ? "sí" : "no", inX && inY ? "bad" : "good"],
+  ]);
+}
+PP.register(ej3Uno, ['input[name="' + ID + '-ej3-met"]']);
+PP.register(ej3Dos, ['input[name="' + ID + '-ej3-met"]']);
+function clampPt(p, T) { return [clamp(p[0], 0.2, T.box.x1 - 0.2), clamp(p[1], 0.2, T.box.y1 - 0.2)]; }
+draggable(ID + "-ej3-c1", () => E3.T1, (px, py, T) => {
+  const dx = Math.hypot(px - T.X(E3.x[0]), py - T.Y(E3.x[1])), dy = Math.hypot(px - T.X(E3.y[0]), py - T.Y(E3.y[1]));
+  if (Math.min(dx, dy) > 28) return null;
+  return dx <= dy ? "x" : "y";
+}, (who, X, Y, T) => {
+  const p = clampPt([X, Y], T), o = who === "x" ? E3.y : E3.x;
+  if (Math.hypot(p[0] - o[0], p[1] - o[1]) < 0.4) return;
+  E3[who] = p;
+}, () => { ej3Uno(); ej3Dos(); });
+draggable(ID + "-ej3-c2", () => E3.T2, (px, py, T) => {
+  if (!E3.z) return null;
+  return Math.hypot(px - T.X(E3.z[0]), py - T.Y(E3.z[1])) <= 30 ? "z" : null;
+}, (who, X, Y, T) => { E3.z = clampPt([X, Y], T); }, ej3Dos);
+
+/* ===================== Ejercicio 4 ===================== */
+
+const DISCOS = [
+  { c: [1.5, 2.5], R: 1.0 },
+  { c: [4.9, 2.3], R: 0.9 },
+  { c: [8.0, 3.0], R: 0.8 },
+  { c: [5.0, 5.2], R: 0.5 },
+]; // separados por más de ε = 1 (valores elegidos)
+const EPS4 = 1;
+const ang = (150 * Math.PI) / 180;
+const XBORDE = [DISCOS[1].c[0] + DISCOS[1].R * Math.cos(ang), DISCOS[1].c[1] + DISCOS[1].R * Math.sin(ang)];
+const E4 = { x: XBORDE.slice(), T1: null, T2: null };
+
+function drawDiscos(ctx, T, hi) {
+  const s = T.X(1) - T.X(0);
+  DISCOS.forEach((D, i) => {
+    const on = i === hi;
+    PP.circle(ctx, T.X(D.c[0]), T.Y(D.c[1]), D.R * s, on ? C("--accent") : C("--seq3"), on ? C("--area") : C("--area3"), [4, 3], 1.4);
+    PP.label(ctx, "M" + sub(i + 1), T.X(D.c[0]), T.Y(D.c[1]), on ? C("--accent") : C("--seq3"), "center", "middle", 13);
+  });
+}
+function toward(p, c, t) {
+  const dx = c[0] - p[0], dy = c[1] - p[1], L = Math.hypot(dx, dy);
+  if (L < 1e-9) return [p[0] + t, p[1]];
+  return [p[0] + dx / L * t, p[1] + dy / L * t];
+}
+
+PP.register(function ej4a() {
+  const r = PP.val(ID + "-ej4-r1") / 100;
+  PP.out(ID + "-ej4-r1-o", PP.fmt(r, 2));
+  const { ctx, w, h } = PP.canvas(ID + "-ej4-c1", 0.66);
+  const T = eqFrame(w, h, 0, 10); E4.T1 = T;
+  const s = T.X(1) - T.X(0);
+  drawDiscos(ctx, T, 1);
+  const x = XBORDE, D = DISCOS[1];
+  const y = toward(x, D.c, Math.min(r / 2, D.R));
+  PP.circle(ctx, T.X(x[0]), T.Y(x[1]), r * s, C("--seq2"), C("--area2"), [5, 4], 1.6);
+  PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 5, C("--ink"));
+  PP.label(ctx, "x", T.X(x[0]) - 7, T.Y(x[1]) - 4, C("--ink"), "right", "bottom", 13);
+  PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 4.5, C("--seq2"));
+  PP.label(ctx, "y", T.X(y[0]) + 6, T.Y(y[1]) + 4, C("--seq2"), "left", "top", 13);
+  PP.label(ctx, "B(x, r)", T.X(x[0]) - r * s * 0.72, T.Y(x[1]) + r * s * 0.72 + 2, C("--seq2"), "right", "top", 12);
+  PP.read(ID + "-ej4-read1", [
+    ["x ∈ M₂", "no (está en el borde)", "bad"],
+    ["x ∈ cl(M₂)", "sí", "good"],
+    ["d(x, y)", PP.fmt(Math.hypot(x[0] - y[0], x[1] - y[1]), 3) + " < r = " + PP.fmt(r, 2)],
+    ["y ∈ B(x, r) ∩ M₂ ⊆ B(x, r) ∩ ⋃ Mₘ", "sí", "good"],
+  ]);
+}, [ID + "-ej4-r1"]);
+
+function ej4b() {
+  const r = PP.val(ID + "-ej4-r2") / 100;
+  PP.out(ID + "-ej4-r2-o", PP.fmt(r, 2));
+  const { ctx, w, h } = PP.canvas(ID + "-ej4-c2", 0.66);
+  const T = eqFrame(w, h, 0, 10); E4.T2 = T;
+  const s = T.X(1) - T.X(0);
+  const x = E4.x;
+  const info = DISCOS.map((D) => Math.hypot(x[0] - D.c[0], x[1] - D.c[1]));
+  const toca = DISCOS.map((D, i) => info[i] < D.R + EPS4 / 2).map((b, i) => (b ? i : -1)).filter((i) => i >= 0);
+  const n0 = toca.length ? toca[0] : -1;
+  drawDiscos(ctx, T, n0);
+  // escala ε
+  PP.path(ctx, [[12, h - 14], [12 + EPS4 * s, h - 14]], C("--ink"), 2);
+  PP.label(ctx, "ε = 1", 12 + EPS4 * s + 6, h - 14, C("--ink"), "left", "middle", 11);
+  PP.circle(ctx, T.X(x[0]), T.Y(x[1]), (EPS4 / 2) * s, C("--ink"), null, [3, 3], 1.3);
+  const rho = Math.min(r, EPS4 / 2);
+  PP.circle(ctx, T.X(x[0]), T.Y(x[1]), rho * s, C("--seq2"), C("--area2"), null, 1.6);
+  const rows = [["B(x, ε/2) toca a", toca.length ? toca.map((i) => "M" + sub(i + 1)).join(", ") : "ningún Mₙ"]];
+  let inClos = false;
+  if (n0 >= 0) {
+    const D = DISCOS[n0], dist0 = info[n0], lo = Math.max(dist0 - D.R, 0);
+    inClos = dist0 <= D.R + 1e-9;
+    const y0 = toward(x, D.c, (lo + EPS4 / 2) / 2);
+    PP.dot(ctx, T.X(y0[0]), T.Y(y0[1]), 4.5, C("--accent"));
+    PP.label(ctx, "y₀", T.X(y0[0]) + 6, T.Y(y0[1]) - 3, C("--accent"), "left", "bottom", 12);
+    rows.push(["n₀", String(n0 + 1)]);
+    rows.push(["d(x, y₀)", PP.fmt(Math.hypot(x[0] - y0[0], x[1] - y0[1]), 3) + " < ε/2 = 0.5", "good"]);
+    rows.push(["ρ = mín{r, ε/2}", PP.fmt(rho, 3)]);
+    if (rho > lo) {
+      const y = toward(x, D.c, (lo + rho) / 2);
+      PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 4.5, C("--seq2"));
+      PP.label(ctx, "y", T.X(y[0]) + 6, T.Y(y[1]) + 3, C("--seq2"), "left", "top", 12);
+      rows.push(["y ∈ B(x, ρ) ∩ ⋃ Mₙ", "y ∈ M" + sub(n0 + 1) + " (m = n₀)", "good"]);
+    } else {
+      rows.push(["B(x, ρ) ∩ ⋃ Mₙ", "vacío", "bad"]);
+    }
+  }
+  rows.push(["¿x ∈ cl(⋃ Mₙ)?", inClos ? "sí: x ∈ cl(M" + sub(n0 + 1) + ")" : "no (el paso arranca con x en la clausura)", inClos ? "good" : "bad"]);
+  PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 5, C("--ink"));
+  PP.label(ctx, "x", T.X(x[0]) - 7, T.Y(x[1]) - 4, C("--ink"), "right", "bottom", 13);
+  PP.label(ctx, "arrastrá x", w - 12, h - 10, C("--muted"), "right", "bottom", 11);
+  PP.read(ID + "-ej4-read2", rows);
+}
+PP.register(ej4b, [ID + "-ej4-r2"]);
+draggable(ID + "-ej4-c2", () => E4.T2, (px, py, T) => (Math.hypot(px - T.X(E4.x[0]), py - T.Y(E4.x[1])) <= 30 ? "x" : null),
+  (who, X, Y, T) => { E4.x = [clamp(X, 0.1, T.box.x1 - 0.1), clamp(Y, 0.1, T.box.y1 - 0.1)]; }, ej4b);
+
+/* ===================== Ejercicio 5 ===================== */
+
+const g5 = (t) => 0.55 + 0.3 * Math.sin(6.2 * t - 0.5) + 0.07 * Math.sin(21 * t);
+const phi5 = (t) => 0.97 * Math.sin(17 * t + 0.8) * Math.cos(2.3 * t);
+function delta1(y, half) {
+  const gy = g5(y), st = 0.0005;
+  let best = 2;
+  for (const dir of [-1, 1]) {
+    for (let d = st; d <= 1.0001; d += st) {
+      const t = y + dir * d;
+      if (t < 0 || t > 1) break;
+      if (Math.abs(g5(t) - gy) >= half) { best = Math.min(best, d); break; }
+    }
+  }
+  return Math.min(best, 1) * 0.999;
+}
+function state5() {
+  const y = PP.val(ID + "-ej5-y") / 100, eps = PP.val(ID + "-ej5-eps") / 100;
+  const d1 = delta1(y, eps / 2);
+  return { y, eps, d1, delta: Math.min(d1, eps / 2), gy: g5(y) };
+}
+function curve(T, f, a, b) {
+  const pts = [], n = 240;
+  for (let i = 0; i <= n; i++) { const t = a + (b - a) * i / n; pts.push([T.X(t), T.Y(f(t))]); }
+  return pts;
+}
+
+function ej5Uno() {
+  const S = state5();
+  PP.out(ID + "-ej5-y-o", PP.fmt(S.y, 2));
+  PP.out(ID + "-ej5-eps-o", PP.fmt(S.eps, 2));
+  const { ctx, w, h } = PP.canvas(ID + "-ej5-c1", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: 1, y0: Math.min(0, S.gy - S.eps / 2 - 0.05), y1: Math.max(1.05, S.gy + S.eps / 2 + 0.05) });
+  const a = Math.max(0, S.y - S.d1), b = Math.min(1, S.y + S.d1);
+  PP.rect(ctx, T.X(a), T.p.t, T.X(b) - T.X(a), h - T.p.t - T.p.b, null, C("--area3"));
+  PP.rect(ctx, T.X(0), T.Y(S.gy + S.eps / 2), T.X(1) - T.X(0), T.Y(S.gy - S.eps / 2) - T.Y(S.gy + S.eps / 2), null, C("--band"));
+  PP.axes(ctx, T, { xLabel: "t", yLabel: "g(t)" });
+  [S.gy + S.eps / 2, S.gy - S.eps / 2].forEach((v) => PP.path(ctx, [[T.X(0), T.Y(v)], [T.X(1), T.Y(v)]], C("--accent"), 1.2, [5, 4]));
+  PP.label(ctx, "g(y) ± ε/2", T.X(1) - 4, T.Y(S.gy + S.eps / 2) - 2, C("--accent"), "right", "bottom", 11);
+  PP.path(ctx, curve(T, g5, 0, 1), C("--ink"), 1.6);
+  PP.path(ctx, curve(T, g5, a, b), C("--seq3"), 3);
+  // δ sobre el eje
+  const da = Math.max(0, S.y - S.delta), db = Math.min(1, S.y + S.delta), yb = h - T.p.b - 4;
+  PP.path(ctx, [[T.X(da), yb], [T.X(db), yb]], C("--seq2"), 4);
+  PP.label(ctx, "δ", T.X(db) + 4, yb, C("--seq2"), "left", "middle", 12);
+  PP.label(ctx, "|t − y| < δ₁", (T.X(a) + T.X(b)) / 2, T.p.t + 2, C("--seq3"), "center", "top", 11);
+  PP.dot(ctx, T.X(S.y), T.Y(S.gy), 5, C("--accent"));
+  PP.label(ctx, "(y, g(y))", T.X(S.y) + 7, T.Y(S.gy) + 4, C("--accent"), "left", "top", 12);
+  PP.read(ID + "-ej5-read1", [
+    ["g(y)", PP.fmt(S.gy, 3)],
+    ["ε/2", PP.fmt(S.eps / 2, 3)],
+    ["δ₁ (numérico)", PP.fmt(S.d1, 3)],
+    ["δ = mín{δ₁, ε/2}", PP.fmt(S.delta, 3) + (S.delta < S.d1 ? "  (manda ε/2)" : "  (manda δ₁)")],
+  ]);
+}
+
+function ej5Dos() {
+  const S = state5();
+  const s = PP.val(ID + "-ej5-s") / 100, u = PP.val(ID + "-ej5-u") / 100;
+  PP.out(ID + "-ej5-s-o", PP.fmt(s, 2));
+  PP.out(ID + "-ej5-u-o", PP.fmt(u, 2));
+  const f = (t) => g5(t) + s * S.delta * phi5(t);
+  const x = clamp(S.y + u * S.delta, 0, 1);
+  let dinf = 0;
+  for (let i = 0; i <= 2000; i++) { const t = i / 2000; dinf = Math.max(dinf, Math.abs(f(t) - g5(t))); }
+  const { ctx, w, h } = PP.canvas(ID + "-ej5-c2", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: 1, y0: Math.min(0, S.gy - S.eps - 0.05), y1: Math.max(1.05, S.gy + S.eps + 0.05) });
+  PP.rect(ctx, T.X(0), T.Y(S.gy + S.eps), T.X(1) - T.X(0), T.Y(S.gy - S.eps) - T.Y(S.gy + S.eps), null, C("--band"));
+  PP.axes(ctx, T, { xLabel: "t" });
+  [S.gy + S.eps, S.gy - S.eps].forEach((v) => PP.path(ctx, [[T.X(0), T.Y(v)], [T.X(1), T.Y(v)]], C("--accent"), 1.2, [5, 4]));
+  PP.label(ctx, "g(y) ± ε", T.X(1) - 4, T.Y(S.gy + S.eps) - 2, C("--accent"), "right", "bottom", 11);
+  const up = curve(T, (t) => g5(t) + S.delta, 0, 1), dn = curve(T, (t) => g5(t) - S.delta, 0, 1).reverse();
+  PP.path(ctx, up.concat(dn), null, 1, null, true, C("--area"));
+  PP.path(ctx, curve(T, g5, 0, 1), C("--ink"), 1.6);
+  PP.path(ctx, curve(T, f, 0, 1), C("--seq2"), 1.6);
+  const gx = g5(x), fx = f(x);
+  PP.path(ctx, [[T.X(S.y), T.Y(S.gy)], [T.X(x), T.Y(S.gy)]], C("--muted"), 1, [3, 3]);
+  PP.path(ctx, [[T.X(x) + 3, T.Y(S.gy)], [T.X(x) + 3, T.Y(gx)]], C("--seq3"), 3.5);
+  PP.path(ctx, [[T.X(x) - 3, T.Y(gx)], [T.X(x) - 3, T.Y(fx)]], C("--seq2"), 3.5);
+  PP.dot(ctx, T.X(S.y), T.Y(S.gy), 5, C("--accent"));
+  PP.label(ctx, "g(y)", T.X(S.y) - 6, T.Y(S.gy) + 4, C("--accent"), "right", "top", 12);
+  PP.dot(ctx, T.X(x), T.Y(gx), 3.5, C("--ink"));
+  PP.dot(ctx, T.X(x), T.Y(fx), 5, C("--seq2"));
+  PP.label(ctx, "f(x)", T.X(x) + 7, T.Y(fx) - 3, C("--seq2"), "left", "bottom", 12);
+  PP.label(ctx, "g", T.X(0.02), T.Y(g5(0.02)) - 4, C("--ink"), "left", "bottom", 12);
+  const a = Math.abs(fx - gx), b = Math.abs(gx - S.gy), tot = Math.abs(fx - S.gy);
+  PP.read(ID + "-ej5-read2", [
+    ["δ", PP.fmt(S.delta, 3)],
+    ["d∞(f, g)", PP.fmt(dinf, 3) + " < δ ≤ ε/2", "good"],
+    ["|x − y|", PP.fmt(Math.abs(x - S.y), 3) + " < δ ≤ δ₁", "good"],
+    ["|f(x) − g(x)|", PP.fmt(a, 3) + " ≤ d∞(f, g)", a < S.eps / 2 ? "good" : "bad"],
+    ["|g(x) − g(y)|", PP.fmt(b, 3) + " < ε/2 = " + PP.fmt(S.eps / 2, 3), b < S.eps / 2 ? "good" : "bad"],
+    ["|F(f, x) − F(g, y)|", PP.fmt(tot, 3) + " < ε = " + PP.fmt(S.eps, 3), tot < S.eps ? "good" : "bad"],
+  ]);
+}
+PP.register(ej5Uno, [ID + "-ej5-y", ID + "-ej5-eps"]);
+PP.register(ej5Dos, [ID + "-ej5-y", ID + "-ej5-eps", ID + "-ej5-s", ID + "-ej5-u"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.49": {
+  "tipo": "Definición",
+  "numero": "4.49",
+  "titulo": "Sucesión acotada",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión dentro de $M$. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es <em>acotada</em> si el conjunto $$A = \\{x_n : n \\in \\mathbb{N}\\} \\subseteq M$$ es un conjunto acotado.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado</b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-espacio-de-banach": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio de Banach",
+  "enunciado": "<p>Un espacio normado $(E, \\|\\cdot\\|)$ es un <b>espacio de Banach</b> si es completo con la distancia $d(x, y) = \\|x - y\\|$, es decir, si toda sucesión de Cauchy en $E$ converge en $E$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-norma": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Norma y espacio normado",
+  "enunciado": "<p>Sea $E$ un espacio vectorial real. Una <b>norma</b> en $E$ es una función $\\|\\cdot\\| : E \\to \\mathbb{R}$ tal que, para todo $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$:</p><p>(i) $\\|x\\| \\ge 0$, y $\\|x\\| = 0$ si y sólo si $x = 0$;<br>(ii) $\\|\\lambda x\\| = |\\lambda|\\, \\|x\\|$;<br>(iii) $\\|x + y\\| \\le \\|x\\| + \\|y\\|$ (desigualdad triangular).</p><p>El par $(E, \\|\\cdot\\|)$ es un <b>espacio normado</b>; es un espacio métrico con $d(x, y) = \\|x - y\\|$, y las nociones métricas (convergencia, Cauchy, abiertos, bolas, acotados) se refieren a esa distancia.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-lineal-acotado": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Operador lineal y operador acotado",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$ y $(F, \\|\\cdot\\|_F)$ espacios normados. Una función $T : E \\to F$ es un <b>operador lineal</b> (o transformación lineal) si $T(\\lambda x + \\mu y) = \\lambda T(x) + \\mu T(y)$ para todo $x, y \\in E$ y $\\lambda, \\mu \\in \\mathbb{R}$; en particular $T(0) = 0$. $T$ es <b>acotado</b> si existe $C \\ge 0$ tal que $\\|T x\\|_F \\le C \\|x\\|_E$ para todo $x \\in E$; la <b>norma</b> de $T$ es $\\|T\\| = \\inf\\{C \\ge 0 : \\|T x\\|_F \\le C \\|x\\|_E \\ \\forall x \\in E\\}$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p3-ej15": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 15",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $A \\subseteq E$ un subconjunto de $E$. Pruebe que si $A$ es cerrado entonces el espacio métrico $(A, d)$ es completo.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p6-ej8": {
+  "tipo": "Práctica 6",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Sean $(E, \\|\\cdot\\|_E)$, $(F, \\|\\cdot\\|_F)$ espacios normados. Sea $T : E \\to F$ un operador lineal. Pruebe que son equivalentes:</p><ol type=\"a\"><li>$T$ es continuo en $0$.</li><li>Existe $x_0 \\in E$ tal que $T$ es continuo en $x_0$.</li><li>$T$ es continuo.</li><li>$T$ es uniformemente continuo.</li><li>$T$ es acotado.</li><li>Para todo $A \\subseteq E$ acotado, $T(A)$ es acotado.</li></ol>",
+  "fuente": "guias/p6.typ"
+ },
+ "teo-4.57": {
+  "tipo": "Teorema",
+  "numero": "4.57",
+  "titulo": "ℝ es completo",
+  "enunciado": "<p>$(\\mathbb{R}, |\\cdot|)$ es completo.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ }
+}

@@ -1,0 +1,252 @@
+<p class="edicion" id="guiap9-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p9.typ</code>) · 13 ejercicios. Funciones medibles e integral de Lebesgue todavía no están en <code>apuntes.typ</code>: los popups dan la definición estándar del curso.</p>
+
+<p class="cita" id="guiap9-convencion"><em>En lo que sigue $\mathcal{M}$ será la <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de los <span class="ref" data-ref="ext-medible-lebesgue">conjuntos medibles Lebesgue</span> de $\mathbb{R}$ y $\mu$ la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span>. Además, $E$ denotará a un subconjunto medible Lebesgue de $\mathbb{R}$.</em></p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap9-ej1" data-short="Ej. 1" data-title="El módulo de una función simple es simple" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>$|f|$ es simple</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f$ una <span class="ref" data-ref="ext-funcion-simple">función simple</span>. Pruebe que $|f|$ es simple.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej1-c" aria-label="Una función simple con cuatro escalones arrastrables y, opcionalmente, su módulo"></canvas>
+      <div class="ctrl">
+        <label class="check"><input type="checkbox" id="guiap9-ej1-abs" checked>mostrar |<i>f</i>|</label>
+      </div>
+      <dl class="read" id="guiap9-ej1-read" aria-live="polite"></dl>
+      <figcaption>Una función simple elegida, <i>f</i> = <i>a</i><sub>1</sub>χ<sub><i>A</i><sub>1</sub></sub> + … + <i>a</i><sub>4</sub>χ<sub><i>A</i><sub>4</sub></sub> en [0, 1], con los <i>A<sub>i</sub></i> intervalos para poder dibujarla (en general son medibles cualesquiera). Arrastrá cada escalón para cambiar su valor <i>a<sub>i</sub></i>. En naranja, |<i>f</i>|.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap9-ej2" data-short="Ej. 2" data-title="Cuatro caracterizaciones de función medible" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Cuatro caracterizaciones de medible</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que dada una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> $\mathcal{A}$ de subconjuntos de $X$ y dada $f : X \to \mathbb{R}$, son equivalentes:</p>
+      <ol class="items">
+        <li>$\{x \in X : f(x) \gt a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \le a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \ge a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+        <li>$\{x \in X : f(x) \lt a\} \in \mathcal{A}$ para todo $a \in \mathbb{R}$.</li>
+      </ol>
+      <p>Concluya que si $X \in \mathcal{M}$ y $\mathcal{A} = \mathcal{M}$, entonces $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span> si y solo si vale alguno de (y por lo tanto, todos) los ítems de arriba.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej2-c" aria-label="Gráfico de una función con una recta horizontal y = a arrastrable; el conjunto de los x que cumplen la condición elegida se marca sobre el eje"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Conjunto</legend>
+          <label><input type="radio" name="guiap9-ej2-op" value="gt" checked><i>f</i> &gt; <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="le"><i>f</i> ≤ <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="ge"><i>f</i> ≥ <i>a</i></label>
+          <label><input type="radio" name="guiap9-ej2-op" value="lt"><i>f</i> &lt; <i>a</i></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej2-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> elegida en <i>X</i> = [0, 1]. Arrastrá la recta <i>y</i> = <i>a</i>; en verde, sobre el eje, el conjunto {<i>x</i> ∈ <i>X</i> : <i>f</i>(<i>x</i>) &gt; <i>a</i>} (o el que elijas). Los extremos de la lectura son aproximados.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap9-ej3" data-short="Ej. 3" data-title="Conjuntos de nivel, f menor o igual que g, igualdad en casi todo punto" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>$\{f = a\}$, $\{f \le g\}$ e igualdad c.t.p.</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$. Pruebe que:</p>
+      <ol class="items">
+        <li>Si $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span> entonces $\{x \in E : f(x) = a\} \in \mathcal{M}$ para todo $a \in \mathbb{R}$.</li>
+        <li>Si $f$ y $g$ son medibles entonces $\{x \in E : f(x) \le g(x)\} \in \mathcal{M}$.</li>
+        <li>Si $f$ es medible y $f(x) = g(x)$ para <span class="ref" data-ref="ext-casi-todo-punto">casi todo</span> $x \in E$, entonces $g$ es medible.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej3-c" aria-label="Los conjuntos de los tres ítems para funciones f y g elegidas"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej3-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap9-ej3-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap9-ej3-it" value="c">(c)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej3-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [0, 1] y funciones elegidas. (a): el conjunto {<i>f</i> = <i>a</i>} sobre el eje; arrastrá la recta <i>y</i> = <i>a</i>. (b): en verde, {<i>f</i> ≤ <i>g</i>}. (c): <i>g</i> coincide con <i>f</i> salvo en cuatro puntos elegidos (un conjunto nulo), marcados con sus valores.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap9-ej4" data-short="Ej. 4" data-title="Operaciones con funciones medibles" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Operaciones con funciones medibles</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$ funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span>. Pruebe que:</p>
+    <ol class="items">
+      <li>$f + g$ es medible.</li>
+      <li>$\alpha f$ es medible para todo $\alpha \in \mathbb{R}$.</li>
+      <li>$f^2$ es medible.</li>
+      <li>$f \cdot g$ es medible.<br><em>Sugerencia:</em> $f \cdot g = \frac{(f + g)^2 - (f - g)^2}{4}$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap9-ej5" data-short="Ej. 5" data-title="Las funciones monótonas son medibles" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Las monótonas son medibles</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ <span class="ref" data-ref="ext-funcion-monotona">monótona</span>. Pruebe que $f$ es <span class="ref" data-ref="ext-funcion-medible">medible</span>.</p></div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap9-ej6" data-short="Ej. 6" data-title="Continua, o continua en casi todo punto, implica medible" data-topics="integracion,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Continua (en casi todo punto) implica medible</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [0, 1] \to \mathbb{R}$ una función. Pruebe que:</p>
+      <ol class="items">
+        <li>Si $f$ es <span class="ref" data-ref="def-5.4">continua</span> en $[0, 1]$, entonces es <span class="ref" data-ref="ext-funcion-medible">medible</span>.</li>
+        <li>Si $f$ es continua en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $[0, 1]$ (esto es, si su conjunto de discontinuidades es <span class="ref" data-ref="ext-conjunto-nulo">nulo</span>), entonces es medible.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej6-c" aria-label="Una función continua y una función escalonada con discontinuidades en los puntos 1/k"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej6-it" value="a">(a)</label>
+          <label><input type="radio" name="guiap9-ej6-it" value="b" checked>(b)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap9-ej6-read" aria-live="polite"></dl>
+      <figcaption>Ejemplos elegidos de cada hipótesis. (a): <i>f</i>(<i>x</i>) = 0,5 + 0,35 sen(5<i>x</i>), continua. (b): <i>f</i>(0) = 0 y <i>f</i> = 1/<i>k</i> en (1/(<i>k</i>+1), 1/<i>k</i>]; las rayas rojas del eje marcan sus discontinuidades, 1/2, 1/3, 1/4, … (se dibujan las primeras).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap9-ej7" data-short="Ej. 7" data-title="Supremo e ínfimo de una sucesión de funciones medibles" data-topics="integracion,supremo">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3><span class="ref" data-ref="def-2">$\sup_n f_n$</span> e <span class="ref" data-ref="def-5">$\inf_n f_n$</span> son medibles</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dada una sucesión $(f_n)_n$ de funciones en $E$, consideremos las funciones
+      $$S(x) = \sup_{n \in \mathbb{N}} f_n(x) \quad \text{y} \quad I(x) = \inf_{n \in \mathbb{N}} f_n(x).$$
+      Pruebe que si las funciones $f_n$ son <span class="ref" data-ref="ext-funcion-medible">medibles</span>, entonces $S$ e $I$ también lo son.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej7-c" aria-label="Varias funciones f_n y las envolventes superior e inferior de las primeras N"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej7-N"><i>N</i></label><input type="range" id="guiap9-ej7-N" min="1" max="30" value="4"><output id="guiap9-ej7-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej7-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida en <i>E</i> = [0, 2π]: <i>f<sub>n</sub></i>(<i>x</i>) = (1/2 + 1/(<i>n</i>+1)) sen(<i>x</i> + <i>n</i>), en gris para <i>n</i> ≤ <i>N</i>. En verde, máx<sub><i>n</i>≤<i>N</i></sub> <i>f<sub>n</sub></i>(<i>x</i>); en naranja, mín<sub><i>n</i>≤<i>N</i></sub> <i>f<sub>n</sub></i>(<i>x</i>). <i>S</i> e <i>I</i> toman el supremo y el ínfimo sobre todos los <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap9-ej8" data-short="Ej. 8" data-title="Integral de una serie de funciones no negativas" data-topics="integracion,series">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3><span class="ref" data-ref="ext-integral-lebesgue">Integral</span> de una serie de funciones no negativas</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a><a class="tag topic" href="#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Dada $(f_n)_n$ una sucesión de funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span> y no negativas con $f_n : E \to \mathbb{R}$ para todo $n \in \mathbb{N}$, sea $f(x) = \sum_{n=1}^{\infty} f_n(x)$. Pruebe que $f$ es medible, y que
+      $$\int_E f \, d\mu = \sum_{n=1}^{\infty} \int_E f_n \, d\mu.$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej8-c" aria-label="Sumas parciales de una serie de funciones no negativas apiladas como franjas"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej8-N"><i>N</i></label><input type="range" id="guiap9-ej8-N" min="1" max="8" value="3"><output id="guiap9-ej8-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej8-read" aria-live="polite"></dl>
+      <figcaption>Una serie elegida en <i>E</i> = [0, 1]: <i>f<sub>n</sub></i>(<i>x</i>) = <i>x<sup>n</sup></i>/<i>n</i>!, con suma <i>f</i>(<i>x</i>) = <i>e<sup>x</sup></i> − 1 (punteada). Cada franja es un <i>f<sub>n</sub></i> apilado sobre los anteriores, hasta <i>n</i> = <i>N</i>; su área es ∫<i>f<sub>n</sub></i> = 1/(<i>n</i>+1)!.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap9-ej9" data-short="Ej. 9" data-title="Invariancia de la integral por traslaciones" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Invariancia por traslaciones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-funcion-medible">medible</span>, no negativa e <span class="ref" data-ref="ext-integrable">integrable</span>. Pruebe que si $A \in \mathcal{M}$, entonces
+      $$\int_A f(x + y) \, d\mu(x) = \int_{A + y} f(x) \, d\mu(x)$$
+      para todo $y \in \mathbb{R}$ tal que $A + y \subseteq E$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej9-c" aria-label="Arriba, el área bajo x ↦ f(x + y) sobre A; abajo, el área bajo f sobre A + y"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej9-y"><i>y</i></label><input type="range" id="guiap9-ej9-y" min="-25" max="25" value="12"><output id="guiap9-ej9-y-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej9-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ, <i>f</i>(<i>x</i>) = e<sup>−(<i>x</i>−1)²/3</sup>(1 + 0,4 sen 3<i>x</i>) y <i>A</i> = [−2, −1] ∪ [0, 1], elegidos. Arriba, el área bajo <i>x</i> ↦ <i>f</i>(<i>x</i> + <i>y</i>) sobre <i>A</i>; abajo, el área bajo <i>f</i> sobre <i>A</i> + <i>y</i>. Las integrales de la lectura son numéricas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap9-ej10" data-short="Ej. 10" data-title="Medible y acotada en un conjunto de medida finita es integrable" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Acotada en medida finita es integrable</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-funcion-medible">medible</span> y acotada. Supongamos que $E$ tiene <span class="ref" data-ref="ext-medida-lebesgue">medida finita</span>. Pruebe que $f$ es <span class="ref" data-ref="ext-integrable">integrable</span>.</p></div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap9-ej11" data-short="Ej. 11" data-title="Integrales iguales en todo medible implica igualdad en casi todo punto" data-topics="integracion">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Integrales iguales en todo medible</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a></span></div>
+  <div class="enun"><p>Sean $f, g : E \to \mathbb{R}$ funciones <span class="ref" data-ref="ext-funcion-medible">medibles</span> e <span class="ref" data-ref="ext-integrable">integrables</span> tales que para todo $A \subseteq E$ medible se tiene que $\int_A f \, d\mu = \int_A g \, d\mu$. Pruebe que $f = g$ en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $E$.</p></div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap9-ej12" data-short="Ej. 12" data-title="Fatou falla sin no negatividad" data-topics="integracion,convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Fatou falla sin no negatividad</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E = [0, +\infty)$. Considere, para cada $n \in \mathbb{N}$, $f_n : E \to \mathbb{R}$ dada por <span class="ref" data-ref="ext-funcion-caracteristica">$f_n = (-1/n) \chi_{[0, n]}$</span>. Pruebe que la sucesión $(f_n)_n$ <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a la función nula en $E$. Pruebe que, sin embargo <span class="ref" data-ref="ext-integral-lebesgue">$\int_E f_n \, d\mu = -1$</span>, de manera que
+      $$\liminf_{n \to \infty} \int_E f_n \, d\mu = -1 \lt 0 = \int_E \liminf_{n \to \infty} f_n \, d\mu.$$
+      Deduzca que el <span class="ref" data-ref="ext-lema-fatou">lema de Fatou</span> no vale si las funciones $f_n$ no son no negativas, aún cuando converjan uniformemente.</p></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej12-c" aria-label="La función f_n, un escalón de altura menos 1 sobre n y largo n, con su área sombreada"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap9-ej12-n"><i>n</i></label><input type="range" id="guiap9-ej12-n" min="1" max="30" value="3"><output id="guiap9-ej12-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej12-read" aria-live="polite"></dl>
+      <figcaption>La <i>f<sub>n</sub></i> del enunciado en [0, 32]: vale −1/<i>n</i> en [0, <i>n</i>] y 0 después. El rectángulo sombreado (bajo el eje) es la región entre su gráfico y el eje.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap9-ej13" data-short="Ej. 13" data-title="Integral sobre una unión numerable disjunta o creciente" data-topics="integracion,series">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Integral sobre uniones disjuntas o crecientes</h3>
+    <span class="topics"><a class="tag topic" href="#tema-integracion">integracion</a><a class="tag topic" href="#tema-series">series</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="ext-integrable">integrable</span> y $(E_n)_{n \in \mathbb{N}}$ una sucesión de subconjuntos medibles de $E$ tales que $E = \bigcup_{n \in \mathbb{N}} E_n$. Pruebe que:</p>
+      <ol class="items">
+        <li>Si los $E_n$ son disjuntos dos a dos entonces
+          $$\int_E f \, d\mu = \sum_{n=1}^{\infty} \int_{E_n} f \, d\mu.$$</li>
+        <li>Si $(E_n)_{n \in \mathbb{N}}$ es creciente entonces
+          $$\begin{aligned} &\lim_{n \to \infty} \int_{E_n} f \, d\mu = \int_E f \, d\mu \quad \text{y} \\ &\lim_{n \to \infty} \int_{E \setminus E_n} f \, d\mu = 0. \end{aligned}$$</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap9-ej13-c" aria-label="Una función integrable en [0, infinito) con los conjuntos E_n sombreados"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap9-ej13-it" value="a" checked>(a) disjuntos</label>
+          <label><input type="radio" name="guiap9-ej13-it" value="b">(b) crecientes</label>
+        </fieldset>
+        <div class="slider"><label for="guiap9-ej13-n"><i>n</i></label><input type="range" id="guiap9-ej13-n" min="1" max="12" value="3"><output id="guiap9-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap9-ej13-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [0, +∞) y <i>f</i>(<i>x</i>) = e<sup>−<i>x</i>/2</sup> cos(2<i>x</i>), integrable, elegidos (se dibuja hasta <i>x</i> = 12). (a): <i>E<sub>k</sub></i> = [<i>k</i> − 1, <i>k</i>), sombreados hasta <i>k</i> = <i>n</i> en colores alternados. (b): <i>E<sub>n</sub></i> = [0, <i>n</i>) en azul y <i>E</i> \ <i>E<sub>n</sub></i> en naranja. Las integrales de la lectura son exactas para este <i>f</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>

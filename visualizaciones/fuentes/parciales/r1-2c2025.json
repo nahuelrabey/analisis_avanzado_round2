@@ -1,0 +1,149 @@
+{
+ "def-1": {
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ ($A \\neq \\emptyset$) se dice <b>acotado superiormente</b> si existe un $c \\in \\mathbb{R}$ tal que $a \\le c$ para todo $a \\in A$. Al número $c$ se le denomina <b>cota superior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente</b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-1": {
+  "tipo": "Teorema",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes",
+  "enunciado": "<p>Si $x \\in \\mathbb{R}$ entonces existe un número $n \\in \\mathbb{N}$ tal que $x \\le n$. Es decir, dado un número real cualquiera, siempre existe un número natural más grande.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4": {
+  "tipo": "Proposición",
+  "numero": "4",
+  "titulo": "Caracterización de Supremo y Máximo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Si $t$ es una cota superior y $t \\in A$ entonces $t = \\sup(A)$ (y también es el máximo).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:</p><p>a) $i$ es cota inferior de $A$, y<br>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo</b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><p>• <b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<br>• <b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<br>• <b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<br>• <b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\neq \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p2-ej11": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 11",
+  "titulo": "Subconjuntos finitos de un numerable",
+  "enunciado": "<p>Pruebe que si $A$ es numerable entonces $\\mathcal{P}_f(A) = \\{B \\subseteq A : B \\text{ es finito}\\}$ es numerable.</p>",
+  "fuente": "guias/p2.typ"
+ },
+ "ext-nxn-numerable": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "$\\mathbb{N} \\times \\mathbb{N}$ es numerable",
+  "enunciado": "<p>$\\mathbb{N} \\times \\mathbb{N} \\sim \\mathbb{N}$, es decir, $\\#(\\mathbb{N} \\times \\mathbb{N}) = \\aleph_0$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-imagen-finita": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La imagen de un conjunto finito es finita",
+  "enunciado": "<p>Si $X$ es un conjunto finito y $h$ es una función definida en $X$, entonces $h(X)$ es finito.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><p>• <b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<br>• <b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<br>• <b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <b>punto interior</b> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <b>interior</b> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^\\circ$. Es decir, $$E^\\circ = \\{x \\in E : x \\text{ es punto interior de } E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <b>abierto</b> si $A = A^\\circ$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <b>de adherencia</b> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\neq \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <b>clausura</b> de $E$ y lo denotamos $\\overline{E}$. Es decir, $$\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\neq \\emptyset\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-4.35": {
+  "tipo": "Ejemplo",
+  "numero": "27 (ejemplos/p3.typ)",
+  "titulo": "Clausura, interior y conjunto derivado de $(0,1) \\cup \\{2\\}$",
+  "enunciado": "<p>Sea $E = (0,1) \\cup \\{2\\} \\subseteq (\\mathbb{R}, |\\cdot|)$. Hallar $E^\\circ$, $\\overline{E}$ y $E'$.</p><p>Resolución: $E^\\circ = (0,1)$, $\\overline{E} = [0,1] \\cup \\{2\\}$ y $E' = [0,1]$.</p>",
+  "fuente": "ejemplos/p3.typ (Ejemplo 4.35 de las notas de la materia)"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que $$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>continua en $x$</i> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} & \\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ & d(x, y) \\lt \\delta \\implies d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$ El $\\delta$ se elige <i>después</i> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "guia-p3-ej4b": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 4 (b)",
+  "titulo": "Las bolas abiertas son abiertas",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Sean $x \\in E$ y $r \\gt 0$.</p><p>(b) Pruebe que $B(x, r)$ es un conjunto abierto.</p>",
+  "fuente": "guias/p3.typ"
+ }
+}

@@ -1,0 +1,275 @@
+<p class="edicion" id="guiap5-edicion">Encabezado de la fuente: Análisis Avanzado · Segundo cuatrimestre de 2025 · Práctica 5. La guía tiene dos partes: compacidad (Ejercicios 1 a 13) y teoremas de punto fijo (Ejercicios 14 a 19).</p>
+
+<section class="bloque" id="guiap5-compacidad">
+<h2><span class="bn">Primera parte</span>Compacidad</h2>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap5-ej1" data-short="Ej. 1" data-title="{0} ∪ {1/n} es compacto, por definición" data-topics="compacidad,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>$\{0\} \cup \{1/n\}$ es compacto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $K = \{0\} \cup \{1/n : n \in \mathbb{N}\} \subseteq \mathbb{R}$. Pruebe, por definición, que $K$ es <span class="ref" data-ref="ext-compacto">compacto</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej1-c" aria-label="Los puntos 1/n y el 0 sobre la recta real"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej1-N"><i>n</i> ≤</label><input type="range" id="guiap5-ej1-N" min="1" max="60" value="12"><output id="guiap5-ej1-N-o"></output></div>
+      </div>
+      <figcaption>El conjunto <i>K</i>: los puntos 1/<i>n</i> para <i>n</i> hasta el valor elegido y el 0 (en verde). Abajo, una lupa sobre [0, 0.1], donde se amontonan los 1/<i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap5-ej2" data-short="Ej. 2" data-title="Un compacto no vacío de ℝ tiene mínimo y máximo" data-topics="compacidad,supremo">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Los compactos de $\mathbb{R}$ tienen mínimo y máximo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span></div>
+  <div class="enun"><p>Sea $K$ un subconjunto <span class="ref" data-ref="ext-compacto">compacto</span> no vacío de $\mathbb{R}$. Pruebe que $K$ tiene <span class="ref" data-ref="def-6-minimo">mínimo</span> y <span class="ref" data-ref="def-3">máximo</span>.</p></div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap5-ej3" data-short="Ej. 3" data-title="Sumas y productos de un compacto de ℝ" data-topics="compacidad">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Sumas y productos de un compacto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $K \subseteq \mathbb{R}$ <span class="ref" data-ref="ext-compacto">compacto</span>. Pruebe que los subconjuntos de $\mathbb{R}$
+      $$\begin{aligned} S &= \{x + y : x, y \in K\}, \\ P &= \{x \cdot y : x, y \in K\} \end{aligned}$$
+      también son compactos.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej3-c" aria-label="Un compacto K de la recta y los conjuntos S y P que se forman con sus sumas y productos"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Compacto <i>K</i></legend>
+          <label><input type="radio" name="guiap5-ej3-k" value="int" checked>[0, 1] ∪ [2, 2.5]</label>
+          <label><input type="radio" name="guiap5-ej3-k" value="neg">[−1, −0.5] ∪ {1}</label>
+          <label><input type="radio" name="guiap5-ej3-k" value="seq">{0} ∪ {1/<i>n</i>}</label>
+        </fieldset>
+      </div>
+      <figcaption>Tres compactos elegidos para el dibujo. En cada fila, el conjunto: <i>K</i> (azul), <i>S</i> (verde) y <i>P</i> (naranja). Para {0} ∪ {1/<i>n</i>} se dibujan las sumas y productos con <i>n</i> ≤ 25.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap5-ej4" data-short="Ej. 4" data-title="Intersección de cerrados con uno compacto" data-topics="compacidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Intersección de cerrados con uno compacto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $\{F_i\}_{i \in I}$ una familia de subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span> de $E$. Pruebe que si existe $i_0 \in I$ tal que $F_{i_0}$ es <span class="ref" data-ref="ext-compacto">compacto</span>, entonces $\bigcap_{i \in I} F_i$ es compacto.</p></div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap5-ej5" data-short="Ej. 5" data-title="Compacidad y sucesiones decrecientes de cerrados" data-topics="compacidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Sucesiones decrecientes de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico. Pruebe que $E$ es <span class="ref" data-ref="ext-compacto">compacto</span> si y solo si para toda sucesión $(F_n)_{n \ge 1}$ decreciente (es decir, $F_{n+1} \subseteq F_n$ para todo $n \in \mathbb{N}$) de <span class="ref" data-ref="def-4.27">cerrados</span> no vacíos de $E$ se tiene que $\bigcap_{n \ge 1} F_n \neq \emptyset$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej5-c" aria-label="Una sucesión decreciente de cerrados no vacíos dentro de [0,1], uno por fila"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej5-N">filas hasta <i>n</i> =</label><input type="range" id="guiap5-ej5-N" min="1" max="14" value="6"><output id="guiap5-ej5-N-o"></output></div>
+      </div>
+      <figcaption>Un ejemplo elegido para el dibujo, con <i>E</i> = [0, 1]: <i>F<sub>n</sub></i> = [0, 1/<i>n</i>] ∪ [1 − 1/(2<i>n</i>), 1], una fila por <i>n</i>. Cada fila está contenida en la de arriba.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap5-ej6" data-short="Ej. 6" data-title="Los compactos de un espacio discreto" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Compactos de un espacio discreto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-metrica-discreta">espacio métrico discreto</span>. ¿Cuáles son los subconjuntos <span class="ref" data-ref="ext-compacto">compactos</span> de $E$?</p></div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap5-ej7" data-short="Ej. 7" data-title="La unión finita de compactos es compacta" data-topics="compacidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Unión finita de compactos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a></span></div>
+  <div class="enun"><p>Pruebe que la unión de un número finito de conjuntos <span class="ref" data-ref="ext-compacto">compactos</span> es compacto.</p></div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap5-ej8" data-short="Ej. 8" data-title="La distancia de un punto a un compacto se realiza" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>La distancia a un compacto se realiza</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que en un espacio métrico $(E, d)$ la <span class="ref" data-ref="guia-p3-ej10">distancia de un punto a un compacto</span> <em>se realiza</em>. Esto es, que para todo <span class="ref" data-ref="ext-compacto">compacto</span> $K \subseteq E$ y para todo $x \in E$ existe $y \in K$ tal que $d(x, y) = d(x, K)$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej8-c" aria-label="Un compacto del plano y un punto x arrastrable, con el segmento hasta el punto de K más cercano"></canvas>
+      <dl class="read" id="guiap5-ej8-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ² y <i>d</i><sub>2</sub>, un compacto <i>K</i> elegido para el dibujo: un disco cerrado unido a un segmento. Arrastrá <i>x</i>: el punto verde es un <i>y</i> ∈ <i>K</i> con <i>d</i>(<i>x</i>, <i>y</i>) = <i>d</i>(<i>x</i>, <i>K</i>), buscado numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap5-ej9" data-short="Ej. 9" data-title="Un compacto y un cerrado disjuntos están a distancia positiva" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Compacto y cerrado disjuntos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico, y sea $\hat{d}$ la función definida en el <span class="ref" data-ref="guia-p3-ej11">Ejercicio 11 de la Práctica 3</span>. Pruebe que si $A \subseteq E$ es <span class="ref" data-ref="ext-compacto">compacto</span>, $B \subseteq E$ es <span class="ref" data-ref="def-4.27">cerrado</span> y se cumple que $A \cap B = \emptyset$, entonces $\hat{d}(A, B) \gt 0$. ¿Sucede lo mismo si $A$ es solo cerrado?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej9-c" aria-label="Un disco cerrado A arrastrable y un cerrado B del plano, con la distancia entre ellos"></canvas>
+      <dl class="read" id="guiap5-ej9-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ² y <i>d</i><sub>2</sub>, conjuntos elegidos para el dibujo: <i>A</i> un disco cerrado de radio 1 (azul, arrastrable desde el centro) y <i>B</i> = {(<i>x</i>, <i>y</i>) : <i>y</i> ≥ <i>x</i>²/4 + 1} (verde). El segmento une puntos que realizan <i>d̂</i>(<i>A</i>, <i>B</i>), calculada numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap5-ej10" data-short="Ej. 10" data-title="La bola cerrada de C[0,1] no es compacta" data-topics="compacidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>La bola cerrada de $(C[0,1], d_\infty)$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$(C[0, 1], d_\infty)$</span> la función $f_0$ nula. Pruebe que <span class="ref" data-ref="def-4.22">$\overline{B(f_0, 1)}$</span> no es <span class="ref" data-ref="ext-compacto">compacta</span> (pero sí es <span class="ref" data-ref="def-4.27">cerrada</span> y <span class="ref" data-ref="def-4.8">acotada</span>). ¿Qué pasa si cambiamos $d_\infty$ por $d_1$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej10-c" aria-label="La franja entre menos 1 y 1 y una función continua poligonal arrastrable"></canvas>
+      <dl class="read" id="guiap5-ej10-read" aria-live="polite"></dl>
+      <figcaption>Para <i>d</i><sub>∞</sub>, estar a distancia ≤ 1 de <i>f</i><sub>0</sub> es tener el gráfico dentro de la franja −1 ≤ <i>y</i> ≤ 1. Arrastrá los nodos de la poligonal y mirá las dos distancias a <i>f</i><sub>0</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap5-ej11" data-short="Ej. 11" data-title="Una continua positiva en un compacto está lejos de 0" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Una continua positiva en un compacto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sea $E$ un espacio métrico <span class="ref" data-ref="ext-compacto">compacto</span>, y sea $f : E \to (0, +\infty)$ una función <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que existe $\alpha \gt 0$ tal que $f(x) \gt \alpha$ para todo $x \in E$.</p></div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap5-ej12" data-short="Ej. 12" data-title="Continua con límite 0 en ±∞ es uniformemente continua" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Límite $0$ en $\pm\infty$ implica continuidad uniforme</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ <span class="ref" data-ref="def-5.4">continua</span> tal que
+      $$\lim_{x \to -\infty} f(x) = \lim_{x \to +\infty} f(x) = 0.$$
+      Pruebe que $f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span> en $\mathbb{R}$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej12-c" aria-label="Una función que tiende a 0 en más y menos infinito, con una banda de ancho epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej12-e">ε</label><input type="range" id="guiap5-ej12-e" min="3" max="100" value="25"><output id="guiap5-ej12-e-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej12-read" aria-live="polite"></dl>
+      <figcaption>Una función elegida para el dibujo, <i>f</i>(<i>x</i>) = 1.6 sen(2<i>x</i>)/(1 + 0.2<i>x</i>²), que cumple la hipótesis. La banda es |<i>y</i>| &lt; ε; fuera de las rayas verticales, |<i>x</i>| &gt; <i>M</i>, el gráfico ya no sale de la banda (el <i>M</i> se busca numéricamente en la ventana dibujada).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap5-ej13" data-short="Ej. 13" data-title="Continua y biyectiva desde un compacto es homeomorfismo" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Continua y biyectiva desde un compacto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f : E \to E'$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que si $E$ es <span class="ref" data-ref="ext-compacto">compacto</span> y $f$ es biyectiva, entonces $f$ es un <span class="ref" data-ref="def-5.29">homeomorfismo</span>.</p></div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+</section>
+
+<section class="bloque" id="guiap5-punto-fijo">
+<h2><span class="bn">Segunda parte</span>Teoremas de punto fijo</h2>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap5-ej14" data-short="Ej. 14" data-title="El conjunto de puntos fijos de una continua es cerrado" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Los puntos fijos forman un cerrado</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico y sea $f : E \to E$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que el conjunto de <span class="ref" data-ref="ext-punto-fijo">puntos fijos</span> de $f$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej14-c" aria-label="Gráfico de una función y de la recta y igual a x, con sus puntos fijos marcados"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej14-a"><i>a</i></label><input type="range" id="guiap5-ej14-a" min="0" max="200" value="120"><output id="guiap5-ej14-a-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej14-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [−5, 5] y una familia elegida para el dibujo, <i>f</i>(<i>x</i>) = <i>x</i>/2 + <i>a</i> cos(2<i>x</i>): los puntos fijos son los cortes del gráfico (azul) con la diagonal <i>y</i> = <i>x</i>, marcados sobre el eje.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap5-ej15" data-short="Ej. 15" data-title="½ arctan(x) + 3 es una contracción" data-topics="continuidad,completitud">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>$\frac12 \arctan(x) + 3$ es una contracción</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-completitud">completitud</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ dada por $f(x) = \frac{1}{2} \arctan(x) + 3$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej15-c" aria-label="Gráfico de f igual a un medio arcotangente de x más 3, la diagonal y la telaraña de iteraciones desde x0"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej15-x">x<sub>0</sub></label><input type="range" id="guiap5-ej15-x" min="-40" max="80" value="-30"><output id="guiap5-ej15-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej15-read" aria-live="polite"></dl>
+      <figcaption>El gráfico de <i>f</i> (azul), la diagonal <i>y</i> = <i>x</i> y la "telaraña" de las iteraciones <i>x</i><sub>0</sub>, <i>f</i>(<i>x</i><sub>0</sub>), <i>f</i>(<i>f</i>(<i>x</i><sub>0</sub>)), … desde el <i>x</i><sub>0</sub> elegido.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap5-ej16" data-short="Ej. 16" data-title="x/3 en ℝ∖{0}: contracción sin punto fijo" data-topics="completitud,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Una contracción sin punto fijo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E = \mathbb{R} \setminus \{0\}$, con la distancia usual de $\mathbb{R}$. Sea $f : E \to E$ dada por $f(x) = \frac{1}{3} x$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span> pero no tiene <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>. ¿Qué falla del <span class="ref" data-ref="ext-punto-fijo-banach">Teorema de Banach</span>?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej16-c" aria-label="Gráfico de f igual a x sobre 3 en la recta sin el cero, junto a la diagonal"></canvas>
+      <figcaption>El gráfico de <i>f</i>(<i>x</i>) = <i>x</i>/3 sobre <i>E</i> = ℝ ∖ {0} (azul) y la diagonal <i>y</i> = <i>x</i> (punteada). El círculo vacío y el hueco en el eje marcan que 0 ∉ <i>E</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"></div>
+</article>
+
+<!-- ===================== EJERCICIO 17 ===================== -->
+<article class="ej" id="guiap5-ej17" data-short="Ej. 17" data-title="Si alguna iterada es contracción hay único punto fijo; cos x = x" data-topics="completitud,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 17</span><h3>Iteradas que son contracciones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico y sea $f : E \to E$ una función. Para $n \in \mathbb{N}$ denotemos por $f^n : E \to E$ a la función $f \circ f \circ \dots \circ f$ ($n$ veces). Pruebe las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Si $x \in E$ es <span class="ref" data-ref="ext-punto-fijo">punto fijo</span> de $f$, entonces es punto fijo de $f^n$.</li>
+        <li>Si $E$ es <span class="ref" data-ref="def-4.55">completo</span> y existe $n \in \mathbb{N}$ tal que $f^n$ es una <span class="ref" data-ref="ext-contraccion">contracción</span>, entonces existe un único punto fijo de $f$ en $E$.
+          <p><em>Sugerencia: pruebe que si $x \in E$ es punto fijo de $f^n$, entonces $f(x)$ también lo es.</em></p></li>
+        <li>Deduzca que existe un único $x \in \mathbb{R}$ tal que $\cos(x) = x$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej17-c" aria-label="Gráficos de coseno y de su iterada n veces, junto a la diagonal"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej17-n"><i>n</i></label><input type="range" id="guiap5-ej17-n" min="1" max="8" value="2"><output id="guiap5-ej17-n-o"></output></div>
+      </div>
+      <figcaption>Para el ítem (c): el gráfico de cos (punteado), el de la iterada cos<sup><i>n</i></sup> = cos ∘ ⋯ ∘ cos (<i>n</i> veces, azul) y la diagonal <i>y</i> = <i>x</i>, en [−4, 4].</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="17"></div>
+</article>
+
+<!-- ===================== EJERCICIO 18 ===================== -->
+<article class="ej" id="guiap5-ej18" data-short="Ej. 18" data-title="Puntos casi fijos en una bola implican punto fijo" data-topics="continuidad,compacidad">
+  <div class="ej-head"><span class="tag">Ej. 18</span><h3>Puntos casi fijos en una bola</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-compacidad">compacidad</a></span></div>
+  <div class="enun"><p>Considere en $\mathbb{R}^n$ la <span class="ref" data-ref="def-distancias-en-rrn">métrica $d_2$</span>. Sea $f : \mathbb{R}^n \to \mathbb{R}^n$ una función <span class="ref" data-ref="def-5.4">continua</span>. Supongamos que existe $M \gt 0$ tal que para todo $\varepsilon \gt 0$ existe <span class="ref" data-ref="def-4.5">$x \in B(0, M)$</span> tal que $d_2(x, f(x)) \lt \varepsilon$. Pruebe que $f$ tiene un <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>.</p></div>
+  <div class="preparan" data-ej="18"></div>
+</article>
+
+<!-- ===================== EJERCICIO 19 ===================== -->
+<article class="ej" id="guiap5-ej19" data-short="Ej. 19" data-title="Toda continua de [a,b] en [a,b] tiene un punto fijo" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 19</span><h3>Punto fijo en $[a, b]$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [a, b] \to [a, b]$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que $f$ tiene un <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>.</p>
+      <p><em>Sugerencia: use el <span class="ref" data-ref="ext-teorema-bolzano">teorema de Bolzano</span>.</em></p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej19-c" aria-label="El cuadrado [a,b] por [a,b] con la diagonal y una función continua poligonal arrastrable"></canvas>
+      <figcaption>Con [<i>a</i>, <i>b</i>] = [0, 1]: el cuadrado [<i>a</i>, <i>b</i>]², la diagonal <i>y</i> = <i>x</i> y una <i>f</i> continua poligonal cuyos nodos se arrastran sin salir del cuadrado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="19"></div>
+</article>
+</section>

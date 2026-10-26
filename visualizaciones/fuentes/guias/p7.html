@@ -1,0 +1,174 @@
+<p class="edicion" id="guiap7-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p7.typ</code>) · 8 ejercicios. La convergencia puntual y uniforme todavía no está en <code>apuntes.typ</code>: sus popups dan la definición estándar del curso.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap7-ej1" data-short="Ej. 1" data-title="Negación de la convergencia uniforme" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Negación de la convergencia uniforme</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A$ un conjunto, y sea $(Y, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Sea $f : A \to Y$, y para cada $n \in \mathbb{N}$, sea $f_n : A \to Y$.</p>
+      <p>Pruebe que la sucesión $(f_n)_{n \ge 1}$ <em>no</em> <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a $f$ si y solo si existen $\alpha \gt 0$, una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(f_{n_k})_{k \ge 1}$ y una sucesión $(a_k)_{k \ge 1} \subseteq A$ tales que
+      $$d(f_{n_k}(a_k), f(a_k)) \ge \alpha \quad \forall k \in \mathbb{N}.$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej1-c" aria-label="Triángulos de altura 1 que se corren hacia la derecha; en el pico de cada uno la distancia a la función nula es 1, mayor que alfa"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej1-k"><i>k</i></label><input type="range" id="guiap7-ej1-k" min="1" max="10" value="3"><output id="guiap7-ej1-k-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej1-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido (no es de la guía) de la situación del enunciado: <i>A</i> = [0, +∞), <i>Y</i> = ℝ, <i>f</i> = 0 y <i>f<sub>n</sub></i>(<i>x</i>) = máx(0, 1 − |<i>x</i> − <i>n</i>|), un triángulo de altura 1 centrado en <i>n</i>. Con α = 1/2, <i>n<sub>k</sub></i> = <i>k</i> y <i>a<sub>k</sub></i> = <i>k</i>, el segmento vertical mide la distancia <i>d</i>(<i>f<sub>n<sub>k</sub></sub></i>(<i>a<sub>k</sub></i>), <i>f</i>(<i>a<sub>k</sub></i>)) y queda siempre por encima de la línea punteada α. En gris, los triángulos anteriores.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap7-ej2" data-short="Ej. 2" data-title="Convergencia puntual y uniforme de cuatro sucesiones" data-topics="convergencia-funciones,funciones">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Puntual y uniforme: cuatro sucesiones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Analice la <span class="ref" data-ref="ext-convergencia-puntual">convergencia puntual</span> y <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> de las siguientes sucesiones de funciones:</p>
+      <ol class="items">
+        <li>$f_n : \mathbb{R} \to \mathbb{R}$, $f_n(x) = \frac{1}{n} \sin(n x)$.</li>
+        <li>$f_n : \mathbb{R} \to \mathbb{R}$, $f_n(x) = \sin(x/n)$.</li>
+        <li>$f_n : \mathbb{R}^2 \to \mathbb{R}^2$, $f_n(x, y) = \frac{n}{n + 1} (x, y)$.</li>
+        <li>$f_n : C([0, 1]) \to C([0, 1])$, $f_n(\varphi) = \frac{n}{n + 1} \varphi$.</li>
+      </ol>
+      <p>Aquí en $C([0, 1])$ consideramos la <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancia $d_\infty$</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej2-c" aria-label="Gráfico de f_n para el ítem elegido, con un slider de n"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Ítem</legend>
+          <label><input type="radio" name="guiap7-ej2-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap7-ej2-it" value="d">(d)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej2-n"><i>n</i></label><input type="range" id="guiap7-ej2-n" min="1" max="40" value="3"><output id="guiap7-ej2-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej2-read" aria-live="polite"></dl>
+      <figcaption>En (a) y (b), el gráfico de <i>f<sub>n</sub></i> (en gris, el de <i>f</i><sub><i>n</i>−1</sub>); arrastrá la línea vertical para leer <i>f<sub>n</sub></i>(<i>x</i>). En (c), cada punto de una grilla de ℝ² con una flecha hasta su imagen <i>f<sub>n</sub></i>(<i>x</i>, <i>y</i>); el punto grande se arrastra. En (d), una φ ∈ <i>C</i>([0, 1]) elegida para el dibujo, φ(<i>t</i>) = 0,4 + <i>t</i> + 0,3 sen(8<i>t</i>) (punteada), y su imagen <i>f<sub>n</sub></i>(φ).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap7-ej3" data-short="Ej. 3" data-title="Límites puntuales y convergencia uniforme en subconjuntos" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Límites puntuales y uniformidad en subconjuntos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Encuentre el <span class="ref" data-ref="ext-convergencia-puntual">límite puntual</span> de la sucesión de funciones $f_n : A \to \mathbb{R}$ en cada uno de los siguientes casos:
+          <ol class="items" style="list-style: lower-roman">
+            <li>$f_n(x) = x^n$, $A = (-1, 1]$.</li>
+            <li>$f_n(x) = x^{-n} e^x$, $A = (1, +\infty)$.</li>
+            <li>$f_n(x) = n^2 x (1 - x^2)^n$, $A = [0, 1]$.</li>
+            <li>$f_n(x) = x e^{-n x^2}$, $A = \mathbb{R}$.</li>
+          </ol></li>
+        <li>Para la sucesión de <b>i.</b>, pruebe que la convergencia es <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> sobre $(0, 1/2)$, y para la de <b>ii.</b>, que es uniforme sobre $[2, 5]$.</li>
+        <li>¿Es uniforme la convergencia de la sucesión sobre $A$ en alguno de los casos?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej3-c" aria-label="Gráficos de f_n sobre A para el caso elegido"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Caso</legend>
+          <label><input type="radio" name="guiap7-ej3-it" value="1" checked>i.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="2">ii.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="3">iii.</label>
+          <label><input type="radio" name="guiap7-ej3-it" value="4">iv.</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej3-n"><i>n</i></label><input type="range" id="guiap7-ej3-n" min="1" max="30" value="4"><output id="guiap7-ej3-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej3-read" aria-live="polite"></dl>
+      <figcaption>El gráfico de <i>f<sub>n</sub></i> sobre <i>A</i> (en gris, los tres anteriores). Un círculo vacío marca un extremo que no está en <i>A</i>. En i. y ii. la franja sombreada es el subconjunto del ítem (b): (0, 1/2) y [2, 5]. En ii. el dibujo se corta en <i>x</i> = 6 y en <i>y</i> = 4; en iii. la escala vertical se ajusta a <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap7-ej4" data-short="Ej. 4" data-title="Límite uniforme de funciones acotadas" data-topics="convergencia-funciones,funciones">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Límite uniforme en $B(X)$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $X$ un conjunto y sea <span class="ref" data-ref="ext-espacio-bx">$B(X)$</span> el conjunto de las funciones acotadas de $X$ en $\mathbb{R}$. Sea $(f_n)_{n \ge 1}$ una sucesión en $B(X)$.</p>
+      <ol class="items">
+        <li>Si $(f_n)_{n \ge 1}$ <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a $f : X \to \mathbb{R}$, muestre que $f \in B(X)$. ¿Sigue valiendo esto si la convergencia es solamente <span class="ref" data-ref="ext-convergencia-puntual">puntual</span>?</li>
+        <li>Si $(f_n)_{n \ge 1}$ converge uniformemente en $X$, muestre que existe $M \gt 0$ tal que $|f_n(x)| \le M$ para todo $x \in X$ y todo $n \in \mathbb{N}$. En otras palabras, la sucesión $(f_n)_{n \ge 1}$ es <em>uniformemente acotada</em>, o es <em>acotada en</em> $(B(X), \|\cdot\|_\infty)$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej4-c" aria-label="Varias funciones f_n dentro de una misma franja de altura M"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej4-n"><i>n</i></label><input type="range" id="guiap7-ej4-n" min="1" max="30" value="5"><output id="guiap7-ej4-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej4-read" aria-live="polite"></dl>
+      <figcaption>Qué quiere decir <em>uniformemente acotada</em> en el ítem (b), con un ejemplo elegido: <i>X</i> = [0, 2π] y <i>f<sub>n</sub></i>(<i>x</i>) = sen <i>x</i> + cos(<i>nx</i>)/<i>n</i>. Se dibujan <i>f</i><sub>1</sub>, …, <i>f<sub>n</sub></i> (la última en color): una sola franja |<i>y</i>| ≤ <i>M</i>, con <i>M</i> = 2, las contiene a todas.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap7-ej5" data-short="Ej. 5" data-title="n x^2/(1 + n x^2) y sus derivadas" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>$f_n(x) = \frac{n x^2}{1 + n x^2}$ y sus derivadas</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(f_n)_{n \ge 1}$ la sucesión de funciones dada por
+      $$f_n : [0, 1] \to \mathbb{R}, \quad f_n(x) = \frac{n x^2}{1 + n x^2}.$$</p>
+      <p>Estudie la <span class="ref" data-ref="ext-convergencia-puntual">convergencia puntual</span> y <span class="ref" data-ref="ext-convergencia-uniforme">uniforme</span> de las sucesiones $(f_n)_{n \ge 1}$ y $(f_n')_{n \ge 1}$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej5-c" aria-label="Gráfico de f_n o de su derivada en [0, 1]"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills">
+          <legend>Sucesión</legend>
+          <label><input type="radio" name="guiap7-ej5-q" value="f" checked><i>f<sub>n</sub></i></label>
+          <label><input type="radio" name="guiap7-ej5-q" value="d"><i>f<sub>n</sub></i>′</label>
+        </fieldset>
+        <div class="slider"><label for="guiap7-ej5-n"><i>n</i></label><input type="range" id="guiap7-ej5-n" min="1" max="200" value="10"><output id="guiap7-ej5-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej5-read" aria-live="polite"></dl>
+      <figcaption>En color, <i>f<sub>n</sub></i> (o <i>f<sub>n</sub></i>′(<i>x</i>) = 2<i>nx</i>/(1 + <i>nx</i>²)²) en [0, 1]; en gris, los de <i>n</i> = 1, 2, 5, 10, 20, 50 y 100 que sean menores que el elegido. Con <i>f<sub>n</sub></i>′ la escala vertical se ajusta a <i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap7-ej6" data-short="Ej. 6" data-title="Suma y producto de sucesiones uniformemente convergentes" data-topics="convergencia-funciones">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Suma y producto de límites uniformes</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span></div>
+  <div class="enun"><p>Sea $X$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $(f_n)_{n \ge 1}, (g_n)_{n \ge 1} : X \to \mathbb{R}$ dos sucesiones de funciones que <span class="ref" data-ref="ext-convergencia-uniforme">convergen uniformemente</span> a funciones $f, g : X \to \mathbb{R}$, respectivamente. Pruebe que:</p>
+    <ol class="items">
+      <li>La sucesión $(f_n + g_n)_{n \ge 1}$ converge uniformemente a $f + g$.</li>
+      <li>Si ambas sucesiones están <span class="ref" data-ref="ext-uniformemente-acotada">uniformemente acotadas</span>, entonces $(f_n g_n)_{n \ge 1}$ converge uniformemente a $f g$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap7-ej7" data-short="Ej. 7" data-title="El límite uniforme de uniformemente continuas es uniformemente continuo" data-topics="convergencia-funciones,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Límite uniforme de uniformemente continuas</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $X, Y$ <span class="ref" data-ref="def-4.1">espacios métricos</span>, y sea $(f_n)_{n \ge 1}$ una sucesión de funciones $f_n : X \to Y$ <span class="ref" data-ref="def-5.14">uniformemente continuas</span> que <span class="ref" data-ref="ext-convergencia-uniforme">converge uniformemente</span> a una función $f : X \to Y$. Pruebe que $f$ es uniformemente continua.</p></div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap7-ej8" data-short="Ej. 8" data-title="Derivadas uniformemente acotadas y límite puntual continuo" data-topics="convergencia-funciones,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Derivadas acotadas por $c$: el límite puntual es continuo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(f_n)_{n \ge 1} : [a, b] \to \mathbb{R}$ una sucesión de funciones derivables que <span class="ref" data-ref="ext-convergencia-puntual">converge puntualmente</span> a una función $f : [a, b] \to \mathbb{R}$. Pruebe que si existe $c \gt 0$ tal que $|f_n'(x)| \le c$ para todo $x \in [a, b]$ y para todo $n \in \mathbb{N}$, entonces $f$ es <span class="ref" data-ref="def-5.4">continua</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap7-ej8-c" aria-label="Gráfico de f_n con la recta tangente en un punto arrastrable"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap7-ej8-n"><i>n</i></label><input type="range" id="guiap7-ej8-n" min="1" max="100" value="4"><output id="guiap7-ej8-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap7-ej8-read" aria-live="polite"></dl>
+      <figcaption>La hipótesis con un ejemplo elegido: [<i>a</i>, <i>b</i>] = [−1, 1] y <i>f<sub>n</sub></i>(<i>x</i>) = √(<i>x</i>² + 1/<i>n</i>), derivables con |<i>f<sub>n</sub></i>′(<i>x</i>)| = |<i>x</i>|/√(<i>x</i>² + 1/<i>n</i>) ≤ 1, así que <i>c</i> = 1 sirve para todos los <i>n</i>. El segmento es la tangente en <i>x</i>₀ (arrastrá el punto): su pendiente nunca pasa de <i>c</i>. En gris, <i>f</i><sub>1</sub> y <i>f</i><sub>2</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>

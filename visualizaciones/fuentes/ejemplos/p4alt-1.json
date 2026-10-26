@@ -1,0 +1,142 @@
+{
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>continua en $x$</i> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <i>después</i> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ (sin el dibujo)"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.13": {
+  "tipo": "Teorema",
+  "numero": "5.13",
+  "titulo": "Caracterización de continuidad por clausuras",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(\\overline{E}) \\subseteq \\overline{f(E)}$ para todo $E \\subseteq M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <b>cerrado</b> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <em>abierto</em> si $A = A^\\circ$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.9": {
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(A) \\subseteq M$ es abierto para todo $A \\subseteq N$ abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.12": {
+  "tipo": "Observación",
+  "numero": "5.12",
+  "titulo": "La imagen de un abierto (o cerrado) no tiene por qué ser abierta (o cerrada)",
+  "enunciado": "<p>En el Teorema 5.9 y en el Ejercicio 5.10 vimos una caracterización que relaciona funciones continuas con que la preimagen de un abierto/cerrado sea abierto/cerrado. Esta caracterización falla si intentamos usar la imagen en vez de la preimagen: en general, es falso que una función continua manda abiertos en abiertos o cerrados en cerrados.</p><p>Pensemos en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = e^x$. Sabemos que esta función es continua, y que $f(\\mathbb{R}) = (0, +\\infty)$. Observemos que $\\mathbb{R}$ es cerrado en $\\mathbb{R}$ (lo vimos antes), pero $(0, +\\infty)$ no es cerrado en $\\mathbb{R}$.</p><p>Pensemos también en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = x^2$. Entonces tenemos que $f((-1, 1)) = [0, 1)$. El conjunto $(-1, 1)$ es abierto en $\\mathbb{R}$ pero $[0, 1)$ no es abierto en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo</i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.</p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos</i>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-la-continuidad-depende-de-las": {
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "La continuidad depende de las métricas",
+  "enunciado": "<p>En la Definición 5.4 la bola $B(f(x), \\varepsilon)$ se mide con $d'$ porque es la métrica de $N$. Si en $N$ usamos otra métrica $d''$, estamos en otro espacio métrico $(N, d'')$, y la pregunta \"¿$f$ es continua?\" pasa a ser otra: la respuesta puede cambiar. Por ejemplo, con $\\delta$ la métrica discreta:</p><ul class=\"items\"><li>$\\operatorname{id} : (\\mathbb{R}, \\delta) \\to (\\mathbb{R}, |\\cdot|)$ es continua: tomando $\\delta = 1/2$, $B(x, 1/2) = \\{x\\}$ y su imagen está dentro de cualquier $B(x, \\varepsilon)$.</li><li>$\\operatorname{id} : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, \\delta)$ no es continua: con $\\varepsilon = 1/2$, $B(x, 1/2) = \\{x\\}$ en la llegada, pero toda bola $B(x, \\delta)$ de la salida tiene infinitos puntos.</li></ul><p>Dentro de la definición no se pueden intercalar métricas. En una demostración sí se puede pasar por otra métrica cuando son comparables: si existe $C \\gt 0$ con $d''(a, b) \\le C d'(a, b)$ para todos $a, b \\in N$, entonces $$f \\text{ continua hacia } (N, d') \\Longrightarrow f \\text{ continua hacia } (N, d'').$$ Dado $\\varepsilon \\gt 0$, tomamos el $\\delta$ de la continuidad hacia $d'$ para $\\varepsilon / C$; si $d(y, x) \\lt \\delta$, $$d''(f(y), f(x)) \\le C d'(f(y), f(x)) \\lt C \\cdot \\varepsilon / C = \\varepsilon.$$ Si además vale la desigualdad en el otro sentido (métricas equivalentes, como $d_1$, $d_2$ y $d_\\infty$ en $\\mathbb{R}^n$), ser continua es lo mismo con cualquiera de las dos.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.31": {
+  "tipo": "Teorema",
+  "numero": "4.31",
+  "titulo": "Intersección arbitraria y unión finita de cerrados",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Entonces:</p><ol type=\"a\"><li>Si $\\{F_i\\}_{i \\in I}$ es una familia de conjuntos cerrados, entonces $F = \\bigcap_{i \\in I} F_i$ es cerrado.</li><li>Si $\\{F_i\\}_{i=1}^n$ son conjuntos cerrados, entonces $F = \\bigcup_{i=1}^n F_i$ es cerrado.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.21": {
+  "tipo": "Proposición",
+  "numero": "4.21",
+  "titulo": "El interior es el abierto más grande contenido en $E$",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $E \\subseteq M$ un subconjunto. Sea $A \\subseteq E$ un conjunto abierto. Entonces $A \\subseteq E^\\circ$. Es decir, el interior es el conjunto abierto más grande contenido dentro de $E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejap-5.10": {
+  "tipo": "Ejercicio",
+  "numero": "5.10",
+  "titulo": "Continuidad por cerrados",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$. Probar que $f$ es continua si y sólo si $f^{-1}(F)$ es cerrado para todo $F \\subseteq N$ cerrado.</p>",
+  "fuente": "apuntes.typ lo cita como Ejercicio 5.10 (desafío de la Práctica 4); enunciado de desafios/p4.typ"
+ },
+ "ejap-5.32": {
+  "tipo": "Ejercicio",
+  "numero": "5.32",
+  "titulo": "La composición de homeomorfismos es un homeomorfismo",
+  "enunciado": "<ol class=\"items\" style=\"list-style-type: decimal\"><li>Sean $f : (M, d) \\to (N, d')$ y $g : (N, d') \\to (X, d'')$ dos homeomorfismos. Ver que la composición $g \\circ f$ es también un homeomorfismo.</li><li>Concluir que si definimos la relación $(M, d) \\sim (N, d')$ si $(M, d)$ y $(N, d')$ son homeomorfos, entonces $\\sim$ es una relación de equivalencia.</li></ol>",
+  "fuente": "Ejercicio 5.32 de las notas (desafío de la Práctica 4); enunciado de desafios/p4.typ"
+ },
+ "ejem-5.30": {
+  "tipo": "Ejemplo",
+  "numero": "5.30",
+  "titulo": "$x / (1 + |x|)$ es un homeomorfismo; la identidad de $(\\mathbb{R}, \\delta)$ en $(\\mathbb{R}, |\\cdot|)$ no",
+  "enunciado": "<ol class=\"items\"><li>Sea $h : (\\mathbb{R}, |\\cdot|) \\to ((-1, 1), |\\cdot|)$ la función $h(x) = x / (1 + |x|)$ (esta función la usamos en el capítulo de cardinalidad para probar que $\\mathbb{R}$ y el intervalo $(-1, 1)$ son coordinables). Veamos que $h$ es un homeomorfismo.</li><li>Sea $f : (\\mathbb{R}, \\delta) \\to (\\mathbb{R}, |\\cdot|)$ la función $f(x) = x$, $\\delta$ la métrica discreta. Entonces $f$ no es un homeomorfismo.</li></ol>",
+  "fuente": "Ejemplo 5.30 de las notas; transcripto en ejemplos/p4.typ (ejemplo 40)"
+ },
+ "ejem-5.21": {
+  "tipo": "Ejemplo",
+  "numero": "5.21",
+  "titulo": "$\\mathbb{Q}$ y $\\mathbb{I} = \\mathbb{R} \\setminus \\mathbb{Q}$ son densos en $\\mathbb{R}$",
+  "enunciado": "<ol class=\"items\"><li>$\\mathbb{Q} \\subseteq (\\mathbb{R}, |\\cdot|)$ es un conjunto denso.</li><li>$\\mathbb{I} = \\mathbb{R} \\setminus \\mathbb{Q} \\subseteq (\\mathbb{R}, |\\cdot|)$ el conjunto de los números irracionales también es denso.</li></ol>",
+  "fuente": "Ejemplo 5.21 de las notas; transcripto en ejemplos/p4.typ (ejemplo 38)"
+ },
+ "ejem-4.2": {
+  "tipo": "Ejemplo",
+  "numero": "4.2",
+  "titulo": "La métrica discreta",
+  "enunciado": "<p>Sea $M$ un conjunto no vacío cualquiera. Se define la función $\\delta : M \\times M \\to \\mathbb{R}$ por $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ Probar que $\\delta$ es una métrica en $M$.</p>",
+  "fuente": "Ejemplo 4.2 de las notas (la métrica discreta); transcripto en ejemplos/p3.typ (ejemplo 16)"
+ },
+ "ext-ejemplo-c6-1": {
+  "tipo": "Ejemplo",
+  "numero": "C6-1",
+  "titulo": "Proyecciones de $X \\times Y$ y continuidad coordenada a coordenada",
+  "enunciado": "<p>Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. Pensamos a $X \\times Y$ con $d_\\infty$.</p><ol class=\"items\"><li>Probar que $\\pi_1 : X \\times Y \\to X$, $(x, y) \\mapsto x$, y $\\pi_2 : X \\times Y \\to Y$, $(x, y) \\mapsto y$ son continuas y abiertas, pero pueden <b>no ser cerradas</b>.</li><li>Sea $(Z, \\delta)$ un espacio métrico y sea $f : Z \\to X \\times Y$ una aplicación. Probar que $f$ es continua si y sólo si $f_1 = \\pi_1 \\circ f$ y $f_2 = \\pi_2 \\circ f$ lo son.</li></ol>",
+  "fuente": "ejemplos/p4.typ (Clase 6 · Ejemplo 1); todavía no está en apuntes.typ"
+ },
+ "ext-ejemplo-c9-1-1": {
+  "tipo": "Ejemplo",
+  "numero": "C9-1.1",
+  "titulo": "Suma y producto de funciones continuas son continuas",
+  "enunciado": "<p>Sean $X$ e $Y$ dos espacios métricos, y $f, g : X \\to Y$ dos funciones continuas entre estos espacios. Se tiene entonces que $f + g$ y $f \\cdot g$ también son funciones continuas entre estos espacios.</p>",
+  "fuente": "ejemplos/p4.typ (Clase 9 · Proposición 1.1); todavía no está en apuntes.typ"
+ },
+ "ext-ejemplo-c9-1-2": {
+  "tipo": "Ejemplo",
+  "numero": "C9-1.2",
+  "titulo": "Las proyecciones $\\pi_i : \\mathbb{R}^n \\to \\mathbb{R}$ son continuas para $d_\\infty$",
+  "enunciado": "<p>Sea $\\pi_i : \\mathbb{R}^n \\to \\mathbb{R}$ la función que proyecta en la $i$-ésima coordenada, es decir, la función tal que $\\pi_i(x_1, x_2, \\dots, x_n) = x_i$. Esta función es continua en la métrica dada por la distancia $d_\\infty$.</p>",
+  "fuente": "ejemplos/p4.typ (Clase 9 · Lema 1.2); todavía no está en apuntes.typ"
+ },
+ "ext-ejemplo-c9-1-6": {
+  "tipo": "Ejemplo",
+  "numero": "C9-1.6",
+  "titulo": "Los polinomios en varias variables son continuos",
+  "enunciado": "<p>Los polinomios en varias variables (Definición 1.4 de la clase) son funciones continuas de $\\mathbb{R}^n$ a $\\mathbb{R}$.</p>",
+  "fuente": "ejemplos/p4.typ (Clase 9 · Proposición 1.6); todavía no está en apuntes.typ"
+ }
+}

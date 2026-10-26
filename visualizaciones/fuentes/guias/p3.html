@@ -1,0 +1,344 @@
+<p class="edicion" id="guiap3-edicion">Edición 2026 · sigue la guía 2026 (<code>apuntes-docentes/guias/p3.pdf</code>), cotejada ítem por ítem con la edición 2025: numeración y enunciados idénticos (16 ejercicios, 54 incisos); sólo cambió el encabezado.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap3-ej1" data-short="Ej. 1" data-title="Seis espacios métricos y sus bolas abiertas" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Seis espacios métricos y sus bolas abiertas</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que los siguientes son <span class="ref" data-ref="def-4.1">espacios métricos</span>. Dibuje, en cada caso, una <span class="ref" data-ref="def-4.5">bola abierta</span>.</p>
+      <ol class="items">
+        <li>$\mathbb{R}$ con $d(x, y) = |x - y|$.</li>
+        <li>$\mathbb{R}^n$ con $d_2(x, y) = \left(\sum_{i=1}^n (x_i - y_i)^2\right)^{1/2}$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>).</li>
+        <li>$\mathbb{R}^n$ con $d_1(x, y) = \sum_{i=1}^n |x_i - y_i|$.</li>
+        <li>$\mathbb{R}^n$ con $d_\infty(x, y) = \max_{1 \le i \le n} |x_i - y_i|$.</li>
+        <li>$C([0, 1])$ con $d_\infty(f, g) = \max_{0 \le t \le 1} |f(t) - g(t)|$ (<span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancias en espacios de funciones</span>).</li>
+        <li>$E$ un conjunto no vacío, con la métrica
+          $$ \delta(x, y) = \begin{cases} 0 & \text{si } x = y, \\ 1 & \text{si } x \neq y. \end{cases} $$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej1-c" aria-label="Bola abierta de centro x y radio r en el espacio métrico elegido"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Espacio</legend>
+          <label><input type="radio" name="guiap3-ej1-it" value="a">(a) ℝ</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="b" checked>(b) d₂</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="c">(c) d₁</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="d">(d) d∞</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="e">(e) C([0, 1])</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="f">(f) δ</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej1-r"><i>r</i></label><input type="range" id="guiap3-ej1-r" min="10" max="200" value="80"><output id="guiap3-ej1-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej1-read" aria-live="polite"></dl>
+      <figcaption>El ejercicio pide dibujar una bola en cada caso; acá están, con radio <i>r</i> y (en ℝ y ℝ²) centro arrastrable. En (b)–(d) se toma <i>n</i> = 2. En (e), el centro es <i>f</i>₀(<i>t</i>) = 0.5 + 0.3 sen(2π<i>t</i>) (elegida) y la franja de ancho <i>r</i> alrededor; la curva naranja es una <i>g</i> de la bola. En (f), <i>E</i> son ocho puntos elegidos: los azules están en la bola.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap3-ej2" data-short="Ej. 2" data-title="¿Cuáles son métricas en ℝ?" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>¿Cuáles son métricas en $\mathbb{R}$?</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Decida cuáles de las siguientes funciones definidas en $\mathbb{R} \times \mathbb{R}$ son <span class="ref" data-ref="def-4.1">métricas</span> en $\mathbb{R}$:</p>
+      <ol class="items">
+        <li>$d(x, y) = (x - y)^2$</li>
+        <li>$d(x, y) = \sqrt{|x - y|}$</li>
+        <li>$d(x, y) = |x^2 - y^2|$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej2-c" aria-label="Gráfico de y en función de d(x, y) con x fijo, para la función elegida"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap3-ej2-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap3-ej2-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap3-ej2-it" value="c">(c)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej2-x"><i>x</i> fijo</label><input type="range" id="guiap3-ej2-x" min="-20" max="20" value="10"><output id="guiap3-ej2-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej2-read" aria-live="polite"></dl>
+      <figcaption>Con <i>x</i> fijo (el slider), la curva es <i>y</i> ↦ <i>d</i>(<i>x</i>, <i>y</i>) para la función elegida; la raya punteada marca <i>y</i> = <i>x</i>. Para comparar, en gris, |<i>x</i> − <i>y</i>|.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap3-ej3" data-short="Ej. 3" data-title="Interior y clausura de ocho subconjuntos de ℝ" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Interior y clausura de ocho subconjuntos de $\mathbb{R}$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Halle <span class="ref" data-ref="def-4.11">interior</span> y <span class="ref" data-ref="def-4.22">clausura</span> de cada uno de los siguientes subconjuntos de $\mathbb{R}$. Determine cuáles son <span class="ref" data-ref="def-4.14">abiertos</span> o <span class="ref" data-ref="def-4.27">cerrados</span>.</p>
+      <ol class="items">
+        <li>$[0, 1]$</li>
+        <li>$(0, 1)$</li>
+        <li>$\mathbb{Q}$</li>
+        <li>$\mathbb{Q} \cap [0, 1]$</li>
+        <li>$\mathbb{Z}$</li>
+        <li>$[0, 1) \cup \{2\}$</li>
+        <li>$\{1/n : n \in \mathbb{N}\}$</li>
+        <li>$\{1/n : n \in \mathbb{N}\} \cup \{0\}$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej3-c" aria-label="El subconjunto elegido dibujado sobre la recta real"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Conjunto</legend>
+          <label><input type="radio" name="guiap3-ej3-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="d">(d)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="e">(e)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="f">(f)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="g">(g)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="h">(h)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap3-ej3-read" aria-live="polite"></dl>
+      <figcaption>Cada conjunto en la ventana [−1.5, 2.5]. Punto lleno: está en el conjunto; círculo vacío: extremo que no está. ℚ no se puede dibujar entero: se ven sólo las fracciones con denominador hasta 12, que ya muestran que hay racionales en todos lados (y huecos irracionales entre ellas). En (g) y (h) se ven los 1/<i>n</i> con <i>n</i> ≤ 40.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap3-ej4" data-short="Ej. 4" data-title="Puntos, bolas abiertas, bolas cerradas y anillos" data-topics="topologia,metricas">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Puntos, bolas abiertas, bolas cerradas y anillos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Sean $x \in E$ y $r \gt 0$.</p>
+      <ol class="items">
+        <li>Pruebe que $\{x\}$ es un conjunto <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+        <li>Pruebe que $B(x, r)$ (<span class="ref" data-ref="def-4.5">bola abierta</span>) es un conjunto <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>Pruebe que si $r \gt r' \gt 0$ entonces $\overline{B(x, r')} \subseteq B(x, r)$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+        <li>Pruebe que $\overline{B}(x, r) = \{y \in E : d(x, y) \le r\}$ es un conjunto cerrado.</li>
+        <li>Deduzca que $\overline{B(x, r)} \subseteq \overline{B}(x, r)$.</li>
+        <li>Dé un ejemplo en que $\overline{B(x, r)}$ sea un subconjunto propio de $\overline{B}(x, r)$.</li>
+        <li>Pruebe que $\{y \in E : 2 \lt d(y, x) \lt 3\}$ es un conjunto abierto.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej4-c" aria-label="En el plano con la distancia euclídea: dos bolas concéntricas o el anillo entre radios 2 y 3"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ítem</legend>
+          <label><input type="radio" name="guiap3-ej4-it" value="c" checked>(c) r′ &lt; r</label>
+          <label><input type="radio" name="guiap3-ej4-it" value="g">(g) anillo</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej4-rp"><i>r</i>′</label><input type="range" id="guiap3-ej4-rp" min="10" max="195" value="120"><output id="guiap3-ej4-rp-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej4-read" aria-live="polite"></dl>
+      <figcaption>Un caso elegido para el dibujo: <i>E</i> = ℝ² con <i>d</i>₂ y <i>x</i> = 0. En (c), <i>r</i> = 2 fijo (círculo punteado) y la bola de radio <i>r</i>′ del slider, sombreada. En (g), el conjunto {2 &lt; <i>d</i>(<i>y</i>, <i>x</i>) &lt; 3}: los bordes punteados no están.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap3-ej5" data-short="Ej. 5" data-title="Complemento del interior y de la clausura" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Complemento del interior y de la clausura</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $A \subseteq E$. Pruebe que (<span class="ref" data-ref="def-4.11">interior</span>, <span class="ref" data-ref="def-4.22">clausura</span>):</p>
+    <ol class="items">
+      <li>$E \setminus A^{\circ} = \overline{E \setminus A}$.</li>
+      <li>$E \setminus \overline{A} = (E \setminus A)^{\circ}$.</li>
+    </ol>
+    <p>¿Son ciertas las igualdades $\overline{A} = \overline{A^{\circ}}$ y $A^{\circ} = (\overline{A})^{\circ}$?</p>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap3-ej6" data-short="Ej. 6" data-title="Interior y clausura de uniones e intersecciones" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Interior y clausura de uniones e intersecciones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $A, B \subseteq E$. Pruebe que (<span class="ref" data-ref="def-4.11">interior</span>, <span class="ref" data-ref="def-4.22">clausura</span>):</p>
+    <ol class="items">
+      <li>$(A \cap B)^{\circ} = A^{\circ} \cap B^{\circ}$.</li>
+      <li>$A^{\circ} \cup B^{\circ} \subseteq (A \cup B)^{\circ}$.</li>
+      <li>$\overline{A \cup B} = \overline{A} \cup \overline{B}$.</li>
+      <li>$\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$.</li>
+    </ol>
+    <p>Encuentre ejemplos en que no valga la igualdad en (b) y (d).</p>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap3-ej7" data-short="Ej. 7" data-title="Diámetro: monotonía y clausura" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Diámetro: monotonía y clausura</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y $A, B \subseteq E$ subconjuntos <span class="ref" data-ref="def-4.8">acotados</span> de $E$.</p>
+      <ol class="items">
+        <li>Pruebe que si $A \subseteq B$ entonces $\operatorname{diam}(A) \le \operatorname{diam}(B)$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+        <li>Pruebe que $\operatorname{diam}(A) = \operatorname{diam}(\overline{A})$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej7-c" aria-label="Cinco puntos arrastrables en el plano y el par más alejado"></canvas>
+      <dl class="read" id="guiap3-ej7-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto finito <i>A</i> ⊆ ℝ² (con <i>d</i>₂) de cinco puntos que se pueden arrastrar. El segmento marca el par más alejado: su largo es diam(<i>A</i>) = sup{<i>d</i>(<i>a</i>, <i>b</i>) : <i>a</i>, <i>b</i> ∈ <i>A</i>}.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap3-ej8" data-short="Ej. 8" data-title="Frontera y puntos de acumulación de los conjuntos del Ejercicio 3" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Frontera y puntos de acumulación de los conjuntos del Ejercicio 3</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Halle <span class="ref" data-ref="def-4.38">frontera</span> y <span class="ref" data-ref="def-4.33">puntos de acumulación</span> de cada uno de los subconjuntos de $\mathbb{R}$ del <span class="ref" data-ref="guia-p3-ej3">Ejercicio 3</span>.</p></div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap3-ej9" data-short="Ej. 9" data-title="La frontera vía clausura e interior" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>La frontera vía clausura e interior</h3>
+    <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $A \subseteq E$.</p>
+    <ol class="items">
+      <li>Pruebe que $\partial A = \overline{A} \setminus A^{\circ}$, y concluya que $\partial A$ es <span class="ref" data-ref="def-4.27">cerrado</span> (<span class="ref" data-ref="def-4.38">frontera</span>, <span class="ref" data-ref="def-4.22">clausura</span>, <span class="ref" data-ref="def-4.11">interior</span>).</li>
+      <li>Pruebe que $\partial A = \overline{A} \cap \overline{E \setminus A}$, y concluir que $\partial A = \partial(E \setminus A)$.</li>
+    </ol>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap3-ej10" data-short="Ej. 10" data-title="Distancia de un punto a un conjunto" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Distancia de un punto a un conjunto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Dados $A \subseteq E$ no vacío y $x \in E$, se define la <em>distancia de $x$ a $A$</em> como
+      $$ d(x, A) = \inf\{d(x, a) : a \in A\}. $$
+      Pruebe que para todos $x, y \in E$ y $r \gt 0$:</p>
+      <ol class="items">
+        <li>$|d(x, A) - d(y, A)| \le d(x, y)$.</li>
+        <li>$x \in A \Rightarrow d(x, A) = 0$.</li>
+        <li>$d(x, A) = 0 \iff x \in \overline{A}$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+        <li>$B_A(r) = \{x \in E : d(x, A) \lt r\}$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>$\overline{B}_A(r) = \{x \in E : d(x, A) \le r\}$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej10-c" aria-label="Un conjunto A en el plano, un punto x arrastrable con su distancia a A y la región de puntos a distancia menor que r"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej10-r"><i>r</i></label><input type="range" id="guiap3-ej10-r" min="5" max="120" value="50"><output id="guiap3-ej10-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej10-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: <i>E</i> = ℝ² con <i>d</i>₂ y <i>A</i> un segmento más un punto suelto (en naranja). Arrastrá <i>x</i>: el trazo punteado va al punto de <i>A</i> más cercano. La región sombreada es <i>B<sub>A</sub></i>(<i>r</i>) = {<i>d</i>(·, <i>A</i>) &lt; <i>r</i>}, para el <i>r</i> del slider.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap3-ej11" data-short="Ej. 11" data-title="La distancia entre conjuntos no es una distancia" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>La “distancia” entre conjuntos no es una distancia</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Consideremos el conjunto $\mathcal{X} = \{A \subseteq E : A \neq \emptyset\}$. Definimos la función $\hat{d} : \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ como
+    $$ \hat{d}(A, B) = \inf\{d(a, b) : a \in A, b \in B\}. $$
+    Determine si las siguientes afirmaciones son verdaderas o falsas:</p>
+    <ol class="items">
+      <li>$\hat{d}(A, B) = \hat{d}(\overline{A}, B)$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+      <li>$\hat{d}(A, B) = 0 \iff A \cap B \neq \emptyset$.</li>
+      <li>$\hat{d}(A, B) = 0 \iff \overline{A} \cap \overline{B} \neq \emptyset$.</li>
+      <li>$\hat{d}(A, B) \le \hat{d}(A, C) + \hat{d}(C, B)$.</li>
+    </ol>
+    <p>Concluya que $\hat{d}$ no es una distancia.</p>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap3-ej12" data-short="Ej. 12" data-title="d1, d2 y d∞ son equivalentes en ℝ^n" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>$d_1$, $d_2$ y $d_\infty$ son equivalentes en $\mathbb{R}^n$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Considere en $\mathbb{R}^n$ las distancias $d_1$, $d_2$ y $d_\infty$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>).</p>
+      <ol class="items">
+        <li>Pruebe que estas tres distancias son <span class="ref" data-ref="ext-metricas-equivalentes">equivalentes</span>; más aún, pruebe que
+          $$ \begin{aligned} d_\infty(x, y) &\le d_2(x, y) \le d_1(x, y) \\ &\le n\, d_\infty(x, y). \end{aligned} $$</li>
+        <li>Denotemos por $B_1(x, r)$, $B_2(x, r)$ y $B_\infty(x, r)$ a la bola de centro $x$ y radio $r$ para cada una de las distancias, respectivamente (<span class="ref" data-ref="def-4.5">bolas</span>). Deduzca de (a) que
+          $$ \begin{aligned} B_1(x, r) &\subseteq B_2(x, r) \subseteq B_\infty(x, r) \\ &\subseteq B_1(x, nr). \end{aligned} $$
+          Compare estas contenciones con los dibujos hechos en el <span class="ref" data-ref="guia-p3-ej1">Ejercicio 1</span>.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej12-c" aria-label="Las bolas B1, B2 y B infinito de radio r y la bola B1 de radio 2r, en el plano"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej12-r"><i>r</i></label><input type="range" id="guiap3-ej12-r" min="20" max="100" value="60"><output id="guiap3-ej12-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej12-read" aria-live="polite"></dl>
+      <figcaption>El caso <i>n</i> = 2, <i>x</i> = 0: el rombo azul es <i>B</i>₁(<i>x</i>, <i>r</i>), el círculo verde azulado <i>B</i>₂(<i>x</i>, <i>r</i>), el cuadrado naranja <i>B</i>∞(<i>x</i>, <i>r</i>) y el rombo punteado <i>B</i>₁(<i>x</i>, 2<i>r</i>). Es la comparación que pide el ítem (b) con los dibujos del Ejercicio 1.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap3-ej13" data-short="Ej. 13" data-title="La distancia es continua en sucesiones" data-topics="completitud,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>La distancia y las sucesiones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ sucesiones en $E$.</p>
+      <ol class="items">
+        <li>Si $\lim_{n \to \infty} x_n = x$ y $\lim_{n \to \infty} y_n = y$ (<span class="ref" data-ref="def-4.42">convergencia</span>), pruebe que $\lim_{n \to \infty} d(x_n, y_n) = d(x, y)$.</li>
+        <li>Si $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ son dos <span class="ref" data-ref="def-4.51">sucesiones de Cauchy</span> en $E$, pruebe que la sucesión de números reales $(d(x_n, y_n))_{n \in \mathbb{N}}$ es convergente.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej13-c" aria-label="Dos sucesiones del plano que convergen a x y a y, con el segmento entre x_n e y_n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej13-n"><i>n</i></label><input type="range" id="guiap3-ej13-n" min="1" max="40" value="3"><output id="guiap3-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej13-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas en ℝ² con <i>d</i>₂: <i>x<sub>n</sub></i> se acerca a <i>x</i> en espiral y <i>y<sub>n</sub></i> se acerca a <i>y</i> zigzagueando. El segmento naranja une <i>x<sub>n</sub></i> con <i>y<sub>n</sub></i>; el gris punteado, <i>x</i> con <i>y</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap3-ej14" data-short="Ej. 14" data-title="ℝ^n es completo con d1, d2 y d∞" data-topics="completitud">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>$\mathbb{R}^n$ es completo con $d_1$, $d_2$ y $d_\infty$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a></span></div>
+  <div class="enun"><p>Pruebe que $(\mathbb{R}^n, d_1)$, $(\mathbb{R}^n, d_2)$ y $(\mathbb{R}^n, d_\infty)$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>) son <span class="ref" data-ref="def-4.55">completos</span>.</p></div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap3-ej15" data-short="Ej. 15" data-title="Un cerrado de un completo es completo" data-topics="completitud,topologia">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Un cerrado de un completo es completo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $(E, d)$ un espacio métrico <span class="ref" data-ref="def-4.55">completo</span> y $A \subseteq E$ un subconjunto de $E$. Pruebe que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces el espacio métrico $(A, d)$ es completo.</p></div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap3-ej16" data-short="Ej. 16" data-title="Teorema de la intersección de Cantor" data-topics="completitud,topologia">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Teorema de la intersección (Cantor)</h3>
+    <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p><b>Teorema de la intersección (Cantor).</b> Sea $E$ un espacio métrico <span class="ref" data-ref="def-4.55">completo</span>. Sea $(A_n)_{n \in \mathbb{N}}$ una sucesión de subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span>, <span class="ref" data-ref="def-4.8">acotados</span> y no vacíos de $E$ tales que</p>
+      <ul class="items">
+        <li>$A_{n+1} \subseteq A_n$ para todo $n \ge 1$.</li>
+        <li>$\lim_{n \to \infty} \operatorname{diam}(A_n) = 0$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+      </ul>
+      <p>Pruebe que existe un único elemento $x \in \bigcap_{n \in \mathbb{N}} A_n$.</p>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej16-c" aria-label="Discos cerrados encajados cuyo diámetro se achica"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej16-n"><i>n</i></label><input type="range" id="guiap3-ej16-n" min="1" max="8" value="4"><output id="guiap3-ej16-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej16-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida en ℝ² con <i>d</i>₂ que cumple las hipótesis: discos cerrados <i>A</i>₁ ⊇ <i>A</i>₂ ⊇ … cuyo radio se divide por 2 en cada paso. Se dibujan <i>A</i>₁, …, <i>A<sub>n</sub></i>; el último, resaltado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"></div>
+</article>
+
+<p class="nota" id="guiap3-resolucion">Esta página trae sólo los enunciados. La resolución completa de la guía está en <code>apuntes-typst/guias-agente/guia_3_resuelta_agente.typ</code> (verificada en Lean).</p>

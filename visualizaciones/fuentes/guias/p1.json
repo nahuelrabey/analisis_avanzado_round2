@@ -1,0 +1,205 @@
+{
+ "def-1": {
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ ($A \\neq \\emptyset$) se dice <b>acotado superiormente</b> si existe un $c \\in \\mathbb{R}$ tal que $a \\le c$ para todo $a \\in A$. Al número $c$ se le denomina <b>cota superior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-10": {
+  "tipo": "Definición",
+  "numero": "10",
+  "titulo": "Sucesión Monótona",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ es <b>monótona creciente</b> (análogamente <b>decreciente</b>) si $a_n \\le a_{n+1}$ (análogamente $a_n \\ge a_{n+1}$) para todo $n$ o a partir de algún $n_0$ en adelante.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo</em> de $A$ si:</p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.</p><p>Es decir, el supremo es la <em>menor de las cotas superiores</em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo</b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente</b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo</strong> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo</b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-sucesiones": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Sucesiones",
+  "enunciado": "<p>Una <b>sucesión</b> es una función $a : \\mathbb{N} \\to \\mathbb{R}$, es decir, una asignación que a cada número natural le asigna un único número real. La notación usual es $a_n = a(n) \\in \\mathbb{R}$ para el elemento que $a$ le asigna a $n$ y para referirnos a la sucesión entera, usamos $a = (a_n)_{n \\in \\mathbb{N}}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-7": {
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión y $\\ell \\in \\mathbb{R}$. Decimos que $(a_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que si $n \\ge n_0$, $|a_n - \\ell| \\lt \\varepsilon$. Notamos $\\lim_{n \\to \\infty} a_n = \\ell$ o $a_n \\to \\ell$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-8": {
+  "tipo": "Definición",
+  "numero": "8",
+  "titulo": "Divergencia de Sucesiones",
+  "enunciado": "<p>Decimos que una sucesión $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $+\\infty$</b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\gt M$. Notamos $\\lim_{n \\to \\infty} a_n = +\\infty$ o $a_n \\to +\\infty$.</p><p>Similarmente, decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $-\\infty$</b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\lt -M$. Notamos $\\lim_{n \\to \\infty} a_n = -\\infty$ o $a_n \\to -\\infty$.</p><p>Decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge</b> si no converge o diverge a $\\pm\\infty$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-sucesion-acotada": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Sucesión Acotada",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ está <b>acotada</b> si el conjunto $\\{a_n : n \\in \\mathbb{N}\\} \\subseteq \\mathbb{R}$ está acotado.</p><p>Es decir, si existe $M \\gt 0$ tal que $|a_n| \\le M$ para todo $n \\in \\mathbb{N}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-funcion-monotona": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función monótona",
+  "enunciado": "<p>Sea $D \\subseteq \\mathbb{R}$. Una función $f : D \\to \\mathbb{R}$ es <b>creciente</b> si $x \\le y$ implica $f(x) \\le f(y)$ para todos $x, y \\in D$, y <b>decreciente</b> si $x \\le y$ implica $f(x) \\ge f(y)$. Es <b>monótona</b> si es creciente o decreciente.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p1-ej1": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 1",
+  "titulo": "Si x es menor que y + ε para todo ε, entonces x ≤ y",
+  "enunciado": "<p>Probar que si $x \\lt y + \\varepsilon$ para todo $\\varepsilon \\gt 0$, entonces $x \\le y$. Deducir que si $|x - y| \\lt \\varepsilon$ para todo $\\varepsilon \\gt 0$, entonces $x = y$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej2": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 2",
+  "titulo": "Enteros, racionales e irracionales entre dos reales",
+  "enunciado": "<ol class=\"items\"> <li>Sean $x, y \\in \\mathbb{R}$ tales que $y - x \\gt 1$. Probar que existe un entero entre $x$ e $y$.</li> <li>Sean $x, y \\in \\mathbb{R}$ tales que $x \\lt y$. Probar que existe un racional entre $x$ e $y$.</li> <li>Sean $x, y \\in \\mathbb{Q}$ tales que $x \\lt y$. Probar que existe un irracional entre $x$ e $y$.</li> <li>Sean $x, y \\in \\mathbb{R}$ tales que $x \\lt y$. Probar que existe un irracional entre $x$ e $y$.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej3": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 3",
+  "titulo": "Equivalencia del ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Probar la siguiente equivalencia: $$ i = \\inf A \\iff \\left\\{ \\begin{aligned} &i \\le a \\text{ para todo } a \\in A, \\\\ &\\text{para todo } \\varepsilon \\gt 0 \\text{ existe } a \\in A \\\\ &\\quad \\text{tal que } i \\le a \\lt i + \\varepsilon. \\end{aligned} \\right. $$</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej4": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 4",
+  "titulo": "Supremo, ínfimo, máximo y mínimo de cuatro conjuntos",
+  "enunciado": "<p>Hallar, si existen, supremo, ínfimo, máximo y mínimo de los siguientes subconjuntos de $\\mathbb{R}$, y probar que lo son:</p> <ol class=\"items\"> <li>$(a, b]$</li> <li>$B = \\{1/2^n : n \\in \\mathbb{N}\\}$</li> <li>$B \\cup \\{0\\}$</li> <li>$\\{x^2 - x - 1 : x \\in \\mathbb{R}\\}$</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej5": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 5",
+  "titulo": "Supremo e ínfimo de un subconjunto",
+  "enunciado": "<p>Sean $A \\subseteq B \\subseteq \\mathbb{R}$, con $A \\neq \\emptyset$. Probar las siguientes afirmaciones:</p> <ol class=\"items\"> <li>Si $B$ está acotado superiormente, entonces $A$ también lo está, y $\\sup A \\le \\sup B$.</li> <li>Si $B$ está acotado inferiormente, entonces $A$ también lo está, e $\\inf B \\le \\inf A$.</li> <li>Si $A$ no está acotado, entonces $B$ tampoco lo está.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej6": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 6",
+  "titulo": "Supremo e ínfimo de −A y de cA",
+  "enunciado": "<p>Dados un conjunto de números reales $A$ y $c \\in \\mathbb{R}$, denotamos $cA = \\{ca : a \\in A\\}$. Más aún, $-A$ denotará al conjunto $(-1)A$. Probar las siguientes afirmaciones:</p> <ol class=\"items\"> <li>Probar que si $A$ está acotado superiormente, entonces $-A$ está acotado inferiormente e $\\inf(-A) = -\\sup A$.</li> <li>Probar que si $c \\gt 0$ y $A$ está acotado superiormente, entonces $cA$ está acotado superiormente y $\\sup(cA) = c \\sup(A)$.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej7": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 7",
+  "titulo": "Tres límites por definición",
+  "enunciado": "<p>Probar, usando la definición de límite:</p> <ol class=\"items\"> <li>$\\displaystyle \\lim_{n \\to \\infty} \\frac{3 - 2n}{n + 1} = -2$.</li> <li>$\\displaystyle \\lim_{n \\to \\infty} \\frac{\\sin(n)}{n} = 0$.</li> <li>$\\displaystyle \\lim_{n \\to \\infty} \\frac{2^n - 3}{2^n + 4} = 1$.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej8": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 8",
+  "titulo": "Acotar la distancia al límite por una sucesión que tiende a 0",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}}$ y $(a_n)_{n \\in \\mathbb{N}}$ sucesiones de números reales. Probar que si $|x_n - \\ell| \\le a_n$ para todo $n \\in \\mathbb{N}$ y $a_n \\underset{n \\to \\infty}{\\longrightarrow} 0$ entonces $x_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej9": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 9",
+  "titulo": "Límite de la suma, con límites finitos e infinitos",
+  "enunciado": "<p>Si $(x_n)_{n \\in \\mathbb{N}}$ e $(y_n)_{n \\in \\mathbb{N}}$ son sucesiones de números reales tales que $x_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell_1$ e $y_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell_2$, probar que $x_n + y_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell_1 + \\ell_2$ para el caso en que:</p> <ol class=\"items\"> <li>$\\ell_1, \\ell_2 \\in \\mathbb{R}$.</li> <li>$\\ell_1 \\in \\mathbb{R}$ y $\\ell_2 = \\infty$.</li> <li>$\\ell_1 = +\\infty = \\ell_2$.</li> <li>Pensar por qué no vale en el caso en que $\\ell_1 = +\\infty$ y $\\ell_2 = -\\infty$. Dar un contraejemplo para este caso.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej10": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 10",
+  "titulo": "Las desigualdades pasan al límite",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}}$ sucesiones de números reales tales que $x_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell_1$ e $y_n \\underset{n \\to \\infty}{\\longrightarrow} \\ell_2$. Probar que si $x_n \\le y_n$ para todo $n$, entonces $\\ell_1 \\le \\ell_2$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej11": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 11",
+  "titulo": "Nula por acotada es nula",
+  "enunciado": "<p>Si $(x_n)_{n \\in \\mathbb{N}}$ e $(y_n)_{n \\in \\mathbb{N}}$ son sucesiones de números reales tales que $(x_n)_{n \\in \\mathbb{N}}$ converge a $0$ e $(y_n)_{n \\in \\mathbb{N}}$ está acotada, probar que $(x_n y_n)_{n \\in \\mathbb{N}}$ converge a $0$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej12": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 12",
+  "titulo": "Sucesiones decrecientes",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$ decreciente. Probar que:</p> <ol class=\"items\"> <li>Si $(x_n)_{n \\in \\mathbb{N}}$ es acotada inferiormente, entonces tiene límite y $$ \\lim_{n \\to \\infty} x_n = \\inf\\{x_n : n \\in \\mathbb{N}\\}. $$</li> <li>Si $(x_n)_{n \\in \\mathbb{N}}$ es no acotada inferiormente, entonces $x_n \\underset{n \\to \\infty}{\\longrightarrow} -\\infty$.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej13": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 13",
+  "titulo": "Sin máximo, el supremo es límite de una sucesión estrictamente creciente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado superiormente y no vacío. Probar que si $A$ no tiene máximo entonces existe $(a_n)_{n \\in \\mathbb{N}} \\subseteq A$ estrictamente creciente tal que $a_n \\underset{n \\to \\infty}{\\longrightarrow} \\sup(A)$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej14": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 14",
+  "titulo": "Una sucesión no acotada superiormente tiene una subsucesión que diverge a +∞",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$ una sucesión no acotada superiormente. Probar que existe una subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ que diverge a $+\\infty$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej15": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 15",
+  "titulo": "Si toda subsucesión tiene una subsubsucesión que converge a ℓ, la sucesión converge a ℓ",
+  "enunciado": "<p>Sean $(x_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$ y $\\ell \\in \\mathbb{R}$. Probar que si toda subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ tiene una (sub)subsucesión $(x_{n_{k_j}})_{j \\in \\mathbb{N}}$ que converge a $\\ell$, entonces la sucesión $(x_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$.</p>",
+  "fuente": "guias/p1.typ"
+ },
+ "guia-p1-ej16": {
+  "tipo": "Práctica 1",
+  "numero": "Ej. 16",
+  "titulo": "Convergencia a partir de pares, impares y múltiplos de 3",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$. Probar:</p> <ol class=\"items\"> <li>Si $(x_{2k})_{k \\in \\mathbb{N}}$ y $(x_{2k-1})_{k \\in \\mathbb{N}}$ son convergentes, y sus límites coinciden, entonces $(x_n)_{n \\in \\mathbb{N}}$ es convergente.</li> <li>Si $(x_{2k})_{k \\in \\mathbb{N}}$, $(x_{2k-1})_{k \\in \\mathbb{N}}$ y $(x_{3k})_{k \\in \\mathbb{N}}$ son convergentes, entonces $(x_n)_{n \\in \\mathbb{N}}$ es convergente.</li> </ol>",
+  "fuente": "guias/p1.typ"
+ }
+}
