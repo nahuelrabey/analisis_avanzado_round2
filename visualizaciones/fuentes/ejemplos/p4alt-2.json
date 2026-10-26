@@ -146,7 +146,7 @@
   "enunciado": "<p>Dos métricas $d$ y $d'$ en un mismo conjunto $M$ son <b>equivalentes</b> (topológicamente) si definen los mismos abiertos; es decir, si $\\operatorname{id} : (M, d) \\to (M, d')$ es un homeomorfismo.</p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
  },
- "ext-normado": {
+ "ext-norma": {
   "tipo": "Definición",
   "numero": "",
   "titulo": "Espacio normado",
