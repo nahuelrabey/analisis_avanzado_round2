@@ -216,7 +216,8 @@ class Page:
             at = attrs(tag)
             if kind == "sec":
                 h2 = H2_RE.search(self.body, start)
-                cur = {"id": at.get("id"), "title": plain(h2.group(1)) if h2 else at.get("id"), "items": []}
+                h2txt = re.sub(r'<span class="bn">(.*?)</span>', r"\1 · ", h2.group(1), count=1, flags=re.S) if h2 else ""
+                cur = {"id": at.get("id"), "title": plain(h2txt) if h2 else at.get("id"), "items": []}
                 self.groups.append(cur)
             else:
                 aid, short, title = at.get("id"), at.get("data-short"), at.get("data-title")

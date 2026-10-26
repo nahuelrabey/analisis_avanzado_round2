@@ -144,7 +144,7 @@
         <div class="step-text">
           <p class="step-title">Lipschitz en $[-M, M]$</p>
           <p>Por otro lado, la restricción de $f(x) = x^2$ a $[-M, M]$ es uniformemente continua: basta ver que es <span class="ref" data-ref="def-5.24">Lipschitz</span>. Para $a, b \in [-M, M]$,
-            $$\begin{aligned} |f(a) - f(b)| &= |a^2 - b^2| \\ &\le |a - b|\, |a + b| \le 2M |a - b|. \end{aligned}$$
+            $$\begin{aligned} |f(a) - f(b)| &= |a^2 - b^2| \\ &\le |a - b|\, |a + b| \\ &\le 2M |a - b|. \end{aligned}$$
             Así $f|_{[-M, M]}$ es $2M$-Lipschitz, y <span class="ref" data-ref="obs-5.28">por lo tanto uniformemente continua</span>. $\square$</p>
         </div>
         <figure class="viz">
@@ -245,7 +245,7 @@
         <div class="step-text">
           <p class="step-title">2. En $[0, +\infty)$, pegando</p>
           <p>En el Ejemplo 3.37 vimos que $f$ es uniformemente continua sobre $[0, 1]$, y usando la desigualdad
-            $$|\sqrt{a} - \sqrt{b}| = \left|\frac{a - b}{\sqrt{a} + \sqrt{b}}\right| \le \frac{1}{2} |a - b|,$$
+            $$\begin{aligned} |\sqrt{a} - \sqrt{b}| &= \left|\frac{a - b}{\sqrt{a} + \sqrt{b}}\right| \\ &\le \frac{1}{2} |a - b|, \end{aligned}$$
             válida para todo $a, b \ge 1$, se comprueba fácilmente que $f$ es uniformemente continua sobre $[1, +\infty)$. Como las hipótesis de la <a href="#ejp4alt-o2-12-prop">Proposición 3.43</a> se satisfacen (con $A_1 = [0, 1]$, $A_2 = [1, +\infty)$; $\gamma$ puede tomarse cualquier número real positivo), $f$ es uniformemente continua, como afirmamos.</p>
         </div>
         <figure class="viz">
@@ -311,9 +311,9 @@
         <div class="step-text">
           <p class="step-title">a) Lipschitz en $[1, \infty)$</p>
           <p>Tenemos
-            $$|\sqrt{x} - \sqrt{y}| = \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| = \frac{|x - y|}{\sqrt{x} + \sqrt{y}}.$$
+            $$\begin{aligned} |\sqrt{x} - \sqrt{y}| &= \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| \\ &= \frac{|x - y|}{\sqrt{x} + \sqrt{y}}. \end{aligned}$$
             Como $x \ge 1$ e $y \ge 1$, vemos que $\dfrac{1}{\sqrt{x} + \sqrt{y}} \le \dfrac{1}{2}$. Por lo tanto
-            $$|\sqrt{x} - \sqrt{y}| = \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| \le \frac{1}{2} |x - y|.$$</p>
+            $$\begin{aligned} |\sqrt{x} - \sqrt{y}| &= \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| \\ &\le \frac{1}{2} |x - y|. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
@@ -709,7 +709,7 @@
         <div class="step-text">
           <p class="step-title">1. Unicidad</p>
           <p>Denotemos con $C$ a $\{x \in X : g(x) = h(x)\}$. Debemos probar que $C = X$. Para ello, como $A \subseteq C$ y $\overline{A} = X$, basta comprobar que $C$ es <span class="ref" data-ref="def-4.27">cerrado</span>, pero esto es una consecuencia inmediata de que si $(x_n)_{n \in \mathbb{N}}$ es una sucesión de puntos de $C$ y $x = \lim_{n \to \infty} x_n$, entonces
-            $$g(x) = \lim_{n \to \infty} g(x_n) = \lim_{n \to \infty} h(x_n) = h(x).$$</p>
+            $$\begin{aligned} g(x) &= \lim_{n \to \infty} g(x_n) \\ &= \lim_{n \to \infty} h(x_n) = h(x). \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
@@ -738,9 +738,9 @@
         <div class="step-text">
           <p class="step-title">$g$ es uniformemente continua</p>
           <p>Además, como $f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span>, para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que
-            $$d(f(x), f(x')) \lt \varepsilon \quad \text{si } x, x' \in A \text{ y } d(x, x') \lt \delta.$$
+            $$\begin{aligned} &d(f(x), f(x')) \lt \varepsilon \\ &\text{si } x, x' \in A \text{ y } d(x, x') \lt \delta. \end{aligned}$$
             Tomemos $x, x' \in X$ tales que $d(x, x') \lt \delta$ y elijamos sucesiones $(x_n)_{n \in \mathbb{N}}$ y $(x'_n)_{n \in \mathbb{N}}$ de puntos de $A$ tales que $x = \lim_{n \to \infty} x_n$ y $x' = \lim_{n \to \infty} x'_n$. Entonces $\lim_{n \to \infty} d(x_n, x'_n) = d(x, x') \lt \delta$, por lo que
-            $$d(g(x), g(x')) = \lim_{n \to \infty} d(f(x_n), f(x'_n)) \le \varepsilon.$$
+            $$\begin{aligned} d(g(x), g(x')) &= \lim_{n \to \infty} d(f(x_n), f(x'_n)) \\ &\le \varepsilon. \end{aligned}$$
             (La fuente termina aquí la prueba de la continuidad uniforme; el caso de la <span class="ref" data-ref="def-5.33">isometría</span> es análogo, reemplazando la desigualdad por la igualdad $d(f(x_n), f(x'_n)) = d(x_n, x'_n)$.)</p>
         </div>
       </div>
@@ -795,7 +795,7 @@
           <p>Sea $\varepsilon \gt 0$. Tomamos $\delta \gt 0$ tal que $|x - y| \lt \delta$ implica $|f(x) - f(y)| \lt \varepsilon/3$. Tomamos $M \in \mathbb{N}$ tal que para $n \ge M$ valen $|a - x_n| \lt \delta/2$, $|a - y_n| \lt \delta/2$, $|f(x_n) - L_1| \lt \varepsilon/3$ y $|f(y_n) - L_2| \lt \varepsilon/3$. Entonces, para $n \ge M$,
             $$\begin{aligned} |x_n - y_n| &= |x_n - a + a - y_n| \\ &\le |x_n - a| + |a - y_n| \\ &\lt \frac{\delta}{2} + \frac{\delta}{2} = \delta. \end{aligned}$$
             Luego
-            $$\begin{aligned} |L_1 - L_2| &= |L_1 - f(x_n) + f(x_n) - f(y_n) + f(y_n) - L_2| \\ &\le |L_1 - f(x_n)| + |f(x_n) - f(y_n)| + |f(y_n) - L_2| \\ &\le \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon. \end{aligned}$$
+            $$\begin{aligned} &|L_1 - L_2| \\ &= |L_1 - f(x_n) + f(x_n) - f(y_n) \\ &\qquad + f(y_n) - L_2| \\ &\le |L_1 - f(x_n)| + |f(x_n) - f(y_n)| \\ &\qquad + |f(y_n) - L_2| \\ &\le \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon. \end{aligned}$$
             Por lo tanto $L_1 = L_2$, y $L_a$ existe. Que $L_b$ existe queda como ejercicio (Ejercicio 3.4.2 de la fuente).</p>
         </div>
       </div>
@@ -837,7 +837,7 @@
         <div class="step-text">
           <p class="step-title">$f$ es uniformemente continua</p>
           <p>Fijado $\varepsilon \gt 0$, la <span class="ref" data-ref="def-5.14">continuidad uniforme</span> de $g$ da $\delta \gt 0$ tal que $a, b \in A$, $d(a, b) \lt \delta \Longrightarrow d(g(a), g(b)) \lt \varepsilon/2$. Para $x, y \in \overline{A}$ con $d(x, y) \lt \delta/3$, sean $(a_n)$, $(b_n)$ sucesiones de $A$ con $a_n \to x$, $b_n \to y$. Existe $m$ tal que, para $n \ge m$, $d(a_n, x) \lt \delta/3$ y $d(b_n, y) \lt \delta/3$. Entonces, para $n \ge m$,
-            $$\begin{aligned} &d(a_n, b_n) \le d(a_n, x) + d(x, y) + d(y, b_n) \lt \delta, \\ &\text{luego} \quad d(g(a_n), g(b_n)) \lt \varepsilon/2. \end{aligned}$$
+            $$\begin{aligned} &d(a_n, b_n) \le d(a_n, x) + d(x, y) \\ &\qquad + d(y, b_n) \lt \delta, \\ &\text{luego} \quad d(g(a_n), g(b_n)) \lt \varepsilon/2. \end{aligned}$$
             Como $g(a_n) \to f(x)$ y $g(b_n) \to f(y)$, se tiene $d(g(a_n), g(b_n)) \to d(f(x), f(y))$, y concluimos $d(f(x), f(y)) \le \varepsilon/2 \lt \varepsilon$.</p>
         </div>
         <figure class="viz">
@@ -911,7 +911,7 @@
         <div class="step-text">
           <p class="step-title">a) $G_n = \overline{A}$ para todo $n$</p>
           <p>Tomando $\varepsilon = 1/(2n)$ en la definición de <span class="ref" data-ref="def-5.14">continuidad uniforme</span> deducimos
-            $$\begin{aligned} &\exists \delta \gt 0,\; \forall x_1, x_2 \in A : \\ &d(x_1, x_2) \lt \delta \Longrightarrow d'(f(x_1), f(x_2)) \lt \frac{1}{2n}. \end{aligned}$$
+            $$\begin{aligned} &\exists \delta \gt 0,\; \forall x_1, x_2 \in A : \\ &d(x_1, x_2) \lt \delta \\ &\quad \Longrightarrow d'(f(x_1), f(x_2)) \lt \frac{1}{2n}. \end{aligned}$$
             Si $x \in \overline{A}$, tomando $\delta_x := \delta/2$ obtenemos $\operatorname{diam}_{d'}(f(B(x, \delta_x) \cap A)) \lt 1/n$ (dos puntos de $B(x, \delta/2) \cap A$ distan menos de $\delta$), por lo tanto $x \in G_n$ para cada $n \in \mathbb{N}$. Así $G_n = \overline{A}$ para todo $n$, es decir $G = \overline{A}$, y la extensión $\varphi$ del Corolario 2.5.17 es continua en todo $\overline{A}$. $\square$</p>
         </div>
       </div>
@@ -979,9 +979,9 @@
         <div class="step-text">
           <p class="step-title">$f$ no es continua en $c$</p>
           <p>Ahora mostramos que $f$ no es continua en $c$. Estimamos
-            $$\begin{aligned} |f(x_{n_k}) - f(c)| &= |f(x_{n_k}) - f(y_{n_k}) + f(y_{n_k}) - f(c)| \\ &\ge |f(x_{n_k}) - f(y_{n_k})| - |f(y_{n_k}) - f(c)| \\ &\ge \varepsilon - |f(y_{n_k}) - f(c)|. \end{aligned}$$
+            $$\begin{aligned} &|f(x_{n_k}) - f(c)| \\ &= |f(x_{n_k}) - f(y_{n_k}) + f(y_{n_k}) - f(c)| \\ &\ge |f(x_{n_k}) - f(y_{n_k})| - |f(y_{n_k}) - f(c)| \\ &\ge \varepsilon - |f(y_{n_k}) - f(c)|. \end{aligned}$$
             En otras palabras,
-            $$|f(x_{n_k}) - f(c)| + |f(y_{n_k}) - f(c)| \ge \varepsilon.$$
+            $$\begin{aligned} &|f(x_{n_k}) - f(c)| \\ &\quad + |f(y_{n_k}) - f(c)| \ge \varepsilon. \end{aligned}$$
             Al menos una de las sucesiones $(f(x_{n_k}))_{k \in \mathbb{N}}$ o $(f(y_{n_k}))_{k \in \mathbb{N}}$ no puede converger a $f(c)$: si no, el lado izquierdo tendería a cero mientras el derecho es positivo. Luego <span class="ref" data-ref="teo-5.7">$f$ no es continua en $c$</span>. $\square$</p>
         </div>
       </div>
@@ -1011,7 +1011,7 @@
         <div class="step-text">
           <p class="step-title">Dos sucesiones que se acercan</p>
           <p>Por reducción al absurdo, suponemos que $f$ no es uniformemente continua. Por la proposición anterior (O14-6) existen sucesiones $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ de puntos de $E$ y un $\varepsilon \gt 0$ tales que, para todo $n \in \mathbb{N}$,
-            $$d(x_n, y_n) \lt 1/n \quad \text{y} \quad d(f(x_n), f(y_n)) \ge \varepsilon.$$</p>
+            $$\begin{aligned} &d(x_n, y_n) \lt 1/n \quad \text{y} \\ &d(f(x_n), f(y_n)) \ge \varepsilon. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">

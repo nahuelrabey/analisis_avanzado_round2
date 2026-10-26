@@ -67,7 +67,7 @@ PP.register(function ej1() {
   const { ctx, T } = setup("1-c", 0.62, { x0: -0.6, x1: K + 0.6, y0: -0.05, y1: 1.12 }, { l: 40, r: 14, t: 14, b: 30 });
   PP.axes(ctx, T, { xLabel: "nueves", intX: false, xTicks: 8 });
   hline(ctx, T, 1, C("--ok"), null, 2);
-  PP.label(ctx, "1", T.p.l + 4, T.Y(1) - 3, C("--ok"), "left", "bottom", 12);
+  PP.label(ctx, "1", T.w - T.p.r - 4, T.Y(1) + 4, C("--ok"), "right", "top", 12);
   for (let j = 0; j <= K; j++) {
     const v = 1 - Math.pow(10, -j);
     PP.dot(ctx, T.X(j), T.Y(v), 3.5, C("--accent"));
@@ -247,7 +247,7 @@ PP.register(function c15() {
   for (let k = -4; k <= n && k <= 4; k++) PP.dot(ctx, T.X(k), y, 5, C("--accent"));
   if (n >= -4 && n <= 4) {
     ring(ctx, T.X(n), y, 10, C("--accent"));
-    PP.label(ctx, "n = sup A", T.X(n), y - 14, C("--accent"), "center", "bottom", 12);
+    PP.label(ctx, "n = sup A", T.X(n), y + 26, C("--accent"), "center", "top", 12);
   }
   if (n + 1 <= 4) PP.circle(ctx, T.X(n + 1), y, 5, C("--fail"), C("--bg"), null, 2);
   PP.path(ctx, [[T.X(x), y - 26], [T.X(x), y + 6]], C("--seq2"), 2.5);
@@ -345,8 +345,8 @@ PP.register(function c111() {
     PP.circle(ctx, T.X(n), T.Y(1 / n), r + 0.5, C("--seq2"), null, null, 1.4);
     PP.dot(ctx, T.X(n), T.Y(1 / Math.pow(2, n)), r, C("--accent"));
   }
-  PP.label(ctx, "1/n", T.X(1) + 8, T.Y(1), C("--seq2"), "left", "middle", 12);
-  PP.label(ctx, "1/2ⁿ", T.X(1) + 8, T.Y(0.5), C("--accent"), "left", "middle", 12);
+  PP.label(ctx, "1/n", T.X(1) + 9, T.Y(1), C("--seq2"), "left", "middle", 12);
+  PP.label(ctx, "1/2ⁿ", T.X(2) + 9, T.Y(0.25), C("--accent"), "left", "middle", 12);
   PP.read(P + "c1-1-1-read", [
     ["ε", F(eps, 3)],
     ["m (primero con 1/m < ε)", String(m)],
@@ -545,11 +545,11 @@ PP.register(function c14() {
   }
   if (arriba) {
     for (let m = 1; m <= N; m++) PP.dot(ctx, T.X(1 + m), y, 5, C("--seq2"));
-    PP.label(ctx, "1 + m →", T.X(N + 1), y - 12, C("--seq2"), "right", "bottom", 12);
+    PP.label(ctx, "1 + m →", T.X(N + 1), y - 22, C("--seq2"), "right", "bottom", 12);
   } else {
     for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(1 + 1 / n), y, 5, C("--accent"));
     PP.circle(ctx, T.X(1), y, 5, C("--ok"), C("--bg"), null, 2);
-    PP.label(ctx, "← 1/n + 1", T.X(1 + 1 / N), y - 12, C("--accent"), "left", "bottom", 12);
+    PP.label(ctx, "← 1/n + 1", T.X(1 + 1 / N), y - 22, C("--accent"), "left", "bottom", 12);
   }
   PP.read(P + "c1-4-read", arriba ? [
     ["sucesión (n = 1)", "aₘ = 1 + m"],
@@ -652,8 +652,8 @@ PP.register(function propCos() {
     const col = n % 4 === 1 ? C("--accent") : n % 4 === 0 ? C("--seq2") : C("--muted");
     PP.dot(ctx, T.X(n), T.Y(v), n % 4 === 1 || n % 4 === 0 ? r + 1 : r - 0.5, col);
   }
-  PP.label(ctx, "a₄ₖ₊₁ = 0", T.w - T.p.r - 4, T.Y(0) + 4, C("--accent"), "right", "top", 12);
-  PP.label(ctx, "a₄ₖ = 1", T.w - T.p.r - 4, T.Y(1) - 4, C("--seq2"), "right", "bottom", 12);
+  PP.label(ctx, "a₄ₖ₊₁ = 0", T.w - T.p.r - 4, T.Y(-0.3), C("--accent"), "right", "middle", 12);
+  PP.label(ctx, "a₄ₖ = 1", T.w - T.p.r - 4, T.Y(0.7), C("--seq2"), "right", "middle", 12);
   const i1 = [], i0 = [];
   for (let n = 1; n <= N; n++) { if (n % 4 === 1) i1.push(n); if (n % 4 === 0) i0.push(n); }
   PP.read(P + "prop-3-read", [
@@ -682,7 +682,6 @@ PP.register(function ej12() {
     ["a₁ = r", F(r, 3)],
     ["|aₙ − 1| ≥ 1 − r", F(1 - r, 3)],
     ["a₃₀ = r³⁰", F(Math.pow(r, 30), 6)],
-    ["a₁₅·a₁₅ = a₃₀", "r¹⁵·r¹⁵ (álgebra: ℓ·ℓ)"],
   ]);
 }, [P + "12-r"]);
 

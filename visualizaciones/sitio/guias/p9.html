@@ -799,7 +799,7 @@ function levelLine(ctx, T, a, label) {
     PP.out(ID + "-ej13-n-o", String(n));
     const { ctx, w, h } = PP.canvas(ID + "-ej13-c", 0.58);
     const T = PP.frame(w, h, { x0: 0, x1: 12.2, y0: -0.65, y1: 1.08 }, { l: 40, r: 12, t: 12, b: 28 });
-    PP.axes(ctx, T, { xLabel: "x", yTicks: 5, xTicks: 6 });
+    PP.axes(ctx, T, { xLabel: "x", yTicks: 3, xTicks: 6 });
     const total = -F(0);
     if (it === "a") {
       for (let k = 1; k <= n; k++) {
