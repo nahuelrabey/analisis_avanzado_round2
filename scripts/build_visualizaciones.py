@@ -94,8 +94,9 @@ OTRAS = [
 ]
 
 ATTR_RE = re.compile(r'([a-zA-Z-]+)="([^"]*)"')
-ART_RE = re.compile(r'<article\s+class="ej"[^>]*>', re.S)
-SEC_RE = re.compile(r'<section\s+class="(?:exam|bloque)"[^>]*>', re.S)
+# Etiquetas de apertura con atributos entre comillas (un atributo puede contener '>').
+ART_RE = re.compile(r'<article\s+class="ej"(?:[^>"]|"[^"]*")*>', re.S)
+SEC_RE = re.compile(r'<section\s+class="(?:exam|bloque)"(?:[^>"]|"[^"]*")*>', re.S)
 H2_RE = re.compile(r"<h2[^>]*>(.*?)</h2>", re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 

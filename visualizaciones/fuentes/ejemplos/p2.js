@@ -96,9 +96,9 @@ PP.register(function zigzag() {
   const vals = vis.map(({ c, idx }) => "f(" + idx + ") = " + frac(c.m, c.n));
   const skipped = ZZ_ORDER.slice(0, last + 1).filter((c) => c.rep).map((c) => c.m + "/" + c.n);
   PP.read("ejp2-13-read1", [
-    ["valores", vals.slice(-4).join(", ")],
+    ["últimos valores", vals.slice(-3).join(", ")],
     ["salteados", skipped.length ? skipped.join(", ") : "ninguno todavía"],
-    ["¿algún valor repetido?", "no: sólo se cuentan fracciones irreducibles", "good"],
+    ["¿repetidos?", "no (sólo irreducibles)", "good"],
   ]);
 }, ["ejp2-13-k"]);
 
@@ -252,7 +252,7 @@ PP.register(function cinta() {
   }
   if (st > 0) PP.label(ctx, "…", zx0 - 4, yz, C("--muted"), "right", "middle", 12);
   if (st + show < elems.length) PP.label(ctx, "…", zx0 + show * (bw + gap), yz, C("--muted"), "left", "middle", 12);
-  PP.label(ctx, "lugar " + tot + " →", Xp(tot), y0 - 4, C("--muted"), "right", "bottom", 10);
+  PP.label(ctx, "la cinta dibujada llega al lugar " + tot, w - r, h - 4, C("--muted"), "right", "bottom", 10);
   PP.read("ejp2-a156a-read2", [
     ["fracción", p0 + "/" + q0 + (g > 1 ? " = " + p + "/" + q + " (irreducible)" : " (ya irreducible)")],
     ["bloque", "A" + sub(n) + "  (p + q = " + n + ")"],
