@@ -329,7 +329,7 @@ PP.register(function () {
     }
     PP.read(P + "-ej12-read", [
       ["ε", PP.fmt(eps, 2)],
-      ["M (|f(x)| < ε si |x| ≥ M)", M < L ? PP.fmt(M, 2) : "fuera de la ventana"],
+      ["M (|f(x)| < ε si |x| > M)", M < L ? PP.fmt(M, 2) : "fuera de la ventana"],
     ]);
   }, [P + "-ej12-e"]);
 })();

@@ -1,2 +1,3 @@
 *.pdf
 libros-procesados
+__pycache__/

@@ -62,7 +62,7 @@
         <div class="step-text">
           <p class="step-title">(c) Positividad</p>
           <p>Aplicando (a) y luego (b) con $z = x$, y usando la simetría recién probada,
-            $$0 \overset{\text{(a)}}{=} d(x, x) \overset{\text{(b)}}{\le} d(x, y) + d(y, x) = 2\, d(x, y),$$
+            $$\begin{aligned} 0 &\overset{\text{(a)}}{=} d(x, x) \\ &\overset{\text{(b)}}{\le} d(x, y) + d(y, x) \\ &= 2\, d(x, y), \end{aligned}$$
             con lo cual $d(x, y) \ge 0$ para todos $x, y \in M$. Si además $x \neq y$, por (a) sabemos que $d(x, y) \neq 0$, y en consecuencia $d(x, y) \gt 0$.</p>
         </div>
       </div>
@@ -98,10 +98,10 @@
       <div class="step">
         <div class="step-text">
           <p class="step-title">(a) Se anula sólo si los puntos coinciden</p>
-          <p>$$d((x, y), (x', y')) = 0 \iff (x, y) = (x', y').$$</p>
+          <p>$$\begin{aligned} &d((x, y), (x', y')) = 0 \\ &\quad \iff (x, y) = (x', y'). \end{aligned}$$</p>
           <p>Si $(x, y) = (x', y')$, en particular $x = x'$, así que estamos en el primer caso y $d((x,y),(x',y')) = |y - y'| = 0$.</p>
           <p>Recíprocamente, supongamos $d((x, y), (x', y')) = 0$. Si fuera $x \neq x'$, tendríamos
-            $$\begin{aligned} d((x, y), (x', y')) &= |x - x'| + |y| + |y'| \\ &\ge |x - x'| \gt 0, \end{aligned}$$
+            $$\begin{aligned} &d((x, y), (x', y')) \\ &\quad = |x - x'| + |y| + |y'| \\ &\quad \ge |x - x'| \gt 0, \end{aligned}$$
             absurdo. Entonces $x = x'$, y en tal caso $0 = d((x,y),(x',y')) = |y - y'|$, de donde $y = y'$.</p>
         </div>
       </div>
@@ -109,13 +109,13 @@
         <div class="step-text">
           <p class="step-title">(b) Desigualdad triangular: casos con $x = x'$</p>
           <p>Queremos ver que
-            $$\begin{aligned} d((x, y), (x', y')) &\le d((x, y), (x'', y'')) \\ &\quad + d((x'', y''), (x', y')). \end{aligned}$$</p>
+            $$\begin{aligned} &d((x, y), (x', y')) \\ &\quad \le d((x, y), (x'', y'')) \\ &\qquad + d((x'', y''), (x', y')). \end{aligned}$$</p>
           <ul class="items">
             <li>Si $x = x' = x''$, los tres términos caen en el primer caso y
               $$|y - y'| \le |y - y''| + |y'' - y'|,$$
               que es la desigualdad triangular en $\mathbb{R}$.</li>
             <li>Si $x = x' \neq x''$, el término de la izquierda cae en el primer caso y los dos de la derecha en el segundo:
-              $$\begin{aligned} |y - y'| &\le |y - y''| + |y'' - y'| \\ &\le |y| + |y''| + |y''| + |y'| \\ &\le |x - x''| + |y| + |y''| \\ &\qquad + |x'' - x'| + |y''| + |y'| \\ &= d((x, y), (x'', y'')) \\ &\qquad + d((x'', y''), (x', y')). \end{aligned}$$</li>
+              $$\begin{aligned} &|y - y'| \\ &\quad \le |y - y''| + |y'' - y'| \\ &\quad \le |y| + |y''| + |y''| + |y'| \\ &\quad \le |x - x''| + |y| + |y''| \\ &\qquad + |x'' - x'| + |y''| + |y'| \\ &\quad = d((x, y), (x'', y'')) \\ &\qquad + d((x'', y''), (x', y')). \end{aligned}$$</li>
           </ul>
         </div>
         <figure class="viz">
@@ -130,10 +130,10 @@
           <p>En los tres casos restantes es $x \neq x'$, así que el término de la izquierda cae en el segundo caso: $d((x,y),(x',y')) = |x - x'| + |y| + |y'|$. Lo que cambia es en qué caso caen los dos términos de la derecha, según $x''$ coincida con $x$, con $x'$ o con ninguno de los dos.</p>
           <ul class="items">
             <li>Si $x'' = x \neq x'$, el primer término de la derecha cae en el primer caso y el segundo en el segundo. Usando $|y| \le |y - y''| + |y''|$ (desigualdad triangular en $\mathbb{R}$),
-              $$\begin{aligned} &|x - x'| + |y| + |y'| \\ &\quad \le |x - x'| + |y - y''| + |y''| + |y'| \\ &\quad = |y - y''| + (|x - x'| + |y''| + |y'|) \\ &\quad = d((x, y), (x, y'')) \\ &\qquad + d((x, y''), (x', y')), \end{aligned}$$
+              $$\begin{aligned} &|x - x'| + |y| + |y'| \\ &\quad \le |x - x'| + |y - y''| \\ &\qquad + |y''| + |y'| \\ &\quad = |y - y''| \\ &\qquad + (|x - x'| + |y''| + |y'|) \\ &\quad = d((x, y), (x, y'')) \\ &\qquad + d((x, y''), (x', y')), \end{aligned}$$
               donde en la última igualdad se usó $x'' = x$ en los dos sumandos.</li>
             <li>Si $x'' = x' \neq x$, es el caso anterior con los roles de $(x, y)$ y $(x', y')$ intercambiados: el primer término de la derecha cae en el segundo caso y el segundo en el primero. Usando ahora $|y'| \le |y''| + |y'' - y'|$,
-              $$\begin{aligned} &|x - x'| + |y| + |y'| \\ &\quad \le |x - x'| + |y| + |y''| + |y'' - y'| \\ &\quad = (|x - x'| + |y| + |y''|) + |y'' - y'| \\ &\quad = d((x, y), (x', y'')) \\ &\qquad + d((x', y''), (x', y')). \end{aligned}$$</li>
+              $$\begin{aligned} &|x - x'| + |y| + |y'| \\ &\quad \le |x - x'| + |y| \\ &\qquad + |y''| + |y'' - y'| \\ &\quad = (|x - x'| + |y| + |y''|) \\ &\qquad + |y'' - y'| \\ &\quad = d((x, y), (x', y'')) \\ &\qquad + d((x', y''), (x', y')). \end{aligned}$$</li>
             <li>Si $x'' \neq x$ y $x'' \neq x'$, los tres términos caen en el segundo caso. Como $|x - x'| \le |x - x''| + |x'' - x'|$ (desigualdad triangular en $\mathbb{R}$) y $2|y''| \ge 0$,
               $$\begin{aligned} &|x - x'| + |y| + |y'| \\ &\quad \le |x - x''| + |x'' - x'| \\ &\qquad + |y| + |y'| + 2|y''| \\ &\quad = (|x - x''| + |y| + |y''|) \\ &\qquad + (|x'' - x'| + |y''| + |y'|) \\ &\quad = d((x, y), (x'', y'')) \\ &\qquad + d((x'', y''), (x', y')). \end{aligned}$$</li>
           </ul>
@@ -183,7 +183,7 @@
         <div class="step-text">
           <p class="step-title">(a) $d(f, g) = 0 \iff f = g$</p>
           <p>Es claro que $d(f, f) = 0$. Recíprocamente, si $d(f, g) = 0$, como los dos sumandos son no negativos,
-            $$\begin{aligned} 0 = d(f, g) &\ge \sup_{x \in [0,1]} |f(x) - g(x)| \\ &\ge |f(x) - g(x)| \quad \text{para todo } x \in [0,1], \end{aligned}$$
+            $$\begin{aligned} &0 = d(f, g) \\ &\quad \ge \sup_{x \in [0,1]} |f(x) - g(x)| \\ &\quad \ge |f(x) - g(x)| \\ &\qquad \text{para todo } x \in [0,1], \end{aligned}$$
             con lo cual $|f(x) - g(x)| = 0$, es decir $f(x) = g(x)$ para todo $x \in [0,1]$, o sea $f = g$.</p>
         </div>
       </div>
@@ -191,11 +191,11 @@
         <div class="step-text">
           <p class="step-title">(b) Cota puntual y supremo</p>
           <p>Sean $f, g, h \in X$. Para cada $x \in [0,1]$,
-            $$\begin{aligned} |f(x) - g(x)| &\le |f(x) - h(x)| + |h(x) - g(x)| \\ &\le \sup_{x \in [0,1]} |f(x) - h(x)| \\ &\quad + \sup_{x \in [0,1]} |h(x) - g(x)|. \end{aligned}$$
+            $$\begin{aligned} &|f(x) - g(x)| \\ &\quad \le |f(x) - h(x)| + |h(x) - g(x)| \\ &\quad \le \sup_{x \in [0,1]} |f(x) - h(x)| \\ &\qquad + \sup_{x \in [0,1]} |h(x) - g(x)|. \end{aligned}$$
             El miembro derecho no depende de $x$, así que es una cota superior del conjunto de la izquierda y podemos tomar supremo:
-            $$\begin{aligned} \sup_{x \in [0,1]} |f(x) - g(x)| &\le \sup_{x \in [0,1]} |f(x) - h(x)| \\ &\quad + \sup_{x \in [0,1]} |h(x) - g(x)|. \qquad (1) \end{aligned}$$
+            $$\begin{aligned} &\sup_{x \in [0,1]} |f(x) - g(x)| \\ &\quad \le \sup_{x \in [0,1]} |f(x) - h(x)| \\ &\qquad + \sup_{x \in [0,1]} |h(x) - g(x)|. \quad (1) \end{aligned}$$
             El mismo razonamiento aplicado a las derivadas da
-            $$\begin{aligned} \sup_{x \in [0,1]} |f'(x) - g'(x)| &\le \sup_{x \in [0,1]} |f'(x) - h'(x)| \\ &\quad + \sup_{x \in [0,1]} |h'(x) - g'(x)|. \qquad (2) \end{aligned}$$</p>
+            $$\begin{aligned} &\sup_{x \in [0,1]} |f'(x) - g'(x)| \\ &\quad \le \sup_{x \in [0,1]} |f'(x) - h'(x)| \\ &\qquad + \sup_{x \in [0,1]} |h'(x) - g'(x)|. \quad (2) \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">
@@ -229,7 +229,7 @@
           <p>Notemos primero que $d'(x, y) = d'(y, x)$, porque $d$ es simétrica.</p>
           <p><b>(a)</b> Si $x = y$, entonces $d'(x, x) = \min\{1, d(x, x)\}$ $= \min\{1, 0\} = 0$, usando que $d(x,x) = 0$ por ser $d$ métrica. Recíprocamente, si $d'(x, y) = 0$ entonces $\min\{1, d(x,y)\} = 0$, y como $1 \neq 0$ debe ser $d(x, y) = 0$, o sea $x = y$.</p>
           <p><b>(b)</b> Queremos ver que
-            $$\begin{aligned} \min\{1, d(x,y)\} &\le \min\{1, d(x,z)\} \\ &\quad + \min\{1, d(z,y)\}. \qquad (\star) \end{aligned}$$</p>
+            $$\begin{aligned} &\min\{1, d(x,y)\} \\ &\quad \le \min\{1, d(x,z)\} \\ &\qquad + \min\{1, d(z,y)\}. \quad (\star) \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
@@ -250,7 +250,7 @@
           <p>Ahora $(\star)$ es
             $$\begin{aligned} d(x, y) &\le \min\{1, d(x,z)\} \\ &\quad + \min\{1, d(z,y)\}. \qquad (\star\star) \end{aligned}$$
             Si alguno de $d(x,z)$, $d(z,y)$ es $\ge 1$, digamos $d(x,z) \ge 1$, entonces
-            $$\begin{aligned} d(x, y) \le 1 &= \min\{1, d(x,z)\} \\ &\le \min\{1, d(x,z)\} + \min\{1, d(z,y)\}. \end{aligned}$$
+            $$\begin{aligned} &d(x, y) \le 1 = \min\{1, d(x,z)\} \\ &\quad \le \min\{1, d(x,z)\} \\ &\qquad + \min\{1, d(z,y)\}. \end{aligned}$$
             Si en cambio $d(x,z) \le 1$ y $d(z,y) \le 1$, los dos mínimos son los propios valores y $(\star\star)$ se convierte en
             $$d(x, y) \le d(x, z) + d(z, y),$$
             que es cierta por ser $d$ una métrica.</p>
@@ -353,7 +353,7 @@
         <div class="step-text">
           <p class="step-title">(iii) Simetría</p>
           <p>Como $|x_i - y_i| = |y_i - x_i|$ para cada coordenada $i$,
-            $$\begin{aligned} d_\infty(x, y) &= \max_{1 \le i \le n} |x_i - y_i| \\ &= \max_{1 \le i \le n} |y_i - x_i| = d_\infty(y, x). \end{aligned}$$</p>
+            $$\begin{aligned} d_\infty(x, y) &= \max_{1 \le i \le n} |x_i - y_i| \\ &= \max_{1 \le i \le n} |y_i - x_i| \\ &= d_\infty(y, x). \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
@@ -362,7 +362,7 @@
           <p>Por la desigualdad triangular del valor absoluto en $\mathbb{R}$, para todo $i = 1, \dots, n$ vale:
             $$|x_i - z_i| \le |x_i - y_i| + |y_i - z_i|.$$
             A su vez, para cada índice $i$:
-            $$\begin{aligned} |x_i - y_i| &\le \max_{1 \le j \le n} |x_j - y_j| = d_\infty(x, y), \\ |y_i - z_i| &\le \max_{1 \le j \le n} |y_j - z_j| = d_\infty(y, z). \end{aligned}$$
+            $$\begin{aligned} |x_i - y_i| &\le \max_{1 \le j \le n} |x_j - y_j| \\ &= d_\infty(x, y), \\ |y_i - z_i| &\le \max_{1 \le j \le n} |y_j - z_j| \\ &= d_\infty(y, z). \end{aligned}$$
             Sumando ambas desigualdades obtenemos:
             $$\begin{aligned} |x_i - z_i| &\le \max_{1 \le j \le n} |x_j - y_j| \\ &\quad + \max_{1 \le j \le n} |y_j - z_j| \\ &= d_\infty(x, y) + d_\infty(y, z) \\ &\qquad \text{para todo } i = 1, \dots, n. \end{aligned}$$
             Como esta cota superior no depende del índice $i$, vale en particular para el índice donde se alcanza el máximo del miembro izquierdo:
@@ -397,7 +397,7 @@
       <div class="step has-viz">
         <div class="step-text">
           <p class="step-title">En $(\mathbb{R}^2, d_2)$</p>
-          <p>$$\begin{aligned} B_{d_2}((0, 0), 1) &= \{(x, y) \in \mathbb{R}^2 : d_2((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : \sqrt{x^2 + y^2} \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \lt 1\}. \end{aligned}$$
+          <p>$$\begin{aligned} &B_{d_2}((0, 0), 1) \\ &= \{(x, y) \in \mathbb{R}^2 : \\ &\qquad d_2((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : \sqrt{x^2 + y^2} \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \lt 1\}. \end{aligned}$$
             Geométricamente corresponde al interior del disco de radio $1$ centrado en el origen.</p>
         </div>
         <figure class="viz">
@@ -416,14 +416,14 @@
       <div class="step">
         <div class="step-text">
           <p class="step-title">En $(\mathbb{R}^2, d_1)$</p>
-          <p>$$\begin{aligned} B_{d_1}((0, 0), 1) &= \{(x, y) \in \mathbb{R}^2 : d_1((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : |x| + |y| \lt 1\}. \end{aligned}$$
+          <p>$$\begin{aligned} &B_{d_1}((0, 0), 1) \\ &= \{(x, y) \in \mathbb{R}^2 : \\ &\qquad d_1((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : |x| + |y| \lt 1\}. \end{aligned}$$
             Corresponde al interior del rombo de vértices $(1, 0), (0, 1), (-1, 0), (0, -1)$.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-text">
           <p class="step-title">En $(\mathbb{R}^2, d_\infty)$</p>
-          <p>$$\begin{aligned} B_{d_\infty}((0, 0), 1) &= \{(x, y) \in \mathbb{R}^2 : d_\infty((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : \max(|x|, |y|) \lt 1\} \\ &= (-1, 1) \times (-1, 1). \end{aligned}$$
+          <p>$$\begin{aligned} &B_{d_\infty}((0, 0), 1) \\ &= \{(x, y) \in \mathbb{R}^2 : \\ &\qquad d_\infty((x, y), (0, 0)) \lt 1\} \\ &= \{(x, y) \in \mathbb{R}^2 : \\ &\qquad \max(|x|, |y|) \lt 1\} \\ &= (-1, 1) \times (-1, 1). \end{aligned}$$
             Corresponde al interior del cuadrado de lado $2$ con lados paralelos a los ejes coordenados.</p>
         </div>
       </div>
@@ -469,14 +469,14 @@
         <div class="step-text">
           <p class="step-title">La bola por definición</p>
           <p>Por definición de <span class="ref" data-ref="def-4.5">bola abierta</span>:
-            $$\begin{aligned} B_{d_\infty}(f, 1) &= \{g \in C([a, b]) : d_\infty(f, g) \lt 1\} \\ &= \Big\{g \in C([a, b]) : \sup_{x \in [a, b]} |f(x) - g(x)| \lt 1\Big\}. \end{aligned}$$</p>
+            $$\begin{aligned} &B_{d_\infty}(f, 1) \\ &= \{g \in C([a, b]) : d_\infty(f, g) \lt 1\} \\ &= \Big\{g \in C([a, b]) : \\ &\qquad \sup_{x \in [a, b]} |f(x) - g(x)| \lt 1\Big\}. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">
         <div class="step-text">
           <p class="step-title">Punto a punto</p>
           <p>Dado que $\sup_{x \in [a, b]} |f(x) - g(x)| \lt 1$, para todo $x \in [a, b]$ se debe cumplir:
-            $$\begin{aligned} |f(x) - g(x)| \lt 1 &\iff -1 \lt g(x) - f(x) \lt 1 \\ &\iff f(x) - 1 \lt g(x) \lt f(x) + 1. \end{aligned}$$</p>
+            $$\begin{aligned} &|f(x) - g(x)| \lt 1 \\ &\iff -1 \lt g(x) - f(x) \lt 1 \\ &\iff f(x) - 1 \lt g(x) \lt f(x) + 1. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
@@ -540,7 +540,7 @@
         <div class="step-text">
           <p class="step-title">(2) Vale: $\delta = \varepsilon/(b-a)$</p>
           <p>Sea $\varepsilon \gt 0$ y tomemos $\delta = \varepsilon/(b-a)$. Si $g \in B_\infty(f,\delta)$, entonces para todo $x \in [a,b]$:
-            $$|f(x)-g(x)| \le \sup_{t \in [a,b]} |f(t)-g(t)| = d_\infty(f,g).$$
+            $$\begin{aligned} |f(x)-g(x)| &\le \sup_{t \in [a,b]} |f(t)-g(t)| \\ &= d_\infty(f,g). \end{aligned}$$
             El lado derecho no depende de $x$, así que integrando ambos lados en $[a,b]$:
             $$\begin{aligned} d_1(f,g) &= \int_a^b |f(x)-g(x)|\,dx \\ &\le \int_a^b d_\infty(f,g)\,dx \\ &= d_\infty(f,g) \cdot (b-a) \\ &\lt \delta \cdot (b-a) = \varepsilon. \end{aligned}$$
             Luego $g \in B_1(f,\varepsilon)$, es decir $B_\infty(f,\delta) \subseteq B_1(f,\varepsilon)$.</p>
@@ -585,7 +585,7 @@
         <div class="step-text">
           <p class="step-title">La bola en $(\mathbb{R}, |\cdot|)$</p>
           <p>Sea $x \in (0, 1)$. Para ver que <span class="ref" data-ref="def-4.11">$x \in E^\circ$</span>, debemos hallar $r \gt 0$ tal que $B(x, r) \subseteq [0, 1]$. Como la métrica es la usual del módulo en $\mathbb{R}$:
-            $$\begin{aligned} B(x, r) &= \{y \in \mathbb{R} : d(x, y) \lt r\} \\ &= \{y \in \mathbb{R} : |x - y| \lt r\} = (x - r, x + r). \end{aligned}$$
+            $$\begin{aligned} B(x, r) &= \{y \in \mathbb{R} : d(x, y) \lt r\} \\ &= \{y \in \mathbb{R} : |x - y| \lt r\} \\ &= (x - r, x + r). \end{aligned}$$
             Debemos encontrar un radio $r \gt 0$ de modo que el intervalo centrado en $x$ se mantenga adentro de $(0, 1)$.</p>
         </div>
       </div>
@@ -675,7 +675,7 @@
         <div class="step-text">
           <p class="step-title">Desigualdad triangular pasando por el centro</p>
           <p>Sean $x, y \in B(x_0, r)$. Por la <span class="ref" data-ref="def-4.1">desigualdad triangular</span> tenemos que
-            $$d(x, y) \le d(x, x_0) + d(x_0, y) \lt r + r = 2r.$$
+            $$\begin{aligned} d(x, y) &\le d(x, x_0) + d(x_0, y) \\ &\lt r + r = 2r. \end{aligned}$$
             Como $d(x, y) \lt 2r$ para todo $x, y \in B(x_0, r)$, podemos concluir que $\operatorname{diam}(B(x_0, r)) \le 2r$.</p>
         </div>
         <figure class="viz">
@@ -755,7 +755,7 @@
         <div class="step-text">
           <p class="step-title">El radio $r = 1 - \sqrt{x_0^2 + y_0^2}$</p>
           <p>Sea $p = (x_0, y_0) \in A$, es decir $x_0^2 + y_0^2 \lt 1$. Tomemos $r = 1 - \sqrt{x_0^2 + y_0^2} \gt 0$ por hipótesis. Veamos que este radio funciona, es decir que $B(p, r) \subseteq B((0, 0), 1)$. Sea $(x, y) \in B(p, r)$. Tenemos, por la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>, que
-            $$\begin{aligned} \sqrt{x^2 + y^2} &= d_2((x, y), (0, 0)) \\ &\le d_2((x, y), (x_0, y_0)) + d_2((x_0, y_0), (0, 0)) \\ &\lt r + \sqrt{x_0^2 + y_0^2} = 1. \end{aligned}$$
+            $$\begin{aligned} \sqrt{x^2 + y^2} &= d_2((x, y), (0, 0)) \\ &\le d_2((x, y), (x_0, y_0)) \\ &\quad + d_2((x_0, y_0), (0, 0)) \\ &\lt r + \sqrt{x_0^2 + y_0^2} = 1. \end{aligned}$$
             Es decir, tenemos que $\sqrt{x^2 + y^2} \lt 1$ como queríamos ver.</p>
         </div>
         <figure class="viz">
@@ -787,7 +787,7 @@
         <div class="step-text">
           <p class="step-title">El radio $t = r - d(x, x_0)$</p>
           <p>Veamos que $A$ es abierto: sea $x \in A$ y tomemos $t = r - d(x, x_0) \gt 0$ por definición, y consideremos $B(x, t)$. Veamos que $B(x, t) \subseteq B(x_0, r)$. Sea $y \in B(x, t)$. Tenemos que
-            $$d(y, x_0) \le d(y, x) + d(x, x_0) \lt t + d(x, x_0) = r,$$
+            $$\begin{aligned} d(y, x_0) &\le d(y, x) + d(x, x_0) \\ &\lt t + d(x, x_0) = r, \end{aligned}$$
             como queríamos ver.</p>
         </div>
         <figure class="viz">
@@ -823,7 +823,7 @@
           <p>Sea $f(x)=x \in A$. Dado $\varepsilon \gt 0$, definimos
             $$\tilde f(x) = \begin{cases} 0 & \text{si } x \in [0,\varepsilon/2], \\ x & \text{si } x \notin [0,\varepsilon/2]. \end{cases}$$
             Entonces $\tilde f$ no es inyectiva ($\tilde f(0)=\tilde f(\varepsilon/4)=0$, por ejemplo), pero
-            $$|f(x)-\tilde f(x)| = \begin{cases} |x| = \varepsilon/2 \lt \varepsilon & \text{si } x \in [0,\varepsilon/2], \\ 0 & \text{si no}, \end{cases}$$
+            $$\begin{aligned} &|f(x)-\tilde f(x)| \\ &\quad = \begin{cases} |x| = \varepsilon/2 \lt \varepsilon & \text{si } x \in [0,\varepsilon/2], \\ 0 & \text{si no}, \end{cases} \end{aligned}$$
             así que $d_\infty(f,\tilde f) \le \varepsilon/2 \lt \varepsilon$, es decir $\tilde f \in B(f,\varepsilon)$. Como $\tilde f \notin A$ para todo $\varepsilon$, <span class="ref" data-ref="def-4.11">$f \notin A^\circ$</span>, y por lo tanto $A$ no es abierto.</p>
         </div>
         <figure class="viz">

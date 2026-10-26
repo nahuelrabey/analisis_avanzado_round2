@@ -281,7 +281,7 @@
       <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Pruebe que la función $f : \mathbb{R}^2 \to \mathbb{R}$ definida por
-      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 & \text{si } x \ge y, \\[4pt] \dfrac{(x - y)^3 - 3 (x - y)^2 + 2 x^2 + 2 y^2 + 2}{x^2 + y^2 + 1} & \text{si } x \le y \end{cases}$$
+      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 & \text{si } x \ge y, \\[6pt] \dfrac{\begin{gathered}(x - y)^3 - 3 (x - y)^2 \\ {} + 2 x^2 + 2 y^2 + 2\end{gathered}}{x^2 + y^2 + 1} & \text{si } x \le y \end{cases}$$
       es continua.</p></div>
     <div class="ej-grid">
       <div class="estrategia"><b>Idea</b><p>La fuente no resuelve el ejercicio, pero lo ubica inmediatamente después de la Proposición 3.16: los semiplanos $C_1 = \{(x, y) : x \ge y\}$ y $C_2 = \{(x, y) : x \le y\}$ son cerrados, cubren $\mathbb{R}^2$, y sobre cada uno $f$ coincide con una función racional (continua por la Nota 3.15, <a href="#ejp4alt-o2-2">O2-2</a>). Lo único que hay que controlar es que ambas fórmulas coincidan sobre la recta $x = y$, para que $f$ esté bien definida: allí la primera vale $2$ y la segunda vale $(2 x^2 + 2 y^2 + 2) / (x^2 + y^2 + 1) = 2$.</p></div>
@@ -591,7 +591,7 @@
       <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Estudiar la continuidad de $f : \mathbb{R}^2 \to \mathbb{R}$ dada por
-      $$f(x, y) = \begin{cases} \dfrac{(x^2 + y^2) \sin(x + y)}{(x + y)^2} & \text{si } x + y \neq 0, \\[4pt] 0 & \text{si } x + y = 0. \end{cases}$$</p></div>
+      $$f(x, y) = \begin{cases} \dfrac{(x^2 + y^2) \sin(x + y)}{(x + y)^2} \\ \qquad \text{si } x + y \neq 0, \\[4pt] 0 \qquad \text{si } x + y = 0. \end{cases}$$</p></div>
     <div class="steps">
       <div class="step">
         <div class="step-text">
@@ -2131,7 +2131,7 @@
         <div class="step-text">
           <p class="step-title">No es uniformemente continua en $\mathbb{R}$</p>
           <p>Sea $\varepsilon = 1$. Vamos a ver que para todo $\delta \gt 0$ falla la conclusión de la definición de <span class="ref" data-ref="def-5.14">continuidad uniforme</span>. Basta verificarlo para una sucesión $(\delta_m)_{m \in \mathbb{N}}$ con $\delta_m \to 0$; tomamos $\delta_m = 1/m$. Elegimos $a_m = m$ y $b_m = m + \frac{1}{2m}$. Entonces $|a_m - b_m| = \frac{1}{2m} \lt \delta_m$, pero
-            $$\begin{aligned} |f(a_m) - f(b_m)| &= \left|m^2 - \left(m + \frac{1}{2m}\right)^2\right| \\ &= 1 + \frac{1}{4 m^2} \gt 1 = \varepsilon. \end{aligned}$$
+            $$\begin{aligned} &|f(a_m) - f(b_m)| \\ &\quad = \left|m^2 - \left(m + \frac{1}{2m}\right)^2\right| \\ &\quad = 1 + \frac{1}{4 m^2} \gt 1 = \varepsilon. \end{aligned}$$
             Luego $f$ no es uniformemente continua como función en todo $\mathbb{R}$.</p>
         </div>
         <figure class="viz">
@@ -2176,7 +2176,7 @@
     </div>
     <div class="enun">
       <p>Consideremos una función $f : X \to Y$, y escribamos $X$ como unión $X = A_1 \cup A_2$ de dos subconjuntos. Supongamos que existe $\gamma \gt 0$ con la siguiente propiedad: para cada par $a, a'$ de elementos de $X$ tales que
-        $$a \in A_1 \setminus A_2, \quad a' \in A_2 \setminus A_1 \quad \text{y} \quad d(a, a') \lt \gamma,$$
+        $$\begin{aligned} &a \in A_1 \setminus A_2, \quad a' \in A_2 \setminus A_1 \\ &\text{y} \quad d(a, a') \lt \gamma, \end{aligned}$$
         existe $a'' \in A_1 \cap A_2$ con $\max(d(a, a''), d(a', a'')) \le d(a, a')$. Si $f|_{A_1}$ y $f|_{A_2}$ son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>, entonces $f$ es uniformemente continua.</p>
       <p><i>Corolario 3.45.</i> Si $d(A_1 \setminus A_2, A_2 \setminus A_1) \gt 0$ y $f|_{A_1}$ y $f|_{A_2}$ son uniformemente continuas, entonces $f$ es uniformemente continua.</p>
     </div>
@@ -2185,7 +2185,7 @@
         <div class="step-text">
           <p class="step-title">Pasar por $a''$</p>
           <p>Por hipótesis, dado $\varepsilon \gt 0$, existe $\delta \gt 0$ tal que si $a, a' \in A_1$ o $a, a' \in A_2$, entonces $d(f(a), f(a')) \lt \varepsilon/2 \lt \varepsilon$. Es evidente que podemos tomar $\delta \lt \gamma$. Si lo hacemos, entonces
-            $$\begin{aligned} d(f(a), f(a')) &\le d(f(a), f(a'')) + d(f(a''), f(a')) \\ &\lt 2\, \frac{\varepsilon}{2} = \varepsilon, \end{aligned}$$
+            $$\begin{aligned} d(f(a), f(a')) &\le d(f(a), f(a'')) \\ &\quad + d(f(a''), f(a')) \\ &\lt 2\, \frac{\varepsilon}{2} = \varepsilon, \end{aligned}$$
             donde $a''$ es como en el enunciado, para cada $a \in A_1$ y $a' \in A_2$ (con $d(a, a') \lt \delta$).</p>
         </div>
         <figure class="viz">
@@ -3300,7 +3300,7 @@
   "tipo": "Definición",
   "numero": "",
   "titulo": "Aplicación lineal",
-  "enunciado": "<p>Si $X$, $Y$ son espacios vectoriales reales, $T : X \\to Y$ es <b>lineal<\/b> si $T(x + y) = T(x) + T(y)$ y $T(\\lambda x) = \\lambda T(x)$ para todos $x, y \\in X$, $\\lambda \\in \\mathbb{R}$. En particular $T(0) = 0$.<\/p>",
+  "enunciado": "<p>Sean $E$, $F$ espacios vectoriales sobre $\\mathbb{R}$. Una función $T : E \\to F$ es un <b>operador lineal<\/b> (o transformación lineal) si $$T(x + y) = T x + T y \\quad \\text{y} \\quad T(\\lambda x) = \\lambda\\, T x$$ para todos $x, y \\in E$ y $\\lambda \\in \\mathbb{R}$. Se suele escribir $Tx$ en lugar de $T(x)$.<\/p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
  },
  "ext-punto-fijo-banach": {
