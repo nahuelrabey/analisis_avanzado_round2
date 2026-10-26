@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root { color-scheme: light dark; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; font: 14px system-ui; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:40;font:13px 'IBM Plex Sans',system-ui,sans-serif;padding:6px 16px;background:Canvas;color:CanvasText;border-bottom:1px solid rgba(128,128,128,.35)"><a href="../index.html#otras" style="color:inherit">← Visualizaciones</a></div>
+<title>La integral es Lipschitz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: el dibujo (arriba el espacio de entrada C([0,1]), abajo el de salida) queda fijo a la izquierda y la cadena de desigualdades avanza paso a paso a la derecha. Misma familia visual que visualizaciones/extension_denso.html. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.22);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.22);
+    --ok: #1d8556;
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.28);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.26); --ok: #4cc38a; --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.28);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.26); --ok: #4cc38a; --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.07rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1120px; margin: 0 auto; display: grid; gap: 1.6rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0 0 0.5rem; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.9rem; }
+  .intro { max-width: 70ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.15rem; }
+
+  .theorem {
+    background: var(--panel); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 1rem 1.2rem; max-width: 78ch;
+  }
+  .theorem p:last-child { margin: 0; }
+  .theorem b { font-family: var(--font-ui); }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  .proof { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+  @media (max-width: 860px) { .proof { grid-template-columns: minmax(0, 1fr); } }
+  .stage {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px);
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0.9rem;
+    display: grid; gap: 0.7rem; font-family: var(--font-ui); font-size: 0.9rem;
+  }
+  @media (max-width: 860px) { .stage { position: static; } }
+  canvas { width: 100%; max-width: 100%; display: block; aspect-ratio: 1 / 1; border-radius: 6px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; color: var(--muted); font-size: 0.82rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .sw { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+  .slider { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 3.6rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pairs { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; }
+  .pairs legend { font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+  .pairs label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; font-size: 0.86rem; }
+  .pairs input { position: absolute; opacity: 0; pointer-events: none; }
+  .pairs label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pairs label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .readout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.15rem 0.9rem; font-family: var(--font-mono); font-size: 0.84rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .readout dt { color: var(--muted); }
+  .readout dd { margin: 0; }
+  .good { color: var(--ok); }
+
+  .steps { display: grid; gap: 0.8rem; min-width: 0; }
+  .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.9rem; }
+  .nav .count { color: var(--muted); margin-right: auto; font-variant-numeric: tabular-nums; }
+  button {
+    font: inherit; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--accent);
+    border-radius: 6px; padding: 0.35rem 0.85rem; cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: var(--band); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toc { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-ui); font-size: 0.82rem; }
+  .toc button { border-color: var(--rule); color: var(--muted); padding: 0.2rem 0.6rem; font-weight: 400; }
+  .toc button[aria-current="step"] { border-color: var(--accent); color: var(--accent); background: var(--band); font-weight: 500; }
+
+  .step { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem 1.2rem; min-width: 0; }
+  .step .kicker { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+  .look { margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px dashed var(--rule); font-size: 0.97rem; color: var(--muted); }
+  .look strong { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+  .note { color: var(--muted); font-size: 0.95rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header class="intro">
+    <p class="eyebrow">Análisis Avanzado · Práctica 4 · Ejemplo 5.26 c)</p>
+    <h1>La integral es Lipschitz de constante 1</h1>
+  </header>
+
+  <section class="theorem" aria-label="Enunciado">
+    <p>
+      <b>Ejemplo 5.26 c).</b> Sea $F : (C([0, 1]), d_\infty) \to (C([0, 1]), d_\infty)$ la función definida como
+      $$ F(f)(x) = \int_0^x f(t)\, dt. $$
+      Entonces $F$ es <span class="ref" tabindex="0" data-ref="lip">Lipschitz</span> de constante $1$:
+      $d_\infty(F(f), F(g)) \leq d_\infty(f, g)$ para todo $f, g \in C([0, 1])$.
+    </p>
+  </section>
+
+  <p class="intro note">Los puntos de este espacio son funciones: $F$ toma una función $f$ y devuelve otra, la función «área acumulada bajo $f$». En el dibujo, el panel de arriba es la entrada y el de abajo la salida. Pasá el mouse (o tocá) sobre las palabras subrayadas para ver la definición que se usa, y avanzá con los botones o con las flechas del teclado.</p>
+
+  <section class="proof" aria-label="Demostración paso a paso">
+    <div class="stage">
+      <canvas id="cv" role="img" aria-label="Arriba f y g en C([0,1]); abajo sus imágenes F(f) y F(g)"></canvas>
+      <div class="legend" id="legend"></div>
+      <fieldset class="pairs">
+        <legend>Par de funciones</legend>
+        <label><input type="radio" name="pair" id="p-osc" value="osc" checked><span>Se cruzan</span></label>
+        <label><input type="radio" name="pair" id="p-shift" value="shift"><span>$g = f - c$</span></label>
+        <label><input type="radio" name="pair" id="p-spike" value="spike"><span>Un pico</span></label>
+      </fieldset>
+      <div class="slider" id="ctl-x"><label for="s-x">$x$</label><input type="range" id="s-x" min="0" max="1" step="0.005" value="0.6"><output id="o-x" for="s-x"></output></div>
+      <dl class="readout" id="readout"></dl>
+    </div>
+
+    <div class="steps">
+      <div class="nav">
+        <span class="count" id="count"></span>
+        <button type="button" id="prev">← Anterior</button>
+        <button type="button" id="next">Siguiente →</button>
+      </div>
+      <ol class="toc" id="toc"></ol>
+
+      <article class="step" data-title="Qué hace F">
+        <div class="kicker">Antes de empezar</div>
+        <h3>$F(f)$ es el área acumulada bajo $f$</h3>
+        <p>
+          Para cada $x \in [0, 1]$, el número $F(f)(x)$ es el área (con signo) bajo el gráfico de $f$ entre $0$ y $x$.
+          Al mover $x$ se obtiene una función nueva, $F(f)$, que es continua; por eso $F$ va de $C([0, 1])$ en $C([0, 1])$.
+        </p>
+        <p>
+          Hay que comparar dos distancias: la de las entradas, $d_\infty(f, g)$, y la de las salidas, $d_\infty(F(f), F(g))$.
+          Las dos son la <span class="ref" tabindex="0" data-ref="dinf">distancia infinito</span>: la mayor separación vertical entre los dos gráficos.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>Mové $x$. Arriba se pinta el área bajo $f$ y bajo $g$ entre $0$ y $x$; abajo, esas dos áreas son las alturas de $F(f)$ y $F(g)$ en $x$.</div>
+      </article>
+
+      <article class="step" data-title="Diferencia">
+        <div class="kicker">Paso 1 · Fijamos $x$</div>
+        <h3>La separación en $x$ es el área bajo $f - g$</h3>
+        <p>Fijamos $0 \leq x \leq 1$. Por <span class="ref" tabindex="0" data-ref="lineal">linealidad de la integral</span>,</p>
+        $$ |F(f)(x) - F(g)(x)| = \left| \int_0^x f(t)\, dt - \int_0^x g(t)\, dt \right| = \left| \int_0^x f(t) - g(t)\, dt \right|. $$
+        <p>Comparar las salidas en $x$ es mirar <em>una sola</em> función, $f - g$, y su área con signo hasta $x$.</p>
+        <div class="look"><strong>En el dibujo</strong>Arriba ahora está $f - g$. El área por encima del eje suma y la de abajo resta. Abajo, el segmento vertical en $x$ mide exactamente el módulo de esa suma.</div>
+      </article>
+
+      <article class="step" data-title="Módulo adentro">
+        <div class="kicker">Paso 2 · Primera desigualdad</div>
+        <h3>Meter el módulo adentro de la integral</h3>
+        $$ \left| \int_0^x f(t) - g(t)\, dt \right| \leq \int_0^x |f(t) - g(t)|\, dt. $$
+        <p>
+          Es la <span class="ref" tabindex="0" data-ref="triint">desigualdad triangular para integrales</span>. Lo que se pierde son las cancelaciones:
+          a la izquierda, las partes donde $f - g$ es negativa restan; a la derecha, todo suma.
+        </p>
+        <div class="look"><strong>En el dibujo</strong>Arriba se dibuja $|f - g|$: lo que estaba debajo del eje se refleja hacia arriba. Con el par «Se cruzan» la diferencia entre los dos números del panel es grande; con «$g = f - c$» no se pierde nada, porque $f - g$ no cambia de signo.</div>
+      </article>
+
+      <article class="step" data-title="Cota por d∞">
+        <div class="kicker">Paso 3 · Segunda desigualdad</div>
+        <h3>Acotar el integrando por su supremo</h3>
+        <p>Para todo $t \in [0, 1]$ vale $|f(t) - g(t)| \leq \sup_{s \in [0,1]} |f(s) - g(s)| = d_\infty(f, g)$. Por <span class="ref" tabindex="0" data-ref="mono">monotonía de la integral</span>,</p>
+        $$ \int_0^x |f(t) - g(t)|\, dt \leq \int_0^x d_\infty(f, g)\, dt = x \, d_\infty(f, g). $$
+        <p>El integrando de la derecha es una constante: la integral es el área de un rectángulo de base $x$ y altura $d_\infty(f, g)$.</p>
+        <div class="look"><strong>En el dibujo</strong>La línea horizontal está a la altura $d_\infty(f, g)$, y toca a $|f - g|$ en el punto donde se alcanza el máximo. El área pintada bajo $|f - g|$ queda adentro del rectángulo $[0, x] \times [0, d_\infty(f, g)]$.</div>
+      </article>
+
+      <article class="step" data-title="x ≤ 1">
+        <div class="kicker">Paso 4 · Tercera desigualdad</div>
+        <h3>Usar que $x \leq 1$</h3>
+        $$ x \, d_\infty(f, g) \leq d_\infty(f, g). $$
+        <p>
+          Juntando los pasos, para cada $x \in [0, 1]$:
+        </p>
+        $$ |F(f)(x) - F(g)(x)| \leq x \, d_\infty(f, g) \leq d_\infty(f, g). $$
+        <p>Es acá donde importa que el dominio sea $[0, 1]$: en $[0, b]$ el mismo argumento da constante $b$.</p>
+        <div class="look"><strong>En el dibujo</strong>Abajo ya no se dibujan $F(f)$ y $F(g)$, sino la separación $s \mapsto |F(f)(s) - F(g)(s)|$ para todo $s$. Queda debajo de la recta $s \, d_\infty(f, g)$ (la cota del Paso 3) y por lo tanto debajo de la altura $d_\infty(f, g)$.</div>
+      </article>
+
+      <article class="step" data-title="Supremo">
+        <div class="kicker">Paso 5 · Conclusión</div>
+        <h3>Tomar supremo en $x$</h3>
+        <p>Como la cota vale para todo $0 \leq x \leq 1$ y no depende de $x$, también acota al supremo:</p>
+        $$ d_\infty(F(f), F(g)) = \sup_{x \in [0,1]} |F(f)(x) - F(g)(x)| \leq d_\infty(f, g), $$
+        <p>
+          lo que nos dice que $F$ es Lipschitz de constante $1$. En particular es uniformemente continua
+          (<span class="ref" tabindex="0" data-ref="ej525">Ejercicio 5.25</span>), con $\delta = \varepsilon$.
+        </p>
+        <p>
+          La constante $1$ no se puede mejorar: con $g = f - c$, la separación de las salidas en $x = 1$ es exactamente $c = d_\infty(f, g)$.
+          En el otro extremo, con «Un pico» las entradas están lejos pero las salidas casi coinciden: $F$ achica mucho las distancias, y la desigualdad no se puede dar vuelta.
+          <em>(Estas dos observaciones no están en las notas.)</em>
+        </p>
+        <div class="look"><strong>En el dibujo</strong>Abajo, el punto marca dónde la separación de las salidas es máxima: ese valor es $d_\infty(F(f), F(g))$. El cociente del panel nunca pasa de $1$. Probá los tres pares.</div>
+      </article>
+    </div>
+  </section>
+
+  <p class="note">Las referencias son a las notas de la materia transcriptas en <code>apuntes-typst/apuntes.typ</code> (Ejemplo 5.26 c) y en <code>ejemplos/p4.typ</code> (tag 39). Las integrales del dibujo se calculan con la regla del trapecio sobre 600 subintervalos.</p>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="lip">
+    <div class="pop-title">Definición 5.24 · Función Lipschitz</div>
+    <p>$f : (M, d) \to (N, d')$ es <em>Lipschitz de constante $C$</em> si $d'(f(x), f(y)) \leq C\, d(x, y)$ para todo $x, y \in M$.</p>
+    <p>Acá $M = N = C([0, 1])$ y los «puntos» $x, y$ son funciones $f, g$.</p>
+  </div>
+  <div data-key="dinf">
+    <div class="pop-title">Distancia infinito en $C([a, b])$</div>
+    <p>$d_\infty(f, g) = \sup_{x \in [a, b]} |f(x) - g(x)|$: la mayor diferencia vertical entre los gráficos de $f$ y $g$.</p>
+  </div>
+  <div data-key="lineal">
+    <div class="pop-title">Linealidad de la integral</div>
+    <p>$\int_0^x f(t)\, dt - \int_0^x g(t)\, dt = \int_0^x \big(f(t) - g(t)\big)\, dt$.</p>
+  </div>
+  <div data-key="triint">
+    <div class="pop-title">Desigualdad triangular para integrales</div>
+    <p>Si $h$ es continua en $[0, x]$, entonces $\left| \int_0^x h(t)\, dt \right| \leq \int_0^x |h(t)|\, dt$.</p>
+    <p>Sale de $-|h| \leq h \leq |h|$ y la monotonía de la integral.</p>
+  </div>
+  <div data-key="mono">
+    <div class="pop-title">Monotonía de la integral</div>
+    <p>Si $h(t) \leq k(t)$ para todo $t \in [0, x]$, entonces $\int_0^x h(t)\, dt \leq \int_0^x k(t)\, dt$.</p>
+  </div>
+  <div data-key="ej525">
+    <div class="pop-title">Ejercicio 5.25 · desafío de la Práctica 4</div>
+    <p>Si $f : M \to N$ es Lipschitz de constante $C$, entonces es uniformemente continua: dado $\varepsilon > 0$ sirve $\delta = \varepsilon / C$.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const NS = 600;
+  const T = Array.from({ length: NS + 1 }, (_, i) => i / NS);
+  const base = (t) => 0.55 + 0.22 * Math.sin(2 * Math.PI * 1.1 * t + 0.4);
+  const PAIRS = {
+    osc: { f: base, g: (t) => base(t) - 0.32 * Math.sin(5 * Math.PI * t) },
+    shift: { f: base, g: (t) => base(t) - 0.3 },
+    spike: { f: base, g: (t) => base(t) - 0.6 * Math.exp(-(((t - 0.42) / 0.025) ** 2)) },
+  };
+
+  function compute(key) {
+    const { f, g } = PAIRS[key];
+    const F = T.map(f), G = T.map(g), H = T.map((_, i) => F[i] - G[i]);
+    const cum = (arr) => { const out = [0]; for (let i = 1; i <= NS; i++) out.push(out[i - 1] + (arr[i] + arr[i - 1]) / (2 * NS)); return out; };
+    const IF = cum(F), IG = cum(G), IH = cum(H), IA = cum(H.map(Math.abs));
+    let dinf = 0, arg = 0;
+    H.forEach((v, i) => { if (Math.abs(v) > dinf) { dinf = Math.abs(v); arg = i; } });
+    const gap = IH.map(Math.abs);
+    let dout = 0, argOut = 0;
+    gap.forEach((v, i) => { if (v > dout) { dout = v; argOut = i; } });
+    return { F, G, H, IF, IG, IH, IA, dinf, arg, gap, dout, argOut };
+  }
+
+  const steps = [...document.querySelectorAll(".step")];
+  let cur = 0;
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"), area: g("--area"),
+             seq2: g("--seq2"), area2: g("--area2"), ok: g("--ok"), fail: g("--fail"), panel: g("--panel"), mono: g("--font-mono") };
+  }
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+
+  // Un panel: caja [top, top+height], eje t ∈ [0,1], rango vertical yr.
+  function panel(ctx, C, w, top, height, yr, title, tickStep) {
+    const pad = { l: 44, r: 14 };
+    const Xp = (t) => pad.l + t * (w - pad.l - pad.r);
+    const Yp = (v) => top + height - (v - yr[0]) / (yr[1] - yr[0]) * height;
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted;
+    for (let t = 0; t <= 1.0001; t += 0.25) {
+      ctx.beginPath(); ctx.moveTo(Xp(t), top); ctx.lineTo(Xp(t), top + height); ctx.stroke();
+      ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(+t.toFixed(2) + "", Xp(t), top + height + 5);
+    }
+    for (let v = Math.ceil(yr[0] / tickStep - 1e-9) * tickStep; v <= yr[1] + 1e-9; v += tickStep) {
+      ctx.beginPath(); ctx.moveTo(pad.l, Yp(v)); ctx.lineTo(w - pad.r, Yp(v)); ctx.stroke();
+      ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillText((Math.abs(v) < 1e-9 ? 0 : v).toFixed(tickStep < 0.1 ? 2 : 1), pad.l - 6, Yp(v));
+    }
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.2;
+    const y0 = Math.min(Math.max(Yp(0), top), top + height);
+    ctx.beginPath(); ctx.moveTo(pad.l, y0); ctx.lineTo(w - pad.r, y0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, top); ctx.lineTo(pad.l, top + height); ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.font = "12px " + C.mono; ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText(title, pad.l + 6, top + 4);
+    return { Xp, Yp, pad, top, height };
+  }
+  function curve(ctx, P, arr, color, width, upto = NS) {
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath();
+    for (let i = 0; i <= upto; i++) { const px = P.Xp(T[i]), py = P.Yp(arr[i]); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+    ctx.stroke();
+  }
+  // Área entre arr y 0 hasta el índice k; si split, positivo/negativo con colores distintos.
+  function area(ctx, P, arr, k, fillPos, fillNeg) {
+    for (let i = 0; i < k; i++) {
+      const a = arr[i], b = arr[i + 1];
+      ctx.fillStyle = (a + b) / 2 >= 0 ? fillPos : (fillNeg || fillPos);
+      ctx.beginPath(); ctx.moveTo(P.Xp(T[i]), P.Yp(0)); ctx.lineTo(P.Xp(T[i]), P.Yp(a));
+      ctx.lineTo(P.Xp(T[i + 1]), P.Yp(b)); ctx.lineTo(P.Xp(T[i + 1]), P.Yp(0)); ctx.closePath(); ctx.fill();
+    }
+  }
+  const dot = (ctx, x, y, r, fill) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); };
+  function label(ctx, C, text, x, y, align = "left", base = "bottom", color) {
+    ctx.font = "12px " + C.mono; ctx.fillStyle = color || C.ink; ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(text, x, y);
+  }
+  function dashed(ctx, x1, y1, x2, y2, color, width = 1) {
+    ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = color; ctx.lineWidth = width;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function bracket(ctx, x, y1, y2, color) {
+    ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2); ctx.stroke();
+    ctx.lineWidth = 1.5;
+    for (const y of [y1, y2]) { ctx.beginPath(); ctx.moveTo(x - 5, y); ctx.lineTo(x + 5, y); ctx.stroke(); }
+  }
+  function setLegend(items) {
+    $("legend").innerHTML = items.map(([c, t]) => `<span><i class="sw" style="background:var(${c})"></i>${t}</span>`).join("");
+  }
+  function setReadout(rows) {
+    $("readout").innerHTML = rows.map(([k, v, cls]) => `<dt>${k}</dt><dd class="${cls || ""}">${v}</dd>`).join("");
+  }
+  const fmt = (v, d = 4) => (Math.abs(v) < 5e-5 ? 0 : v).toFixed(d);
+  const range = (arrs, padFrac = 0.08, incl0 = true) => {
+    let lo = incl0 ? 0 : Infinity, hi = incl0 ? 0 : -Infinity;
+    for (const a of arrs) for (const v of a) { lo = Math.min(lo, v); hi = Math.max(hi, v); }
+    const p = (hi - lo) * padFrac || 0.1; return [lo - p, hi + p];
+  };
+
+  function draw() {
+    const C = colors(), { ctx, w, h } = setup($("cv"));
+    const key = document.querySelector('input[name="pair"]:checked').value;
+    const D = compute(key);
+    const x = +$("s-x").value, k = Math.round(x * NS);
+    $("o-x").textContent = x.toFixed(3);
+    $("ctl-x").hidden = cur === 5;
+
+    ctx.fillStyle = C.panel; ctx.fillRect(0, 0, w, h);
+    const gapPx = 34, topH = (h - 2 * gapPx - 10) / 2;
+    const top = 6, bot = top + topH + gapPx + 4;
+
+    // ---------- panel de entrada ----------
+    if (cur === 0) {
+      const P = panel(ctx, C, w, top, topH, range([D.F, D.G]), "entrada: f, g", 0.2);
+      area(ctx, P, D.F, k, C.area); area(ctx, P, D.G, k, C.area2);
+      curve(ctx, P, D.F, C.accent, 2); curve(ctx, P, D.G, C.seq2, 2);
+      dashed(ctx, P.Xp(x), P.top, P.Xp(x), P.top + P.height, C.ink);
+    } else {
+      const showAbs = cur >= 2;
+      const arr = showAbs ? D.H.map(Math.abs) : D.H;
+      const yr = showAbs ? [0, D.dinf * 1.18] : range([D.H], 0.12);
+      const P = panel(ctx, C, w, top, topH, yr, showAbs ? "entrada: |f − g|" : "entrada: f − g", D.dinf > 0.4 ? 0.2 : 0.1);
+      if (cur >= 3) {
+        const xr = cur >= 4 ? 1 : x;
+        ctx.fillStyle = C.band; ctx.fillRect(P.Xp(0), P.Yp(D.dinf), P.Xp(xr) - P.Xp(0), P.Yp(0) - P.Yp(D.dinf));
+        ctx.strokeStyle = C.ink; ctx.lineWidth = 1; ctx.strokeRect(P.Xp(0), P.Yp(D.dinf), P.Xp(xr) - P.Xp(0), P.Yp(0) - P.Yp(D.dinf));
+      }
+      if (cur === 1) area(ctx, P, D.H, k, C.area, C.area2);
+      else area(ctx, P, arr, cur === 5 ? 0 : k, C.area);
+      if (showAbs) curve(ctx, P, D.H, C.rule, 1.2);
+      curve(ctx, P, arr, C.ink, 2);
+      if (cur >= 3) {
+        dashed(ctx, P.Xp(0), P.Yp(D.dinf), P.Xp(1), P.Yp(D.dinf), C.fail, 1.4);
+        label(ctx, C, "d∞(f, g)", P.Xp(1) - 2, P.Yp(D.dinf) - 4, "right", "bottom", C.fail);
+        dot(ctx, P.Xp(T[D.arg]), P.Yp(D.dinf), 4.5, C.fail);
+      }
+      if (cur !== 5) dashed(ctx, P.Xp(x), P.top, P.Xp(x), P.top + P.height, C.ink);
+    }
+
+    // ---------- panel de salida ----------
+    if (cur <= 3) {
+      const B = panel(ctx, C, w, bot, topH, range([D.IF, D.IG]), "salida: F(f), F(g)", 0.1);
+      curve(ctx, B, D.IF, C.accent, 2); curve(ctx, B, D.IG, C.seq2, 2);
+      dashed(ctx, B.Xp(x), B.top, B.Xp(x), B.top + B.height, C.ink);
+      if (cur >= 1) bracket(ctx, B.Xp(x), B.Yp(D.IF[k]), B.Yp(D.IG[k]), C.ink);
+      dot(ctx, B.Xp(x), B.Yp(D.IF[k]), 4, C.accent); dot(ctx, B.Xp(x), B.Yp(D.IG[k]), 4, C.seq2);
+    } else {
+      const B = panel(ctx, C, w, bot, topH, [0, D.dinf * 1.18], "salida: |F(f) − F(g)|", D.dinf > 0.4 ? 0.2 : 0.1);
+      ctx.fillStyle = C.band;
+      ctx.beginPath(); ctx.moveTo(B.Xp(0), B.Yp(0)); ctx.lineTo(B.Xp(1), B.Yp(D.dinf)); ctx.lineTo(B.Xp(1), B.Yp(0)); ctx.closePath(); ctx.fill();
+      dashed(ctx, B.Xp(0), B.Yp(0), B.Xp(1), B.Yp(D.dinf), C.muted, 1.4);
+      label(ctx, C, "s·d∞(f, g)", B.Xp(0.62), B.Yp(0.62 * D.dinf) - 6, "right", "bottom", C.muted);
+      dashed(ctx, B.Xp(0), B.Yp(D.dinf), B.Xp(1), B.Yp(D.dinf), C.fail, 1.4);
+      label(ctx, C, "d∞(f, g)", B.Xp(0) + 6, B.Yp(D.dinf) - 4, "left", "bottom", C.fail);
+      area(ctx, B, D.gap, NS, C.area);
+      curve(ctx, B, D.gap, C.ink, 2);
+      if (cur === 4) {
+        dashed(ctx, B.Xp(x), B.top, B.Xp(x), B.top + B.height, C.ink);
+        dot(ctx, B.Xp(x), B.Yp(D.gap[k]), 4.5, C.ink);
+      } else {
+        dashed(ctx, B.Xp(0), B.Yp(D.dout), B.Xp(1), B.Yp(D.dout), C.ok, 1.4);
+        label(ctx, C, "d∞(F(f), F(g))", B.Xp(1) - 2, B.Yp(D.dout) + 4, "right", "top", C.ok);
+        dot(ctx, B.Xp(T[D.argOut]), B.Yp(D.dout), 5, C.ok);
+      }
+    }
+
+    // ---------- leyenda y números ----------
+    const sAbs = Math.abs(D.IH[k]), sInt = D.IA[k], rect = x * D.dinf;
+    if (cur === 0) {
+      setLegend([["--accent", "f y F(f)"], ["--seq2", "g y F(g)"], ["--area", "área de 0 a x"]]);
+      setReadout([["F(f)(x)", fmt(D.IF[k])], ["F(g)(x)", fmt(D.IG[k])], ["d∞(f, g)", fmt(D.dinf)]]);
+    } else if (cur === 1) {
+      setLegend([["--area", "f − g > 0: suma"], ["--area2", "f − g < 0: resta"], ["--ink", "|F(f)(x) − F(g)(x)|"]]);
+      setReadout([["∫₀ˣ (f − g)", fmt(D.IH[k])], ["|F(f)(x) − F(g)(x)|", fmt(sAbs)]]);
+    } else if (cur === 2) {
+      setLegend([["--area", "área bajo |f − g|"], ["--rule", "f − g (sin módulo)"]]);
+      setReadout([["|∫₀ˣ (f − g)|", fmt(sAbs)], ["∫₀ˣ |f − g|", fmt(sInt), "good"], ["se pierde", fmt(sInt - sAbs)]]);
+    } else if (cur === 3) {
+      setLegend([["--area", "∫₀ˣ |f − g|"], ["--band", "rectángulo x · d∞(f, g)"], ["--fail", "d∞(f, g)"]]);
+      setReadout([["|F(f)(x) − F(g)(x)|", fmt(sAbs)], ["≤ ∫₀ˣ |f − g|", fmt(sInt)], ["≤ x · d∞(f, g)", fmt(rect), "good"]]);
+    } else if (cur === 4) {
+      setLegend([["--ink", "s ↦ |F(f)(s) − F(g)(s)|"], ["--band", "debajo de s · d∞(f, g)"], ["--fail", "d∞(f, g)"]]);
+      setReadout([["|F(f)(x) − F(g)(x)|", fmt(sAbs)], ["≤ x · d∞(f, g)", fmt(rect)], ["≤ d∞(f, g)", fmt(D.dinf), "good"]]);
+    } else {
+      setLegend([["--ok", "d∞(F(f), F(g)): el máximo"], ["--fail", "d∞(f, g)"]]);
+      setReadout([["d∞(f, g)", fmt(D.dinf)], ["d∞(F(f), F(g))", fmt(D.dout)], ["cociente", fmt(D.dout / D.dinf, 3) + "  ≤ 1", "good"]]);
+    }
+  }
+
+  // ---------- navegación ----------
+  const toc = $("toc");
+  steps.forEach((s, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = i === 0 ? "Qué hace F" : i + " · " + s.dataset.title; b.id = "toc-" + i;
+    b.addEventListener("click", () => go(i));
+    li.appendChild(b); toc.appendChild(li);
+  });
+  function go(i) {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => (s.hidden = k !== cur));
+    toc.querySelectorAll("button").forEach((b, k) => (k === cur ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
+    $("prev").disabled = cur === 0; $("next").disabled = cur === steps.length - 1;
+    $("count").textContent = cur === 0 ? "Preparación" : "Paso " + cur + " de " + (steps.length - 1);
+    hidePopup();
+    draw();
+  }
+  $("prev").addEventListener("click", () => go(cur - 1));
+  $("next").addEventListener("click", () => go(cur + 1));
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("input")) return;
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft") go(cur - 1);
+    if (e.key === "Escape") hidePopup();
+  });
+  $("s-x").addEventListener("input", draw);
+  document.querySelectorAll('input[name="pair"]').forEach((r) => r.addEventListener("change", draw));
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  new ResizeObserver(draw).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", draw);
+
+  go(0);
+})();
+</script>
+
+</body>
+</html>

@@ -1,20 +1,5 @@
-<title>Primeros parciales resueltos</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<script>
-  window.MathJax = {
-    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
-    svg: { fontCache: "global" },
-    options: { enableMenu: false },
-    startup: { pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))) },
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
-<style>
-  /* GENERADO: no editar primeros_parciales.html a mano. Fuente: visualizaciones/primeros_parciales/ (fragmentos por examen) + scripts/build_primeros_parciales.py.
-     Layout: índice arriba (exámenes con sus ejercicios, y temas); después un bloque por examen; cada ejercicio es una ficha con el enunciado y los pasos de la resolución, cada paso con su dibujo a la derecha cuando lo tiene. Misma familia visual que las otras páginas de visualizaciones/. */
+/* Hoja compartida por todas las páginas de visualizaciones/sitio/ (GENERADO por scripts/build_visualizaciones.py: se edita en visualizaciones/fuentes/assets/).
+   Layout: una barra fija de navegación (Visualizaciones › sección › página, con anterior y siguiente) y, debajo, una columna: encabezado de la página, índice local, y fichas (ejercicios o ejemplos) con el texto a la izquierda y el dibujo a la derecha. Misma familia visual que las otras páginas de visualizaciones/. */
   :root {
     --bg: #f5f6f8;
     --panel: #ffffff;
@@ -196,207 +181,67 @@
   #popup .pop-src { font-family: var(--font-ui); font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.35rem; margin-top: 0.45rem; }
   footer { color: var(--muted); font-family: var(--font-ui); font-size: 0.85rem; max-width: 80ch; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-</style>
 
-<div class="page">
+/* ---------- sitio: navegación ---------- */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel); }
+.sitebar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--panel); border-bottom: 1px solid var(--rule);
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); margin-top: -2.2rem; margin-bottom: 1.6rem; }
+.sitebar .in { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 1rem; padding-block: 0.55rem; font-family: var(--font-ui); font-size: 0.86rem; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; list-style: none; margin: 0; padding: 0; min-width: 0; }
+.crumbs li + li::before { content: "›"; color: var(--muted); margin-right: 0.3rem; }
+.crumbs a { color: var(--ink); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.crumbs [aria-current] { color: var(--muted); }
+.pager { display: flex; gap: 0.5rem; }
+.pager a { color: var(--accent); text-decoration: none; border: 1px solid var(--rule); border-radius: 6px; padding: 0.15rem 0.6rem; white-space: nowrap; }
+.pager a:hover { border-color: var(--accent); }
+.pager a[aria-disabled="true"] { color: var(--muted); pointer-events: none; opacity: 0.5; }
 
-<header class="intro" id="inicio">
-  <p class="eyebrow">Análisis Avanzado · FCEN-UBA · {{N_EXAMS}} exámenes, {{N_EJS}} ejercicios</p>
-  <h1>Primeros parciales resueltos</h1>
-  <p>Todos los primeros parciales y recuperatorios del repositorio, con la resolución de cada ejercicio paso a paso. Los pasos que se pueden dibujar tienen su dibujo al lado, y casi todos se pueden mover. Cada definición, teorema o proposición que se usa está subrayada con puntos: pasá el mouse, enfocala con el teclado o tocala para ver el enunciado.</p>
-  <p>Las resoluciones de 2024 son las oficiales de la cátedra; las de 2025 son resoluciones propuestas en el repositorio, verificadas en Lean. Los números de los resultados son los de <code>apuntes.typ</code>.</p>
-</header>
+/* ---------- sitio: índice local de una página ---------- */
+.toc { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0.9rem 1.1rem; display: grid; gap: 0.6rem; }
+.toc h2 { font-size: 1.05rem; }
+.toc-group { display: grid; grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr); gap: 0.3rem 1rem; align-items: start; border-top: 1px solid var(--rule); padding-top: 0.5rem; }
+.toc-group:first-of-type { border-top: 0; padding-top: 0; }
+.toc-group > a { font-family: var(--font-ui); font-size: 0.88rem; color: var(--ink); text-decoration: none; font-weight: 500; }
+.toc-group > a:hover { color: var(--accent); }
+@media (max-width: 640px) { .toc-group { grid-template-columns: minmax(0, 1fr); } }
 
-<nav class="indice" aria-labelledby="h-indice">
-  <h2 id="h-indice"><span class="bn">Índice</span>Por examen</h2>
-  <ul class="exams-nav">
-{{NAV}}
-  </ul>
-  <h2 id="temas"><span class="bn">Índice</span>Por tema</h2>
-  <div class="temas">
-{{TOPICS}}
-  </div>
-</nav>
+/* ---------- sitio: bloques de ejemplos y guías ---------- */
+.bloque { display: grid; gap: 1.2rem; scroll-margin-top: 4rem; }
+.bloque > h2 { border-top: 3px solid var(--accent); padding-top: 0.9rem; }
+.desbloquea { max-width: 82ch; color: var(--muted); }
+.desbloquea > b:first-child { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.35rem; }
+.desbloquea p:last-child { margin-bottom: 0; }
+.ej, .exam, .sub { scroll-margin-top: 4rem; }
+a.xg { color: var(--seq2); text-decoration-style: dotted; text-underline-offset: 3px; }
+.preparan { font-family: var(--font-ui); font-size: 0.84rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.55rem; display: grid; gap: 0.35rem; }
+.preparan:empty { display: none; }
+.preparan > b { color: var(--ink); font-weight: 600; }
+.cita { font-size: 0.95rem; color: var(--muted); }
 
-{{EXAMS}}
+/* ---------- portada ---------- */
+.hub-sec { display: grid; gap: 1rem; scroll-margin-top: 4rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0.9rem; list-style: none; margin: 0; padding: 0; }
+.cards > li { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 0.85rem 1rem; display: grid; gap: 0.35rem; align-content: start; }
+.cards .card-link { font-family: var(--font-ui); font-weight: 600; font-size: 1rem; color: var(--ink); text-decoration: none; }
+.cards .card-link:hover { color: var(--accent); }
+.cards .card-link::after { content: " →"; color: var(--accent); }
+.cards .meta { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+.cards p { margin: 0; font-size: 0.95rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; font-family: var(--font-ui); font-size: 0.9rem; }
+.tabs a { display: inline-block; text-decoration: none; color: var(--ink); border: 1px solid var(--rule); border-radius: 999px; padding: 0.3rem 0.9rem; background: var(--panel); }
+.tabs a:hover { border-color: var(--accent); color: var(--accent); }
+details.tema-det { border-top: 1px solid var(--rule); padding: 0.5rem 0; }
+details.tema-det > summary { cursor: pointer; font-family: var(--font-ui); font-weight: 600; font-size: 0.95rem; }
+details.tema-det > summary .cnt { font-weight: 400; color: var(--muted); margin-left: 0.4rem; font-size: 0.82rem; }
+details.tema-det .grp { display: grid; grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr); gap: 0.3rem 0.8rem; margin-top: 0.5rem; align-items: start; }
+details.tema-det .grp > span { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
+@media (max-width: 640px) { details.tema-det .grp { grid-template-columns: minmax(0, 1fr); } }
 
-<footer>
-  <p>Fuentes: <code>apuntes-typst/parciales/*_1.typ</code> (enunciados y resoluciones), <code>apuntes-typst/apuntes.typ</code> (enunciados del glosario) y <code>lean/Parciales/</code> (verificaciones). Esta página se genera con <code>scripts/build_primeros_parciales.py</code> a partir de los fragmentos de <code>visualizaciones/primeros_parciales/</code>.</p>
-</footer>
-
-</div>
-
-<div id="popup" role="tooltip" hidden></div>
-<script type="application/json" id="glosario">{{GLOSSARY}}</script>
-
-<script>
-/* Librería mínima de dibujo compartida por todos los ejercicios (window.PP). */
-window.PP = (() => {
-  "use strict";
-  const draws = [];
-  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const fmt = (x, d = 3) => {
-    if (typeof x !== "number") return String(x);
-    if (!isFinite(x)) return x > 0 ? "+∞" : "−∞";
-    return Number(x).toFixed(d).replace(/\.?0+$/, "").replace("-", "−");
-  };
-  function canvas(el, ratio) {
-    if (typeof el === "string") el = document.getElementById(el);
-    const w = el.clientWidth || 480;
-    const h = Math.max(180, Math.round(w * (ratio || 0.62)));
-    const dpr = window.devicePixelRatio || 1;
-    el.width = Math.round(w * dpr); el.height = Math.round(h * dpr); el.style.height = h + "px";
-    const ctx = el.getContext("2d");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
-    return { ctx, w, h };
-  }
-  function frame(w, h, box, pad) {
-    const p = Object.assign({ l: 44, r: 14, t: 14, b: 30 }, pad || {});
-    const X = (x) => p.l + (x - box.x0) / (box.x1 - box.x0) * (w - p.l - p.r);
-    const Y = (y) => h - p.b - (y - box.y0) / (box.y1 - box.y0) * (h - p.t - p.b);
-    const iX = (px) => box.x0 + (px - p.l) / (w - p.l - p.r) * (box.x1 - box.x0);
-    const iY = (py) => box.y0 + (h - p.b - py) / (h - p.t - p.b) * (box.y1 - box.y0);
-    return { X, Y, iX, iY, p, box, w, h };
-  }
-  function niceStep(span, target) {
-    const raw = span / target, m = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / m;
-    return (f < 1.5 ? 1 : f < 3.5 ? 2 : f < 7.5 ? 5 : 10) * m;
-  }
-  function axes(ctx, T, opts) {
-    const o = Object.assign({ xLabel: "", yLabel: "", xTicks: 6, yTicks: 5, intX: false, grid: true, zero: true }, opts || {});
-    const { box, w, h, p } = T;
-    ctx.save();
-    ctx.font = "11px 'IBM Plex Sans', system-ui, sans-serif"; ctx.fillStyle = css("--muted"); ctx.strokeStyle = css("--rule"); ctx.lineWidth = 1;
-    const ys = niceStep(box.y1 - box.y0, o.yTicks);
-    ctx.textAlign = "right"; ctx.textBaseline = "middle";
-    for (let y = Math.ceil(box.y0 / ys) * ys; y <= box.y1 + 1e-9; y += ys) {
-      if (o.grid) { ctx.beginPath(); ctx.moveTo(p.l, T.Y(y)); ctx.lineTo(w - p.r, T.Y(y)); ctx.stroke(); }
-      ctx.fillText(fmt(y, 2), p.l - 6, T.Y(y));
-    }
-    let xs = niceStep(box.x1 - box.x0, o.xTicks); if (o.intX) xs = Math.max(1, Math.round(xs));
-    ctx.textAlign = "center"; ctx.textBaseline = "top";
-    for (let x = Math.ceil(box.x0 / xs) * xs; x <= box.x1 + 1e-9; x += xs) {
-      if (o.intX && x < 1) continue;
-      ctx.fillText(fmt(x, 2), T.X(x), h - p.b + 6);
-    }
-    if (o.zero) {
-      ctx.strokeStyle = css("--muted");
-      if (box.y0 < 0 && box.y1 > 0) { ctx.beginPath(); ctx.moveTo(p.l, T.Y(0)); ctx.lineTo(w - p.r, T.Y(0)); ctx.stroke(); }
-      if (box.x0 < 0 && box.x1 > 0) { ctx.beginPath(); ctx.moveTo(T.X(0), p.t); ctx.lineTo(T.X(0), h - p.b); ctx.stroke(); }
-    }
-    if (o.xLabel) { ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(o.xLabel, w - p.r, h - p.b - 3); }
-    if (o.yLabel) { ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(o.yLabel, p.l + 4, p.t); }
-    ctx.restore();
-  }
-  function dot(ctx, x, y, r, fill, stroke) {
-    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
-    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke(); }
-  }
-  function path(ctx, pts, color, width, dash, close, fill) {
-    if (!pts.length) return;
-    ctx.save(); ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
-    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-    if (close) ctx.closePath();
-    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-    if (color) { ctx.strokeStyle = color; ctx.lineWidth = width || 1.5; ctx.setLineDash(dash || []); ctx.stroke(); }
-    ctx.restore();
-  }
-  function circle(ctx, x, y, r, stroke, fill, dash, width) {
-    ctx.save(); ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
-    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = width || 1.5; ctx.setLineDash(dash || []); ctx.stroke(); }
-    ctx.restore();
-  }
-  function rect(ctx, x, y, w, h, stroke, fill, dash) {
-    ctx.save();
-    if (fill) { ctx.fillStyle = fill; ctx.fillRect(x, y, w, h); }
-    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.setLineDash(dash || []); ctx.strokeRect(x, y, w, h); }
-    ctx.restore();
-  }
-  function label(ctx, text, x, y, color, align, base, size) {
-    ctx.save(); ctx.font = (size || 12) + "px 'IBM Plex Sans', system-ui, sans-serif"; ctx.fillStyle = color || css("--ink");
-    ctx.textAlign = align || "left"; ctx.textBaseline = base || "bottom"; ctx.fillText(text, x, y); ctx.restore();
-  }
-  function read(el, rows) {
-    if (typeof el === "string") el = document.getElementById(el);
-    el.innerHTML = rows.map(([k, v, cls]) => `<dt>${k}</dt><dd${cls ? ` class="${cls}"` : ""}>${v}</dd>`).join("");
-  }
-  function out(id, text) { const o = document.getElementById(id); if (o) o.textContent = text; }
-  function radio(name) { const r = document.querySelector(`input[name="${name}"]:checked`); return r ? r.value : null; }
-  function val(id) { return +document.getElementById(id).value; }
-  /* Registra una función de dibujo: se llama al cargar, al cambiar de tamaño o de tema, y cuando cambia cualquiera de los controles listados. */
-  function register(draw, controls) {
-    draws.push(draw);
-    (controls || []).forEach((sel) => {
-      document.querySelectorAll(sel.startsWith("#") || sel.startsWith(".") || sel.startsWith("input") ? sel : "#" + sel).forEach((el) => {
-        el.addEventListener(el.type === "radio" || el.type === "checkbox" ? "change" : "input", () => { try { draw(); } catch (e) { console.error(e); } });
-      });
-    });
-  }
-  function redrawAll() { draws.forEach((d) => { try { d(); } catch (e) { console.error(e); } }); }
-  return { css, fmt, canvas, frame, axes, dot, path, circle, rect, label, read, out, radio, val, register, redrawAll, niceStep };
-})();
-</script>
-
-{{SCRIPTS}}
-
-<script>
-/* Arranque de dibujos y popups del glosario. */
-(() => {
-  "use strict";
-  PP.redrawAll();
-  let pending = 0;
-  const later = () => { cancelAnimationFrame(pending); pending = requestAnimationFrame(PP.redrawAll); };
-  if (window.ResizeObserver) { const ro = new ResizeObserver(later); document.querySelectorAll(".viz canvas").forEach((c) => ro.observe(c)); }
-  window.addEventListener("resize", later);
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", later);
-  new MutationObserver(later).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
-
-  const G = JSON.parse(document.getElementById("glosario").textContent);
-  const pop = document.getElementById("popup");
-  let current = null, hideTimer = 0, shownAt = 0;
-  function render(key) {
-    const g = G[key];
-    if (!g) return `<div class="pop-title">Referencia</div><p>${key}</p>`;
-    const head = [g.tipo, g.numero].filter(Boolean).join(" ");
-    return `<div class="pop-title">${head}</div>${g.titulo ? `<div class="pop-name">${g.titulo}</div>` : ""}${g.enunciado}${g.fuente ? `<div class="pop-src">${g.fuente}</div>` : ""}`;
-  }
-  function place(el) {
-    const r = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
-    let left = Math.min(Math.max(16, r.left), vw - pw - 16);
-    let top = r.bottom + 8;
-    if (top + ph > vh - 12) top = Math.max(12, r.top - ph - 8);
-    pop.style.left = left + "px"; pop.style.top = top + "px";
-  }
-  function show(el) {
-    clearTimeout(hideTimer);
-    if (current === el && !pop.hidden) return;
-    current = el; shownAt = performance.now();
-    pop.innerHTML = render(el.dataset.ref);
-    pop.hidden = false; place(el);
-    if (window.MathJax && MathJax.typesetPromise) {
-      MathJax.typesetClear && MathJax.typesetClear([pop]);
-      MathJax.typesetPromise([pop]).then(() => { if (current === el) place(el); }).catch(() => {});
-    }
-  }
-  function hide(delay) { clearTimeout(hideTimer); hideTimer = setTimeout(() => { pop.hidden = true; current = null; }, delay || 0); }
-  document.querySelectorAll(".ref[data-ref]").forEach((el) => {
-    if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
-    el.setAttribute("role", "button");
-    if (!G[el.dataset.ref]) console.warn("Referencia sin glosario:", el.dataset.ref);
-    el.addEventListener("mouseenter", () => show(el));
-    el.addEventListener("mouseleave", () => hide(180));
-    el.addEventListener("focus", () => show(el));
-    el.addEventListener("blur", () => hide(120));
-    /* El foco (o el mouseenter) ya abre el popup justo antes del clic: un clic inmediato no lo cierra; uno posterior, sí. */
-    el.addEventListener("click", (e) => { e.preventDefault(); if (current === el && !pop.hidden && performance.now() - shownAt > 400) hide(); else show(el); });
-    el.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
-  });
-  pop.addEventListener("mouseenter", () => clearTimeout(hideTimer));
-  pop.addEventListener("mouseleave", () => hide(150));
-  document.addEventListener("click", (e) => { if (!pop.hidden && !pop.contains(e.target) && !(e.target.closest && e.target.closest(".ref"))) hide(); });
-  window.addEventListener("scroll", () => { if (!pop.hidden && current) place(current); }, { passive: true });
-})();
-</script>
+/* ---------- guías: enunciado a la izquierda, dibujo a la derecha ---------- */
+.ej-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); gap: 1.2rem; align-items: start; }
+.ej-grid > * { min-width: 0; }
+@media (max-width: 900px) { .ej-grid { grid-template-columns: minmax(0, 1fr); } }
+.ej .enun ol.items, .ej .enun ul.items { margin-top: 0.4rem; }
+.edicion { font-family: var(--font-ui); font-size: 0.84rem; color: var(--muted); }

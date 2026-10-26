@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root { color-scheme: light dark; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; font: 14px system-ui; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:40;font:13px 'IBM Plex Sans',system-ui,sans-serif;padding:6px 16px;background:Canvas;color:CanvasText;border-bottom:1px solid rgba(128,128,128,.35)"><a href="../index.html#otras" style="color:inherit">← Visualizaciones</a></div>
+<title>No Lipschitz con M_n</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]], macros: { abs: ["\\left|#1\\right|", 1] } },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: una columna. Arriba la idea (monotonía en M), después el laboratorio interactivo (escalera de M_n + gráfico de x·sin(1/x) con el cono de pendiente M), al final las dos direcciones y la trampa x_n = y_n. Misma familia visual que «Subsucesiones». */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --cone: rgba(54, 71, 184, 0.13);
+    --curve: #1a2130;
+    --seq2: #b0532a;
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.14);
+    --fail: #c23a30;
+    --failband: rgba(194, 58, 48, 0.12);
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --cone: rgba(143, 156, 255, 0.18); --curve: #e5e8ef;
+      --seq2: #f0a070; --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63; --failband: rgba(255, 111, 99, 0.15);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --cone: rgba(143, 156, 255, 0.18); --curve: #e5e8ef;
+    --seq2: #f0a070; --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63; --failband: rgba(255, 111, 99, 0.15);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1100px; margin: 0 auto; display: grid; gap: 2.2rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.1; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.45rem; line-height: 1.25; margin: 0 0 0.6rem; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+
+  .card { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 1rem; min-width: 0; }
+  .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; }
+  .enun p:last-child { margin-bottom: 0; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1.2rem; }
+  .pair > div { min-width: 0; }
+
+  .ctrl { display: grid; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.9rem; }
+  .slider { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) 4.4rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .checks { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--muted); }
+  .checks label { display: inline-flex; gap: 0.4rem; align-items: center; cursor: pointer; }
+  input[type="checkbox"] { accent-color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .ladder-wrap { overflow-x: auto; }
+  svg.ladder { display: block; width: 100%; min-width: 520px; height: auto; font-family: var(--font-ui); }
+
+  .lab { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+  @media (max-width: 860px) { .lab { grid-template-columns: minmax(0, 1fr); } }
+  canvas#plot { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); aspect-ratio: 4 / 3; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
+  .sw { display: inline-block; width: 0.9rem; height: 0.6rem; border-radius: 2px; margin-right: 0.3rem; vertical-align: middle; }
+
+  table.read { width: 100%; border-collapse: collapse; font-family: var(--font-ui); font-size: 0.88rem; }
+  table.read td { padding: 0.32rem 0.2rem; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+  table.read td:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  table.read td:first-child { color: var(--muted); }
+  .verdict { font-family: var(--font-ui); font-size: 0.92rem; border-radius: 6px; padding: 0.6rem 0.8rem; margin-top: 0.8rem; line-height: 1.45; }
+  .verdict.ok { background: var(--okband); color: var(--ink); border-left: 3px solid var(--ok); }
+  .verdict.fail { background: var(--failband); color: var(--ink); border-left: 3px solid var(--fail); }
+  .verdict b { font-weight: 600; }
+
+  .nota { font-size: 0.95rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.6rem; margin: 0; }
+  .nota b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+</style>
+
+<main class="page">
+  <header class="intro">
+    <p class="eyebrow">Clase 6 · Ejemplo 3 · Práctica 4 (C6-3)</p>
+    <h1>¿Por qué alcanza con una sucesión $M_n \to \infty$?</h1>
+    <p>Para ver que $f(x) = x \sin(1/x)$ no es Lipschitz cerca de $0$, el apunte cambia «para todo $M &gt; 0$ hay testigos $x_M, y_M$» por «hay testigos $x_n, y_n$ para una sucesión $M_n \to +\infty$». Acá se ve por qué las dos cosas dicen lo mismo, con los testigos del apunte:</p>
+    $$x_n = \frac{1}{\frac{\pi}{2} + 2\pi n}, \qquad y_n = \frac{1}{\frac{3\pi}{2} + 2\pi n}, \qquad M_n = 2 + 4n.$$
+  </header>
+
+  <section class="card">
+    <div class="enun">
+      <p class="lbl">La idea</p>
+      <p>Llamemos $P(M)$ a «existen $x, y \in I$ con $\abs{f(x) - f(y)} &gt; M \abs{x - y}$». Si $P(M)$ vale, vale $P(M')$ para todo $M' \le M$, con <em>los mismos</em> testigos. El conjunto de los $M$ donde vale $P$ es un intervalo que arranca en $0$. Para que sea todo $(0, +\infty)$ alcanza con que no esté acotado, y eso es lo que da una sucesión $M_n \to +\infty$.</p>
+    </div>
+
+    <div class="ctrl">
+      <div class="slider">
+        <label for="mSlider">$M$ (el que pide el «para todo»)</label>
+        <input type="range" id="mSlider" min="0.5" max="54" step="0.5" value="13">
+        <output id="mOut">13.0</output>
+      </div>
+      <div class="slider">
+        <label for="nSlider">$n$ (testigo usado)</label>
+        <input type="range" id="nSlider" min="0" max="13" step="1" value="3">
+        <output id="nOut">3</output>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" id="auto" checked> elegir el primer $n$ con $M_n &gt; M$</label>
+        <label><input type="checkbox" id="trap"> trampa: tomar $y_n = x_n$</label>
+      </div>
+    </div>
+
+    <div>
+      <p class="lbl">Escalera de valores $M_n = 2 + 4n$</p>
+      <div class="ladder-wrap"><svg class="ladder" id="ladder" viewBox="0 0 820 120" role="img" aria-label="Recta de M con los valores M_n marcados"></svg></div>
+    </div>
+
+    <div class="lab">
+      <div>
+        <canvas id="plot" aria-label="Gráfico de x sin(1/x) cerca de los testigos"></canvas>
+        <div class="legend">
+          <span><span class="sw" style="background: var(--curve)"></span>$f(x) = x\sin(1/x)$</span>
+          <span><span class="sw" style="background: var(--cone)"></span>cono de pendiente $\pm M$ en $(x_n, f(x_n))$</span>
+          <span><span class="sw" style="background: var(--seq2)"></span>secante, pendiente $M_n$</span>
+        </div>
+      </div>
+      <div>
+        <p class="lbl">Números</p>
+        <table class="read"><tbody id="readout"></tbody></table>
+        <div id="verdict" class="verdict ok"></div>
+      </div>
+    </div>
+    <p class="nota"><b>Cómo leer el gráfico</b>Si $f$ fuera $M$-Lipschitz, todo el gráfico estaría dentro del cono sombreado (las rectas de pendiente $\pm M$ por el punto $(x_n, f(x_n))$). El testigo funciona cuando el otro punto $(y_n, f(y_n))$ queda afuera. La ventana se achica al subir $n$ porque $x_n, y_n \to 0$, y por eso están en $I = (a, b)$ para $n$ grande.</p>
+  </section>
+
+  <section class="pair">
+    <div class="card">
+      <div class="enun">
+        <p class="lbl">(⇒) Del «para todo $M$» a las sucesiones</p>
+        <p>Si para todo $M &gt; 0$ hay testigos, en particular los hay para cada $M_n$. Se define $x_n := x_{M_n}$, $y_n := y_{M_n}$. La desigualdad estricta implica la $\ge$, y $x_n \ne y_n$ porque con $x = y$ la estricta da $0 &gt; 0$.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="enun">
+        <p class="lbl">(⇐) De las sucesiones al «para todo $M$»</p>
+        <p>Dado $M &gt; 0$, como $M_n \to +\infty$ existe $n$ con $M_n &gt; M$. Si $x_n \ne y_n$,</p>
+        $$\abs{f(x_n) - f(y_n)} \ge M_n \abs{x_n - y_n} &gt; M \abs{x_n - y_n},$$
+        <p>así que $x_M := x_n$, $y_M := y_n$ sirven. Es lo que hace el modo automático de arriba.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="enun" style="border-left-color: var(--fail)">
+      <p class="lbl">La trampa: hace falta $x_n \ne y_n$</p>
+      <p>Con $y_n = x_n$ la condición $\abs{f(x_n) - f(y_n)} \ge M_n \abs{x_n - y_n}$ queda $0 \ge 0$, que vale para <em>cualquier</em> $f$, incluso para una constante. No prueba nada. El paso de $\ge M_n$ a $&gt; M$ usa $\abs{x_n - y_n} &gt; 0$. Activá la casilla «trampa» arriba para verlo. Con $x_n \ne y_n$ la condición dice que los cocientes incrementales no están acotados:</p>
+      $$\frac{\abs{f(x_n) - f(y_n)}}{\abs{x_n - y_n}} \ge M_n \longrightarrow +\infty.$$
+      <p>En este ejemplo el cociente da exactamente $2 + 4n$.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+
+  const $ = (id) => document.getElementById(id);
+  const mSlider = $("mSlider"), nSlider = $("nSlider"), autoBox = $("auto"), trapBox = $("trap");
+  const canvas = $("plot"), ladder = $("ladder");
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const NMAX = 13;
+
+  const f = (x) => (x === 0 ? 0 : x * Math.sin(1 / x));
+  const xn = (n) => 1 / (Math.PI / 2 + 2 * Math.PI * n);
+  const yn = (n) => 1 / (3 * Math.PI / 2 + 2 * Math.PI * n);
+  const Mn = (n) => 2 + 4 * n;
+  const firstN = (M) => Math.min(NMAX, M < 2 ? 0 : Math.floor((M - 2) / 4) + 1);
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const fmt = (v) => (v === 0 ? "0" : Math.abs(v) >= 0.01 ? v.toFixed(4) : v.toExponential(3));
+
+  function state() {
+    const M = parseFloat(mSlider.value);
+    if (autoBox.checked) nSlider.value = firstN(M);
+    const n = parseInt(nSlider.value, 10);
+    const trap = trapBox.checked;
+    return { M, n, trap, x: xn(n), y: trap ? xn(n) : yn(n) };
+  }
+
+  function drawLadder(s) {
+    ladder.replaceChildren();
+    const L = 40, R = 790, AX = 70, MAXM = 56;
+    const sx = (m) => L + (m / MAXM) * (R - L);
+    const el = (tag, attrs, text) => {
+      const e = document.createElementNS(SVGNS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      ladder.appendChild(e);
+      return e;
+    };
+    const ok = !s.trap && Mn(s.n) > s.M;
+    // franja de M cubiertos por el testigo actual: [0, M_n)
+    if (!s.trap) el("rect", { x: sx(0), y: AX - 14, width: sx(Mn(s.n)) - sx(0), height: 28, fill: ok ? css("--okband") : css("--band") });
+    el("line", { x1: L, x2: R, y1: AX, y2: AX, stroke: css("--muted"), "stroke-width": 1.2 });
+    for (let m = 0; m <= 50; m += 10) {
+      el("line", { x1: sx(m), x2: sx(m), y1: AX + 4, y2: AX + 9, stroke: css("--muted") });
+      el("text", { x: sx(m), y: AX + 24, "text-anchor": "middle", "font-size": 12, fill: css("--muted") }, m);
+    }
+    for (let n = 0; n <= NMAX; n++) {
+      const sel = n === s.n;
+      el("circle", { cx: sx(Mn(n)), cy: AX, r: sel ? 6 : 3.6, fill: sel ? css("--seq2") : css("--panel"), stroke: css("--seq2"), "stroke-width": 1.6 });
+      if (sel || n < 4) el("text", { x: sx(Mn(n)), y: AX - 22, "text-anchor": "middle", "font-size": 12, fill: sel ? css("--seq2") : css("--muted"), "font-weight": sel ? 600 : 400 }, `M${sub(n)}`);
+    }
+    // marcador de M
+    el("line", { x1: sx(s.M), x2: sx(s.M), y1: AX - 34, y2: AX + 12, stroke: css("--accent"), "stroke-width": 2 });
+    el("text", { x: sx(s.M), y: AX - 40, "text-anchor": "middle", "font-size": 13, fill: css("--accent"), "font-weight": 600 }, "M");
+    el("text", { x: R, y: 112, "text-anchor": "end", "font-size": 12, fill: css("--muted") },
+      s.trap ? "con yₙ = xₙ el testigo no cubre ningún M" : `el testigo n = ${s.n} sirve para todo M < M${sub(s.n)} = ${Mn(s.n)}`);
+  }
+  const sub = (n) => String(n).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[d]).join("");
+
+  function drawPlot(s) {
+    const dpr = window.devicePixelRatio || 1;
+    const W = canvas.clientWidth, H = canvas.clientHeight;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    const g = canvas.getContext("2d");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, W, H);
+
+    const X = xn(s.n);
+    const x0 = -0.25 * X, x1 = 1.4 * X, y0 = -1.25 * X, y1 = 1.25 * X;
+    const px = (x) => ((x - x0) / (x1 - x0)) * W;
+    const py = (y) => H - ((y - y0) / (y1 - y0)) * H;
+
+    // cono de pendiente ±M por P
+    const P = { x: s.x, y: f(s.x) };
+    g.fillStyle = css("--cone");
+    for (const xe of [x0, x1]) {
+      g.beginPath();
+      g.moveTo(px(P.x), py(P.y));
+      g.lineTo(px(xe), py(P.y + s.M * (xe - P.x)));
+      g.lineTo(px(xe), py(P.y - s.M * (xe - P.x)));
+      g.closePath(); g.fill();
+    }
+
+    // ejes
+    g.strokeStyle = css("--rule"); g.lineWidth = 1;
+    g.beginPath(); g.moveTo(px(x0), py(0)); g.lineTo(px(x1), py(0)); g.moveTo(px(0), py(y0)); g.lineTo(px(0), py(y1)); g.stroke();
+
+    // envolvente ±x
+    g.setLineDash([4, 4]); g.strokeStyle = css("--muted"); g.lineWidth = 1;
+    g.beginPath(); g.moveTo(px(x0), py(-Math.abs(x0))); g.lineTo(px(0), py(0)); g.lineTo(px(x1), py(-x1));
+    g.moveTo(px(x0), py(Math.abs(x0))); g.lineTo(px(0), py(0)); g.lineTo(px(x1), py(x1)); g.stroke();
+    g.setLineDash([]);
+
+    // f
+    g.strokeStyle = css("--curve"); g.lineWidth = 1.6; g.beginPath();
+    const N = 4000;
+    for (let i = 0; i <= N; i++) {
+      const x = x0 + ((x1 - x0) * i) / N;
+      const X_ = px(x), Y_ = py(f(x));
+      i ? g.lineTo(X_, Y_) : g.moveTo(X_, Y_);
+    }
+    g.stroke();
+
+    const Q = { x: s.y, y: f(s.y) };
+    const ok = !s.trap && Mn(s.n) > s.M;
+    // secante
+    if (!s.trap) {
+      g.strokeStyle = css("--seq2"); g.lineWidth = 2.4;
+      g.beginPath(); g.moveTo(px(P.x), py(P.y)); g.lineTo(px(Q.x), py(Q.y)); g.stroke();
+    }
+    // puntos
+    const dot = (pt, color, label, dy) => {
+      g.fillStyle = color; g.beginPath(); g.arc(px(pt.x), py(pt.y), 5.5, 0, 2 * Math.PI); g.fill();
+      g.font = `600 13px ${css("--font-ui")}`; g.textAlign = "center";
+      g.fillText(label, px(pt.x), py(pt.y) + dy);
+    };
+    dot(P, css("--accent"), "(xₙ, f(xₙ))", -12);
+    if (!s.trap) dot(Q, ok ? css("--ok") : css("--fail"), "(yₙ, f(yₙ))", 22);
+  }
+
+  function readout(s) {
+    const df = Math.abs(f(s.x) - f(s.y)), dx = Math.abs(s.x - s.y);
+    const rows = [
+      ["n", s.n],
+      ["xₙ", fmt(s.x)],
+      ["yₙ", fmt(s.y)],
+      ["|f(xₙ) − f(yₙ)|", fmt(df)],
+      [`Mₙ·|xₙ − yₙ|   (Mₙ = ${Mn(s.n)})`, fmt(Mn(s.n) * dx)],
+      [`M·|xₙ − yₙ|   (M = ${s.M.toFixed(1)})`, fmt(s.M * dx)],
+      ["cociente |Δf| / |Δx|", dx === 0 ? "0/0" : (df / dx).toFixed(3)],
+    ];
+    $("readout").replaceChildren(...rows.map(([k, v]) => {
+      const tr = document.createElement("tr");
+      const a = document.createElement("td"), b = document.createElement("td");
+      a.textContent = k; b.textContent = v; tr.append(a, b); return tr;
+    }));
+    const v = $("verdict");
+    if (s.trap) {
+      v.className = "verdict fail";
+      v.innerHTML = "<b>0 ≥ Mₙ · 0 vale, pero 0 &gt; M · 0 no.</b> Con yₙ = xₙ la condición con ≥ se cumple para cualquier f y no sirve como testigo para ningún M.";
+    } else if (Mn(s.n) > s.M) {
+      v.className = "verdict ok";
+      v.innerHTML = `<b>Testigo válido para M = ${s.M.toFixed(1)}.</b> Como Mₙ = ${Mn(s.n)} &gt; M y xₙ ≠ yₙ, |f(xₙ) − f(yₙ)| ≥ Mₙ|xₙ − yₙ| &gt; M|xₙ − yₙ|. El punto (yₙ, f(yₙ)) queda fuera del cono.`;
+    } else {
+      v.className = "verdict fail";
+      v.innerHTML = `<b>Este n es chico para M = ${s.M.toFixed(1)}.</b> Mₙ = ${Mn(s.n)} ≤ M, así que la secante entra en el cono. Hay que subir n: como Mₙ → ∞, siempre hay uno que sirve.`;
+    }
+  }
+
+  function render() {
+    const s = state();
+    $("mOut").textContent = s.M.toFixed(1);
+    $("nOut").textContent = s.n;
+    drawLadder(s); drawPlot(s); readout(s);
+  }
+
+  mSlider.addEventListener("input", render);
+  nSlider.addEventListener("input", () => { autoBox.checked = false; render(); });
+  autoBox.addEventListener("change", render);
+  trapBox.addEventListener("change", render);
+  window.addEventListener("resize", render);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  render();
+</script>
+
+</body>
+</html>

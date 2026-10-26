@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root { color-scheme: light dark; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; font: 14px system-ui; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:40;font:13px 'IBM Plex Sans',system-ui,sans-serif;padding:6px 16px;background:Canvas;color:CanvasText;border-bottom:1px solid rgba(128,128,128,.35)"><a href="../index.html#otras" style="color:inherit">← Visualizaciones</a></div>
+<title>¿Por qué x² no es uniformemente continua?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: una columna de lectura (~68ch) y un laboratorio interactivo más ancho arriba, como una hoja de práctica con un gráfico pegado. */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --ok: #1d8556;
+    --fail: #c23a30;
+    --curve: #1a2130;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.12); --ok: #4cc38a; --fail: #ff6f63; --curve: #e5e8ef;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.12); --ok: #4cc38a; --fail: #ff6f63; --curve: #e5e8ef;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.09rem;
+    line-height: 1.62;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 4rem;
+  }
+  .wrap { max-width: 68ch; margin: 0 auto; }
+  .wide { max-width: 1060px; margin: 0 auto; }
+
+  header .eyebrow {
+    font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 0.4rem;
+  }
+  h1 { font-size: clamp(1.8rem, 4.2vw, 2.6rem); line-height: 1.15; margin: 0 0 0.8rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.45rem; line-height: 1.25; margin: 2.6rem 0 0.6rem; font-weight: 600; text-wrap: balance; }
+  h3 { font-family: var(--font-ui); font-size: 1rem; margin: 1.6rem 0 0.3rem; font-weight: 600; }
+  p { margin: 0 0 1rem; }
+  .lead { font-size: 1.18rem; color: var(--ink); }
+  a { color: var(--accent); }
+
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.2rem; }
+
+  /* ---------- laboratorio ---------- */
+  .lab {
+    margin: 2rem auto 1rem; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 1.1rem; display: grid; gap: 1rem;
+    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    font-family: var(--font-ui); font-size: 0.92rem;
+  }
+  @media (max-width: 820px) { .lab { grid-template-columns: minmax(0, 1fr); } }
+  .lab figure { margin: 0; display: grid; gap: 0.3rem; min-width: 0; }
+  .lab figcaption { color: var(--muted); font-size: 0.82rem; }
+  canvas { width: 100%; display: block; border-radius: 6px; }
+  #cv-main { aspect-ratio: 16 / 10; }
+  #cv-zoom { aspect-ratio: 1 / 1; }
+  #cv-delta { aspect-ratio: 16 / 5; }
+  .col { display: grid; gap: 1rem; align-content: start; min-width: 0; }
+
+  .status {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.75rem; border-radius: 6px;
+    border: 1px solid var(--rule); font-weight: 500;
+  }
+  .status .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; flex: none; }
+  .status.ok .dot { background: var(--ok); }
+  .status.fail .dot { background: var(--fail); }
+  .status.ok { color: var(--ok); }
+  .status.fail { color: var(--fail); }
+
+  .controls { display: grid; gap: 0.75rem; }
+  .fn-pick { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; }
+  .fn-pick legend { font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+  .fn-pick label {
+    cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.28rem 0.8rem;
+    font-family: var(--font-mono); font-size: 0.86rem;
+  }
+  .fn-pick input { position: absolute; opacity: 0; pointer-events: none; }
+  .fn-pick input:checked + span { color: var(--accent); }
+  .fn-pick label:has(input:checked) { border-color: var(--accent); background: var(--band); }
+  .fn-pick label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .slider { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) 4.2rem; align-items: center; gap: 0.6rem; }
+  .slider label { font-family: var(--font-body); font-style: italic; font-size: 1.1rem; }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+  .readout { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 0.15rem 1rem; font-family: var(--font-mono); font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+  .readout dt { color: var(--muted); }
+  .readout dd { margin: 0; }
+
+  button {
+    font: inherit; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid var(--accent);
+    border-radius: 6px; padding: 0.4rem 0.9rem; cursor: pointer; justify-self: start;
+  }
+  button:hover { background: var(--band); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .full { grid-column: 1 / -1; }
+
+  /* ---------- texto ---------- */
+  .defs { display: grid; gap: 0.9rem; margin: 1rem 0 1.2rem; }
+  .def { border-left: 3px solid var(--rule); padding: 0.2rem 0 0.2rem 1rem; }
+  .def.uc { border-left-color: var(--accent); }
+  .def .tag { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+  .hl { color: var(--accent); font-weight: 600; }
+  .note { font-size: 0.97rem; color: var(--muted); }
+  .compare { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.97rem; }
+  th, td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+</style>
+
+<header class="wrap">
+  <p class="eyebrow">Análisis Avanzado · Práctica 4 · Ejemplo 5.17 a)</p>
+  <h1>¿Por qué $x^2$ no es uniformemente continua?</h1>
+  <p class="lead">
+    $f(x) = x^2$ es continua en cada punto de $\mathbb{R}$ y sin embargo no es uniformemente continua.
+    No hay contradicción: las dos definiciones piden casi lo mismo, pero con los cuantificadores en otro orden.
+    Probalo abajo moviendo $x_0$ con $\varepsilon$ y $\delta$ fijos.
+  </p>
+</header>
+
+<section class="wide lab" aria-label="Laboratorio interactivo">
+  <figure>
+    <canvas id="cv-main" role="img" aria-label="Gráfico de la función con la caja epsilon-delta centrada en x0"></canvas>
+    <figcaption>La franja horizontal es $B(f(x_0), \varepsilon)$. La caja tiene ancho $2\delta$ y alto $2\varepsilon$. El tramo de curva resaltado es $f(B(x_0, \delta))$.</figcaption>
+  </figure>
+
+  <div class="col">
+    <div class="status ok" id="status" aria-live="polite"><span class="dot"></span><span id="status-text"></span></div>
+
+    <figure>
+      <canvas id="cv-zoom" role="img" aria-label="Lupa sobre la caja epsilon-delta"></canvas>
+      <figcaption>Lupa sobre la caja: siempre muestra la misma proporción de $\delta$ y $\varepsilon$, así se ve si la curva se escapa por arriba o por abajo.</figcaption>
+    </figure>
+  </div>
+
+  <div class="controls">
+    <fieldset class="fn-pick">
+      <legend>Función</legend>
+      <label><input type="radio" name="fn" id="fn-x2" value="x2" checked><span>x²</span></label>
+      <label><input type="radio" name="fn" id="fn-sin" value="sin"><span>sen(x)</span></label>
+      <label><input type="radio" name="fn" id="fn-sqrt" value="sqrt"><span>√x en [0,∞)</span></label>
+      <label><input type="radio" name="fn" id="fn-inv" value="inv"><span>1/x en (0,∞)</span></label>
+    </fieldset>
+    <div class="slider"><label for="s-eps">ε</label><input type="range" id="s-eps" min="0.05" max="1.5" step="0.01" value="0.5"><output id="o-eps" for="s-eps"></output></div>
+    <div class="slider"><label for="s-del">δ</label><input type="range" id="s-del" min="0.01" max="1" step="0.005" value="0.3"><output id="o-del" for="s-del"></output></div>
+    <div class="slider"><label for="s-x0">x₀</label><input type="range" id="s-x0" min="-6" max="6" step="0.01" value="0.5"><output id="o-x0" for="s-x0"></output></div>
+    <button type="button" id="sweep">Barrer x₀ de punta a punta</button>
+  </div>
+
+  <dl class="readout" aria-live="polite">
+    <dt>δ_max(x₀)</dt><dd id="r-here"></dd>
+    <dt>fórmula</dt><dd id="r-formula"></dd>
+    <dt>mín. en la ventana</dt><dd id="r-min"></dd>
+    <dt>ínfimo en el dominio</dt><dd id="r-inf"></dd>
+  </dl>
+
+  <figure class="full">
+    <canvas id="cv-delta" role="img" aria-label="Gráfico de delta máximo en función de x0"></canvas>
+    <figcaption>Para cada $x_0$, el $\delta$ más grande que funciona en ese punto, $\delta_{\max}(x_0)$. La línea punteada es el $\delta$ elegido. En rojo, los $x_0$ donde ese $\delta$ no alcanza.</figcaption>
+  </figure>
+</section>
+
+<main class="wrap">
+  <h2>Cómo leer el laboratorio</h2>
+  <p>
+    Una caja de ancho $2\delta$ y alto $2\varepsilon$ centrada en $(x_0, f(x_0))$ <span class="hl">funciona</span> si el gráfico de $f$
+    sobre $(x_0 - \delta, x_0 + \delta)$ entra y sale por los costados de la caja, sin escaparse por arriba ni por abajo.
+    Eso es exactamente
+    $$ f(B(x_0, \delta)) \subseteq B(f(x_0), \varepsilon). $$
+    Para cada punto hay un $\delta$ máximo que funciona:
+    $$ \delta_{\max}(x_0) = \sup\{\delta > 0 : f(B(x_0, \delta)) \subseteq B(f(x_0), \varepsilon)\}. $$
+    Cualquier $\delta$ menor que $\delta_{\max}(x_0)$ también funciona en $x_0$ (una caja más angosta cubre menos curva).
+    El gráfico de abajo del laboratorio dibuja esa cantidad para todos los $x_0$.
+  </p>
+
+  <h2>Las dos definiciones, lado a lado</h2>
+  <div class="defs">
+    <div class="def">
+      <div class="tag">Continua en todo $M$ (Definición 5.4)</div>
+      $$ \forall x \in M \;\; \forall \varepsilon > 0 \;\; \exists \delta > 0 \;\; \forall y \in M \;:\; d(x, y) < \delta \implies d'(f(x), f(y)) < \varepsilon. $$
+      El $\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\varepsilon$.
+    </div>
+    <div class="def uc">
+      <div class="tag">Uniformemente continua (Definición 5.14)</div>
+      $$ \forall \varepsilon > 0 \;\; \exists \delta > 0 \;\; \forall x \in M \;\; \forall y \in M \;:\; d(x, y) < \delta \implies d'(f(x), f(y)) < \varepsilon. $$
+      El $\delta$ se elige <em>antes</em> de conocer el punto: depende sólo de $\varepsilon$ y tiene que servir en todos lados.
+    </div>
+  </div>
+  <p>Traducido al gráfico de $\delta_{\max}$:</p>
+  $$ f \text{ continua} \iff \delta_{\max}(x_0) > 0 \text{ para todo } x_0, \qquad f \text{ unif. continua} \iff \inf_{x_0 \in M} \delta_{\max}(x_0) > 0. $$
+  <p>
+    Si el ínfimo es un número $c > 0$, el $\delta = c/2$ sirve en todos los puntos. Si el ínfimo es $0$, cualquier $\delta$
+    que propongas falla en algún punto donde $\delta_{\max}$ es más chico que él.
+    Una función continua tiene la curva de $\delta_{\max}$ siempre por encima de $0$, pero puede <em>acercarse</em> a $0$ tanto como quiera.
+  </p>
+
+  <h2>La cuenta para $x^2$</h2>
+  <p>Tomemos $x_0 \geq 0$ (el caso $x_0 < 0$ es simétrico). Lo que se mueve $f$ entre dos puntos es</p>
+  $$ \lvert x^2 - y^2 \rvert = \lvert x + y \rvert \cdot \lvert x - y \rvert. $$
+  <p>
+    La distancia $\lvert x - y \rvert$ se multiplica por $\lvert x + y \rvert$, que es más o menos $2\lvert x_0 \rvert$: cuanto más lejos del origen,
+    más estira $f$ las distancias. A la derecha de $x_0$ la curva sube más rápido, así que es ese lado el que se escapa primero por arriba de la caja.
+    El borde es cuando $(x_0 + \delta)^2 - x_0^2 = \varepsilon$:
+  </p>
+  $$ 2x_0\delta + \delta^2 = \varepsilon \quad\Longrightarrow\quad \delta_{\max}(x_0) = \sqrt{x_0^2 + \varepsilon} - \lvert x_0 \rvert = \frac{\varepsilon}{\sqrt{x_0^2 + \varepsilon} + \lvert x_0 \rvert}. $$
+  <p>
+    (Del lado izquierdo, $x_0^2 - (x_0 - \delta)^2 = 2x_0\delta - \delta^2$, que es menor que $\varepsilon$ con ese mismo $\delta$.)
+    Este número es positivo para cada $x_0$, y eso es la continuidad. Pero
+  </p>
+  $$ \delta_{\max}(x_0) \approx \frac{\varepsilon}{2\lvert x_0 \rvert} \xrightarrow[\;\lvert x_0 \rvert \to \infty\;]{} 0, \qquad\text{así que}\qquad \inf_{x_0 \in \mathbb{R}} \delta_{\max}(x_0) = 0. $$
+  <p>
+    No hay un $\delta$ común: dado cualquier $\delta > 0$, alcanza con ir a un $x_0$ con $\delta_{\max}(x_0) < \delta$, y ahí la caja se rompe.
+    En el laboratorio, con $x^2$ elegida, dejá $\varepsilon$ y $\delta$ quietos y apretá «Barrer»: la caja es verde cerca de $0$ y se pone roja a los costados.
+  </p>
+
+  <h3>La misma idea, con la cuenta del Ejemplo 5.17 a)</h3>
+  <p>
+    El apunte toma $\varepsilon = 1$, un $\delta > 0$ cualquiera, $y = x + \delta/2$ y $x > 1/\delta$:
+  </p>
+  $$ \lvert x - y \rvert = \frac{\delta}{2} < \delta, \qquad \lvert f(x) - f(y) \rvert = \delta \left\lvert x + \frac{\delta}{4} \right\rvert \geq \delta x > 1 = \varepsilon. $$
+  <p>
+    Es el mismo fenómeno: para cada caja de ancho $2\delta$ hay un $x$ lo suficientemente grande (más allá de $1/\delta$) donde la caja
+    de alto $2$ ya no alcanza.
+  </p>
+
+  <h3>Con sucesiones (Proposición 5.18)</h3>
+  <p>Tomando $x_n = n$ e $y_n = n + \tfrac{1}{n}$, los puntos se acercan entre sí pero sus imágenes no:</p>
+  $$ \lvert x_n - y_n \rvert = \frac{1}{n} \to 0, \qquad \lvert f(x_n) - f(y_n) \rvert = 2 + \frac{1}{n^2} \geq 2. $$
+  <p>
+    Cada par $(x_n, y_n)$ está pegado, pero el par se va hacia donde $f$ estira mucho, así que la distancia entre las imágenes no baja de $2$.
+    Para una función uniformemente continua eso no puede pasar.
+  </p>
+
+  <h2>Comparación con otras funciones</h2>
+  <p>El laboratorio tiene tres funciones más. Cambiá de función y mirá qué hace la curva de $\delta_{\max}$.</p>
+  <div class="compare">
+    <table>
+      <thead><tr><th>Función</th><th>$\delta_{\max}(x_0)$</th><th>Ínfimo</th><th>¿Unif. continua?</th></tr></thead>
+      <tbody>
+        <tr><td>$x^2$ en $\mathbb{R}$</td><td>$\dfrac{\varepsilon}{\sqrt{x_0^2+\varepsilon}+\lvert x_0\rvert}$</td><td>$0$ (en $\pm\infty$)</td><td>No</td></tr>
+        <tr><td>$\operatorname{sen}(x)$ en $\mathbb{R}$</td><td>$\geq \varepsilon$ (es Lipschitz de constante $1$)</td><td>$> 0$</td><td>Sí</td></tr>
+        <tr><td>$\sqrt{x}$ en $[0,\infty)$</td><td>$2\varepsilon\sqrt{x_0} - \varepsilon^2$ si $\sqrt{x_0} \geq \varepsilon$; si no, $2\varepsilon\sqrt{x_0} + \varepsilon^2$</td><td>$\varepsilon^2$</td><td>Sí</td></tr>
+        <tr><td>$1/x$ en $(0,\infty)$</td><td>$\dfrac{\varepsilon x_0^2}{1+\varepsilon x_0}$</td><td>$0$ (en $0^+$)</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    <strong>$\operatorname{sen}(x)$.</strong> Por valor medio, $\lvert \operatorname{sen}(x) - \operatorname{sen}(y) \rvert \leq \lvert x - y \rvert$,
+    así que $\delta = \varepsilon$ funciona en todos los puntos. La pendiente está acotada por $1$ y $f$ nunca estira las distancias más que eso.
+  </p>
+  <p>
+    <strong>$\sqrt{x}$.</strong> Cerca de $0$ la pendiente explota y por eso no es Lipschitz (Ejemplo 5.26 b)), pero igual es uniformemente continua
+    (Ejercicio 5.27): de la sugerencia sale $\lvert \sqrt{x} - \sqrt{y} \rvert \leq \sqrt{\lvert x - y \rvert}$, así que $\delta = \varepsilon^2$ sirve en todos lados.
+    En el gráfico, la curva de $\delta_{\max}$ baja cerca de $0$ pero nunca por debajo de $\varepsilon^2$.
+  </p>
+  <p>
+    <strong>$1/x$.</strong> Le pasa lo mismo que a $x^2$ pero en el otro extremo: la pendiente $-1/x^2$ explota cuando $x \to 0^+$,
+    y ahí $\delta_{\max}$ se va a $0$. Es el contraejemplo del Ejercicio 13 de la Práctica 4.
+  </p>
+
+  <h2>Resumen</h2>
+  <p>
+    Continuidad mira un punto por vez: en cada punto hay alguna caja que funciona, aunque en algunos puntos tenga que ser muy angosta.
+    Continuidad uniforme pide una sola caja, de un ancho fijo, que funcione deslizándola por todo el dominio.
+    $x^2$ falla porque su pendiente $2x$ no está acotada: lejos del origen, cualquier ancho fijo termina siendo demasiado grande.
+    Si la miráramos sólo en un intervalo acotado como $[-R, R]$, la pendiente quedaría acotada por $2R$ y $x^2$ sí sería uniformemente continua (es Lipschitz ahí).
+  </p>
+  <p class="note">Las referencias (Definición 5.4, 5.14, Proposición 5.18, Ejemplos 5.17 y 5.26, Ejercicio 5.27) son a las notas de la materia transcriptas en <code>apuntes-typst/</code>.</p>
+</main>
+
+<script>
+(() => {
+  // δ_max numérico para funciones sin fórmula cerrada: bisección sobre la oscilación muestreada.
+  function numericDeltaMax(f, x0, eps, lo = -Infinity, cap = 12) {
+    const osc = (d) => {
+      const a = Math.max(x0 - d, lo), b = x0 + d, n = 160;
+      const y0 = f(x0); let m = 0;
+      for (let i = 0; i <= n; i++) { const v = Math.abs(f(a + (b - a) * i / n) - y0); if (v > m) m = v; }
+      return m;
+    };
+    if (osc(cap) < eps) return Infinity;
+    let a = 0, b = cap;
+    for (let i = 0; i < 32; i++) { const m = (a + b) / 2; if (osc(m) < eps) a = m; else b = m; }
+    return a;
+  }
+
+  const FNS = {
+    x2: {
+      f: (x) => x * x, view: [-6, 6], lo: -Infinity,
+      dmax: (x0, e) => e / (Math.sqrt(x0 * x0 + e) + Math.abs(x0)),
+      formula: "ε / (√(x₀²+ε) + |x₀|)",
+      inf: () => "0  →  no es unif. continua",
+    },
+    sin: {
+      f: Math.sin, view: [-7, 7], lo: -Infinity,
+      dmax: (x0, e) => numericDeltaMax(Math.sin, x0, e),
+      formula: "numérico (≥ ε)",
+      inf: (e) => "≥ " + e.toFixed(3) + "  →  unif. continua",
+    },
+    sqrt: {
+      f: Math.sqrt, view: [0, 9], lo: 0,
+      dmax: (x0, e) => {
+        const r = Math.sqrt(x0);
+        const right = 2 * e * r + e * e;
+        const left = r >= e ? 2 * e * r - e * e : Infinity;
+        return Math.min(right, left);
+      },
+      formula: "2ε√x₀ ∓ ε²",
+      inf: (e) => "ε² = " + (e * e).toFixed(4) + "  →  unif. continua",
+    },
+    inv: {
+      f: (x) => 1 / x, view: [0.04, 5], lo: 0, ylim: [0, 9],
+      dmax: (x0, e) => (e * x0 * x0) / (1 + e * x0),
+      formula: "εx₀² / (1 + εx₀)",
+      inf: () => "0  →  no es unif. continua",
+    },
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const sEps = $("s-eps"), sDel = $("s-del"), sX0 = $("s-x0");
+  const cvMain = $("cv-main"), cvZoom = $("cv-zoom"), cvDelta = $("cv-delta");
+  let key = "x2";
+  let curve = null; // cache de δ_max sobre la ventana: depende de función y ε
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement);
+    const g = (n) => cs.getPropertyValue(n).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"),
+             ok: g("--ok"), fail: g("--fail"), curve: g("--curve"), panel: g("--panel"), mono: g("--font-mono") };
+  }
+
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+
+  // Ejes con escala lineal; devuelve funciones de mapeo.
+  function frame(ctx, w, h, xr, yr, C, pad = { l: 40, r: 10, t: 10, b: 24 }, ticks = true) {
+    const X = (x) => pad.l + (x - xr[0]) / (xr[1] - xr[0]) * (w - pad.l - pad.r);
+    const Y = (y) => h - pad.b - (y - yr[0]) / (yr[1] - yr[0]) * (h - pad.t - pad.b);
+    ctx.fillStyle = C.panel; ctx.fillRect(0, 0, w, h);
+    ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted; ctx.strokeStyle = C.rule; ctx.lineWidth = 1;
+    if (ticks) {
+      for (const [t, horiz] of [...niceTicks(xr).map((t) => [t, false]), ...niceTicks(yr).map((t) => [t, true])]) {
+        ctx.beginPath();
+        if (horiz) { ctx.moveTo(pad.l, Y(t)); ctx.lineTo(w - pad.r, Y(t)); }
+        else { ctx.moveTo(X(t), pad.t); ctx.lineTo(X(t), h - pad.b); }
+        ctx.stroke();
+        ctx.textAlign = horiz ? "right" : "center"; ctx.textBaseline = horiz ? "middle" : "top";
+        const label = fmt(t);
+        if (horiz) ctx.fillText(label, pad.l - 5, Y(t)); else ctx.fillText(label, X(t), h - pad.b + 5);
+      }
+    }
+    return { X, Y, pad };
+  }
+  function niceTicks([a, b], n = 6) {
+    const raw = (b - a) / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 2, 5, 10].map((m) => m * mag).find((s) => s >= raw);
+    const out = []; for (let t = Math.ceil(a / step) * step; t <= b + 1e-9; t += step) out.push(+t.toFixed(10));
+    return out;
+  }
+  const fmt = (t) => (Math.abs(t) >= 100 ? t.toFixed(0) : +t.toFixed(2)).toString();
+
+  function plotFn(ctx, F, X, Y, a, b, yClip, style, width) {
+    ctx.strokeStyle = style; ctx.lineWidth = width; ctx.beginPath();
+    let pen = false; const n = 600;
+    for (let i = 0; i <= n; i++) {
+      const x = a + (b - a) * i / n; const y = F.f(x);
+      if (!isFinite(y) || y < yClip[0] - 50 || y > yClip[1] + 50) { pen = false; continue; }
+      pen ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)); pen = true;
+    }
+    ctx.stroke();
+  }
+
+  function computeCurve() {
+    const F = FNS[key], eps = +sEps.value, [a, b] = F.view, n = 300;
+    const xs = [], ds = [];
+    for (let i = 0; i <= n; i++) { const x = a + (b - a) * i / n; xs.push(x); ds.push(F.dmax(x, eps)); }
+    curve = { xs, ds };
+  }
+
+  function draw() {
+    const F = FNS[key], C = colors();
+    const eps = +sEps.value, del = +sDel.value, x0 = +sX0.value;
+    const [a, b] = F.view, y0 = F.f(x0);
+    const dHere = F.dmax(x0, eps);
+    const fails = del > dHere;
+    const boxCol = fails ? C.fail : C.ok;
+    const left = Math.max(x0 - del, F.lo === 0 ? (key === "inv" ? 1e-6 : 0) : -Infinity);
+
+    $("o-eps").textContent = eps.toFixed(2);
+    $("o-del").textContent = del.toFixed(3);
+    $("o-x0").textContent = x0.toFixed(2);
+    const st = $("status");
+    st.className = "status " + (fails ? "fail" : "ok");
+    $("status-text").textContent = fails
+      ? `Con δ = ${del.toFixed(3)} la caja se rompe en x₀ = ${x0.toFixed(2)}`
+      : `Con δ = ${del.toFixed(3)} la caja funciona en x₀ = ${x0.toFixed(2)}`;
+
+    // --- gráfico principal ---
+    {
+      const { ctx, w, h } = setup(cvMain);
+      let ys = []; for (let i = 0; i <= 200; i++) ys.push(F.f(a + (b - a) * i / 200));
+      let yr = F.ylim ? F.ylim.slice() : [Math.min(...ys, y0 - eps) - 0.4, Math.max(...ys, y0 + eps) + 0.4];
+      const { X, Y, pad } = frame(ctx, w, h, [a, b], yr, C);
+      ctx.fillStyle = C.band; ctx.fillRect(pad.l, Y(y0 + eps), w - pad.l - pad.r, Y(y0 - eps) - Y(y0 + eps));
+      ctx.globalAlpha = 0.22; ctx.fillStyle = boxCol;
+      ctx.fillRect(X(left), Y(y0 + eps), X(x0 + del) - X(left), Y(y0 - eps) - Y(y0 + eps));
+      ctx.globalAlpha = 1; ctx.strokeStyle = boxCol; ctx.lineWidth = 1.5;
+      ctx.strokeRect(X(left), Y(y0 + eps), X(x0 + del) - X(left), Y(y0 - eps) - Y(y0 + eps));
+      plotFn(ctx, F, X, Y, a, b, yr, C.curve, 1.8);
+      plotFn(ctx, F, X, Y, left, x0 + del, yr, boxCol, 4);
+      ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(X(x0), Y(y0), 4, 0, 2 * Math.PI); ctx.fill();
+    }
+
+    // --- lupa ---
+    {
+      const { ctx, w, h } = setup(cvZoom);
+      const xr = [x0 - 1.7 * del, x0 + 1.7 * del], yr = [y0 - 1.8 * eps, y0 + 1.8 * eps];
+      const { X, Y } = frame(ctx, w, h, xr, yr, C, { l: 8, r: 8, t: 8, b: 8 }, false);
+      ctx.fillStyle = C.band; ctx.fillRect(0, Y(y0 + eps), w, Y(y0 - eps) - Y(y0 + eps));
+      ctx.globalAlpha = 0.22; ctx.fillStyle = boxCol;
+      ctx.fillRect(X(left), Y(y0 + eps), X(x0 + del) - X(left), Y(y0 - eps) - Y(y0 + eps));
+      ctx.globalAlpha = 1; ctx.strokeStyle = boxCol; ctx.lineWidth = 2;
+      ctx.strokeRect(X(left), Y(y0 + eps), X(x0 + del) - X(left), Y(y0 - eps) - Y(y0 + eps));
+      const lo = F.lo === 0 ? Math.max(xr[0], key === "inv" ? 1e-6 : 0) : xr[0];
+      plotFn(ctx, F, X, Y, lo, xr[1], yr, C.curve, 2);
+      plotFn(ctx, F, X, Y, left, x0 + del, yr, boxCol, 4);
+      ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(X(x0), Y(y0), 4, 0, 2 * Math.PI); ctx.fill();
+      ctx.font = "12px " + C.mono; ctx.fillStyle = C.muted; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("ancho 2δ, alto 2ε", 12, 12);
+    }
+
+    // --- δ_max(x0) ---
+    {
+      const { ctx, w, h } = setup(cvDelta);
+      const finite = curve.ds.map((d) => (isFinite(d) ? d : 12));
+      const top = Math.min(Math.max(...finite, del) * 1.15, 12);
+      const { X, Y, pad } = frame(ctx, w, h, [a, b], [0, top], C, { l: 40, r: 10, t: 10, b: 24 });
+      ctx.globalAlpha = 0.16; ctx.fillStyle = C.fail;
+      for (let i = 0; i < curve.xs.length - 1; i++) {
+        if (curve.ds[i] < del) ctx.fillRect(X(curve.xs[i]), pad.t, X(curve.xs[i + 1]) - X(curve.xs[i]) + 0.5, h - pad.t - pad.b);
+      }
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = C.accent; ctx.lineWidth = 2; ctx.beginPath();
+      curve.xs.forEach((x, i) => { const y = Y(Math.min(finite[i], top)); i ? ctx.lineTo(X(x), y) : ctx.moveTo(X(x), y); });
+      ctx.stroke();
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = C.ink; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(pad.l, Y(del)); ctx.lineTo(w - pad.r, Y(del)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = C.muted; ctx.beginPath(); ctx.moveTo(X(x0), pad.t); ctx.lineTo(X(x0), h - pad.b); ctx.stroke();
+      ctx.font = "11px " + C.mono; ctx.fillStyle = C.ink; ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+      ctx.fillText("δ elegido", w - pad.r - 4, Y(del) - 3);
+    }
+
+    const finiteMin = Math.min(...curve.ds);
+    $("r-here").textContent = isFinite(dHere) ? dHere.toFixed(4) : "∞ (cualquier δ sirve)";
+    $("r-formula").textContent = F.formula;
+    $("r-min").textContent = isFinite(finiteMin) ? finiteMin.toFixed(4) : "∞";
+    $("r-inf").textContent = F.inf(eps);
+  }
+
+  function setFunction(k) {
+    key = k;
+    const [a, b] = FNS[k].view;
+    sX0.min = a; sX0.max = b;
+    const defaults = { x2: 0.5, sin: 0.5, sqrt: 1, inv: 2 };
+    sX0.value = defaults[k];
+    computeCurve(); draw();
+  }
+
+  document.querySelectorAll('input[name="fn"]').forEach((r) => r.addEventListener("change", () => setFunction(r.value)));
+  sEps.addEventListener("input", () => { computeCurve(); draw(); });
+  sDel.addEventListener("input", draw);
+  sX0.addEventListener("input", draw);
+
+  // Barrido de x0: animación iniciada por el usuario.
+  let anim = null;
+  $("sweep").addEventListener("click", () => {
+    if (anim) { cancelAnimationFrame(anim); anim = null; $("sweep").textContent = "Barrer x₀ de punta a punta"; return; }
+    const [a, b] = FNS[key].view, T = 6000, t0 = performance.now();
+    $("sweep").textContent = "Detener";
+    const step = (t) => {
+      const u = ((t - t0) % T) / T, s = u < 0.5 ? u * 2 : 2 - u * 2;
+      sX0.value = a + (b - a) * s; draw();
+      anim = requestAnimationFrame(step);
+    };
+    anim = requestAnimationFrame(step);
+  });
+
+  new ResizeObserver(() => draw()).observe(document.querySelector(".lab"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  setFunction("x2");
+})();
+</script>
+
+</body>
+</html>
