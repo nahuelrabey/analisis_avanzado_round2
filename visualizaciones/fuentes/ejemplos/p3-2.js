@@ -192,7 +192,7 @@ PP.register(function ej28a() {
       rows = [["x ∉ E", F3(x)], ["ρ = mín{|x|, |x−1|, |x−2|}", F3(rho)], ["B(x, ρ) ∩ E", "= ∅  ⇒  x ∉ ∂E", "good"]];
     }
     PP.dot(ctx, T.X(x), yL - 30, 6, C("--ink"));
-    PP.label(ctx, "x", T.X(x), yL - 52, C("--ink"), "center", "bottom", 13);
+    PP.label(ctx, "x", T.X(x), yL - 20, C("--ink"), "center", "top", 13);
     PP.read("ejp3-28-read2", rows);
   }
   PP.register(draw, []);
@@ -231,7 +231,7 @@ PP.register(function ej28a() {
       inE = null; meetE = meetEc = meetEx = true;
     }
     PP.dot(ctx, T.X(x), yL - 32, 6, C("--ink"));
-    PP.label(ctx, "x = " + F2(x), T.X(x), yL - 56, C("--ink"), "center", "bottom", 12);
+    PP.label(ctx, "x = " + F2(x), T.X(x), yL - 20, C("--ink"), "center", "top", 12);
     const yn = (v) => (v ? "sí" : "no");
     const rows = [];
     if (inE !== null) rows.push(["x ∈ E", yn(inE)]);
@@ -270,7 +270,7 @@ PP.register(ab2("ejp3-15-09-2-c2", "ejp3-15-09-2-r2", "b"), ["ejp3-15-09-2-r2"])
 
 /* ===================== 15/09-3 · bola cerrada vía r → 0⁺ ===================== */
 (() => {
-  const S = { P: [1.45, 0.75] }; let TT = null;
+  const S = { P: [1.3, 0.6] }; let TT = null;
   function draw() {
     const r = PP.val("ejp3-15-09-3-r") / 100;
     PP.out("ejp3-15-09-3-r-o", F2(r));
@@ -692,11 +692,11 @@ PP.register(function e31c() {
   PP.out("ejp3-31-n3-o", String(n));
   const { ctx, T } = frame31("ejp3-31-c3");
   PP.path(ctx, P31(T, [[0.5 - 1 / n, 0], [0.5, 1], [0.5, 0]]), null, 1, null, true, C("--area3"));
+  PP.path(ctx, P31(T, ramp(n)), C("--seq2"), 2.2);
   PP.path(ctx, P31(T, [[0, 0], [0.5, 0]]), C("--ink"), 3);
   PP.path(ctx, P31(T, [[0.5, 1], [1, 1]]), C("--ink"), 3);
   PP.dot(ctx, T.X(0.5), T.Y(0), 4.5, C("--ink"));
   PP.dot(ctx, T.X(0.5), T.Y(1), 4.5, C("--bg"), C("--ink"));
-  PP.path(ctx, P31(T, ramp(n)), C("--seq2"), 1.8);
   PP.label(ctx, "f", T.X(0.92), T.Y(1) - 6, C("--ink"), "center", "bottom", 13);
   PP.label(ctx, "fₙ", T.X(0.5 - 1 / n) - 4, T.Y(0.4), C("--seq2"), "right", "middle", 13);
   PP.read("ejp3-31-read3", [["d₁(fₙ, f) = 1/(2n)", F3(1 / (2 * n))]]);
@@ -707,20 +707,21 @@ PP.register(function e32() {
   const n = PP.val("ejp3-32-n");
   PP.out("ejp3-32-n-o", String(n));
   const xs = []; for (let k = 1; k <= n; k++) { const p = Math.pow(10, k - 1); xs.push(Math.floor(Math.PI * p) / p); }
-  const hw = 2 * Math.pow(10, -(n - 1));
+  const hw = Math.min(1.5, 1.2 * Math.pow(10, -(n - 2)));
   const { ctx, w, h } = PP.canvas("ejp3-32-c1", 0.36);
   const T = PP.frame(w, h, { x0: Math.PI - hw, x1: Math.PI + hw, y0: 0, y1: 1 }, { l: 14, r: 14, t: 8, b: 8 });
   const yL = h * 0.5;
   PP.path(ctx, [[T.p.l, yL], [w - T.p.r, yL]], C("--muted"), 1);
   xs.forEach((x, i) => { if (x >= T.box.x0) { PP.dot(ctx, T.X(x), yL, i === n - 1 ? 5.5 : 3.5, C("--accent")); } });
   const xn = xs[n - 1];
+  if (n > 1) PP.label(ctx, "x" + "₀₁₂₃₄₅₆₇₈₉"[n - 1], T.X(xs[n - 2]), yL - 10, C("--muted"), "center", "bottom", 11);
   PP.label(ctx, "x" + "₀₁₂₃₄₅₆₇₈₉"[n], T.X(xn), yL - 10, C("--accent"), "center", "bottom", 12);
   PP.dot(ctx, T.X(Math.PI), yL, 5, C("--bg"), C("--fail"));
   PP.label(ctx, "π ∉ ℚ", T.X(Math.PI), yL + 10, C("--fail"), "center", "top", 12);
   PP.read("ejp3-32-read", [
     ["xₙ", xn.toFixed(n - 1).replace(".", ",")],
     ["|π − xₙ|", (Math.PI - xn).toExponential(2).replace(".", ",") + " < 10^−" + (n - 1)],
-    ["ventana", "π ± " + hw.toExponential(0)],
+    ["ventana", "π ± " + PP.fmt(hw, 9).replace(".", ",")],
   ]);
 }, ["ejp3-32-n"]);
 
@@ -865,12 +866,12 @@ PP.register(function c55() {
 
 /* ===================== C5-6 · una Cauchy en una bola cerrada ===================== */
 PP.register(function c56() {
-  const { ctx, w, h } = PP.canvas("ejp3-c5-6-c1", 0.72);
-  const T = eqFrame(w, h, -2.2, 2.2, 0); const s = scale(T);
+  const { ctx, w, h } = PP.canvas("ejp3-c5-6-c1", 0.9);
   const L = [0.35, -0.15];
   const a = (n) => [L[0] + 1.25 * Math.pow(0.86, n) * Math.cos(1.1 * n), L[1] + 1.25 * Math.pow(0.86, n) * Math.sin(1.1 * n)];
   const a1 = a(1); let M = 0; const pts = [];
   for (let n = 1; n <= 60; n++) { const p = a(n); pts.push(p); M = Math.max(M, hyp(p[0] - a1[0], p[1] - a1[1])); }
+  const T = eqFrame(w, h, a1[0] - 1.35 * M, a1[0] + 1.35 * M, a1[1]); const s = scale(T);
   PP.circle(ctx, T.X(a1[0]), T.Y(a1[1]), M * s, C("--accent"), C("--band"), null, 2);
   PP.path(ctx, pts.map(([x, y]) => [T.X(x), T.Y(y)]), C("--rule"), 1);
   pts.forEach(([x, y], i) => PP.dot(ctx, T.X(x), T.Y(y), i < 20 ? 3.4 : 1.8, C("--seq2")));

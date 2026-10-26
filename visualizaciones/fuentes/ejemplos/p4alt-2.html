@@ -704,7 +704,7 @@
         <div class="step-text">
           <p class="step-title">$\delta = \varepsilon$</p>
           <p>Fijamos $x_0$ y $\varepsilon \gt 0$, y elegimos $\delta = \varepsilon$. Si $d(x, x_0) \lt \delta = \varepsilon$, entonces
-            $$\begin{aligned} |d_a(x) - d_a(x_0)| &= |d(x, a) - d(x_0, a)| \\ &\le d(x, x_0) \lt \delta = \varepsilon, \end{aligned}$$
+            $$\begin{aligned} &|d_a(x) - d_a(x_0)| \\ &\quad = |d(x, a) - d(x_0, a)| \\ &\quad \le d(x, x_0) \lt \delta = \varepsilon, \end{aligned}$$
             donde usamos la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>. $\square$</p>
         </div>
         <figure class="viz">
@@ -739,7 +739,7 @@
         <div class="step-text">
           <p class="step-title">El radio $\varepsilon = d(x, y) - r$</p>
           <p>Sea $y \in A$ y notemos que $\varepsilon = d(x, y) - r$ es positivo. Afirmamos que $B(y, \varepsilon)$ está contenida en $A$. En efecto,
-            $$\begin{aligned} z \in B(y, \varepsilon) &\Longrightarrow d(z, y) \lt \varepsilon \\ &\Longrightarrow d(z, y) + r \lt \varepsilon + r \\ &\qquad = d(x, y) \le d(x, z) + d(z, y) \\ &\Longrightarrow r \lt d(x, z) \\ &\Longrightarrow z \in A. \end{aligned}$$</p>
+            $$\begin{aligned} &z \in B(y, \varepsilon) \\ &\Longrightarrow d(z, y) \lt \varepsilon \\ &\Longrightarrow d(z, y) + r \lt \varepsilon + r \\ &\qquad = d(x, y) \le d(x, z) + d(z, y) \\ &\Longrightarrow r \lt d(x, z) \\ &\Longrightarrow z \in A. \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <canvas id="ejp4alt-o10-3-c1" aria-label="La bola cerrada de centro x y radio r, un punto y afuera arrastrable y la bola de radio d(x, y) − r alrededor de y, que no toca la bola cerrada"></canvas>
@@ -789,7 +789,7 @@
         <div class="step-text">
           <p class="step-title">2)</p>
           <p>Esto vale porque
-            $$\begin{aligned} &|d(x, u) - d(y, v)| \\ &= |d(x, u) - d(y, u) + d(y, u) - d(y, v)| \\ &\le |d(x, u) - d(y, u)| + |d(y, u) - d(y, v)| \\ &= |d(x, u) - d(y, u)| + |d(u, y) - d(v, y)| \\ &\le d(x, y) + d(u, v), \end{aligned}$$
+            $$\begin{aligned} &|d(x, u) - d(y, v)| \\ &= |d(x, u) - d(y, u) \\ &\qquad + d(y, u) - d(y, v)| \\ &\le |d(x, u) - d(y, u)| \\ &\qquad + |d(y, u) - d(y, v)| \\ &= |d(x, u) - d(y, u)| \\ &\qquad + |d(u, y) - d(v, y)| \\ &\le d(x, y) + d(u, v), \end{aligned}$$
             debido a que $|a + b| \le |a| + |b|$ para todo $a, b \in \mathbb{R}$, a la simetría de la distancia y al item 1.</p>
         </div>
       </div>
@@ -815,7 +815,7 @@
         <div class="step-text">
           <p class="step-title">La cota $2$</p>
           <p>Por las propiedades triangular y simétrica de $d$ y el item 2 de la <a href="#ejp4alt-o2-7-prop">Proposición 1.2</a>,
-            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') \\ &\le 2 \max(d(x, y), d(x', y')) \\ &= 2 d_\infty((x, x'), (y, y')) \end{aligned}$$
+            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| \\ &\qquad + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') \\ &\le 2 \max(d(x, y), d(x', y')) \\ &= 2 d_\infty((x, x'), (y, y')) \end{aligned}$$
             para todo $x, x', y, y' \in X$.</p>
         </div>
       </div>
@@ -823,7 +823,7 @@
         <div class="step-text">
           <p class="step-title">Nota 3.56 de la fuente: la constante es $2$ con $d_\infty$, $1$ con $d_1$</p>
           <p>La cuenta anterior muestra que $2$ es una cota superior de la constante de Lipschitz de $d$. Para $\mathbb{R}$ esta constante es $2$, como puede comprobarse tomando $x = 0$, $x' = 2$ e $y = y' = 1$. Por supuesto, el hecho de que la máxima constante de Lipschitz para las funciones distancia sea $2$ se debe a que estamos considerando a $X \times X$ provisto de la distancia $d_\infty$. Si lo consideramos provisto con la distancia $d_1$, entonces $d$ es una función corta, porque (nota [2] del capítulo)
-            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') = d_1((x, x'), (y, y')). \end{aligned}$$</p>
+            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| \\ &\qquad + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') \\ &= d_1((x, x'), (y, y')). \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <svg viewBox="0 0 360 190" role="img" aria-label="En la recta, los puntos x = 0, y = y' = 1 y x' = 2: d(x, x') = 2, d(y, y') = 0 y la distancia d infinito entre los pares es 1">
@@ -894,7 +894,7 @@
           <p>Por la definición de $d(x, A)$ y la propiedad triangular de $d$, sabemos que
             $$\begin{aligned} d(x, A) \le d(x, z) &\le d(x, y) + d(y, z) \\ &\text{para todo } z \in A. \end{aligned}$$
             Así que $d(x, A) - d(x, y)$ es una cota inferior de $\{d(y, z) : z \in A\}$. Por lo tanto
-            $$d(x, A) - d(x, y) \le \inf\{d(y, z) : z \in A\} = d(y, A)$$
+            $$\begin{aligned} &d(x, A) - d(x, y) \\ &\quad \le \inf\{d(y, z) : z \in A\} = d(y, A) \end{aligned}$$
             o, lo que es equivalente,
             $$d(x, A) - d(y, A) \le d(x, y).$$
             Por simetría, $d(y, A) - d(x, A) \le d(x, y)$ y, en consecuencia, $|d(x, A) - d(y, A)| \le d(x, y)$, como queremos.</p>
@@ -943,7 +943,7 @@
         <div class="step-text">
           <p class="step-title">2. Lipschitz $\Longrightarrow$ uniformemente continua</p>
           <p>Supongamos que $f : X \to Y$ es de Lipschitz con constante de Lipschitz $K$. Entonces dado $\varepsilon \gt 0$, basta tomar $\delta := \varepsilon / K$ para conseguir que
-            $$\begin{aligned} &d(f(x), f(x')) \le K d(x, x') \lt K \delta = \varepsilon \\ &\text{para todo } x, x' \in X \text{ con } d(x, x') \lt \delta. \end{aligned}$$
+            $$\begin{aligned} &d(f(x), f(x')) \le K d(x, x') \\ &\quad \lt K \delta = \varepsilon \\ &\text{para todo } x, x' \in X \\ &\text{con } d(x, x') \lt \delta. \end{aligned}$$
             Esto prueba que $f$ es uniformemente continua, como afirmamos.</p>
         </div>
       </div>
@@ -1025,7 +1025,7 @@
         <div class="step-text">
           <p class="step-title">Teorema 3.19</p>
           <p>Por la Proposición 2.61 (item 2 de la <a href="#ejp4alt-o2-8-prop">proposición de O2-8</a>), como $C$ y $D$ son cerrados disjuntos,
-            $$d(x, C) + d(x, D) \gt 0 \quad \text{para todo } x \in X.$$
+            $$\begin{aligned} &d(x, C) + d(x, D) \gt 0 \\ &\text{para todo } x \in X. \end{aligned}$$
             Además, es claro que $0 \le \zeta_{C, D}(x) \le 1$ para todo $x$. Por lo tanto, la función $\zeta_{C, D}$ está bien definida. Para probar que es continua es suficiente notar que es <span class="ref" data-ref="ext-algebra-continuas">cociente de funciones reales que lo son</span>. Por último, es claro que $\zeta_{C, D}$ vale cero sobre $C$ y uno sobre $D$.</p>
         </div>
         <figure class="viz">
@@ -1071,7 +1071,7 @@
         <div class="step-text">
           <p class="step-title">$U$ y $V$ separan</p>
           <p>Consideremos las funciones $d_E$ y $d_F$; por el Lema 2.2.4 (misma demostración en <a href="#ejp4alt-o2-8">O2-8</a>), ambas funciones son <span class="ref" data-ref="def-5.14">uniformemente continuas</span> y, por el Teorema 1.0.26 (está en O2-8), $d_E(x) = 0$ si y sólo si $x \in \overline{E} = E$, y $d_F(x) = 0$ si y sólo si $x \in \overline{F} = F$. Definimos
-            $$\begin{aligned} U &= \{z \in X : d_E(z) - d_F(z) \lt 0\} \quad \text{y} \\ V &= \{z \in X : d_E(z) - d_F(z) \gt 0\}. \end{aligned}$$
+            $$\begin{aligned} U &= \{z \in X : d_E(z) - d_F(z) \lt 0\} \\ &\quad \text{y} \\ V &= \{z \in X : d_E(z) - d_F(z) \gt 0\}. \end{aligned}$$
             Obviamente $U$ y $V$ son conjuntos disjuntos, y si $x \in E$ entonces $x \notin F$ y por lo tanto $d_E(x) = 0$ y $d_F(x) \gt 0$; esto implica que $d_E(x) - d_F(x) \lt 0$, o sea $x \in U$. En forma semejante, si $x \in F$ entonces $x \notin E$ y por lo tanto $d_F(x) = 0$ y $d_E(x) \gt 0$; esto implica que $d_E(x) - d_F(x) \gt 0$, o sea $x \in V$. Por lo tanto $E \subseteq U$ y $F \subseteq V$.</p>
         </div>
         <figure class="viz">
@@ -1110,7 +1110,7 @@
             $$\begin{aligned} &d(0, [1, 2]) = d(0, (1, 2]) = 1 \quad \text{y} \\ &d((0, 1], (1, 2)) = d(\mathbb{Q}, \mathbb{R} \setminus \mathbb{Q}) \\ &\qquad = d(0, (0, 1]) = 0. \end{aligned}$$
             El último ejemplo muestra que la distancia de un punto a un conjunto puede ser cero sin que el punto pertenezca al conjunto.</li>
           <li>En $(\mathbb{R}^2, d_2)$,
-            $$\begin{aligned} d(\mathbb{R} \times \{0\}, \{(x, y) \in \mathbb{R}^2 : y = x^2 + 1\}) &= 1, \\ d(\mathbb{R} \times \{0\}, \{(x, y) \in \mathbb{R}^2 : y \gt x^2 + 1\}) &= 1 \end{aligned}$$
+            $$\begin{aligned} &d(\mathbb{R} \times \{0\}, \\ &\quad \{(x, y) \in \mathbb{R}^2 : y = x^2 + 1\}) = 1, \\ &d(\mathbb{R} \times \{0\}, \\ &\quad \{(x, y) \in \mathbb{R}^2 : y \gt x^2 + 1\}) = 1 \end{aligned}$$
             y
             $$\begin{aligned} d(&\{(x, 1/x) : x \in (0, \infty)\}, \\ &\{(x, -1/x) : x \in (0, \infty)\}) = 0. \end{aligned}$$</li>
           <li>En un espacio métrico <span class="ref" data-ref="ext-metrica-discreta">discreto</span> $X$, para cada par de subconjuntos no vacíos $A$ y $B$ de $X$,
@@ -1148,7 +1148,7 @@
           <p class="step-title">Si $A \cap B \neq \varnothing$: Alternativa 1</p>
           <p>Si $A \cap B \neq \varnothing$, mostremos que $d(A, B) = 0$.</p>
           <p><em>Alternativa 1</em>: Sea $\overline{x} \in A \cap B$. Entonces $d(\overline{x}, A) = 0$, pues $A$ es un conjunto cerrado (<a href="#ejp4alt-o2-8">O2-8</a>) y, por lo tanto,
-            $$0 \le d(A, B) = \inf_{b \in B} d(b, A) \le d(\overline{x}, A) = 0.$$</p>
+            $$\begin{aligned} 0 \le d(A, B) &= \inf_{b \in B} d(b, A) \\ &\le d(\overline{x}, A) = 0. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">
@@ -1204,5 +1204,425 @@
     <div class="estrategia"><b>Indicaciones</b><p>La fuente no resuelve estos ejercicios. Para (iv): $\{(x, y) : d(x, y) \lt r\} = d^{-1}((-\infty, r))$ y $\{(x, y) : d(x, y) \le r\} = d^{-1}((-\infty, r])$, con $d : E \times E \to \mathbb{R}$ continua (<a href="#ejp4alt-o2-7">O2-7</a>); luego $\{f = g\} = (f, g)^{-1}(\Delta(F))$, donde $(f, g) : E \to F \times F$ es continua por serlo sus componentes (Apuntes 03, §3.6, pág. 8). Para (v): $\operatorname{Gr} f = (\operatorname{id}, f)^{-1}(\Delta(F))$. (Indicaciones del transcriptor, coherentes con lo que la fuente desarrolla en §3.5–3.6.)</p></div>
     <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25): Tema 2, §2.12 Ejercicio 4, pág. 14 del PDF (26 impresa); Tema 3, §3.9 Ejercicios 4, 5 y 6, pág. 12 del PDF (38 impresa); Tema 5, §5.8 Ejercicios 4 y 6, pág. 10 del PDF (60 impresa). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_02.pdf">URL 02</a>, <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_03.pdf">URL 03</a>, <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL 05</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
     <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>, <a class="xg" data-guia="p4" data-ej="11">11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+</section>
+
+
+<section class="bloque" id="ejp4alt-b9">
+  <h2><span class="bn">Bloque 9</span>Lipschitz y continuidad uniforme: definiciones y criterios</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p><code>apuntes.typ</code> ya tiene la teoría de este bloque: continuidad uniforme (<span class="ref" data-ref="def-5.14">Definición 5.14</span>), su negación (<span class="ref" data-ref="obs-5.16">Observación 5.16</span>) y la caracterización por pares de sucesiones (<span class="ref" data-ref="prop-5.18">Proposición 5.18</span>), función Lipschitz (<span class="ref" data-ref="def-5.24">Definición 5.24</span>) y la cadena Lipschitz $\Longrightarrow$ uniformemente continua $\Longrightarrow$ continua sin vueltas (<span class="ref" data-ref="obs-5.28">Observación 5.28</span>; la primera implicación es el <span class="ref" data-ref="ejap-5.25">Ejercicio 5.25</span>). Por eso <a href="#ejp4alt-o6-1-def">O6-1</a>, <a href="#ejp4alt-o3-8">O3-8</a> y <a href="#ejp4alt-o14-6-prop">O14-6</a> son una <strong>segunda lectura</strong>: las mismas definiciones y la misma caracterización contadas por otra fuente. Lo nuevo es el módulo de continuidad (<a href="#ejp4alt-o5-1-def">O5-1</a> a <a href="#ejp4alt-o5-4">O5-4</a>), que da otro criterio para los <a class="xg" data-guia="p4" data-ej="13">Ejercicios 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a>, y que la continuidad uniforme depende de la métrica y no sólo de los abiertos: la identidad de <a href="#ejp4alt-o14-8">O14-8</a> es un homeomorfismo (<span class="ref" data-ref="def-5.29">Definición 5.29</span>) que no es uniformemente continuo. Entrena los <a class="xg" data-guia="p4" data-ej="12">Ejercicios 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a>.</p></div>
+
+  <!-- O6-1: definición -->
+  <article class="ej" id="ejp4alt-o6-1-def" data-short="Def." data-title="Continuidad uniforme y funciones Lipschitz en espacios métricos" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Continuidad uniforme y funciones Lipschitz en espacios métricos</h3>
+      <span class="src">Lebl, Def. 7.5.10 y Ej. 7.5.13</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $(X, d_X)$ e $(Y, d_Y)$ espacios métricos. Una función $f : X \to Y$ es <b>uniformemente continua</b> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que, siempre que $p, q \in X$ y $d_X(p, q) \lt \delta$, vale $d_Y(f(p), f(q)) \lt \varepsilon$.</p>
+      <p>Una función $f : X \to Y$ es <b>Lipschitz</b> (o <b>$K$-Lipschitz</b>) si existe $K \in \mathbb{R}$ tal que
+        $$\begin{aligned} &d_Y(f(p), f(q)) \le K d_X(p, q) \\ &\text{para todo } p, q \in X. \end{aligned}$$</p>
+      <p>Una función uniformemente continua es continua: la única diferencia con la <span class="ref" data-ref="def-5.4">Definición 5.4</span> es que el $\delta$ ya no puede depender del punto, sólo de $\varepsilon$. La fuente insiste en que ahora <b>el dominio importa</b>: una función que no es uniformemente continua en un conjunto grande puede serlo al restringirla a uno más chico (ver <a href="#ejp4alt-o6-10">O6-10</a>, <a href="#ejp4alt-o6-11">O6-11</a> y <a href="#ejp4alt-o7-2">O7-2</a>).</p>
+    </div>
+    <p class="cita"><i>Fuente</i>: la de la proposición que sigue (<a href="#ejp4alt-o6-1-prop">Lebl</a>).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+
+  <!-- O6-1: proposición -->
+  <article class="ej" id="ejp4alt-o6-1-prop" data-short="Prop." data-title="Lipschitz implica uniformemente continua" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Lipschitz implica uniformemente continua</h3>
+      <span class="src">Lebl, Prop. 3.4.8</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Toda función <span class="ref" data-ref="def-5.24">Lipschitz</span> es <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\delta = \varepsilon / K$</p>
+          <p>La fuente lo prueba para $f : S \to \mathbb{R}$ con $S \subseteq \mathbb{R}$, y en el Ejemplo 7.5.13 observa que en espacios métricos es lo mismo: “tomar $\delta = \varepsilon / K$ (suponiendo $K \gt 0$)”. Sea $f : S \to \mathbb{R}$ y sea $K$ una constante tal que $|f(x) - f(y)| \le K |x - y|$ para todos $x, y \in S$. Sea $\varepsilon \gt 0$. Tomamos $\delta := \varepsilon / K$. Para todos $x, y \in S$ con $|x - y| \lt \delta$,
+            $$\begin{aligned} |f(x) - f(y)| &\le K |x - y| \lt K \delta \\ &= K \frac{\varepsilon}{K} = \varepsilon. \end{aligned}$$
+            Por lo tanto $f$ es uniformemente continua. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-1-c1" aria-label="Gráfico de una función Lipschitz, el cono de pendientes ±K en un punto arrastrable y la caja de ancho 2δ y alto 2ε con δ = ε/K"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o6-1-eps">ε</label><input type="range" id="ejp4alt-o6-1-eps" min="5" max="80" value="35"><output id="ejp4alt-o6-1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-1-read" aria-live="polite"></dl>
+          <figcaption>Función elegida para el dibujo: <i>f</i>(<i>x</i>) = 0.5·sen(2<i>x</i>) + 0.3<i>x</i> en [0, 4], que es Lipschitz con <i>K</i> = 1.3 (cota de |<i>f</i>′|). Arrastrá el punto <i>y</i>: las rayas punteadas son el cono de pendientes ±<i>K</i>, que encierra al gráfico. La caja tiene ancho 2δ con δ = ε/<i>K</i> y alto 2ε, y es la misma en todos los puntos: el gráfico entra y sale por los costados, nunca por arriba ni por abajo.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>en la Prop. 3.4.8 la fuente divide por $K$ sin aclarar $K \gt 0$; el caso $K \le 0$ lo cubre explícitamente la fuente O8 (pág. 1): “si $K \le 0$, basta tomar $\delta = 1$ y usar que $d_Y(f(p), f(q)) \ge 0$” (observación nuestra: con $K \le 0$ la desigualdad fuerza $f$ constante).</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I: Introduction to Real Analysis</i>, vol. I, versión 6.3 (15 de mayo de 2026), Def. 7.5.10 y Ej. 7.5.13 (págs. 291–292 del PDF), Prop. 3.4.8 (pág. 141 del PDF). <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: licencia doble CC BY-NC-SA 4.0 / CC BY-SA 4.0, declarada en la pág. 2 del PDF.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+
+  <!-- O3-8: definición y observación -->
+  <article class="ej" id="ejp4alt-o3-8-def" data-short="Def." data-title="Continuidad uniforme (Daniilidis)" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Continuidad uniforme</h3>
+      <span class="src">Daniilidis, Def. 2.5.1</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sean $(X, d)$, $(Y, d')$ dos espacios métricos. Una función $f : X \to Y$ se dice <em>uniformemente continua</em> si
+      $$\begin{aligned} &(\forall \varepsilon \gt 0)(\exists \delta \gt 0)(\forall x_1, x_2 \in X) \\ &\quad d(x_1, x_2) \lt \delta \Longrightarrow d'(f(x_1), f(x_2)) \lt \varepsilon. \end{aligned}$$</p></div>
+    <div class="nota"><b>Observación</b> <em>Uniformemente continua $\Longrightarrow$ continua, y manda Cauchy en Cauchy (Daniilidis, Obs. 2.5.2 (ii)).</em> Cada función uniformemente continua es continua: en la definición anterior la elección de $\delta \gt 0$ sólo depende de $\varepsilon \gt 0$, mientras que en la definición de continuidad también depende del punto de referencia. En términos de sucesiones, una función continua envía sucesiones convergentes a sucesiones convergentes, mientras que una función uniformemente continua, además de hacer eso, también envía <span class="ref" data-ref="def-4.51">sucesiones de Cauchy</span> a sucesiones de Cauchy. Esta diferencia sólo se puede apreciar en el caso de espacios métricos no <span class="ref" data-ref="def-4.55">completos</span> (es decir, en espacios donde las sucesiones de Cauchy no son las mismas que las sucesiones convergentes).</div>
+    <div class="nota"><b>Nota</b>la fuente sólo enuncia que “envía Cauchy en Cauchy” (es el <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a> de la práctica); no lo demuestra. Ver <a href="#ejp4alt-o3-9">O3-9</a> para un ejemplo de función continua (no uniformemente continua) que no lo hace.</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Definición 2.5.1 (pág. 117 del PDF) y Observación 2.5.2 (ii) (pág. 118 del PDF). <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O3-8: ejemplo -->
+  <article class="ej" id="ejp4alt-o3-8" data-short="O3-8" data-title="Caracterización de la continuidad uniforme por pares de sucesiones" data-topics="continuidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">O3-8</span>
+      <h3>Caracterización de la continuidad uniforme por pares de sucesiones</h3>
+      <span class="src">Daniilidis, Prop. 2.5.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $f : X \to Y$ una función entre los espacios métricos $(X, d)$ e $(Y, d')$. Son equivalentes:</p>
+      <p>(i) $f$ es uniformemente continua;<br>(ii) para todo par de sucesiones $(x_n)_{n \in \mathbb{N}}, (y_n)_{n \in \mathbb{N}} \subseteq X$ tales que $d(x_n, y_n) \xrightarrow[n \to \infty]{} 0$ se tiene que $d'(f(x_n), f(y_n)) \xrightarrow[n \to \infty]{} 0$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(i) $\Longrightarrow$ (ii)</p>
+          <p>Supongamos primero que $f$ es uniformemente continua y tomamos dos sucesiones $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ en $X$ tales que $d(x_n, y_n) \to 0$. Queremos establecer que $d'(f(x_n), f(y_n)) \to 0$. Para eso, fijamos $\varepsilon \gt 0$ y tomamos $\delta \gt 0$ dado por la definición de continuidad uniforme. Por la convergencia de la sucesión real $t_n := d(x_n, y_n)$ a $0 \in \mathbb{R}$, existe $n_0 \in \mathbb{N}$ tal que para todo $n \ge n_0$ se tiene que $d(x_n, y_n) \lt \delta$. Eso en particular garantiza que $d'(f(x_n), f(y_n)) \lt \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(ii) $\Longrightarrow$ (i), por el contrarrecíproco</p>
+          <p>Supongamos ahora que $f$ no es uniformemente continua. En este caso, existe $\varepsilon_0 \gt 0$ tal que para todo $n \in \mathbb{N}$ existen $x_n, y_n$ en $X$ tales que $d(x_n, y_n) \lt 1/n$ y $d'(f(x_n), f(y_n)) \ge \varepsilon_0$. Se forman así dos sucesiones $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ que contradicen directamente (ii). $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-8-c1" aria-label="Para f(x) = x² con x_n = n e y_n = n + 1/n: la sucesión de distancias en el dominio va a cero y la de distancias de las imágenes se queda arriba de 2"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-8-n">hasta <i>n</i></label><input type="range" id="ejp4alt-o3-8-n" min="2" max="30" value="12"><output id="ejp4alt-o3-8-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-8-read" aria-live="polite"></dl>
+          <figcaption>El ejemplo que la fuente pone a continuación (ver la nota): <i>f</i>(<i>x</i>) = <i>x</i><sup>2</sup> en ℝ, <i>x<sub>n</sub></i> = <i>n</i>, <i>y<sub>n</sub></i> = <i>n</i> + 1/<i>n</i>. En azul, |<i>x<sub>n</sub></i> − <i>y<sub>n</sub></i>| = 1/<i>n</i>, que va a 0; en naranja, |<i>f</i>(<i>x<sub>n</sub></i>) − <i>f</i>(<i>y<sub>n</sub></i>)|, que no baja de 2: el par de sucesiones que viola (ii).</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente aplica esta proposición a $f(x) = x^2$ en $\mathbb{R}$ con $x_n = n$, $y_n = n + 1/n$: $|x_n - y_n| = 1/n \to 0$ mientras que $|f(x_n) - f(y_n)| \ge 2$. Es exactamente el argumento de C6-5 b), así que no se repite. Lo que aporta este ítem es la <strong>equivalencia</strong> (la vuelta (ii) $\Longrightarrow$ (i)), que es la justificación formal de la “vía negativa” usada en C6-5, C6-6 y en los <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a> de la práctica.</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Proposición 2.5.3 (Caracterización de la continuidad uniforme) y ejemplo siguiente, págs. 118–119 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O14-6 -->
+  <article class="ej" id="ejp4alt-o14-6-prop" data-short="Prop." data-title="Caracterización por sucesiones de la continuidad uniforme (Payá)" data-topics="continuidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Caracterización por sucesiones de la continuidad uniforme</h3>
+      <span class="src">Payá, Apuntes 05, §5.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sean $E, F$ espacios métricos y $f : E \to F$. Decimos que $f$ es <em>uniformemente continua</em> cuando
+      $$\begin{aligned} &\forall \varepsilon \gt 0 \quad \exists \delta \gt 0 : \\ &x, y \in E,\ d(x, y) \lt \delta \\ &\quad \Longrightarrow d(f(x), f(y)) \lt \varepsilon. \end{aligned}$$
+      Si $f$ es uniformemente continua y $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ son sucesiones de puntos de $E$ con $d(x_n, y_n) \to 0$, entonces $d(f(x_n), f(y_n)) \to 0$. El recíproco también es cierto; más aún: si $f$ <b>no</b> es uniformemente continua, existen dos sucesiones $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ en $E$ y un $\varepsilon \gt 0$ tales que $d(x_n, y_n) \lt 1/n$ para todo $n$, pero $d(f(x_n), f(y_n)) \ge \varepsilon$ para todo $n$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ida</p>
+          <p>Dado $\varepsilon \gt 0$, sea $\delta \gt 0$ dado por la continuidad uniforme de $f$. Existe $m \in \mathbb{N}$ tal que, para todo $n \ge m$, se tiene $d(x_n, y_n) \lt \delta$, luego $d(f(x_n), f(y_n)) \lt \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Vuelta</p>
+          <p>Recíprocamente, si $f$ no es uniformemente continua, existe $\varepsilon \gt 0$ tal que, para cada $\delta \gt 0$, podemos encontrar $x, y \in E$ con $d(x, y) \lt \delta$ pero $d(f(x), f(y)) \ge \varepsilon$. Para cada $n \in \mathbb{N}$ tomamos $\delta = 1/n$ y encontramos $x_n, y_n \in E$ con $d(x_n, y_n) \lt 1/n$ y $d(f(x_n), f(y_n)) \ge \varepsilon$. En particular $d(x_n, y_n) \to 0$ pero $d(f(x_n), f(y_n))$ no converge a cero.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o14-6-c1" aria-label="Gráfico de 1/x o de sen(1/x) con el par x_n, y_n de la nota: los puntos están muy cerca y sus imágenes no"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>función</legend>
+              <label><input type="radio" name="ejp4alt-o14-6-f" value="inv" checked> 1/<i>x</i> en (0, +∞)</label>
+              <label><input type="radio" name="ejp4alt-o14-6-f" value="sen"> sen(1/<i>x</i>) en (0, 1)</label>
+            </fieldset>
+            <div class="slider"><label for="ejp4alt-o14-6-n"><i>n</i></label><input type="range" id="ejp4alt-o14-6-n" min="1" max="12" value="2"><output id="ejp4alt-o14-6-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o14-6-read" aria-live="polite"></dl>
+          <figcaption>Los pares de la nota (elección del transcriptor): para 1/<i>x</i>, <i>x<sub>n</sub></i> = 1/<i>n</i> e <i>y<sub>n</sub></i> = 1/(<i>n</i> + 1); para sen(1/<i>x</i>), <i>x<sub>n</sub></i> = 1/(2<i>n</i>π) e <i>y<sub>n</sub></i> = 1/(2<i>n</i>π + π/2). Las rayas verticales marcan <i>x<sub>n</sub></i> e <i>y<sub>n</sub></i>; el segmento rojo es la distancia entre las imágenes. Al subir <i>n</i> los puntos se juntan y el segmento rojo no se achica.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>éste es el criterio práctico para los <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a>: para $1/x$ en $(0, +\infty)$ tomar $x_n = 1/n$, $y_n = 1/(n + 1)$; para $\sin(1/x)$ en $(0, 1)$, $x_n = 1/(2 n \pi)$, $y_n = 1/(2 n \pi + \pi/2)$ (elección del transcriptor, no de la fuente).</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25), Tema 5, §5.3 “Funciones uniformemente continuas”, pág. 4 del PDF (54 impresa). Idéntico en la versión 2014-15, Lección 11, §11.1, pág. 2 del PDF. <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+
+  <!-- O5-1: definición -->
+  <article class="ej" id="ejp4alt-o5-1-def" data-short="Def." data-title="Continuidad uniforme y medidor (módulo) de continuidad uniforme ω_f" data-topics="continuidad,supremo">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Continuidad uniforme y medidor (módulo) de continuidad uniforme $\omega_f$</h3>
+      <span class="src">Maximenko</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <p>Sean $(X, d)$ e $(Y, d')$ espacios métricos y $f : X \to Y$. Se dice que $f$ es <b>uniformemente continua</b> si
+          $$\begin{aligned} &\forall \varepsilon \gt 0 \quad \exists \delta \gt 0 \quad \forall a \in X \quad \forall b \in X \\ &\quad (d(a, b) \lt \delta \\ &\qquad \Longrightarrow d'(f(a), f(b)) \lt \varepsilon). \end{aligned}$$
+          Se escribe $C_u(X, Y) := \{f \in Y^X :$ $f$ es uniformemente continua$\}$.</p>
+        <p>Para $f : X \to Y$ se define $\omega_f : (0, +\infty) \to [0, +\infty]$,
+          $$\begin{aligned} &\omega_f(\eta) := \sup\{d'(f(a), f(b)) : \\ &\qquad a, b \in X,\ d(a, b) \le \eta\}. \end{aligned}$$
+          Muchos autores utilizan el término “módulo de continuidad uniforme”.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o5-1-c1" aria-label="Gráfico de raíz de x en [0, 4] y el par a, b con |a − b| ≤ η que da el supremo omega_f(η)"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4alt-o5-1-eta">η</label><input type="range" id="ejp4alt-o5-1-eta" min="2" max="200" value="60"><output id="ejp4alt-o5-1-eta-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4alt-o5-1-read" aria-live="polite"></dl>
+        <figcaption>Función elegida para el dibujo (no es ninguna de las de <a href="#ejp4alt-o5-4">O5-4</a>): <i>f</i>(<i>x</i>) = √<i>x</i> en <i>X</i> = [0, 4]. Para el η del control se recorren, numéricamente, los pares <i>a</i>, <i>b</i> con |<i>a</i> − <i>b</i>| ≤ η; el par marcado es el que da la mayor diferencia |<i>f</i>(<i>a</i>) − <i>f</i>(<i>b</i>)|, que es ω<sub><i>f</i></sub>(η).</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>el supremo puede valer $+\infty$ (por eso el codominio es $[0, +\infty]$). La presentación compara las fórmulas cuantificadas de “continua en cada punto” ($\forall a, \forall \varepsilon, \exists \delta, \forall b$) y “uniformemente continua” ($\forall \varepsilon, \exists \delta, \forall a, \forall b$) y deja como ejercicio, sin resolver, mostrar que $C_u(X, Y) \subseteq C(X, Y)$.</div>
+    <p class="cita"><i>Fuente</i>: E. Maximenko, <i>Funciones uniformemente continuas</i> (ESFM-IPN, 2022), diapositivas en págs. 6, 11 y 12 del PDF. <a href="https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf">URL</a>. Acceso: web personal del docente, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a> (herramienta)</p>
+  </article>
+
+  <!-- O5-1: proposición -->
+  <article class="ej" id="ejp4alt-o5-1" data-short="O5-1" data-title="Cota superior para d'(f(a), f(b)) en términos de ω_f" data-topics="continuidad,supremo">
+    <div class="ej-head">
+      <span class="tag">O5-1</span>
+      <h3>Cota superior para $d'(f(a), f(b))$ en términos de $\omega_f$</h3>
+      <span class="src">Maximenko</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : X \to Y$ y sean $a, b \in X$. Entonces
+      $$d'(f(a), f(b)) \le \omega_f(d(a, b)).$$</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El par está en el conjunto del supremo</p>
+          <p>Sea $\eta = d(a, b)$. Entonces $(a, b) \in \{(s, t) \in X^2 : d(s, t) \le \eta\}$. Por eso
+            $$\begin{aligned} &d'(f(a), f(b)) \in \\ &\underbrace{\left\{d'(f(s), f(t)) : \substack{s, t \in X, \\ d(s, t) \le \eta}\right\}}_{G}. \end{aligned}$$
+            Finalmente, recordamos que $\omega_f(\eta) = \sup(G)$. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente supone implícitamente $\eta = d(a, b) \gt 0$ para que $\omega_f(\eta)$ esté definido ($\omega_f$ se definió en $(0, +\infty)$); si $a = b$ la desigualdad es trivial. No se dice en las diapositivas.</div>
+    <p class="cita"><i>Fuente</i>: E. Maximenko, <i>Funciones uniformemente continuas</i> (ESFM-IPN, 2022), diapositivas en págs. 16–19 del PDF. <a href="https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf">URL</a>. Acceso: web personal del docente, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a> (herramienta)</p>
+  </article>
+
+  <!-- O5-2 -->
+  <article class="ej" id="ejp4alt-o5-2" data-short="O5-2" data-title="ω_f es creciente" data-topics="continuidad,supremo">
+    <div class="ej-head">
+      <span class="tag">O5-2</span>
+      <h3>$\omega_f$ es creciente</h3>
+      <span class="src">Maximenko</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : X \to Y$ y sean $\eta_1, \eta_2 \gt 0$ tales que $\eta_1 \lt \eta_2$. Entonces $\omega_f(\eta_1) \le \omega_f(\eta_2)$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Monotonía del supremo</p>
+          <p>Si $d(a, b) \le \eta_1$, entonces $d(a, b) \le \eta_2$. Por eso
+            $$\begin{aligned} &\underbrace{\left\{d'(f(a), f(b)) : \substack{a, b \in X, \\ d(a, b) \le \eta_1}\right\}}_{G} \\ &\subseteq \underbrace{\left\{d'(f(a), f(b)) : \substack{a, b \in X, \\ d(a, b) \le \eta_1}\right\}}_{H}. \end{aligned}$$
+            Luego $\omega_f(\eta_1) = \sup(G) \le \sup(H)$ $= \omega_f(\eta_2)$. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>errata de la fuente (pág. 22): el conjunto $H$ está escrito con “$d(a, b) \le \eta_1$”, pero para que $\sup(H) = \omega_f(\eta_2)$ debe ser “$d(a, b) \le \eta_2$”. Se transcribe tal cual.</div>
+    <p class="cita"><i>Fuente</i>: E. Maximenko, <i>Funciones uniformemente continuas</i> (ESFM-IPN, 2022), diapositivas en págs. 20–23 del PDF. <a href="https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf">URL</a>. Acceso: web personal del docente, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a> (herramienta)</p>
+  </article>
+
+  <!-- O5-3 -->
+  <article class="ej" id="ejp4alt-o5-3" data-short="O5-3" data-title="Criterio de continuidad uniforme vía ω_f" data-topics="continuidad,supremo">
+    <div class="ej-head">
+      <span class="tag">O5-3</span>
+      <h3>Criterio de continuidad uniforme vía $\omega_f$</h3>
+      <span class="src">Maximenko</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $f : X \to Y$. Entonces las siguientes condiciones son equivalentes:</p>
+      <ol class="items">
+        <li>$f$ es uniformemente continua;</li>
+        <li>para cada $\varepsilon \gt 0$ existe $\eta \gt 0$ tal que $\omega_f(\eta) \le \varepsilon$;</li>
+        <li>$\lim_{\delta \to 0} \omega_f(\delta) = 0$;</li>
+        <li>$\inf_{\delta \gt 0} \omega_f(\delta) = 0$.</li>
+      </ol>
+      <p>La condición (b) involucra solamente 2 cuantificadores y muestra la utilidad de $\omega_f$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(a) $\Rightarrow$ (b)</p>
+          <p>Supongamos que $f \in C_u(X, Y)$. Dado $\varepsilon \gt 0$, encontramos $\delta \gt 0$ tal que
+            $$\begin{aligned} &\forall a, b \in X \quad (d(a, b) \lt \delta \\ &\qquad \Longrightarrow d'(f(a), f(b)) \lt \varepsilon). \end{aligned}$$
+            Pongamos $\eta := \delta / 2$. Notamos que si $a, b \in X$ y $d(a, b) \le \eta$, entonces $d(a, b) \lt \delta$ y por eso $d'(f(a), f(b)) \lt \varepsilon$. Luego $\omega_f(\eta) \le \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ejercicio</p>
+          <p>Completar la demostración (las implicaciones restantes quedan como ejercicio en la fuente).</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>sólo (a)$\Rightarrow$(b) está demostrada en las diapositivas; no se agrega el resto. Para (b)$\Rightarrow$(a) alcanza <a href="#ejp4alt-o5-1">O5-1</a> (si $d(a, b) \lt \eta$ entonces $d'(f(a), f(b)) \le \omega_f(d(a, b)) \le \omega_f(\eta) \le \varepsilon$ usando <a href="#ejp4alt-o5-2">O5-2</a>), pero eso no está escrito en la fuente.</div>
+    <p class="cita"><i>Fuente</i>: E. Maximenko, <i>Funciones uniformemente continuas</i> (ESFM-IPN, 2022), diapositivas en págs. 24–31 del PDF. <a href="https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf">URL</a>. Acceso: web personal del docente, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O5-4 -->
+  <article class="ej" id="ejp4alt-o5-4" data-short="O5-4" data-title="Calcular ω_f para x² en [−5, 5], x² en R y 1/x en (0, +∞)" data-topics="continuidad,supremo">
+    <div class="ej-head">
+      <span class="tag">O5-4</span>
+      <h3>Calcular $\omega_f$ para $x^2$ en $[-5, 5]$, $x^2$ en $\mathbb{R}$ y $1/x$ en $(0, +\infty)$</h3>
+      <span class="src">Maximenko, ejercicios</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>Sea $f : [-5, 5] \to \mathbb{R}$, $f(x) := x^2$. Calcular $\omega_f$ y determinar si $f$ es uniformemente continua.</li>
+        <li>Sea $f : \mathbb{R} \to \mathbb{R}$, $f(x) = x^2$. Calcular $\omega_f$ y determinar si $f$ es uniformemente continua.</li>
+        <li>Sea $f : (0, +\infty) \to \mathbb{R}$, $f(x) = 1/x$. Calcular $\omega_f$ y determinar si $f$ es uniformemente continua.</li>
+      </ol>
+    </div>
+    <div class="estrategia"><b>Idea (la única indicación de la fuente)</b><p>Los tres ejercicios siguen inmediatamente al criterio <a href="#ejp4alt-o5-3">O5-3</a>: la consigna es calcular explícitamente $\omega_f(\eta) = \sup\{|f(a) - f(b)| : |a - b| \le \eta\}$ y decidir con (b) o (d) del criterio ($f$ es uniformemente continua si y sólo si $\inf_{\delta \gt 0} \omega_f(\delta) = 0$). La presentación no da las respuestas.</p></div>
+    <div class="nota"><b>Nota</b>sin resolución en la fuente; se transcribe sólo el enunciado. Compárese con C6-5 ($x^2$ no uniformemente continua en $(0, +\infty)$, por sucesiones) y con el <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> de la práctica ($1/x$ en $(0, +\infty)$).</div>
+    <p class="cita"><i>Fuente</i>: E. Maximenko, <i>Funciones uniformemente continuas</i> (ESFM-IPN, 2022), diapositivas en págs. 32–34 del PDF. <a href="https://esfm.egormaximenko.com/analysis/uniformly_continuous_functions_presentation_es.pdf">URL</a>. Acceso: web personal del docente, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O2-14 -->
+  <article class="ej" id="ejp4alt-o2-14" data-short="O2-14" data-title="Lipschitz manda acotados en acotados; uniformemente continua no" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O2-14</span>
+      <h3>Lipschitz manda acotados en acotados; uniformemente continua no: la identidad desde la métrica discreta</h3>
+      <span class="src">Guccione, Prop. 3.62 y Obs. 3.63</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>(Proposición 3.62) Consideremos una función de <span class="ref" data-ref="def-5.24">Lipschitz</span> $f : X \to Y$. La imagen por $f$ de cada conjunto <span class="ref" data-ref="def-4.8">acotado</span> $A$ de $X$ es un conjunto acotado de $Y$.</li>
+        <li>(Observación 3.63) Para que valga el resultado anterior no basta que $f$ sea <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1. El diámetro se multiplica a lo sumo por $K$</p>
+          <p>Denotemos con $K$ a la constante de Lipschitz de $f$. Como
+            $$\begin{aligned} &d(f(x), f(x')) \le K d(x, x') \\ &\text{para todo } x, x' \in X, \end{aligned}$$
+            si $A$ tiene <span class="ref" data-ref="def-4.9">diámetro</span> $M$, entonces $f(A)$ tiene diámetro menor o igual que $K M$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2. La identidad desde la métrica discreta</p>
+          <p>Por ejemplo, si $X$ es un espacio métrico no acotado, entonces la función identidad $\operatorname{id} : X_\delta \to X$, donde $X_\delta$ es el conjunto subyacente de $X$ dotado con la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>, es uniformemente continua y aplica su dominio (que es un conjunto acotado) sobre su codominio (que no lo es). Es más, cuando $X$ es $\mathbb{N}$ (con la distancia usual), $f$ es un isomorfismo uniforme (biyectiva, uniformemente continua y con inversa uniformemente continua).</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>$\operatorname{id} : X_\delta \to X$ es uniformemente continua porque, dado $\varepsilon \gt 0$, con $\delta = 1$ la condición $\delta(x, x') \lt 1$ fuerza $x = x'$. Es la misma función del <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c) de la Práctica 4 ($\operatorname{id} : (\mathbb{R}^2, \delta) \to (\mathbb{R}^2, d_2)$), vista ahora con la lupa de la continuidad uniforme. Para $X = \mathbb{N}$, la inversa $\operatorname{id} : \mathbb{N} \to \mathbb{N}_\delta$ también es uniformemente continua: si $|n - m| \lt 1$ entonces $n = m$. Esto da un ejemplo de función uniformemente continua y no acotada (como pide el <a class="xg" data-guia="p4" data-ej="15">Ej. 15</a>), aunque con dominio $X_\delta$ en lugar de $\mathbb{R}$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Proposición 3.62 y Observación 3.63, págs. 74–75 del PDF (65–66 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c), <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O11-5: definición -->
+  <article class="ej" id="ejp4alt-o11-5-def" data-short="Def." data-title="Continuidad uniforme y condición de Lipschitz (BUAP)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Continuidad uniforme y condición de Lipschitz</h3>
+      <span class="src">BUAP, Defs. 5.35 y 5.37</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $(X, d)$ y $(Y, d')$ espacios métricos, $A \subseteq X$ y $f : A \to Y$ una función.</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li>$f$ es <b>uniformemente continua</b> en $A$ si para cada $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que para cualesquiera $x, y \in A$, si $d(x, y) \lt \delta$, entonces $d'(f(x), f(y)) \lt \varepsilon$.</li>
+        <li>$f$ <b>satisface la condición de Lipschitz</b> en $A$ si existe $k \gt 0$ tal que para cualesquiera $x, y \in A$ se cumple que $d'(f(x), f(y)) \le k\, d(x, y)$.</li>
+      </ol>
+    </div>
+    <p class="cita"><i>Fuente</i>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), Definiciones 5.35 y 5.37, pág. 134 del libro (143 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: “DR © Benemérita Universidad Autónoma de Puebla”, ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c), <a class="xg" data-guia="p4" data-ej="12">12</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O11-5: ejemplo -->
+  <article class="ej" id="ejp4alt-o11-5" data-short="O11-5" data-title="Desde un espacio discreto todo es uniformemente continuo; uniformemente continua no implica Lipschitz" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O11-5</span>
+      <h3>Desde un espacio discreto todo es uniformemente continuo, y uniformemente continua $\not\Rightarrow$ Lipschitz</h3>
+      <span class="src">BUAP, Lema 5.36 y Obs. 5.38</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>Si $X$ es un espacio métrico <span class="ref" data-ref="ext-metrica-discreta">discreto</span> (con la métrica $D(x, y) = 1$ si $x \neq y$, $D(x, y) = 0$ si $x = y$) y $f : X \to Y$ es una función cualquiera, entonces $f$ es uniformemente continua.</li>
+        <li>Si $f$ satisface la condición de Lipschitz, entonces $f$ es uniformemente continua. La afirmación recíproca es falsa: la función $g : (\mathbb{R}, D) \to (\mathbb{R}, |\cdot|)$ definida por $g(x) = x$, donde $D$ es la métrica discreta, es uniformemente continua pero no satisface la condición de Lipschitz.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ítem 1</p>
+          <p>Sean $\varepsilon \gt 0$ y $d'$ la métrica de $Y$. Para $\delta \lt 1$ y $x, y \in X$, si $D(x, y) \lt \delta \lt 1$, entonces $D(x, y) = 0$, lo cual implica que $x = y$, es decir, $d'(f(x), f(y)) = 0 \lt \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ítem 2</p>
+          <p>Si $f$ es Lipschitz con constante $k$, dado $\varepsilon \gt 0$ basta elegir $\delta = \varepsilon / k$. Para el contraejemplo: por el ítem 1, $g$ es uniformemente continua. Supongamos que satisface la condición de Lipschitz, es decir, que existe $k \gt 0$ tal que para todo $x, y \in \mathbb{R}$ se cumple que $|g(x) - g(y)| \le k D(x, y)$. En particular, para $x \gt k$ e $y = 0$,
+            $$\begin{aligned} |g(x) - g(y)| &= |x| \le k D(x, 0) \\ &= k \lt x, \end{aligned}$$
+            lo cual significa que $x \lt x$, una contradicción.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente escribe la condición de Lipschitz supuesta con “$\lt$” ($|g(x) - g(y)| \lt k D(x, y)$) aunque la Definición 5.37 la define con “$\le$”; el argumento funciona igual con $\le$, como está transcripto arriba. La fuente también agrega: “es claro que si una función $f$ es uniformemente continua, entonces $f$ es continua; sin embargo, el recíproco no es cierto, dar un ejemplo” (los ejemplos C6 del repositorio, $x^2$ en $\mathbb{R}$, sirven). Para el <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c) de la práctica: el ítem 1 dice que $\operatorname{id} : (\mathbb{R}^2, D) \to (\mathbb{R}^2, d_2)$ no sólo es continua sino uniformemente continua.</div>
+    <p class="cita"><i>Fuente</i>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), Lema 5.36 (ítem 3) y Observación 5.38, págs. 134–135 del libro (143–144 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: “DR © Benemérita Universidad Autónoma de Puebla”, ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c), <a class="xg" data-guia="p4" data-ej="12">12</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O14-8 -->
+  <article class="ej" id="ejp4alt-o14-8" data-short="O14-8" data-title="La continuidad uniforme no es una propiedad topológica: la identidad y ρ(x, y) = |e^x − e^y|" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O14-8</span>
+      <h3>La continuidad uniforme no es una propiedad topológica: la identidad y $\rho(x, y) = |e^x - e^y|$</h3>
+      <span class="src">Payá, Apuntes 05, §5.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>En $\mathbb{R}$ consideramos la distancia usual y la distancia $\rho(x, y) = |e^x - e^y|$, que es <span class="ref" data-ref="ext-metricas-equivalentes">equivalente</span> a la usual (tiene los mismos abiertos). Sea $E = (\mathbb{R}, |\cdot|)$ y $F = (\mathbb{R}, \rho)$. Probar que la identidad $f : E \to F$ no es <span class="ref" data-ref="def-5.14">uniformemente continua</span>, aunque sí lo es si en $F$ se usa la distancia usual, o si en $E$ y $F$ se usa $\rho$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Con $|\cdot|$ en $E$ y $\rho$ en $F$: no</p>
+          <p>Si $f$ fuese uniformemente continua tendríamos que
+            $$\begin{aligned} &\forall \varepsilon \gt 0 \quad \exists \delta \gt 0 : \\ &x, y \in \mathbb{R},\ |x - y| \lt \delta \\ &\quad \Longrightarrow |e^x - e^y| \lt \varepsilon. \end{aligned}$$
+            Esto sería tanto como decir que la función exponencial es uniformemente continua, vista como función de $\mathbb{R}$ con la distancia usual en sí mismo, cosa que sabemos que es falsa.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o14-8-c1" aria-label="Gráfico de e^x cerca de x = n con los puntos n y n + 1/n: muy cerca en la distancia usual y muy lejos en rho"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o14-8-n"><i>n</i></label><input type="range" id="ejp4alt-o14-8-n" min="1" max="10" value="3"><output id="ejp4alt-o14-8-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o14-8-read" aria-live="polite"></dl>
+          <figcaption>La verificación de la nota: <i>x<sub>n</sub></i> = <i>n</i>, <i>y<sub>n</sub></i> = <i>n</i> + 1/<i>n</i>. La ventana sigue a <i>n</i> (de <i>n</i> − 1 a <i>n</i> + 1.2 en horizontal, de 0 a <i>e</i><sup><i>n</i>+1.2</sup> en vertical). El tramo azul sobre el eje es |<i>x<sub>n</sub></i> − <i>y<sub>n</sub></i>| = 1/<i>n</i>; el rojo vertical es ρ(<i>x<sub>n</sub></i>, <i>y<sub>n</sub></i>) = <i>e</i><sup><i>y<sub>n</sub></i></sup> − <i>e</i><sup><i>x<sub>n</sub></i></sup>, que crece con <i>n</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Con la usual en $F$, o con $\rho$ en los dos: sí</p>
+          <p>Sin embargo, es obvio que si en $F$ cambiamos su distancia por la usual de $\mathbb{R}$ tendremos la continuidad uniforme de $f$. Lo mismo ocurre si tanto en $E$ como en $F$ usamos la distancia $\rho$ (la distancia de $f(x)$ a $f(y)$ coincide con la de $x$ a $y$). Tenemos así ejemplos en los que una función uniformemente continua deja de serlo cuando sustituimos la distancia del espacio de partida, o del de llegada, por otra equivalente.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>que $e^x$ no es uniformemente continua en $\mathbb{R}$ se da por sabido; con <a href="#ejp4alt-o14-6-prop">O14-6</a>, tomar $x_n = n$, $y_n = n + 1/n$: $e^{n + 1/n} - e^n = e^n(e^{1/n} - 1) \ge e^n / n \to \infty$ (verificación del transcriptor). La fuente agrega que, en espacios <strong>normados</strong>, la continuidad uniforme sí se conserva al cambiar las normas por otras equivalentes (versión 2014-15, pág. 4: si $\lambda \|u - v\|_1 \le \|u - v\|_2$ y $\|f(u) - f(v)\|_2 \le \rho \|f(u) - f(v)\|_1$, dado $\varepsilon$ se toma $\delta$ para $\varepsilon / \rho$ y sirve $\delta \lambda$). Esto es lo que hace que en el <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> de la Práctica 4 dé lo mismo usar $d_1$, $d_2$ o $d_\infty$.</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25), Tema 5, §5.3, pág. 5 del PDF (55 impresa); versión 2014-15, §11.3, pág. 4 del PDF (66 impresa). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="1">Ej. 1</a> (c)(d) (variante), <a class="xg" data-guia="p4" data-ej="15">15</a></p>
   </article>
 </section>

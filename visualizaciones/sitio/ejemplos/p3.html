@@ -1751,11 +1751,11 @@
             <path d="M70 120 C 70 50, 170 30, 220 60 S 320 120, 270 170 S 120 210, 70 120 Z" class="sv-seq2" style="stroke-width:3"/>
             <text x="160" y="125" class="sv-label-accent">U</text>
             <text x="300" y="70" class="sv-label-seq2">F = ∂U</text>
-            <circle cx="72.5" cy="140" r="26" class="sv-ink sv-dash"/>
-            <circle cx="72.5" cy="140" r="4" class="sv-fill-seq2"/>
-            <text x="34" y="146" class="sv-text">x</text>
-            <circle cx="88" cy="136" r="3.5" class="sv-fill-accent"/>
-            <text x="94" y="134" class="sv-label-accent">y</text>
+            <circle cx="71" cy="130" r="26" class="sv-ink sv-dash"/>
+            <circle cx="71" cy="130" r="4" class="sv-fill-seq2"/>
+            <text x="32" y="136" class="sv-text">x</text>
+            <circle cx="88" cy="124" r="3.5" class="sv-fill-accent"/>
+            <text x="93" y="118" class="sv-label-accent">y</text>
             <text x="180" y="222" text-anchor="middle" class="sv-muted">B(x, r) ∩ U ≠ ∅ y ningún y ∈ U está en F</text>
           </svg>
           <figcaption>Esquema con <i>U</i> un abierto del plano (elegido para el dibujo). Alrededor de un <i>x</i> ∈ <i>F</i>, toda bola agarra puntos <i>y</i> ∈ <i>U</i>, que no están en <i>F</i>: por eso <i>F</i> no tiene puntos interiores.</figcaption>
@@ -1848,7 +1848,7 @@
           <canvas id="ejp3-30-c1" aria-label="Una función f, la banda entre f − ε y f + ε sobre [a, b], y una f_n que se mete en la banda cuando n crece"></canvas>
           <div class="ctrl">
             <div class="slider"><label for="ejp3-30-n"><i>n</i></label><input type="range" id="ejp3-30-n" min="1" max="20" value="2"><output id="ejp3-30-n-o"></output></div>
-            <div class="slider"><label for="ejp3-30-eps">ε</label><input type="range" id="ejp3-30-eps" min="5" max="100" value="45"><output id="ejp3-30-eps-o"></output></div>
+            <div class="slider"><label for="ejp3-30-eps">ε</label><input type="range" id="ejp3-30-eps" min="5" max="100" value="60"><output id="ejp3-30-eps-o"></output></div>
           </div>
           <dl class="read" id="ejp3-30-read" aria-live="polite"></dl>
           <figcaption>La curva azul es <i>f</i>, la banda es {<i>f</i> − ε &lt; <i>y</i> &lt; <i>f</i> + ε} sobre [<i>a</i>, <i>b</i>] y la naranja es <i>f<sub>n</sub></i> = <i>f</i> + (1/<i>n</i>)·<i>g</i>, con <i>f</i> y <i>g</i> elegidas para el dibujo. <i>d</i><sub>∞</sub>(<i>f<sub>n</sub></i>, <i>f</i>) &lt; ε quiere decir que todo el gráfico de <i>f<sub>n</sub></i> está en la banda, no sólo algunos puntos.</figcaption>
@@ -1967,7 +1967,7 @@
             <div class="slider"><label for="ejp3-31-n3"><i>n</i></label><input type="range" id="ejp3-31-n3" min="3" max="40" value="4"><output id="ejp3-31-n3-o"></output></div>
           </div>
           <dl class="read" id="ejp3-31-read3" aria-live="polite"></dl>
-          <figcaption>En negro, el escalón <i>f</i> (vale 0 en 1/2, círculo lleno abajo, hueco arriba); en naranja, <i>f<sub>n</sub></i>. El triángulo sombreado tiene base 1/<i>n</i> y altura 1.</figcaption>
+          <figcaption>En trazo grueso, el escalón <i>f</i> (vale 0 en 1/2, círculo lleno abajo, hueco arriba); en naranja, <i>f<sub>n</sub></i>. El triángulo sombreado tiene base 1/<i>n</i> y altura 1.</figcaption>
         </figure>
       </div>
     </div>
@@ -1994,7 +1994,7 @@
           <div class="slider"><label for="ejp3-32-n">dígitos <i>n</i></label><input type="range" id="ejp3-32-n" min="1" max="9" value="3"><output id="ejp3-32-n-o"></output></div>
         </div>
         <dl class="read" id="ejp3-32-read" aria-live="polite"></dl>
-        <figcaption>La recta muestra una ventana alrededor de π que se achica con <i>n</i>: los puntos son <i>x</i>₁, …, <i>x<sub>n</sub></i>, todos racionales (decimales finitos). π, en rojo, es el único punto que falta en ℚ.</figcaption>
+        <figcaption>La recta muestra una ventana alrededor de π que se achica con <i>n</i>: se ven <i>x</i><sub><i>n</i>−1</sub> y <i>x<sub>n</sub></i> (los anteriores quedan afuera), todos racionales (decimales finitos). π, en rojo, es el único punto que falta en ℚ.</figcaption>
       </figure>
     </div>
   </article>
@@ -2044,7 +2044,7 @@
         <figure class="viz">
           <canvas id="ejp3-c5-1-c1" aria-label="Las coordenadas k de una sucesión acotada a_n y del límite ã, con la banda ã ± ε en todas las coordenadas a la vez"></canvas>
           <div class="ctrl">
-            <div class="slider"><label for="ejp3-c5-1-n"><i>n</i></label><input type="range" id="ejp3-c5-1-n" min="1" max="30" value="2"><output id="ejp3-c5-1-n-o"></output></div>
+            <div class="slider"><label for="ejp3-c5-1-n"><i>n</i></label><input type="range" id="ejp3-c5-1-n" min="1" max="30" value="4"><output id="ejp3-c5-1-n-o"></output></div>
             <div class="slider"><label for="ejp3-c5-1-eps">ε</label><input type="range" id="ejp3-c5-1-eps" min="5" max="100" value="30"><output id="ejp3-c5-1-eps-o"></output></div>
           </div>
           <dl class="read" id="ejp3-c5-1-read" aria-live="polite"></dl>
@@ -2086,7 +2086,7 @@
             <div class="slider"><label for="ejp3-c5-2-N"><i>n</i> ≤</label><input type="range" id="ejp3-c5-2-N" min="1" max="25" value="5"><output id="ejp3-c5-2-N-o"></output></div>
           </div>
           <dl class="read" id="ejp3-c5-2-read" aria-live="polite"></dl>
-          <figcaption>Los gráficos de <i>y</i> = <i>x<sup>n</sup></i> para 0 ≤ <i>x</i> ≤ 1,2, con <i>n</i> hasta el valor del control, y la circunferencia <i>B</i> punteada. Los puntos naranjas (1/2, 1/2<sup><i>n</i></sup>) bajan hacia (1/2, 0), marcado en rojo: está en la clausura de <i>A</i> pero no en <i>A</i>.</figcaption>
+          <figcaption>Los gráficos de <i>y</i> = <i>x<sup>n</sup></i> para −1,3 ≤ <i>x</i> ≤ 1,3, con <i>n</i> hasta el valor del control, y la circunferencia <i>B</i> punteada. Los puntos naranjas (1/2, 1/2<sup><i>n</i></sup>) bajan hacia (1/2, 0), marcado en rojo: está en la clausura de <i>A</i> pero no en <i>A</i>.</figcaption>
         </figure>
       </div>
       <div class="step">
@@ -3414,7 +3414,7 @@ PP.register(function ej28a() {
       rows = [["x ∉ E", F3(x)], ["ρ = mín{|x|, |x−1|, |x−2|}", F3(rho)], ["B(x, ρ) ∩ E", "= ∅  ⇒  x ∉ ∂E", "good"]];
     }
     PP.dot(ctx, T.X(x), yL - 30, 6, C("--ink"));
-    PP.label(ctx, "x", T.X(x), yL - 52, C("--ink"), "center", "bottom", 13);
+    PP.label(ctx, "x", T.X(x), yL - 20, C("--ink"), "center", "top", 13);
     PP.read("ejp3-28-read2", rows);
   }
   PP.register(draw, []);
@@ -3453,7 +3453,7 @@ PP.register(function ej28a() {
       inE = null; meetE = meetEc = meetEx = true;
     }
     PP.dot(ctx, T.X(x), yL - 32, 6, C("--ink"));
-    PP.label(ctx, "x = " + F2(x), T.X(x), yL - 56, C("--ink"), "center", "bottom", 12);
+    PP.label(ctx, "x = " + F2(x), T.X(x), yL - 20, C("--ink"), "center", "top", 12);
     const yn = (v) => (v ? "sí" : "no");
     const rows = [];
     if (inE !== null) rows.push(["x ∈ E", yn(inE)]);
@@ -3492,7 +3492,7 @@ PP.register(ab2("ejp3-15-09-2-c2", "ejp3-15-09-2-r2", "b"), ["ejp3-15-09-2-r2"])
 
 /* ===================== 15/09-3 · bola cerrada vía r → 0⁺ ===================== */
 (() => {
-  const S = { P: [1.45, 0.75] }; let TT = null;
+  const S = { P: [1.3, 0.6] }; let TT = null;
   function draw() {
     const r = PP.val("ejp3-15-09-3-r") / 100;
     PP.out("ejp3-15-09-3-r-o", F2(r));
@@ -3914,11 +3914,11 @@ PP.register(function e31c() {
   PP.out("ejp3-31-n3-o", String(n));
   const { ctx, T } = frame31("ejp3-31-c3");
   PP.path(ctx, P31(T, [[0.5 - 1 / n, 0], [0.5, 1], [0.5, 0]]), null, 1, null, true, C("--area3"));
+  PP.path(ctx, P31(T, ramp(n)), C("--seq2"), 2.2);
   PP.path(ctx, P31(T, [[0, 0], [0.5, 0]]), C("--ink"), 3);
   PP.path(ctx, P31(T, [[0.5, 1], [1, 1]]), C("--ink"), 3);
   PP.dot(ctx, T.X(0.5), T.Y(0), 4.5, C("--ink"));
   PP.dot(ctx, T.X(0.5), T.Y(1), 4.5, C("--bg"), C("--ink"));
-  PP.path(ctx, P31(T, ramp(n)), C("--seq2"), 1.8);
   PP.label(ctx, "f", T.X(0.92), T.Y(1) - 6, C("--ink"), "center", "bottom", 13);
   PP.label(ctx, "fₙ", T.X(0.5 - 1 / n) - 4, T.Y(0.4), C("--seq2"), "right", "middle", 13);
   PP.read("ejp3-31-read3", [["d₁(fₙ, f) = 1/(2n)", F3(1 / (2 * n))]]);
@@ -3929,20 +3929,21 @@ PP.register(function e32() {
   const n = PP.val("ejp3-32-n");
   PP.out("ejp3-32-n-o", String(n));
   const xs = []; for (let k = 1; k <= n; k++) { const p = Math.pow(10, k - 1); xs.push(Math.floor(Math.PI * p) / p); }
-  const hw = 2 * Math.pow(10, -(n - 1));
+  const hw = Math.min(1.5, 1.2 * Math.pow(10, -(n - 2)));
   const { ctx, w, h } = PP.canvas("ejp3-32-c1", 0.36);
   const T = PP.frame(w, h, { x0: Math.PI - hw, x1: Math.PI + hw, y0: 0, y1: 1 }, { l: 14, r: 14, t: 8, b: 8 });
   const yL = h * 0.5;
   PP.path(ctx, [[T.p.l, yL], [w - T.p.r, yL]], C("--muted"), 1);
   xs.forEach((x, i) => { if (x >= T.box.x0) { PP.dot(ctx, T.X(x), yL, i === n - 1 ? 5.5 : 3.5, C("--accent")); } });
   const xn = xs[n - 1];
+  if (n > 1) PP.label(ctx, "x" + "₀₁₂₃₄₅₆₇₈₉"[n - 1], T.X(xs[n - 2]), yL - 10, C("--muted"), "center", "bottom", 11);
   PP.label(ctx, "x" + "₀₁₂₃₄₅₆₇₈₉"[n], T.X(xn), yL - 10, C("--accent"), "center", "bottom", 12);
   PP.dot(ctx, T.X(Math.PI), yL, 5, C("--bg"), C("--fail"));
   PP.label(ctx, "π ∉ ℚ", T.X(Math.PI), yL + 10, C("--fail"), "center", "top", 12);
   PP.read("ejp3-32-read", [
     ["xₙ", xn.toFixed(n - 1).replace(".", ",")],
     ["|π − xₙ|", (Math.PI - xn).toExponential(2).replace(".", ",") + " < 10^−" + (n - 1)],
-    ["ventana", "π ± " + hw.toExponential(0)],
+    ["ventana", "π ± " + PP.fmt(hw, 9).replace(".", ",")],
   ]);
 }, ["ejp3-32-n"]);
 
@@ -4087,12 +4088,12 @@ PP.register(function c55() {
 
 /* ===================== C5-6 · una Cauchy en una bola cerrada ===================== */
 PP.register(function c56() {
-  const { ctx, w, h } = PP.canvas("ejp3-c5-6-c1", 0.72);
-  const T = eqFrame(w, h, -2.2, 2.2, 0); const s = scale(T);
+  const { ctx, w, h } = PP.canvas("ejp3-c5-6-c1", 0.9);
   const L = [0.35, -0.15];
   const a = (n) => [L[0] + 1.25 * Math.pow(0.86, n) * Math.cos(1.1 * n), L[1] + 1.25 * Math.pow(0.86, n) * Math.sin(1.1 * n)];
   const a1 = a(1); let M = 0; const pts = [];
   for (let n = 1; n <= 60; n++) { const p = a(n); pts.push(p); M = Math.max(M, hyp(p[0] - a1[0], p[1] - a1[1])); }
+  const T = eqFrame(w, h, a1[0] - 1.35 * M, a1[0] + 1.35 * M, a1[1]); const s = scale(T);
   PP.circle(ctx, T.X(a1[0]), T.Y(a1[1]), M * s, C("--accent"), C("--band"), null, 2);
   PP.path(ctx, pts.map(([x, y]) => [T.X(x), T.Y(y)]), C("--rule"), 1);
   pts.forEach(([x, y], i) => PP.dot(ctx, T.X(x), T.Y(y), i < 20 ? 3.4 : 1.8, C("--seq2")));

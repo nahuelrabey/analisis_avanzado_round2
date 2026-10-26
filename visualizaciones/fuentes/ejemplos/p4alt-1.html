@@ -700,7 +700,7 @@
             <circle cx="275" cy="100" r="40" class="sv-ok sv-dash"/>
             <circle cx="275" cy="100" r="16" class="sv-ok sv-dash"/>
             <circle cx="275" cy="100" r="3.5" class="sv-fill-accent"/>
-            <text x="275" y="93" text-anchor="middle" class="sv-text">f(x)</text>
+            <text x="275" y="80" text-anchor="middle" class="sv-text">f(x)</text>
             <text x="275" y="156" text-anchor="middle" class="sv-label-ok">B(f(x), ε) para dos ε</text>
             <path d="M100 96 Q180 70 268 96" class="sv-axis"/><path d="M260 90 L269 97 L258 100" class="sv-axis"/>
             <text x="180" y="72" text-anchor="middle" class="sv-text">f</text>
@@ -739,7 +739,7 @@
           <p>Observamos que $U = \{0\}$ es abierto en $X$ y $g^{-1}(U) = f(U) = U = \{0\}$ no es abierto en $Y$. Luego $g$ no es continua (y $f$ no manda abiertos en abiertos).</p>
         </div>
         <figure class="viz">
-          <svg viewBox="0 0 360 170" role="img" aria-label="Arriba, X igual a R con la métrica discreta, donde el conjunto {0} es una bola; abajo, Y igual a R con la usual, donde toda bola alrededor de 0 tiene más puntos">
+          <svg viewBox="0 0 360 180" role="img" aria-label="Arriba, X igual a R con la métrica discreta, donde el conjunto {0} es una bola; abajo, Y igual a R con la usual, donde toda bola alrededor de 0 tiene más puntos">
             <text x="10" y="22" class="sv-muted">X = (ℝ, discreta)</text>
             <g class="sv-fill-seq2">
               <circle cx="40" cy="50" r="2.5"/><circle cx="70" cy="50" r="2.5"/><circle cx="100" cy="50" r="2.5"/><circle cx="130" cy="50" r="2.5"/><circle cx="150" cy="50" r="2.5"/><circle cx="210" cy="50" r="2.5"/><circle cx="230" cy="50" r="2.5"/><circle cx="260" cy="50" r="2.5"/><circle cx="290" cy="50" r="2.5"/><circle cx="320" cy="50" r="2.5"/>
@@ -837,23 +837,24 @@
           <p>Por el Lema 5.8 de la fuente (no transcripto; la misma cuenta está en <a href="#ejp4alt-o7-1">O7-1</a>, con $a = 0$), $f$ es continua en $[-1, 1]$. Notemos que $(-1, 1)$ es abierto de $[-1, 1]$ y que $f((-1, 1)) = [0, 1)$. Como $[0, 1)$ no es abierto de $\mathbb{R}$, éste es un ejemplo de que una función continua no envía abiertos en abiertos.</p>
         </div>
         <figure class="viz">
-          <svg viewBox="0 0 360 200" role="img" aria-label="Gráfico de valor absoluto en [-1, 1]; el intervalo abierto (-1, 1) en el eje horizontal y su imagen [0, 1) en el eje vertical">
-            <line x1="20" y1="160" x2="340" y2="160" class="sv-axis"/>
+          <svg viewBox="0 0 420 200" role="img" aria-label="Gráfico de valor absoluto en [-1, 1]; el intervalo abierto (-1, 1) en el eje horizontal y su imagen [0, 1) en un eje vertical a la derecha">
+            <line x1="20" y1="160" x2="320" y2="160" class="sv-axis"/>
             <line x1="180" y1="20" x2="180" y2="185" class="sv-axis"/>
-            <line x1="60" y1="40" x2="300" y2="40" class="sv-grid sv-dash"/>
+            <line x1="60" y1="40" x2="345" y2="40" class="sv-grid sv-dash"/>
+            <line x1="180" y1="160" x2="345" y2="160" class="sv-grid sv-dash"/>
             <polyline points="60,40 180,160 300,40" class="sv-accent"/>
             <circle cx="60" cy="40" r="3.5" class="sv-fill-accent"/><circle cx="300" cy="40" r="3.5" class="sv-fill-accent"/>
-            <line x1="60" y1="170" x2="300" y2="170" class="sv-seq2"/>
-            <circle cx="60" cy="170" r="4" class="sv-fill-bg sv-seq2"/><circle cx="300" cy="170" r="4" class="sv-fill-bg sv-seq2"/>
-            <text x="60" y="190" text-anchor="middle" class="sv-muted">−1</text><text x="300" y="190" text-anchor="middle" class="sv-muted">1</text>
-            <text x="240" y="186" class="sv-label-seq2">(−1, 1)</text>
-            <line x1="190" y1="160" x2="190" y2="40" class="sv-ok"/>
-            <circle cx="190" cy="160" r="4" class="sv-fill-ok"/><circle cx="190" cy="40" r="4" class="sv-fill-bg sv-ok"/>
-            <text x="198" y="44" class="sv-label-ok">1 (no está)</text>
-            <text x="198" y="152" class="sv-label-ok">0 (está)</text>
-            <text x="198" y="100" class="sv-label-ok">[0, 1)</text>
+            <line x1="60" y1="172" x2="300" y2="172" class="sv-seq2"/>
+            <circle cx="60" cy="172" r="4" class="sv-fill-bg sv-seq2"/><circle cx="300" cy="172" r="4" class="sv-fill-bg sv-seq2"/>
+            <text x="60" y="192" text-anchor="middle" class="sv-muted">−1</text><text x="300" y="192" text-anchor="middle" class="sv-muted">1</text>
+            <text x="240" y="192" text-anchor="middle" class="sv-label-seq2">(−1, 1)</text>
+            <line x1="345" y1="160" x2="345" y2="40" class="sv-ok"/>
+            <circle cx="345" cy="160" r="4" class="sv-fill-ok"/><circle cx="345" cy="40" r="4" class="sv-fill-bg sv-ok"/>
+            <text x="353" y="44" class="sv-label-ok">1 (no está)</text>
+            <text x="353" y="104" class="sv-label-ok">[0, 1)</text>
+            <text x="353" y="164" class="sv-label-ok">0 (está)</text>
           </svg>
-          <figcaption>El gráfico de |<i>x</i>| en [−1, 1]. En naranja, el abierto (−1, 1) del dominio (círculos vacíos: los extremos no están). En verde, su imagen [0, 1): contiene al 0 (círculo lleno) y ninguna bola alrededor de 0 queda adentro.</figcaption>
+          <figcaption>El gráfico de |<i>x</i>| en [−1, 1]. En naranja, el abierto (−1, 1) del dominio (círculos vacíos: los extremos no están). En verde, a la derecha, su imagen [0, 1) en el eje de los valores: contiene al 0 (círculo lleno) y ninguna bola alrededor de 0 queda adentro.</figcaption>
         </figure>
       </div>
     </div>

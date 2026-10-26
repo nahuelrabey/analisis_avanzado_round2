@@ -664,7 +664,7 @@ PP.register(function o2_9() {
     }
     if (prev !== "0") band(start, T.box.x1, prev === "U");
     PP.label(ctx, "U", T.p.l + 2, T.Y(-0.3) - 4, C("--accent"), "left", "bottom", 11);
-    PP.label(ctx, "V", T.X(hh) - 4, T.Y(-0.48), C("--seq2"), "right", "middle", 11);
+    PP.label(ctx, "V", T.p.l + 2, T.Y(-0.48) - 4, C("--seq2"), "left", "bottom", 11);
   }
   PP.read("ejp4alt-o2-9-read", [
     ["D = [h, 1.5] con h", F(hh, 1)],
@@ -724,3 +724,134 @@ PP.register(function o2_10() {
     ["d((x, 1/x), (x, −1/x)) = 2/x", F(2 / x, 4)],
   ]);
 }, ["ejp4alt-o2-10-x"]);
+
+
+/* ===================== Bloque 9 ===================== */
+
+/* O6-1: f Lipschitz con K = 1.3; caja de ancho 2δ (δ = ε/K) y alto 2ε en un punto arrastrable. */
+(() => {
+  const st = { y: 1.4 };
+  const f = (x) => 0.5 * Math.sin(2 * x) + 0.3 * x, K = 1.3;
+  let T = null;
+  function draw() {
+    const eps = PP.val("ejp4alt-o6-1-eps") / 100, del = eps / K;
+    PP.out("ejp4alt-o6-1-eps-o", F(eps, 2));
+    const { ctx, w, h } = PP.canvas("ejp4alt-o6-1-c1", 0.66);
+    T = PP.frame(w, h, { x0: 0, x1: 4, y0: -0.6, y1: 1.9 }, { l: 32, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xTicks: 4, yTicks: 5 });
+    const y = st.y, fy = f(y);
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, w - T.p.l - T.p.r, h - T.p.t - T.p.b); ctx.clip();
+    [-1, 1].forEach((s) => PP.path(ctx, [[T.X(y - 3), T.Y(fy - s * K * 3)], [T.X(y + 3), T.Y(fy + s * K * 3)]], C("--muted"), 1, [4, 4]));
+    PP.rect(ctx, T.X(y - del), T.Y(fy + eps), T.X(y + del) - T.X(y - del), T.Y(fy - eps) - T.Y(fy + eps), C("--accent"), C("--band"));
+    ctx.restore();
+    plotFn(ctx, T, f, 0, 4, C("--ink"), 2.2);
+    PP.dot(ctx, T.X(y), T.Y(fy), 6, C("--accent"));
+    PP.label(ctx, "y", T.X(y) + 6, T.Y(fy) + 6, C("--accent"), "left", "top", 12);
+    let worst = 0; for (let i = 0; i <= 200; i++) { const x = y - del + 2 * del * i / 200; worst = Math.max(worst, Math.abs(f(x) - fy)); }
+    PP.read("ejp4alt-o6-1-read", [
+      ["δ = ε/K", F(del, 4)],
+      ["máx |f(x) − f(y)| con |x − y| < δ", F(worst, 4) + " < " + F(eps, 2), worst < eps ? "good" : "bad"],
+    ]);
+  }
+  PP.register(draw, ["ejp4alt-o6-1-eps"]);
+  draggable("ejp4alt-o6-1-c1", () => T, (px, py, T) => (Math.abs(T.X(st.y) - px) < 40 ? "y" : null),
+    (id, xx) => { st.y = clamp(xx, 0, 4); }, draw);
+})();
+
+/* O3-8: para x² con x_n = n, y_n = n + 1/n, las dos sucesiones de distancias. */
+PP.register(function o3_8() {
+  const N = PP.val("ejp4alt-o3-8-n");
+  PP.out("ejp4alt-o3-8-n-o", String(N));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o3-8-c1", 0.62);
+  const T = PP.frame(w, h, { x0: 0, x1: N + 1, y0: 0, y1: 3.4 }, { l: 32, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: Math.min(N + 1, 8), yTicks: 4, intX: true, xLabel: "n" });
+  PP.path(ctx, [[T.p.l, T.Y(2)], [w - T.p.r, T.Y(2)]], C("--seq2"), 1, [5, 4]);
+  PP.label(ctx, "2", w - T.p.r - 4, T.Y(2) - 3, C("--seq2"), "right", "bottom", 11);
+  for (let n = 1; n <= N; n++) {
+    const a = 1 / n, b = (n + 1 / n) ** 2 - n * n;
+    PP.dot(ctx, T.X(n), T.Y(a), 4, C("--accent"));
+    PP.dot(ctx, T.X(n), T.Y(b), 4, C("--seq2"));
+  }
+  PP.label(ctx, "|xₙ − yₙ| = 1/n", T.X(1) + 8, T.Y(1) + 2, C("--accent"), "left", "top", 12);
+  PP.label(ctx, "|f(xₙ) − f(yₙ)| = 2 + 1/n²", T.X(1) + 8, T.Y(3) - 2, C("--seq2"), "left", "bottom", 12);
+  PP.read("ejp4alt-o3-8-read", [
+    ["|x" + sub(N) + " − y" + sub(N) + "|", F(1 / N, 4), "good"],
+    ["|f(x" + sub(N) + ") − f(y" + sub(N) + ")|", F(2 + 1 / (N * N), 4), "bad"],
+  ]);
+}, ["ejp4alt-o3-8-n"]);
+
+/* O14-6: los pares de la nota para 1/x y para sen(1/x). */
+PP.register(function o14_6() {
+  const n = PP.val("ejp4alt-o14-6-n"), which = PP.radio("ejp4alt-o14-6-f");
+  PP.out("ejp4alt-o14-6-n-o", String(n));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o14-6-c1", 0.66);
+  let f, xn, yn, box;
+  if (which === "inv") { f = (x) => 1 / x; xn = 1 / n; yn = 1 / (n + 1); box = { x0: 0, x1: 1.05, y0: 0, y1: Math.max(4, n + 2) }; }
+  else { f = (x) => Math.sin(1 / x); xn = 1 / (2 * n * Math.PI); yn = 1 / (2 * n * Math.PI + Math.PI / 2); box = { x0: 0, x1: Math.min(0.4, 6 * xn), y0: -1.25, y1: 1.35 }; }
+  const T = PP.frame(w, h, box, { l: 34, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: 4, yTicks: 5 });
+  plotFn(ctx, T, f, Math.max(1e-4, box.x1 / 4000), box.x1, C("--ink"), 1.6, null, 4000);
+  [xn, yn].forEach((x, i) => {
+    const col = i ? C("--seq2") : C("--accent");
+    PP.path(ctx, [[T.X(x), T.Y(Math.max(box.y0, 0))], [T.X(x), T.Y(Math.min(box.y1, f(x)))]], col, 1, [3, 3]);
+    PP.dot(ctx, T.X(x), T.Y(f(x)), 5, col);
+  });
+  PP.path(ctx, [[T.X((xn + yn) / 2), T.Y(f(xn))], [T.X((xn + yn) / 2), T.Y(f(yn))]], C("--fail"), 3);
+  PP.label(ctx, "xₙ", T.X(xn) + 4, T.Y(f(xn)) - 4, C("--accent"), "left", "bottom", 12);
+  PP.label(ctx, "yₙ", T.X(yn) - 4, T.Y(f(yn)) - 4, C("--seq2"), "right", "bottom", 12);
+  PP.read("ejp4alt-o14-6-read", [
+    ["d(xₙ, yₙ) < 1/n", F(Math.abs(xn - yn), 5) + " < " + F(1 / n, 4), "good"],
+    ["d(f(xₙ), f(yₙ))", F(Math.abs(f(xn) - f(yn)), 4), "bad"],
+  ]);
+}, ["ejp4alt-o14-6-n", "input[name='ejp4alt-o14-6-f']"]);
+
+/* O5-1: ω_f(η) para f = √x en [0, 4], calculado numéricamente. */
+PP.register(function o5_1() {
+  const eta = PP.val("ejp4alt-o5-1-eta") / 50;
+  PP.out("ejp4alt-o5-1-eta-o", F(eta, 2));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o5-1-c1", 0.66);
+  const T = PP.frame(w, h, { x0: -0.1, x1: 4.1, y0: -0.15, y1: 2.3 }, { l: 32, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: 4, yTicks: 4 });
+  const f = (x) => Math.sqrt(Math.max(0, x));
+  let best = -1, ba = 0, bb = 0; const M = 400;
+  for (let i = 0; i <= M; i++) { const a = 4 * i / M, b = Math.min(4, a + eta), v = Math.abs(f(b) - f(a)); if (v > best + 1e-12) { best = v; ba = a; bb = b; } }
+  vband(ctx, T, ba, bb, C("--band"));
+  hband(ctx, T, f(ba), f(bb), C("--area2"));
+  plotFn(ctx, T, f, 0, 4, C("--ink"), 2.2);
+  PP.dot(ctx, T.X(ba), T.Y(f(ba)), 5, C("--accent"));
+  PP.dot(ctx, T.X(bb), T.Y(f(bb)), 5, C("--accent"));
+  PP.path(ctx, [[T.X(ba), T.Y(0)], [T.X(bb), T.Y(0)]], C("--accent"), 3);
+  PP.label(ctx, "η", T.X((ba + bb) / 2), T.Y(0) - 4, C("--accent"), "center", "bottom", 12);
+  PP.path(ctx, [[T.X(bb) + 6, T.Y(f(ba))], [T.X(bb) + 6, T.Y(f(bb))]], C("--seq2"), 3);
+  PP.label(ctx, "ω(η)", T.X(bb) + 10, T.Y((f(ba) + f(bb)) / 2), C("--seq2"), "left", "middle", 12);
+  PP.read("ejp4alt-o5-1-read", [
+    ["par que da el supremo (a, b)", "(" + F(ba, 2) + ", " + F(bb, 2) + ")"],
+    ["ω_f(η) (numérico)", F(best, 4)],
+  ]);
+}, ["ejp4alt-o5-1-eta"]);
+
+/* O14-8: e^x cerca de n; |x_n − y_n| = 1/n y ρ(x_n, y_n) = e^{n+1/n} − e^n. */
+PP.register(function o14_8() {
+  const n = PP.val("ejp4alt-o14-8-n");
+  PP.out("ejp4alt-o14-8-n-o", String(n));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o14-8-c1", 0.66);
+  const top = Math.exp(n + 1.2);
+  const T = PP.frame(w, h, { x0: n - 1, x1: n + 1.2, y0: 0, y1: top }, { l: 48, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: 4, yTicks: 4, zero: false });
+  plotFn(ctx, T, Math.exp, n - 1, n + 1.2, C("--ink"), 2.2);
+  const xn = n, yn = n + 1 / n, ex = Math.exp(xn), ey = Math.exp(yn);
+  PP.path(ctx, [[T.X(xn), T.Y(0) - 2], [T.X(yn), T.Y(0) - 2]], C("--accent"), 5);
+  PP.path(ctx, [[T.X(xn), T.Y(0)], [T.X(xn), T.Y(ex)]], C("--accent"), 1, [3, 3]);
+  PP.path(ctx, [[T.X(yn), T.Y(0)], [T.X(yn), T.Y(ey)]], C("--accent"), 1, [3, 3]);
+  PP.path(ctx, [[T.X(yn) + 8, T.Y(ex)], [T.X(yn) + 8, T.Y(ey)]], C("--fail"), 3);
+  PP.path(ctx, [[T.X(xn), T.Y(ex)], [T.X(yn) + 8, T.Y(ex)]], C("--fail"), 1, [3, 3]);
+  PP.dot(ctx, T.X(xn), T.Y(ex), 5, C("--accent"));
+  PP.dot(ctx, T.X(yn), T.Y(ey), 5, C("--accent"));
+  PP.label(ctx, "ρ", T.X(yn) + 12, T.Y((ex + ey) / 2), C("--fail"), "left", "middle", 13);
+  PP.label(ctx, "1/n", T.X((xn + yn) / 2), T.Y(0) - 8, C("--accent"), "center", "bottom", 12);
+  PP.read("ejp4alt-o14-8-read", [
+    ["|xₙ − yₙ| = 1/n", F(1 / n, 4), "good"],
+    ["ρ(xₙ, yₙ) = eⁿ(e^(1/n) − 1)", F(ey - ex, 2), "bad"],
+    ["eⁿ/n", F(ex / n, 2)],
+  ]);
+}, ["ejp4alt-o14-8-n"]);
