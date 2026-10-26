@@ -1,3 +1,4 @@
 *.pdf
 libros-procesados
 __pycache__/
+visualizaciones/sitio/_index_wrapped*.html
