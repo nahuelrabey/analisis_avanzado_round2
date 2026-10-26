@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root { color-scheme: light dark; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; font: 14px system-ui; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:40;font:13px 'IBM Plex Sans',system-ui,sans-serif;padding:6px 16px;background:Canvas;color:CanvasText;border-bottom:1px solid rgba(128,128,128,.35)"><a href="../index.html#otras" style="color:inherit">← Visualizaciones</a></div>
+<title>Heine–Borel paso a paso</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+    startup: {
+      pageReady: () => MathJax.startup.defaultPageReady().then(() => document.dispatchEvent(new Event("mathjax-ready"))),
+    },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: un recorrido por pasos de la demostración del Teorema 6.5. Arriba, el texto del paso y el plano; abajo, la tira de índices (cada fila es una subsucesión de la de arriba) y una gráfica por coordenada. Después, la lectura con conjuntos de índices y qué falla sin cada hipótesis. Misma familia visual que «Subsucesiones». */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.20);
+    --seq2: #b0532a;
+    --area2: rgba(176, 83, 42, 0.16);
+    --seq3: #0f7a6f;
+    --seq4: #8a3fa0;
+    --ok: #1d8556;
+    --okband: rgba(29, 133, 86, 0.14);
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+      --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0; --seq4: #d08ae6;
+      --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+    --seq2: #f0a070; --area2: rgba(240, 160, 112, 0.20); --seq3: #4fd1c0; --seq4: #d08ae6;
+    --ok: #4cc38a; --okband: rgba(76, 195, 138, 0.16); --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 2.4rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.5rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+  h2 .bn { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 0; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+  ol.items, ul.items { margin: 0 0 0.8rem; padding-left: 1.4rem; }
+  ol.items { list-style: lower-alpha; }
+  ol.items li, ul.items li { margin-bottom: 0.35rem; }
+
+  .ladder { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.25rem; list-style: none; padding: 0; margin: 0.4rem 0 0; font-family: var(--font-ui); font-size: 0.86rem; }
+  .ladder li { display: flex; align-items: center; gap: 0.25rem; }
+  .ladder li + li::before { content: "→"; color: var(--muted); margin-right: 0.15rem; }
+  .ladder a { display: inline-block; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; background: var(--panel); }
+  .ladder a:hover { border-color: var(--accent); color: var(--accent); }
+  .ladder a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ladder .k { color: var(--muted); margin-right: 0.3rem; font-variant-numeric: tabular-nums; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 1rem; }
+  button { font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer; }
+  button:hover { background: var(--band); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .block { display: grid; gap: 1.2rem; scroll-margin-top: 1rem; }
+  .unlock { max-width: 78ch; color: var(--muted); margin: 0; }
+  .unlock b { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+
+  .ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; scroll-margin-top: 1rem; min-width: 0; }
+  .ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.8rem; }
+  .tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0.05rem 0.4rem; white-space: nowrap; }
+  .tag.def { color: var(--seq3); border-color: var(--seq3); }
+  .tag.guia { color: var(--seq2); border-color: var(--seq2); }
+  .tag.agente { color: var(--muted); border-color: var(--muted); }
+  .src { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .ex-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 1.4rem; align-items: start; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+  .ex-text { min-width: 0; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin-bottom: 0.9rem; }
+  .enun.def { border-left-color: var(--seq3); }
+  .enun.agente { border-left-color: var(--muted); border-left-style: dashed; }
+  .enun p:last-child, .proof p:last-child { margin-bottom: 0; }
+  .nota { font-size: 0.95rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.6rem; margin-top: 0.8rem; }
+  .nota b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-right: 0.3rem; }
+  .receta { font-size: 0.97rem; background: var(--band); border-radius: 6px; padding: 0.6rem 0.85rem; margin: 0 0 0.9rem; }
+  .receta b { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; margin-right: 0.3rem; }
+
+  details.proof { border-top: 1px solid var(--rule); padding-top: 0.55rem; }
+  details.proof > summary { cursor: pointer; font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); list-style-position: outside; margin-left: 1rem; }
+  details.proof > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  details.proof > summary .from { color: var(--muted); margin-left: 0.4rem; }
+  details.proof[open] > summary { margin-bottom: 0.6rem; }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  #popup .psrc { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  .viz { margin: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 0.6rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; }
+  @media (max-width: 900px) { .viz { position: static; } }
+  .viz canvas { width: 100%; max-width: 100%; display: block; border-radius: 6px; background: var(--bg); aspect-ratio: 4 / 3; }
+  .ctrl { display: grid; gap: 0.45rem; }
+  .slider { display: grid; grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr) 4.4rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .pills legend { color: var(--muted); font-size: 0.8rem; padding: 0; margin-bottom: 0.25rem; float: left; width: 100%; }
+  .pills label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.85rem; position: relative; }
+  .pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .pills label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pills label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.1rem 0.9rem; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .read dt { color: var(--muted); }
+  .read dd { margin: 0; overflow-wrap: anywhere; }
+  .read .good { color: var(--ok); }
+  .read .bad { color: var(--fail); }
+  .viz figcaption { color: var(--muted); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.5; }
+
+  .tbl-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tr:last-child td { border-bottom: 0; }
+  footer { color: var(--muted); font-family: var(--font-ui); font-size: 0.85rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .stepbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; font-family: var(--font-ui); }
+  .stepbar .pills { flex: 1 1 18rem; }
+  .stepbar .pills legend { float: none; width: auto; margin-bottom: 0.25rem; }
+  .paso:not(.on) { position: absolute; left: -10000px; top: 0; width: 34rem; visibility: hidden; }
+  .paso .k { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.3rem; }
+  .paso h3 { margin-bottom: 0.7rem; }
+  .paso .ctrl { margin: 0.2rem 0 0.9rem; font-family: var(--font-ui); font-size: 0.88rem; }
+  .check { display: flex; gap: 0.5rem; align-items: flex-start; cursor: pointer; color: var(--ink); }
+  .check input { margin-top: 0.25rem; accent-color: var(--fail); }
+  .viz canvas.sq { aspect-ratio: 1 / 1; max-width: 560px; margin: 0 auto; }
+  .ex > * { min-width: 0; }
+  .wide { display: grid; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; }
+  .wide canvas { width: 100%; display: block; border-radius: 6px; background: var(--bg); }
+  #cv-tira { height: 100px; touch-action: pan-y; }
+  .coords { display: grid; gap: 0.5rem; }
+  .coords canvas { height: 128px; touch-action: pan-y; }
+  .hover-read { font-family: var(--font-body); font-size: 0.97rem; margin: 0 0 0.6rem; min-height: 3em; }
+  .hover-read sub { font-size: 0.72em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; color: var(--muted); font-size: 0.82rem; margin: 0; padding: 0; list-style: none; }
+  .legend i { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; margin-right: 0.35rem; vertical-align: -0.05rem; }
+</style>
+
+<div class="page">
+
+<header class="intro">
+  <p class="eyebrow">Análisis Avanzado 2026 · Compacidad, rumbo a la Práctica 5</p>
+  <h1>Heine–Borel, paso a paso</h1>
+  <div class="enun">
+    <p><b>Teorema 6.5 (Heine–Borel).</b> Sea $K \subseteq (\mathbb{R}^m, d_2)$ un conjunto <span class="ref" tabindex="0" data-ref="cerrado">cerrado</span> y <span class="ref" tabindex="0" data-ref="acotado">acotado</span>. Entonces $K$ es <span class="ref" tabindex="0" data-ref="compacto">compacto</span>.</p>
+  </div>
+  <p>La demostración parece larga por los subíndices, pero es una sola idea repetida. En $\mathbb{R}$ ya sabemos sacar una subsucesión convergente de una sucesión acotada (<span class="ref" tabindex="0" data-ref="bw">Bolzano–Weierstrass</span>). En $\mathbb{R}^m$ se hace eso $m$ veces, una por coordenada. La clave es que cada extracción se hace <i>sobre la subsucesión que dejó la anterior</i>, y no sobre la sucesión original. Así no se pierde lo que ya convergía.</p>
+  <p>Abajo está la demostración dividida en pasos, con un dibujo para cada uno. Pasá el mouse (o tocá) sobre las palabras <span class="ref" tabindex="0" data-ref="subconv">subrayadas así</span> para ver el resultado que se usa.</p>
+  <ol class="ladder" aria-label="Secciones">
+    <li><a href="#recorrido"><span class="k">1</span>La demostración, paso a paso</a></li>
+    <li><a href="#indices"><span class="k">2</span>La notación, sin subíndices anidados</a></li>
+    <li><a href="#hipotesis"><span class="k">3</span>Sin alguna hipótesis</a></li>
+  </ol>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="block" id="recorrido" aria-labelledby="h-rec">
+  <h2 id="h-rec"><span class="bn">Sección 1</span>La demostración, paso a paso</h2>
+  <p class="unlock"><b>Cómo leerlo</b>Arriba está el texto de la demostración que corresponde a cada paso, y al lado, la sucesión en el plano. Abajo hay dos dibujos más. La <i>tira de índices</i> tiene una fila por subsucesión, y cada fila sale de la de arriba. Las <i>gráficas por coordenada</i> muestran cada coordenada como una sucesión de números reales, que es donde se aplica Bolzano–Weierstrass. El caso $m = 1$ es el paso «Coordenada 1» seguido del último: con eso ya termina.</p>
+
+  <div class="ex">
+    <div class="stepbar">
+      <button type="button" id="prev" aria-label="Paso anterior">←</button>
+      <fieldset class="pills" id="pasos"><legend>Paso</legend></fieldset>
+      <button type="button" id="next" aria-label="Paso siguiente">→</button>
+    </div>
+    <div class="stepbar">
+      <fieldset class="pills"><legend>Dimensión</legend>
+        <label><input type="radio" name="dim" value="2" checked>$m = 2$</label>
+        <label><input type="radio" name="dim" value="3">$m = 3$</label>
+      </fieldset>
+      <button type="button" id="otra">Otra sucesión</button>
+    </div>
+
+    <div class="ex-grid">
+      <div class="ex-text" style="position: relative">
+
+        <div class="paso" data-step="suc">
+          <p class="k">Paso 0</p>
+          <h3>Una sucesión cualquiera en $K$</h3>
+          <div class="enun"><p>Sea $m \gt 1$ y tomemos $x_n = (x_n^1, x_n^2, \dots, x_n^m) \in \mathbb{R}^m$ una sucesión en $K$.</p></div>
+          <p>Para probar que $K$ es <span class="ref" tabindex="0" data-ref="compacto">compacto</span> hay que tomar una sucesión cualquiera en $K$ y encontrarle una subsucesión que converja a un punto de $K$.</p>
+          <p>La sucesión del dibujo <b>no converge</b>: salta entre varios puntos de acumulación, y sus términos se acercan cada vez más a ellos. El superíndice indica la coordenada y el subíndice, el término: $x_n^2$ es la segunda coordenada del término $n$.</p>
+          <p class="nota" data-m3><b>Con $m = 3$</b>El plano muestra sólo las dos primeras coordenadas. La tercera se ve en su gráfica, abajo.</p>
+        </div>
+
+        <div class="paso" data-step="acot">
+          <p class="k">Paso 1 · se usa que $K$ es acotado</p>
+          <h3>Cada coordenada es una sucesión acotada de números reales</h3>
+          <div class="enun">
+            <p>Como $K$ es <span class="ref" tabindex="0" data-ref="acotado">acotado</span>, por definición tenemos que $d_2(x_n, x_1) \le C$ para todo $n \in \mathbb{N}$. Entonces</p>
+            <p>$$|x_n^i - x_1^i| = \sqrt{(x_n^i - x_1^i)^2} \le \sqrt{\textstyle\sum_{j=1}^m (x_n^j - x_1^j)^2} = d_2(x_n, x_1) \le C.$$</p>
+          </div>
+          <p>Es un cateto contra la hipotenusa: la diferencia en una sola coordenada es un cateto del triángulo y $d_2(x_n, x_1)$ es la hipotenusa. Movés el deslizador para elegir el término.</p>
+          <p>Conclusión: la coordenada $i$ de todos los términos vive en el intervalo $[x_1^i - C,\ x_1^i + C]$ (las franjas verdes del plano y de las gráficas). Cada $(x_n^i)_{n}$ es una sucesión acotada de números reales, y por eso se le puede aplicar Bolzano–Weierstrass.</p>
+          <p class="nota"><b>Sobre la letra $i$</b>La demostración usa $i$ para la coordenada fija y también para el índice de la suma. Acá la suma va con $j$ para no mezclarlas.</p>
+          <div class="ctrl">
+            <div class="slider"><label for="acot-n">término $n$</label><input type="range" id="acot-n" min="2" max="60" value="5"><output id="acot-n-o">5</output></div>
+          </div>
+        </div>
+
+        <div class="paso" data-step="c1">
+          <p class="k">Paso 2 · Bolzano–Weierstrass en la coordenada 1</p>
+          <h3>Una subsucesión donde converge la primera coordenada</h3>
+          <div class="enun"><p>Como la sucesión $(x_n^1)_{n \in \mathbb{N}}$ es acotada, sabemos que existe una subsucesión $(x^1_{n_{k_1}})_{k_1 \in \mathbb{N}}$ tal que $x^1_{n_{k_1}} \to x^1 \in \mathbb{R}$.</p></div>
+          <p><span class="ref" tabindex="0" data-ref="bw">Bolzano–Weierstrass</span> se aplica a una sucesión de <i>números</i>: la primera coordenada. El resultado es una lista infinita de índices $n_{k_1}$, que es la segunda fila de la tira.</p>
+          <p>Mirá la diferencia entre los dos dibujos. En la gráfica de la coordenada 1, los puntos azules se acercan a $x^1$. En el plano, esos mismos términos siguen saltando en vertical, porque la segunda coordenada todavía no está controlada.</p>
+          <div class="ctrl"><fieldset class="pills" id="ch-1"><legend>Bolzano–Weierstrass asegura que hay una subsucesión convergente, pero no dice a qué valor converge. Elegí uno:</legend></fieldset></div>
+        </div>
+
+        <div class="paso" data-step="c2">
+          <p class="k">Paso 3 · Bolzano–Weierstrass en la coordenada 2, dentro de la subsucesión</p>
+          <h3>Una subsucesión de la subsucesión</h3>
+          <div class="enun"><p>Podemos hacer lo mismo con las otras coordenadas. Como $(x^2_{n_{k_1}})_{k_1 \in \mathbb{N}} \subseteq \mathbb{R}$ es una sucesión acotada, sabemos que existe $(x^2_{n_{k_{1_{k_2}}}})_{k_2 \in \mathbb{N}}$ tal que $x^2_{n_{k_{1_{k_2}}}} \to x^2$.</p></div>
+          <p>Ésta es la parte que confunde. Bolzano–Weierstrass se aplica a la segunda coordenada, pero <b>sólo de los términos que quedaron en el paso anterior</b> (la fila $n_{k_1}$). Lo que sale es una lista de índices <i>dentro de esa lista</i>: $n_{k_{1_{k_2}}}$ se lee «el $k_2$-ésimo índice de la lista $n_{k_1}$». Pasá el mouse por la tira para ver los dos números de cada término.</p>
+          <p>La primera coordenada no se pierde. $(x^1_{n_{k_{1_{k_2}}}})_{k_2}$ es una subsucesión de $(x^1_{n_{k_1}})_{k_1}$, que converge a $x^1$, y <span class="ref" tabindex="0" data-ref="subconv">toda subsucesión de una convergente converge al mismo límite</span>.</p>
+          <div class="ctrl">
+            <fieldset class="pills" id="ch-2"><legend>Elegí a qué valor converge la coordenada 2:</legend></fieldset>
+          </div>
+          <div class="ctrl">
+            <label class="check"><input type="checkbox" id="mal"><span><b>¿Y si extraigo desde la sucesión original?</b> Aplicar Bolzano–Weierstrass a $(x_n^2)_{n \in \mathbb{N}}$ desde cero, sin respetar el paso anterior.</span></label>
+          </div>
+          <p class="nota" id="mal-nota" hidden><b>Lo que se rompe</b>La coordenada 2 converge, pero la nueva lista usa índices que el paso 1 había descartado (en rojo en la tira). En esos términos, la coordenada 1 vuelve a saltar entre varios valores, como se ve en su gráfica y en el plano. Por eso la demostración extrae siempre de la última subsucesión.</p>
+        </div>
+
+        <div class="paso" data-step="c3">
+          <p class="k">Paso 4 · lo mismo en la coordenada 3</p>
+          <h3>Una vez más, dentro de la última lista</h3>
+          <div class="enun"><p>Recursivamente podemos ir tomando subsubsucesión de subsubsucesión…</p></div>
+          <p>Con $m = 3$ hace falta un paso más. En el plano parece que ya está, porque las dos primeras coordenadas convergen. Pero la tercera todavía salta (mirá su gráfica). Se aplica Bolzano–Weierstrass a $(x^3_{n})$, recorriendo sólo los índices de la fila $n_{k_{1_{k_2}}}$, y sale la cuarta fila de la tira.</p>
+          <div class="ctrl"><fieldset class="pills" id="ch-3"><legend>Elegí a qué valor converge la coordenada 3:</legend></fieldset></div>
+        </div>
+
+        <div class="paso" data-step="d2">
+          <p class="k">Paso final · el ejercicio anterior</p>
+          <h3>Todas las coordenadas convergen, así que converge en $d_2$</h3>
+          <div class="enun"><p>Recursivamente podemos ir tomando subsubsucesión de subsubsucesión de forma tal que, al terminar con todas las coordenadas, tengamos una subsucesión $(x_{n_k})_{k \in \mathbb{N}}$ tal que $x^i_{n_k} \to x^i$ para todo $i = 1, \dots, m$. Por el ejercicio anterior, esto nos dice que si $x = (x^1, \dots, x^m)$ entonces $x_{n_k} \to x$ en distancia $d_2$.</p></div>
+          <p>La demostración llama $n_k$ a la <b>última fila</b> de la tira. Que <span class="ref" tabindex="0" data-ref="coord">converger coordenada a coordenada implique converger en $d_2$</span> sale de una desigualdad:</p>
+          <p>$$d_2(x_{n_k}, x) = \sqrt{\textstyle\sum_{i=1}^m (x^i_{n_k} - x^i)^2} \le \sqrt{m}\, \max_{i} |x^i_{n_k} - x^i|.$$</p>
+          <p>Dado $\varepsilon$, cada coordenada tiene su $k_i$ a partir del cual $|x^i_{n_k} - x^i| \lt \varepsilon/\sqrt{m}$ (líneas verticales en las gráficas). Desde $k_0 = \max_i k_i$ vale $d_2(x_{n_k}, x) \lt \varepsilon$. El disco verde es la bola $B(x, \varepsilon)$.</p>
+          <div class="ctrl">
+            <div class="slider"><label for="d2-eps">$\varepsilon$</label><input type="range" id="d2-eps" min="5" max="40" value="15"><output id="d2-eps-o">0.15</output></div>
+          </div>
+        </div>
+
+        <div class="paso" data-step="cer">
+          <p class="k">Paso final · se usa que $K$ es cerrado</p>
+          <h3>El límite está en $K$</h3>
+          <div class="enun"><p>Finalmente, como $K$ es cerrado, sabemos que $x$ debe estar en $K$ y esto nos dice que $K$ es compacto como queríamos ver.</p></div>
+          <p>$(x_{n_k})$ es una sucesión de puntos de $K$ que converge a $x$. Como $K$ es cerrado, <span class="ref" tabindex="0" data-ref="cor447">el límite queda en $K$</span>. Ya tenemos lo que pide la definición de <span class="ref" tabindex="0" data-ref="compacto">compacto</span>: una subsucesión que converge a un punto de $K$.</p>
+          <p>Cada hipótesis se usó una sola vez. <i>Acotado</i> se usó en el paso 1, para poder aplicar Bolzano–Weierstrass, y <i>cerrado</i> se usa ahora. En la <a href="#hipotesis">Sección 3</a> se ve qué falla si falta alguna de las dos.</p>
+        </div>
+      </div>
+
+      <figure class="viz">
+        <canvas id="cv-plano" class="sq" role="img" aria-label="La sucesión en el plano, con el conjunto K"></canvas>
+        <ul class="legend" id="plano-ley"></ul>
+        <dl class="read" id="plano-read"></dl>
+      </figure>
+    </div>
+
+    <div class="wide">
+      <p class="lbl">Tira de índices · cada fila es una subsucesión de la de arriba</p>
+      <canvas id="cv-tira" role="img" aria-label="Índices de cada subsucesión"></canvas>
+      <p class="hover-read" id="tira-read"></p>
+      <p class="lbl">Cada coordenada como sucesión de números reales ($n = 1, \dots, 120$)</p>
+      <div class="coords">
+        <canvas id="cv-c1" role="img" aria-label="Coordenada 1"></canvas>
+        <canvas id="cv-c2" role="img" aria-label="Coordenada 2"></canvas>
+        <canvas id="cv-c3" role="img" aria-label="Coordenada 3"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="block" id="indices" aria-labelledby="h-ind">
+  <h2 id="h-ind"><span class="bn">Sección 2</span>La notación, sin subíndices anidados</h2>
+  <article class="ex">
+    <div class="ex-head"><span class="tag agente">agente</span><h3>Una subsucesión es un conjunto infinito de índices</h3></div>
+    <p>Una subsucesión de $(x_n)$ queda determinada por <i>qué índices se quedan</i>: un conjunto infinito $N_1 \subseteq \mathbb{N}$, que se recorre en orden creciente. Leída así, la demostración construye una cadena</p>
+    <p>$$\mathbb{N} \supseteq N_1 \supseteq N_2 \supseteq \cdots \supseteq N_m, \qquad \text{todos infinitos.}$$</p>
+    <ul class="items">
+      <li>$N_1$ sale de aplicar Bolzano–Weierstrass a $(x_n^1)_{n \in \mathbb{N}}$: a lo largo de $N_1$, la coordenada 1 converge a $x^1$.</li>
+      <li>$N_2 \subseteq N_1$ sale de aplicar Bolzano–Weierstrass a $(x_n^2)_{n \in N_1}$: a lo largo de $N_2$, la coordenada 2 converge a $x^2$, y la 1 sigue convergiendo porque $N_2 \subseteq N_1$.</li>
+      <li>Y así hasta $N_m$. Como $N_m \subseteq N_i$ para todo $i$, a lo largo de $N_m$ convergen todas las coordenadas.</li>
+    </ul>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Fila de la tira</th><th>Conjunto</th><th>Notación de la demostración</th><th>Qué converge ahí</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>$\mathbb{N}$</td><td>$x_n$</td><td>nada todavía</td></tr>
+          <tr><td>2</td><td>$N_1$</td><td>$x_{n_{k_1}}$, $k_1 = 1, 2, \dots$</td><td>coordenada 1</td></tr>
+          <tr><td>3</td><td>$N_2 \subseteq N_1$</td><td>$x_{n_{k_{1_{k_2}}}}$, $k_2 = 1, 2, \dots$</td><td>coordenadas 1 y 2</td></tr>
+          <tr><td>$m + 1$</td><td>$N_m$</td><td>$x_{n_k}$ (renombrada al final)</td><td>todas, y por eso en $d_2$</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="nota"><b>Por qué no se puede extraer desde cero</b>Si $N_2$ saliera de aplicar Bolzano–Weierstrass a $(x_n^2)_{n \in \mathbb{N}}$, nada garantiza que $N_2 \subseteq N_1$. A lo largo de $N_2$ la coordenada 1 podría no converger. La casilla «¿Y si extraigo desde la sucesión original?» del paso 3 muestra un caso donde pasa exactamente eso.</p>
+    <p class="nota"><b>Ver también</b>La técnica de sub-subsucesiones (extraer sobre la extracción anterior) aparece en <a href="subsucesiones.html#bw">Subsucesiones, Sección 5</a>.</p>
+  </article>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="block" id="hipotesis" aria-labelledby="h-hip">
+  <h2 id="h-hip"><span class="bn">Sección 3</span>¿Qué pasa si falta una hipótesis?</h2>
+  <article class="ex">
+    <div class="ex-grid">
+      <div class="ex-text">
+        <p>Cada hipótesis se usa en un solo renglón de la demostración. Sin ella, ese renglón falla y el teorema también, porque aparece una sucesión en $K$ sin ninguna subsucesión que converja en $K$.</p>
+        <ul class="items">
+          <li><b>Cerrado y acotado.</b> $K = \overline{B}(0, 1)$ es la bola cerrada. La sucesión $x_n \to (1, 0)$ y el límite está en $K$.</li>
+          <li><b>Acotado, no cerrado.</b> $K = B(0, 1)$ es la bola abierta. La misma sucesión está en $K$ y converge a $(1, 0) \notin K$. Toda subsucesión converge a $(1, 0)$, así que ninguna converge a un punto de $K$. Falla el último renglón.</li>
+          <li><b>Cerrado, no acotado.</b> $K = [-1, +\infty) \times [-1, 1]$. Con $x_n = (-1 + 0.35\,n,\ \operatorname{sen} n)$, la primera coordenada no está acotada y falla el paso 1. Dos términos distintos están a distancia al menos $0.35$, así que ninguna subsucesión es de Cauchy, y entonces ninguna converge.</li>
+        </ul>
+      </div>
+      <figure class="viz">
+        <fieldset class="pills"><legend>Conjunto $K$</legend>
+          <label><input type="radio" name="hip" value="ok" checked>cerrado y acotado</label>
+          <label><input type="radio" name="hip" value="abierto">no cerrado</label>
+          <label><input type="radio" name="hip" value="noacot">no acotado</label>
+        </fieldset>
+        <canvas id="cv-hip" role="img" aria-label="Contraejemplos sin cada hipótesis"></canvas>
+        <dl class="read" id="hip-read"></dl>
+      </figure>
+    </div>
+  </article>
+  <footer>El enunciado y la demostración citados son los del Teorema 6.5 de las notas del curso; el Capítulo 6 todavía no está transcripto en <code>apuntes.typ</code>. Las sucesiones de los dibujos son elegidas para ilustrar y no salen de ninguna fuente. En el dibujo, la subsucesión de cada paso se arma con los términos que se acercan al valor elegido. Bolzano–Weierstrass sólo garantiza que esa subsucesión existe.</footer>
+</section>
+</div>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="acotado">
+    <div class="pop-title">Definición 4.8 · Conjunto acotado</div>
+    <p>Sea $(M, d)$ un espacio métrico. $E \subseteq M$ es <b>acotado</b> si existe $C \gt 0$ tal que $d(x, y) \le C$ para todo $x, y \in E$. Equivalentemente, si existen $x_0 \in M$ y $R \gt 0$ con $E \subseteq B(x_0, R)$.</p>
+    <p class="psrc">En la demostración se usa con $x = x_n$ e $y = x_1$, ambos en $K$.</p>
+  </div>
+  <div data-key="cerrado">
+    <div class="pop-title">Definición 4.27 · Conjunto cerrado</div>
+    <p>$E$ es cerrado si contiene a todos sus puntos de adherencia, es decir, si $\overline{E} = E$. Por el Corolario 4.47, esto equivale a que todo límite de una sucesión de $E$ esté en $E$.</p>
+  </div>
+  <div data-key="compacto">
+    <div class="pop-title">Compacto (por sucesiones)</div>
+    <p>$K$ es compacto si toda sucesión $(x_n) \subseteq K$ tiene una subsucesión que converge a un punto de $K$.</p>
+    <p class="psrc">Es la forma que usa la demostración del Teorema 6.5. El Capítulo 6 todavía no está en <code>apuntes.typ</code>.</p>
+  </div>
+  <div data-key="bw">
+    <div class="pop-title">Bolzano–Weierstrass</div>
+    <p>Si $(a_n) \subseteq \mathbb{R}$ está acotada, existe una subsucesión $(a_{n_k})_k$ convergente.</p>
+    <p class="psrc">No está enunciado en <code>apuntes.typ</code>; sale de la demostración del Teorema 4.57 ($\mathbb{R}$ es completo), cortándola antes de usar Cauchy. Ver <i>Subsucesiones</i>, Sección 5.</p>
+  </div>
+  <div data-key="subconv">
+    <div class="pop-title">Subsucesión de una convergente</div>
+    <p>Si $a_n \to \ell$, toda subsucesión $(a_{n_k})_k$ también tiende a $\ell$. La razón es que $n_k \ge k$: si $|a_n - \ell| \lt \varepsilon$ para $n \ge n_0$, vale $|a_{n_k} - \ell| \lt \varepsilon$ para $k \ge n_0$.</p>
+    <p class="psrc">Prácticas 1 y 3; ver <i>Subsucesiones</i>, Sección 2.</p>
+  </div>
+  <div data-key="coord">
+    <div class="pop-title">El ejercicio anterior · convergencia por coordenadas</div>
+    <p>En $\mathbb{R}^m$, $x_k \to x$ en $d_2$ si y sólo si $x_k^i \to x^i$ para cada coordenada $i = 1, \dots, m$.</p>
+    <p>La vuelta sale de $d_2(x_k, x) \le \sqrt{m}\, \max_i |x_k^i - x^i|$. La ida, de $|x_k^i - x^i| \le d_2(x_k, x)$, que es la misma desigualdad del paso 1.</p>
+    <p class="psrc">Es el ejercicio anterior al Teorema 6.5 en las notas. En <code>apuntes.typ</code> el mismo argumento, con $d_\infty$, está en la demostración del Corolario 4.58.</p>
+  </div>
+  <div data-key="cor447">
+    <div class="pop-title">Corolario 4.47 · Cerrados vía sucesiones</div>
+    <p>Sea $(M, d)$ un espacio métrico y $E \subseteq M$. $E$ es cerrado si y sólo si para toda sucesión $(x_n) \subseteq E$ con $x_n \to x$ se tiene que $x \in E$.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const val = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+  const fmt = (v, d = 2) => (Math.abs(v) < 5 * Math.pow(10, -d - 1) ? 0 : v).toFixed(d).replace("-", "−");
+  const fv = (x, d = 2) => "(" + x.map((v) => fmt(v, d)).join(", ") + ")";
+  const SUP = ["", "¹", "²", "³"], SUB = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"];
+  const sub = (n) => String(n).split("").map((c) => SUB[+c]).join("");
+
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"), area: g("--area"),
+             seq2: g("--seq2"), area2: g("--area2"), seq3: g("--seq3"), seq4: g("--seq4"), ok: g("--ok"), okband: g("--okband"),
+             fail: g("--fail"), panel: g("--panel"), bg: g("--bg"), mono: g("--font-mono") };
+  }
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+  function frame(ctx, C, box, xr, yr, opt = {}) {
+    const X = (x) => box.l + (x - xr[0]) / (xr[1] - xr[0]) * (box.r - box.l);
+    const Y = (y) => box.b - (y - yr[0]) / (yr[1] - yr[0]) * (box.b - box.t);
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.font = "11px " + C.mono; ctx.fillStyle = C.muted;
+    for (const y of opt.yt || []) {
+      ctx.beginPath(); ctx.moveTo(box.l, Y(y)); ctx.lineTo(box.r, Y(y)); ctx.stroke();
+      ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillText(String(y).replace("-", "−"), box.l - 6, Y(y));
+    }
+    for (const x of opt.xt || []) {
+      ctx.beginPath(); ctx.moveTo(X(x), box.b); ctx.lineTo(X(x), box.b + 4); ctx.stroke();
+      ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(String(x).replace("-", "−"), X(x), box.b + 6);
+    }
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.1;
+    ctx.beginPath(); ctx.moveTo(box.l, box.t); ctx.lineTo(box.l, box.b); ctx.lineTo(box.r, box.b); ctx.stroke();
+    if (opt.xl) { ctx.fillStyle = C.muted; ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(opt.xl, box.r, box.b - 3); }
+    return { X, Y };
+  }
+  const dot = (ctx, x, y, r, fill) => { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); };
+  const ring = (ctx, x, y, r, stroke, fill, lw = 1.6) => { ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); };
+  function seg(ctx, x1, y1, x2, y2, color, width = 1, dash) {
+    ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width; if (dash) ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.restore();
+  }
+  function label(ctx, C, s, x, y, color, align = "left", base = "bottom", size = 11) {
+    ctx.font = size + "px " + C.mono; ctx.fillStyle = color || C.ink; ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(s, x, y);
+  }
+  function arrow(ctx, x1, y1, x2, y2, color, width = 1.3) {
+    seg(ctx, x1, y1, x2, y2, color, width);
+    const a = Math.atan2(y2 - y1, x2 - x1), L = 7;
+    ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - L * Math.cos(a - 0.4), y2 - L * Math.sin(a - 0.4)); ctx.lineTo(x2 - L * Math.cos(a + 0.4), y2 - L * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+  }
+  const setRead = (id, rows) => { $(id).innerHTML = rows.map(([k, v, c]) => `<dt>${k}</dt><dd class="${c || ""}">${v}</dd>`).join(""); };
+  function mulberry32(a) {
+    return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  // ===================================================== datos
+  // La sucesión salta entre puntos de acumulación que forman una grilla: cada coordenada tiene
+  // unos pocos valores límite posibles y cada término elige una combinación al azar. El ruido
+  // decrece con n, así que a lo largo de los índices de una misma combinación la sucesión converge.
+  const NGEN = 400, NSHOW = 120;
+  const S = { seed: 3, m: 2, step: 0, ch: [0, 0, 0], hover: null, mal: false };
+  let D = null;
+
+  function pickVals(rng, k, lo, hi, gap) {
+    for (let t = 0; t < 400; t++) {
+      const v = Array.from({ length: k }, () => lo + (hi - lo) * rng()).sort((a, b) => a - b);
+      if (v.every((x, i) => i === 0 || x - v[i - 1] >= gap)) return v;
+    }
+    return Array.from({ length: k }, (_, i) => lo + (hi - lo) * (i + 0.5) / k);
+  }
+  function build() {
+    const rng = mulberry32(S.seed * 7919 + S.m);
+    const fan = S.m === 2 ? [3, 2] : [2, 2, 2];
+    let vals = fan.map((k) => pickVals(rng, k, -0.62, 0.62, k === 3 ? 0.32 : 0.4));
+    const maxr = Math.sqrt(vals.reduce((a, v) => a + Math.max(...v.map((x) => x * x)), 0));
+    if (maxr > 0.86) vals = vals.map((v) => v.map((x) => x * 0.86 / maxr));
+    const leaves = [];
+    (function grow(path) {
+      if (path.length === S.m) { leaves.push(path); return; }
+      vals[path.length].forEach((_, i) => grow(path.concat(i)));
+    })([]);
+    // Bloques consecutivos de tamaño leaves.length, cada uno una permutación al azar de las
+    // combinaciones: así cada punto de acumulación aparece una vez por bloque.
+    const xs = [null], leaf = [null];
+    let block = [];
+    for (let n = 1; n <= NGEN; n++) {
+      if (!block.length) {
+        block = leaves.slice();
+        for (let i = block.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [block[i], block[j]] = [block[j], block[i]]; }
+      }
+      const L = block.pop();
+      const A = 0.45 / Math.pow(1 + (n - 1) / 8, 0.75);
+      let u;
+      do { u = Array.from({ length: S.m }, () => 2 * rng() - 1); } while (u.reduce((a, v) => a + v * v, 0) > 1);
+      let x = L.map((p, i) => vals[i][p] + A * u[i]);
+      const r = Math.hypot(...x);
+      if (r > 0.97) x = x.map((v) => v * 0.97 / r);
+      xs.push(x); leaf.push(L);
+    }
+    let C = 0;
+    for (let n = 2; n <= NGEN; n++) C = Math.max(C, dist(xs[n], xs[1]));
+    let meas = 2;
+    for (let n = 2; n <= 40; n++) if (dist(xs[n], xs[1]) > dist(xs[meas], xs[1])) meas = n;
+    D = { vals, leaves, xs, leaf, C };
+    $("acot-n").value = meas;
+    S.ch = [0, 0, 0];
+    S.hover = null;
+    sets();
+  }
+  const dist = (a, b) => Math.hypot(...a.map((v, i) => v - b[i]));
+  function mkSet(list) { const pos = new Map(); list.forEach((n, k) => pos.set(n, k + 1)); return { list, set: new Set(list), pos }; }
+  function sets() {
+    const all = Array.from({ length: NGEN }, (_, i) => i + 1);
+    D.rows = [mkSet(all)];
+    for (let s = 1; s <= S.m; s++) D.rows.push(mkSet(D.rows[s - 1].list.filter((n) => D.leaf[n][s - 1] === S.ch[s - 1])));
+    D.wrong = mkSet(all.filter((n) => D.leaf[n][1] === S.ch[1]));
+    D.lim = S.ch.slice(0, S.m).map((c, i) => D.vals[i][c]);
+  }
+
+  // ===================================================== pasos
+  const STEPS_ALL = [
+    ["suc", "0 · La sucesión"], ["acot", "1 · Acotada"], ["c1", "2 · Coord. 1"], ["c2", "3 · Coord. 2"],
+    ["c3", "4 · Coord. 3"], ["d2", "Converge en d₂"], ["cer", "x ∈ K"],
+  ];
+  const steps = () => STEPS_ALL.filter(([id]) => id !== "c3" || S.m === 3);
+  const stepId = () => steps()[S.step][0];
+  const stage = () => { const id = stepId(); if (/^c\d$/.test(id)) return +id[1]; return id === "d2" || id === "cer" ? S.m : 0; };
+  const malOn = () => stepId() === "c2" && S.mal;
+  const row = (r) => (r === 2 && malOn() ? D.wrong : D.rows[r]);
+
+  function buildSteps() {
+    const fs = $("pasos");
+    fs.querySelectorAll("label").forEach((l) => l.remove());
+    steps().forEach(([id, t], i) => {
+      const lab = document.createElement("label");
+      lab.innerHTML = `<input type="radio" name="paso" value="${i}"${i === S.step ? " checked" : ""}>${t}`;
+      lab.querySelector("input").addEventListener("change", () => goto(i));
+      fs.appendChild(lab);
+    });
+  }
+  function buildChoices() {
+    for (let s = 1; s <= 3; s++) {
+      const fs = $("ch-" + s);
+      fs.querySelectorAll("label").forEach((l) => l.remove());
+      if (s > S.m) continue;
+      D.vals[s - 1].forEach((v, i) => {
+        const lab = document.createElement("label");
+        lab.innerHTML = `<input type="radio" name="ch${s}" value="${i}"${i === S.ch[s - 1] ? " checked" : ""}>x${SUP[s]} = ${fmt(v)}`;
+        lab.querySelector("input").addEventListener("change", () => { S.ch[s - 1] = i; sets(); drawAll(); });
+        fs.appendChild(lab);
+      });
+    }
+  }
+  function goto(i) {
+    S.step = Math.max(0, Math.min(steps().length - 1, i));
+    const id = stepId();
+    document.querySelectorAll(".paso").forEach((el) => {
+      const on = el.dataset.step === id;
+      el.classList.toggle("on", on);
+      el.inert = !on;
+    });
+    document.querySelectorAll('input[name="paso"]').forEach((el) => (el.checked = +el.value === S.step));
+    $("prev").disabled = S.step === 0;
+    $("next").disabled = S.step === steps().length - 1;
+    document.querySelectorAll("[data-m3]").forEach((el) => (el.hidden = S.m !== 3));
+    $("cv-c3").hidden = S.m !== 3;
+    drawAll();
+  }
+
+  // estilo de un término según el paso: [color, radio, ¿en la fila actual?]
+  function style(C, n) {
+    const id = stepId(), st = stage();
+    if (id === "suc") return [C.accent, 2.6, true];
+    if (id === "acot") return [n === +$("acot-n").value ? C.seq2 : C.muted, n === +$("acot-n").value ? 4.5 : 2, true];
+    const cur = row(st), prev = row(st - 1);
+    if (cur.set.has(n)) {
+      if (malOn() && !D.rows[1].set.has(n)) return [C.fail, 3.2, true];
+      if (id === "d2") { const k = cur.pos.get(n); return [k >= thr().k0 ? C.ok : C.accent, 3.2, true]; }
+      return [C.accent, 3.2, true];
+    }
+    if (!malOn() && /^c\d$/.test(id) && prev.set.has(n)) return [C.seq2, 2.2, false];
+    return [C.rule, 1.8, false];
+  }
+
+  // umbrales del paso d₂: k_i por coordenada (con ε/√m) y k₀ con d₂ directamente
+  function thr() {
+    const eps = +$("d2-eps").value / 100, L = D.rows[S.m].list, lim = D.lim;
+    const last = (cond) => { let k = 0; L.forEach((n, j) => { if (!cond(n)) k = j + 1; }); return k + 1 > L.length ? null : k + 1; };
+    const ki = lim.map((v, i) => last((n) => Math.abs(D.xs[n][i] - v) < eps / Math.sqrt(S.m)));
+    const kd = last((n) => dist(D.xs[n], lim) < eps);
+    const kmax = ki.some((k) => k === null) ? null : Math.max(...ki);
+    return { eps, ki, kd, kmax, k0: kmax === null ? Infinity : kmax };
+  }
+
+  // ===================================================== plano
+  function drawPlane() {
+    const C = colors(), { ctx, w, h } = setup($("cv-plano"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const id = stepId(), st = stage(), x1 = D.xs[1];
+    let R = 1.2;
+    if (id === "acot") R = Math.max(1.2, Math.max(Math.abs(x1[0]), Math.abs(x1[1])) + D.C + 0.08);
+    const side = Math.min(w - 40, h - 34);
+    const B = { l: 34 + (w - 40 - side) / 2, r: 34 + (w - 40 - side) / 2 + side, t: 8, b: 8 + side };
+    const ticks = R > 1.6 ? [-2, -1, 0, 1, 2].filter((t) => Math.abs(t) < R) : [-1, 0, 1];
+    const F = frame(ctx, C, B, [-R, R], [-R, R], { xt: ticks, yt: ticks });
+    label(ctx, C, "x¹", B.r - 2, B.b - 3, C.muted, "right", "bottom");
+    label(ctx, C, "x²", B.l + 4, B.t + 2, C.muted, "left", "top");
+    ctx.save(); ctx.beginPath(); ctx.rect(B.l, B.t, B.r - B.l, B.b - B.t); ctx.clip();
+    const rp = F.X(1) - F.X(0);
+    ring(ctx, F.X(0), F.Y(0), rp, C.accent, C.band, 1.6);
+    label(ctx, C, "K", F.X(-0.72), F.Y(0.78), C.accent, "center", "middle", 13);
+
+    // líneas de las coordenadas ya fijadas y candidatos del paso actual
+    for (let i = 0; i < Math.min(2, S.m); i++) {
+      const s = i + 1;
+      const fixed = st >= s && !(malOn() && s === 1);
+      const lines = [];
+      if (/^c\d$/.test(id) && st === s) D.vals[i].forEach((v, j) => lines.push([v, j === S.ch[i]]));
+      else if (fixed) lines.push([D.lim[i], true]);
+      if (malOn() && s === 1) D.vals[0].forEach((v) => lines.push([v, false]));
+      for (const [v, on] of lines) {
+        if (i === 0) seg(ctx, F.X(v), B.t, F.X(v), B.b, on ? C.accent : C.seq2, on ? 1.3 : 1, on ? [6, 4] : [2, 4]);
+        else seg(ctx, B.l, F.Y(v), B.r, F.Y(v), on ? C.accent : C.seq2, on ? 1.3 : 1, on ? [6, 4] : [2, 4]);
+      }
+    }
+
+    if (id === "acot") {
+      const n = +$("acot-n").value, xn = D.xs[n];
+      ctx.save(); ctx.setLineDash([5, 4]); ring(ctx, F.X(x1[0]), F.Y(x1[1]), D.C * rp, C.seq3, "transparent", 1.2); ctx.restore();
+      ctx.fillStyle = C.okband;
+      ctx.fillRect(F.X(x1[0] - D.C), B.b - 9, F.X(x1[0] + D.C) - F.X(x1[0] - D.C), 9);
+      ctx.fillRect(B.l, F.Y(x1[1] + D.C), 9, F.Y(x1[1] - D.C) - F.Y(x1[1] + D.C));
+    }
+    // términos
+    const order = [];
+    for (let n = 1; n <= NSHOW; n++) order.push(n);
+    const st0 = order.map((n) => [n, style(C, n)]);
+    for (const [n, [col, r, on]] of st0) if (!on) dot(ctx, F.X(D.xs[n][0]), F.Y(D.xs[n][1]), r, col);
+    if (id === "d2" || id === "cer") {
+      const L = D.rows[S.m].list.filter((n) => n <= NSHOW);
+      ctx.save(); ctx.strokeStyle = C.accent; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.beginPath();
+      L.forEach((n, j) => (j ? ctx.lineTo : ctx.moveTo).call(ctx, F.X(D.xs[n][0]), F.Y(D.xs[n][1]))); ctx.stroke(); ctx.restore();
+    }
+    for (const [n, [col, r, on]] of st0) if (on) dot(ctx, F.X(D.xs[n][0]), F.Y(D.xs[n][1]), r, col);
+
+    if (id === "acot") {
+      const n = +$("acot-n").value, xn = D.xs[n];
+      seg(ctx, F.X(x1[0]), F.Y(x1[1]), F.X(xn[0]), F.Y(xn[1]), C.seq2, 2);
+      seg(ctx, F.X(x1[0]), F.Y(x1[1]), F.X(xn[0]), F.Y(x1[1]), C.seq3, 2);
+      seg(ctx, F.X(xn[0]), F.Y(x1[1]), F.X(xn[0]), F.Y(xn[1]), C.seq4, 2);
+      ring(ctx, F.X(x1[0]), F.Y(x1[1]), 5, C.ink, C.bg);
+      label(ctx, C, "x₁", F.X(x1[0]) + 7, F.Y(x1[1]) - 4, C.ink);
+      label(ctx, C, "x" + sub(n), F.X(xn[0]) + 7, F.Y(xn[1]) - 4, C.seq2);
+      label(ctx, C, "C", F.X(x1[0] + D.C * 0.71) + 4, F.Y(x1[1] + D.C * 0.71) - 2, C.seq3);
+    } else if (id === "suc") {
+      ring(ctx, F.X(x1[0]), F.Y(x1[1]), 5, C.ink, C.bg);
+      label(ctx, C, "x₁", F.X(x1[0]) + 7, F.Y(x1[1]) - 4, C.ink);
+    }
+    if (id === "d2" || id === "cer") {
+      const x = D.lim;
+      if (id === "d2") { const e = thr().eps; ring(ctx, F.X(x[0]), F.Y(x[1]), e * rp, C.ok, C.okband, 1.4); }
+      ring(ctx, F.X(x[0]), F.Y(x[1]), 5.5, C.ok, C.bg, 2.2);
+      label(ctx, C, "x", F.X(x[0]) + 8, F.Y(x[1]) - 6, C.ok, "left", "bottom", 13);
+      if (id === "cer") { ctx.save(); ctx.lineWidth = 3; ctx.strokeStyle = C.accent; ctx.beginPath(); ctx.arc(F.X(0), F.Y(0), rp, 0, 2 * Math.PI); ctx.stroke(); ctx.restore(); }
+    }
+    if (S.hover && S.hover <= NSHOW) { const p = D.xs[S.hover]; ring(ctx, F.X(p[0]), F.Y(p[1]), 7, C.ink, "transparent", 1.4); }
+    ctx.restore();
+    readPlane(C);
+  }
+
+  function readPlane(C) {
+    const id = stepId(), st = stage(), x1 = D.xs[1];
+    const leg = [];
+    const L = (c, t) => leg.push(`<li><i style="background:${c}"></i>${t}</li>`);
+    if (id === "suc") L(C.accent, "términos x₁, …, x₁₂₀");
+    if (id === "acot") { L(C.seq3, "cateto horizontal |xₙ¹ − x₁¹|"); L(C.seq4, "cateto vertical |xₙ² − x₁²|"); L(C.seq2, "hipotenusa d₂(xₙ, x₁)"); }
+    if (/^c\d$/.test(id)) {
+      L(C.accent, malOn() ? "extraídos desde cero" : `quedan en la fila ${st + 1}`);
+      if (malOn()) L(C.fail, "índices que el paso 1 había descartado");
+      else L(C.seq2, "descartados en este paso");
+      L(C.rule, "descartados antes");
+    }
+    if (id === "d2") { L(C.accent, "subsucesión final, antes de k₀"); L(C.ok, "desde k₀: dentro de B(x, ε)"); }
+    if (id === "cer") L(C.accent, "subsucesión final (x_{n_k})");
+    $("plano-ley").innerHTML = leg.join("");
+    let rows = [];
+    if (id === "suc") rows = [["puntos de acumulación", String(D.leaves.length)], ["¿(xₙ) converge?", "no: salta entre ellos", "bad"]];
+    if (id === "acot") {
+      const n = +$("acot-n").value, xn = D.xs[n];
+      $("acot-n-o").textContent = n;
+      rows = [["x₁", fv(x1)], ["x" + sub(n), fv(xn)], ["C = máx d₂(xₙ, x₁)", fmt(D.C)], ["d₂(x" + sub(n) + ", x₁)", fmt(dist(xn, x1), 3)]];
+      for (let i = 0; i < S.m; i++) rows.push([`|x${sub(n)}${SUP[i + 1]} − x₁${SUP[i + 1]}|`, `${fmt(Math.abs(xn[i] - x1[i]), 3)} ≤ ${fmt(dist(xn, x1), 3)} ≤ C`, "good"]);
+    }
+    if (/^c\d$/.test(id)) {
+      const cnt = (r) => r.list.filter((n) => n <= NSHOW).length;
+      rows = [[`x${SUP[st]} elegido`, fmt(D.lim[st - 1])],
+              [`fila ${st + 1} (n ≤ 120)`, `${cnt(row(st))} términos`],
+              ["coordenadas que convergen", malOn() ? "sólo la 2: la 1 salta" : Array.from({ length: st }, (_, i) => i + 1).join(", "), malOn() ? "bad" : "good"]];
+      if (malOn()) {
+        const bad = row(2).list.filter((n) => !D.rows[1].set.has(n) && n <= NSHOW).length;
+        rows.splice(2, 0, ["fuera de la fila 2", `${bad} índices`, "bad"]);
+      }
+    }
+    if (id === "d2") {
+      const T = thr();
+      $("d2-eps-o").textContent = T.eps.toFixed(2);
+      const kstr = (k) => (k === null ? "más allá de n = 400" : "k = " + k);
+      rows = [["x", fv(D.lim)], ["ε / √m", fmt(T.eps / Math.sqrt(S.m), 3)]];
+      T.ki.forEach((k, i) => rows.push([`k${sub(i + 1)} (coord. ${i + 1})`, kstr(k)]));
+      rows.push(["k₀ = máx kᵢ", kstr(T.kmax), "good"]);
+      rows.push(["d₂ < ε, mirando d₂", kstr(T.kd)]);
+    }
+    if (id === "cer") rows = [["x", fv(D.lim)], ["d₂(x, 0)", `${fmt(Math.hypot(...D.lim), 3)} ≤ 1, así que x ∈ K`, "good"], ["por qué alcanza", "K cerrado (Cor. 4.47)"]];
+    setRead("plano-read", rows);
+  }
+
+  // ===================================================== tira
+  function drawStrip() {
+    const C = colors(), cv = $("cv-tira"), st = stage(), nrows = st + 1;
+    const H = 30 + nrows * 38;
+    if (cv.style.height !== H + "px") cv.style.height = H + "px";
+    const { ctx, w, h } = setup(cv);
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const NS = w < 560 ? 24 : 40, l = 78, r = 10, cw = (w - l - r) / NS;
+    const X = (n) => l + (n - 0.5) * cw, Yr = (k) => 34 + k * 38;
+    if (S.hover && S.hover <= NS) { ctx.fillStyle = C.band; ctx.fillRect(X(S.hover) - cw / 2, 4, cw, h - 8); }
+    for (let n = 1; n <= NS; n++) if (cw >= 14 || n === 1 || n % 5 === 0) label(ctx, C, String(n), X(n), 16, C.muted, "center", "bottom", 10);
+    const names = ["n", "n_k₁", "n_k₁k₂", "n_k₁k₂k₃"];
+    for (let k = 0; k < nrows; k++) {
+      const R = row(k), y = Yr(k), newest = k === st && st > 0;
+      label(ctx, C, names[k], 8, y, newest ? C.ok : C.muted, "left", "middle", 12);
+      for (let n = 1; n <= NS; n++) {
+        const inR = R.set.has(n);
+        if (!inR) { ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(X(n), y, 2.2, 0, 2 * Math.PI); ctx.stroke(); continue; }
+        const bad = malOn() && k === 2 && !D.rows[1].set.has(n);
+        const col = bad ? C.fail : newest ? C.ok : C.accent;
+        if (k > 0 && !bad) seg(ctx, X(n), Yr(k - 1) + 6, X(n), y - 6, col, 1, [2, 2]);
+        dot(ctx, X(n), y, Math.min(5, cw * 0.32), col);
+        if (k > 0 && cw >= 13) label(ctx, C, String(R.pos.get(n)), X(n), y - 8, col, "center", "bottom", 9);
+      }
+    }
+    readStrip(NS);
+  }
+  function readStrip(NS) {
+    const st = stage();
+    let n = S.hover;
+    if (!n || n > NS) {
+      const L = row(st).list;
+      n = malOn() ? (L.find((j) => !D.rows[1].set.has(j)) || L[0]) : st > 0 ? (L[1] || L[0]) : 1;
+    }
+    const x = D.xs[n];
+    const nk = (k) => ["n", "n<sub>k<sub>1</sub></sub>", "n<sub>k<sub>1<sub>k<sub>2</sub></sub></sub></sub>", "n<sub>k<sub>1<sub>k<sub>2<sub>k<sub>3</sub></sub></sub></sub></sub></sub>"][k];
+    let s = `<b>n = ${n}</b>: x<sub>${n}</sub> = ${fv(x)}. `;
+    for (let k = 1; k <= st; k++) {
+      const R = row(k);
+      if (R.set.has(n)) {
+        if (malOn() && k === 2 && !D.rows[1].set.has(n)) { s += `Está en la fila 3 pero no en la 2: la extracción desde cero lo recuperó, y su primera coordenada va hacia ${fmt(D.vals[0][D.leaf[n][0]])}, no hacia ${fmt(D.lim[0])}. `; break; }
+        s += `En la fila ${nk(k)} es el término k<sub>${k}</sub> = ${R.pos.get(n)}. `;
+      } else {
+        s += `No está en la fila ${nk(k)}: su coordenada ${k} va hacia ${fmt(D.vals[k - 1][D.leaf[n][k - 1]])} y elegimos x<sup>${k}</sup> = ${fmt(D.lim[k - 1])}. `;
+        break;
+      }
+    }
+    if (st >= 2 && row(2).set.has(n) && D.rows[1].set.has(n) && !malOn())
+      s += `Por eso x<sub>${n}</sub> = x<sub>n<sub>k<sub>1</sub></sub></sub> con k<sub>1</sub> = ${D.rows[1].pos.get(n)}, y a la vez es el término k<sub>2</sub> = ${D.rows[2].pos.get(n)} de la sub-subsucesión.`;
+    if (st === 0) s += "Todavía no se extrajo nada: la tira tiene una sola fila.";
+    $("tira-read").innerHTML = s + (S.hover ? "" : ' <span style="color:var(--muted)">(Pasá el mouse o tocá una columna para elegir otro término.)</span>');
+  }
+
+  // ===================================================== coordenadas
+  function drawCoord(i) {
+    const cv = $("cv-c" + (i + 1));
+    if (cv.hidden) return;
+    const C = colors(), { ctx, w, h } = setup(cv);
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const id = stepId(), st = stage(), s = i + 1;
+    const B = { l: 40, r: w - 10, t: 22, b: h - 20 };
+    const F = frame(ctx, C, B, [0, NSHOW + 1], [-1.1, 1.1], { yt: [-1, 0, 1], xt: [1, 30, 60, 90, 120] });
+    ctx.save(); ctx.beginPath(); ctx.rect(B.l, B.t - 2, B.r - B.l, B.b - B.t + 4); ctx.clip();
+    let status = "", scol = C.muted;
+    if (id === "acot") {
+      const a = D.xs[1][i] - D.C, b = D.xs[1][i] + D.C;
+      ctx.fillStyle = C.okband; ctx.fillRect(B.l, F.Y(b), B.r - B.l, F.Y(a) - F.Y(b));
+      seg(ctx, B.l, F.Y(D.xs[1][i]), B.r, F.Y(D.xs[1][i]), C.seq3, 1, [4, 3]);
+      status = `acotada: |xₙ${SUP[s]} − x₁${SUP[s]}| ≤ C`; scol = C.ok;
+    }
+    const isC = /^c\d$/.test(id);
+    if (isC && st === s) {
+      D.vals[i].forEach((v, j) => seg(ctx, B.l, F.Y(v), B.r, F.Y(v), j === S.ch[i] ? C.accent : C.seq2, j === S.ch[i] ? 1.4 : 1, j === S.ch[i] ? [6, 4] : [2, 4]));
+      status = (malOn() ? "BW desde cero: x² = " : `BW: elegimos x${SUP[s]} = `) + fmt(D.lim[i]); scol = C.accent;
+    } else if (isC && s < st) {
+      if (malOn() && s === 1) { D.vals[0].forEach((v) => seg(ctx, B.l, F.Y(v), B.r, F.Y(v), C.seq2, 1, [2, 4])); status = "ya no converge: salta"; scol = C.fail; }
+      else { seg(ctx, B.l, F.Y(D.lim[i]), B.r, F.Y(D.lim[i]), C.accent, 1.2, [6, 4]); status = `sigue convergiendo a x${SUP[s]} = ${fmt(D.lim[i])}`; scol = C.ok; }
+    } else if (isC) { status = "todavía sin controlar"; }
+    if (id === "d2") {
+      const T = thr(), e = T.eps / Math.sqrt(S.m), v = D.lim[i];
+      ctx.fillStyle = C.okband; ctx.fillRect(B.l, F.Y(v + e), B.r - B.l, F.Y(v - e) - F.Y(v + e));
+      seg(ctx, B.l, F.Y(v), B.r, F.Y(v), C.ok, 1, [6, 4]);
+      const k = T.ki[i];
+      if (k !== null) { const n = D.rows[S.m].list[k - 1]; if (n <= NSHOW) seg(ctx, F.X(n), B.t, F.X(n), B.b, C.ok, 1.4); status = `k${sub(s)} = ${k} (n = ${n})`; scol = C.ok; }
+      else status = "kᵢ más allá de n = 400";
+    }
+    if (id === "cer") { seg(ctx, B.l, F.Y(D.lim[i]), B.r, F.Y(D.lim[i]), C.ok, 1.2, [6, 4]); status = `→ x${SUP[s]} = ${fmt(D.lim[i])}`; scol = C.ok; }
+    if (S.hover && S.hover <= NSHOW) seg(ctx, F.X(S.hover), B.t, F.X(S.hover), B.b, C.muted, 1, [2, 2]);
+    const pts = [];
+    for (let n = 1; n <= NSHOW; n++) pts.push([n, style(C, n)]);
+    for (const [n, [col, r, on]] of pts) if (!on) dot(ctx, F.X(n), F.Y(D.xs[n][i]), Math.min(r, 2), col);
+    for (const [n, [col, r, on]] of pts) if (on) dot(ctx, F.X(n), F.Y(D.xs[n][i]), Math.min(r, 3), col);
+    ctx.restore();
+    label(ctx, C, `coordenada ${s}: xₙ${SUP[s]}`, B.l + 2, 15, C.ink, "left", "bottom", 11);
+    if (status) {
+      const tw = w - B.l - 150;
+      ctx.font = "11px " + C.mono;
+      if (ctx.measureText(status).width <= tw) label(ctx, C, status, B.r, 15, scol, "right", "bottom", 11);
+      else label(ctx, C, status, B.r - 2, B.t + 2, scol, "right", "top", 10);
+    }
+  }
+
+  // ===================================================== hipótesis
+  function drawHip() {
+    const C = colors(), { ctx, w, h } = setup($("cv-hip"));
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+    const mode = val("hip");
+    const B = { l: 34, r: w - 10, t: 10, b: h - 24 };
+    if (mode !== "noacot") {
+      const ry = 1.25, rx = ry * (B.r - B.l) / (B.b - B.t);
+      const F = frame(ctx, C, B, [-rx, rx], [-ry, ry], { xt: [-1, 0, 1], yt: [-1, 0, 1] });
+      const rp = F.X(1) - F.X(0);
+      ctx.save();
+      if (mode === "abierto") ctx.setLineDash([5, 4]);
+      ring(ctx, F.X(0), F.Y(0), rp, C.accent, C.band, mode === "abierto" ? 1.2 : 2.4);
+      ctx.restore();
+      label(ctx, C, mode === "abierto" ? "K = B(0, 1) abierta" : "K = B̄(0, 1) cerrada", F.X(-0.95), F.Y(1.12), C.accent, "left", "middle", 12);
+      for (let n = 1; n <= 60; n++) {
+        const r = 1 - 1 / (n + 1), t = 2.4 / n;
+        dot(ctx, F.X(r * Math.cos(t)), F.Y(r * Math.sin(t)), n <= 12 ? 3 : 2.2, C.seq2);
+      }
+      const ok = mode === "ok";
+      ring(ctx, F.X(1), F.Y(0), 6, ok ? C.ok : C.fail, ok ? C.ok : C.bg, 2);
+      label(ctx, C, ok ? "(1, 0) ∈ K" : "(1, 0) ∉ K", F.X(1) - 4, F.Y(0) + 12, ok ? C.ok : C.fail, "right", "top", 12);
+      setRead("hip-read", ok
+        ? [["xₙ", "(1 − 1/(n+1))(cos(2.4/n), sen(2.4/n))"], ["límite", "(1, 0) ∈ K", "good"], ["conclusión", "la subsucesión (toda la sucesión) converge en K", "good"]]
+        : [["xₙ", "la misma sucesión, en la bola abierta"], ["límite", "(1, 0) ∉ K", "bad"], ["renglón que falla", "«como K es cerrado, x ∈ K»", "bad"], ["conclusión", "B(0, 1) no es compacta", "bad"]]);
+    } else {
+      const xr = [-1.4, 6], yr = [-1.6, 1.6];
+      const F = frame(ctx, C, B, xr, yr, { xt: [-1, 0, 2, 4], yt: [-1, 0, 1] });
+      ctx.fillStyle = C.band; ctx.fillRect(F.X(-1), F.Y(1), B.r - F.X(-1), F.Y(-1) - F.Y(1));
+      seg(ctx, F.X(-1), F.Y(1), B.r, F.Y(1), C.accent, 2); seg(ctx, F.X(-1), F.Y(-1), B.r, F.Y(-1), C.accent, 2); seg(ctx, F.X(-1), F.Y(1), F.X(-1), F.Y(-1), C.accent, 2);
+      label(ctx, C, "K = [−1, +∞) × [−1, 1]", F.X(-0.9), F.Y(1.3), C.accent, "left", "middle", 12);
+      for (let n = 1; n <= 30; n++) { const x = -1 + 0.35 * n; if (x <= xr[1]) dot(ctx, F.X(x), F.Y(Math.sin(n)), 3, C.seq2); }
+      arrow(ctx, B.r - 60, F.Y(-1.35), B.r - 4, F.Y(-1.35), C.fail, 1.6);
+      label(ctx, C, "xₙ¹ → +∞", B.r - 64, F.Y(-1.35), C.fail, "right", "middle", 12);
+      setRead("hip-read", [["xₙ", "(−1 + 0.35 n, sen n)"], ["coordenada 1", "no acotada", "bad"], ["renglón que falla", "el paso 1: no hay C con d₂(xₙ, x₁) ≤ C", "bad"], ["d₂(xₙ, xₘ)", "≥ 0.35 si n ≠ m: ninguna subsucesión es de Cauchy", "bad"]]);
+    }
+  }
+
+  // ===================================================== cableado
+  function drawAll() { drawPlane(); drawStrip(); for (let i = 0; i < 3; i++) drawCoord(i); drawHip(); }
+
+  $("prev").addEventListener("click", () => goto(S.step - 1));
+  $("next").addEventListener("click", () => goto(S.step + 1));
+  $("otra").addEventListener("click", () => { S.seed++; build(); buildChoices(); drawAll(); });
+  document.querySelectorAll('input[name="dim"]').forEach((el) => el.addEventListener("change", () => {
+    const id = stepId();
+    S.m = +val("dim"); build(); buildSteps(); buildChoices();
+    const j = steps().findIndex(([s]) => s === id);
+    goto(j >= 0 ? j : steps().findIndex(([s]) => s === "d2"));
+    buildSteps();
+  }));
+  document.querySelectorAll('input[name="hip"]').forEach((el) => el.addEventListener("change", drawHip));
+  $("acot-n").addEventListener("input", drawAll);
+  $("d2-eps").addEventListener("input", drawAll);
+  $("mal").addEventListener("change", () => { S.mal = $("mal").checked; $("mal-nota").hidden = !S.mal; drawAll(); });
+
+  // elegir un término con el puntero, en la tira, en las gráficas o en el plano
+  function hoverAt(n) { if (n !== S.hover) { S.hover = n; drawAll(); } }
+  $("cv-tira").addEventListener("pointermove", (e) => {
+    const r = e.currentTarget.getBoundingClientRect(), NS = r.width < 560 ? 24 : 40, cw = (r.width - 88) / NS;
+    const n = Math.floor((e.clientX - r.left - 78) / cw) + 1;
+    if (n >= 1 && n <= NS) hoverAt(n);
+  });
+  for (let i = 1; i <= 3; i++) $("cv-c" + i).addEventListener("pointermove", (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const n = Math.round((e.clientX - r.left - 40) / (r.width - 50) * (NSHOW + 1));
+    if (n >= 1 && n <= NSHOW) hoverAt(n);
+  });
+  $("cv-plano").addEventListener("pointermove", (e) => {
+    const r = e.currentTarget.getBoundingClientRect(), w = r.width, h = r.height;
+    const id = stepId(), x1 = D.xs[1];
+    let R = 1.2;
+    if (id === "acot") R = Math.max(1.2, Math.max(Math.abs(x1[0]), Math.abs(x1[1])) + D.C + 0.08);
+    const side = Math.min(w - 40, h - 34), l = 34 + (w - 40 - side) / 2;
+    const px = e.clientX - r.left, py = e.clientY - r.top;
+    let best = null, bd = 12;
+    for (let n = 1; n <= NSHOW; n++) {
+      const p = D.xs[n], X = l + (p[0] + R) / (2 * R) * side, Y = 8 + side - (p[1] + R) / (2 * R) * side;
+      const d = Math.hypot(X - px, Y - py);
+      if (d < bd) { bd = d; best = n; }
+    }
+    if (best) hoverAt(best);
+  });
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  build(); buildSteps(); buildChoices(); goto(0);
+  new ResizeObserver(drawAll).observe(document.querySelector(".page"));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+  new MutationObserver(drawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("mathjax-ready", drawAll);
+})();
+</script>
+
+</body>
+</html>

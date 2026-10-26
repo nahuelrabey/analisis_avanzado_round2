@@ -90,6 +90,7 @@ OTRAS = [
     ("extension_denso", "Extensión desde un denso", "La demostración del Teorema 5.22 paso a paso."),
     ("integral_lipschitz", "La integral es Lipschitz", "El Ejemplo 5.26 c) dibujado."),
     ("proyecciones_producto", "Proyecciones en un producto", "Proyecciones de X × Y con d∞: abiertas y no cerradas."),
+    ("heine_borel", "Heine–Borel paso a paso", "La demostración del Teorema 6.5: Bolzano–Weierstrass coordenada por coordenada, con la tira de sub-subsucesiones."),
     ("ejemplos_p4", "Ejemplos de continuidad", "Los ejemplos de la Práctica 4 con dibujos interactivos (página original)."),
 ]
 
