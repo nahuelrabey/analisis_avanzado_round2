@@ -1,0 +1,114 @@
+{
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo</em> de $A$ si:</p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.</p><p>Es decir, el supremo es la <em>menor de las cotas superiores</em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo</strong> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-casi-todo-punto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "En casi todo punto",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una propiedad vale <b>en casi todo punto</b> de $E$ (c.t.p.) si el conjunto de los $x \\in E$ en los que no vale es nulo, es decir, tiene medida $0$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-conjunto-nulo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto nulo (de medida cero)",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ es <b>nulo</b> (o de medida nula) si para todo $\\varepsilon \\gt 0$ existe una sucesión de intervalos abiertos $(I_k)_{k \\ge 1}$ tal que $A \\subseteq \\bigcup_{k} I_k$ y $\\sum_{k} \\ell(I_k) \\lt \\varepsilon$. Equivalentemente, $\\mu^*(A) = 0$, donde $\\mu^*$ es la medida exterior de Lebesgue.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-convergencia-uniforme": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Convergencia uniforme",
+  "enunciado": "<p>Sean $A$ un conjunto, $(Y, d)$ un espacio métrico y $f, f_n : A \\to Y$ para cada $n \\in \\mathbb{N}$. La sucesión $(f_n)_{n \\ge 1}$ <b>converge uniformemente</b> a $f$ (en $A$) si</p><p>$$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists n_0 \\in \\mathbb{N} \\quad \\forall n \\ge n_0 \\quad \\forall a \\in A : \\\\ &d(f_n(a), f(a)) \\lt \\varepsilon.\\end{aligned}$$</p><p>Ahora el $n_0$ depende sólo de $\\varepsilon$: sirve para todos los puntos de $A$ a la vez (comparar con la convergencia puntual). Equivalentemente, $\\sup_{a \\in A} d(f_n(a), f(a)) \\to 0$ cuando $n \\to \\infty$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-caracteristica": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función característica",
+  "enunciado": "<p>La <b>función característica</b> de un conjunto $A \\subseteq X$ es $\\chi_A : X \\to \\mathbb{R}$, $$\\chi_A(x) = \\begin{cases} 1 & \\text{si } x \\in A, \\\\ 0 & \\text{si } x \\notin A. \\end{cases}$$</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-medible": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función medible",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una función $f : E \\to \\mathbb{R}$ es <b>medible</b> (Lebesgue) si $f^{-1}(U) \\in \\mathcal{M}$ para todo abierto $U \\subseteq \\mathbb{R}$.</p><p>Muchos textos toman como definición $\\{x \\in E : f(x) \\gt a\\} \\in \\mathcal{M}$ para todo $a \\in \\mathbb{R}$; el Ejercicio 2 de la Práctica 9 muestra que da lo mismo.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-monotona": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función monótona",
+  "enunciado": "<p>Una función $f : \\mathbb{R} \\to \\mathbb{R}$ es <b>monótona creciente</b> si $x \\le y \\Rightarrow f(x) \\le f(y)$, y <b>monótona decreciente</b> si $x \\le y \\Rightarrow f(x) \\ge f(y)$. Es <b>monótona</b> si es creciente o decreciente.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-funcion-simple": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función simple",
+  "enunciado": "<p>Una función $\\varphi : E \\to \\mathbb{R}$ es <b>simple</b> si es de la forma $$\\varphi = \\sum_{i=1}^{n} a_i \\chi_{A_i},$$ con $n \\in \\mathbb{N}$, $a_1, \\dots, a_n \\in \\mathbb{R}$ y $A_1, \\dots, A_n \\in \\mathcal{M}$. Equivalentemente, si es medible y toma finitos valores; si $a_1, \\dots, a_n$ son sus valores distintos, se puede tomar $A_i = \\{x \\in E : \\varphi(x) = a_i\\}$ (representación canónica).</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-integrable": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Función integrable",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una función medible $f : E \\to \\mathbb{R}$ es <b>integrable</b> en $E$ si $\\int_E |f| \\, d\\mu \\lt +\\infty$; equivalentemente, si $\\int_E f^+ \\, d\\mu$ y $\\int_E f^- \\, d\\mu$ son finitas.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-integral-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Integral de Lebesgue",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. La integral se define en tres etapas:</p><ul class=\"items\"><li>si $\\varphi = \\sum_{i=1}^{n} a_i \\chi_{A_i}$ es simple y no negativa, $\\int_E \\varphi \\, d\\mu = \\sum_{i=1}^{n} a_i \\, \\mu(A_i \\cap E)$;</li><li>si $f : E \\to [0, +\\infty]$ es medible, $$\\int_E f \\, d\\mu = \\sup \\Big\\{ \\int_E \\varphi \\, d\\mu : \\varphi \\text{ simple},\\ 0 \\le \\varphi \\le f \\Big\\};$$</li><li>si $f$ es medible e integrable, $\\int_E f \\, d\\mu = \\int_E f^+ \\, d\\mu - \\int_E f^- \\, d\\mu$, con $f^+ = \\max(f, 0)$ y $f^- = \\max(-f, 0)$.</li></ul><p>Para $A \\in \\mathcal{M}$, $A \\subseteq E$, se nota $\\int_A f \\, d\\mu = \\int_E f \\chi_A \\, d\\mu$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-lema-fatou": {
+  "tipo": "Lema",
+  "numero": "",
+  "titulo": "Lema de Fatou",
+  "enunciado": "<p>Sea $(f_n)_{n}$ una sucesión de funciones medibles y no negativas en $E \\in \\mathcal{M}$. Entonces $$\\int_E \\liminf_{n \\to \\infty} f_n \\, d\\mu \\le \\liminf_{n \\to \\infty} \\int_E f_n \\, d\\mu.$$</p>",
+  "fuente": "Resultado del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medible-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto medible Lebesgue",
+  "enunciado": "<p>Sea $\\mu^*$ la medida exterior de Lebesgue. Un conjunto $A \\subseteq \\mathbb{R}$ es <b>medible Lebesgue</b> si para todo $T \\subseteq \\mathbb{R}$ $$\\mu^*(T) = \\mu^*(T \\cap A) + \\mu^*(T \\setminus A)$$ (criterio de Carathéodory). La familia de los conjuntos medibles Lebesgue se nota $\\mathcal{M}$, y es una $\\sigma$-álgebra de subconjuntos de $\\mathbb{R}$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medida-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Medida de Lebesgue",
+  "enunciado": "<p>La <b>medida de Lebesgue</b> es la restricción de la medida exterior a los conjuntos medibles: $$\\mu = \\mu^*\\big|_{\\mathcal{M}} : \\mathcal{M} \\to [0, +\\infty].$$ Es $\\sigma$-aditiva: si $(A_n)_{n \\in \\mathbb{N}} \\subseteq \\mathcal{M}$ son disjuntos dos a dos, entonces $\\mu\\big(\\bigcup_{n} A_n\\big) = \\sum_{n} \\mu(A_n)$. Un conjunto $A \\in \\mathcal{M}$ tiene <b>medida finita</b> si $\\mu(A) \\lt +\\infty$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-sigma-algebra": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "$\\sigma$-álgebra",
+  "enunciado": "<p>Sea $X$ un conjunto. Una familia $\\mathcal{A}$ de subconjuntos de $X$ es una <b>$\\sigma$-álgebra</b> si:</p><ul class=\"items\"><li>$X \\in \\mathcal{A}$;</li><li>si $A \\in \\mathcal{A}$, entonces $X \\setminus A \\in \\mathcal{A}$ (es cerrada por complementos);</li><li>si $A_n \\in \\mathcal{A}$ para todo $n \\in \\mathbb{N}$, entonces $\\bigcup_{n \\in \\mathbb{N}} A_n \\in \\mathcal{A}$ (es cerrada por uniones numerables).</li></ul>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}

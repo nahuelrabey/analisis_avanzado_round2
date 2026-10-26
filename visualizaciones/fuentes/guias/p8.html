@@ -1,0 +1,232 @@
+<p class="edicion" id="guiap8-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p8.typ</code>) · 15 ejercicios. La teoría de la medida todavía no está en <code>apuntes.typ</code>: los popups de $\sigma$-álgebra, medida exterior, conjunto nulo, medible y medida de Lebesgue dan la definición estándar del curso.</p>
+
+<p class="cita" id="guiap8-convencion"><em>En lo que sigue $\mathcal{M}$ será la <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de los <span class="ref" data-ref="ext-medible-lebesgue">conjuntos medibles Lebesgue</span> de $\mathbb{R}$ y $\mu$ la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span>.</em></p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap8-ej1" data-short="Ej. 1" data-title="Contables y co-contables forman una sigma-álgebra" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3><span class="ref" data-ref="def-3.6">Contables</span> y co-contables: una $\sigma$-álgebra</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Sea $X$ un conjunto y sea
+    $$\begin{aligned} \mathcal{A} = \{A \subseteq X :\ &A \text{ es contable o} \\ &X \setminus A \text{ es contable}\}. \end{aligned}$$
+    Pruebe que $\mathcal{A}$ es una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span>.</p></div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap8-ej2" data-short="Ej. 2" data-title="Propiedades de una sigma-álgebra" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Propiedades de una $\sigma$-álgebra</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $X$ un conjunto y sea $\mathcal{A}$ una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de subconjuntos de $X$. Pruebe que:</p>
+      <ol class="items">
+        <li>$\emptyset \in \mathcal{A}$.</li>
+        <li>Si $A, B \in \mathcal{A}$ entonces $A \setminus B \in \mathcal{A}$ y $A \,\Delta\, B \in \mathcal{A}$ (<span class="ref" data-ref="ext-diferencia-simetrica">diferencia simétrica</span>).</li>
+        <li>$\mathcal{A}$ es cerrada por intersecciones numerables.</li>
+      </ol></div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 150" role="img" aria-label="Diagramas de Venn: a la izquierda A menos B sombreado, a la derecha la diferencia simétrica de A y B sombreada">
+        <defs><clipPath id="guiap8-ej2-clip"><circle cx="75" cy="80" r="46"/></clipPath></defs>
+        <rect class="sv-fill-bg" x="0" y="0" width="360" height="150"/>
+        <path class="sv-area" fill-rule="evenodd" clip-path="url(#guiap8-ej2-clip)" d="M29,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z M71,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z"/>
+        <circle class="sv-accent" cx="75" cy="80" r="46"/>
+        <circle class="sv-seq2" cx="117" cy="80" r="46"/>
+        <text class="sv-label-accent" x="40" y="84">A</text>
+        <text class="sv-label-seq2" x="142" y="84">B</text>
+        <text class="sv-text" x="96" y="22" text-anchor="middle">A \ B</text>
+        <path class="sv-area" fill-rule="evenodd" d="M209,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z M251,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z"/>
+        <circle class="sv-accent" cx="255" cy="80" r="46"/>
+        <circle class="sv-seq2" cx="297" cy="80" r="46"/>
+        <text class="sv-label-accent" x="220" y="84">A</text>
+        <text class="sv-label-seq2" x="322" y="84">B</text>
+        <text class="sv-text" x="276" y="22" text-anchor="middle">A Δ B</text>
+      </svg>
+      <figcaption>Las dos operaciones del ítem (b), sombreadas: <i>A</i> \ <i>B</i> (izquierda) y <i>A</i> Δ <i>B</i> = (<i>A</i> \ <i>B</i>) ∪ (<i>B</i> \ <i>A</i>) (derecha).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap8-ej3" data-short="Ej. 3" data-title="Todo subconjunto numerable de R es nulo" data-topics="medida,cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Los numerables son nulos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que todo subconjunto <span class="ref" data-ref="def-3.6">numerable</span> de $\mathbb{R}$ es <span class="ref" data-ref="ext-conjunto-nulo">nulo</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej3-c" aria-label="Puntos de un conjunto numerable, cada uno dentro de un intervalo; las longitudes de los intervalos se suman abajo"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej3-eps">ε</label><input type="range" id="guiap8-ej3-eps" min="2" max="100" value="40"><output id="guiap8-ej3-eps-o"></output></div>
+        <div class="slider"><label for="guiap8-ej3-N"><i>N</i></label><input type="range" id="guiap8-ej3-N" min="1" max="24" value="8"><output id="guiap8-ej3-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej3-read" aria-live="polite"></dl>
+      <figcaption>Un cubrimiento como los de la definición de conjunto nulo, para un conjunto numerable elegido: los racionales de [0, 1] enumerados por denominador (0, 1, 1/2, 1/3, 2/3, 1/4, …). Cada fila es un punto <i>q<sub>k</sub></i> (abajo, todos juntos sobre la recta) dentro de un intervalo abierto <i>I<sub>k</sub></i> de longitud ε/2<sup><i>k</i></sup>; se dibujan los primeros <i>N</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap8-ej4" data-short="Ej. 4" data-title="Los intervalos son medibles: medida de [a,b), [a,b] y [a,+inf)" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Los intervalos son medibles</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que para todos $a, b \in \mathbb{R}$ los intervalos $[a, b)$, $[a, b]$, $[a, +\infty)$ son <span class="ref" data-ref="ext-medible-lebesgue">medibles Lebesgue</span>, y calcule su <span class="ref" data-ref="ext-medida-lebesgue">medida</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej4-c" aria-label="Los intervalos [a, b), [a, b] y [a, +infinito) sobre la recta, con a y b arrastrables"></canvas>
+      <dl class="read" id="guiap8-ej4-read" aria-live="polite"></dl>
+      <figcaption>Los tres intervalos del enunciado; arrastrá <i>a</i> o <i>b</i> sobre cualquiera de las filas. Punto lleno: el extremo pertenece al intervalo; punto vacío: no pertenece.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap8-ej5" data-short="Ej. 5" data-title="Abiertos y cerrados son medibles" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Abiertos y cerrados son medibles</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq \mathbb{R}$.</p>
+    <ol class="items">
+      <li>Pruebe que si $A$ es <span class="ref" data-ref="def-4.14">abierto</span> entonces $A \in \mathcal{M}$.</li>
+      <li>Deduzca que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces $A \in \mathcal{M}$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap8-ej6" data-short="Ej. 6" data-title="Medida de Q y de los irracionales de [0,1]" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Medida de $\mathbb{Q}$ y de los irracionales de $[0, 1]$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Calcule la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span> de $\mathbb{Q}$ y la de los irracionales del $[0, 1]$. ¿Por qué son <span class="ref" data-ref="ext-medible-lebesgue">medibles</span> estos conjuntos?</p></div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap8-ej7" data-short="Ej. 7" data-title="Acotado implica medida finita; medida finita no acotado" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Acotado y medida finita</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Pruebe que todo conjunto <span class="ref" data-ref="def-4.8">acotado</span> de $\mathcal{M}$ tiene <span class="ref" data-ref="ext-medida-lebesgue">medida finita</span>. Muestre un conjunto de $\mathcal{M}$ que tenga medida de Lebesgue finita pero que no sea acotado.</p></div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap8-ej8" data-short="Ej. 8" data-title="Medida de la unión más medida de la intersección" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>$\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $A, B \in$ <span class="ref" data-ref="ext-medible-lebesgue">$\mathcal{M}$</span>, pruebe que
+      $$\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B).$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej8-c" aria-label="Dos intervalos A y B arrastrables, con su unión y su intersección"></canvas>
+      <dl class="read" id="guiap8-ej8-read" aria-live="polite"></dl>
+      <figcaption>El enunciado en el caso más simple, con <i>A</i> y <i>B</i> intervalos cerrados elegidos (arrastrá sus extremos en las dos primeras filas). Abajo, <i>A</i> ∪ <i>B</i> y <i>A</i> ∩ <i>B</i>; las longitudes de los dibujos se suman en la lectura.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap8-ej9" data-short="Ej. 9" data-title="Medida nula implica interior vacío" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Medida nula e interior vacío</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $A \in \mathcal{M}$. Pruebe que si $\mu(A) = 0$ entonces $A^{\circ} = \emptyset$ (<span class="ref" data-ref="def-4.11">interior</span>). ¿Vale la recíproca?</p></div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap8-ej10" data-short="Ej. 10" data-title="Medida 1 en [0,1] implica denso" data-topics="medida,densidad">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Medida $1$ en $[0, 1]$ implica denso</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq [0, 1]$ un conjunto <span class="ref" data-ref="ext-medible-lebesgue">medible Lebesgue</span> tal que $\mu(A) = 1$. Pruebe que $A$ es <span class="ref" data-ref="def-5.20">denso</span> en $[0, 1]$.</p></div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap8-ej11" data-short="Ej. 11" data-title="Medible como unión de cerrados más un nulo, o intersección de abiertos menos un nulo" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Medibles vía cerrados y abiertos</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$. Pruebe que las siguientes afirmaciones son equivalentes:</p>
+      <ol class="items">
+        <li>$A \in \mathcal{M}$.</li>
+        <li>Existen una sucesión $(F_n)_{n \in \mathbb{N}}$ de conjuntos <span class="ref" data-ref="def-4.27">cerrados</span> contenidos en $A$ y un conjunto $Z$ de <span class="ref" data-ref="ext-conjunto-nulo">medida nula</span> tales que $A = \big(\bigcup_{n \in \mathbb{N}} F_n\big) \cup Z$.</li>
+        <li>Existen una sucesión $(G_n)_{n \in \mathbb{N}}$ de conjuntos <span class="ref" data-ref="def-4.14">abiertos</span> que contienen a $A$ y un conjunto $H$ de medida nula tales que $A = \big(\bigcap_{n \in \mathbb{N}} G_n\big) \setminus H$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej11-c" aria-label="Un conjunto A, un cerrado F_n contenido en A y un abierto G_n que contiene a A"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej11-n"><i>n</i></label><input type="range" id="guiap8-ej11-n" min="1" max="20" value="2"><output id="guiap8-ej11-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej11-read" aria-live="polite"></dl>
+      <figcaption>Los objetos de (b) y (c) para un <i>A</i> elegido, <i>A</i> = [0,1; 0,4) ∪ (0,55; 0,85]: un cerrado <i>F<sub>n</sub></i> ⊆ <i>A</i> (se achica 0,15/<i>n</i> en los extremos abiertos) y un abierto <i>G<sub>n</sub></i> ⊇ <i>A</i> (se agranda 0,15/<i>n</i> en cada extremo). Es una elección posible para este <i>A</i>, no la construcción general.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap8-ej12" data-short="Ej. 12" data-title="Medible si y sólo si hay F cerrado y G abierto con medida de G menos F menor que epsilon" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>$F \subseteq A \subseteq G$ con $\mu(G \setminus F) \lt \varepsilon$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$. Pruebe que $A \in \mathcal{M}$ si y sólo si para todo $\varepsilon \gt 0$ existen conjuntos $G$ <span class="ref" data-ref="def-4.14">abierto</span> y $F$ <span class="ref" data-ref="def-4.27">cerrado</span> tales que $F \subseteq A \subseteq G$ y $\mu(G \setminus F) \lt \varepsilon$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej12-c" aria-label="Un conjunto A unión de tres intervalos, un cerrado F dentro, un abierto G que lo contiene y la diferencia G menos F"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej12-eps">ε</label><input type="range" id="guiap8-ej12-eps" min="1" max="60" value="30"><output id="guiap8-ej12-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej12-read" aria-live="polite"></dl>
+      <figcaption>Para un <i>A</i> elegido, <i>A</i> = [0,1; 0,3) ∪ (0,45; 0,6) ∪ [0,7; 0,9], un <i>F</i> cerrado y un <i>G</i> abierto con <i>F</i> ⊆ <i>A</i> ⊆ <i>G</i>, que se mueven δ = ε/13 desde cada extremo de <i>A</i>. La última fila es <i>G</i> \ <i>F</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap8-ej13" data-short="Ej. 13" data-title="Si la medida de A_n delta B tiende a 0, la medida de A_n tiende a la de B" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>$\mu(A_n \,\Delta\, B) \to 0 \Rightarrow \mu(A_n) \to \mu(B)$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{M}$ y $B \in \mathcal{M}$ tales que $\lim_{n \to \infty} \mu(A_n \,\Delta\, B) = 0$ (<span class="ref" data-ref="ext-diferencia-simetrica">diferencia simétrica</span>). Pruebe que $\lim_{n \to \infty} \mu(A_n) = \mu(B)$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej13-c" aria-label="El intervalo B, el intervalo A_n y su diferencia simétrica"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej13-n"><i>n</i></label><input type="range" id="guiap8-ej13-n" min="1" max="40" value="2"><output id="guiap8-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej13-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido que cumple la hipótesis: <i>B</i> = [0,2; 0,7] y <i>A<sub>n</sub></i> = [0,2 + 0,3/<i>n</i>; 0,7 + 0,25/<i>n</i>]. La última fila es <i>A<sub>n</sub></i> Δ <i>B</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap8-ej14" data-short="Ej. 14" data-title="Dilataciones cA de un medible" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Dilataciones $cA$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Recordemos que para $c \in \mathbb{R}$ y $A \subseteq \mathbb{R}$ denotamos
+      $$cA = \{c a : a \in A\}.$$</p>
+      <ol class="items">
+        <li>Pruebe que si $A \in$ <span class="ref" data-ref="ext-medible-lebesgue">$\mathcal{M}$</span> entonces $cA \in \mathcal{M}$.</li>
+        <li>Pruebe que si $c \gt 0$ entonces <span class="ref" data-ref="ext-medida-lebesgue">$\mu(cA) = c\, \mu(A)$</span>.</li>
+        <li>¿Qué se puede decir de $\mu(cA)$ en el caso $c \lt 0$?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej14-c" aria-label="Un conjunto A unión de dos intervalos y su dilatación cA"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej14-c-s"><i>c</i></label><input type="range" id="guiap8-ej14-c-s" min="-40" max="40" value="15"><output id="guiap8-ej14-c-s-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej14-read" aria-live="polite"></dl>
+      <figcaption>Un <i>A</i> elegido, <i>A</i> = [0,5; 1] ∪ [1,5; 2,5], y el conjunto <i>cA</i> para el <i>c</i> del slider (también negativo).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap8-ej15" data-short="Ej. 15" data-title="Sobreyectiva de [0,1] en R que vale 0 en casi todo punto" data-topics="medida,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Sobreyectiva y nula en casi todo punto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-medida">medida</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Pruebe que existe una función sobreyectiva $f : [0, 1] \to \mathbb{R}$ que vale $0$ en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $[0, 1]$. ¿Puede una tal función ser <span class="ref" data-ref="def-5.4">continua</span>?</p></div>
+  <div class="preparan" data-ej="15"></div>
+</article>

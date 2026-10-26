@@ -1,0 +1,233 @@
+{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul class=\"items\"><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy</em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-cerrado-en-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Cerrado dentro de un compacto",
+  "enunciado": "<p>Si $X$ es un espacio métrico compacto y $F \\subseteq X$ es cerrado, entonces $F$ es compacto.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio compacto",
+  "enunciado": "<p>Un espacio métrico $K$ es <b>compacto</b> si toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$. Un subconjunto $K \\subseteq X$ de un espacio métrico es compacto si lo es con la métrica inducida.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ (es la definición por sucesiones que usan ejemplos/p5.typ y guias/p5.typ)"
+ },
+ "ext-compacto-cerrado": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Los compactos son cerrados",
+  "enunciado": "<p>En un espacio métrico, todo subconjunto compacto es cerrado.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-compacto-completo": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Los compactos son completos",
+  "enunciado": "<p>Todo espacio métrico compacto es completo.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-heine-borel": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Heine–Borel",
+  "enunciado": "<p>Un subconjunto $K \\subseteq \\mathbb{R}^n$ (con cualquiera de las distancias $d_1$, $d_2$, $d_\\infty$) es compacto si y sólo si es cerrado y acotado.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-imagen-compacto": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "La imagen continua de un compacto es compacta",
+  "enunciado": "<p>Sean $X$, $Y$ espacios métricos y $f : X \\to Y$ continua. Si $K \\subseteq X$ es compacto, entonces $f(K)$ es compacto.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-punto-fijo-banach": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Punto fijo de Banach",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $f : E \\to E$ una <b>contracción</b>, es decir, existe $0 \\le \\alpha \\lt 1$ tal que $d(f(x), f(y)) \\le \\alpha\\, d(x, y)$ para todo $x, y \\in E$. Entonces $f$ tiene un único punto fijo $a \\in E$ ($f(a) = a$). Además, para cualquier $x \\in E$, la sucesión $x_n = f^n(x)$ converge a $a$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (guias/p5.typ lo da por conocido)"
+ },
+ "guia-p2-ej17": {
+  "tipo": "Práctica 2",
+  "numero": "Ej. 17",
+  "titulo": "",
+  "enunciado": "<ol type=\"a\"><li>Sea $I$ un conjunto (de índices). Supongamos que existe una familia de intervalos $\\{A_i\\}_{i \\in I}$ indexada por $I$ tal que: $\\# A_i \\gt 1$ para todo $i \\in I$; $A_i \\cap A_j = \\emptyset$ si $i \\neq j$. Pruebe que $I$ es contable.</li><li>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ una función monótona. Pruebe que el conjunto de sus discontinuidades es contable.</li></ol>",
+  "fuente": "guias/p2.typ"
+ },
+ "guia-p4-ej11": {
+  "tipo": "Práctica 4",
+  "numero": "Ej. 11",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico.</p><ol type=\"a\"><li>Sea $A \\subseteq E$, y sea $g : E \\to \\mathbb{R}$ dada por $g(x) = d(x, A)$. (i) Pruebe que $g$ es continua. (ii) Pruebe que si $A$ es cerrado entonces $g(x) \\gt 0$ para todo $x \\notin A$.</li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos, y sea $h : E \\to [0, 1]$ dada por $$h(x) = \\frac{d(x, A)}{d(x, A) + d(x, B)}.$$ Pruebe que $h$ es continua, y que $h(x) = 0$ $\\forall x \\in A$ y $h(x) = 1$ $\\forall x \\in B$.</li><li>Sean $A, B \\subseteq E$ cerrados, no vacíos y disjuntos. Pruebe que existen conjuntos abiertos y disjuntos $U$ y $V$ tales que $A \\subseteq U$ y $B \\subseteq V$.</li></ol><p><em>Nota: esta última afirmación está comprendida en el llamado Lema de Urysohn.</em></p>",
+  "fuente": "guias/p4.typ"
+ },
+ "guia-p5-ej10": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 10",
+  "titulo": "",
+  "enunciado": "<p>Consideremos en $(C[0, 1], d_\\infty)$ la función $f_0$ nula. Pruebe que $\\overline{B(f_0, 1)}$ no es compacta (pero sí es cerrada y acotada). ¿Qué pasa si cambiamos $d_\\infty$ por $d_1$?</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej12": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 12",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ continua tal que $$\\lim_{x \\to -\\infty} f(x) = \\lim_{x \\to +\\infty} f(x) = 0.$$ Pruebe que $f$ es uniformemente continua en $\\mathbb{R}$.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej14": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 14",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $f : E \\to E$ continua. Pruebe que el conjunto de puntos fijos de $f$ es cerrado.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej15": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 15",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : \\mathbb{R} \\to \\mathbb{R}$ dada por $f(x) = \\frac{1}{2} \\arctan(x) + 3$. Pruebe que $f$ es una contracción.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej17": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 17",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $f : E \\to E$ una función. Para $n \\in \\mathbb{N}$ denotemos por $f^n : E \\to E$ a la función $f \\circ f \\circ \\dots \\circ f$ ($n$ veces). Pruebe las siguientes afirmaciones:</p><ol type=\"a\"><li>Si $x \\in E$ es punto fijo de $f$, entonces es punto fijo de $f^n$.</li><li>Si $E$ es completo y existe $n \\in \\mathbb{N}$ tal que $f^n$ es una contracción, entonces existe un único punto fijo de $f$ en $E$. <em>Sugerencia: pruebe que si $x \\in E$ es punto fijo de $f^n$, entonces $f(x)$ también lo es.</em></li><li>Deduzca que existe un único $x \\in \\mathbb{R}$ tal que $\\cos(x) = x$.</li></ol>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej19": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 19",
+  "titulo": "",
+  "enunciado": "<p>Sea $f : [a, b] \\to [a, b]$ continua. Pruebe que $f$ tiene un punto fijo.</p><p><em>Sugerencia: use el teorema de Bolzano.</em></p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej2": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 2",
+  "titulo": "",
+  "enunciado": "<p>Sea $K$ un subconjunto compacto no vacío de $\\mathbb{R}$. Pruebe que $K$ tiene mínimo y máximo.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej4": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 4",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico y sea $\\{F_i\\}_{i \\in I}$ una familia de subconjuntos cerrados de $E$. Pruebe que si existe $i_0 \\in I$ tal que $F_{i_0}$ es compacto, entonces $\\bigcap_{i \\in I} F_i$ es compacto.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej5": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 5",
+  "titulo": "",
+  "enunciado": "<p>Sea $E$ un espacio métrico. Pruebe que $E$ es compacto si y solo si para toda sucesión $(F_n)_{n \\ge 1}$ decreciente (es decir, $F_{n+1} \\subseteq F_n$ para todo $n \\in \\mathbb{N}$) de cerrados no vacíos de $E$ se tiene que $\\bigcap_{n \\ge 1} F_n \\neq \\emptyset$.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej8": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 8",
+  "titulo": "",
+  "enunciado": "<p>Pruebe que en un espacio métrico $(E, d)$ la distancia de un punto a un compacto <em>se realiza</em>. Esto es, que para todo compacto $K \\subseteq E$ y para todo $x \\in E$ existe $y \\in K$ tal que $d(x, y) = d(x, K)$.</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "guia-p5-ej9": {
+  "tipo": "Práctica 5",
+  "numero": "Ej. 9",
+  "titulo": "",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico, y sea $\\hat{d}$ la función definida en el Ejercicio 11 de la Práctica 3. Pruebe que si $A \\subseteq E$ es compacto, $B \\subseteq E$ es cerrado y se cumple que $A \\cap B = \\emptyset$, entonces $\\hat{d}(A, B) \\gt 0$. ¿Sucede lo mismo si $A$ es solo cerrado?</p>",
+  "fuente": "guias/p5.typ"
+ },
+ "prop-5-unicidad-del-limite": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión de términos reales. Supongamos que $a_n \\to \\ell_1$ y $a_n \\to \\ell_2$ al mismo tiempo, con $\\ell_1, \\ell_2 \\in \\mathbb{R}$. Entonces $\\ell_1 = \\ell_2$.</p><p>Es decir, el límite de una sucesión es único.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-convergencia-de-subsucesiones": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de subsucesiones",
+  "enunciado": "<p>Si $\\lim_{n \\to \\infty} a_n = \\ell$, entonces toda subsucesión también converge a $\\ell$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.54": {
+  "tipo": "Teorema",
+  "numero": "4.54",
+  "titulo": "Sucesiones de Cauchy, acotadas y convergentes",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión.</p><ol type=\"a\"><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy, entonces es acotada.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es convergente, entonces es de Cauchy.</li><li>Si $(x_n)_{n \\in \\mathbb{N}}$ es de Cauchy y tiene una subsucesión convergente, entonces $(x_n)$ es convergente.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ }
+}

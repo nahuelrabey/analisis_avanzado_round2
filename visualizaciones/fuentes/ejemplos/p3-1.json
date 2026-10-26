@@ -1,0 +1,100 @@
+{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro</b> se define como:</p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-4.12": {
+  "tipo": "Observación",
+  "numero": "4.12",
+  "titulo": "$E^{\\circ} \\subseteq E$, inclusión posiblemente estricta",
+  "enunciado": "<p>Por definición, sabemos que $E^{\\circ} \\subseteq E$ pero la inclusión puede ser estricta.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión</b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.</p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge</b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que</p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:</p><ol><li><b>Distancia euclídea ($d_2$):</b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$</li><li><b>Distancia taxista ($d_1$):</b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$</li><li><b>Distancia del máximo ($d_\\infty$):</b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$</li></ol><p>(En el apunte, un dibujo de cada distancia entre dos puntos de $\\mathbb{R}^2$.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Weierstrass",
+  "enunciado": "<p>Si $f : [a, b] \\to \\mathbb{R}$ es continua, entonces $f$ es acotada y alcanza su máximo y su mínimo: existen $x_m, x_M \\in [a, b]$ tales que $f(x_m) \\le f(x) \\le f(x_M)$ para todo $x \\in [a, b]$.</p>",
+  "fuente": "Resultado del curso (Análisis I); todavía no está en apuntes.typ"
+ },
+ "ext-densidad-irracionales": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Densidad de los irracionales",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $t \\in \\mathbb{R} \\setminus \\mathbb{Q}$ tal que $x \\lt t \\lt y$.</p>",
+  "fuente": "Resultado del curso (se deduce de la densidad de $\\mathbb{Q}$, Proposición 2); todavía no está como caja en apuntes.typ"
+ },
+ "ext-metricas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métricas equivalentes",
+  "enunciado": "<p>Dos métricas $d$ y $d'$ sobre un mismo conjunto $M$ son <b>equivalentes</b> si definen los mismos abiertos: un conjunto $A \\subseteq M$ es abierto en $(M, d)$ si y sólo si es abierto en $(M, d')$.</p><p>Equivalentemente: para todo $x \\in M$ y todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $B_{d'}(x, \\delta) \\subseteq B_d(x, \\varepsilon)$, y existe $\\delta' \\gt 0$ tal que $B_d(x, \\delta') \\subseteq B_{d'}(x, \\varepsilon)$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}

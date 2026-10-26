@@ -1,0 +1,303 @@
+<p class="edicion" id="guiap4-edicion">Edición 2026 (<code>apuntes-docentes/guias/p4.pdf</code>) · cotejada ítem por ítem con la edición 2025: numeración y enunciados idénticos (16 ejercicios, 34 incisos); sólo cambió el encabezado.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap4-ej1" data-short="Ej. 1" data-title="Cuáles de estas funciones son continuas" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>¿Cuáles de estas funciones son continuas?</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Decida cuáles de las siguientes funciones son <span class="ref" data-ref="def-5.4">continuas</span>:</p>
+      <ol class="items">
+        <li>$f : (\mathbb{R}^2, d_2) \to (\mathbb{R}, d_2)$, $f(x, y) = x^2 + y^2$.</li>
+        <li>$f : (\mathbb{R}^2, d_2) \to (\mathbb{R}, d_2)$,
+          $$f(x, y) = \begin{cases} \dfrac{x^2 y}{\frac{1}{2} x^2 + (x-1)^2 y^2} & \text{si } (x, y) \neq (0, 0), \\[4pt] 0 & \text{si } (x, y) = (0, 0). \end{cases}$$</li>
+        <li>$\operatorname{id}_{\mathbb{R}^2} : (\mathbb{R}^2, \delta) \to (\mathbb{R}^2, d_2)$, la función identidad.</li>
+        <li>$\operatorname{id}_{\mathbb{R}^2} : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, \delta)$, la función identidad.</li>
+      </ol>
+      <p>Aquí $d_2$ es la <span class="ref" data-ref="def-distancias-en-rrn">métrica euclídea usual</span>, y $\delta$ es la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. ¿Cambia algo si en lugar de $d_2$ consideramos $d_1$ o $d_\infty$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej1-c" aria-label="Mapa de colores de la función del ítem (b) alrededor del origen"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej1-R">ventana</label><input type="range" id="guiap4-ej1-R" min="0" max="100" value="80"><output id="guiap4-ej1-R-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej1-read" aria-live="polite"></dl>
+      <figcaption>La función del ítem (b) en el cuadrado [−<i>R</i>, <i>R</i>]², pintada con una intensidad que crece con |<i>f</i>| (azul si <i>f</i> &gt; 0, naranja si <i>f</i> &lt; 0; color pleno a partir de |<i>f</i>| = 2). El punto marca el origen, donde <i>f</i> vale 0 por definición. Achicá la ventana para mirar cerca del origen.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap4-ej2" data-short="Ej. 2" data-title="x en los racionales, 0 en los irracionales: continua sólo en 0" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>$x$ en $\mathbb{Q}$, $0$ fuera de $\mathbb{Q}$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ dada por
+      $$f(x) = \begin{cases} x & \text{si } x \in \mathbb{Q}, \\ 0 & \text{si } x \notin \mathbb{Q}. \end{cases}$$
+      Pruebe que $f$ es <span class="ref" data-ref="def-5.4">continua</span> únicamente en $x = 0$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej2-c" aria-label="Gráfico de f: puntos racionales sobre la recta y igual a x y la recta y igual a 0 para los irracionales"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej2-q">denominador ≤</label><input type="range" id="guiap4-ej2-q" min="1" max="30" value="8"><output id="guiap4-ej2-q-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej2-read" aria-live="polite"></dl>
+      <figcaption>Los puntos azules son (<i>p</i>/<i>q</i>, <i>p</i>/<i>q</i>) para los racionales de [−2, 2] con denominador <i>q</i> hasta el valor elegido; la recta naranja es <i>y</i> = 0, el valor de <i>f</i> en los irracionales. Un gráfico sólo puede mostrar finitos racionales: subiendo el denominador, los puntos azules llenan la diagonal punteada.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap4-ej3" data-short="Ej. 3" data-title="Conservación del signo" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Conservación del signo</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>, y sea $x_0 \in E$. Sea $f : E \to \mathbb{R}$ una función <span class="ref" data-ref="def-5.4">continua en $x_0$</span>. Pruebe que si $f(x_0) \gt 0$ entonces existe $r \gt 0$ tal que $f(x) \gt 0$ para todo <span class="ref" data-ref="def-4.5">$x \in B(x_0, r)$</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej3-c" aria-label="Gráfico de una función real con un punto x0 y un intervalo alrededor donde la función es positiva"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej3-x">x<sub>0</sub></label><input type="range" id="guiap4-ej3-x" min="-100" max="600" value="100"><output id="guiap4-ej3-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej3-read" aria-live="polite"></dl>
+      <figcaption>Una función elegida para el dibujo, <i>f</i>(<i>x</i>) = sen <i>x</i> + 0.35, con <i>E</i> = ℝ. Si <i>f</i>(<i>x</i><sub>0</sub>) &gt; 0, la franja sombreada y el segmento verde son la bola <i>B</i>(<i>x</i><sub>0</sub>, <i>r</i>) más grande (calculada numéricamente) donde <i>f</i> sigue positiva. Acercá <i>x</i><sub>0</sub> a un cero de <i>f</i> y mirá cómo se achica <i>r</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap4-ej4" data-short="Ej. 4" data-title="Donde f y g difieren es abierto; donde coinciden, cerrado" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Donde $f \neq g$ es abierto</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f, g : E \to E'$ funciones <span class="ref" data-ref="def-5.4">continuas</span>.</p>
+      <ol class="items">
+        <li>Pruebe que $\{x \in E : f(x) \neq g(x)\}$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>Deduzca que $\{x \in E : f(x) = g(x)\}$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej4-c" aria-label="Gráficos de f igual a seno y g constante, con los conjuntos donde difieren y donde coinciden marcados en el eje"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej4-c0">valor de <i>g</i></label><input type="range" id="guiap4-ej4-c0" min="-120" max="120" value="50"><output id="guiap4-ej4-c0-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej4-read" aria-live="polite"></dl>
+      <figcaption>Funciones elegidas para el dibujo, con <i>E</i> = [0, 4π] y <i>E'</i> = ℝ: <i>f</i>(<i>x</i>) = sen <i>x</i> (azul) y <i>g</i> constante (verde). Sobre el eje, en azul, el conjunto {<i>f</i> ≠ <i>g</i>}; los puntos naranjas son {<i>f</i> = <i>g</i>}. Probá <i>g</i> = 1: los puntos de tangencia también cuentan.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap4-ej5" data-short="Ej. 5" data-title="Conjuntos abiertos y cerrados definidos por funciones continuas" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Abiertos y cerrados definidos por ecuaciones</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Considerando en cada $\mathbb{R}^n$ la <span class="ref" data-ref="def-distancias-en-rrn">métrica euclídea $d_2$</span>, pruebe que:</p>
+      <ol class="items">
+        <li>$$\{(x, y) \in \mathbb{R}^2 : x^2 + y \sin(e^x - 1) = -2\}$$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+        <li>$$\{(x, y, z) \in \mathbb{R}^3 : -1 \le x^3 - 3y^4 + z - 2 \le 3\}$$ es cerrado.</li>
+        <li>$$\{(x_1, x_2, x_3, x_4, x_5) \in \mathbb{R}^5 : 3 \lt x_1 - x_2\}$$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+      </ol>
+      <p>¿Cambia algo si en lugar de $d_2$ consideramos las métricas $d_1$ o $d_\infty$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej5-c" aria-label="La curva x al cuadrado más y por seno de e a la x menos 1 igual a menos 2 en el plano"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej5-y">alto de la ventana</label><input type="range" id="guiap4-ej5-y" min="4" max="40" value="14"><output id="guiap4-ej5-y-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej5-read" aria-live="polite"></dl>
+      <figcaption>El conjunto del ítem (a): donde sen(<i>e<sup>x</sup></i> − 1) ≠ 0 es el gráfico de <i>y</i> = −(2 + <i>x</i>²)/sen(<i>e<sup>x</sup></i> − 1), y las rectas punteadas son los <i>x</i> donde sen(<i>e<sup>x</sup></i> − 1) = 0, a los que la curva no llega. Los conjuntos de (b) y (c) viven en ℝ³ y ℝ⁵ y no se dibujan.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap4-ej6" data-short="Ej. 6" data-title="Continuas que no mandan abiertos en abiertos ni cerrados en cerrados" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Imagen de abiertos y de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $f, g : \mathbb{R} \to \mathbb{R}$ dadas por $f(x) = x^2$, $g(x) = x^2 / (1 + x^2)$. Pruebe que:</p>
+      <ol class="items">
+        <li>$f$ es <span class="ref" data-ref="def-5.4">continua</span>, y sin embargo existe $G \subseteq \mathbb{R}$ <span class="ref" data-ref="def-4.14">abierto</span> tal que <span class="ref" data-ref="def-5.1">$f(G)$</span> no es abierto.</li>
+        <li>$g$ es continua, y sin embargo existe $F \subseteq \mathbb{R}$ <span class="ref" data-ref="def-4.27">cerrado</span> tal que $g(F)$ no es cerrado.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej6-c" aria-label="Gráficos de f igual a x al cuadrado y de g igual a x al cuadrado sobre uno más x al cuadrado"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap4-ej6-f" value="f" checked><i>f</i>(<i>x</i>) = <i>x</i>²</label>
+          <label><input type="radio" name="guiap4-ej6-f" value="g"><i>g</i>(<i>x</i>) = <i>x</i>²/(1 + <i>x</i>²)</label>
+        </fieldset>
+      </div>
+      <figcaption>Los gráficos de las dos funciones del enunciado en [−4, 4]. La recta punteada en <i>y</i> = 1 es la asíntota horizontal de <i>g</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap4-ej7" data-short="Ej. 7" data-title="Dos continuas que coinciden en un denso son iguales" data-topics="continuidad,densidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Dos continuas que coinciden en un denso</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f, g : E \to E'$ funciones <span class="ref" data-ref="def-5.4">continuas</span>.</p>
+      <ol class="items">
+        <li>Sea $D \subseteq E$ un subconjunto <span class="ref" data-ref="def-5.20">denso</span>. Pruebe que si $f|_D = g|_D$, entonces $f = g$.</li>
+        <li>Concluya que la función $\mathcal{R} :$ <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$C([0, 1])$</span> $\to \{f : \mathbb{Q} \cap [0, 1] \to \mathbb{R}\}$ dada por $\mathcal{R}(f) = f|_{\mathbb{Q} \cap [0, 1]}$ es inyectiva.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej7-c" aria-label="Una función continua en [0,1] y sus valores en los racionales con denominador acotado"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej7-q">denominador ≤</label><input type="range" id="guiap4-ej7-q" min="1" max="40" value="6"><output id="guiap4-ej7-q-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej7-read" aria-live="polite"></dl>
+      <figcaption>Una <i>f</i> ∈ <i>C</i>([0, 1]) elegida para el dibujo (línea punteada) y los puntos de 𝓡(<i>f</i>) que se pueden mostrar: los valores de <i>f</i> en los racionales de [0, 1] con denominador hasta el valor elegido.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap4-ej8" data-short="Ej. 8" data-title="La imagen continua y suryectiva de un denso es densa" data-topics="continuidad,densidad">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>La imagen de un denso por una continua suryectiva</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f : E \to E'$ una función <span class="ref" data-ref="def-5.4">continua</span> y suryectiva. Pruebe que si $D$ es <span class="ref" data-ref="def-5.20">denso</span> en $E$ entonces $f(D)$ es denso en $E'$.</p></div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap4-ej9" data-short="Ej. 9" data-title="Evaluación e integral en C([0,1]) con d∞ y d1" data-topics="continuidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Evaluación e integral en $C([0,1])$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideramos las funciones $\mathcal{E}, \mathcal{I} :$ <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$C([0, 1])$</span> $\to \mathbb{R}$ definidas por:
+      $$\mathcal{E}(f) = f(0), \quad \mathcal{I}(f) = \int_0^1 f(x)\, dx.$$</p>
+      <ol class="items">
+        <li>Demuestre que si utilizamos en $C([0, 1])$ la distancia $d_\infty$ ambas resultan <span class="ref" data-ref="def-5.4">continuas</span>.</li>
+        <li>Demuestre que si en cambio utilizamos en $C([0, 1])$ la distancia $d_1$, $\mathcal{I}$ es una función continua pero $\mathcal{E}$ no lo es.</li>
+        <li>Analice si es posible que una función $\mathcal{F} : C([0, 1]) \to \mathbb{R}$ sea continua para la distancia $d_1$ pero no para $d_\infty$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej9-c" aria-label="Función continua poligonal en [0,1] con nodos arrastrables, su valor en 0 y el área bajo su gráfico"></canvas>
+      <dl class="read" id="guiap4-ej9-read" aria-live="polite"></dl>
+      <figcaption>Arrastrá los nodos para armar una <i>f</i> ∈ <i>C</i>([0, 1]) poligonal. El punto grande es (0, 𝓔(<i>f</i>)); el área sombreada (azul arriba del eje, naranja abajo) es la que suma 𝓘(<i>f</i>). Debajo, las dos distancias de <i>f</i> a la función nula.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap4-ej10" data-short="Ej. 10" data-title="La distancia a un punto es continua" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>La distancia a un punto es continua</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>.</p>
+      <ol class="items">
+        <li>Sea $x_0 \in E$, y sea $f : E \to \mathbb{R}$ dada por $f(x) = d(x, x_0)$. Pruebe que $f$ es <span class="ref" data-ref="def-5.4">continua</span>.</li>
+        <li>Usando esto rehaga los ítems (b), (d) y (g) del <span class="ref" data-ref="guia-p3-ej4">Ejercicio 4 de la Práctica 3</span>.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej10-c" aria-label="Curvas de nivel de la distancia a un punto x0 en el plano, para tres métricas"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Métrica en ℝ²</legend>
+          <label><input type="radio" name="guiap4-ej10-m" value="2" checked><i>d</i><sub>2</sub></label>
+          <label><input type="radio" name="guiap4-ej10-m" value="1"><i>d</i><sub>1</sub></label>
+          <label><input type="radio" name="guiap4-ej10-m" value="inf"><i>d</i><sub>∞</sub></label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap4-ej10-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ²: las curvas son los niveles <i>f</i> = 1, 2, 3 de <i>f</i>(<i>x</i>) = <i>d</i>(<i>x</i>, <i>x</i><sub>0</sub>). Arrastrá <i>x</i><sub>0</sub> (azul) y <i>x</i> (naranja).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap4-ej11" data-short="Ej. 11" data-title="Distancia a un conjunto y la función de Urysohn" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Distancia a un conjunto y separación de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico.</p>
+      <ol class="items">
+        <li>Sea $A \subseteq E$, y sea $g : E \to \mathbb{R}$ dada por $g(x) =$ <span class="ref" data-ref="guia-p3-ej10">$d(x, A)$</span>.
+          <ol class="items" style="list-style-type: lower-roman">
+            <li>Pruebe que $g$ es <span class="ref" data-ref="def-5.4">continua</span>.</li>
+            <li>Pruebe que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces $g(x) \gt 0$ para todo $x \notin A$.</li>
+          </ol></li>
+        <li>Sean $A, B \subseteq E$ cerrados, no vacíos y disjuntos, y sea $h : E \to [0, 1]$ dada por
+          $$h(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}.$$
+          Pruebe que $h$ es continua, y que $h(x) = 0$ $\forall x \in A$ y $h(x) = 1$ $\forall x \in B$.</li>
+        <li>Sean $A, B \subseteq E$ cerrados, no vacíos y disjuntos. Pruebe que existen conjuntos <span class="ref" data-ref="def-4.14">abiertos</span> y disjuntos $U$ y $V$ tales que $A \subseteq U$ y $B \subseteq V$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej11-c" aria-label="Las funciones d(x,A), d(x,B) y h sobre la recta, con A y B dos intervalos cerrados"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap4-ej11-b">posición de <i>B</i></label><input type="range" id="guiap4-ej11-b" min="-100" max="200" value="80"><output id="guiap4-ej11-b-o"></output></div>
+      </div>
+      <dl class="read" id="guiap4-ej11-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: <i>E</i> = ℝ, <i>A</i> = [−3, −1.5] y <i>B</i> = [<i>b</i>, <i>b</i> + 1.5] (el control mueve <i>b</i>). En naranja <i>d</i>(<i>x</i>, <i>A</i>), en verde <i>d</i>(<i>x</i>, <i>B</i>) y en azul <i>h</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="nota"><b>Nota</b><em>esta última afirmación está comprendida en el llamado Lema de Urysohn.</em></div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap4-ej12" data-short="Ej. 12" data-title="Las funciones de los Ejercicios 10 y 11 son Lipschitz" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Las funciones de los Ejercicios 10 y 11 son Lipschitz</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Pruebe que las funciones $f$ y $g$ de los ejercicios <span class="ref" data-ref="guia-p4-ej10">10</span> y <span class="ref" data-ref="guia-p4-ej11">11</span> son de tipo <span class="ref" data-ref="def-5.24">Lipschitz</span>. Deduzca que son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>.</p></div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap4-ej13" data-short="Ej. 13" data-title="1/x y sen(1/x) no son uniformemente continuas" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>$1/x$ y $\sin(1/x)$</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun">
+      <ol class="items">
+        <li>Verifique que la función $f(x) = 1/x$ no es <span class="ref" data-ref="def-5.14">uniformemente continua</span> en $(0, +\infty)$. ¿Y en $[\varepsilon, +\infty)$ para $\varepsilon \gt 0$?</li>
+        <li>Verifique que la función $f(x) = \sin(1/x)$ no es uniformemente continua en $(0, 1)$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap4-ej13-c" aria-label="Gráfico de 1 sobre x o de seno de 1 sobre x cerca de 0"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap4-ej13-f" value="inv" checked>1/<i>x</i></label>
+          <label><input type="radio" name="guiap4-ej13-f" value="sin">sen(1/<i>x</i>)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap4-ej13-e">ε (ítem a)</label><input type="range" id="guiap4-ej13-e" min="5" max="150" value="40"><output id="guiap4-ej13-e-o"></output></div>
+      </div>
+      <figcaption>Las dos funciones del enunciado en (0, 3] y (0, 1). Para 1/<i>x</i>, la parte resaltada del eje y del gráfico es el dominio [ε, +∞) de la segunda pregunta del ítem (a).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap4-ej14" data-short="Ej. 14" data-title="Las uniformemente continuas mandan Cauchy en Cauchy" data-topics="continuidad,completitud">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Uniformemente continuas y sucesiones de Cauchy</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-completitud">completitud</a></span></div>
+  <div class="enun"><p>Sean $E, E'$ espacios métricos y sea $f : E \to E'$ una función <span class="ref" data-ref="def-5.14">uniformemente continua</span>. Sea $(x_n)_{n \in \mathbb{N}}$ una <span class="ref" data-ref="def-4.51">sucesión de Cauchy</span> en $E$. Pruebe que $(f(x_n))_{n \in \mathbb{N}}$ es una sucesión de Cauchy en $E'$.</p></div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap4-ej15" data-short="Ej. 15" data-title="Ejemplos: acotada continua no uniforme, no acotada uniforme" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Acotación y continuidad uniforme</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span></div>
+  <div class="enun">
+    <ol class="items">
+      <li>Dé un ejemplo de una función $f : \mathbb{R} \to \mathbb{R}$ acotada y <span class="ref" data-ref="def-5.4">continua</span> pero no <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</li>
+      <li>Dé un ejemplo de una función $f : \mathbb{R} \to \mathbb{R}$ no acotada y uniformemente continua.</li>
+    </ol></div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap4-ej16" data-short="Ej. 16" data-title="Uniformemente continua y conjuntos a distancia cero" data-topics="continuidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Conjuntos a distancia cero</h3>
+    <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span></div>
+  <div class="enun"><p>Sea $f : (E, d) \to (E', d')$ una función <span class="ref" data-ref="def-5.14">uniformemente continua</span>, y sean $A, B \subseteq E$ conjuntos no vacíos tales que <span class="ref" data-ref="guia-p3-ej11">$d(A, B) = 0$</span>. Pruebe que $d'(f(A), f(B)) = 0$.</p></div>
+  <div class="preparan" data-ej="16"></div>
+</article>

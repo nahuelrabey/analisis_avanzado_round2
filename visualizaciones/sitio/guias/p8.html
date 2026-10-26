@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 8</span></li></ol><div class="pager"><a href="../guias/p7.html" title="Guía · Práctica 7">← Anterior</a><a href="../guias/p9.html" title="Guía · Práctica 9">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 15 ejercicios</p>
+  <h1>Práctica 8</h1>
+  <p>Medida de Lebesgue. Los enunciados de <code>apuntes-typst/guias/p8.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap8-ej1" title="Contables y co-contables forman una sigma-álgebra">Ej. 1</a></li><li><a href="#guiap8-ej2" title="Propiedades de una sigma-álgebra">Ej. 2</a></li><li><a href="#guiap8-ej3" title="Todo subconjunto numerable de R es nulo">Ej. 3</a></li><li><a href="#guiap8-ej4" title="Los intervalos son medibles: medida de [a,b), [a,b] y [a,+inf)">Ej. 4</a></li><li><a href="#guiap8-ej5" title="Abiertos y cerrados son medibles">Ej. 5</a></li><li><a href="#guiap8-ej6" title="Medida de Q y de los irracionales de [0,1]">Ej. 6</a></li><li><a href="#guiap8-ej7" title="Acotado implica medida finita; medida finita no acotado">Ej. 7</a></li><li><a href="#guiap8-ej8" title="Medida de la unión más medida de la intersección">Ej. 8</a></li><li><a href="#guiap8-ej9" title="Medida nula implica interior vacío">Ej. 9</a></li><li><a href="#guiap8-ej10" title="Medida 1 en [0,1] implica denso">Ej. 10</a></li><li><a href="#guiap8-ej11" title="Medible como unión de cerrados más un nulo, o intersección de abiertos menos un nulo">Ej. 11</a></li><li><a href="#guiap8-ej12" title="Medible si y sólo si hay F cerrado y G abierto con medida de G menos F menor que epsilon">Ej. 12</a></li><li><a href="#guiap8-ej13" title="Si la medida de A_n delta B tiende a 0, la medida de A_n tiende a la de B">Ej. 13</a></li><li><a href="#guiap8-ej14" title="Dilataciones cA de un medible">Ej. 14</a></li><li><a href="#guiap8-ej15" title="Sobreyectiva de [0,1] en R que vale 0 en casi todo punto">Ej. 15</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap8-edicion">Segundo cuatrimestre de 2025 (<code>apuntes-typst/guias/p8.typ</code>) · 15 ejercicios. La teoría de la medida todavía no está en <code>apuntes.typ</code>: los popups de $\sigma$-álgebra, medida exterior, conjunto nulo, medible y medida de Lebesgue dan la definición estándar del curso.</p>
+
+<p class="cita" id="guiap8-convencion"><em>En lo que sigue $\mathcal{M}$ será la <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de los <span class="ref" data-ref="ext-medible-lebesgue">conjuntos medibles Lebesgue</span> de $\mathbb{R}$ y $\mu$ la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span>.</em></p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap8-ej1" data-short="Ej. 1" data-title="Contables y co-contables forman una sigma-álgebra" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3><span class="ref" data-ref="def-3.6">Contables</span> y co-contables: una $\sigma$-álgebra</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Sea $X$ un conjunto y sea
+    $$\begin{aligned} \mathcal{A} = \{A \subseteq X :\ &A \text{ es contable o} \\ &X \setminus A \text{ es contable}\}. \end{aligned}$$
+    Pruebe que $\mathcal{A}$ es una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span>.</p></div>
+  <div class="preparan" data-ej="1"></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap8-ej2" data-short="Ej. 2" data-title="Propiedades de una sigma-álgebra" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Propiedades de una $\sigma$-álgebra</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $X$ un conjunto y sea $\mathcal{A}$ una <span class="ref" data-ref="ext-sigma-algebra">$\sigma$-álgebra</span> de subconjuntos de $X$. Pruebe que:</p>
+      <ol class="items">
+        <li>$\emptyset \in \mathcal{A}$.</li>
+        <li>Si $A, B \in \mathcal{A}$ entonces $A \setminus B \in \mathcal{A}$ y $A \,\Delta\, B \in \mathcal{A}$ (<span class="ref" data-ref="ext-diferencia-simetrica">diferencia simétrica</span>).</li>
+        <li>$\mathcal{A}$ es cerrada por intersecciones numerables.</li>
+      </ol></div>
+    <figure class="viz">
+      <svg viewBox="0 0 360 150" role="img" aria-label="Diagramas de Venn: a la izquierda A menos B sombreado, a la derecha la diferencia simétrica de A y B sombreada">
+        <defs><clipPath id="guiap8-ej2-clip"><circle cx="75" cy="80" r="46"/></clipPath></defs>
+        <rect class="sv-fill-bg" x="0" y="0" width="360" height="150"/>
+        <path class="sv-area" fill-rule="evenodd" clip-path="url(#guiap8-ej2-clip)" d="M29,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z M71,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z"/>
+        <circle class="sv-accent" cx="75" cy="80" r="46"/>
+        <circle class="sv-seq2" cx="117" cy="80" r="46"/>
+        <text class="sv-label-accent" x="40" y="84">A</text>
+        <text class="sv-label-seq2" x="142" y="84">B</text>
+        <text class="sv-text" x="96" y="22" text-anchor="middle">A \ B</text>
+        <path class="sv-area" fill-rule="evenodd" d="M209,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z M251,80 a46,46 0 1,0 92,0 a46,46 0 1,0 -92,0 Z"/>
+        <circle class="sv-accent" cx="255" cy="80" r="46"/>
+        <circle class="sv-seq2" cx="297" cy="80" r="46"/>
+        <text class="sv-label-accent" x="220" y="84">A</text>
+        <text class="sv-label-seq2" x="322" y="84">B</text>
+        <text class="sv-text" x="276" y="22" text-anchor="middle">A Δ B</text>
+      </svg>
+      <figcaption>Las dos operaciones del ítem (b), sombreadas: <i>A</i> \ <i>B</i> (izquierda) y <i>A</i> Δ <i>B</i> = (<i>A</i> \ <i>B</i>) ∪ (<i>B</i> \ <i>A</i>) (derecha).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap8-ej3" data-short="Ej. 3" data-title="Todo subconjunto numerable de R es nulo" data-topics="medida,cardinalidad">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Los numerables son nulos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-cardinalidad">cardinalidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que todo subconjunto <span class="ref" data-ref="def-3.6">numerable</span> de $\mathbb{R}$ es <span class="ref" data-ref="ext-conjunto-nulo">nulo</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej3-c" aria-label="Puntos de un conjunto numerable, cada uno dentro de un intervalo; las longitudes de los intervalos se suman abajo"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej3-eps">ε</label><input type="range" id="guiap8-ej3-eps" min="2" max="100" value="40"><output id="guiap8-ej3-eps-o"></output></div>
+        <div class="slider"><label for="guiap8-ej3-N"><i>N</i></label><input type="range" id="guiap8-ej3-N" min="1" max="24" value="8"><output id="guiap8-ej3-N-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej3-read" aria-live="polite"></dl>
+      <figcaption>Un cubrimiento como los de la definición de conjunto nulo, para un conjunto numerable elegido: los racionales de [0, 1] enumerados por denominador (0, 1, 1/2, 1/3, 2/3, 1/4, …). Cada fila es un punto <i>q<sub>k</sub></i> (abajo, todos juntos sobre la recta) dentro de un intervalo abierto <i>I<sub>k</sub></i> de longitud ε/2<sup><i>k</i></sup>; se dibujan los primeros <i>N</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap8-ej4" data-short="Ej. 4" data-title="Los intervalos son medibles: medida de [a,b), [a,b] y [a,+inf)" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Los intervalos son medibles</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que para todos $a, b \in \mathbb{R}$ los intervalos $[a, b)$, $[a, b]$, $[a, +\infty)$ son <span class="ref" data-ref="ext-medible-lebesgue">medibles Lebesgue</span>, y calcule su <span class="ref" data-ref="ext-medida-lebesgue">medida</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej4-c" aria-label="Los intervalos [a, b), [a, b] y [a, +infinito) sobre la recta, con a y b arrastrables"></canvas>
+      <dl class="read" id="guiap8-ej4-read" aria-live="polite"></dl>
+      <figcaption>Los tres intervalos del enunciado; arrastrá <i>a</i> o <i>b</i> sobre cualquiera de las filas. Punto lleno: el extremo pertenece al intervalo; punto vacío: no pertenece.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap8-ej5" data-short="Ej. 5" data-title="Abiertos y cerrados son medibles" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Abiertos y cerrados son medibles</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq \mathbb{R}$.</p>
+    <ol class="items">
+      <li>Pruebe que si $A$ es <span class="ref" data-ref="def-4.14">abierto</span> entonces $A \in \mathcal{M}$.</li>
+      <li>Deduzca que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces $A \in \mathcal{M}$.</li>
+    </ol></div>
+  <div class="preparan" data-ej="5"></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap8-ej6" data-short="Ej. 6" data-title="Medida de Q y de los irracionales de [0,1]" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Medida de $\mathbb{Q}$ y de los irracionales de $[0, 1]$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Calcule la <span class="ref" data-ref="ext-medida-lebesgue">medida de Lebesgue</span> de $\mathbb{Q}$ y la de los irracionales del $[0, 1]$. ¿Por qué son <span class="ref" data-ref="ext-medible-lebesgue">medibles</span> estos conjuntos?</p></div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap8-ej7" data-short="Ej. 7" data-title="Acotado implica medida finita; medida finita no acotado" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Acotado y medida finita</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="enun"><p>Pruebe que todo conjunto <span class="ref" data-ref="def-4.8">acotado</span> de $\mathcal{M}$ tiene <span class="ref" data-ref="ext-medida-lebesgue">medida finita</span>. Muestre un conjunto de $\mathcal{M}$ que tenga medida de Lebesgue finita pero que no sea acotado.</p></div>
+  <div class="preparan" data-ej="7"></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap8-ej8" data-short="Ej. 8" data-title="Medida de la unión más medida de la intersección" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>$\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Si $A, B \in$ <span class="ref" data-ref="ext-medible-lebesgue">$\mathcal{M}$</span>, pruebe que
+      $$\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B).$$</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej8-c" aria-label="Dos intervalos A y B arrastrables, con su unión y su intersección"></canvas>
+      <dl class="read" id="guiap8-ej8-read" aria-live="polite"></dl>
+      <figcaption>El enunciado en el caso más simple, con <i>A</i> y <i>B</i> intervalos cerrados elegidos (arrastrá sus extremos en las dos primeras filas). Abajo, <i>A</i> ∪ <i>B</i> y <i>A</i> ∩ <i>B</i>; las longitudes de los dibujos se suman en la lectura.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap8-ej9" data-short="Ej. 9" data-title="Medida nula implica interior vacío" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Medida nula e interior vacío</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $A \in \mathcal{M}$. Pruebe que si $\mu(A) = 0$ entonces $A^{\circ} = \emptyset$ (<span class="ref" data-ref="def-4.11">interior</span>). ¿Vale la recíproca?</p></div>
+  <div class="preparan" data-ej="9"></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap8-ej10" data-short="Ej. 10" data-title="Medida 1 en [0,1] implica denso" data-topics="medida,densidad">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Medida $1$ en $[0, 1]$ implica denso</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span></div>
+  <div class="enun"><p>Sea $A \subseteq [0, 1]$ un conjunto <span class="ref" data-ref="ext-medible-lebesgue">medible Lebesgue</span> tal que $\mu(A) = 1$. Pruebe que $A$ es <span class="ref" data-ref="def-5.20">denso</span> en $[0, 1]$.</p></div>
+  <div class="preparan" data-ej="10"></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap8-ej11" data-short="Ej. 11" data-title="Medible como unión de cerrados más un nulo, o intersección de abiertos menos un nulo" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Medibles vía cerrados y abiertos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$. Pruebe que las siguientes afirmaciones son equivalentes:</p>
+      <ol class="items">
+        <li>$A \in \mathcal{M}$.</li>
+        <li>Existen una sucesión $(F_n)_{n \in \mathbb{N}}$ de conjuntos <span class="ref" data-ref="def-4.27">cerrados</span> contenidos en $A$ y un conjunto $Z$ de <span class="ref" data-ref="ext-conjunto-nulo">medida nula</span> tales que $A = \big(\bigcup_{n \in \mathbb{N}} F_n\big) \cup Z$.</li>
+        <li>Existen una sucesión $(G_n)_{n \in \mathbb{N}}$ de conjuntos <span class="ref" data-ref="def-4.14">abiertos</span> que contienen a $A$ y un conjunto $H$ de medida nula tales que $A = \big(\bigcap_{n \in \mathbb{N}} G_n\big) \setminus H$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej11-c" aria-label="Un conjunto A, un cerrado F_n contenido en A y un abierto G_n que contiene a A"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej11-n"><i>n</i></label><input type="range" id="guiap8-ej11-n" min="1" max="20" value="2"><output id="guiap8-ej11-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej11-read" aria-live="polite"></dl>
+      <figcaption>Los objetos de (b) y (c) para un <i>A</i> elegido, <i>A</i> = [0,1; 0,4) ∪ (0,55; 0,85]: un cerrado <i>F<sub>n</sub></i> ⊆ <i>A</i> (se achica 0,15/<i>n</i> en los extremos abiertos) y un abierto <i>G<sub>n</sub></i> ⊇ <i>A</i> (se agranda 0,15/<i>n</i> en cada extremo). Es una elección posible para este <i>A</i>, no la construcción general.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="11"></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap8-ej12" data-short="Ej. 12" data-title="Medible si y sólo si hay F cerrado y G abierto con medida de G menos F menor que epsilon" data-topics="medida,topologia">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>$F \subseteq A \subseteq G$ con $\mu(G \setminus F) \lt \varepsilon$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$. Pruebe que $A \in \mathcal{M}$ si y sólo si para todo $\varepsilon \gt 0$ existen conjuntos $G$ <span class="ref" data-ref="def-4.14">abierto</span> y $F$ <span class="ref" data-ref="def-4.27">cerrado</span> tales que $F \subseteq A \subseteq G$ y $\mu(G \setminus F) \lt \varepsilon$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej12-c" aria-label="Un conjunto A unión de tres intervalos, un cerrado F dentro, un abierto G que lo contiene y la diferencia G menos F"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej12-eps">ε</label><input type="range" id="guiap8-ej12-eps" min="1" max="60" value="30"><output id="guiap8-ej12-eps-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej12-read" aria-live="polite"></dl>
+      <figcaption>Para un <i>A</i> elegido, <i>A</i> = [0,1; 0,3) ∪ (0,45; 0,6) ∪ [0,7; 0,9], un <i>F</i> cerrado y un <i>G</i> abierto con <i>F</i> ⊆ <i>A</i> ⊆ <i>G</i>, que se mueven δ = ε/13 desde cada extremo de <i>A</i>. La última fila es <i>G</i> \ <i>F</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap8-ej13" data-short="Ej. 13" data-title="Si la medida de A_n delta B tiende a 0, la medida de A_n tiende a la de B" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>$\mu(A_n \,\Delta\, B) \to 0 \Rightarrow \mu(A_n) \to \mu(B)$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{M}$ y $B \in \mathcal{M}$ tales que $\lim_{n \to \infty} \mu(A_n \,\Delta\, B) = 0$ (<span class="ref" data-ref="ext-diferencia-simetrica">diferencia simétrica</span>). Pruebe que $\lim_{n \to \infty} \mu(A_n) = \mu(B)$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej13-c" aria-label="El intervalo B, el intervalo A_n y su diferencia simétrica"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej13-n"><i>n</i></label><input type="range" id="guiap8-ej13-n" min="1" max="40" value="2"><output id="guiap8-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej13-read" aria-live="polite"></dl>
+      <figcaption>Un ejemplo elegido que cumple la hipótesis: <i>B</i> = [0,2; 0,7] y <i>A<sub>n</sub></i> = [0,2 + 0,3/<i>n</i>; 0,7 + 0,25/<i>n</i>]. La última fila es <i>A<sub>n</sub></i> Δ <i>B</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap8-ej14" data-short="Ej. 14" data-title="Dilataciones cA de un medible" data-topics="medida">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Dilataciones $cA$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Recordemos que para $c \in \mathbb{R}$ y $A \subseteq \mathbb{R}$ denotamos
+      $$cA = \{c a : a \in A\}.$$</p>
+      <ol class="items">
+        <li>Pruebe que si $A \in$ <span class="ref" data-ref="ext-medible-lebesgue">$\mathcal{M}$</span> entonces $cA \in \mathcal{M}$.</li>
+        <li>Pruebe que si $c \gt 0$ entonces <span class="ref" data-ref="ext-medida-lebesgue">$\mu(cA) = c\, \mu(A)$</span>.</li>
+        <li>¿Qué se puede decir de $\mu(cA)$ en el caso $c \lt 0$?</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap8-ej14-c" aria-label="Un conjunto A unión de dos intervalos y su dilatación cA"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap8-ej14-c-s"><i>c</i></label><input type="range" id="guiap8-ej14-c-s" min="-40" max="40" value="15"><output id="guiap8-ej14-c-s-o"></output></div>
+      </div>
+      <dl class="read" id="guiap8-ej14-read" aria-live="polite"></dl>
+      <figcaption>Un <i>A</i> elegido, <i>A</i> = [0,5; 1] ∪ [1,5; 2,5], y el conjunto <i>cA</i> para el <i>c</i> del slider (también negativo).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="14"></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap8-ej15" data-short="Ej. 15" data-title="Sobreyectiva de [0,1] en R que vale 0 en casi todo punto" data-topics="medida,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Sobreyectiva y nula en casi todo punto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-medida">medida</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Pruebe que existe una función sobreyectiva $f : [0, 1] \to \mathbb{R}$ que vale $0$ en <span class="ref" data-ref="ext-casi-todo-punto">casi todo punto</span> de $[0, 1]$. ¿Puede una tal función ser <span class="ref" data-ref="def-5.4">continua</span>?</p></div>
+  <div class="preparan" data-ej="15"></div>
+</article>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:<\/p><ul class=\"items\"><li><b>finito<\/b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.<\/li><li><b>infinito<\/b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.<\/li><li><b>numerable<\/b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.<\/li><li><b>a lo sumo numerable<\/b> o <b>contable<\/b> si es finito o numerable.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior<\/strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.<\/p><p>El <strong>interior<\/strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto<\/strong> si $A = A^{\\circ}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado<\/b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.<\/p><p>(En el apunte, la definición viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso<\/em> en $M$ si $\\overline{E} = M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-casi-todo-punto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "En casi todo punto",
+  "enunciado": "<p>Sea $E \\in \\mathcal{M}$. Una propiedad vale <b>en casi todo punto<\/b> de $E$ (c.t.p.) si el conjunto de los $x \\in E$ en los que no vale es nulo, es decir, tiene medida $0$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-conjunto-nulo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto nulo (de medida cero)",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ es <b>nulo<\/b> (o de medida nula) si para todo $\\varepsilon \\gt 0$ existe una sucesión de intervalos abiertos $(I_k)_{k \\ge 1}$ tal que $A \\subseteq \\bigcup_{k} I_k$ y $\\sum_{k} \\ell(I_k) \\lt \\varepsilon$. Equivalentemente, $\\mu^*(A) = 0$, donde $\\mu^*$ es la medida exterior de Lebesgue.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-diferencia-simetrica": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Diferencia simétrica",
+  "enunciado": "<p>La <b>diferencia simétrica<\/b> de dos conjuntos $A$ y $B$ es $$A \\,\\Delta\\, B = (A \\setminus B) \\cup (B \\setminus A),$$ los puntos que están en exactamente uno de los dos.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medible-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto medible Lebesgue",
+  "enunciado": "<p>Sea $\\mu^*$ la medida exterior de Lebesgue. Un conjunto $A \\subseteq \\mathbb{R}$ es <b>medible Lebesgue<\/b> si para todo $T \\subseteq \\mathbb{R}$ $$\\mu^*(T) = \\mu^*(T \\cap A) + \\mu^*(T \\setminus A)$$ (criterio de Carathéodory). La familia de los conjuntos medibles Lebesgue se nota $\\mathcal{M}$, y es una $\\sigma$-álgebra de subconjuntos de $\\mathbb{R}$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-medida-lebesgue": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Medida de Lebesgue",
+  "enunciado": "<p>La <b>medida de Lebesgue<\/b> es la restricción de la medida exterior a los conjuntos medibles: $$\\mu = \\mu^*\\big|_{\\mathcal{M}} : \\mathcal{M} \\to [0, +\\infty].$$ Es $\\sigma$-aditiva: si $(A_n)_{n \\in \\mathbb{N}} \\subseteq \\mathcal{M}$ son disjuntos dos a dos, entonces $\\mu\\big(\\bigcup_{n} A_n\\big) = \\sum_{n} \\mu(A_n)$. Un conjunto $A \\in \\mathcal{M}$ tiene <b>medida finita<\/b> si $\\mu(A) \\lt +\\infty$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-sigma-algebra": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "$\\sigma$-álgebra",
+  "enunciado": "<p>Sea $X$ un conjunto. Una familia $\\mathcal{A}$ de subconjuntos de $X$ es una <b>$\\sigma$-álgebra<\/b> si:<\/p><ul class=\"items\"><li>$X \\in \\mathcal{A}$;<\/li><li>si $A \\in \\mathcal{A}$, entonces $X \\setminus A \\in \\mathcal{A}$ (es cerrada por complementos);<\/li><li>si $A_n \\in \\mathcal{A}$ para todo $n \\in \\mathbb{N}$, entonces $\\bigcup_{n \\in \\mathbb{N}} A_n \\in \\mathcal{A}$ (es cerrada por uniones numerables).<\/li><\/ul>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p8 */
+(() => {
+"use strict";
+/* Dibujos de la guía 8 (medida de Lebesgue). Usa window.PP. */
+const ID = "guiap8";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const FONT = "11px 'IBM Plex Sans', system-ui, sans-serif";
+const fx = (x, d) => PP.fmt(x, d === undefined ? 3 : d);
+
+/* Arrastre sobre un canvas: pick(px, py, T) devuelve un id o null; move(id, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Recta con filas: la fila r (1 = arriba) está en y = r. Devuelve el marco. */
+function rows(cid, nrows, x0, x1, ratio, padL) {
+  const { ctx, w, h } = PP.canvas(cid, ratio);
+  const T = PP.frame(w, h, { x0, x1, y0: nrows + 0.55, y1: 0.45 }, { l: padL || 58, r: 14, t: 6, b: 26 });
+  const step = PP.niceStep(x1 - x0, w < 420 ? 4 : 7);
+  ctx.save();
+  ctx.font = FONT; ctx.fillStyle = C("--muted"); ctx.strokeStyle = C("--rule"); ctx.lineWidth = 1;
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for (let x = Math.ceil(x0 / step) * step; x <= x1 + 1e-9; x += step) {
+    ctx.beginPath(); ctx.moveTo(T.X(x), T.p.t); ctx.lineTo(T.X(x), h - T.p.b); ctx.stroke();
+    ctx.fillText(fx(x, 2), T.X(x), h - T.p.b + 6);
+  }
+  ctx.restore();
+  for (let r = 1; r <= nrows; r++) PP.path(ctx, [[T.p.l, T.Y(r)], [w - T.p.r, T.Y(r)]], C("--rule"), 1);
+  return { ctx, T, w, h };
+}
+function rowLabel(ctx, T, text, r, color) { PP.label(ctx, text, T.p.l - 8, T.Y(r), color || C("--ink"), "right", "middle", 12); }
+
+/* Intervalo [a, b] en la fila r; ca / cb: extremo cerrado. b = Infinity dibuja una flecha. */
+function seg(ctx, T, a, b, r, color, ca, cb, width) {
+  const y = T.Y(r), xa = T.X(a), xb = isFinite(b) ? T.X(b) : T.w - T.p.r;
+  const lw = width || 5;
+  ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.lineCap = "butt";
+  ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(Math.max(xb, xa + 1.5), y); ctx.stroke(); ctx.restore();
+  if (!isFinite(b)) {
+    PP.path(ctx, [[xb - 9, y - 6], [xb, y], [xb - 9, y + 6]], color, 2.2);
+  }
+  if (isFinite(b) && xb - xa < 18) return;  /* intervalos cortos: sin marcas de extremos, que taparían el segmento */
+  const end = (x, closed) => PP.dot(ctx, x, y, 4.2, closed ? color : C("--bg"), color);
+  if (ca !== undefined && ca !== null) end(xa, ca);
+  if (isFinite(b) && cb !== undefined && cb !== null) end(xb, cb);
+}
+
+/* Unión de intervalos {a, b, ca, cb}: ordena y junta los que se pisan. */
+function union(list) {
+  const L = list.filter((I) => I.b > I.a || (I.b === I.a && I.ca && I.cb)).map((I) => Object.assign({}, I)).sort((p, q) => p.a - q.a);
+  const out = [];
+  L.forEach((I) => {
+    const c = out[out.length - 1];
+    if (c && (I.a < c.b || (I.a === c.b && (c.cb || I.ca)))) {
+      if (I.b > c.b) { c.b = I.b; c.cb = I.cb; } else if (I.b === c.b) c.cb = c.cb || I.cb;
+    } else out.push(I);
+  });
+  return out;
+}
+const len = (L) => L.reduce((s, I) => s + Math.max(0, I.b - I.a), 0);
+/* Diferencia L \ M de uniones de intervalos (sólo longitudes y extremos aproximados para dibujar). */
+function minus(L, M) {
+  let cur = L.map((I) => Object.assign({}, I));
+  M.forEach((J) => {
+    const nxt = [];
+    cur.forEach((I) => {
+      if (J.b <= I.a || J.a >= I.b) { nxt.push(I); return; }
+      if (J.a > I.a || (J.a === I.a && I.ca && !J.ca)) nxt.push({ a: I.a, b: J.a, ca: I.ca, cb: !J.ca });
+      if (J.b < I.b || (J.b === I.b && I.cb && !J.cb)) nxt.push({ a: J.b, b: I.b, ca: !J.cb, cb: I.cb });
+    });
+    cur = nxt;
+  });
+  return cur;
+}
+const ivText = (L) => L.length ? L.map((I) => (I.ca ? "[" : "(") + fx(I.a) + ", " + fx(I.b) + (I.cb ? "]" : ")")).join(" ∪ ") : "∅";
+
+/* ===================== Ejercicio 3 ===================== */
+(function () {
+  const Q = [];
+  for (let q = 1; Q.length < 40; q++) for (let p = 0; p <= q; p++) {
+    const g = (a, b) => (b ? g(b, a % b) : a);
+    if (g(p, q) === 1 || (q === 1)) { const v = p / q; if (!Q.some((u) => Math.abs(u - v) < 1e-12)) Q.push(v); }
+  }
+  const draw = function ej3() {
+    const eps = PP.val(ID + "-ej3-eps") / 100, N = PP.val(ID + "-ej3-N");
+    PP.out(ID + "-ej3-eps-o", fx(eps, 2)); PP.out(ID + "-ej3-N-o", String(N));
+    const nr = N + 1;
+    const { ctx, T } = rows(ID + "-ej3-c", nr, -0.15, 1.15, 0.5 + 0.022 * N, 44);
+    let total = 0;
+    for (let k = 1; k <= N; k++) {
+      const q = Q[k - 1], L = eps / Math.pow(2, k);
+      total += L;
+      const color = k % 2 ? C("--accent") : C("--seq3");
+      seg(ctx, T, q - L / 2, q + L / 2, k, color, false, false, N > 14 ? 3 : 5);
+      PP.dot(ctx, T.X(q), T.Y(k), 2.2, C("--ink"));
+      if (N <= 12 || k === 1 || k % 4 === 0) rowLabel(ctx, T, "I" + String(k).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[+d]).join(""), k, color);
+    }
+    // todos los puntos sobre la recta
+    for (let k = 1; k <= N; k++) PP.dot(ctx, T.X(Q[k - 1]), T.Y(nr), 3.2, C("--seq2"));
+    rowLabel(ctx, T, "qₖ", nr, C("--seq2"));
+    PP.read(ID + "-ej3-read", [
+      ["ℓ(I<sub>k</sub>)", "ε/2<sup>k</sup>"],
+      ["ℓ(I<sub>1</sub>) + … + ℓ(I<sub>N</sub>)", fx(total, 5), total < eps ? "good" : "bad"],
+      ["ε", fx(eps, 2)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej3-eps", ID + "-ej3-N"]);
+})();
+
+/* ===================== Ejercicio 4 ===================== */
+(function () {
+  const S = { a: -1, b: 2.5 };
+  let lastT = null;
+  const draw = function ej4() {
+    const { ctx, T } = rows(ID + "-ej4-c", 3, -3, 6, 0.42, 72);
+    lastT = T;
+    seg(ctx, T, S.a, S.b, 1, C("--accent"), true, false);
+    seg(ctx, T, S.a, S.b, 2, C("--seq3"), true, true);
+    seg(ctx, T, S.a, Infinity, 3, C("--seq2"), true, null);
+    rowLabel(ctx, T, "[a, b)", 1, C("--accent"));
+    rowLabel(ctx, T, "[a, b]", 2, C("--seq3"));
+    rowLabel(ctx, T, "[a, +∞)", 3, C("--seq2"));
+    PP.label(ctx, "a", T.X(S.a), T.Y(1) - 8, C("--ink"), "center", "bottom", 12);
+    PP.label(ctx, "b", T.X(S.b), T.Y(1) - 8, C("--ink"), "center", "bottom", 12);
+    PP.read(ID + "-ej4-read", [["a", fx(S.a, 2)], ["b", fx(S.b, 2)]]);
+  };
+  PP.register(draw, []);
+  draggable(ID + "-ej4-c", () => lastT,
+    (px, py, T) => {
+      const da = Math.abs(px - T.X(S.a)), db = Math.abs(px - T.X(S.b));
+      if (Math.min(da, db) > 22) return null;
+      return da <= db ? "a" : "b";
+    },
+    (k, x) => {
+      if (k === "a") S.a = clamp(Math.round(x * 10) / 10, -3, S.b - 0.1);
+      else S.b = clamp(Math.round(x * 10) / 10, S.a + 0.1, 6);
+    }, draw);
+})();
+
+/* ===================== Ejercicio 8 ===================== */
+(function () {
+  const S = { A: [1, 5.5], B: [3.5, 8.5] };
+  let lastT = null;
+  const draw = function ej8() {
+    const { ctx, T } = rows(ID + "-ej8-c", 4, 0, 10, 0.5, 62);
+    lastT = T;
+    const A = { a: S.A[0], b: S.A[1], ca: true, cb: true }, B = { a: S.B[0], b: S.B[1], ca: true, cb: true };
+    const U = union([A, B]);
+    const lo = Math.max(A.a, B.a), hi = Math.min(A.b, B.b);
+    const I = lo <= hi ? [{ a: lo, b: hi, ca: true, cb: true }] : [];
+    seg(ctx, T, A.a, A.b, 1, C("--accent"), true, true);
+    seg(ctx, T, B.a, B.b, 2, C("--seq2"), true, true);
+    U.forEach((J) => seg(ctx, T, J.a, J.b, 3, C("--seq3"), true, true));
+    I.forEach((J) => seg(ctx, T, J.a, J.b, 4, C("--ok"), true, true));
+    rowLabel(ctx, T, "A", 1, C("--accent"));
+    rowLabel(ctx, T, "B", 2, C("--seq2"));
+    rowLabel(ctx, T, "A ∪ B", 3, C("--seq3"));
+    rowLabel(ctx, T, "A ∩ B", 4, C("--ok"));
+    if (!I.length) PP.label(ctx, "∅", T.p.l + 6, T.Y(4), C("--ok"), "left", "middle", 13);
+    const mA = A.b - A.a, mB = B.b - B.a, mU = len(U), mI = len(I);
+    PP.read(ID + "-ej8-read", [
+      ["μ(A) + μ(B)", fx(mA, 2) + " + " + fx(mB, 2) + " = " + fx(mA + mB, 2)],
+      ["μ(A ∪ B) + μ(A ∩ B)", fx(mU, 2) + " + " + fx(mI, 2) + " = " + fx(mU + mI, 2), "good"],
+    ]);
+  };
+  PP.register(draw, []);
+  draggable(ID + "-ej8-c", () => lastT,
+    (px, py, T) => {
+      let best = null, bd = 24;
+      [["A", 1], ["B", 2]].forEach(([s, r]) => [0, 1].forEach((i) => {
+        const d = Math.hypot(px - T.X(S[s][i]), (py - T.Y(r)) * 0.6);
+        if (d < bd) { bd = d; best = s + i; }
+      }));
+      return best;
+    },
+    (k, x) => {
+      const s = k[0], i = +k[1], v = clamp(Math.round(x * 4) / 4, 0, 10);
+      if (i === 0) S[s][0] = Math.min(v, S[s][1] - 0.25); else S[s][1] = Math.max(v, S[s][0] + 0.25);
+    }, draw);
+})();
+
+/* ===================== Ejercicio 11 ===================== */
+(function () {
+  const A = [{ a: 0.1, b: 0.4, ca: true, cb: false }, { a: 0.55, b: 0.85, ca: false, cb: true }];
+  const draw = function ej11() {
+    const n = PP.val(ID + "-ej11-n");
+    PP.out(ID + "-ej11-n-o", String(n));
+    const d = 0.15 / n;
+    const F = [{ a: 0.1, b: 0.4 - d, ca: true, cb: true }, { a: 0.55 + d, b: 0.85, ca: true, cb: true }];
+    const G = union([{ a: 0.1 - d, b: 0.4 + d, ca: false, cb: false }, { a: 0.55 - d, b: 0.85 + d, ca: false, cb: false }]);
+    const { ctx, T } = rows(ID + "-ej11-c", 3, -0.1, 1.1, 0.42, 48);
+    G.forEach((I) => seg(ctx, T, I.a, I.b, 3, C("--seq2"), false, false));
+    A.forEach((I) => seg(ctx, T, I.a, I.b, 1, C("--accent"), I.ca, I.cb));
+    F.forEach((I) => seg(ctx, T, I.a, I.b, 2, C("--seq3"), true, true));
+    rowLabel(ctx, T, "A", 1, C("--accent"));
+    rowLabel(ctx, T, "Fₙ", 2, C("--seq3"));
+    rowLabel(ctx, T, "Gₙ", 3, C("--seq2"));
+    PP.read(ID + "-ej11-read", [
+      ["A", ivText(A)],
+      ["F<sub>n</sub> (cerrado, ⊆ A)", ivText(F)],
+      ["G<sub>n</sub> (abierto, ⊇ A)", ivText(G)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej11-n"]);
+})();
+
+/* ===================== Ejercicio 12 ===================== */
+(function () {
+  const A = [{ a: 0.1, b: 0.3, ca: true, cb: false }, { a: 0.45, b: 0.6, ca: false, cb: false }, { a: 0.7, b: 0.9, ca: true, cb: true }];
+  const draw = function ej12() {
+    const eps = PP.val(ID + "-ej12-eps") / 100;
+    PP.out(ID + "-ej12-eps-o", fx(eps, 2));
+    const d = eps / 13;
+    const F = A.map((I) => ({ a: I.a + d, b: I.b - d, ca: true, cb: true }));
+    const G = union(A.map((I) => ({ a: I.a - d, b: I.b + d, ca: false, cb: false })));
+    const D = minus(G, F);
+    const { ctx, T } = rows(ID + "-ej12-c", 4, -0.05, 1.05, 0.48, 58);
+    A.forEach((I) => seg(ctx, T, I.a, I.b, 1, C("--accent"), I.ca, I.cb));
+    F.forEach((I) => seg(ctx, T, I.a, I.b, 2, C("--seq3"), true, true));
+    G.forEach((I) => seg(ctx, T, I.a, I.b, 3, C("--seq2"), false, false));
+    D.forEach((I) => seg(ctx, T, I.a, I.b, 4, C("--fail"), I.ca, I.cb, 6));
+    rowLabel(ctx, T, "A", 1, C("--accent"));
+    rowLabel(ctx, T, "F", 2, C("--seq3"));
+    rowLabel(ctx, T, "G", 3, C("--seq2"));
+    rowLabel(ctx, T, "G \\ F", 4, C("--fail"));
+    const m = len(G) - len(F);
+    PP.read(ID + "-ej12-read", [
+      ["δ = ε/13", fx(d, 4)],
+      ["μ(G \\ F) = 12δ", fx(m, 4), m < eps ? "good" : "bad"],
+      ["ε", fx(eps, 2)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej12-eps"]);
+})();
+
+/* ===================== Ejercicio 13 ===================== */
+(function () {
+  const B = { a: 0.2, b: 0.7, ca: true, cb: true };
+  const draw = function ej13() {
+    const n = PP.val(ID + "-ej13-n");
+    PP.out(ID + "-ej13-n-o", String(n));
+    const An = { a: 0.2 + 0.3 / n, b: 0.7 + 0.25 / n, ca: true, cb: true };
+    const D = minus([B], [An]).concat(minus([An], [B]));
+    const { ctx, T } = rows(ID + "-ej13-c", 3, 0, 1, 0.42, 58);
+    seg(ctx, T, B.a, B.b, 1, C("--accent"), true, true);
+    seg(ctx, T, An.a, An.b, 2, C("--seq2"), true, true);
+    D.forEach((I) => seg(ctx, T, I.a, I.b, 3, C("--fail"), I.ca, I.cb, 6));
+    rowLabel(ctx, T, "B", 1, C("--accent"));
+    rowLabel(ctx, T, "Aₙ", 2, C("--seq2"));
+    rowLabel(ctx, T, "Aₙ Δ B", 3, C("--fail"));
+    PP.read(ID + "-ej13-read", [
+      ["μ(A<sub>n</sub> Δ B)", fx(len(D), 4)],
+      ["μ(A<sub>n</sub>)", fx(An.b - An.a, 4)],
+      ["μ(B)", fx(B.b - B.a, 4)],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej13-n"]);
+})();
+
+/* ===================== Ejercicio 14 ===================== */
+(function () {
+  const A = [[0.5, 1], [1.5, 2.5]];
+  const draw = function ej14() {
+    const c = PP.val(ID + "-ej14-c-s") / 10;
+    PP.out(ID + "-ej14-c-s-o", fx(c, 1));
+    const { ctx, T } = rows(ID + "-ej14-c", 2, -5.5, 5.5, 0.34, 40);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), T.h - T.p.b]], C("--muted"), 1);
+    A.forEach(([a, b]) => seg(ctx, T, a, b, 1, C("--accent"), true, true));
+    const cA = A.map(([a, b]) => [Math.min(c * a, c * b), Math.max(c * a, c * b)]).sort((p, q) => p[0] - q[0]);
+    cA.forEach(([a, b]) => seg(ctx, T, a, b, 2, C("--seq2"), true, true));
+    rowLabel(ctx, T, "A", 1, C("--accent"));
+    rowLabel(ctx, T, "cA", 2, C("--seq2"));
+    PP.read(ID + "-ej14-read", [
+      ["A", "[0.5, 1] ∪ [1.5, 2.5]"],
+      ["cA", c === 0 ? "{0}" : cA.map(([a, b]) => "[" + fx(a, 2) + ", " + fx(b, 2) + "]").join(" ∪ ")],
+    ]);
+  };
+  PP.register(draw, [ID + "-ej14-c-s"]);
+})();
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

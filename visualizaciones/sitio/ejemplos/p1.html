@@ -1,0 +1,2715 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ejemplos · Práctica 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#ejemplos">Ejemplos</a></li><li><span aria-current="page">Práctica 1</span></li></ol><div class="pager"><a aria-disabled="true">← Anterior</a><a href="../ejemplos/p2.html" title="Ejemplos · Práctica 2">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Ejemplos resueltos · 30 ejemplos</p>
+  <h1>Práctica 1</h1>
+  <p>Números reales, supremo e ínfimo, sucesiones y series. Los ejemplos de <code>apuntes-typst/ejemplos/p1.typ</code>, con la resolución partida en pasos y un dibujo en cada paso que se puede dibujar. Cada resultado subrayado con puntos muestra su enunciado.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#ejp1-b1">Bloque 1Supremo, ínfimo, máximo y mínimo por definición</a><ul class="chips"><li><a href="#ejp1-1" title="Un conjunto sin máximo: A = {0, 0.9, 0.99, 0.999, ...}">1</a></li><li><a href="#ejp1-2" title="Cotas superiores">2</a></li><li><a href="#ejp1-3" title="Supremo de B = (0, 1)">3</a></li><li><a href="#ejp1-4" title="Máximo y Supremo de A = [0, 1] y B = [0, 1)">4</a></li><li><a href="#ejp1-6" title="Ínfimo de A = {1/n : n ∈ ℕ}">6</a></li><li><a href="#ejp1-3-2" title="Supremo de C = {2 − 1/n : n ∈ ℕ}">3</a></li><li><a href="#ejp1-3-3" title="Supremo de D = {x ∈ ℝ : 1/x² mayor que 1/4}">3</a></li></ul></div><div class="toc-group"><a href="#ejp1-b2">Bloque 2Densidad y completitud: por qué ℚ no alcanza</a><ul class="chips"><li><a href="#ejp1-5" title="Inexistencia de supremo en ℚ para A = {r ∈ ℚ : r² &lt; 2}">5</a></li><li><a href="#ejp1-c1-5" title="Parte entera: el único n ∈ ℤ con n ≤ x &lt; n+1">C1-5</a></li></ul></div><div class="toc-group"><a href="#ejp1-b3">Bloque 3Límite por definición</a><ul class="chips"><li><a href="#ejp1-7" title="Las dos sucesiones de referencia y sus gráficos">7</a></li><li><a href="#ejp1-8" title="Límite de a_n = 1/n">8</a></li><li><a href="#ejp1-c1-1-1" title="Límite de a_n = 1/2^n acotando por 1/m">C1-1.1</a></li><li><a href="#ejp1-c1-1-2" title="Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el numerador">C1-1.2</a></li><li><a href="#ejp1-c1-3" title="Una sucesión convergente de enteros es finalmente constante">C1-3</a></li><li><a href="#ejp1-prop" title="Límite de la raíz cuadrada: si a_n → l, entonces √a_n → √l">Prop</a></li><li><a href="#ejp1-prop-2" title="Límite de las medias de Cesàro: si a_n → 0, entonces S_n → 0">Prop</a></li></ul></div><div class="toc-group"><a href="#ejp1-b4">Bloque 4La equivalencia del supremo por sucesiones</a><ul class="chips"><li><a href="#ejp1-10" title="Supremo de A = {x/(x + 1) : x positivo}">10</a></li><li><a href="#ejp1-c1-4" title="Supremo e ínfimo de A = {1/n + m : n, m ∈ ℕ}">C1-4</a></li></ul></div><div class="toc-group"><a href="#ejp1-b5">Bloque 5Negar la convergencia</a><ul class="chips"><li><a href="#ejp1-9" title="No convergencia de a_n = (−1)^n">9</a></li></ul></div><div class="toc-group"><a href="#ejp1-b6">Bloque 6Monotonía, álgebra de límites y subsucesiones</a><ul class="chips"><li><a href="#ejp1-11" title="Qué es y qué no es una subsucesión">11</a></li><li><a href="#ejp1-prop-3" title="No convergencia de a_n = cos(nπ/2) vía subsucesiones">Prop</a></li><li><a href="#ejp1-12" title="Convergencia de a_n = r^n con r ∈ (0,1)">12</a></li><li><a href="#ejp1-c1-2" title="Para qué x ∈ ℝ converge (x^n)">C1-2</a></li><li><a href="#ejp1-c2-1" title="Sucesión definida por recursión: a_(n+1) = √(2 + a_n)">C2-1</a></li><li><a href="#ejp1-c2-2" title="Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) convergen al mismo límite">C2-2</a></li><li><a href="#ejp1-prop-4" title="Producto de acotadas con subsucesiones nulas: c_n = a_n b_n → 0">Prop</a></li><li><a href="#ejp1-c2-3" title="Si a_n/b_n tiende a un irracional, ninguna está acotada">C2-3</a></li><li><a href="#ejp1-c1-6" title="Racionales estrictamente decrecientes hacia x">C1-6</a></li><li><a href="#ejp1-serie" title="La serie de a_n = (−1)^n no converge">Serie</a></li><li><a href="#ejp1-serie-2" title="Serie geométrica">Serie</a></li></ul></div><div class="toc-group"><a href="#ejp1-huecos">Notas finalesHuecos frente a la Práctica 1</a><ul class="chips"></ul></div></nav>
+
+<!-- ===================== BLOQUE 1 ===================== -->
+<section class="bloque" id="ejp1-b1">
+  <h2><span class="bn">Bloque 1</span>Supremo, ínfimo, máximo y mínimo por definición</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Todo el <a href="../guias/p1.html#guiap1-ej4" class="xg" data-guia="p1" data-ej="4">Ejercicio 4</a> de p1 ($(a,b]$, $B = \{1/2^n\}$, $B \cup \{0\}$, $\{x^2 - x - 1\}$) se hace con las tres técnicas de este bloque: exhibir la cota, y después descartar cualquier cota mejor <em>o bien</em> por el punto medio <em>o bien</em> por Arquímedes. Los <a href="../guias/p1.html#guiap1-ej5" class="xg" data-guia="p1" data-ej="5">Ejercicios 5</a> y <a href="../guias/p1.html#guiap1-ej6" class="xg" data-guia="p1" data-ej="6">6</a> (monotonía de $\sup$, $-A$ y $cA$) son estos mismos argumentos aplicados a dos conjuntos a la vez.</p>
+    <p><strong>El orden importa:</strong> los dos primeros ejemplos son informales y fijan el vocabulario (un conjunto puede no tener máximo y sí tener supremo; una cota superior no tiene por qué ser la mejor). Recién el tercero introduce una técnica de demostración —el punto medio, el argumento más elemental, que no usa Arquímedes— y conviene tenerlo automatizado antes de pasar a los demás.</p>
+  </div>
+
+  <!-- Ejemplo 1 -->
+  <article class="ej" id="ejp1-1" data-short="1" data-title="Un conjunto sin máximo: A = {0, 0.9, 0.99, 0.999, ...}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">1</span>
+      <h3>Un conjunto sin máximo: $A = \{0, 0.9, 0.99, 0.999, \dots\}$</h3>
+      <span class="src">Ejemplo 1.1 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $A = \{0, 0.9, 0.99, 0.999, \dots\}$. ¿Existe algún elemento de $A$ que sea el más grande de todos?</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Ningún elemento es el más grande</p>
+          <p>Todos los elementos de $A$ son de la forma $0.99\dots9$. Supongamos que alguno es el más grande de todos: este elemento deberá ser
+            $$\underbrace{0.99\dots9}_{k \text{ nueves}}.$$
+            Pero si le agrego un nueve a este número, obtengo el
+            $$\underbrace{0.99\dots9}_{k+1 \text{ nueves}}$$
+            que es un elemento de $A$ pero es más grande que el anterior! Esto es absurdo, por lo que podemos concluir que el conjunto $A$ no tiene un elemento más grande que todos dentro de $A$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-1-c" aria-label="Elementos de A según la cantidad de nueves, acercándose a la recta y igual a 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-1-k"><i>k</i> nueves</label><input type="range" id="ejp1-1-k" min="1" max="7" value="3"><output id="ejp1-1-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-1-read" aria-live="polite"></dl>
+          <figcaption>Cada punto es un elemento de <i>A</i>, ubicado según su cantidad de nueves. El punto naranja es el candidato a “más grande” con <i>k</i> nueves; el azul grande es el que se obtiene agregándole un nueve: también está en <i>A</i> y es mayor. La raya verde es el 1, que nadie alcanza.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Pero sí hay reales más grandes que todos</p>
+          <p>¿Pero existe algún número real que sea más grande que todos los elementos de $A$? Acá la respuesta es que sí, podemos ver que todos los elementos de $A$ son menores a, por ejemplo, $1$ (pero también son menores a $1.5$, $2$, $100$, …).</p>
+          <p>Como los elementos del conjunto $A$ están cada vez más cerca de $1$, nos da la impresión de que $1$ es el número que mejor se ajusta a este problema. Es decir, que no va a ser posible conseguir otro número que cumpla, simultáneamente, que sea más grande que todos los elementos de $A$ y más chico que $1$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo 2 -->
+  <article class="ej" id="ejp1-2" data-short="2" data-title="Cotas superiores" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">2</span>
+      <h3>Cotas superiores</h3>
+      <span class="src">Ejemplo 1.3 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>Sea $A = [0, 1] \Rightarrow 1$ es una <span class="ref" data-ref="def-1">cota superior</span>; por lo tanto, $A$ está acotado. Notar que el número $2$ también es una cota superior.</li>
+          <li>$A = \{-3, -1, 0, 1.5, 7/2\}$. En este caso $7/2$ es cota superior (y también es un elemento del conjunto).</li>
+          <li>$A = \{n \in \mathbb{N} : n \text{ es par}\}$. Intuitivamente sabemos que $A$ no puede ser acotado superiormente. Para probarlo formalmente, tenemos que esperar un poco más.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <svg viewBox="0 0 360 236" role="img" aria-label="Tres rectas: el intervalo [0,1] con las cotas 1 y 2; cinco puntos con 7/2 marcado como cota y elemento; los pares que se van a la derecha">
+          <text x="8" y="22" class="sv-muted">a) A = [0, 1]</text>
+          <line x1="16" y1="52" x2="344" y2="52" class="sv-axis"/>
+          <line x1="76" y1="52" x2="180" y2="52" class="sv-accent" style="stroke-width:5"/>
+          <circle cx="76" cy="52" r="4" class="sv-fill-accent"/>
+          <circle cx="180" cy="52" r="4" class="sv-fill-accent"/>
+          <text x="76" y="72" text-anchor="middle" class="sv-muted">0</text>
+          <line x1="180" y1="42" x2="180" y2="62" class="sv-ok"/>
+          <text x="180" y="76" text-anchor="middle" class="sv-label-ok">1 cota</text>
+          <line x1="284" y1="42" x2="284" y2="62" class="sv-ok"/>
+          <text x="284" y="76" text-anchor="middle" class="sv-label-ok">2 también</text>
+
+          <text x="8" y="102" class="sv-muted">b) A = {−3, −1, 0, 1.5, 7/2}</text>
+          <line x1="16" y1="132" x2="344" y2="132" class="sv-axis"/>
+          <circle cx="56" cy="132" r="4.5" class="sv-fill-accent"/>
+          <text x="56" y="152" text-anchor="middle" class="sv-muted">−3</text>
+          <circle cx="132" cy="132" r="4.5" class="sv-fill-accent"/>
+          <text x="132" y="152" text-anchor="middle" class="sv-muted">−1</text>
+          <circle cx="170" cy="132" r="4.5" class="sv-fill-accent"/>
+          <text x="170" y="152" text-anchor="middle" class="sv-muted">0</text>
+          <circle cx="227" cy="132" r="4.5" class="sv-fill-accent"/>
+          <text x="227" y="152" text-anchor="middle" class="sv-muted">1.5</text>
+          <circle cx="302" cy="132" r="6" class="sv-fill-ok"/>
+          <text x="302" y="152" text-anchor="middle" class="sv-label-ok">7/2</text>
+          <text x="302" y="118" text-anchor="middle" class="sv-label-ok">cota y elemento</text>
+
+          <text x="8" y="182" class="sv-muted">c) A = pares</text>
+          <line x1="16" y1="210" x2="336" y2="210" class="sv-axis"/>
+          <path d="M330 205 L340 210 L330 215" class="sv-axis"/>
+          <circle cx="66" cy="210" r="4.5" class="sv-fill-accent"/>
+          <text x="66" y="230" text-anchor="middle" class="sv-muted">2</text>
+          <circle cx="116" cy="210" r="4.5" class="sv-fill-accent"/>
+          <text x="116" y="230" text-anchor="middle" class="sv-muted">4</text>
+          <circle cx="166" cy="210" r="4.5" class="sv-fill-accent"/>
+          <text x="166" y="230" text-anchor="middle" class="sv-muted">6</text>
+          <circle cx="216" cy="210" r="4.5" class="sv-fill-accent"/>
+          <text x="216" y="230" text-anchor="middle" class="sv-muted">8</text>
+          <circle cx="266" cy="210" r="4.5" class="sv-fill-accent"/>
+          <text x="266" y="230" text-anchor="middle" class="sv-muted">10</text>
+          <text x="302" y="214" text-anchor="middle" class="sv-text">…</text>
+          <text x="236" y="190" text-anchor="middle" class="sv-muted">¿alguna cota? (se prueba más adelante)</text>
+        </svg>
+        <figcaption>Los tres conjuntos del ejemplo. En verde, las cotas superiores que nombra el texto: en a) el 1 y el 2; en b) el 7/2, que además es un elemento. En c) los pares siguen hacia la derecha.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- Ejemplo 3 (b) -->
+  <article class="ej" id="ejp1-3" data-short="3" data-title="Supremo de B = (0, 1)" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">3</span>
+      <h3>Supremo de $B = (0, 1)$</h3>
+      <span class="src">Ejemplo 1.6 b) de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $B = (0, 1)$. Probar que $\sup(B) = 1$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>La estrategia es suponer que no es el supremo, por lo tanto hay un $t$ menor a él que es cota superior, y deberíamos ver una contradicción estudiando el punto medio entre $t$ y $1$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$1$ es cota superior</p>
+          <p>Tenemos que <span class="ref" data-ref="def-2">$\sup(B) = 1$</span> ya que:</p>
+          <p>$s = 1$ es <span class="ref" data-ref="def-1">cota superior</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Ninguna cota menor: el punto medio</p>
+          <p>Supongamos que $t$ es una cota superior de $B$ y veamos que $t \ge 1$. Supongamos que no, es decir, $t \lt 1$. Pero entonces puedo tomar $x = \frac{t+1}{2}$ (el punto medio entre $t$ y $1$) y nos sale que $t \lt x \lt 1$. Pero entonces tenemos que por un lado $x \in B$ (porque es menor a 1) y por el otro es mayor a $t$ (que era una cota superior!). Esto es absurdo.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-3-c" aria-label="El intervalo (0,1), una supuesta cota t menor que 1 y el punto medio entre t y 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-3-t"><i>t</i></label><input type="range" id="ejp1-3-t" min="5" max="98" value="70"><output id="ejp1-3-t-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-3-read" aria-live="polite"></dl>
+          <figcaption>La banda azul es <i>B</i> = (0, 1). Mové la supuesta cota <i>t</i> &lt; 1 (en rojo): el punto medio <i>x</i> = (<i>t</i> + 1)/2 siempre cae entre <i>t</i> y 1, dentro de <i>B</i> y por encima de <i>t</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo 4 -->
+  <article class="ej" id="ejp1-4" data-short="4" data-title="Máximo y Supremo de A = [0, 1] y B = [0, 1)" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">4</span>
+      <h3>Máximo y Supremo de $A = [0, 1]$ y $B = [0, 1)$</h3>
+      <span class="src">Ejemplo 1.9 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun"><p>Para $A = [0, 1]$, el $\sup(A) = 1$ y como $1 \in A$, $\max(A) = 1$. Sin embargo, para $B = [0, 1)$, el $\sup(B) = 1$ pero no tiene <span class="ref" data-ref="def-3">máximo</span> porque $1 \notin B$.</p></div>
+      <figure class="viz">
+        <svg viewBox="0 0 360 150" role="img" aria-label="El intervalo cerrado [0,1] con el 1 incluido y el intervalo [0,1) con el 1 excluido">
+          <text x="8" y="22" class="sv-muted">A = [0, 1]</text>
+          <line x1="16" y1="50" x2="344" y2="50" class="sv-axis"/>
+          <line x1="70" y1="50" x2="270" y2="50" class="sv-accent" style="stroke-width:5"/>
+          <circle cx="70" cy="50" r="5" class="sv-fill-accent"/>
+          <circle cx="270" cy="50" r="6" class="sv-fill-ok"/>
+          <text x="70" y="72" text-anchor="middle" class="sv-muted">0</text>
+          <text x="270" y="72" text-anchor="middle" class="sv-label-ok">1 = sup A = máx A</text>
+          <text x="8" y="100" class="sv-muted">B = [0, 1)</text>
+          <line x1="16" y1="128" x2="344" y2="128" class="sv-axis"/>
+          <line x1="70" y1="128" x2="264" y2="128" class="sv-accent" style="stroke-width:5"/>
+          <circle cx="70" cy="128" r="5" class="sv-fill-accent"/>
+          <circle cx="270" cy="128" r="6" class="sv-fill-bg"/>
+          <circle cx="270" cy="128" r="6" class="sv-fail"/>
+          <text x="70" y="148" text-anchor="middle" class="sv-muted">0</text>
+          <text x="270" y="148" text-anchor="middle" class="sv-label-fail">1 = sup B ∉ B</text>
+        </svg>
+        <figcaption>Arriba el 1 está en el conjunto (punto lleno): es supremo y máximo. Abajo el 1 sigue siendo el supremo pero no pertenece a <i>B</i> (punto hueco): no hay máximo.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- Ejemplo 6 -->
+  <article class="ej" id="ejp1-6" data-short="6" data-title="Ínfimo de A = {1/n : n ∈ ℕ}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">6</span>
+      <h3>Ínfimo de $A = \{1/n : n \in \mathbb{N}\}$</h3>
+      <span class="src">Ejemplo 1.19 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $A = \{1/n : n \in \mathbb{N}\}$. Veamos que <span class="ref" data-ref="def-5">$\inf(A) = 0$</span>:</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$0$ es cota inferior</p>
+          <p>Es fácil ver que $0$ es <span class="ref" data-ref="def-4">cota inferior</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Ninguna cota mejor: Arquímedes</p>
+          <p>Supongamos que $t$ es una cota inferior “mejor” que $0$, es decir, que $t \gt 0$. Por el <span class="ref" data-ref="prop-1">Principio de Arquímedes (Proposición 1)</span>, sabemos que debe existir un $n \in \mathbb{N}$ tal que $t \gt 1/n \gt 0$. Pero esto nos dice que $t$ no puede ser cota inferior, lo cual es absurdo. Concluimos que si $t$ es cota inferior debe ser $t \le 0$, que es lo que queríamos ver.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-6-c" aria-label="Los puntos 1/n sobre la recta, una supuesta cota inferior t mayor que 0 y el 1/n de Arquímedes por debajo de t"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-6-t"><i>t</i></label><input type="range" id="ejp1-6-t" min="3" max="60" value="22"><output id="ejp1-6-t-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-6-read" aria-live="polite"></dl>
+          <figcaption>Los puntos azules son 1/<i>n</i> (se dibujan los primeros 80). Para la supuesta cota <i>t</i> &gt; 0 (en rojo), el punto marcado es el primer 1/<i>n</i> &lt; <i>t</i> que da Arquímedes: queda a la izquierda de <i>t</i>, así que <i>t</i> no es cota inferior.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo 3 (c) -->
+  <article class="ej" id="ejp1-3-2" data-short="3" data-title="Supremo de C = {2 − 1/n : n ∈ ℕ}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">3</span>
+      <h3>Supremo de $C = \{2 - 1/n : n \in \mathbb{N}\}$</h3>
+      <span class="src">Ejemplo 1.6 c) de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="ej-grid">
+      <div style="display:grid;gap:1rem;grid-template-columns:minmax(0,1fr)">
+        <div class="enun"><p>Sea $C = \{2 - 1/n : n \in \mathbb{N}\}$ $= \{2 - 1, 2 - \tfrac12, 2 - \tfrac13, \dots\}$. Probar que $\sup(C) = 2$.</p></div>
+        <div class="estrategia"><b>Estrategia</b><p>Claramente $2$ es una cota superior de $C$. Mediante el <span class="ref" data-ref="prop-1">Principio de Arquímedes</span> se puede demostrar formalmente que $2 = \sup(C)$.</p></div>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp1-3-2-c" aria-label="Los elementos 2 menos 1/n de C sobre la recta, acumulándose antes del 2"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp1-3-2-N"><i>n</i> ≤ <i>N</i></label><input type="range" id="ejp1-3-2-N" min="1" max="40" value="8"><output id="ejp1-3-2-N-o"></output></div>
+        </div>
+        <dl class="read" id="ejp1-3-2-read" aria-live="polite"></dl>
+        <figcaption>Los elementos 2 − 1/<i>n</i> de <i>C</i> con <i>n</i> ≤ <i>N</i>. La raya verde es la cota superior 2 de la estrategia. El <code>.typ</code> no trae la demostración formal.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- Ejemplo 3 (d) -->
+  <article class="ej" id="ejp1-3-3" data-short="3" data-title="Supremo de D = {x ∈ ℝ : 1/x² mayor que 1/4}" data-topics="supremo">
+    <div class="ej-head">
+      <span class="tag">3</span>
+      <h3>Supremo de $D = \{x \in \mathbb{R} : 1/x^2 \gt 1/4\}$</h3>
+      <span class="src">Ejemplo 1.6 d) de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $D = \{x \in \mathbb{R} : 1/x^2 \gt 1/4\}$. Determinar el conjunto $D$ y hallar su supremo.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Resolver la inecuación</p>
+          <p>Resolviendo la inecuación:
+            $$\begin{aligned} \frac{1}{x^2} \gt \frac14 &\iff 4 \gt x^2 \ \wedge\ x \neq 0 \\ &\iff 2 \gt |x| \ \wedge\ x \neq 0 \end{aligned}$$
+            Esto nos da el conjunto $D = (-2, 0) \cup (0, 2)$, cuyo supremo es $\sup(D) = 2$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-3-3-c" aria-label="Gráfico de 1 sobre x al cuadrado, la recta y = 1/4 y el conjunto D marcado sobre el eje x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-3-3-x"><i>x</i></label><input type="range" id="ejp1-3-3-x" min="-40" max="40" value="13"><output id="ejp1-3-3-x-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-3-3-read" aria-live="polite"></dl>
+          <figcaption>La curva es 1/<i>x</i>² y la recta punteada es la altura 1/4. Sobre el eje, en azul, <i>D</i> = (−2, 0) ∪ (0, 2): los <i>x</i> donde la curva queda por encima de la recta. Mové <i>x</i> para comprobarlo punto por punto.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 2 ===================== -->
+<section class="bloque" id="ejp1-b2">
+  <h2><span class="bn">Bloque 2</span>Densidad y completitud: por qué ℚ no alcanza</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Todo el <a href="../guias/p1.html#guiap1-ej2" class="xg" data-guia="p1" data-ej="2">Ejercicio 2</a> de p1 (entero entre $x$ e $y$, racional entre reales, irracional entre racionales, irracional entre reales). El ejemplo de abajo va en la dirección inversa —usa la densidad para probar que algo <em>no</em> existe en $\mathbb{Q}$— y por eso es el que fija la técnica: multiplicar por $n$ para separar, encajar un entero, volver a dividir.</p>
+  </div>
+
+  <!-- Ejemplo 5 -->
+  <article class="ej" id="ejp1-5" data-short="5" data-title="Inexistencia de supremo en ℚ para A = {r ∈ ℚ : r² < 2}" data-topics="supremo,densidad">
+    <div class="ej-head">
+      <span class="tag">5</span>
+      <h3>Inexistencia de supremo en $\mathbb{Q}$ para $A = \{r \in \mathbb{Q} : r^2 \lt 2\}$</h3>
+      <span class="src">Ejemplo 1.15 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $A = \{r \in \mathbb{Q} : r^2 \lt 2\}$. Demostrar que $A$ es acotado pero no tiene supremo en $\mathbb{Q}$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Usar demostración por contradicción suponiendo que existe $s = \sup(A) \in \mathbb{Q}$. Analizar las opciones $s^2 \gt 2$ y $s^2 \lt 2$ utilizando la <span class="ref" data-ref="prop-2">densidad de $\mathbb{Q}$ en $\mathbb{R}$</span> para encontrar en ambos casos una contradicción.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Suponer que hay supremo en $\mathbb{Q}$</p>
+          <p>Vemos que este conjunto es acotado (en $\mathbb{Q}$ y en $\mathbb{R}$). Sin embargo, $A$ no tiene supremo en $\mathbb{Q}$. Supongamos que sí tiene supremo, es decir, que existe <span class="ref" data-ref="def-2">$s = \sup(A)$</span> y $s \in \mathbb{Q}$. Entonces tenemos que $s$ es <span class="ref" data-ref="def-1">cota superior</span> de $A$ y si $t$ es otra cota superior, se debe cumplir que $t \ge s$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Dos posibilidades</p>
+          <p>Como $s \in \mathbb{Q} \subseteq \mathbb{R}$ tenemos dos posibilidades: $s^2 \gt 2$ o $s^2 \lt 2$ (dado que $s^2 \neq 2$). Notar que acá estamos usando formalmente uno de los axiomas de orden: <span class="ref" data-ref="ext-tricotomia">Tricotomía</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Los dos casos llevan a un absurdo</p>
+          <p>Si $s^2 \gt 2$, tenemos que $s \gt \sqrt2$ (dado que $s \gt 0$). Por la <span class="ref" data-ref="prop-2">Proposición 2</span>, sabemos que existe un número racional $q$ tal que $s \gt q \gt \sqrt2$. Elevando todo al cuadrado:
+            $$q^2 \gt 2 \gt r^2 \ \text{para todo } r \in A \ \Rightarrow\ q \gt r \ \text{para todo } r \in A.$$
+            Esto último dice que $q$ es una cota superior de $A$. Pero $s \gt q$, que contradice que $s$ sea la menor cota superior en $\mathbb{Q}$.</p>
+          <p>Si $s^2 \lt 2$, tenemos que $s \lt \sqrt2$. Al igual que antes, tiene que existir $q \in \mathbb{Q}$ tal que $s \lt q \lt \sqrt2$. Elevando al cuadrado:
+            $$q^2 \lt 2 \ \text{y}\ q \in \mathbb{Q} \ \Rightarrow\ q \in A,$$
+            y por lo tanto se contradice que $s$ sea cota superior de $A$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-5-c" aria-label="El candidato racional s, la raíz de 2 y un racional q entre ambos"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-5-s"><i>s</i></label><input type="range" id="ejp1-5-s" min="100" max="200" value="150"><output id="ejp1-5-s-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-5-read" aria-live="polite"></dl>
+          <figcaption>El candidato <i>s</i> (racional, en naranja) nunca cae justo en √2. El punto azul es un racional <i>q</i> entre <i>s</i> y √2 —el de menor denominador, elegido para el dibujo—. Con <i>s</i> a la derecha de √2, <i>q</i> es una cota menor que <i>s</i>; con <i>s</i> a la izquierda, <i>q</i> es un elemento de <i>A</i> mayor que <i>s</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Como llegamos a un absurdo con las dos únicas opciones, podemos concluir que no puede existir $s \in \mathbb{Q}$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-5 -->
+  <article class="ej" id="ejp1-c1-5" data-short="C1-5" data-title="Parte entera: el único n ∈ ℤ con n ≤ x < n+1" data-topics="supremo,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-5</span>
+      <h3>Parte entera: el único $n \in \mathbb{Z}$ con $n \le x \lt n+1$</h3>
+      <span class="src">Clase 1 · Ejemplo 5</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $x \in \mathbb{R}$. Probar que existe un único entero $n$ tal que $n \le x \lt n+1$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Este es el resultado que usa el <a href="../guias/p1.html#guiap1-ej2" class="xg" data-guia="p1" data-ej="2">Ejercicio 2</a> (a): una vez que existe la parte entera, encajar un entero entre $x$ e $y$ cuando $y - x \gt 1$ es inmediato. La construcción es la de siempre —definir el conjunto correcto y tomarle el supremo— con un paso extra: hay que probar que ese supremo <em>es entero</em>, y eso sale de que una sucesión de enteros que converge es finalmente constante (<a href="#ejp1-c1-3">Ejemplo C1-3</a>).</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$A \neq \emptyset$</p>
+          <p>Sea $A = \{n \in \mathbb{Z} : n \le x\}$.</p>
+          <p>$A \neq \emptyset$. Por <span class="ref" data-ref="teo-1">arquimedianidad</span>, dado $x \in \mathbb{R}$, existe $m \in \mathbb{N}$ tal que $-x \le m$. Entonces $x \ge -m$ y $-m \in A$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Existe $n = \sup(A)$</p>
+          <p>$A$ está acotado superiormente por $x$, así que por <span class="ref" data-ref="ax-completitud">completitud</span> existe $n = \sup(A)$. Es este $n$ el que vamos a ver que cumple lo pedido.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-5-c" aria-label="Los enteros menores o iguales que x, el supremo n y el entero n+1 que ya no está en A"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-5-x"><i>x</i></label><input type="range" id="ejp1-c1-5-x" min="-33" max="33" value="14"><output id="ejp1-c1-5-x-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-5-read" aria-live="polite"></dl>
+          <figcaption>Los puntos azules son los enteros de <i>A</i> = {<i>n</i> ∈ ℤ : <i>n</i> ≤ <i>x</i>} que entran en la ventana (siguen hacia la izquierda). El anillo marca <i>n</i> = sup <i>A</i>; el hueco rojo es <i>n</i> + 1, el primer entero que ya pasó a <i>x</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$n \le x$</p>
+          <p>$n \le x$ porque $n$ es la <span class="ref" data-ref="def-2">menor cota superior</span> (y $x$ es una de ellas).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$x \lt n+1$</p>
+          <p>$x \lt n+1$ porque, caso contrario, $n+1 \le x$ y $n+1 \in A$, contradiciendo que $n$ sea cota superior.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$n \in \mathbb{Z}$</p>
+          <p>$n \in \mathbb{Z}$: <span class="ref" data-ref="prop-equivalencia-del-supremo-2">como es el supremo, existe $(a_k)_{k \in \mathbb{N}} \subseteq A$ tal que $\lim_{k \to +\infty} a_k = n$</span>. Pero, por el <a href="#ejp1-c1-3">Ejemplo C1-3</a>, existe $k_0 \in \mathbb{N}$ tal que $a_k = n$ para todo $k \ge k_0$. Entonces $n \in \mathbb{Z}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Unicidad</p>
+          <p>$n$ es único: si $n' \in \mathbb{Z}$ cumple que $n' \le x \lt n'+1$, entonces $n \ge n'$ o $n' \ge n$. Si $n \ge n'$ resulta que $0 \le n - n' \lt 1$. Como $n, n' \in \mathbb{Z}$, resulta que $n = n'$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 96" role="img" aria-label="Recta con las marcas n prima, n arriba, x y n prima más 1">
+            <line x1="10" y1="48" x2="350" y2="48" class="sv-ink" style="stroke-width:1.5"/>
+            <line x1="78" y1="40" x2="78" y2="56" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="78" y="78" text-anchor="middle" class="sv-text">n′</text>
+            <line x1="146" y1="56" x2="146" y2="36" class="sv-accent"/>
+            <text x="146" y="26" text-anchor="middle" class="sv-label-accent">n</text>
+            <line x1="214" y1="40" x2="214" y2="56" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="214" y="78" text-anchor="middle" class="sv-text">x</text>
+            <line x1="282" y1="40" x2="282" y2="56" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="282" y="78" text-anchor="middle" class="sv-text">n′ + 1</text>
+          </svg>
+          <figcaption>El dibujo del <code>.typ</code>: con <i>n</i>′ ≤ <i>n</i> ≤ <i>x</i> &lt; <i>n</i>′ + 1, los dos enteros <i>n</i>′ y <i>n</i> quedan a distancia menor que 1.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 3 ===================== -->
+<section class="bloque" id="ejp1-b3">
+  <h2><span class="bn">Bloque 3</span>Límite por definición</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>El <a href="../guias/p1.html#guiap1-ej7" class="xg" data-guia="p1" data-ej="7">Ejercicio 7</a> de p1 son los tres primeros ejemplos con cuentas distintas: despejar la condición $|a_n - \ell| \lt \varepsilon$ hasta que quede $n \gt \text{algo}(\varepsilon)$, y recién ahí invocar Arquímedes para exhibir $n_0$. El <a href="../guias/p1.html#guiap1-ej1" class="xg" data-guia="p1" data-ej="1">Ejercicio 1</a> ($x \lt y + \varepsilon$ para todo $\varepsilon$ implica $x \le y$) es la contracara: acá se elige un $\varepsilon$ chico a propósito, allá se usa que la desigualdad vale para <em>todos</em>.</p>
+    <p><strong>La progresión del bloque:</strong> el <a href="#ejp1-7">Ejemplo 7</a> no demuestra nada —presenta las dos sucesiones que aparecen en todo el resto del archivo y las dos formas de dibujarlas—. El <a href="#ejp1-8">Ejemplo 8</a> ($1/n$) sale de una <em>equivalencia exacta</em>: se despeja y listo. Los dos de clase (<a href="#ejp1-c1-1-1">C1-1.1</a> y <a href="#ejp1-c1-1-2">C1-1.2</a>) son los que importan para la guía, porque ahí la equivalencia exacta no existe y hay que <em>acotar primero</em> por algo más simple: son los <a href="../guias/p1.html#guiap1-ej7" class="xg" data-guia="p1" data-ej="7">Ej. 7</a> (c) y 7 (b) casi textuales, y el lema general que los ordena a los dos es el <a href="../guias/p1.html#guiap1-ej8" class="xg" data-guia="p1" data-ej="8">Ejercicio 8</a>. El último (<a href="#ejp1-c1-3">C1-3</a>) usa la definición al revés: elige un $\varepsilon$ a propósito para forzar una conclusión.</p>
+  </div>
+
+  <!-- Ejemplo 7 -->
+  <article class="ej" id="ejp1-7" data-short="7" data-title="Las dos sucesiones de referencia y sus gráficos" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">7</span>
+      <h3>Las dos sucesiones de referencia y sus gráficos</h3>
+      <span class="src">Ejemplo 2.2 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>Si escribimos $a_n = 1/n$, nos estamos refiriendo a la <span class="ref" data-ref="def-6-sucesiones">sucesión</span> $(a_n)_{n \in \mathbb{N}} = (1, \tfrac12, \tfrac13, \tfrac14, \dots)$. Su gráfico sería el de la figura (en el plano). También suele ser útil graficar solo las imágenes de la sucesión, es decir, ubicar a los elementos de la sucesión en la recta real (vista “sobre la recta”).</li>
+          <li>Si $a_n = (-1)^n$, la sucesión completa es $(a_n)_{n \in \mathbb{N}} = (-1, 1, -1, 1, -1, 1, \dots)$, con su gráfico en el plano.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp1-7-c" aria-label="Gráfico de la sucesión elegida, en el plano o sobre la recta real"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Sucesión</legend>
+            <label><input type="radio" name="ejp1-7-s" value="inv" checked><i>a<sub>n</sub></i> = 1/<i>n</i></label>
+            <label><input type="radio" name="ejp1-7-s" value="alt"><i>a<sub>n</sub></i> = (−1)<sup><i>n</i></sup></label>
+          </fieldset>
+          <fieldset class="pills"><legend>Gráfico</legend>
+            <label><input type="radio" name="ejp1-7-v" value="plano" checked>en el plano</label>
+            <label><input type="radio" name="ejp1-7-v" value="recta">sobre la recta</label>
+          </fieldset>
+          <div class="slider"><label for="ejp1-7-N">términos</label><input type="range" id="ejp1-7-N" min="4" max="30" value="10"><output id="ejp1-7-N-o"></output></div>
+        </div>
+        <dl class="read" id="ejp1-7-read" aria-live="polite"></dl>
+        <figcaption>Los gráficos del <code>.typ</code> (con 10 términos): en el plano, los puntos (<i>n</i>, <i>a<sub>n</sub></i>); sobre la recta, sólo los valores <i>a<sub>n</sub></i>, con <i>a</i>₁, …, <i>a</i>₄ etiquetados. La vista sobre la recta de (−1)<sup><i>n</i></sup> no está en el <code>.typ</code>: se agrega para comparar.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- Ejemplo 8 -->
+  <article class="ej" id="ejp1-8" data-short="8" data-title="Límite de a_n = 1/n" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">8</span>
+      <h3>Límite de $a_n = 1/n$</h3>
+      <span class="src">Ejemplo 2.4 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $a_n = 1/n$. Veamos que $\lim_{n \to \infty} a_n = 0$. Acá “ver” quiere decir “<span class="ref" data-ref="def-7">probar por definición</span>”:</p>
+      <p>Sea $\varepsilon \gt 0$. Queremos encontrar $n_0 \in \mathbb{N}$ tal que $|1/n - 0| \lt \varepsilon$ para todo $n \ge n_0$. Desmembrando un poco la condición $|1/n - 0| \lt \varepsilon$, vemos que
+        $$\left|\frac1n - 0\right| \lt \varepsilon \iff \frac1n \lt \varepsilon \iff \frac1\varepsilon \lt n.$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>La idea es la siguiente: el $\varepsilon$ viene dado y tenemos que ser capaces de exhibir un $n_0$ que cumpla lo que queremos. Por la condición de arriba, vemos que si $n_0$ es tal que $1/\varepsilon \lt n_0$, entonces
+      $$n \ge n_0 \gt \frac1\varepsilon \Rightarrow \frac1n \le \frac1{n_0} \lt \varepsilon.$$</p>
+      <p>Con lo cual, $n_0$ tiene que cumplir que $1/\varepsilon \lt n_0$ ya que esto garantiza que si tomamos $n \ge n_0$, entonces $1/n \lt \varepsilon$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Arquímedes da el $n_0$</p>
+          <p>Ahora, ¿qué es lo que permite afirmar que existe un $n_0$ tal que $1/\varepsilon \lt n_0$? La respuesta es el <span class="ref" data-ref="teo-1">Principio de Arquímedes</span>: para $x = 1/\varepsilon$ existe $n_0 \in \mathbb{N}$ tal que $1/\varepsilon \lt n_0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-8-c" aria-label="La sucesión 1/n, la banda de ancho épsilon alrededor de 0 y el n0 a partir del cual todos los términos quedan dentro"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-8-e">ε</label><input type="range" id="ejp1-8-e" min="3" max="60" value="15"><output id="ejp1-8-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-8-read" aria-live="polite"></dl>
+          <figcaption>La banda es (−ε, ε) alrededor del límite 0. La raya vertical está en el primer natural <i>n</i>₀ &gt; 1/ε: desde ahí todos los puntos (azules) están en la banda; los naranjas son los anteriores.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-1.1 -->
+  <article class="ej" id="ejp1-c1-1-1" data-short="C1-1.1" data-title="Límite de a_n = 1/2^n acotando por 1/m" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-1.1</span>
+      <h3>Límite de $a_n = 1/2^n$ acotando por $1/m$</h3>
+      <span class="src">Clase 1 · Ejemplo 1.1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Demostrar que $\lim_{n \to +\infty} \frac{1}{2^n} = 0$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Acá no se puede despejar $n$ de $1/2^n \lt \varepsilon$ con las herramientas disponibles. La salida es <em>acotar por una sucesión que ya sabemos manejar</em>: como $m \le 2^m$, se tiene $1/2^m \le 1/m$, y el $m$ que da Arquímedes para $1/m \lt \varepsilon$ sirve directamente como $n_0$. Es el mismo movimiento que pide el <a href="../guias/p1.html#guiap1-ej7" class="xg" data-guia="p1" data-ej="7">Ejercicio 7</a> (c), donde la cadena es $\frac{7}{2^n + 4} \le \frac{7}{2^n} \le \frac7n$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que ver</p>
+          <p>Queremos ver que dado $\varepsilon \gt 0$ existe $n_0 \in \mathbb{N}$ tal que $\forall n \ge n_0$
+            $$\left|\frac{1}{2^n}\right| = \frac{1}{2^n} \lt \varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Arquímedes y la cota $m \le 2^m$</p>
+          <p>Por <span class="ref" data-ref="prop-1">arquimedianidad</span> existe $m \in \mathbb{N}$ tal que $1/m \lt \varepsilon$. Alcanza con ver que
+            $$\frac{1}{2^m} \le \frac1m \iff m \le 2^m.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-1-1-c" aria-label="Las sucesiones 1/2 a la n y 1/n, la banda épsilon y el m de Arquímedes"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-1-1-e">ε</label><input type="range" id="ejp1-c1-1-1-e" min="3" max="60" value="12"><output id="ejp1-c1-1-1-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-1-1-read" aria-live="polite"></dl>
+          <figcaption>En azul 1/2<sup><i>n</i></sup>, en naranja (huecos) la sucesión de comparación 1/<i>n</i>. La raya vertical es el <i>m</i> de Arquímedes (el primero con 1/<i>m</i> &lt; ε): desde ahí los puntos azules quedan debajo de los naranjas, y éstos dentro de la banda.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Elegir $n_0 = m$</p>
+          <p>Como $1/2^n \le 1/2^m$ si $n \ge m$, tomamos $n_0 = m$ y concluimos que
+            $$\frac{1}{2^n} \le \frac{1}{2^m} \le \frac1m \lt \varepsilon \ \text{ si } n \ge n_0.$$</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-1.2 -->
+  <article class="ej" id="ejp1-c1-1-2" data-short="C1-1.2" data-title="Límite de a_n = ((−1)^n + 2)/√(n+3) acotando el numerador" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-1.2</span>
+      <h3>Límite de $a_n = \frac{(-1)^n + 2}{\sqrt{n+3}}$ acotando el numerador</h3>
+      <span class="src">Clase 1 · Ejemplo 1.2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Demostrar que $\lim_{n \to +\infty} \frac{(-1)^n + 2}{\sqrt{n+3}} = 0$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>El numerador oscila pero <em>está acotado</em>: $|(-1)^n + 2| \le 3$. Esa cota se saca de la cuenta de entrada y el problema queda reducido a un límite conocido. Es exactamente el <a href="../guias/p1.html#guiap1-ej7" class="xg" data-guia="p1" data-ej="7">Ejercicio 7</a> (b) ($|\sin(n)| \le 1$) y, en versión concreta, el <a href="../guias/p1.html#guiap1-ej11" class="xg" data-guia="p1" data-ej="11">Ejercicio 11</a>: acotada por nula da nula. Segundo detalle a copiar: cuando la cota tiene una raíz, se aplica Arquímedes a $(\varepsilon/3)^2$ y no a $\varepsilon/3$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que ver</p>
+          <p>Queremos ver que, dado $\varepsilon \gt 0$, podemos encontrar $n_0 \in \mathbb{N}$ tal que $\forall n \ge n_0$
+            $$\left|\frac{(-1)^n + 2}{\sqrt{n+3}}\right| \lt \varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Acotar el numerador</p>
+          <p>Notemos que $|(-1)^n + 2| \le 1 + 2 = 3$. Por lo tanto
+            $$\left|\frac{(-1)^n + 2}{\sqrt{n+3}}\right| \le \frac{3}{\sqrt{n+3}}.$$</p>
+          <p>Veamos que existe $n_0 \in \mathbb{N}$ tal que $\forall n \ge n_0$
+            $$\frac{1}{\sqrt{n+3}} \lt \frac\varepsilon3.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Arquímedes con $(\varepsilon/3)^2$</p>
+          <p>Por <span class="ref" data-ref="prop-1">arquimedianidad</span> existe $m \in \mathbb{N}$ tal que $1/m \lt (\varepsilon/3)^2$. Entonces $1/\sqrt{m} \lt \varepsilon/3$. Basta que
+            $$\frac{1}{\sqrt{n+3}} \lt \frac{1}{\sqrt m} \iff m \lt n+3.$$</p>
+          <p>Por lo tanto, si tomamos $n_0 = \max\{m-3, 1\}$,
+            $$\frac{3}{\sqrt{n+3}} \le \frac{3}{\sqrt m} \lt 3 \cdot \frac\varepsilon3 = \varepsilon.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-1-2-c" aria-label="La sucesión oscilante, su cota 3 sobre raíz de n+3 y la banda épsilon con el n0 elegido"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-1-2-e">ε</label><input type="range" id="ejp1-c1-1-2-e" min="30" max="150" value="60"><output id="ejp1-c1-1-2-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-1-2-read" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>a<sub>n</sub></i>: alternan entre 1/√(<i>n</i>+3) y 3/√(<i>n</i>+3). La curva punteada verde es la cota 3/√(<i>n</i>+3), la banda es [0, ε) y la raya vertical es <i>n</i>₀ = máx{<i>m</i> − 3, 1}. ε arranca en 0,3 para que <i>n</i>₀ entre en la ventana.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-3 -->
+  <article class="ej" id="ejp1-c1-3" data-short="C1-3" data-title="Una sucesión convergente de enteros es finalmente constante" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-3</span>
+      <h3>Una sucesión convergente de enteros es finalmente constante</h3>
+      <span class="src">Clase 1 · Ejemplo 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}}$ una sucesión convergente tal que existe $n_0 \in \mathbb{N}$ para el cual $a_n \in \mathbb{Z}$ para todo $n \gt n_0$. Probar que existen $n_1 \in \mathbb{N}$ y $a \in \mathbb{R}$ tales que $a_n = a$ para todo $n \ge n_1$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Este es el uso “al revés” de la definición: en lugar de tomar $\varepsilon$ arbitrario y buscar $n_0$, se elige <em>un $\varepsilon$ concreto</em> ($1/2$) para que la conclusión sea imposible salvo en un caso. Se compara $a_n$ con un término fijo $a_{n_1}$ vía <span class="ref" data-ref="ext-desigualdad-triangular">desigualdad triangular</span>, y se aprovecha que dos enteros distintos nunca están a distancia menor que $1$. La cuenta con $2\varepsilon$ es la misma de la <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad del límite</span>.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El límite y la definición</p>
+          <p>Supongamos que <span class="ref" data-ref="def-7">$\lim_{n \to +\infty} a_n = L$</span>. Veamos que $L = a$ cumple lo pedido. Dado $\varepsilon \gt 0$ existe $\tilde n \in \mathbb{N}$ tal que $\forall n \gt \tilde n$ vale que
+            $$|a_n - L| \lt \varepsilon.$$</p>
+          <p>En particular, $\forall n \ge \max\{\tilde n, n_0\}$ se tiene que
+            $$a_n \in \mathbb{Z} \ \text{ y } \ |a_n - L| \lt \varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Comparar con un término fijo</p>
+          <p>Siguiendo el mismo rango de $n$, si $n_1 = \max\{\tilde n, n_0\}$ y $n \ge n_1$,
+            $$|a_n - a_{n_1}| \le |a_n - L| + |a_{n_1} - L| \lt 2\varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Elegir $\varepsilon = 1/2$</p>
+          <p>Si el $\varepsilon$ lo tomamos $\varepsilon \le 1/2$, por ejemplo $\varepsilon = 1/2$, queda que
+            $$|a_n - a_{n_1}| \lt 1.$$</p>
+          <p>Pero la diferencia entre dos enteros distintos es, al menos, $1$. Concluimos que $a_n = a_{n_1}$ para todo $n \ge n_1$. Como $a_n$ converge, $\lim_{n \to +\infty} a_n = a_{n_1} = L$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-3-c" aria-label="Una sucesión que a partir de n0 toma valores enteros, la banda de radio 2 épsilon alrededor de a sub n1 y los enteros que caen dentro"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-3-e">ε</label><input type="range" id="ejp1-c1-3-e" min="10" max="120" value="50"><output id="ejp1-c1-3-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-3-read" aria-live="polite"></dl>
+          <figcaption>Una sucesión elegida para el dibujo: los cuatro primeros términos son reales cualesquiera y desde <i>n</i>₀ + 1 = 5 son enteros. Las rayas horizontales son los enteros. La banda punteada tiene radio 2ε alrededor de <i>a</i><sub><i>n</i>₁</sub>: con ε ≤ 1/2 el único entero que cabe es <i>a</i><sub><i>n</i>₁</sub>; con ε más grande entran otros.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota de esta versión</b>La definición da la cota para $n \gt \tilde n$ y la hipótesis da $a_n \in \mathbb{Z}$ para $n \gt n_0$, así que el rango que sirve es $n \gt \max\{\tilde n, n_0\}$; con $n_1 = \max\{\tilde n, n_0\} + 1$ la cuenta vale tal cual. El dibujo usa ese $n_1$.</div>
+  </article>
+
+  <!-- Prop: raíz -->
+  <article class="ej" id="ejp1-prop" data-short="Prop" data-title="Límite de la raíz cuadrada: si a_n → l, entonces √a_n → √l" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>Límite de la raíz cuadrada: si $a_n \to l$, entonces $\sqrt{a_n} \to \sqrt l$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}}$ con $a_n \ge 0$ tal que $a_n \to l \in \mathbb{R}$. Demostrar que $\sqrt{a_n} \to \sqrt l$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Se analizan dos casos según el valor del límite $l$:</p>
+      <ul class="items">
+        <li>Si $l \gt 0$, no se puede despejar directamente $n$. Se multiplica y divide por el conjugado $\sqrt{a_n} + \sqrt l$ y se acota el denominador por $\sqrt l$, reduciendo la cota a $|a_n - l| \lt \varepsilon\sqrt l$.</li>
+        <li>Si $l = 0$, el truco del conjugado no se aplica (daría división por cero); en su lugar se aprovecha directamente la definición de $a_n \to 0$ eligiendo $\varepsilon^2$.</li>
+      </ul></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$l \ge 0$</p>
+          <p>Como $a_n \ge 0$ para todo $n \in \mathbb{N}$, se tiene que $l \ge 0$. Estudiamos los dos casos:</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso 1: $l \gt 0$</p>
+          <p>Dado $\varepsilon \gt 0$, como $a_n \to l$, existe $n_0 \in \mathbb{N}$ tal que
+            $$|a_n - l| \lt \varepsilon \sqrt l \quad \forall n \ge n_0.$$</p>
+          <p>En particular, para $n \ge n_0$, usando el conjugado:
+            $$\begin{aligned} |\sqrt{a_n} - \sqrt l| &= |\sqrt{a_n} - \sqrt l| \cdot \frac{|\sqrt{a_n} + \sqrt l|}{|\sqrt{a_n} + \sqrt l|} \\ &= \frac{|a_n - l|}{\sqrt{a_n} + \sqrt l}. \end{aligned}$$</p>
+          <p>Como $a_n \ge 0$, se cumple que $\sqrt{a_n} + \sqrt l \ge \sqrt l \gt 0$, por lo que $\frac{1}{\sqrt{a_n} + \sqrt l} \le \frac{1}{\sqrt l}$. Luego, para todo $n \ge n_0$:
+            $$|\sqrt{a_n} - \sqrt l| \le \frac{|a_n - l|}{\sqrt l} \lt \frac{\varepsilon\sqrt l}{\sqrt l} = \varepsilon.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-prop-c" aria-label="Una sucesión a_n y su raíz, con las bandas de radio épsilon por raíz de l y épsilon"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Caso</legend>
+              <label><input type="radio" name="ejp1-prop-caso" value="pos" checked><i>l</i> &gt; 0</label>
+              <label><input type="radio" name="ejp1-prop-caso" value="cero"><i>l</i> = 0</label>
+            </fieldset>
+            <div class="slider"><label for="ejp1-prop-l"><i>l</i></label><input type="range" id="ejp1-prop-l" min="25" max="400" value="400"><output id="ejp1-prop-l-o"></output></div>
+            <div class="slider"><label for="ejp1-prop-e">ε</label><input type="range" id="ejp1-prop-e" min="15" max="80" value="30"><output id="ejp1-prop-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-prop-read" aria-live="polite"></dl>
+          <figcaption>Sucesiones elegidas para el dibujo: <i>a<sub>n</sub></i> = <i>l</i>(1 + (−1)<sup><i>n</i></sup>/(<i>n</i>+1)) si <i>l</i> &gt; 0 y <i>a<sub>n</sub></i> = 1/<i>n</i> si <i>l</i> = 0. Naranja: <i>a<sub>n</sub></i> con la banda de radio ε√<i>l</i> (o ε² si <i>l</i> = 0). Azul: √<i>a<sub>n</sub></i> con la banda de radio ε. Desde el mismo <i>n</i>₀ (raya vertical) los dos quedan en su banda.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Caso 2: $l = 0$</p>
+          <p>Dado $\varepsilon \gt 0$, como $a_n \to 0$, existe $n_0 \in \mathbb{N}$ tal que
+            $$|a_n| \lt \varepsilon^2 \quad \forall n \ge n_0.$$</p>
+          <p>Como $a_n \ge 0$, la desigualdad es $a_n \lt \varepsilon^2$. Aplicando raíz cuadrada (que es una función estrictamente creciente):
+            $$\sqrt{a_n} \lt \varepsilon \quad (\text{pues } \varepsilon \gt 0),$$
+            es decir, $|\sqrt{a_n} - 0| \lt \varepsilon$ para todo $n \ge n_0$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>En ambos casos, demostramos que <span class="ref" data-ref="def-7">$\forall \varepsilon \gt 0,$ $\exists n_0 \in \mathbb{N} :$ $|\sqrt{a_n} - \sqrt l| \lt \varepsilon,$ $\forall n \ge n_0$</span>.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Prop: Cesàro -->
+  <article class="ej" id="ejp1-prop-2" data-short="Prop" data-title="Límite de las medias de Cesàro: si a_n → 0, entonces S_n → 0" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>Límite de las medias de Cesàro: si $a_n \to 0$, entonces $S_n = \frac1n \sum_{i=1}^n a_i \to 0$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}} \subseteq \mathbb{R}$ tal que $a_n \to 0$. Definimos $S_n$ como
+      $$S_n = \frac{\sum_{i=1}^n a_i}{n}.$$
+      Demostrar que $S_n \to 0$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>La técnica clave es <em>partir la suma en dos tramos</em>:</p>
+      <ul class="items">
+        <li>Los primeros $n_1$ términos se acotan por una suma constante $K = \sum_{i=1}^{n_1} |a_i|$, la cual decae a cero al dividir por $n$ cuando $n$ crece (por arquimedianidad).</li>
+        <li>Los términos restantes ($i \gt n_1$) se acotan por $\varepsilon/2$ usando la convergencia de $a_n \to 0$.</li>
+      </ul>
+      <p>Elegir $n_0 = \max\{n_1, n_2\}$ permite controlar ambas partes simultáneamente por $\varepsilon/2 + \varepsilon/2 = \varepsilon$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La cola: $n_1$</p>
+          <p>Dado $\varepsilon \gt 0$, como $a_n \to 0$, existe $n_1 \in \mathbb{N}$ tal que
+            $$|a_i| \lt \frac\varepsilon2 \quad \forall i \ge n_1.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Partir la suma</p>
+          <p>Para $n \ge n_1$, aplicando <span class="ref" data-ref="ext-desigualdad-triangular">desigualdad triangular</span> y separando la suma en los primeros $n_1$ términos y la cola:
+            $$\begin{aligned} |S_n| &\le \frac{\sum_{i=1}^n |a_i|}{n} \\ &= \frac{\sum_{i=1}^{n_1} |a_i| + \sum_{i=n_1+1}^{n} |a_i|}{n}. \end{aligned}$$</p>
+          <p>Como cada uno de los $n - n_1$ términos del segundo tramo cumple $|a_i| \lt \varepsilon/2$:
+            $$\sum_{i=n_1+1}^{n} |a_i| \lt (n - n_1) \cdot \frac\varepsilon2 \le n \cdot \frac\varepsilon2.$$</p>
+          <p>Luego:
+            $$\begin{aligned} |S_n| &\lt \frac{\sum_{i=1}^{n_1} |a_i|}{n} + \frac{n\varepsilon/2}{n} \\ &= \frac{\sum_{i=1}^{n_1} |a_i|}{n} + \frac\varepsilon2. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El tramo fijo: $K$ y $n_2$</p>
+          <p>Llamemos $K = \sum_{i=1}^{n_1} |a_i| \ge 0$.</p>
+          <ul class="items">
+            <li>Si $K = 0$, la primera fracción es $0 \lt \varepsilon/2$.</li>
+            <li>Si $K \gt 0$, por el <span class="ref" data-ref="prop-1">Principio de Arquímedes</span> existe $n_2 \in \mathbb{N}$ tal que $K/n_2 \lt \varepsilon/2$. Entonces para todo $n \ge n_2$, se cumple $K/n \le K/n_2 \lt \varepsilon/2$.</li>
+          </ul>
+          <p>Tomando $n_0 = \max\{n_1, n_2\}$, resulta que para todo $n \ge n_0$:
+            $$|S_n| \lt \frac\varepsilon2 + \frac\varepsilon2 = \varepsilon.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-prop-2-c" aria-label="La sucesión a_n, sus medias S_n y los índices n1, n2 y n0"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-prop-2-e">ε</label><input type="range" id="ejp1-prop-2-e" min="25" max="120" value="60"><output id="ejp1-prop-2-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-prop-2-read" aria-live="polite"></dl>
+          <figcaption>Sucesión elegida para el dibujo: <i>a<sub>n</sub></i> = 3(−1)<sup><i>n</i></sup>/<i>n</i> (puntos naranjas, con su banda ±ε/2). La línea azul son las medias <i>S<sub>n</sub></i>, con la banda ±ε. Las rayas punteadas marcan <i>n</i>₁ y <i>n</i>₂; la llena, <i>n</i>₀ = máx{<i>n</i>₁, <i>n</i>₂}.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Concluimos que $\forall \varepsilon \gt 0,$ $\exists n_0 \in \mathbb{N} :$ $|S_n| \lt \varepsilon,$ $\forall n \ge n_0$, es decir, $S_n \to 0$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 4 ===================== -->
+<section class="bloque" id="ejp1-b4">
+  <h2><span class="bn">Bloque 4</span>La equivalencia del supremo por sucesiones</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Esta es la <span class="ref" data-ref="prop-equivalencia-del-supremo-2">equivalencia del supremo <em>por sucesiones</em></span> —distinta de la de $\varepsilon$ ($s - \varepsilon \lt a \le s$ para algún $a \in A$), que es la que pide el <a href="../guias/p1.html#guiap1-ej3" class="xg" data-guia="p1" data-ej="3">Ejercicio 3</a> de p1 (para el ínfimo) y que no usa límites en absoluto—. Por eso este bloque va recién acá: citar “existe una sucesión en $A$ que converge a $s$” no tiene sentido antes de saber qué significa que una sucesión converja.</p>
+    <p><em>(Ej. 3 sigue sin ejemplo propio en este archivo: sólo está cubierto por la demostración de la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Equivalencia de Ínfimo</span> en <code>apuntes.typ</code>.)</em></p>
+    <p><strong>La progresión del bloque:</strong> los dos ejemplos exhiben una sucesión <em>ya conocida</em> (no la construyen) y cierran con el lema “$s = \sup(A)$ sii es cota superior y hay una sucesión en $A$ que converge a $s$” —alcanza con la noción de límite, nada de monotonía—. La construcción más fina que pide el <a href="../guias/p1.html#guiap1-ej13" class="xg" data-guia="p1" data-ej="13">Ejercicio 13</a> (fabricar la sucesión por recursión cuando no hay una a mano, y probar su convergencia por monotonía + acotación) queda para el <a href="#ejp1-c1-6">Ejemplo C1-6</a>, al final del Bloque 6, que es donde esas herramientas recién están disponibles.</p>
+  </div>
+
+  <!-- Ejemplo 10 -->
+  <article class="ej" id="ejp1-10" data-short="10" data-title="Supremo de A = {x/(x + 1) : x positivo}" data-topics="supremo,sucesiones">
+    <div class="ej-head">
+      <span class="tag">10</span>
+      <h3>Supremo de $A = \{x/(x + 1) : x \gt 0\}$</h3>
+      <span class="src">Ejemplo 2.20 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $A = \left\{\frac{x}{x + 1} : x \gt 0\right\}$. Veamos que $\sup(A) = 1$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1 es cota superior</p>
+          <p>$$\frac{x}{x + 1} \le 1 \iff x \le x + 1,$$
+            dado que $x \gt 0$ y por lo tanto 1 es <span class="ref" data-ref="def-1">cota superior</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Una sucesión que converge a 1</p>
+          <p>Veamos que existe una sucesión que converge a 1: consideremos $a_n = \frac{n}{n + 1} \in A$ para todo $n \in \mathbb{N}$ y sabemos que $\lim_{n \to \infty} a_n = 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-10-c" aria-label="Gráfico de x/(x+1) para x mayor que 0, la recta y = 1 y los puntos n/(n+1)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-10-N"><i>n</i> ≤ <i>N</i></label><input type="range" id="ejp1-10-N" min="1" max="30" value="6"><output id="ejp1-10-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-10-read" aria-live="polite"></dl>
+          <figcaption>La curva es <i>x</i>/(<i>x</i> + 1) para <i>x</i> &gt; 0: sus alturas forman <i>A</i>. La raya verde es la cota 1. Los puntos son los <i>a<sub>n</sub></i> = <i>n</i>/(<i>n</i> + 1), elementos de <i>A</i> (los de <i>x</i> = <i>n</i>), que se acercan a 1.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Equivalencia del supremo</p>
+          <p>Por la <span class="ref" data-ref="prop-equivalencia-del-supremo-2">equivalencia del supremo</span> nos sale que $1 = \sup(A)$. Podemos observar además que $1 \notin A$, por lo que $A$ no tiene <span class="ref" data-ref="def-3">máximo</span>.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-4 -->
+  <article class="ej" id="ejp1-c1-4" data-short="C1-4" data-title="Supremo e ínfimo de A = {1/n + m : n, m ∈ ℕ}" data-topics="supremo,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-4</span>
+      <h3>Supremo e ínfimo de $A = \{1/n + m : n, m \in \mathbb{N}\}$</h3>
+      <span class="src">Clase 1 · Ejemplo 4</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-supremo">supremo</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Hallar, si existen, supremo e ínfimo de $A = \{1/n + m : n \in \mathbb{N}, m \in \mathbb{N}\}$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>El lema de la clase tiene tres partes, y acá se usan dos: <span class="ref" data-ref="prop-equivalencia-del-supremo-2">$s = \sup(A)$ si y sólo si $s$ es cota superior y existe una sucesión contenida en $A$ que converge a $s$</span>; y si $A$ contiene una sucesión no acotada superiormente, entonces $A$ no está acotado superiormente. Con eso, todo el ejercicio se reduce a <em>exhibir dos sucesiones dentro de $A$</em>: una que se escape y otra que baje hasta el candidato a ínfimo. Fijar uno de los dos parámetros es lo que las produce.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$A$ no está acotado superiormente</p>
+          <p>Tenemos que $A \neq \emptyset$.</p>
+          <p>$a_m = 1 + m$ define una sucesión contenida en $A$ (es el caso $n = 1$), y $\lim_{m \to +\infty} a_m = +\infty$ por <span class="ref" data-ref="teo-1">arquimedianidad</span>. Entonces $A$ no está <span class="ref" data-ref="def-1">acotado superiormente</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-4-c" aria-label="Los elementos de A sobre la recta y una de las dos sucesiones dentro de A"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Sucesión dentro de <i>A</i></legend>
+              <label><input type="radio" name="ejp1-c1-4-s" value="arriba" checked><i>a<sub>m</sub></i> = 1 + <i>m</i></label>
+              <label><input type="radio" name="ejp1-c1-4-s" value="abajo"><i>a<sub>n</sub></i> = 1/<i>n</i> + 1</label>
+            </fieldset>
+            <div class="slider"><label for="ejp1-c1-4-N"><i>n</i>, <i>m</i> ≤ <i>N</i></label><input type="range" id="ejp1-c1-4-N" min="2" max="20" value="6"><output id="ejp1-c1-4-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-4-read" aria-live="polite"></dl>
+          <figcaption>Los puntos chicos son los elementos 1/<i>n</i> + <i>m</i> de <i>A</i> con <i>n</i>, <i>m</i> ≤ <i>N</i>: se amontonan a la derecha de cada entero. En grande, la sucesión elegida: 1 + <i>m</i> (fijando <i>n</i> = 1) se escapa hacia la derecha; 1/<i>n</i> + 1 (fijando <i>m</i> = 1, vista ampliada) baja hasta 1 sin tocarlo.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\inf(A) = 1$</p>
+          <p>$1/n + m \gt 1$ para todo $n, m \in \mathbb{N}$. Como $a_n = 1/n + 1$ está en $A$ y cumple $\lim_{n \to +\infty} a_n = 1$, concluimos que $1$ es el <span class="ref" data-ref="def-5">ínfimo</span> de $A$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 5 ===================== -->
+<section class="bloque" id="ejp1-b5">
+  <h2><span class="bn">Bloque 5</span>Negar la convergencia</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>El <a href="../guias/p1.html#guiap1-ej16" class="xg" data-guia="p1" data-ej="16">Ejercicio 16</a> (a) de p1 (si pares e impares convergen al mismo límite, la sucesión converge) es justamente el enunciado que explica <em>por qué</em> $(-1)^n$ falla: acá los dos límites parciales no coinciden. Practicar la negación —dar vuelta los cuantificadores y elegir el $\varepsilon$ testigo— es lo que después permite reconocer de un vistazo cuándo una sucesión no puede converger.</p>
+  </div>
+
+  <!-- Ejemplo 9 -->
+  <article class="ej" id="ejp1-9" data-short="9" data-title="No convergencia de a_n = (−1)^n" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">9</span>
+      <h3>No convergencia de $a_n = (-1)^n$</h3>
+      <span class="src">Ejemplo 2.5 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>La sucesión $a_n = (-1)^n$ <strong>no converge</strong>.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>¿Cómo probamos esto? <span class="ref" data-ref="def-9-negacion-de-la-convergencia-no">Deberíamos ver</span> que <em>para todo</em> candidato a límite $\ell \in \mathbb{R}$ <em>existe</em> un $\varepsilon \gt 0$ tal que <em>para toda</em> elección de $n_0$ <em>existe</em> un $n \ge n_0$ con $|a_n - \ell| \ge \varepsilon$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Dos opciones para $\ell$</p>
+          <p>En el ejemplo que estábamos mirando: sea $\ell \in \mathbb{R}$. Entonces tenemos dos opciones: $\ell \ge 0$ o $\ell \lt 0$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\ell \ge 0$ con $\varepsilon = 1/2$</p>
+          <p>Supongamos que $\ell \ge 0$, y sea $\varepsilon = 1/2$. Dado $n_0 \in \mathbb{N}$ cualquiera, tenemos que $n_0$ es par o es impar.</p>
+          <ul class="items">
+            <li>Si $n_0$ es par, podemos elegir $n = n_0 + 1$ (impar) y tenemos que:
+              $$\begin{aligned} |(-1)^n - \ell| &= |(-1) - \ell| = \ell - (-1) \\ &= \ell + 1 \ge \tfrac12 \end{aligned}$$
+              pues $\ell \ge 0$ y $n$ es impar.</li>
+            <li>Si $n_0$ es impar, podemos elegir $n = n_0$ (impar) y podemos hacer la misma cuenta.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-9-c" aria-label="La sucesión menos uno a la n, la banda de radio un medio alrededor del candidato ell y el término elegido fuera de la banda"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-9-l">ℓ</label><input type="range" id="ejp1-9-l" min="-200" max="200" value="40"><output id="ejp1-9-l-o"></output></div>
+            <div class="slider"><label for="ejp1-9-n0"><i>n</i>₀</label><input type="range" id="ejp1-9-n0" min="1" max="12" value="4"><output id="ejp1-9-n0-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-9-read" aria-live="polite"></dl>
+          <figcaption>La banda es (ℓ − 1/2, ℓ + 1/2). Para cada <i>n</i>₀, el anillo marca el <i>n</i> ≥ <i>n</i>₀ elegido: con ℓ ≥ 0, el impar del texto (vale −1). Con ℓ &lt; 0 el dibujo hace la “cuenta muy parecida” con el par siguiente (vale 1); esa elección no está escrita en el <code>.typ</code>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\ell \lt 0$</p>
+          <p>Finalmente, nos queda observar que si $\ell \lt 0$ podemos hacer una cuenta muy parecida y llegamos a la misma conclusión.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 6 ===================== -->
+<section class="bloque" id="ejp1-b6">
+  <h2><span class="bn">Bloque 6</span>Monotonía, álgebra de límites y subsucesiones</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Es el bloque que cubre toda la última parte de la guía, y tiene dos mitades.</p>
+    <p><strong>Monotonía (<a href="../guias/p1.html#guiap1-ej12" class="xg" data-guia="p1" data-ej="12">Ejercicio 12</a>).</strong> El <a href="#ejp1-11">Ejemplo 11</a> fija qué cuenta como subsucesión y qué no. El <a href="#ejp1-12">12</a> ($r^n$), <a href="#ejp1-c1-2">C1-2</a> ($x^n$ para todo $x$) y <a href="#ejp1-c2-1">C2-1</a> (una sucesión definida por recursión) son la misma receta con dificultad creciente: probar que es monótona y acotada para saber que el límite <em>existe</em>, y recién entonces <em>cerrar una ecuación sobre él</em> ($\ell = \ell^2$, $L = Lx$, $L^2 = 2 + L$) usando <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span> y <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad</span>. El paso final siempre es descartar la raíz que sobra con una desigualdad que valga para todos los términos.</p>
+    <p><strong>Subsucesiones (<a href="../guias/p1.html#guiap1-ej14" class="xg" data-guia="p1" data-ej="14">Ejercicios 14</a>, <a href="../guias/p1.html#guiap1-ej15" class="xg" data-guia="p1" data-ej="15">15</a> y <a href="../guias/p1.html#guiap1-ej16" class="xg" data-guia="p1" data-ej="16">16</a>).</strong> <a href="#ejp1-c2-2">C2-2</a> es el <a href="../guias/p1.html#guiap1-ej16" class="xg" data-guia="p1" data-ej="16">Ejercicio 16</a> con tres clases de restos en vez de dos, y viene con las dos pruebas posibles: la directa —partir $\mathbb{N}$ y tomar el máximo de los índices, que es la del 16 (a)— y la del absurdo, cuyo <em>lema auxiliar construye recursivamente la subsucesión que se aleja del límite</em>. Ese lema es el paso central del <a href="../guias/p1.html#guiap1-ej15" class="xg" data-guia="p1" data-ej="15">Ejercicio 15</a> y la primera mitad del <a href="../guias/p1.html#guiap1-ej14" class="xg" data-guia="p1" data-ej="14">14</a>. <a href="#ejp1-c2-3">C2-3</a> cierra con un uso combinado: acotada $\rightarrow$ hay subsucesión convergente.</p>
+    <p><strong>Cierre con el <a href="../guias/p1.html#guiap1-ej13" class="xg" data-guia="p1" data-ej="13">Ejercicio 13</a>.</strong> El <a href="#ejp1-c1-6">Ejemplo C1-6</a>, al final del bloque, es la versión espejada de este ejercicio: en vez de construir una sucesión creciente que suba hasta el supremo vía la caracterización $\varepsilon$ (eso ya está resuelto en <code>apuntes.typ</code> y en el Bloque 4), construye por recursión y densidad una sucesión de racionales <em>decreciente</em> hacia un $x \in \mathbb{R}$ cualquiera, y recién identifica el límite invocando el <span class="ref" data-ref="prop-8">Teorema de sucesiones monótonas acotadas</span> y pasaje al límite en la desigualdad de la construcción —las dos herramientas que este bloque acaba de instalar con 12, C1-2 y C2-1—.</p>
+    <p><strong>Series.</strong> Los dos ejemplos <code>Serie</code> del final aplican el bloque a la sucesión de sumas parciales $S_n$: $\sum (-1)^k$ no converge porque $S_n$ tiene dos subsucesiones con límites distintos, y la geométrica se resuelve encontrando una fórmula cerrada para $S_n$ y tomando límite con álgebra de límites.</p>
+  </div>
+
+  <!-- Ejemplo 11 -->
+  <article class="ej" id="ejp1-11" data-short="11" data-title="Qué es y qué no es una subsucesión" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">11</span>
+      <h3>Qué es y qué no es una subsucesión</h3>
+      <span class="src">Ejemplo 2.22 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <p>Sea $(a_n)_{n \in \mathbb{N}} = (1, \tfrac12, \tfrac13, \dots)$. Entonces $(a_{2k})_{k \in \mathbb{N}} = (\tfrac12, \tfrac14, \tfrac16, \tfrac18, \dots)$ es una <span class="ref" data-ref="def-subsucesion">subsucesión</span> (sólo nos quedamos con los términos pares).</p>
+        <p>La sucesión $(b_n)_{n \in \mathbb{N}} = (\tfrac12, \tfrac14, 1, \tfrac15, \tfrac16, \dots)$ <strong>no</strong> es una subsucesión de $(a_n)_{n \in \mathbb{N}}$, dado que no se respeta el orden original de la sucesión.</p>
+        <p>La sucesión $(c_n)_{n \in \mathbb{N}} = (1, 1, \tfrac12, \tfrac13, \dots)$ tampoco es una subsucesión de $(a_n)_{n \in \mathbb{N}}$, dado que se repite el primer término y eso no está permitido.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp1-11-c" aria-label="Los primeros términos de a_n arriba y la sucesión candidata abajo, con flechas desde el índice de origen"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Candidata</legend>
+            <label><input type="radio" name="ejp1-11-s" value="a2k" checked>(<i>a</i><sub>2<i>k</i></sub>)</label>
+            <label><input type="radio" name="ejp1-11-s" value="b">(<i>b<sub>n</sub></i>)</label>
+            <label><input type="radio" name="ejp1-11-s" value="c">(<i>c<sub>n</sub></i>)</label>
+          </fieldset>
+        </div>
+        <dl class="read" id="ejp1-11-read" aria-live="polite"></dl>
+        <figcaption>Arriba, <i>a</i>₁, …, <i>a</i>₈. Abajo, los primeros términos de la candidata, cada uno unido al término de arriba del que sale. Una subsucesión necesita índices <i>n</i>₁ &lt; <i>n</i>₂ &lt; …: las líneas no se cruzan ni comparten origen. En rojo, la línea que rompe la regla.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- Prop: cos -->
+  <article class="ej" id="ejp1-prop-3" data-short="Prop" data-title="No convergencia de a_n = cos(nπ/2) vía subsucesiones" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>No convergencia de $a_n = \cos\left(\frac{n}{2}\pi\right)$ vía subsucesiones</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}}$ dada por $a_n = \cos\left(\frac{n}{2}\pi\right)$. Probar que $(a_n)_{n \in \mathbb{N}}$ <strong>no</strong> converge.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Si una sucesión converge a $\ell \in \mathbb{R}$, entonces <span class="ref" data-ref="prop-convergencia-de-subsucesiones">toda subsucesión suya debe converger al mismo límite $\ell$</span>. Por lo tanto, si se exhiben dos subsucesiones que convergen a límites distintos, la sucesión original no puede converger.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Primeros términos</p>
+          <p>Analicemos los primeros términos de la sucesión:
+            $$\begin{aligned} a_1 &= \cos(\pi/2) = 0, \\ a_2 &= \cos(\pi) = -1, \\ a_3 &= \cos(3\pi/2) = 0, \\ a_4 &= \cos(2\pi) = 1. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Dos subsucesiones</p>
+          <p>Consideremos la <span class="ref" data-ref="def-subsucesion">subsucesión</span> $a_{4k+1}$ con $k \in \mathbb{N}_0$:
+            $$\begin{aligned} a_{4k+1} &= \cos\left(\frac{4k+1}{2}\pi\right) \\ &= \cos\left(2k\pi + \frac\pi2\right) = 0 \quad \forall k \in \mathbb{N}_0. \end{aligned}$$
+            Luego, $a_{4k+1} \to 0$.</p>
+          <p>Por otro lado, consideremos la subsucesión $a_{4k}$ con $k \in \mathbb{N}$:
+            $$a_{4k} = \cos\left(\frac{4k}{2}\pi\right) = \cos(2k\pi) = 1 \quad \forall k \in \mathbb{N}.$$
+            Por lo tanto, $a_{4k} \to 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-prop-3-c" aria-label="Los términos de cos(n pi/2) con las subsucesiones de índices 4k+1 y 4k resaltadas"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-prop-3-N">términos</label><input type="range" id="ejp1-prop-3-N" min="4" max="40" value="16"><output id="ejp1-prop-3-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-prop-3-read" aria-live="polite"></dl>
+          <figcaption>En azul, los términos de índice 4<i>k</i> + 1 (todos valen 0); en naranja, los de índice 4<i>k</i> (todos valen 1). Los demás, en gris. Las dos subsucesiones son constantes, con valores distintos.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Como tenemos dos subsucesiones que convergen a límites distintos ($0 \neq 1$), concluimos que $(a_n)_{n \in \mathbb{N}}$ no converge.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo 12 -->
+  <article class="ej" id="ejp1-12" data-short="12" data-title="Convergencia de a_n = r^n con r ∈ (0,1)" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">12</span>
+      <h3>Convergencia de $a_n = r^n$ con $r \in (0,1)$</h3>
+      <span class="src">Ejemplo 2.24 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $r \in (0, 1)$ y sea $a_n = r^n$. Usemos la <span class="ref" data-ref="prop-convergencia-de-subsucesiones">proposición anterior</span> para probar que $r^n \to 0$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Decreciente y acotada: el límite existe</p>
+          <p>Como $r \lt 1$, multiplicando por $r^n$ ambos términos (que es un número positivo), vemos que $r^{n+1} \lt r^n$ y por lo tanto $(a_n)_{n \in \mathbb{N}}$ es una sucesión decreciente. Además es acotada, por lo que sabemos que <span class="ref" data-ref="prop-8">existe el límite</span> de esta sucesión (además sabemos que este límite debe coincidir con el ínfimo, y esa es otra manera de terminar este ejercicio pero no es lo que vamos a hacer nosotros).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La subsucesión de los pares</p>
+          <p>Llamemos $\ell \in \mathbb{R}$ al límite de $(a_n)_{n \in \mathbb{N}}$ y consideremos la subsucesión $a_{2k} = r^{2k}$ la subsucesión de los términos pares. Por la <span class="ref" data-ref="prop-convergencia-de-subsucesiones">proposición anterior</span>, sabemos que $(a_{2k})_{k \in \mathbb{N}}$ también converge a $\ell$. Observemos que
+            $$a_{2k} = r^{2k} = r^k \cdot r^k \to \ell \cdot \ell = \ell^2,$$
+            por <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span>. Pero entonces, por <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad del límite</span>, tenemos que $\ell = \ell^2$ y por lo tanto $\ell = 0$ o $\ell = 1$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Descartar $\ell = 1$</p>
+          <p>Finalmente, observamos que $\ell$ no puede ser 1, porque el primer término de la sucesión es $r$ y después la sucesión es decreciente: esto nos dice que $|a_n - 1| \ge 1 - r$ para todo $n \in \mathbb{N}$. Concluimos que $\ell = 0$, como queríamos ver.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-12-c" aria-label="Los términos r a la n, los pares resaltados y la franja de ancho 1 menos r debajo del 1 que ningún término toca"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-12-r"><i>r</i></label><input type="range" id="ejp1-12-r" min="5" max="95" value="80"><output id="ejp1-12-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-12-read" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>r</i><sup><i>n</i></sup>; los anillos naranjas, la subsucesión de los pares <i>r</i><sup>2<i>k</i></sup>. La franja roja va de <i>r</i> a 1: ningún término entra, así que todos quedan a distancia al menos 1 − <i>r</i> del 1.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-2 -->
+  <article class="ej" id="ejp1-c1-2" data-short="C1-2" data-title="Para qué x ∈ ℝ converge (x^n)" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C1-2</span>
+      <h3>Para qué $x \in \mathbb{R}$ converge $(x^n)_{n \in \mathbb{N}}$</h3>
+      <span class="src">Clase 1 · Ejemplo 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Determinar todos los $x \in \mathbb{R}$ para los cuales $(x^n)_{n \in \mathbb{N}}$ converge.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Es el <a href="#ejp1-12">Ejemplo 12</a> llevado a todos los casos. Dos herramientas nuevas: el paso al valor absoluto (lema de abajo), que permite reducir $x \lt 0$ al caso ya hecho, y el argumento del caso $x \gt 1$, donde la contradicción sale de que <em>una sucesión creciente convergente converge al supremo de sus términos</em>, así que el límite no puede quedar por debajo de todos ellos.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso $0 \le x \le 1$</p>
+          <p>Separamos en casos. Acá $a_n = x^n$ es decreciente:
+            $$a_{n+1} \le a_n \iff x^{n+1} \le x^n.$$
+            Pero
+            $$x^{n+1} - x^n = x^n(x - 1) \le 0$$
+            es verdadero porque $x^n \ge 0$ y $x - 1 \le 0$. Además $x^n$ es acotada:
+            $$0 \le x^n \le 1^n = 1.$$</p>
+          <p>Por el <span class="ref" data-ref="prop-8">teorema de monótonas acotadas</span>, $(a_n)_{n \in \mathbb{N}}$ converge. Para calcular el límite usamos que
+            $$x^{n+1} = x^n \cdot x. \quad (*)$$</p>
+          <p>Sea $L = \lim_{n \to +\infty} x^n$; entonces también $L = \lim_{n \to +\infty} x^{n+1}$, y <span class="ref" data-ref="prop-6-algebra-de-limites">por lo tanto</span>
+            $$L = \lim_{n \to +\infty} x^{n+1} = \lim_{n \to +\infty} x^n \cdot x = Lx.$$</p>
+          <p>De $L = Lx$ se sigue $L(1 - x) = 0$: tenemos dos opciones, $L = 0$ o $x = 1$. Si $x = 1$, entonces $a_n = 1^n \to 1$. En cualquier caso, el límite existe.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-2-c" aria-label="Los primeros términos de x a la n para el x elegido"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-2-x"><i>x</i></label><input type="range" id="ejp1-c1-2-x" min="-150" max="150" value="80"><output id="ejp1-c1-2-x-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-2-read" aria-live="polite"></dl>
+          <figcaption>Los primeros 25 términos de <i>x</i><sup><i>n</i></sup>. Los que se salen de la ventana se marcan con un triángulo en el borde. Mové <i>x</i> para recorrer los casos del ejemplo; la lectura dice cuál es y qué concluye el resumen.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Caso $|x| \lt 1$</p>
+          <p>Para esto usamos el siguiente lema:</p>
+          <ol class="items" style="list-style:decimal">
+            <li>$(a_n)_n \to 0$ si $(|a_n|)_n \to 0$;</li>
+            <li>si $(a_n)_n \to L$ entonces $(|a_n|)_n \to |L|$.</li>
+          </ol>
+          <p>Entonces, si $a_n = x^n$, se tiene $|a_n| = |x|^n$ con $|x| \lt 1$. Por el caso anterior, $|a_n| \to 0$, y en consecuencia $a_n \to 0$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Caso $x \gt 1$</p>
+          <p>Acá $a_n = x^n$ es creciente:
+            $$a_{n+1} \ge a_n \iff x^{n+1} \ge x^n,$$
+            y $x^{n+1} - x^n = x^n(x-1) \ge 0$ ya que $x^n \ge 0$ y $x - 1 \gt 0$. Si $(a_n)$ convergiera, repitiendo el argumento de tomar límite en $(*)$ nos daría que $x = 1$ o $L = 0$. Como $x \gt 1$, debe ser $L = 0$. Pero <span class="ref" data-ref="prop-8">una sucesión <em>creciente</em> y convergente converge al supremo del conjunto de sus términos</span>, por lo tanto $a_n = x^n \le L = 0$ para todo $n \in \mathbb{N}$, lo cual es absurdo (pues $x^n \gt 1 \gt 0$). Concluimos que no converge.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Casos $x = -1$ y $x \lt -1$</p>
+          <p><strong>Caso $x = -1$:</strong> queda como ejercicio (es el <a href="#ejp1-9">Ejemplo 9</a>).</p>
+          <p><strong>Caso $x \lt -1$:</strong> si $a_n = x^n$ fuera convergente, entonces $|a_n| = |x|^n$ sería convergente, pero $|x| \gt 1$ y por el caso anterior no lo es.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Resumen</p>
+          <p>$$(x^n)_{n \in \mathbb{N}} \text{ es } \begin{cases} \text{convergente a } 0 & \text{cuando } |x| \lt 1, \\ \text{convergente a } 1 & \text{cuando } x = 1, \\ \text{divergente} & \text{cuando } |x| \gt 1. \end{cases}$$</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C2-1 -->
+  <article class="ej" id="ejp1-c2-1" data-short="C2-1" data-title="Sucesión definida por recursión: a_(n+1) = √(2 + a_n)" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C2-1</span>
+      <h3>Sucesión definida por recursión: $a_{n+1} = \sqrt{2 + a_n}$</h3>
+      <span class="src">Clase 2 · Ejemplo 1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}}$ la sucesión definida recursivamente como
+      $$\begin{cases} a_1 = \sqrt2, \\ a_{n+1} = \sqrt{2 + a_n} \ \text{ para todo } n \ge 1 \end{cases}$$
+      Probar que $(a_n)_n$ es <span class="ref" data-ref="def-10">monótona</span> y acotada superiormente por $2$. Determinar su límite.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Conviene hacer <em>primero la cuenta del límite</em> aunque todavía no sepamos que existe: sale una ecuación con dos raíces, y eso deja claros los dos problemas a resolver —(I) por qué converge y (II) cómo se descarta la raíz de más—. Como la sucesión está definida por recursión, tanto la monotonía como la cota se prueban por inducción, apoyándose en que $\sqrt{\cdot}$ es creciente.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Notemos que si supiéramos que $(a_n)_n$ converge a $L$, como $a_{n+1}^2 = 2 + a_n$, resultaría
+      $$L^2 = \lim_{n \to +\infty} a_{n+1}^2 = \lim_{n \to +\infty} (2 + a_n) = 2 + L,$$
+      es decir
+      $$L^2 - L - 2 = 0 \iff L = 2 \ \text{ o } \ L = -1.$$</p>
+      <p>Entonces $L = 2$ o $L = -1$. Problemas:<br>(I) ¿Cómo vemos que $(a_n)_n$ converge?<br>(II) ¿Cómo distinguimos entre los dos candidatos a límite?</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(I) Creciente</p>
+          <p><strong>(I)</strong> Veamos que $(a_n)_n$ es creciente y acotada superiormente. Por lo tanto será <span class="ref" data-ref="prop-8">convergente</span>.</p>
+          <p><em>Creciente</em> (por inducción). Caso base: $n = 1$, $a_1 = \sqrt2 \le \sqrt{2 + a_1} = \sqrt{2 + \sqrt2}$ es verdadero, porque $\sqrt{\cdot}$ es creciente y $2 \lt 2 + \sqrt2$.<br>
+            Caso inductivo: si $a_k \le a_{k+1}$ entonces $2 + a_k \le 2 + a_{k+1}$ y $a_{k+1} = \sqrt{2 + a_k} \le \sqrt{2 + a_{k+1}}$, o sea $a_{k+1} \le a_{k+2}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c2-1-c" aria-label="Diagrama de telaraña de la recursión con la curva raíz de 2 más x y la diagonal, o los términos de la sucesión"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Vista</legend>
+              <label><input type="radio" name="ejp1-c2-1-v" value="tela" checked>telaraña</label>
+              <label><input type="radio" name="ejp1-c2-1-v" value="terminos">términos</label>
+            </fieldset>
+            <div class="slider"><label for="ejp1-c2-1-k">pasos</label><input type="range" id="ejp1-c2-1-k" min="1" max="8" value="4"><output id="ejp1-c2-1-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c2-1-read" aria-live="polite"></dl>
+          <figcaption>Telaraña: la curva es <i>y</i> = √(2 + <i>x</i>) y la recta <i>y</i> = <i>x</i>; cada escalón lleva <i>a<sub>n</sub></i> a <i>a</i><sub><i>n</i>+1</sub>. Los escalones suben y se quedan debajo de la cota 2 (raya verde). En el eje, el −1 es la otra raíz de <i>L</i>² − <i>L</i> − 2. Términos: los <i>a<sub>n</sub></i> contra <i>n</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(I) Acotada superiormente por 2</p>
+          <p><em>Acotada superiormente</em>: veamos que $a_n \le 2$ para todo $n$, por inducción. Caso base: $a_1 = \sqrt2 \le 2$.<br>
+            Caso inductivo: si $a_k \le 2$ entonces
+            $$a_{k+1} = \sqrt{2 + a_k} \le \sqrt{2 + 2} = 2,$$
+            usando que $\sqrt{\cdot}$ es creciente y que $2 + a_k \le 4$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(II) Descartar $L = -1$</p>
+          <p><strong>(II)</strong> $(a_n)_n$ es creciente y $a_1 \gt 0$. Entonces $a_n \gt 0$ para todo $n \in \mathbb{N}$, y por lo tanto $L = \lim_{n \to +\infty} a_n \ge 0$. Concluimos que $L = 2$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C2-2 -->
+  <article class="ej" id="ejp1-c2-2" data-short="C2-2" data-title="Tres clases de restos: si (a_3k), (a_3k+1), (a_3k+2) convergen al mismo límite" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C2-2</span>
+      <h3>Tres clases de restos: si $(a_{3k}), (a_{3k+1}), (a_{3k+2})$ convergen al mismo límite</h3>
+      <span class="src">Clase 2 · Ejemplo 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_n$ una sucesión tal que $(a_{3k})_k$, $(a_{3k+1})_k$ y $(a_{3k+2})_k$ convergen a un mismo número. Probar que $(a_n)_n$ es convergente.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Las dos pruebas valen la pena y son las dos técnicas del <a href="../guias/p1.html#guiap1-ej16" class="xg" data-guia="p1" data-ej="16">Ejercicio 16</a>. La primera es directa: como las tres familias de índices <em>parten</em> $\mathbb{N}$, todo $n$ cae en alguna, y basta pedir que $n$ supere a los tres umbrales a la vez —por eso aparece el máximo—. La segunda es por absurdo y es la que hay que tener a mano para el <a href="../guias/p1.html#guiap1-ej15" class="xg" data-guia="p1" data-ej="15">Ejercicio 15</a>: de la negación de la convergencia se <em>extrae</em> una subsucesión que se queda lejos del límite, y después el principio del palomar (infinitos índices en tres cajas) obliga a que una de las tres familias contenga infinitos de ellos, contradiciendo su convergencia.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que probar</p>
+          <p>Supongamos que $(a_{3k})_k$, $(a_{3k+1})_k$ y $(a_{3k+2})_k$ convergen a $L$. Probemos que <span class="ref" data-ref="def-7">para todo $\varepsilon \gt 0$ existe $n_0$ tal que para todo $n \ge n_0$, $|a_n - L| \lt \varepsilon$</span>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(I) Prueba directa: tres umbrales</p>
+          <p><strong>(I) Prueba directa.</strong> Dado $\varepsilon \gt 0$,</p>
+          <ul class="items">
+            <li>existe $k_0 \in \mathbb{N}$ tal que para todo $k \ge k_0$, $|a_{3k} - L| \lt \varepsilon$,</li>
+            <li>existe $k_1 \in \mathbb{N}$ tal que para todo $k \ge k_1$, $|a_{3k+1} - L| \lt \varepsilon$,</li>
+            <li>existe $k_2 \in \mathbb{N}$ tal que para todo $k \ge k_2$, $|a_{3k+2} - L| \lt \varepsilon$.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(I) Partir $\mathbb{N}$ y tomar el máximo</p>
+          <p>Puesto que $\mathbb{N} = \{3k : k \in \mathbb{N}\}$ $\sqcup \{3k+1 : k \in \mathbb{N}_0\}$ $\sqcup \{3k+2 : k \in \mathbb{N}_0\}$,</p>
+          <ul class="items">
+            <li>si $n = 3k$, queremos $k \ge k_0$: entonces $n \ge 3k_0$ hace que $k \ge k_0$;</li>
+            <li>si $n = 3k+1$, queremos $k \ge k_1$: entonces $n \ge 3k_1 + 1$ hace que $k \ge k_1$;</li>
+            <li>si $n = 3k+2$, queremos $k \ge k_2$: entonces $n \ge 3k_2 + 2$ hace que $k \ge k_2$.</li>
+          </ul>
+          <p>Tomando $n_0 \ge \max\{3k_0, 3k_1+1, 3k_2+2\}$ vemos que para todo $n \ge n_0$, $|a_n - L| \lt \varepsilon$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c2-2-c" aria-label="Una sucesión con tres clases de restos en tres colores, la banda épsilon y los tres umbrales con su máximo"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c2-2-e">ε</label><input type="range" id="ejp1-c2-2-e" min="6" max="60" value="25"><output id="ejp1-c2-2-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c2-2-read" aria-live="polite"></dl>
+          <figcaption>Sucesión elegida para el dibujo, con <i>L</i> = 0: <i>a</i><sub>3<i>k</i></sub> = 1,2(−1)<sup><i>k</i></sup>/<i>k</i> (azul), <i>a</i><sub>3<i>k</i>+1</sub> = 2/(<i>k</i>+1) (naranja), <i>a</i><sub>3<i>k</i>+2</sub> = −0,8/(<i>k</i>+1) (verde). Las rayas punteadas, en el color de cada familia, son 3<i>k</i>₀, 3<i>k</i>₁ + 1 y 3<i>k</i>₂ + 2; la llena es su máximo <i>n</i>₀.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(II) Por el absurdo: la subsucesión mala</p>
+          <p><strong>(II) Por el absurdo.</strong> Supongamos que no. Entonces existe $\varepsilon \gt 0$ y una <span class="ref" data-ref="def-subsucesion">subsucesión</span> $(a_{n_k})_k$ tal que
+            $$|a_{n_k} - L| \ge \varepsilon.$$</p>
+          <div class="nota"><b>Lema auxiliar: construcción de la subsucesión mala</b>
+            <p><span class="ref" data-ref="def-9-negacion-de-la-convergencia-no">Si $(a_n)_n$ no converge a $L$</span>, entonces existe $\varepsilon \gt 0$ tal que para todo $n \in \mathbb{N}$ existe $n_0 \ge n$ tal que $|a_{n_0} - L| \ge \varepsilon$.</p>
+            <ul class="items">
+              <li>Si $n = 1$, existe $n_1 \ge 1$ tal que $|a_{n_1} - L| \ge \varepsilon$.</li>
+              <li>Si $n = n_1 + 1$, existe $n_2 \ge n_1 + 1$ tal que $|a_{n_2} - L| \ge \varepsilon$.</li>
+              <li>Recursivamente, habiendo elegido $n_1 \lt n_2 \lt \dots \lt n_k$ tales que $|a_{n_k} - L| \ge \varepsilon$, poniendo $n = n_k + 1$ vemos que existe $n_{k+1} \ge n_k + 1$ tal que $|a_{n_{k+1}} - L| \ge \varepsilon$.<br>Por construcción, $(a_{n_k})_k$ cumple lo pedido.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(II) Palomar: una familia tiene infinitos</p>
+          <p>Como $\mathbb{N} = \{3k : k \in \mathbb{N}\}$ $\sqcup \{3k+1 : k \in \mathbb{N}_0\}$ $\sqcup \{3k+2 : k \in \mathbb{N}_0\}$, en alguno de los tres conjuntos hay infinitos $n_k$. Por lo tanto existe una subsucesión $(a_{n_{k_j}})_j$ tal que $n_{k_j} \in \{3k + a : k \in \mathbb{N}\}$ para algún $a \in \{0, 1, 2\}$. Pero entonces <span class="ref" data-ref="prop-convergencia-de-subsucesiones">$a_{n_{k_j}} \to L$</span>, así que existe $j_0 \in \mathbb{N}$ tal que para todo $j \gt j_0$,
+            $$|a_{n_{k_j}} - L| \lt \varepsilon.$$</p>
+          <p>Pero por la hipótesis del absurdo, $\varepsilon \le |a_{n_{k_j}} - L| \lt \varepsilon$, absurdo.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 214" role="img" aria-label="Los índices de una subsucesión repartidos en tres cajas según su resto módulo 3; una caja recibe infinitos">
+            <text x="10" y="20" class="sv-muted">índices n₁ &lt; n₂ &lt; n₃ &lt; … de la subsucesión</text>
+            <text x="10" y="44" class="sv-text">2, 4, 5, 8, 10, 11, 14, 17, 20, 23, …</text>
+            <rect x="10" y="74" width="104" height="104" rx="8" class="sv-accent"/>
+            <text x="62" y="96" text-anchor="middle" class="sv-label-accent">n = 3k</text>
+            <text x="62" y="134" text-anchor="middle" class="sv-muted">(ninguno)</text>
+            <rect x="128" y="74" width="104" height="104" rx="8" class="sv-seq2"/>
+            <text x="180" y="96" text-anchor="middle" class="sv-label-seq2">n = 3k + 1</text>
+            <text x="180" y="126" text-anchor="middle" class="sv-text">4, 10</text>
+            <rect x="246" y="74" width="104" height="104" rx="8" class="sv-seq3"/>
+            <text x="298" y="96" text-anchor="middle" class="sv-label-seq3">n = 3k + 2</text>
+            <text x="298" y="122" text-anchor="middle" class="sv-text">2, 5, 8,</text>
+            <text x="298" y="142" text-anchor="middle" class="sv-text">11, 14, 17,</text>
+            <text x="298" y="162" text-anchor="middle" class="sv-text">20, 23, …</text>
+            <text x="180" y="204" text-anchor="middle" class="sv-muted">infinitos índices en tres cajas: alguna recibe infinitos</text>
+          </svg>
+          <figcaption>Índices inventados para el dibujo. Repartidos según el resto de dividir por 3, alguna caja (acá la verde) se queda con infinitos: ésa es la subsucesión (<i>a</i><sub><i>n</i><sub><i>k<sub>j</sub></i></sub></sub>) que vive dentro de una de las tres familias convergentes.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Prop: producto -->
+  <article class="ej" id="ejp1-prop-4" data-short="Prop" data-title="Producto de acotadas con subsucesiones nulas: c_n = a_n b_n → 0" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">Prop</span>
+      <h3>Producto de acotadas con subsucesiones nulas: $c_n = a_n b_n \to 0$</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sean $(a_n)_{n \in \mathbb{N}}$ y $(b_n)_{n \in \mathbb{N}}$ sucesiones <span class="ref" data-ref="def-9-sucesion-acotada">acotadas</span> de números reales tales que $a_{2k} \to 0$ y $b_{2k-1} \to 0$. Sea $c_n = a_n b_n$. Demostrar que $c_n \to 0$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Queremos ver que para todo $\varepsilon \gt 0$ existe $n_0 \in \mathbb{N}$ tal que $|c_n| \lt \varepsilon$ para todo $n \ge n_0$.</p>
+      <p>Como $|c_n| = |a_n||b_n|$, usamos que ambas sucesiones están acotadas ($|a_n| \le M_1$ y $|b_n| \le M_2$) y separamos según la paridad de $n$:</p>
+      <ul class="items">
+        <li>En los términos pares ($n = 2k$), $a_{2k} \to 0$ compensa la cota de $b_{2k}$.</li>
+        <li>En los términos impares ($n = 2k-1$), $b_{2k-1} \to 0$ compensa la cota de $a_{2k-1}$.</li>
+      </ul>
+      <p>Tomando $n_0 = \max\{2k_1, 2k_2 - 1\}$, garantizamos que cualquier $n \ge n_0$ cumpla la cota correspondiente según sea par o impar.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Las cotas $M_1$ y $M_2$</p>
+          <p>Como $(a_n)_{n \in \mathbb{N}}$ está acotada, existe $M_1 \gt 0$ tal que $|a_n| \le M_1$ para todo $n \in \mathbb{N}$.<br>
+            Como $(b_n)_{n \in \mathbb{N}}$ está acotada, existe $M_2 \gt 0$ tal que $|b_n| \le M_2$ para todo $n \in \mathbb{N}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Los umbrales $k_1$, $k_2$ y $n_0$</p>
+          <p>Dado $\varepsilon \gt 0$:</p>
+          <ul class="items">
+            <li>Como $a_{2k} \to 0$, existe $k_1 \in \mathbb{N}$ tal que $|a_{2k}| \lt \varepsilon/M_2$ para todo $k \ge k_1$.</li>
+            <li>Como $b_{2k-1} \to 0$, existe $k_2 \in \mathbb{N}$ tal que $|b_{2k-1}| \lt \varepsilon/M_1$ para todo $k \ge k_2$.</li>
+          </ul>
+          <p>Definimos $n_0 = \max\{2k_1, 2k_2 - 1\}$ y tomemos $n \ge n_0$. Analizamos según la paridad de $n$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-prop-4-c" aria-label="Las sucesiones a_n y b_n, o el producto c_n con la banda épsilon y el n0"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Mostrar</legend>
+              <label><input type="radio" name="ejp1-prop-4-v" value="ab" checked><i>a<sub>n</sub></i> y <i>b<sub>n</sub></i></label>
+              <label><input type="radio" name="ejp1-prop-4-v" value="c"><i>c<sub>n</sub></i> = <i>a<sub>n</sub></i><i>b<sub>n</sub></i></label>
+            </fieldset>
+            <div class="slider"><label for="ejp1-prop-4-e">ε</label><input type="range" id="ejp1-prop-4-e" min="15" max="100" value="40"><output id="ejp1-prop-4-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-prop-4-read" aria-live="polite"></dl>
+          <figcaption>Sucesiones elegidas para el dibujo: <i>a<sub>n</sub></i> = 1,5 si <i>n</i> es impar y 3/<i>n</i> si es par; <i>b<sub>n</sub></i> = 4/(<i>n</i>+1) si <i>n</i> es impar y −1,2 si es par (así <i>M</i>₁ = 1,5 y <i>M</i>₂ = 2). En la vista de <i>c<sub>n</sub></i>, la banda es (−ε, ε) y la raya vertical, <i>n</i>₀ = máx{2<i>k</i>₁, 2<i>k</i>₂ − 1}.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$n$ par</p>
+          <p><strong>Si $n$ es par:</strong> existe $k \in \mathbb{N}$ tal que $n = 2k$. Por lo tanto,
+            $$2k = n \ge n_0 \ge 2k_1 \iff k \ge k_1.$$
+            Luego,
+            $$\begin{aligned} |c_n| &= |a_n||b_n| = |a_{2k}||b_{2k}| \\ &\lt \frac{\varepsilon}{M_2} \cdot M_2 = \varepsilon. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$n$ impar</p>
+          <p><strong>Si $n$ es impar:</strong> existe $k \in \mathbb{N}$ tal que $n = 2k - 1$. Por lo tanto,
+            $$2k - 1 = n \ge n_0 \ge 2k_2 - 1 \iff k \ge k_2.$$
+            Luego,
+            $$\begin{aligned} |c_n| &= |a_n||b_n| = |a_{2k-1}||b_{2k-1}| \\ &\le M_1 \cdot |b_{2k-1}| \lt M_1 \cdot \frac{\varepsilon}{M_1} = \varepsilon. \end{aligned}$$</p>
+          <p>Concluimos que para todo $n \ge n_0$ se cumple $|c_n| \lt \varepsilon$, y por lo tanto $c_n \to 0$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C2-3 -->
+  <article class="ej" id="ejp1-c2-3" data-short="C2-3" data-title="Si a_n/b_n tiende a un irracional, ninguna está acotada" data-topics="sucesiones">
+    <div class="ej-head">
+      <span class="tag">C2-3</span>
+      <h3>Si $a_n / b_n$ tiende a un irracional, ninguna está acotada</h3>
+      <span class="src">Clase 2 · Ejemplo 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $r \notin \mathbb{Q}$. Supongamos que $(a_n)_n, (b_n)_n \subseteq \mathbb{N}$ cumplen que $\lim_{n \to +\infty} a_n / b_n = r$. Probar que $(a_n)_n$ y $(b_n)_n$ no están <span class="ref" data-ref="def-9-sucesion-acotada">acotadas</span>.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>Encadena tres cosas del bloque: si estuviera acotada tendría una subsucesión convergente (<span class="ref" data-ref="ext-bolzano-weierstrass">Bolzano–Weierstrass</span>, que todavía no está en <code>apuntes.typ</code>), esa subsucesión es de naturales y entonces es finalmente constante (<a href="#ejp1-c1-3">Ejemplo C1-3</a>), y una constante sobre otra constante da un racional —que es la contradicción—. Es el argumento típico de “acotada $\rightarrow$ subsucesión convergente” que también aparece en el <a href="../guias/p1.html#guiap1-ej14" class="xg" data-guia="p1" data-ej="14">Ejercicio 14</a>, ahí en su forma negativa.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Si $(a_n)$ fuera acotada</p>
+          <p>Supongamos que $(a_n)_n$ está acotada. Por lo tanto <span class="ref" data-ref="ext-bolzano-weierstrass">existe $(a_{n_k})_k$ convergente</span>. Como $(a_{n_k})_k \subseteq \mathbb{N}$, resulta que <a href="#ejp1-c1-3">es eventualmente constante</a>, es decir existe $a \in \mathbb{N}$ y $k_0 \in \mathbb{N}$ tal que
+            $$a_{n_k} = a \ \text{ para todo } k \gt k_0.$$</p>
+          <p>Entonces
+            $$\frac{a_{n_k}}{b_{n_k}} = \frac{a}{b_{n_k}} \ \text{ para todo } k \gt k_0.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c2-3-c" aria-label="Fracciones de naturales que se acercan a raíz de 2, con numeradores y denominadores que crecen"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Vista</legend>
+              <label><input type="radio" name="ejp1-c2-3-v" value="cociente" checked><i>a<sub>n</sub></i>/<i>b<sub>n</sub></i></label>
+              <label><input type="radio" name="ejp1-c2-3-v" value="terminos"><i>a<sub>n</sub></i> y <i>b<sub>n</sub></i></label>
+            </fieldset>
+            <div class="slider"><label for="ejp1-c2-3-N"><i>n</i> ≤ <i>N</i></label><input type="range" id="ejp1-c2-3-N" min="2" max="10" value="6"><output id="ejp1-c2-3-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c2-3-read" aria-live="polite"></dl>
+          <figcaption>Un caso elegido para el dibujo, con <i>r</i> = √2: <i>a<sub>n</sub></i>/<i>b<sub>n</sub></i> = 1/1, 3/2, 7/5, 17/12, 41/29, … En la vista de términos, la escala vertical es logarítmica: numeradores y denominadores crecen sin cota, como dice el ejemplo.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El cociente invertido</p>
+          <p>Como $r \notin \mathbb{Q}$ y $a \neq 0$ (pues $a \in \mathbb{N}$), resulta que $\left(\frac{a}{b_{n_k}}\right)^{-1} = \frac{b_{n_k}}{a}$ converge a $1/r$. Como $(b_{n_k})_k \subseteq \mathbb{N}$ es eventualmente constante, entonces existe $b \in \mathbb{N}$ y $k_1 \in \mathbb{N}$ tal que
+            $$b_{n_k} = b \ \text{ para todo } k \gt k_1.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Absurdo</p>
+          <p>Pero entonces $b/a = 1/r \in \mathbb{Q}$, absurdo. Concluimos que $(a_n)_n$ no está acotada.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Lo mismo para $(b_n)$</p>
+          <p>Para ver que $(b_n)_n$ no es acotada, usamos que $1/r \notin \mathbb{Q}$ y que $b_n / a_n$ converge a $1/r$, por lo tanto el mismo argumento aplicado a $(b_n)_n$ permite deducir que no está acotada.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Ejemplo C1-6 -->
+  <article class="ej" id="ejp1-c1-6" data-short="C1-6" data-title="Racionales estrictamente decrecientes hacia x" data-topics="sucesiones,densidad">
+    <div class="ej-head">
+      <span class="tag">C1-6</span>
+      <h3>Racionales estrictamente decrecientes hacia $x$</h3>
+      <span class="src">Clase 1 · Ejemplo 6</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a><a class="tag topic" href="../index.html#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun"><p>Probar que para todo $x \in \mathbb{R}$ existe $(q_n)_{n \in \mathbb{N}} \subseteq \mathbb{Q}$ estrictamente decreciente tal que $\lim_{n \to +\infty} q_n = x$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p>No hay una fórmula para $q_n$: hay que <em>construirla</em>. El truco es que cada término nuevo se elige por densidad dentro del intervalo $(x, (x+q_n)/2)$ —el punto medio garantiza a la vez que se mantenga por encima de $x$ y que baje estrictamente—. Después, la convergencia sale de monotonía + acotación, y el valor del límite se identifica pasando al límite en la propia desigualdad de la construcción.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$q_1$ y $q_2$</p>
+          <p>Por <span class="ref" data-ref="teo-1">arquimedianidad</span> existe $m \in \mathbb{N}$ tal que $x \lt m$. Tomamos $q_1 = m$.</p>
+          <p>Por la <span class="ref" data-ref="prop-2">densidad de $\mathbb{Q}$ en $\mathbb{R}$</span> podemos elegir $q_2$ entre $x$ y $(x+q_1)/2$, es decir $x \lt q_2 \lt (x+q_1)/2$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 96" role="img" aria-label="Recta con las marcas x, q2, el punto medio entre x y q1, y q1">
+            <line x1="10" y1="40" x2="350" y2="40" class="sv-ink" style="stroke-width:1.5"/>
+            <line x1="78" y1="34" x2="78" y2="46" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="78" y="68" text-anchor="middle" class="sv-text">x</text>
+            <line x1="146" y1="34" x2="146" y2="46" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="146" y="68" text-anchor="middle" class="sv-text">q₂</text>
+            <line x1="214" y1="34" x2="214" y2="46" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="214" y="68" text-anchor="middle" class="sv-text">(x + q₁)/2</text>
+            <line x1="282" y1="34" x2="282" y2="46" class="sv-ink" style="stroke-width:1.5"/>
+            <text x="282" y="68" text-anchor="middle" class="sv-text">q₁</text>
+          </svg>
+          <figcaption>El dibujo del <code>.typ</code>: <i>q</i>₂ se elige entre <i>x</i> y el punto medio de <i>x</i> y <i>q</i>₁.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El paso recursivo</p>
+          <p>En general, si definimos $q_1, q_2, \dots, q_n$ racionales con $q_1 \gt q_2 \gt \dots \gt q_n$, elegimos $q_{n+1} \in \mathbb{Q}$ con $x \lt q_{n+1} \lt (x+q_n)/2$, que existe por densidad de $\mathbb{Q}$. Afirmamos que $q_{n+1} \lt q_n$ para todo $n$ y que $q_n \to x$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-c1-6-c" aria-label="Los racionales q_n bajando hacia x, cada uno elegido entre x y el punto medio anterior"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-c1-6-x"><i>x</i></label><input type="range" id="ejp1-c1-6-x" min="-20" max="30" value="7"><output id="ejp1-c1-6-x-o"></output></div>
+            <div class="slider"><label for="ejp1-c1-6-k">términos</label><input type="range" id="ejp1-c1-6-k" min="2" max="8" value="5"><output id="ejp1-c1-6-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-c1-6-read" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>q<sub>n</sub></i> contra <i>n</i>; la raya verde es <i>x</i>. La barra gris sobre cada <i>n</i> + 1 es el intervalo (<i>x</i>, (<i>x</i> + <i>q<sub>n</sub></i>)/2) donde se elige <i>q</i><sub><i>n</i>+1</sub>. La regla de elección es del dibujo (el racional de denominador potencia de 2 más chico, el mayor de ellos): la demostración sólo pide que exista uno.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(1) $q_{n+1} \lt q_n$ para todo $n \in \mathbb{N}$</p>
+          <p>Por inducción. Caso base: $n = 1$,
+            $$q_2 \lt \frac{x+q_1}{2} \ \text{ y } \ \frac{x+q_1}{2} \lt q_1,$$
+            porque
+            $$\frac{x+q_1}{2} \lt q_1 \iff x + q_1 \lt 2q_1 \iff x \lt q_1.$$</p>
+          <p>Caso inductivo:
+            $$q_{k+1} \lt \frac{x+q_k}{2} \ \text{ y } \ \frac{x+q_k}{2} \lt q_k,$$
+            porque
+            $$\frac{x+q_k}{2} \lt q_k \iff x + q_k \lt 2q_k \iff x \lt q_k.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(2) $\lim_{n \to +\infty} q_n = x$</p>
+          <p>Como $(q_n)_n$ es decreciente y acotada inferiormente por $x$, es <span class="ref" data-ref="prop-8">convergente</span> a algún $q \in \mathbb{R}$.</p>
+          <ul class="items">
+            <li>$x \lt q_n$ para todo $n$, entonces $x \le q$.</li>
+            <li>$q_{n+1} \lt (x+q_n)/2$. Tomando límite, $q \le (x+q)/2 \iff q \le x$.</li>
+          </ul>
+          <p>Entonces $q = x$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Serie (-1)^n -->
+  <article class="ej" id="ejp1-serie" data-short="Serie" data-title="La serie de a_n = (−1)^n no converge" data-topics="series">
+    <div class="ej-head">
+      <span class="tag">Serie</span>
+      <h3>La serie de $a_n = (-1)^n$ no converge</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-series">series</a></span>
+    </div>
+    <div class="enun"><p>Sea $(a_n)_{n \in \mathbb{N}}$ dada por $a_n = (-1)^n$. ¿<span class="ref" data-ref="def-limite-y-convergencia-de-series">Converge</span> $\sum_{k=1}^\infty a_k$?</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las sumas parciales</p>
+          <p>Tenemos que
+            $$\begin{aligned} S_1 &= -1 \\ S_2 &= 0 \\ S_3 &= -1 \\ &\ \ \vdots \\ S_{2n} &= 0 \\ S_{2n+1} &= -1 \end{aligned}$$</p>
+          <p>Podemos ver que <span class="ref" data-ref="def-serie">$(S_n)_{n \in \mathbb{N}}$</span> no tiene límite, por lo tanto $\sum_{k=1}^\infty a_k$ no converge.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-serie-c" aria-label="Las sumas parciales de la serie de menos uno a la k, alternando entre menos uno y cero"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-serie-N">términos</label><input type="range" id="ejp1-serie-N" min="2" max="30" value="12"><output id="ejp1-serie-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-serie-read" aria-live="polite"></dl>
+          <figcaption>Los <i>S<sub>n</sub></i>: en naranja los de índice impar (valen −1), en azul los de índice par (valen 0). Las líneas grises unen <i>S<sub>n</sub></i> con <i>S</i><sub><i>n</i>+1</sub>: cada salto es el término <i>a</i><sub><i>n</i>+1</sub> = ±1.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- Serie geométrica -->
+  <article class="ej" id="ejp1-serie-2" data-short="Serie" data-title="Serie geométrica" data-topics="series">
+    <div class="ej-head">
+      <span class="tag">Serie</span>
+      <h3>Serie geométrica</h3>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-series">series</a></span>
+    </div>
+    <div class="enun"><p>Sea $r \in \mathbb{R}$ con $r \neq 1$. Calcular las <span class="ref" data-ref="def-serie">sumas parciales</span> de
+      $$\begin{aligned} \sum_{k=0}^\infty r^k &= \sum_{k=1}^\infty r^{k-1} \\ &= \lim_{n \to \infty} \sum_{k=1}^n r^{k-1} \end{aligned}$$
+      y su límite.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Fórmula cerrada para $S_n$</p>
+          <p>$$\begin{aligned} S_n &= 1 + r + r^2 + \dots + r^{n-1} \\ S_n(r - 1) &= r + r^2 + \dots + r^n \\ &\quad - 1 - r - r^2 - \dots - r^{n-1} \\ &= r^n - 1 \\ S_n &= \frac{r^n - 1}{r - 1} \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El límite</p>
+          <p>Sabemos que $\lim_{n \to \infty} r^n = 0$ cuando $r \in (0, 1)$, <span class="ref" data-ref="prop-6-algebra-de-limites">por lo tanto</span>, en el mismo intervalo:
+            $$\lim_{n \to \infty} S_n = \lim_{n \to \infty} \frac{r^n - 1}{r - 1} = \frac{1}{1 - r}.$$</p>
+          <p><em>Ejercicio:</em> Si $|r| \lt 1 \Rightarrow S_n \to \frac{1}{1 - r}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp1-serie-2-c" aria-label="Las sumas parciales de la geométrica acercándose a 1/(1−r)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp1-serie-2-r"><i>r</i></label><input type="range" id="ejp1-serie-2-r" min="5" max="95" value="60"><output id="ejp1-serie-2-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp1-serie-2-read" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>S<sub>n</sub></i> = (<i>r</i><sup><i>n</i></sup> − 1)/(<i>r</i> − 1) para <i>n</i> ≤ 30, con <i>r</i> ∈ (0, 1) como en el texto. La raya verde es 1/(1 − <i>r</i>). La lectura compara la fórmula cerrada con la suma término a término.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== HUECOS ===================== -->
+<section class="bloque" id="ejp1-huecos">
+  <h2><span class="bn">Notas finales</span>Huecos frente a la Práctica 1</h2>
+  <div class="desbloquea">
+    <p>Con los 17 ejemplos del apunte y los 19 de clase, quedan sólo dos técnicas sin ningún ejemplo trabajado en todo el repositorio. Cuando aparezca una en clase, cargala con <code>/ejemplo</code> en el bloque indicado:</p>
+    <ol>
+      <li><strong>Divergencia a $\pm\infty$ por definición</strong> — <a href="../guias/p1.html#guiap1-ej9" class="xg" data-guia="p1" data-ej="9">Ej. 9</a> (b)–(d), <a href="../guias/p1.html#guiap1-ej12" class="xg" data-guia="p1" data-ej="12">Ej. 12</a> (b), y la segunda mitad del <a href="../guias/p1.html#guiap1-ej14" class="xg" data-guia="p1" data-ej="14">Ej. 14</a>. De <code>apuntes.typ</code> sólo está la <span class="ref" data-ref="def-8">definición</span>, y ninguna demostración usa el cuantificador “para todo $M \gt 0$”: lo más cerca que hay es el <a href="#ejp1-c1-4">Ejemplo C1-4</a>, que invoca $a_m \to +\infty$ sin probarlo por definición. → Bloque 6 o bloque nuevo.</li>
+      <li><strong>Punto fijo vía supremo</strong> — el ejercicio del anexo de p1 (edición 2025). Sin material de ningún tipo. → Bloque 1 o bloque nuevo.</li>
+    </ol>
+    <h3>Dónde está el modelo cuando no hay ejemplo</h3>
+    <p>El resto de la guía sí tiene material trabajado, aunque no esté en este archivo: está en <code>desafios/p1.typ</code> o en las demostraciones de <code>apuntes.typ</code>.</p>
+    <ul>
+      <li><a href="../guias/p1.html#guiap1-ej1" class="xg" data-guia="p1" data-ej="1">Ej. 1</a> → Desafío 5.3, resuelto completo.</li>
+      <li><a href="../guias/p1.html#guiap1-ej2" class="xg" data-guia="p1" data-ej="2">Ej. 2</a> (a) → el <a href="#ejp1-c1-5">Ejemplo C1-5</a> construye la parte entera, que es la herramienta; además los Desafíos “Existencia de un entero en $(x, x+1]$” y “número natural intermedio”. (b) → es la demostración de la <span class="ref" data-ref="prop-2">Densidad de $\mathbb{Q}$ (Prop. 2)</span>. (c)–(d) → Desafío 5.4, con las dos estrategias.</li>
+      <li><a href="../guias/p1.html#guiap1-ej3" class="xg" data-guia="p1" data-ej="3">Ej. 3</a> → la demostración de la <span class="ref" data-ref="prop-5-equivalencia-de-infimo">Equivalencia de Ínfimo</span> en <code>apuntes.typ</code> es este enunciado, con las dos implicaciones.</li>
+      <li><a href="../guias/p1.html#guiap1-ej4" class="xg" data-guia="p1" data-ej="4">Ej. 4</a> (a) → Desafío “Ejercicio 1” ($\sup(a,b) = b$) y “Mínimo del intervalo $(a,b]$”. (b)–(c) → el <a href="#ejp1-6">Ejemplo 6</a>, con el Desafío “$2^n \gt n$” como puente. (d) → Desafío “Mínimo de una función cuadrática convexa”, resuelto completo, y “No acotación de pares” para la parte de arriba.</li>
+      <li><a href="../guias/p1.html#guiap1-ej6" class="xg" data-guia="p1" data-ej="6">Ej. 6</a> (a) → la demostración del <span class="ref" data-ref="teo-2">Teorema 2</span> (completitud en términos de ínfimos) hace exactamente $-A$ e $\inf(A) = -\sup(-A)$.</li>
+      <li><a href="../guias/p1.html#guiap1-ej10" class="xg" data-guia="p1" data-ej="10">Ej. 10</a> → Desafío 2.14 (a)–(c), resuelto: mismo truco de tomar $\varepsilon = (\ell_1 - \ell_2)/2$.</li>
+      <li><a href="../guias/p1.html#guiap1-ej11" class="xg" data-guia="p1" data-ej="11">Ej. 11</a> → el <a href="#ejp1-c1-1-2">Ejemplo C1-1.2</a> es el caso concreto; en general, la demostración del <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span>, ítem c, <em>caso $b = 0$</em>: $|a_n b_n| \le M|b_n|$ es el argumento completo.</li>
+      <li><a href="../guias/p1.html#guiap1-ej12" class="xg" data-guia="p1" data-ej="12">Ej. 12</a> (a) → <span class="ref" data-ref="prop-8">Proposición 8</span> (monótona creciente y acotada converge), en versión espejo.</li>
+      <li><a href="../guias/p1.html#guiap1-ej13" class="xg" data-guia="p1" data-ej="13">Ej. 13</a> → la demostración de la <span class="ref" data-ref="prop-equivalencia-del-supremo-2">Equivalencia del supremo 2</span> construye $a_n$ con $s - 1/n \lt a_n \le s$; el Desafío “Ejercicio 2.19” agrega que se la puede tomar estrictamente creciente.</li>
+      <li><a href="../guias/p1.html#guiap1-ej16" class="xg" data-guia="p1" data-ej="16">Ej. 16</a> (a) → el <a href="#ejp1-9">Ejemplo 9</a> (partición por paridad) más la demostración de <span class="ref" data-ref="prop-5-unicidad-del-limite">unicidad del límite</span> (elegir $\max(n_1, n_2)$).</li>
+    </ul>
+  </div>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/ejemplos/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-1": {
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ ($A \\neq \\emptyset$) se dice <b>acotado superiormente<\/b> si existe un $c \\in \\mathbb{R}$ tal que $a \\le c$ para todo $a \\in A$. Al número $c$ se le denomina <b>cota superior<\/b> de $A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-10": {
+  "tipo": "Definición",
+  "numero": "10",
+  "titulo": "Sucesión Monótona",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ es <b>monótona creciente<\/b> (análogamente <b>decreciente<\/b>) si $a_n \\le a_{n+1}$ (análogamente $a_n \\ge a_{n+1}$) para todo $n$ o a partir de algún $n_0$ en adelante.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo<\/em> de $A$ si:<\/p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.<\/p><p>Es decir, el supremo es la <em>menor de las cotas superiores<\/em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo<\/b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente<\/b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior<\/b> de $A$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo<\/strong> de $A$ si:<\/p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).<\/p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-sucesiones": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Sucesiones",
+  "enunciado": "<p>Una <b>sucesión<\/b> es una función $a : \\mathbb{N} \\to \\mathbb{R}$, es decir, una asignación que a cada número natural le asigna un único número real. La notación usual es $a_n = a(n) \\in \\mathbb{R}$ para el elemento que $a$ le asigna a $n$ y para referirnos a la sucesión entera, usamos $a = (a_n)_{n \\in \\mathbb{N}}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-7": {
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión y $\\ell \\in \\mathbb{R}$. Decimos que $(a_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que si $n \\ge n_0$, $|a_n - \\ell| \\lt \\varepsilon$. Notamos $\\lim_{n \\to \\infty} a_n = \\ell$ o $a_n \\to \\ell$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-8": {
+  "tipo": "Definición",
+  "numero": "8",
+  "titulo": "Divergencia de Sucesiones",
+  "enunciado": "<p>Decimos que una sucesión $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $+\\infty$<\/b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\gt M$. Notamos $\\lim_{n \\to \\infty} a_n = +\\infty$ o $a_n \\to +\\infty$.<\/p><p>Similarmente, decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $-\\infty$<\/b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\lt -M$. Notamos $\\lim_{n \\to \\infty} a_n = -\\infty$ o $a_n \\to -\\infty$.<\/p><p>Decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge<\/b> si no converge o diverge a $\\pm\\infty$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-negacion-de-la-convergencia-no": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Negación de la Convergencia (No Convergencia / Divergencia)",
+  "enunciado": "<p>Decimos que una sucesión real $(a_n)_{n \\in \\mathbb{N}}$ <b>no converge<\/b> (es decir, no admite ningún límite en $\\mathbb{R}$) si satisface la negación formal de la definición de convergencia para todo candidato a límite $L \\in \\mathbb{R}$:<\/p><p>$$\\begin{aligned} &(\\forall L \\in \\mathbb{R})(\\exists \\varepsilon_0 \\gt 0)(\\forall N \\in \\mathbb{N})(\\exists n \\ge N) \\\\ &\\Rightarrow |a_n - L| \\ge \\varepsilon_0 \\end{aligned}$$<\/p><p>En palabras: para todo candidato a límite $L \\in \\mathbb{R}$, existe un umbral de error $\\varepsilon_0 \\gt 0$ tal que para cualquier elección de $N \\in \\mathbb{N}$, existe un término $a_n$ con $n \\ge N$ cuya distancia a $L$ es mayor o igual a $\\varepsilon_0$ ($|a_n - L| \\ge \\varepsilon_0$).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-sucesion-acotada": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Sucesión Acotada",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ está <b>acotada<\/b> si el conjunto $\\{a_n : n \\in \\mathbb{N}\\} \\subseteq \\mathbb{R}$ está acotado.<\/p><p>Es decir, si existe $M \\gt 0$ tal que $|a_n| \\le M$ para todo $n \\in \\mathbb{N}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-limite-y-convergencia-de-series": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Límite y Convergencia de Series",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$. Decimos que la serie $\\sum_{k=1}^\\infty a_k$ <b>converge<\/b> si existe $\\lim_{n \\to \\infty} S_n$.<\/p><p>En ese caso, $$\\sum_{k=1}^\\infty a_k = \\lim_{n \\to \\infty} S_n.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-serie": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Serie",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$, llamamos <b>serie de $a_n$<\/b> (o sucesión de sumas parciales) a $$S_n = \\sum_{k=1}^n a_k.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-bolzano-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano–Weierstrass",
+  "enunciado": "<p>Toda sucesión acotada de números reales tiene una subsucesión convergente.<\/p>",
+  "fuente": "Resultado del curso; todavía no está en apuntes.typ"
+ },
+ "ext-desigualdad-triangular": {
+  "tipo": "Propiedad",
+  "numero": "",
+  "titulo": "Desigualdad triangular",
+  "enunciado": "<p>Para todo $x, y \\in \\mathbb{R}$, $|x + y| \\le |x| + |y|$. En particular, $|x - z| \\le |x - y| + |y - z|$ para todo $x, y, z \\in \\mathbb{R}$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-tricotomia": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Tricotomía (axiomas de orden)",
+  "enunciado": "<p>Para todo par $x, y \\in \\mathbb{R}$ vale una y sólo una de las relaciones $x \\lt y$, $x = y$, $x \\gt y$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-2": {
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $\\mathbb{Q}$",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $q \\in \\mathbb{Q}$ tal que $x \\lt q \\lt y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:<\/p><p>a) $i$ es cota inferior de $A$, y<\/p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-unicidad-del-limite": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión de términos reales. Supongamos que $a_n \\to \\ell_1$ y $a_n \\to \\ell_2$ al mismo tiempo, con $\\ell_1, \\ell_2 \\in \\mathbb{R}$. Entonces $\\ell_1 = \\ell_2$.<\/p><p>Es decir, el límite de una sucesión es único.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-algebra-de-limites": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}}$ y $(b_n)_{n \\in \\mathbb{N}}$ sucesiones reales tales que $\\lim_{n \\to \\infty} a_n = a$, $\\lim_{n \\to \\infty} b_n = b$, con $a, b \\in \\mathbb{R}$. Entonces:<\/p><ol type=\\\"a\\\"><li>$\\lim_{n \\to \\infty} (c \\cdot a_n) = c \\cdot a$ para todo $c \\in \\mathbb{R}$.<\/li><li>$\\lim_{n \\to \\infty} (a_n + b_n) = a + b$.<\/li><li>$\\lim_{n \\to \\infty} (a_n b_n) = a b$.<\/li><li>Si $b \\neq 0$, entonces $\\lim_{n \\to \\infty} (a_n / b_n) = a / b$.<\/li><li>Si $a_n \\le b_n$ para todo $n \\ge n_0$ entonces $a \\le b$.<\/li><\/ol>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-8": {
+  "tipo": "Proposición",
+  "numero": "8",
+  "titulo": "Convergencia de sucesiones monótonas crecientes",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión monótona creciente y acotada, entonces converge.<\/p><p>Más aún, se tiene que $$\\lim_{n \\to \\infty} a_n = \\sup\\{a_n : n \\in \\mathbb{N}\\}.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-convergencia-de-subsucesiones": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de subsucesiones",
+  "enunciado": "<p>Si $\\lim_{n \\to \\infty} a_n = \\ell$, entonces toda subsucesión también converge a $\\ell$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-equivalencia-del-supremo-2": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Equivalencia del supremo 2",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado superiormente. Entonces $s = \\sup(A)$ si y sólo si:<\/p><p>a) $s$ es cota superior de $A$, y<br>b) existe una sucesión $(a_n)_{n \\in \\mathbb{N}} \\subseteq A$ tal que $\\lim_{n \\to \\infty} a_n = s$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-1": {
+  "tipo": "Teorema",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes",
+  "enunciado": "<p>Si $x \\in \\mathbb{R}$ entonces existe un número $n \\in \\mathbb{N}$ tal que $x \\le n$. Es decir, dado un número real cualquiera, siempre existe un número natural más grande.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-2": {
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado inferiormente y no vacío. Entonces existe $i = \\inf(A) \\in \\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* ejemplos/p1 */
+(() => {
+"use strict";
+/* Dibujos de los ejemplos de la Práctica 1. Usa window.PP (el build envuelve este archivo). */
+const P = "ejp1-";
+const C = (t) => PP.css(t);
+const SUBS = "₀₁₂₃₄₅₆₇₈₉";
+const sub = (n) => String(n).split("").map((d) => (/\d/.test(d) ? SUBS[+d] : d)).join("");
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const F = (x, d) => PP.fmt(x, d === undefined ? 3 : d);
+const V = (id) => PP.val(P + id);
+const R = (name) => PP.radio(P + name);
+const font = (s) => (s || 12) + "px 'IBM Plex Sans', system-ui, sans-serif";
+
+/* Lienzo + marco en coordenadas del problema. */
+function setup(id, ratio, box, pad) {
+  const { ctx, w, h } = PP.canvas(P + id, ratio);
+  const T = PP.frame(w, h, box, pad);
+  return { ctx, T, w, h };
+}
+/* Recta horizontal a la altura y (en coordenadas del marco). */
+function hline(ctx, T, y, color, dash, width) {
+  if (y < T.box.y0 || y > T.box.y1) return;
+  PP.path(ctx, [[T.p.l, T.Y(y)], [T.w - T.p.r, T.Y(y)]], color, width || 1.5, dash);
+}
+function vline(ctx, T, x, color, dash, width) {
+  if (x < T.box.x0 || x > T.box.x1) return;
+  PP.path(ctx, [[T.X(x), T.p.t], [T.X(x), T.h - T.p.b]], color, width || 1.5, dash);
+}
+/* Banda horizontal entre y0 e y1 (recortada al marco). */
+function hband(ctx, T, y0, y1, fill) {
+  const a = Math.max(Math.min(y0, y1), T.box.y0), b = Math.min(Math.max(y0, y1), T.box.y1);
+  if (b <= a) return;
+  PP.rect(ctx, T.p.l, T.Y(b), T.w - T.p.l - T.p.r, T.Y(a) - T.Y(b), null, fill);
+}
+/* Recta real dibujada en la altura y = 0 del marco, con marcas. */
+function realLine(ctx, T, ticks, arrow) {
+  const y = T.Y(0), x0 = T.p.l, x1 = T.w - T.p.r;
+  PP.path(ctx, [[x0, y], [x1, y]], C("--muted"), 1.3);
+  if (arrow) PP.path(ctx, [[x1 - 8, y - 4], [x1, y], [x1 - 8, y + 4]], C("--muted"), 1.3);
+  (ticks || []).forEach((t) => {
+    if (t.x < T.box.x0 || t.x > T.box.x1) return;
+    const x = T.X(t.x), col = t.color || C("--muted"), up = !!t.up;
+    PP.path(ctx, [[x, y - (t.len || 6)], [x, y + (t.len || 6)]], col, t.w || 1.3);
+    if (t.label) PP.label(ctx, t.label, x, up ? y - (t.off || 10) : y + (t.off || 10), col, t.align || "center", up ? "bottom" : "top", t.size || 12);
+  });
+}
+/* Ejes de un gráfico de sucesión (n en x, entero). */
+function seqAxes(ctx, T, xLabel, yLabel) { PP.axes(ctx, T, { xLabel: xLabel || "n", yLabel: yLabel || "", intX: true }); }
+const dotR = (M) => (M <= 20 ? 4 : M <= 45 ? 3 : M <= 90 ? 2.2 : 1.7);
+const ring = (ctx, x, y, r, col) => PP.circle(ctx, x, y, r, col, null, null, 2);
+/* Triángulo de "fuera de la ventana". */
+function arrowOut(ctx, x, y, up, col) {
+  const s = up ? -1 : 1;
+  PP.path(ctx, [[x - 5, y], [x + 5, y], [x, y + 7 * s]], null, 1, null, true, col);
+}
+function frac(p, q) {
+  if (q === 1) return String(p).replace("-", "−");
+  return String(p).replace("-", "−") + "/" + q;
+}
+function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; }
+
+/* ===================== Bloque 1 ===================== */
+
+/* Ejemplo 1: elementos 0.99…9 según cantidad de nueves. */
+PP.register(function ej1() {
+  const k = V("1-k");
+  PP.out(P + "1-k-o", String(k));
+  const K = 8;
+  const { ctx, T } = setup("1-c", 0.62, { x0: -0.6, x1: K + 0.6, y0: -0.05, y1: 1.12 }, { l: 40, r: 14, t: 14, b: 30 });
+  PP.axes(ctx, T, { xLabel: "nueves", intX: false, xTicks: 8 });
+  hline(ctx, T, 1, C("--ok"), null, 2);
+  PP.label(ctx, "1", T.p.l + 4, T.Y(1) - 3, C("--ok"), "left", "bottom", 12);
+  for (let j = 0; j <= K; j++) {
+    const v = 1 - Math.pow(10, -j);
+    PP.dot(ctx, T.X(j), T.Y(v), 3.5, C("--accent"));
+  }
+  const vk = 1 - Math.pow(10, -k), vk1 = 1 - Math.pow(10, -(k + 1));
+  PP.dot(ctx, T.X(k), T.Y(vk), 6, C("--seq2"));
+  PP.dot(ctx, T.X(k + 1), T.Y(vk1), 6, C("--accent"));
+  ring(ctx, T.X(k + 1), T.Y(vk1), 9, C("--accent"));
+  PP.label(ctx, k + " nueves", T.X(k), T.Y(vk) + 12, C("--seq2"), "center", "top", 11);
+  const str = (n) => (n === 0 ? "0" : "0." + "9".repeat(n));
+  PP.read(P + "1-read", [
+    ["con k nueves", str(k)],
+    ["con k+1 nueves", str(k + 1) + "  (está en A)"],
+    ["¿es mayor?", "sí: lo supera en 9·10^−" + (k + 1), "good"],
+    ["distancia al 1", "10^−" + k + " → 10^−" + (k + 1)],
+  ]);
+}, [P + "1-k"]);
+
+/* Ejemplo 3: B = (0,1), punto medio entre t y 1. */
+PP.register(function ej3() {
+  const t = V("3-t") / 100;
+  PP.out(P + "3-t-o", F(t, 2));
+  const { ctx, T } = setup("3-c", 0.42, { x0: -0.2, x1: 1.2, y0: -1, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  PP.rect(ctx, T.X(0), y - 7, T.X(1) - T.X(0), 14, null, C("--area"));
+  realLine(ctx, T, [{ x: 0, label: "0" }, { x: 1, label: "1 = s", color: C("--ok"), w: 2.5 }]);
+  PP.circle(ctx, T.X(0), y, 4.5, C("--accent"), C("--bg"));
+  PP.circle(ctx, T.X(1), y, 4.5, C("--accent"), C("--bg"));
+  PP.label(ctx, "B = (0, 1)", T.X(0.08), y - 12, C("--accent"), "left", "bottom", 12);
+  const x = (t + 1) / 2;
+  // arco que muestra el punto medio
+  const yA = y - 34;
+  PP.path(ctx, [[T.X(t), y - 8], [T.X(t), yA], [T.X(1), yA], [T.X(1), y - 8]], C("--muted"), 1, [3, 3]);
+  PP.path(ctx, [[T.X(x), yA - 5], [T.X(x), yA + 5]], C("--muted"), 1);
+  PP.label(ctx, "punto medio", T.X(x), yA - 6, C("--muted"), "center", "bottom", 11);
+  PP.path(ctx, [[T.X(t), y - 10], [T.X(t), y + 10]], C("--fail"), 2.5);
+  PP.label(ctx, "t", T.X(t), y + 12, C("--fail"), "center", "top", 13);
+  PP.dot(ctx, T.X(x), y, 6, C("--accent"));
+  PP.label(ctx, "x", T.X(x), y + 12, C("--accent"), "center", "top", 13);
+  PP.read(P + "3-read", [
+    ["t (supuesta cota)", F(t, 3)],
+    ["x = (t + 1)/2", F(x, 3)],
+    ["¿x ∈ B?", "sí (0 < x < 1)", "good"],
+    ["¿x > t?", "sí ⇒ t no es cota", "bad"],
+  ]);
+}, [P + "3-t"]);
+
+/* Ejemplo 6: ínf {1/n} = 0. */
+PP.register(function ej6() {
+  const t = V("6-t") / 100;
+  PP.out(P + "6-t-o", F(t, 2));
+  const { ctx, T } = setup("6-c", 0.42, { x0: -0.07, x1: 1.07, y0: -1, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  realLine(ctx, T, [{ x: 0, label: "0", color: C("--ok"), w: 2.5 }, { x: 1, label: "1" }, { x: 0.5, label: "1/2" }]);
+  for (let n = 1; n <= 80; n++) PP.dot(ctx, T.X(1 / n), y, n <= 10 ? 3.6 : 2.2, C("--accent"));
+  const n = Math.floor(1 / t) + 1;
+  PP.rect(ctx, T.X(0), y - 16, T.X(t) - T.X(0), 32, null, C("--failband"));
+  PP.path(ctx, [[T.X(t), y - 18], [T.X(t), y + 18]], C("--fail"), 2.5);
+  PP.label(ctx, "t", T.X(t), y - 20, C("--fail"), "center", "bottom", 13);
+  ring(ctx, T.X(1 / n), y, 8, C("--ink"));
+  PP.label(ctx, "1/" + n, T.X(1 / n), y + 20, C("--ink"), T.X(1 / n) - T.X(0) < 24 ? "left" : "center", "top", 12);
+  PP.read(P + "6-read", [
+    ["t > 0", F(t, 3)],
+    ["n de Arquímedes", String(n) + "  (primer n con 1/n < t)"],
+    ["1/n", F(1 / n, 4)],
+    ["¿1/n ∈ A y 1/n < t?", "sí ⇒ t no es cota inferior", "bad"],
+  ]);
+}, [P + "6-t"]);
+
+/* Ejemplo 3 (c): C = {2 − 1/n}. */
+PP.register(function ej3c() {
+  const N = V("3-2-N");
+  PP.out(P + "3-2-N-o", String(N));
+  const { ctx, T } = setup("3-2-c", 0.42, { x0: 0.85, x1: 2.12, y0: -1, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  realLine(ctx, T, [{ x: 1, label: "1" }, { x: 1.5, label: "3/2" }, { x: 2, label: "2", color: C("--ok"), w: 2.5 }]);
+  PP.label(ctx, "cota superior", T.X(2), y - 14, C("--ok"), "center", "bottom", 11);
+  for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(2 - 1 / n), y, n <= 12 ? 4 : 2.6, C("--accent"));
+  PP.read(P + "3-2-read", [
+    ["elementos dibujados", String(N)],
+    ["el más grande dibujado", "2 − 1/" + N + " = " + F(2 - 1 / N, 4)],
+    ["distancia a 2", "1/" + N + " = " + F(1 / N, 4)],
+  ]);
+}, [P + "3-2-N"]);
+
+/* Ejemplo 3 (d): D = {1/x² > 1/4}. */
+PP.register(function ej3d() {
+  const x = V("3-3-x") / 10;
+  PP.out(P + "3-3-x-o", F(x, 1));
+  const { ctx, T } = setup("3-3-c", 0.62, { x0: -4.2, x1: 4.2, y0: -0.25, y1: 1.5 }, { l: 34, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: "1/x²" });
+  hline(ctx, T, 0.25, C("--seq2"), [6, 4], 1.8);
+  PP.label(ctx, "1/4", T.w - T.p.r - 4, T.Y(0.25) - 3, C("--seq2"), "right", "bottom", 12);
+  [[-4.2, -0.05], [0.05, 4.2]].forEach(([a, b]) => {
+    const pts = [];
+    for (let i = 0; i <= 200; i++) {
+      const u = a + (b - a) * i / 200, v = 1 / (u * u);
+      if (v <= T.box.y1 + 0.2) pts.push([T.X(u), T.Y(Math.min(v, T.box.y1 + 0.2))]);
+    }
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b); ctx.clip();
+    PP.path(ctx, pts, C("--accent"), 2);
+    ctx.restore();
+  });
+  // D sobre el eje
+  const y0 = T.Y(0);
+  [[-2, 0], [0, 2]].forEach(([a, b]) => PP.path(ctx, [[T.X(a), y0], [T.X(b), y0]], C("--ok"), 5));
+  [-2, 0, 2].forEach((u) => PP.circle(ctx, T.X(u), y0, 4.5, C("--ok"), C("--bg"), null, 2));
+  PP.label(ctx, "D", T.X(1), y0 + 6, C("--ok"), "center", "top", 13);
+  if (x === 0) {
+    PP.read(P + "3-3-read", [["x", "0"], ["1/x²", "no está definido"], ["¿x ∈ D?", "no (x ≠ 0)", "bad"]]);
+    return;
+  }
+  const v = 1 / (x * x), inD = v > 0.25;
+  const vy = Math.min(v, T.box.y1);
+  PP.path(ctx, [[T.X(x), T.Y(0)], [T.X(x), T.Y(vy)]], C("--muted"), 1, [3, 3]);
+  if (v <= T.box.y1) PP.dot(ctx, T.X(x), T.Y(v), 6, inD ? C("--ok") : C("--fail"));
+  else arrowOut(ctx, T.X(x), T.p.t + 7, true, C("--ok"));
+  PP.dot(ctx, T.X(x), y0, 4, inD ? C("--ok") : C("--fail"));
+  PP.read(P + "3-3-read", [
+    ["x", F(x, 2)],
+    ["1/x²", F(v, 4)],
+    ["¿1/x² > 1/4?", inD ? "sí" : "no", inD ? "good" : "bad"],
+    ["¿2 > |x| y x ≠ 0?", Math.abs(x) < 2 ? "sí ⇒ x ∈ D" : "no ⇒ x ∉ D", inD ? "good" : "bad"],
+  ]);
+}, [P + "3-3-x"]);
+
+/* ===================== Bloque 2 ===================== */
+
+/* Ejemplo 5: s racional, √2 y un racional q entre ambos. */
+function ratBetween(a, b) {
+  const lo = Math.min(a, b), hi = Math.max(a, b);
+  for (let d = 1; d <= 2000; d++) {
+    const m = Math.floor(lo * d) + 1;
+    if (m / d < hi) return [m, d];
+  }
+  return [Math.round((lo + hi) * 500), 1000];
+}
+PP.register(function ej5() {
+  const sv = V("5-s"), s = sv / 100, r2 = Math.SQRT2;
+  const g = gcd(sv, 100);
+  PP.out(P + "5-s-o", F(s, 2));
+  const { ctx, T } = setup("5-c", 0.46, { x0: 0.92, x1: 2.08, y0: -1, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  // A ∩ [0.92, √2): racionales con r² < 2
+  PP.rect(ctx, T.p.l, y - 6, T.X(r2) - T.p.l, 12, null, C("--area"));
+  PP.label(ctx, "A (r² < 2) →", T.p.l + 2, y - 10, C("--accent"), "left", "bottom", 11);
+  realLine(ctx, T, [{ x: 1, label: "1" }, { x: 2, label: "2" }]);
+  PP.path(ctx, [[T.X(r2), y - 22], [T.X(r2), y + 22]], C("--muted"), 1.5, [4, 3]);
+  PP.label(ctx, "√2 ∉ ℚ", T.X(r2), y + 24, C("--muted"), "center", "top", 12);
+  const above = s * s > 2;
+  const [m, d] = ratBetween(s, r2);
+  const q = m / d;
+  PP.path(ctx, [[T.X(s), y - 14], [T.X(s), y + 14]], C("--seq2"), 3);
+  PP.label(ctx, "s", T.X(s), y - 16, C("--seq2"), "center", "bottom", 14);
+  PP.dot(ctx, T.X(q), y, 6, C("--accent"));
+  PP.label(ctx, "q = " + frac(m, d), T.X(q), y - 30, C("--accent"), "center", "bottom", 12);
+  PP.path(ctx, [[T.X(q), y - 8], [T.X(q), y - 28]], C("--accent"), 1);
+  PP.read(P + "5-read", [
+    ["s", frac(sv / g, 100 / g) + " = " + F(s, 2)],
+    ["s²", F(s * s, 4) + (above ? " > 2" : " < 2")],
+    ["q entre s y √2", frac(m, d) + "   (q² = " + F(q * q, 4) + ")"],
+    ["contradicción", above ? "q es cota superior y q < s" : "q ∈ A y q > s: s no es cota", "bad"],
+  ]);
+}, [P + "5-s"]);
+
+/* Ejemplo C1-5: A = {n ∈ ℤ : n ≤ x} y su supremo. */
+PP.register(function c15() {
+  const x = V("c1-5-x") / 10;
+  PP.out(P + "c1-5-x-o", F(x, 1));
+  const { ctx, T } = setup("c1-5-c", 0.42, { x0: -4.6, x1: 4.6, y0: -1, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  const n = Math.floor(x);
+  const ticks = [];
+  for (let k = -4; k <= 4; k++) ticks.push({ x: k, label: String(k).replace("-", "−"), len: 4 });
+  realLine(ctx, T, ticks, true);
+  PP.path(ctx, [[T.p.l + 8, y - 4], [T.p.l, y], [T.p.l + 8, y + 4]], C("--muted"), 1.3);
+  for (let k = -4; k <= n && k <= 4; k++) PP.dot(ctx, T.X(k), y, 5, C("--accent"));
+  if (n >= -4 && n <= 4) {
+    ring(ctx, T.X(n), y, 10, C("--accent"));
+    PP.label(ctx, "n = sup A", T.X(n), y - 14, C("--accent"), "center", "bottom", 12);
+  }
+  if (n + 1 <= 4) PP.circle(ctx, T.X(n + 1), y, 5, C("--fail"), C("--bg"), null, 2);
+  PP.path(ctx, [[T.X(x), y - 26], [T.X(x), y + 6]], C("--seq2"), 2.5);
+  PP.label(ctx, "x", T.X(x), y - 28, C("--seq2"), "center", "bottom", 14);
+  PP.read(P + "c1-5-read", [
+    ["x", F(x, 2)],
+    ["A", "{…, " + String(n - 2).replace("-", "−") + ", " + String(n - 1).replace("-", "−") + ", " + String(n).replace("-", "−") + "}"],
+    ["n = sup A", String(n).replace("-", "−")],
+    ["n ≤ x < n + 1", String(n).replace("-", "−") + " ≤ " + F(x, 2) + " < " + String(n + 1).replace("-", "−"), "good"],
+  ]);
+}, [P + "c1-5-x"]);
+
+/* ===================== Bloque 3 ===================== */
+
+/* Ejemplo 7: las dos sucesiones, en el plano o sobre la recta. */
+PP.register(function ej7() {
+  const N = V("7-N"), s = R("7-s"), v = R("7-v");
+  PP.out(P + "7-N-o", String(N));
+  const a = (n) => (s === "inv" ? 1 / n : (n % 2 ? -1 : 1));
+  if (v === "plano") {
+    const box = s === "inv" ? { x0: 0, x1: N + 0.8, y0: 0, y1: 1.15 } : { x0: 0, x1: N + 0.8, y0: -1.3, y1: 1.3 };
+    const { ctx, T } = setup("7-c", 0.62, box, { l: 34, r: 12, t: 12, b: 26 });
+    ctx.save(); ctx.strokeStyle = C("--rule"); ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+    const yt = s === "inv" ? [[1, "1"], [0.5, "1/2"]] : [[-1, "−1"], [1, "1"]];
+    yt.forEach(([yy]) => { ctx.beginPath(); ctx.moveTo(T.p.l, T.Y(yy)); ctx.lineTo(T.w - T.p.r, T.Y(yy)); ctx.stroke(); });
+    ctx.restore();
+    PP.path(ctx, [[T.p.l, T.Y(0)], [T.w - T.p.r, T.Y(0)]], C("--muted"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), T.h - T.p.b]], C("--muted"), 1);
+    yt.forEach(([yy, lab]) => PP.label(ctx, lab, T.p.l - 6, T.Y(yy), C("--muted"), "right", "middle", 11));
+    const step = N <= 12 ? 1 : N <= 20 ? 2 : 5;
+    for (let n = 1; n <= N; n++) if (n % step === 0 || n === 1) PP.label(ctx, String(n), T.X(n), T.Y(0) + (s === "inv" ? 6 : 4), C("--muted"), "center", "top", 11);
+    PP.label(ctx, "n", T.w - T.p.r, T.Y(0) - 3, C("--muted"), "right", "bottom", 11);
+    PP.label(ctx, "aₙ", T.X(0) + 5, T.p.t, C("--muted"), "left", "top", 11);
+    for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(n), T.Y(a(n)), dotR(N), C("--accent"));
+  } else {
+    const box = s === "inv" ? { x0: -0.1, x1: 1.12, y0: -1, y1: 1 } : { x0: -1.5, x1: 1.5, y0: -1, y1: 1 };
+    const { ctx, T } = setup("7-c", 0.42, box, { l: 14, r: 14, t: 10, b: 10 });
+    realLine(ctx, T, [{ x: 0, label: "0", up: true }], true);
+    const y = T.Y(0);
+    for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(a(n)), y, 4, C("--accent"));
+    if (s === "inv") {
+      for (let n = 1; n <= Math.min(4, N); n++) PP.label(ctx, "a" + sub(n), T.X(1 / n), y + 10, C("--accent"), "center", "top", 12);
+    } else {
+      PP.label(ctx, "a₁, a₃, …", T.X(-1), y + 10, C("--accent"), "center", "top", 12);
+      PP.label(ctx, "a₂, a₄, …", T.X(1), y + 10, C("--accent"), "center", "top", 12);
+      PP.label(ctx, "−1", T.X(-1), y - 10, C("--muted"), "center", "bottom", 11);
+      PP.label(ctx, "1", T.X(1), y - 10, C("--muted"), "center", "bottom", 11);
+    }
+  }
+  const first = [];
+  for (let n = 1; n <= 6; n++) first.push(s === "inv" ? (n === 1 ? "1" : "1/" + n) : (n % 2 ? "−1" : "1"));
+  PP.read(P + "7-read", [
+    ["sucesión", s === "inv" ? "aₙ = 1/n" : "aₙ = (−1)ⁿ"],
+    ["primeros términos", "(" + first.join(", ") + ", …)"],
+    ["gráfico", v === "plano" ? "puntos (n, aₙ)" : "sólo los valores aₙ"],
+  ]);
+}, [P + "7-N", 'input[name="' + P + '7-s"]', 'input[name="' + P + '7-v"]']);
+
+/* Sucesión con banda ε alrededor de 0 y n₀ marcado (Ejemplos 8 y C1-1.1). */
+PP.register(function ej8() {
+  const eps = V("8-e") / 100;
+  PP.out(P + "8-e-o", F(eps, 2));
+  const n0 = Math.floor(1 / eps) + 1;
+  const M = clamp(n0 + 10, 14, 45);
+  const { ctx, T } = setup("8-c", 0.62, { x0: 0, x1: M + 1, y0: -0.12, y1: 1.06 }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, -eps, eps, C("--band"));
+  seqAxes(ctx, T, "n", "1/n");
+  hline(ctx, T, eps, C("--accent"), [5, 4], 1.2);
+  PP.label(ctx, "ε", T.w - T.p.r - 4, T.Y(eps) - 3, C("--accent"), "right", "bottom", 13);
+  vline(ctx, T, n0, C("--ink"), [4, 3], 1.2);
+  PP.label(ctx, "n₀ = " + n0, T.X(n0) + 4, T.p.t + 2, C("--ink"), "left", "top", 12);
+  for (let n = 1; n <= M; n++) PP.dot(ctx, T.X(n), T.Y(1 / n), dotR(M), n >= n0 ? C("--accent") : C("--seq2"));
+  PP.read(P + "8-read", [
+    ["ε", F(eps, 3)],
+    ["1/ε", F(1 / eps, 3)],
+    ["n₀ (primer natural > 1/ε)", String(n0)],
+    ["1/n₀", F(1 / n0, 4) + " < ε", "good"],
+  ]);
+}, [P + "8-e"]);
+
+PP.register(function c111() {
+  const eps = V("c1-1-1-e") / 100;
+  PP.out(P + "c1-1-1-e-o", F(eps, 2));
+  const m = Math.floor(1 / eps) + 1;
+  const M = clamp(m + 8, 12, 45);
+  const { ctx, T } = setup("c1-1-1-c", 0.62, { x0: 0, x1: M + 1, y0: -0.1, y1: 1.06 }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, -eps, eps, C("--band"));
+  seqAxes(ctx, T, "n");
+  hline(ctx, T, eps, C("--accent"), [5, 4], 1.2);
+  PP.label(ctx, "ε", T.w - T.p.r - 4, T.Y(eps) - 3, C("--accent"), "right", "bottom", 13);
+  vline(ctx, T, m, C("--ink"), [4, 3], 1.2);
+  PP.label(ctx, "m = n₀ = " + m, T.X(m) + 4, T.p.t + 2, C("--ink"), "left", "top", 12);
+  const r = dotR(M);
+  for (let n = 1; n <= M; n++) {
+    PP.circle(ctx, T.X(n), T.Y(1 / n), r + 0.5, C("--seq2"), null, null, 1.4);
+    PP.dot(ctx, T.X(n), T.Y(1 / Math.pow(2, n)), r, C("--accent"));
+  }
+  PP.label(ctx, "1/n", T.X(1) + 8, T.Y(1), C("--seq2"), "left", "middle", 12);
+  PP.label(ctx, "1/2ⁿ", T.X(1) + 8, T.Y(0.5), C("--accent"), "left", "middle", 12);
+  PP.read(P + "c1-1-1-read", [
+    ["ε", F(eps, 3)],
+    ["m (primero con 1/m < ε)", String(m)],
+    ["1/2ᵐ ≤ 1/m < ε", F(1 / Math.pow(2, m), 6) + " ≤ " + F(1 / m, 4) + " < " + F(eps, 3), "good"],
+  ]);
+}, [P + "c1-1-1-e"]);
+
+/* C1-1.2: ((−1)ⁿ + 2)/√(n+3). */
+PP.register(function c112() {
+  const eps = V("c1-1-2-e") / 100;
+  PP.out(P + "c1-1-2-e-o", F(eps, 2));
+  const m = Math.floor(9 / (eps * eps)) + 1; // primer m con 1/m < (ε/3)²
+  const n0 = Math.max(m - 3, 1);
+  const M = clamp(n0 + 14, 16, 130);
+  const { ctx, T } = setup("c1-1-2-c", 0.62, { x0: 0, x1: M + 1, y0: -0.06, y1: 1.5 }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, 0, eps, C("--band"));
+  seqAxes(ctx, T, "n");
+  hline(ctx, T, eps, C("--accent"), [5, 4], 1.2);
+  PP.label(ctx, "ε", T.w - T.p.r - 4, T.Y(eps) - 3, C("--accent"), "right", "bottom", 13);
+  const env = [];
+  for (let i = 0; i <= 300; i++) { const n = 1 + (M - 1) * i / 300; env.push([T.X(n), T.Y(3 / Math.sqrt(n + 3))]); }
+  PP.path(ctx, env, C("--seq3"), 1.6, [5, 3]);
+  PP.label(ctx, "3/√(n+3)", T.X(M) - 2, T.Y(3 / Math.sqrt(M + 3)) - 4, C("--seq3"), "right", "bottom", 11);
+  vline(ctx, T, n0, C("--ink"), [4, 3], 1.2);
+  PP.label(ctx, "n₀ = " + n0, T.X(n0) + (T.X(n0) > T.w * 0.7 ? -4 : 4), T.p.t + 2, C("--ink"), T.X(n0) > T.w * 0.7 ? "right" : "left", "top", 12);
+  const r = dotR(M);
+  let worst = 0;
+  for (let n = 1; n <= M; n++) {
+    const a = ((n % 2 ? -1 : 1) + 2) / Math.sqrt(n + 3);
+    if (n >= n0) worst = Math.max(worst, a);
+    PP.dot(ctx, T.X(n), T.Y(a), r, n >= n0 ? C("--accent") : C("--seq2"));
+  }
+  PP.read(P + "c1-1-2-read", [
+    ["ε", F(eps, 3)],
+    ["(ε/3)²", F((eps / 3) ** 2, 5)],
+    ["m", String(m) + "   (1/m = " + F(1 / m, 5) + ")"],
+    ["n₀ = máx{m − 3, 1}", String(n0)],
+    ["3/√m < ε", F(3 / Math.sqrt(m), 4) + " < " + F(eps, 3), "good"],
+    ["máx aₙ dibujado, n ≥ n₀", F(worst, 4), worst < eps ? "good" : "bad"],
+  ]);
+}, [P + "c1-1-2-e"]);
+
+/* C1-3: sucesión que desde n₀ + 1 es entera; banda de radio 2ε alrededor de a_{n₁}. */
+PP.register(function c13() {
+  const eps = V("c1-3-e") / 100;
+  PP.out(P + "c1-3-e-o", F(eps, 2));
+  const head = [0.4, 3.5, 1.4, 2.6], L = 2, n0 = 4, M = 14;
+  const a = (n) => (n <= n0 ? head[n - 1] : L);
+  // ñ: menor índice tal que |a_n − L| < ε para todo n > ñ
+  let nt = 0;
+  for (let n = 1; n <= M; n++) if (Math.abs(a(n) - L) >= eps) nt = n;
+  const n1 = Math.max(nt, n0) + 1;
+  const { ctx, T } = setup("c1-3-c", 0.62, { x0: 0, x1: M + 1, y0: -0.6, y1: 4.4 }, { l: 34, r: 12, t: 12, b: 26 });
+  const an1 = a(n1);
+  hband(ctx, T, an1 - 2 * eps, an1 + 2 * eps, C("--area2"));
+  hband(ctx, T, L - eps, L + eps, C("--band"));
+  PP.axes(ctx, T, { xLabel: "n", intX: true, grid: false });
+  for (let k = 0; k <= 4; k++) hline(ctx, T, k, C("--rule"), null, 1);
+  hline(ctx, T, an1 - 2 * eps, C("--seq2"), [5, 4], 1.3);
+  hline(ctx, T, an1 + 2 * eps, C("--seq2"), [5, 4], 1.3);
+  PP.label(ctx, "a(n₁) ± 2ε", T.w - T.p.r - 4, T.Y(Math.min(an1 + 2 * eps, T.box.y1)) + 3, C("--seq2"), "right", "top", 11);
+  vline(ctx, T, n0 + 0.5, C("--muted"), [3, 3], 1);
+  PP.label(ctx, "enteros desde aquí", T.X(n0 + 0.5) + 4, T.h - T.p.b - 4, C("--muted"), "left", "bottom", 11);
+  for (let n = 1; n <= M; n++) PP.dot(ctx, T.X(n), T.Y(a(n)), 4, n > n0 ? C("--accent") : C("--seq2"));
+  ring(ctx, T.X(n1), T.Y(an1), 8, C("--ink"));
+  PP.label(ctx, "n₁", T.X(n1), T.Y(an1) + 10, C("--ink"), "center", "top", 12);
+  const ints = [];
+  for (let k = -5; k <= 10; k++) if (Math.abs(k - an1) < 2 * eps) ints.push(k);
+  PP.read(P + "c1-3-read", [
+    ["ε", F(eps, 2) + "   (2ε = " + F(2 * eps, 2) + ")"],
+    ["ñ, n₀, n₁", nt + ", " + n0 + ", " + n1],
+    ["enteros a distancia < 2ε de a(n₁)", "{" + ints.join(", ") + "}", ints.length === 1 ? "good" : "bad"],
+    ["conclusión", ints.length === 1 ? "sólo cabe a(n₁): aₙ = a(n₁) para n ≥ n₁" : "con ε > 1/2 entran otros enteros", ints.length === 1 ? "good" : "bad"],
+  ]);
+}, [P + "c1-3-e"]);
+
+/* Prop raíz: aₙ y √aₙ con sus bandas. */
+PP.register(function propSqrt() {
+  const caso = R("prop-caso"), eps = V("prop-e") / 100;
+  const l = caso === "pos" ? V("prop-l") / 100 : 0;
+  PP.out(P + "prop-e-o", F(eps, 2));
+  PP.out(P + "prop-l-o", caso === "pos" ? F(l, 2) : "0");
+  document.getElementById(P + "prop-l").disabled = caso !== "pos";
+  const a = (n) => (caso === "pos" ? l * (1 + (n % 2 ? -1 : 1) / (n + 1)) : 1 / n);
+  const rad = caso === "pos" ? eps * Math.sqrt(l) : eps * eps;
+  let n0 = 1;
+  while (Math.abs(a(n0) - l) >= rad) n0++; // |aₙ − l| decrece en los dos casos: vale para todo n ≥ n₀
+  const M = clamp(n0 + 10, 16, 80);
+  const top = caso === "pos" ? Math.max(1.4 * l, Math.sqrt(l) + eps) + 0.15 : 1.08;
+  const { ctx, T } = setup("prop-c", 0.62, { x0: 0, x1: M + 1, y0: -0.05 * top, y1: top }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, l - rad, l + rad, C("--area2"));
+  hband(ctx, T, Math.sqrt(l) - eps, Math.sqrt(l) + eps, C("--area"));
+  seqAxes(ctx, T, "n");
+  hline(ctx, T, l, C("--seq2"), [5, 4], 1.2);
+  hline(ctx, T, Math.sqrt(l), C("--accent"), [5, 4], 1.2);
+  if (caso === "pos") {
+    PP.label(ctx, "l", T.w - T.p.r - 4, T.Y(l) - 3, C("--seq2"), "right", "bottom", 12);
+    PP.label(ctx, "√l", T.w - T.p.r - 4, T.Y(Math.sqrt(l)) - 3, C("--accent"), "right", "bottom", 12);
+  }
+  vline(ctx, T, n0, C("--ink"), [4, 3], 1.2);
+  PP.label(ctx, "n₀ = " + n0, T.X(n0) + 4, T.p.t + 2, C("--ink"), "left", "top", 12);
+  const r = dotR(M);
+  let worst = 0;
+  for (let n = 1; n <= M; n++) {
+    PP.dot(ctx, T.X(n), T.Y(a(n)), r, C("--seq2"));
+    PP.dot(ctx, T.X(n), T.Y(Math.sqrt(a(n))), r, C("--accent"));
+    if (n >= n0) worst = Math.max(worst, Math.abs(Math.sqrt(a(n)) - Math.sqrt(l)));
+  }
+  PP.read(P + "prop-read", [
+    ["caso", caso === "pos" ? "l = " + F(l, 2) + " > 0" : "l = 0"],
+    ["radio pedido a aₙ", caso === "pos" ? "ε√l = " + F(rad, 4) : "ε² = " + F(rad, 4)],
+    ["n₀", String(n0)],
+    ["máx |√aₙ − √l|, n₀ ≤ n ≤ " + M, F(worst, 4) + " < ε = " + F(eps, 2), worst < eps ? "good" : "bad"],
+  ]);
+}, [P + "prop-e", P + "prop-l", 'input[name="' + P + 'prop-caso"]']);
+
+/* Prop Cesàro: aₙ = 3(−1)ⁿ/n y sus medias. */
+PP.register(function cesaro() {
+  const eps = V("prop-2-e") / 100;
+  PP.out(P + "prop-2-e-o", F(eps, 2));
+  const a = (n) => 3 * (n % 2 ? -1 : 1) / n;
+  const n1 = Math.floor(6 / eps) + 1; // |aᵢ| = 3/i < ε/2 ⇔ i > 6/ε
+  let K = 0;
+  for (let i = 1; i <= n1; i++) K += Math.abs(a(i));
+  const n2 = Math.floor(2 * K / eps) + 1; // K/n₂ < ε/2
+  const n0 = Math.max(n1, n2);
+  const M = clamp(n0 + 12, 20, 160);
+  const { ctx, T } = setup("prop-2-c", 0.62, { x0: 0, x1: M + 1, y0: -1.7, y1: 1.7 }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, -eps / 2, eps / 2, C("--area2"));
+  hband(ctx, T, -eps, eps, C("--band"));
+  seqAxes(ctx, T, "n");
+  vline(ctx, T, n1, C("--seq2"), [4, 3], 1.2);
+  vline(ctx, T, n2, C("--accent"), [4, 3], 1.2);
+  vline(ctx, T, n0, C("--ink"), null, 1.4);
+  const lab = (x, txt, col, row) => PP.label(ctx, txt, T.X(x) + 3, T.p.t + 2 + 14 * row, col, "left", "top", 11);
+  lab(n1, "n₁", C("--seq2"), 0); lab(n2, "n₂", C("--accent"), 1); lab(n0, "n₀", C("--ink"), 2);
+  const r = dotR(M);
+  let S = 0; const pts = [];
+  for (let n = 1; n <= M; n++) {
+    S += a(n);
+    pts.push([T.X(n), T.Y(S / n)]);
+    const an = a(n);
+    if (an >= T.box.y0 && an <= T.box.y1) PP.dot(ctx, T.X(n), T.Y(an), r, C("--seq2"));
+    else arrowOut(ctx, T.X(n), an > 0 ? T.p.t + 7 : T.h - T.p.b - 7, an > 0, C("--seq2"));
+  }
+  PP.path(ctx, pts, C("--accent"), 2);
+  let Sn0 = 0;
+  for (let i = 1; i <= n0; i++) Sn0 += a(i);
+  PP.read(P + "prop-2-read", [
+    ["n₁ (|aᵢ| < ε/2 desde ahí)", String(n1)],
+    ["K = Σ_{i≤n₁} |aᵢ|", F(K, 3)],
+    ["n₂ (K/n₂ < ε/2)", String(n2)],
+    ["n₀ = máx{n₁, n₂}", String(n0)],
+    ["|S(n₀)|", F(Math.abs(Sn0 / n0), 4) + " < ε", "good"],
+  ]);
+}, [P + "prop-2-e"]);
+
+/* ===================== Bloque 4 ===================== */
+
+/* Ejemplo 10: x/(x+1). */
+PP.register(function ej10() {
+  const N = V("10-N");
+  PP.out(P + "10-N-o", String(N));
+  const X1 = Math.max(10, N + 2);
+  const { ctx, T } = setup("10-c", 0.62, { x0: 0, x1: X1, y0: 0, y1: 1.12 }, { l: 38, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xLabel: "x", yLabel: "x/(x+1)" });
+  hline(ctx, T, 1, C("--ok"), null, 2);
+  PP.label(ctx, "1 (cota superior)", T.w - T.p.r - 4, T.Y(1) - 3, C("--ok"), "right", "bottom", 12);
+  const pts = [];
+  for (let i = 1; i <= 300; i++) { const x = X1 * i / 300; pts.push([T.X(x), T.Y(x / (x + 1))]); }
+  PP.path(ctx, pts, C("--muted"), 1.6);
+  PP.circle(ctx, T.X(0), T.Y(0), 4, C("--muted"), C("--bg"));
+  for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(n), T.Y(n / (n + 1)), 4.5, C("--accent"));
+  PP.read(P + "10-read", [
+    ["a_N = N/(N+1)", N + "/" + (N + 1) + " = " + F(N / (N + 1), 4)],
+    ["1 − a_N", "1/" + (N + 1) + " = " + F(1 / (N + 1), 4)],
+    ["¿1 ∈ A?", "no: x/(x+1) < 1 para todo x > 0"],
+  ]);
+}, [P + "10-N"]);
+
+/* C1-4: A = {1/n + m}. */
+PP.register(function c14() {
+  const N = V("c1-4-N"), s = R("c1-4-s");
+  PP.out(P + "c1-4-N-o", String(N));
+  const arriba = s === "arriba";
+  const box = arriba ? { x0: 0.6, x1: N + 1.6, y0: -1, y1: 1 } : { x0: 0.94, x1: 2.08, y0: -1, y1: 1 };
+  const { ctx, T } = setup("c1-4-c", 0.42, box, { l: 14, r: 14, t: 10, b: 10 });
+  const y = T.Y(0);
+  const ticks = [];
+  if (arriba) { const st = N <= 10 ? 1 : 2; for (let k = 1; k <= N + 1; k++) if (k % st === 0 || k === 1) ticks.push({ x: k, label: String(k), len: 4 }); }
+  else { ticks.push({ x: 1, label: "1 = ínf A", color: C("--ok"), w: 2.5 }); ticks.push({ x: 1.5, label: "3/2", len: 4 }); ticks.push({ x: 2, label: "2", len: 4 }); }
+  realLine(ctx, T, ticks, true);
+  for (let m = 1; m <= N; m++) for (let n = 1; n <= N; n++) {
+    const v = 1 / n + m;
+    if (v >= T.box.x0 && v <= T.box.x1) PP.dot(ctx, T.X(v), y, 2, C("--muted"));
+  }
+  if (arriba) {
+    for (let m = 1; m <= N; m++) PP.dot(ctx, T.X(1 + m), y, 5, C("--seq2"));
+    PP.label(ctx, "1 + m →", T.X(N + 1), y - 12, C("--seq2"), "right", "bottom", 12);
+  } else {
+    for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(1 + 1 / n), y, 5, C("--accent"));
+    PP.circle(ctx, T.X(1), y, 5, C("--ok"), C("--bg"), null, 2);
+    PP.label(ctx, "← 1/n + 1", T.X(1 + 1 / N), y - 12, C("--accent"), "left", "bottom", 12);
+  }
+  PP.read(P + "c1-4-read", arriba ? [
+    ["sucesión (n = 1)", "aₘ = 1 + m"],
+    ["último dibujado", "a" + sub(N) + " = " + (N + 1)],
+    ["comportamiento", "aₘ → +∞: A no está acotado superiormente", "bad"],
+  ] : [
+    ["sucesión (m = 1)", "aₙ = 1/n + 1"],
+    ["último dibujado", "a" + sub(N) + " = " + F(1 + 1 / N, 4)],
+    ["distancia a 1", "1/" + N + " = " + F(1 / N, 4)],
+    ["¿1 ∈ A?", "no: 1/n + m > 1", "good"],
+  ]);
+}, [P + "c1-4-N", 'input[name="' + P + 'c1-4-s"]']);
+
+/* ===================== Bloque 5 ===================== */
+
+/* Ejemplo 9: (−1)ⁿ no converge. */
+PP.register(function ej9() {
+  const l = V("9-l") / 100, n0 = V("9-n0");
+  PP.out(P + "9-l-o", F(l, 2));
+  PP.out(P + "9-n0-o", String(n0));
+  const M = 16, eps = 0.5;
+  const { ctx, T } = setup("9-c", 0.62, { x0: 0, x1: M + 1, y0: -2.6, y1: 2.6 }, { l: 34, r: 12, t: 12, b: 26 });
+  hband(ctx, T, l - eps, l + eps, C("--band"));
+  seqAxes(ctx, T, "n");
+  hline(ctx, T, l, C("--accent"), [5, 4], 1.4);
+  PP.label(ctx, "ℓ", T.w - T.p.r - 4, T.Y(l) - 3, C("--accent"), "right", "bottom", 13);
+  vline(ctx, T, n0, C("--ink"), [4, 3], 1.2);
+  PP.label(ctx, "n₀", T.X(n0) + 4, T.p.t + 2, C("--ink"), "left", "top", 12);
+  const wantOdd = l >= 0;
+  const n = (n0 % 2 === 1) === wantOdd ? n0 : n0 + 1;
+  for (let k = 1; k <= M; k++) PP.dot(ctx, T.X(k), T.Y(k % 2 ? -1 : 1), 4, C("--seq2"));
+  const an = n % 2 ? -1 : 1;
+  ring(ctx, T.X(n), T.Y(an), 9, C("--fail"));
+  PP.path(ctx, [[T.X(n) + 12, T.Y(an)], [T.X(n) + 12, T.Y(l)]], C("--fail"), 1.5);
+  PP.label(ctx, "≥ 1/2", T.X(n) + 16, T.Y((an + l) / 2), C("--fail"), "left", "middle", 12);
+  PP.read(P + "9-read", [
+    ["ℓ, ε", F(l, 2) + ", 1/2"],
+    ["n elegido (≥ n₀)", n + (n % 2 ? " (impar)" : " (par)") + (wantOdd ? "" : " — caso ℓ < 0")],
+    ["aₙ", String(an).replace("-", "−")],
+    ["|aₙ − ℓ|", F(Math.abs(an - l), 3) + " ≥ 1/2", "bad"],
+  ]);
+}, [P + "9-l", P + "9-n0"]);
+
+/* ===================== Bloque 6 ===================== */
+
+/* Ejemplo 11: qué es una subsucesión. */
+PP.register(function ej11() {
+  const s = R("11-s");
+  const cands = {
+    a2k: { idx: [2, 4, 6, 8], name: "(a₂ₖ)" },
+    b: { idx: [2, 4, 1, 5, 6], name: "(bₙ)" },
+    c: { idx: [1, 1, 2, 3], name: "(cₙ)" },
+  };
+  const cand = cands[s];
+  const { ctx, w, h } = PP.canvas(P + "11-c", 0.55);
+  const lab = (n) => (n === 1 ? "1" : "1/" + n);
+  const cellW = Math.min(52, (w - 24) / 8 - 4), gap = ((w - 24) - 8 * cellW) / 7;
+  const xTop = (i) => 12 + (i - 1) * (cellW + gap) + cellW / 2;
+  const yTop = h * 0.26, yBot = h * 0.74, ch = 28;
+  PP.label(ctx, "(aₙ)", 12, yTop - ch / 2 - 18, C("--muted"), "left", "bottom", 11);
+  PP.label(ctx, cand.name, 12, yBot + ch / 2 + 6, C("--muted"), "left", "top", 11);
+  // reglas: índice repetido o no creciente
+  const bad = cand.idx.map((n, k) => k > 0 && n <= cand.idx[k - 1]);
+  cand.idx.forEach((n, k) => {
+    const xb = xTop(k + 1);
+    PP.path(ctx, [[xTop(n), yTop + ch / 2], [xb, yBot - ch / 2]], bad[k] ? C("--fail") : C("--accent"), bad[k] ? 2.4 : 1.6);
+  });
+  for (let i = 1; i <= 8; i++) {
+    const used = cand.idx.includes(i);
+    PP.rect(ctx, xTop(i) - cellW / 2, yTop - ch / 2, cellW, ch, used ? C("--accent") : C("--rule"), C("--panel"));
+    PP.label(ctx, lab(i), xTop(i), yTop, C("--ink"), "center", "middle", 12);
+    PP.label(ctx, "a" + sub(i), xTop(i), yTop - ch / 2 - 3, C("--muted"), "center", "bottom", 10);
+  }
+  cand.idx.forEach((n, k) => {
+    const xb = xTop(k + 1);
+    PP.rect(ctx, xb - cellW / 2, yBot - ch / 2, cellW, ch, bad[k] ? C("--fail") : C("--accent"), C("--panel"));
+    PP.label(ctx, lab(n), xb, yBot, C("--ink"), "center", "middle", 12);
+  });
+  PP.label(ctx, "…", xTop(cand.idx.length + 1) - cellW / 2, yBot, C("--muted"), "left", "middle", 14);
+  const ok = !bad.some(Boolean);
+  const why = s === "b" ? "n₃ = 1 < n₂ = 4: no respeta el orden" : s === "c" ? "n₂ = n₁ = 1: repite el primer término" : "2 < 4 < 6 < 8 < …";
+  PP.read(P + "11-read", [
+    ["índices nₖ", cand.idx.join(", ") + ", …"],
+    ["¿estrictamente crecientes?", ok ? "sí" : "no", ok ? "good" : "bad"],
+    ["motivo", why, ok ? "good" : "bad"],
+  ]);
+}, ['input[name="' + P + '11-s"]']);
+
+/* Prop cos(nπ/2). */
+PP.register(function propCos() {
+  const N = V("prop-3-N");
+  PP.out(P + "prop-3-N-o", String(N));
+  const { ctx, T } = setup("prop-3-c", 0.55, { x0: 0, x1: N + 1, y0: -1.4, y1: 1.4 }, { l: 34, r: 12, t: 12, b: 26 });
+  seqAxes(ctx, T, "n");
+  hline(ctx, T, 0, C("--accent"), [5, 4], 1);
+  hline(ctx, T, 1, C("--seq2"), [5, 4], 1);
+  const r = dotR(N) + 0.5;
+  for (let n = 1; n <= N; n++) {
+    const v = Math.round(Math.cos(n * Math.PI / 2));
+    const col = n % 4 === 1 ? C("--accent") : n % 4 === 0 ? C("--seq2") : C("--muted");
+    PP.dot(ctx, T.X(n), T.Y(v), n % 4 === 1 || n % 4 === 0 ? r + 1 : r - 0.5, col);
+  }
+  PP.label(ctx, "a₄ₖ₊₁ = 0", T.w - T.p.r - 4, T.Y(0) + 4, C("--accent"), "right", "top", 12);
+  PP.label(ctx, "a₄ₖ = 1", T.w - T.p.r - 4, T.Y(1) - 4, C("--seq2"), "right", "bottom", 12);
+  const i1 = [], i0 = [];
+  for (let n = 1; n <= N; n++) { if (n % 4 === 1) i1.push(n); if (n % 4 === 0) i0.push(n); }
+  PP.read(P + "prop-3-read", [
+    ["índices 4k + 1", i1.slice(0, 6).join(", ") + (i1.length > 6 ? ", …" : "") + "  → 0"],
+    ["índices 4k", i0.slice(0, 6).join(", ") + (i0.length > 6 ? ", …" : "") + "  → 1"],
+    ["límites", "0 ≠ 1 ⇒ (aₙ) no converge", "bad"],
+  ]);
+}, [P + "prop-3-N"]);
+
+/* Ejemplo 12: rⁿ. */
+PP.register(function ej12() {
+  const r = V("12-r") / 100;
+  PP.out(P + "12-r-o", F(r, 2));
+  const M = 30;
+  const { ctx, T } = setup("12-c", 0.62, { x0: 0, x1: M + 1, y0: -0.04, y1: 1.12 }, { l: 38, r: 12, t: 12, b: 26 });
+  hband(ctx, T, r, 1, C("--failband"));
+  seqAxes(ctx, T, "n", "rⁿ");
+  hline(ctx, T, 1, C("--fail"), null, 1.6);
+  PP.label(ctx, "1", T.w - T.p.r - 4, T.Y(1) - 3, C("--fail"), "right", "bottom", 12);
+  PP.label(ctx, "1 − r", T.w - T.p.r - 4, T.Y((1 + r) / 2), C("--fail"), "right", "middle", 12);
+  for (let n = 1; n <= M; n++) {
+    PP.dot(ctx, T.X(n), T.Y(Math.pow(r, n)), 3, C("--accent"));
+    if (n % 2 === 0) ring(ctx, T.X(n), T.Y(Math.pow(r, n)), 6, C("--seq2"));
+  }
+  PP.read(P + "12-read", [
+    ["a₁ = r", F(r, 3)],
+    ["|aₙ − 1| ≥ 1 − r", F(1 - r, 3)],
+    ["a₃₀ = r³⁰", F(Math.pow(r, 30), 6)],
+    ["a₁₅·a₁₅ = a₃₀", "r¹⁵·r¹⁵ (álgebra: ℓ·ℓ)"],
+  ]);
+}, [P + "12-r"]);
+
+/* C1-2: xⁿ para el x elegido. */
+PP.register(function c12() {
+  const x = V("c1-2-x") / 100;
+  PP.out(P + "c1-2-x-o", F(x, 2));
+  const M = 25, Y = 3;
+  const { ctx, T } = setup("c1-2-c", 0.62, { x0: 0, x1: M + 1, y0: -Y, y1: Y }, { l: 34, r: 12, t: 12, b: 26 });
+  seqAxes(ctx, T, "n", "xⁿ");
+  for (let n = 1; n <= M; n++) {
+    const v = Math.pow(x, n);
+    if (Math.abs(v) <= Y) PP.dot(ctx, T.X(n), T.Y(v), 3.5, C("--accent"));
+    else arrowOut(ctx, T.X(n), v > 0 ? T.p.t + 7 : T.h - T.p.b - 7, v > 0, C("--seq2"));
+  }
+  const ax = Math.abs(x);
+  let caso, concl, cls;
+  if (x === 1) { caso = "x = 1"; concl = "convergente a 1"; cls = "good"; }
+  else if (x === -1) { caso = "x = −1 (Ejemplo 9)"; concl = "no converge"; cls = "bad"; }
+  else if (x >= 0 && x < 1) { caso = "0 ≤ x < 1 (monótona acotada, L = Lx)"; concl = "convergente a 0"; cls = "good"; }
+  else if (ax < 1) { caso = "|x| < 1 (lema del valor absoluto)"; concl = "convergente a 0"; cls = "good"; }
+  else if (x > 1) { caso = "x > 1 (creciente; L = 0 es absurdo)"; concl = "divergente"; cls = "bad"; }
+  else { caso = "x < −1 (|x|ⁿ no converge)"; concl = "divergente"; cls = "bad"; }
+  PP.read(P + "c1-2-read", [
+    ["x", F(x, 2)],
+    ["caso", caso],
+    ["x²⁵", F(Math.pow(x, 25), 4)],
+    ["resumen", concl, cls],
+  ]);
+}, [P + "c1-2-x"]);
+
+/* C2-1: telaraña de a_{n+1} = √(2 + aₙ). */
+PP.register(function c21() {
+  const k = V("c2-1-k"), v = R("c2-1-v");
+  PP.out(P + "c2-1-k-o", String(k));
+  const seq = [Math.SQRT2];
+  for (let i = 0; i < k; i++) seq.push(Math.sqrt(2 + seq[i]));
+  if (v === "tela") {
+    const { ctx, T } = setup("c2-1-c", 0.7, { x0: -1.3, x1: 2.5, y0: -0.25, y1: 2.45 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.axes(ctx, T, { xLabel: "x", yLabel: "y" });
+    hline(ctx, T, 2, C("--ok"), [5, 4], 1.4);
+    PP.label(ctx, "cota 2", T.p.l + 4, T.Y(2) - 3, C("--ok"), "left", "bottom", 11);
+    PP.path(ctx, [[T.X(-0.25), T.Y(-0.25)], [T.X(2.45), T.Y(2.45)]], C("--muted"), 1.4);
+    PP.label(ctx, "y = x", T.X(2.38), T.Y(2.38) + 4, C("--muted"), "right", "top", 11);
+    const curve = [];
+    for (let i = 0; i <= 200; i++) { const u = -1.3 + 3.8 * i / 200; curve.push([T.X(u), T.Y(Math.sqrt(2 + u))]); }
+    PP.path(ctx, curve, C("--accent"), 2);
+    PP.label(ctx, "y = √(2 + x)", T.X(-1.2), T.Y(Math.sqrt(0.8)) - 6, C("--accent"), "left", "bottom", 11);
+    // telaraña
+    const web = [[T.X(seq[0]), T.Y(0)]];
+    for (let i = 0; i < k; i++) {
+      web.push([T.X(seq[i]), T.Y(seq[i + 1])]);
+      web.push([T.X(seq[i + 1]), T.Y(seq[i + 1])]);
+    }
+    PP.path(ctx, web, C("--seq2"), 1.6);
+    PP.dot(ctx, T.X(seq[0]), T.Y(0), 4.5, C("--seq2"));
+    PP.label(ctx, "a₁ = √2", T.X(seq[0]), T.Y(0) + 4, C("--seq2"), "center", "top", 11);
+    PP.dot(ctx, T.X(2), T.Y(2), 5, C("--ok"));
+    PP.label(ctx, "L = 2", T.X(2) + 6, T.Y(2) + 4, C("--ok"), "left", "top", 11);
+    PP.dot(ctx, T.X(-1), T.Y(0), 4.5, C("--fail"));
+    PP.label(ctx, "−1", T.X(-1), T.Y(0) + 4, C("--fail"), "center", "top", 11);
+  } else {
+    const M = k + 1;
+    const { ctx, T } = setup("c2-1-c", 0.7, { x0: 0, x1: Math.max(M, 6) + 1, y0: 1.2, y1: 2.12 }, { l: 38, r: 12, t: 12, b: 26 });
+    seqAxes(ctx, T, "n", "aₙ");
+    hline(ctx, T, 2, C("--ok"), [5, 4], 1.4);
+    PP.label(ctx, "cota 2", T.w - T.p.r - 4, T.Y(2) - 3, C("--ok"), "right", "bottom", 11);
+    for (let n = 1; n <= M; n++) PP.dot(ctx, T.X(n), T.Y(seq[n - 1]), 4.5, C("--accent"));
+  }
+  PP.read(P + "c2-1-read", [
+    ["a₁, a₂, a₃", seq.slice(0, 3).map((u) => F(u, 4)).join(", ")],
+    ["a" + sub(k + 1), F(seq[k], 6)],
+    ["2 − a" + sub(k + 1), F(2 - seq[k], 6)],
+    ["¿creciente y ≤ 2?", "sí", "good"],
+  ]);
+}, [P + "c2-1-k", 'input[name="' + P + 'c2-1-v"]']);
+
+/* C2-2: tres clases de restos. */
+PP.register(function c22() {
+  const eps = V("c2-2-e") / 100;
+  PP.out(P + "c2-2-e-o", F(eps, 2));
+  const a = (n) => {
+    const r = n % 3, k = (n - r) / 3;
+    if (r === 0) return 1.2 * (k % 2 ? -1 : 1) / k;
+    if (r === 1) return 2 / (k + 1);
+    return -0.8 / (k + 1);
+  };
+  const first = (cond, start) => { let k = start; while (!cond(k)) k++; return k; };
+  const k0 = first((k) => 1.2 / k < eps, 1);
+  const k1 = first((k) => 2 / (k + 1) < eps, 1);
+  const k2 = first((k) => 0.8 / (k + 1) < eps, 1);
+  const t0 = 3 * k0, t1 = 3 * k1 + 1, t2 = 3 * k2 + 2, n0 = Math.max(t0, t1, t2);
+  const M = clamp(n0 + 9, 18, 120);
+  const { ctx, T } = setup("c2-2-c", 0.62, { x0: 0, x1: M + 1, y0: -1.3, y1: 1.3 }, { l: 34, r: 12, t: 12, b: 26 });
+  hband(ctx, T, -eps, eps, C("--band"));
+  seqAxes(ctx, T, "n");
+  const cols = [C("--accent"), C("--seq2"), C("--seq3")];
+  [t0, t1, t2].forEach((t, i) => vline(ctx, T, t, cols[i], [4, 3], 1.3));
+  vline(ctx, T, n0, C("--ink"), null, 1.5);
+  PP.label(ctx, "n₀ = " + n0, T.X(n0) + (T.X(n0) > T.w * 0.7 ? -4 : 4), T.p.t + 2, C("--ink"), T.X(n0) > T.w * 0.7 ? "right" : "left", "top", 12);
+  const r = dotR(M);
+  for (let n = 1; n <= M; n++) {
+    const v = a(n);
+    if (Math.abs(v) <= 1.3) PP.dot(ctx, T.X(n), T.Y(v), r, cols[n % 3]);
+    else arrowOut(ctx, T.X(n), v > 0 ? T.p.t + 7 : T.h - T.p.b - 7, v > 0, cols[n % 3]);
+  }
+  PP.read(P + "c2-2-read", [
+    ["k₀ → 3k₀", k0 + " → " + t0],
+    ["k₁ → 3k₁ + 1", k1 + " → " + t1],
+    ["k₂ → 3k₂ + 2", k2 + " → " + t2],
+    ["n₀ = máx", String(n0), "good"],
+  ]);
+}, [P + "c2-2-e"]);
+
+/* Prop producto: aₙ, bₙ y cₙ = aₙbₙ. */
+PP.register(function propProd() {
+  const eps = V("prop-4-e") / 100, v = R("prop-4-v");
+  PP.out(P + "prop-4-e-o", F(eps, 2));
+  const a = (n) => (n % 2 ? 1.5 : 3 / n);
+  const b = (n) => (n % 2 ? 4 / (n + 1) : -1.2);
+  const M1 = 1.5, M2 = 2;
+  const k1 = Math.floor(3 * M2 / (2 * eps)) + 1; // |a₂ₖ| = 3/(2k) < ε/M₂
+  const k2 = Math.floor(2 * M1 / eps) + 1; // |b₂ₖ₋₁| = 2/k < ε/M₁
+  const n0 = Math.max(2 * k1, 2 * k2 - 1);
+  const M = clamp(n0 + 10, 20, 140);
+  const r = dotR(M);
+  if (v === "ab") {
+    const { ctx, T } = setup("prop-4-c", 0.62, { x0: 0, x1: M + 1, y0: -1.6, y1: 2.2 }, { l: 34, r: 12, t: 12, b: 26 });
+    seqAxes(ctx, T, "n");
+    for (let n = 1; n <= M; n++) {
+      PP.dot(ctx, T.X(n), T.Y(a(n)), r, C("--accent"));
+      PP.dot(ctx, T.X(n), T.Y(b(n)), r, C("--seq2"));
+    }
+    PP.label(ctx, "aₙ", T.w - T.p.r - 4, T.Y(1.5) - 4, C("--accent"), "right", "bottom", 12);
+    PP.label(ctx, "bₙ", T.w - T.p.r - 4, T.Y(-1.2) + 4, C("--seq2"), "right", "top", 12);
+  } else {
+    const { ctx, T } = setup("prop-4-c", 0.62, { x0: 0, x1: M + 1, y0: -1.2, y1: 1.6 }, { l: 34, r: 12, t: 12, b: 26 });
+    hband(ctx, T, -eps, eps, C("--band"));
+    seqAxes(ctx, T, "n", "cₙ");
+    vline(ctx, T, n0, C("--ink"), [4, 3], 1.3);
+    PP.label(ctx, "n₀ = " + n0, T.X(n0) + (T.X(n0) > T.w * 0.7 ? -4 : 4), T.p.t + 2, C("--ink"), T.X(n0) > T.w * 0.7 ? "right" : "left", "top", 12);
+    for (let n = 1; n <= M; n++) PP.dot(ctx, T.X(n), T.Y(a(n) * b(n)), r, n % 2 ? C("--seq2") : C("--accent"));
+  }
+  let worst = 0;
+  for (let n = n0; n <= M; n++) worst = Math.max(worst, Math.abs(a(n) * b(n)));
+  PP.read(P + "prop-4-read", [
+    ["M₁, M₂", "1,5 y 2"],
+    ["k₁ (|a₂ₖ| < ε/M₂)", String(k1)],
+    ["k₂ (|b₂ₖ₋₁| < ε/M₁)", String(k2)],
+    ["n₀ = máx{2k₁, 2k₂ − 1}", String(n0)],
+    ["máx |cₙ| dibujado, n ≥ n₀", F(worst, 4) + " < ε", worst < eps ? "good" : "bad"],
+  ]);
+}, [P + "prop-4-e", 'input[name="' + P + 'prop-4-v"]']);
+
+/* C2-3: fracciones de naturales que tienden a √2. */
+PP.register(function c23() {
+  const N = V("c2-3-N"), v = R("c2-3-v");
+  PP.out(P + "c2-3-N-o", String(N));
+  const pairs = [[1, 1], [3, 2], [7, 5], [17, 12], [41, 29], [99, 70], [239, 169], [577, 408], [1393, 985], [3363, 2378]];
+  const r2 = Math.SQRT2;
+  if (v === "cociente") {
+    const { ctx, T } = setup("c2-3-c", 0.62, { x0: 0, x1: 11, y0: 0.9, y1: 1.6 }, { l: 38, r: 12, t: 12, b: 26 });
+    seqAxes(ctx, T, "n", "aₙ/bₙ");
+    hline(ctx, T, r2, C("--ok"), [5, 4], 1.6);
+    PP.label(ctx, "r = √2", T.w - T.p.r - 4, T.Y(r2) - 3, C("--ok"), "right", "bottom", 12);
+    for (let n = 1; n <= N; n++) {
+      const [p, q] = pairs[n - 1];
+      PP.dot(ctx, T.X(n), T.Y(p / q), 4.5, C("--accent"));
+      if (n <= 4) PP.label(ctx, p + "/" + q, T.X(n), T.Y(p / q) + (n % 2 ? 8 : -8), C("--accent"), "center", n % 2 ? "top" : "bottom", 11);
+    }
+  } else {
+    const { ctx, T } = setup("c2-3-c", 0.62, { x0: 0, x1: 11, y0: 0, y1: 3.7 }, { l: 44, r: 12, t: 12, b: 26 });
+    ctx.save(); ctx.font = font(11); ctx.fillStyle = C("--muted"); ctx.strokeStyle = C("--rule"); ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    [1, 10, 100, 1000].forEach((u) => { const yy = T.Y(Math.log10(u)); ctx.beginPath(); ctx.moveTo(T.p.l, yy); ctx.lineTo(T.w - T.p.r, yy); ctx.stroke(); ctx.fillText(String(u), T.p.l - 6, yy); });
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    for (let n = 1; n <= 10; n++) ctx.fillText(String(n), T.X(n), T.h - T.p.b + 6);
+    ctx.restore();
+    for (let n = 1; n <= N; n++) {
+      const [p, q] = pairs[n - 1];
+      PP.dot(ctx, T.X(n) - 3, T.Y(Math.log10(p)), 4.5, C("--accent"));
+      PP.dot(ctx, T.X(n) + 3, T.Y(Math.log10(q)), 4.5, C("--seq2"));
+    }
+    PP.label(ctx, "aₙ", T.X(1) + 8, T.Y(0) - 6, C("--accent"), "left", "bottom", 12);
+    PP.label(ctx, "bₙ", T.X(1) + 8, T.Y(0) + 4, C("--seq2"), "left", "bottom", 12);
+  }
+  const [p, q] = pairs[N - 1];
+  PP.read(P + "c2-3-read", [
+    ["a" + sub(N) + ", b" + sub(N), p + ", " + q],
+    ["a" + sub(N) + "/b" + sub(N), F(p / q, 7)],
+    ["|a/b − √2|", F(Math.abs(p / q - r2), 7)],
+  ]);
+}, [P + "c2-3-N", 'input[name="' + P + 'c2-3-v"]']);
+
+/* C1-6: racionales diádicos decrecientes hacia x. */
+PP.register(function c16() {
+  const x = V("c1-6-x") / 10, K = V("c1-6-k");
+  PP.out(P + "c1-6-x-o", F(x, 1));
+  PP.out(P + "c1-6-k-o", String(K));
+  const q = [[x < 1 ? 1 : Math.floor(x) + 1, 0]]; // [m, j] representa m/2^j
+  const val = (t) => t[0] / Math.pow(2, t[1]);
+  for (let n = 1; n < K; n++) {
+    const mid = (x + val(q[n - 1])) / 2;
+    let j = 0, m;
+    for (;;) {
+      const d = Math.pow(2, j);
+      m = Math.ceil(mid * d - 1e-12) - 1;
+      if (m / d > x + 1e-12) break;
+      j++;
+    }
+    let mm = m, jj = j;
+    while (mm % 2 === 0 && jj > 0) { mm /= 2; jj--; }
+    q.push([mm, jj]);
+  }
+  const top = val(q[0]);
+  const span = top - x;
+  const { ctx, T } = setup("c1-6-c", 0.62, { x0: 0, x1: K + 1, y0: x - 0.12 * span, y1: top + 0.1 * span }, { l: 44, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xLabel: "n", intX: true });
+  hline(ctx, T, x, C("--ok"), null, 2);
+  PP.label(ctx, "x", T.w - T.p.r - 4, T.Y(x) + 3, C("--ok"), "right", "top", 13);
+  for (let n = 1; n < K; n++) {
+    const mid = (x + val(q[n - 1])) / 2;
+    PP.rect(ctx, T.X(n + 1) - 5, T.Y(mid), 10, T.Y(x) - T.Y(mid), null, C("--area2"));
+    PP.path(ctx, [[T.X(n + 1) - 7, T.Y(mid)], [T.X(n + 1) + 7, T.Y(mid)]], C("--muted"), 1.2);
+  }
+  const pts = q.map((t, i) => [T.X(i + 1), T.Y(val(t))]);
+  PP.path(ctx, pts, C("--accent"), 1, [3, 3]);
+  q.forEach((t, i) => PP.dot(ctx, T.X(i + 1), T.Y(val(t)), 4.5, C("--accent")));
+  const fr = (t) => (t[1] === 0 ? String(t[0]) : t[0] + "/" + Math.pow(2, t[1]));
+  PP.read(P + "c1-6-read", [
+    ["x", F(x, 2)],
+    ["q₁ (natural > x)", fr(q[0])],
+    ["q₂, q₃, …", q.slice(1).map(fr).join(", ")],
+    ["q" + sub(K) + " − x", F(val(q[K - 1]) - x, 5) + " > 0", "good"],
+  ]);
+}, [P + "c1-6-x", P + "c1-6-k"]);
+
+/* Serie de (−1)ᵏ. */
+PP.register(function serie1() {
+  const N = V("serie-N");
+  PP.out(P + "serie-N-o", String(N));
+  const { ctx, T } = setup("serie-c", 0.5, { x0: 0, x1: N + 1, y0: -1.5, y1: 0.7 }, { l: 34, r: 12, t: 12, b: 26 });
+  seqAxes(ctx, T, "n", "Sₙ");
+  const S = (n) => (n % 2 ? -1 : 0);
+  const pts = [];
+  for (let n = 1; n <= N; n++) pts.push([T.X(n), T.Y(S(n))]);
+  PP.path(ctx, pts, C("--muted"), 1);
+  for (let n = 1; n <= N; n++) PP.dot(ctx, T.X(n), T.Y(S(n)), dotR(N) + 0.5, n % 2 ? C("--seq2") : C("--accent"));
+  PP.label(ctx, "S₂ₙ = 0", T.w - T.p.r - 4, T.Y(0) - 6, C("--accent"), "right", "bottom", 12);
+  PP.label(ctx, "S₂ₙ₊₁ = −1", T.w - T.p.r - 4, T.Y(-1) + 6, C("--seq2"), "right", "top", 12);
+  PP.read(P + "serie-read", [
+    ["S₁, …, S₆", "−1, 0, −1, 0, −1, 0"],
+    ["S" + sub(N), String(S(N)).replace("-", "−")],
+    ["¿lím Sₙ?", "no existe: dos subsucesiones con límites 0 y −1", "bad"],
+  ]);
+}, [P + "serie-N"]);
+
+/* Serie geométrica. */
+PP.register(function serie2() {
+  const r = V("serie-2-r") / 100;
+  PP.out(P + "serie-2-r-o", F(r, 2));
+  const N = 30, lim = 1 / (1 - r);
+  const { ctx, T } = setup("serie-2-c", 0.62, { x0: 0, x1: N + 1, y0: 0, y1: lim * 1.12 }, { l: 38, r: 12, t: 12, b: 26 });
+  seqAxes(ctx, T, "n", "Sₙ");
+  hline(ctx, T, lim, C("--ok"), null, 2);
+  PP.label(ctx, "1/(1 − r) = " + F(lim, 3), T.w - T.p.r - 4, T.Y(lim) - 3, C("--ok"), "right", "bottom", 12);
+  let sum = 0;
+  for (let n = 1; n <= N; n++) {
+    sum += Math.pow(r, n - 1);
+    PP.dot(ctx, T.X(n), T.Y((Math.pow(r, n) - 1) / (r - 1)), 3.5, C("--accent"));
+  }
+  PP.read(P + "serie-2-read", [
+    ["S₃₀ por la fórmula", F((Math.pow(r, N) - 1) / (r - 1), 6)],
+    ["S₃₀ sumando 1 + r + … + r²⁹", F(sum, 6)],
+    ["1/(1 − r)", F(lim, 6)],
+    ["r³⁰", F(Math.pow(r, N), 6)],
+  ]);
+}, [P + "serie-2-r"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

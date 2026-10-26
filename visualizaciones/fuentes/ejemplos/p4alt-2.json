@@ -1,0 +1,163 @@
+{
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo</strong> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$</i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejap-5.10": {
+  "tipo": "Ejercicio",
+  "numero": "5.10",
+  "titulo": "Continuidad por cerrados",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(F) \\subseteq M$ es cerrado para todo $F \\subseteq N$ cerrado.</p>",
+  "fuente": "Ejercicio 5.10 de las notas de la materia. <code>apuntes.typ</code> lo cita (Teorema 5.13, Observación 5.12) sin caja propia; el enunciado es el que esas citas usan: la versión del Teorema 5.9 con cerrados."
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto compacto",
+  "enunciado": "<p>Un subconjunto $K$ de un espacio métrico es <b>compacto</b> si de todo cubrimiento de $K$ por abiertos se puede extraer un subcubrimiento finito. En espacios métricos equivale a ser <b>secuencialmente compacto</b>: toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-normado": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio normado",
+  "enunciado": "<p>Una <b>norma</b> en un espacio vectorial real $X$ es una función $\\|\\cdot\\| : X \\to \\mathbb{R}$ tal que, para todos $x, y \\in X$ y $\\lambda \\in \\mathbb{R}$: $\\|x\\| \\ge 0$ y $\\|x\\| = 0 \\iff x = 0$; $\\|\\lambda x\\| = |\\lambda| \\|x\\|$; $\\|x + y\\| \\le \\|x\\| + \\|y\\|$. El par $(X, \\|\\cdot\\|)$ es un <b>espacio normado</b>, y $d(x, y) = \\|x - y\\|$ es una métrica en $X$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-operador-lineal": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Aplicación lineal",
+  "enunciado": "<p>Si $X$, $Y$ son espacios vectoriales reales, $T : X \\to Y$ es <b>lineal</b> si $T(x + y) = T(x) + T(y)$ y $T(\\lambda x) = \\lambda T(x)$ para todos $x, y \\in X$, $\\lambda \\in \\mathbb{R}$. En particular $T(0) = 0$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-punto-fijo-banach": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Punto fijo de Banach",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico completo y $T : M \\to M$ una contracción: existe $k \\lt 1$ con $d(T(x), T(y)) \\le k\\, d(x, y)$ para todos $x, y \\in M$. Entonces $T$ tiene un único punto fijo $x^* = T(x^*)$, y para cualquier $x_0 \\in M$ la sucesión $x_{n+1} = T(x_n)$ converge a $x^*$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-separable": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio separable",
+  "enunciado": "<p>Un espacio métrico $(X, d)$ es <b>separable</b> si tiene un subconjunto contable (finito o numerable) y denso.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.</li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.29": {
+  "tipo": "Teorema",
+  "numero": "4.29",
+  "titulo": "Cerrados vía complemento abierto",
+  "enunciado": "<p>$F$ es un conjunto cerrado si y sólo si $F^c$ es un conjunto abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.31": {
+  "tipo": "Teorema",
+  "numero": "4.31",
+  "titulo": "Intersección arbitraria y unión finita de cerrados",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Entonces:</p><ol type=\"a\"><li>Si $\\{F_i\\}_{i \\in I}$ es una familia de conjuntos cerrados, entonces $F = \\bigcap_{i \\in I} F_i$ es cerrado.</li><li>Si $\\{F_i\\}_{i=1}^n$ son conjuntos cerrados, entonces $F = \\bigcup_{i=1}^n F_i$ es cerrado.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.13": {
+  "tipo": "Teorema",
+  "numero": "5.13",
+  "titulo": "Caracterización de continuidad por clausuras",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f(\\overline{E}) \\subseteq \\overline{f(E)}$ para todo $E \\subseteq M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.9": {
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(A) \\subseteq M$ es abierto para todo $A \\subseteq N$ abierto.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

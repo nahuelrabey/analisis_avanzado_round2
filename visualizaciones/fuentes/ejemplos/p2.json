@@ -1,0 +1,142 @@
+{
+ "def-3.1": {
+  "tipo": "Definición",
+  "numero": "3.1",
+  "titulo": "Conjuntos Coordinables",
+  "enunciado": "<p>Sean $X, Y$ dos conjuntos. Decimos que son <strong>coordinables</strong> si existe una función biyectiva $f : X \\to Y$. Cuando esto ocurre, escribimos $X \\sim Y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.6": {
+  "tipo": "Definición",
+  "numero": "3.6",
+  "titulo": "Conjunto Finito, Infinito, Numerable y Contable",
+  "enunciado": "<p>Un conjunto $A$ es:</p><ul><li><b>finito</b> si existe $n \\in \\mathbb{N}$ y una biyección $f : \\{1, 2, \\dots, n\\} \\to A$. En este caso, $\\#A = n$.</li><li><b>infinito</b> si no es finito. En otras palabras, $A$ no es coordinable con ningún conjunto finito.</li><li><b>numerable</b> si existe una biyección $f : \\mathbb{N} \\to A$. En este caso se tiene que $\\#A = \\aleph_0$.</li><li><b>a lo sumo numerable</b> o <b>contable</b> si es finito o numerable.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3.8": {
+  "tipo": "Definición",
+  "numero": "3.8",
+  "titulo": "Comparación y Orden entre Cardinales",
+  "enunciado": "<p>Dados dos conjuntos $A$ y $B$, decimos que $\\#A \\le \\#B$ si existe una función inyectiva $f : A \\to B$.</p><p>Además, decimos que $\\#A \\lt \\#B$ si $\\#A \\le \\#B$ pero $\\#A \\ne \\#B$ (existe una función inyectiva de $A$ en $B$ pero no existe ninguna función biyectiva entre los conjuntos).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.9": {
+  "tipo": "Proposición",
+  "numero": "3.9",
+  "titulo": "Caracterización de $\\le$ vía sobreyecciones",
+  "enunciado": "<p>Sean $A$ y $B$ conjuntos, con $A \\neq \\emptyset$. Entonces $\\#A \\le \\#B$ si y sólo si existe una función sobreyectiva $g : B \\to A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.11": {
+  "tipo": "Teorema",
+  "numero": "3.11",
+  "titulo": "Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Si existen funciones inyectivas $f : A \\to B$ y $g : B \\to A$, entonces existe una función biyectiva $h : A \\to B$. Es decir, si $\\#A \\le \\#B$ y $\\#B \\le \\#A$ entonces $\\#A = \\#B$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-3.13": {
+  "tipo": "Proposición",
+  "numero": "3.13",
+  "titulo": "Subconjuntos de Conjuntos Numerables",
+  "enunciado": "<p>Sea $A$ numerable. Si $\\emptyset \\ne B \\subseteq A$, entonces $B$ es a lo sumo numerable.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-numerabilidad-de-qq": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Numerabilidad de $\\mathbb{Q}$",
+  "enunciado": "<p>El conjunto de los números racionales es numerable. Es decir, $\\mathbb{N} \\sim \\mathbb{Q}$ y por lo tanto $\\#\\mathbb{Q} = \\aleph_0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-2": {
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $\\mathbb{Q}$",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $q \\in \\mathbb{Q}$ tal que $x \\lt q \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejem-3.12": {
+  "tipo": "Ejemplo",
+  "numero": "3.12",
+  "titulo": "Numerabilidad de $\\mathbb{N} \\times \\mathbb{N}$ vía Cantor-Schröeder-Bernstein",
+  "enunciado": "<p>Usemos el Teorema de Cantor-Schröeder-Bernstein para ver que $\\mathbb{N} \\times \\mathbb{N}$ es numerable.</p>",
+  "fuente": "ejemplos/p2.typ (Ejemplo 14, rotulado “Ejemplo 3.12”); no es una caja de apuntes.typ"
+ },
+ "ext-tfa": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Teorema fundamental de la aritmética",
+  "enunciado": "<p>Todo número natural $N \\ge 2$ se escribe como producto de primos, y esa escritura es única salvo el orden de los factores. En particular, si $p_0, \\dots, p_n$ son primos distintos y $p_0^{e_0} \\cdots p_n^{e_n} = p_0^{f_0} \\cdots p_n^{f_n}$ con $e_j, f_j \\in \\mathbb{N}_0$, entonces $e_j = f_j$ para todo $j$.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-raices-finitas": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Un polinomio no nulo tiene finitas raíces",
+  "enunciado": "<p>Un polinomio no nulo $p$ de grado $n$ con coeficientes reales tiene a lo sumo $n$ raíces reales. En particular, $\\{x \\in \\mathbb{R} : p(x) = 0\\}$ es finito.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "prop-3.2": {
+  "tipo": "Proposición",
+  "numero": "3.2",
+  "titulo": "Relación de equivalencia",
+  "enunciado": "<p>La relación $\\sim$ es una relación de equivalencia.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-3.19": {
+  "tipo": "Teorema",
+  "numero": "3.19",
+  "titulo": "No numerabilidad de $\\mathbb{R}$",
+  "enunciado": "<p>El conjunto de los números reales $\\mathbb{R}$ no es numerable.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-obs-3-22": {
+  "tipo": "Observación",
+  "numero": "3.22",
+  "titulo": "No unicidad del desarrollo decimal",
+  "enunciado": "<p>En la demostración de que el intervalo $(0, 1)$ no es numerable (Teorema 3.19) se usa el desarrollo decimal de los números reales para construir un $y \\in (0, 1)$ con $y \\neq x_n$ para todo $n \\in \\mathbb{N}$. Sin embargo, el desarrollo decimal de un número real no siempre es único: por ejemplo, $$0{,}1 = 0{,}0999999\\dots$$ (y en general, cualquier número con desarrollo decimal finito admite una representación alternativa terminada en una cola infinita de nueves).</p>",
+  "fuente": "notas_materia.pdf; en el repositorio figura como desafío en desafios/p2.typ. No está en apuntes.typ"
+ },
+ "ext-intervalos-encajados": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Propiedad de los intervalos encajados",
+  "enunciado": "<p>Si $I_n = [a_n, b_n]$ son intervalos cerrados y acotados con $I_{n+1} \\subseteq I_n$ para todo $n$, entonces $\\bigcap_{n \\in \\mathbb{N}} I_n \\neq \\emptyset$.</p>",
+  "fuente": "Abbott, Teorema 1.4.1; no está en apuntes.typ (la nota del Ejemplo A1.5.6b la demuestra)"
+ },
+ "ext-ejemplo-c1-3": {
+  "tipo": "Ejemplo",
+  "numero": "C1-3",
+  "titulo": "Una sucesión convergente de enteros es finalmente constante",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión convergente tal que existe $n_0 \\in \\mathbb{N}$ para el cual $a_n \\in \\mathbb{Z}$ para todo $n \\gt n_0$. Probar que existen $n_1 \\in \\mathbb{N}$ y $a \\in \\mathbb{R}$ tales que $a_n = a$ para todo $n \\ge n_1$.</p>",
+  "fuente": "ejemplos/p1.typ (Clase 1 · Ejemplo 3); no está enunciado en apuntes.typ"
+ },
+ "ext-buena-ordenacion": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Principio de buena ordenación",
+  "enunciado": "<p>Todo subconjunto no vacío de $\\mathbb{N}$ tiene mínimo.</p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ"
+ },
+ "ext-axioma-de-eleccion": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Axioma de elección",
+  "enunciado": "<p>Si $(X_i)_{i \\in I}$ es una familia de conjuntos no vacíos, existe una función $c : I \\to \\bigcup_{i \\in I} X_i$ con $c(i) \\in X_i$ para todo $i \\in I$: se puede elegir simultáneamente un elemento de cada conjunto.</p>",
+  "fuente": "Axioma de la teoría de conjuntos; no está enunciado en apuntes.typ (la demostración de la Proposición 3.9 lo menciona)"
+ }
+}

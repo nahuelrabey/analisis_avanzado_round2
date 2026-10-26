@@ -1,0 +1,686 @@
+<!-- ===================== p4alt, segunda parte: Bloques 6 a 9 ===================== -->
+<section class="bloque" id="ejp4alt-b6">
+  <h2><span class="bn">Bloque 6</span>Densidad y continuidad</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Dos usos de la densidad: dos funciones continuas que coinciden en un denso coinciden en todo (<a class="xg" data-guia="p4" data-ej="7">Ejercicio 7</a>), y la imagen continua y suryectiva de un denso es densa (<a class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a>). Incluye las caracterizaciones de “denso” (<span class="ref" data-ref="def-5.20">Definición 5.20</span>) por abiertos y por bolas, y otra demostración del <span class="ref" data-ref="teo-5.13">Teo. 5.13</span>, que es la herramienta del <a class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a>. En <code>ejemplos/p4.typ</code>, los ejemplos de clase C9-3.2 y C9-3.1 resuelven el <a class="xg" data-guia="p4" data-ej="7">Ejercicio 7</a> (a) y el <a class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a>; los ítems de este bloque son otras demostraciones de lo mismo.</p></div>
+
+  <!-- O3-1 -->
+  <article class="ej" id="ejp4alt-o3-1-prop" data-short="Prop." data-title="Un conjunto denso encuentra todos los abiertos no vacíos" data-topics="densidad,topologia">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Un conjunto denso “encuentra” todos los abiertos no vacíos</h3>
+      <span class="src">Daniilidis, Prop. 2.2.45</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(X, d)$ un espacio métrico y $D \subseteq X$. Entonces
+      $$\begin{aligned} &D \text{ es denso en } X \quad \Longleftrightarrow \\ &D \cap U \neq \emptyset \text{ para todo abierto } U \neq \emptyset. \end{aligned}$$
+      (Recordar: $D$ es <span class="ref" data-ref="def-5.20">denso</span> en $X$ si $\overline{D} = X$, Def. 2.2.44 de la fuente.)</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$(\Longrightarrow)$</p>
+          <p>Sea $D \subseteq X$ denso, sea $U \neq \emptyset$ <span class="ref" data-ref="def-4.14">abierto</span> y $x \in U$. Entonces $U$ es un abierto que contiene a $x$ y $x \in \overline{D}$. Se concluye porque $x \in \overline{D}$ si y sólo si todo abierto que contiene a $x$ corta a $D$ (la fuente cita su Proposición 2.2.17, que es la caracterización de la clausura por entornos; en <code>apuntes.typ</code> es la <span class="ref" data-ref="def-4.22">Def. 4.22</span> de punto de adherencia, con bolas).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-1-c1" aria-label="Puntos racionales del cuadrado y un abierto U arrastrable que siempre contiene alguno"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-1-q">denominador ≤ <i>q</i></label><input type="range" id="ejp4alt-o3-1-q" min="2" max="40" value="8"><output id="ejp4alt-o3-1-q-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o3-1-r">radio de <i>U</i></label><input type="range" id="ejp4alt-o3-1-r" min="1" max="30" value="6"><output id="ejp4alt-o3-1-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-1-read" aria-live="polite"></dl>
+          <figcaption><i>X</i> = [0, 1]² y <i>D</i> = ℚ² ∩ [0, 1]² (ejemplo elegido para el dibujo); sólo se dibujan los puntos de <i>D</i> con denominador ≤ <i>q</i>. El abierto <i>U</i> es una bola que se arrastra. Por chica que sea, al subir <i>q</i> aparecen puntos de <i>D</i> adentro: <i>D</i> ∩ <i>U</i> ≠ ∅.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$(\Longleftarrow)$</p>
+          <p>Sea $U$ abierto no vacío. Si $D \cap U = \emptyset$ entonces $D \subseteq X \setminus U$, y como $X \setminus U$ es <span class="ref" data-ref="teo-4.29">cerrado</span>, $\overline{D} \subseteq X \setminus U \subsetneq X$, es decir $\overline{D} \neq X$, lo que es una contradicción.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Observación</b> <em>Denso $\Longleftrightarrow$ el complemento tiene interior vacío (Daniilidis, Obs. 2.2.46).</em> Un conjunto $D \subseteq X$ es denso si y sólo si su complemento $X \setminus D$ tiene interior vacío. En $\mathbb{R}$ tanto $\mathbb{Q}$ como su complemento $\mathbb{R} \setminus \mathbb{Q}$ son densos (y tienen interior vacío). Si un espacio métrico $X$ posee un conjunto denso con complemento denso, entonces $X$ no puede tener puntos aislados. En el otro extremo, el único conjunto denso en un espacio métrico discreto es todo el espacio.</div>
+    <div class="nota"><b>Nota</b>la fuente no demuestra esta observación; la primera equivalencia sale de la Proposición 2.2.45 (un abierto no vacío contenido en $X \setminus D$ no cortaría a $D$). Sirve para el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (b) de la práctica: $\mathbb{Q} \cap [0, 1]$ es denso en $[0, 1]$.</div>
+    <p class="cita"><i>Fuente</i>: A. Daniilidis, <i>Espacios Métricos</i> (MA3801, DIM, U. de Chile, 2016), Proposición 2.2.45, pág. 83 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: publicado en la web del docente; sin licencia explícita.</p>
+    <p class="cita"><i>Fuente</i> (observación): Daniilidis, Observación 2.2.46, pág. 84 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a>, <a class="xg" data-guia="p4" data-ej="8">8</a></p>
+  </article>
+
+  <!-- O4-10 -->
+  <article class="ej" id="ejp4alt-o4-10" data-short="O4-10" data-title="Caracterización de los densos por cubrimientos con bolas" data-topics="densidad,topologia">
+    <div class="ej-head">
+      <span class="tag">O4-10</span>
+      <h3>Caracterización de los densos por cubrimientos con bolas</h3>
+      <span class="src">Gajardo, Ej. resuelto E5 a)</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Considere un espacio métrico $(X, d)$. Pruebe que un conjunto $D \subseteq X$ es <span class="ref" data-ref="def-5.20">denso</span>, si y solamente si, para todo $r \gt 0$ se tiene que
+      $$X \subseteq \bigcup_{y \in D} B(y, r). \tag{3.5}$$</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Denso $\Longrightarrow$ (3.5)</p>
+          <p>Supongamos que $D \subseteq X$ es denso. Entonces, para todo $r \gt 0$ y $x \in X$, se tendrá $B(x, r) \cap D \neq \varnothing$ (la fuente cita su Lema 2.1: $D$ es denso si y sólo si $D \cap \theta \neq \varnothing$ para todo abierto $\theta \neq \varnothing$). Tomando $y \in B(x, r) \cap D$ se tiene $x \in B(y, r)$, probando así la inclusión (3.5).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o4-10-c1" aria-label="En la recta, la bola B(x, r), un racional y adentro y la bola B(y, r) que contiene a x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o4-10-r"><i>r</i></label><input type="range" id="ejp4alt-o4-10-r" min="1" max="60" value="20"><output id="ejp4alt-o4-10-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o4-10-read" aria-live="polite"></dl>
+          <figcaption><i>X</i> = ℝ y <i>D</i> = ℚ (ejemplo elegido para el dibujo). Arrastrá <i>x</i>. Arriba, la bola <i>B</i>(<i>x</i>, <i>r</i>) y el racional <i>y</i> de menor denominador que cae en ella; abajo, la bola <i>B</i>(<i>y</i>, <i>r</i>), que contiene a <i>x</i> porque <i>d</i>(<i>x</i>, <i>y</i>) &lt; <i>r</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(3.5) $\Longrightarrow$ denso</p>
+          <p>Supongamos ahora que para todo $r \gt 0$ se tiene la inclusión (3.5) y consideremos un abierto $\theta \neq \varnothing$. Para $x \in \theta$ se tendrá que existe $r^* \gt 0$ tal que $B(x, r^*) \subseteq \theta$. Por otro lado, como se tiene (3.5) para $r = r^*$, existirá $y \in D$ tal que $x \in B(y, r^*)$. Esto implica que $y \in B(x, r^*) \subseteq \theta$. Por lo tanto $\theta \cap D \neq \varnothing$, probando así que $D$ es denso. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente define denso como $\overline{D} = X$ y prueba el Lema 2.1 (denso $\Longleftrightarrow$ corta a todo abierto no vacío) en la pág. 31. La parte b) del mismo ejercicio (compacto $\Rightarrow$ separable) no se transcribe: usa compacidad.</div>
+    <p class="cita"><i>Fuente</i>: P. Gajardo Adaro, <i>Análisis I</i> (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E5) a), pág. 60 del PDF. <a href="https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf">URL</a>. Acceso: web del departamento, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a>, <a class="xg" data-guia="p4" data-ej="8">8</a></p>
+  </article>
+
+  <!-- O11-4 -->
+  <article class="ej" id="ejp4alt-o11-4" data-short="O11-4" data-title="Dos continuas que coinciden en A coinciden en la clausura de A" data-topics="densidad,continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">O11-4</span>
+      <h3>Dos continuas que coinciden en $A$ coinciden en $\overline{A}$</h3>
+      <span class="src">BUAP, Lema 5.22</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sean $X$ e $Y$ espacios métricos y $A \subseteq X$. Si $f, g : \overline{A} \to Y$ son funciones <span class="ref" data-ref="def-5.4">continuas</span> en $\overline{A}$ y $f|_A = g|_A$, entonces para cada $x \in \overline{A}$ se cumple que $f(x) = g(x)$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El conjunto donde coinciden</p>
+          <p>Sea $B = \{x \in \overline{A} : f(x) = g(x)\}$. Por el Lema 5.21 de la fuente (ítem <a href="#ejp4alt-o11-3">O11-3</a>), el conjunto $B$ es <span class="ref" data-ref="def-4.27">cerrado</span> de $\overline{A}$. Notemos que $A \subseteq B \subseteq \overline{A}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Encerrar $B$ entre $\overline{A}$ y $\overline{A}$</p>
+          <p>Luego,
+            $$\overline{A} \subseteq \overline{B} = B \subseteq \overline{A}.$$
+            Así, $\overline{A} = B$ y por lo tanto, para cada $x \in \overline{A}$, se tiene que $f(x) = g(x)$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 200" role="img" aria-label="Tres conjuntos anidados: A dentro de B dentro de la clausura de A; como B es cerrado, su clausura no se sale de B">
+            <rect x="12" y="14" width="336" height="150" rx="16" class="sv-area3"/>
+            <rect x="12" y="14" width="336" height="150" rx="16" class="sv-seq3"/>
+            <text x="26" y="36" class="sv-label-seq3">clausura de A</text>
+            <rect x="52" y="46" width="256" height="104" rx="12" class="sv-area2"/>
+            <rect x="52" y="46" width="256" height="104" rx="12" class="sv-seq2 sv-dash"/>
+            <text x="64" y="66" class="sv-label-seq2">B = {f = g}, cerrado</text>
+            <circle cx="120" cy="112" r="4" class="sv-fill-accent"/>
+            <circle cx="150" cy="98" r="4" class="sv-fill-accent"/>
+            <circle cx="182" cy="120" r="4" class="sv-fill-accent"/>
+            <circle cx="214" cy="104" r="4" class="sv-fill-accent"/>
+            <circle cx="246" cy="118" r="4" class="sv-fill-accent"/>
+            <text x="268" y="122" class="sv-label-accent">A</text>
+            <text x="180" y="188" text-anchor="middle" class="sv-muted">A ⊆ B ⊆ cl A  ⇒  cl A ⊆ cl B = B</text>
+          </svg>
+          <figcaption>Esquema: <i>A</i> (puntos) está dentro de <i>B</i>, donde <i>f</i> y <i>g</i> coinciden, y <i>B</i> está dentro de la clausura de <i>A</i>. Tomar clausura conserva la inclusión <i>A</i> ⊆ <i>B</i>, y como <i>B</i> es cerrado su clausura es él mismo: no queda lugar entre <i>B</i> y la clausura de <i>A</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a) de la práctica es el caso $\overline{A} = X$ ($A$ denso): dos continuas $f, g : X \to Y$ que coinciden en un denso son iguales. La igualdad $\overline{B} = B$ usa que $B$ es cerrado en el subespacio $\overline{A}$, que a su vez es cerrado de $X$, así que $B$ es cerrado de $X$.</div>
+    <p class="cita"><i>Fuente</i>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), Lema 5.22, pág. 126 del libro (135 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: “DR © Benemérita Universidad Autónoma de Puebla”, ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a)</p>
+  </article>
+
+  <!-- O15-4 -->
+  <article class="ej" id="ejp4alt-o15-4" data-short="O15-4" data-title="Coincidir en un denso implica coincidir; una continua en [0,1] ∩ Q sin extensión continua" data-topics="densidad,continuidad">
+    <div class="ej-head">
+      <span class="tag">O15-4</span>
+      <h3>Coincidir en un denso implica coincidir; una continua en $[0, 1] \cap \mathbb{Q}$ sin extensión continua a $[0, 1]$</h3>
+      <span class="src">Körner, Ej. 6.8</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>(i) Sea $X$ un espacio topológico (en particular, métrico) y $(Y, d)$ un espacio métrico. Si $f, g : X \to Y$ son continuas y $f(x) = g(x)$ para todo $x \in A$, donde $A$ es <span class="ref" data-ref="def-5.20">denso</span> en $X$, probar que $f(x) = g(x)$ para todo $x \in X$.</p>
+      <p>(ii) Sea $[0, 1]$ con la métrica euclídea y $A = [0, 1] \cap \mathbb{Q}$ con la métrica heredada. Exhibir, con demostración, una función <span class="ref" data-ref="def-5.4">continua</span> $f : A \to \mathbb{R}$ tal que no existe ninguna función continua $\tilde{f} : [0, 1] \to \mathbb{R}$ con $\tilde{f}(x) = f(x)$ para todo $x \in A$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(i) Por contradicción</p>
+          <p>Supongamos que $f(b) \neq g(b)$ para algún $b \in X$. Podemos encontrar abiertos $U$ y $V$ (de $Y$) con $f(b) \in U$, $g(b) \in V$ y $U \cap V = \varnothing$. Ahora $f^{-1}(U)$ es abierto, igual que $g^{-1}(V)$, así que $b \in f^{-1}(U) \cap g^{-1}(V)$, que es abierto. Como $A$ es denso, podemos encontrar $a \in A$ con $a \in f^{-1}(U) \cap g^{-1}(V)$. Entonces $f(a) \in U$ y $g(a) \in V$, pero $f(a) = g(a)$, luego $f(a) \in U \cap V$, contradiciendo $U \cap V = \varnothing$. El resultado sigue por contradicción.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(ii) Una $f$ continua en $A$</p>
+          <p>Observamos que $x \in A \Longrightarrow x^2 \neq 1/2$. Para $x \in A$ definimos
+            $$f(x) = \begin{cases} 0 & \text{si } x^2 \lt 1/2, \\ 1 & \text{en otro caso}. \end{cases}$$
+            Si $y \in A$ y $y^2 \lt 1/2$, podemos encontrar $\delta \gt 0$ tal que $|y - x| \lt \delta$ $\Longrightarrow x^2 \lt 1/2$ $\Longrightarrow f(x) = f(y)$. Análogamente, si $y \in A$ y $y^2 \gt 1/2$ podemos encontrar $\delta \gt 0$ con $|y - x| \lt \delta$ $\Longrightarrow x^2 \gt 1/2$ $\Longrightarrow f(x) = f(y)$. Luego $f$ es continua.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(ii) No hay extensión continua</p>
+          <p>Supongamos que $\tilde{f} : [0, 1] \to \mathbb{R}$ cumple $\tilde{f}(x) = f(x)$ para todo $x \in A$. Elegimos $p_n, q_n \in A$ con $p_n^2 \gt 1/2 \gt q_n^2$ y $|p_n - 2^{-1/2}| \to 0$, $|q_n - 2^{-1/2}| \to 0$. Entonces
+            $$\begin{aligned} &|\tilde{f}(p_n) - \tilde{f}(2^{-1/2})| \\ &\quad + |\tilde{f}(q_n) - \tilde{f}(2^{-1/2})| \\ &\quad \ge |f(p_n) - f(q_n)| = 1, \end{aligned}$$
+            luego $\tilde{f}$ no puede ser continua.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o15-4-c1" aria-label="La función f sobre los racionales de [0,1]: vale 0 a la izquierda de 1 sobre raíz de 2 y 1 a la derecha; p_n y q_n se acercan a ese punto por los dos lados"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o15-4-n"><i>n</i></label><input type="range" id="ejp4alt-o15-4-n" min="1" max="12" value="3"><output id="ejp4alt-o15-4-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o15-4-read" aria-live="polite"></dl>
+          <figcaption>Los puntos son <i>f</i> en racionales de [0, 1] con denominador ≤ 40. Las rayas de los dos niveles no se tocan: el corte cae en 2<sup>−1/2</sup>, que no es racional. Los puntos grandes son <i>p<sub>n</sub></i> y <i>q<sub>n</sub></i>, tomados acá como los truncamientos decimales de 2<sup>−1/2</sup> a <i>n</i> cifras (por exceso y por defecto; elección del dibujo). Los dos niveles, 0 y 1, están a distancia 1: es el |<i>f</i>(<i>p<sub>n</sub></i>) − <i>f</i>(<i>q<sub>n</sub></i>)| = 1 de la desigualdad.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>en (i) la fuente usa que en un espacio métrico dos puntos distintos tienen bolas disjuntas (propiedad de Hausdorff; en el apunte: tomar $r = d(f(b), g(b))/2$). La demostración es distinta de la del <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a) por sucesiones (O14-10, unicidad) y vale para $X$ topológico. En (ii), en la sección de soluciones la fuente escribe el enunciado con “$x \in [0, 1]$” y la última desigualdad con $f$ en lugar de $\tilde{f}$; son erratas (el enunciado original, pág. 16, dice “$x \in A$”). Este ejemplo muestra que en el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (b) la restricción $C([0, 1]) \to \{\mathbb{Q} \cap [0, 1] \to \mathbb{R}\}$ es inyectiva pero <strong>no</strong> suryectiva sobre las continuas en $\mathbb{Q} \cap [0, 1]$, y que en O14-10 la hipótesis “uniformemente continua” no se puede quitar.</div>
+    <p class="cita"><i>Fuente</i>: T. W. Körner, <i>Metric and Topological Spaces</i> (DPMMS, Cambridge, 2021), Exercise 6.8, pág. 16 (enunciado), solución págs. 68–69. <a href="https://www.dpmms.cam.ac.uk/~twk10/Top.pdf">URL</a>. Acceso: página personal del autor; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a)(b)</p>
+  </article>
+
+  <!-- O3-2 -->
+  <article class="ej" id="ejp4alt-o3-2" data-short="O3-2" data-title="La continuidad se decide sobre un denso más un punto" data-topics="densidad,continuidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">O3-2</span>
+      <h3>La continuidad se decide sobre un denso más un punto</h3>
+      <span class="src">Daniilidis, Lema 2.5.16</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $(X, d)$, $(Y, d')$ espacios métricos, $D \subseteq X$ <span class="ref" data-ref="def-5.20">denso</span> y $f : X \to Y$. Son equivalentes:</p>
+      <p>(i) la función $f : X \to Y$ es continua;<br>(ii) para todo $x \in X$ la restricción $f|_{D \cup \{x\}}$ es continua.</p>
+    </div>
+    <div class="estrategia"><b>Idea</b><p>Para $(\Longleftarrow)$: dada $x_n \to x$, aproximar cada $x_n$ por puntos de $D$ y armar una <b>sucesión diagonal</b> $(y_k)_{k \in \mathbb{N}} \subseteq D$ con $d(y_k, x_k) \lt 1/k$ y $d'(f(y_k), f(x_k)) \lt 1/k$; como $y_k \to x$ y $f|_{D \cup \{x\}}$ es continua, $f(y_k) \to f(x)$, y la desigualdad triangular arrastra a $f(x_k)$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(i) $\Longrightarrow$ (ii)</p>
+          <p>La implicación (i) $\Longrightarrow$ (ii) es obvia.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(ii) $\Longrightarrow$ (i): aproximar cada $x_n$ desde $D$</p>
+          <p>Sea $(x_n)_{n \in \mathbb{N}} \subseteq X$ una sucesión convergente hacia un punto $x \in X$. Dado que $D$ es denso en $X$, para cada $n \in \mathbb{N}$ podemos acercarnos al elemento $x_n$ por una sucesión $(u^{(n)}_m)_{m \in \mathbb{N}} \subseteq D$ (la fuente escribe $u(n)_m$), es decir
+            $$\begin{aligned} &(\forall n \in \mathbb{N}) \left(\exists (u^{(n)}_m)_{m \in \mathbb{N}} \subseteq D\right) : \\ &\qquad u^{(n)}_m \xrightarrow[m \to \infty]{} x_n. \end{aligned}$$
+            Como $f|_{D \cup \{x_n\}}$ es continua, se tiene que $d'(f(u^{(n)}_m), f(x_n)) \xrightarrow[m \to \infty]{} 0$ para todo $n \in \mathbb{N}$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Elegir los índices $m_n$ por inducción</p>
+          <p>Para $\varepsilon_1 = 1$ existe $m_1 \in \mathbb{N}$ tal que $d(u^{(1)}_{m_1}, x_1) \lt 1$ y $d'(f(u^{(1)}_{m_1}), f(x_1)) \lt 1$. Luego, para $\varepsilon_2 := 1/2$, existe $m_2 \gt m_1$ tal que
+            $$\begin{aligned} &d(u^{(2)}_{m_2}, x_2) \lt 1/2 \quad \text{y} \\ &d'(f(u^{(2)}_{m_2}), f(x_2)) \lt 1/2. \end{aligned}$$
+            Tomando sucesivamente $\varepsilon_n := 1/n$ y usando inducción, se construye una sucesión $(u^{(n)}_{m_n})_{n \in \mathbb{N}} \subseteq D$ tal que
+            $$\begin{aligned} &d(u^{(n)}_{m_n}, x_n) \lt \frac{1}{n} \quad \text{y} \\ &d'(f(u^{(n)}_{m_n}), f(x_n)) \lt \frac{1}{n}. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La sucesión diagonal</p>
+          <p>Considerando la sucesión diagonal $y_k = u^{(k)}_{m_k}$ se tiene entonces que
+            $$\begin{aligned} &d(y_k, x_k) \lt \frac{1}{k} \quad \text{y} \\ &d'(f(y_k), f(x_k)) \lt \frac{1}{k}. \end{aligned}$$
+            Por lo tanto $(y_k)_{k \in \mathbb{N}} \to x$ (pues $d(y_k, x) \le d(y_k, x_k) + d(x_k, x) \to 0$), y como $(y_k)_{k \in \mathbb{N}} \subseteq D$ y $f|_{D \cup \{x\}}$ es continua, $d'(f(y_k), f(x)) \to 0$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-2-c1" aria-label="Sucesión x_k que converge a x y, al lado de cada término, un punto y_k del denso a distancia menor que 1/k"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-2-k">hasta <i>k</i></label><input type="range" id="ejp4alt-o3-2-k" min="1" max="30" value="10"><output id="ejp4alt-o3-2-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-2-read" aria-live="polite"></dl>
+          <figcaption>En el eje horizontal, el índice <i>k</i>; en el vertical, los puntos de <i>X</i> = ℝ. Valores elegidos para el dibujo: <i>x</i> = 1/√2, <i>x<sub>k</sub></i> = <i>x</i> + (−1)<sup><i>k</i></sup>·0.4/√<i>k</i> y <i>D</i> = racionales diádicos; <i>y<sub>k</sub></i> es el primer diádico <i>j</i>/2<sup><i>m</i></sup> que cae en la franja sombreada (<i>x<sub>k</sub></i> − 1/<i>k</i>, <i>x<sub>k</sub></i> + 1/<i>k</i>). Al principio una <i>y<sub>k</sub></i> puede quedar lejos de su <i>x<sub>k</sub></i>, pero la franja se angosta y las <i>y<sub>k</sub></i> también van a <i>x</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Se obtiene entonces que
+            $$\begin{aligned} d'(f(x_k), f(x)) \le\ &\underbrace{d'(f(x_k), f(y_k))}_{\lt 1/k} \\ &+ \underbrace{d'(f(y_k), f(x))}_{\to 0}, \end{aligned}$$
+            de donde se concluye que $f(x_k) \to f(x)$, es decir, la función $f$ es continua (<span class="ref" data-ref="teo-5.7">Teorema 5.7</span> del apunte). $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente escribe “$\{y_k\} \to x$ luego $\rho(f(y_k), f(x_k)) \to 0$” en la penúltima línea; por el contexto, lo que se usa es $\rho(f(y_k), f(x)) \to 0$ (continuidad de $f|_{D \cup \{x\}}$ en $x$), que es como se transcribió. Para el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a) de la práctica el camino es más corto (dos continuas que coinciden en un denso coinciden), pero este lema dice algo más fuerte: la continuidad de $f$ en todo $X$ está determinada por su comportamiento sobre $D \cup \{x\}$.</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Lema 2.5.16 (Conjuntos densos vs continuidad), págs. 127–128 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a></p>
+  </article>
+
+  <!-- O2-5 -->
+  <article class="ej" id="ejp4alt-o2-5" data-short="O2-5" data-title="Imagen continua y sobreyectiva de un espacio separable" data-topics="densidad,continuidad,cardinalidad">
+    <div class="ej-head">
+      <span class="tag">O2-5</span>
+      <h3>Imagen continua y sobreyectiva de un espacio separable</h3>
+      <span class="src">Guccione, Prop. 5.11</span>
+      <span class="topics"><a class="tag topic" href="#tema-densidad">densidad</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-cardinalidad">cardinalidad</a></span>
+    </div>
+    <div class="enun"><p>Recordemos (Definición 5.1 de la fuente) que $A \subseteq X$ es <em><span class="ref" data-ref="def-5.20">denso</span></em> si $\overline{A} = X$, y que $X$ es <em><span class="ref" data-ref="ext-separable">separable</span></em> si tiene un subconjunto contable (finito o numerable) y denso. Si $X$ es separable y $f : X \to Y$ es continua y sobreyectiva, entonces $Y$ es separable.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La imagen del denso numerable</p>
+          <p>Tomemos un subconjunto numerable denso $S$ de $X$. Por el Teorema 3.6 de la fuente, dado que $f$ es continua,
+            $$Y = f(X) = f(\overline{S}) \subseteq \overline{f(S)}.$$
+            Como $f(S)$ es <span class="ref" data-ref="prop-3.9">contable</span>, esto prueba que $Y$ es separable.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-5-c1" aria-label="Gráfico de una función continua y sobreyectiva de [0,1] en [-1,1]: los puntos de un denso numerable en el eje x y sus imágenes en el eje y"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o2-5-q">denominador ≤ <i>q</i></label><input type="range" id="ejp4alt-o2-5-q" min="2" max="40" value="6"><output id="ejp4alt-o2-5-q-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o2-5-read" aria-live="polite"></dl>
+          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>S</i> = ℚ ∩ [0, 1] (se dibujan los de denominador ≤ <i>q</i>, abajo), <i>Y</i> = [−1, 1] y <i>f</i>(<i>x</i>) = sen(2π<i>x</i>), continua y sobreyectiva. Las imágenes <i>f</i>(<i>S</i>) (a la izquierda) van llenando <i>Y</i>: el hueco más grande entre ellas se achica al subir <i>q</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el Teorema 3.6 (item 4) de la fuente es exactamente el <span class="ref" data-ref="teo-5.13">Teorema 5.13</span> de <code>apuntes.typ</code>: $f$ continua $\Longrightarrow$ $f(\overline{E}) \subseteq \overline{f(E)}$. El argumento, quitando la palabra “contable”, es la resolución del <a class="xg" data-guia="p4" data-ej="8">Ej. 8</a> de la Práctica 4: si $D$ es denso y $f$ es continua y sobreyectiva, entonces $Y = f(\overline{D}) \subseteq \overline{f(D)}$, o sea $f(D)$ es denso en $Y$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Definición 5.1 y Proposición 5.11, págs. 94 y 96 del PDF (85 y 87 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="8">Ej. 8</a></p>
+  </article>
+
+  <!-- O9-1 -->
+  <article class="ej" id="ejp4alt-o9-1" data-short="O9-1" data-title="f(cl E) ⊆ cl f(E) por ε-δ, y la inclusión puede ser estricta" data-topics="continuidad,topologia,densidad">
+    <div class="ej-head">
+      <span class="tag">O9-1</span>
+      <h3>$f(\overline{E}) \subseteq \overline{f(E)}$ por $\varepsilon$–$\delta$, y la inclusión puede ser estricta</h3>
+      <span class="src">MIT 18.100C, PS6 Prob. 3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : X \to Y$ <span class="ref" data-ref="def-5.4">continua</span> y $E \subseteq X$. Probar que $f(\overline{E}) \subseteq \overline{f(E)}$, y mostrar con un ejemplo que la inclusión puede ser propia.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Qué hay que ver</p>
+          <p>Sea $x \in \overline{E}$. Entonces $f(x) \in \overline{f(E)}$ si y sólo si, para todo $\varepsilon \gt 0$, $B(f(x), \varepsilon) \cap f(E) \neq \emptyset$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\varepsilon$–$\delta$ y adherencia</p>
+          <p>Sea $\varepsilon \gt 0$. Como $f$ es continua en $x$, existe $\delta \gt 0$ tal que para todo $y \in X$, $d(x, y) \lt \delta \Longrightarrow d(f(x), f(y)) \lt \varepsilon$. Pero $x \in \overline{E}$, así que todo entorno de $x$ corta a $E$: existe $y \in E$ con $d(x, y) \lt \delta$. Entonces $d(f(x), f(y)) \lt \varepsilon$, luego $f(y) \in B(f(x), \varepsilon) \cap f(E) \neq \emptyset$, y listo.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o9-1-c1" aria-label="Gráfico de f, el conjunto E en el eje x, un punto x de la clausura que no está en E, la banda epsilon alrededor de f(x) y la banda delta alrededor de x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o9-1-eps">ε</label><input type="range" id="ejp4alt-o9-1-eps" min="2" max="40" value="16"><output id="ejp4alt-o9-1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o9-1-read" aria-live="polite"></dl>
+          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = <i>Y</i> = ℝ, <i>f</i>(<i>t</i>) = 0.5 + 0.35·sen(5<i>t</i>), <i>E</i> = (0.2, 0.6) (en verde sobre el eje) y <i>x</i> = 0.6 ∈ cl <i>E</i> ∖ <i>E</i>. La franja horizontal es <i>B</i>(<i>f</i>(<i>x</i>), ε); la vertical, <i>B</i>(<i>x</i>, δ) con el mayor δ que sirve. El punto <i>y</i> ∈ <i>E</i> está en la franja vertical, y <i>f</i>(<i>y</i>) ∈ <i>f</i>(<i>E</i>) cae en la horizontal.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La inclusión puede ser propia</p>
+          <p>Para ver que la inclusión puede ser propia, sean $X = \mathbb{Q}$, $Y = \mathbb{R}$, $f : X \to Y$ la inclusión $\iota : \mathbb{Q} \hookrightarrow \mathbb{R}$, y $E = X = \mathbb{Q}$. Todo conjunto es cerrado como subconjunto de sí mismo, así que $\overline{E} = E$. Pero $f(E) = \mathbb{Q} \subseteq \mathbb{R}$ es denso, luego $\overline{f(E)} = \mathbb{R}$. Entonces $\overline{f(E)} \setminus f(\overline{E}) = \mathbb{R} \setminus \mathbb{Q}$, y la inclusión es ciertamente propia. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el apunte prueba la misma inclusión en el <span class="ref" data-ref="teo-5.13">Teo. 5.13</span> ($\Longrightarrow$) vía sucesiones (<span class="ref" data-ref="prop-4.46">Prop. 4.46</span> + <span class="ref" data-ref="teo-5.7">Teo. 5.7</span>); ésta es la demostración directa por $\varepsilon$–$\delta$ y la definición de adherencia (<span class="ref" data-ref="def-4.22">Def. 4.22</span>), más instructiva para p4 <a class="xg" data-guia="p4" data-ej="8">Ej. 8</a>: si $D$ es denso y $f$ suryectiva, $Y = f(X) = f(\overline{D}) \subseteq \overline{f(D)}$. La fuente escribe $N_\varepsilon(f(x))$ por $B(f(x), \varepsilon)$. Es también el Ejercicio 7.5.3 de Lebl (pág. 294).</div>
+    <p class="cita"><i>Fuente</i>: MIT OpenCourseWare, <i>18.100C Real Analysis, Fall 2012, Problem Set 6 Solutions</i> (autor según los metadatos del PDF: D. Jackson-Hanen), Problema 3, pág. 3 del PDF. <a href="https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/resources/mit18_100cf12_prob_set_6/">URL</a>. Acceso: el PDF remite a los Términos de uso de OCW (<a href="http://ocw.mit.edu/terms">ocw.mit.edu/terms</a>); el sitio OCW declara licencia CC BY-NC-SA 4.0. No hay licencia impresa en el cuerpo del documento.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="8">Ej. 8</a></p>
+  </article>
+
+  <!-- O4-6 -->
+  <article class="ej" id="ejp4alt-o4-6" data-short="O4-6" data-title="Si f(cl A) ⊆ cl f(A) para todo A, entonces f es continua: prueba por sucesiones" data-topics="continuidad,topologia,sucesiones">
+    <div class="ej-head">
+      <span class="tag">O4-6</span>
+      <h3>Si $f(\overline{A}) \subseteq \overline{f(A)}$ para todo $A$, entonces $f$ es continua: prueba por sucesiones</h3>
+      <span class="src">Gajardo, Ej. resuelto E7 b)</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sean $(X, d)$ e $(Y, d')$ dos espacios métricos y $f : X \to Y$ una función. Si para todo conjunto $A \subseteq X$ se tiene que $f(\overline{A}) \subseteq \overline{f(A)}$, demuestre que $f$ es <span class="ref" data-ref="def-5.4">continua</span>.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Negar la continuidad en un punto</p>
+          <p>Supongamos existe $x \in X$ donde $f$ no es continua. Es decir, existirá $\varepsilon \gt 0$ tal que para todo $k \in \mathbb{N}$ existe $x_k \in B(x, 1/k)$ que satisface $d'(f(x), f(x_k)) \ge \varepsilon$. Deducimos que $x_k \to x$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o4-6-c1" aria-label="Una función con salto en x: los puntos x_k se acercan a x pero sus imágenes quedan fuera de la banda epsilon alrededor de f(x)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o4-6-k">hasta <i>k</i></label><input type="range" id="ejp4alt-o4-6-k" min="1" max="25" value="6"><output id="ejp4alt-o4-6-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o4-6-read" aria-live="polite"></dl>
+          <figcaption>Ejemplo elegido para el dibujo: <i>f</i> vale 0.3 hasta <i>x</i> = 0.5 inclusive y 0.8 después, ε = 0.4 y <i>x<sub>k</sub></i> = 0.5 + 0.4/<i>k</i> ∈ <i>B</i>(<i>x</i>, 1/<i>k</i>). <i>A</i> = {<i>x<sub>k</sub></i>} acumula en <i>x</i>, pero <i>f</i>(<i>A</i>) = {0.8} no entra en la franja <i>B</i>(<i>f</i>(<i>x</i>), ε): <i>f</i>(<i>x</i>) no es adherente a <i>f</i>(<i>A</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Aplicar la hipótesis a $A = \{x_k\}$</p>
+          <p>Definamos el conjunto $A = \{x_k : k \in \mathbb{N}\}$. Como $x \in \overline{A}$ se tiene que $f(x) \in f(\overline{A})$ y, por la hipótesis, entonces $f(x) \in \overline{f(A)}$. Esto implicará que $B(f(x), \varepsilon) \cap f(A) \neq \varnothing$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Contradicción</p>
+          <p>Como $f(A) = \{f(x_k) : k \in \mathbb{N}\}$ existirá $k \in \mathbb{N}$ tal que $f(x_k) \in B(f(x), \varepsilon)$, pero esto contradice la desigualdad $d'(f(x), f(x_k)) \ge \varepsilon$, por lo tanto la función $f$ debe ser continua. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>es la implicación $(\Longleftarrow)$ del <span class="ref" data-ref="teo-5.13">Teo. 5.13</span> de <code>apuntes.typ</code>, pero con una demostración <em>distinta</em>: el apunte la reduce a “preimagen de cerrado es cerrada” (<span class="ref" data-ref="ejap-5.10">Ej. 5.10</span>); acá se niega la continuidad en un punto, se fabrica la sucesión $x_k \to x$ con $d'(f(x), f(x_k)) \ge \varepsilon$ y se aplica la hipótesis al conjunto $A$ formado por sus términos. Que $x \in \overline{A}$ es la <span class="ref" data-ref="prop-4.46">Prop. 4.46</span> a).</div>
+    <p class="cita"><i>Fuente</i>: P. Gajardo Adaro, <i>Análisis I</i> (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E7) b), pág. 61 del PDF. <a href="https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf">URL</a>. Acceso: web del departamento, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a>, <a class="xg" data-guia="p4" data-ej="8">8</a> (manejo de clausuras e imágenes)</p>
+  </article>
+</section>
+
+
+<section class="bloque" id="ejp4alt-b7">
+  <h2><span class="bn">Bloque 7</span>Funciones sobre $C([0, 1])$: $d_1$ contra $d_\infty$</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Funciones y conjuntos en $C([0, 1])$ con $d_1$ y con $d_\infty$. La integral es continua con las dos métricas y la evaluación en un punto sólo con $d_\infty$, porque $d_1 \le d_\infty$ pero no al revés (<a class="xg" data-guia="p4" data-ej="9">Ejercicio 9</a>). También hay operadores Lipschitz sobre $C([a, b])$ y la caracterización de las funciones lineales continuas, que contesta el <a class="xg" data-guia="p4" data-ej="9">Ejercicio 9</a> (c).</p></div>
+
+  <!-- O17-1 -->
+  <article class="ej" id="ejp4alt-o17-1" data-short="O17-1" data-title="En C([0,1]): converge en d1 y no en d∞; la integral es continua para ambas y f ↦ f(0) sólo para d∞" data-topics="funciones,continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O17-1</span>
+      <h3>En $C([0, 1])$: una sucesión que converge en $d_1$ pero no en $d_\infty$; $\int_0^1$ es continua para ambas y $f \mapsto f(0)$ sólo para $d_\infty$</h3>
+      <span class="src">Addington, Ejemplo 1.8</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $C([0, 1])$ con $d_1(f, g) = \int_0^1 |f(x) - g(x)|\, dx$ y $d_\infty(f, g) = \sup_{x \in [0, 1]} |f(x) - g(x)|$ (<span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancias en espacios de funciones</span>).</p>
+      <ol class="items">
+        <li>Dar una sucesión de $C([0, 1])$ que converja en $d_1$ pero no en $d_\infty$.</li>
+        <li>Probar que $\Phi : C([0, 1]) \to \mathbb{R}$, $\Phi(f) = \int_0^1 f(x)\, dx$, es <span class="ref" data-ref="def-5.4">continua</span> tanto con $d_\infty$ como con $d_1$.</li>
+        <li>Probar que $\Psi : C([0, 1]) \to \mathbb{R}$, $\Psi(f) = f(0)$, es continua con $d_\infty$ pero no con $d_1$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(a) La sucesión $f_n$</p>
+          <p>Para $n = 1, 2, 3, \dots$ sea $f_n : [0, 1] \to \mathbb{R}$ la función lineal a trozos que va de $f_n(0) = 0$ a $f_n(1/n) = 1$ y vale $f_n(x) = 1$ en $[1/n, 1]$. Afirmo que $f_n$ converge a la función constante $g(x) = 1$ en $d_1$ pero no en $d_\infty$. Por un lado, $d_1(f_n, g) = \int_0^1 |f_n - g|$ es el área del triángulo de vértices $(0, 0)$, $(0, 1)$, $(1/n, 1)$, es decir $1/(2n)$, que tiende a $0$; luego $f_n \to g$ en $d_1$. Por otro lado, $d_\infty(f_n, g) = \sup |f_n - g| = 1$ para todo $n$, que no tiende a $0$; luego $f_n$ no converge a $g$ en $d_\infty$. (Lo mismo pasa con $f_n(x) = x^n$ y $g = 0$.)</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o17-1-c1" aria-label="La función f_n, que sube de 0 a 1 en [0, 1/n] y después vale 1, la constante g = 1 y el triángulo de área 1/(2n) entre ellas"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o17-1-n"><i>n</i></label><input type="range" id="ejp4alt-o17-1-n" min="1" max="40" value="3"><output id="ejp4alt-o17-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o17-1-read1" aria-live="polite"></dl>
+          <figcaption>La raya azul es <i>f<sub>n</sub></i> y la naranja punteada, <i>g</i> = 1. El triángulo sombreado mide <i>d</i><sub>1</sub>(<i>f<sub>n</sub></i>, <i>g</i>) = 1/(2<i>n</i>), que se achica; la raya roja junto a <i>x</i> = 0 mide <i>d</i><sub>∞</sub>(<i>f<sub>n</sub></i>, <i>g</i>) = 1, que no cambia. Esa raya es también |Ψ(<i>f<sub>n</sub></i>) − Ψ(<i>g</i>)| del ítem (c).</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(b) $\Phi$ es continua con $d_\infty$</p>
+          <p>Primero, $\Phi$ es continua con $d_\infty$ en $C([0, 1])$ (y la métrica usual en $\mathbb{R}$). Desempacando las definiciones, hay que ver que para toda $f \in C([0, 1])$ y todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que para toda $g$ con $d_\infty(f, g) \lt \delta$ se tiene $|\Phi(f) - \Phi(g)| \lt \varepsilon$. Sean $f$ y $\varepsilon \gt 0$ dados, y tomemos $\delta = \varepsilon$. Si $d_\infty(f, g) \lt \delta$, entonces para todo $x \in [0, 1]$ vale $|f(x) - g(x)| \lt \delta$, así que
+            $$\begin{aligned} &|\Phi(f) - \Phi(g)| \\ &\quad = \left|\int_0^1 f(x)\, dx - \int_0^1 g(x)\, dx\right| \\ &\quad = \left|\int_0^1 (f(x) - g(x))\, dx\right| \\ &\quad \le \int_0^1 |f(x) - g(x)|\, dx \\ &\quad \lt \int_0^1 \delta\, dx = \delta = \varepsilon, \end{aligned}$$
+            que es lo que queríamos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o17-1-c2" aria-label="Dos funciones f y g: el área con signo entre ellas, el área sin signo y la franja de ancho d infinito"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o17-1-a">amplitud</label><input type="range" id="ejp4alt-o17-1-a" min="0" max="40" value="22"><output id="ejp4alt-o17-1-a-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o17-1-read2" aria-live="polite"></dl>
+          <figcaption>Funciones elegidas para el dibujo: <i>f</i>(<i>x</i>) = 0.5 + 0.3·sen(2π<i>x</i>) y <i>g</i> = <i>f</i> + <i>a</i>·sen(3π<i>x</i>), con <i>a</i> la amplitud. Lo sombreado es <i>f</i> − <i>g</i> (verde donde es positiva, naranja donde es negativa). La cadena de la izquierda se lee en el cuadro: |Φ(<i>f</i>) − Φ(<i>g</i>)| ≤ <i>d</i><sub>1</sub>(<i>f</i>, <i>g</i>) ≤ <i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(b) $\Phi$ es continua con $d_1$</p>
+          <p>Segundo, $\Phi$ también es continua con $d_1$: dados $f$ y $\varepsilon \gt 0$, tomamos $\delta = \varepsilon$; si $d_1(f, g) \lt \delta$,
+            $$\begin{aligned} |\Phi(f) - \Phi(g)| &\le \int_0^1 |f(x) - g(x)|\, dx \\ &= d_1(f, g) \lt \delta = \varepsilon. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(c) $\Psi$ es continua con $d_\infty$ y no con $d_1$</p>
+          <p>$\Psi$ es continua con $d_\infty$: dados $f$ y $\varepsilon \gt 0$, tomamos $\delta = \varepsilon$; si $d_\infty(f, g) \lt \delta$, entonces $|f(x) - g(x)| \lt \delta$ para todo $x$, luego $|\Psi(f) - \Psi(g)| = |f(0) - g(0)|$ $\lt \delta = \varepsilon$. En cambio, $\Psi$ no es continua con $d_1$: tomemos la sucesión $(f_n)$ de (a), que converge en $d_1$ a la constante $g = 1$. Si $\Psi$ fuese continua con $d_1$, la sucesión $\Psi(f_1), \Psi(f_2), \dots$ convergería a $\Psi(g)$ (Ej. 1.11 de la fuente: continua manda sucesiones convergentes en convergentes, <span class="ref" data-ref="teo-5.7">Teo. 5.7</span> del apunte), pero $\Psi(f_n) = 0$ para todo $n$ mientras que $\Psi(g) = 1$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente agrega como Ej. 1.5 (pág. 11, sin solución): “probar que lo contrario no puede pasar: toda sucesión que converge en $d_\infty$ converge en $d_1$”. Es exactamente el <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a)(b) de la Práctica 4 con $\mathcal{I} = \Phi$, $\mathcal{E} = \Psi$; las cuentas muestran además que $\Phi$ y $\Psi$ son <span class="ref" data-ref="def-5.24">Lipschitz</span> con constante $1$ (<a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>).</div>
+    <p class="cita"><i>Fuente</i>: N. Addington, <i>A Course in Metric Spaces and Point-Set Topology</i> (Math 431, Univ. of Oregon), Example 1.8 (a)(b)(c), págs. 7–9; Exercise 1.5, pág. 11. <a href="https://pages.uoregon.edu/adding/courses/431/431notes.pdf">URL</a>. Acceso: página del docente en la Univ. of Oregon; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a)(b)</p>
+  </article>
+
+  <!-- O16-1 -->
+  <article class="ej" id="ejp4alt-o16-1" data-short="O16-1" data-title="La bola unidad de (C[0,1], d∞) no es abierta en d1, pero la de d1 sí es abierta en d∞" data-topics="funciones,metricas,topologia">
+    <div class="ej-head">
+      <span class="tag">O16-1</span>
+      <h3>La bola unidad de $(C[0, 1], d_\infty)$ no es abierta en $d_1$, pero la de $d_1$ sí es abierta en $d_\infty$</h3>
+      <span class="src">Chavan, Ej. 1.8 y 1.9</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div>
+        <div class="enun">
+          <p>Sea $C[0, 1]$ con $d_\infty(f, g) = \|f - g\|_\infty$ y $d_1(f, g) = \int_0^1 |f(t) - g(t)|\, dt$.</p>
+          <p>(i) (Ej. 1.8) Probar que la <span class="ref" data-ref="def-4.5">bola abierta</span> unidad de $(C[0, 1], d_\infty)$ no puede ser <span class="ref" data-ref="def-4.14">abierta</span> en $(C[0, 1], d_1)$.</p>
+          <p>(ii) (Ej. 1.9) Probar que la bola abierta unidad de $(C[0, 1], d_1)$ es abierta en $(C[0, 1], d_\infty)$.</p>
+        </div>
+        <div class="estrategia" style="margin-top: 1rem"><b>Indicación de la fuente</b><p>Para (i): construir una función con máximo igual a $1 + r$ en $0$ y área cubierta menor que $r$. (Es decir: la función nula está en la bola $d_\infty$-unidad, pero toda bola $B_{d_1}(0, r)$ contiene una función con $d_\infty$ mayor que $1$.) Para (ii) la fuente no da indicación; se usa $d_1(f, g) \le d_\infty(f, g)$ (observación del transcriptor).</p></div>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o16-1-c1" aria-label="Una función con pico 1 + r en 0 y área menor que r: está en la bola d1 de radio r alrededor de 0 pero fuera de la bola d infinito unidad"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4alt-o16-1-r"><i>r</i></label><input type="range" id="ejp4alt-o16-1-r" min="2" max="60" value="30"><output id="ejp4alt-o16-1-r-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4alt-o16-1-read" aria-live="polite"></dl>
+        <figcaption>La indicación dibujada, con una elección del dibujo: el pico lineal <i>h</i>(<i>t</i>) = (1 + <i>r</i>)·máx(0, 1 − <i>t</i>/<i>w</i>) con <i>w</i> = <i>r</i>/(1 + <i>r</i>). La franja es la bola <i>d</i><sub>∞</sub>-unidad alrededor de 0 (|<i>h</i>| &lt; 1 en todo punto); el pico la atraviesa, aunque el área sombreada, <i>d</i><sub>1</sub>(<i>h</i>, 0), es menor que <i>r</i>.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>(ii) dice que todo abierto de $d_1$ es abierto de $d_\infty$, y (i) que el recíproco falla; por el <span class="ref" data-ref="teo-5.9">Teo. 5.9</span> esto es lo que está detrás del <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a>: toda $\mathcal{F}$ continua para $d_1$ es continua para $d_\infty$, y no al revés.</div>
+    <p class="cita"><i>Fuente</i>: S. Chavan, <i>MTH304 Topology: notes and problems</i> (IIT Kanpur), Exercises 1.8 y 1.9, pág. 2. <a href="https://home.iitk.ac.in/~chavan/topology_mth304.pdf">URL</a>. Acceso: página del docente en IIT Kanpur; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a)(b)(c) (relación entre $d_1$ y $d_\infty$ en $C([0,1])$)</p>
+  </article>
+
+  <!-- O16-2 -->
+  <article class="ej" id="ejp4alt-o16-2" data-short="O16-2" data-title="El funcional de evaluación es continuo para d∞, y {f : f(t0) ≠ 0} es abierto" data-topics="funciones,continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">O16-2</span>
+      <h3>El funcional de evaluación $E_{t_0}(f) = f(t_0)$ es continuo para $d_\infty$, y $\{f : f(t_0) \neq 0\}$ es abierto</h3>
+      <span class="src">Chavan, Ej. 8.5 y Ejemplo 8.6</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>(Ej. 8.5) Sean $X_1, X_2$ espacios topológicos, $x_0 \in X_2$ y $X_2$ de Hausdorff (p. ej. métrico). Probar que para toda $f : X_1 \to X_2$ continua, $C = \{x \in X_1 : f(x) = x_0\}$ es <span class="ref" data-ref="def-4.27">cerrado</span> en $X_1$.</p>
+      <p>(Ejemplo 8.6) Consideremos $C[0, 1]$ con la métrica del supremo. Fijado $t_0 \in [0, 1]$, el funcional de evaluación $E_{t_0} : C[0, 1] \to \mathbb{R}$, $E_{t_0}(f) = f(t_0)$, es <span class="ref" data-ref="def-5.4">continuo</span>, y $\{f \in C[0, 1] : f(t_0) \neq 0\}$ es abierto en $C[0, 1]$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(Ej. 8.5) Indicación</p>
+          <p>Indicación de la fuente: $f^{-1}(X_2 \setminus \{x_0\}) = X_1 \setminus C$ (y $\{x_0\}$ es cerrado en un espacio de Hausdorff).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(Ejemplo 8.6) $E_{t_0}$ es continuo</p>
+          <p>Como $|f(t_0) - g(t_0)| \le d_\infty(f, g)$, la convergencia en la métrica del supremo implica la convergencia puntual. Se sigue que $E_{t_0}$ es continuo.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o16-2-c1" aria-label="Dos funciones f y g, la franja de ancho d infinito alrededor de f y la diferencia en t0, que no supera ese ancho"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o16-2-t"><i>t</i><sub>0</sub></label><input type="range" id="ejp4alt-o16-2-t" min="0" max="100" value="30"><output id="ejp4alt-o16-2-t-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o16-2-read" aria-live="polite"></dl>
+          <figcaption>Funciones elegidas para el dibujo: <i>f</i>(<i>t</i>) = 0.4 + 0.3·sen(2π<i>t</i>) (azul) y <i>g</i>(<i>t</i>) = <i>f</i>(<i>t</i>) + 0.15·cos(3π<i>t</i>) + 0.05 (naranja). La franja alrededor de <i>f</i> tiene ancho <i>d</i><sub>∞</sub>(<i>f</i>, <i>g</i>) hacia cada lado; el segmento en <i>t</i><sub>0</sub> es |<i>E</i><sub><i>t</i>0</sub>(<i>f</i>) − <i>E</i><sub><i>t</i>0</sub>(<i>g</i>)|, que nunca sale de la franja.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(Ejemplo 8.6) Un abierto</p>
+          <p>Ahora $\{f \in C[0, 1] : f(t_0) \neq 0\}$ es el complemento del núcleo de $E_{t_0}$ y, por el ejercicio anterior, es abierto en $C[0, 1]$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente trabaja con $C[0, 1]$ a valores en $\mathbb{C}$; se transcribió con $\mathbb{R}$. “La convergencia en $d_\infty$ implica la puntual, luego $E_{t_0}$ es continuo” es el <span class="ref" data-ref="teo-5.7">Teo. 5.7</span>: si $f_n \to f$ en $d_\infty$, entonces $f_n(t_0) \to f(t_0)$. La desigualdad $|f(t_0) - g(t_0)| \le d_\infty(f, g)$ dice además que $E_{t_0}$ es <span class="ref" data-ref="def-5.24">Lipschitz</span> con constante $1$ (<a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>). El <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a) de la Práctica 4 es el caso $t_0 = 0$.</div>
+    <p class="cita"><i>Fuente</i>: S. Chavan, <i>MTH304 Topology: notes and problems</i> (IIT Kanpur), Exercise 8.5 y Example 8.6, págs. 12–13. <a href="https://home.iitk.ac.in/~chavan/topology_mth304.pdf">URL</a>. Acceso: página del docente en IIT Kanpur; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a), <a class="xg" data-guia="p4" data-ej="5">5</a></p>
+  </article>
+
+  <!-- O17-3 -->
+  <article class="ej" id="ejp4alt-o17-3" data-short="O17-3" data-title="Las funciones que se anulan en S forman un cerrado de (C([0,1]), d∞), pero no de d1" data-topics="funciones,topologia,continuidad">
+    <div class="ej-head">
+      <span class="tag">O17-3</span>
+      <h3>Las funciones que se anulan en $S \subseteq [0, 1]$ forman un cerrado de $(C([0, 1]), d_\infty)$, pero no de $d_1$</h3>
+      <span class="src">Addington, Ejemplo 3.4, Ej. 3.4 y Ejemplo 6.9</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $X = C([0, 1])$ con la métrica del supremo y fijemos $S \subseteq [0, 1]$. Probar que el conjunto $A$ de las funciones que se anulan en $S$ (es decir, $f(x) = 0$ para todo $x \in S$) es <span class="ref" data-ref="def-4.27">cerrado</span> en $d_\infty$. Mostrar que no tiene por qué ser cerrado en $d_1$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(Ejemplo 6.9, “solución sin manos”) Cerrado en $d_\infty$</p>
+          <p>En el Ejemplo 1.8 (c) (<a href="#ejp4alt-o17-1">O17-1</a>) vimos que $\Psi : C([0, 1]) \to \mathbb{R}$, $\Psi(f) = f(0)$, es continua en la métrica del supremo. Ahora observamos que $\Psi^{-1}(\{0\})$ es el conjunto de funciones que se anulan en $x = 0$ y, como $\{0\}$ es cerrado en $\mathbb{R}$ y $\Psi$ es continua, es un cerrado de $C([0, 1])$ (Proposición 6.8 de la fuente: $f$ continua si y sólo si la preimagen de todo cerrado es cerrada; <span class="ref" data-ref="ejap-5.10">Ej. 5.10</span> del apunte). El mismo argumento funciona para el conjunto de funciones que se anulan en cualquier otro punto $x$. Luego el conjunto de funciones que se anulan en todo punto de $S$ es una <span class="ref" data-ref="teo-4.31">intersección de cerrados</span>, y por tanto es cerrado.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(Ejemplo 3.4) No cerrado en $d_1$</p>
+          <p>En el Ejemplo 1.8 (a) vimos una sucesión $(f_n)$ de funciones que se anulan todas en $0$ y que converge en $d_1$ a una función $g$ que no se anula en $0$. Así vemos que las nociones de abierto y cerrado, interior, clausura y frontera dependen de la métrica.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la indicación original del Ej. 3.4 (pág. 22) ofrece otro camino: “directamente de las definiciones, o con la Prop. 2.10 (clausura por sucesiones) y la Prop. 1.10 (continuidad por sucesiones) junto con el Ejemplo 1.8 (c)”, que es el <span class="ref" data-ref="teo-5.7">Teo. 5.7</span> + clausura secuencial del apunte. Con $S = \{0\}$, el ejemplo responde “cerrado en $d_\infty$, no cerrado en $d_1$” para $\{f : \mathcal{E}(f) = 0\}$, el conjunto de nivel del <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a>.</div>
+    <p class="cita"><i>Fuente</i>: N. Addington, <i>A Course in Metric Spaces and Point-Set Topology</i> (Math 431, Univ. of Oregon), Example 3.4 (pág. 20), Exercise 3.4 (pág. 22) y Example 6.9 (pág. 50). <a href="https://pages.uoregon.edu/adding/courses/431/431notes.pdf">URL</a>. Acceso: página del docente en la Univ. of Oregon; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="5">Ej. 5</a>, <a class="xg" data-guia="p4" data-ej="9">9</a></p>
+  </article>
+
+  <!-- O6-6 -->
+  <article class="ej" id="ejp4alt-o6-6" data-short="O6-6" data-title="El operador derivada es continuo con dC1 y no con d∞" data-topics="funciones,continuidad,normados">
+    <div class="ej-head">
+      <span class="tag">O6-6</span>
+      <h3>El operador derivada es continuo con $d_{C^1}$ y no con $d_\infty$</h3>
+      <span class="src">Lebl, Ejerc. 7.5.12</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-normados">normados</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $C([a, b])$ el conjunto de las funciones continuas en $[a, b]$ y $C^1([a, b])$ el de las funciones con derivada continua en $[a, b]$. Definimos
+        $$\begin{aligned} d_C(f, g) &:= \|f - g\|_\infty \quad \text{y} \\ d_{C^1}(f, g) &:= \|f - g\|_\infty + \|f' - g'\|_\infty, \end{aligned}$$
+        donde $\|\cdot\|_\infty$ es la norma del supremo en $[a, b]$ (así $d_C$ es la $d_\infty$ del apunte). Tanto $(C([a, b]), d_C)$ como $(C^1([a, b]), d_{C^1})$ son espacios métricos.</p>
+      <ol class="items">
+        <li>Probar que el operador derivada $D : (C^1([a, b]), d_{C^1}) \to (C([a, b]), d_C)$, $D(f) := f'$, es <span class="ref" data-ref="def-5.4">continuo</span>.</li>
+        <li>Probar que si en $C^1([a, b])$ se usa en cambio la métrica $d_C$, el operador derivada ya no es continuo.</li>
+      </ol>
+    </div>
+    <div class="ej-grid">
+      <div class="estrategia"><b>Indicación de la fuente</b><p>Para b): considerar $\sin(n x)$.</p></div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o6-6-c1" aria-label="La función sen(nx) y su derivada n cos(nx) en [0, π]"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4alt-o6-6-n"><i>n</i></label><input type="range" id="ejp4alt-o6-6-n" min="1" max="12" value="3"><output id="ejp4alt-o6-6-n-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4alt-o6-6-read" aria-live="polite"></dl>
+        <figcaption>Sólo la indicación, dibujada en [<i>a</i>, <i>b</i>] = [0, π] (elección del dibujo): en azul sen(<i>nx</i>) y en naranja su derivada <i>n</i>·cos(<i>nx</i>). La altura de la primera no pasa de 1; la de la segunda crece con <i>n</i>.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>es el fenómeno de p4 <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a>: la misma aplicación es continua o no según la métrica del dominio. Aquí la métrica “fina” $d_{C^1}$ controla a $f'$ y la “gruesa” $d_C$ no.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Ejercicio 7.5.12, pág. 295 del PDF. <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (b), (c)</p>
+  </article>
+
+  <!-- O14-11 -->
+  <article class="ej" id="ejp4alt-o14-11-prop" data-short="Prop." data-title="Aplicación lineal continua ⟺ acotada ⟺ Lipschitz" data-topics="normados,continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Aplicación lineal continua $\Longleftrightarrow$ acotada $\Longleftrightarrow$ Lipschitz</h3>
+      <span class="src">Payá, Apuntes 05, §5.6</span>
+      <span class="topics"><a class="tag topic" href="#tema-normados">normados</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $X, Y$ <span class="ref" data-ref="ext-normado">espacios normados</span> y $T : X \to Y$ <span class="ref" data-ref="ext-operador-lineal">lineal</span>. Son equivalentes:</p>
+      <p>(i) $T$ es continua;<br>(ii) existe $M \ge 0$ tal que $\|T(x)\| \le M \|x\|$ para todo $x \in X$.</p>
+      <p>Además, si $T$ es continua en un solo punto (p. ej. en $0$), es continua en todo $X$; y si $T$ es continua, es <span class="ref" data-ref="def-5.24">lipschitziana</span>, luego <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(i) $\Longrightarrow$ (ii)</p>
+          <p>Teniendo en cuenta que $T(0) = 0$, la continuidad de $T$ en $0$ nos dice que existe $\delta \gt 0$ tal que $z \in X$, $\|z\| \lt \delta \Longrightarrow \|T(z)\| \lt 1$. Dado $x \in X \setminus \{0\}$, tomando $z = \frac{\delta x}{2 \|x\|}$ tenemos $\|z\| = \delta/2 \lt \delta$, luego
+            $$\|T(x)\| = \frac{2 \|x\|}{\delta} \|T(z)\| \le \frac{2}{\delta} \|x\|.$$
+            Como la desigualdad es obvia para $x = 0$, hemos probado (ii) con $M = 2/\delta$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(ii) $\Longrightarrow$ (i)</p>
+          <p>Para cualesquiera $u, v \in X$, de (ii) deducimos
+            $$\begin{aligned} \|T(u) - T(v)\| &= \|T(u - v)\| \\ &\le M \|u - v\|, \end{aligned}$$
+            lo que prueba que $T$ es lipschitziana, luego continua.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Continuidad en un punto</p>
+          <p>Para probar (i) $\Longrightarrow$ (ii) sólo se usó la continuidad en el origen; usando una traslación, si $T$ es continua en un punto cualquiera, lo es en el origen y por tanto en todo $X$. Dicho de otro modo: si $T$ no es continua, no es continua en ningún punto.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>(del transcriptor): $\mathcal{E}(f) = f(0)$ e $\mathcal{I}(f) = \int_0^1 f$ son lineales en $C([0, 1])$. Con esta proposición, el <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a)(b) se reduce a buscar $M$: $|f(0)| \le d_\infty(f, 0)$, $|\int_0^1 f| \le d_1(f, 0) \le d_\infty(f, 0)$, y $\mathcal{E}$ no es acotada para $d_1$ (ver <a href="#ejp4alt-o17-1">O17-1</a>). Para (c): si $\mathcal{F}$ es lineal y continua para $d_1$, como $d_1(f, g) \le d_\infty(f, g)$, es continua para $d_\infty$; así que una $\mathcal{F}$ continua para $d_1$ y no para $d_\infty$ no puede ser lineal.</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25), Tema 5, §5.6 “Continuidad de aplicaciones lineales”, págs. 7–8 del PDF (57–58 impresas). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a)(b)(c), <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O8-1 -->
+  <article class="ej" id="ejp4alt-o8-1" data-short="O8-1" data-title="Un operador integral en (C([a,b]), d∞) es Lipschitz" data-topics="funciones,continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O8-1</span>
+      <h3>Un operador integral en $(C([a, b]), d_\infty)$ es Lipschitz</h3>
+      <span class="src">Dote, Ej. 13</span>
+      <span class="topics"><a class="tag topic" href="#tema-funciones">funciones</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sean $\lambda \in \mathbb{R}$, $g \in C([a, b])$ y $k \in C([a, b] \times [a, b])$. Consideramos el operador $T : C([a, b]) \to C([a, b])$,
+      $$T(f)(x) = g(x) + \lambda \int_a^b k(x, y) f(y)\, dy.$$
+      ¿Para qué $\lambda$ es $T$ una contracción (es decir, $k$-<span class="ref" data-ref="def-5.24">Lipschitz</span> con $k \lt 1$) respecto de $d_\infty$?</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$T(f)$ es continua y $k$ es acotada</p>
+          <p>Por la Proposición 5 de la fuente (si $k$ es continua en el rectángulo compacto, entonces $y \mapsto \int_a^b k(x, y)\, dx$ es continua), $T(f)$ es continua. Como $k$ es continua en un compacto, es acotada: existe $c$ tal que $|k(x, y)| \le c$ para todos $x, y \in [a, b]$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La cadena de desigualdades</p>
+          <p>Entonces
+            $$\begin{aligned} &d_\infty(T(f_1), T(f_2)) \\ &= \sup_{x \in [a, b]} |T(f_1)(x) - T(f_2)(x)| \\ &= |\lambda| \sup_{x \in [a, b]} \\ &\qquad \left|\int_a^b k(x, y) (f_1(y) - f_2(y))\, dy\right| \\ &\le |\lambda| \sup_{x \in [a, b]} \\ &\qquad \int_a^b |k(x, y)| |f_1(y) - f_2(y)|\, dy \\ &\le |\lambda| \sup_{x \in [a, b]} |f_1(x) - f_2(x)| \\ &\qquad \cdot \sup_{x \in [a, b]} \int_a^b |k(x, y)|\, dy \\ &\le c |\lambda| (b - a)\, d_\infty(f_1, f_2). \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o8-1-c1" aria-label="Dos funciones f1 y f2 arriba y sus imágenes T(f1), T(f2) abajo, con las distancias d infinito marcadas"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o8-1-l">λ</label><input type="range" id="ejp4alt-o8-1-l" min="-150" max="150" value="60"><output id="ejp4alt-o8-1-l-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o8-1-read" aria-live="polite"></dl>
+          <figcaption>Datos elegidos para el dibujo: [<i>a</i>, <i>b</i>] = [0, 1], <i>k</i>(<i>x</i>, <i>y</i>) = cos(3(<i>x</i> − <i>y</i>)) (así <i>c</i> = 1), <i>g</i>(<i>x</i>) = 0.5, <i>f</i><sub>1</sub>(<i>y</i>) = 0.3·sen(2π<i>y</i>) + 0.2 y <i>f</i><sub>2</sub> = 0 (líneas finas). Las gruesas son <i>T</i>(<i>f</i><sub>1</sub>) y <i>T</i>(<i>f</i><sub>2</sub>), con las integrales calculadas numéricamente. En el cuadro, la distancia entre las imágenes nunca pasa la cota <i>c</i>|λ|(<i>b</i> − <i>a</i>)·<i>d</i><sub>∞</sub>(<i>f</i><sub>1</sub>, <i>f</i><sub>2</sub>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Contracción y punto fijo</p>
+          <p>Por lo tanto, si $|\lambda| \lt \frac{1}{c (b - a)}$, $T$ es una contracción en un <span class="ref" data-ref="def-4.55">espacio métrico completo</span>, y por el <span class="ref" data-ref="ext-punto-fijo-banach">teorema del punto fijo de Banach</span> existe una única $f \in C([a, b])$ con $T(f) = f$. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>para p4 <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> lo que importa es la cadena de desigualdades: $T$ es Lipschitz con constante $c |\lambda| (b - a)$ respecto de $d_\infty$ para <strong>cualquier</strong> $\lambda$, y en particular continua. Lebl (Ejerc. 7.5.9, pág. 294) pide exactamente esto, sin $g$ ni $\lambda$, como ejercicio. La fuente escribe “$\sup_x |f_1(x) - f_2(x)|$” al sacar el factor de la integral en $y$; es el mismo supremo, $d_\infty(f_1, f_2)$. La Proposición 5 de la fuente es la Prop. 7.5.12 de Lebl (continuidad de integrales con parámetro), que usa continuidad uniforme en compactos.</div>
+    <p class="cita"><i>Fuente</i>: P. Dote, <i>18.S097 Introduction to Metric Spaces</i>, Lecture 5 (MIT, IAP 2022), Ejemplo 13, págs. 6–7 del PDF. <a href="https://web.mit.edu/paigeb/www/18.S097/Lect_5.pdf">URL</a>. Acceso: publicado en la web personal de la docente en MIT; sin licencia explícita en el documento.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a), <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O7-7 -->
+  <article class="ej" id="ejp4alt-o7-7" data-short="O7-7" data-title="Mínimo de dos distancias, esferas cerradas, evaluación 1-Lipschitz" data-topics="continuidad,topologia,funciones">
+    <div class="ej-head">
+      <span class="tag">O7-7</span>
+      <h3>Tres enunciados: mínimo de dos distancias, esferas cerradas, evaluación $1$-Lipschitz</h3>
+      <span class="src">Tyson, Ejerc. 3.9, 3.14 y 3.46</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-funciones">funciones</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>(Ejercicio 3.9) Sea $(X, d)$ un espacio métrico, $a, b \in X$ con $a \neq b$, y $h : X \to \mathbb{R}$, $h(x) = \min\{d(x, a), d(x, b)\}$. Probar que $h$ es <span class="ref" data-ref="def-5.4">continua</span> en todo $x_0 \in X$.</li>
+          <li>(Ejercicio 3.14) Sea $(X, d)$ un espacio métrico, $x_0 \in X$ y $r \gt 0$. Probar que $\{x \in X : d(x, x_0) = r\}$ es <span class="ref" data-ref="def-4.27">cerrado</span> en $X$.</li>
+          <li>(Ejercicio 3.46) Sea $(X, d)$ un espacio métrico <span class="ref" data-ref="ext-compacto">compacto</span> y $C(X)$ el espacio de las funciones continuas $X \to \mathbb{R}$ con la métrica $d_\infty(f, g) =$ $\max\{|f(x) - g(x)| : x \in X\}$. Fijado $x_0 \in X$, definimos $F : C(X) \to \mathbb{R}$ por $F(g) := g(x_0)$. Probar que $F$ es <span class="ref" data-ref="def-5.24">Lipschitz</span> con constante $L = 1$.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o7-7-c1" aria-label="En la recta, el gráfico de h(x) = mín{|x − a|, |x − b|} con a y b arrastrables"></canvas>
+        <dl class="read" id="ejp4alt-o7-7-read" aria-live="polite"></dl>
+        <figcaption>El ítem a) en <i>X</i> = ℝ (elección del dibujo): arrastrá <i>a</i> y <i>b</i> sobre el eje. Las rayas finas son <i>d</i>(<i>x</i>, <i>a</i>) y <i>d</i>(<i>x</i>, <i>b</i>); la gruesa es <i>h</i>, su mínimo punto a punto.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente no da indicaciones. b) es la parte “esferas” de p4 <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a> (con <a href="#ejp4alt-o7-1">O7-1</a> y <span class="ref" data-ref="ejap-5.10">Ej. 5.10</span> sale como preimagen de $\{r\}$). c) es p4 <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a) para $\mathcal{E}(f) = f(0)$, reforzado a Lipschitz; con $X = [0, 1]$ el máximo existe porque $f - g$ es continua en un compacto. a) es una variante de $d(x, A)$ con $A = \{a, b\}$ (p4 <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>).</div>
+    <p class="cita"><i>Fuente</i>: J. Tyson, <i>MATH 424 Lecture notes: Functions</i> (UIUC, 2026), Ejercicios 3.9 y 3.14 (pág. 18 del PDF) y 3.46 (pág. 22 del PDF). <a href="http://publish.illinois.edu/jeremy-tyson/files/2026/05/functions.pdf">URL</a>. Acceso: publicado en la web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a), <a class="xg" data-guia="p4" data-ej="10">10</a>, <a class="xg" data-guia="p4" data-ej="11">11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+</section>

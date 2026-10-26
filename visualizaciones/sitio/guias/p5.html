@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 5</span></li></ol><div class="pager"><a href="../guias/p4.html" title="Guía · Práctica 4">← Anterior</a><a href="../guias/p6.html" title="Guía · Práctica 6">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 19 ejercicios</p>
+  <h1>Práctica 5</h1>
+  <p>Compacidad. Los enunciados de <code>apuntes-typst/guias/p5.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#guiap5-compacidad">Primera parteCompacidad</a><ul class="chips"><li><a href="#guiap5-ej1" title="{0} ∪ {1/n} es compacto, por definición">Ej. 1</a></li><li><a href="#guiap5-ej2" title="Un compacto no vacío de ℝ tiene mínimo y máximo">Ej. 2</a></li><li><a href="#guiap5-ej3" title="Sumas y productos de un compacto de ℝ">Ej. 3</a></li><li><a href="#guiap5-ej4" title="Intersección de cerrados con uno compacto">Ej. 4</a></li><li><a href="#guiap5-ej5" title="Compacidad y sucesiones decrecientes de cerrados">Ej. 5</a></li><li><a href="#guiap5-ej6" title="Los compactos de un espacio discreto">Ej. 6</a></li><li><a href="#guiap5-ej7" title="La unión finita de compactos es compacta">Ej. 7</a></li><li><a href="#guiap5-ej8" title="La distancia de un punto a un compacto se realiza">Ej. 8</a></li><li><a href="#guiap5-ej9" title="Un compacto y un cerrado disjuntos están a distancia positiva">Ej. 9</a></li><li><a href="#guiap5-ej10" title="La bola cerrada de C[0,1] no es compacta">Ej. 10</a></li><li><a href="#guiap5-ej11" title="Una continua positiva en un compacto está lejos de 0">Ej. 11</a></li><li><a href="#guiap5-ej12" title="Continua con límite 0 en ±∞ es uniformemente continua">Ej. 12</a></li><li><a href="#guiap5-ej13" title="Continua y biyectiva desde un compacto es homeomorfismo">Ej. 13</a></li></ul></div><div class="toc-group"><a href="#guiap5-punto-fijo">Segunda parteTeoremas de punto fijo</a><ul class="chips"><li><a href="#guiap5-ej14" title="El conjunto de puntos fijos de una continua es cerrado">Ej. 14</a></li><li><a href="#guiap5-ej15" title="½ arctan(x) + 3 es una contracción">Ej. 15</a></li><li><a href="#guiap5-ej16" title="x/3 en ℝ∖{0}: contracción sin punto fijo">Ej. 16</a></li><li><a href="#guiap5-ej17" title="Si alguna iterada es contracción hay único punto fijo; cos x = x">Ej. 17</a></li><li><a href="#guiap5-ej18" title="Puntos casi fijos en una bola implican punto fijo">Ej. 18</a></li><li><a href="#guiap5-ej19" title="Toda continua de [a,b] en [a,b] tiene un punto fijo">Ej. 19</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap5-edicion">Encabezado de la fuente: Análisis Avanzado · Segundo cuatrimestre de 2025 · Práctica 5. La guía tiene dos partes: compacidad (Ejercicios 1 a 13) y teoremas de punto fijo (Ejercicios 14 a 19).</p>
+
+<section class="bloque" id="guiap5-compacidad">
+<h2><span class="bn">Primera parte</span>Compacidad</h2>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap5-ej1" data-short="Ej. 1" data-title="{0} ∪ {1/n} es compacto, por definición" data-topics="compacidad,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>$\{0\} \cup \{1/n\}$ es compacto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $K = \{0\} \cup \{1/n : n \in \mathbb{N}\} \subseteq \mathbb{R}$. Pruebe, por definición, que $K$ es <span class="ref" data-ref="ext-compacto">compacto</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej1-c" aria-label="Los puntos 1/n y el 0 sobre la recta real"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej1-N"><i>n</i> ≤</label><input type="range" id="guiap5-ej1-N" min="1" max="60" value="12"><output id="guiap5-ej1-N-o"></output></div>
+      </div>
+      <figcaption>El conjunto <i>K</i>: los puntos 1/<i>n</i> para <i>n</i> hasta el valor elegido y el 0 (en verde). Abajo, una lupa sobre [0, 0.1], donde se amontonan los 1/<i>n</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b1" title="Bloque 1Compacidad por definición (sucesiones)">Ej. Práctica 5 · Bloque 1Compacidad por definición (sucesiones)</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap5-ej2" data-short="Ej. 2" data-title="Un compacto no vacío de ℝ tiene mínimo y máximo" data-topics="compacidad,supremo">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>Los compactos de $\mathbb{R}$ tienen mínimo y máximo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-supremo">supremo</a></span></div>
+  <div class="enun"><p>Sea $K$ un subconjunto <span class="ref" data-ref="ext-compacto">compacto</span> no vacío de $\mathbb{R}$. Pruebe que $K$ tiene <span class="ref" data-ref="def-6-minimo">mínimo</span> y <span class="ref" data-ref="def-3">máximo</span>.</p></div>
+  <div class="preparan" data-ej="2"></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap5-ej3" data-short="Ej. 3" data-title="Sumas y productos de un compacto de ℝ" data-topics="compacidad">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Sumas y productos de un compacto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $K \subseteq \mathbb{R}$ <span class="ref" data-ref="ext-compacto">compacto</span>. Pruebe que los subconjuntos de $\mathbb{R}$
+      $$\begin{aligned} S &= \{x + y : x, y \in K\}, \\ P &= \{x \cdot y : x, y \in K\} \end{aligned}$$
+      también son compactos.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej3-c" aria-label="Un compacto K de la recta y los conjuntos S y P que se forman con sus sumas y productos"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Compacto <i>K</i></legend>
+          <label><input type="radio" name="guiap5-ej3-k" value="int" checked>[0, 1] ∪ [2, 2.5]</label>
+          <label><input type="radio" name="guiap5-ej3-k" value="neg">[−1, −0.5] ∪ {1}</label>
+          <label><input type="radio" name="guiap5-ej3-k" value="seq">{0} ∪ {1/<i>n</i>}</label>
+        </fieldset>
+      </div>
+      <figcaption>Tres compactos elegidos para el dibujo. En cada fila, el conjunto: <i>K</i> (azul), <i>S</i> (verde) y <i>P</i> (naranja). Para {0} ∪ {1/<i>n</i>} se dibujan las sumas y productos con <i>n</i> ≤ 25.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b3" title="Bloque 3Productos de compactos">Ej. Práctica 5 · Bloque 3Productos de compactos</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap5-ej4" data-short="Ej. 4" data-title="Intersección de cerrados con uno compacto" data-topics="compacidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Intersección de cerrados con uno compacto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $\{F_i\}_{i \in I}$ una familia de subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span> de $E$. Pruebe que si existe $i_0 \in I$ tal que $F_{i_0}$ es <span class="ref" data-ref="ext-compacto">compacto</span>, entonces $\bigcap_{i \in I} F_i$ es compacto.</p></div>
+  <div class="preparan" data-ej="4"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b2" title="Bloque 2Compactos y cerrados">Ej. Práctica 5 · Bloque 2Compactos y cerrados</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap5-ej5" data-short="Ej. 5" data-title="Compacidad y sucesiones decrecientes de cerrados" data-topics="compacidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Sucesiones decrecientes de cerrados</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico. Pruebe que $E$ es <span class="ref" data-ref="ext-compacto">compacto</span> si y solo si para toda sucesión $(F_n)_{n \ge 1}$ decreciente (es decir, $F_{n+1} \subseteq F_n$ para todo $n \in \mathbb{N}$) de <span class="ref" data-ref="def-4.27">cerrados</span> no vacíos de $E$ se tiene que $\bigcap_{n \ge 1} F_n \neq \emptyset$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej5-c" aria-label="Una sucesión decreciente de cerrados no vacíos dentro de [0,1], uno por fila"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej5-N">filas hasta <i>n</i> =</label><input type="range" id="guiap5-ej5-N" min="1" max="14" value="6"><output id="guiap5-ej5-N-o"></output></div>
+      </div>
+      <figcaption>Un ejemplo elegido para el dibujo, con <i>E</i> = [0, 1]: <i>F<sub>n</sub></i> = [0, 1/<i>n</i>] ∪ [1 − 1/(2<i>n</i>), 1], una fila por <i>n</i>. Cada fila está contenida en la de arriba.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="5"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b2" title="Bloque 2Compactos y cerrados">Ej. Práctica 5 · Bloque 2Compactos y cerrados</a></li><li><a href="../ejemplos/p5.html#ejp5-b5" title="Bloque 5Compacidad y funciones continuas: encajes de compactos">Ej. Práctica 5 · Bloque 5Compacidad y funciones continuas: encajes de compact…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap5-ej6" data-short="Ej. 6" data-title="Los compactos de un espacio discreto" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Compactos de un espacio discreto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="ext-metrica-discreta">espacio métrico discreto</span>. ¿Cuáles son los subconjuntos <span class="ref" data-ref="ext-compacto">compactos</span> de $E$?</p></div>
+  <div class="preparan" data-ej="6"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b1" title="Bloque 1Compacidad por definición (sucesiones)">Ej. Práctica 5 · Bloque 1Compacidad por definición (sucesiones)</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap5-ej7" data-short="Ej. 7" data-title="La unión finita de compactos es compacta" data-topics="compacidad">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Unión finita de compactos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a></span></div>
+  <div class="enun"><p>Pruebe que la unión de un número finito de conjuntos <span class="ref" data-ref="ext-compacto">compactos</span> es compacto.</p></div>
+  <div class="preparan" data-ej="7"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b1" title="Bloque 1Compacidad por definición (sucesiones)">Ej. Práctica 5 · Bloque 1Compacidad por definición (sucesiones)</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap5-ej8" data-short="Ej. 8" data-title="La distancia de un punto a un compacto se realiza" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>La distancia a un compacto se realiza</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que en un espacio métrico $(E, d)$ la <span class="ref" data-ref="guia-p3-ej10">distancia de un punto a un compacto</span> <em>se realiza</em>. Esto es, que para todo <span class="ref" data-ref="ext-compacto">compacto</span> $K \subseteq E$ y para todo $x \in E$ existe $y \in K$ tal que $d(x, y) = d(x, K)$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej8-c" aria-label="Un compacto del plano y un punto x arrastrable, con el segmento hasta el punto de K más cercano"></canvas>
+      <dl class="read" id="guiap5-ej8-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ² y <i>d</i><sub>2</sub>, un compacto <i>K</i> elegido para el dibujo: un disco cerrado unido a un segmento. Arrastrá <i>x</i>: el punto verde es un <i>y</i> ∈ <i>K</i> con <i>d</i>(<i>x</i>, <i>y</i>) = <i>d</i>(<i>x</i>, <i>K</i>), buscado numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="8"></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap5-ej9" data-short="Ej. 9" data-title="Un compacto y un cerrado disjuntos están a distancia positiva" data-topics="compacidad,metricas">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>Compacto y cerrado disjuntos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico, y sea $\hat{d}$ la función definida en el <span class="ref" data-ref="guia-p3-ej11">Ejercicio 11 de la Práctica 3</span>. Pruebe que si $A \subseteq E$ es <span class="ref" data-ref="ext-compacto">compacto</span>, $B \subseteq E$ es <span class="ref" data-ref="def-4.27">cerrado</span> y se cumple que $A \cap B = \emptyset$, entonces $\hat{d}(A, B) \gt 0$. ¿Sucede lo mismo si $A$ es solo cerrado?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej9-c" aria-label="Un disco cerrado A arrastrable y un cerrado B del plano, con la distancia entre ellos"></canvas>
+      <dl class="read" id="guiap5-ej9-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = ℝ² y <i>d</i><sub>2</sub>, conjuntos elegidos para el dibujo: <i>A</i> un disco cerrado de radio 1 (azul, arrastrable desde el centro) y <i>B</i> = {(<i>x</i>, <i>y</i>) : <i>y</i> ≥ <i>x</i>²/4 + 1} (verde). El segmento une puntos que realizan <i>d̂</i>(<i>A</i>, <i>B</i>), calculada numéricamente.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="9"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b3" title="Bloque 3Productos de compactos">Ej. Práctica 5 · Bloque 3Productos de compactos</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap5-ej10" data-short="Ej. 10" data-title="La bola cerrada de C[0,1] no es compacta" data-topics="compacidad,funciones">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>La bola cerrada de $(C[0,1], d_\infty)$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Consideremos en <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$(C[0, 1], d_\infty)$</span> la función $f_0$ nula. Pruebe que <span class="ref" data-ref="def-4.22">$\overline{B(f_0, 1)}$</span> no es <span class="ref" data-ref="ext-compacto">compacta</span> (pero sí es <span class="ref" data-ref="def-4.27">cerrada</span> y <span class="ref" data-ref="def-4.8">acotada</span>). ¿Qué pasa si cambiamos $d_\infty$ por $d_1$?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej10-c" aria-label="La franja entre menos 1 y 1 y una función continua poligonal arrastrable"></canvas>
+      <dl class="read" id="guiap5-ej10-read" aria-live="polite"></dl>
+      <figcaption>Para <i>d</i><sub>∞</sub>, estar a distancia ≤ 1 de <i>f</i><sub>0</sub> es tener el gráfico dentro de la franja −1 ≤ <i>y</i> ≤ 1. Arrastrá los nodos de la poligonal y mirá las dos distancias a <i>f</i><sub>0</sub>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b4" title="Bloque 4Cerrado y acotado no alcanza: bolas en espacios de funciones">Ej. Práctica 5 · Bloque 4Cerrado y acotado no alcanza: bolas en espacios de f…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap5-ej11" data-short="Ej. 11" data-title="Una continua positiva en un compacto está lejos de 0" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>Una continua positiva en un compacto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sea $E$ un espacio métrico <span class="ref" data-ref="ext-compacto">compacto</span>, y sea $f : E \to (0, +\infty)$ una función <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que existe $\alpha \gt 0$ tal que $f(x) \gt \alpha$ para todo $x \in E$.</p></div>
+  <div class="preparan" data-ej="11"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b5" title="Bloque 5Compacidad y funciones continuas: encajes de compactos">Ej. Práctica 5 · Bloque 5Compacidad y funciones continuas: encajes de compact…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap5-ej12" data-short="Ej. 12" data-title="Continua con límite 0 en ±∞ es uniformemente continua" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>Límite $0$ en $\pm\infty$ implica continuidad uniforme</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ <span class="ref" data-ref="def-5.4">continua</span> tal que
+      $$\lim_{x \to -\infty} f(x) = \lim_{x \to +\infty} f(x) = 0.$$
+      Pruebe que $f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span> en $\mathbb{R}$.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej12-c" aria-label="Una función que tiende a 0 en más y menos infinito, con una banda de ancho epsilon"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej12-e">ε</label><input type="range" id="guiap5-ej12-e" min="3" max="100" value="25"><output id="guiap5-ej12-e-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej12-read" aria-live="polite"></dl>
+      <figcaption>Una función elegida para el dibujo, <i>f</i>(<i>x</i>) = 1.6 sen(2<i>x</i>)/(1 + 0.2<i>x</i>²), que cumple la hipótesis. La banda es |<i>y</i>| &lt; ε; fuera de las rayas verticales, |<i>x</i>| ≥ <i>M</i>, el gráfico ya no sale de la banda (el <i>M</i> se busca numéricamente en la ventana dibujada).</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap5-ej13" data-short="Ej. 13" data-title="Continua y biyectiva desde un compacto es homeomorfismo" data-topics="compacidad,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>Continua y biyectiva desde un compacto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="enun"><p>Sean $E$ y $E'$ espacios métricos y $f : E \to E'$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que si $E$ es <span class="ref" data-ref="ext-compacto">compacto</span> y $f$ es biyectiva, entonces $f$ es un <span class="ref" data-ref="def-5.29">homeomorfismo</span>.</p></div>
+  <div class="preparan" data-ej="13"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p4.html#ejp4-b8" title="Bloque 8Homeomorfismos e isometrías">Ej. Práctica 4 · Bloque 8Homeomorfismos e isometrías</a></li><li><a href="../ejemplos/p5.html#ejp5-b5" title="Bloque 5Compacidad y funciones continuas: encajes de compactos">Ej. Práctica 5 · Bloque 5Compacidad y funciones continuas: encajes de compact…</a></li></ul></div>
+</article>
+</section>
+
+<section class="bloque" id="guiap5-punto-fijo">
+<h2><span class="bn">Segunda parte</span>Teoremas de punto fijo</h2>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap5-ej14" data-short="Ej. 14" data-title="El conjunto de puntos fijos de una continua es cerrado" data-topics="continuidad,topologia">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>Los puntos fijos forman un cerrado</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico y sea $f : E \to E$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que el conjunto de <span class="ref" data-ref="ext-punto-fijo">puntos fijos</span> de $f$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej14-c" aria-label="Gráfico de una función y de la recta y igual a x, con sus puntos fijos marcados"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej14-a"><i>a</i></label><input type="range" id="guiap5-ej14-a" min="0" max="200" value="120"><output id="guiap5-ej14-a-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej14-read" aria-live="polite"></dl>
+      <figcaption>Con <i>E</i> = [−5, 5] y una familia elegida para el dibujo, <i>f</i>(<i>x</i>) = <i>x</i>/2 + <i>a</i> cos(2<i>x</i>): los puntos fijos son los cortes del gráfico (azul) con la diagonal <i>y</i> = <i>x</i>, marcados sobre el eje.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="14"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap5-ej15" data-short="Ej. 15" data-title="½ arctan(x) + 3 es una contracción" data-topics="continuidad,completitud">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>$\frac12 \arctan(x) + 3$ es una contracción</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : \mathbb{R} \to \mathbb{R}$ dada por $f(x) = \frac{1}{2} \arctan(x) + 3$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span>.</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej15-c" aria-label="Gráfico de f igual a un medio arcotangente de x más 3, la diagonal y la telaraña de iteraciones desde x0"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej15-x">x<sub>0</sub></label><input type="range" id="guiap5-ej15-x" min="-40" max="80" value="-30"><output id="guiap5-ej15-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap5-ej15-read" aria-live="polite"></dl>
+      <figcaption>El gráfico de <i>f</i> (azul), la diagonal <i>y</i> = <i>x</i> y la "telaraña" de las iteraciones <i>x</i><sub>0</sub>, <i>f</i>(<i>x</i><sub>0</sub>), <i>f</i>(<i>f</i>(<i>x</i><sub>0</sub>)), … desde el <i>x</i><sub>0</sub> elegido.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="15"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap5-ej16" data-short="Ej. 16" data-title="x/3 en ℝ∖{0}: contracción sin punto fijo" data-topics="completitud,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Una contracción sin punto fijo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E = \mathbb{R} \setminus \{0\}$, con la distancia usual de $\mathbb{R}$. Sea $f : E \to E$ dada por $f(x) = \frac{1}{3} x$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span> pero no tiene <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>. ¿Qué falla del <span class="ref" data-ref="ext-teorema-banach">Teorema de Banach</span>?</p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej16-c" aria-label="Gráfico de f igual a x sobre 3 en la recta sin el cero, junto a la diagonal"></canvas>
+      <figcaption>El gráfico de <i>f</i>(<i>x</i>) = <i>x</i>/3 sobre <i>E</i> = ℝ ∖ {0} (azul) y la diagonal <i>y</i> = <i>x</i> (punteada). El círculo vacío y el hueco en el eje marcan que 0 ∉ <i>E</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 17 ===================== -->
+<article class="ej" id="guiap5-ej17" data-short="Ej. 17" data-title="Si alguna iterada es contracción hay único punto fijo; cos x = x" data-topics="completitud,continuidad">
+  <div class="ej-head"><span class="tag">Ej. 17</span><h3>Iteradas que son contracciones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $E$ un espacio métrico y sea $f : E \to E$ una función. Para $n \in \mathbb{N}$ denotemos por $f^n : E \to E$ a la función $f \circ f \circ \dots \circ f$ ($n$ veces). Pruebe las siguientes afirmaciones:</p>
+      <ol class="items">
+        <li>Si $x \in E$ es <span class="ref" data-ref="ext-punto-fijo">punto fijo</span> de $f$, entonces es punto fijo de $f^n$.</li>
+        <li>Si $E$ es <span class="ref" data-ref="def-4.55">completo</span> y existe $n \in \mathbb{N}$ tal que $f^n$ es una <span class="ref" data-ref="ext-contraccion">contracción</span>, entonces existe un único punto fijo de $f$ en $E$.
+          <p><em>Sugerencia: pruebe que si $x \in E$ es punto fijo de $f^n$, entonces $f(x)$ también lo es.</em></p></li>
+        <li>Deduzca que existe un único $x \in \mathbb{R}$ tal que $\cos(x) = x$.</li>
+      </ol></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej17-c" aria-label="Gráficos de coseno y de su iterada n veces, junto a la diagonal"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap5-ej17-n"><i>n</i></label><input type="range" id="guiap5-ej17-n" min="1" max="8" value="2"><output id="guiap5-ej17-n-o"></output></div>
+      </div>
+      <figcaption>Para el ítem (c): el gráfico de cos (punteado), el de la iterada cos<sup><i>n</i></sup> = cos ∘ ⋯ ∘ cos (<i>n</i> veces, azul) y la diagonal <i>y</i> = <i>x</i>, en [−4, 4].</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="17"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 18 ===================== -->
+<article class="ej" id="guiap5-ej18" data-short="Ej. 18" data-title="Puntos casi fijos en una bola implican punto fijo" data-topics="continuidad,compacidad">
+  <div class="ej-head"><span class="tag">Ej. 18</span><h3>Puntos casi fijos en una bola</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-compacidad">compacidad</a></span></div>
+  <div class="enun"><p>Considere en $\mathbb{R}^n$ la <span class="ref" data-ref="def-distancias-en-rrn">métrica $d_2$</span>. Sea $f : \mathbb{R}^n \to \mathbb{R}^n$ una función <span class="ref" data-ref="def-5.4">continua</span>. Supongamos que existe $M \gt 0$ tal que para todo $\varepsilon \gt 0$ existe <span class="ref" data-ref="def-4.5">$x \in B(0, M)$</span> tal que $d_2(x, f(x)) \lt \varepsilon$. Pruebe que $f$ tiene un <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>.</p></div>
+  <div class="preparan" data-ej="18"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 19 ===================== -->
+<article class="ej" id="guiap5-ej19" data-short="Ej. 19" data-title="Toda continua de [a,b] en [a,b] tiene un punto fijo" data-topics="continuidad">
+  <div class="ej-head"><span class="tag">Ej. 19</span><h3>Punto fijo en $[a, b]$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $f : [a, b] \to [a, b]$ <span class="ref" data-ref="def-5.4">continua</span>. Pruebe que $f$ tiene un <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>.</p>
+      <p><em>Sugerencia: use el <span class="ref" data-ref="ext-teorema-bolzano">teorema de Bolzano</span>.</em></p></div>
+    <figure class="viz">
+      <canvas id="guiap5-ej19-c" aria-label="El cuadrado [a,b] por [a,b] con la diagonal y una función continua poligonal arrastrable"></canvas>
+      <figcaption>Con [<i>a</i>, <i>b</i>] = [0, 1]: el cuadrado [<i>a</i>, <i>b</i>]², la diagonal <i>y</i> = <i>x</i> y una <i>f</i> continua poligonal cuyos nodos se arrastran sin salir del cuadrado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="19"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p5.html#ejp5-b6" title="Bloque 6Compacidad y punto fijo">Ej. Práctica 5 · Bloque 6Compacidad y punto fijo</a></li></ul></div>
+</article>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo<\/b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia<\/strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.<\/p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura<\/strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:<\/p><ul><li><b>Bola abierta:<\/b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<\/li><li><b>Bola cerrada:<\/b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<\/li><li><b>Esfera:<\/b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo<\/strong> si toda sucesión de Cauchy tiene límite en $M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado<\/b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.<\/p><p>(En el apunte, la definición viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua<\/i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$<\/p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes<\/i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).<\/p><p><i>Nota<\/i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$<\/b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo<\/i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.<\/p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos<\/i>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo<\/b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:<\/p><ol><li><b>Distancia euclídea ($d_2$):<\/b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$<\/li><li><b>Distancia taxista ($d_1$):<\/b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$<\/li><li><b>Distancia del máximo ($d_\\infty$):<\/b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$<\/li><\/ol><p>(En el apunte, un dibujo de cada distancia entre dos puntos de $\\mathbb{R}^2$.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Conjunto compacto",
+  "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto<\/b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.<\/p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$<\/i>.<\/p>",
+  "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
+ },
+ "ext-contraccion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Contracción",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Una función $f : E \\to E$ es una <b>contracción<\/b> si existe una constante $0 \\le \\alpha \\lt 1$ tal que $$d(f(x), f(y)) \\le \\alpha\\, d(x, y) \\quad \\text{para todo } x, y \\in E.$$ Es decir, $f$ es Lipschitz con constante menor que $1$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-metrica-discreta": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métrica discreta",
+  "enunciado": "<p>Sea $E$ un conjunto no vacío. La <b>métrica discreta<\/b> en $E$ es $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ Un espacio métrico con esta métrica se llama <b>discreto<\/b>. Para $r \\le 1$, la bola $B(x, r)$ es $\\{x\\}$.<\/p>",
+  "fuente": "Guía de la Práctica 3, Ejercicio 1 (f); el apunte la usa (observación «La continuidad depende de las métricas») pero no la define en una caja"
+ },
+ "ext-punto-fijo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Punto fijo",
+  "enunciado": "<p>Sea $f : E \\to E$ una función. Un punto $x \\in E$ es un <b>punto fijo<\/b> de $f$ si $f(x) = x$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-teorema-banach": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Punto fijo de Banach",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo no vacío y sea $f : E \\to E$ una contracción. Entonces $f$ tiene un único punto fijo $x^* \\in E$. Además, para cualquier $x_0 \\in E$, la sucesión $x_{n+1} = f(x_n)$ converge a $x^*$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-teorema-bolzano": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano",
+  "enunciado": "<p>Sea $g : [a, b] \\to \\mathbb{R}$ continua tal que $g(a)$ y $g(b)$ tienen signos opuestos ($g(a)\\, g(b) \\lt 0$). Entonces existe $c \\in (a, b)$ tal que $g(c) = 0$.<\/p>",
+  "fuente": "Teorema de Análisis I, usado en el curso; no está en apuntes.typ"
+ },
+ "guia-p3-ej10": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 10",
+  "titulo": "Distancia de un punto a un conjunto",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Dados $A \\subseteq E$ no vacío y $x \\in E$, se define la <em>distancia de $x$ a $A$<\/em> como $$ d(x, A) = \\inf\\{d(x, a) : a \\in A\\}. $$ Pruebe que para todos $x, y \\in E$ y $r \\gt 0$:<\/p> <ol class=\"items\"> <li>$|d(x, A) - d(y, A)| \\le d(x, y)$.<\/li> <li>$x \\in A \\Rightarrow d(x, A) = 0$.<\/li> <li>$d(x, A) = 0 \\iff x \\in \\overline{A}$.<\/li> <li>$B_A(r) = \\{x \\in E : d(x, A) \\lt r\\}$ es abierto.<\/li> <li>$\\overline{B}_A(r) = \\{x \\in E : d(x, A) \\le r\\}$ es cerrado.<\/li> <\/ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej11": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 11",
+  "titulo": "La distancia entre conjuntos no es una distancia",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Consideremos el conjunto $\\mathcal{X} = \\{A \\subseteq E : A \\neq \\emptyset\\}$. Definimos la función $\\hat{d} : \\mathcal{X} \\times \\mathcal{X} \\to \\mathbb{R}$ como $$ \\hat{d}(A, B) = \\inf\\{d(a, b) : a \\in A, b \\in B\\}. $$ Determine si las siguientes afirmaciones son verdaderas o falsas:<\/p> <ol class=\"items\"> <li>$\\hat{d}(A, B) = \\hat{d}(\\overline{A}, B)$.<\/li> <li>$\\hat{d}(A, B) = 0 \\iff A \\cap B \\neq \\emptyset$.<\/li> <li>$\\hat{d}(A, B) = 0 \\iff \\overline{A} \\cap \\overline{B} \\neq \\emptyset$.<\/li> <li>$\\hat{d}(A, B) \\le \\hat{d}(A, C) + \\hat{d}(C, B)$.<\/li> <\/ol> <p>Concluya que $\\hat{d}$ no es una distancia.<\/p>",
+  "fuente": "guias/p3.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p5 */
+(() => {
+"use strict";
+/* Dibujos de la guía de la Práctica 5 (compacidad y punto fijo). Usa window.PP. */
+const P = "guiap5";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Marco con la misma escala en x y en y, centrado verticalmente en yc. */
+function eqFrame(w, h, x0, x1, yc, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const span = (x1 - x0) * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0, x1, y0: yc - span / 2, y1: yc + span / 2 }, p);
+}
+
+/* Recorta el dibujo al rectángulo de datos del marco T (hay que llamar a ctx.restore() después). */
+function clipBox(ctx, T) {
+  ctx.save(); ctx.beginPath();
+  ctx.rect(T.p.l, T.p.t, T.w - T.p.l - T.p.r, T.h - T.p.t - T.p.b); ctx.clip();
+}
+
+/* Gráfico de f en [a, b]; corta el trazo donde f no es finita, se va muy lejos o donde brk(x1, x2) lo pide. */
+function plotFn(ctx, T, f, a, b, color, width, dash, n, brk) {
+  n = n || 600;
+  const span = T.box.y1 - T.box.y0;
+  let seg = [], px = null;
+  const flush = () => { if (seg.length > 1) PP.path(ctx, seg, color, width, dash); seg = []; };
+  for (let i = 0; i <= n; i++) {
+    const x = a + (b - a) * i / n, y = f(x);
+    if (!isFinite(y) || y < T.box.y0 - 4 * span || y > T.box.y1 + 4 * span) { flush(); px = null; continue; }
+    if (px !== null && brk && brk(px, x)) flush();
+    seg.push([T.X(x), T.Y(y)]); px = x;
+  }
+  flush();
+}
+
+/* Arrastre de puntos sobre un canvas: pick(px, py, T) devuelve un índice o null; move(i, x, y, T) actualiza. */
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+
+/* Índice del punto (de una lista [[x, y], …]) más cercano al píxel, o null si está lejos. */
+function nearest(pts, px, py, T, tol) {
+  let best = null, bd = tol || 18;
+  pts.forEach(([x, y], i) => { const d = Math.hypot(T.X(x) - px, T.Y(y) - py); if (d < bd) { bd = d; best = i; } });
+  return best;
+}
+
+/* Poligonal por nodos (xs, ys): valor, integral, integral del módulo y máximo del módulo. */
+function pwl(xs, ys) {
+  const f = (x) => {
+    for (let i = 0; i < xs.length - 1; i++) {
+      if (x <= xs[i + 1] || i === xs.length - 2) { const t = (x - xs[i]) / (xs[i + 1] - xs[i]); return ys[i] + t * (ys[i + 1] - ys[i]); }
+    }
+    return ys[ys.length - 1];
+  };
+  let I = 0, I1 = 0;
+  for (let i = 0; i < xs.length - 1; i++) {
+    const dx = xs[i + 1] - xs[i], a = ys[i], b = ys[i + 1];
+    I += (a + b) / 2 * dx;
+    if (a * b >= 0) I1 += Math.abs(a + b) / 2 * dx;
+    else I1 += dx / 2 * (a * a + b * b) / (Math.abs(a) + Math.abs(b));
+  }
+  return { f, I, I1, sup: Math.max(...ys.map(Math.abs)) };
+}
+
+/* Sombrea el área entre la poligonal y el eje: arriba con c1, abajo con c2. */
+function shadeArea(ctx, T, xs, ys, c1, c2) {
+  const poly = [[T.X(xs[0]), T.Y(0)], ...xs.map((x, i) => [T.X(x), T.Y(ys[i])]), [T.X(xs[xs.length - 1]), T.Y(0)]];
+  [[T.p.t, T.Y(0) - T.p.t, c1], [T.Y(0), T.h - T.p.b - T.Y(0), c2]].forEach(([y, hh, c]) => {
+    if (hh <= 0) return;
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, y, T.w - T.p.l - T.p.r, hh); ctx.clip();
+    PP.path(ctx, poly, null, 0, null, true, c); ctx.restore();
+  });
+}
+
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; };
+
+/* ===================== Ejercicio 1 ===================== */
+PP.register(function () {
+  const N = PP.val(P + "-ej1-N");
+  PP.out(P + "-ej1-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(P + "-ej1-c", 0.42);
+  const pad = { l: 16, r: 16, t: 10, b: 10 };
+  const rows = [[-0.05, 1.05, h * 0.3, "K"], [-0.004, 0.104, h * 0.75, "lupa en [0, 0.1]"]];
+  rows.forEach(([x0, x1, yy, name], k) => {
+    const X = (x) => pad.l + (x - x0) / (x1 - x0) * (w - pad.l - pad.r);
+    PP.path(ctx, [[X(x0), yy], [X(x1), yy]], C("--muted"), 1);
+    const ticks = k === 0 ? [0, 0.25, 0.5, 0.75, 1] : [0, 0.025, 0.05, 0.075, 0.1];
+    ticks.forEach((t) => {
+      PP.path(ctx, [[X(t), yy - 4], [X(t), yy + 4]], C("--muted"), 1);
+      PP.label(ctx, PP.fmt(t, 3), X(t), yy + 8, C("--muted"), "center", "top", 10);
+    });
+    for (let n = 1; n <= N; n++) {
+      const x = 1 / n; if (x < x0 || x > x1) continue;
+      PP.dot(ctx, X(x), yy, n <= 3 ? 4.5 : 3.2, C("--accent"));
+    }
+    PP.dot(ctx, X(0), yy, 5, C("--ok"), C("--bg"));
+    PP.label(ctx, name, pad.l, yy - 12, C("--muted"), "left", "bottom", 11);
+  });
+}, [P + "-ej1-N"]);
+
+/* ===================== Ejercicio 3 ===================== */
+(() => {
+  const Ks = {
+    int: [[0, 1], [2, 2.5]],
+    neg: [[-1, -0.5], [1, 1]],
+    seq: [[0, 0]].concat(Array.from({ length: 25 }, (_, i) => [1 / (i + 1), 1 / (i + 1)])),
+  };
+  const combine = (K, op) => {
+    const out = [];
+    K.forEach(([a, b]) => K.forEach(([c, d]) => {
+      if (op === "+") out.push([a + c, b + d]);
+      else { const v = [a * c, a * d, b * c, b * d]; out.push([Math.min(...v), Math.max(...v)]); }
+    }));
+    return out;
+  };
+  PP.register(function () {
+    const which = PP.radio(P + "-ej3-k") || "int";
+    const K = Ks[which], S = combine(K, "+"), Pp = combine(K, "*");
+    const all = K.concat(S, Pp).flat();
+    let lo = Math.min(...all), hi = Math.max(...all);
+    const m = (hi - lo) * 0.06 || 0.5; lo -= m; hi += m;
+    const { ctx, w, h } = PP.canvas(P + "-ej3-c", 0.5);
+    const T = PP.frame(w, h, { x0: lo, x1: hi, y0: 0, y1: 1 }, { l: 28, r: 14, t: 8, b: 24 });
+    const rows = [[K, 0.8, "K", C("--accent")], [S, 0.5, "S", C("--ok")], [Pp, 0.2, "P", C("--seq2")]];
+    // eje común abajo
+    const step = PP.niceStep(hi - lo, 6);
+    for (let t = Math.ceil(lo / step) * step; t <= hi + 1e-9; t += step) {
+      PP.path(ctx, [[T.X(t), T.p.t], [T.X(t), h - T.p.b]], C("--rule"), 1);
+      PP.label(ctx, PP.fmt(t, 2), T.X(t), h - T.p.b + 5, C("--muted"), "center", "top", 10);
+    }
+    rows.forEach(([pieces, y, name, col]) => {
+      PP.path(ctx, [[T.X(lo), T.Y(y)], [T.X(hi), T.Y(y)]], C("--muted"), 1);
+      PP.label(ctx, name, 8, T.Y(y), col, "left", "middle", 13);
+      pieces.forEach(([a, b]) => {
+        if (b - a > 1e-9) { PP.path(ctx, [[T.X(a), T.Y(y)], [T.X(b), T.Y(y)]], col, 6); PP.dot(ctx, T.X(a), T.Y(y), 3.5, col); PP.dot(ctx, T.X(b), T.Y(y), 3.5, col); }
+        else PP.dot(ctx, T.X(a), T.Y(y), which === "seq" ? 2.6 : 4.5, col);
+      });
+    });
+  }, ["input[name='" + P + "-ej3-k']"]);
+})();
+
+/* ===================== Ejercicio 5 ===================== */
+PP.register(function () {
+  const N = PP.val(P + "-ej5-N");
+  PP.out(P + "-ej5-N-o", String(N));
+  const { ctx, w, h } = PP.canvas(P + "-ej5-c", 0.62);
+  const T = PP.frame(w, h, { x0: -0.02, x1: 1.02, y0: N + 0.7, y1: 0.3 }, { l: 40, r: 14, t: 10, b: 24 });
+  // y invertido: fila n = 1 arriba
+  const Yr = (n) => T.p.t + (n - 0.3) / (N + 0.4) * (h - T.p.t - T.p.b);
+  [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
+    PP.path(ctx, [[T.X(t), T.p.t], [T.X(t), h - T.p.b]], C("--rule"), 1);
+    PP.label(ctx, PP.fmt(t, 2), T.X(t), h - T.p.b + 5, C("--muted"), "center", "top", 10);
+  });
+  const lw = Math.max(3, Math.min(10, (h - T.p.t - T.p.b) / (N + 1) * 0.45));
+  for (let n = 1; n <= N; n++) {
+    const y = Yr(n);
+    PP.label(ctx, "F" + String(n).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[+d]).join(""), T.p.l - 6, y, C("--muted"), "right", "middle", 11);
+    const a = 1 / n, b = 1 - 1 / (2 * n);
+    if (a >= b) PP.path(ctx, [[T.X(0), y], [T.X(1), y]], C("--accent"), lw);
+    else { PP.path(ctx, [[T.X(0), y], [T.X(a), y]], C("--accent"), lw); PP.path(ctx, [[T.X(b), y], [T.X(1), y]], C("--accent"), lw); }
+  }
+}, [P + "-ej5-N"]);
+
+/* ===================== Ejercicio 8 ===================== */
+(() => {
+  const c = [-1.2, 0.4], R = 1.2, s0 = [-1.2, 0.4], s1 = [2.8, -1.6];
+  const pt = [[2.2, 1.9]];
+  let T = null;
+  const cid = P + "-ej8-c";
+  function nearestK(x) {
+    const dx = x[0] - c[0], dy = x[1] - c[1], r = Math.hypot(dx, dy);
+    const dDisk = Math.max(0, r - R);
+    const yDisk = r <= R ? x.slice() : [c[0] + R * dx / r, c[1] + R * dy / r];
+    const vx = s1[0] - s0[0], vy = s1[1] - s0[1];
+    const t = clamp(((x[0] - s0[0]) * vx + (x[1] - s0[1]) * vy) / (vx * vx + vy * vy), 0, 1);
+    const ySeg = [s0[0] + t * vx, s0[1] + t * vy];
+    const dSeg = Math.hypot(x[0] - ySeg[0], x[1] - ySeg[1]);
+    return dDisk <= dSeg ? [dDisk, yDisk] : [dSeg, ySeg];
+  }
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.72);
+    T = eqFrame(w, h, -4, 4, 0);
+    PP.path(ctx, [[T.X(-4), T.Y(0)], [T.X(4), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    PP.circle(ctx, T.X(c[0]), T.Y(c[1]), T.X(c[0] + R) - T.X(c[0]), C("--accent"), C("--area"), null, 2);
+    PP.path(ctx, [[T.X(s0[0]), T.Y(s0[1])], [T.X(s1[0]), T.Y(s1[1])]], C("--accent"), 3.5);
+    PP.dot(ctx, T.X(s1[0]), T.Y(s1[1]), 3.5, C("--accent"));
+    PP.label(ctx, "K", T.X(c[0]), T.Y(c[1] + R) - 4, C("--accent"), "center", "bottom", 14);
+    const x = pt[0], [d, y] = nearestK(x);
+    if (d > 0) PP.path(ctx, [[T.X(x[0]), T.Y(x[1])], [T.X(y[0]), T.Y(y[1])]], C("--ink"), 1.4, [4, 3]);
+    PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 5, C("--ok"), C("--bg"));
+    PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 7, C("--seq2"), C("--bg"));
+    PP.label(ctx, "x", T.X(x[0]) + 9, T.Y(x[1]) - 4, C("--seq2"), "left", "bottom", 13);
+    PP.label(ctx, "y", T.X(y[0]) - 8, T.Y(y[1]) + 4, C("--ok"), "right", "top", 13);
+    PP.read(P + "-ej8-read", [
+      ["x", "(" + PP.fmt(x[0], 2) + ", " + PP.fmt(x[1], 2) + ")"],
+      ["y ∈ K más cercano", "(" + PP.fmt(y[0], 2) + ", " + PP.fmt(y[1], 2) + ")"],
+      ["d(x, y) = d(x, K)", PP.fmt(d, 3)],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(pt, px, py, T, 24),
+    (i, x, y, T) => { pt[0] = [clamp(x, -3.9, 3.9), clamp(y, T.box.y0 + 0.1, T.box.y1 - 0.1)]; }, draw);
+})();
+
+/* ===================== Ejercicio 9 ===================== */
+(() => {
+  const ctr = [[2.6, -1.2]];
+  const par = (x) => x * x / 4 + 1;
+  let T = null;
+  const cid = P + "-ej9-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.72);
+    T = eqFrame(w, h, -5, 5, 0.8);
+    PP.path(ctx, [[T.X(-5), T.Y(0)], [T.X(5), T.Y(0)]], C("--rule"), 1);
+    PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+    // B: región sobre la parábola
+    const pts = [];
+    for (let x = -6; x <= 6.001; x += 0.05) pts.push([T.X(x), T.Y(par(x))]);
+    clipBox(ctx, T);
+    PP.path(ctx, pts.concat([[T.X(6), T.Y(T.box.y1 + 5)], [T.X(-6), T.Y(T.box.y1 + 5)]]), null, 0, null, true, C("--area3"));
+    PP.path(ctx, pts, C("--seq3"), 2);
+    ctx.restore();
+    PP.label(ctx, "B", T.X(0), T.Y(par(0)) - 26, C("--seq3"), "center", "bottom", 14);
+    // A: disco de radio 1
+    const [cx, cy] = ctr[0];
+    PP.circle(ctx, T.X(cx), T.Y(cy), T.X(cx + 1) - T.X(cx), C("--accent"), C("--area"), null, 2);
+    PP.dot(ctx, T.X(cx), T.Y(cy), 5, C("--accent"), C("--bg"));
+    PP.label(ctx, "A", T.X(cx), T.Y(cy - 1) + 4, C("--accent"), "center", "top", 14);
+    // distancia del centro a B
+    const inside = cy >= par(cx);
+    let best = Infinity, q = null;
+    for (let x = -10; x <= 10; x += 0.002) { const d = Math.hypot(x - cx, par(x) - cy); if (d < best) { best = d; q = [x, par(x)]; } }
+    const dc = inside ? 0 : best;
+    const dhat = Math.max(0, dc - 1);
+    if (dhat > 0) {
+      const u = [(q[0] - cx) / best, (q[1] - cy) / best];
+      const p0 = [cx + u[0], cy + u[1]];
+      PP.path(ctx, [[T.X(p0[0]), T.Y(p0[1])], [T.X(q[0]), T.Y(q[1])]], C("--ink"), 1.4, [4, 3]);
+      PP.dot(ctx, T.X(p0[0]), T.Y(p0[1]), 4, C("--ink"));
+      PP.dot(ctx, T.X(q[0]), T.Y(q[1]), 4, C("--ink"));
+    }
+    PP.read(P + "-ej9-read", [
+      ["centro de A", "(" + PP.fmt(cx, 2) + ", " + PP.fmt(cy, 2) + ")"],
+      ["A ∩ B", dhat > 0 ? "vacía" : "no vacía"],
+      ["d̂(A, B)", PP.fmt(dhat, 3), dhat > 0 ? "good" : ""],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => {
+    const [cx, cy] = ctr[0];
+    return Math.hypot(T.X(cx) - px, T.Y(cy) - py) < T.X(cx + 1) - T.X(cx) + 6 ? 0 : null;
+  }, (i, x, y, T) => { ctr[0] = [clamp(x, -4, 4), clamp(y, T.box.y0 + 1, T.box.y1 - 1)]; }, draw);
+})();
+
+/* ===================== Ejercicio 10 ===================== */
+(() => {
+  const xs = [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6, 1];
+  const ys = [0.5, 0.9, -0.3, -0.8, 0.2, 0.95, 0.4];
+  let T = null;
+  const cid = P + "-ej10-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.66);
+    T = PP.frame(w, h, { x0: -0.04, x1: 1.04, y0: -1.8, y1: 1.8 }, { l: 36, r: 12, t: 12, b: 26 });
+    PP.rect(ctx, T.X(0), T.Y(1), T.X(1) - T.X(0), T.Y(-1) - T.Y(1), null, C("--band"));
+    PP.axes(ctx, T, { xTicks: 5 });
+    [1, -1].forEach((v) => PP.path(ctx, [[T.X(0), T.Y(v)], [T.X(1), T.Y(v)]], C("--ok"), 1.5, [5, 4]));
+    PP.label(ctx, "‖f − f₀‖∞ ≤ 1", T.X(1) - 2, T.Y(1) - 3, C("--ok"), "right", "bottom", 11);
+    PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(1), T.Y(0)]], C("--muted"), 2);
+    PP.label(ctx, "f₀", T.X(0.02), T.Y(0) + 3, C("--muted"), "left", "top", 11);
+    const F = pwl(xs, ys);
+    PP.path(ctx, xs.map((x, i) => [T.X(x), T.Y(ys[i])]), C("--accent"), 2.4);
+    xs.forEach((x, i) => PP.dot(ctx, T.X(x), T.Y(ys[i]), 5, C("--accent"), C("--bg")));
+    const inBall = F.sup <= 1 + 1e-9;
+    PP.read(P + "-ej10-read", [
+      ["d∞(f, f₀)", PP.fmt(F.sup, 3)],
+      ["d₁(f, f₀)", PP.fmt(F.I1, 3)],
+      ["¿f en la bola cerrada de d∞?", inBall ? "sí" : "no", inBall ? "good" : "bad"],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(xs.map((x, i) => [x, ys[i]]), px, py, T),
+    (i, x, y) => { ys[i] = clamp(Math.round(y * 50) / 50, -1.7, 1.7); }, draw);
+})();
+
+/* ===================== Ejercicio 12 ===================== */
+(() => {
+  const f = (x) => 1.6 * Math.sin(2 * x) / (1 + 0.2 * x * x);
+  const L = 15;
+  PP.register(function () {
+    const eps = PP.val(P + "-ej12-e") / 100;
+    PP.out(P + "-ej12-e-o", PP.fmt(eps, 2));
+    let M = 0;
+    for (let x = L; x >= 0; x -= 0.002) { if (Math.abs(f(x)) >= eps || Math.abs(f(-x)) >= eps) { M = x; break; } }
+    const { ctx, w, h } = PP.canvas(P + "-ej12-c", 0.6);
+    const T = PP.frame(w, h, { x0: -L, x1: L, y0: -1.7, y1: 1.7 }, { l: 34, r: 12, t: 12, b: 26 });
+    PP.rect(ctx, T.X(-L), T.Y(eps), T.X(L) - T.X(-L), T.Y(-eps) - T.Y(eps), null, C("--band"));
+    PP.axes(ctx, T, { xTicks: 6 });
+    clipBox(ctx, T);
+    plotFn(ctx, T, f, -L, L, C("--muted"), 1.4, null, 2000);
+    if (M < L) {
+      plotFn(ctx, T, f, M, L, C("--accent"), 2.6, null, 800);
+      plotFn(ctx, T, f, -L, -M, C("--accent"), 2.6, null, 800);
+      [M, -M].forEach((x) => PP.path(ctx, [[T.X(x), T.p.t], [T.X(x), h - T.p.b]], C("--ok"), 1.5, [5, 4]));
+    }
+    ctx.restore();
+    if (M < L) {
+      PP.label(ctx, "M", T.X(M) + 4, T.p.t + 2, C("--ok"), "left", "top", 12);
+      PP.label(ctx, "−M", T.X(-M) - 4, T.p.t + 2, C("--ok"), "right", "top", 12);
+    }
+    PP.read(P + "-ej12-read", [
+      ["ε", PP.fmt(eps, 2)],
+      ["M (|f(x)| < ε si |x| ≥ M)", M < L ? PP.fmt(M, 2) : "fuera de la ventana"],
+    ]);
+  }, [P + "-ej12-e"]);
+})();
+
+/* ===================== Ejercicio 14 ===================== */
+PP.register(function () {
+  const a = PP.val(P + "-ej14-a") / 100;
+  PP.out(P + "-ej14-a-o", PP.fmt(a, 2));
+  const f = (x) => x / 2 + a * Math.cos(2 * x);
+  const g = (x) => f(x) - x;
+  const fix = [];
+  const n = 4000;
+  for (let i = 0; i < n; i++) {
+    let u = -5 + 10 * i / n, v = -5 + 10 * (i + 1) / n;
+    if (g(u) === 0) { fix.push(u); continue; }
+    if (g(u) * g(v) < 0) { for (let k = 0; k < 50; k++) { const m = (u + v) / 2; if (g(u) * g(m) <= 0) v = m; else u = m; } fix.push((u + v) / 2); }
+  }
+  const { ctx, w, h } = PP.canvas(P + "-ej14-c", 0.72);
+  const T = eqFrame(w, h, -5.3, 5.3, 0, { l: 26, r: 10, t: 10, b: 22 });
+  PP.axes(ctx, T, { xTicks: 6, yTicks: 6, grid: false });
+  clipBox(ctx, T);
+  PP.path(ctx, [[T.X(-5), T.Y(-5)], [T.X(5), T.Y(5)]], C("--muted"), 1.2, [5, 4]);
+  plotFn(ctx, T, f, -5, 5, C("--accent"), 2.4, null, 800);
+  ctx.restore();
+  fix.forEach((x) => {
+    PP.path(ctx, [[T.X(x), T.Y(x)], [T.X(x), T.Y(0)]], C("--seq2"), 1, [2, 3]);
+    PP.dot(ctx, T.X(x), T.Y(x), 4.5, C("--seq2"));
+    PP.dot(ctx, T.X(x), T.Y(0), 4.5, C("--seq2"), C("--bg"));
+  });
+  PP.label(ctx, "y = x", T.X(4.6), T.Y(4.6) + 4, C("--muted"), "right", "top", 11);
+  PP.read(P + "-ej14-read", [
+    ["a", PP.fmt(a, 2)],
+    ["puntos fijos hallados", fix.length ? fix.map((x) => PP.fmt(x, 3)).join(", ") : "ninguno"],
+  ]);
+}, [P + "-ej14-a"]);
+
+/* ===================== Ejercicio 15 ===================== */
+(() => {
+  const f = (x) => 0.5 * Math.atan(x) + 3;
+  PP.register(function () {
+    const x0 = PP.val(P + "-ej15-x") / 10;
+    PP.out(P + "-ej15-x-o", PP.fmt(x0, 1));
+    const { ctx, w, h } = PP.canvas(P + "-ej15-c", 0.72);
+    const T = eqFrame(w, h, -4.5, 8.5, 2.2, { l: 26, r: 10, t: 10, b: 22 });
+    PP.axes(ctx, T, { xTicks: 7, yTicks: 6, grid: false });
+    clipBox(ctx, T);
+    PP.path(ctx, [[T.X(-5), T.Y(-5)], [T.X(9), T.Y(9)]], C("--muted"), 1.2, [5, 4]);
+    plotFn(ctx, T, f, -4.5, 8.5, C("--accent"), 2.4, null, 600);
+    // telaraña
+    const it = [x0];
+    for (let k = 0; k < 12; k++) it.push(f(it[it.length - 1]));
+    const web = [[T.X(x0), T.Y(0)], [T.X(x0), T.Y(it[1])]];
+    for (let k = 1; k < it.length - 1; k++) { web.push([T.X(it[k]), T.Y(it[k])]); web.push([T.X(it[k]), T.Y(it[k + 1])]); }
+    PP.path(ctx, web, C("--seq2"), 1.4);
+    ctx.restore();
+    PP.dot(ctx, T.X(x0), T.Y(0), 5, C("--seq2"), C("--bg"));
+    PP.label(ctx, "x₀", T.X(x0), T.Y(0) + 7, C("--seq2"), "center", "top", 12);
+    PP.label(ctx, "y = x", T.X(8), T.Y(8) + 4, C("--muted"), "left", "top", 11);
+    PP.read(P + "-ej15-read", [
+      ["x₀ … x₃", it.slice(0, 4).map((v) => PP.fmt(v, 2)).join("; ")],
+      ["pasos |xₖ₊₁ − xₖ|", [1, 2, 3].map((k) => PP.fmt(Math.abs(it[k] - it[k - 1]), 2)).join("; ")],
+    ]);
+  }, [P + "-ej15-x"]);
+})();
+
+/* ===================== Ejercicio 16 ===================== */
+PP.register(function () {
+  const { ctx, w, h } = PP.canvas(P + "-ej16-c", 0.62);
+  const T = eqFrame(w, h, -3.2, 3.2, 0, { l: 26, r: 10, t: 10, b: 22 });
+  PP.axes(ctx, T, { xTicks: 6, yTicks: 4, grid: false, zero: false });
+  // eje x con el hueco en 0
+  PP.path(ctx, [[T.X(-3.2), T.Y(0)], [T.X(3.2), T.Y(0)]], C("--muted"), 1.2);
+  PP.path(ctx, [[T.X(0), T.p.t], [T.X(0), h - T.p.b]], C("--rule"), 1);
+  clipBox(ctx, T);
+  PP.path(ctx, [[T.X(-3.2), T.Y(-3.2)], [T.X(3.2), T.Y(3.2)]], C("--muted"), 1.2, [5, 4]);
+  PP.path(ctx, [[T.X(-3.2), T.Y(-3.2 / 3)], [T.X(-0.04), T.Y(-0.04 / 3)]], C("--accent"), 2.6);
+  PP.path(ctx, [[T.X(0.04), T.Y(0.04 / 3)], [T.X(3.2), T.Y(3.2 / 3)]], C("--accent"), 2.6);
+  ctx.restore();
+  PP.dot(ctx, T.X(0), T.Y(0), 6, C("--bg"), C("--seq2"));
+  PP.label(ctx, "0 ∉ E", T.X(0) + 9, T.Y(0) + 6, C("--seq2"), "left", "top", 12);
+  PP.label(ctx, "f(x) = x/3", T.X(3.1), T.Y(3.2 / 3) - 6, C("--accent"), "right", "bottom", 12);
+  PP.label(ctx, "y = x", T.X(2.2), T.Y(2.2) - 4, C("--muted"), "right", "bottom", 11);
+}, []);
+
+/* ===================== Ejercicio 17 ===================== */
+PP.register(function () {
+  const n = PP.val(P + "-ej17-n");
+  PP.out(P + "-ej17-n-o", String(n));
+  const cosn = (x) => { for (let k = 0; k < n; k++) x = Math.cos(x); return x; };
+  const { ctx, w, h } = PP.canvas(P + "-ej17-c", 0.62);
+  const T = PP.frame(w, h, { x0: -4, x1: 4, y0: -1.4, y1: 1.4 }, { l: 34, r: 12, t: 12, b: 26 });
+  PP.axes(ctx, T, { xTicks: 8 });
+  clipBox(ctx, T);
+  PP.path(ctx, [[T.X(-4), T.Y(-4)], [T.X(4), T.Y(4)]], C("--muted"), 1.2, [5, 4]);
+  plotFn(ctx, T, Math.cos, -4, 4, C("--seq2"), 1.4, [3, 3], 600);
+  plotFn(ctx, T, cosn, -4, 4, C("--accent"), 2.6, null, 800);
+  ctx.restore();
+  PP.label(ctx, n === 1 ? "cos" : "cos" + String(n).split("").map((d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+d]).join(""), T.X(-3.9), T.p.t + 4, C("--accent"), "left", "top", 13);
+  PP.label(ctx, "y = x", T.X(1.3), T.Y(1.3) - 2, C("--muted"), "right", "bottom", 11);
+}, [P + "-ej17-n"]);
+
+/* ===================== Ejercicio 19 ===================== */
+(() => {
+  const xs = [0, 0.2, 0.4, 0.6, 0.8, 1];
+  const ys = [0.8, 0.95, 0.55, 0.25, 0.45, 0.1];
+  let T = null;
+  const cid = P + "-ej19-c";
+  function draw() {
+    const { ctx, w, h } = PP.canvas(cid, 0.8);
+    T = eqFrame(w, h, -0.12, 1.12, 0.5, { l: 26, r: 10, t: 12, b: 24 });
+    PP.rect(ctx, T.X(0), T.Y(1), T.X(1) - T.X(0), T.Y(0) - T.Y(1), C("--muted"), C("--band"));
+    PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(1), T.Y(1)]], C("--muted"), 1.2, [5, 4]);
+    PP.label(ctx, "a", T.X(0), T.Y(0) + 5, C("--muted"), "center", "top", 12);
+    PP.label(ctx, "b", T.X(1), T.Y(0) + 5, C("--muted"), "center", "top", 12);
+    PP.label(ctx, "a", T.X(0) - 6, T.Y(0), C("--muted"), "right", "middle", 12);
+    PP.label(ctx, "b", T.X(0) - 6, T.Y(1), C("--muted"), "right", "middle", 12);
+    PP.label(ctx, "y = x", T.X(0.95), T.Y(0.95) + 4, C("--muted"), "right", "top", 11);
+    PP.path(ctx, xs.map((x, i) => [T.X(x), T.Y(ys[i])]), C("--accent"), 2.6);
+    xs.forEach((x, i) => PP.dot(ctx, T.X(x), T.Y(ys[i]), 5, C("--accent"), C("--bg")));
+    PP.label(ctx, "f", T.X(xs[1]) + 6, T.Y(ys[1]) - 4, C("--accent"), "left", "bottom", 13);
+  }
+  PP.register(draw, []);
+  draggable(cid, () => T, (px, py, T) => nearest(xs.map((x, i) => [x, ys[i]]), px, py, T),
+    (i, x, y) => { ys[i] = clamp(Math.round(y * 50) / 50, 0, 1); }, draw);
+})();
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

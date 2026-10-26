@@ -1,0 +1,1087 @@
+<!-- ===================== BLOQUE 10 ===================== -->
+<section class="bloque" id="ejp4alt-b10">
+  <h2><span class="bn">Bloque 10</span>Ejemplos y contraejemplos de continuidad uniforme</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Catálogo para los <a class="xg" data-guia="p4" data-ej="13">Ejercicios 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a>: $1/x$, $x^2$, $\sqrt{x}$ (uniformemente continua sin ser Lipschitz), polinomios y funciones periódicas.</p></div>
+
+  <!-- O2-11 (definición) -->
+  <article class="ej" id="ejp4alt-o2-11-def" data-short="Def." data-title="Función uniformemente continua" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Función uniformemente continua</h3>
+      <span class="src">Guccione, Def. 3.33</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Decimos que una función $f : X \to Y$ es <span class="ref" data-ref="def-5.14"><i>uniformemente continua</i></span> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que para todo $x, x' \in X$,
+        $$d(x, x') \lt \delta \Longrightarrow d(f(x), f(x')) \lt \varepsilon.$$</p>
+      <p>Decimos que $f$ es uniformemente continua sobre un subconjunto $A$ de $X$ si su restricción a $A$ es uniformemente continua. La diferencia con la <span class="ref" data-ref="def-5.4">definición de continuidad</span> es que en ésta $\delta$ puede variar con el punto del dominio en el que se está evaluando la continuidad, no exigiéndose que haya uno que sirva para todos, mientras que en la continuidad uniforme esto se pide explícitamente. En particular (Observación 3.34) toda función uniformemente continua es continua.</p>
+    </div>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O2-11 -->
+  <article class="ej" id="ejp4alt-o2-11" data-short="O2-11" data-title="1/x es continua pero no uniformemente continua en (0, +∞)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">O2-11</span>
+      <h3>$1/x$ es continua pero no uniformemente continua en $(0, +\infty)$</h3>
+      <span class="src">Guccione, Obs. 3.35</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Hay funciones que son continuas y no son uniformemente continuas. Una es la función $f : \mathbb{R}_{\gt 0} \to \mathbb{R}$ definida por $f(x) := \dfrac{1}{x}$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Es continua</p>
+          <p>Es <span class="ref" data-ref="def-5.4">continua</span> porque es cociente de dos funciones continuas (ver el Ejercicio 3.14, O2-2).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">No es uniformemente continua</p>
+          <p>Pero no es <span class="ref" data-ref="def-5.14">uniformemente continua</span> porque para todo $\delta \in (0, 1)$,
+            $$\begin{aligned} |f(\delta) - f(\delta/2)| &= \left|\frac{1}{\delta} - \frac{1}{\delta/2}\right| \\ &= \frac{\delta/2}{\delta^2/2} = \frac{1}{\delta} \gt 1. \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-11-c1" aria-label="Gráfico de 1 sobre x con los puntos delta y delta medios: la distancia horizontal es delta medios y la vertical es 1 sobre delta"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o2-11-d">δ</label><input type="range" id="ejp4alt-o2-11-d" min="5" max="95" value="40"><output id="ejp4alt-o2-11-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o2-11-r1" aria-live="polite"></dl>
+          <figcaption>El gráfico de <i>f</i>(<i>x</i>) = 1/<i>x</i> con los puntos <i>x</i> = δ y <i>x</i>′ = δ/2. La raya horizontal mide |<i>x</i> − <i>x</i>′| = δ/2 &lt; δ; la vertical mide |<i>f</i>(<i>x</i>) − <i>f</i>(<i>x</i>′)| = 1/δ. La barra verde de la izquierda tiene altura ε = 1: al achicar δ la raya vertical crece en vez de entrar en ella.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el argumento es la <span class="ref" data-ref="obs-5.16">negación directa de la definición</span> con $\varepsilon = 1$: para cada $\delta \in (0, 1)$ los puntos $x = \delta$ y $x' = \delta/2$ cumplen $|x - x'| = \delta/2 \lt \delta$ y sin embargo $|f(x) - f(x')| \gt 1$. Es la primera mitad del <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> de la Práctica 4; la fuente no trata la restricción a $[\varepsilon, +\infty)$ (donde $f$ es Lipschitz con constante $1/\varepsilon^2$) ni $\sin(1/x)$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Definición 3.33, Observaciones 3.34 y 3.35, pág. 70 del PDF (61 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O6-10 -->
+  <article class="ej" id="ejp4alt-o6-10" data-short="O6-10" data-title="1/x no es uniformemente continua en (0, 1); es Lipschitz en (c, ∞) pero no en (0, ∞)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">O6-10</span>
+      <h3>$1/x$ no es uniformemente continua en $(0, 1)$; es Lipschitz en $(c, \infty)$ pero no en $(0, \infty)$</h3>
+      <span class="src">Lebl, Ej. 3.4.3 y Ejerc. 3.4.3–3.4.4</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>(Ejemplo 3.4.3) La función $f : (0, 1) \to \mathbb{R}$, $f(x) := 1/x$, no es uniformemente continua.</li>
+        <li>(Ejercicio 3.4.3) Probar que $f : (c, \infty) \to \mathbb{R}$, $f(x) := 1/x$, con $c \gt 0$, es Lipschitz.</li>
+        <li>(Ejercicio 3.4.4) Probar que $f : (0, \infty) \to \mathbb{R}$, $f(x) := 1/x$, no es Lipschitz.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) La desigualdad, reescrita</p>
+          <p>Dado $\varepsilon \gt 0$, la desigualdad $\varepsilon \gt |1/x - 1/y|$ vale si y sólo si
+            $$\varepsilon \gt \left|\frac{1}{x} - \frac{1}{y}\right| = \frac{|y - x|}{|x y|} = \frac{|y - x|}{x y},$$
+            o sea, si y sólo si $|x - y| \lt x y \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) Probar con $y = x + \delta/2$</p>
+          <p>Supongamos $\varepsilon \lt 1$. Queremos ver si algún $\delta \gt 0$ chico funciona. Si $x \in (0, 1)$ e $y = x + \delta/2 \in (0, 1)$, entonces $|x - y| = \delta/2 \lt \delta$. Reemplazando $y$ en la desigualdad anterior obtenemos
+            $$\frac{\delta}{2} \lt x \left(x + \frac{\delta}{2}\right) \varepsilon \lt x.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-10-c1" aria-label="La curva x por x más delta medios por epsilon contra la recta delta medios: cerca de cero la curva queda por debajo"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o6-10-e">ε</label><input type="range" id="ejp4alt-o6-10-e" min="5" max="95" value="50"><output id="ejp4alt-o6-10-e-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o6-10-d">δ</label><input type="range" id="ejp4alt-o6-10-d" min="2" max="60" value="20"><output id="ejp4alt-o6-10-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-10-r1" aria-live="polite"></dl>
+          <figcaption>La curva azul es <i>x</i>(<i>x</i> + δ/2)ε y la raya naranja es δ/2, en función de <i>x</i>. La continuidad uniforme pediría la curva por encima de la raya en todo (0, 1); en la franja roja, pegada al 0, queda por debajo, y ahí el par <i>x</i>, <i>y</i> = <i>x</i> + δ/2 da |1/<i>x</i> − 1/<i>y</i>| ≥ ε. Achicar δ achica la franja, pero no la borra.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Ningún $\delta$ sirve</p>
+          <p>Si se cumpliera la definición de <span class="ref" data-ref="def-5.14">continuidad uniforme</span>, la desigualdad $\delta/2 \lt x$ valdría para todo $x \gt 0$ chico. Pero eso implica $\delta \le 0$. Por lo tanto ningún $\delta \gt 0$ sirve para todos los puntos. $\square$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) y c)</p>
+          <p>La fuente sólo los enuncia.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>p4 <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> pide el dominio $(0, +\infty)$; por el Ejercicio 3.4.1 de la fuente (la restricción de una uniformemente continua es uniformemente continua) basta con a). La fuente resume los dos ejemplos de esta sección así: “si $f$ está definida en un intervalo que no es cerrado o no es acotado, $f$ puede ser continua sin ser uniformemente continua”. b) y c) son la versión <span class="ref" data-ref="def-5.24">Lipschitz</span> de “sí en $[\varepsilon, +\infty)$, no en $(0, +\infty)$”.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Ejemplo 3.4.3 (pág. 138 del PDF) y Ejercicios 3.4.3 y 3.4.4 (pág. 143 del PDF). <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a></p>
+  </article>
+
+  <!-- O7-2 -->
+  <article class="ej" id="ejp4alt-o7-2" data-short="O7-2" data-title="x² no es uniformemente continua en ℝ pero es 2M-Lipschitz en [−M, M]" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">O7-2</span>
+      <h3>$x^2$ no es uniformemente continua en $\mathbb{R}$ pero es $2M$-Lipschitz en $[-M, M]$</h3>
+      <span class="src">Tyson, Ej. 3.34</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>La función $f : \mathbb{R} \to \mathbb{R}$, $f(x) = x^2$, no es uniformemente continua. En cambio, su restricción a cualquier intervalo cerrado y acotado $[-M, M]$ es Lipschitz, y por lo tanto uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">No es uniformemente continua en $\mathbb{R}$</p>
+          <p>Sea $\varepsilon = 1$. Vamos a ver que para todo $\delta \gt 0$ falla la conclusión de la definición de <span class="ref" data-ref="def-5.14">continuidad uniforme</span>. Basta verificarlo para una sucesión $(\delta_m)_{m \in \mathbb{N}}$ con $\delta_m \to 0$; tomamos $\delta_m = 1/m$. Elegimos $a_m = m$ y $b_m = m + \frac{1}{2m}$. Entonces $|a_m - b_m| = \frac{1}{2m} \lt \delta_m$, pero
+            $$\begin{aligned} &|f(a_m) - f(b_m)| \\ &\quad = \left|m^2 - \left(m + \frac{1}{2m}\right)^2\right| \\ &\quad = 1 + \frac{1}{4 m^2} \gt 1 = \varepsilon. \end{aligned}$$
+            Luego $f$ no es uniformemente continua como función en todo $\mathbb{R}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o7-2-c1" aria-label="Zoom del gráfico de x al cuadrado alrededor de m, con los puntos a sub m y b sub m"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o7-2-m"><i>m</i></label><input type="range" id="ejp4alt-o7-2-m" min="1" max="12" value="2"><output id="ejp4alt-o7-2-m-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o7-2-r1" aria-live="polite"></dl>
+          <figcaption>Una ventana de ancho 1 y alto 4 alrededor del punto (<i>m</i>, <i>m</i>²), siempre a la misma escala. La franja azul es [<i>m</i>, <i>m</i> + δ<sub><i>m</i></sub>); <i>a<sub>m</sub></i> y <i>b<sub>m</sub></i> caen en ella. La barra verde mide ε = 1: el salto vertical entre <i>f</i>(<i>a<sub>m</sub></i>) y <i>f</i>(<i>b<sub>m</sub></i>) siempre la supera, porque la curva es cada vez más empinada.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Lipschitz en $[-M, M]$</p>
+          <p>Por otro lado, la restricción de $f(x) = x^2$ a $[-M, M]$ es uniformemente continua: basta ver que es <span class="ref" data-ref="def-5.24">Lipschitz</span>. Para $a, b \in [-M, M]$,
+            $$\begin{aligned} |f(a) - f(b)| &= |a^2 - b^2| \\ &\le |a - b|\, |a + b| \le 2M |a - b|. \end{aligned}$$
+            Así $f|_{[-M, M]}$ es $2M$-Lipschitz, y <span class="ref" data-ref="obs-5.28">por lo tanto uniformemente continua</span>. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o7-2-c2" aria-label="Gráfico de x al cuadrado en menos M, M con un cono de pendientes más y menos 2M que lo contiene"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o7-2-M"><i>M</i></label><input type="range" id="ejp4alt-o7-2-M" min="5" max="30" value="15"><output id="ejp4alt-o7-2-M-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o7-2-b"><i>b</i>/<i>M</i></label><input type="range" id="ejp4alt-o7-2-b" min="-100" max="100" value="60"><output id="ejp4alt-o7-2-b-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o7-2-r2" aria-live="polite"></dl>
+          <figcaption>Las dos rectas punteadas pasan por (<i>b</i>, <i>b</i>²) con pendientes ±2<i>M</i>. Sobre [−<i>M</i>, <i>M</i>] (tramo azul) el gráfico queda entre ellas, que es |<i>f</i>(<i>a</i>) − <i>f</i>(<i>b</i>)| ≤ 2<i>M</i>|<i>a</i> − <i>b</i>|. Afuera (tramo gris) se escapa del cono: por eso la constante depende del dominio.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la primera parte repite el argumento de C6-5 b) (allí con $x_n = n$, $y_n = n + 1/n$ en $(0, +\infty)$); lo nuevo es la segunda parte, que da la constante de Lipschitz explícita en $[-M, M]$ y muestra la dependencia del dominio. Lebl (Ej. 3.4.2, pág. 138) hace lo mismo en $[0, 1]$ con constante $2$.</div>
+    <p class="cita"><i>Fuente</i>: J. Tyson, <i>MATH 424 Lecture notes: Functions</i> (UIUC, 2026), Ejemplo 3.34, pág. 7 del PDF. <a href="http://publish.illinois.edu/jeremy-tyson/files/2026/05/functions.pdf">URL</a>. Acceso: publicado en la web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O2-12 (proposición) -->
+  <article class="ej" id="ejp4alt-o2-12-prop" data-short="Prop." data-title="Pegado de continuidad uniforme sobre A₁ ∪ A₂" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Pegado de continuidad uniforme sobre $A_1 \cup A_2$</h3>
+      <span class="src">Guccione, Prop. 3.43 y Cor. 3.45</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Consideremos una función $f : X \to Y$, y escribamos $X$ como unión $X = A_1 \cup A_2$ de dos subconjuntos. Supongamos que existe $\gamma \gt 0$ con la siguiente propiedad: para cada par $a, a'$ de elementos de $X$ tales que
+        $$\begin{aligned} &a \in A_1 \setminus A_2, \quad a' \in A_2 \setminus A_1 \\ &\text{y} \quad d(a, a') \lt \gamma, \end{aligned}$$
+        existe $a'' \in A_1 \cap A_2$ con $\max(d(a, a''), d(a', a'')) \le d(a, a')$. Si $f|_{A_1}$ y $f|_{A_2}$ son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>, entonces $f$ es uniformemente continua.</p>
+      <p><i>Corolario 3.45.</i> Si $d(A_1 \setminus A_2, A_2 \setminus A_1) \gt 0$ y $f|_{A_1}$ y $f|_{A_2}$ son uniformemente continuas, entonces $f$ es uniformemente continua.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Pasar por $a''$</p>
+          <p>Por hipótesis, dado $\varepsilon \gt 0$, existe $\delta \gt 0$ tal que si $a, a' \in A_1$ o $a, a' \in A_2$, entonces $d(f(a), f(a')) \lt \varepsilon/2 \lt \varepsilon$. Es evidente que podemos tomar $\delta \lt \gamma$. Si lo hacemos, entonces
+            $$\begin{aligned} d(f(a), f(a')) &\le d(f(a), f(a'')) \\ &\quad + d(f(a''), f(a')) \\ &\lt 2\, \frac{\varepsilon}{2} = \varepsilon, \end{aligned}$$
+            donde $a''$ es como en el enunciado, para cada $a \in A_1$ y $a' \in A_2$ (con $d(a, a') \lt \delta$).</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 170" role="img" aria-label="Recta real con A1 igual a cero, uno y A2 igual a uno, infinito; a en A1, a prima en A2 y a doble prima igual a 1 entre ellos">
+            <line x1="20" y1="80" x2="345" y2="80" class="sv-axis"/>
+            <line x1="40" y1="70" x2="180" y2="70" class="sv-accent" stroke-width="5"/>
+            <line x1="180" y1="90" x2="345" y2="90" class="sv-seq2" stroke-width="5"/>
+            <text x="100" y="58" text-anchor="middle" class="sv-label-accent">A₁ = [0, 1]</text>
+            <text x="270" y="114" text-anchor="middle" class="sv-label-seq2">A₂ = [1, +∞)</text>
+            <circle cx="135" cy="80" r="5" class="sv-fill-accent"/>
+            <text x="135" y="104" text-anchor="middle" class="sv-text">a</text>
+            <circle cx="232" cy="80" r="5" class="sv-fill-seq2"/>
+            <text x="232" y="60" text-anchor="middle" class="sv-text">a′</text>
+            <circle cx="180" cy="80" r="5" class="sv-fill-ok"/>
+            <text x="180" y="104" text-anchor="middle" class="sv-label-ok">a″ = 1</text>
+            <path d="M135 132 L232 132" class="sv-ink"/>
+            <path d="M135 127 L135 137 M232 127 L232 137" class="sv-ink"/>
+            <text x="183" y="152" text-anchor="middle" class="sv-muted">d(a, a′) &lt; δ &lt; γ</text>
+            <path d="M135 30 Q157 14 180 30" class="sv-ok sv-dash"/>
+            <path d="M180 30 Q206 14 232 30" class="sv-ok sv-dash"/>
+            <text x="183" y="14" text-anchor="middle" class="sv-muted">cada tramo ≤ d(a, a′)</text>
+          </svg>
+          <figcaption>El caso de la Nota: <i>A</i>₁ = [0, 1], <i>A</i>₂ = [1, +∞) (valores elegidos para el dibujo). Si <i>a</i> ≤ 1 ≤ <i>a</i>′, el punto <i>a</i>″ = 1 está entre los dos, así que cada tramo es a lo sumo |<i>a</i> − <i>a</i>′|. Cada tramo vive en un solo <i>A<sub>i</sub></i>, donde <i>f</i> es uniformemente continua: cada uno aporta menos de ε/2.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Corolario 3.45</p>
+          <p>Si tomamos $\gamma = d(A_1 \setminus A_2, A_2 \setminus A_1) \gt 0$, entonces las hipótesis de la proposición se satisfacen trivialmente, porque no hay ningún $a_1 \in A_1$ y $a_2 \in A_2$ a distancia menor que $\gamma$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el Corolario 3.45 es el ejemplo C6-8 de <code>ejemplos/p4.typ</code> (con la hipótesis sobre $A_1 \setminus A_2$ y $A_2 \setminus A_1$ en vez de sobre $A$ y $B$), y C6-7 es el caso $A_1 = [0, a]$, $A_2 = [a, +\infty)$ de la proposición con $a'' = a$: si $x \le a \le y$ entonces $\max(|x - a|, |y - a|) \le |x - y|$. La demostración de la fuente es la misma idea que la de clase, escrita de una vez para los dos casos. En la frase “existe $\delta \gt 0$ tal que si $a, a' \in A_1$ o $a, a' \in A_2$” se sobreentiende “y $d(a, a') \lt \delta$”, y en la última línea que $d(a, a'') \le d(a, a') \lt \delta$ y $d(a', a'') \lt \delta$, con $a, a'' \in A_1$ y $a', a'' \in A_2$.</div>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O2-12 -->
+  <article class="ej" id="ejp4alt-o2-12" data-short="O2-12" data-title="√x es uniformemente continua en [0, +∞) pero no es de Lipschitz en [0, 1]" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">O2-12</span>
+      <h3>$\sqrt{x}$ es uniformemente continua en $[0, +\infty)$ pero no es de Lipschitz en $[0, 1]$</h3>
+      <span class="src">Guccione, Ejemplos 3.37 y 3.44, Obs. 3.52</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>(Ejemplo 3.37) La función $f : [0, 1] \to \mathbb{R}$, dada por $f(x) := \sqrt{x}$, es uniformemente continua.</li>
+        <li>(Ejemplo 3.44) La función $f : [0, +\infty) \to \mathbb{R}$, dada por $f(x) := \sqrt{x}$, es uniformemente continua.</li>
+        <li>(Observación 3.52) Hay funciones uniformemente continuas que no son funciones de Lipschitz. Una es la función $f : [0, 1] \to \mathbb{R}$ dada por $f(x) := \sqrt{x}$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1. En $[0, 1]$</p>
+          <p>En los cursos de cálculo en una variable se prueba que esta función es continua (la fuente agrega en nota al pie: “más adelante deduciremos esto del hecho de que la función $x \mapsto x^2$ es continua”), y en el Capítulo 7 de la fuente se ve que toda función continua cuyo dominio es un intervalo cerrado de $\mathbb{R}$ es uniformemente continua (Corolario 7.38: si $f : X \to Y$ es continua y $X$ es compacto, entonces $f$ es uniformemente continua).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">2. En $[0, +\infty)$, pegando</p>
+          <p>En el Ejemplo 3.37 vimos que $f$ es uniformemente continua sobre $[0, 1]$, y usando la desigualdad
+            $$|\sqrt{a} - \sqrt{b}| = \left|\frac{a - b}{\sqrt{a} + \sqrt{b}}\right| \le \frac{1}{2} |a - b|,$$
+            válida para todo $a, b \ge 1$, se comprueba fácilmente que $f$ es uniformemente continua sobre $[1, +\infty)$. Como las hipótesis de la <a href="#ejp4alt-o2-12-prop">Proposición 3.43</a> se satisfacen (con $A_1 = [0, 1]$, $A_2 = [1, +\infty)$; $\gamma$ puede tomarse cualquier número real positivo), $f$ es uniformemente continua, como afirmamos.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 220" role="img" aria-label="Gráfico de raíz de x entre 0 y 4: el tramo en cero, uno en azul y el tramo desde uno en naranja">
+            <line x1="40" y1="190" x2="345" y2="190" class="sv-axis"/>
+            <line x1="40" y1="15" x2="40" y2="190" class="sv-axis"/>
+            <line x1="108.2" y1="186" x2="108.2" y2="194" class="sv-axis"/>
+            <line x1="312.7" y1="186" x2="312.7" y2="194" class="sv-axis"/>
+            <text x="40" y="207" text-anchor="middle" class="sv-muted">0</text>
+            <text x="108.2" y="207" text-anchor="middle" class="sv-muted">1</text>
+            <text x="312.7" y="207" text-anchor="middle" class="sv-muted">4</text>
+            <line x1="40" y1="112.7" x2="345" y2="112.7" class="sv-grid"/>
+            <text x="34" y="116.7" text-anchor="end" class="sv-muted">1</text>
+            <path d="M40.0 190.0 L40.2 186.1 L40.7 182.3 L41.5 178.4 L42.7 174.5 L44.3 170.7 L46.1 166.8 L48.4 163.0 L50.9 159.1 L53.8 155.2 L57.0 151.4 L60.6 147.5 L64.5 143.6 L68.8 139.8 L73.4 135.9 L78.4 132.0 L83.6 128.2 L89.3 124.3 L95.2 120.5 L101.5 116.6 L108.2 112.7" class="sv-accent" stroke-width="3"/>
+            <path d="M108.2 112.7 L118.4 107.1 L128.6 101.9 L138.9 97.0 L149.1 92.3 L159.3 87.8 L169.5 83.5 L179.8 79.4 L190.0 75.4 L200.2 71.5 L210.5 67.8 L220.7 64.2 L230.9 60.7 L241.1 57.3 L251.4 53.9 L261.6 50.7 L271.8 47.5 L282.0 44.4 L292.3 41.4 L302.5 38.4 L312.7 35.5" class="sv-seq2" stroke-width="3"/>
+            <circle cx="108.2" cy="112.7" r="4.5" class="sv-fill-ok"/>
+            <text x="60" y="80" class="sv-label-accent">[0, 1]: Ej. 3.37</text>
+            <text x="190" y="120" class="sv-label-seq2">[1, +∞): pendientes ≤ 1/2</text>
+            <text x="114" y="132" class="sv-label-ok">pegado en 1</text>
+          </svg>
+          <figcaption>Los dos tramos del pegado: en [0, 1] (azul) la continuidad uniforme sale del Ejemplo 3.37; en [1, +∞) (naranja) las cuerdas tienen pendiente a lo sumo 1/2, por la desigualdad de la izquierda. El punto verde es el que comparten <i>A</i>₁ y <i>A</i>₂.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">3. No es de Lipschitz en $[0, 1]$</p>
+          <p>No es de <span class="ref" data-ref="def-5.24">Lipschitz</span>, porque
+            $$|\sqrt{a} - \sqrt{b}| = \frac{1}{\sqrt{a} + \sqrt{b}}\, |a - b|,$$
+            y $1/(\sqrt{a} + \sqrt{b})$ toma valores arbitrariamente grandes en el intervalo $[0, 1]$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-12-c1" aria-label="Gráfico de raíz de x en cero, uno con la cuerda desde el origen hasta a: su pendiente crece sin cota cuando a tiende a cero"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o2-12-a"><i>a</i></label><input type="range" id="ejp4alt-o2-12-a" min="0" max="100" value="55"><output id="ejp4alt-o2-12-a-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o2-12-r1" aria-live="polite"></dl>
+          <figcaption>La cuerda entre (0, 0) y (<i>a</i>, √<i>a</i>), es decir <i>b</i> = 0 como en la Nota (iv). Su pendiente es 1/(√<i>a</i> + √0) = 1/√<i>a</i>. El slider recorre <i>a</i> en escala logarítmica, de 1 a 10⁻⁴: la pendiente pasa de 1 a 100 y no hay constante <i>K</i> que la acote.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>(i) En el Ejemplo 3.44 la fuente escribe “$f : [0, 1] \to \mathbb{R}$” y “sobre $[1, \infty]$”; por el contexto (se pega $[0, 1]$ con $[1, +\infty)$) el dominio es $[0, +\infty)$ y el segundo intervalo es $[1, +\infty)$; aquí se transcribió corregido. (ii) El item 1 depende del <a href="#ejp4alt-o14-7-prop">teorema de Heine</a> (continua sobre compacto $\Longrightarrow$ uniformemente continua), que <code>apuntes.typ</code> no tiene todavía; una prueba directa con la definición sale de $|\sqrt{a} - \sqrt{b}| \le \sqrt{|a - b|}$, que la fuente no usa. En <code>apuntes.typ</code> es el <span class="ref" data-ref="ejap-5.27">Ejercicio 5.27</span> (desafío). (iii) El item 2 es la variante “$\sqrt{x}$ uniformemente continua y no Lipschitz” pedida para el <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>–<a class="xg" data-guia="p4" data-ej="13">13</a>, y además da un ejemplo de función no acotada y uniformemente continua en $[0, +\infty)$ (<a class="xg" data-guia="p4" data-ej="15">Ej. 15</a>). (iv) En el item 3 la desigualdad falla si $a = b = 0$ (división por cero); hay que leerla para $(a, b) \neq (0, 0)$, y con $b = 0$ queda $|\sqrt{a} - 0| = (1/\sqrt{a})\, |a - 0|$, que es la obstrucción: ninguna constante $K$ cumple $\sqrt{a} \le K a$ para $a \to 0^+$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Ejemplo 3.37 (pág. 70 del PDF, 61 del apunte), Proposición 3.43, Ejemplo 3.44 y Corolario 3.45 (pág. 72 del PDF, 63 del apunte), Observación 3.52 (pág. 73 del PDF, 64 del apunte), Corolario 7.38 (pág. 118 del PDF, 109 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="13">13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O6-11 -->
+  <article class="ej" id="ejp4alt-o6-11" data-short="O6-11" data-title="√x es Lipschitz en [1, ∞), no es Lipschitz en [0, ∞), pero es uniformemente continua y no acotada en [0, ∞)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">O6-11</span>
+      <h3>$\sqrt{x}$ es Lipschitz en $[1, \infty)$, no es Lipschitz en $[0, \infty)$, pero es uniformemente continua y no acotada en $[0, \infty)$</h3>
+      <span class="src">Lebl, Ej. 3.4.10 y comentario</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>La función $f : [1, \infty) \to \mathbb{R}$, $f(x) := \sqrt{x}$, es Lipschitz.</li>
+        <li>La función $g : [0, \infty) \to \mathbb{R}$, $g(x) := \sqrt{x}$, no es Lipschitz.</li>
+        <li>Sin embargo, $g$ es uniformemente continua en $[0, \infty)$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Lipschitz en $[1, \infty)$</p>
+          <p>Tenemos
+            $$|\sqrt{x} - \sqrt{y}| = \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| = \frac{|x - y|}{\sqrt{x} + \sqrt{y}}.$$
+            Como $x \ge 1$ e $y \ge 1$, vemos que $\dfrac{1}{\sqrt{x} + \sqrt{y}} \le \dfrac{1}{2}$. Por lo tanto
+            $$|\sqrt{x} - \sqrt{y}| = \left|\frac{x - y}{\sqrt{x} + \sqrt{y}}\right| \le \frac{1}{2} |x - y|.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) No es Lipschitz en $[0, \infty)$</p>
+          <p>Supongamos que existe $K$ tal que para todos $x, y \in [0, \infty)$,
+            $$|\sqrt{x} - \sqrt{y}| \le K |x - y|.$$
+            Debe ser $K \gt 0$: $K \lt 0$ es imposible y $K = 0$ significaría que $g$ es constante. Poniendo $y = 0$ obtenemos $\sqrt{x} \le K x$. Para $x \gt 0$ queda $1/K \le \sqrt{x}$, o sea $1/K^2 \le x$. Esto no puede valer para todo $x \gt 0$. Luego no existe tal $K$ y $g$ no es <span class="ref" data-ref="def-5.24">Lipschitz</span>. (La fuente lo ilustra con las secantes por $(0, 0)$ y $(x, \sqrt{x})$, cada vez más verticales al acercarse a $x = 0$.)</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-11-c1" aria-label="Raíz de x contra la recta K x: para x menor que 1 sobre K al cuadrado la raíz queda por encima"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o6-11-K"><i>K</i></label><input type="range" id="ejp4alt-o6-11-K" min="10" max="100" value="25"><output id="ejp4alt-o6-11-K-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-11-r1" aria-live="polite"></dl>
+          <figcaption>La curva azul es √<i>x</i> y la recta naranja es <i>Kx</i> (la desigualdad con <i>y</i> = 0). En la franja roja, 0 &lt; <i>x</i> &lt; 1/<i>K</i>², la curva queda por encima de la recta: ahí √<i>x</i> ≤ <i>Kx</i> falla. Con <i>K</i> más grande la franja se achica, pero nunca desaparece.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">c) Uniformemente continua en $[0, \infty)$</p>
+          <p>“El último ejemplo, $g$, es una función <span class="ref" data-ref="def-5.14">uniformemente continua</span> que no es Lipschitz. Para ver que $\sqrt{x}$ es uniformemente continua en $[0, \infty)$, notar que es uniformemente continua restringida a $[0, 1]$ por el Teorema 3.4.4 (<a href="#ejp4alt-o6-7-prop">O6-7</a>). También es Lipschitz (y por lo tanto uniformemente continua) restringida a $[1, \infty)$. No es difícil (ejercicio) mostrar que esto implica que $\sqrt{x}$ es uniformemente continua en $[0, \infty)$.”</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el “ejercicio” del paso c) es exactamente el pegado de C6-7 (continuidad uniforme en $[0, a]$ y en $[a, +\infty)$ implica continuidad uniforme en $[0, +\infty)$). Además $\sqrt{x}$ es <b>no acotada y uniformemente continua</b> en $[0, +\infty)$: es un ejemplo para la segunda parte de p4 <a class="xg" data-guia="p4" data-ej="15">Ej. 15</a>. La fuente O10 (Teo. 1.8, pág. 12) enuncia la misma dicotomía: “$x^2$ es Lipschitz en $[0, 1]$; $\sqrt{x}$ no es Lipschitz en $[0, 1]$”.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Ejemplo 3.4.10 y comentario posterior, págs. 142–143 del PDF. <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O6-12 -->
+  <article class="ej" id="ejp4alt-o6-12" data-short="O6-12" data-title="Tres enunciados: polinomios no Lipschitz, extensión desde ℚ, periódicas" data-topics="continuidad,densidad">
+    <div class="ej-head">
+      <span class="tag">O6-12</span>
+      <h3>Tres enunciados: polinomios no Lipschitz, extensión desde $\mathbb{Q}$, periódicas</h3>
+      <span class="src">Lebl, Ejerc. 3.4.6, 3.4.9 y 3.4.15</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-densidad">densidad</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>(Ejercicio 3.4.6, difícil) Sea $f : \mathbb{R} \to \mathbb{R}$ un polinomio de grado $d \ge 2$. Probar que $f$ no es Lipschitz.</li>
+          <li>(Ejercicio 3.4.9, difícil) Sea $f : \mathbb{Q} \to \mathbb{R}$ uniformemente continua. Probar que existe una función uniformemente continua $\tilde{f} : \mathbb{R} \to \mathbb{R}$ tal que $f(x) = \tilde{f}(x)$ para todo $x \in \mathbb{Q}$.</li>
+          <li>(Ejercicio 3.4.15) Sea $f : \mathbb{R} \to \mathbb{R}$ continua y periódica de período $P \gt 0$, es decir, $f(x + P) = f(x)$ para todo $x \in \mathbb{R}$. Probar que $f$ es uniformemente continua.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o6-12-c1" aria-label="Una función continua periódica: el tramo de un período se repite a lo largo de la recta"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4alt-o6-12-P"><i>P</i></label><input type="range" id="ejp4alt-o6-12-P" min="10" max="40" value="20"><output id="ejp4alt-o6-12-P-o"></output></div>
+          <div class="slider"><label for="ejp4alt-o6-12-x"><i>x</i></label><input type="range" id="ejp4alt-o6-12-x" min="-60" max="20" value="-30"><output id="ejp4alt-o6-12-x-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4alt-o6-12-r1" aria-live="polite"></dl>
+        <figcaption>El objeto del ítem c): una función continua de período <i>P</i>, aquí <i>f</i>(<i>x</i>) = sen(2π<i>x</i>/<i>P</i>) + 0,4 sen(6π<i>x</i>/<i>P</i>) (elegida para el dibujo). El tramo azul es un período, [0, <i>P</i>]; el resto del gráfico son copias suyas. Los puntos <i>x</i> y <i>x</i> + <i>P</i> están a la misma altura.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente no da indicaciones. b) es la versión en $\mathbb{R}$ de la Prop. 3.68 de la fuente O7 (la misma extensión, en espacios métricos, está resuelta en <a href="#ejp4alt-o2-6">O2-6</a>) y complementa p4 <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (unicidad de la extensión desde un denso) con la existencia. c) da una familia de funciones <b>acotadas, continuas y uniformemente continuas</b>, a contrastar con p4 <a class="xg" data-guia="p4" data-ej="15">Ej. 15</a> (acotada, continua, no uniformemente continua).</div>
+    <div class="estrategia"><b>Indicación para b), vía el Teorema 5.22 (del transcriptor)</b><p>La fuente no da indicaciones; esta es del transcriptor. b) es un caso particular del <span class="ref" data-ref="teo-5.22">Teorema 5.22</span> de <code>apuntes.typ</code> con $M = \mathbb{R}$, $E = \mathbb{Q}$ y $N = \mathbb{R}$. Hay que chequear las tres hipótesis: $\mathbb{Q}$ es denso en $\mathbb{R}$ (<span class="ref" data-ref="def-5.20">Definición 5.20</span> y <span class="ref" data-ref="ejem-5.21">Ejemplo 5.21</span>), $\mathbb{R}$ es completo (<span class="ref" data-ref="teo-4.57">Teorema 4.57</span>) y $f$ es uniformemente continua por hipótesis. El teorema da $\tilde{f} : \mathbb{R} \to \mathbb{R}$ uniformemente continua con $\tilde{f}|_{\mathbb{Q}} = f$, y el <span class="ref" data-ref="ejap-5.23">Ejercicio 5.23</span> dice que es la única.</p></div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Ejercicios 3.4.6, 3.4.9 (pág. 143 del PDF) y 3.4.15 (pág. 144 del PDF). <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a>, <a class="xg" data-guia="p4" data-ej="12">12</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 11 ===================== -->
+<section class="bloque" id="ejp4alt-b11">
+  <h2><span class="bn">Bloque 11</span>Continuidad uniforme, sucesiones de Cauchy y extensión</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Que una función uniformemente continua (<span class="ref" data-ref="def-5.14">Definición 5.14</span>) manda sucesiones de Cauchy en sucesiones de Cauchy es el <span class="ref" data-ref="ejap-5.19">Ejercicio 5.19</span> de <code>apuntes.typ</code> y el <a class="xg" data-guia="p4" data-ej="14">Ejercicio 14</a> de la práctica; <a href="#ejp4alt-o6-8">O6-8</a>, <a href="#ejp4alt-o4-7">O4-7</a> y <a href="#ejp4alt-o14-9">O14-9</a> lo demuestran. La continuidad sola no alcanza: en <a href="#ejp4alt-o2-13">O2-13</a> y <a href="#ejp4alt-o3-9">O3-9</a> el contraejemplo es incluso un homeomorfismo (<span class="ref" data-ref="def-5.29">Definición 5.29</span>). La consecuencia es el <span class="ref" data-ref="teo-5.22">Teorema 5.22</span>: una función uniformemente continua sobre un denso (<span class="ref" data-ref="def-5.20">Definición 5.20</span>) a valores en un completo se extiende a la clausura, y la extensión es única (<span class="ref" data-ref="ejap-5.23">Ejercicio 5.23</span>). <a href="#ejp4alt-o2-6">O2-6</a> y <a href="#ejp4alt-o14-10-prop">O14-10</a> son otra lectura de ese teorema, y O2-6 agrega que si la función es una isometría (<span class="ref" data-ref="def-5.33">Definición 5.33</span>) la extensión también lo es, en la línea de la <span class="ref" data-ref="obs-5.34">Observación 5.34</span>. <a href="#ejp4alt-o6-9-prop">O6-9</a> es la versión en intervalos, con la vuelta, y <a href="#ejp4alt-o3-12">O3-12</a> muestra que $\sin(1/x)$ no se extiende: otra forma de ver el <a class="xg" data-guia="p4" data-ej="13">Ejercicio 13</a> (b).</p></div>
+
+  <!-- O6-8 -->
+  <article class="ej" id="ejp4alt-o6-8" data-short="O6-8" data-title="Uniformemente continua manda Cauchy en Cauchy; continua sola no alcanza" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O6-8</span>
+      <h3>Uniformemente continua manda Cauchy en Cauchy; continua sola no alcanza</h3>
+      <span class="src">Lebl, Lema 3.4.5 y Ejerc. 3.4.10</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>(Lema 3.4.5) Sean $S \subseteq \mathbb{R}$ y $f : S \to \mathbb{R}$ <span class="ref" data-ref="def-5.14">uniformemente continua</span>. Si $(x_n)_{n \in \mathbb{N}}$ es una <span class="ref" data-ref="def-4.51">sucesión de Cauchy</span> en $S$, entonces $(f(x_n))_{n \in \mathbb{N}}$ es de Cauchy.</li>
+        <li>(Ejercicio 3.4.10) (i) Hallar una $f : (0, 1) \to \mathbb{R}$ continua y una sucesión $(x_n)_{n \in \mathbb{N}}$ en $(0, 1)$ de Cauchy tal que $(f(x_n))_{n \in \mathbb{N}}$ no sea de Cauchy. (ii) Probar que si $f : \mathbb{R} \to \mathbb{R}$ es continua y $(x_n)_{n \in \mathbb{N}}$ es de Cauchy, entonces $(f(x_n))_{n \in \mathbb{N}}$ es de Cauchy.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) El $\delta$ de la continuidad uniforme y el $M$ de Cauchy</p>
+          <p>Sea $\varepsilon \gt 0$. Existe $\delta \gt 0$ tal que $|f(x) - f(y)| \lt \varepsilon$ siempre que $x, y \in S$ y $|x - y| \lt \delta$. Tomamos $M \in \mathbb{N}$ tal que para todos $n, k \ge M$ vale $|x_n - x_k| \lt \delta$. Entonces, para todos $n, k \ge M$, tenemos $|f(x_n) - f(x_k)| \lt \varepsilon$. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-8-c1" aria-label="Dos rectas: arriba la sucesión 1 sobre n, abajo sus imágenes; la cola desde M se marca en las dos"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>función</legend>
+              <label><input type="radio" name="ejp4alt-o6-8-f" value="lin" checked> <i>f</i>(<i>x</i>) = <i>x</i>/2</label>
+              <label><input type="radio" name="ejp4alt-o6-8-f" value="inv"> <i>f</i>(<i>x</i>) = 1/<i>x</i></label>
+            </fieldset>
+            <div class="slider"><label for="ejp4alt-o6-8-M"><i>M</i></label><input type="range" id="ejp4alt-o6-8-M" min="1" max="30" value="5"><output id="ejp4alt-o6-8-M-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-8-r1" aria-live="polite"></dl>
+          <figcaption>Arriba, <i>x<sub>n</sub></i> = 1/<i>n</i> en (0, 1], de Cauchy; abajo, <i>f</i>(<i>x<sub>n</sub></i>). En azul la cola <i>n</i> ≥ <i>M</i>. Con <i>f</i>(<i>x</i>) = <i>x</i>/2 (uniformemente continua, elegida para el dibujo) la cola de abajo se aprieta igual que la de arriba. Con 1/<i>x</i> (el ejemplo de b)(i) que da O2-13) la cola de abajo es 1/<i>x<sub>n</sub></i> = <i>n</i> y se desparrama: el dibujo muestra sólo hasta <i>n</i> = 60.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b)</p>
+          <p>La fuente sólo enuncia el ejercicio. Una resolución de (i), con $f(x) = 1/x$ y $x_n = 1/n$, está en <a href="#ejp4alt-o2-13">O2-13</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la demostración de a) no usa nada particular de $\mathbb{R}$: cambiando $|x - y|$ por $d(x, y)$ y $|f(x) - f(y)|$ por $d'(f(x), f(y))$ es, palabra por palabra, p4 <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a>. La fuente presenta el lema como “la clave” de la extensión continua (<a href="#ejp4alt-o6-9-prop">O6-9</a>): “la novedad es que, para una sucesión de Cauchy, el límite puede no estar en el dominio de la función”. El ítem b)(ii) muestra que en $\mathbb{R}$ (completo) la continuidad sola basta; b)(i), que en $(0, 1)$ no.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Lema 3.4.5 (págs. 139–140 del PDF) y Ejercicio 3.4.10 (pág. 143 del PDF). <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a></p>
+  </article>
+
+  <!-- O2-13 -->
+  <article class="ej" id="ejp4alt-o2-13" data-short="O2-13" data-title="Continua no preserva Cauchy (ni siquiera un homeomorfismo); uniformemente continua sí" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O2-13</span>
+      <h3>Continua no preserva Cauchy (ni siquiera un homeomorfismo); uniformemente continua sí</h3>
+      <span class="src">Guccione, Obs. 6.5</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Una función continua puede transformar una sucesión de Cauchy en una que no lo es, aun si es un <span class="ref" data-ref="def-5.29">homeomorfismo</span>. Pero si $f : X \to Y$ es uniformemente continua y $(x_n)_{n \in \mathbb{N}}$ es una sucesión de Cauchy de puntos de $X$, entonces $(f(x_n))_{n \in \mathbb{N}}$ también lo es.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La continuidad no alcanza</p>
+          <p>Para lo primero: la función $\operatorname{inv} : (0, +\infty) \to (0, +\infty)$, definida por $\operatorname{inv}(x) := \dfrac{1}{x}$, aplica la sucesión $(1/n)_{n \in \mathbb{N}}$, que es de <span class="ref" data-ref="def-4.51">Cauchy</span>, en la sucesión identidad $(n)_{n \in \mathbb{N}}$, que no lo es.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 190" role="img" aria-label="Arriba los puntos 1, un medio, un tercio, un cuarto, un quinto amontonados cerca de 0; abajo sus imágenes 1, 2, 3, 4, 5 separadas por 1">
+            <line x1="20" y1="45" x2="340" y2="45" class="sv-axis"/>
+            <line x1="20" y1="150" x2="340" y2="150" class="sv-axis"/>
+            <text x="20" y="22" class="sv-muted">(0, +∞): 1/n</text>
+            <text x="20" y="182" class="sv-muted">(0, +∞): n</text>
+            <circle cx="30" cy="45" r="3" class="sv-fill-bg sv-ink"/>
+            <text x="30" y="65" text-anchor="middle" class="sv-muted">0</text>
+            <circle cx="310" cy="45" r="5" class="sv-fill-accent"/>
+            <circle cx="170" cy="45" r="5" class="sv-fill-accent"/>
+            <circle cx="123.3" cy="45" r="5" class="sv-fill-accent"/>
+            <circle cx="100" cy="45" r="5" class="sv-fill-accent"/>
+            <circle cx="86" cy="45" r="5" class="sv-fill-accent"/>
+            <circle cx="76.7" cy="45" r="4" class="sv-fill-accent"/>
+            <circle cx="70" cy="45" r="3.5" class="sv-fill-accent"/>
+            <circle cx="65" cy="45" r="3" class="sv-fill-accent"/>
+            <text x="310" y="34" text-anchor="middle" class="sv-label-accent">1</text>
+            <text x="170" y="34" text-anchor="middle" class="sv-label-accent">1/2</text>
+            <text x="123.3" y="34" text-anchor="middle" class="sv-label-accent">1/3</text>
+            <text x="92" y="34" text-anchor="middle" class="sv-label-accent">1/4 …</text>
+            <circle cx="40" cy="150" r="5" class="sv-fill-seq2"/>
+            <circle cx="100" cy="150" r="5" class="sv-fill-seq2"/>
+            <circle cx="160" cy="150" r="5" class="sv-fill-seq2"/>
+            <circle cx="220" cy="150" r="5" class="sv-fill-seq2"/>
+            <circle cx="280" cy="150" r="5" class="sv-fill-seq2"/>
+            <text x="40" y="138" text-anchor="middle" class="sv-label-seq2">1</text>
+            <text x="100" y="138" text-anchor="middle" class="sv-label-seq2">2</text>
+            <text x="160" y="138" text-anchor="middle" class="sv-label-seq2">3</text>
+            <text x="220" y="138" text-anchor="middle" class="sv-label-seq2">4</text>
+            <text x="280" y="138" text-anchor="middle" class="sv-label-seq2">5</text>
+            <text x="330" y="138" text-anchor="middle" class="sv-label-seq2">…</text>
+            <path d="M310 52 L44 143" class="sv-ink sv-dash"/>
+            <path d="M170 52 L102 143" class="sv-ink sv-dash"/>
+            <path d="M123.3 52 L160 143" class="sv-ink sv-dash"/>
+            <path d="M100 52 L218 143" class="sv-ink sv-dash"/>
+            <path d="M86 52 L276 143" class="sv-ink sv-dash"/>
+            <text x="300" y="100" text-anchor="middle" class="sv-text">inv</text>
+          </svg>
+          <figcaption>Arriba, los primeros términos de 1/<i>n</i>: se amontonan contra el 0, que no está en (0, +∞). Abajo, sus imágenes por inv: los términos quedan a distancia 1 entre vecinos y no se amontonan en ningún lado.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Uniformemente continua sí</p>
+          <p>Para lo segundo: dado $\varepsilon \gt 0$, existe $\delta \gt 0$ tal que $d(f(x), f(x')) \lt \varepsilon$ siempre que $d(x, x') \lt \delta$. Para este $\delta$ existe $n_0 \in \mathbb{N}$ tal que $d(x_l, x_m) \lt \delta$ para todo $l, m \ge n_0$. Pero entonces $d(f(x_l), f(x_m)) \lt \varepsilon$ para todo $l, m \ge n_0$. En particular, la de ser de Cauchy es una propiedad uniforme que no es topológica.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>es exactamente el <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a> de la Práctica 4, con el contraejemplo que muestra que la hipótesis “uniformemente” no se puede bajar a “continua”. Que $\operatorname{inv}$ es un homeomorfismo de $(0, +\infty)$ en sí mismo: es continua (cociente de continuas, O2-2), biyectiva, y es su propia inversa. La frase final de la fuente usa su vocabulario de “propiedades uniformes/topológicas” (Definiciones 3.25 y 3.48): ser de Cauchy se preserva por isomorfismos uniformes pero no por homeomorfismos.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Observación 6.5, pág. 101 del PDF (92 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a></p>
+  </article>
+
+  <!-- O4-7 -->
+  <article class="ej" id="ejp4alt-o4-7" data-short="O4-7" data-title="Uniformemente continua con inversa continua transporta la completitud" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O4-7</span>
+      <h3>Uniformemente continua con inversa continua transporta la completitud; contiene “u.c. manda Cauchy en Cauchy”</h3>
+      <span class="src">Gajardo, Ej. resuelto E7 a)</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sean $(X, d)$ e $(Y, d')$ dos espacios métricos y $f : X \to Y$ una función. Si $(Y, d')$ es <span class="ref" data-ref="def-4.55">completo</span> y $f : X \to Y$ es uniformemente continua, biyectiva y su inversa es continua, pruebe que $(X, d)$ es también completo.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La imagen es de Cauchy</p>
+          <p>Sea $(x_k)_{k \in \mathbb{N}} \subseteq X$ una sucesión de <span class="ref" data-ref="def-4.51">Cauchy</span> y $\varepsilon \gt 0$. Por la uniforme continuidad de $f$, sabemos que existe $\delta \gt 0$ tal que
+            $$d(x, y) \lt \delta \Rightarrow d'(f(x), f(y)) \lt \varepsilon.$$
+            Por otro lado, existirá $k_0 \in \mathbb{N}$ tal que $d(x_k, x_{k'}) \lt \delta$ para todo $k, k' \ge k_0$. Por lo tanto, $d'(f(x_k), f(x_{k'})) \lt \varepsilon$ para todo $k, k' \ge k_0$, probando así que $(f(x_k))_{k \in \mathbb{N}} \subseteq Y$ es una sucesión de Cauchy.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Converge en $Y$ y se vuelve con $f^{-1}$</p>
+          <p>Dado que $Y$ es completo, existirá $z \in Y$ tal que $f(x_k) \to z$. Como $x_k = f^{-1}(f(x_k))$ y $f^{-1}$ es continua, se tiene que $x_k \to f^{-1}(z)$ (<span class="ref" data-ref="teo-5.7">Teo. 5.7</span>), por lo tanto la sucesión $(x_k)_{k \in \mathbb{N}}$ es convergente, permitiendo concluir la completitud de $X$. $\square$</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 200" role="img" aria-label="Esquema: una sucesión de Cauchy en X, su imagen en Y converge a z, y f inversa la devuelve convergiendo a f inversa de z">
+            <ellipse cx="85" cy="110" rx="70" ry="70" class="sv-ink"/>
+            <ellipse cx="275" cy="110" rx="70" ry="70" class="sv-ink"/>
+            <text x="85" y="28" text-anchor="middle" class="sv-text">(X, d)</text>
+            <text x="275" y="28" text-anchor="middle" class="sv-text">(Y, d′) completo</text>
+            <circle cx="40" cy="80" r="4" class="sv-fill-accent"/>
+            <circle cx="62" cy="128" r="4" class="sv-fill-accent"/>
+            <circle cx="88" cy="96" r="3.5" class="sv-fill-accent"/>
+            <circle cx="96" cy="118" r="3" class="sv-fill-accent"/>
+            <circle cx="104" cy="106" r="2.5" class="sv-fill-accent"/>
+            <circle cx="107" cy="111" r="2" class="sv-fill-accent"/>
+            <circle cx="110" cy="109" r="4" class="sv-fill-bg sv-ok"/>
+            <text x="44" y="70" class="sv-label-accent">x<tspan baseline-shift="sub" font-size="10">k</tspan></text>
+            <text x="78" y="160" class="sv-label-ok">f⁻¹(z)</text>
+            <circle cx="232" cy="72" r="4" class="sv-fill-seq2"/>
+            <circle cx="250" cy="140" r="4" class="sv-fill-seq2"/>
+            <circle cx="268" cy="92" r="3.5" class="sv-fill-seq2"/>
+            <circle cx="276" cy="124" r="3" class="sv-fill-seq2"/>
+            <circle cx="284" cy="104" r="2.5" class="sv-fill-seq2"/>
+            <circle cx="288" cy="113" r="2" class="sv-fill-seq2"/>
+            <circle cx="292" cy="109" r="4" class="sv-fill-ok"/>
+            <text x="238" y="62" class="sv-label-seq2">f(x<tspan baseline-shift="sub" font-size="10">k</tspan>)</text>
+            <text x="300" y="104" class="sv-label-ok">z</text>
+            <path d="M150 70 Q180 52 210 70" class="sv-accent"/>
+            <path d="M203 63 L210 70 L201 72" class="sv-accent"/>
+            <text x="180" y="50" text-anchor="middle" class="sv-label-accent">f u.c.</text>
+            <path d="M210 160 Q180 178 150 160" class="sv-ok"/>
+            <path d="M157 153 L150 160 L159 162" class="sv-ok"/>
+            <text x="180" y="194" text-anchor="middle" class="sv-label-ok">f⁻¹ continua</text>
+          </svg>
+          <figcaption>El recorrido de la prueba: la sucesión de Cauchy (<i>x<sub>k</sub></i>) va a <i>Y</i> por <i>f</i>, donde sigue siendo de Cauchy (primer paso) y converge a <i>z</i> porque <i>Y</i> es completo; <i>f</i>⁻¹, continua, la trae de vuelta convergiendo a <i>f</i>⁻¹(<i>z</i>).</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>el primer párrafo es, palabra por palabra, el <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a> de la práctica (uniformemente continua $\Rightarrow$ manda sucesiones de Cauchy en sucesiones de Cauchy); el resto muestra para qué sirve. Maximenko (fuente O5, diapositivas 35–36) deja la misma proposición como ejercicio.</div>
+    <p class="cita"><i>Fuente</i>: P. Gajardo Adaro, <i>Análisis I</i> (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E7) a), pág. 61 del PDF. <a href="https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf">URL</a>. Acceso: web del departamento, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a></p>
+  </article>
+
+  <!-- O14-9 -->
+  <article class="ej" id="ejp4alt-o14-9" data-short="O14-9" data-title="Uniformemente continua manda Cauchy en Cauchy; log no es uniformemente continua en (0, +∞)" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O14-9</span>
+      <h3>Uniformemente continua manda Cauchy en Cauchy; $\log$ no es uniformemente continua en $(0, +\infty)$</h3>
+      <span class="src">Payá, Uniforme 2014-15, §11.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sean $E$ y $F$ espacios métricos y $f : E \to F$ uniformemente continua. Si $(x_n)_{n \in \mathbb{N}}$ es una sucesión de Cauchy de puntos de $E$, entonces $(f(x_n))_{n \in \mathbb{N}}$ es una sucesión de Cauchy en $F$. Deducir que $\log : (0, +\infty) \to \mathbb{R}$ no es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cauchy en Cauchy</p>
+          <p>Dado $\varepsilon \gt 0$, sea $\delta \gt 0$ dado por la <span class="ref" data-ref="def-5.14">continuidad uniforme</span> de $f$. Entonces existe $m \in \mathbb{N}$ tal que para $p, q \ge m$ se tiene $d(x_p, x_q) \lt \delta$, de donde $d(f(x_p), f(x_q)) \lt \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cuándo sirve: $\log$ en $(0, +\infty)$</p>
+          <p>La observación carece de interés cuando $E$ es <span class="ref" data-ref="def-4.55">completo</span>, pues entonces la sucesión de Cauchy $(x_n)_{n \in \mathbb{N}}$ es convergente y la continuidad de $f$ basta para que $(f(x_n))_{n \in \mathbb{N}}$ sea convergente. Cuando $E$ no es completo, sirve para probar fácilmente que una función <b>no</b> es uniformemente continua: la función $\log : (0, +\infty) \to \mathbb{R}$ no es uniformemente continua, pues $(1/n)_{n \in \mathbb{N}}$ es una sucesión de Cauchy de puntos de $(0, +\infty)$ pero $(\log(1/n))_{n \in \mathbb{N}} = (-\log n)_{n \in \mathbb{N}}$ no es de Cauchy.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o14-9-c1" aria-label="Gráfico de logaritmo en cero, uno con los puntos 1 sobre n y sus imágenes menos logaritmo de n"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o14-9-N"><i>N</i></label><input type="range" id="ejp4alt-o14-9-N" min="2" max="60" value="12"><output id="ejp4alt-o14-9-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o14-9-r1" aria-live="polite"></dl>
+          <figcaption>Los puntos (1/<i>n</i>, log(1/<i>n</i>)) para <i>n</i> ≤ <i>N</i>. Sobre el eje horizontal los 1/<i>n</i> se amontonan contra el 0 (que no está en el dominio); sobre el vertical, los −log <i>n</i> siguen bajando sin cota.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente escribe en la demostración “$d(x_p, y_q) \lt \delta$, de donde $d(f(x_p), f(y_q)) \lt \varepsilon$”; es una errata por $x_q$ (no hay ninguna sucesión $(y_n)$). El mismo criterio resuelve el <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> ($1/x$ con $x_n = 1/n$, Cauchy en $(0, +\infty)$, imagen $n$ no acotada) y es el <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a> de la Práctica 4.</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, curso 2014-15), Lección 11 “Continuidad uniforme”, §11.3 “Extensión de funciones uniformemente continuas”, pág. 3 del PDF (65 impresa). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2014-15/Uniforme.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a></p>
+  </article>
+
+  <!-- O3-9 -->
+  <article class="ej" id="ejp4alt-o3-9" data-short="O3-9" data-title="Un homeomorfismo cuya inversa no manda Cauchy en Cauchy: ℝ y la circunferencia pinchada" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O3-9</span>
+      <h3>Un homeomorfismo cuya inversa no manda Cauchy en Cauchy: $\mathbb{R}$ y la circunferencia pinchada</h3>
+      <span class="src">Daniilidis, Ej. 2.5.5</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sea $S$ la circunferencia unitaria de $\mathbb{R}^2$ centrada en el punto $(0, 1)$, es decir,
+      $$S = \{(x, y) \in \mathbb{R}^2 : x^2 + (y - 1)^2 = 1\},$$
+      y consideramos el espacio métrico $Y = S \setminus \{(0, 2)\}$ con la métrica $d$ inducida por (cualquier norma de) $\mathbb{R}^2$. Mostrar que $(Y, d)$ es homeomorfo a $(\mathbb{R}, |\cdot|)$ (es decir, existe $f : \mathbb{R} \to Y$ biyectiva con $f$ y $f^{-1}$ continuas) pero que $f^{-1}$ no respeta las sucesiones de Cauchy; en particular, $f^{-1} : Y \to \mathbb{R}$ es continua pero no uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$Y$ no es completo</p>
+          <p>Dicho espacio $Y$ no es <span class="ref" data-ref="def-4.55">completo</span> (ya que $Y$ no es <span class="ref" data-ref="cor-4.47">cerrado</span> en $\mathbb{R}^2$: le falta el punto $(0, 2)$, que es límite de puntos de $Y$; la fuente cita su Proposición 2.4.3, “un subconjunto de un completo es completo si y sólo si es cerrado”). Sin embargo, $(Y, d)$ es <span class="ref" data-ref="def-5.29">homeomorfo</span> a $(\mathbb{R}, |\cdot|)$, que es completo.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La proyección estereográfica</p>
+          <p>En efecto, definimos la función $f : \mathbb{R} \to S \setminus \{(0, 2)\}$ tal que para todo $t \in \mathbb{R}$ entrega la intersección entre $S \setminus \{(0, 2)\}$ y la recta que pasa por $(t, 0)$ y $(0, 2)$ (proyección estereográfica). La fórmula explícita que define la función es
+            $$f(t) = \left(\frac{4t}{4 + t^2},\; 2 - \frac{8}{4 + t^2}\right).$$
+            Es fácil convencerse (mirando el dibujo) de que $f$ es biyectiva y de que tanto $f$ como $f^{-1}$ son funciones continuas.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-9-c1" aria-label="La circunferencia de centro cero, uno y radio 1 sin el polo norte; la recta desde t, 0 hasta 0, 2 la corta en f de t"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-9-t"><i>t</i></label><input type="range" id="ejp4alt-o3-9-t" min="-45" max="45" value="15"><output id="ejp4alt-o3-9-t-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o3-9-N"><i>N</i></label><input type="range" id="ejp4alt-o3-9-N" min="1" max="40" value="8"><output id="ejp4alt-o3-9-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-9-r1" aria-live="polite"></dl>
+          <figcaption>La recta naranja une (<i>t</i>, 0) con el polo (0, 2), que no está en <i>Y</i> (círculo hueco); corta a la circunferencia en <i>f</i>(<i>t</i>). Los puntos verdes son <i>f</i>(1), …, <i>f</i>(<i>N</i>): se acercan al polo, mientras que 1, …, <i>N</i> se van por el eje (los que entran en la ventana se ven como marcas).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$f^{-1}$ no respeta las sucesiones de Cauchy</p>
+          <p>Por otra parte, $f^{-1}$ no respeta las sucesiones de <span class="ref" data-ref="def-4.51">Cauchy</span>: en efecto, la sucesión $x_n = n$, $n \in \mathbb{N}$, de $\mathbb{R}$ es la imagen por $f^{-1}$ de la sucesión $y_n = f(x_n)$, que es de Cauchy en $Y$ (ya que es convergente en $S = \overline{Y}$: $f(n) \to (0, 2)$), mientras que $(x_n)_{n \in \mathbb{N}}$ no es de Cauchy en $\mathbb{R}$. En particular, $f$ no es un homeomorfismo uniforme (es decir, $f$ y $f^{-1}$ no son ambas uniformemente continuas). $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente deja la biyectividad y la continuidad de $f$ y $f^{-1}$ al dibujo; la continuidad de $f$ sale de que sus coordenadas son cocientes de polinomios con denominador no nulo (O2-2), y $f^{-1}(x, y) = 2x/(2 - y)$ (deducción propia: de la fórmula, $4 + t^2 = 8/(2 - y)$ y $t = x (4 + t^2)/4$). Lo que entrena el ítem es la <b>contrarrecíproca del <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a></b>: como $f^{-1}$ es continua pero manda la sucesión de Cauchy $(f(n))_{n \in \mathbb{N}}$ en la sucesión $(n)_{n \in \mathbb{N}}$, que no es de Cauchy, $f^{-1}$ no puede ser uniformemente continua.</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Ejemplo 2.5.5 (Homeomorfismo vs completitud) y Definición 2.5.4, págs. 119–120 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a></p>
+  </article>
+
+  <!-- O3-10 -->
+  <article class="ej" id="ejp4alt-o3-10" data-short="O3-10" data-title="La función x ↦ lim d(zₙ, x), con (zₙ) de Cauchy, es 1-Lipschitz" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O3-10</span>
+      <h3>La función $x \mapsto \lim_n d(z_n, x)$, con $(z_n)_n$ de Cauchy, es $1$-Lipschitz</h3>
+      <span class="src">Daniilidis, Lema 2.4.33</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $(z_n)_{n \in \mathbb{N}}$ una sucesión de Cauchy en un espacio métrico $(X, d)$. Entonces:</p>
+      <ol class="items" style="list-style-type: lower-roman">
+        <li>para todo $x \in X$ la sucesión $t_n := d(z_n, x)$, $n \in \mathbb{N}$, es de Cauchy (convergente) en $\mathbb{R}$;</li>
+        <li>la función $\varphi : X \to \mathbb{R}$ definida por
+          $$\varphi(x) := \lim_{n \to \infty} d(z_n, x)$$
+          es Lipschitz continua.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">(i) $(t_n)$ es de Cauchy</p>
+          <p>Sea $\varepsilon \gt 0$. Entonces existe $n_0 \in \mathbb{N}$ tal que para todo $n, m \gt n_0$ se tiene que $d(z_n, z_m) \lt \varepsilon$. Sea $x \in X$ arbitrario. Por la desigualdad triangular se tiene que
+            $$d(z_n, x) \le d(z_n, z_m) + d(z_m, x),$$
+            por lo tanto, intercambiando $z_n$ y $z_m$, se obtiene eventualmente que
+            $$|t_n - t_m| \le d(z_n, z_m) \lt \varepsilon,$$
+            es decir, $(t_n)_{n \in \mathbb{N}}$ es de <span class="ref" data-ref="def-4.51">Cauchy</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">(ii) $\varphi$ es $1$-Lipschitz</p>
+          <p>La función $\varphi$ está bien definida (ya que <span class="ref" data-ref="teo-4.57">las sucesiones de Cauchy en $\mathbb{R}$ son convergentes</span>). Sean $x, y \in X$. Utilizando nuevamente la desigualdad triangular se tiene que $d(z_n, x) \le d(z_n, y) + d(y, x)$. Tomando el límite cuando $n \to \infty$ (y observando que $x, y$ se pueden intercambiar) se obtiene que $\varphi$ es <span class="ref" data-ref="def-5.24">Lipschitz</span> continua con constante $L = 1$. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-10-c1" aria-label="Una sucesión de Cauchy en el plano y un punto x arrastrable con los segmentos a los z sub n"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-10-N"><i>N</i></label><input type="range" id="ejp4alt-o3-10-N" min="1" max="40" value="10"><output id="ejp4alt-o3-10-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-10-r1" aria-live="polite"></dl>
+          <figcaption>En ℝ² con la distancia euclídea, <i>z<sub>n</sub></i> = (1,5 + 0,9(−1)<sup><i>n</i></sup>/<i>n</i>, 1 + 0,7/<i>n</i>) (valores elegidos), de Cauchy. Arrastrá <i>x</i>: los segmentos miden <i>t<sub>n</sub></i> = <i>d</i>(<i>z<sub>n</sub></i>, <i>x</i>), y la lectura muestra cómo se estabilizan. El último segmento es el de <i>z<sub>N</sub></i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>es la misma cuenta que prueba que $d(\cdot, x_0)$ es $1$-Lipschitz (<a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>), pero con un “punto ideal” $(z_n)_n$ en lugar de $x_0$; si $z_n \to z$, entonces $\varphi = d(\cdot, z)$. La parte (i) es, además, una instancia del <a class="xg" data-guia="p4" data-ej="14">Ej. 14</a> (la función $1$-Lipschitz $d(\cdot, x)$ manda la Cauchy $(z_n)_n$ en la Cauchy $(t_n)_n$).</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Lema 2.4.33, pág. 116 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>, <a class="xg" data-guia="p4" data-ej="14">14</a></p>
+  </article>
+
+  <!-- O2-6 -->
+  <article class="ej" id="ejp4alt-o2-6" data-short="O2-6" data-title="Extensión de funciones definidas sobre un denso: unicidad y existencia" data-topics="continuidad,densidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O2-6</span>
+      <h3>Extensión de funciones definidas sobre un denso: unicidad y existencia</h3>
+      <span class="src">Guccione, Teo. 6.28</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-densidad">densidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <p>Supongamos que $A \subseteq X$ es un conjunto <span class="ref" data-ref="def-5.20">denso</span> y $f : A \to Y$ es una función continua. Los siguientes hechos valen:</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li>Si $g : X \to Y$ y $h : X \to Y$ son funciones continuas que extienden a $f$, entonces $g = h$.</li>
+        <li>Si $f$ es uniformemente continua e $Y$ es completo, entonces existe una función uniformemente continua $g : X \to Y$ que extiende a $f$. Además, si $f$ es una isometría, entonces $g$ también lo es.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1. Unicidad</p>
+          <p>Denotemos con $C$ a $\{x \in X : g(x) = h(x)\}$. Debemos probar que $C = X$. Para ello, como $A \subseteq C$ y $\overline{A} = X$, basta comprobar que $C$ es <span class="ref" data-ref="def-4.27">cerrado</span>, pero esto es una consecuencia inmediata de que si $(x_n)_{n \in \mathbb{N}}$ es una sucesión de puntos de $C$ y $x = \lim_{n \to \infty} x_n$, entonces
+            $$g(x) = \lim_{n \to \infty} g(x_n) = \lim_{n \to \infty} h(x_n) = h(x).$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">2. Definición de $g$, que no depende de la sucesión</p>
+          <p>Fijemos un punto $x \in X$ y tomemos una sucesión $(x_n)_{n \in \mathbb{N}}$ de puntos de $A$ que tiende a $x$. Como $f$ es uniformemente continua, la sucesión $(f(x_n))_{n \in \mathbb{N}}$ es de <span class="ref" data-ref="def-4.51">Cauchy</span> y, por lo tanto, dado que $Y$ es <span class="ref" data-ref="def-4.55">completo</span>, convergente. Definimos $g(x) = y$, donde $y = \lim_{n \to \infty} f(x_n)$. Debemos probar que esta definición no depende de la sucesión elegida. Supongamos que empezando con otra sucesión $(x'_n)_{n \in \mathbb{N}}$ de puntos de $A$ que tiende a $x$, obtenemos $y' = \lim_{n \to \infty} f(x'_n)$. Entonces la sucesión $f(x_1), f(x'_1), f(x_2), f(x'_2), \dots$ es convergente y tiene subsucesiones que convergen a $y$ e $y'$. En consecuencia, $y = y'$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-6-c1" aria-label="Valores de f sobre racionales de 0, 1 y dos sucesiones de racionales, por debajo y por encima de x, cuyas imágenes convergen al mismo valor g de x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o2-6-n"><i>n</i></label><input type="range" id="ejp4alt-o2-6-n" min="1" max="40" value="4"><output id="ejp4alt-o2-6-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o2-6-r1" aria-live="polite"></dl>
+          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>A</i> = ℚ ∩ [0, 1] y <i>f</i>(<i>q</i>) = <i>q</i>² (los puntos grises son algunos <i>f</i>(<i>q</i>) con denominador ≤ 14). El punto <i>x</i> = 1/√2 no está en <i>A</i>. En azul, <i>x<sub>k</sub></i> = ⌊10<i>k x</i>⌋/(10<i>k</i>), racionales por debajo de <i>x</i>; en naranja, <i>x</i>′<sub><i>k</i></sub> = ⌈10<i>k x</i>⌉/(10<i>k</i>), por encima (<i>k</i> ≤ <i>n</i>). Las dos sucesiones de imágenes van al mismo valor, el círculo verde.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$g$ extiende a $f$</p>
+          <p>Para concluir la demostración debemos probar que $g$ extiende a $f$, es uniformemente continua y es una isometría si $f$ lo es. Si $x \in A$, entonces tomando $x_n = x$ para todo $n$, vemos que
+            $$g(x) = \lim_{n \to \infty} f(x_n) = f(x),$$
+            lo que muestra que $g$ extiende a $f$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$g$ es uniformemente continua</p>
+          <p>Además, como $f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span>, para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que
+            $$d(f(x), f(x')) \lt \varepsilon \quad \text{si } x, x' \in A \text{ y } d(x, x') \lt \delta.$$
+            Tomemos $x, x' \in X$ tales que $d(x, x') \lt \delta$ y elijamos sucesiones $(x_n)_{n \in \mathbb{N}}$ y $(x'_n)_{n \in \mathbb{N}}$ de puntos de $A$ tales que $x = \lim_{n \to \infty} x_n$ y $x' = \lim_{n \to \infty} x'_n$. Entonces $\lim_{n \to \infty} d(x_n, x'_n) = d(x, x') \lt \delta$, por lo que
+            $$d(g(x), g(x')) = \lim_{n \to \infty} d(f(x_n), f(x'_n)) \le \varepsilon.$$
+            (La fuente termina aquí la prueba de la continuidad uniforme; el caso de la <span class="ref" data-ref="def-5.33">isometría</span> es análogo, reemplazando la desigualdad por la igualdad $d(f(x_n), f(x'_n)) = d(x_n, x'_n)$.)</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>en el paso 2 la fuente usa, sin citarlo, que una función uniformemente continua manda sucesiones de Cauchy en sucesiones de Cauchy (su Observación 6.5, transcripta en <a href="#ejp4alt-o2-13">O2-13</a>), que la sucesión intercalada $f(x_1), f(x'_1), \dots$ es de Cauchy por el mismo motivo (porque $x_1, x'_1, x_2, x'_2, \dots$ tiende a $x$), y que $d$ es continua en $X \times X$ (su Ejemplo 3.55, transcripto en O2-7). El punto 1 es exactamente el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a) de la Práctica 4 y usa que $\{g = h\}$ es cerrado, que es el <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>. El Ej. 7 (b) (inyectividad de $C([0, 1]) \to \{\mathbb{Q} \cap [0, 1] \to \mathbb{R}\}$) es el caso $A = \mathbb{Q} \cap [0, 1]$, $X = [0, 1]$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Teorema 6.28, págs. 105–106 del PDF (96–97 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>, <a class="xg" data-guia="p4" data-ej="7">7</a> (a), <a class="xg" data-guia="p4" data-ej="14">14</a></p>
+  </article>
+
+  <!-- O6-9 (proposición) -->
+  <article class="ej" id="ejp4alt-o6-9-prop" data-short="Prop." data-title="Uniformemente continua en (a, b) ⟺ se extiende con continuidad a [a, b]" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Uniformemente continua en $(a, b)$ $\Longleftrightarrow$ se extiende con continuidad a $[a, b]$</h3>
+      <span class="src">Lebl, Prop. 3.4.6</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Una función $f : (a, b) \to \mathbb{R}$ es uniformemente continua si y sólo si los límites
+      $$L_a := \lim_{x \to a} f(x) \quad \text{y} \quad L_b := \lim_{x \to b} f(x)$$
+      existen y la función $\tilde{f} : [a, b] \to \mathbb{R}$ definida por
+      $$\tilde{f}(x) := \begin{cases} f(x) & \text{si } x \in (a, b), \\ L_a & \text{si } x = a, \\ L_b & \text{si } x = b \end{cases}$$
+      es continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La dirección rápida</p>
+          <p>Una dirección es rápida. Si $\tilde{f}$ es continua, entonces es uniformemente continua por el Teorema 3.4.4 (<a href="#ejp4alt-o6-7-prop">O6-7</a>). Como $f$ es la restricción de $\tilde{f}$ a $(a, b)$, $f$ también es uniformemente continua (ejercicio: la restricción de una uniformemente continua es uniformemente continua, Ejercicio 3.4.1 de la fuente).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Cada sucesión que va a $a$ da un límite</p>
+          <p>Supongamos ahora que $f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span>. Primero hay que ver que los límites $L_a$ y $L_b$ existen. Concentrémonos en $L_a$. Tomamos $(x_n)_{n \in \mathbb{N}}$ en $(a, b)$ con $\lim_{n \to \infty} x_n = a$. La sucesión $(x_n)_{n \in \mathbb{N}}$ es de <span class="ref" data-ref="def-4.51">Cauchy</span>, así que por el Lema 3.4.5 (<a href="#ejp4alt-o6-8">O6-8</a>) la sucesión $(f(x_n))_{n \in \mathbb{N}}$ es de Cauchy y <span class="ref" data-ref="teo-4.57">por lo tanto convergente</span>. Sea $L_1 := \lim_{n \to \infty} f(x_n)$. Tomamos otra sucesión $(y_n)_{n \in \mathbb{N}}$ en $(a, b)$ con $\lim_{n \to \infty} y_n = a$. Por el mismo razonamiento obtenemos $L_2 := \lim_{n \to \infty} f(y_n)$. Si mostramos que $L_1 = L_2$, entonces el límite $L_a = \lim_{x \to a} f(x)$ existe.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-9-c1" aria-label="Gráfico de una función en cero, uno con dos sucesiones que van a cero y sus imágenes"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>función en (0, 1)</legend>
+              <label><input type="radio" name="ejp4alt-o6-9-f" value="xs" checked> <i>x</i> sen(1/<i>x</i>)</label>
+              <label><input type="radio" name="ejp4alt-o6-9-f" value="s"> sen(1/<i>x</i>)</label>
+              <label><input type="radio" name="ejp4alt-o6-9-f" value="inv"> 1/<i>x</i></label>
+            </fieldset>
+            <div class="slider"><label for="ejp4alt-o6-9-n"><i>n</i></label><input type="range" id="ejp4alt-o6-9-n" min="1" max="12" value="3"><output id="ejp4alt-o6-9-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-9-r1" aria-live="polite"></dl>
+          <figcaption>Con (<i>a</i>, <i>b</i>) = (0, 1) y dos sucesiones elegidas para el dibujo: <i>x<sub>k</sub></i> = 1/(2π<i>k</i> + π/2) (azul) e <i>y<sub>k</sub></i> = 1/(2π<i>k</i> − π/2) (naranja), <i>k</i> ≤ <i>n</i>, las dos con límite 0. Con <i>x</i> sen(1/<i>x</i>) las imágenes van al mismo valor y aparece <i>L<sub>a</sub></i> (círculo verde). Con sen(1/<i>x</i>) se quedan en 1 y −1: <i>L</i>₁ ≠ <i>L</i>₂. Con 1/<i>x</i> ni siquiera son de Cauchy (el gráfico se corta arriba).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$L_1 = L_2$</p>
+          <p>Sea $\varepsilon \gt 0$. Tomamos $\delta \gt 0$ tal que $|x - y| \lt \delta$ implica $|f(x) - f(y)| \lt \varepsilon/3$. Tomamos $M \in \mathbb{N}$ tal que para $n \ge M$ valen $|a - x_n| \lt \delta/2$, $|a - y_n| \lt \delta/2$, $|f(x_n) - L_1| \lt \varepsilon/3$ y $|f(y_n) - L_2| \lt \varepsilon/3$. Entonces, para $n \ge M$,
+            $$\begin{aligned} |x_n - y_n| &= |x_n - a + a - y_n| \\ &\le |x_n - a| + |a - y_n| \\ &\lt \frac{\delta}{2} + \frac{\delta}{2} = \delta. \end{aligned}$$
+            Luego
+            $$\begin{aligned} |L_1 - L_2| &= |L_1 - f(x_n) + f(x_n) - f(y_n) + f(y_n) - L_2| \\ &\le |L_1 - f(x_n)| + |f(x_n) - f(y_n)| + |f(y_n) - L_2| \\ &\le \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon. \end{aligned}$$
+            Por lo tanto $L_1 = L_2$, y $L_a$ existe. Que $L_b$ existe queda como ejercicio (Ejercicio 3.4.2 de la fuente).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\tilde{f}$ es continua</p>
+          <p>Si $L_a = \lim_{x \to a} f(x)$ existe, entonces $\lim_{x \to a} \tilde{f}(x)$ existe y vale $L_a$ (Prop. 3.1.15 de la fuente: el límite de una función en un punto no cambia al agregar el punto al dominio). Lo mismo para $L_b$. Luego $\tilde{f}$ es continua en $a$ y en $b$. Y como $f$ es continua en cada $c \in (a, b)$, también $\tilde{f}$ es continua en cada $c \in (a, b)$ (Prop. 3.1.15 otra vez). $\square$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Una aplicación típica</p>
+          <p>La fuente agrega una aplicación típica: si $f : (-1, 0) \cup (0, 1) \to \mathbb{R}$ es uniformemente continua, entonces $\lim_{x \to 0} f(x)$ existe y la función tiene una singularidad evitable, es decir, se extiende a una función continua en $(-1, 1)$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>este criterio decide de un golpe varios casos de p4 <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a>: $1/x$ y $\sin(1/x)$ no tienen límite en $0^+$, así que no son uniformemente continuas en $(0, 1)$; y una continua en $(a, b)$ con límites finitos en los extremos sí lo es. La ida es un caso del <span class="ref" data-ref="teo-5.22">Teorema 5.22</span> de <code>apuntes.typ</code>, con $E = (a, b)$ denso en $[a, b]$ y $\mathbb{R}$ completo; la vuelta todavía no está en el apunte.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Proposición 3.4.6, págs. 140–141 del PDF. <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O14-10 (proposición) -->
+  <article class="ej" id="ejp4alt-o14-10-prop" data-short="Prop." data-title="Extensión de una función uniformemente continua a la clausura" data-topics="continuidad,densidad,completitud">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Extensión de una función uniformemente continua a la clausura</h3>
+      <span class="src">Payá, Uniforme 2014-15, §11.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-densidad">densidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sean $E$ y $F$ espacios métricos, $A \subseteq E$ no vacío y $g : A \to F$. Supongamos que $F$ es completo y que $g$ es uniformemente continua. Entonces existe una única función continua $f : \overline{A} \to F$ que extiende a $g$ ($f(a) = g(a)$ para todo $a \in A$). De hecho, $f$ es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Definición de $f$</p>
+          <p>Para $x \in \overline{A}$ <span class="ref" data-ref="prop-4.46">existe una sucesión $(a_n)_{n \in \mathbb{N}}$ de puntos de $A$ con $a_n \to x$</span>; por ser $g$ uniformemente continua, $(g(a_n))_{n \in \mathbb{N}}$ es de Cauchy en $F$ (<a href="#ejp4alt-o14-9">O14-9</a>), y como $F$ es <span class="ref" data-ref="def-4.55">completo</span>, converge. Su límite sólo depende de $x$ y no de la sucesión: si $(b_n)_{n \in \mathbb{N}}$ es otra sucesión de $A$ con $b_n \to x$, entonces $d(a_n, b_n) \to 0$ y, por la continuidad uniforme de $g$, $d(g(a_n), g(b_n)) \to 0$, lo que implica que $(g(a_n))$ y $(g(b_n))$ convergen al mismo límite. Escribimos pues $f(x) = \lim_{n \to \infty} g(a_n)$, con $(a_n)$ cualquier sucesión de $A$ que converja a $x$. Es claro que $f$ extiende a $g$: para $a \in A$ tomamos $a_n = a$ para todo $n$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$f$ es uniformemente continua</p>
+          <p>Fijado $\varepsilon \gt 0$, la <span class="ref" data-ref="def-5.14">continuidad uniforme</span> de $g$ da $\delta \gt 0$ tal que $a, b \in A$, $d(a, b) \lt \delta \Longrightarrow d(g(a), g(b)) \lt \varepsilon/2$. Para $x, y \in \overline{A}$ con $d(x, y) \lt \delta/3$, sean $(a_n)$, $(b_n)$ sucesiones de $A$ con $a_n \to x$, $b_n \to y$. Existe $m$ tal que, para $n \ge m$, $d(a_n, x) \lt \delta/3$ y $d(b_n, y) \lt \delta/3$. Entonces, para $n \ge m$,
+            $$\begin{aligned} &d(a_n, b_n) \le d(a_n, x) + d(x, y) + d(y, b_n) \lt \delta, \\ &\text{luego} \quad d(g(a_n), g(b_n)) \lt \varepsilon/2. \end{aligned}$$
+            Como $g(a_n) \to f(x)$ y $g(b_n) \to f(y)$, se tiene $d(g(a_n), g(b_n)) \to d(f(x), f(y))$, y concluimos $d(f(x), f(y)) \le \varepsilon/2 \lt \varepsilon$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 200" role="img" aria-label="Dos puntos x e y a distancia menor que delta tercios, con bolas de radio delta tercios que contienen a a sub n y b sub n">
+            <circle cx="120" cy="100" r="62" class="sv-accent sv-dash"/>
+            <circle cx="120" cy="100" r="62" class="sv-area"/>
+            <circle cx="240" cy="100" r="62" class="sv-seq2 sv-dash"/>
+            <circle cx="240" cy="100" r="62" class="sv-area2"/>
+            <circle cx="120" cy="100" r="5" class="sv-fill-ok"/>
+            <circle cx="240" cy="100" r="5" class="sv-fill-ok"/>
+            <text x="120" y="122" text-anchor="middle" class="sv-label-ok">x</text>
+            <text x="240" y="122" text-anchor="middle" class="sv-label-ok">y</text>
+            <path d="M120 100 L240 100" class="sv-ok"/>
+            <text x="180" y="94" text-anchor="middle" class="sv-muted">&lt; δ/3</text>
+            <circle cx="82" cy="70" r="4.5" class="sv-fill-accent"/>
+            <text x="74" y="62" text-anchor="end" class="sv-label-accent">aₙ</text>
+            <circle cx="282" cy="140" r="4.5" class="sv-fill-seq2"/>
+            <text x="290" y="156" class="sv-label-seq2">bₙ</text>
+            <path d="M82 70 L282 140" class="sv-ink sv-dash"/>
+            <text x="195" y="150" text-anchor="middle" class="sv-text">d(aₙ, bₙ) &lt; δ</text>
+            <path d="M120 100 L120 38" class="sv-accent"/>
+            <text x="126" y="58" class="sv-label-accent">δ/3</text>
+            <text x="20" y="190" class="sv-muted">B(x, δ/3)</text>
+            <text x="340" y="190" text-anchor="end" class="sv-muted">B(y, δ/3)</text>
+          </svg>
+          <figcaption>Por qué alcanza con δ/3: <i>a<sub>n</sub></i> está a menos de δ/3 de <i>x</i>, <i>b<sub>n</sub></i> a menos de δ/3 de <i>y</i>, y <i>x</i>, <i>y</i> a menos de δ/3 entre sí. La raya punteada suma los tres tramos y queda por debajo de δ, que es lo que pide la continuidad uniforme de <i>g</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Unicidad</p>
+          <p>Sea $\varphi : \overline{A} \to F$ otra función continua que extienda a $g$. Fijado $x \in \overline{A}$ tomamos $a_n \in A$ con $a_n \to x$; por ser $\varphi$ extensión continua de $g$, $g(a_n) = \varphi(a_n) \to \varphi(x)$, pero por definición $g(a_n) \to f(x)$, luego $\varphi(x) = f(x)$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente combina esto con Heine: si $A \subseteq \mathbb{R}^N$ es acotado y $g : A \to \mathbb{R}$ continua, $g$ se extiende con continuidad a $\overline{A}$ si y sólo si $g$ es uniformemente continua (necesidad: $\overline{A}$ compacto, la extensión es uniformemente continua y $g$ es su restricción). Esto explica el <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>: $1/x$ y $\sin(1/x)$ no se extienden a $x = 0$. La unicidad usa sólo continuidad y densidad: es el <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a> (a) de la Práctica 4 con la demostración por sucesiones. Que $d(g(a_n), g(b_n)) \to d(f(x), f(y))$ es la continuidad de $d$ (O2-7).</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2014-15), Lección 11, §11.3, págs. 3–4 del PDF (65–66 impresas). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2014-15/Uniforme.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="7">Ej. 7</a>, <a class="xg" data-guia="p4" data-ej="14">14</a> (extensión por densidad)</p>
+  </article>
+
+  <!-- O3-12 (proposición) -->
+  <article class="ej" id="ejp4alt-o3-12-prop" data-short="Prop." data-title="Extensión continua a un G_δ entre A y su clausura" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Extensión continua a un $G_\delta$ entre $A$ y $\overline{A}$</h3>
+      <span class="src">Daniilidis, Cor. 2.5.17, sólo enunciado</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sea $(X, d)$ un espacio métrico y sea $(Y, d')$ un espacio métrico <b>completo</b>. Sea $A \subseteq X$ y $f : A \to Y$ continua. Entonces existe un conjunto $G \subseteq X$, que es $G_\delta$ (intersección numerable de abiertos), tal que $A \subseteq G \subseteq \overline{A}$ y existe $\varphi : G \to Y$ extensión continua de $f$, es decir $\varphi|_A = f$. Además, dicha extensión se define de forma única. Concretamente,
+      $$\begin{aligned} &G = \bigcap_{n = 1}^{\infty} G_n, \\ &G_n = \Big\{x \in \overline{A} : \text{existe } \delta_x \gt 0 \text{ con} \\ &\qquad \operatorname{diam}_{d'}\big(f(B(x, \delta_x) \cap A)\big) \lt \frac{1}{n}\Big\}. \end{aligned}$$</p></div>
+    <div class="estrategia"><b>Idea de la fuente (demostración completa en págs. 128–129 del PDF)</b><p>Si $x \in G$ y $(x_n)_n, (y_n)_n \subseteq A$ convergen a $x$, el diámetro pequeño de $f(B(x, \delta_x) \cap A)$ obliga a que $(f(x_n))_n$, $(f(y_n))_n$ sean de Cauchy con el mismo límite (acá se usa que $Y$ es completo); eso define $\varphi(x)$ y hace continua a $\varphi|_{A \cup \{x\}}$. Se concluye por el Lema 2.5.16 (O3-2) con $A$ denso en $G$.</p></div>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a></p>
+  </article>
+
+  <!-- O3-12 -->
+  <article class="ej" id="ejp4alt-o3-12" data-short="O3-12" data-title="Uniformemente continua ⟹ se extiende a la clausura; sin(1/t) no se extiende" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O3-12</span>
+      <h3>Uniformemente continua $\Longrightarrow$ se extiende a la clausura; $\sin(1/t)$ no se extiende</h3>
+      <span class="src">Daniilidis, Obs. 2.5.18 y Ej. 2.5.19</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>Con la notación del <a href="#ejp4alt-o3-12-prop">Corolario 2.5.17</a>, supongamos que $f : A \to Y$ es uniformemente continua (e $Y$ completo). Probar que $G = \overline{A}$, es decir, $f$ admite una extensión continua a toda la clausura $\overline{A}$.</li>
+        <li>Sea $A = (0, 1]$, $X = Y = \mathbb{R}$ y $f(t) = \sin(1/t)$, $t \in A$. Entonces $G = A \not\subseteq \overline{A}$, es decir, $f$ no admite ninguna extensión continua a $\overline{A} = [0, 1]$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) $G_n = \overline{A}$ para todo $n$</p>
+          <p>Tomando $\varepsilon = 1/(2n)$ en la definición de <span class="ref" data-ref="def-5.14">continuidad uniforme</span> deducimos
+            $$\begin{aligned} &\exists \delta \gt 0,\; \forall x_1, x_2 \in A : \\ &d(x_1, x_2) \lt \delta \Longrightarrow d'(f(x_1), f(x_2)) \lt \frac{1}{2n}. \end{aligned}$$
+            Si $x \in \overline{A}$, tomando $\delta_x := \delta/2$ obtenemos $\operatorname{diam}_{d'}(f(B(x, \delta_x) \cap A)) \lt 1/n$ (dos puntos de $B(x, \delta/2) \cap A$ distan menos de $\delta$), por lo tanto $x \in G_n$ para cada $n \in \mathbb{N}$. Así $G_n = \overline{A}$ para todo $n$, es decir $G = \overline{A}$, y la extensión $\varphi$ del Corolario 2.5.17 es continua en todo $\overline{A}$. $\square$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) $\sin(1/t)$</p>
+          <p>La fuente sólo enuncia el ejemplo (“Entonces $G = A \not\subseteq \overline{A}$”), sin desarrollarlo. La fuente agrega: “si $f$ no es uniformemente continua, entonces $G$ puede ser subconjunto estricto de $\overline{A}$”.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o3-12-c1" aria-label="Gráfico de seno de 1 sobre t en cero, uno, con la ventana cero, delta y su imagen"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o3-12-d">δ</label><input type="range" id="ejp4alt-o3-12-d" min="2" max="60" value="30"><output id="ejp4alt-o3-12-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o3-12-r1" aria-live="polite"></dl>
+          <figcaption>El gráfico de sen(1/<i>t</i>) en (0, 1]. La franja azul es <i>B</i>(0, δ) ∩ <i>A</i> = (0, δ) y la banda verde, su imagen. Los puntos son los de la Nota 2: <i>t<sub>n</sub></i> = 1/(<i>n</i>π) (naranja, imagen 0) y <i>s<sub>n</sub></i> = 1/(π/2 + 2<i>n</i>π) (azul, imagen 1), los que caen en la ventana. Por chica que sea δ, la banda ocupa todo [−1, 1].</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota 1</b>en el PDF la Obs. 2.5.18 dice “$G_n = \overline{A}$, es decir $G = A$” y termina con “$f$ es continua en $\overline{A}$”; por el contexto debe leerse $G = \overline{A}$ y “la extensión $\varphi$ es continua en $\overline{A}$”, que es como se transcribió.</div>
+    <div class="nota"><b>Nota 2</b>b) es el <b><a class="xg" data-guia="p4" data-ej="13">Ej. 13</a></b> de la práctica leído al revés: $\sin(1/t)$ es continua y acotada en $(0, 1]$ pero, como $0 \in \overline{A}$ y $\sin(1/t)$ no tiene límite en $0$ (tomar $t_n = 1/(n\pi)$ y $s_n = 1/(\pi/2 + 2n\pi)$, razonamiento propio), no hay extensión continua a $[0, 1]$; por a), $\sin(1/t)$ <b>no es uniformemente continua</b> en $(0, 1]$. Con $1/t$ en $(0, 1]$ el mismo argumento funciona (no es acotada cerca de $0$, así que no se extiende).</div>
+    <div class="nota"><b>Nota de esta versión</b>en b) el símbolo $\not\subseteq$ (“no está contenido”) está así en el <code>.typ</code>, pero $A \subseteq \overline{A}$ siempre; por el contexto (“$G$ puede ser subconjunto estricto de $\overline{A}$”) debe leerse $G = A \subsetneq \overline{A}$, contenido estrictamente.</div>
+    <p class="cita"><i>Fuente</i>: Daniilidis, Corolario 2.5.17 (Extensión continua), Observación 2.5.18 (Extensión continua en $\overline{A}$) y Ejemplo 2.5.19 (Inexistencia de extensión continua), págs. 128–130 del PDF. <a href="https://www.dim.uchile.cl/~arisd/Espacios%20Metricos%20(U3).pdf">URL</a>. Acceso: web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a></p>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 12 ===================== -->
+<section class="bloque" id="ejp4alt-b12">
+  <h2><span class="bn">Bloque 12</span>Anticipo de la Práctica 5: continua en un compacto es uniformemente continua</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>El teorema de Heine explica por qué los contraejemplos de los <a class="xg" data-guia="p4" data-ej="13">Ejercicios 13</a> y <a class="xg" data-guia="p4" data-ej="15">15</a> viven en dominios no acotados o no cerrados. Usa <span class="ref" data-ref="ext-compacto">compacidad</span>, que es tema de la Práctica 5.</p></div>
+
+  <!-- O6-7 (proposición) -->
+  <article class="ej" id="ejp4alt-o6-7-prop" data-short="Prop." data-title="Continua en [a, b] implica uniformemente continua" data-topics="continuidad,compacidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Continua en $[a, b]$ implica uniformemente continua</h3>
+      <span class="src">Lebl, Teo. 3.4.4</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-compacidad">compacidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : [a, b] \to \mathbb{R}$ una función continua. Entonces $f$ es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Contrarrecíproco</p>
+          <p>Probamos el contrarrecíproco. Supongamos que $f$ no es uniformemente continua; vamos a probar que hay algún $c \in [a, b]$ donde $f$ no es continua. <span class="ref" data-ref="obs-5.16">Neguemos la definición de continuidad uniforme</span>: existe $\varepsilon \gt 0$ tal que para todo $\delta \gt 0$ existen puntos $x, y \in [a, b]$ con $|x - y| \lt \delta$ y $|f(x) - f(y)| \ge \varepsilon$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Bolzano–Weierstrass y el punto $c$</p>
+          <p>Para ese $\varepsilon \gt 0$ encontramos sucesiones $(x_n)_{n \in \mathbb{N}}$ e $(y_n)_{n \in \mathbb{N}}$ tales que $|x_n - y_n| \lt 1/n$ y $|f(x_n) - f(y_n)| \ge \varepsilon$. Por <span class="ref" data-ref="ext-bolzano-weierstrass">Bolzano–Weierstrass</span> existe una subsucesión convergente $(x_{n_k})_{k \in \mathbb{N}}$. Sea $c := \lim_{k \to \infty} x_{n_k}$. Como $a \le x_{n_k} \le b$ para todo $k$, tenemos $a \le c \le b$. Estimamos
+            $$\begin{aligned} |y_{n_k} - c| &= |y_{n_k} - x_{n_k} + x_{n_k} - c| \\ &\le |y_{n_k} - x_{n_k}| + |x_{n_k} - c| \\ &\lt \frac{1}{n_k} + |x_{n_k} - c|. \end{aligned}$$
+            Como $1/n_k$ y $|x_{n_k} - c|$ tienden a cero cuando $k \to \infty$, la sucesión $(y_{n_k})_{k \in \mathbb{N}}$ converge y su límite es $c$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o6-7-c1" aria-label="Gráfico de seno de 1 sobre x en cero, uno con pares de puntos cada vez más cercanos cuyas imágenes distan 2"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o6-7-n"><i>n</i></label><input type="range" id="ejp4alt-o6-7-n" min="1" max="10" value="2"><output id="ejp4alt-o6-7-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o6-7-r1" aria-live="polite"></dl>
+          <figcaption>Qué pasa si el intervalo no es cerrado (ejemplo elegido para el dibujo): <i>f</i>(<i>x</i>) = sen(1/<i>x</i>) en (0, 1], con <i>x<sub>n</sub></i> = 1/(2π<i>n</i> + π/2) (azul) e <i>y<sub>n</sub></i> = 1/(2π<i>n</i> − π/2) (naranja). Cumplen |<i>x<sub>n</sub></i> − <i>y<sub>n</sub></i>| &lt; 1/<i>n</i> y |<i>f</i>(<i>x<sub>n</sub></i>) − <i>f</i>(<i>y<sub>n</sub></i>)| = 2, pero el <i>c</i> al que se acercan es 0, que no está en el dominio: la prueba no llega a ninguna discontinuidad.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$f$ no es continua en $c$</p>
+          <p>Ahora mostramos que $f$ no es continua en $c$. Estimamos
+            $$\begin{aligned} |f(x_{n_k}) - f(c)| &= |f(x_{n_k}) - f(y_{n_k}) + f(y_{n_k}) - f(c)| \\ &\ge |f(x_{n_k}) - f(y_{n_k})| - |f(y_{n_k}) - f(c)| \\ &\ge \varepsilon - |f(y_{n_k}) - f(c)|. \end{aligned}$$
+            En otras palabras,
+            $$|f(x_{n_k}) - f(c)| + |f(y_{n_k}) - f(c)| \ge \varepsilon.$$
+            Al menos una de las sucesiones $(f(x_{n_k}))_{k \in \mathbb{N}}$ o $(f(y_{n_k}))_{k \in \mathbb{N}}$ no puede converger a $f(c)$: si no, el lado izquierdo tendería a cero mientras el derecho es positivo. Luego <span class="ref" data-ref="teo-5.7">$f$ no es continua en $c$</span>. $\square$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Lo esencial</p>
+          <p>La fuente remarca qué es lo esencial: Bolzano–Weierstrass se puede aplicar porque $[a, b]$ es acotado, y el límite de la subsucesión queda en $[a, b]$ porque el intervalo es cerrado.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>es la versión en $\mathbb{R}$ del teorema “continua en un compacto $\Longrightarrow$ uniformemente continua” (Teo. 7.5.11 de la fuente, demostrado con el lema del cubrimiento de Lebesgue; la fuente O7 lo prueba con un subcubrimiento finito). Para la Práctica 4 alcanza esta versión: explica por qué $x^2$ y $\sqrt{x}$ son uniformemente continuas en $[0, 1]$ (<a href="#ejp4alt-o6-11">O6-11</a>) aunque no sean Lipschitz o no sean uniformemente continuas en dominios más grandes.</div>
+    <p class="cita"><i>Fuente</i>: J. Lebl, <i>Basic Analysis I</i>, v6.3, Teorema 3.4.4, pág. 139 del PDF. <a href="https://www.jirka.org/ra/realanal.pdf">URL</a>. Acceso: CC BY-NC-SA 4.0 / CC BY-SA 4.0.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+
+  <!-- O14-7 (proposición) -->
+  <article class="ej" id="ejp4alt-o14-7-prop" data-short="Prop." data-title="Teorema de Heine: continua sobre un compacto implica uniformemente continua" data-topics="continuidad,compacidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>Teorema de Heine: continua sobre un compacto implica uniformemente continua</h3>
+      <span class="src">Payá, Apuntes 05, §5.3</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-compacidad">compacidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $E$ y $F$ espacios métricos y $f : E \to F$ continua. Si $E$ es <span class="ref" data-ref="ext-compacto">compacto</span> (toda sucesión de puntos de $E$ admite una sucesión parcial convergente en $E$), entonces $f$ es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Dos sucesiones que se acercan</p>
+          <p>Por reducción al absurdo, suponemos que $f$ no es uniformemente continua. Por la proposición anterior (O14-6) existen sucesiones $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ de puntos de $E$ y un $\varepsilon \gt 0$ tales que, para todo $n \in \mathbb{N}$,
+            $$d(x_n, y_n) \lt 1/n \quad \text{y} \quad d(f(x_n), f(y_n)) \ge \varepsilon.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La parcial convergente y el absurdo</p>
+          <p>Por ser $E$ compacto, tenemos una sucesión parcial $(x_{\sigma(n)})_{n \in \mathbb{N}}$ que converge a un punto $x \in E$. Puesto que $d(x_{\sigma(n)}, y_{\sigma(n)}) \to 0$, deducimos que también $y_{\sigma(n)} \to x$. <span class="ref" data-ref="teo-5.7">Como $f$ es continua</span>, $f(x_{\sigma(n)}) \to f(x)$ y $f(y_{\sigma(n)}) \to f(x)$, luego $d(f(x_{\sigma(n)}), f(y_{\sigma(n)})) \to 0$, lo cual es una contradicción, ya que $d(f(x_{\sigma(n)}), f(y_{\sigma(n)})) \ge \varepsilon$ para todo $n$.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente observa a continuación que la continuidad uniforme <b>no es local</b>: si $f : \mathbb{R} \to \mathbb{R}$ es continua, cada $x$ tiene un entorno $U$ con $f|_U$ uniformemente continua (por Heine), pero eso no implica que $f$ sea uniformemente continua (p. ej. $x^2$).</div>
+    <div class="nota"><b>Nota de esta versión</b>O14-6 (Bloque 9) es la caracterización de la continuidad uniforme por sucesiones; en el apunte es la <span class="ref" data-ref="prop-5.18">Proposición 5.18</span>.</div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25), Tema 5, §5.3, “Teorema de Heine”, pág. 4 del PDF (54 impresa); también versión 2014-15, §11.2, pág. 2. <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a> (restricción a $[\varepsilon, +\infty)$ no cubre), <a class="xg" data-guia="p4" data-ej="15">15</a></p>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 13 ===================== -->
+<section class="bloque" id="ejp4alt-b13">
+  <h2><span class="bn">Bloque 13</span>Listas de ejercicios sin resolver para practicar</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Enunciados que la fuente deja sin resolver, con la indicación de qué pieza de los bloques anteriores los resuelve. Sirven para practicar después de leer el resto.</p></div>
+
+  <!-- O11-8 -->
+  <article class="ej" id="ejp4alt-o11-8" data-short="O11-8" data-title="Ejercicios propuestos de continuidad, sin resolución" data-topics="continuidad,topologia,densidad">
+    <div class="ej-head">
+      <span class="tag">O11-8</span>
+      <h3>Ejercicios propuestos de continuidad, sin resolución</h3>
+      <span class="src">BUAP, §5.6</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun">
+      <p>En todos los casos $X$ e $Y$ son espacios métricos. La fuente sólo da los enunciados.</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li><b>(Ej. 4)</b> Sean $A \subseteq X$ y $f : A \to \mathbb{R}$ continua en $A$. Demostrar que si $a \in A$ y $c \in \mathbb{R}$ con $f(a) \lt c$, entonces existe una vecindad $V$ de $a$ tal que para cada $x \in A \cap V$ se cumple que $f(x) \lt c$.</li>
+        <li><b>(Ej. 7)</b> Sean $A \subseteq X$ y $f : A \to Y$ continua en $A$. Probar que para cualquier $b \in Y$, el conjunto $B = \{x \in A : f(x) = b\}$ es cerrado del subespacio $A$.</li>
+        <li><b>(Ej. 8)</b> Sea $f : \mathbb{R} \to \mathbb{R}$ continua. Demostrar que el conjunto de las raíces de la ecuación $f(x) = 0$ es cerrado de $\mathbb{R}$.</li>
+        <li><b>(Ej. 10)</b> Sea $f : X \to \mathbb{R}$. Demostrar que $f$ es continua en $X$ si y sólo si, para todo $\alpha \in \mathbb{R}$, los conjuntos $A_\alpha = \{x \in X : f(x) \lt \alpha\}$ y $B_\alpha = \{x \in X : f(x) \gt \alpha\}$ son abiertos de $X$.</li>
+        <li><b>(Ej. 11)</b> Probar que si $A$ y $B$ son conjuntos no vacíos, disjuntos y cerrados de $X$, entonces existen conjuntos $U$ y $V$ disjuntos y abiertos de $X$ tales que $A \subseteq U$ y $B \subseteq V$.</li>
+        <li><b>(Ej. 13)</b> Sea $f : X \to Y$ continua y suryectiva. Demostrar que si $S$ es denso en $X$, entonces $f(S)$ es denso en $Y$.</li>
+        <li><b>(Ej. 24)</b> Sean $A, B$ conjuntos disjuntos y cerrados de $X$. Demostrar que existe una función continua $f : X \to [0, 1]$ tal que $f(x) = 0$ para todo $x \in A$ y $f(x) = 1$ para todo $x \in B$.</li>
+      </ol>
+    </div>
+    <div class="estrategia"><b>Qué pieza de la fuente resuelve cada uno</b><p>Ej. 4 es el <a class="xg" data-guia="p4" data-ej="3">Ej. 3 de la práctica</a> con $c = 0$ y signo cambiado (aplicar a $-f$); sale de la definición $\varepsilon$–$\delta$ con $\varepsilon = c - f(a)$. Ej. 7 y 8 son preimágenes del cerrado $\{b\}$ (<span class="ref" data-ref="ejap-5.10">Ej. 5.10</span> del apunte), y el Ej. 7 es el Lema 5.21 (ítem O11-3) con $g$ constante. Ej. 10 es la caracterización por preimágenes de abiertos (<span class="ref" data-ref="teo-5.9">Teo. 5.9</span> del apunte) usando que los intervalos $(-\infty, \alpha)$ y $(\alpha, +\infty)$ generan los abiertos de $\mathbb{R}$. Ej. 11 y 24 son el <a class="xg" data-guia="p4" data-ej="11">Ej. 11 de la práctica</a> (Urysohn): la fuente tiene las herramientas en los Lemas 5.8–5.9 (acá, O7-1 y O2-8), y Wilson lo resuelve con $d_A - d_B$ (ítem O12-3). Ej. 13 es el <a class="xg" data-guia="p4" data-ej="8">Ej. 8 de la práctica</a>; con el <span class="ref" data-ref="teo-5.13">Teo. 5.13</span> del apunte, $Y = f(X) = f(\overline{S}) \subseteq \overline{f(S)}$.</p></div>
+    <p class="cita"><i>Fuente</i>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), §5.6, Ejercicios 4, 7, 8, 10, 11, 13 y 24, págs. 138–141 del libro (147–150 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: “DR © Benemérita Universidad Autónoma de Puebla”, ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="3">Ej. 3</a>, <a class="xg" data-guia="p4" data-ej="4">4</a>, <a class="xg" data-guia="p4" data-ej="5">5</a>, <a class="xg" data-guia="p4" data-ej="8">8</a>, <a class="xg" data-guia="p4" data-ej="11">11</a></p>
+  </article>
+
+  <!-- O11-9 -->
+  <article class="ej" id="ejp4alt-o11-9" data-short="O11-9" data-title="Ejercicios propuestos de continuidad uniforme, sin resolución" data-topics="continuidad,completitud">
+    <div class="ej-head">
+      <span class="tag">O11-9</span>
+      <h3>Ejercicios propuestos de continuidad uniforme, sin resolución</h3>
+      <span class="src">BUAP, §5.6</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a> <a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun">
+      <p>En todos los casos $X$ e $Y$ son espacios métricos. La fuente sólo da los enunciados.</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li><b>(Ej. 9)</b> Si $X$ es completo, $f : X \to Y$ es continua en $X$ y $(x_n)_{n \in \mathbb{N}}$ es de Cauchy en $X$, entonces $(f(x_n))_{n \in \mathbb{N}}$ es de Cauchy en $Y$.</li>
+        <li><b>(Ej. 26)</b> Una $f : \mathbb{R} \to \mathbb{R}$ es <i>periódica</i> de período $p$ si $f(x + p) = f(x)$ para todo $x \in \mathbb{R}$. Demostrar que toda función periódica y continua en $\mathbb{R}$ es uniformemente continua en $\mathbb{R}$.</li>
+        <li><b>(Ej. 40)</b> Demostrar que $f : X \to Y$ es uniformemente continua en $X$ si y sólo si para todo par de subconjuntos no vacíos $A, B$ de $X$, $d(A, B) = 0$ implica $d'(f(A), f(B)) = 0$.</li>
+        <li><b>(Ej. 41)</b> Sea $f : (0, 1) \to \mathbb{R}$ dada por $f(x) = \dfrac{1}{x}$. Demostrar que $f$ es continua, pero no uniformemente continua en $(0, 1)$, y que su rango no es precompacto.</li>
+        <li><b>(Ej. 42)</b> Sea $A \subseteq \mathbb{R}$ acotado. Probar que si $f : \mathbb{R} \to \mathbb{R}$ es uniformemente continua, entonces $f(A)$ es acotado. Dar un ejemplo donde la imagen continua de un conjunto acotado no sea acotada.</li>
+        <li><b>(Ej. 44)</b> Sean $f, g : A \subseteq X \to \mathbb{R}$ uniformemente continuas en $A$. Demostrar que $f + g$ y $f g$ son uniformemente continuas en $A$.</li>
+        <li><b>(Ej. 45)</b> Probar que si $f : (a, b) \to \mathbb{R}$ es uniformemente continua en $(a, b)$, entonces existen los límites de $f$ en $a$ y en $b$.</li>
+        <li><b>(Ej. 50)</b> Sea $(X, d)$ un espacio métrico. Demostrar que la métrica $d$ es uniformemente continua (como función $X \times X \to \mathbb{R}$).</li>
+      </ol>
+    </div>
+    <div class="estrategia"><b>Observaciones</b><p>Ej. 9 contrasta con el Teo. 5.43 (misma demostración en <a href="#ejp4alt-o6-8">O6-8</a>): sin completitud hace falta continuidad uniforme. Ej. 40: la implicación “$\Rightarrow$” es exactamente el <a class="xg" data-guia="p4" data-ej="16">Ej. 16 de la práctica</a>; la recíproca es la parte no trivial (negar continuidad uniforme da sucesiones $x_n, y_n$ con $d(x_n, y_n) \to 0$ y $d'(f(x_n), f(y_n)) \ge \varepsilon$; tomar $A = \{x_n\}$, $B = \{y_n\}$). Ej. 41 es el <a class="xg" data-guia="p4" data-ej="13">Ej. 13 de la práctica</a>. Ej. 26 da una familia de ejemplos para el <a class="xg" data-guia="p4" data-ej="15">Ej. 15</a> (acotada, continua y uniformemente continua: $\sin x$) y se prueba con Heine en $[0, 2p]$ (ver <a href="#ejp4alt-o6-7-prop">O6-7</a> y <a href="#ejp4alt-o14-7-prop">O14-7</a>). Ej. 45 es la versión en $\mathbb{R}$ del Lema 5.47 (ver <a href="#ejp4alt-o2-6">O2-6</a> y <a href="#ejp4alt-o14-10-prop">O14-10</a>).</p></div>
+    <div class="nota"><b>Nota</b>el Ej. 44 tal como está enunciado es <b>falso</b> para el producto: $f(x) = g(x) = x$ son uniformemente continuas en $\mathbb{R}$ y $f g = x^2$ no lo es (ejemplo C6 del repositorio). Hace falta pedir $f$ y $g$ acotadas (o $A$ acotado), que es la versión que ya está en <code>ejemplos/p4.typ</code>. La suma sí es uniformemente continua sin hipótesis extra.</div>
+    <p class="cita"><i>Fuente</i>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), §5.6, Ejercicios 9, 26, 40, 41, 42, 44, 45 y 50, págs. 139–145 del libro (148–154 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: “DR © Benemérita Universidad Autónoma de Puebla”, ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="13">Ej. 13</a>, <a class="xg" data-guia="p4" data-ej="14">14</a>, <a class="xg" data-guia="p4" data-ej="15">15</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+</section>

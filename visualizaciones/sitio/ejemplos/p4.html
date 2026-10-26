@@ -1,0 +1,2331 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ejemplos · Práctica 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#ejemplos">Ejemplos</a></li><li><span aria-current="page">Práctica 4</span></li></ol><div class="pager"><a href="../ejemplos/p3.html" title="Ejemplos · Práctica 3">← Anterior</a><a href="../ejemplos/p4alt.html" title="Ejemplos · Práctica 4 · alternativos">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Ejemplos resueltos · 25 ejemplos</p>
+  <h1>Práctica 4</h1>
+  <p>Funciones continuas. Los ejemplos de <code>apuntes-typst/ejemplos/p4.typ</code>, con la resolución partida en pasos y un dibujo en cada paso que se puede dibujar. Cada resultado subrayado con puntos muestra su enunciado.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><a href="#ejp4-b1">Bloque 1Imagen y preimagen de conjuntos</a><ul class="chips"><li><a href="#ejp4-33" title="Imagen y preimagen por f(n) = n²">33</a></li></ul></div><div class="toc-group"><a href="#ejp4-b2">Bloque 2Continuidad por definición ($\varepsilon$–$\delta$)</a><ul class="chips"><li><a href="#ejp4-34" title="Continuidad en ℝ, en puntos aislados, en ℕ y en ℝⁿ">34</a></li></ul></div><div class="toc-group"><a href="#ejp4-b3">Bloque 3Continuidad por sucesiones y por preimágenes de abiertos</a><ul class="chips"><li><a href="#ejp4-36" title="Continuidad del determinante y Gl₂(ℝ) abierto">36</a></li><li><a href="#ejp4-c9-1-1" title="Suma y producto de funciones continuas son continuas">C9-1.1</a></li><li><a href="#ejp4-c9-1-2" title="Las proyecciones πᵢ : ℝⁿ → ℝ son continuas para d∞">C9-1.2</a></li><li><a href="#ejp4-c9-1-6" title="Los polinomios en varias variables son continuos">C9-1.6</a></li><li><a href="#ejp4-c9-2-1" title="Un conjunto cerrado del plano como preimagen por un polinomio">C9-2.1</a></li><li><a href="#ejp4-c9-2-2" title="GLₙ(ℝ) es abierto en Mₙ(ℝ)">C9-2.2</a></li></ul></div><div class="toc-group"><a href="#ejp4-b4">Bloque 4Continuidad en productos y proyecciones</a><ul class="chips"><li><a href="#ejp4-def" title="Función abierta y función cerrada">Def.</a></li><li><a href="#ejp4-c6-1" title="Proyecciones de X × Y y continuidad coordenada a coordenada">C6-1</a></li></ul></div><div class="toc-group"><a href="#ejp4-b5">Bloque 5Funciones Lipschitz</a><ul class="chips"><li><a href="#ejp4-c6-2" title="Derivada acotada implica Lipschitz">C6-2</a></li><li><a href="#ejp4-c6-3" title="x sin(1/x) es continua en 0 pero no es Lipschitz cerca de 0">C6-3</a></li><li><a href="#ejp4-c6-4" title="Ψ(f)(x) = x f(x) de (C([0,1]), d∞) en (C([0,1]), d₁) es Lipschitz">C6-4</a></li><li><a href="#ejp4-39" title="cos(x), √x en [1, +∞) y la integral en (C([0,1]), d∞) son Lipschitz; √x en [0, +∞) no">39</a></li></ul></div><div class="toc-group"><a href="#ejp4-b6">Bloque 6Continuidad uniforme: ejemplos, contraejemplos y pegado</a><ul class="chips"><li><a href="#ejp4-c6-5" title="sin(x) es uniformemente continua en ℝ; x² no lo es en (0, +∞)">C6-5</a></li><li><a href="#ejp4-c6-6" title="Producto de uniformemente continuas y acotadas">C6-6</a></li><li><a href="#ejp4-c6-7" title="Pegado de continuidad uniforme en [0, a] y [a, +∞)">C6-7</a></li><li><a href="#ejp4-c6-8" title="Pegado de continuidad uniforme en A ∪ B con d(A, B) positiva">C6-8</a></li><li><a href="#ejp4-37" title="x² no es uniformemente continua en ℝ; toda función desde un discreto lo es">37</a></li></ul></div><div class="toc-group"><a href="#ejp4-b7">Bloque 7Conjuntos densos</a><ul class="chips"><li><a href="#ejp4-38" title="ℚ e 𝕀 = ℝ ∖ ℚ son densos en ℝ">38</a></li><li><a href="#ejp4-c9-3-1" title="La imagen continua de un denso es densa">C9-3.1</a></li><li><a href="#ejp4-c9-3-2" title="Dos continuas que coinciden en un denso coinciden en todo">C9-3.2</a></li><li><a href="#ejp4-c9-3-1b" title="Las continuas con f(x + y) = f(x) f(y) y f(1) = 2">C9-3.1b</a></li></ul></div><div class="toc-group"><a href="#ejp4-b8">Bloque 8Homeomorfismos e isometrías</a><ul class="chips"><li><a href="#ejp4-40" title="x/(1 + |x|) es un homeomorfismo; la identidad de (ℝ, δ) en (ℝ, |·|) no">40</a></li><li><a href="#ejp4-41" title="x + 1 es una isometría de ℝ≥0 que no es sobreyectiva">41</a></li></ul></div></nav>
+
+<!-- Ejemplos de la Práctica 4 (funciones continuas). Fuente: apuntes-typst/ejemplos/p4.typ. Dibujos en p4.js. -->
+
+<!-- ===================== BLOQUE 1 ===================== -->
+<section class="bloque" id="ejp4-b1">
+  <h2><span class="bn">Bloque 1</span>Imagen y preimagen de conjuntos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Calcular imágenes y preimágenes de conjuntos concretos (<span class="ref" data-ref="def-5.1">Definición 5.1</span>). Es el vocabulario de base para la caracterización de continuidad por preimágenes de abiertos y cerrados que usa la Práctica 4.</p></div>
+
+  <article class="ej" id="ejp4-33" data-short="33" data-title="Imagen y preimagen por f(n) = n²" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">33</span>
+      <h3>Imagen y preimagen por $f(n) = n^2$</h3>
+      <span class="src">Ejemplo 5.2 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun"><p>Sea $f : \mathbb{Z} \to \mathbb{N}$ la función $f(n) = n^2$. Entonces, si $A = \{1, 3, 4\}$ y $B = \{1, 3, 4\}$,
+        $$\begin{aligned} f(A) &= \{1, 9, 16\} \subseteq \mathbb{N} \quad \text{y} \\ f^{-1}(B) &= \{1, -1, 2, -2\} \subseteq \mathbb{Z}. \end{aligned}$$
+</p></div>
+      <figure class="viz">
+        <canvas id="ejp4-33-c" aria-label="Flechas de n en Z a n al cuadrado en N; se resaltan la imagen de A o la preimagen de B"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Qué mirar</legend>
+            <label><input type="radio" name="ejp4-33-m" value="img" checked>Imagen de A</label>
+            <label><input type="radio" name="ejp4-33-m" value="pre">Preimagen de B</label>
+          </fieldset>
+        </div>
+        <dl class="read" id="ejp4-33-r" aria-live="polite"></dl>
+        <figcaption>Arriba ℤ (de −4 a 4), abajo ℕ (de 0 a 16), una flecha por cada <i>n</i>. La imagen sigue las flechas que salen de <i>A</i>. La preimagen junta las flechas que llegan a <i>B</i>: al 3 no llega ninguna.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><p><b>Observación</b><em>Los elementos de $B$ fuera de la imagen no aportan a la preimagen.</em></p>
+      <p>$3 \notin \operatorname{img}(f)$ porque no hay ningún $n \in \mathbb{Z}$ con $n^2 = 3$, así que el $3$ no aporta nada a la preimagen:
+        $$3 \notin \operatorname{img}(f) \Longrightarrow f^{-1}(B) = f^{-1}(B \setminus \{3\}).$$
+        En general, como $B \subseteq N$ no tiene por qué estar contenido en la imagen,
+        $$f^{-1}(B) = f^{-1}(B \cap \operatorname{img}(f)).$$</p></div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 2 ===================== -->
+<section class="bloque" id="ejp4-b2">
+  <h2><span class="bn">Bloque 2</span>Continuidad por definición ($\varepsilon$–$\delta$)</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Leer la <span class="ref" data-ref="def-5.4">Definición 5.4</span> en casos concretos: ver que en $\mathbb{R}$ y en $\mathbb{R}^n$ recupera la continuidad de Análisis 1, y que en un punto aislado cualquier función es continua (alcanza con tomar $\delta$ igual al radio que aísla al punto). Es el modelo para decidir continuidad en el <a href="../guias/p4.html#guiap4-ej1" class="xg" data-guia="p4" data-ej="1">Ejercicio 1</a> de la Práctica 4.</p></div>
+
+  <article class="ej" id="ejp4-34" data-short="34" data-title="Continuidad en ℝ, en puntos aislados, en ℕ y en ℝⁿ" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">34</span>
+      <h3>Continuidad en $\mathbb{R}$, en puntos aislados, en $\mathbb{N}$ y en $\mathbb{R}^n$</h3>
+      <span class="src">Ejemplo 5.5 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>Sea $f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$. Entonces $f$ es <span class="ref" data-ref="def-5.4">continua en un punto $x$</span> si para todo $\varepsilon \gt 0$ existe $\delta \gt 0$ tal que si $|x - y| \lt \delta$ entonces $|f(x) - f(y)| \lt \varepsilon$. En este caso, recuperamos la definición de continuidad que ya conocemos.</li>
+          <li>Sea $f : (M, d) \to (N, d')$ y sea $x \in M$ un punto aislado, es decir, $x$ es un punto tal que existe un $r \gt 0$ tal que $B(x, r) = \{x\}$. Entonces $f$ es continua en $x$: dado $\varepsilon \gt 0$, podemos tomar $\delta = r$ (el de la definición de punto aislado) y tenemos que
+            $$f(B(x, r)) = f(\{x\}) = \{f(x)\} \subseteq B(f(x), \varepsilon).$$</li>
+          <li>Sea $f : (\mathbb{N}, |\cdot|) \to (M, d)$ una función que llega a un espacio métrico cualquiera. Entonces $f$ es continua en $n$ para todo $n \in \mathbb{N}$, dado que en $(\mathbb{N}, |\cdot|)$ todos los puntos son aislados.</li>
+          <li>Sea $f : (\mathbb{R}^n, d_2) \to (\mathbb{R}, |\cdot|)$. Entonces $f$ es continua en un punto $x$ si para todo $\varepsilon \gt 0$ existe un $\delta \gt 0$ tal que si $d_2(x, y) \lt \delta$ entonces $|f(x) - f(y)| \lt \varepsilon$. Recordando la notación que usamos en otras materias, esto es lo mismo que decir que
+            $$\|x - y\| \lt \delta \Rightarrow |f(x) - f(y)| \lt \varepsilon.$$
+            Es decir, recuperamos la definición de función continua que vimos en Análisis 1.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4-34-c" aria-label="Bandas epsilon y delta para x al cuadrado en x0 = 1, o una función de N en R con la bola de radio un medio alrededor de 3"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Ítem</legend>
+            <label><input type="radio" name="ejp4-34-m" value="r" checked>a) en ℝ</label>
+            <label><input type="radio" name="ejp4-34-m" value="n">b), c) puntos aislados</label>
+          </fieldset>
+          <div class="slider"><label for="ejp4-34-e">ε</label><input type="range" id="ejp4-34-e" min="0.05" max="0.9" step="0.01" value="0.4"><output id="ejp4-34-e-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4-34-r" aria-live="polite"></dl>
+        <figcaption>a) <i>f</i>(<i>x</i>) = <i>x</i>² en <i>x</i>₀ = 1 (función elegida para el dibujo): al achicar ε (banda horizontal) hay que achicar δ (banda vertical); el δ que se muestra es el más grande que sirve. b), c) Una <i>f</i> : ℕ → ℝ cualquiera (valores elegidos): la bola <i>B</i>(3, 1/2) es {3}, así que δ = 1/2 sirve para todo ε.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><p><b>Observación</b><em>En un punto aislado, el único $y$ cercano a $x$ es el propio $x$.</em></p>
+      <p>El ítem b) escrito con bolas es la misma <span class="ref" data-ref="def-5.4">condición $\varepsilon$–$\delta$</span>: $f(B(x, \delta)) \subseteq B(f(x), \varepsilon)$ dice que para todo $y$ con $d(x, y) \lt \delta$ vale $d'(f(x), f(y)) \lt \varepsilon$. Con $\delta = r$, si $d(x, y) \lt r$ entonces $y \in B(x, r) = \{x\}$, es decir, $y = x$. Luego
+        $$d'(f(x), f(y)) = d'(f(x), f(x)) = 0 \lt \varepsilon.$$
+        La condición "para todo $y$ cercano a $x$" se cumple porque el único $y$ que hay que revisar es el propio $x$, y toda bola contiene a su centro. Por eso en un espacio discreto (donde todos los puntos son aislados) <b>toda</b> función es continua.</p></div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 3 ===================== -->
+<section class="bloque" id="ejp4-b3">
+  <h2><span class="bn">Bloque 3</span>Continuidad por sucesiones y por preimágenes de abiertos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Usar las caracterizaciones de continuidad en vez de la definición: el <span class="ref" data-ref="teo-5.7">Teorema 5.7</span> (sucesiones) para probar que una función es continua, y el <span class="ref" data-ref="teo-5.9">Teorema 5.9</span> (preimágenes de abiertos) para probar que un conjunto es abierto escribiéndolo como preimagen de un abierto por una función continua. Es el modelo de los <a href="../guias/p4.html#guiap4-ej4" class="xg" data-guia="p4" data-ej="4">Ejercicios 4</a> y <a href="../guias/p4.html#guiap4-ej5" class="xg" data-guia="p4" data-ej="5">5</a> de la Práctica 4.</p>
+    <p>La clase del 07/10 (<code>C9-*</code>) arma la herramienta para no hacer cuentas: suma y producto de continuas son continuas (<a href="#ejp4-c9-1-1">C9-1.1</a>, por sucesiones y álgebra de límites), las proyecciones $\pi_i : \mathbb{R}^n \to \mathbb{R}$ son continuas para $d_\infty$ (<a href="#ejp4-c9-1-2">C9-1.2</a>; el único paso es $|x^i_k - x^i| \le d_\infty$, que también vale con $d_1$ y $d_2$), y por lo tanto todo <b>polinomio en varias variables</b> es continuo (<a href="#ejp4-c9-1-6">C9-1.6</a>). Con eso, <a href="#ejp4-c9-2-1">C9-2.1</a> lee un conjunto del plano como $\{f \ge 0\} = f^{-1}([0, +\infty))$ (modelo del <a href="../guias/p4.html#guiap4-ej5" class="xg" data-guia="p4" data-ej="5">Ejercicio 5</a>), y <a href="#ejp4-c9-2-2">C9-2.2</a> generaliza el <a href="#ejp4-36">Ejemplo 5.11</a> a $\operatorname{GL}_n(\mathbb{R})$ viendo que $\det$ es un polinomio en las entradas.</p>
+    <p>La clase define: $P : \mathbb{R}^n \to \mathbb{R}$ es un <b>polinomio en varias variables</b> si puede escribirse como
+      $$P(x_1, \dots, x_n) = \sum_{e_1 + \dots + e_n \le r} a_{(e_1, \dots, e_n)} x_1^{e_1} \cdots x_n^{e_n}$$
+      para algún $r \in \mathbb{N}$ (Definición 1.4); por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5).</p>
+  </div>
+
+  <!-- 36 -->
+  <article class="ej" id="ejp4-36" data-short="36" data-title="Continuidad del determinante y Gl₂(ℝ) abierto" data-topics="continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">36</span>
+      <h3>Continuidad del determinante y $Gl_2(\mathbb{R})$ abierto</h3>
+      <span class="src">Ejemplo 5.11 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea
+        $$M_2(\mathbb{R}) = \left\{\begin{pmatrix} a & b \\ c & d \end{pmatrix} : a, b, c, d \in \mathbb{R}\right\},$$
+        el conjunto de las matrices de $2 \times 2$ con coeficientes reales. En este conjunto tomamos la distancia infinito
+        $$d_\infty(A, B) = \max_{1 \le i, j \le 2} |a_{ij} - b_{ij}|.$$
+        Como ejercicio, ver que $(M_2(\mathbb{R}), d_\infty)$ es un <span class="ref" data-ref="def-4.1">espacio métrico</span>.</p>
+      <p>En este espacio, consideremos la función determinante $\det : (M_2(\mathbb{R}), d_\infty) \to (\mathbb{R}, |\cdot|)$ y veamos que es una función continua. Consideremos en este espacio el subconjunto de las matrices que son inversibles,
+        $$\begin{aligned} Gl_2(\mathbb{R}) = \{&A \in M_2(\mathbb{R}) : \\ &A \text{ es una matriz inversible}\}, \end{aligned}$$
+        y veamos que este conjunto es abierto.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El determinante es continuo</p>
+          <p>Supongamos que $(A_n)_{n \in \mathbb{N}}$ es una sucesión de matrices que convergen a la matriz $A$. Entonces, si
+            $$A_n = \begin{pmatrix} a_n & b_n \\ c_n & d_n \end{pmatrix}, \quad A = \begin{pmatrix} a & b \\ c & d \end{pmatrix},$$
+            sabemos que $A_n \to A$ en $d_\infty$ si y sólo si $a_n \to a$, $b_n \to b$, $c_n \to c$ y $d_n \to d$ en $\mathbb{R}$ (probarlo como ejercicio).</p>
+          <p>Para ver que el determinante es continua, por el <span class="ref" data-ref="teo-5.7">Teorema 5.7</span>, nos alcanza con ver que $\det(A_n) \to \det(A)$. Pero
+            $$\det(A_n) = a_n d_n - b_n c_n \to a d - b c = \det(A),$$
+            lo que nos dice que la función es continua.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$Gl_2(\mathbb{R})$ es abierto</p>
+          <p>Por el <span class="ref" data-ref="teo-5.9">Teorema 5.9</span>, nos alcanza con ver que este conjunto es la preimagen de un conjunto abierto via una función continua. De álgebra lineal, sabemos que <span class="ref" data-ref="ext-det-inversible">una matriz es inversible si y sólo si su determinante es distinto de cero</span>. Esto es lo mismo que decir que
+            $$\begin{aligned} Gl_2(\mathbb{R}) &= \{A \in M_2(\mathbb{R}) : \det(A) \neq 0\} \\ &= \det\nolimits^{-1}(\mathbb{R} \setminus \{0\}) \\ &= \det\nolimits^{-1}((-\infty, 0) \cup (0, +\infty)), \end{aligned}$$
+            y como $(-\infty, 0) \cup (0, +\infty) \subseteq \mathbb{R}$ es un conjunto abierto (por ejemplo, lo podríamos escribir como una unión de intervalos abiertos), nos sale que $Gl_2(\mathbb{R})$ es también un conjunto abierto.</p>
+          <p>Como ejercicio, intentá probar que $Gl_2(\mathbb{R})$ es un conjunto abierto usando solo la <span class="ref" data-ref="def-4.14">definición</span>: no es imposible, pero es mucho más difícil que lo que acabamos de hacer.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-36-c" aria-label="Corte de M2(R) con b = c = 1: la hipérbola ad = 1 de matrices singulares y un cuadrado de d infinito alrededor de una matriz inversible"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-36-a"><i>a</i></label><input type="range" id="ejp4-36-a" min="-3" max="3" step="0.05" value="2"><output id="ejp4-36-a-o"></output></div>
+            <div class="slider"><label for="ejp4-36-d"><i>d</i></label><input type="range" id="ejp4-36-d" min="-3" max="3" step="0.05" value="1.6"><output id="ejp4-36-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-36-r" aria-live="polite"></dl>
+          <figcaption>Un corte de <i>M</i>₂(ℝ): las matrices con <i>b</i> = <i>c</i> = 1 (valores elegidos para el dibujo), con <i>a</i> y <i>d</i> en los ejes. Las singulares forman la hipérbola <i>ad</i> = 1. Alrededor de cada matriz inversible entra un cuadrado (la bola de <i>d</i>∞ dentro del corte) sin tocar la hipérbola. Mové <i>A</i> con los controles o arrastrándola.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-1.1 -->
+  <article class="ej" id="ejp4-c9-1-1" data-short="C9-1.1" data-title="Suma y producto de funciones continuas son continuas" data-topics="continuidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C9-1.1</span>
+      <h3>Suma y producto de funciones continuas son continuas</h3>
+      <span class="src">Clase 9 · Proposición 1.1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $X$ e $Y$ dos espacios métricos, y $f, g : X \to Y$ dos funciones continuas entre estos espacios. Se tiene entonces que $f + g$ y $f \cdot g$ también son funciones continuas entre estos espacios.</p>
+      <p><i>Nota</i>: para que $f + g$ y $f \cdot g$ tengan sentido hace falta que en $Y$ se pueda sumar y multiplicar; en lo que sigue se usa con $Y = \mathbb{R}$ (con la métrica usual), que es el caso que interesa para los polinomios.</p>
+    </div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Continuidad por sucesiones y álgebra de límites.</em> Con la <span class="ref" data-ref="teo-5.7">caracterización sucesional</span>, probar que $f + g$ es continua es probar que $(f + g)(x_n) \to (f + g)(x)$ para toda $x_n \to x$. Pero $(f + g)(x_n) = f(x_n) + g(x_n)$ es la suma de dos sucesiones convergentes (por continuidad de $f$ y de $g$), y el <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span> de $\mathbb{R}$ hace el resto. Para el producto es la misma frase con "producto" en lugar de "suma".</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La suma</p>
+          <p>Comencemos por demostrar que la suma de funciones continuas es una función continua. Sea $(x_n)_{n \in \mathbb{N}}$ una sucesión de elementos de $X$ convergente, y sea $x$ su límite; veamos que
+            $$\lim_{n \to \infty} (f + g)(x_n) = (f + g)(x).$$
+            En efecto, notar que
+            $$\begin{aligned} \lim_{n \to \infty} (f + g)(x_n) &= \lim_{n \to \infty} f(x_n) + g(x_n) \\ &= \lim_{n \to \infty} f(x_n) + \lim_{n \to \infty} g(x_n) \\ &= f(x) + g(x) = (f + g)(x), \end{aligned}$$
+            donde la única igualdad que no se deduce directamente de las definiciones es la tercera, que se debe al <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span> (la sucesión dada por una suma de sucesiones convergentes converge a la suma de los límites).</p>
+          <p class="nota"><b>Nota de esta versión</b>Contando de izquierda a derecha, la igualdad que usa el álgebra de límites (límite de la suma igual a suma de los límites) es la segunda; la tercera, $\lim f(x_n) = f(x)$ y $\lim g(x_n) = g(x)$, es la continuidad de $f$ y de $g$ (<span class="ref" data-ref="teo-5.7">Teorema 5.7</span>).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-1-1-c" aria-label="Gráficos de f, g y f más g con una sucesión x_n que tiende a x y los tres valores acercándose"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-1-1-n"><i>n</i></label><input type="range" id="ejp4-c9-1-1-n" min="1" max="40" step="1" value="3"><output id="ejp4-c9-1-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-1-1-r" aria-live="polite"></dl>
+          <figcaption><i>f</i> = sin (azul), <i>g</i>(<i>x</i>) = 0,4<i>x</i> (naranja) y <i>f</i> + <i>g</i> (oscura), elegidas para el dibujo. La sucesión <i>x<sub>n</sub></i> = 1,2 + 1,2·(−1)<sup><i>n</i></sup>/<i>n</i> salta de un lado a otro de <i>x</i> = 1,2. Los tres valores <i>f</i>(<i>x<sub>n</sub></i>), <i>g</i>(<i>x<sub>n</sub></i>) y (<i>f</i> + <i>g</i>)(<i>x<sub>n</sub></i>) se acercan a los de <i>x</i> a la vez.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El producto</p>
+          <p>Exactamente de la misma forma uno puede probar que el producto de funciones continuas es continua, observando que
+            $$\begin{aligned} \lim_{n \to \infty} (f \cdot g)(x_n) &= \lim_{n \to \infty} f(x_n) \cdot g(x_n) \\ &= \lim_{n \to \infty} f(x_n) \cdot \lim_{n \to \infty} g(x_n) \\ &= f(x) \cdot g(x) = (f \cdot g)(x). \end{aligned}$$</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-1.2 -->
+  <article class="ej" id="ejp4-c9-1-2" data-short="C9-1.2" data-title="Las proyecciones πᵢ : ℝⁿ → ℝ son continuas para d∞" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">C9-1.2</span>
+      <h3>Las proyecciones $\pi_i : \mathbb{R}^n \to \mathbb{R}$ son continuas para $d_\infty$</h3>
+      <span class="src">Clase 9 · Lema 1.2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $\pi_i : \mathbb{R}^n \to \mathbb{R}$ la función que proyecta en la $i$-ésima coordenada, es decir, la función tal que $\pi_i(x_1, x_2, \dots, x_n) = x_i$. Esta función es continua en la métrica dada por la <span class="ref" data-ref="def-distancias-en-rrn">distancia $d_\infty$</span>.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Convergencia en $d_\infty$ implica convergencia coordenada a coordenada.</em> Hay que ver que si $(x^1_k, \dots, x^n_k) \to (x^1, \dots, x^n)$ en $(\mathbb{R}^n, d_\infty)$ entonces $x^i_k \to x^i$ en $\mathbb{R}$. Como $|x^i_k - x^i|$ es uno de los números cuyo máximo es $d_\infty$, está acotado por la distancia: el $n_0$ de la convergencia en $\mathbb{R}^n$ sirve para la coordenada.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Por sucesiones</p>
+          <p>Sea $\{(x^1_k, x^2_k, \dots, x^n_k)\}_{k \in \mathbb{N}}$ una sucesión cualquiera convergente a algún punto de $\mathbb{R}^n$, que denotaremos como $(x^1, x^2, \dots, x^n)$. Para <span class="ref" data-ref="teo-5.7">probar la continuidad</span>, debemos ver que
+            $$\lim_{k \to \infty} \pi_i(x^1_k, x^2_k, \dots, x^n_k) = \pi_i(x^1, x^2, \dots, x^n).$$
+            Por todo lo que acabamos de definir, esto es lo mismo que probar que
+            $$\lim_{k \to \infty} x^i_k = x^i,$$
+            pero esto se deduce de que la convergencia de una sucesión en $\mathbb{R}^n$ con la métrica dada por la distancia $d_\infty$ implica la convergencia de las sucesiones de sus coordenadas. En efecto, dado $\varepsilon \gt 0$, existe un $n_0 \in \mathbb{N}$ tal que $d_\infty((x^1_k, \dots, x^n_k), (x^1, \dots, x^n)) \le \varepsilon$ para todo $k \ge n_0$, pero esto implica que
+            $$\begin{aligned} |x^i_k - x^i| &\le d_\infty((x^1_k, x^2_k, \dots, x^n_k), \\ &\qquad\quad (x^1, x^2, \dots, x^n)) \le \varepsilon, \end{aligned}$$
+            y se concluye lo deseado.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-1-2-c" aria-label="Sucesión x_k en el plano acercándose al límite, con el cuadrado de d infinito y su sombra sobre el eje horizontal"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-1-2-k"><i>k</i></label><input type="range" id="ejp4-c9-1-2-k" min="1" max="30" step="1" value="2"><output id="ejp4-c9-1-2-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-1-2-r" aria-live="polite"></dl>
+          <figcaption>En ℝ² (<i>n</i> = 2, <i>i</i> = 1) con una sucesión elegida para el dibujo. El cuadrado es la bola de <i>d</i>∞ centrada en el límite que pasa por <i>x<sub>k</sub></i>. Su sombra sobre el eje horizontal contiene a <i>x</i>¹<sub><i>k</i></sub>: la distancia de la coordenada (tramo naranja) nunca supera al semilado del cuadrado.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Solución propia: por $\varepsilon$–$\delta$</p>
+          <p>Recordemos que $d_\infty(x, y) = \max_{k \le n} |x_k - y_k|$. Sea $\varepsilon \gt 0$ y tomemos $\delta = \varepsilon$. Si $x, y \in \mathbb{R}^n$ cumplen $d_\infty(x, y) \lt \delta$, entonces
+            $$\begin{aligned} |\pi_i(x) - \pi_i(y)| &= |x_i - y_i| \le \max_{k \le n} |x_k - y_k| \\ &= d_\infty(x, y) \lt \varepsilon. \end{aligned}$$
+            La desigualdad del medio no es estricta: si la coordenada $i$ es la que realiza el máximo, vale la igualdad. La estricta la aporta $d_\infty(x, y) \lt \delta$.</p>
+          <p>Como $\delta$ no depende de $y$, la cuenta prueba algo más fuerte: $|\pi_i(x) - \pi_i(y)| \le d_\infty(x, y)$, es decir, $\pi_i$ es <span class="ref" data-ref="def-5.24">Lipschitz con constante $1$</span> y, por lo tanto, <span class="ref" data-ref="ejap-5.25">uniformemente continua</span> (<a href="#ejp4-b5">Bloque 5</a>).</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-1.6 -->
+  <article class="ej" id="ejp4-c9-1-6" data-short="C9-1.6" data-title="Los polinomios en varias variables son continuos" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C9-1.6</span>
+      <h3>Los polinomios en varias variables son continuos</h3>
+      <span class="src">Clase 9 · Proposición 1.6</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Los <span class="ref" data-ref="ext-polinomio-varias-variables">polinomios en varias variables</span> (<a href="#ejp4-b3">Definición 1.4</a>) son funciones continuas de $\mathbb{R}^n$ a $\mathbb{R}$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Sumas y productos de proyecciones y constantes</p>
+          <p>Basta con observar que los polinomios son sumas y productos de las funciones estudiadas en el <a href="#ejp4-c9-1-2">Lema 1.2</a> (las proyecciones $x_i = \pi_i(x_1, \dots, x_n)$, y las constantes), y que sumas y productos de continuas son continuas por la <a href="#ejp4-c9-1-1">Proposición 1.1</a>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-1-6-c" aria-label="Árbol de operaciones del polinomio x cuadrado por y más 3y menos 2, que se va marcando como continuo desde las hojas hasta la raíz"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-1-6-s">paso</label><input type="range" id="ejp4-c9-1-6-s" min="0" max="3" step="1" value="0"><output id="ejp4-c9-1-6-s-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-1-6-r" aria-live="polite"></dl>
+          <figcaption>El árbol de <i>P</i>(<i>x</i>, <i>y</i>) = <i>x</i>²<i>y</i> + 3<i>y</i> − 2 (polinomio elegido para el dibujo). Las hojas son proyecciones o constantes. Cada nodo interno es una suma o un producto, así que es continuo apenas lo son sus dos hijos. Mové el paso para verlo subir hasta la raíz.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><p><b>Para qué sirve</b>En el <a href="../guias/p4.html#guiap4-ej1" class="xg" data-guia="p4" data-ej="1">Ejercicio 1</a> (a), $f(x, y) = x^2 + y^2$ es un polinomio: continua sin $\varepsilon$ ni $\delta$. Y en el <a href="../guias/p4.html#guiap4-ej5" class="xg" data-guia="p4" data-ej="5">Ejercicio 5</a>, cada conjunto está descripto por desigualdades entre polinomios (o entre funciones armadas con polinomios y $\sin$, $\exp$, que también son continuas), que es lo que hacen <a href="#ejp4-c9-2-1">C9-2.1</a> y <a href="#ejp4-c9-2-2">C9-2.2</a> a continuación.</p></div>
+  </article>
+
+  <!-- C9-2.1 -->
+  <article class="ej" id="ejp4-c9-2-1" data-short="C9-2.1" data-title="Un conjunto cerrado del plano como preimagen por un polinomio" data-topics="continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">C9-2.1</span>
+      <h3>Un conjunto cerrado del plano como preimagen por un polinomio</h3>
+      <span class="src">Clase 9 · Problema 2.1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <p>Probar que el conjunto $A = \{(x, y) \in \mathbb{R}^2 : x^3 \ge x^2 + y - x\}$ es <span class="ref" data-ref="def-4.27">cerrado</span> con la métrica dada por la <span class="ref" data-ref="def-distancias-en-rrn">distancia $d_\infty$</span>.</p>
+        <p><i>Observación 2.1 (de la clase)</i>: puede graficarse el conjunto: es la región por debajo de la curva $y = x^3 - x^2 + x$, es decir $A = \{(x, y) : y \le x^3 - x^2 + x\}$.</p>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4-c9-2-1-c1" aria-label="La región A debajo de la curva y = x al cubo menos x al cuadrado más x, con un punto que se puede arrastrar"></canvas>
+        <dl class="read" id="ejp4-c9-2-1-r1" aria-live="polite"></dl>
+        <figcaption>El dibujo de la clase: <i>A</i> = {<i>f</i> ≥ 0} es la región sombreada, con su borde (la curva, trazo lleno: pertenece a <i>A</i>); arriba queda {<i>f</i> &lt; 0}. Arrastrá el punto para leer el signo de <i>f</i>(<i>x</i>, <i>y</i>) = <i>x</i>³ − <i>x</i>² + <i>x</i> − <i>y</i>.</figcaption>
+      </figure>
+    </div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Pasar todo de un lado y leer el conjunto como $\{f \ge 0\}$.</em> La desigualdad $x^3 \ge x^2 + y - x$ es $f(x, y) \ge 0$ con $f(x, y) = x^3 - x^2 + x - y$, un polinomio y por lo tanto continuo (<a href="#ejp4-c9-1-6">C9-1.6</a>). Así $A = f^{-1}([0, +\infty))$: <span class="ref" data-ref="ejap-5.10">preimagen de un cerrado por una continua, cerrado</span>.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$A$ como preimagen de un cerrado</p>
+          <p>Si tomamos la función $f : \mathbb{R}^2 \to \mathbb{R}$ dada por $f(x, y) = x^3 - x^2 + x - y$, podemos caracterizar al conjunto $A$ como
+            $$A = \{(x, y) : f(x, y) \ge 0\} = f^{-1}([0, +\infty)).$$
+            Visto de esta manera, $A$ es la <span class="ref" data-ref="ejap-5.10">preimagen de un conjunto cerrado a través de una función continua</span> (cosa que se ve de que $f$ es un polinomio), y por lo tanto es cerrado.</p>
+          <p class="nota"><b>Nota</b>El apunte escribe $f^{-1}((0, +\infty))$ y "preimagen de un conjunto abierto", pero $A$ está definido con $\ge$: es $A = \{f \ge 0\} = f^{-1}([0, +\infty))$, la preimagen del <i>cerrado</i> $[0, +\infty)$, y por eso $A$ es cerrado (que es lo que pide el problema); con $(0, +\infty)$ se obtendría el abierto $\{f \gt 0\}$, que no es $A$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-2-1-c2" aria-label="Una sucesión p_n dentro de A que converge a un punto del borde"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-2-1-n"><i>n</i></label><input type="range" id="ejp4-c9-2-1-n" min="1" max="30" step="1" value="2"><output id="ejp4-c9-2-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-2-1-r2" aria-live="polite"></dl>
+          <figcaption>Una sucesión <i>p<sub>n</sub></i> ∈ <i>A</i> (elegida para el dibujo) que converge al punto (1, 1) del borde. Como <i>f</i>(<i>p<sub>n</sub></i>) ≥ 0 y <i>f</i> es continua, <i>f</i>(lím <i>p<sub>n</sub></i>) = lím <i>f</i>(<i>p<sub>n</sub></i>) ≥ 0: el límite no se escapa de <i>A</i>. Es otra forma de ver que <i>A</i> es cerrado.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-2.2 -->
+  <article class="ej" id="ejp4-c9-2-2" data-short="C9-2.2" data-title="GLₙ(ℝ) es abierto en Mₙ(ℝ)" data-topics="continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">C9-2.2</span>
+      <h3>$\operatorname{GL}_n(\mathbb{R})$ es abierto en $\operatorname{M}_n(\mathbb{R})$</h3>
+      <span class="src">Clase 9 · Problema 2.2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Probar que el conjunto de matrices inversibles con coeficientes reales, $\operatorname{GL}_n(\mathbb{R})$, es abierto en el conjunto $\operatorname{M}_n(\mathbb{R})$ de matrices de $n \times n$ con coeficientes reales, si a las matrices las dotamos de la distancia $d_\infty$ (identificando $\operatorname{M}_n(\mathbb{R}) = \mathbb{R}^{n \times n}$).</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Inversible es $\det \neq 0$, y el determinante es un polinomio en las entradas.</em> $\operatorname{GL}_n(\mathbb{R}) = \det^{-1}(\mathbb{R} \setminus \{0\})$, preimagen de un abierto. Falta ver que $\det : \mathbb{R}^{n \times n} \to \mathbb{R}$ es continua, y es más: es un polinomio en los $n^2$ coeficientes. Esto sale por inducción en $n$ con el desarrollo por cofactores, que escribe $\det_{n+1}$ como suma de productos de una entrada por un $\det_n$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\operatorname{GL}_n(\mathbb{R})$ como preimagen</p>
+          <p>Una caracterización común de $\operatorname{GL}_n(\mathbb{R})$ estudiada en el CBC es la dada por el <span class="ref" data-ref="ext-det-inversible">determinante</span>. En efecto, podemos pensar a este conjunto como
+            $$\operatorname{GL}_n(\mathbb{R}) = \{A \in \operatorname{M}_n(\mathbb{R}) : \det(A) \neq 0\}.$$</p>
+          <p>En vista del ejercicio anterior, esto nos da una pista de cómo probar que este conjunto es abierto: si pudiésemos ver que la función determinante es continua, podríamos entender a las matrices inversibles como la preimagen de un abierto ($\det^{-1}(\mathbb{R} \setminus \{0\})$), y por ende <span class="ref" data-ref="teo-5.9">sería abierto</span>. En efecto, la función determinante es una función $\det : \mathbb{R}^{n \times n} \to \mathbb{R}$ y es más que continua: es un polinomio.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El determinante es un polinomio (inducción)</p>
+          <p>Para ver esto último vayamos por inducción. La hipótesis inductiva es: "la función $\det_n$, pensada como el determinante para matrices de $n \times n$, es una función polinomial en los coeficientes de la matriz (y por ende de $\mathbb{R}^{n \times n}$ a $\mathbb{R}$)".</p>
+          <p>El caso base es sencillo, ya que $\det_1$ es la identidad, que es trivialmente un polinomio. Para el paso inductivo, asumamos que la función $\det_n$ es un polinomio y veamos que lo mismo ocurre para la función $\det_{n+1}$. Sea $A = (a_{ij})_{1 \le i, j \le n+1}$ una matriz de tamaño $(n+1) \times (n+1)$. Para cada par de índices $1 \le i, j \le n+1$ denotamos por $A_{ij}$ a la matriz que se obtiene de $A$ al eliminar la fila $i$ y la columna $j$. Con esta notación, la fórmula para calcular el determinante por cofactores viene dada por
+            $$\begin{cases} \det\nolimits_1(a_{11}) = a_{11}, \\ \det\nolimits_{n+1}(A) = \displaystyle\sum_{j = 1}^{n+1} (-1)^{1+j} a_{1j} \det\nolimits_n(A_{1j}). \end{cases}$$
+            Mirando esta definición, es claro que si por hipótesis inductiva la función $\det_n$ es un polinomio en los coeficientes de una matriz de $n \times n$, la función $\det_{n+1}$ también debe serlo, ya que se fabrica como suma y producto de polinomios en los coeficientes de una matriz de $(n+1) \times (n+1)$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>Habiendo probado que el determinante es una función polinomial, y que las funciones polinomiales son continuas (<a href="#ejp4-c9-1-6">C9-1.6</a>), concluimos el resultado observando que
+            $$\operatorname{GL}_n(\mathbb{R}) = \det\nolimits^{-1}(\mathbb{R} \setminus \{0\}),$$
+            que es la <span class="ref" data-ref="teo-5.9">preimagen de un abierto a través de una función continua</span>, y por ende abierto también.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-2-2-c" aria-label="Determinantes de 400 matrices sorteadas en la bola de d infinito de radio r alrededor de una matriz de 3 por 3 con determinante 3"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-2-2-rr"><i>r</i></label><input type="range" id="ejp4-c9-2-2-rr" min="0" max="1.2" step="0.01" value="0.3"><output id="ejp4-c9-2-2-rr-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-2-2-r" aria-live="polite"></dl>
+          <figcaption>Una matriz <i>A</i> de 3 × 3 con det <i>A</i> = 3 (elegida para el dibujo) y 400 matrices sorteadas en la bola <i>B</i>∞(<i>A</i>, <i>r</i>). Cada punto es el determinante de una de ellas. Con <i>r</i> chico quedan todas lejos del 0; al agrandar <i>r</i> alguna llega a det ≤ 0. Es una muestra, no una prueba: la prueba es la continuidad.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 4 ===================== -->
+<section class="bloque" id="ejp4-b4">
+  <h2><span class="bn">Bloque 4</span>Continuidad en productos y proyecciones</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Trabajar en $X \times Y$ con $d_\infty((x, y), (x', y')) = \max\{d_1(x, x'), d_2(y, y')\}$: las proyecciones $\pi_1, \pi_2$ son continuas y abiertas (pero no cerradas), una función a valores en el producto es continua si y sólo si lo son sus dos coordenadas, y una sucesión converge en $X \times Y$ si y sólo si converge coordenada a coordenada. Es lo que está detrás del <a href="../guias/p4.html#guiap4-ej1" class="xg" data-guia="p4" data-ej="1">Ejercicio 1</a> (a) (una función de dos variables se evalúa en sucesiones $(x_n, y_n)$ que convergen coordenada a coordenada), del <a href="../guias/p4.html#guiap4-ej4" class="xg" data-guia="p4" data-ej="4">Ejercicio 4</a> (la función $x \mapsto (f(x), g(x))$ es continua a valores en $E' \times E'$) y del <a href="../guias/p4.html#guiap4-ej5" class="xg" data-guia="p4" data-ej="5">Ejercicio 5</a> (las coordenadas $x, y, z$ de $\mathbb{R}^n$ son proyecciones continuas, y con ellas se arman las funciones cuya preimagen es el conjunto).</p></div>
+
+  <!-- Definición -->
+  <article class="ej" id="ejp4-def" data-short="Def." data-title="Función abierta y función cerrada" data-topics="continuidad,topologia">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Función abierta y función cerrada</h3>
+      <span class="src">Definición agregada en el apunte (no está en las notas)</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <p>Sea $f : (M, d) \to (N, d')$ una función. Decimos que</p>
+        <ul class="items">
+          <li>$f$ es <b>abierta</b> si para todo $U \subseteq M$ <span class="ref" data-ref="def-4.14">abierto</span>, $f(U)$ es abierto en $N$;</li>
+          <li>$f$ es <b>cerrada</b> si para todo $F \subseteq M$ <span class="ref" data-ref="def-4.27">cerrado</span>, $f(F)$ es cerrado en $N$.</li>
+        </ul>
+        <p>Es una propiedad de la función, no de su imagen: $f(M)$ es abierto en $f(M)$ siempre, lo que importa es que <b>cada</b> abierto del dominio vaya a parar a un abierto. Comparar con la continuidad (<span class="ref" data-ref="teo-5.9">Teorema 5.9</span>), que pide lo mismo pero con <b>preimágenes</b>. A diferencia de lo que pasa con preimágenes, pasando a complementos no se obtiene la equivalencia entre "abierta" y "cerrada", porque en general $f(M \setminus A) \neq N \setminus f(A)$; por eso son dos propiedades distintas, como muestra el ejemplo siguiente. Que una función continua no tiene por qué ser abierta ni cerrada es la <span class="ref" data-ref="obs-5.12">Observación 5.12</span> ($x^2$ y $e^x$).</p>
+        <p><i>Nota</i>: esta definición no figura en <code>notas_materia.pdf</code> ni en el manuscrito de la clase, que la usa sin enunciarla; la agregó el agente.</p>
+      </div>
+      <figure class="viz">
+        <svg viewBox="0 0 360 250" role="img" aria-label="Gráfico de x al cuadrado sobre el intervalo abierto de menos 1 a 1; su imagen es el intervalo [0, 1), que no es abierto">
+          <line x1="30" y1="200" x2="340" y2="200" class="sv-axis"/>
+          <line x1="185" y1="230" x2="185" y2="18" class="sv-axis"/>
+          <path d="M 85 40 Q 185 360 285 40" class="sv-accent"/>
+          <line x1="85" y1="200" x2="285" y2="200" class="sv-seq2" stroke-width="5"/>
+          <circle cx="85" cy="200" r="5" class="sv-fill-bg"/><circle cx="85" cy="200" r="5" class="sv-seq2"/>
+          <circle cx="285" cy="200" r="5" class="sv-fill-bg"/><circle cx="285" cy="200" r="5" class="sv-seq2"/>
+          <text x="85" y="222" text-anchor="middle" class="sv-muted">−1</text>
+          <text x="285" y="222" text-anchor="middle" class="sv-muted">1</text>
+          <text x="235" y="240" text-anchor="middle" class="sv-label-seq2">U = (−1, 1) abierto</text>
+          <line x1="185" y1="200" x2="185" y2="40" class="sv-ok" stroke-width="5"/>
+          <circle cx="185" cy="200" r="5" class="sv-fill-ok"/>
+          <circle cx="185" cy="40" r="5" class="sv-fill-bg"/><circle cx="185" cy="40" r="5" class="sv-ok"/>
+          <line x1="85" y1="40" x2="285" y2="40" class="sv-grid sv-dash"/>
+          <text x="177" y="44" text-anchor="end" class="sv-muted">1</text>
+          <text x="177" y="196" text-anchor="end" class="sv-muted">0</text>
+          <text x="193" y="120" class="sv-label-ok">f(U) = [0, 1)</text>
+          <text x="193" y="137" class="sv-muted">no es abierto</text>
+          <text x="292" y="36" class="sv-label-accent">x²</text>
+        </svg>
+        <figcaption>La Observación 5.12 en un dibujo: <i>f</i>(<i>x</i>) = <i>x</i>² es continua, pero manda el abierto (−1, 1) al intervalo [0, 1), que contiene al 0 (punto lleno) y no es abierto. Así que <i>x</i>² no es una función abierta.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- C6-1 -->
+  <article class="ej" id="ejp4-c6-1" data-short="C6-1" data-title="Proyecciones de X × Y y continuidad coordenada a coordenada" data-topics="continuidad,topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">C6-1</span>
+      <h3>Proyecciones de $X \times Y$ y continuidad coordenada a coordenada</h3>
+      <span class="src">Clase 6 · Ejemplo 1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. Pensamos a $X \times Y$ con $d_\infty$.</p>
+      <ol class="items">
+        <li>Probar que $\pi_1 : X \times Y \to X$, $(x, y) \mapsto x$, y $\pi_2 : X \times Y \to Y$, $(x, y) \mapsto y$ son continuas y <a href="#ejp4-def">abiertas</a>, pero pueden <b>no ser cerradas</b>.</li>
+        <li>Sea $(Z, \delta)$ un espacio métrico y sea $f : Z \to X \times Y$ una aplicación. Probar que $f$ es continua si y sólo si $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$ lo son.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) $\pi_1$ es continua</p>
+          <p>Probemos que $\pi_1$ es continua y abierta. A lo largo de la resolución, los puntos de $X \times Y$ se llaman $p, q$, y sus coordenadas $p = (x_p, y_p)$, $q = (x_q, y_q)$.</p>
+          <p>Para ver que $\pi_1$ es <span class="ref" data-ref="def-5.4">continua</span>, dado $p \in X \times Y$, podemos ver que dado $\varepsilon \gt 0$, existe $\delta \gt 0$ tal que si $d_\infty(q, p) \lt \delta$ entonces
+            $$d_1(\pi_1(q), \pi_1(p)) = d_1(x_q, x_p) \lt \varepsilon.$$
+            Como
+            $$\begin{aligned} d_1(x_q, x_p) &\le \max\{d_1(x_q, x_p), d_2(y_q, y_p)\} \\ &= d_\infty(q, p), \qquad (*) \end{aligned}$$
+            si $\delta \lt \varepsilon$ garantizamos $(*)$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) $\pi_1$ es abierta: el plan</p>
+          <p>Para ver que $\pi_1$ es abierta, tenemos que ver que <b>para todo abierto $U \subseteq X \times Y$, $\pi_1(U)$ es abierto</b>. Lo hacemos en dos pasos: primero para bolas y después para abiertos cualesquiera.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Paso 1: la proyección de una bola es una bola</p>
+          <p>Sea $p \in X \times Y$ y $r \gt 0$. Veamos que $\pi_1(B(p, r)) = B(x_p, r)$; en particular, $\pi_1(B(p, r))$ es abierto. Por un lado,
+            $$\begin{aligned} B(p, r) &= \{q \in X \times Y : d_\infty(q, p) \lt r\} \\ &= \{q \in X \times Y : \max\{d_1(x_q, x_p), \\ &\qquad\qquad d_2(y_q, y_p)\} \lt r\} \\ &= \{q \in X \times Y : d_1(x_q, x_p) \lt r \\ &\qquad\qquad \text{ y } d_2(y_q, y_p) \lt r\}. \end{aligned}$$
+            Por otro lado,
+            $$\begin{aligned} \pi_1(B(p, r)) = \{x \in X : {}&\text{existe } y \in Y \text{ con } d_1(x, x_p) \lt r \\ &\text{ y } d_2(y, y_p) \lt r\}. \end{aligned}$$</p>
+          <p class="nota"><b>Nota</b>El manuscrito dibuja un disco de centro $p$ y radio $r$ y, sobre el eje $x$, su proyección: un intervalo de centro $x_p$ y del "mismo radio". Con $d_\infty$ la bola de $\mathbb{R}^2$ es en realidad el cuadrado $(x_p - r, x_p + r) \times (y_p - r, y_p + r)$, que es lo que se dibuja acá; el disco es la bola euclídea. Las dos tienen la misma proyección.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-1-c1" aria-label="La bola de d infinito, un cuadrado de centro p, y su proyección sobre el eje X, el intervalo abierto de centro x_p y radio r"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-1-r"><i>r</i></label><input type="range" id="ejp4-c6-1-r" min="0.2" max="1.6" step="0.05" value="1.1"><output id="ejp4-c6-1-r-o"></output></div>
+            <label class="check"><input type="checkbox" id="ejp4-c6-1-disco" checked>mostrar el disco del manuscrito (bola euclídea)</label>
+          </div>
+          <dl class="read" id="ejp4-c6-1-r1" aria-live="polite"></dl>
+          <figcaption>El dibujo del apunte, en <i>X</i> = <i>Y</i> = ℝ: la bola <i>B</i>(<i>p</i>, <i>r</i>) de <i>d</i>∞ es el cuadrado punteado y su proyección es el intervalo abierto (<i>x<sub>p</sub></i> − <i>r</i>, <i>x<sub>p</sub></i> + <i>r</i>) = <i>B</i>(<i>x<sub>p</sub></i>, <i>r</i>) (extremos huecos). Arrastrá <i>p</i>; el disco gris es la bola euclídea, con la misma sombra.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Las dos contenciones</p>
+          <p>Las dos contenciones salen de la descripción de $\pi_1(B(p, r))$:</p>
+          <p>($\subseteq$) Todo $x \in \pi_1(B(p, r))$ cumple $d_1(x, x_p) \lt r$, es decir, $x \in B(x_p, r)$.</p>
+          <p>($\supseteq$) Dado $x \in B(x_p, r)$, tenemos $d_1(x, x_p) \lt r$, y $y = y_p$ cumple $d_2(y_p, y_p) = 0 \lt r$. Entonces $q = (x, y_p) \in B(p, r)$ y $x = \pi_1(q) \in \pi_1(B(p, r))$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Paso 2: de bolas a abiertos</p>
+          <p>Sea $U \subseteq X \times Y$ abierto. <span class="ref" data-ref="def-4.11">Para todo $p \in U$ existe $r_p \gt 0$ tal que $B(p, r_p) \subseteq U$</span>. Entonces $U = \bigcup_{p \in U} B(p, r_p)$, por lo tanto
+            $$\begin{aligned} \pi_1(U) &= \pi_1\Big(\bigcup_{p \in U} B(p, r_p)\Big) = \bigcup_{p \in U} \pi_1(B(p, r_p)) \\ &= \bigcup_{p \in U} B(x_p, r_p), \end{aligned}$$
+            donde la última igualdad es el Paso 1. Es <span class="ref" data-ref="teo-4.17">unión de abiertos</span>, por lo tanto $\pi_1(U)$ es abierto.</p>
+          <p class="nota"><b>Nota</b>El manuscrito presenta primero el Paso 2, como reducción ("si probamos que para toda bola $B(x, r)$, $\pi_1(B(x, r))$ es abierto, entonces se sigue la misma conclusión para todo abierto $U$"), y después el Paso 1; acá se reordenó. Además escribe los puntos de $X \times Y$ como $x$, $(x, y)$ o $(x_0, y_0)$ según el lugar; acá se unificó a $p$, $q$ con coordenadas $(x_p, y_p)$, $(x_q, y_q)$. Por último, sólo prueba la contención $\supseteq$ (verificando $q \in B(p, r)$ con la cuenta $d_\infty(p, q) = \max\{d_1(x_p, x), d_2(y_p, y_p)\} = d_1(x_p, x) \lt r$). Sola no alcanza para el Paso 1: dice que $x_p$ es punto interior de $\pi_1(B(p, r))$, pero no que lo sean todos sus puntos. Con la igualdad, en cambio, la proyección es una bola y por lo tanto es abierta.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-1-c2" aria-label="Un abierto U del plano cubierto por cuadrados contenidos en U; sus proyecciones son intervalos abiertos cuya unión es la proyección de U"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-1-k">cuadrados</label><input type="range" id="ejp4-c6-1-k" min="1" max="60" step="1" value="8"><output id="ejp4-c6-1-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-1-r2" aria-live="polite"></dl>
+          <figcaption><i>U</i> es un abierto del plano (una elipse abierta, elegida para el dibujo). Para cada <i>p</i> sorteado en <i>U</i> se dibuja una bola <i>B</i>(<i>p</i>, <i>r<sub>p</sub></i>) ⊆ <i>U</i> (un cuadrado) y su proyección <i>B</i>(<i>x<sub>p</sub></i>, <i>r<sub>p</sub></i>). Con más bolas, la unión de las proyecciones va llenando π₁(<i>U</i>), un intervalo abierto.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\pi_1$ no es cerrada: la idea</p>
+          <p>Veamos que en general $\pi_1$ <b>no es cerrada, es decir, existe $F \subseteq X \times Y$ cerrado con $\pi_1(F)$ no cerrado</b>.</p>
+          <p><i>Idea</i>: sea $F \subseteq X \times Y$ cerrado, y consideramos $\pi_1(F)$. Si $(x_n)_n \subseteq \pi_1(F)$ cumple que $x_n \to x$, querríamos ver que $x \in \pi_1(F)$, es decir, existe $q \in F$ con $x_q = x$. Como $x_n \in \pi_1(F)$, existe $q_n \in F$ con $x_{q_n} = x_n$. <b>Lo ideal sería que $q_n \to q$ para algún $q$</b>, porque en tal caso, <span class="ref" data-ref="cor-4.47">al ser $F$ cerrado, $q \in F$</span>, y como la primera coordenada converge, $x_q = \lim x_n = x$; entonces $x \in \pi_1(F)$. El problema es que <b>las segundas coordenadas $(y_{q_n})_n$ no tienen por qué converger, o tener subsucesiones convergentes</b>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El ejemplo: la hipérbola $xy = 1$</p>
+          <p><i>Ej</i>: si $X = Y = \mathbb{R}$, en $\mathbb{R}^2$ con $d_\infty$, sea $F = \{q \in \mathbb{R}^2 : x_q y_q = 1\}$. Es cerrado porque es la preimagen de $\{1\}$ vía $f(q) = x_q y_q$, o sea: $F = f^{-1}(\{1\})$. <span class="ref" data-ref="ejap-5.10">Como $f$ es continua, $F$ es cerrado</span>. Pero
+            $$\pi_1(F) = \{x \in \mathbb{R} : \text{existe } y \in \mathbb{R} \text{ con } x y = 1\} = \mathbb{R} \setminus \{0\},$$
+            que no es cerrado. <i>(Dibujo: la hipérbola $xy = 1$ y su proyección sobre el eje $x$, que cubre toda la recta salvo el $0$.)</i></p>
+          <p>Las afirmaciones para $\pi_2$ se prueban de manera análoga.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-1-c3" aria-label="La hipérbola xy = 1 y su proyección sobre el eje x, toda la recta salvo el 0; los puntos (1/n, n) se proyectan en 1/n, que tiende a 0"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-1-n"><i>n</i></label><input type="range" id="ejp4-c6-1-n" min="1" max="20" step="1" value="2"><output id="ejp4-c6-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-1-r3" aria-live="polite"></dl>
+          <figcaption>El dibujo que describe el texto: <i>F</i> es la hipérbola y su sombra (verde) es ℝ ∖ {0}, con el 0 hueco. Los puntos <i>q<sub>n</sub></i> = (1/<i>n</i>, <i>n</i>) están en <i>F</i> y sus sombras 1/<i>n</i> tienden a 0, pero las segundas coordenadas se van a infinito: no hay un <i>q</i> ∈ <i>F</i> al que converjan.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) Si $f$ es continua, sus coordenadas también</p>
+          <p>Notemos que si $f$ es continua, por el ítem a), $\pi_1$ y $\pi_2$ son continuas, y en consecuencia $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$ son continuas por ser composición de continuas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) Si las coordenadas son continuas, $f$ también</p>
+          <p><span class="ref" data-ref="teo-5.7">Usemos sucesiones</span>. Tenemos que $f$ es continua en $z_0 \in Z$ si y sólo si para toda $(z_n)_n \subseteq Z$ con $z_n \to z_0$ se tiene que $f(z_n) \to f(z_0)$. Notemos que
+            $$f : Z \to X \times Y, \quad f(z) = (f_1(z), f_2(z)),$$
+            porque $f_1 = \pi_1 \circ f$ y $f_2 = \pi_2 \circ f$. Sea $(z_n)_n \subseteq Z$ con $z_n \to z_0$. Como $f_1$ y $f_2$ son continuas en $z_0$, $f_1(z_n) \to f_1(z_0)$ y $f_2(z_n) \to f_2(z_0)$. Sea $\varepsilon \gt 0$. Sabemos que existen $n_1, n_2 \in \mathbb{N}$ tales que
+            $$\begin{aligned} d_1(f_1(z_0), f_1(z_n)) &\lt \varepsilon \text{ para todo } n \ge n_1, \\ d_2(f_2(z_0), f_2(z_n)) &\lt \varepsilon \text{ para todo } n \ge n_2. \end{aligned}$$
+            Entonces, para todo $n \ge n_0 = \max\{n_1, n_2\}$,
+            $$\begin{aligned} d_\infty(f(z_0), f(z_n)) = \max\{&d_1(f_1(z_0), f_1(z_n)), \\ &d_2(f_2(z_0), f_2(z_n))\} \lt \varepsilon. \end{aligned}$$
+            Concluimos que $f(z_n) \to f(z_0)$. $\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><p><b>Observación</b><em>Convergencia en $X \times Y$ es convergencia coordenada a coordenada.</em></p>
+      <p>De 1 b) sale que en $X \times Y$ con $d_\infty$, la sucesión $(x_n, y_n) \to (x, y)$ si y sólo si $x_n \to x$ e $y_n \to y$, tomando $f : X \times Y \to X \times Y$, $f(x, y) = \operatorname{id}_{X \times Y}(x, y) = (x, y)$, es decir $f_1(x, y) = x$, $f_2(x, y) = y$ (observación del docente). Lo que realmente se usa es el <b>argumento</b> de la demostración de b): dado $(x_n, y_n) \to (x, y)$, la desigualdad $d_1(x_n, x) \le d_\infty((x_n, y_n), (x, y))$ da $x_n \to x$, y recíprocamente el $\max$ de dos cantidades que tienden a $0$ tiende a $0$.</p></div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 5 ===================== -->
+<section class="bloque" id="ejp4-b5">
+  <h2><span class="bn">Bloque 5</span>Funciones Lipschitz</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Recordar que $f : (E, d) \to (E', d')$ es <span class="ref" data-ref="def-5.24">Lipschitz</span> si existe $M \gt 0$ tal que $d'(f(x), f(y)) \le M d(x, y)$ para todo $x, y \in E$, y que Lipschitz implica <span class="ref" data-ref="def-5.14">uniformemente continua</span> (la vuelta es falsa: $x \sin(1/x)$ en $[-1, 1]$). Las herramientas son el <span class="ref" data-ref="ext-tvm">teorema del valor medio</span> (derivada acotada $\Longrightarrow$ Lipschitz), la negación cuantificada de "Lipschitz" para construir contraejemplos con sucesiones, y la acotación de integrales por el supremo para operadores en $C([0, 1])$. Es el modelo del <a href="../guias/p4.html#guiap4-ej12" class="xg" data-guia="p4" data-ej="12">Ejercicio 12</a> (probar que $d(x, x_0)$ y $d(x, A)$ son Lipschitz) y ayuda en el <a href="../guias/p4.html#guiap4-ej9" class="xg" data-guia="p4" data-ej="9">Ejercicio 9</a> (funcionales de $C([0, 1])$ con $d_\infty$ y $d_1$).</p></div>
+
+  <!-- C6-2 -->
+  <article class="ej" id="ejp4-c6-2" data-short="C6-2" data-title="Derivada acotada implica Lipschitz" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-2</span>
+      <h3>Derivada acotada implica Lipschitz</h3>
+      <span class="src">Clase 6 · Ejemplo 2</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : (a, b) \to \mathbb{R}$ derivable, con derivada acotada. Probar que $f$ es <span class="ref" data-ref="def-5.24">Lipschitz</span>.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Valor medio</p>
+          <p>Recordemos que por el <span class="ref" data-ref="ext-tvm">teorema del valor medio</span>, dados $x \lt y$, si $f$ es continua en $[x, y]$ y derivable en $(x, y)$, entonces existe $c \in (x, y)$ tal que
+            $$f(x) - f(y) = f'(c)(x - y).$$
+            Con esto en mente, dados $x, y \in (a, b)$, con $x \lt y$, existe $c \in (x, y)$ tal que
+            $$|f(x) - f(y)| = |f'(c)| \cdot |x - y|.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title"><span class="ref" data-ref="obs-derivada-acotada-implica-lipschitz">La cota de la derivada es la constante</span></p>
+          <p>Como $f'(c)$ está acotada (pues $c \in (x, y) \subseteq (a, b)$), digamos por $M$, se sigue que
+            $$|f(x) - f(y)| \le M |x - y|.$$
+            Concluimos. $\blacksquare$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Ejemplo: $x^3$ en $(0, 1)$</p>
+          <p><i>Ej</i>: si $f : (0, 1) \to \mathbb{R}$, $f(x) = x^3$, por el teorema del valor medio, para $0 \lt x \lt y \lt 1$, existe $c \in (x, y)$ tal que
+            $$|f(x) - f(y)| = |f'(c)(x - y)| = 3c^2 |x - y| \le 3 |x - y|,$$
+            donde usamos que $c \in (0, 1)$, por lo tanto $|c| \le 1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-2-c" aria-label="El gráfico de x al cubo en (0, 1), la secante entre x e y, la tangente paralela en c y el cono de pendientes más y menos 3"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-2-x"><i>x</i></label><input type="range" id="ejp4-c6-2-x" min="0.02" max="0.98" step="0.01" value="0.25"><output id="ejp4-c6-2-x-o"></output></div>
+            <div class="slider"><label for="ejp4-c6-2-y"><i>y</i></label><input type="range" id="ejp4-c6-2-y" min="0.02" max="0.98" step="0.01" value="0.8"><output id="ejp4-c6-2-y-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-2-r" aria-live="polite"></dl>
+          <figcaption><i>f</i>(<i>x</i>) = <i>x</i>³ en (0, 1). La secante entre <i>x</i> e <i>y</i> (naranja) es paralela a la tangente en algún <i>c</i> intermedio (punteada). El gráfico nunca sale del cono de pendientes ±3 apoyado en (<i>x</i>, <i>f</i>(<i>x</i>)).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C6-3 -->
+  <article class="ej" id="ejp4-c6-3" data-short="C6-3" data-title="x sin(1/x) es continua en 0 pero no es Lipschitz cerca de 0" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-3</span>
+      <h3>$x \sin(1/x)$ es continua en $0$ pero no es Lipschitz cerca de $0$</h3>
+      <span class="src">Clase 6 · Ejemplo 3</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $f : \mathbb{R} \to \mathbb{R}$ dada por
+        $$f(x) = \begin{cases} x \sin\left(\frac{1}{x}\right) & \text{ si } x \neq 0, \\ 0 & \text{ si } x = 0. \end{cases}$$</p>
+      <ol class="items">
+        <li>Probar que $f$ es continua en $x = 0$.</li>
+        <li>Probar que $f$ no es Lipschitz en ningún intervalo que contenga al $0$.</li>
+      </ol>
+      <p><i>Nota</i>: el manuscrito escribe "$0$ si $f(0) = 0$" en la segunda rama; es "$0$ si $x = 0$".</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) <span class="ref" data-ref="def-5.4">Continuidad</span> en $0$</p>
+          <p>Sea $\varepsilon \gt 0$. Tenemos que
+            $$|f(x) - f(0)| = |f(x)| = \left|x \sin\left(\frac{1}{x}\right)\right| \le |x|,$$
+            por lo tanto $|f(x)| \lt \varepsilon$ si $|x| \lt \delta$ con $\delta \le \varepsilon$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-3-c1" aria-label="x sen(1/x) atrapada entre las rectas y = x e y = menos x; con delta igual a epsilon, el gráfico sobre (menos delta, delta) queda dentro de la banda de altura epsilon"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-3-e">ε = δ</label><input type="range" id="ejp4-c6-3-e" min="0.05" max="0.6" step="0.01" value="0.3"><output id="ejp4-c6-3-e-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-3-r1" aria-live="polite"></dl>
+          <figcaption>La función queda entre las rectas ±<i>x</i> (punteadas). Con δ = ε, el tramo del gráfico sobre (−δ, δ) (resaltado) queda dentro de la banda |<i>y</i>| &lt; ε, aunque oscile infinitas veces.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) Qué hay que probar</p>
+          <p>Sea $I = (a, b)$ que contiene al $0$. Como ser Lipschitz en $I$ significa que <b>existe $M \gt 0$ tal que para todo $x \in I$, $y \in I$, $|f(x) - f(y)| \le M |x - y|$</b>, no ser Lipschitz significa que <b>para todo $M \gt 0$, existen $x_M \in I$, $y_M \in I$, tales que $|f(x_M) - f(y_M)| \gt M |x_M - y_M|$</b>. Tomando $M = M_n$ con $M_n \to +\infty$, vemos que alcanza con probar que <b>existen $(x_n)_n \subseteq I$, $(y_n)_n \subseteq I$, tales que</b>
+            $$|f(x_n) - f(y_n)| \ge M_n \cdot |x_n - y_n|.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) Las sucesiones de crestas y valles</p>
+          <p>Sean
+            $$x_n = \frac{1}{\frac{\pi}{2} + 2\pi n}, \quad y_n = \frac{1}{\frac{3\pi}{2} + 2\pi n};$$
+            tenemos que $x_n \neq 0$, $y_n \neq 0$ para todo $n$. Entonces
+            $$\begin{aligned} &|f(x_n) - f(y_n)| \\ &= \left|\tfrac{1}{\frac{\pi}{2} + 2\pi n} \sin\left(\tfrac{\pi}{2} + 2\pi n\right) - \tfrac{1}{\frac{3\pi}{2} + 2\pi n} \sin\left(\tfrac{3\pi}{2} + 2\pi n\right)\right| \\ &= \left|\frac{1}{\frac{\pi}{2} + 2\pi n} + \frac{1}{\frac{3\pi}{2} + 2\pi n}\right| \\ &= \left|\frac{\frac{3\pi}{2} + 2\pi n + \frac{\pi}{2} + 2\pi n}{\left(\frac{\pi}{2} + 2\pi n\right)\left(\frac{3\pi}{2} + 2\pi n\right)}\right| \\ &= \frac{2\pi + 4\pi n}{\left(\frac{\pi}{2} + 2\pi n\right)\left(\frac{3\pi}{2} + 2\pi n\right)} \\ &= \frac{2\pi + 4\pi n}{\pi} \cdot \frac{\pi}{\left(\frac{\pi}{2} + 2\pi n\right)\left(\frac{3\pi}{2} + 2\pi n\right)} \\ &= (2 + 4n) \left|\frac{1}{\frac{\pi}{2} + 2\pi n} - \frac{1}{\frac{3\pi}{2} + 2\pi n}\right| \\ &= (2 + 4n) \cdot |x_n - y_n| = M_n \cdot |x_n - y_n|, \end{aligned}$$
+            y como $M_n \to +\infty$, concluimos que $f$ <b>no es Lipschitz</b>. $\blacksquare$</p>
+          <p class="nota"><b>Nota</b>El manuscrito no dice por qué $x_n, y_n \in I$: como $x_n, y_n \to 0$ y $0 \in (a, b)$, están en $I$ para todo $n$ suficientemente grande, y con esos $n$ alcanza (dado $M \gt 0$, se elige $n$ grande con $M_n = 2 + 4n \gt M$; como $x_n \neq y_n$, la desigualdad $\ge M_n |x_n - y_n|$ da la estricta $\gt M |x_n - y_n|$).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-3-c2" aria-label="Zoom hacia el 0 de x sen(1/x) siguiendo el par x_n en una cresta e y_n en un valle, con la secante que los une"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-3-n"><i>n</i></label><input type="range" id="ejp4-c6-3-n" min="1" max="15" step="1" value="1"><output id="ejp4-c6-3-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-3-r2" aria-live="polite"></dl>
+          <figcaption>Zoom hacia el 0 que sigue al par (<i>x<sub>n</sub></i>, <i>y<sub>n</sub></i>): <i>x<sub>n</sub></i> cae en una cresta (<i>f</i> = <i>x</i>) e <i>y<sub>n</sub></i> en un valle (<i>f</i> = −<i>x</i>). Los dos puntos se acercan, pero la secante que los une (roja) tiene pendiente <i>M<sub>n</sub></i> = 2 + 4<i>n</i>, cada vez más empinada.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><p><b>Observación</b><em>Lipschitz implica uniformemente continua, pero no al revés.</em></p>
+      <p>Si $f : E \to F$ es Lipschitz entonces $f$ es <span class="ref" data-ref="ejap-5.25">uniformemente continua</span>. Pero <span class="ref" data-ref="obs-5.28">no vale la vuelta</span>; la función del ejemplo anterior en el dominio $[-1, 1]$ es uniformemente continua <i>(esto es consecuencia de un resultado que veremos más adelante)</i> pero no es Lipschitz.</p>
+      <p><i>Nota</i>: el resultado aludido es que <span class="ref" data-ref="ext-continua-compacto-uc">una función continua en un compacto es uniformemente continua</span> (Práctica 5).</p></div>
+  </article>
+
+  <!-- C6-4 -->
+  <article class="ej" id="ejp4-c6-4" data-short="C6-4" data-title="Ψ(f)(x) = x f(x) de (C([0,1]), d∞) en (C([0,1]), d₁) es Lipschitz" data-topics="continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">C6-4</span>
+      <h3>$\Psi(f)(x) = x f(x)$ de $(C([0, 1]), d_\infty)$ en $(C([0, 1]), d_1)$ es Lipschitz</h3>
+      <span class="src">Clase 6 · Ejemplo 4</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun"><p>Sea $\Psi : (C([0, 1]), d_\infty) \to (C([0, 1]), d_1)$ dada por
+      $$(\Psi(f))(x) := x f(x).$$
+      Decidir si $\Psi$ es <span class="ref" data-ref="def-5.24">Lipschitz</span>.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Acotar <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_1$ por $d_\infty$</span></p>
+          <p>Dadas $f, g \in C([0, 1])$, planteamos
+            $$\begin{aligned} d_1(\Psi(f), \Psi(g)) &= \int_0^1 |x f(x) - x g(x)|\, dx \\ &= \int_0^1 |x (f(x) - g(x))|\, dx \\ &\le \int_0^1 |x| |f(x) - g(x)|\, dx \\ &\le \int_0^1 \sup_{x \in [0, 1]} |f(x) - g(x)|\, dx \\ &= d_\infty(f, g). \end{aligned}$$
+            Entonces $\Psi$ es Lipschitz. $\blacksquare$</p>
+          <p class="nota"><b>Nota</b>En 4), en particular vemos que es <span class="ref" data-ref="ejap-5.25">uniformemente continua</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-4-c" aria-label="Arriba f y g, que difieren en un pico de altura 0,5; abajo las áreas de |f − g| y de x|f − g| debajo de la línea d infinito"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-4-p">pico en</label><input type="range" id="ejp4-c6-4-p" min="0" max="1" step="0.01" value="0.7"><output id="ejp4-c6-4-p-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-4-r" aria-live="polite"></dl>
+          <figcaption>Arriba, <i>f</i> y <i>g</i> = <i>f</i> + un pico de altura 0,5 (elegidas para el dibujo), así que <i>d</i>∞(<i>f</i>, <i>g</i>) = 0,5. Abajo, el área clara es ∫|<i>f</i> − <i>g</i>| y la oscura es ∫<i>x</i>|<i>f</i> − <i>g</i>| = <i>d</i>₁(Ψ<i>f</i>, Ψ<i>g</i>); las dos quedan por debajo de la línea <i>d</i>∞. Moviendo el pico hacia el 0, el factor <i>x</i> lo aplasta todavía más.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- 39 -->
+  <article class="ej" id="ejp4-39" data-short="39" data-title="cos(x), √x en [1, +∞) y la integral en (C([0,1]), d∞) son Lipschitz; √x en [0, +∞) no" data-topics="continuidad,funciones">
+    <div class="ej-head">
+      <span class="tag">39</span>
+      <h3>$\cos(x)$, $\sqrt{x}$ en $[1, +\infty)$ y la integral en $(C([0, 1]), d_\infty)$ son Lipschitz; $\sqrt{x}$ en $[0, +\infty)$ no</h3>
+      <span class="src">Ejemplo 5.26 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-funciones">funciones</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>Sea $f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$, $f(x) = \cos(x)$.</li>
+        <li>Sea $f : ([1, +\infty), |\cdot|) \to (\mathbb{R}, |\cdot|)$, $f(x) = \sqrt{x}$.</li>
+        <li>Sea $F : (C([0, 1]), d_\infty) \to (C([0, 1]), d_\infty)$ la función definida como
+          $$F(f)(x) = \int_0^x f(t)\, dt.$$</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) $\cos$ es Lipschitz de constante $1$</p>
+          <p>Como $f$ es derivable, sabemos que para todo $x, y \in \mathbb{R}$ <span class="ref" data-ref="ext-tvm">existe un $z$ entre $x$ e $y$</span> tal que
+            $$|\cos(x) - \cos(y)| = |\sin(z)| \cdot |x - y| \le 1 \cdot |x - y|,$$
+            lo que nos dice que $f$ es <span class="ref" data-ref="def-5.24">Lipschitz de constante $1$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-39-c1" aria-label="El gráfico de coseno, una secante entre x e y y el cono de pendientes más y menos 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-39-x"><i>x</i></label><input type="range" id="ejp4-39-x" min="0" max="6.2" step="0.01" value="1"><output id="ejp4-39-x-o"></output></div>
+            <div class="slider"><label for="ejp4-39-y"><i>y</i></label><input type="range" id="ejp4-39-y" min="0" max="6.2" step="0.01" value="2.6"><output id="ejp4-39-y-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-39-r1" aria-live="polite"></dl>
+          <figcaption>La secante de cos entre <i>x</i> e <i>y</i> (naranja) nunca es más empinada que 1: el gráfico entero queda dentro del cono de pendientes ±1 apoyado en (<i>x</i>, cos <i>x</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) $\sqrt{x}$ en $[1, +\infty)$ es Lipschitz de constante $1/2$</p>
+          <p>Otra vez, como $f$ es derivable, sabemos que para todo $x, y \in [1, +\infty)$ existe un $z$ entre $x$ e $y$ tal que
+            $$|\sqrt{x} - \sqrt{y}| = \frac{1}{2\sqrt{z}} |x - y| \le \frac{1}{2} |x - y|,$$
+            dado que $z \ge 1$. Esto nos dice que $f$ es Lipschitz de constante $1/2$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) $\sqrt{x}$ en $[0, +\infty)$ no es Lipschitz</p>
+          <p>Sin embargo, también usando el teorema del valor medio, podemos ver que $f$ no va a ser Lipschitz si la pensamos como función $f : [0, +\infty) \to \mathbb{R}$. Para ver esto, supongamos que sí lo es. Sea $C \gt 0$ la constante de Lipschitz de la función y sea $x \in (0, +\infty)$ tal que $\frac{1}{2\sqrt{x}} \gt C$. Como $x \gt 0$, podemos encontrar $y$ tal que $0 \lt y \lt x$. Como estamos suponiendo que $f$ es Lipschitz de constante $C$, tenemos que
+            $$|\sqrt{x} - \sqrt{y}| \le C |x - y|.$$
+            Por otro lado, por el teorema del valor medio, existe $y \lt z \lt x$ tal que
+            $$\begin{aligned} |\sqrt{x} - \sqrt{y}| &= \frac{1}{2\sqrt{z}} |x - y| \ge \frac{1}{2\sqrt{x}} |x - y| \\ &\gt C |x - y|, \end{aligned}$$
+            lo cual es absurdo.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-39-c2" aria-label="El gráfico de raíz de x con la zona [1, infinito) sombreada y una secante entre x e y"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-39-u"><i>x</i></label><input type="range" id="ejp4-39-u" min="0" max="4" step="0.01" value="0.6"><output id="ejp4-39-u-o"></output></div>
+            <div class="slider"><label for="ejp4-39-v"><i>y</i></label><input type="range" id="ejp4-39-v" min="0" max="4" step="0.01" value="0.04"><output id="ejp4-39-v-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-39-r2" aria-live="polite"></dl>
+          <figcaption>La pendiente de la secante de √<i>x</i> entre <i>x</i> e <i>y</i> es 1/(√<i>x</i> + √<i>y</i>). En la zona sombreada [1, ∞) no pasa de 1/2; cerca del 0 se dispara, así que ninguna constante <i>C</i> sirve en [0, ∞).</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">c) La integral es Lipschitz de constante $1$</p>
+          <p>Veamos que $F$ es Lipschitz:
+            $$\begin{aligned} |F(f)(x) - F(g)(x)| &= \left|\int_0^x f(t)\, dt - \int_0^x g(t)\, dt\right| \\ &= \left|\int_0^x f(t) - g(t)\, dt\right| \\ &\le \int_0^x |f(t) - g(t)|\, dt \\ &\le \int_0^x d_\infty(f, g)\, dt \\ &= x\, d_\infty(f, g) \le d_\infty(f, g). \end{aligned}$$
+            Como esto vale para todo $0 \le x \le 1$, tenemos que
+            $$d_\infty(F(f), F(g)) \le d_\infty(f, g),$$
+            lo que nos dice que $F$ es Lipschitz de constante $1$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-39-c3" aria-label="Arriba f y g con la franja d infinito; abajo F(f) y F(g) y la recta x d infinito que acota su distancia"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-39-t"><i>x</i></label><input type="range" id="ejp4-39-t" min="0" max="1" step="0.01" value="0.6"><output id="ejp4-39-t-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-39-r3" aria-live="polite"></dl>
+          <figcaption>Arriba, dos funciones <i>f</i> (azul) y <i>g</i> (naranja) elegidas para el dibujo; <i>d</i>∞(<i>f</i>, <i>g</i>) es la mayor distancia vertical. Abajo, sus primitivas <i>F</i>(<i>f</i>) y <i>F</i>(<i>g</i>): en cada <i>x</i>, la distancia entre ellas no supera <i>x</i>·<i>d</i>∞(<i>f</i>, <i>g</i>) (la recta punteada), y por lo tanto tampoco <i>d</i>∞(<i>f</i>, <i>g</i>).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 6 ===================== -->
+<section class="bloque" id="ejp4-b6">
+  <h2><span class="bn">Bloque 6</span>Continuidad uniforme: ejemplos, contraejemplos y pegado</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Decidir <span class="ref" data-ref="def-5.14">continuidad uniforme</span>: por la vía positiva (Lipschitz vía valor medio, o un $\delta$ que no depende del punto) y por la negativa (<span class="ref" data-ref="prop-5.18">dos sucesiones $(x_n)_n, (y_n)_n$ con $|x_n - y_n| \to 0$ pero $|f(x_n) - f(y_n)| \ge \varepsilon$</span>). Además, dos resultados de "pegado": si $f$ es uniformemente continua en dos piezas que se tocan en un punto, o en dos piezas a distancia positiva, lo es en la unión. Es el modelo de los <a href="../guias/p4.html#guiap4-ej13" class="xg" data-guia="p4" data-ej="13">Ejercicios 13</a>, <a href="../guias/p4.html#guiap4-ej14" class="xg" data-guia="p4" data-ej="14">14</a>, <a href="../guias/p4.html#guiap4-ej15" class="xg" data-guia="p4" data-ej="15">15</a> y <a href="../guias/p4.html#guiap4-ej16" class="xg" data-guia="p4" data-ej="16">16</a> de la Práctica 4 (contraejemplos con $1/x$ y $\sin(1/x)$, continuidad uniforme y sucesiones de Cauchy, acotada y no uniformemente continua, $d(A, B) = 0 \Longrightarrow d'(f(A), f(B)) = 0$).</p></div>
+
+  <!-- C6-5 -->
+  <article class="ej" id="ejp4-c6-5" data-short="C6-5" data-title="sin(x) es uniformemente continua en ℝ; x² no lo es en (0, +∞)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-5</span>
+      <h3>$\sin(x)$ es uniformemente continua en $\mathbb{R}$; $x^2$ no lo es en $(0, +\infty)$</h3>
+      <span class="src">Clase 6 · Ejemplo 5</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Decidir si son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>.</p>
+      <ol class="items">
+        <li>$f : \mathbb{R} \to \mathbb{R}$, $f(x) = \sin(x)$.</li>
+        <li>$f : (0, +\infty) \to \mathbb{R}$, $f(x) = x^2$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) $\sin$ es Lipschitz</p>
+          <p>Una forma es viendo que es <span class="ref" data-ref="def-5.24">Lipschitz</span>, mediante el <span class="ref" data-ref="ext-tvm">teorema del valor medio</span>: dados $x \lt y$, existe $c \in (x, y)$ tal que
+            $$f(x) - f(y) = f'(c)(x - y).$$
+            Entonces
+            $$\begin{aligned} |f(x) - f(y)| &= |\sin(x) - \sin(y)| \\ &= |\cos(c)| \cdot |x - y| \le |x - y|. \end{aligned}$$
+            Como $f$ es Lipschitz, <span class="ref" data-ref="ejap-5.25">es uniformemente continua</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) $x^2$ no es <span class="ref" data-ref="prop-5.18">uniformemente continua</span></p>
+          <p>Veamos que <b>no es uniformemente continua</b>. Para ello, razonamos como para ver que una $f$ no es Lipschitz: <b>existen $\varepsilon \gt 0$ y $(x_n)_n \subseteq (0, +\infty)$, $(y_n)_n \subseteq (0, +\infty)$ tales que $|x_n - y_n| \to 0$ pero</b>
+            $$|f(x_n) - f(y_n)| \ge \varepsilon \text{ para todo } n.$$</p>
+          <p>El problema ocurre cuando $x_n, y_n \to +\infty$. Sea $x_n = n$, $y_n = n + 1/n$. Tenemos que $|x_n - y_n| = 1/n \to 0$ pero
+            $$\begin{aligned} |f(x_n) - f(y_n)| &= |n^2 - (n + 1/n)^2| \\ &= \cancel{n^2} + 2 + 1/n^2 - \cancel{n^2} \gt 2. \end{aligned}$$
+            Tomando $\varepsilon = 2$ vemos que no es uniformemente continua.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-5-c" aria-label="El par n y n más 1/n sobre el gráfico de x al cuadrado o de seno, con el salto vertical entre sus imágenes"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Función</legend>
+              <label><input type="radio" name="ejp4-c6-5-m" value="sq" checked>x²</label>
+              <label><input type="radio" name="ejp4-c6-5-m" value="sin">sin x</label>
+            </fieldset>
+            <div class="slider"><label for="ejp4-c6-5-n"><i>n</i></label><input type="range" id="ejp4-c6-5-n" min="1" max="12" step="1" value="2"><output id="ejp4-c6-5-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-5-r" aria-live="polite"></dl>
+          <figcaption>El mismo par (<i>n</i>, <i>n</i> + 1/<i>n</i>) para las dos funciones, en una ventana que sigue a <i>n</i>. Para <i>x</i>² el salto vertical no baja de 2 aunque los puntos se peguen; para sin el salto se achica junto con 1/<i>n</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C6-6 -->
+  <article class="ej" id="ejp4-c6-6" data-short="C6-6" data-title="Producto de uniformemente continuas y acotadas" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-6</span>
+      <h3>Producto de uniformemente continuas y acotadas</h3>
+      <span class="src">Clase 6 · Ejemplo 6</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $(X, d)$ un espacio métrico y $f, g : X \to \mathbb{R}$ <span class="ref" data-ref="def-5.14">uniformemente continuas</span> y acotadas. Probar que $f \cdot g$ es uniformemente continua. Mostrar que el producto de funciones uniformemente continuas puede no serlo <b>incluso si una de ellas está acotada</b>. [Sugerencia: $f(x) = x \sin(x)$.]</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Los $\delta$ de $f$ y de $g$</p>
+          <p>Sea $\varepsilon \gt 0$. Queremos ver que existe $\delta \gt 0$ tal que $d(x, y) \lt \delta$ implica que
+            $$|f(x) \cdot g(x) - f(y) \cdot g(y)| \lt \varepsilon.$$
+            Como $f, g$ son uniformemente continuas, existen $\delta_1 \gt 0$, $\delta_2 \gt 0$ tales que
+            $$\begin{aligned} d(x, y) \lt \delta_1 &\Longrightarrow |f(x) - f(y)| \lt \varepsilon', \\ d(x, y) \lt \delta_2 &\Longrightarrow |g(x) - g(y)| \lt \varepsilon', \end{aligned}$$
+            donde $\varepsilon' \gt 0$ lo elegiremos después.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Sumar y restar $f(y) g(x)$</p>
+          <p>Entonces
+            $$\begin{aligned} &|f(x) g(x) - f(y) g(y)| \\ &\le |f(x) g(x) - f(y) g(x)| + |f(y) g(x) - f(y) g(y)| \\ &= |g(x)| |f(x) - f(y)| + |f(y)| |g(x) - g(y)|. \quad (*) \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Usar que son acotadas</p>
+          <p>Como $f, g$ son acotadas, existen $M_1 \gt 0$, $M_2 \gt 0$ tales que $|g(x)| \le M_1$ para todo $x \in X$, $|f(x)| \le M_2$ para todo $x \in X$. Entonces en $(*)$ acotamos
+            $$\begin{aligned} |f(x) g(x) - f(y) g(y)| &\le M_1 \varepsilon' + M_2 \varepsilon' \\ &= (M_1 + M_2) \varepsilon' \end{aligned}$$
+            si $d(x, y) \lt \min\{\delta_1, \delta_2\}$. Tomando $\varepsilon' \lt \frac{\varepsilon}{M_1 + M_2}$, concluimos.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">La hipótesis de acotadas es necesaria: $x \sin(x)$</p>
+          <p>Veamos que la hipótesis de acotadas es necesaria. Sea $f : \mathbb{R} \to \mathbb{R}$, $f(x) = x \sin(x)$. Sean $x_n = \pi + 2\pi n$, $y_n = \pi + 2\pi n + 1/n$. Se tiene que $|x_n - y_n| = 1/n \to 0$, pero
+            $$\begin{aligned} &|f(x_n) - f(y_n)| \\ &= \Big|(\pi + 2\pi n) \underbrace{\sin(\pi + 2\pi n)}_{= 0} \\ &\qquad - \left(\pi + 2\pi n + \tfrac{1}{n}\right) \sin\left(\pi + 2\pi n + \tfrac{1}{n}\right)\Big| \\ &= \left|\left(\pi + 2\pi n + \tfrac{1}{n}\right) \sin\left((\pi + 2\pi n) + \tfrac{1}{n}\right)\right| \\ &= \Big|\left(\pi + 2\pi n + \tfrac{1}{n}\right) \Big[\underbrace{\sin(\pi + 2\pi n)}_{= 0} \cdot \cos\left(\tfrac{1}{n}\right) \\ &\qquad + \underbrace{\cos(\pi + 2\pi n)}_{= -1} \sin\left(\tfrac{1}{n}\right)\Big]\Big| \\ &= \underbrace{\pi \sin\left(\tfrac{1}{n}\right)}_{\to 0} + \underbrace{2\pi n \sin\left(\tfrac{1}{n}\right)}_{(\star)} + \underbrace{\tfrac{1}{n} \sin\left(\tfrac{1}{n}\right)}_{\to 0}. \end{aligned}$$
+            $(\star)$ Como $2\pi n \sin(1/n) = 2\pi \frac{\sin(1/n)}{1/n} \to 2\pi$, tenemos que $|f(x_n) - f(y_n)| \to 2\pi$, y en consecuencia <span class="ref" data-ref="prop-5.18">existe $\varepsilon \gt 0$ tal que $|f(x_n) - f(y_n)| \ge \varepsilon$ para todo $n$ suficientemente grande</span>. $\blacksquare$</p>
+          <p class="nota"><b>Nota</b>El manuscrito no explicita qué par de funciones multiplica en el contraejemplo: $x \sin(x)$ es el producto de $\operatorname{id}_{\mathbb{R}}$ (uniformemente continua, no acotada) por $\sin$ (uniformemente continua y acotada, <a href="#ejp4-c6-5">Ejemplo 5 a)</a>). En la última igualdad desaparece la barra de valor absoluto porque $\sin(1/n) \gt 0$ para todo $n \ge 1$, así que la expresión entre barras es $-(\pi + 2\pi n + 1/n) \sin(1/n)$ y su módulo es la suma escrita.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-6-c" aria-label="El gráfico de x sen x entre las rectas más y menos x, con el par x_n, y_n y el salto vertical entre sus imágenes"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-6-n"><i>n</i></label><input type="range" id="ejp4-c6-6-n" min="1" max="10" step="1" value="2"><output id="ejp4-c6-6-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-6-r" aria-live="polite"></dl>
+          <figcaption><i>x</i> sin <i>x</i> entre las rectas ±<i>x</i> (punteadas), en una ventana alrededor de <i>x<sub>n</sub></i> = π + 2π<i>n</i>. Ahí la función cruza el cero con pendiente ≈ −<i>x<sub>n</sub></i>; por eso avanzar 1/<i>n</i> baja casi <i>x<sub>n</sub></i>/<i>n</i> ≈ 2π, aunque el paso horizontal se achique.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C6-7 -->
+  <article class="ej" id="ejp4-c6-7" data-short="C6-7" data-title="Pegado de continuidad uniforme en [0, a] y [a, +∞)" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-7</span>
+      <h3>Pegado de continuidad uniforme en $[0, a]$ y $[a, +\infty)$</h3>
+      <span class="src">Clase 6 · Ejemplo 7</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sea $f : [0, +\infty) \to \mathbb{R}$. Supongamos que existe $a \gt 0$ tal que $f|_{[0, a]}$ y $f|_{[a, +\infty)}$ son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>. Probar que $f$ es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Los dos trozos por separado</p>
+          <p>Sea $\varepsilon \gt 0$. Queremos ver que existe $\delta \gt 0$ tal que $|x - y| \lt \delta$ implica que $|f(x) - f(y)| \lt \varepsilon$.</p>
+          <ul class="items">
+            <li>Si $x, y \in [0, a]$, existe $\delta_1 \gt 0$ tal que $|x - y| \lt \delta_1$ implica que $|f(x) - f(y)| \lt \varepsilon'$.</li>
+            <li>Si $x, y \in [a, +\infty)$, existe $\delta_2 \gt 0$ tal que $|x - y| \lt \delta_2$ implica que $|f(x) - f(y)| \lt \varepsilon'$.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Un punto de cada lado: $a$ hace de puente</p>
+          <p>Sea $x \in [0, a]$, $y \in [a, +\infty)$. <i>(Dibujo: la semirrecta desde $0$, con $x$ a la izquierda de $a$ a distancia $\lt \delta_1$ e $y$ a la derecha de $a$ a distancia $\lt \delta_2$.)</i></p>
+          <p>La idea es que si $x$ e $y$ están muy cerca, estarán cerca de $a$, y si $|x - a| \lt \delta_1$ entonces $|f(x) - f(a)| \lt \varepsilon'$ y similarmente $|y - a| \lt \delta_2$, entonces $|f(y) - f(a)| \lt \varepsilon'$, por lo tanto $f(x)$ y $f(y)$ estarán muy cerca entre sí. Formalmente, sea $\delta \lt \min\{\delta_1, \delta_2\}$. Supongamos que $|x - y| \lt \delta$. Como $x \le a \le y$, tenemos que
+            $$\begin{aligned} |x - a| &= a - x \le y - x = |y - x| \lt \delta \lt \delta_1, \\ &\quad\text{entonces } |f(x) - f(a)| \lt \varepsilon', \quad (1) \\ |y - a| &= y - a \le y - x = |y - x| \lt \delta \lt \delta_2, \\ &\quad\text{entonces } |f(y) - f(a)| \lt \varepsilon'. \quad (2) \end{aligned}$$
+            Por lo tanto
+            $$\begin{aligned} |f(x) - f(y)| &\le \underbrace{|f(x) - f(a)|}_{\lt \varepsilon' \text{ por } (1)} + \underbrace{|f(a) - f(y)|}_{\lt \varepsilon' \text{ por } (2)} \\ &\lt 2\varepsilon'. \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-7-c" aria-label="Una función pegada en a = 1, con x a la izquierda e y a la derecha de a; los saltos de x a a y de a a y suman el salto total"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-7-x"><i>x</i></label><input type="range" id="ejp4-c6-7-x" min="0.5" max="1" step="0.01" value="0.85"><output id="ejp4-c6-7-x-o"></output></div>
+            <div class="slider"><label for="ejp4-c6-7-h">|<i>x</i> − <i>y</i>|</label><input type="range" id="ejp4-c6-7-h" min="0.02" max="0.5" step="0.01" value="0.3"><output id="ejp4-c6-7-h-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-7-r" aria-live="polite"></dl>
+          <figcaption>El dibujo que describe el texto, con una <i>f</i> elegida para el ejemplo y <i>a</i> = 1. Cuando <i>x</i> e <i>y</i> quedan a ambos lados de <i>a</i>, el punto <i>a</i> hace de puente: <i>x</i> y <i>a</i> están en el primer trozo y a distancia menor que |<i>x</i> − <i>y</i>|, lo mismo <i>a</i> e <i>y</i> en el segundo. Los dos saltos chicos acotan el salto total.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Elegir $\varepsilon'$</p>
+          <p>Tomando $\varepsilon' \lt 2\varepsilon$, concluimos. $\blacksquare$</p>
+          <p class="nota"><b>Nota</b>El manuscrito cierra con "tomando $\varepsilon' \lt 2\varepsilon$"; para que $2\varepsilon' \le \varepsilon$ hay que tomar $\varepsilon' \le \varepsilon/2$. En el párrafo de la idea escribe "$|x - a| \lt \delta$ entonces $|f(x) - f(a)| \lt \varepsilon$" mezclando $\delta$ con $\delta_1$ y $\varepsilon$ con $\varepsilon'$; la versión formal de abajo es la correcta.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- C6-8 -->
+  <article class="ej" id="ejp4-c6-8" data-short="C6-8" data-title="Pegado de continuidad uniforme en A ∪ B con d(A, B) positiva" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">C6-8</span>
+      <h3>Pegado de continuidad uniforme en $A \cup B$ con $d(A, B) \gt 0$</h3>
+      <span class="src">Clase 6 · Ejemplo 8</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $(X, d)$, $(Y, d')$ espacios métricos y $f : X \to Y$. Supongamos que $X = A \cup B$, con $A, B$ tales que $d(A, B) \gt 0$. Si $f|_A$ y $f|_B$ son <span class="ref" data-ref="def-5.14">uniformemente continuas</span>, entonces $f$ es uniformemente continua.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Los $\delta$ de cada pieza</p>
+          <p>Sea $\varepsilon \gt 0$. Como $f|_A$ y $f|_B$ son uniformemente continuas, existen $\delta_A \gt 0$, $\delta_B \gt 0$ tales que</p>
+          <ul class="items">
+            <li>si $x, y \in A$ y $d(x, y) \lt \delta_A$ entonces $d'(f(x), f(y)) \lt \varepsilon'$;</li>
+            <li>si $x, y \in B$ y $d(x, y) \lt \delta_B$ entonces $d'(f(x), f(y)) \lt \varepsilon'$.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Con $\delta$ chico no hay pares que crucen la brecha</p>
+          <p><i>(Dibujo: dos intervalos $A$ y $B$ separados por una brecha de longitud $d(A, B)$; para $x \in A$, $y \in B$ se marca $d(x, y) \ge d(A, B)$.)</i> Notemos que si $d(A, B) \gt 0$ entonces $\overline{A} \cap \overline{B} = \emptyset$ (es el contrarrecíproco del <a href="../guias/p3.html#guiap3-ej11" class="xg" data-guia="p3" data-ej="11">ejercicio 11</a> c), $\overline{A} \cap \overline{B} \neq \emptyset \Longrightarrow d(A, B) = 0$).</p>
+          <p>La idea es que si tomamos $\delta \gt 0$ muy pequeño, no puede pasar que $d(x, y) \lt \delta$ con $x \in A$, $y \in B$. Si tomamos $\delta \lt \min\{\delta_A, \delta_B, d(A, B)\}$, si $x \in A$, $y \in B$, $d(x, y) \lt \delta$, entonces
+            $$d(A, B) \le d(x, y) \lt \delta \lt d(A, B),$$
+            absurdo. Por lo tanto $d(x, y) \lt \delta$ implica que $x \in A, y \in A$, o $x \in B, y \in B$.</p>
+          <ul class="items">
+            <li>Si $x, y \in A$, como $d(x, y) \lt \delta \lt \delta_A$, tenemos que $d'(f(x), f(y)) \lt \varepsilon'$;</li>
+            <li>si $x, y \in B$, como $d(x, y) \lt \delta \lt \delta_B$, tenemos que $d'(f(x), f(y)) \lt \varepsilon'$.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c6-8-c" aria-label="Dos intervalos A y B separados por una brecha de 0,8, con una regla de largo delta apoyada en el borde de A"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c6-8-d">δ</label><input type="range" id="ejp4-c6-8-d" min="0.1" max="1.6" step="0.01" value="0.5"><output id="ejp4-c6-8-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c6-8-r" aria-live="polite"></dl>
+          <figcaption>El dibujo que describe el texto, con <i>A</i> = [0; 1,2], <i>B</i> = [2; 3,4] y <i>f</i> elegidas para el ejemplo: <i>d</i>(<i>A</i>, <i>B</i>) = 0,8. La regla de largo δ apoyada en el borde de <i>A</i>: mientras δ ≤ <i>d</i>(<i>A</i>, <i>B</i>) no llega a <i>B</i>, y ningún par que cruza la brecha cuenta como "cercano".</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Elegir $\varepsilon'$</p>
+          <p>Tomando $\varepsilon' \lt \varepsilon$ concluimos. $\blacksquare$</p>
+          <p class="nota"><b>Nota</b>El "ejercicio 11 c)" citado es el <a href="../guias/p3.html#guiap3-ej11" class="xg" data-guia="p3" data-ej="11">Ejercicio 11</a> (c) de la Práctica 3 ($\hat{d}(A, B) = 0 \Longleftrightarrow \overline{A} \cap \overline{B} \neq \emptyset$); la implicación que se usa, $\overline{A} \cap \overline{B} \neq \emptyset \Longrightarrow d(A, B) = 0$, es la dirección verdadera de ese ítem. Además, la observación $\overline{A} \cap \overline{B} = \emptyset$ no se vuelve a usar en la prueba: lo que hace falta es sólo la desigualdad $d(A, B) \le d(x, y)$ para $x \in A$, $y \in B$, que sale de la definición de <span class="ref" data-ref="def-5">ínfimo</span>.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 37 -->
+  <article class="ej" id="ejp4-37" data-short="37" data-title="x² no es uniformemente continua en ℝ; toda función desde un discreto lo es" data-topics="continuidad">
+    <div class="ej-head">
+      <span class="tag">37</span>
+      <h3>$x^2$ no es uniformemente continua en $\mathbb{R}$; toda función desde un discreto lo es</h3>
+      <span class="src">Ejemplo 5.17 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>Sea $f : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, |\cdot|)$ la función $f(x) = x^2$. Sabemos que $f$ es continua en todo $\mathbb{R}$. Veamos que $f$ no es <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</li>
+        <li>Sea $f : (M, d) \to (N, d')$ con $d$ la <span class="ref" data-ref="ejem-4.2">métrica discreta</span> y $(N, d')$ cualquiera. Veamos que $f$ es uniformemente continua.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Qué hay que ver</p>
+          <p>Para ver que $f$ no es uniformemente continua, deberíamos ver que existe $\varepsilon \gt 0$ tal que para todo $\delta \gt 0$ existen $x, y$ tal que $|x - y| \lt \delta$ pero $|f(x) - f(y)| \ge \varepsilon$ (<span class="ref" data-ref="obs-5.16">Observación 5.16</span>).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) Ir a buscar $x$ lejos</p>
+          <p>Esto se puede lograr de muchas formas distintas. Una de ellas es la siguiente: tomemos $\varepsilon = 1$. Dado $\delta \gt 0$, si $x$ es cualquiera en $\mathbb{R}$ y si $y = x + \delta/2$, entonces tenemos que $|x - y| = \delta/2 \lt \delta$. Veamos que pasa con $|f(x) - f(y)|$:
+            $$\begin{aligned} |f(x) - f(y)| &= |x^2 - (x + \delta/2)^2| \\ &= \left|x^2 - \left(x^2 + \delta x + \frac{\delta^2}{4}\right)\right| \\ &= \left|\delta x + \frac{\delta^2}{4}\right| = \delta \left|x + \frac{\delta}{4}\right|. \end{aligned}$$
+            Si elegimos $x \gt 1/\delta$ (en particular, $x \gt 0$), nos sale que
+            $$|f(x) - f(y)| = \delta \left|x + \frac{\delta}{4}\right| \ge \delta x \gt 1 = \varepsilon,$$
+            lo que nos dice que la función $f$ <b>no</b> es uniformemente continua.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-37-c" aria-label="Para cada delta, el par x = 1,1/delta e y = x + delta/2 sobre el gráfico de x al cuadrado, con un salto vertical mayor que 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-37-d">δ</label><input type="range" id="ejp4-37-d" min="0.08" max="1" step="0.01" value="0.5"><output id="ejp4-37-d-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-37-r" aria-live="polite"></dl>
+          <figcaption>Para cada δ, el par <i>x</i> = 1,1/δ (un <i>x</i> &gt; 1/δ elegido para el dibujo) e <i>y</i> = <i>x</i> + δ/2. Cuanto más chico es δ, más lejos hay que ir a buscar <i>x</i>, pero siempre hay uno: el salto vertical nunca baja de 1.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) Desde un discreto, $\delta = 1/2$ sirve en todos lados</p>
+          <p>Dado $\varepsilon \gt 0$, tomemos $\delta = 1/2$. Entonces tenemos que para todo $x \in M$, $B(x, 1/2) = \{x\}$ y por lo tanto
+            $$f(B(x, 1/2)) = f(\{x\}) = \{f(x)\} \subseteq B(f(x), \varepsilon).$$
+            Como la elección de $\delta$ no depende del punto $x$, vemos que cualquier función $f$ es uniformemente continua.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 7 ===================== -->
+<section class="bloque" id="ejp4-b7">
+  <h2><span class="bn">Bloque 7</span>Conjuntos densos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Probar que un conjunto es denso (<span class="ref" data-ref="def-5.20">Definición 5.20</span>) mostrando que todo punto del espacio es límite de una sucesión del conjunto (<span class="ref" data-ref="prop-4.46">Proposición 4.46</span>). Es el vocabulario de los <a href="../guias/p4.html#guiap4-ej7" class="xg" data-guia="p4" data-ej="7">Ejercicios 7</a> y <a href="../guias/p4.html#guiap4-ej8" class="xg" data-guia="p4" data-ej="8">8</a> de la Práctica 4 (dos continuas que coinciden en un denso son iguales; la imagen continua y suryectiva de un denso es densa).</p>
+    <p>Dos resultados de la clase del 07/10 son <b>literalmente</b> esos ejercicios: el Lema 3.1 (<a href="#ejp4-c9-3-1">C9-3.1</a>) es el <a href="../guias/p4.html#guiap4-ej8" class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a> y el Lema 3.2 (<a href="#ejp4-c9-3-2">C9-3.2</a>) es el <a href="../guias/p4.html#guiap4-ej7" class="xg" data-guia="p4" data-ej="7">Ejercicio 7</a> (a). Ojo: la guía agrega en el <a href="../guias/p4.html#guiap4-ej8" class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a> la hipótesis "$f$ suryectiva", que la clase omite y que hace falta (ver la nota en C9-3.1). El Problema 3.1 (<a href="#ejp4-c9-3-1b">C9-3.1b</a>) muestra para qué sirve el Lema 3.2: para determinar una función continua alcanza con conocerla en $\mathbb{Q}$. La misma idea (aproximar un real por racionales o por irracionales) decide el <a href="../guias/p4.html#guiap4-ej2" class="xg" data-guia="p4" data-ej="2">Ejercicio 2</a>.</p>
+  </div>
+
+  <!-- 38 -->
+  <article class="ej" id="ejp4-38" data-short="38" data-title="ℚ e 𝕀 = ℝ ∖ ℚ son densos en ℝ" data-topics="densidad,sucesiones">
+    <div class="ej-head">
+      <span class="tag">38</span>
+      <h3>$\mathbb{Q}$ y $\mathbb{I} = \mathbb{R} \setminus \mathbb{Q}$ son densos en $\mathbb{R}$</h3>
+      <span class="src">Ejemplo 5.21 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>$\mathbb{Q} \subseteq (\mathbb{R}, |\cdot|)$ es un conjunto <span class="ref" data-ref="def-5.20">denso</span>.</li>
+        <li>$\mathbb{I} = \mathbb{R} \setminus \mathbb{Q} \subseteq (\mathbb{R}, |\cdot|)$ el conjunto de los números irracionales también es denso.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Racionales</p>
+          <p>Si $x \in \mathbb{R}$, sabemos que existe una sucesión de racionales $(q_n) \subseteq \mathbb{Q}$ tal que $q_n \to x$. Esto nos dice que <span class="ref" data-ref="prop-4.46">$x \in \overline{\mathbb{Q}}$</span>.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) Irracionales</p>
+          <p>Dado $x \in \mathbb{R}$, consideremos $y = x + 1/n$. Como $x \lt y$, sabemos que debe existir un número irracional $z_n$ tal que $x \lt z_n \lt x + 1/n$ (por el <a href="../guias/p1.html#guiap1-ej2" class="xg" data-guia="p1" data-ej="2">ejercicio 2 de la guía 1</a>). Esto nos dice que
+            $$|x - z_n| \lt \frac{1}{n} \to 0 \quad \text{cuando } n \to \infty,$$
+            lo cual nos dice que $(z_n) \subseteq \mathbb{I}$ es una sucesión tal que $z_n \to x$. Por lo tanto, <span class="ref" data-ref="prop-4.46">$x \in \overline{\mathbb{I}}$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-38-c" aria-label="Zoom alrededor de x = raíz de 2 menos 1 con el intervalo (x, x + 1/n), un racional y un irracional adentro"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-38-n"><i>n</i></label><input type="range" id="ejp4-38-n" min="1" max="60" step="1" value="4"><output id="ejp4-38-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-38-r" aria-live="polite"></dl>
+          <figcaption>Zoom alrededor de <i>x</i> = √2 − 1 (elegido para el dibujo). En el intervalo (<i>x</i>, <i>x</i> + 1/<i>n</i>) siempre hay un racional (el primer múltiplo de 1/<i>n</i> después de <i>x</i>) y un irracional (por ejemplo <i>x</i> + 1/(2<i>n</i>)). Al crecer <i>n</i> la ventana se cierra sobre <i>x</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-3.1 -->
+  <article class="ej" id="ejp4-c9-3-1" data-short="C9-3.1" data-title="La imagen continua de un denso es densa" data-topics="densidad,continuidad">
+    <div class="ej-head">
+      <span class="tag">C9-3.1</span>
+      <h3>La imagen continua de un denso es densa</h3>
+      <span class="src">Clase 9 · Lema 3.1 $=$ <a href="../guias/p4.html#guiap4-ej8" class="xg" data-guia="p4" data-ej="8">Ejercicio 8</a> de la guía</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $f : X \to Y$ una función continua entre dos espacios métricos. Se tiene que $f(D) \subseteq Y$ es un conjunto <span class="ref" data-ref="def-5.20">denso</span> siempre que $D \subseteq X$ sea denso.</p>
+      <p><i>Nota</i>: tal como está enunciado, el lema necesita además que $f$ sea sobreyectiva (o bien debe leerse "$f(D)$ es denso en $f(X)$"); la guía lo pide con "$f$ continua y suryectiva". Si la imagen de $f$ no es todo $Y$, un abierto $A \subseteq Y$ disjunto de $f(X)$ tiene $f^{-1}(A) = \emptyset$ y el argumento de la demostración, que supone $f^{-1}(A)$ no vacío, no se aplica.</p>
+    </div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Denso es "toca a todo abierto", y la continuidad transporta abiertos hacia atrás.</em> Hay que ver que todo abierto $A \subseteq Y$ corta a $f(D)$. Como $f$ es continua, $f^{-1}(A)$ es abierto en $X$ (y no vacío si $f$ es sobreyectiva y $A \neq \emptyset$), así que por densidad de $D$ contiene un punto $d \in D$; entonces $f(d) \in A \cap f(D)$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Todo abierto de $Y$ corta a $f(D)$</p>
+          <p>Sea $A \subseteq Y$ un conjunto abierto cualquiera (no vacío). Para ver que $f(D)$ es denso basta con probar que $f(D)$ interseca a $A$, ya que $A$ era arbitrario. Como $A$ es abierto y $f$ es continua, <span class="ref" data-ref="teo-5.9">$f^{-1}(A)$ es un abierto de $X$</span> (no vacío, por la sobreyectividad), y como $D$ es denso en $X$, debe ocurrir que <span class="ref" data-ref="def-4.22">$f^{-1}(A) \cap D \neq \emptyset$</span>. Esto último implica directamente que $A \cap f(D) \neq \emptyset$, y concluimos lo deseado.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-3-1-c" aria-label="La función x al cubo menos x, una banda abierta A en el eje vertical, su preimagen en el eje horizontal y los puntos diádicos que caen en ella"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-3-1-a">centro de <i>A</i></label><input type="range" id="ejp4-c9-3-1-a" min="-1.3" max="1.3" step="0.01" value="0.3"><output id="ejp4-c9-3-1-a-o"></output></div>
+            <div class="slider"><label for="ejp4-c9-3-1-m"><i>D</i> = <i>k</i>/2<sup><i>m</i></sup></label><input type="range" id="ejp4-c9-3-1-m" min="1" max="6" step="1" value="3"><output id="ejp4-c9-3-1-m-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-3-1-r" aria-live="polite"></dl>
+          <figcaption><i>f</i>(<i>x</i>) = <i>x</i>³ − <i>x</i> (continua y sobre ℝ, elegida para el dibujo). <i>D</i> son los racionales diádicos <i>k</i>/2<sup><i>m</i></sup>, densos como ℚ (el dibujo muestra los de un <i>m</i> fijo). La banda naranja es un abierto <i>A</i> de <i>Y</i>; su preimagen (verde, en el eje horizontal) es abierta y no vacía, así que atrapa puntos de <i>D</i>, y sus imágenes caen en <i>A</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-3.2 -->
+  <article class="ej" id="ejp4-c9-3-2" data-short="C9-3.2" data-title="Dos continuas que coinciden en un denso coinciden en todo" data-topics="densidad,continuidad">
+    <div class="ej-head">
+      <span class="tag">C9-3.2</span>
+      <h3>Dos continuas que coinciden en un denso coinciden en todo</h3>
+      <span class="src">Clase 9 · Lema 3.2 $=$ <a href="../guias/p4.html#guiap4-ej7" class="xg" data-guia="p4" data-ej="7">Ejercicio 7</a> (a) de la guía</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $f, g : X \to Y$ dos funciones continuas entre espacios métricos y sea $D$ un conjunto <span class="ref" data-ref="def-5.20">denso</span> en $X$. Si $f(x) = g(x)$ para todo $x \in D$, tiene que ser que $f \equiv g$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Todo punto es límite de una sucesión del denso.</em> Fijado $x \in X$, la densidad de $D$ da $(x_n)_n \subseteq D$ con $x_n \to x$. Sobre $D$ las dos funciones son la misma sucesión $f(x_n) = g(x_n)$, y la continuidad de ambas obliga a que sus límites, $f(x)$ y $g(x)$, coincidan.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Pasar al límite por una sucesión de $D$</p>
+          <p>Sea $x \in X$ un elemento cualquiera, y sea $(x_n)_{n \in \mathbb{N}}$ una sucesión convergente a $x$ de elementos de $D$ (<span class="ref" data-ref="prop-4.46">esto puede hacerse ya que $D$ es denso</span>). <span class="ref" data-ref="teo-5.7">Por continuidad</span>, notar que
+            $$f(x) = \lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} g(x_n) = g(x),$$
+            de lo que concluimos lo deseado.</p>
+          <p class="nota"><b>Nota</b>El apunte dice "una sucesión convergente a $X$ de elementos de $D$"; se refiere a una sucesión convergente al punto $x$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-3-2-c" aria-label="Una función f, la sucesión diádica x_n que tiende a x estrella y, en la variante discontinua, un valor de g en x estrella que no es el límite"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Variante</legend>
+              <label><input type="radio" name="ejp4-c9-3-2-g" value="c" checked><i>g</i> continua</label>
+              <label><input type="radio" name="ejp4-c9-3-2-g" value="d"><i>g</i> no continua</label>
+            </fieldset>
+            <div class="slider"><label for="ejp4-c9-3-2-n"><i>n</i></label><input type="range" id="ejp4-c9-3-2-n" min="1" max="12" step="1" value="3"><output id="ejp4-c9-3-2-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-3-2-r" aria-live="polite"></dl>
+          <figcaption><i>X</i> = [0; 1,2] y <i>D</i> los diádicos (elegidos para el dibujo); <i>x</i>* = √2/2 no es diádico. La sucesión <i>x<sub>n</sub></i> = ⌊2<sup><i>n</i></sup><i>x</i>*⌋/2<sup><i>n</i></sup> ∈ <i>D</i> tiende a <i>x</i>*, y ahí <i>f</i>(<i>x<sub>n</sub></i>) = <i>g</i>(<i>x<sub>n</sub></i>). En "<i>g</i> no continua", <i>g</i> coincide con <i>f</i> en <i>D</i> pero vale otra cosa en <i>x</i>*: los valores <i>g</i>(<i>x<sub>n</sub></i>) no llegan a <i>g</i>(<i>x</i>*). Sin continuidad el lema falla.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- C9-3.1b -->
+  <article class="ej" id="ejp4-c9-3-1b" data-short="C9-3.1b" data-title="Las continuas con f(x + y) = f(x) f(y) y f(1) = 2" data-topics="densidad,continuidad">
+    <div class="ej-head">
+      <span class="tag">C9-3.1b</span>
+      <h3>Las continuas con $f(x + y) = f(x) f(y)$ y $f(1) = 2$</h3>
+      <span class="src">Clase 9 · Problema 3.1</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-densidad">densidad</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun"><p>Caracterizar todas las funciones continuas $f : \mathbb{R} \to \mathbb{R}$ tales que $f(x + y) = f(x) f(y)$ para cualesquiera $x, y \in \mathbb{R}$ y $f(1) = 2$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Primero $\mathbb{N}$, después $\mathbb{Q}$, y la continuidad hace el resto.</em> La ecuación funcional determina $f$ en $\mathbb{N}$ ($f(n) = 2^n$, sumando unos), en los racionales positivos ($f(p/q)^q = f(p) = 2^p$) y en los negativos (de $2 = f(1) = f(1) f(p/q) f(-p/q)$ se despeja $f(-p/q)$). Así $f = 2^x$ en $\mathbb{Q}$, y como $f$ y $x \mapsto 2^x$ son continuas e iguales en un denso, el Lema 3.2 (<a href="#ejp4-c9-3-2">C9-3.2</a>) da $f(x) = 2^x$ en todo $\mathbb{R}$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">En los naturales</p>
+          <p>Notemos primero que, si $n \in \mathbb{N}$, se tiene que
+            $$f(n) = f(1 + \dots + 1) = f(1) \cdots f(1) = 2 \cdots 2 = 2^n.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">En los racionales positivos</p>
+          <p>Por otro lado, si evaluamos en $p/q$ con $p, q \in \mathbb{N}$, se tiene
+            $$\begin{aligned} f\left(\frac{p}{q}\right) &= f\left(\frac{p}{q}\right)^{q/q} = \left(f\left(\frac{p}{q}\right)^q\right)^{1/q} \\ &= f(p)^{1/q} = (2^p)^{1/q} = 2^{p/q}. \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">En los racionales negativos</p>
+          <p>Además, es claro que si tomamos $p/q$ con $p, q \in \mathbb{N}$, se tiene que
+            $$\begin{aligned} 2 = f(1) &= f\left(1 + \frac{p}{q} - \frac{p}{q}\right) = f(1) \cdot f\left(\frac{p}{q}\right) \cdot f\left(-\frac{p}{q}\right) \\ &= 2 \cdot f\left(\frac{p}{q}\right) \cdot f\left(-\frac{p}{q}\right), \end{aligned}$$
+            de lo que se concluye que, como $f(p/q) = 2^{p/q}$, debe tenerse que $f(-p/q) = 2^{-p/q}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">En todo $\mathbb{R}$, por densidad</p>
+          <p>Con todo lo probado hasta ahora, obtuvimos que si $x \in \mathbb{Q}$ entonces $f(x) = 2^x$. <span class="ref" data-ref="teo-5.7">Por hipótesis sabemos que $f$ es continua</span>, y asumiremos la continuidad de la exponencial como un hecho. Tenemos entonces que, dado un $x \in \mathbb{R}$ cualquiera, si tomamos una sucesión de racionales $(x_n)_{n \in \mathbb{N}}$ convergente a $x$ (cosa que podemos hacer porque <a href="#ejp4-38">los racionales son densos en $\mathbb{R}$</a>), se tiene que
+            $$f(x) = \lim_{n \to \infty} f(x_n) = \lim_{n \to \infty} 2^{x_n} = 2^x,$$
+            lo que termina de caracterizar a nuestra función.</p>
+          <p class="nota"><b>Nota</b>Dos detalles que el apunte deja implícitos: el caso $x = 0$ sale de $2 = f(1) = f(1 + 0) = 2 f(0)$, o sea $f(0) = 1 = 2^0$; y para tomar la raíz $q$-ésima real en $(f(p/q)^q)^{1/q} = f(p/q)$ hace falta $f(p/q) \ge 0$, que vale porque $f(p/q) = f(p/(2q))^2$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-c9-3-1b-c" aria-label="Los valores 2 a la p/q para racionales con denominador hasta Q, sobre la curva punteada 2 a la x"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-c9-3-1b-q"><i>Q</i></label><input type="range" id="ejp4-c9-3-1b-q" min="1" max="12" step="1" value="3"><output id="ejp4-c9-3-1b-q-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-c9-3-1b-r" aria-live="polite"></dl>
+          <figcaption>Los valores que la ecuación funcional fija sin usar continuidad: <i>f</i>(<i>p</i>/<i>q</i>) = 2<sup><i>p</i>/<i>q</i></sup> para los denominadores <i>q</i> ≤ <i>Q</i> en [−2; 2,4] (en verde, los enteros). Al subir <i>Q</i> los puntos llenan la curva punteada 2<sup><i>x</i></sup>; la continuidad completa los huecos (los irracionales).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 8 ===================== -->
+<section class="bloque" id="ejp4-b8">
+  <h2><span class="bn">Bloque 8</span>Homeomorfismos e isometrías</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>Usar la <span class="ref" data-ref="def-5.29">Definición 5.29</span> (homeomorfismo: continua, biyectiva y con inversa continua) y la <span class="ref" data-ref="def-5.33">Definición 5.33</span> (isometría). El <a href="#ejp4-40">Ejemplo 5.30</a> muestra los dos lados: un homeomorfismo entre $\mathbb{R}$ y $(-1, 1)$, y una biyección continua cuya inversa no lo es (la discreta contra la usual, vía el <span class="ref" data-ref="teo-5.7">Teorema 5.7</span>). El <a href="#ejp4-41">Ejemplo 5.35</a> aplica la <span class="ref" data-ref="obs-5.34">Observación 5.34</span>: una isometría es homeomorfismo con su imagen, aunque no sea sobreyectiva. La guía 4 no tiene ejercicios de homeomorfismos; el primero aparece en la <a href="../guias/p5.html#guiap5-ej13" class="xg" data-guia="p5" data-ej="13">Práctica 5, Ejercicio 13</a> (biyección continua desde un compacto).</p></div>
+
+  <!-- 40 -->
+  <article class="ej" id="ejp4-40" data-short="40" data-title="x/(1 + |x|) es un homeomorfismo; la identidad de (ℝ, δ) en (ℝ, |·|) no" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">40</span>
+      <h3>$x/(1 + |x|)$ es un homeomorfismo; la identidad de $(\mathbb{R}, \delta)$ en $(\mathbb{R}, |\cdot|)$ no</h3>
+      <span class="src">Ejemplo 5.30 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>Sea $h : (\mathbb{R}, |\cdot|) \to ((-1, 1), |\cdot|)$ la función $h(x) = \frac{x}{1 + |x|}$ (esta función la usamos en el capítulo de cardinalidad para probar que $\mathbb{R}$ y el intervalo $(-1, 1)$ son <span class="ref" data-ref="obs-3.21">coordinables</span>). Veamos que $h$ es un <span class="ref" data-ref="def-5.29">homeomorfismo</span>.</li>
+        <li>Sea $f : (\mathbb{R}, \delta) \to (\mathbb{R}, |\cdot|)$ la función $f(x) = x$, $\delta$ la <span class="ref" data-ref="ejem-4.2">métrica discreta</span>. Entonces $f$ no es un homeomorfismo.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) $h$ es un homeomorfismo</p>
+          <ul class="items">
+            <li>$h$ es continua por ser cociente de dos funciones continuas cuyo denominador no se anula.</li>
+            <li>$h$ es biyectiva, porque podemos calcular su inversa $h^{-1}(y) = \frac{y}{1 - |y|}$ y se cumple que $(h \circ h^{-1})(y) = y$, $(h^{-1} \circ h)(x) = x$.</li>
+            <li>$h^{-1}$ es continua, dado que también es cociente de funciones continuas cuyo denominador no se anula.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-40-c1" aria-label="El gráfico de h(x) = x/(1 + |x|) entre las asíntotas y = 1 e y = menos 1, con un punto x y su imagen h(x)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-40-x"><i>x</i></label><input type="range" id="ejp4-40-x" min="-9" max="9" step="0.05" value="2"><output id="ejp4-40-x-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-40-r1" aria-live="polite"></dl>
+          <figcaption><i>h</i> aplasta toda la recta dentro de la franja (−1, 1) sin cortes ni repeticiones. La flecha baja de <i>x</i> a <i>h</i>(<i>x</i>) y la lectura vuelve con <i>h</i>⁻¹(<i>y</i>) = <i>y</i>/(1 − |<i>y</i>|): las dos son continuas.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) La identidad de la discreta en la usual no lo es</p>
+          <ul class="items">
+            <li>$f$ es <span class="ref" data-ref="def-5.14">uniformemente continua</span>, <a href="#ejp4-37">dado que sale de un espacio métrico con la métrica discreta</a>.</li>
+            <li>$f$ es biyectiva y su inversa es $f^{-1}(x) = x$.</li>
+            <li>$f^{-1} : (\mathbb{R}, |\cdot|) \to (\mathbb{R}, \delta)$, $f^{-1}(x) = x$ <b>no</b> es continua. Sea $x \in \mathbb{R}$ cualquiera y tomemos $x_n = x + 1/n$. Entonces sabemos que $x_n \to x$ en $(\mathbb{R}, |\cdot|)$ pero $\delta(x_n, x) = 1$ para todo $n \in \mathbb{N}$. Esto nos dice que $f^{-1}$ no puede ser continua.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4-40-c2" aria-label="Los puntos x_n = x + 1/n acercándose a x en la recta usual, y sus distancias discretas a x, todas iguales a 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4-40-n"><i>n</i></label><input type="range" id="ejp4-40-n" min="1" max="30" step="1" value="5"><output id="ejp4-40-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4-40-r2" aria-live="polite"></dl>
+          <figcaption>Arriba, en (ℝ, |·|): los <i>x<sub>n</sub></i> = <i>x</i> + 1/<i>n</i> se amontonan sobre <i>x</i> (<i>x</i> = 0 en el dibujo). Abajo, las barras son las distancias: la usual |<i>x<sub>n</sub></i> − <i>x</i>| = 1/<i>n</i> (azul) baja a 0, la discreta δ(<i>x<sub>n</sub></i>, <i>x</i>) (roja) vale 1 siempre.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><p><b>Observación</b><em>Qué resultado se usa en b).</em></p>
+      <p>El último ítem es la contrarrecíproca del <span class="ref" data-ref="teo-5.7">Teorema 5.7</span> (caracterización de continuidad por sucesiones): si existe <b>una</b> sucesión $x_n \to x$ con $f^{-1}(x_n) \not\to f^{-1}(x)$, entonces $f^{-1}$ no es continua en $x$. Como $x_n \neq x$ para todo $n$, $\delta(f^{-1}(x_n), f^{-1}(x)) = \delta(x_n, x) = 1 \not\to 0$. En la métrica discreta las únicas sucesiones convergentes son las eventualmente constantes (<span class="ref" data-ref="ejem-4.45">Ejemplo 4.45</span>).</p></div>
+  </article>
+
+  <!-- 41 -->
+  <article class="ej" id="ejp4-41" data-short="41" data-title="x + 1 es una isometría de ℝ≥0 que no es sobreyectiva" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">41</span>
+      <h3>$x + 1$ es una isometría de $\mathbb{R}_{\ge 0}$ que no es sobreyectiva</h3>
+      <span class="src">Ejemplo 5.35 de las notas</span>
+      <span class="topics"><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun"><p>Consideremos $f : (\mathbb{R}_{\ge 0}, |\cdot|) \to (\mathbb{R}_{\ge 0}, |\cdot|)$ la función $f(x) = x + 1$. Entonces $f$ es una <span class="ref" data-ref="def-5.33">isometría</span>:
+        $$|f(x) - f(y)| = |(x + 1) - (y + 1)| = |x - y|.$$
+        Sin embargo, es fácil ver que $f$ no es sobreyectiva; de hecho $\operatorname{Im}(f) = [1, +\infty)$. Por lo que vimos en la observación anterior (<span class="ref" data-ref="obs-5.34">Observación 5.34</span>), lo que podemos concluir es que $f$ es un homeomorfismo si la pensamos como $f : \mathbb{R}_{\ge 0} \to \mathbb{R}_{\ge 1}$.</p></div>
+      <figure class="viz">
+        <canvas id="ejp4-41-c" aria-label="Dos semirrectas: arriba el dominio [0, infinito) con x e y, abajo la llegada con la imagen [1, infinito) y f(x), f(y) a la misma distancia"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4-41-x"><i>x</i></label><input type="range" id="ejp4-41-x" min="0" max="5" step="0.05" value="0.6"><output id="ejp4-41-x-o"></output></div>
+          <div class="slider"><label for="ejp4-41-y"><i>y</i></label><input type="range" id="ejp4-41-y" min="0" max="5" step="0.05" value="2.3"><output id="ejp4-41-y-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4-41-r" aria-live="polite"></dl>
+        <figcaption>Arriba el dominio ℝ<sub>≥0</sub>, abajo la llegada ℝ<sub>≥0</sub> con la imagen [1, ∞) resaltada. <i>f</i> corre todo una unidad: la distancia entre <i>f</i>(<i>x</i>) y <i>f</i>(<i>y</i>) es la misma que entre <i>x</i> e <i>y</i>, pero el tramo [0, 1) de la llegada no lo alcanza nadie.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/ejemplos/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior<\/strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.<\/p><p>El <strong>interior<\/strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto<\/strong> si $A = A^{\\circ}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia<\/strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.<\/p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura<\/strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo<\/strong> de $A$ si:<\/p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).<\/p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.1": {
+  "tipo": "Definición",
+  "numero": "5.1",
+  "titulo": "Imagen y Preimagen de un Conjunto",
+  "enunciado": "<p>Dada una función $f : M \\to N$, y dados conjuntos $A \\subseteq M$ y $B \\subseteq N$,<\/p><p>$$\\begin{aligned} f(A) &= \\{f(x) \\in N : x \\in A\\} \\subseteq N \\quad \\text{y} \\\\ f^{-1}(B) &= \\{x \\in M : f(x) \\in B\\} \\subseteq M. \\end{aligned}$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua<\/i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$<\/p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes<\/i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).<\/p><p><i>Nota<\/i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$<\/b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso<\/em> en $M$ si $\\overline{E} = M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$<\/i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo<\/i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.<\/p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos<\/i>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.33": {
+  "tipo": "Definición",
+  "numero": "5.33",
+  "titulo": "Isometría",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es una <i>isometría<\/i> si $$d'(f(x), f(y)) = d(x, y) \\quad \\text{para todo } x, y \\in M.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$<\/em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.<\/p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.<\/p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$<\/p><p>El $\\delta$ se elige <em>después<\/em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:<\/p><ol><li><b>Distancia euclídea ($d_2$):<\/b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$<\/li><li><b>Distancia taxista ($d_1$):<\/b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$<\/li><li><b>Distancia del máximo ($d_\\infty$):<\/b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$<\/li><\/ol><p>(En el apunte, un dibujo de cada distancia entre dos puntos de $\\mathbb{R}^2$.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ejap-5.10": {
+  "tipo": "Ejercicio",
+  "numero": "5.10",
+  "titulo": "Continuidad por cerrados",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(F) \\subseteq M$ es cerrado para todo $F \\subseteq N$ cerrado.<\/p>",
+  "fuente": "Ejercicio 5.10 de las notas de la materia. <code>apuntes.typ<\/code> lo cita (Teorema 5.13, Observación 5.12) sin caja propia; el enunciado es el que esas citas usan: la versión del Teorema 5.9 con cerrados."
+ },
+ "ejap-5.25": {
+  "tipo": "Ejercicio",
+  "numero": "5.25",
+  "titulo": "Lipschitz implica uniformemente continua",
+  "enunciado": "<p>Sea $f : M \\to N$ una función Lipschitz de constante $C$. Probar que $f$ es uniformemente continua.<\/p>",
+  "fuente": "notas_materia.pdf, Ejercicio 5.25 (desafío de la Práctica 4, <code>desafios/p4.typ<\/code>)"
+ },
+ "ejem-4.2": {
+  "tipo": "Ejemplo",
+  "numero": "4.2",
+  "titulo": "La distancia discreta",
+  "enunciado": "<p>Sea $M$ un conjunto no vacío cualquiera. Se define la función $\\delta : M \\times M \\to \\mathbb{R}$ por $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ $\\delta$ es una métrica en $M$ (la <b>métrica discreta<\/b>).<\/p>",
+  "fuente": "notas_materia.pdf, Ejemplo 4.2 (transcripto en <code>ejemplos/p3.typ<\/code>, ejemplo 16)"
+ },
+ "ejem-4.45": {
+  "tipo": "Ejemplo",
+  "numero": "4.45",
+  "titulo": "Sucesiones convergentes en la métrica discreta",
+  "enunciado": "<p>Consideremos $(M, \\delta)$, con $\\delta$ la métrica discreta. Supongamos que $x_n \\to x$. Por definición, tenemos que para todo $\\varepsilon \\gt 0$, debería ser que $\\delta(x_n, x) \\lt \\varepsilon$ para todo $n$ a partir de cierto $n_0$. Pero si $0 \\lt \\varepsilon \\lt 1$, $\\delta(x_n, x) \\lt \\varepsilon$ si y sólo si $\\delta(x_n, x) = 0$ (puesto que $\\delta$ toma sólo dos valores, $0$ y $1$). Pero $\\delta(x_n, x) = 0$ sólo cuando $x_n = x$.<\/p><p>Es decir, que las únicas sucesiones convergentes en $(M, \\delta)$ son aquéllas que a partir de cierto punto valen siempre lo mismo (es decir, las <b>eventualmente constantes<\/b>).<\/p>",
+  "fuente": "notas_materia.pdf, Ejemplo 4.45 a) (transcripto en <code>ejemplos/p3.typ<\/code>, ejemplo 30)"
+ },
+ "ext-continua-compacto-uc": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Continua en un compacto implica uniformemente continua",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos con $M$ compacto y $f : M \\to N$ continua. Entonces $f$ es uniformemente continua.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ (Práctica 5)"
+ },
+ "ext-det-inversible": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Inversibilidad y determinante",
+  "enunciado": "<p>Una matriz cuadrada $A \\in \\operatorname{M}_n(\\mathbb{R})$ es inversible si y sólo si $\\det(A) \\neq 0$. Es decir, $\\operatorname{GL}_n(\\mathbb{R}) = \\{A \\in \\operatorname{M}_n(\\mathbb{R}) : \\det(A) \\neq 0\\}$.<\/p>",
+  "fuente": "Álgebra lineal (CBC / Álgebra 1); no es una caja de apuntes.typ"
+ },
+ "ext-polinomio-varias-variables": {
+  "tipo": "Definición",
+  "numero": "1.4 (Clase 9)",
+  "titulo": "Polinomio en varias variables",
+  "enunciado": "<p>$P : \\mathbb{R}^n \\to \\mathbb{R}$ es un <b>polinomio en varias variables<\/b> si puede escribirse como $$P(x_1, \\dots, x_n) = \\sum_{e_1 + \\dots + e_n \\le r} a_{(e_1, \\dots, e_n)} x_1^{e_1} \\cdots x_n^{e_n}$$ para algún $r \\in \\mathbb{N}$. Por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5).<\/p>",
+  "fuente": "Clase 9 (07/10), Definición 1.4; transcripta en <code>ejemplos/p4.typ<\/code>, Bloque 3"
+ },
+ "ext-tvm": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Teorema del valor medio (Lagrange)",
+  "enunciado": "<p>Si $f$ es continua en $[x, y]$ y derivable en $(x, y)$, entonces existe $c \\in (x, y)$ tal que $$f(x) - f(y) = f'(c)(x - y).$$<\/p>",
+  "fuente": "Análisis 1 (resultado previo al curso); no es una caja de apuntes.typ"
+ },
+ "obs-3.21": {
+  "tipo": "Observación",
+  "numero": "3.21",
+  "titulo": "Coordinabilidad de $\\mathbb{R}$ con Intervalos",
+  "enunciado": "<p>De hecho, podemos probar que $\\mathbb{R}$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $\\mathbb{R} \\sim (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $\\mathbb{R}$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $\\mathbb{R} \\sim [a, b]$, podemos pensar que $\\mathbb{R} \\sim (a, b)$ y $(a, b) \\sim [a, b]$ dado que $(a, b) = [a, b] \\setminus \\{a, b\\}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] \\sim (a, b)$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.12": {
+  "tipo": "Observación",
+  "numero": "5.12",
+  "titulo": "La imagen de un abierto (o cerrado) no tiene por qué ser abierta (o cerrada)",
+  "enunciado": "<p>En el Teorema 5.9 y en el Ejercicio 5.10 vimos una caracterización que relaciona funciones continuas con que la preimagen de un abierto/cerrado sea abierto/cerrado. Esta caracterización falla si intentamos usar la imagen en vez de la preimagen: en general, es falso que una función continua manda abiertos en abiertos o cerrados en cerrados.<\/p><p>Pensemos en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = e^x$. Sabemos que esta función es continua, y que $f(\\mathbb{R}) = (0, +\\infty)$. Observemos que $\\mathbb{R}$ es cerrado en $\\mathbb{R}$ (lo vimos antes), pero $(0, +\\infty)$ no es cerrado en $\\mathbb{R}$.<\/p><p>Pensemos también en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = x^2$. Entonces tenemos que $f((-1, 1)) = [0, 1)$. El conjunto $(-1, 1)$ es abierto en $\\mathbb{R}$ pero $[0, 1)$ no es abierto en $\\mathbb{R}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.16": {
+  "tipo": "Observación",
+  "numero": "5.16",
+  "titulo": "Negación de la continuidad uniforme",
+  "enunciado": "<p>Pensemos qué significa negar que una función sea uniformemente continua. Por definición, una función <b>no<\/b> es uniformemente continua si existe un $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$, $f(B(x, \\delta)) \\not\\subseteq B(x, \\delta)$ para algún $x \\in M$ (acá el $x$ podría depender de $\\delta$).<\/p><p>Equivalentemente, podríamos decir que: existe $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$ existen $x, y$ tal que $d(x, y) \\lt \\delta$ pero $d'(f(x), f(y)) \\ge \\varepsilon$.<\/p><p><i>Nota<\/i>: la bola de la derecha está mal escrita en las notas: negando la Definición 5.14 debería ser $f(B(x, \\delta)) \\not\\subseteq B(f(x), \\varepsilon)$, que es lo que dice la versión equivalente con $x, y$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.28": {
+  "tipo": "Observación",
+  "numero": "5.28",
+  "titulo": "Lipschitz, uniformemente continua y continua",
+  "enunciado": "<p>Resumiendo lo que vimos hasta ahora, tenemos las siguientes implicaciones $$\\text{Lipschitz} \\Longrightarrow \\text{uniformemente continua} \\Longrightarrow \\text{continua},$$ y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = \\sqrt{x}$ es uniformemente continua pero no Lipschitz).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.34": {
+  "tipo": "Observación",
+  "numero": "5.34",
+  "titulo": "Una isometría es un homeomorfismo con su imagen",
+  "enunciado": "<p>Veamos que si $f : (M, d) \\to (N, d')$ es una isometría entonces $f : (M, d) \\to (\\operatorname{Im}(f), d') \\subseteq (N, d')$ es un homeomorfismo:<\/p><ul class=\"items\"><li>$f$ es continua, dado que es Lipschitz de constante $1$.<\/li><li>$f$ siempre es inyectiva: si $f(x) = f(y)$, entonces $0 = d'(f(x), f(y)) = d(x, y) \\Rightarrow x = y$. En principio no podemos garantizar que $f$ sea sobreyectiva y por esto es que no decimos que $f$ sea un homeomorfismo con $N$, sino con su imagen dentro de $N$.<\/li><li>$f^{-1} : \\operatorname{Im}(f) \\to M$ es continua. Si $z, w \\in \\operatorname{Im}(f)$ tenemos que existen $x, y \\in M$ tal que $f(x) = z$ y $f(y) = w$. Pero entonces $$d(f^{-1}(z), f^{-1}(w)) = d(x, y) = d'(f(x), f(y)) = d'(z, w),$$ lo que nos dice que $f^{-1}$ es también una isometría y por lo tanto continua (y Lipschitz).<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-derivada-acotada-implica-lipschitz": {
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Derivada acotada implica Lipschitz",
+  "enunciado": "<p>Las funciones Lipschitz nos dan una buena cantidad de ejemplos de funciones uniformemente continuas (Ejercicio 5.25: toda función Lipschitz es uniformemente continua, desafío de la Práctica 4). Por ejemplo, supongamos que tenemos una función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$ derivable. Por el teorema del valor medio (de Lagrange), sabemos que vale $$|f(x) - f(y)| = |f'(z)(x - y)|$$ con $z$ un punto intermedio entre $x$ e $y$. Esto nos dice que si $f$ tiene derivada acotada entonces $f$ es Lipschitz de constante $C = \\max_{z \\in \\mathbb{R}} |f'(z)|$.<\/p><p><i>Nota<\/i>: que $f'$ sea acotada no garantiza que el máximo se alcance; en general la constante es $C = \\sup_{z \\in \\mathbb{R}} |f'(z)|$, y con eso $|f(x) - f(y)| = |f'(z)| |x - y| \\le C |x - y|$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces<\/p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.<\/li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).<\/li><\/ol>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5.18": {
+  "tipo": "Proposición",
+  "numero": "5.18",
+  "titulo": "Caracterización de continuidad uniforme por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}} \\subseteq M$ tal que $d(x_n, y_n) \\to 0$ entonces $d'(f(x_n), f(y_n)) \\to 0$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-algebra-de-limites": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}}$ y $(b_n)_{n \\in \\mathbb{N}}$ sucesiones reales tales que $\\lim_{n \\to \\infty} a_n = a$, $\\lim_{n \\to \\infty} b_n = b$, con $a, b \\in \\mathbb{R}$. Entonces:<\/p><ol type=\\\"a\\\"><li>$\\lim_{n \\to \\infty} (c \\cdot a_n) = c \\cdot a$ para todo $c \\in \\mathbb{R}$.<\/li><li>$\\lim_{n \\to \\infty} (a_n + b_n) = a + b$.<\/li><li>$\\lim_{n \\to \\infty} (a_n b_n) = a b$.<\/li><li>Si $b \\neq 0$, entonces $\\lim_{n \\to \\infty} (a_n / b_n) = a / b$.<\/li><li>Si $a_n \\le b_n$ para todo $n \\ge n_0$ entonces $a \\le b$.<\/li><\/ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.17": {
+  "tipo": "Teorema",
+  "numero": "4.17",
+  "titulo": "Unión arbitraria de abiertos es abierta",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Sea $(A_i)_{i \\in I}$ una familia de conjuntos abiertos (acá podríamos tomar una cantidad arbitraria, finita o infinita, numerable o no, de conjuntos). Entonces $A = \\bigcup_{i \\in I} A_i$ es abierto.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.9": {
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(A) \\subseteq M$ es abierto para todo $A \\subseteq N$ abierto.<\/p>",
+  "fuente": "apuntes.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* ejemplos/p4 */
+(() => {
+"use strict";
+/* Dibujos de los ejemplos de la Práctica 4 (funciones continuas). Usa window.PP.
+   Varios dibujos adaptan los de visualizaciones/ejemplos_p4.html. */
+const P = "ejp4-";
+const C = {};
+const TOKENS = ["ink", "muted", "rule", "accent", "seq2", "seq3", "ok", "okband", "fail", "failband", "panel", "band", "area", "area2", "area3", "bg"];
+function readColors() { TOKENS.forEach((k) => { C[k] = PP.css("--" + k); }); }
+const UI = '500 12px "IBM Plex Sans", system-ui, sans-serif';
+const UIs = '500 11px "IBM Plex Sans", system-ui, sans-serif';
+const fmt = (v, d = 3) => { if (Math.abs(v) < 1e-12) return "0"; const s = PP.fmt(v, d); return s === "−0" ? "0" : s; };
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+function mulberry(seed) { return () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+
+/* ---------- ejes y trazos en una caja (box en píxeles, xr e yr en coordenadas) ---------- */
+function plot(ctx, box, xr, yr) {
+  const X = (x) => box.x + ((x - xr[0]) / (xr[1] - xr[0])) * box.w;
+  const Y = (y) => box.y + box.h - ((y - yr[0]) / (yr[1] - yr[0])) * box.h;
+  const iX = (px) => xr[0] + ((px - box.x) / box.w) * (xr[1] - xr[0]);
+  const iY = (py) => yr[0] + ((box.y + box.h - py) / box.h) * (yr[1] - yr[0]);
+  const o = { X, Y, iX, iY, box, xr, yr };
+  o.clip = (fn) => { ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip(); fn(); ctx.restore(); };
+  o.axes = ({ xt = [], yt = [], xl = "", yl = "" } = {}) => {
+    const ay = yr[0] <= 0 && yr[1] >= 0 ? Y(0) : box.y + box.h;
+    const ax = xr[0] <= 0 && xr[1] >= 0 ? X(0) : box.x;
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(box.x, ay); ctx.lineTo(box.x + box.w, ay); ctx.moveTo(ax, box.y); ctx.lineTo(ax, box.y + box.h); ctx.stroke();
+    ctx.fillStyle = C.muted; ctx.font = UIs;
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    for (const t of xt) { const [v, s] = Array.isArray(t) ? t : [t, fmt(t)]; const px = X(v); ctx.beginPath(); ctx.moveTo(px, ay - 3); ctx.lineTo(px, ay + 3); ctx.stroke(); ctx.fillText(s, px, ay + 5); }
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (const t of yt) { const [v, s] = Array.isArray(t) ? t : [t, fmt(t)]; const py = Y(v); ctx.beginPath(); ctx.moveTo(ax - 3, py); ctx.lineTo(ax + 3, py); ctx.stroke(); ctx.fillText(s, ax - 6, py); }
+    if (xl) { ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(xl, box.x + box.w, ay - 4); }
+    if (yl) { ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(yl, ax + 5, box.y); }
+  };
+  o.fn = (f, color, w = 2, a = xr[0], b = xr[1], n = 600, dash) => o.clip(() => {
+    ctx.strokeStyle = color; ctx.lineWidth = w; ctx.setLineDash(dash || []); ctx.beginPath();
+    let pen = false;
+    for (let i = 0; i <= n; i++) {
+      const x = a + ((b - a) * i) / n, y = f(x);
+      if (!isFinite(y)) { pen = false; continue; }
+      const py = Y(y);
+      if (py < box.y - 4000 || py > box.y + box.h + 4000) { pen = false; continue; }
+      if (pen) ctx.lineTo(X(x), py); else ctx.moveTo(X(x), py);
+      pen = true;
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  });
+  o.seg = (x1, y1, x2, y2, color, w = 1.5, dash) => o.clip(() => {
+    ctx.strokeStyle = color; ctx.lineWidth = w; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(X(x1), Y(y1)); ctx.lineTo(X(x2), Y(y2)); ctx.stroke(); ctx.setLineDash([]);
+  });
+  o.dot = (x, y, color, r = 4, hollow = false) => {
+    const px = X(x), py = Y(y);
+    if (px < box.x - r || px > box.x + box.w + r || py < box.y - r || py > box.y + box.h + r) return;
+    ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2);
+    if (hollow) { ctx.fillStyle = C.bg; ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = 1.6; ctx.setLineDash([]); ctx.stroke(); }
+    else { ctx.fillStyle = color; ctx.fill(); }
+  };
+  o.text = (s, x, y, color, align = "left", base = "bottom", dx = 0, dy = 0, font = UI) => {
+    ctx.fillStyle = color || C.ink; ctx.font = font; ctx.textAlign = align; ctx.textBaseline = base;
+    ctx.fillText(s, X(x) + dx, Y(y) + dy);
+  };
+  o.vband = (a, b, fill) => o.clip(() => { ctx.fillStyle = fill; ctx.fillRect(X(a), box.y, X(b) - X(a), box.h); });
+  o.hband = (a, b, fill) => o.clip(() => { ctx.fillStyle = fill; ctx.fillRect(box.x, Y(b), box.w, Y(a) - Y(b)); });
+  o.rect = (x1, y1, x2, y2, fill, stroke, dash, lw = 1.4) => o.clip(() => {
+    const px = X(Math.min(x1, x2)), py = Y(Math.max(y1, y2)), w = Math.abs(X(x2) - X(x1)), h = Math.abs(Y(y2) - Y(y1));
+    if (fill) { ctx.fillStyle = fill; ctx.fillRect(px, py, w, h); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.setLineDash(dash || []); ctx.strokeRect(px, py, w, h); ctx.setLineDash([]); }
+  });
+  o.region = (f, g, a, b, fill, n = 300) => o.clip(() => {
+    ctx.fillStyle = fill; ctx.beginPath();
+    for (let i = 0; i <= n; i++) { const x = a + ((b - a) * i) / n; const py = Y(f(x)); i ? ctx.lineTo(X(x), py) : ctx.moveTo(X(x), py); }
+    for (let i = n; i >= 0; i--) { const x = a + ((b - a) * i) / n; ctx.lineTo(X(x), Y(g(x))); }
+    ctx.closePath(); ctx.fill();
+  });
+  o.vbrace = (x, y1, y2, color, label, side = 1) => {
+    const px = X(x) + side * 6;
+    ctx.strokeStyle = color; ctx.lineWidth = 1.4; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(px - side * 4, Y(y1)); ctx.lineTo(px, Y(y1)); ctx.lineTo(px, Y(y2)); ctx.lineTo(px - side * 4, Y(y2)); ctx.stroke();
+    if (label) { ctx.fillStyle = color; ctx.font = UI; ctx.textAlign = side > 0 ? "left" : "right"; ctx.textBaseline = "middle"; ctx.fillText(label, px + side * 5, (Y(y1) + Y(y2)) / 2); }
+  };
+  o.hbrace = (x1, x2, y, color, label, side = 1) => {
+    const py = Y(y) + side * 8;
+    ctx.strokeStyle = color; ctx.lineWidth = 1.4; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(X(x1), py - side * 4); ctx.lineTo(X(x1), py); ctx.lineTo(X(x2), py); ctx.lineTo(X(x2), py - side * 4); ctx.stroke();
+    if (label) { ctx.fillStyle = color; ctx.font = UI; ctx.textAlign = "center"; ctx.textBaseline = side > 0 ? "top" : "bottom"; ctx.fillText(label, (X(x1) + X(x2)) / 2, py + side * 4); }
+  };
+  return o;
+}
+function arrow(ctx, x1, y1, x2, y2, color, w = 1.3) {
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = w; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  const a = Math.atan2(y2 - y1, x2 - x1), h = 7;
+  ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(x2 - h * Math.cos(a - 0.4), y2 - h * Math.sin(a - 0.4)); ctx.lineTo(x2 - h * Math.cos(a + 0.4), y2 - h * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+}
+const full = (W, H, p) => ({ x: p.l, y: p.t, w: W - p.l - p.r, h: H - p.t - p.b });
+
+/* ---------- registro: lee los controles, dibuja y llena la lectura ----------
+   spec = { c: id del canvas, r: id de la lectura, aspect, range: {nombre: id}, radio: {nombre: name}, check: {nombre: id} } */
+const LAST = {};
+function viz(spec, draw) {
+  const ids = (o) => Object.values(o || {});
+  const fn = () => {
+    readColors();
+    const st = {};
+    for (const [k, id] of Object.entries(spec.range || {})) { st[k] = PP.val(P + id); PP.out(P + id + "-o", fmt(st[k], 2)); }
+    for (const [k, nm] of Object.entries(spec.radio || {})) st[k] = PP.radio(P + nm);
+    for (const [k, id] of Object.entries(spec.check || {})) st[k] = document.getElementById(P + id).checked;
+    const { ctx, w, h } = PP.canvas(P + spec.c, 1 / spec.aspect);
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    const rows = draw(ctx, w, h, st) || [];
+    if (spec.r) PP.read(P + spec.r, rows);
+  };
+  PP.register(fn, [...ids(spec.range).map((i) => "#" + P + i), ...ids(spec.radio).map((n) => `input[name="${P + n}"]`), ...ids(spec.check).map((i) => "#" + P + i)]);
+  return fn;
+}
+/* Arrastre: pick(px, py) → true si agarra; move(x, y) en coordenadas del último plot guardado en LAST[key]. */
+function draggable(cid, key, pick, move, redraw) {
+  const cv = document.getElementById(P + cid);
+  if (!cv) return;
+  cv.style.cursor = "grab";
+  let on = false;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = LAST[key]; if (!T) return;
+    const [px, py] = pos(e);
+    if (pick(px, py, T)) { on = true; cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; cv.style.touchAction = "none"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (!on) return;
+    const T = LAST[key]; const [px, py] = pos(e);
+    move(T.iX(px), T.iY(py)); redraw();
+  });
+  const end = () => { on = false; cv.style.cursor = "grab"; cv.style.touchAction = ""; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+const near = (T, x, y, px, py, r = 18) => Math.hypot(T.X(x) - px, T.Y(y) - py) <= r;
+function setSlider(id, v) { const el = document.getElementById(P + id); el.value = String(clamp(v, +el.min, +el.max)); }
+
+/* ===================== Bloque 1 ===================== */
+
+/* 33: flechas de ℤ a ℕ. */
+viz({ c: "33-c", r: "33-r", aspect: 1.9, radio: { m: "33-m" } }, (ctx, W, H, s) => {
+  const top = H * 0.24, bot = H * 0.7, L = 30, R = W - 14;
+  const zx = (n) => L + ((n + 4) / 8) * (R - L);
+  const nx = (k) => L + (k / 16) * (R - L);
+  ctx.font = '600 14px "IBM Plex Sans", sans-serif'; ctx.fillStyle = C.muted; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  ctx.fillText("ℤ", 6, top); ctx.fillText("ℕ", 6, bot);
+  const A = new Set([1, 3, 4]), B = new Set([1, 3, 4]);
+  const img = s.m === "img";
+  const hl = (n) => (img ? A.has(n) : B.has(n * n));
+  const col = img ? C.accent : C.seq2;
+  for (let n = -4; n <= 4; n++) if (!hl(n)) arrow(ctx, zx(n), top + 9, nx(n * n), bot - 10, C.rule, 1.1);
+  for (let n = -4; n <= 4; n++) if (hl(n)) arrow(ctx, zx(n), top + 9, nx(n * n), bot - 10, col, 2);
+  ctx.font = UI; ctx.textAlign = "center";
+  for (let n = -4; n <= 4; n++) {
+    ctx.beginPath(); ctx.arc(zx(n), top, hl(n) ? 6 : 4, 0, 7); ctx.fillStyle = hl(n) ? col : C.muted; ctx.fill();
+    ctx.textBaseline = "bottom"; ctx.fillText(String(n).replace("-", "−"), zx(n), top - 9);
+  }
+  const imgSet = new Set([0, 1, 4, 9, 16]);
+  for (let k = 0; k <= 16; k++) {
+    let c = imgSet.has(k) ? C.muted : C.rule, r = imgSet.has(k) ? 4 : 3;
+    if (img && [1, 9, 16].includes(k)) { c = C.accent; r = 6; }
+    if (!img && B.has(k)) { c = k === 3 ? C.fail : C.seq2; r = 6; }
+    ctx.beginPath(); ctx.arc(nx(k), bot, r, 0, 7); ctx.fillStyle = c; ctx.fill();
+    ctx.fillStyle = r > 4 ? c : C.muted; ctx.textBaseline = "top"; ctx.fillText(String(k), nx(k), bot + 9);
+  }
+  if (!img) { ctx.fillStyle = C.fail; ctx.textBaseline = "top"; ctx.textAlign = "left"; ctx.fillText("3 ∉ img(f)", nx(3) - 6, bot + 26); }
+  ctx.fillStyle = C.muted; ctx.font = UIs; ctx.textAlign = "right"; ctx.textBaseline = "top";
+  ctx.fillText("gris claro: fuera de la imagen", R, bot + 26);
+  return img
+    ? [["A", "{1, 3, 4} ⊆ ℤ"], ["f(A)", "{1, 9, 16}"]]
+    : [["B", "{1, 3, 4} ⊆ ℕ"], ["f⁻¹(B)", "{−2, −1, 1, 2}"], ["f⁻¹({3})", "∅", "bad"]];
+});
+
+/* ===================== Bloque 2 ===================== */
+
+/* 34: ε–δ en ℝ y en un punto aislado. */
+viz({ c: "34-c", r: "34-r", aspect: 1.35, range: { e: "34-e" }, radio: { m: "34-m" } }, (ctx, W, H, s) => {
+  const e = s.e;
+  if (s.m === "r") {
+    const d = Math.sqrt(1 + e) - 1;
+    const L = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 2], [0, 3.2]);
+    L.hband(1 - e, 1 + e, C.band); L.vband(1 - d, 1 + d, C.area2);
+    L.axes({ xt: [[1, "x₀ = 1"], 2], yt: [1, 2, 3] });
+    L.fn((x) => x * x, C.muted, 1.6);
+    L.fn((x) => x * x, C.accent, 3, 1 - d, 1 + d, 80);
+    L.dot(1, 1, C.accent, 4.5);
+    L.text("f(x) = x²", 1.5, 2.6, C.muted);
+    L.text("1 ± ε", 0.04, 1 + e, C.accent, "left", "bottom", 4, -2);
+    L.text("δ", 1 + d, 0.05, C.seq2, "left", "bottom", 4);
+    return [["ε", fmt(e, 2)], ["δ = √(1+ε) − 1", fmt(d)], ["achicar ε", "obliga a achicar δ"]];
+  }
+  const f = [0, 1.2, 2.6, 0.9, 2.1, 1.6, 2.8];
+  const R = plot(ctx, full(W, H, { l: 30, r: 14, t: 26, b: 26 }), [0.3, 6.7], [0, 3.4]);
+  R.hband(f[3] - e, f[3] + e, C.band); R.vband(2.5, 3.5, C.area2);
+  R.axes({ xt: [1, 2, 3, 4, 5, 6], yt: [1, 2, 3] });
+  for (let n = 1; n <= 6; n++) R.dot(n, f[n], n === 3 ? C.accent : C.muted, n === 3 ? 5 : 4);
+  R.text("B(3, 1/2) = {3}", 3, 3.4, C.seq2, "center", "bottom", 0, -4);
+  R.text("f : ℕ → ℝ", 6.6, 0.12, C.muted, "right", "bottom");
+  return [["ε", fmt(e, 2)], ["δ = 1/2", "sirve para todo ε", "good"], ["f(B(3, 1/2))", "{f(3)} ⊆ B(f(3), ε)"]];
+});
+
+/* ===================== Bloque 3 ===================== */
+
+/* 36: corte de M₂(ℝ) con b = c = 1. */
+const draw36 = viz({ c: "36-c", r: "36-r", aspect: 1.05, range: { a: "36-a", d: "36-d" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-3.2, 3.2], [-3.2, 3.2]);
+  LAST["36"] = T;
+  T.axes({ xt: [-3, -2, -1, 1, 2, 3], yt: [-3, -2, -1, 1, 2, 3], xl: "a", yl: "d" });
+  T.fn((t) => 1 / t, C.fail, 2, 0.001, 3.2, 500); T.fn((t) => 1 / t, C.fail, 2, -3.2, -0.001, 500);
+  T.text("det = 0", 3.1, 1 / 3.1 + 0.15, C.fail, "right", "bottom");
+  const a = s.a, d = s.d, det = a * d - 1;
+  let r = Infinity;
+  for (let i = 0; i <= 6000; i++) {
+    const t = Math.pow(10, -3 + (6 * i) / 6000);
+    r = Math.min(r, Math.max(Math.abs(a - t), Math.abs(d - 1 / t)), Math.max(Math.abs(a + t), Math.abs(d + 1 / t)));
+  }
+  const inGL = Math.abs(det) > 1e-9 && r > 0.004;
+  if (inGL) T.rect(a - r, d - r, a + r, d + r, C.band, C.accent, [5, 4]);
+  T.dot(a, d, inGL ? C.accent : C.fail, 6);
+  T.text("A", a, d, inGL ? C.accent : C.fail, "left", "bottom", 7, -4);
+  return [["A", `(${fmt(a, 2)} 1; 1 ${fmt(d, 2)})`], ["det A = ad − 1", fmt(det)], inGL ? ["radio que entra en el corte", "≈ " + fmt(r), "good"] : ["A", "singular: no está en Gl₂", "bad"]];
+});
+draggable("36-c", "36", (px, py, T) => near(T, PP.val(P + "36-a"), PP.val(P + "36-d"), px, py, 22),
+  (x, y) => { setSlider("36-a", Math.round(x * 20) / 20); setSlider("36-d", Math.round(y * 20) / 20); }, draw36);
+
+/* C9-1.1: f, g y f + g evaluadas en xₙ → x. */
+viz({ c: "c9-1-1-c", r: "c9-1-1-r", aspect: 1.3, range: { n: "c9-1-1-n" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-0.4, 3], [-1.3, 2.6]);
+  T.axes({ xt: [[1.2, "x"], 2, 3], yt: [-1, 1, 2] });
+  const f = Math.sin, g = (x) => 0.4 * x, h = (x) => f(x) + g(x);
+  const x = 1.2, xn = (k) => x + (1.2 * (k % 2 ? -1 : 1)) / k;
+  T.fn(f, C.accent, 2); T.fn(g, C.seq2, 2); T.fn(h, C.ink, 2.2);
+  T.text("f", 2.9, f(2.9), C.accent, "right", "top", 0, 4); T.text("g", 2.9, g(2.9), C.seq2, "right", "top", 0, 4); T.text("f + g", 2.9, h(2.9), C.ink, "right", "bottom", 0, -4);
+  for (let k = 1; k < s.n; k++) T.dot(xn(k), h(xn(k)), C.rule, 2.5);
+  const v = xn(s.n);
+  T.seg(v, -1.3, v, 2.6, C.muted, 1, [3, 3]); T.seg(x, -1.3, x, 2.6, C.muted, 1, [1, 3]);
+  for (const [fn, c] of [[f, C.accent], [g, C.seq2], [h, C.ink]]) { T.dot(x, fn(x), c, 4.5, true); T.dot(v, fn(v), c, 4); }
+  T.text("xₙ", v, -1.3, C.muted, "center", "bottom", 0, -2);
+  return [["|xₙ − x|", fmt(Math.abs(v - x))], ["|(f+g)(xₙ) − (f+g)(x)|", fmt(Math.abs(h(v) - h(x)))], ["|(f·g)(xₙ) − (f·g)(x)|", fmt(Math.abs(f(v) * g(v) - f(x) * g(x)))]];
+});
+
+/* C9-1.2: |x¹ₖ − x¹| ≤ d∞. */
+viz({ c: "c9-1-2-c", r: "c9-1-2-r", aspect: 1.15, range: { k: "c9-1-2-k" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 30 }), [0, 3.1], [0, 2.6]);
+  const p = [1.5, 1.2], xk = (k) => [p[0] + (1.1 * Math.cos(2.3 * k)) / k, p[1] + (0.9 * Math.sin(1.7 * k)) / k];
+  const q = xk(s.k), dk = Math.max(Math.abs(q[0] - p[0]), Math.abs(q[1] - p[1]));
+  T.rect(p[0] - dk, p[1] - dk, p[0] + dk, p[1] + dk, C.band, C.accent, [5, 4]);
+  T.axes({ xt: [[p[0], "x¹"]], yt: [[p[1], "x²"]] });
+  T.seg(p[0] - dk, p[1] - dk, p[0] - dk, 0, C.accent, 1, [2, 3]); T.seg(p[0] + dk, p[1] - dk, p[0] + dk, 0, C.accent, 1, [2, 3]);
+  T.seg(p[0] - dk, 0, p[0] + dk, 0, C.accent, 5);
+  T.seg(p[0], 0, q[0], 0, C.seq2, 5);
+  T.seg(q[0], q[1], q[0], 0, C.seq2, 1, [3, 3]);
+  for (let j = 1; j < s.k; j++) { const r = xk(j); T.dot(r[0], r[1], C.rule, 2.5); }
+  T.dot(p[0], p[1], C.ink, 4.5, true); T.dot(q[0], q[1], C.seq2, 5);
+  T.text("xₖ", q[0], q[1], C.seq2, "left", "bottom", 6, -3);
+  return [["|x¹ₖ − x¹|", fmt(Math.abs(q[0] - p[0]))], ["d∞(xₖ, x)", fmt(dk)], ["|x¹ₖ − x¹| ≤ d∞", "sí", "good"]];
+});
+
+/* C9-1.6: árbol de x²y + 3y − 2. */
+viz({ c: "c9-1-6-c", r: "c9-1-6-r", aspect: 1.35, range: { st: "c9-1-6-s" } }, (ctx, W, H, s) => {
+  const N = {
+    r: { p: [0.5, 0.1], t: "+", lv: 3, e: "P" },
+    A: { p: [0.27, 0.38], t: "×", lv: 2, e: "x²y", par: "r" },
+    B: { p: [0.74, 0.38], t: "+", lv: 2, e: "3y − 2", par: "r" },
+    A1: { p: [0.15, 0.64], t: "×", lv: 1, e: "x²", par: "A" },
+    A2: { p: [0.4, 0.64], t: "π₂", lv: 0, e: "y", par: "A" },
+    a1: { p: [0.06, 0.88], t: "π₁", lv: 0, e: "x", par: "A1" },
+    a2: { p: [0.25, 0.88], t: "π₁", lv: 0, e: "x", par: "A1" },
+    B1: { p: [0.64, 0.64], t: "×", lv: 1, e: "3y", par: "B" },
+    B2: { p: [0.9, 0.64], t: "−2", lv: 0, e: "cte.", par: "B" },
+    b1: { p: [0.55, 0.88], t: "3", lv: 0, e: "cte.", par: "B1" },
+    b2: { p: [0.74, 0.88], t: "π₂", lv: 0, e: "y", par: "B1" },
+  };
+  const rad = clamp(W / 26, 11, 17);
+  const px = ([u, v]) => [rad + 4 + u * (W - 2 * rad - 8), 16 + v * (H - 46)];
+  for (const k in N) if (N[k].par) {
+    const [x1, y1] = px(N[k].p), [x2, y2] = px(N[N[k].par].p);
+    ctx.strokeStyle = N[k].lv < s.st ? C.ok : C.rule; ctx.lineWidth = 1.6; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  }
+  for (const k in N) {
+    const n = N[k], [x, y] = px(n.p), on = n.lv <= s.st;
+    ctx.beginPath(); ctx.arc(x, y, rad, 0, 7); ctx.fillStyle = on ? C.okband : C.bg; ctx.fill();
+    ctx.strokeStyle = on ? C.ok : C.rule; ctx.lineWidth = 1.6; ctx.stroke();
+    ctx.fillStyle = on ? C.ok : C.muted; ctx.font = '600 13px "IBM Plex Sans", sans-serif'; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(n.t, x, y);
+    ctx.font = UIs; ctx.fillStyle = C.muted; ctx.textBaseline = "top"; ctx.fillText(n.e, x, y + rad + 3);
+  }
+  const msg = [
+    "hojas: proyecciones (Lema 1.2) y constantes",
+    "x² = π₁·π₁ y 3y = 3·π₂ (Prop. 1.1, producto)",
+    "x²y (producto) y 3y − 2 (suma)",
+    "P = x²y + 3y − 2 es suma de continuas",
+  ][s.st];
+  return [["continuas", msg, s.st === 3 ? "good" : ""]];
+});
+
+/* C9-2.1, enunciado: el dibujo de la clase, con un punto para arrastrar. */
+const phi = (x) => x * x * x - x * x + x;
+let q921 = [-0.6, 2.6];
+const draw921 = viz({ c: "c9-2-1-c1", r: "c9-2-1-r1", aspect: 1.1 }, (ctx, W, H) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 12, t: 14, b: 26 }), [-1.2, 1.8], [-4.5, 4.5]);
+  LAST["921"] = T;
+  T.region(phi, () => -10, -1.2, 1.8, C.band);
+  T.axes({ xt: [-1, 1], yt: [-4, -2, 2, 4], xl: "x", yl: "y" });
+  T.fn(phi, C.accent, 2.4, -1.2, 1.8);
+  T.text("y = x³ − x² + x", 1.45, phi(1.45), C.accent, "right", "bottom", -6, 0);
+  T.text("A = {f ≥ 0}", 1.1, -2.5, C.accent, "center", "middle", 0, 0, '600 13px "IBM Plex Sans", sans-serif');
+  T.text("{f < 0}", -0.6, 3.3, C.fail, "center", "middle", 0, 0, '600 13px "IBM Plex Sans", sans-serif');
+  const [x, y] = q921, v = phi(x) - y;
+  T.dot(x, y, v >= 0 ? C.accent : C.fail, 6);
+  T.text("q", x, y, v >= 0 ? C.accent : C.fail, "left", "bottom", 7, -4);
+  return [["q", `(${fmt(x, 2)}, ${fmt(y, 2)})`], ["f(q) = x³ − x² + x − y", fmt(v, 3)], ["q ∈ A", v >= 0 ? "sí" : "no", v >= 0 ? "good" : "bad"]];
+});
+draggable("c9-2-1-c1", "921", (px, py, T) => near(T, q921[0], q921[1], px, py, 24),
+  (x, y) => { q921 = [clamp(x, -1.2, 1.8), clamp(y, -4.5, 4.5)]; }, draw921);
+
+/* C9-2.1, resolución: una sucesión de A que converge al borde. */
+viz({ c: "c9-2-1-c2", r: "c9-2-1-r2", aspect: 1.15, range: { n: "c9-2-1-n" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-1.2, 1.8], [-4.5, 4.5]);
+  T.region(phi, () => -10, -1.2, 1.8, C.band);
+  T.axes({ xt: [-1, 1], yt: [-4, -2, 2, 4] });
+  T.fn(phi, C.accent, 2.2, -1.2, 1.8);
+  T.text("A", -1.0, -3.6, C.accent, "left", "bottom");
+  const pn = (k) => { const x = 1 + (0.6 * Math.cos(k)) / k; return [x, phi(x) - 1.2 / k]; };
+  for (let j = 1; j < s.n; j++) { const q = pn(j); T.dot(q[0], q[1], C.rule, 2.5); }
+  const q = pn(s.n);
+  T.dot(1, 1, C.ok, 5, true); T.dot(q[0], q[1], C.seq2, 5);
+  T.text("pₙ", q[0], q[1], C.seq2, "left", "top", 6, 3); T.text("(1, 1)", 1, 1, C.ok, "right", "bottom", -8, -4);
+  return [["f(pₙ)", fmt(phi(q[0]) - q[1]) + " ≥ 0", "good"], ["f(1, 1)", "0 ≥ 0: el límite está en A", "good"]];
+});
+
+/* C9-2.2: determinantes de matrices sorteadas en B∞(A, r). */
+const A3 = [[2, 1, 0], [0, 1, 1], [1, 0, 1]];
+const det3 = (m) => m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+const U3 = (() => { const rnd = mulberry(7); return Array.from({ length: 400 }, () => ({ u: Array.from({ length: 9 }, () => 2 * rnd() - 1), j: rnd() })); })();
+viz({ c: "c9-2-2-c", r: "c9-2-2-r", aspect: 1.8, range: { r: "c9-2-2-rr" } }, (ctx, W, H, s) => {
+  const dets = U3.map(({ u, j }) => ({ d: det3(A3.map((row, i) => row.map((v, k) => v + s.r * u[3 * i + k]))), j }));
+  const lo = Math.min(-1, ...dets.map((o) => o.d)), hi = Math.max(5, ...dets.map((o) => o.d));
+  const T = plot(ctx, full(W, H, { l: 16, r: 16, t: 26, b: 28 }), [lo - 0.3, hi + 0.3], [0, 1]);
+  const neg = dets.filter((o) => o.d <= 0).length;
+  T.vband(lo - 1, 0, C.failband);
+  T.seg(0, 0, 0, 1, C.fail, 2); T.seg(3, 0, 3, 1, C.accent, 1.4, [4, 3]);
+  for (const o of dets) T.dot(o.d, 0.12 + 0.76 * o.j, o.d <= 0 ? C.fail : C.accent, 2.6);
+  T.text("det = 0", 0, 1, C.fail, "center", "bottom", 0, -4); T.text("det A = 3", 3, 1, C.accent, "center", "bottom", 0, -4);
+  const ticks = []; for (let t = Math.ceil(lo); t <= hi; t += Math.max(1, Math.round((hi - lo) / 7))) ticks.push(t);
+  T.axes({ xt: ticks });
+  const mn = Math.min(...dets.map((o) => o.d)), mx = Math.max(...dets.map((o) => o.d));
+  return [["det en la muestra", `[${fmt(mn, 2)}, ${fmt(mx, 2)}]`], ["con det ≤ 0", neg ? `${neg} de 400` : "ninguna", neg ? "bad" : "good"]];
+});
+
+/* ===================== Bloque 4 ===================== */
+
+/* C6-1, Paso 1: la bola de d∞ y su sombra (el dibujo cetz del apunte). */
+let p61 = [2.5, 2.3];
+const draw61b = viz({ c: "c6-1-c1", r: "c6-1-r1", aspect: 1.1, range: { r: "c6-1-r" }, check: { disc: "c6-1-disco" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 24, r: 12, t: 12, b: 34 }), [0, 5], [-0.2, 4.6]);
+  LAST["61"] = T;
+  const p = p61, r = s.r;
+  T.rect(p[0] - r, p[1] - r, p[0] + r, p[1] + r, C.band, C.accent, [5, 4]);
+  if (s.disc) T.clip(() => { ctx.beginPath(); ctx.arc(T.X(p[0]), T.Y(p[1]), T.X(p[0] + r) - T.X(p[0]), 0, 7); ctx.strokeStyle = C.muted; ctx.setLineDash([2, 3]); ctx.lineWidth = 1.2; ctx.stroke(); ctx.setLineDash([]); });
+  T.axes({ xt: [[p[0] - r, "x_p − r"], [p[0], "x_p"], [p[0] + r, "x_p + r"]], xl: "X", yl: "Y" });
+  T.seg(p[0] - r, p[1] - r, p[0] - r, 0, C.muted, 1, [2, 3]); T.seg(p[0] + r, p[1] - r, p[0] + r, 0, C.muted, 1, [2, 3]);
+  T.seg(p[0] - r, 0, p[0] + r, 0, C.ok, 5);
+  T.dot(p[0] - r, 0, C.ok, 4.5, true); T.dot(p[0] + r, 0, C.ok, 4.5, true);
+  T.seg(p[0], p[1], p[0] + r, p[1], C.accent, 1.2);
+  T.text("r", p[0] + r / 2, p[1], C.accent, "center", "top", 0, 3);
+  T.dot(p[0], p[1], C.ink, 5); T.text("p", p[0], p[1], C.ink, "left", "bottom", 5, -4);
+  T.text("B(p, r)", p[0] + r, p[1] + r, C.accent, "right", "bottom", 0, -3);
+  T.text("π₁(B) = B(x_p, r)", p[0], 0, C.ok, "center", "bottom", 0, -9);
+  return [["p", `(${fmt(p[0], 2)}, ${fmt(p[1], 2)})`], ["π₁(B(p, r))", `(${fmt(p[0] - r, 2)}, ${fmt(p[0] + r, 2)})`], ["es una bola de X", "abierta", "good"]];
+});
+draggable("c6-1-c1", "61", (px, py, T) => near(T, p61[0], p61[1], px, py, 24),
+  (x, y) => { p61 = [clamp(Math.round(x * 20) / 20, 0.3, 4.7), clamp(Math.round(y * 20) / 20, 0.4, 4.2)]; }, draw61b);
+
+/* C6-1, Paso 2: un abierto U cubierto por bolas; la unión de las sombras es π₁(U). */
+const E61 = { cx: 2.5, cy: 2.3, ax: 1.7, ay: 1.2 };
+const inE = (x, y) => ((x - E61.cx) / E61.ax) ** 2 + ((y - E61.cy) / E61.ay) ** 2 < 1;
+const PTS61 = (() => {
+  const rnd = mulberry(11), out = [];
+  while (out.length < 60) {
+    const x = E61.cx + E61.ax * (2 * rnd() - 1), y = E61.cy + E61.ay * (2 * rnd() - 1);
+    if (!inE(x, y)) continue;
+    let lo = 0, hi = 2;
+    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (inE(x - m, y - m) && inE(x + m, y - m) && inE(x - m, y + m) && inE(x + m, y + m)) lo = m; else hi = m; }
+    out.push([x, y, lo * 0.98]);
+  }
+  return out;
+})();
+viz({ c: "c6-1-c2", r: "c6-1-r2", aspect: 1.1, range: { k: "c6-1-k" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 24, r: 12, t: 12, b: 34 }), [0, 5], [-0.2, 4.6]);
+  T.clip(() => { ctx.beginPath(); ctx.ellipse(T.X(E61.cx), T.Y(E61.cy), T.X(E61.cx + E61.ax) - T.X(E61.cx), T.Y(E61.cy) - T.Y(E61.cy + E61.ay), 0, 0, 7); ctx.fillStyle = C.area3; ctx.fill(); ctx.strokeStyle = C.seq3; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.4; ctx.stroke(); ctx.setLineDash([]); });
+  T.axes({ xt: [[E61.cx - E61.ax, fmt(E61.cx - E61.ax, 2)], [E61.cx + E61.ax, fmt(E61.cx + E61.ax, 2)]], xl: "X", yl: "Y" });
+  T.text("U", E61.cx + E61.ax * 0.75, E61.cy + E61.ay * 0.9, C.seq3, "left", "bottom");
+  const pts = PTS61.slice(0, s.k), iv = [];
+  for (const [x, y, r] of pts) { T.rect(x - r, y - r, x + r, y + r, null, C.accent, [], 1); T.dot(x, y, C.accent, 2); iv.push([x - r, x + r]); }
+  iv.sort((a, b) => a[0] - b[0]);
+  const U = [];
+  for (const [a, b] of iv) { if (U.length && a <= U[U.length - 1][1]) U[U.length - 1][1] = Math.max(U[U.length - 1][1], b); else U.push([a, b]); }
+  for (const [a, b] of U) { T.seg(a, 0, b, 0, C.ok, 5); T.dot(a, 0, C.ok, 3.5, true); T.dot(b, 0, C.ok, 3.5, true); }
+  T.text("π₁(U)", E61.cx, 0, C.seq3, "center", "bottom", 0, -10);
+  const len = U.reduce((t, [a, b]) => t + b - a, 0);
+  return [["bolas dibujadas", String(s.k)], ["unión de las sombras", U.map(([a, b]) => `(${fmt(a, 2)}, ${fmt(b, 2)})`).join(" ∪ ")], ["cubre de π₁(U)", fmt((100 * len) / (2 * E61.ax), 1) + " %"]];
+});
+
+/* C6-1, π₁ no es cerrada: la hipérbola. */
+viz({ c: "c6-1-c3", r: "c6-1-r3", aspect: 1.1, range: { n: "c6-1-n" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-4, 4], [-4, 4.4]);
+  T.axes({ xt: [-3, -1, 1, 3], yt: [-3, -1, 1, 3] });
+  T.seg(-4, 0, 4, 0, C.ok, 4); T.dot(0, 0, C.ok, 5, true);
+  T.fn((t) => 1 / t, C.accent, 2.2, 0.001, 4, 500); T.fn((t) => 1 / t, C.accent, 2.2, -4, -0.001, 500);
+  T.text("F: xy = 1", 3.9, 0.35, C.accent, "right", "bottom");
+  for (let k = 1; k <= s.n; k++) {
+    const on = k === s.n;
+    T.dot(1 / k, k, on ? C.seq2 : C.rule, on ? 5 : 3);
+    T.dot(1 / k, 0, on ? C.seq2 : C.rule, on ? 4 : 2.5);
+    if (on) T.seg(1 / k, Math.min(k, 4.4), 1 / k, 0, C.seq2, 1, [3, 3]);
+  }
+  if (s.n > 4) T.text(`(1/${s.n}, ${s.n}) ↑ fuera del dibujo`, 0.3, 4.3, C.seq2, "left", "top");
+  return [["xₙ = 1/n ∈ π₁(F)", fmt(1 / s.n)], ["segunda coordenada", String(s.n) + " → ∞"], ["lím xₙ = 0", "∉ π₁(F) = ℝ ∖ {0}", "bad"]];
+});
+
+/* ===================== Bloque 5 ===================== */
+
+/* C6-2: x³ en (0, 1), secante, tangente paralela y cono ±3. */
+viz({ c: "c6-2-c", r: "c6-2-r", aspect: 1.15, range: { x: "c6-2-x", y: "c6-2-y" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 34, r: 14, t: 14, b: 26 }), [0, 1], [-0.15, 1.05]);
+  const f = (t) => t * t * t, x = Math.min(s.x, s.y), y = Math.max(s.x, s.y);
+  T.region((t) => f(x) + 3 * Math.abs(t - x), (t) => f(x) - 3 * Math.abs(t - x), 0, 1, C.band);
+  T.axes({ xt: [0.5, 1], yt: [0.5, 1] });
+  T.fn((t) => f(x) + 3 * (t - x), C.accent, 1, 0, 1, 2, [3, 3]); T.fn((t) => f(x) - 3 * (t - x), C.accent, 1, 0, 1, 2, [3, 3]);
+  T.fn(f, C.ink, 2.2, 0, 1);
+  const out = [];
+  if (y - x > 1e-6) {
+    const m = (f(y) - f(x)) / (y - x), c = Math.sqrt(m / 3);
+    T.fn((t) => f(x) + m * (t - x), C.seq2, 1.8, 0, 1, 2);
+    T.fn((t) => f(c) + m * (t - c), C.accent, 1.5, 0, 1, 2, [6, 4]);
+    T.dot(c, f(c), C.accent, 4.5); T.text("c", c, f(c), C.accent, "left", "top", 5, 2);
+    out.push(["pendiente de la secante", fmt(m) + " = 3c²"], ["c", fmt(c)], ["3c² ≤ 3", "sí", "good"]);
+  } else out.push(["x = y", "mové uno de los dos"]);
+  T.dot(x, f(x), C.seq2, 5); T.dot(y, f(y), C.seq2, 5);
+  T.text("cono ±3", 0.02, 1.0, C.accent, "left", "top");
+  return out;
+});
+
+/* C6-3 a): |x sin(1/x)| ≤ |x|; con δ = ε el tramo entra en la banda. */
+const xs1x = (x) => (x === 0 ? 0 : x * Math.sin(1 / x));
+viz({ c: "c6-3-c1", r: "c6-3-r1", aspect: 1.15, range: { e: "c6-3-e" } }, (ctx, W, H, s) => {
+  const e = s.e;
+  const T = plot(ctx, full(W, H, { l: 34, r: 14, t: 14, b: 26 }), [-0.75, 0.75], [-0.75, 0.75]);
+  T.hband(-e, e, C.band); T.vband(-e, e, C.area2);
+  T.axes({ xt: [[-e, "−δ"], [e, "δ"]], yt: [[e, "ε"], [-e, "−ε"]] });
+  T.fn((x) => x, C.muted, 1, -0.75, 0.75, 2, [3, 3]); T.fn((x) => -x, C.muted, 1, -0.75, 0.75, 2, [3, 3]);
+  T.fn(xs1x, C.muted, 1.3, -0.75, 0.75, 4000);
+  T.fn(xs1x, C.accent, 2.2, -e, e, 4000);
+  T.dot(0, 0, C.accent, 4);
+  let mx = 0; for (let i = 1; i <= 4000; i++) { const x = (e * i) / 4000; mx = Math.max(mx, Math.abs(xs1x(x))); }
+  return [["δ = ε", fmt(e, 2)], ["máx |f| en (−δ, δ)", fmt(mx) + " < ε", "good"]];
+});
+
+/* C6-3 b): crestas y valles hacia el 0. */
+viz({ c: "c6-3-c2", r: "c6-3-r2", aspect: 1.15, range: { n: "c6-3-n" } }, (ctx, W, H, s) => {
+  const n = s.n, xn = 1 / (Math.PI / 2 + 2 * Math.PI * n), yn = 1 / ((3 * Math.PI) / 2 + 2 * Math.PI * n);
+  const T = plot(ctx, full(W, H, { l: 50, r: 14, t: 14, b: 26 }), [-0.25 * xn, 1.6 * xn], [-1.3 * xn, 1.3 * xn]);
+  T.axes({ xt: [[xn, "xₙ"], [yn, "yₙ"]], yt: [[xn, fmt(xn, 4)], [-xn, fmt(-xn, 4)]] });
+  T.fn((x) => x, C.muted, 1, T.xr[0], T.xr[1], 2, [3, 3]); T.fn((x) => -x, C.muted, 1, T.xr[0], T.xr[1], 2, [3, 3]);
+  T.fn(xs1x, C.accent, 1.8, 1e-7, T.xr[1], 2500); T.fn(xs1x, C.accent, 1.8, T.xr[0], -1e-7, 600);
+  T.seg(yn, -yn, xn, xn, C.fail, 2);
+  T.dot(xn, xn, C.seq2, 5); T.dot(yn, -yn, C.seq2, 5);
+  const slope = (xs1x(xn) - xs1x(yn)) / (xn - yn);
+  return [["Mₙ = 2 + 4n", String(2 + 4 * n)], ["|f(xₙ) − f(yₙ)| / |xₙ − yₙ|", fmt(slope)], ["|xₙ − yₙ|", fmt(xn - yn, 5)]];
+});
+
+/* C6-4: Ψ con un pico. */
+viz({ c: "c6-4-c", r: "c6-4-r", aspect: 1.1, range: { p: "c6-4-p" } }, (ctx, W, H, s) => {
+  const f = (x) => 0.45 + 0.18 * Math.sin(2 * Math.PI * x + 0.5);
+  const b = (x) => 0.5 * Math.max(0, 1 - Math.abs(x - s.p) / 0.08);
+  const g = (x) => f(x) + b(x);
+  const half = (H - 30) / 2;
+  const T = plot(ctx, { x: 34, y: 12, w: W - 48, h: half - 14 }, [0, 1], [0, 1.25]);
+  T.axes({ xt: [], yt: [0.5, 1] });
+  T.fn(f, C.accent, 2); T.fn(g, C.seq2, 2);
+  T.text("f", 0.02, f(0.02), C.accent, "left", "bottom", 0, -4); T.text("g", s.p, g(s.p), C.seq2, s.p > 0.85 ? "right" : "left", "bottom", s.p > 0.85 ? -6 : 6, 0);
+  const B = plot(ctx, { x: 34, y: half + 14, w: W - 48, h: half - 4 }, [0, 1], [0, 0.6]);
+  B.region(b, () => 0, 0, 1, C.area2, 500);
+  B.region((x) => x * b(x), () => 0, 0, 1, C.area, 500);
+  B.axes({ xt: [0.5, 1], yt: [[0.5, "d∞"]] });
+  B.seg(0, 0.5, 1, 0.5, C.ink, 1.2, [5, 4]);
+  B.fn(b, C.seq2, 1.4, 0, 1, 500); B.fn((x) => x * b(x), C.accent, 1.6, 0, 1, 500);
+  B.text("|f − g|", 0.99, 0.6, C.seq2, "right", "top"); B.text("x·|f − g|", 0.99, 0.47, C.accent, "right", "top");
+  let i1 = 0, i2 = 0; const N = 2000;
+  for (let i = 0; i < N; i++) { const x = (i + 0.5) / N; i1 += b(x) / N; i2 += (x * b(x)) / N; }
+  return [["d∞(f, g)", "0.5"], ["∫|f − g|", fmt(i1, 4)], ["d₁(Ψf, Ψg) = ∫x|f − g|", fmt(i2, 4) + " ≤ 0.5", "good"]];
+});
+
+/* 39 a): cos y el cono ±1. */
+viz({ c: "39-c1", r: "39-r1", aspect: 1.3, range: { x: "39-x", y: "39-y" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 6.3], [-1.5, 1.5]);
+  const x = s.x, y = s.y;
+  T.region((t) => Math.cos(x) + Math.abs(t - x), (t) => Math.cos(x) - Math.abs(t - x), 0, 6.3, C.band);
+  T.text("cono ±1", 6.25, 1.45, C.accent, "right", "top");
+  T.axes({ xt: [1, 2, 3, 4, 5, 6], yt: [-1, 1] });
+  T.fn(Math.cos, C.ink, 2.2, 0, 6.3, 600);
+  const out = [];
+  if (Math.abs(x - y) > 1e-6) {
+    const m = (Math.cos(y) - Math.cos(x)) / (y - x);
+    T.fn((t) => Math.cos(x) + m * (t - x), C.seq2, 1.8, 0, 6.3, 2);
+    out.push(["|pendiente de la secante|", fmt(Math.abs(m))], ["≤ 1", "sí", "good"]);
+  } else out.push(["x = y", "mové uno de los dos"]);
+  T.dot(x, Math.cos(x), C.seq2, 5); T.dot(y, Math.cos(y), C.seq2, 5);
+  return out;
+});
+
+/* 39 b): √x, pendientes cerca del 0. */
+viz({ c: "39-c2", r: "39-r2", aspect: 1.3, range: { x: "39-u", y: "39-v" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 4.2], [-0.1, 2.3]);
+  const x = s.x, y = s.y;
+  T.vband(1, 5, C.okband); T.text("[1, ∞): pendientes ≤ 1/2", 4.15, 0.05, C.ok, "right", "bottom");
+  T.axes({ xt: [1, 2, 3, 4], yt: [1, 2] });
+  T.fn(Math.sqrt, C.ink, 2.2, 0, 4.2, 800);
+  const out = [];
+  if (Math.abs(x - y) > 1e-6) {
+    const m = (Math.sqrt(y) - Math.sqrt(x)) / (y - x);
+    T.fn((t) => Math.sqrt(x) + m * (t - x), C.seq2, 1.8, 0, 4.2, 2);
+    out.push(["pendiente = 1/(√x + √y)", fmt(m)]);
+    out.push(Math.min(x, y) >= 1 ? ["x, y ≥ 1: ≤ 1/2", "sí", "good"] : ["cerca del 0", "sin cota: crece sin límite", "bad"]);
+  } else out.push(["x = y", "mové uno de los dos"]);
+  T.dot(x, Math.sqrt(x), C.seq2, 5); T.dot(y, Math.sqrt(y), C.seq2, 5);
+  return out;
+});
+
+/* 39 c): la integral, |F(f)(x) − F(g)(x)| ≤ x·d∞(f, g). */
+viz({ c: "39-c3", r: "39-r3", aspect: 1.05, range: { x: "39-t" } }, (ctx, W, H, s) => {
+  const f = (t) => 0.55 + 0.35 * Math.sin(6 * t), g = (t) => 0.35 + 0.5 * t * t;
+  const N = 400, Ff = [0], Fg = [0];
+  let dinf = 0;
+  for (let i = 0; i <= N; i++) dinf = Math.max(dinf, Math.abs(f(i / N) - g(i / N)));
+  for (let i = 1; i <= N; i++) { const a = (i - 1) / N, b = i / N; Ff.push(Ff[i - 1] + (f(a) + f(b)) / (2 * N)); Fg.push(Fg[i - 1] + (g(a) + g(b)) / (2 * N)); }
+  const at = (arr, x) => arr[Math.round(clamp(x, 0, 1) * N)];
+  const half = (H - 30) / 2;
+  const T = plot(ctx, { x: 34, y: 12, w: W - 48, h: half - 14 }, [0, 1], [0, 1.1]);
+  T.axes({ xt: [], yt: [0.5, 1] });
+  T.fn(f, C.accent, 2, 0, 1); T.fn(g, C.seq2, 2, 0, 1);
+  T.text("f", 0.02, f(0.02), C.accent, "left", "bottom", 0, -4); T.text("g", 0.98, g(0.98), C.seq2, "right", "top", 0, 4);
+  const x = s.x;
+  T.seg(x, 0, x, 1.1, C.muted, 1, [3, 3]);
+  const B = plot(ctx, { x: 34, y: half + 14, w: W - 48, h: half - 4 }, [0, 1], [0, 0.65]);
+  B.fn((t) => at(Ff, t), C.accent, 2, 0, 1, 200); B.fn((t) => at(Fg, t), C.seq2, 2, 0, 1, 200);
+  B.fn((t) => t * dinf, C.ink, 1.2, 0, 1, 2, [5, 4]);
+  B.axes({ xt: [0.5, 1], yt: [[dinf, "d∞"]] });
+  B.text("F(f)", 0.99, at(Ff, 0.99), C.accent, "right", "bottom", 0, -3); B.text("F(g)", 0.99, at(Fg, 0.99), C.seq2, "right", "top", 0, 3);
+  B.text("x·d∞", 0.62, 0.62 * dinf, C.ink, "right", "bottom", -4, -2);
+  const gap = Math.abs(at(Ff, x) - at(Fg, x));
+  B.seg(x, at(Ff, x), x, at(Fg, x), C.fail, 3);
+  B.dot(x, at(Ff, x), C.accent, 4); B.dot(x, at(Fg, x), C.seq2, 4);
+  return [["d∞(f, g)", fmt(dinf)], ["|F(f)(x) − F(g)(x)|", fmt(gap)], ["≤ x·d∞(f, g)", fmt(x * dinf), "good"]];
+});
+
+/* ===================== Bloque 6 ===================== */
+
+/* C6-5: el par (n, n + 1/n) para x² y para sin. */
+viz({ c: "c6-5-c", r: "c6-5-r", aspect: 1.2, range: { n: "c6-5-n" }, radio: { m: "c6-5-m" } }, (ctx, W, H, s) => {
+  const n = s.n, xn = n, yn = n + 1 / n, sq = s.m === "sq";
+  const f = sq ? (x) => x * x : Math.sin;
+  const xr = [n - 1, n + 1.6], yr = sq ? [Math.max(0, (n - 1) ** 2) - 0.5, (n + 1.6) ** 2 + 0.5] : [-1.4, 1.4];
+  const T = plot(ctx, full(W, H, { l: 40, r: 64, t: 14, b: 26 }), xr, yr);
+  T.axes({ xt: [[xn, "n"], [yn, "n + 1/n"]], yt: sq ? [[f(xn), fmt(f(xn), 1)], [f(yn), fmt(f(yn), 1)]] : [-1, 1] });
+  T.fn(f, C.ink, 2.2);
+  T.seg(xn, f(xn), xn, yr[0], C.muted, 1, [3, 3]); T.seg(yn, f(yn), yn, yr[0], C.muted, 1, [3, 3]);
+  T.seg(xn, f(xn), yn + 0.15, f(xn), C.muted, 1, [3, 3]); T.seg(yn, f(yn), yn + 0.15, f(yn), C.muted, 1, [3, 3]);
+  const gap = Math.abs(f(yn) - f(xn));
+  T.vbrace(yn + 0.15, f(xn), f(yn), sq ? C.fail : C.ok, fmt(gap, 2));
+  T.dot(xn, f(xn), C.seq2, 5); T.dot(yn, f(yn), C.seq2, 5);
+  return [["|xₙ − yₙ| = 1/n", fmt(1 / n)], ["|f(xₙ) − f(yₙ)|", sq ? fmt(gap) + " > 2" : fmt(gap) + " ≤ 1/n", sq ? "bad" : "good"]];
+});
+
+/* C6-6: x sin x en xₙ = π + 2πn. */
+viz({ c: "c6-6-c", r: "c6-6-r", aspect: 1.2, range: { n: "c6-6-n" } }, (ctx, W, H, s) => {
+  const n = s.n, xn = Math.PI + 2 * Math.PI * n, yn = xn + 1 / n, f = (x) => x * Math.sin(x);
+  const T = plot(ctx, full(W, H, { l: 40, r: 58, t: 14, b: 26 }), [xn - 3, xn + 3], [-(xn + 4), xn + 4]);
+  T.axes({ xt: [[xn, "xₙ"]], yt: [[xn, fmt(xn, 1)], [-xn, fmt(-xn, 1)]] });
+  T.fn((x) => x, C.muted, 1, T.xr[0], T.xr[1], 2, [3, 3]); T.fn((x) => -x, C.muted, 1, T.xr[0], T.xr[1], 2, [3, 3]);
+  T.fn(f, C.ink, 2.2);
+  T.seg(xn, f(xn), xn + 3, f(xn), C.muted, 1, [3, 3]); T.seg(yn, f(yn), xn + 3, f(yn), C.muted, 1, [3, 3]);
+  const gap = Math.abs(f(yn) - f(xn));
+  T.vbrace(xn + 2.6, f(xn), f(yn), C.fail, fmt(gap, 2));
+  T.dot(xn, f(xn), C.seq2, 5); T.dot(yn, f(yn), C.seq2, 5);
+  return [["|xₙ − yₙ| = 1/n", fmt(1 / n)], ["|f(xₙ) − f(yₙ)|", fmt(gap) + " → 2π ≈ 6.283", "bad"]];
+});
+
+/* C6-7: pegado en a = 1. */
+viz({ c: "c6-7-c", r: "c6-7-r", aspect: 1.2, range: { x: "c6-7-x", h: "c6-7-h" } }, (ctx, W, H, s) => {
+  const a = 1, f = (t) => (t <= 1 ? 2 * Math.sqrt(t) : 2 + 0.6 * Math.sin(2 * (t - 1)));
+  const T = plot(ctx, full(W, H, { l: 30, r: 58, t: 14, b: 26 }), [0, 2], [0, 3]);
+  const x = s.x, y = x + s.h;
+  T.vband(0, a, C.band); T.vband(a, 2, C.okband);
+  T.axes({ xt: [[x, "x"], [a, "a"], [y, "y"]], yt: [1, 2, 3] });
+  T.fn(f, C.ink, 2.2, 0, 2, 600);
+  T.text("[0, a]", 0.05, 2.95, C.accent, "left", "top"); T.text("[a, ∞)", 1.95, 2.95, C.ok, "right", "top");
+  for (const t of [x, a, y]) T.seg(t, 0, t, f(t), C.muted, 1, [3, 3]);
+  const cross = y >= a;
+  if (cross) {
+    for (const t of [x, a, y]) T.seg(t, f(t), 2.05, f(t), C.muted, 1, [2, 3]);
+    T.vbrace(2.02, f(x), f(a), C.accent, fmt(Math.abs(f(x) - f(a)), 2));
+    T.vbrace(2.14, f(a), f(y), C.ok, fmt(Math.abs(f(a) - f(y)), 2));
+  }
+  T.dot(x, f(x), C.seq2, 5); T.dot(y, f(y), C.seq2, 5); T.dot(a, f(a), C.ink, 4, true);
+  if (!cross) return [["x, y", "en el mismo trozo [0, a]"]];
+  return [["|x − a| ≤ |x − y|", fmt(a - x) + " ≤ " + fmt(s.h)], ["|y − a| ≤ |x − y|", fmt(y - a) + " ≤ " + fmt(s.h)], ["|f(x) − f(y)| ≤ suma", fmt(Math.abs(f(x) - f(y))) + " ≤ " + fmt(Math.abs(f(x) - f(a)) + Math.abs(f(a) - f(y))), "good"]];
+});
+
+/* C6-8: brecha d(A, B) = 0.8 y la regla δ. */
+viz({ c: "c6-8-c", r: "c6-8-r", aspect: 1.5, range: { d: "c6-8-d" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 44 }), [-0.2, 3.7], [-0.6, 3]);
+  const fA = (x) => 1 + 0.5 * Math.sin(3 * x), fB = (x) => 2.4 - 0.3 * (x - 2);
+  T.rect(0, -0.12, 1.2, 0.12, C.band, C.accent); T.rect(2, -0.12, 3.4, 0.12, C.okband, C.ok);
+  T.axes({ xt: [0, [1.2, "1.2"], 2, [3.4, "3.4"]], yt: [1, 2, 3] });
+  T.fn(fA, C.accent, 2.2, 0, 1.2); T.fn(fB, C.ok, 2.2, 2, 3.4);
+  T.text("A", 0.6, 0.15, C.accent, "center", "bottom"); T.text("B", 2.7, 0.15, C.ok, "center", "bottom");
+  T.hbrace(1.2, 2, -0.12, C.muted, "d(A, B) = 0.8");
+  const ok = s.d <= 0.8;
+  T.seg(1.2, -0.45, 1.2 + s.d, -0.45, ok ? C.ok : C.fail, 4);
+  T.text("δ", 1.2 + s.d, -0.45, ok ? C.ok : C.fail, "left", "middle", 6);
+  return [["δ ≤ d(A, B)", ok ? "sí: d(x, y) < δ deja a x, y en la misma pieza" : "no: hay x ∈ A, y ∈ B con d(x, y) < δ", ok ? "good" : "bad"]];
+});
+
+/* 37: x² y el par x = 1.1/δ, y = x + δ/2. */
+viz({ c: "37-c", r: "37-r", aspect: 1.2, range: { d: "37-d" } }, (ctx, W, H, s) => {
+  const d = s.d, x = 1.1 / d, y = x + d / 2;
+  const T = plot(ctx, full(W, H, { l: 44, r: 58, t: 14, b: 26 }), [0, y * 1.12], [0, y * y * 1.12]);
+  T.axes({ xt: [[x, "x"]], yt: [[x * x, fmt(x * x, 1)], [y * y, fmt(y * y, 1)]] });
+  T.fn((t) => t * t, C.ink, 2.2);
+  T.seg(x, x * x, y * 1.12, x * x, C.muted, 1, [3, 3]); T.seg(y, y * y, y * 1.12, y * y, C.muted, 1, [3, 3]);
+  T.vbrace(y * 1.06, x * x, y * y, C.fail, fmt(y * y - x * x, 2));
+  T.dot(x, x * x, C.seq2, 5); T.dot(y, y * y, C.seq2, 5);
+  return [["x = 1.1/δ", fmt(x, 2)], ["|x − y| = δ/2", fmt(d / 2)], ["|f(x) − f(y)| = δ|x + δ/4|", fmt(y * y - x * x) + " ≥ 1", "bad"]];
+});
+
+/* ===================== Bloque 7 ===================== */
+
+/* 38: un racional y un irracional en (x, x + 1/n). */
+viz({ c: "38-c", r: "38-r", aspect: 2.2, range: { n: "38-n" } }, (ctx, W, H, s) => {
+  const n = s.n, x = Math.SQRT2 - 1, q = Math.ceil(n * x) / n, z = x + 1 / (2 * n);
+  const T = plot(ctx, full(W, H, { l: 16, r: 16, t: 24, b: 34 }), [x - 0.6 / n, x + 1.6 / n], [-1, 1]);
+  T.vband(x, x + 1 / n, C.band);
+  T.axes({ xt: [[x, "x"], [x + 1 / n, "x + 1/n"]] });
+  T.seg(x, -1, x, 1, C.accent, 1, [3, 3]); T.seg(x + 1 / n, -1, x + 1 / n, 1, C.accent, 1, [3, 3]);
+  T.dot(x, 0, C.ink, 5, true);
+  T.dot(q, 0.4, C.ok, 5); T.text(`${Math.ceil(n * x)}/${n} ∈ ℚ`, q, 0.4, C.ok, "center", "bottom", 0, -8);
+  T.dot(z, -0.4, C.seq2, 5); T.text("zₙ ∈ 𝕀", z, -0.4, C.seq2, "center", "top", 0, 8);
+  return [["x = √2 − 1", fmt(x, 6)], ["racional, distancia a x", fmt(q - x, 6)], ["zₙ = x + 1/(2n), distancia", fmt(z - x, 6)]];
+});
+
+/* C9-3.1: la preimagen de un abierto atrapa puntos de D. */
+viz({ c: "c9-3-1-c", r: "c9-3-1-r", aspect: 1.05, range: { c: "c9-3-1-a", m: "c9-3-1-m" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-1.6, 1.6], [-1.6, 1.6]);
+  const f = (x) => x * x * x - x, w = 0.12, a = s.c - w, b = s.c + w;
+  T.hband(a, b, C.area2);
+  T.axes({ xt: [-1, 1], yt: [-1, 1], xl: "X", yl: "Y" });
+  T.fn(f, C.ink, 2.2);
+  const N = 1200; let st = null;
+  for (let i = 0; i <= N; i++) {
+    const x = -1.6 + (3.2 * i) / N, inn = f(x) > a && f(x) < b;
+    if (inn && st === null) st = x;
+    if ((!inn || i === N) && st !== null) { T.seg(st, 0, x, 0, C.ok, 5); st = null; }
+  }
+  const step = 1 / 2 ** s.m; let hits = 0;
+  for (let k = Math.ceil(-1.6 / step); k * step <= 1.6; k++) {
+    const x = k * step, inn = f(x) > a && f(x) < b;
+    T.seg(x, -0.05, x, 0.05, inn ? C.accent : C.muted, inn ? 2 : 1);
+    if (inn) { hits++; T.seg(x, 0, x, f(x), C.accent, 1, [2, 3]); T.seg(x, f(x), 0, f(x), C.accent, 1, [2, 3]); T.dot(x, f(x), C.accent, 3.5); T.dot(0, f(x), C.accent, 3.5); }
+  }
+  T.text("A", 1.55, b, C.seq2, "right", "bottom");
+  return [["A", `(${fmt(a, 2)}, ${fmt(b, 2)})`], ["puntos de D en f⁻¹(A)", hits ? String(hits) : "0 (con este m; probá uno más grande)", hits ? "good" : "bad"], ["f(D) ∩ A ≠ ∅", hits ? "sí" : "—", hits ? "good" : ""]];
+});
+
+/* C9-3.2: f = g en los diádicos. */
+viz({ c: "c9-3-2-c", r: "c9-3-2-r", aspect: 1.2, range: { n: "c9-3-2-n" }, radio: { g: "c9-3-2-g" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [0, 1.2], [0, 2.4]);
+  const f = (x) => 1 + 0.6 * Math.sin(2 * x), xs = Math.SQRT2 / 2;
+  T.axes({ xt: [[xs, "x*"], 1], yt: [1, 2] });
+  for (let k = 0; k <= 76; k++) T.seg(k / 64, 0, k / 64, 0.06, C.muted, 1);
+  T.fn(f, C.accent, 2.2);
+  const xn = (k) => Math.floor(xs * 2 ** k) / 2 ** k;
+  for (let k = 1; k <= s.n; k++) T.dot(xn(k), f(xn(k)), k === s.n ? C.seq2 : C.rule, k === s.n ? 5 : 3);
+  T.seg(xn(s.n), 0, xn(s.n), f(xn(s.n)), C.seq2, 1, [3, 3]);
+  T.dot(xs, f(xs), C.accent, 5, true);
+  const disc = s.g === "d";
+  if (disc) { T.dot(xs, f(xs) + 0.7, C.fail, 5); T.text("g(x*)", xs, f(xs) + 0.7, C.fail, "left", "bottom", 7, -2); }
+  T.text("f = g en D", 0.02, 2.3, C.accent, "left", "top");
+  return [["xₙ = ⌊2ⁿx*⌋/2ⁿ", fmt(xn(s.n), 5)], ["f(xₙ) = g(xₙ)", fmt(f(xn(s.n)), 5)], ["f(x*)", fmt(f(xs), 5)], disc ? ["g(x*)", fmt(f(xs) + 0.7, 5) + " ≠ lím g(xₙ)", "bad"] : ["g(x*)", fmt(f(xs), 5), "good"]];
+});
+
+/* C9-3.1b: los valores 2^(p/q) fijados por la ecuación. */
+viz({ c: "c9-3-1b-c", r: "c9-3-1b-r", aspect: 1.2, range: { Q: "c9-3-1b-q" } }, (ctx, W, H, s) => {
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 26 }), [-2, 2.4], [0, 5.5]);
+  T.axes({ xt: [-2, -1, 1, 2], yt: [1, 2, 4] });
+  T.fn((x) => 2 ** x, C.muted, 1.2, -2, 2.4, 300, [4, 4]);
+  const seen = new Set(); let cnt = 0;
+  for (let q = 1; q <= s.Q; q++) for (let p = Math.ceil(-2 * q); p <= 2.4 * q; p++) {
+    const v = p / q, key = v.toFixed(9); if (seen.has(key)) continue; seen.add(key); cnt++;
+    T.dot(v, 2 ** v, q === 1 ? C.ok : C.accent, q === 1 ? 5 : 2.8);
+  }
+  T.text("f(1) = 2", 1, 2, C.ok, "left", "top", 7, 2);
+  return [["racionales p/q con q ≤ Q", String(cnt)], ["valores fijados", "f(p/q) = 2^(p/q)"]];
+});
+
+/* ===================== Bloque 8 ===================== */
+
+/* 40 a): h(x) = x/(1 + |x|). */
+viz({ c: "40-c1", r: "40-r1", aspect: 1.3, range: { x: "40-x" } }, (ctx, W, H, s) => {
+  const h = (x) => x / (1 + Math.abs(x)), hi = (y) => y / (1 - Math.abs(y));
+  const T = plot(ctx, full(W, H, { l: 34, r: 14, t: 14, b: 26 }), [-10, 10], [-1.35, 1.35]);
+  T.hband(-1, 1, C.band);
+  T.axes({ xt: [-8, -4, 4, 8], yt: [-1, 1] });
+  T.seg(-10, 1, 10, 1, C.accent, 1, [5, 4]); T.seg(-10, -1, 10, -1, C.accent, 1, [5, 4]);
+  T.fn(h, C.ink, 2.2, -10, 10, 400);
+  const x = s.x, y = h(x);
+  T.seg(x, 0, x, y, C.seq2, 1.2, [3, 3]); T.seg(x, y, 0, y, C.seq2, 1.2, [3, 3]);
+  T.dot(x, 0, C.seq2, 4.5); T.dot(x, y, C.seq2, 5); T.dot(0, y, C.ok, 4.5);
+  T.text("h(x)", 0, y, C.ok, x >= 0 ? "right" : "left", "bottom", x >= 0 ? -6 : 6, -3);
+  T.text("(−1, 1)", -9.8, 1, C.accent, "left", "top", 0, 3);
+  return [["x", fmt(x, 2)], ["h(x)", fmt(y, 4)], ["h⁻¹(h(x)) = h(x)/(1 − |h(x)|)", fmt(hi(y), 2), "good"]];
+});
+
+/* 40 b): xₙ = x + 1/n en la usual y en la discreta. */
+viz({ c: "40-c2", r: "40-r2", aspect: 1.25, range: { n: "40-n" } }, (ctx, W, H, s) => {
+  const n = s.n, top = 0.36 * (H - 20);
+  const T = plot(ctx, { x: 20, y: 12, w: W - 40, h: top - 12 }, [-0.12, 1.08], [-1, 1]);
+  T.axes({ xt: [[0, "x"], [1, "x + 1"]] });
+  T.text("(ℝ, |·|)", -0.1, 1, C.muted, "left", "top");
+  for (let k = 1; k <= n; k++) T.dot(1 / k, 0, k === n ? C.seq2 : C.rule, k === n ? 5 : 3);
+  T.dot(0, 0, C.ink, 5, true);
+  T.text("xₙ", 1 / n, 0, C.seq2, "center", "bottom", 0, -8);
+  const B = plot(ctx, { x: 34, y: top + 22, w: W - 48, h: H - top - 50 }, [0, 31], [0, 1.25]);
+  B.axes({ xt: [1, 10, 20, 30], yt: [[1, "1"]], xl: "n" });
+  for (let k = 1; k <= n; k++) {
+    B.seg(k - 0.2, 0, k - 0.2, 1 / k, C.accent, 3);
+    B.seg(k + 0.2, 0, k + 0.2, 1, C.fail, 3);
+  }
+  B.text("δ(xₙ, x) = 1", 30.5, 1, C.fail, "right", "bottom", 0, -4);
+  B.text("|xₙ − x| = 1/n", 30.5, 0.35, C.accent, "right", "bottom");
+  return [["|xₙ − x|", fmt(1 / n, 4) + " → 0", "good"], ["δ(f⁻¹(xₙ), f⁻¹(x))", "1 para todo n", "bad"]];
+});
+
+/* 41: la isometría x ↦ x + 1. */
+viz({ c: "41-c", r: "41-r", aspect: 1.6, range: { x: "41-x", y: "41-y" } }, (ctx, W, H, s) => {
+  const x = s.x, y = s.y, fx = x + 1, fy = y + 1;
+  const T = plot(ctx, full(W, H, { l: 18, r: 18, t: 18, b: 18 }), [-0.3, 6.6], [0, 1]);
+  const yt = 0.78, yb = 0.22;
+  T.seg(0, yt, 6.6, yt, C.muted, 1.4); T.seg(0, yb, 6.6, yb, C.muted, 1.4);
+  T.seg(1, yb, 6.6, yb, C.ok, 6);
+  for (const t of [0, 1, 2, 3, 4, 5, 6]) { T.seg(t, yt - 0.025, t, yt + 0.025, C.muted, 1); T.seg(t, yb - 0.025, t, yb + 0.025, C.muted, 1); T.text(String(t), t, yb, C.muted, "center", "top", 0, 8, UIs); }
+  T.dot(0, yt, C.muted, 3.5); T.dot(0, yb, C.muted, 3.5); T.dot(1, yb, C.ok, 4.5);
+  T.text("dominio ℝ≥0", -0.25, yt, C.muted, "left", "bottom", 0, -10);
+  T.text("llegada ℝ≥0;  Im(f) = [1, ∞)", -0.25, yb, C.ok, "left", "bottom", 0, -10);
+  for (const [a, b, lab] of [[x, fx, "x"], [y, fy, "y"]]) {
+    arrow(ctx, T.X(a), T.Y(yt) + 6, T.X(b), T.Y(yb) - 7, C.seq2, 1.2);
+    T.dot(a, yt, C.accent, 5); T.text(lab, a, yt, C.accent, "center", "bottom", 0, -7);
+    T.dot(b, yb, C.seq2, 5); T.text("f(" + lab + ")", b, yb, C.seq2, "center", "top", 0, 22);
+  }
+  return [["|x − y|", fmt(Math.abs(x - y), 2)], ["|f(x) − f(y)|", fmt(Math.abs(fx - fy), 2), "good"], ["[0, 1) ∩ Im(f)", "∅: f no es sobreyectiva", "bad"]];
+});
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

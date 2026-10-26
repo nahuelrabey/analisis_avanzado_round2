@@ -1,0 +1,149 @@
+{
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo</b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <b>espacio métrico</b>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <b>cerrado</b> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:</p><ul><li><b>Bola abierta:</b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.</li><li><b>Bola cerrada:</b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.</li><li><b>Esfera:</b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <b>completo</b> si toda sucesión de Cauchy tiene límite en $M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado</b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.</p><p>(En el apunte viene con un esquema ilustrativo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo</i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.</p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos</i>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-minimo": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Mínimo",
+  "enunciado": "<p>Si $\\inf(A) \\in A$, entonces $\\inf(A)$ se denomina <b>mínimo</b> de $A$. En ese caso, notamos $\\min(A)$ en lugar de $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><ol><li><b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</li><li><b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:</p><p>1. <b>Distancia euclídea ($d_2$):</b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$</p><p>2. <b>Distancia taxista ($d_1$):</b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$</p><p>3. <b>Distancia del máximo ($d_\\infty$):</b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-compacto": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Espacio compacto",
+  "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto</b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.</p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$</i>.</p>",
+  "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
+ },
+ "ext-contraccion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Contracción",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Una función $f : E \\to E$ es una <b>contracción</b> si existe una constante $0 \\le \\alpha \\lt 1$ tal que $$d(f(x), f(y)) \\le \\alpha\\, d(x, y) \\quad \\text{para todo } x, y \\in E.$$ Es decir, $f$ es Lipschitz con constante menor que $1$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-metrica-discreta": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métrica discreta",
+  "enunciado": "<p>Sea $E$ un conjunto no vacío. La <b>métrica discreta</b> en $E$ es $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ Un espacio métrico con esta métrica se llama <b>discreto</b>. Para $r \\le 1$, la bola $B(x, r)$ es $\\{x\\}$.</p>",
+  "fuente": "Guía de la Práctica 3, Ejercicio 1 (f); el apunte la usa (observación «La continuidad depende de las métricas») pero no la define en una caja"
+ },
+ "ext-punto-fijo": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Punto fijo",
+  "enunciado": "<p>Sea $f : E \\to E$ una función. Un punto $x \\in E$ es un <b>punto fijo</b> de $f$ si $f(x) = x$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-teorema-banach": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Punto fijo de Banach",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo no vacío y sea $f : E \\to E$ una contracción. Entonces $f$ tiene un único punto fijo $x^* \\in E$. Además, para cualquier $x_0 \\in E$, la sucesión $x_{n+1} = f(x_n)$ converge a $x^*$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-teorema-bolzano": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano",
+  "enunciado": "<p>Sea $g : [a, b] \\to \\mathbb{R}$ continua tal que $g(a)$ y $g(b)$ tienen signos opuestos ($g(a)\\, g(b) \\lt 0$). Entonces existe $c \\in (a, b)$ tal que $g(c) = 0$.</p>",
+  "fuente": "Teorema de Análisis I, usado en el curso; no está en apuntes.typ"
+ },
+ "guia-p3-ej10": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 10",
+  "titulo": "Distancia de un punto a un conjunto",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Dados $A \\subseteq E$ no vacío y $x \\in E$, se define la <i>distancia de $x$ a $A$</i> como $$d(x, A) = \\inf\\{d(x, a) : a \\in A\\}.$$ Pruebe que para todos $x, y \\in E$ y $r \\gt 0$:</p><p>(a) $|d(x, A) - d(y, A)| \\le d(x, y)$.<br>(b) $x \\in A \\Rightarrow d(x, A) = 0$.<br>(c) $d(x, A) = 0 \\Leftrightarrow x \\in \\overline{A}$.<br>(d) $B_A(r) = \\{x \\in E : d(x, A) \\lt r\\}$ es abierto.<br>(e) $\\overline{B}_A(r) = \\{x \\in E : d(x, A) \\le r\\}$ es cerrado.</p>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej11": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 11",
+  "titulo": "Distancia entre conjuntos",
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico. Consideremos el conjunto $\\mathcal{X} = \\{A \\subseteq E : A \\neq \\emptyset\\}$. Definimos la función $\\hat{d} : \\mathcal{X} \\times \\mathcal{X} \\to \\mathbb{R}$ como $$\\hat{d}(A, B) = \\inf\\{d(a, b) : a \\in A, b \\in B\\}.$$ Determine si las siguientes afirmaciones son verdaderas o falsas:</p><p>(a) $\\hat{d}(A, B) = \\hat{d}(\\overline{A}, B)$.<br>(b) $\\hat{d}(A, B) = 0 \\Leftrightarrow A \\cap B \\neq \\emptyset$.<br>(c) $\\hat{d}(A, B) = 0 \\Leftrightarrow \\overline{A} \\cap \\overline{B} \\neq \\emptyset$.<br>(d) $\\hat{d}(A, B) \\le \\hat{d}(A, C) + \\hat{d}(C, B)$.</p><p>Concluya que $\\hat{d}$ no es una distancia.</p>",
+  "fuente": "guias/p3.typ"
+ }
+}

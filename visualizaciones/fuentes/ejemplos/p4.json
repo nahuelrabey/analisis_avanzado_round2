@@ -1,0 +1,254 @@
+{
+ "cor-4.47": {
+  "tipo": "Corolario",
+  "numero": "4.47",
+  "titulo": "Cerrados vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Entonces $E$ es cerrado si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$ se tiene que $x \\in E$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior</strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.</p><p>El <strong>interior</strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto</strong> si $A = A^{\\circ}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia</strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura</strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado</strong> si $\\overline{F} = F$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo</strong> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.1": {
+  "tipo": "Definición",
+  "numero": "5.1",
+  "titulo": "Imagen y Preimagen de un Conjunto",
+  "enunciado": "<p>Dada una función $f : M \\to N$, y dados conjuntos $A \\subseteq M$ y $B \\subseteq N$, $$\\begin{aligned} f(A) &= \\{f(x) \\in N : x \\in A\\} \\subseteq N \\quad \\text{y} \\\\ f^{-1}(B) &= \\{x \\in M : f(x) \\in B\\} \\subseteq M. \\end{aligned}$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.14": {
+  "tipo": "Definición",
+  "numero": "5.14",
+  "titulo": "Función Uniformemente Continua",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. $f$ se dice <i>uniformemente continua</i> si para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que si $d(x, y) \\lt \\delta$ entonces $d'(f(x), f(y)) \\lt \\varepsilon$. Equivalentemente, podríamos pedir que para todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $$f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon).$$</p><p>Con cuantificadores: $$\\begin{aligned}&\\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall x \\in M \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon.\\end{aligned}$$ El $\\delta$ se elige <i>antes</i> de conocer el punto: depende sólo de $\\varepsilon$ y tiene que servir en todos lados (comparar con la Definición 5.4).</p><p><i>Nota</i>: en la versión con bolas falta escribir el cuantificador: la inclusión tiene que valer <b>para todo $x \\in M$</b> con el mismo $\\delta$ (así lo aclara la Observación 5.15). Sin él, se lee como la continuidad en $x$ de la Definición 5.4.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.20": {
+  "tipo": "Definición",
+  "numero": "5.20",
+  "titulo": "Conjunto Denso",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y $E \\subseteq M$ un subconjunto. Decimos que $E$ es <em>denso</em> en $M$ si $\\overline{E} = M$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.24": {
+  "tipo": "Definición",
+  "numero": "5.24",
+  "titulo": "Función Lipschitz",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <i>Lipschitz de constante $C$</i> si $$d'(f(x), f(y)) \\le C\\, d(x, y), \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.29": {
+  "tipo": "Definición",
+  "numero": "5.29",
+  "titulo": "Homeomorfismo",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ dos espacios métricos y $f : M \\to N$ una función. Decimos que $f$ es un <i>homeomorfismo</i> si $f$ es continua, biyectiva y $f^{-1} : N \\to M$ es también continua.</p><p>Si existe un homeomorfismo $f : M \\to N$ decimos que $M$ y $N$ son espacios <i>homeomorfos</i>.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.33": {
+  "tipo": "Definición",
+  "numero": "5.33",
+  "titulo": "Isometría",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es una <i>isometría</i> si $$d'(f(x), f(y)) = d(x, y) \\quad \\text{para todo } x, y \\in M.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5.4": {
+  "tipo": "Definición",
+  "numero": "5.4",
+  "titulo": "Función Continua",
+  "enunciado": "<p>Sean $(M, d)$ y $(N, d')$ dos espacios métricos y sea $f : M \\to N$ una función. Decimos que $f$ es <em>continua en $x$</em> si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que si $d(y, x) \\lt \\delta$ se tiene que $d'(f(y), f(x)) \\lt \\varepsilon$.</p><p>Recordando que la definición de $B(x, \\delta) = \\{y \\in M : d(x, y) \\lt \\delta\\}$ y $B(f(x), \\varepsilon) = \\{z \\in N : d'(f(x), z) \\lt \\varepsilon\\}$, podemos reescribir la definición de continuidad de $f$ en $x$ como: $f$ es continua en $x$ si para todo $\\varepsilon \\gt 0$ existe un $\\delta \\gt 0$ tal que $f(B(x, \\delta)) \\subseteq B(f(x), \\varepsilon)$.</p><p>Cuando $f$ sea continua en $x$ para todo $x \\in M$, diremos que $f$ es continua en $M$. Con cuantificadores: $$\\begin{aligned} &\\forall x \\in M \\quad \\forall \\varepsilon \\gt 0 \\quad \\exists \\delta \\gt 0 \\quad \\forall y \\in M : \\\\ &d(x, y) \\lt \\delta \\Longrightarrow d'(f(x), f(y)) \\lt \\varepsilon. \\end{aligned}$$</p><p>El $\\delta$ se elige <em>después</em> de conocer el punto $x$: puede depender de $x$ y de $\\varepsilon$ (comparar con la Definición 5.14).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$</p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:</p><p>1. <b>Distancia infinito:</b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$</p><p>2. <b>Distancia 1:</b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$</p><p>(En el apunte, cada distancia viene con un dibujo.)</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:</p><ol><li><b>Distancia euclídea ($d_2$):</b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$</li><li><b>Distancia taxista ($d_1$):</b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$</li><li><b>Distancia del máximo ($d_\\infty$):</b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "ejap-5.10": {
+  "tipo": "Ejercicio",
+  "numero": "5.10",
+  "titulo": "Continuidad por cerrados",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$. Probar que $f$ es continua si y sólo si $f^{-1}(F)$ es cerrado para todo $F \\subseteq N$ cerrado.</p>",
+  "fuente": "notas_materia.pdf, Ejercicio 5.10 (desafío de la Práctica 4, <code>desafios/p4.typ</code>)"
+ },
+ "ejap-5.25": {
+  "tipo": "Ejercicio",
+  "numero": "5.25",
+  "titulo": "Lipschitz implica uniformemente continua",
+  "enunciado": "<p>Sea $f : M \\to N$ una función Lipschitz de constante $C$. Probar que $f$ es uniformemente continua.</p>",
+  "fuente": "notas_materia.pdf, Ejercicio 5.25 (desafío de la Práctica 4, <code>desafios/p4.typ</code>)"
+ },
+ "ejem-4.2": {
+  "tipo": "Ejemplo",
+  "numero": "4.2",
+  "titulo": "La distancia discreta",
+  "enunciado": "<p>Sea $M$ un conjunto no vacío cualquiera. Se define la función $\\delta : M \\times M \\to \\mathbb{R}$ por $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ $\\delta$ es una métrica en $M$ (la <b>métrica discreta</b>).</p>",
+  "fuente": "notas_materia.pdf, Ejemplo 4.2 (transcripto en <code>ejemplos/p3.typ</code>, ejemplo 16)"
+ },
+ "ejem-4.45": {
+  "tipo": "Ejemplo",
+  "numero": "4.45",
+  "titulo": "Sucesiones convergentes en la métrica discreta",
+  "enunciado": "<p>Consideremos $(M, \\delta)$, con $\\delta$ la métrica discreta. Supongamos que $x_n \\to x$. Por definición, tenemos que para todo $\\varepsilon \\gt 0$, debería ser que $\\delta(x_n, x) \\lt \\varepsilon$ para todo $n$ a partir de cierto $n_0$. Pero si $0 \\lt \\varepsilon \\lt 1$, $\\delta(x_n, x) \\lt \\varepsilon$ si y sólo si $\\delta(x_n, x) = 0$ (puesto que $\\delta$ toma sólo dos valores, $0$ y $1$). Pero $\\delta(x_n, x) = 0$ sólo cuando $x_n = x$.</p><p>Es decir, que las únicas sucesiones convergentes en $(M, \\delta)$ son aquéllas que a partir de cierto punto valen siempre lo mismo (es decir, las <b>eventualmente constantes</b>).</p>",
+  "fuente": "notas_materia.pdf, Ejemplo 4.45 a) (transcripto en <code>ejemplos/p3.typ</code>, ejemplo 30)"
+ },
+ "ext-continua-compacto-uc": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Continua en un compacto implica uniformemente continua",
+  "enunciado": "<p>Sean $(M, d)$, $(N, d')$ espacios métricos con $M$ compacto y $f : M \\to N$ continua. Entonces $f$ es uniformemente continua.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ (Práctica 5)"
+ },
+ "ext-det-inversible": {
+  "tipo": "Resultado",
+  "numero": "",
+  "titulo": "Inversibilidad y determinante",
+  "enunciado": "<p>Una matriz cuadrada $A \\in \\operatorname{M}_n(\\mathbb{R})$ es inversible si y sólo si $\\det(A) \\neq 0$. Es decir, $\\operatorname{GL}_n(\\mathbb{R}) = \\{A \\in \\operatorname{M}_n(\\mathbb{R}) : \\det(A) \\neq 0\\}$.</p>",
+  "fuente": "Álgebra lineal (CBC / Álgebra 1); no es una caja de apuntes.typ"
+ },
+ "ext-polinomio-varias-variables": {
+  "tipo": "Definición",
+  "numero": "1.4 (Clase 9)",
+  "titulo": "Polinomio en varias variables",
+  "enunciado": "<p>$P : \\mathbb{R}^n \\to \\mathbb{R}$ es un <b>polinomio en varias variables</b> si puede escribirse como $$P(x_1, \\dots, x_n) = \\sum_{e_1 + \\dots + e_n \\le r} a_{(e_1, \\dots, e_n)} x_1^{e_1} \\cdots x_n^{e_n}$$ para algún $r \\in \\mathbb{N}$. Por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5).</p>",
+  "fuente": "Clase 9 (07/10), Definición 1.4; transcripta en <code>ejemplos/p4.typ</code>, Bloque 3"
+ },
+ "ext-tvm": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Teorema del valor medio (Lagrange)",
+  "enunciado": "<p>Si $f$ es continua en $[x, y]$ y derivable en $(x, y)$, entonces existe $c \\in (x, y)$ tal que $$f(x) - f(y) = f'(c)(x - y).$$</p>",
+  "fuente": "Análisis 1 (resultado previo al curso); no es una caja de apuntes.typ"
+ },
+ "obs-3.21": {
+  "tipo": "Observación",
+  "numero": "3.21",
+  "titulo": "Coordinabilidad de $\\mathbb{R}$ con Intervalos",
+  "enunciado": "<p>De hecho, podemos probar que $\\mathbb{R}$ es coordinable con cualquier intervalo. Usando funciones parecidas a la del ejemplo anterior podemos probar que $\\mathbb{R} \\sim (a, b)$ donde $(a, b)$ es cualquier intervalo abierto (hacerlo como ejercicio). Pero además podemos ver que $\\mathbb{R}$ es también coordinable con cualquier intervalo cerrado o semiabierto: si por ejemplo queremos ver que $\\mathbb{R} \\sim [a, b]$, podemos pensar que $\\mathbb{R} \\sim (a, b)$ y $(a, b) \\sim [a, b]$ dado que $(a, b) = [a, b] \\setminus \\{a, b\\}$ y el ejercicio 3 de la guía nos dice que entonces $[a, b] \\sim (a, b)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.12": {
+  "tipo": "Observación",
+  "numero": "5.12",
+  "titulo": "La imagen de un abierto (o cerrado) no tiene por qué ser abierta (o cerrada)",
+  "enunciado": "<p>En el Teorema 5.9 y en el Ejercicio 5.10 vimos una caracterización que relaciona funciones continuas con que la preimagen de un abierto/cerrado sea abierto/cerrado. Esta caracterización falla si intentamos usar la imagen en vez de la preimagen: en general, es falso que una función continua manda abiertos en abiertos o cerrados en cerrados.</p><p>Pensemos en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = e^x$. Sabemos que esta función es continua, y que $f(\\mathbb{R}) = (0, +\\infty)$. Observemos que $\\mathbb{R}$ es cerrado en $\\mathbb{R}$ (lo vimos antes), pero $(0, +\\infty)$ no es cerrado en $\\mathbb{R}$.</p><p>Pensemos también en la función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$, $f(x) = x^2$. Entonces tenemos que $f((-1, 1)) = [0, 1)$. El conjunto $(-1, 1)$ es abierto en $\\mathbb{R}$ pero $[0, 1)$ no es abierto en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.16": {
+  "tipo": "Observación",
+  "numero": "5.16",
+  "titulo": "Negación de la continuidad uniforme",
+  "enunciado": "<p>Pensemos qué significa negar que una función sea uniformemente continua. Por definición, una función <b>no</b> es uniformemente continua si existe un $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$, $f(B(x, \\delta)) \\not\\subseteq B(x, \\delta)$ para algún $x \\in M$ (acá el $x$ podría depender de $\\delta$).</p><p>Equivalentemente, podríamos decir que: existe $\\varepsilon \\gt 0$ tal que para todo $\\delta \\gt 0$ existen $x, y$ tal que $d(x, y) \\lt \\delta$ pero $d'(f(x), f(y)) \\ge \\varepsilon$.</p><p><i>Nota</i>: la bola de la derecha está mal escrita en las notas: negando la Definición 5.14 debería ser $f(B(x, \\delta)) \\not\\subseteq B(f(x), \\varepsilon)$, que es lo que dice la versión equivalente con $x, y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.28": {
+  "tipo": "Observación",
+  "numero": "5.28",
+  "titulo": "Lipschitz, uniformemente continua y continua",
+  "enunciado": "<p>Resumiendo lo que vimos hasta ahora, tenemos las siguientes implicaciones $$\\text{Lipschitz} \\Longrightarrow \\text{uniformemente continua} \\Longrightarrow \\text{continua},$$ y no vale la vuelta en ningún caso (vimos que $f(x) = x^2$ es continua pero no uniformemente continua y $f(x) = \\sqrt{x}$ es uniformemente continua pero no Lipschitz).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-5.34": {
+  "tipo": "Observación",
+  "numero": "5.34",
+  "titulo": "Una isometría es un homeomorfismo con su imagen",
+  "enunciado": "<p>Veamos que si $f : (M, d) \\to (N, d')$ es una isometría entonces $f : (M, d) \\to (\\operatorname{Im}(f), d') \\subseteq (N, d')$ es un homeomorfismo:</p><ul><li>$f$ es continua, dado que es Lipschitz de constante $1$.</li><li>$f$ siempre es inyectiva: si $f(x) = f(y)$, entonces $$0 = d'(f(x), f(y)) = d(x, y) \\Rightarrow x = y.$$ En principio no podemos garantizar que $f$ sea sobreyectiva y por esto es que no decimos que $f$ sea un homeomorfismo con $N$, sino con su imagen dentro de $N$.</li><li>$f^{-1} : \\operatorname{Im}(f) \\to M$ es continua. Si $z, w \\in \\operatorname{Im}(f)$ tenemos que existen $x, y \\in M$ tal que $f(x) = z$ y $f(y) = w$. Pero entonces $$d(f^{-1}(z), f^{-1}(w)) = d(x, y) = d'(f(x), f(y)) = d'(z, w),$$ lo que nos dice que $f^{-1}$ es también una isometría y por lo tanto continua (y Lipschitz).</li></ul>",
+  "fuente": "apuntes.typ"
+ },
+ "obs-derivada-acotada-implica-lipschitz": {
+  "tipo": "Observación",
+  "numero": "",
+  "titulo": "Derivada acotada implica Lipschitz",
+  "enunciado": "<p>Las funciones Lipschitz nos dan una buena cantidad de ejemplos de funciones uniformemente continuas (Ejercicio 5.25: toda función Lipschitz es uniformemente continua, desafío de la Práctica 4). Por ejemplo, supongamos que tenemos una función $f : (\\mathbb{R}, |\\cdot|) \\to (\\mathbb{R}, |\\cdot|)$ derivable. Por el teorema del valor medio (de Lagrange), sabemos que vale $$|f(x) - f(y)| = |f'(z)(x - y)|$$ con $z$ un punto intermedio entre $x$ e $y$. Esto nos dice que si $f$ tiene derivada acotada entonces $f$ es Lipschitz de constante $C = \\max_{z \\in \\mathbb{R}} |f'(z)|$.</p><p><i>Nota</i>: que $f'$ sea acotada no garantiza que el máximo se alcance; en general la constante es $C = \\sup_{z \\in \\mathbb{R}} |f'(z)|$, y con eso $|f(x) - f(y)| = |f'(z)| |x - y| \\le C |x - y|$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-4.46": {
+  "tipo": "Proposición",
+  "numero": "4.46",
+  "titulo": "Clausura y conjunto derivado vía sucesiones",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, y sean $E \\subseteq M$ y $x \\in M$. Entonces</p><ol type=\"a\"><li>$x \\in \\overline{E}$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\to x$.</li><li>$x \\in E'$ si y sólo si existe una sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq E$ tal que $x_n \\ne x$ para todo $n \\in \\mathbb{N}$ y además $x_n \\to x$. Más aún, esta sucesión se puede elegir de forma tal que sus términos sean todos distintos entre sí (y distintos de $x$).</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5.18": {
+  "tipo": "Proposición",
+  "numero": "5.18",
+  "titulo": "Caracterización de continuidad uniforme por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es uniformemente continua si y sólo si para todo par de sucesiones $(x_n)_{n \\in \\mathbb{N}}, (y_n)_{n \\in \\mathbb{N}} \\subseteq M$ tal que $d(x_n, y_n) \\to 0$ entonces $d'(f(x_n), f(y_n)) \\to 0$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-algebra-de-limites": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}}$ y $(b_n)_{n \\in \\mathbb{N}}$ sucesiones reales tales que $\\lim_{n \\to \\infty} a_n = a$, $\\lim_{n \\to \\infty} b_n = b$, con $a, b \\in \\mathbb{R}$. Entonces:</p><ol type=\\\"a\\\"><li>$\\lim_{n \\to \\infty} (c \\cdot a_n) = c \\cdot a$ para todo $c \\in \\mathbb{R}$.</li><li>$\\lim_{n \\to \\infty} (a_n + b_n) = a + b$.</li><li>$\\lim_{n \\to \\infty} (a_n b_n) = a b$.</li><li>Si $b \\neq 0$, entonces $\\lim_{n \\to \\infty} (a_n / b_n) = a / b$.</li><li>Si $a_n \\le b_n$ para todo $n \\ge n_0$ entonces $a \\le b$.</li></ol>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-4.17": {
+  "tipo": "Teorema",
+  "numero": "4.17",
+  "titulo": "Unión arbitraria de abiertos es abierta",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Sea $(A_i)_{i \\in I}$ una familia de conjuntos abiertos (acá podríamos tomar una cantidad arbitraria, finita o infinita, numerable o no, de conjuntos). Entonces $A = \\bigcup_{i \\in I} A_i$ es abierto.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.7": {
+  "tipo": "Teorema",
+  "numero": "5.7",
+  "titulo": "Caracterización de continuidad por sucesiones",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función y $x \\in M$. Entonces $f$ es continua en $x$ si y sólo si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ con $x_n \\to x$ se tiene que $f(x_n) \\to f(x)$ (en $N$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-5.9": {
+  "tipo": "Teorema",
+  "numero": "5.9",
+  "titulo": "Caracterización de continuidad por abiertos",
+  "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(A) \\subseteq M$ es abierto para todo $A \\subseteq N$ abierto.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

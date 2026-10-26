@@ -1,0 +1,198 @@
+{
+ "ax-completitud": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Completitud",
+  "enunciado": "<p>Todo subconjunto no vacío y acotado superiormente de $\\mathbb{R}$ tiene supremo en $\\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-1": {
+  "tipo": "Definición",
+  "numero": "1",
+  "titulo": "Conjunto Acotado Superiormente",
+  "enunciado": "<p>Un conjunto $A \\subseteq \\mathbb{R}$ ($A \\neq \\emptyset$) se dice <b>acotado superiormente</b> si existe un $c \\in \\mathbb{R}$ tal que $a \\le c$ para todo $a \\in A$. Al número $c$ se le denomina <b>cota superior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-10": {
+  "tipo": "Definición",
+  "numero": "10",
+  "titulo": "Sucesión Monótona",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ es <b>monótona creciente</b> (análogamente <b>decreciente</b>) si $a_n \\le a_{n+1}$ (análogamente $a_n \\ge a_{n+1}$) para todo $n$ o a partir de algún $n_0$ en adelante.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-2": {
+  "tipo": "Definición",
+  "numero": "2",
+  "titulo": "Supremo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto acotado superiormente y no vacío. Un número $s \\in \\mathbb{R}$ se dice <em>supremo</em> de $A$ si:</p><p>a) $s$ es una cota superior de $A$ ($x \\le s,\\ \\forall x \\in A$).<br>b) Si $t$ es cualquier otra cota superior de $A \\Rightarrow s \\le t$.</p><p>Es decir, el supremo es la <em>menor de las cotas superiores</em>. La notación que vamos a usar para el supremo del conjunto $A$ es $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-3": {
+  "tipo": "Definición",
+  "numero": "3",
+  "titulo": "Máximo",
+  "enunciado": "<p>Si $\\sup(A) \\in A$, entonces $\\sup(A)$ se denomina <b>máximo</b> de $A$. En ese caso, notamos $\\max(A)$ en lugar de $\\sup(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4": {
+  "tipo": "Definición",
+  "numero": "4",
+  "titulo": "Conjunto Acotado Inferiormente",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ un conjunto no vacío. Decimos que $A$ es <b>acotado inferiormente</b> si existe $c \\in \\mathbb{R}$ tal que $c \\le a$ para todo $a \\in A$. En este caso, decimos que $c$ es una <b>cota inferior</b> de $A$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-5": {
+  "tipo": "Definición",
+  "numero": "5",
+  "titulo": "Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado inferiormente. Un número $i \\in \\mathbb{R}$ es el <strong>ínfimo</strong> de $A$ si:</p><p>a) $i$ es una cota inferior de $A$;<br>b) si $t$ es una cota inferior de $A \\Rightarrow t \\le i$ (es la mayor de las cotas inferiores).</p><p>La notación que usamos para el ínfimo de $A$ es $\\inf(A)$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-6-sucesiones": {
+  "tipo": "Definición",
+  "numero": "6",
+  "titulo": "Sucesiones",
+  "enunciado": "<p>Una <b>sucesión</b> es una función $a : \\mathbb{N} \\to \\mathbb{R}$, es decir, una asignación que a cada número natural le asigna un único número real. La notación usual es $a_n = a(n) \\in \\mathbb{R}$ para el elemento que $a$ le asigna a $n$ y para referirnos a la sucesión entera, usamos $a = (a_n)_{n \\in \\mathbb{N}}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-7": {
+  "tipo": "Definición",
+  "numero": "7",
+  "titulo": "Convergencia de Sucesiones",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión y $\\ell \\in \\mathbb{R}$. Decimos que $(a_n)_{n \\in \\mathbb{N}}$ converge a $\\ell$ si para todo $\\varepsilon \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que si $n \\ge n_0$, $|a_n - \\ell| \\lt \\varepsilon$. Notamos $\\lim_{n \\to \\infty} a_n = \\ell$ o $a_n \\to \\ell$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-8": {
+  "tipo": "Definición",
+  "numero": "8",
+  "titulo": "Divergencia de Sucesiones",
+  "enunciado": "<p>Decimos que una sucesión $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $+\\infty$</b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\gt M$. Notamos $\\lim_{n \\to \\infty} a_n = +\\infty$ o $a_n \\to +\\infty$.</p><p>Similarmente, decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge a $-\\infty$</b> si para todo $M \\gt 0$ existe $n_0 \\in \\mathbb{N}$ tal que para todo $n \\ge n_0$ se tiene $a_n \\lt -M$. Notamos $\\lim_{n \\to \\infty} a_n = -\\infty$ o $a_n \\to -\\infty$.</p><p>Decimos que $(a_n)_{n \\in \\mathbb{N}}$ <b>diverge</b> si no converge o diverge a $\\pm\\infty$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-negacion-de-la-convergencia-no": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Negación de la Convergencia (No Convergencia / Divergencia)",
+  "enunciado": "<p>Decimos que una sucesión real $(a_n)_{n \\in \\mathbb{N}}$ <b>no converge</b> (es decir, no admite ningún límite en $\\mathbb{R}$) si satisface la negación formal de la definición de convergencia para todo candidato a límite $L \\in \\mathbb{R}$:</p><p>$$\\begin{aligned} &(\\forall L \\in \\mathbb{R})(\\exists \\varepsilon_0 \\gt 0)(\\forall N \\in \\mathbb{N})(\\exists n \\ge N) \\\\ &\\Rightarrow |a_n - L| \\ge \\varepsilon_0 \\end{aligned}$$</p><p>En palabras: para todo candidato a límite $L \\in \\mathbb{R}$, existe un umbral de error $\\varepsilon_0 \\gt 0$ tal que para cualquier elección de $N \\in \\mathbb{N}$, existe un término $a_n$ con $n \\ge N$ cuya distancia a $L$ es mayor o igual a $\\varepsilon_0$ ($|a_n - L| \\ge \\varepsilon_0$).</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-9-sucesion-acotada": {
+  "tipo": "Definición",
+  "numero": "9",
+  "titulo": "Sucesión Acotada",
+  "enunciado": "<p>Una sucesión $(a_n)_{n \\in \\mathbb{N}}$ está <b>acotada</b> si el conjunto $\\{a_n : n \\in \\mathbb{N}\\} \\subseteq \\mathbb{R}$ está acotado.</p><p>Es decir, si existe $M \\gt 0$ tal que $|a_n| \\le M$ para todo $n \\in \\mathbb{N}$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-limite-y-convergencia-de-series": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Límite y Convergencia de Series",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}} \\subseteq \\mathbb{R}$. Decimos que la serie $\\sum_{k=1}^\\infty a_k$ <b>converge</b> si existe $\\lim_{n \\to \\infty} S_n$.</p><p>En ese caso, $$\\sum_{k=1}^\\infty a_k = \\lim_{n \\to \\infty} S_n.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-serie": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Serie",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$, llamamos <b>serie de $a_n$</b> (o sucesión de sumas parciales) a $$S_n = \\sum_{k=1}^n a_k.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-subsucesion": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Subsucesión",
+  "enunciado": "<p>Una subsucesión de $(a_n)_{n \\in \\mathbb{N}}$ es una sucesión de la forma $(a_{n_k})$ donde $n_k$ es estrictamente creciente, es decir, tenemos que $n_1 \\lt n_2 \\lt n_3 \\lt \\dots$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-bolzano-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Bolzano–Weierstrass",
+  "enunciado": "<p>Toda sucesión acotada de números reales tiene una subsucesión convergente.</p>",
+  "fuente": "Resultado del curso; todavía no está en apuntes.typ"
+ },
+ "ext-desigualdad-triangular": {
+  "tipo": "Propiedad",
+  "numero": "",
+  "titulo": "Desigualdad triangular",
+  "enunciado": "<p>Para todo $x, y \\in \\mathbb{R}$, $|x + y| \\le |x| + |y|$. En particular, $|x - z| \\le |x - y| + |y - z|$ para todo $x, y, z \\in \\mathbb{R}$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-tricotomia": {
+  "tipo": "Axioma",
+  "numero": "",
+  "titulo": "Tricotomía (axiomas de orden)",
+  "enunciado": "<p>Para todo par $x, y \\in \\mathbb{R}$ vale una y sólo una de las relaciones $x \\lt y$, $x = y$, $x \\gt y$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "prop-1": {
+  "tipo": "Proposición",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes 2",
+  "enunciado": "<p>Si $y \\in \\mathbb{R}$, $y \\gt 0$ entonces existe un $n \\in \\mathbb{N}$ tal que $0 \\lt 1/n \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-2": {
+  "tipo": "Proposición",
+  "numero": "2",
+  "titulo": "Densidad de $\\mathbb{Q}$",
+  "enunciado": "<p>Sean $x, y \\in \\mathbb{R}$, con $x \\lt y$. Entonces existe $q \\in \\mathbb{Q}$ tal que $x \\lt q \\lt y$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-equivalencia-de-infimo": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Equivalencia de Ínfimo",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$, $A \\neq \\emptyset$ y acotado inferiormente. Entonces $i = \\inf(A)$ si y sólo si se cumple:</p><p>a) $i$ es cota inferior de $A$, y</p><p>b) para todo $\\varepsilon \\gt 0$, existe un elemento $a_\\varepsilon \\in A$ tal que $a_\\varepsilon \\lt i + \\varepsilon$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-5-unicidad-del-limite": {
+  "tipo": "Proposición",
+  "numero": "5",
+  "titulo": "Unicidad del límite",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión de términos reales. Supongamos que $a_n \\to \\ell_1$ y $a_n \\to \\ell_2$ al mismo tiempo, con $\\ell_1, \\ell_2 \\in \\mathbb{R}$. Entonces $\\ell_1 = \\ell_2$.</p><p>Es decir, el límite de una sucesión es único.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-6-algebra-de-limites": {
+  "tipo": "Proposición",
+  "numero": "6",
+  "titulo": "Álgebra de límites",
+  "enunciado": "<p>Sean $(a_n)_{n \\in \\mathbb{N}}$ y $(b_n)_{n \\in \\mathbb{N}}$ sucesiones reales tales que $\\lim_{n \\to \\infty} a_n = a$, $\\lim_{n \\to \\infty} b_n = b$, con $a, b \\in \\mathbb{R}$. Entonces:</p><p>a) $\\lim_{n \\to \\infty} (c \\cdot a_n) = c \\cdot a$ para todo $c \\in \\mathbb{R}$.<br>b) $\\lim_{n \\to \\infty} (a_n + b_n) = a + b$.<br>c) $\\lim_{n \\to \\infty} (a_n b_n) = ab$.<br>d) Si $b \\neq 0$, entonces $\\lim_{n \\to \\infty} (a_n / b_n) = a / b$.<br>e) Si $a_n \\le b_n$ para todo $n \\ge n_0$ entonces $a \\le b$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-8": {
+  "tipo": "Proposición",
+  "numero": "8",
+  "titulo": "Convergencia de sucesiones monótonas crecientes",
+  "enunciado": "<p>Sea $(a_n)_{n \\in \\mathbb{N}}$ una sucesión monótona creciente y acotada, entonces converge.</p><p>Más aún, se tiene que $$\\lim_{n \\to \\infty} a_n = \\sup\\{a_n : n \\in \\mathbb{N}\\}.$$</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-convergencia-de-subsucesiones": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Convergencia de subsucesiones",
+  "enunciado": "<p>Si $\\lim_{n \\to \\infty} a_n = \\ell$, entonces toda subsucesión también converge a $\\ell$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "prop-equivalencia-del-supremo-2": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Equivalencia del supremo 2",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ no vacío y acotado superiormente. Entonces $s = \\sup(A)$ si y sólo si:</p><p>a) $s$ es cota superior de $A$, y<br>b) existe una sucesión $(a_n)_{n \\in \\mathbb{N}} \\subseteq A$ tal que $\\lim_{n \\to \\infty} a_n = s$.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-1": {
+  "tipo": "Teorema",
+  "numero": "1",
+  "titulo": "Principio de Arquímedes",
+  "enunciado": "<p>Si $x \\in \\mathbb{R}$ entonces existe un número $n \\in \\mathbb{N}$ tal que $x \\le n$. Es decir, dado un número real cualquiera, siempre existe un número natural más grande.</p>",
+  "fuente": "apuntes.typ"
+ },
+ "teo-2": {
+  "tipo": "Teorema",
+  "numero": "2",
+  "titulo": "Completitud en términos de ínfimos",
+  "enunciado": "<p>Sea $A \\subseteq \\mathbb{R}$ acotado inferiormente y no vacío. Entonces existe $i = \\inf(A) \\in \\mathbb{R}$.</p>",
+  "fuente": "apuntes.typ"
+ }
+}

@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía · Práctica 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<link rel="stylesheet" href="../assets/sitio.css">
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body data-base="../">
+<nav class="sitebar" aria-label="Navegación del sitio"><div class="in"><ol class="crumbs"><li><a href="../index.html">Visualizaciones</a></li><li><a href="../index.html#guias">Guías</a></li><li><span aria-current="page">Práctica 3</span></li></ol><div class="pager"><a href="../guias/p2.html" title="Guía · Práctica 2">← Anterior</a><a href="../guias/p4.html" title="Guía · Práctica 4">Siguiente →</a></div></div></nav>
+<div class="page">
+<header class="intro" id="top">
+  <p class="eyebrow">Guías de ejercicios · 16 ejercicios</p>
+  <h1>Práctica 3</h1>
+  <p>Espacios métricos. Los enunciados de <code>apuntes-typst/guias/p3.typ</code>, con un dibujo para cada objeto que se puede dibujar y, debajo de cada ejercicio, los ejemplos y parciales que lo preparan.</p>
+</header>
+<nav class="toc" aria-labelledby="toc-h"><h2 id="toc-h">En esta página</h2><div class="toc-group"><span class="src">Ejercicios</span><ul class="chips"><li><a href="#guiap3-ej1" title="Seis espacios métricos y sus bolas abiertas">Ej. 1</a></li><li><a href="#guiap3-ej2" title="¿Cuáles son métricas en ℝ?">Ej. 2</a></li><li><a href="#guiap3-ej3" title="Interior y clausura de ocho subconjuntos de ℝ">Ej. 3</a></li><li><a href="#guiap3-ej4" title="Puntos, bolas abiertas, bolas cerradas y anillos">Ej. 4</a></li><li><a href="#guiap3-ej5" title="Complemento del interior y de la clausura">Ej. 5</a></li><li><a href="#guiap3-ej6" title="Interior y clausura de uniones e intersecciones">Ej. 6</a></li><li><a href="#guiap3-ej7" title="Diámetro: monotonía y clausura">Ej. 7</a></li><li><a href="#guiap3-ej8" title="Frontera y puntos de acumulación de los conjuntos del Ejercicio 3">Ej. 8</a></li><li><a href="#guiap3-ej9" title="La frontera vía clausura e interior">Ej. 9</a></li><li><a href="#guiap3-ej10" title="Distancia de un punto a un conjunto">Ej. 10</a></li><li><a href="#guiap3-ej11" title="La distancia entre conjuntos no es una distancia">Ej. 11</a></li><li><a href="#guiap3-ej12" title="d1, d2 y d∞ son equivalentes en ℝ^n">Ej. 12</a></li><li><a href="#guiap3-ej13" title="La distancia es continua en sucesiones">Ej. 13</a></li><li><a href="#guiap3-ej14" title="ℝ^n es completo con d1, d2 y d∞">Ej. 14</a></li><li><a href="#guiap3-ej15" title="Un cerrado de un completo es completo">Ej. 15</a></li><li><a href="#guiap3-ej16" title="Teorema de la intersección de Cantor">Ej. 16</a></li></ul></div></nav>
+
+<p class="edicion" id="guiap3-edicion">Edición 2026 · sigue la guía 2026 (<code>apuntes-docentes/guias/p3.pdf</code>), cotejada ítem por ítem con la edición 2025: numeración y enunciados idénticos (16 ejercicios, 54 incisos); sólo cambió el encabezado.</p>
+
+<!-- ===================== EJERCICIO 1 ===================== -->
+<article class="ej" id="guiap3-ej1" data-short="Ej. 1" data-title="Seis espacios métricos y sus bolas abiertas" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 1</span><h3>Seis espacios métricos y sus bolas abiertas</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Pruebe que los siguientes son <span class="ref" data-ref="def-4.1">espacios métricos</span>. Dibuje, en cada caso, una <span class="ref" data-ref="def-4.5">bola abierta</span>.</p>
+      <ol class="items">
+        <li>$\mathbb{R}$ con $d(x, y) = |x - y|$.</li>
+        <li>$\mathbb{R}^n$ con $d_2(x, y) = \left(\sum_{i=1}^n (x_i - y_i)^2\right)^{1/2}$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>).</li>
+        <li>$\mathbb{R}^n$ con $d_1(x, y) = \sum_{i=1}^n |x_i - y_i|$.</li>
+        <li>$\mathbb{R}^n$ con $d_\infty(x, y) = \max_{1 \le i \le n} |x_i - y_i|$.</li>
+        <li>$C([0, 1])$ con $d_\infty(f, g) = \max_{0 \le t \le 1} |f(t) - g(t)|$ (<span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancias en espacios de funciones</span>).</li>
+        <li>$E$ un conjunto no vacío, con la métrica
+          $$ \delta(x, y) = \begin{cases} 0 & \text{si } x = y, \\ 1 & \text{si } x \neq y. \end{cases} $$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej1-c" aria-label="Bola abierta de centro x y radio r en el espacio métrico elegido"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Espacio</legend>
+          <label><input type="radio" name="guiap3-ej1-it" value="a">(a) ℝ</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="b" checked>(b) d₂</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="c">(c) d₁</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="d">(d) d∞</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="e">(e) C([0, 1])</label>
+          <label><input type="radio" name="guiap3-ej1-it" value="f">(f) δ</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej1-r"><i>r</i></label><input type="range" id="guiap3-ej1-r" min="10" max="200" value="80"><output id="guiap3-ej1-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej1-read" aria-live="polite"></dl>
+      <figcaption>El ejercicio pide dibujar una bola en cada caso; acá están, con radio <i>r</i> y (en ℝ y ℝ²) centro arrastrable. En (b)–(d) se toma <i>n</i> = 2. En (e), el centro es <i>f</i>₀(<i>t</i>) = 0.5 + 0.3 sen(2π<i>t</i>) (elegida) y la franja de ancho <i>r</i> alrededor; la curva naranja es una <i>g</i> de la bola. En (f), <i>E</i> son ocho puntos elegidos: los azules están en la bola.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="1"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b1" title="Bloque 1Métricas: verificar los axiomas">Ej. Práctica 3 · Bloque 1Métricas: verificar los axiomas</a></li><li><a href="../ejemplos/p3.html#ejp3-c3-5" title="C3-5 · Dos axiomas alcanzan para tener una métrica">Ej. Práctica 3 · C3-5 · Dos axiomas alcanzan para tener una métrica</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 2 ===================== -->
+<article class="ej" id="guiap3-ej2" data-short="Ej. 2" data-title="¿Cuáles son métricas en ℝ?" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 2</span><h3>¿Cuáles son métricas en $\mathbb{R}$?</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Decida cuáles de las siguientes funciones definidas en $\mathbb{R} \times \mathbb{R}$ son <span class="ref" data-ref="def-4.1">métricas</span> en $\mathbb{R}$:</p>
+      <ol class="items">
+        <li>$d(x, y) = (x - y)^2$</li>
+        <li>$d(x, y) = \sqrt{|x - y|}$</li>
+        <li>$d(x, y) = |x^2 - y^2|$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej2-c" aria-label="Gráfico de y en función de d(x, y) con x fijo, para la función elegida"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Función</legend>
+          <label><input type="radio" name="guiap3-ej2-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap3-ej2-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap3-ej2-it" value="c">(c)</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej2-x"><i>x</i> fijo</label><input type="range" id="guiap3-ej2-x" min="-20" max="20" value="10"><output id="guiap3-ej2-x-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej2-read" aria-live="polite"></dl>
+      <figcaption>Con <i>x</i> fijo (el slider), la curva es <i>y</i> ↦ <i>d</i>(<i>x</i>, <i>y</i>) para la función elegida; la raya punteada marca <i>y</i> = <i>x</i>. Para comparar, en gris, |<i>x</i> − <i>y</i>|.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="2"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b1" title="Bloque 1Métricas: verificar los axiomas">Ej. Práctica 3 · Bloque 1Métricas: verificar los axiomas</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 3 ===================== -->
+<article class="ej" id="guiap3-ej3" data-short="Ej. 3" data-title="Interior y clausura de ocho subconjuntos de ℝ" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 3</span><h3>Interior y clausura de ocho subconjuntos de $\mathbb{R}$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Halle <span class="ref" data-ref="def-4.11">interior</span> y <span class="ref" data-ref="def-4.22">clausura</span> de cada uno de los siguientes subconjuntos de $\mathbb{R}$. Determine cuáles son <span class="ref" data-ref="def-4.14">abiertos</span> o <span class="ref" data-ref="def-4.27">cerrados</span>.</p>
+      <ol class="items">
+        <li>$[0, 1]$</li>
+        <li>$(0, 1)$</li>
+        <li>$\mathbb{Q}$</li>
+        <li>$\mathbb{Q} \cap [0, 1]$</li>
+        <li>$\mathbb{Z}$</li>
+        <li>$[0, 1) \cup \{2\}$</li>
+        <li>$\{1/n : n \in \mathbb{N}\}$</li>
+        <li>$\{1/n : n \in \mathbb{N}\} \cup \{0\}$</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej3-c" aria-label="El subconjunto elegido dibujado sobre la recta real"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Conjunto</legend>
+          <label><input type="radio" name="guiap3-ej3-it" value="a" checked>(a)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="b">(b)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="c">(c)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="d">(d)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="e">(e)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="f">(f)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="g">(g)</label>
+          <label><input type="radio" name="guiap3-ej3-it" value="h">(h)</label>
+        </fieldset>
+      </div>
+      <dl class="read" id="guiap3-ej3-read" aria-live="polite"></dl>
+      <figcaption>Cada conjunto en la ventana [−1.5, 2.5]. Punto lleno: está en el conjunto; círculo vacío: extremo que no está. ℚ no se puede dibujar entero: se ven sólo las fracciones con denominador hasta 12, que ya muestran que hay racionales en todos lados (y huecos irracionales entre ellas). En (g) y (h) se ven los 1/<i>n</i> con <i>n</i> ≤ 40.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="3"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b2" title="Bloque 2Topología en espacios métricos: puntos interiores y abiertos">Ej. Práctica 3 · Bloque 2Topología en espacios métricos: puntos interiores y …</a></li><li><a href="../ejemplos/p3.html#ejp3-b3" title="Bloque 3Clausura, cerrados, conjunto derivado y frontera">Ej. Práctica 3 · Bloque 3Clausura, cerrados, conjunto derivado y frontera</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 4 ===================== -->
+<article class="ej" id="guiap3-ej4" data-short="Ej. 4" data-title="Puntos, bolas abiertas, bolas cerradas y anillos" data-topics="topologia,metricas">
+  <div class="ej-head"><span class="tag">Ej. 4</span><h3>Puntos, bolas abiertas, bolas cerradas y anillos</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Sean $x \in E$ y $r \gt 0$.</p>
+      <ol class="items">
+        <li>Pruebe que $\{x\}$ es un conjunto <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+        <li>Pruebe que $B(x, r)$ (<span class="ref" data-ref="def-4.5">bola abierta</span>) es un conjunto <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>Pruebe que si $r \gt r' \gt 0$ entonces $\overline{B(x, r')} \subseteq B(x, r)$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+        <li>Pruebe que $\overline{B}(x, r) = \{y \in E : d(x, y) \le r\}$ es un conjunto cerrado.</li>
+        <li>Deduzca que $\overline{B(x, r)} \subseteq \overline{B}(x, r)$.</li>
+        <li>Dé un ejemplo en que $\overline{B(x, r)}$ sea un subconjunto propio de $\overline{B}(x, r)$.</li>
+        <li>Pruebe que $\{y \in E : 2 \lt d(y, x) \lt 3\}$ es un conjunto abierto.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej4-c" aria-label="En el plano con la distancia euclídea: dos bolas concéntricas o el anillo entre radios 2 y 3"></canvas>
+      <div class="ctrl">
+        <fieldset class="pills"><legend>Ítem</legend>
+          <label><input type="radio" name="guiap3-ej4-it" value="c" checked>(c) r′ &lt; r</label>
+          <label><input type="radio" name="guiap3-ej4-it" value="g">(g) anillo</label>
+        </fieldset>
+        <div class="slider"><label for="guiap3-ej4-rp"><i>r</i>′</label><input type="range" id="guiap3-ej4-rp" min="10" max="195" value="120"><output id="guiap3-ej4-rp-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej4-read" aria-live="polite"></dl>
+      <figcaption>Un caso elegido para el dibujo: <i>E</i> = ℝ² con <i>d</i>₂ y <i>x</i> = 0. En (c), <i>r</i> = 2 fijo (círculo punteado) y la bola de radio <i>r</i>′ del slider, sombreada. En (g), el conjunto {2 &lt; <i>d</i>(<i>y</i>, <i>x</i>) &lt; 3}: los bordes punteados no están.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="4"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b2" title="Bloque 2Topología en espacios métricos: puntos interiores y abiertos">Ej. Práctica 3 · Bloque 2Topología en espacios métricos: puntos interiores y …</a></li><li><a href="../ejemplos/p3.html#ejp3-b3" title="Bloque 3Clausura, cerrados, conjunto derivado y frontera">Ej. Práctica 3 · Bloque 3Clausura, cerrados, conjunto derivado y frontera</a></li><li><a href="../ejemplos/p3.html#ejp3-c5-6" title="C5-6 · Completo si y sólo si toda bola cerrada es completa">Ej. Práctica 3 · C5-6 · Completo si y sólo si toda bola cerrada es completa</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 5 ===================== -->
+<article class="ej" id="guiap3-ej5" data-short="Ej. 5" data-title="Complemento del interior y de la clausura" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 5</span><h3>Complemento del interior y de la clausura</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $A \subseteq E$. Pruebe que (<span class="ref" data-ref="def-4.11">interior</span>, <span class="ref" data-ref="def-4.22">clausura</span>):</p>
+    <ol class="items">
+      <li>$E \setminus A^{\circ} = \overline{E \setminus A}$.</li>
+      <li>$E \setminus \overline{A} = (E \setminus A)^{\circ}$.</li>
+    </ol>
+    <p>¿Son ciertas las igualdades $\overline{A} = \overline{A^{\circ}}$ y $A^{\circ} = (\overline{A})^{\circ}$?</p>
+  </div>
+  <div class="preparan" data-ej="5"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b4" title="Bloque 4Caracterizaciones y estabilidad de abiertos y cerrados">Ej. Práctica 3 · Bloque 4Caracterizaciones y estabilidad de abiertos y cerrad…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 6 ===================== -->
+<article class="ej" id="guiap3-ej6" data-short="Ej. 6" data-title="Interior y clausura de uniones e intersecciones" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 6</span><h3>Interior y clausura de uniones e intersecciones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $A, B \subseteq E$. Pruebe que (<span class="ref" data-ref="def-4.11">interior</span>, <span class="ref" data-ref="def-4.22">clausura</span>):</p>
+    <ol class="items">
+      <li>$(A \cap B)^{\circ} = A^{\circ} \cap B^{\circ}$.</li>
+      <li>$A^{\circ} \cup B^{\circ} \subseteq (A \cup B)^{\circ}$.</li>
+      <li>$\overline{A \cup B} = \overline{A} \cup \overline{B}$.</li>
+      <li>$\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$.</li>
+    </ol>
+    <p>Encuentre ejemplos en que no valga la igualdad en (b) y (d).</p>
+  </div>
+  <div class="preparan" data-ej="6"></div>
+</article>
+
+<!-- ===================== EJERCICIO 7 ===================== -->
+<article class="ej" id="guiap3-ej7" data-short="Ej. 7" data-title="Diámetro: monotonía y clausura" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 7</span><h3>Diámetro: monotonía y clausura</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sean $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y $A, B \subseteq E$ subconjuntos <span class="ref" data-ref="def-4.8">acotados</span> de $E$.</p>
+      <ol class="items">
+        <li>Pruebe que si $A \subseteq B$ entonces $\operatorname{diam}(A) \le \operatorname{diam}(B)$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+        <li>Pruebe que $\operatorname{diam}(A) = \operatorname{diam}(\overline{A})$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej7-c" aria-label="Cinco puntos arrastrables en el plano y el par más alejado"></canvas>
+      <dl class="read" id="guiap3-ej7-read" aria-live="polite"></dl>
+      <figcaption>Un conjunto finito <i>A</i> ⊆ ℝ² (con <i>d</i>₂) de cinco puntos que se pueden arrastrar. El segmento marca el par más alejado: su largo es diam(<i>A</i>) = sup{<i>d</i>(<i>a</i>, <i>b</i>) : <i>a</i>, <i>b</i> ∈ <i>A</i>}.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="7"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-c5-5" title="C5-5 · Si todo encaje de cerrados acotados con diámetro → 0 tiene intersección no vacía, el espacio es completo">Ej. Práctica 3 · C5-5 · Si todo encaje de cerrados acotados con diámetro → 0 …</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 8 ===================== -->
+<article class="ej" id="guiap3-ej8" data-short="Ej. 8" data-title="Frontera y puntos de acumulación de los conjuntos del Ejercicio 3" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 8</span><h3>Frontera y puntos de acumulación de los conjuntos del Ejercicio 3</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Halle <span class="ref" data-ref="def-4.38">frontera</span> y <span class="ref" data-ref="def-4.33">puntos de acumulación</span> de cada uno de los subconjuntos de $\mathbb{R}$ del <span class="ref" data-ref="guia-p3-ej3">Ejercicio 3</span>.</p></div>
+  <div class="preparan" data-ej="8"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b3" title="Bloque 3Clausura, cerrados, conjunto derivado y frontera">Ej. Práctica 3 · Bloque 3Clausura, cerrados, conjunto derivado y frontera</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 9 ===================== -->
+<article class="ej" id="guiap3-ej9" data-short="Ej. 9" data-title="La frontera vía clausura e interior" data-topics="topologia">
+  <div class="ej-head"><span class="tag">Ej. 9</span><h3>La frontera vía clausura e interior</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $E$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sea $A \subseteq E$.</p>
+    <ol class="items">
+      <li>Pruebe que $\partial A = \overline{A} \setminus A^{\circ}$, y concluya que $\partial A$ es <span class="ref" data-ref="def-4.27">cerrado</span> (<span class="ref" data-ref="def-4.38">frontera</span>, <span class="ref" data-ref="def-4.22">clausura</span>, <span class="ref" data-ref="def-4.11">interior</span>).</li>
+      <li>Pruebe que $\partial A = \overline{A} \cap \overline{E \setminus A}$, y concluir que $\partial A = \partial(E \setminus A)$.</li>
+    </ol>
+  </div>
+  <div class="preparan" data-ej="9"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-c4-1" title="C4-1 · Interior, clausura, aislados, acumulación y frontera de A = {1/n + 1/m : n,m ∈ N}">Ej. Práctica 3 · C4-1 · Interior, clausura, aislados, acumulación y frontera …</a></li><li><a href="../ejemplos/p3.html#ejp3-c4-2" title="C4-2 · Interior, clausura, aislados, acumulación y frontera del semiplano sobre y = x">Ej. Práctica 3 · C4-2 · Interior, clausura, aislados, acumulación y frontera …</a></li><li><a href="../ejemplos/p3.html#ejp3-b4" title="Bloque 4Caracterizaciones y estabilidad de abiertos y cerrados">Ej. Práctica 3 · Bloque 4Caracterizaciones y estabilidad de abiertos y cerrad…</a></li><li><a href="../ejemplos/p3.html#ejp3-c4-7" title="C4-7 · F es frontera de un abierto si y sólo si es cerrado con interior vacío">Ej. Práctica 3 · C4-7 · F es frontera de un abierto si y sólo si es cerrado c…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 10 ===================== -->
+<article class="ej" id="guiap3-ej10" data-short="Ej. 10" data-title="Distancia de un punto a un conjunto" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 10</span><h3>Distancia de un punto a un conjunto</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Dados $A \subseteq E$ no vacío y $x \in E$, se define la <em>distancia de $x$ a $A$</em> como
+      $$ d(x, A) = \inf\{d(x, a) : a \in A\}. $$
+      Pruebe que para todos $x, y \in E$ y $r \gt 0$:</p>
+      <ol class="items">
+        <li>$|d(x, A) - d(y, A)| \le d(x, y)$.</li>
+        <li>$x \in A \Rightarrow d(x, A) = 0$.</li>
+        <li>$d(x, A) = 0 \iff x \in \overline{A}$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+        <li>$B_A(r) = \{x \in E : d(x, A) \lt r\}$ es <span class="ref" data-ref="def-4.14">abierto</span>.</li>
+        <li>$\overline{B}_A(r) = \{x \in E : d(x, A) \le r\}$ es <span class="ref" data-ref="def-4.27">cerrado</span>.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej10-c" aria-label="Un conjunto A en el plano, un punto x arrastrable con su distancia a A y la región de puntos a distancia menor que r"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej10-r"><i>r</i></label><input type="range" id="guiap3-ej10-r" min="5" max="120" value="50"><output id="guiap3-ej10-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej10-read" aria-live="polite"></dl>
+      <figcaption>Valores elegidos para el dibujo: <i>E</i> = ℝ² con <i>d</i>₂ y <i>A</i> un segmento más un punto suelto (en naranja). Arrastrá <i>x</i>: el trazo punteado va al punto de <i>A</i> más cercano. La región sombreada es <i>B<sub>A</sub></i>(<i>r</i>) = {<i>d</i>(·, <i>A</i>) &lt; <i>r</i>}, para el <i>r</i> del slider.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="10"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b6" title="Bloque 6Completitud: probarla, heredarla y caracterizarla">Ej. Práctica 3 · Bloque 6Completitud: probarla, heredarla y caracterizarla</a></li><li><a href="../ejemplos/p3.html#ejp3-c5-4" title="C5-4 · Un cerrado es intersección numerable de los abiertos {d(x,F) &lt; 1/n}">Ej. Práctica 3 · C5-4 · Un cerrado es intersección numerable de los abiertos …</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 11 ===================== -->
+<article class="ej" id="guiap3-ej11" data-short="Ej. 11" data-title="La distancia entre conjuntos no es una distancia" data-topics="metricas,topologia">
+  <div class="ej-head"><span class="tag">Ej. 11</span><h3>La “distancia” entre conjuntos no es una distancia</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span>. Consideremos el conjunto $\mathcal{X} = \{A \subseteq E : A \neq \emptyset\}$. Definimos la función $\hat{d} : \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ como
+    $$ \hat{d}(A, B) = \inf\{d(a, b) : a \in A, b \in B\}. $$
+    Determine si las siguientes afirmaciones son verdaderas o falsas:</p>
+    <ol class="items">
+      <li>$\hat{d}(A, B) = \hat{d}(\overline{A}, B)$ (<span class="ref" data-ref="def-4.22">clausura</span>).</li>
+      <li>$\hat{d}(A, B) = 0 \iff A \cap B \neq \emptyset$.</li>
+      <li>$\hat{d}(A, B) = 0 \iff \overline{A} \cap \overline{B} \neq \emptyset$.</li>
+      <li>$\hat{d}(A, B) \le \hat{d}(A, C) + \hat{d}(C, B)$.</li>
+    </ol>
+    <p>Concluya que $\hat{d}$ no es una distancia.</p>
+  </div>
+  <div class="preparan" data-ej="11"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b1" title="Bloque 1Métricas: verificar los axiomas">Ej. Práctica 3 · Bloque 1Métricas: verificar los axiomas</a></li><li><a href="../ejemplos/p4.html#ejp4-c6-8" title="C6-8 · Pegado de continuidad uniforme en A ∪ B con d(A, B) positiva">Ej. Práctica 4 · C6-8 · Pegado de continuidad uniforme en A ∪ B con d(A, B) p…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 12 ===================== -->
+<article class="ej" id="guiap3-ej12" data-short="Ej. 12" data-title="d1, d2 y d∞ son equivalentes en ℝ^n" data-topics="metricas">
+  <div class="ej-head"><span class="tag">Ej. 12</span><h3>$d_1$, $d_2$ y $d_\infty$ son equivalentes en $\mathbb{R}^n$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-metricas">metricas</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Considere en $\mathbb{R}^n$ las distancias $d_1$, $d_2$ y $d_\infty$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>).</p>
+      <ol class="items">
+        <li>Pruebe que estas tres distancias son <span class="ref" data-ref="ext-metricas-equivalentes">equivalentes</span>; más aún, pruebe que
+          $$ \begin{aligned} d_\infty(x, y) &\le d_2(x, y) \le d_1(x, y) \\ &\le n\, d_\infty(x, y). \end{aligned} $$</li>
+        <li>Denotemos por $B_1(x, r)$, $B_2(x, r)$ y $B_\infty(x, r)$ a la bola de centro $x$ y radio $r$ para cada una de las distancias, respectivamente (<span class="ref" data-ref="def-4.5">bolas</span>). Deduzca de (a) que
+          $$ \begin{aligned} B_1(x, r) &\subseteq B_2(x, r) \subseteq B_\infty(x, r) \\ &\subseteq B_1(x, nr). \end{aligned} $$
+          Compare estas contenciones con los dibujos hechos en el <span class="ref" data-ref="guia-p3-ej1">Ejercicio 1</span>.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej12-c" aria-label="Las bolas B1, B2 y B infinito de radio r y la bola B1 de radio 2r, en el plano"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej12-r"><i>r</i></label><input type="range" id="guiap3-ej12-r" min="20" max="100" value="60"><output id="guiap3-ej12-r-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej12-read" aria-live="polite"></dl>
+      <figcaption>El caso <i>n</i> = 2, <i>x</i> = 0: el rombo azul es <i>B</i>₁(<i>x</i>, <i>r</i>), el círculo verde azulado <i>B</i>₂(<i>x</i>, <i>r</i>), el cuadrado naranja <i>B</i>∞(<i>x</i>, <i>r</i>) y el rombo punteado <i>B</i>₁(<i>x</i>, 2<i>r</i>). Es la comparación que pide el ítem (b) con los dibujos del Ejercicio 1.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="12"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b4" title="Bloque 4Caracterizaciones y estabilidad de abiertos y cerrados">Ej. Práctica 3 · Bloque 4Caracterizaciones y estabilidad de abiertos y cerrad…</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 13 ===================== -->
+<article class="ej" id="guiap3-ej13" data-short="Ej. 13" data-title="La distancia es continua en sucesiones" data-topics="completitud,sucesiones">
+  <div class="ej-head"><span class="tag">Ej. 13</span><h3>La distancia y las sucesiones</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-sucesiones">sucesiones</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p>Sea $(E, d)$ un <span class="ref" data-ref="def-4.1">espacio métrico</span> y sean $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ sucesiones en $E$.</p>
+      <ol class="items">
+        <li>Si $\lim_{n \to \infty} x_n = x$ y $\lim_{n \to \infty} y_n = y$ (<span class="ref" data-ref="def-4.42">convergencia</span>), pruebe que $\lim_{n \to \infty} d(x_n, y_n) = d(x, y)$.</li>
+        <li>Si $(x_n)_{n \in \mathbb{N}}$, $(y_n)_{n \in \mathbb{N}}$ son dos <span class="ref" data-ref="def-4.51">sucesiones de Cauchy</span> en $E$, pruebe que la sucesión de números reales $(d(x_n, y_n))_{n \in \mathbb{N}}$ es convergente.</li>
+      </ol>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej13-c" aria-label="Dos sucesiones del plano que convergen a x y a y, con el segmento entre x_n e y_n"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej13-n"><i>n</i></label><input type="range" id="guiap3-ej13-n" min="1" max="40" value="3"><output id="guiap3-ej13-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej13-read" aria-live="polite"></dl>
+      <figcaption>Sucesiones elegidas en ℝ² con <i>d</i>₂: <i>x<sub>n</sub></i> se acerca a <i>x</i> en espiral y <i>y<sub>n</sub></i> se acerca a <i>y</i> zigzagueando. El segmento naranja une <i>x<sub>n</sub></i> con <i>y<sub>n</sub></i>; el gris punteado, <i>x</i> con <i>y</i>.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="13"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b5" title="Bloque 5Sucesiones en espacios métricos">Ej. Práctica 3 · Bloque 5Sucesiones en espacios métricos</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 14 ===================== -->
+<article class="ej" id="guiap3-ej14" data-short="Ej. 14" data-title="ℝ^n es completo con d1, d2 y d∞" data-topics="completitud">
+  <div class="ej-head"><span class="tag">Ej. 14</span><h3>$\mathbb{R}^n$ es completo con $d_1$, $d_2$ y $d_\infty$</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a></span></div>
+  <div class="enun"><p>Pruebe que $(\mathbb{R}^n, d_1)$, $(\mathbb{R}^n, d_2)$ y $(\mathbb{R}^n, d_\infty)$ (<span class="ref" data-ref="def-distancias-en-rrn">distancias en $\mathbb{R}^n$</span>) son <span class="ref" data-ref="def-4.55">completos</span>.</p></div>
+  <div class="preparan" data-ej="14"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b6" title="Bloque 6Completitud: probarla, heredarla y caracterizarla">Ej. Práctica 3 · Bloque 6Completitud: probarla, heredarla y caracterizarla</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 15 ===================== -->
+<article class="ej" id="guiap3-ej15" data-short="Ej. 15" data-title="Un cerrado de un completo es completo" data-topics="completitud,topologia">
+  <div class="ej-head"><span class="tag">Ej. 15</span><h3>Un cerrado de un completo es completo</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="enun"><p>Sea $(E, d)$ un espacio métrico <span class="ref" data-ref="def-4.55">completo</span> y $A \subseteq E$ un subconjunto de $E$. Pruebe que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span> entonces el espacio métrico $(A, d)$ es completo.</p></div>
+  <div class="preparan" data-ej="15"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b6" title="Bloque 6Completitud: probarla, heredarla y caracterizarla">Ej. Práctica 3 · Bloque 6Completitud: probarla, heredarla y caracterizarla</a></li><li><a href="../ejemplos/p3.html#ejp3-c5-2" title="C5-2 · Completo si y sólo si cerrado, y dos conjuntos de R²">Ej. Práctica 3 · C5-2 · Completo si y sólo si cerrado, y dos conjuntos de R²</a></li><li><a href="../ejemplos/p3.html#ejp3-c5-6" title="C5-6 · Completo si y sólo si toda bola cerrada es completa">Ej. Práctica 3 · C5-6 · Completo si y sólo si toda bola cerrada es completa</a></li></ul></div>
+</article>
+
+<!-- ===================== EJERCICIO 16 ===================== -->
+<article class="ej" id="guiap3-ej16" data-short="Ej. 16" data-title="Teorema de la intersección de Cantor" data-topics="completitud,topologia">
+  <div class="ej-head"><span class="tag">Ej. 16</span><h3>Teorema de la intersección (Cantor)</h3>
+    <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-topologia">topologia</a></span></div>
+  <div class="ej-grid">
+    <div class="enun"><p><b>Teorema de la intersección (Cantor).</b> Sea $E$ un espacio métrico <span class="ref" data-ref="def-4.55">completo</span>. Sea $(A_n)_{n \in \mathbb{N}}$ una sucesión de subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span>, <span class="ref" data-ref="def-4.8">acotados</span> y no vacíos de $E$ tales que</p>
+      <ul class="items">
+        <li>$A_{n+1} \subseteq A_n$ para todo $n \ge 1$.</li>
+        <li>$\lim_{n \to \infty} \operatorname{diam}(A_n) = 0$ (<span class="ref" data-ref="def-4.9">diámetro</span>).</li>
+      </ul>
+      <p>Pruebe que existe un único elemento $x \in \bigcap_{n \in \mathbb{N}} A_n$.</p>
+    </div>
+    <figure class="viz">
+      <canvas id="guiap3-ej16-c" aria-label="Discos cerrados encajados cuyo diámetro se achica"></canvas>
+      <div class="ctrl">
+        <div class="slider"><label for="guiap3-ej16-n"><i>n</i></label><input type="range" id="guiap3-ej16-n" min="1" max="8" value="4"><output id="guiap3-ej16-n-o"></output></div>
+      </div>
+      <dl class="read" id="guiap3-ej16-read" aria-live="polite"></dl>
+      <figcaption>Una sucesión elegida en ℝ² con <i>d</i>₂ que cumple las hipótesis: discos cerrados <i>A</i>₁ ⊇ <i>A</i>₂ ⊇ … cuyo radio se divide por 2 en cada paso. Se dibujan <i>A</i>₁, …, <i>A<sub>n</sub></i>; el último, resaltado.</figcaption>
+    </figure>
+  </div>
+  <div class="preparan" data-ej="16"><b>Ejemplos y parciales que lo preparan</b><ul class="chips"><li><a href="../ejemplos/p3.html#ejp3-b6" title="Bloque 6Completitud: probarla, heredarla y caracterizarla">Ej. Práctica 3 · Bloque 6Completitud: probarla, heredarla y caracterizarla</a></li><li><a href="../ejemplos/p3.html#ejp3-c5-5" title="C5-5 · Si todo encaje de cerrados acotados con diámetro → 0 tiene intersección no vacía, el espacio es completo">Ej. Práctica 3 · C5-5 · Si todo encaje de cerrados acotados con diámetro → 0 …</a></li></ul></div>
+</article>
+
+<p class="nota" id="guiap3-resolucion">Esta página trae sólo los enunciados. La resolución completa de la guía está en <code>apuntes-typst/guias-agente/guia_3_resuelta_agente.typ</code> (verificada en Lean).</p>
+
+<footer><p>Generado por <code>scripts/build_visualizaciones.py</code> desde <code>visualizaciones/fuentes/guias/</code>. Los enunciados del glosario son los de <code>apuntes-typst/apuntes.typ</code> y de las guías.</p></footer>
+</div>
+<div id="popup" role="tooltip" hidden></div>
+<script type="application/json" id="glosario">{
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:<\/p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).<\/p><p>El par $(M, d)$ se denomina <em>espacio métrico<\/em>.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.11": {
+  "tipo": "Definición",
+  "numero": "4.11",
+  "titulo": "Punto Interior",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ y $x \\in E$. Decimos que $x$ es un <strong>punto interior<\/strong> de $E$ si existe un radio $r \\gt 0$ tal que $B(x, r) \\subseteq E$. Es decir, que $x$ es un punto interior si podemos encontrar una bolita abierta centrada en $x$ que se quede completamente contenida dentro del conjunto.<\/p><p>El <strong>interior<\/strong> de $E$ está formado por todos los puntos interiores de $E$ y lo notamos $E^{\\circ}$. Es decir, $E^{\\circ} = \\{x \\in E : x \\text{ es punto interior de } E\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.14": {
+  "tipo": "Definición",
+  "numero": "4.14",
+  "titulo": "Conjunto Abierto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $A \\subseteq M$ es <strong>abierto<\/strong> si $A = A^{\\circ}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.22": {
+  "tipo": "Definición",
+  "numero": "4.22",
+  "titulo": "Punto de Adherencia y Clausura",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <strong>de adherencia<\/strong> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\ne \\emptyset$.<\/p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <strong>clausura<\/strong> de $E$ y lo denotamos $\\overline{E}$. Es decir, $\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\ne \\emptyset\\}$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.27": {
+  "tipo": "Definición",
+  "numero": "4.27",
+  "titulo": "Conjunto Cerrado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico y sea $F \\subseteq M$. Decimos que $F$ es <strong>cerrado<\/strong> si $\\overline{F} = F$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.33": {
+  "tipo": "Definición",
+  "numero": "4.33",
+  "titulo": "Punto de Acumulación y Conjunto Derivado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <strong>punto de acumulación<\/strong> de $E$ si para todo radio $r \\gt 0$ tenemos que existe un $y \\in B(x, r) \\cap E$ con $y \\ne x$.<\/p><p>Definimos el <strong>conjunto derivado<\/strong> de $E$ como $$E' = \\{x \\in M : x \\text{ es punto de acumulación}\\}.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.38": {
+  "tipo": "Definición",
+  "numero": "4.38",
+  "titulo": "Punto de Frontera y Frontera de un Conjunto",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$. Decimos que $x$ es un <strong>punto de frontera<\/strong> de $E$ si para todo $r \\gt 0$, $B(x, r) \\cap E \\ne \\emptyset$ y $B(x, r) \\cap E^c \\ne \\emptyset$.<\/p><p>Al conjunto de los puntos de frontera lo llamamos la <strong>frontera<\/strong> de $E$ y lo notamos $$\\partial E = \\{x \\in M : x \\text{ es punto de frontera de } E\\}.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.42": {
+  "tipo": "Definición",
+  "numero": "4.42",
+  "titulo": "Sucesión y Convergencia",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Una <b>sucesión<\/b> en $(M, d)$ es una función $f : \\mathbb{N} \\to M$. Usamos la notación $x_n = f(n)$ para referirnos al $n$-ésimo término de la sucesión y $(x_n)_{n \\in \\mathbb{N}}$ para referirnos a la sucesión entera. Al igual que con sucesiones de números reales, podemos pensar a una sucesión como una lista ordenada, donde en vez de poner números en nuestra lista, ahora ponemos objetos de nuestro espacio métrico.<\/p><p>Decimos que $(x_n)_{n \\in \\mathbb{N}}$ <b>converge<\/b> a $x \\in M$ (y usamos la notación $x_n \\to x$ o $\\lim_{n \\to \\infty} x_n = x$) si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x) \\lt \\varepsilon, \\quad \\text{para todo } n \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.5": {
+  "tipo": "Definición",
+  "numero": "4.5",
+  "titulo": "Bolas y Esfera",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $x_0 \\in M$ y $r \\gt 0$. Definimos:<\/p><ul><li><b>Bola abierta:<\/b> $B(x_0, r) = \\{y \\in M : d(x_0, y) \\lt r\\}$.<\/li><li><b>Bola cerrada:<\/b> $B[x_0, r] = \\{y \\in M : d(x_0, y) \\le r\\}$.<\/li><li><b>Esfera:<\/b> $S(x_0, r) = \\{y \\in M : d(x_0, y) = r\\}$.<\/li><\/ul>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.51": {
+  "tipo": "Definición",
+  "numero": "4.51",
+  "titulo": "Sucesión de Cauchy",
+  "enunciado": "<p>Sea $(x_n)_{n \\in \\mathbb{N}} \\subseteq M$ una sucesión. Decimos que $(x_n)_{n \\in \\mathbb{N}}$ es una sucesión <em>de Cauchy<\/em> si para todo $\\varepsilon \\gt 0$ existe un $n_0 \\in \\mathbb{N}$ tal que<\/p><p>$$d(x_n, x_m) \\lt \\varepsilon, \\quad \\text{para todo } n, m \\ge n_0.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.55": {
+  "tipo": "Definición",
+  "numero": "4.55",
+  "titulo": "Espacio métrico completo",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <strong>completo<\/strong> si toda sucesión de Cauchy tiene límite en $M$.<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.8": {
+  "tipo": "Definición",
+  "numero": "4.8",
+  "titulo": "Conjunto Acotado",
+  "enunciado": "<p>Sea $(M, d)$ un espacio métrico. Un conjunto $E \\subseteq M$ es <b>acotado<\/b> si existe $C \\gt 0$ tal que $d(x, y) \\le C$ para todo $x, y \\in E$. Equivalentemente, si existe $x_0 \\in M$ y $R \\gt 0$ tal que $E \\subseteq B(x_0, R)$.<\/p><p>(En el apunte, la definición viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-4.9": {
+  "tipo": "Definición",
+  "numero": "4.9",
+  "titulo": "Diámetro",
+  "enunciado": "<p>Si $E$ es acotado, su <b>diámetro<\/b> se define como:<\/p><p>$$\\operatorname{diam}(E) = \\sup\\{d(x, y) : x, y \\in E\\}.$$<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-espacios-de-funciones": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en espacios de funciones",
+  "enunciado": "<p>Un ejemplo importante que vamos a estudiar es el espacio de funciones continuas. Este se define como $$C([a, b]) = \\{f : [a, b] \\to \\mathbb{R} \\text{ funciones continuas}\\}.$$<\/p><p>Así como $\\mathbb{R}^n$, este conjunto también admite más de una métrica. Vamos a destacar dos de ellas:<\/p><p>1. <b>Distancia infinito:<\/b> Esta distancia se define de manera análoga a la distancia infinito en $\\mathbb{R}^n$, y mide la diferencia más grande entre dos funciones $f$ y $g$: $$d_\\infty(f, g) = \\sup_{x \\in [a, b]} |f(x) - g(x)|.$$<\/p><p>2. <b>Distancia 1:<\/b> Otra manera de pensar qué tan cerca está una función de otra es medir el área entre los gráficos de las funciones. Esta es la definición de la distancia uno: $$d_1(f, g) = \\int_a^b |f(x) - g(x)|\\, dx.$$<\/p><p>(En el apunte, cada distancia viene con un dibujo.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "def-distancias-en-rrn": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Distancias en $\\mathbb{R}^n$",
+  "enunciado": "<p>Sean $x = (x_1, \\dots, x_n)$ e $y = (y_1, \\dots, y_n)$ elementos de $\\mathbb{R}^n$. Se definen las siguientes métricas:<\/p><ol><li><b>Distancia euclídea ($d_2$):<\/b> $$d_2(x, y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}.$$<\/li><li><b>Distancia taxista ($d_1$):<\/b> $$d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|.$$<\/li><li><b>Distancia del máximo ($d_\\infty$):<\/b> $$d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|.$$<\/li><\/ol><p>(En el apunte, un dibujo de cada distancia entre dos puntos de $\\mathbb{R}^2$.)<\/p>",
+  "fuente": "apuntes.typ"
+ },
+ "ext-metricas-equivalentes": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métricas equivalentes",
+  "enunciado": "<p>Dos métricas $d$ y $d'$ sobre un mismo conjunto $M$ son <b>equivalentes<\/b> si definen los mismos abiertos: un conjunto $A \\subseteq M$ es abierto en $(M, d)$ si y sólo si es abierto en $(M, d')$.<\/p><p>Equivalentemente: para todo $x \\in M$ y todo $\\varepsilon \\gt 0$ existe $\\delta \\gt 0$ tal que $B_{d'}(x, \\delta) \\subseteq B_d(x, \\varepsilon)$, y existe $\\delta' \\gt 0$ tal que $B_d(x, \\delta') \\subseteq B_{d'}(x, \\varepsilon)$.<\/p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "guia-p3-ej1": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 1",
+  "titulo": "Seis espacios métricos y sus bolas abiertas",
+  "enunciado": "<p>Pruebe que los siguientes son espacios métricos. Dibuje, en cada caso, una bola abierta.<\/p> <ol class=\"items\"> <li>$\\mathbb{R}$ con $d(x, y) = |x - y|$.<\/li> <li>$\\mathbb{R}^n$ con $d_2(x, y) = \\left(\\sum_{i=1}^n (x_i - y_i)^2\\right)^{1/2}$.<\/li> <li>$\\mathbb{R}^n$ con $d_1(x, y) = \\sum_{i=1}^n |x_i - y_i|$.<\/li> <li>$\\mathbb{R}^n$ con $d_\\infty(x, y) = \\max_{1 \\le i \\le n} |x_i - y_i|$.<\/li> <li>$C([0, 1])$ con $d_\\infty(f, g) = \\max_{0 \\le t \\le 1} |f(t) - g(t)|$.<\/li> <li>$E$ un conjunto no vacío, con la métrica $$ \\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases} $$<\/li> <\/ol>",
+  "fuente": "guias/p3.typ"
+ },
+ "guia-p3-ej3": {
+  "tipo": "Práctica 3",
+  "numero": "Ej. 3",
+  "titulo": "Interior y clausura de ocho subconjuntos de ℝ",
+  "enunciado": "<p>Halle interior y clausura de cada uno de los siguientes subconjuntos de $\\mathbb{R}$. Determine cuáles son abiertos o cerrados.<\/p> <ol class=\"items\"> <li>$[0, 1]$<\/li> <li>$(0, 1)$<\/li> <li>$\\mathbb{Q}$<\/li> <li>$\\mathbb{Q} \\cap [0, 1]$<\/li> <li>$\\mathbb{Z}$<\/li> <li>$[0, 1) \\cup \\{2\\}$<\/li> <li>$\\{1/n : n \\in \\mathbb{N}\\}$<\/li> <li>$\\{1/n : n \\in \\mathbb{N}\\} \\cup \\{0\\}$<\/li> <\/ol>",
+  "fuente": "guias/p3.typ"
+ }
+}</script>
+<script src="../assets/pp.js"></script>
+<script>
+/* guias/p3 */
+(() => {
+"use strict";
+/* Dibujos de la guía de la Práctica 3 (enunciados). Usa window.PP. */
+const G = "guiap3";
+const C = (t) => PP.css(t);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const gcd = (a, b) => (b === 0 ? Math.abs(a) : gcd(b, a % b));
+
+/* Marco con la misma escala en x y en y, centrado en (cx, cy) con semiancho hx. */
+function eqFrame(w, h, cx, cy, hx, pad) {
+  const p = Object.assign({ l: 10, r: 10, t: 10, b: 10 }, pad || {});
+  const hy = hx * (h - p.t - p.b) / (w - p.l - p.r);
+  return PP.frame(w, h, { x0: cx - hx, x1: cx + hx, y0: cy - hy, y1: cy + hy }, p);
+}
+function plainAxes(ctx, T) {
+  const { box } = T;
+  PP.path(ctx, [[T.X(box.x0), T.Y(0)], [T.X(box.x1), T.Y(0)]], C("--rule"), 1);
+  PP.path(ctx, [[T.X(0), T.Y(box.y0)], [T.X(0), T.Y(box.y1)]], C("--rule"), 1);
+}
+function draggable(id, getT, pick, move, redraw) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  cv.style.touchAction = "none";
+  cv.style.cursor = "grab";
+  let active = null;
+  const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  cv.addEventListener("pointerdown", (e) => {
+    const T = getT(); if (!T) return;
+    const [px, py] = pos(e);
+    active = pick(px, py, T);
+    if (active !== null) { cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; e.preventDefault(); }
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (active === null) return;
+    const T = getT(); const [px, py] = pos(e);
+    move(active, T.iX(px), T.iY(py), T);
+    redraw();
+  });
+  const end = () => { active = null; cv.style.cursor = "grab"; };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+}
+function numberLine(ctx, T, y0, x0, x1, step) {
+  PP.path(ctx, [[T.X(x0), y0], [T.X(x1), y0]], C("--muted"), 1.2);
+  for (let k = Math.ceil(x0 / step - 1e-9) * step; k <= x1 + 1e-9; k += step) {
+    PP.path(ctx, [[T.X(k), y0 - 4], [T.X(k), y0 + 4]], C("--muted"), 1);
+    PP.label(ctx, PP.fmt(k, 2).replace("-", "−"), T.X(k), y0 + 8, C("--muted"), "center", "top", 11);
+  }
+}
+
+/* ===================== Ejercicio 1 ===================== */
+const e1 = { c: [0.3, 0.2], x1: 0.4, T: null, mode: "b" };
+const E8 = [[-1.6, 0.9], [-0.7, -0.8], [0.2, 1.1], [0.9, -0.3], [1.7, 0.8], [-1.9, -0.6], [1.4, -1.1], [0, 0]];
+let e1Center = 7;
+function drawEj1() {
+  const it = PP.radio(G + "-ej1-it"), r = PP.val(G + "-ej1-r") / 100;
+  e1.mode = it;
+  PP.out(G + "-ej1-r-o", PP.fmt(r, 2));
+  if (it === "a") {
+    const { ctx, w, h } = PP.canvas(G + "-ej1-c", 0.42);
+    const T = PP.frame(w, h, { x0: -3, x1: 3, y0: 0, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+    e1.T = T;
+    const y0 = h * 0.55;
+    PP.rect(ctx, T.X(e1.x1 - r), y0 - 14, T.X(e1.x1 + r) - T.X(e1.x1 - r), 28, null, C("--area"));
+    numberLine(ctx, T, y0 + 20, -3, 3, 1);
+    PP.path(ctx, [[T.X(e1.x1 - r), y0], [T.X(e1.x1 + r), y0]], C("--accent"), 4);
+    PP.circle(ctx, T.X(e1.x1 - r), y0, 5, C("--accent"), C("--bg"), null, 2);
+    PP.circle(ctx, T.X(e1.x1 + r), y0, 5, C("--accent"), C("--bg"), null, 2);
+    PP.dot(ctx, T.X(e1.x1), y0, 5, C("--ink"));
+    PP.label(ctx, "x", T.X(e1.x1), y0 - 18, C("--ink"), "center", "bottom", 13);
+    PP.read(G + "-ej1-read", [["B(x, r)", "(" + PP.fmt(e1.x1 - r, 2) + ", " + PP.fmt(e1.x1 + r, 2) + ")"]]);
+    return;
+  }
+  if (it === "e") {
+    const { ctx, w, h } = PP.canvas(G + "-ej1-c", 0.62);
+    const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -1.9, y1: 2.9 }, { l: 40, r: 12, t: 14, b: 28 });
+    e1.T = null;
+    PP.axes(ctx, T, { xLabel: "t", yLabel: "" });
+    const f0 = (t) => 0.5 + 0.3 * Math.sin(2 * Math.PI * t);
+    const g = (t) => f0(t) + 0.85 * r * Math.cos(7 * t + 0.4);
+    const up = [], dn = [], c0 = [], cg = [];
+    for (let k = 0; k <= 200; k++) { const t = k / 200; up.push([T.X(t), T.Y(f0(t) + r)]); dn.push([T.X(t), T.Y(f0(t) - r)]); c0.push([T.X(t), T.Y(f0(t))]); cg.push([T.X(t), T.Y(g(t))]); }
+    PP.path(ctx, up.concat(dn.slice().reverse()), null, 1, null, true, C("--area"));
+    PP.path(ctx, up, C("--accent"), 1.2, [5, 4]); PP.path(ctx, dn, C("--accent"), 1.2, [5, 4]);
+    PP.path(ctx, c0, C("--accent"), 2.4);
+    PP.path(ctx, cg, C("--seq2"), 2);
+    PP.label(ctx, "f₀", T.X(0.25) + 4, T.Y(f0(0.25)) - 4, C("--accent"), "left", "bottom", 13);
+    let m = 0; for (let k = 0; k <= 400; k++) m = Math.max(m, Math.abs(g(k / 400) - f0(k / 400)));
+    PP.read(G + "-ej1-read", [["d∞(g, f₀)", PP.fmt(m, 3) + " < r = " + PP.fmt(r, 2), "good"]]);
+    return;
+  }
+  const { ctx, w, h } = PP.canvas(G + "-ej1-c", 0.75);
+  const T = eqFrame(w, h, 0, 0, 2.6);
+  e1.T = T;
+  plainAxes(ctx, T);
+  if (it === "f") {
+    const cx = E8[e1Center];
+    E8.forEach((p, i) => {
+      const inB = i === e1Center || r > 1;
+      PP.dot(ctx, T.X(p[0]), T.Y(p[1]), 6, inB ? C("--accent") : C("--rule"));
+    });
+    PP.circle(ctx, T.X(cx[0]), T.Y(cx[1]), 11, C("--ink"), null, null, 2);
+    PP.label(ctx, "x", T.X(cx[0]) + 13, T.Y(cx[1]) - 6, C("--ink"), "left", "bottom", 13);
+    PP.read(G + "-ej1-read", [["r", PP.fmt(r, 2)], ["B(x, r)", r > 1 ? "todo E (8 puntos)" : "{x}"], ["centro", "tocá un punto para moverlo"]]);
+    return;
+  }
+  const [cx, cy] = e1.c;
+  const pts = [];
+  for (let k = 0; k <= 240; k++) {
+    const t = 2 * Math.PI * k / 240, c = Math.cos(t), s = Math.sin(t);
+    let rho;
+    if (it === "b") rho = 1; else if (it === "c") rho = 1 / (Math.abs(c) + Math.abs(s)); else rho = 1 / Math.max(Math.abs(c), Math.abs(s));
+    pts.push([T.X(cx + r * rho * c), T.Y(cy + r * rho * s)]);
+  }
+  PP.path(ctx, pts, C("--accent"), 1.8, [6, 4], true, C("--area"));
+  PP.dot(ctx, T.X(cx), T.Y(cy), 5, C("--ink"));
+  PP.label(ctx, "x", T.X(cx) + 7, T.Y(cy) - 4, C("--ink"), "left", "bottom", 13);
+  const name = { b: "d₂: disco", c: "d₁: rombo", d: "d∞: cuadrado" }[it];
+  PP.read(G + "-ej1-read", [["x", "(" + PP.fmt(cx, 2) + ", " + PP.fmt(cy, 2) + ")"], ["B(x, r)", name + " (borde punteado: no está)"]]);
+}
+PP.register(drawEj1, ["input[name='" + G + "-ej1-it']", G + "-ej1-r"]);
+draggable(G + "-ej1-c", () => e1.T,
+  (px, py, T) => {
+    if (e1.mode === "a") return Math.abs(px - T.X(e1.x1)) < 24 ? "x1" : null;
+    if (e1.mode === "f") {
+      let best = null, bd = 22;
+      E8.forEach((p, i) => { const d = Math.hypot(px - T.X(p[0]), py - T.Y(p[1])); if (d < bd) { bd = d; best = i; } });
+      if (best !== null) { e1Center = best; drawEj1(); }
+      return null;
+    }
+    return Math.hypot(px - T.X(e1.c[0]), py - T.Y(e1.c[1])) < 26 ? "c" : null;
+  },
+  (id, x, y) => {
+    if (id === "x1") e1.x1 = Math.round(clamp(x, -2.5, 2.5) * 100) / 100;
+    else e1.c = [Math.round(clamp(x, -2, 2) * 100) / 100, Math.round(clamp(y, -1.5, 1.5) * 100) / 100];
+  }, drawEj1);
+
+/* ===================== Ejercicio 2 ===================== */
+PP.register(function drawEj2() {
+  const it = PP.radio(G + "-ej2-it"), x = PP.val(G + "-ej2-x") / 10;
+  PP.out(G + "-ej2-x-o", PP.fmt(x, 1));
+  const d = { a: (y) => (x - y) * (x - y), b: (y) => Math.sqrt(Math.abs(x - y)), c: (y) => Math.abs(x * x - y * y) }[it];
+  const { ctx, w, h } = PP.canvas(G + "-ej2-c", 0.62);
+  const T = PP.frame(w, h, { x0: -3, x1: 3, y0: -0.3, y1: 6 }, { l: 36, r: 12, t: 14, b: 28 });
+  PP.axes(ctx, T, { xLabel: "y", yLabel: "d(x, y)" });
+  const ref = [], cur = [];
+  for (let k = 0; k <= 300; k++) {
+    const y = -3 + 6 * k / 300;
+    ref.push([T.X(y), T.Y(Math.min(Math.abs(x - y), 7))]);
+    cur.push([T.X(y), T.Y(Math.min(d(y), 7))]);
+  }
+  ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, w - T.p.l - T.p.r, h - T.p.t - T.p.b); ctx.clip();
+  PP.path(ctx, ref, C("--muted"), 1.2);
+  PP.path(ctx, cur, C("--accent"), 2.4);
+  ctx.restore();
+  PP.path(ctx, [[T.X(x), T.Y(-0.3)], [T.X(x), T.Y(6)]], C("--seq2"), 1.2, [4, 4]);
+  PP.label(ctx, "y = x", T.X(x) + 4, T.Y(5.8), C("--seq2"), "left", "top", 11);
+  const txt = { a: "(x − y)²", b: "√|x − y|", c: "|x² − y²|" }[it];
+  PP.read(G + "-ej2-read", [["d(x, y)", txt], ["x", PP.fmt(x, 1)], ["d(x, x)", PP.fmt(d(x), 3)]]);
+}, ["input[name='" + G + "-ej2-it']", G + "-ej2-x"]);
+
+/* ===================== Ejercicio 3 ===================== */
+PP.register(function drawEj3() {
+  const it = PP.radio(G + "-ej3-it");
+  const { ctx, w, h } = PP.canvas(G + "-ej3-c", 0.42);
+  const T = PP.frame(w, h, { x0: -1.5, x1: 2.5, y0: 0, y1: 1 }, { l: 14, r: 14, t: 10, b: 10 });
+  const y0 = h * 0.5;
+  numberLine(ctx, T, y0 + 22, -1, 2, 0.5);
+  const A = C("--accent");
+  const seg = (a, b, oa, ob) => {
+    PP.path(ctx, [[T.X(a), y0], [T.X(b), y0]], A, 5);
+    if (oa !== null) oa ? PP.circle(ctx, T.X(a), y0, 5, A, C("--bg"), null, 2) : PP.dot(ctx, T.X(a), y0, 5, A);
+    if (ob !== null) ob ? PP.circle(ctx, T.X(b), y0, 5, A, C("--bg"), null, 2) : PP.dot(ctx, T.X(b), y0, 5, A);
+  };
+  const rats = (lo, hi) => { for (let q = 1; q <= 12; q++) for (let p = Math.ceil(lo * q); p <= hi * q; p++) if (gcd(p, q) === 1 || p === 0) PP.dot(ctx, T.X(p / q), y0, q <= 2 ? 2.6 : 1.6, A); };
+  let desc = "";
+  switch (it) {
+    case "a": seg(0, 1, false, false); desc = "[0, 1]"; break;
+    case "b": seg(0, 1, true, true); desc = "(0, 1)"; break;
+    case "c": rats(-1.5, 2.5); desc = "ℚ (denominador ≤ 12)"; break;
+    case "d": rats(0, 1); desc = "ℚ ∩ [0, 1] (denominador ≤ 12)"; break;
+    case "e": for (let z = -1; z <= 2; z++) PP.dot(ctx, T.X(z), y0, 5, A); PP.label(ctx, "…", T.X(-1.45), y0 - 4, A, "left", "bottom", 14); PP.label(ctx, "…", T.X(2.45), y0 - 4, A, "right", "bottom", 14); desc = "ℤ"; break;
+    case "f": seg(0, 1, false, true); PP.dot(ctx, T.X(2), y0, 5, A); desc = "[0, 1) ∪ {2}"; break;
+    case "g": case "h":
+      for (let n = 1; n <= 40; n++) PP.dot(ctx, T.X(1 / n), y0, n <= 6 ? 4 : 2.2, A);
+      if (it === "h") PP.dot(ctx, T.X(0), y0, 5, C("--seq2"));
+      desc = it === "g" ? "{1/n : n ∈ ℕ}" : "{1/n : n ∈ ℕ} ∪ {0}";
+      break;
+  }
+  PP.read(G + "-ej3-read", [["conjunto", desc]]);
+}, ["input[name='" + G + "-ej3-it']"]);
+
+/* ===================== Ejercicio 4 ===================== */
+PP.register(function drawEj4() {
+  const it = PP.radio(G + "-ej4-it"), rp = PP.val(G + "-ej4-rp") / 100;
+  PP.out(G + "-ej4-rp-o", it === "c" ? PP.fmt(rp, 2) : "—");
+  document.getElementById(G + "-ej4-rp").disabled = it !== "c";
+  const { ctx, w, h } = PP.canvas(G + "-ej4-c", 0.75);
+  const T = eqFrame(w, h, 0, 0, 3.4);
+  plainAxes(ctx, T);
+  const ring = (rad, stroke, dash, fill) => PP.circle(ctx, T.X(0), T.Y(0), T.X(rad) - T.X(0), stroke, fill, dash, 1.8);
+  if (it === "c") {
+    ring(rp, C("--accent"), [5, 4], C("--area"));
+    ring(2, C("--seq2"), [6, 4], null);
+    PP.label(ctx, "B(x, r′)", T.X(0) + 4, T.Y(rp * 0.5), C("--accent"), "left", "middle", 12);
+    PP.label(ctx, "r = 2", T.X(2 * 0.72) + 4, T.Y(2 * 0.72) - 4, C("--seq2"), "left", "bottom", 12);
+    PP.read(G + "-ej4-read", [["r′", PP.fmt(rp, 2)], ["r", "2"], ["¿r > r′ > 0?", rp < 2 ? "sí" : "no", rp < 2 ? "good" : "bad"]]);
+  } else {
+    // anillo 2 < d < 3: sombrear con regla par-impar
+    ctx.save(); ctx.beginPath();
+    ctx.arc(T.X(0), T.Y(0), T.X(3) - T.X(0), 0, 2 * Math.PI);
+    ctx.arc(T.X(0), T.Y(0), T.X(2) - T.X(0), 0, 2 * Math.PI, true);
+    ctx.fillStyle = C("--area"); ctx.fill(); ctx.restore();
+    ring(3, C("--accent"), [5, 4], null); ring(2, C("--accent"), [5, 4], null);
+    PP.label(ctx, "2 < d(y, x) < 3", T.X(0), T.Y(2.5), C("--accent"), "center", "middle", 12);
+    PP.read(G + "-ej4-read", [["conjunto", "{y : 2 < d(y, x) < 3}"], ["bordes", "no están (punteados)"]]);
+  }
+  PP.dot(ctx, T.X(0), T.Y(0), 4.5, C("--ink"));
+  PP.label(ctx, "x", T.X(0) + 6, T.Y(0) + 4, C("--ink"), "left", "top", 13);
+}, ["input[name='" + G + "-ej4-it']", G + "-ej4-rp"]);
+
+/* ===================== Ejercicio 7 ===================== */
+const e7 = { P: [[-1.6, 0.4], [-0.5, 1.1], [0.7, 0.8], [1.3, -0.6], [-0.4, -0.9]], T: null };
+function drawEj7() {
+  const { ctx, w, h } = PP.canvas(G + "-ej7-c", 0.7);
+  const T = eqFrame(w, h, 0, 0, 2.4);
+  e7.T = T;
+  plainAxes(ctx, T);
+  let best = [0, 1], bd = -1;
+  for (let i = 0; i < e7.P.length; i++) for (let j = i + 1; j < e7.P.length; j++) {
+    const d = Math.hypot(e7.P[i][0] - e7.P[j][0], e7.P[i][1] - e7.P[j][1]);
+    if (d > bd) { bd = d; best = [i, j]; }
+  }
+  const [a, b] = best.map((i) => e7.P[i]);
+  PP.path(ctx, [[T.X(a[0]), T.Y(a[1])], [T.X(b[0]), T.Y(b[1])]], C("--seq2"), 2.2);
+  PP.label(ctx, "diam", T.X((a[0] + b[0]) / 2) + 4, T.Y((a[1] + b[1]) / 2) - 4, C("--seq2"), "left", "bottom", 12);
+  e7.P.forEach((p, i) => { PP.dot(ctx, T.X(p[0]), T.Y(p[1]), 7, C("--accent")); PP.label(ctx, "a" + "₁₂₃₄₅"[i], T.X(p[0]) + 9, T.Y(p[1]) - 4, C("--accent"), "left", "bottom", 12); });
+  PP.read(G + "-ej7-read", [["par más alejado", "a" + "₁₂₃₄₅"[best[0]] + ", a" + "₁₂₃₄₅"[best[1]]], ["diam(A)", PP.fmt(bd, 3)]]);
+}
+PP.register(drawEj7, []);
+draggable(G + "-ej7-c", () => e7.T,
+  (px, py, T) => { let best = null, bd = 24; e7.P.forEach((p, i) => { const d = Math.hypot(px - T.X(p[0]), py - T.Y(p[1])); if (d < bd) { bd = d; best = i; } }); return best; },
+  (i, x, y, T) => { e7.P[i] = [clamp(x, T.box.x0 + 0.1, T.box.x1 - 0.1), clamp(y, T.box.y0 + 0.1, T.box.y1 - 0.1)]; }, drawEj7);
+
+/* ===================== Ejercicio 10 ===================== */
+const e10 = { x: [1.2, 1.1], T: null };
+const SEG = [[-1.8, -0.6], [0.6, 0.3]], LONE = [1.6, -0.9];
+function nearest(px, py) {
+  const [[ax, ay], [bx, by]] = SEG;
+  const vx = bx - ax, vy = by - ay;
+  const t = clamp(((px - ax) * vx + (py - ay) * vy) / (vx * vx + vy * vy), 0, 1);
+  const q = [ax + t * vx, ay + t * vy];
+  const d1 = Math.hypot(px - q[0], py - q[1]), d2 = Math.hypot(px - LONE[0], py - LONE[1]);
+  return d1 <= d2 ? [d1, q] : [d2, LONE];
+}
+function drawEj10() {
+  const r = PP.val(G + "-ej10-r") / 100;
+  PP.out(G + "-ej10-r-o", PP.fmt(r, 2));
+  const { ctx, w, h } = PP.canvas(G + "-ej10-c", 0.7);
+  const T = eqFrame(w, h, 0, 0, 2.4);
+  e10.T = T;
+  // región B_A(r)
+  const cell = 4;
+  ctx.save(); ctx.fillStyle = C("--area");
+  for (let py = 0; py < h; py += cell) for (let px = 0; px < w; px += cell) {
+    if (nearest(T.iX(px + cell / 2), T.iY(py + cell / 2))[0] < r) ctx.fillRect(px, py, cell, cell);
+  }
+  ctx.restore();
+  plainAxes(ctx, T);
+  PP.path(ctx, SEG.map(([a, b]) => [T.X(a), T.Y(b)]), C("--seq2"), 3);
+  PP.dot(ctx, T.X(LONE[0]), T.Y(LONE[1]), 4.5, C("--seq2"));
+  PP.label(ctx, "A", T.X(-0.6) - 4, T.Y(-0.15) - 6, C("--seq2"), "right", "bottom", 13);
+  const [d, q] = nearest(e10.x[0], e10.x[1]);
+  PP.path(ctx, [[T.X(e10.x[0]), T.Y(e10.x[1])], [T.X(q[0]), T.Y(q[1])]], C("--ink"), 1.4, [4, 3]);
+  PP.dot(ctx, T.X(e10.x[0]), T.Y(e10.x[1]), 6.5, C("--ink"));
+  PP.label(ctx, "x", T.X(e10.x[0]) + 8, T.Y(e10.x[1]) - 4, C("--ink"), "left", "bottom", 13);
+  PP.read(G + "-ej10-read", [["d(x, A)", PP.fmt(d, 3)], ["r", PP.fmt(r, 2)], ["¿x ∈ B_A(r)?", d < r ? "sí" : "no", d < r ? "good" : "bad"]]);
+}
+PP.register(drawEj10, [G + "-ej10-r"]);
+draggable(G + "-ej10-c", () => e10.T,
+  (px, py, T) => (Math.hypot(px - T.X(e10.x[0]), py - T.Y(e10.x[1])) < 26 ? "x" : null),
+  (id, x, y, T) => { e10.x = [clamp(x, T.box.x0 + 0.05, T.box.x1 - 0.05), clamp(y, T.box.y0 + 0.05, T.box.y1 - 0.05)]; }, drawEj10);
+
+/* ===================== Ejercicio 12 ===================== */
+PP.register(function drawEj12() {
+  const r = PP.val(G + "-ej12-r") / 100;
+  PP.out(G + "-ej12-r-o", PP.fmt(r, 2));
+  const { ctx, w, h } = PP.canvas(G + "-ej12-c", 0.75);
+  const T = eqFrame(w, h, 0, 0, 2.3);
+  plainAxes(ctx, T);
+  const dia = (s) => [[T.X(s), T.Y(0)], [T.X(0), T.Y(s)], [T.X(-s), T.Y(0)], [T.X(0), T.Y(-s)]];
+  PP.path(ctx, dia(2 * r), C("--muted"), 1.4, [5, 4], true);
+  PP.rect(ctx, T.X(-r), T.Y(r), T.X(r) - T.X(-r), T.Y(-r) - T.Y(r), C("--seq2"), C("--area2"));
+  PP.circle(ctx, T.X(0), T.Y(0), T.X(r) - T.X(0), C("--seq3"), C("--area3"), null, 2);
+  PP.path(ctx, dia(r), C("--accent"), 2, null, true, C("--area"));
+  PP.label(ctx, "B₁(x, 2r)", T.X(0) + 6, T.Y(2 * r) + 2, C("--muted"), "left", "top", 11);
+  PP.label(ctx, "B∞", T.X(r) - 3, T.Y(r) + 3, C("--seq2"), "right", "top", 11);
+  PP.read(G + "-ej12-read", [["n", "2"], ["r", PP.fmt(r, 2)], ["radio de la última", "n r = " + PP.fmt(2 * r, 2)]]);
+}, [G + "-ej12-r"]);
+
+/* ===================== Ejercicio 13 ===================== */
+PP.register(function drawEj13() {
+  const n = PP.val(G + "-ej13-n");
+  PP.out(G + "-ej13-n-o", String(n));
+  const X = [-1.2, 0.2], Y = [1.3, -0.4];
+  const xs = (k) => [X[0] + (1.6 / k) * Math.cos(1.3 * k), X[1] + (1.6 / k) * Math.sin(1.3 * k)];
+  const ys = (k) => [Y[0] + (k % 2 ? 1 : -1) * 0.9 / k, Y[1] + 1.4 / k];
+  const { ctx, w, h } = PP.canvas(G + "-ej13-c", 0.7);
+  const T = eqFrame(w, h, 0, 0.1, 2.6);
+  plainAxes(ctx, T);
+  for (let k = 1; k <= n; k++) {
+    const a = xs(k), b = ys(k), last = k === n;
+    if (last) { PP.dot(ctx, T.X(a[0]), T.Y(a[1]), 5.5, C("--accent")); PP.dot(ctx, T.X(b[0]), T.Y(b[1]), 5.5, C("--seq3")); }
+    else { PP.circle(ctx, T.X(a[0]), T.Y(a[1]), 3.2, C("--accent"), null, null, 1.3); PP.circle(ctx, T.X(b[0]), T.Y(b[1]), 3.2, C("--seq3"), null, null, 1.3); }
+  }
+  PP.path(ctx, [[T.X(X[0]), T.Y(X[1])], [T.X(Y[0]), T.Y(Y[1])]], C("--muted"), 1.3, [5, 4]);
+  const a = xs(n), b = ys(n);
+  PP.path(ctx, [[T.X(a[0]), T.Y(a[1])], [T.X(b[0]), T.Y(b[1])]], C("--seq2"), 2);
+  PP.dot(ctx, T.X(X[0]), T.Y(X[1]), 5, C("--ink")); PP.label(ctx, "x", T.X(X[0]) - 7, T.Y(X[1]) + 4, C("--ink"), "right", "top", 13);
+  PP.dot(ctx, T.X(Y[0]), T.Y(Y[1]), 5, C("--ink")); PP.label(ctx, "y", T.X(Y[0]) + 7, T.Y(Y[1]) + 4, C("--ink"), "left", "top", 13);
+  PP.label(ctx, "xₙ", T.X(a[0]) + 7, T.Y(a[1]) - 4, C("--accent"), "left", "bottom", 12);
+  PP.label(ctx, "yₙ", T.X(b[0]) + 7, T.Y(b[1]) - 4, C("--seq3"), "left", "bottom", 12);
+  PP.read(G + "-ej13-read", [["d(xₙ, yₙ)", PP.fmt(Math.hypot(a[0] - b[0], a[1] - b[1]), 4)], ["d(x, y)", PP.fmt(Math.hypot(X[0] - Y[0], X[1] - Y[1]), 4)]]);
+}, [G + "-ej13-n"]);
+
+/* ===================== Ejercicio 16 ===================== */
+PP.register(function drawEj16() {
+  const n = PP.val(G + "-ej16-n");
+  PP.out(G + "-ej16-n-o", String(n));
+  const discs = [];
+  let c = [0, 0], r = 1.6;
+  for (let k = 1; k <= 8; k++) {
+    discs.push([c, r]);
+    const ang = 0.9 * k;
+    c = [c[0] + (r / 2) * Math.cos(ang), c[1] + (r / 2) * Math.sin(ang)];
+    r = r / 2;
+  }
+  const { ctx, w, h } = PP.canvas(G + "-ej16-c", 0.75);
+  const T = eqFrame(w, h, 0, 0, 2.1);
+  plainAxes(ctx, T);
+  for (let k = 1; k <= n; k++) {
+    const [cc, rr] = discs[k - 1], last = k === n;
+    PP.circle(ctx, T.X(cc[0]), T.Y(cc[1]), T.X(rr) - T.X(0), last ? C("--accent") : C("--muted"), last ? C("--area") : C("--band"), null, last ? 2.2 : 1.2);
+    if (k <= 3) PP.label(ctx, "A" + "₁₂₃"[k - 1], T.X(cc[0] - rr * 0.7), T.Y(cc[1] + rr * 0.7), C("--muted"), "right", "bottom", 12);
+  }
+  PP.read(G + "-ej16-read", [["diam(Aₙ)", PP.fmt(2 * discs[n - 1][1], 4)], ["Aₙ₊₁ ⊆ Aₙ", "sí", "good"]]);
+}, [G + "-ej16-n"]);
+})();
+</script>
+<script src="../assets/sitio.js"></script>
+</body>
+</html>

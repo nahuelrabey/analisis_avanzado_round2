@@ -1,0 +1,1362 @@
+<!-- ===================== BLOQUE 3 ===================== -->
+<section class="bloque" id="ejp3-b3">
+  <h2><span class="bn">Bloque 3</span>Clausura, cerrados, conjunto derivado y frontera</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>El resto del <a class="xg" data-guia="p3" data-ej="3">Ejercicio 3</a> de la Práctica 3 (clausura, no sólo interior), el <a class="xg" data-guia="p3" data-ej="4">Ejercicio 4</a> (a), (b) y (d) (bolas cerradas, complemento abierto/cerrado, y que $\emptyset$ y el total sean cerrados) y el <b>Ejercicio 7</b> (frontera y puntos de acumulación de los conjuntos del Ejercicio 3).</p>
+    <p><b>El orden importa:</b> el primero (clausura de la bola abierta en $\mathbb{R}^2$) fija la técnica de la doble contención con la recta que une al centro; el segundo (bola cerrada es cerrada) la reusa con la desigualdad triangular «al revés». Los tres últimos son el mismo par de conjuntos ($(0,1) \cup \{2\}$) recorrido con las cuatro nociones —interior, clausura, derivado y frontera— y después generalizado a $\mathbb{Z}$, $(0,1)$ y $\mathbb{Q}$.</p>
+  </div>
+  <p class="nota"><b>Nota de esta versión</b>En la guía 2026 (<code>apuntes-typst/guias/p3.typ</code>) el ejercicio de frontera y puntos de acumulación de los subconjuntos del Ejercicio 3 es el <a class="xg" data-guia="p3" data-ej="8">Ejercicio 8</a>; el Ejercicio 7 es el de diámetros (que usa el ejemplo C5-5 del Bloque 6).</p>
+
+  <!-- ===== 24 ===== -->
+  <article class="ej" id="ejp3-24" data-short="24" data-title="Clausura de la bola unitaria en (R², d2)" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">24</span>
+      <h3>Clausura de la bola unitaria en $(\mathbb{R}^2, d_2)$</h3>
+      <span class="src">Ejemplo 4.24 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(M, d) = (\mathbb{R}^2, d_2)$ y sea $E = B((0,0), 1) = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \lt 1\}$. Veamos que $\overline{E} = B[(0,0), 1]$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Doble contención por la recta que une al centro con el punto.</em> Para ver que $B[(0,0),1] \subseteq \overline{E}$, hay que probar que todo punto del borde $x^2+y^2=1$ es <span class="ref" data-ref="def-4.22">de adherencia</span>. La idea es acercarse a ese punto <b>desde adentro</b> de $E$, siguiendo la recta que lo une con el origen: los puntos $(t x, t y)$ con $t$ cercano a $1$ (pero menor) están en $E$ y a la vez arbitrariamente cerca de $(x,y)$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Los puntos de $B[(0,0),1]$</p>
+          <p>Veamos que $\overline{E} = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \le 1\} = B[(0,0), 1]$. Para esto, veamos la doble contención.</p>
+          <p>Supongamos que $(x, y) \in B[(0,0), 1]$. Si $x^2 + y^2 \lt 1$, tenemos que $(x, y) \in E$ y por lo tanto pertenece a su clausura. Si $x^2 + y^2 = 1$ (es decir, $(x, y)$ está en el borde del círculo), lo que tenemos que probar es que para todo radio $r \gt 0$, $B((x,y), r) \cap E \ne \emptyset$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Un punto de la intersección sobre la recta</p>
+          <p>Para encontrar un punto que pertenezca a la intersección de las bolas lo que podemos hacer es pensar en la recta que une al $(0,0)$ con $(x,y)$. Gráficamente, podemos ver que vamos a tener un elemento en esa recta que pertenece a la intersección. Analíticamente, esto lo podemos escribir de la siguiente manera: consideremos los elementos $(t x, t y)$, con $t \in \mathbb{R}$. Para que un elemento de esta recta pertenezca a $E$, debemos tener
+            $$(t x)^2 + (t y)^2 = t^2 (x^2 + y^2) = t^2 \lt 1,$$
+            es decir, nos alcanza con que $|t| \lt 1$. Para que este elemento además pertenezca a la bola $B((x,y), r)$, deberíamos tener
+            $$\begin{aligned} d_2((t x, t y), (x, y)) &= \sqrt{(t x - x)^2 + (t y - y)^2} \\ &= \sqrt{(t-1)^2 (x^2+y^2)} = |t - 1| \lt r. \end{aligned}$$</p>
+          <p>Esto nos dice que si queremos que un elemento de la pinta $(t x, t y)$ pertenezca a la intersección lo que estamos buscando es un $t \in \mathbb{R}$ que simultáneamente cumpla que $|t| \lt 1$ y $|1-t| \lt r$. Esto no es difícil de conseguir, podríamos por ejemplo fijar $t = 1 - r/2$, y este número cumple las dos condiciones que queríamos. Esto nos termina de probar que $B[(0,0), 1] \subseteq \overline{E}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-24-c1" aria-label="Disco unitario abierto E, un punto x del borde, la bola B(x, r) y el punto (tx, ty) con t = 1 − r/2 sobre la recta al origen"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-24-r">radio <i>r</i></label><input type="range" id="ejp3-24-r" min="5" max="150" value="45"><output id="ejp3-24-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-24-read" aria-live="polite"></dl>
+          <figcaption>El disco punteado es <i>E</i> (sin borde). Arrastrá el punto negro <i>x</i> por la circunferencia y mové <i>r</i>: el punto naranja es (<i>tx</i>, <i>ty</i>) con <i>t</i> = 1 − <i>r</i>/2, que está a la vez en <i>E</i> y en <i>B</i>(<i>x</i>, <i>r</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La otra contención</p>
+          <p>Para ver la otra contención, es más fácil probar que si un elemento <b>no</b> pertenece a $B[(0,0), 1]$ entonces <b>no</b> puede pertenecer a la clausura de $E$. Lo dejamos como ejercicio.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 25 ===== -->
+  <article class="ej" id="ejp3-25" data-short="25" data-title="Las bolas cerradas son conjuntos cerrados" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">25</span>
+      <h3>Las bolas cerradas son conjuntos cerrados</h3>
+      <span class="src">Ejemplo 4.28 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>En $(M, d)$ cualquier espacio métrico, el conjunto $F = B[x, r] = \{y \in M : d(y, x) \le r\}$ es un conjunto <span class="ref" data-ref="def-4.27">cerrado</span>.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La mitad de la doble inclusión sale gratis.</em> Para probar la igualdad $\overline{F} = F$, la inclusión $F \subseteq \overline{F}$ vale siempre (<span class="ref" data-ref="obs-4.23">Observación 4.23</span>), así que sólo hay que probar $\overline{F} \subseteq F$. Usando el contrarrecíproco ($A \subseteq B \iff B^c \subseteq A^c$), alcanza con ver que si $y \notin F$ entonces $y \notin \overline{F}$: hay que exhibir una bola alrededor de $y$ que no toque a $F$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El radio $t = d(y,x) - r$</p>
+          <p>Dicho esto, lo que vamos a probar es que si $y \notin B[x, r]$ entonces $y \notin \overline{B[x, r]}$. Sea $y \notin B[x, r]$. Por definición, esto quiere decir que $d(y, x) \gt r$. Veamos que $y \notin \overline{B[x, r]}$, es decir, que existe un radio $t \gt 0$ tal que $B(y, t) \cap B[x, r] = \emptyset$. Como $d(y, x) \gt r$, tomemos $t = d(y, x) - r \gt 0$ y veamos que $B(y, t) \cap B[x, r] = \emptyset$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-25-c1" aria-label="Bola cerrada B[x, r] y bola abierta B(y, t) con t = d(y, x) − r, que no se tocan"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-25-r">radio <i>r</i></label><input type="range" id="ejp3-25-r" min="30" max="140" value="100"><output id="ejp3-25-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-25-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i>₂). Arrastrá <i>y</i> (afuera de la bola cerrada) y el punto <i>z</i> (adentro de <i>B</i>(<i>y</i>, <i>t</i>)): la lectura muestra la cadena <i>d</i>(<i>z</i>, <i>x</i>) ≥ <i>d</i>(<i>x</i>, <i>y</i>) − <i>d</i>(<i>z</i>, <i>y</i>) &gt; <i>r</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La desigualdad triangular «al revés»</p>
+          <p>Hagamos una pequeña observación. Recordemos que la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>, que vale en cualquier espacio métrico, nos dice que
+            $$d(x, y) \le d(x, z) + d(z, y),$$
+            para cualquiera tres puntos $x, y, z \in M$. Muchas veces, como en esta demostración, nos sirve mirar a la desigualdad triangular «al revés»: esta desigualdad también dice
+            $$d(x, z) \ge d(x, y) - d(z, y).$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Ningún $z \in B(y,t)$ está en $B[x,r]$</p>
+          <p>Ahora sigamos con el ejemplo. Recordemos que estábamos intentando probar que $B(y, t) \cap B[x, r] = \emptyset$. Sea $z \in B(y, t)$, y veamos que no puede pasar que $z \in B[x, r]$, es decir, probemos que $d(z, x) \gt r$:
+            $$\begin{aligned} d(z, x) &\ge d(x, y) - d(z, y) \gt d(x, y) - t \\ &= d(x, y) - (d(x, y) - r) = r, \end{aligned}$$
+            que es lo que queríamos ver.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 26 ===== -->
+  <article class="ej" id="ejp3-26" data-short="26" data-title="El vacío y M son conjuntos cerrados" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">26</span>
+      <h3>$\emptyset$ y $M$ son conjuntos cerrados</h3>
+      <span class="src">Ejemplo 4.30 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(M, d)$ un espacio métrico. Entonces $\emptyset$ y $M$ son conjuntos cerrados.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Por complemento</p>
+          <p>Recordemos que ya vimos que $M$ y $\emptyset$ son conjuntos abiertos (<a href="#ejp3-22">Ejemplo 22</a>). Como <span class="ref" data-ref="teo-4.29">un conjunto es cerrado si y sólo si su complemento es abierto</span>, y $\emptyset^c = M$, $M^c = \emptyset$, vemos que ambos son también cerrados.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 27 ===== -->
+  <article class="ej" id="ejp3-27" data-short="27" data-title="Clausura, interior y conjunto derivado de (0,1) ∪ {2}" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">27</span>
+      <h3>Clausura, interior y conjunto derivado de $(0,1) \cup \{2\}$</h3>
+      <span class="src">Ejemplo 4.35 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $E = (0,1) \cup \{2\} \subseteq (\mathbb{R}, |\cdot|)$. Hallar $E^{\circ}$, $\overline{E}$ y $E'$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Los tres conjuntos</p>
+          <p>Tenemos:</p>
+          <ul class="items">
+            <li><span class="ref" data-ref="def-4.11">$E^{\circ}$</span> $= (0,1)$.</li>
+            <li><span class="ref" data-ref="def-4.22">$\overline{E}$</span> $= [0,1] \cup \{2\}$.</li>
+            <li><span class="ref" data-ref="def-4.33">$E'$</span> $= [0,1]$: cuando tomamos $B(2, 1/2) = (2 - 1/2, 2 + 1/2) = (3/2, 5/2)$, vemos que $B(2,1/2) \cap E = \{2\}$, y por lo tanto $2 \in \overline{E}$ pero $2 \notin E'$.</li>
+          </ul>
+          <p>La clausura y el conjunto derivado no son iguales, como vemos en este ejemplo. Sin embargo, por definición sabemos que $E' \subseteq \overline{E}$, dado que la condición que le pedimos a punto de acumulación es más fuerte que la que le pedimos a punto de adherencia.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 400 230" role="img" aria-label="Cuatro rectas: E = (0,1) unión {2}; su interior (0,1); su clausura [0,1] unión {2}; su derivado [0,1]">
+            <g transform="translate(0,0)">
+              <text x="12" y="38" class="sv-text">E</text>
+              <line x1="70" y1="34" x2="390" y2="34" class="sv-axis"/>
+              <line x1="110" y1="34" x2="250" y2="34" class="sv-accent" style="stroke-width:4"/>
+              <circle cx="110" cy="34" r="5" class="sv-fill-bg sv-accent"/><circle cx="250" cy="34" r="5" class="sv-fill-bg sv-accent"/>
+              <circle cx="320" cy="34" r="5" class="sv-fill-accent"/>
+            </g>
+            <g transform="translate(0,52)">
+              <text x="12" y="38" class="sv-text">E°</text>
+              <line x1="70" y1="34" x2="390" y2="34" class="sv-axis"/>
+              <line x1="110" y1="34" x2="250" y2="34" class="sv-seq3" style="stroke-width:4"/>
+              <circle cx="110" cy="34" r="5" class="sv-fill-bg sv-seq3"/><circle cx="250" cy="34" r="5" class="sv-fill-bg sv-seq3"/>
+            </g>
+            <g transform="translate(0,104)">
+              <text x="12" y="38" class="sv-text">Ē</text>
+              <line x1="70" y1="34" x2="390" y2="34" class="sv-axis"/>
+              <line x1="110" y1="34" x2="250" y2="34" class="sv-seq2" style="stroke-width:4"/>
+              <circle cx="110" cy="34" r="5" class="sv-fill-seq2"/><circle cx="250" cy="34" r="5" class="sv-fill-seq2"/>
+              <circle cx="320" cy="34" r="5" class="sv-fill-seq2"/>
+            </g>
+            <g transform="translate(0,156)">
+              <text x="12" y="38" class="sv-text">E′</text>
+              <line x1="70" y1="34" x2="390" y2="34" class="sv-axis"/>
+              <line x1="110" y1="34" x2="250" y2="34" class="sv-ok" style="stroke-width:4"/>
+              <circle cx="110" cy="34" r="5" class="sv-fill-ok"/><circle cx="250" cy="34" r="5" class="sv-fill-ok"/>
+              <line x1="285" y1="34" x2="355" y2="34" class="sv-fail sv-dash"/>
+              <text x="320" y="24" text-anchor="middle" class="sv-label-fail">B(2, 1/2) ∩ E = {2}</text>
+            </g>
+            <text x="110" y="222" text-anchor="middle" class="sv-muted">0</text>
+            <text x="250" y="222" text-anchor="middle" class="sv-muted">1</text>
+            <text x="320" y="222" text-anchor="middle" class="sv-muted">2</text>
+          </svg>
+          <figcaption>Círculo hueco: el extremo no está; círculo lleno: está. El 2 es aislado: está en la clausura pero no en el derivado, porque la bola (3/2, 5/2) sólo agarra al propio 2.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 28 ===== -->
+  <article class="ej" id="ejp3-28" data-short="28" data-title="Frontera de (0,1) ∪ {2}" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">28</span>
+      <h3>Frontera de $(0,1) \cup \{2\}$</h3>
+      <span class="src">Ejemplo 4.39 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $E = (0,1) \cup \{2\} \subseteq (\mathbb{R}, |\cdot|)$. Entonces $\partial E = \{0, 1, 2\}$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$0$, $1$ y $2$ son puntos de frontera</p>
+          <p>Para ver esto, deberíamos probar que dado $r \gt 0$, las bolas $B(0,r)$, $B(1,r)$ y $B(2,r)$ <span class="ref" data-ref="def-4.38">intersecan tanto a $E$ como a $E^c$</span>. Gráficamente, esto no es difícil de creer. Analíticamente, podríamos argumentar que, por ejemplo, $-r/2 \in B(0,r) \cap E^c$ y $r/2 \in B(0,r) \cap E$ (y podríamos hacer lo mismo con los otros puntos).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-28-c1" aria-label="La recta con E = (0,1) unión {2} y las bolas de radio r alrededor de 0, 1 y 2"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-28-r">radio <i>r</i></label><input type="range" id="ejp3-28-r" min="2" max="45" value="30"><output id="ejp3-28-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-28-read1" aria-live="polite"></dl>
+          <figcaption>Cada bola <i>B</i>(<i>p</i>, <i>r</i>) con <i>p</i> = 0, 1, 2 lleva marcado un punto de <i>E</i> (azul) y uno de <i>E</i><sup>c</sup> (rojo). Para 0, son ±<i>r</i>/2, como en el texto; para 1 y 2 son los análogos.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">No hay otros puntos en la frontera</p>
+          <p>Por otra parte, deberíamos ver que no hay otros puntos en la frontera. Acá tenemos dos casos: $x \in E$ o $x \notin E$.</p>
+          <p>Si $x \in E$ pero $x \ne 2$, tenemos que $x \in (0,1)$. Podemos construir una bola que se quede contenida en $E$ alrededor de $x$, tomando como $r = \min\{r, 1 - r\}$, como hicimos en el <a href="#ejp3-20">Ejemplo 20</a>. Esto nos indica que $x \notin \partial E$, dado que no interseca a $E^c$.</p>
+          <p>Si $x \notin E$, podríamos encontrar una bola que se quede contenida totalmente en $E^c$. Podríamos tomar $r = \min\{|x|, |x-1|, |x-2|\} \gt 0$ (es decir, tomamos la menor distancia de $x$ a los puntos $0, 1, 2$) y nos sale que $B(x, r) \subseteq E^c$. Esto nos dice que $x \notin \partial E$.</p>
+          <p class="nota"><b>Nota de esta versión</b>El radio del caso $x \in (0,1)$ está escrito $r = \min\{r, 1-r\}$; por el Ejemplo 20 debería ser $r = \min\{x, 1 - x\}$, la distancia de $x$ a los extremos. El dibujo usa ese radio.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-28-c2" aria-label="Un punto x arrastrable en la recta con la bola de radio elegido según el caso, contenida en E o en su complemento"></canvas>
+          <dl class="read" id="ejp3-28-read2" aria-live="polite"></dl>
+          <figcaption>Arrastrá <i>x</i>. Si <i>x</i> ∈ (0, 1), la bola tiene radio mín{<i>x</i>, 1 − <i>x</i>} y queda dentro de <i>E</i>; si <i>x</i> ∉ <i>E</i>, radio mín{|<i>x</i>|, |<i>x</i> − 1|, |<i>x</i> − 2|} y queda dentro de <i>E</i><sup>c</sup>. En 0, 1 y 2 no hay radio que sirva.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 29 ===== -->
+  <article class="ej" id="ejp3-29" data-short="29" data-title="Clausura, interior, derivado y frontera: tres ejemplos en (R, |·|)" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">29</span>
+      <h3>Clausura, interior, derivado y frontera: tres ejemplos en $(\mathbb{R}, |\cdot|)$</h3>
+      <span class="src">Ejemplo 4.41 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li><p>Sea $E = \mathbb{Z} \subseteq (\mathbb{R}, |\cdot|)$. Como estamos en $(\mathbb{R}, |\cdot|)$, sabemos que $B(x, r) = (x - r, x + r)$. Observemos que si $n \in \mathbb{Z}$, y $r$ es un radio con $0 \lt r \lt 1$, $B(n, r) \cap \mathbb{Z} = \{n\}$ y a su vez $B(n, r) \cap \mathbb{Z}^c \ne \emptyset$. Por otro lado, si $x \notin \mathbb{Z}$, no es difícil ver que existe un radio $r \gt 0$ tal que $B(x, r) \cap \mathbb{Z} = \emptyset$.</p>
+            <p>Estas observaciones nos llevan a concluir lo siguiente:</p>
+            <ul class="items">
+              <li>$\overline{\mathbb{Z}} = \mathbb{Z}$ (es un conjunto <span class="ref" data-ref="def-4.27">cerrado</span>).</li>
+              <li>$\mathbb{Z}^{\circ} = \emptyset$ (no es un conjunto <span class="ref" data-ref="def-4.14">abierto</span>).</li>
+              <li>$\mathbb{Z}' = \emptyset$.</li>
+              <li>$\partial \mathbb{Z} = \mathbb{Z}$.</li>
+            </ul></li>
+          <li><p>Sea $E = (0, 1) \subseteq (\mathbb{R}, |\cdot|)$. Tenemos</p>
+            <ul class="items">
+              <li>$\overline{(0,1)} = [0,1]$ (no es un conjunto cerrado).</li>
+              <li>$(0,1)^{\circ} = (0,1)$ (es un conjunto abierto).</li>
+              <li>$(0,1)' = [0,1]$: si $x \in [0,1]$, sabemos que $(x-r, x+r) \cap (0,1)$ es un intervalo y por lo tanto contiene infinitos elementos para todo $r \gt 0$.</li>
+              <li>$\partial (0,1) = \{0, 1\}$: los únicos puntos que cumplen que $(x-r,x+r)$ interseca tanto a $(0,1)$ como a $(0,1)^c$ para todo $r \gt 0$ son el $0$ y el $1$.</li>
+            </ul></li>
+          <li><p>Sea $E = \mathbb{Q} \subseteq (\mathbb{R}, |\cdot|)$. Tenemos</p>
+            <ul class="items">
+              <li>$\overline{\mathbb{Q}} = \mathbb{R}$ (no es un conjunto cerrado).</li>
+              <li>$\mathbb{Q}^{\circ} = \emptyset$ (no es un conjunto abierto).</li>
+              <li>$\mathbb{Q}' = \mathbb{R}$: si $x \in \mathbb{R}$ y $r \gt 0$, tenemos que el conjunto $(x-r,x+r) \cap \mathbb{Q}$ contiene infinitos elementos.</li>
+              <li>$\partial \mathbb{Q} = \mathbb{R}$: si $x \in \mathbb{R}$ y $r \gt 0$, el intervalo $(x-r,x+r)$ interseca tanto a $\mathbb{Q}$ como a $\mathbb{Q}^c$ (cualquier intervalo abierto contiene números racionales e irracionales).</li>
+            </ul></li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp3-29-c1" aria-label="Recta real con el conjunto elegido (Z, (0,1) o Q), un punto x arrastrable y su bola B(x, r)"></canvas>
+        <div class="ctrl">
+          <fieldset class="pills"><legend>Conjunto <i>E</i></legend>
+            <label><input type="radio" name="ejp3-29-set" value="Z" checked>ℤ</label>
+            <label><input type="radio" name="ejp3-29-set" value="I">(0, 1)</label>
+            <label><input type="radio" name="ejp3-29-set" value="Q">ℚ</label>
+          </fieldset>
+          <div class="slider"><label for="ejp3-29-r">radio <i>r</i></label><input type="range" id="ejp3-29-r" min="2" max="90" value="40"><output id="ejp3-29-r-o"></output></div>
+        </div>
+        <dl class="read" id="ejp3-29-read" aria-live="polite"></dl>
+        <figcaption>Arrastrá <i>x</i> sobre la recta. La lectura dice si <i>B</i>(<i>x</i>, <i>r</i>) toca a <i>E</i>, a <i>E</i><sup>c</sup> y a <i>E</i> ∖ {<i>x</i>}, para este <i>r</i>: las cuatro nociones piden eso para <i>todo</i> <i>r</i> &gt; 0. Para ℚ sólo se dibujan racionales de denominador chico (el conjunto es denso).</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ===== 15/09-1 ===== -->
+  <article class="ej" id="ejp3-15-09-1" data-short="15/09-1" data-title="[a,b] es cerrado" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">15/09-1</span>
+      <h3>$[a,b]$ es cerrado</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(\mathbb{R}, |\cdot|)$ y $E = [a,b]$. Veamos que $E$ es cerrado.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Doble inclusión: una mitad es gratis.</em> Un conjunto es <span class="ref" data-ref="def-4.27">cerrado</span> si $\overline{E} = E$. La inclusión $E \subseteq \overline{E}$ <span class="ref" data-ref="obs-4.23">vale siempre, para cualquier conjunto</span>, así que sólo falta probar $\overline{E} \subseteq E$.</p></div>
+    <p class="nota"><b>Nota de esta versión</b>El <code>.typ</code> trae sólo el enunciado y la estrategia de este ejemplo; no tiene resolución.</p>
+  </article>
+
+  <!-- ===== 15/09-2 ===== -->
+  <article class="ej" id="ejp3-15-09-2" data-short="15/09-2" data-title="[a,b) no es cerrado ni es abierto" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">15/09-2</span>
+      <h3>$[a,b)$ no es cerrado ni es abierto</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(\mathbb{R}, |\cdot|)$ y $E = [a,b)$. Veamos que $E$ no es abierto y que tampoco es cerrado.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$E$ no es abierto</p>
+          <p>Tenemos que $a \in E$, pero <span class="ref" data-ref="def-4.11">$a \notin E^{\circ}$</span>. En efecto, para todo $r \gt 0$,
+            $$B(a,r) \cap E^c = (a-r,a+r) \cap [a,b)^c \ne \emptyset,$$
+            ya que $a - r/2 \in B(a,r) \cap [a,b)^c$ (está a la izquierda de $a$, así que no pertenece a $E$).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-2-c1" aria-label="El intervalo [a, b) y la bola B(a, r) con el punto a − r/2 fuera de E"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-15-09-2-r1">radio <i>r</i></label><input type="range" id="ejp3-15-09-2-r1" min="2" max="60" value="30"><output id="ejp3-15-09-2-r1-o"></output></div>
+          </div>
+          <figcaption>Con <i>a</i> = 0 y <i>b</i> = 1 (valores elegidos para el dibujo). Por chico que sea <i>r</i>, el punto rojo <i>a</i> − <i>r</i>/2 está en la bola y fuera de [<i>a</i>, <i>b</i>).</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$E$ no es cerrado</p>
+          <p>Tenemos que $b \in \overline{E}$, pero $b \notin E$. En efecto, para todo $r \gt 0$,
+            $$B(b,r) \cap E = (b-r,b+r) \cap [a,b) \ne \emptyset,$$
+            ya que $b - r/2 \in B(b,r) \cap E$ (tomando $r$ suficientemente chico para que además $b - r/2 \gt a$).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-2-c2" aria-label="El intervalo [a, b) y la bola B(b, r) con el punto b − r/2 dentro de E"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-15-09-2-r2">radio <i>r</i></label><input type="range" id="ejp3-15-09-2-r2" min="2" max="60" value="30"><output id="ejp3-15-09-2-r2-o"></output></div>
+          </div>
+          <figcaption>Mismo intervalo. El punto azul <i>b</i> − <i>r</i>/2 está en la bola y en <i>E</i>, así que <i>b</i> es de adherencia aunque no esté en <i>E</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 15/09-3 ===== -->
+  <article class="ej" id="ejp3-15-09-3" data-short="15/09-3" data-title="La bola cerrada es cerrada, vía r → 0⁺" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">15/09-3</span>
+      <h3>La bola cerrada es cerrada, vía $r \to 0^+$</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(\mathbb{R}^2, d_2)$ y $E = B[(0,0), 1] = \{(x,y) \in \mathbb{R}^2 : d_2((x,y),(0,0)) \le 1\}$. Veamos que $E$ es cerrado.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Acotar la distancia al origen por $r + 1$ para todo $r \gt 0$, y después hacer $r \to 0^+$.</em> La inclusión $E \subseteq \overline{E}$ vale siempre. Para la otra, si $(x,y) \in \overline{E}$, para todo $r \gt 0$ hay un punto de $E$ en $B((x,y),r)$, y la desigualdad triangular da una cota de $d_2((x,y),(0,0))$ que depende de $r$. Como esa cota vale para <b>todo</b> $r \gt 0$ y el lado izquierdo no depende de $r$, tomando $r \to 0^+$ se concluye $d_2((x,y),(0,0)) \le 1$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Un punto de $E$ en cada bola</p>
+          <p>Como $E \subseteq \overline{E}$ <span class="ref" data-ref="obs-4.23">vale siempre</span>, falta ver $\overline{E} \subseteq E$. Sea $(x,y) \in \overline{E}$: por <span class="ref" data-ref="def-4.22">definición</span>, para todo $r \gt 0$ existe $(\tilde{x}, \tilde{y}) \in B((x,y),r) \cap E$, es decir
+            $$d_2((\tilde{x},\tilde{y}),(x,y)) \lt r \quad \text{y} \quad d_2((\tilde{x},\tilde{y}),(0,0)) \le 1.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Desigualdad triangular</p>
+          <p>Por desigualdad triangular,
+            $$\begin{aligned} d_2((x,y),(0,0)) &\le d_2((x,y),(\tilde{x},\tilde{y})) + d_2((\tilde{x},\tilde{y}),(0,0)) \\ &\lt r + 1. \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-3-c1" aria-label="Disco cerrado E, un punto P con su bola B(P, r), un punto de E en esa bola y la circunferencia de radio r + 1"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-15-09-3-r">radio <i>r</i></label><input type="range" id="ejp3-15-09-3-r" min="3" max="100" value="45"><output id="ejp3-15-09-3-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-15-09-3-read" aria-live="polite"></dl>
+          <figcaption>Arrastrá el punto (<i>x</i>, <i>y</i>). Si <i>B</i>((<i>x</i>, <i>y</i>), <i>r</i>) toca a <i>E</i>, el punto naranja es un (<i>x̃</i>, <i>ỹ</i>) de la intersección y (<i>x</i>, <i>y</i>) queda dentro de la circunferencia punteada de radio <i>r</i> + 1. Achicá <i>r</i> con el punto afuera de <i>E</i>: la bola deja de tocar a <i>E</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$r \to 0^+$</p>
+          <p>Como esto vale para todo $r \gt 0$, tomando $r \to 0^+$ concluimos que $d_2((x,y),(0,0)) \le 1$, es decir, $(x,y) \in E$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 15/09-4 ===== -->
+  <article class="ej" id="ejp3-15-09-4" data-short="15/09-4" data-title="Supremo e ínfimo de un conjunto acotado están en su clausura" data-topics="topologia,supremo">
+    <div class="ej-head">
+      <span class="tag">15/09-4</span>
+      <h3>Supremo e ínfimo de un conjunto acotado están en su clausura</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-supremo">supremo</a></span>
+    </div>
+    <div class="enun"><p>Sea $E \subseteq \mathbb{R}$ acotado, en $(\mathbb{R}, |\cdot|)$. Veamos que $\sup(E), \inf(E) \in \overline{E}$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Todo entorno del supremo agarra algún punto de $E$, por ser la menor cota superior.</em> Recordemos que $\overline{E} = \{x \in \mathbb{R} : \forall r \gt 0,\ B(x,r) \cap E \ne \emptyset\}$. Dado $r \gt 0$, hay que hallar un punto de $E$ en $B(\sup(E), r) = (\sup(E) - r, \sup(E) + r)$. Como $\sup(E) - r$ es menor que la <b>menor</b> cota superior de $E$, ya no puede ser cota superior, así que debe existir $e \in E$ con $e \gt \sup(E) - r$; y automáticamente $e \le \sup(E) \lt \sup(E) + r$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\sup(E) \in \overline{E}$</p>
+          <p>Sea $r \gt 0$. Como $\sup(E) - r \lt \sup(E)$ y $\sup(E)$ es <span class="ref" data-ref="def-2">la menor cota superior</span> de $E$, el número $\sup(E) - r$ no puede ser cota superior de $E$. Por lo tanto existe $e \in E$ tal que
+            $$e \in (\sup(E) - r, \sup(E)) \subseteq B(\sup(E), r),$$
+            es decir, $e \in B(\sup(E), r) \cap E$. Como $r \gt 0$ era arbitrario, $\sup(E) \in \overline{E}$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-4-c1" aria-label="Un conjunto E en la recta, la bola de radio r alrededor de su supremo o ínfimo y un punto e de E dentro de ella"></canvas>
+          <div class="ctrl">
+            <fieldset class="pills"><legend>Ejemplo</legend>
+              <label><input type="radio" name="ejp3-15-09-4-set" value="ab" checked>[<i>a</i>, <i>b</i>) y su supremo</label>
+              <label><input type="radio" name="ejp3-15-09-4-set" value="inv">{1/<i>n</i>} y su ínfimo</label>
+            </fieldset>
+            <div class="slider"><label for="ejp3-15-09-4-r">radio <i>r</i></label><input type="range" id="ejp3-15-09-4-r" min="2" max="60" value="25"><output id="ejp3-15-09-4-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-15-09-4-read" aria-live="polite"></dl>
+          <figcaption>Los dos ejemplos concretos del paso 3, con <i>a</i> = 0 y <i>b</i> = 1 en el primero (valores elegidos para el dibujo). El punto naranja es un <i>e</i> ∈ <i>E</i> dentro de la bola: para [<i>a</i>, <i>b</i>) se toma <i>e</i> = <i>b</i> − <i>r</i>/2 (o el punto medio de [<i>a</i>, <i>b</i>) si <i>r</i> es grande); para {1/<i>n</i>}, el primer 1/<i>n</i> &lt; <i>r</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">El ínfimo</p>
+          <p>La demostración para $\inf(E) \in \overline{E}$ es análoga.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Dos ejemplos concretos</p>
+          <p>Dos ejemplos concretos de esta observación:</p>
+          <ul class="items">
+            <li>$E = \{1/n : n \in \mathbb{N}\}$: tenemos $0 = \inf(E) \in \overline{E}$, aunque $0 \notin E$.</li>
+            <li>$E = [a, b)$ (<a href="#ejp3-15-09-2">Ejemplo 15/09-2</a>): tenemos $b \in \overline{E}$ porque $b = \sup(E)$, lo cual explica directamente por qué $b \in \overline{E} \setminus E$.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 15/09-5 ===== -->
+  <article class="ej" id="ejp3-15-09-5" data-short="15/09-5" data-title="La esfera S(x,r) es un conjunto cerrado" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">15/09-5</span>
+      <h3>La esfera $S(x,r)$ es un conjunto cerrado</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(X, d)$ un espacio métrico. Dados $x \in X$ y $r \gt 0$, definimos la <span class="ref" data-ref="def-4.5">esfera</span>
+      $$S(x,r) = \{y \in X : d(y,x) = r\}.$$
+      Probar que $S(x,r)$ es cerrado.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Doble contradicción por tricotomía.</em> Como $S(x,r) \subseteq \overline{S(x,r)}$ vale siempre, alcanza con ver $\overline{S(x,r)} \subseteq S(x,r)$: si $y$ es punto de adherencia de $S(x,r)$, hay que ver que $d(y,x) = r$. La estrategia es descartar los otros dos casos de la tricotomía ($d(y,x) \gt r$ y $d(y,x) \lt r$) por separado, sacando en ambos un punto $z \in S(x,r)$ suficientemente cerca de $y$ y usando la desigualdad triangular para llegar a un absurdo.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso $d(x,y) \gt r$</p>
+          <p>Sea $y \in X$ un <span class="ref" data-ref="def-4.22">punto de adherencia</span> de $S(x,r)$. Queremos ver que $d(y,x) = r$.</p>
+          <p><b>Caso $d(x,y) \gt r$:</b> sea $\varepsilon = d(y,x) - r \gt 0$. Como $y \in \overline{S(x,r)}$, existe $z \in B(y,\varepsilon) \cap S(x,r)$. Entonces
+            $$\begin{aligned} d(x,y) &\le \underbrace{d(x,z)}_{=r} + \underbrace{d(z,y)}_{\lt \varepsilon} \lt r + \varepsilon \\ &= r + d(y,x) - r = d(y,x), \end{aligned}$$
+            es decir $d(x,y) \lt d(y,x)$, lo cual es absurdo (por simetría, $d(x,y) = d(y,x)$).</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-5-c1" aria-label="Esfera S(x, r) en el plano, un punto y afuera y la bola B(y, ε) con ε = d(y, x) − r, que no toca la esfera"></canvas>
+          <dl class="read" id="ejp3-15-09-5-read1" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i>₂) con <i>r</i> = 1 (valores elegidos para el dibujo). Arrastrá <i>y</i>: la bola de radio ε = |<i>d</i>(<i>y</i>, <i>x</i>) − <i>r</i>| no agarra ningún punto de la esfera, que es lo que el absurdo dice que no puede pasar si <i>y</i> fuera de adherencia.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Caso $d(y,x) \lt r$</p>
+          <p>Sea $\varepsilon = r - d(x,y) \gt 0$. Como $y \in \overline{S(x,r)}$, existe $z \in B(y,\varepsilon) \cap S(x,r)$. Entonces
+            $$\begin{aligned} r = d(x,z) &\le d(x,y) + \underbrace{d(y,z)}_{\lt \varepsilon} \lt d(x,y) + \varepsilon \\ &= d(x,y) + r - d(x,y) = r, \end{aligned}$$
+            es decir $r \lt r$, absurdo.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-5-c2" aria-label="Esfera S(x, r), un punto y adentro y la bola B(y, ε) con ε = r − d(x, y)"></canvas>
+          <dl class="read" id="ejp3-15-09-5-read2" aria-live="polite"></dl>
+          <figcaption>El mismo dibujo con <i>y</i> adentro: ahora ε = <i>r</i> − <i>d</i>(<i>x</i>, <i>y</i>) y la bola tampoco llega a la esfera.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Tricotomía</p>
+          <p>Por tricotomía, descartados los otros dos casos, debe ser $d(y,x) = r$, es decir $y \in S(x,r)$. Esto prueba que $\overline{S(x,r)} \subseteq S(x,r)$ y, junto con la inclusión que vale siempre, $\overline{S(x,r)} = S(x,r)$: $S(x,r)$ es cerrado.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Otra forma del primer caso (guía de la práctica)</b>La versión de la guía evita el paso de simetría del primer caso: define directamente $\varepsilon = d(x,y) - r$ (en vez de $\varepsilon = d(y,x) - r$), con lo cual $r + \varepsilon = d(x,y)$ de entrada, y la cadena
+      $$d(x,y) \le d(x,z) + d(z,y) \lt r + \varepsilon = d(x,y)$$
+      da la contradicción $d(x,y) \lt d(x,y)$ directamente, sin necesitar invocar $d(x,y) = d(y,x)$.</div>
+  </article>
+
+  <!-- ===== 15/09-6 ===== -->
+  <article class="ej" id="ejp3-15-09-6" data-short="15/09-6" data-title="Interior y clausura de A = {m + 1/(n+1) : m, n ∈ N}" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">15/09-6</span>
+      <h3>Interior y clausura de $A = \{m + 1/(n+1) : m, n \in \mathbb{N}\}$</h3>
+      <span class="src">Clase 15/09</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $A \subseteq \mathbb{R}$ definido como
+      $$A = \left\{m + \frac{1}{n+1} : m, n \in \mathbb{N}\right\}.$$
+      Hallar $A^{\circ}$ y $\overline{A}$, en $(\mathbb{R}, d)$ con $d(x,y) = |x-y|$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Racimos de puntos que se acumulan sobre cada natural, viniendo desde la derecha.</em> Notemos que $A \subseteq \mathbb{R}_{\gt 0}$ y $A \subseteq \mathbb{Q}$. Fijado $m \in \mathbb{N}$, al variar $n \in \mathbb{N}$ se obtiene la sucesión
+      $$m + \tfrac{1}{2}, \quad m + \tfrac{1}{3}, \quad m + \tfrac{1}{4}, \quad \dots, \quad m + \tfrac{1}{n+1} \to m,$$
+      que decrece estrictamente hacia $m$ sin alcanzarlo nunca. Es decir, $A$ es una unión de racimos de puntos que se acumulan sobre cada natural $m$, acercándose desde la derecha.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Interior: $A^{\circ} = \emptyset$</p>
+          <p>Como $A \subseteq \mathbb{Q}$, tenemos $A^{\circ} \subseteq \mathbb{Q}^{\circ}$. Pero ya vimos que <span class="ref" data-ref="obs-4.32">$\mathbb{Q}^{\circ} = \emptyset$</span> (<a href="#ejp3-20-2">Ejemplo 20 b</a>), así que $A^{\circ} \subseteq \emptyset$, es decir $A^{\circ} = \emptyset$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Clausura: $A \cup \mathbb{N} \subseteq \overline{A}$</p>
+          <p><b>Clausura: $\overline{A} = A \cup \mathbb{N}$.</b> Veamos primero que $A \cup \mathbb{N} \subseteq \overline{A}$.</p>
+          <ul class="items">
+            <li>$A \subseteq \overline{A}$ vale siempre.</li>
+            <li>$\mathbb{N} \subseteq \overline{A}$: sea $m \in \mathbb{N}$; veamos que $m$ es punto de adherencia de $A$. Sea $r \gt 0$; queremos ver que $B(m,r) \cap A = (m-r, m+r) \cap A \ne \emptyset$. Por <span class="ref" data-ref="prop-1">arquimedianidad</span>, existe $k \in \mathbb{N}$ tal que $1/k \lt r$. Entonces
+              $$m - r \lt m \lt m + \frac{1}{k+1} \lt m + \frac{1}{k} \lt m + r,$$
+              donde $m + 1/(k+1) \lt m + 1/k$ porque $k+1 \gt k$, y $m + 1/k \lt m+r$ porque $1/k \lt r$. El punto $m + 1/(k+1)$ pertenece a $A$ (tomando el índice $k$ en su definición), y por la cadena de desigualdades pertenece también a $(m-r, m+r)$. Luego $(m-r,m+r) \cap A \ne \emptyset$, es decir, $m \in \overline{A}$.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-15-09-6-c1" aria-label="Racimos de puntos m + 1/(n+1) acumulándose sobre cada natural desde la derecha, con la bola B(m, r) y el punto m + 1/(k+1)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-15-09-6-r">radio <i>r</i></label><input type="range" id="ejp3-15-09-6-r" min="3" max="80" value="30"><output id="ejp3-15-09-6-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-15-09-6-read" aria-live="polite"></dl>
+          <figcaption>Los puntos de <i>A</i> con <i>m</i> ≤ 3 y <i>n</i> ≤ 40, en racimos sobre cada natural. Alrededor de <i>m</i> = 2, la bola (<i>m</i> − <i>r</i>, <i>m</i> + <i>r</i>) y el punto naranja <i>m</i> + 1/(<i>k</i> + 1), con <i>k</i> el primer natural con 1/<i>k</i> &lt; <i>r</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La otra inclusión</p>
+          <p><b>(Queda pendiente, tal como se dejó en la clase, la otra inclusión $\overline{A} \subseteq A \cup \mathbb{N}$.)</b></p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== guía-2 ===== -->
+  <article class="ej" id="ejp3-guia-2" data-short="guía-2" data-title="El conjunto derivado de la imagen de una sucesión convergente" data-topics="topologia,sucesiones">
+    <div class="ej-head">
+      <span class="tag">guía-2</span>
+      <h3>El conjunto derivado de la imagen de una sucesión convergente</h3>
+      <span class="src">Guía de la práctica</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E,d)$ un espacio métrico y sea $(a_n)_{n \in \mathbb{N}} \subseteq E$ tal que $a_n \to a$. Sea $A = \{a_n : n \in \mathbb{N}\}$ (la imagen de la sucesión, sin el orden). Probar que $A' = \{a\}$ o $A' = \emptyset$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Si hay algún punto de acumulación, tiene que ser el límite.</em> Recordemos que <span class="ref" data-ref="def-4.33">$A' = \{x \in E : \forall r \gt 0,\ B(x,r) \cap (A \setminus \{x\}) \ne \emptyset\}$</span>. La idea es suponer que $A' \ne \emptyset$, tomar $b \in A'$ arbitrario, y ver que necesariamente $b = a$. Si $b \ne a$, la distancia $\lambda = d(b,a) \gt 0$ da margen para construir un radio $r$ demasiado chico como para que $B(b,r)$ agarre algún término de la sucesión distinto de $b$: los términos con $n$ grande están todos cerca de $a$ (lejos de $b$), y de los finitos términos con $n$ chico se puede achicar $r$ para esquivarlos a todos.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Suponer $b \ne a$</p>
+          <p>Supongamos que $A' \ne \emptyset$ y veamos que $A' = \{a\}$. Sea $b \in A'$, y veamos que $b = a$.</p>
+          <p>Supongamos, por el absurdo, que $b \ne a$, y sea $\lambda = d(b,a) \gt 0$. Como <span class="ref" data-ref="def-4.42">$a_n \to a$</span>, existe $n_0 \in \mathbb{N}$ tal que
+            $$d(a_n, a) \lt \lambda/2 \quad \forall\, n \ge n_0.$$</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El radio $r$</p>
+          <p>Tomemos
+            $$r = \min\big(\{d(b, a_n) : n \lt n_0,\ a_n \ne b\} \cup \{\lambda/2\}\big) \gt 0$$
+            (el mínimo de un conjunto finito de números positivos, así que $r \gt 0$). Veamos que $B(b,r) \cap (A \setminus \{b\}) = \emptyset$, lo cual contradice que $b \in A'$:</p>
+          <ul class="items">
+            <li>Si $n \lt n_0$ y $a_n \ne b$, entonces $d(b, a_n) \ge r$ por construcción de $r$, así que $a_n \notin B(b,r)$.</li>
+            <li>Si $n \ge n_0$ y $a_n \ne b$: si además $a_n \in B(b,r)$, es decir $d(a_n,b) \lt r \le \lambda/2$, por desigualdad triangular
+              $$\lambda = d(a,b) \le d(a, a_n) + d(a_n, b) \lt \lambda/2 + \lambda/2 = \lambda,$$
+              absurdo. Luego $a_n \notin B(b,r)$.</li>
+          </ul>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-guia-2-c1" aria-label="Sucesión convergente a a en el plano, un punto b distinto de a y la bola B(b, r) que no agarra ningún término"></canvas>
+          <dl class="read" id="ejp3-guia-2-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i>₂), con <i>a<sub>n</sub></i> = <i>a</i> + (cos 2,2<i>n</i>, sen 2,2<i>n</i>)/<i>n</i> (valores elegidos para el dibujo). Arrastrá <i>b</i>. Los términos naranjas son los <i>n</i> &lt; <i>n</i>₀; los azules, los <i>n</i> ≥ <i>n</i>₀, todos dentro de <i>B</i>(<i>a</i>, λ/2) (punteada). La bola sombreada es <i>B</i>(<i>b</i>, <i>r</i>): no contiene ningún término distinto de <i>b</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conclusión</p>
+          <p>En cualquier caso, ningún $a_n \ne b$ está en $B(b,r)$, es decir $B(b,r) \cap (A \setminus \{b\}) = \emptyset$, lo cual contradice que $b$ sea punto de acumulación de $A$. Por lo tanto $b = a$, y concluimos que $A' \subseteq \{a\}$, es decir $A' = \{a\}$ o $A' = \emptyset$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C4-1 ===== -->
+  <article class="ej" id="ejp3-c4-1" data-short="C4-1" data-title="Interior, clausura, aislados, acumulación y frontera de A = {1/n + 1/m : n,m ∈ N}" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">C4-1</span>
+      <h3>Interior, clausura, aislados, acumulación y frontera de $A = \{1/n + 1/m : n,m \in \mathbb{N}\}$</h3>
+      <span class="src">Clase 4 · Ejercicio 1</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>En $(\mathbb{R}, |\cdot|)$, sea $A = \{1/n + 1/m : n,m \in \mathbb{N}\}$. Determinar $A^{\circ}$, $\overline{A}$, los puntos aislados, $A'$ y $\partial A$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Ningún punto de $A$ tiene margen (está en $\mathbb{Q}$), pero sí está aislado de los demás puntos de $A$.</em> Como $A \subseteq \mathbb{Q}$ y $\mathbb{Q}^{\circ} = \emptyset$ (<a href="#ejp3-20-2">Ejemplo 20 b</a>), inmediatamente $A^{\circ} = \emptyset$. Para la clausura, hay que rastrear a dónde puede converger una sucesión $1/n_k+1/m_k$ cuando los índices $n_k,m_k$ no necesariamente divergen: si ambos quedan acotados, <span class="ref" data-ref="ext-bolzano-weierstrass">Bolzano-Weierstrass</span> los vuelve eventualmente constantes y el límite cae en $A$; si alguno diverge, el límite es $0$ o $1/m$ para algún $m$ fijo. Por otro lado, dos elementos distintos de $A$ nunca están arbitrariamente cerca: la resta $1/n+1/m-1/n'-1/m'$ tiene numerador entero no nulo sobre denominador $n n' m m'$, así que está acotada lejos de $0$ —eso hace que cada punto de $A$ sea aislado.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Interior: $A^{\circ} = \emptyset$</p>
+          <p>Como $A \subseteq \mathbb{Q}$, $A^{\circ} \subseteq$ <span class="ref" data-ref="obs-4.32">$\mathbb{Q}^{\circ} = \emptyset$</span> (<a href="#ejp3-20-2">Ejemplo 20 b</a>).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Clausura: $\supseteq$</p>
+          <p><b>Clausura: $\overline{A} = A \cup \{0\} \cup \{1/n : n \in \mathbb{N}\}$.</b></p>
+          <p>$\supseteq)$ Siempre $A \subseteq \overline{A}$. Además, $1/n+1/(n+1) \to 0$, así que $0 \in \overline{A}$; y fijado $n$, $1/n+1/m \to 1/n$ cuando $m \to +\infty$, así que <span class="ref" data-ref="prop-4.46">$1/n \in \overline{A}$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-1-c1" aria-label="Puntos 1/n + 1/m con n y m hasta N sobre la recta, acumulándose en 0 y en cada 1/n"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c4-1-N"><i>n</i>, <i>m</i> ≤ <i>N</i></label><input type="range" id="ejp3-c4-1-N" min="2" max="60" value="12"><output id="ejp3-c4-1-N-o"></output></div>
+            <div class="slider"><label for="ejp3-c4-1-n">fila <i>n</i></label><input type="range" id="ejp3-c4-1-n" min="1" max="6" value="2"><output id="ejp3-c4-1-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c4-1-read" aria-live="polite"></dl>
+          <figcaption>Arriba, todos los 1/<i>n</i> + 1/<i>m</i> con <i>n</i>, <i>m</i> ≤ <i>N</i>. Abajo, la fila de un <i>n</i> fijo: los 1/<i>n</i> + 1/<i>m</i> bajan hacia 1/<i>n</i> (raya naranja), que está en la clausura. Las rayas grises son los 1/<i>n</i> y el 0.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Clausura: $\subseteq$</p>
+          <p>$\subseteq)$ Sea $a \in \overline{A}$, con $a_k = 1/n_k + 1/m_k \to a$. Las sucesiones $(n_k)_k, (m_k)_k$ no tienen por qué divergir. Si ambas están acotadas, por <span class="ref" data-ref="ext-bolzano-weierstrass">Bolzano-Weierstrass</span> (aplicado primero a una y, sobre la subsucesión resultante, a la otra) se extrae una <span class="ref" data-ref="def-subsucesion">subsucesión</span> con $n_{k_j} = n$ y $m_{k_j} = m$ eventualmente constantes (al ser sucesiones de naturales, toda subsucesión convergente es eventualmente constante), y entonces $a = 1/n+1/m \in A$. Si alguna de las dos no está acotada, digamos $(n_k)_k$ (el otro caso es análogo), por el <b>Ejercicio 13 de la Práctica 1</b> existe una subsucesión $n_{k_j} \to +\infty$; si a su vez $(m_{k_j})_j$ está acotada, se extrae una subsucesión con $m$ eventualmente constante y $a_{k_{j_l}} \to 1/m$; si $(m_{k_j})_j$ tampoco está acotada, se extrae una subsucesión con $m_{k_{j_l}} \to +\infty$ y $a_{k_{j_l}} \to 0$. En cualquier caso, $a \in A \cup \{0\} \cup \{1/n : n \in \mathbb{N}\}$.</p>
+          <p class="nota"><b>Nota de esta versión</b>En la guía 2026 (<code>apuntes-typst/guias/p1.typ</code>) el ejercicio «una sucesión no acotada superiormente tiene una subsucesión que diverge a $+\infty$» es el <a class="xg" data-guia="p1" data-ej="14">Ejercicio 14</a>; la numeración «Ejercicio 13» es la de la edición anterior.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Puntos aislados: todos los de $A$</p>
+          <p>Dados $a = 1/n+1/m \ne b = 1/n'+1/m'$ en $A$,
+            $$\begin{aligned} |a-b| &= \left|\frac{n'm m' + n m m' - n n' m' - n m n'}{n n' m m'}\right| \\ &\ge \frac{1}{n n' m m'}, \end{aligned}$$
+            porque el numerador es un entero no nulo. Tomando $r \lt 1/(n n' m m')$, $B(a,r) \cap A = \{a\}$.</p>
+          <p class="nota"><b>Nota de esta versión</b>La cota $1/(n n' m m')$ depende de $b$ (de $n'$ y $m'$), así que no da un radio que sirva para todos los $b$ a la vez. Y no todos los puntos de $A$ son aislados: $1/k = 1/(2k) + 1/(2k) \in A$ y $1/k + 1/m \to 1/k$ con $1/k + 1/m \in A \setminus \{1/k\}$, así que cada $1/k$ es un punto de $A$ que es de acumulación. Los aislados son los de $A \setminus \{1/k : k \in \mathbb{N}\}$, y $A' \cap A = \{1/k : k \in \mathbb{N}\}$. El <code>.typ</code> no lo señala.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Conjunto derivado y frontera</p>
+          <p><b>Conjunto derivado: $A' = \{0\} \cup \{1/n : n \in \mathbb{N}\}$</b>, ya que <span class="ref" data-ref="prop-4.36">$\overline{A} = A' \cup A$</span> y $A$ consta de puntos aislados ($A' \cap A = \emptyset$).</p>
+          <p><b>Frontera: $\partial A = \overline{A} \setminus A^{\circ} = \{0\} \cup \{1/n : n \in \mathbb{N}\}$</b> (<a class="xg" data-guia="p3" data-ej="9">Ejercicio 9</a> de la Práctica 3).</p>
+          <p><em>Comparar con el <a href="#ejp3-15-09-6">Ejemplo 15/09-6</a></em>: mismo tipo de análisis para $A = \{m+1/(n+1)\}$, donde había quedado pendiente $\overline{A} \subseteq A \cup \mathbb{N}$; el argumento de Bolzano-Weierstrass de acá se adapta a ese caso.</p>
+          <p class="nota"><b>Nota de esta versión</b>Con $A^{\circ} = \emptyset$, la fórmula da $\partial A = \overline{A} \setminus A^{\circ} = \overline{A}$, que contiene a $A$: toda bola alrededor de un $a \in A$ toca a $A$ (en $a$) y a $A^c$. El conjunto $\{0\} \cup \{1/n : n \in \mathbb{N}\}$ es $A'$, no $\partial A$. Como además $1/n \in A$ (nota anterior), $\overline{A} = \partial A = A \cup \{0\}$. El <code>.typ</code> no lo señala.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C4-2 ===== -->
+  <article class="ej" id="ejp3-c4-2" data-short="C4-2" data-title="Interior, clausura, aislados, acumulación y frontera del semiplano sobre y = x" data-topics="topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">C4-2</span>
+      <h3>Interior, clausura, aislados, acumulación y frontera de $A = \{(x,y) \in \mathbb{R}^2 : y \gt x\}$</h3>
+      <span class="src">Clase 4 · Ejercicio 2</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>En $(\mathbb{R}^2, d_2)$, sea $A = \{(x,y) \in \mathbb{R}^2 : y \gt x\}$ (el semiplano estrictamente por encima de la recta $y=x$). Determinar $A^{\circ}$, $\overline{A}$, los puntos aislados, $A'$ y $\partial A$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Trabajar con $d_\infty$ (equivalente a $d_2$) y tomar el radio como la mitad de la distancia vertical a la diagonal.</em> Para ver que $a=(a_1,a_2) \in A$ es interior, conviene medir con $d_\infty$ en vez de $d_2$ (<span class="ref" data-ref="ext-metricas-equivalentes">dan los mismos abiertos</span>): la bola $B_\infty(a,r)$ es un cuadrado de lado $2r$ centrado en $a$, y tomando $r = \frac{1}{2}(a_2-a_1)$ el cuadrado no llega a tocar la diagonal. Para la clausura, basta ver que toda sucesión en $A$ que converge tiene límite con $y \ge x$ (pasando al límite en la desigualdad estricta), y que cualquier punto con $y \ge x$ es límite de puntos de $A$ desplazando $y$ una cantidad $1/m \to 0$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Interior: $A^{\circ} = A$</p>
+          <p>Ya vale $A^{\circ} \subseteq A$. Sea $a=(a_1,a_2) \in A$, es decir $a_2 \gt a_1$. Con <span class="ref" data-ref="def-distancias-en-rrn">$d_\infty(a,(x,y)) = \sup\{|a_1-x|,|a_2-y|\}$</span>, tomamos $r=\frac{1}{2}(a_2-a_1) \gt 0$. Si $(x,y) \in B_\infty(a,r)$, es decir $|x-a_1| \lt r$, $|y-a_2| \lt r$, entonces
+            $$\begin{aligned} y-x &= (y-a_2)+(a_2-a_1)+(a_1-x) \\ &\gt (a_2-a_1)-2r \\ &= (a_2-a_1)-(a_2-a_1) = 0, \end{aligned}$$
+            así que $y \gt x$, es decir $(x,y) \in A$. Luego $B_\infty(a,r) \subseteq A$, y como $d_2$ y $d_\infty$ son <span class="ref" data-ref="ext-metricas-equivalentes">equivalentes</span>, también hay una $d_2$-bola contenida en $A$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-2-c1" aria-label="Semiplano y mayor que x, un punto a arrastrable y el cuadrado B∞(a, r) con r la mitad de a2 − a1"></canvas>
+          <dl class="read" id="ejp3-c4-2-read1" aria-live="polite"></dl>
+          <figcaption>Arrastrá <i>a</i> dentro del semiplano sombreado. El cuadrado es <i>B</i><sub>∞</sub>(<i>a</i>, <i>r</i>) con <i>r</i> = (<i>a</i>₂ − <i>a</i>₁)/2: su esquina inferior derecha (marcada en rojo) cae justo sobre la diagonal, pero el cuadrado es abierto y no la contiene. El disco punteado es la <i>d</i>₂-bola del mismo radio, que está adentro del cuadrado.</figcaption>
+        </figure>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Clausura: $\overline{A} = \{(x,y) : y \ge x\}$</p>
+          <p>$\subseteq)$ Si $(x_m,y_m) \in A$ para todo $m$ y $(x_m,y_m) \to (x,y)$, entonces $x_m \to x$, $y_m \to y$ (acotando cada coordenada por $d_\infty$), y como $y_m \gt x_m$ para todo $m$, <span class="ref" data-ref="prop-6-algebra-de-limites">pasando al límite</span> $y \ge x$.</p>
+          <p>$\supseteq)$ Dado $(x,y)$ con $y=x$ (el caso $y \gt x$ ya está en $A$), la sucesión $(x,x+1/m) \in A$ converge a $(x,x)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-2-c2" aria-label="Un punto de la diagonal y la sucesión (x, x + 1/m) dentro del semiplano que converge a él"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c4-2-m">términos <i>m</i> ≤</label><input type="range" id="ejp3-c4-2-m" min="1" max="30" value="6"><output id="ejp3-c4-2-m-o"></output></div>
+          </div>
+          <figcaption>Arrastrá el punto (<i>x</i>, <i>x</i>) por la diagonal. Los puntos (<i>x</i>, <i>x</i> + 1/<i>m</i>) están en <i>A</i>, son distintos de (<i>x</i>, <i>x</i>) y bajan hacia él: (<i>x</i>, <i>x</i>) está en la clausura y es de acumulación.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Aislados, derivado y frontera</p>
+          <p><b>Puntos aislados: ninguno.</b> Se sigue de que $A' = \overline{A}$ (ver abajo): todo punto de $A$ es límite de otros puntos de $A$ distintos de él.</p>
+          <p><b>Conjunto derivado: $A' = \overline{A} = \{(x,y):y \ge x\}$.</b> Como $A' \subseteq \overline{A}$, alcanza ver $\overline{A} \subseteq A'$: dado $(x,y)$ con $y \ge x$, la sucesión $(x,y+1/m) \in A$ (pues $y+1/m \ge x+1/m \gt x$) <span class="ref" data-ref="prop-4.46">converge a $(x,y)$ y es distinta de $(x,y)$ para todo $m$</span>.</p>
+          <p><b>Frontera: $\partial A = \overline{A} \setminus A^{\circ} = \{(x,y):y=x\}$</b> (<a class="xg" data-guia="p3" data-ej="9">Ejercicio 9</a> de la Práctica 3).</p>
+        </div>
+      </div>
+    </div>
+    <p class="nota"><b>Nota</b>Para $A^{\circ}$ también se puede probar que $\mathbb{R}^2 \setminus A = \{(x,y):y \le x\}$ es cerrado, razonando igual que en el cálculo de $\overline{A}$.</p>
+  </article>
+
+  <!-- ===== C4-3 ===== -->
+  <article class="ej" id="ejp3-c4-3" data-short="C4-3" data-title="Clausura de la unión de rectas por el origen con pendiente entera" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">C4-3</span>
+      <h3>Clausura de la unión de rectas por el origen con pendiente entera</h3>
+      <span class="src">Clase 4 · Ejercicio 3</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>En $(\mathbb{R}^2,d_2)$, sea
+      $$\begin{aligned} A &= \{(x,y) \in \mathbb{R}^2 : y=m x \text{ para algún } m \in \mathbb{Z}\} \\ &= \bigcup_{m \in \mathbb{Z}} \{(x,y):y=m x\} \end{aligned}$$
+      (unión infinita de rectas por el origen, todas cerradas). Calcular $\overline{A}$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Las rectas se «acumulan» sobre el eje $y$ cuando la pendiente crece.</em> Si una sucesión de puntos de $A$ converge con abscisas $x_n$ que no tienden a $0$, la pendiente $m_n=y_n/x_n$ converge a un número real y, al ser entera, debe ser eventualmente constante —entonces el límite cae en la misma recta. Pero si $x_n \to 0$, la pendiente puede «escaparse» a $\pm\infty$ y el límite es cualquier punto del eje $y$: por eso aparece todo el eje $y$ en la clausura, no sólo el origen.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Lo que hay que ver</p>
+          <p>Veamos que $\overline{A} = A \cup \{(0,y):y \ne 0\}$ (excluyendo $(0,0)$, que ya está en $A$).</p>
+          <p>$\subseteq)$ <span class="ref" data-ref="prop-4.46">Sea $(x_n,y_n) \in A$ con $(x_n,y_n) \to (x,y)$</span>, y $m_n \in \mathbb{Z}$ con $y_n=m_n x_n$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $x_n \to x \ne 0$</p>
+          <p>Existe $n_0$ tal que $x_n \ne 0$ para $n \ge n_0$, así que $m_n = y_n/x_n \to y/x$ por <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span>; como $(m_n)$ es una sucesión de <b>enteros</b> convergente, es eventualmente constante $=m_0$, y entonces $y = \lim m_0 x_n = m_0 x$, es decir $(x,y) \in A$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $x_n \to 0$</p>
+          <p>Entonces $(x,y)=(0,y) \in A \cup \{(0,y):y \ne 0\}$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\supseteq$</p>
+          <p>$\supseteq)$ Dado $(0,y)$ con $y \ne 0$, la sucesión $(y/m, y) \in A$ (pues $y = m \cdot (y/m)$) converge a $(0,y)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-3-c1" aria-label="Rectas y = m x con m entero, que se juntan contra el eje y, y la sucesión (y/m, y) convergiendo a (0, y)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c4-3-M">|<i>m</i>| ≤</label><input type="range" id="ejp3-c4-3-M" min="1" max="30" value="6"><output id="ejp3-c4-3-M-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c4-3-read" aria-live="polite"></dl>
+          <figcaption>Las rectas <i>y</i> = <i>mx</i> con |<i>m</i>| hasta el valor del control. Arrastrá el punto (0, <i>y</i>) por el eje vertical: los puntos naranjas (<i>y</i>/<i>m</i>, <i>y</i>), <i>m</i> = 1, 2, …, están cada uno en su recta y se acercan a (0, <i>y</i>), que no está en <i>A</i> si <i>y</i> ≠ 0.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 4 ===================== -->
+<section class="bloque" id="ejp3-b4">
+  <h2><span class="bn">Bloque 4</span>Caracterizaciones y estabilidad de abiertos y cerrados</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Estos ejemplos no calculan interior o clausura de un conjunto concreto, sino que prueban <b>hechos generales</b> sobre cómo se comportan los abiertos y cerrados: bajo la suma de conjuntos $A+B$, mediante sucesiones, y en dos caracterizaciones de «ser abierto» y «ser frontera de un abierto» que no involucran bolas directamente. Son las herramientas que hacen falta cuando el conjunto en cuestión no tiene una fórmula sencilla para su bola, y conviene tenerlas separadas de los ejemplos «de cálculo» de los Bloques 9 y 10.</p>
+  </div>
+  <p class="nota"><b>Nota de esta versión</b>La práctica tiene seis bloques: los ejemplos «de cálculo» son los de los <a href="#ejp3-b2">Bloques 2</a> y <a href="#ejp3-b3">3</a>. La tabla del encabezado del <code>.typ</code> dice que este bloque desbloquea el <a class="xg" data-guia="p3" data-ej="9">Ejercicio 9</a> y es conceptual para los <a class="xg" data-guia="p3" data-ej="5">Ejercicios 5</a> y <a class="xg" data-guia="p3" data-ej="12">12</a>.</p>
+
+  <!-- ===== C4-4b ===== -->
+  <article class="ej" id="ejp3-c4-4b" data-short="C4-4b" data-title="Estabilidad de abierto/cerrado/denso bajo A+B" data-topics="topologia,densidad">
+    <div class="ej-head">
+      <span class="tag">C4-4b</span>
+      <h3>Estabilidad de abierto/cerrado/denso bajo $A+B$</h3>
+      <span class="src">Clase 4 · Ejercicio 4 bis</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-densidad">densidad</a></span>
+    </div>
+    <div class="enun"><p>Sean $A,B \subseteq \mathbb{R}^m$ y $A+B = \{a+b : a \in A, b \in B\}$.</p>
+      <ol class="items">
+        <li>Si $A$ es abierto, $A+B$ es abierto.</li>
+        <li>Si $A$ es cerrado y $B=\{b\}$, $A+B$ es cerrado.</li>
+        <li>Si $A$ es <span class="ref" data-ref="def-5.20">denso</span> ($\overline{A}=\mathbb{R}^m$) y $B=B(0,\varepsilon)$ con $\varepsilon \gt 0$, $A+B=\mathbb{R}^m$.</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Trasladar la bola o la sucesión restando el punto fijo de $B$.</em> En los tres ítems la maniobra es la misma: «cancelar» el sumando de $B$ para volver al problema en $A$. En (a), la bola de $A$ alrededor de $a$ se traslada para armar la bola de $A+B$ alrededor de $x=a+b$. En (b), a una sucesión convergente en $A+B$ se le resta $b$ para obtener una sucesión convergente en $A$, y se usa que $A$ es cerrado. En (c), la densidad de $A$ da un punto de $A$ a distancia menor que $\varepsilon$ de cualquier $x$, y esa diferencia es exactamente el elemento de $B(0,\varepsilon)$ que hace falta.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">a) $A$ abierto</p>
+          <p>Sea $x=a+b \in A+B$. Como $A$ es <span class="ref" data-ref="def-4.14">abierto</span>, existe $r \gt 0$ con $B(a,r) \subseteq A$. Si $y \in B(x,r)$, entonces
+            $$d(x,y) = \|a+b-y\| = \|a-(y-b)\| \lt r,$$
+            así que $y-b \in B(a,r) \subseteq A$, y por lo tanto $y=(y-b)+b \in A+B$. Luego $B(x,r) \subseteq A+B$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-4b-c1" aria-label="Un abierto A, su trasladado A + b, una bola B(a, r) dentro de A y su trasladada B(a + b, r) dentro de A + b"></canvas>
+          <dl class="read" id="ejp3-c4-4b-read" aria-live="polite"></dl>
+          <figcaption>En ℝ², con <i>A</i> un disco abierto y un solo <i>b</i> (valores elegidos para el dibujo; con más puntos en <i>B</i>, <i>A</i> + <i>B</i> es la unión de los trasladados). Arrastrá <i>a</i> dentro de <i>A</i> y la punta de la flecha <i>b</i>: la bola <i>B</i>(<i>a</i>, <i>r</i>) ⊆ <i>A</i> se traslada a <i>B</i>(<i>a</i> + <i>b</i>, <i>r</i>) ⊆ <i>A</i> + <i>b</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) $A$ cerrado y $B = \{b\}$</p>
+          <p>Basta ver $\overline{A+B} \subseteq A+B$. Si $x_m=a_m+b \to x$ con $(a_m)_m \subseteq A$, entonces $\|a_m-(x-b)\| = \|x_m-x\| \to 0$, es decir $a_m \to x-b$. Como <span class="ref" data-ref="cor-4.47">$A$ es cerrado, $x-b \in A$</span>, y $x=(x-b)+b \in A+B$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">c) $A$ denso y $B = B(0,\varepsilon)$</p>
+          <p>Sea $x \in \mathbb{R}^m$. Como $A$ es denso, existe $y \in A$ con $\|x-y\| \lt \varepsilon$, es decir $x-y \in B(0,\varepsilon)$. Entonces $x=y+(x-y) \in A+B$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C4-5 ===== -->
+  <article class="ej" id="ejp3-c4-5" data-short="C4-5" data-title="Caracterización sucesional de los abiertos" data-topics="topologia,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C4-5</span>
+      <h3>Caracterización sucesional de los abiertos</h3>
+      <span class="src">Clase 4 · Ejercicio 5</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E,d)$ un espacio métrico. Probar que $A \subseteq E$ es abierto si y sólo si para toda $(x_n)_n \subseteq A$ con $x_n \to a \in A$, existe $n_0 \in \mathbb{N}$ tal que $x_n \in A$ para todo $n \ge n_0$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La vuelta es la contrarrecíproca: «no abierto» da una sucesión que se cuela desde afuera.</em> La ida es directa: la bola alrededor de $a$ que atestigua que $A$ es abierto contiene la cola de la sucesión. La vuelta conviene probarla por el contrarrecíproco: si $A$ no es abierto, hay un punto $a \in A$ tal que <b>ninguna</b> bola $B(a,1/n)$ está contenida en $A$, así que se puede elegir $x_n \in B(a,1/n) \setminus A$ para cada $n$; esta sucesión converge a $a$ pero <b>ningún</b> término está en $A$, violando la propiedad.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow$</p>
+          <p>$\Rightarrow)$ Sea $(x_n)_n \subseteq A$ con $x_n \to a \in A$. Como $A$ es <span class="ref" data-ref="def-4.14">abierto</span>, existe $r \gt 0$ con $B(a,r) \subseteq A$. Tomando $\varepsilon=r$ en la <span class="ref" data-ref="def-4.42">definición de límite</span>, existe $n_0$ tal que $d(x_n,a) \lt r$ para $n \ge n_0$, es decir $x_n \in B(a,r) \subseteq A$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow$, por el contrarrecíproco</p>
+          <p>$\Leftarrow)$ Supongamos que $A$ no es abierto: existe $a \in A$ tal que para todo $r \gt 0$, $B(a,r) \not\subseteq A$. Entonces, para cada $n \in \mathbb{N}$, existe $x_n \in B(a,1/n) \setminus A$, y $d(x_n,a) \lt 1/n \to 0$, así que $x_n \to a$. Pero $x_n \notin A$ para <b>todo</b> $n$, así que no existe ningún $n_0$ con $x_n \in A$ para $n \ge n_0$: contradice la hipótesis.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-5-c1" aria-label="Un conjunto no abierto A con un punto a de su borde, las bolas B(a, 1/n) y los puntos x_n fuera de A que convergen a a"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c4-5-n"><i>n</i></label><input type="range" id="ejp3-c4-5-n" min="1" max="12" value="3"><output id="ejp3-c4-5-n-o"></output></div>
+          </div>
+          <figcaption>En ℝ², <i>A</i> = {<i>y</i> ≥ 0} (el semiplano cerrado, sombreado) y <i>a</i> = (0, 0), que está en <i>A</i> pero no es interior (valores elegidos para el dibujo). Cada bola <i>B</i>(<i>a</i>, 1/<i>n</i>) se sale de <i>A</i>, y de ahí sale <i>x<sub>n</sub></i> = (0, −1/(2<i>n</i>)) ∉ <i>A</i>.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="nota"><b>Nota de esta versión</b>En el enunciado, la sucesión tiene que poder tener términos fuera de $A$ para que la condición diga algo (en la vuelta se usa una con $x_n \notin A$ para todo $n$): la hipótesis se lee «para toda $(x_n)_n \subseteq E$ con $x_n \to a \in A$». El <code>.typ</code> escribe $(x_n)_n \subseteq A$.</p>
+  </article>
+
+  <!-- ===== C4-6 ===== -->
+  <article class="ej" id="ejp3-c4-6" data-short="C4-6" data-title="U abierto si y sólo si U ∩ cl(T) ⊆ cl(U ∩ T) para todo T" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">C4-6</span>
+      <h3>$U$ abierto si y sólo si $U \cap \overline{T} \subseteq \overline{U \cap T}$ para todo $T$</h3>
+      <span class="src">Clase 4 · Ejercicio 6</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E,d)$ un espacio métrico y $U \subseteq E$. Probar que $U$ es abierto si y sólo si para todo $T \subseteq E$, $U \cap \overline{T} \subseteq \overline{U \cap T}$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La vuelta sale de particularizar $T = E \setminus U$.</em> La ida usa que $V \cap U$ es abierto siempre que $V$ lo sea, para trasladar un entorno de un punto de $\overline{T}$ a un entorno dentro de $U$. La vuelta es la parte más económica: alcanza con aplicar la hipótesis a $T=E \setminus U$, donde el lado derecho se anula, y de ahí se deduce directamente que $E \setminus U$ es cerrado.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow$</p>
+          <p>$\Rightarrow)$ Sea $T \subseteq E$ y $x \in U \cap \overline{T}$. Veamos $x \in \overline{U \cap T}$: sea $V$ abierto con $x \in V$. Como $x \in U$, $x \in V \cap U$, <span class="ref" data-ref="teo-4.18">que es abierto</span>; como <span class="ref" data-ref="ext-clausura-via-abiertos">$x \in \overline{T}$, $(V \cap U) \cap T \ne \emptyset$</span>, que es lo que había que ver.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow$, con $T = E \setminus U$</p>
+          <p>$\Leftarrow)$ Tomemos $T=E \setminus U$. La hipótesis da
+            $$U \cap \overline{E \setminus U} \subseteq \overline{U \cap (E \setminus U)} = \overline{\emptyset} = \emptyset,$$
+            es decir $\overline{E \setminus U} \cap U = \emptyset$. Entonces
+            $$\begin{aligned} \overline{E \setminus U} &= (\overline{E \setminus U} \cap U) \cup (\overline{E \setminus U} \cap (E \setminus U)) \\ &= \overline{E \setminus U} \cap (E \setminus U) \subseteq E \setminus U, \end{aligned}$$
+            así que $E \setminus U$ es cerrado (la otra inclusión vale siempre), es decir <span class="ref" data-ref="teo-4.29">$U$ es abierto</span>.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C4-7 ===== -->
+  <article class="ej" id="ejp3-c4-7" data-short="C4-7" data-title="F es frontera de un abierto si y sólo si es cerrado con interior vacío" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">C4-7</span>
+      <h3>$F$ es frontera de un abierto si y sólo si es cerrado con interior vacío</h3>
+      <span class="src">Clase 4 · Ejercicio 7</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E,d)$ un espacio métrico. Probar que $F \subseteq E$ es la <span class="ref" data-ref="def-4.38">frontera</span> de un abierto si y sólo si $F$ es cerrado y $F^{\circ}=\emptyset$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La vuelta se construye tomando $U = E \setminus F$.</em> La ida usa que $\partial U = \overline{U} \cap \overline{E \setminus U}$ (<a class="xg" data-guia="p3" data-ej="9">Ejercicio 9</a> de la Práctica 3) es intersección de cerrados, y que ningún punto de $U$ puede estar en $\partial U$ (tiene una bola adentro de $U$) para descartar puntos interiores de $F$. La vuelta es constructiva: el candidato natural a abierto es el complemento de $F$, y hay que verificar que su frontera es exactamente $F$, usando que $F$ es cerrado con interior vacío en cada paso.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow$</p>
+          <p>$\Rightarrow)$ Si $F=\partial U$ con $U$ abierto, $F=\overline{U} \cap \overline{E \setminus U}$ es <span class="ref" data-ref="teo-4.31">intersección de cerrados, luego cerrado</span>. Si $x \in U$, hay $r \gt 0$ con $B(x,r) \subseteq U$, así que $B(x,r) \cap (E \setminus U) = \emptyset$ y $x \notin F$. Para ver $F^{\circ}=\emptyset$: sea $x \in F$; dado $r \gt 0$, $B(x,r) \cap U \ne \emptyset$, y como $x \notin U$, hay $y \ne x$ con $y \in B(x,r) \cap U$; pero $y \in U$ implica $y \notin F$, así que ninguna bola alrededor de $x$ queda contenida en $F$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 230" role="img" aria-label="Un abierto U, su frontera F dibujada como curva, un punto x de F con una bola que toca puntos y de U fuera de F">
+            <path d="M70 120 C 70 50, 170 30, 220 60 S 320 120, 270 170 S 120 210, 70 120 Z" class="sv-area"/>
+            <path d="M70 120 C 70 50, 170 30, 220 60 S 320 120, 270 170 S 120 210, 70 120 Z" class="sv-seq2" style="stroke-width:3"/>
+            <text x="160" y="125" class="sv-label-accent">U</text>
+            <text x="300" y="70" class="sv-label-seq2">F = ∂U</text>
+            <circle cx="72.5" cy="140" r="26" class="sv-ink sv-dash"/>
+            <circle cx="72.5" cy="140" r="4" class="sv-fill-seq2"/>
+            <text x="34" y="146" class="sv-text">x</text>
+            <circle cx="88" cy="136" r="3.5" class="sv-fill-accent"/>
+            <text x="94" y="134" class="sv-label-accent">y</text>
+            <text x="180" y="222" text-anchor="middle" class="sv-muted">B(x, r) ∩ U ≠ ∅ y ningún y ∈ U está en F</text>
+          </svg>
+          <figcaption>Esquema con <i>U</i> un abierto del plano (elegido para el dibujo). Alrededor de un <i>x</i> ∈ <i>F</i>, toda bola agarra puntos <i>y</i> ∈ <i>U</i>, que no están en <i>F</i>: por eso <i>F</i> no tiene puntos interiores.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow$, con $U = E \setminus F$</p>
+          <p>$\Leftarrow)$ Sea $U=E \setminus F$; veamos $\partial U = F$. Por un lado,
+            $$\begin{aligned} \partial U &= \overline{U} \cap \overline{E \setminus U} = \overline{E \setminus F} \cap \overline{F} \\ &= \overline{E \setminus F} \cap F \subseteq F \end{aligned}$$
+            (usando $\overline{F}=F$). Por otro, si $x \in F$, como $F^{\circ}=\emptyset$, para todo $r \gt 0$ vale $B(x,r) \cap (E \setminus F) \ne \emptyset$, es decir $x \in \overline{E \setminus F}$; junto con $x \in F \subseteq \overline{F}$, se sigue $x \in \partial U$.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C4-8 ===== -->
+  <article class="ej" id="ejp3-c4-8" data-short="C4-8" data-title="Métricas equivalentes vía sucesiones" data-topics="metricas,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C4-8</span>
+      <h3>Métricas equivalentes vía sucesiones</h3>
+      <span class="src">Clase 4 · Ejercicio 8</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a> <a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Sea $E \ne \emptyset$. Probar que dos métricas $d,d'$ en $E$ son <span class="ref" data-ref="ext-metricas-equivalentes">equivalentes</span> (dan los mismos abiertos) si y sólo si toda sucesión converge para $d$ exactamente cuando converge para $d'$ (al mismo límite).</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Traducir una bola de una métrica a un radio suficientemente chico en la otra.</em> Usamos la caracterización de equivalencia por bolas: para todo $x$ y todo $r \gt 0$ existen $r',r'' \gt 0$ con $B_d(x,r') \subseteq B_{d'}(x,r)$ y $B_{d'}(x,r'') \subseteq B_d(x,r)$. Con eso, convertir «converge para $d$» en «converge para $d'$» es sólo enhebrar la definición de límite a través de esa bola intermedia.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">De $d$ a $d'$</p>
+          <p>Supongamos $x_n \to x$ respecto de $d$. Dado $\varepsilon \gt 0$, por equivalencia existe $r' \gt 0$ con $B_d(x,r') \subseteq B_{d'}(x,\varepsilon)$. Como $x_n \to x$ para $d$, existe $\tilde{n} \in \mathbb{N}$ tal que $d(x_n,x) \lt r'$ para $n \ge \tilde{n}$, es decir $(x_n)_{n \ge \tilde{n}} \subseteq B_d(x,r') \subseteq B_{d'}(x,\varepsilon)$. Tomando $n_0 \ge \tilde{n}$, $d'(x_n,x) \lt \varepsilon$ para todo $n \ge n_0$, es decir $x_n \to x$ respecto de $d'$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c4-8-c1" aria-label="En el plano, la bola B2(x, ε), el cuadrado B∞(x, r') con r' = ε/√2 dentro de ella, y una sucesión que entra en el cuadrado"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c4-8-eps">ε</label><input type="range" id="ejp3-c4-8-eps" min="10" max="100" value="60"><output id="ejp3-c4-8-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c4-8-read" aria-live="polite"></dl>
+          <figcaption>En ℝ² con <i>d</i> = <i>d</i><sub>∞</sub> y <i>d′</i> = <i>d</i>₂, la sucesión <i>x<sub>n</sub></i> = <i>x</i> + (1,2 cos <i>n</i>, sen <i>n</i>)/<i>n</i> (valores elegidos para el dibujo). El disco es <i>B<sub>d′</sub></i>(<i>x</i>, ε); el cuadrado, <i>B<sub>d</sub></i>(<i>x</i>, <i>r′</i>) con <i>r′</i> = ε/√2, que entra en el disco. Desde <i>ñ</i> los términos (azules) están en el cuadrado, y por lo tanto en el disco.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La recíproca</p>
+          <p>El argumento recíproco (que la convergencia para $d'$ implica la convergencia para $d$) es análogo, intercambiando los roles de $d$ y $d'$.</p>
+        </div>
+      </div>
+    </div>
+    <p class="nota"><b>Nota de esta versión</b>La resolución prueba la ida (equivalentes $\Rightarrow$ mismas sucesiones convergentes); la vuelta del «si y sólo si» (mismas sucesiones convergentes $\Rightarrow$ mismos abiertos) no está en el <code>.typ</code>.</p>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 5 ===================== -->
+<section class="bloque" id="ejp3-b5">
+  <h2><span class="bn">Bloque 5</span>Sucesiones en espacios métricos</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>La definición de convergencia en un espacio métrico (<span class="ref" data-ref="def-4.42">Definición 4.42</span>) es la de $\mathbb{R}$ con $|x_n - x|$ cambiado por $d(x_n, x)$. Lo que cambia de un espacio a otro es <b>qué significa</b> $d(x_n, x) \lt \varepsilon$ en concreto. Estos ejemplos lo traducen en dos métricas conocidas: en la discreta, convergencia quiere decir eventualmente constante; con $d_\infty$, quiere decir convergencia uniforme. El <a href="#ejp3-31">Ejemplo 31</a> hace lo mismo con la <span class="ref" data-ref="def-4.51">Definición 4.51</span> (sucesión de Cauchy) y muestra que ser de Cauchy no alcanza para converger: el límite puede no estar en el espacio ($(0,1]$, $(C([0,1]), d_1)$). Es el punto de partida del <a class="xg" data-guia="p3" data-ej="13">Ejercicio 13</a> de la Práctica 3.</p>
+  </div>
+
+  <!-- ===== 30 ===== -->
+  <article class="ej" id="ejp3-30" data-short="30" data-title="Sucesiones convergentes en la métrica discreta y en (C([a,b]), d∞)" data-topics="sucesiones,funciones,convergencia-funciones">
+    <div class="ej-head">
+      <span class="tag">30</span>
+      <h3>Sucesiones convergentes en la métrica discreta y en $(C([a,b]), d_\infty)$</h3>
+      <span class="src">Ejemplo 4.45 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-sucesiones">sucesiones</a> <a class="tag topic" href="#tema-funciones">funciones</a> <a class="tag topic" href="#tema-convergencia-funciones">convergencia-funciones</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items">
+        <li>Consideremos $(M, \delta)$, con $\delta$ la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. ¿Cómo son las sucesiones convergentes en este espacio?</li>
+        <li>Consideremos $(C([a,b]), d_\infty)$. ¿Qué significa que $f_n \to f$ en este espacio?</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Métrica discreta: eventualmente constantes</p>
+          <p>Supongamos que $x_n \to x$. Por <span class="ref" data-ref="def-4.42">definición</span>, tenemos que para todo $\varepsilon \gt 0$, debería ser que $\delta(x_n, x) \lt \varepsilon$ para todo $n$ a partir de cierto $n_0$. Pero si $0 \lt \varepsilon \lt 1$, $\delta(x_n, x) \lt \varepsilon$ si y sólo si $\delta(x_n, x) = 0$ (puesto que $\delta$ toma sólo dos valores, $0$ y $1$). Pero $\delta(x_n, x) = 0$ sólo cuando $x_n = x$.</p>
+          <p>Es decir, que las únicas sucesiones convergentes en $(M, \delta)$ son aquéllas que a partir de cierto punto valen siempre lo mismo (es decir, las <b>eventualmente constantes</b>).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) $d_\infty$: convergencia uniforme</p>
+          <p>Recordemos que <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_\infty(f_n, f) = \sup_{x \in [a,b]} |f_n(x) - f(x)|$</span>. Tenemos que $f_n \to f$ en este espacio si para todo $\varepsilon \gt 0$ existe un $n_0 \in \mathbb{N}$ tal que si $n \ge n_0$ se tiene que
+            $$|f_n(x) - f(x)| \lt \varepsilon \quad \textbf{para todo } x \in [a, b].$$</p>
+          <p>Esto es lo que vamos a llamar <span class="ref" data-ref="ext-convergencia-uniforme"><b>convergencia uniforme</b></span> de las funciones $f_n$ y es una de las nociones de convergencia en espacio de funciones que vamos a explorar más adelante.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-30-c1" aria-label="Una función f, la banda entre f − ε y f + ε sobre [a, b], y una f_n que se mete en la banda cuando n crece"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-30-n"><i>n</i></label><input type="range" id="ejp3-30-n" min="1" max="20" value="2"><output id="ejp3-30-n-o"></output></div>
+            <div class="slider"><label for="ejp3-30-eps">ε</label><input type="range" id="ejp3-30-eps" min="5" max="100" value="45"><output id="ejp3-30-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-30-read" aria-live="polite"></dl>
+          <figcaption>La curva azul es <i>f</i>, la banda es {<i>f</i> − ε &lt; <i>y</i> &lt; <i>f</i> + ε} sobre [<i>a</i>, <i>b</i>] y la naranja es <i>f<sub>n</sub></i> = <i>f</i> + (1/<i>n</i>)·<i>g</i>, con <i>f</i> y <i>g</i> elegidas para el dibujo. <i>d</i><sub>∞</sub>(<i>f<sub>n</sub></i>, <i>f</i>) &lt; ε quiere decir que todo el gráfico de <i>f<sub>n</sub></i> está en la banda, no sólo algunos puntos.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 31 ===== -->
+  <article class="ej" id="ejp3-31" data-short="31" data-title="Sucesiones de Cauchy que no convergen" data-topics="completitud,funciones">
+    <div class="ej-head">
+      <span class="tag">31</span>
+      <h3>Sucesiones de Cauchy que no convergen</h3>
+      <span class="src">Ejemplo 4.52 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a> <a class="tag topic" href="#tema-funciones">funciones</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>Sea $(x_n)_{n \in \mathbb{N}} = (1/n) \subseteq (\mathbb{R}, |\cdot|)$. Probar que $(x_n)_{n \in \mathbb{N}}$ es <span class="ref" data-ref="def-4.51">de Cauchy</span>.</li>
+          <li>Sea $(x_n)_{n \in \mathbb{N}} = (1/n) \subseteq ((0, 1], |\cdot|)$. ¿Es de Cauchy? ¿Converge en este espacio métrico?</li>
+          <li>Sea $(M, \delta)$ un espacio métrico con la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. ¿Cómo son las sucesiones de Cauchy en este espacio?</li>
+          <li><p>Consideremos en $(C([0, 1]), d_1)$ la sucesión de funciones $f_n$ definidas de la siguiente forma:
+            $$f_n(x) = \begin{cases} 0, & \text{si } 0 \le x \le \frac12 - \frac1n, \\ \text{segmento que une} \\ \quad (\frac12 - \frac1n, 0) \text{ y } (\frac12, 1), & \text{si } \frac12 - \frac1n \le x \le \frac12, \\ 1, & \text{si } \frac12 \le x \le 1. \end{cases}$$
+            Para que esta sucesión tenga sentido la definimos con $n \ge 3$ (para completar la sucesión, podemos tomar los primeros dos términos de la sucesión como $f_1 = f_2 = 0$).</p>
+            <p>¿Es $(f_n)$ de Cauchy? ¿Converge en $(C([0, 1]), d_1)$?</p></li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp3-31-c1" aria-label="Las funciones f_n en [0, 1]: cero hasta 1/2 − 1/n, una rampa hasta (1/2, 1) y uno después"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp3-31-n"><i>n</i></label><input type="range" id="ejp3-31-n" min="3" max="40" value="4"><output id="ejp3-31-n-o"></output></div>
+        </div>
+        <figcaption>En gris, <i>f</i>₄, <i>f</i>₁₀ y <i>f</i>₂₅, las tres del dibujo del <code>.typ</code>; en naranja, <i>f<sub>n</sub></i> para el <i>n</i> del control. Cuando <i>n</i> → ∞ la rampa se vuelve vertical en <i>x</i> = 1/2.</figcaption>
+      </figure>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) $1/n$ es de Cauchy en $\mathbb{R}$</p>
+          <p>Sea $\varepsilon \gt 0$. Queremos encontrar un $n_0$ tal que si $n, m \ge n_0$ se tiene que $|1/n - 1/m| \lt \varepsilon$. Si $n, m \ge n_0$ tenemos
+            $$\left|\frac1n - \frac1m\right| \le \frac1n + \frac1m \le \frac1{n_0} + \frac1{n_0} = \frac2{n_0} \lt \varepsilon$$
+            si elegimos $n_0 \gt 2/\varepsilon$.</p>
+          <p>Más adelante vamos a ver que <span class="ref" data-ref="teo-4.54">toda sucesión convergente es de Cauchy</span>, con lo cual vamos a poder decir que esta sucesión es de Cauchy porque converge en $\mathbb{R}$. Sin embargo, notemos que la definición de sucesión de Cauchy no depende de la existencia del $0$ en este espacio métrico.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) En $(0,1]$: de Cauchy, pero no converge</p>
+          <p>Por la cuenta que hicimos en (a), vemos que esta sucesión sigue siendo de Cauchy. Sin embargo, esta sucesión no converge en el espacio métrico que estamos considerando: $0 \notin (0, 1]$.</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 380 110" role="img" aria-label="El intervalo (0, 1] con los puntos 1/n amontonándose contra el 0, que no está">
+            <line x1="20" y1="55" x2="360" y2="55" class="sv-axis"/>
+            <line x1="40" y1="55" x2="340" y2="55" class="sv-accent" style="stroke-width:4"/>
+            <circle cx="40" cy="55" r="6" class="sv-fill-bg sv-fail" style="stroke-width:2"/>
+            <circle cx="340" cy="55" r="5" class="sv-fill-accent"/>
+            <g class="sv-fill-seq2">
+              <circle cx="340" cy="40" r="3.5"/><circle cx="190" cy="40" r="3.5"/><circle cx="140" cy="40" r="3.5"/><circle cx="115" cy="40" r="3.5"/><circle cx="100" cy="40" r="3.5"/><circle cx="90" cy="40" r="3.5"/><circle cx="82.9" cy="40" r="3.5"/><circle cx="77.5" cy="40" r="3"/><circle cx="73.3" cy="40" r="3"/><circle cx="70" cy="40" r="3"/><circle cx="67.3" cy="40" r="2.5"/><circle cx="65" cy="40" r="2.5"/><circle cx="63.1" cy="40" r="2.5"/><circle cx="61.4" cy="40" r="2"/><circle cx="60" cy="40" r="2"/>
+            </g>
+            <text x="40" y="82" text-anchor="middle" class="sv-label-fail">0 ∉ (0, 1]</text>
+            <text x="340" y="82" text-anchor="middle" class="sv-muted">1</text>
+            <text x="190" y="28" text-anchor="middle" class="sv-label-seq2">1/2</text>
+            <text x="340" y="28" text-anchor="middle" class="sv-label-seq2">1/1</text>
+            <text x="200" y="102" text-anchor="middle" class="sv-muted">x_n = 1/n, n = 1, …, 15</text>
+          </svg>
+          <figcaption>Los términos 1/<i>n</i> se amontonan (son de Cauchy) contra el 0, que fue sacado del espacio: no hay dónde converger.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">c) Métrica discreta: también eventualmente constantes</p>
+          <p>Supongamos que $(x_n)_{n \in \mathbb{N}}$ es de Cauchy. Entonces para $0 \lt \varepsilon \lt 1$, deberíamos tener un $n_0$ tal que $\delta(x_n, x_m) \lt \varepsilon$ para todo $n, m \ge n_0$. Pero como la métrica sólo toma los valores $0$ y $1$, vemos que tiene que ser $\delta(x_n, x_m) = 0$. Es decir, que las sucesiones de Cauchy son las eventualmente constantes. Observemos que, por el <a href="#ejp3-30">Ejemplo 4.45</a>, tenemos que en este espacio las sucesiones de Cauchy y las convergentes sí son las mismas.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">d) $(f_n)$ es de Cauchy en $d_1$</p>
+          <p>Veamos que esta sucesión es de Cauchy. Para esto, tenemos que entender cómo son las distancias entre dos términos de la sucesión. Sean $f_n$ y $f_m$ dos elementos de la sucesión, y supongamos que $m \gt n$. Recordemos que la <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancia 1</span> entre funciones representa el área atrapada entre las dos funciones. Gráficamente tendremos algo así (ver el dibujo).</p>
+          <p>El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n) = 1/n - 1/m$ y altura $1$, entonces el área es $A = \frac12 (1/n - 1/m) \cdot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $\varepsilon \gt 0$,
+            $$d_1(f_n, f_m) \le \frac12 \left|\frac1n - \frac1m\right| \lt \varepsilon, \quad \text{para todo } n, m \ge n_0.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-31-c2" aria-label="Las funciones f_n y f_m y el triángulo entre sus rampas, cuya área es d1(f_n, f_m)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-31-n2"><i>n</i></label><input type="range" id="ejp3-31-n2" min="3" max="30" value="4"><output id="ejp3-31-n2-o"></output></div>
+            <div class="slider"><label for="ejp3-31-m2"><i>m</i></label><input type="range" id="ejp3-31-m2" min="3" max="30" value="10"><output id="ejp3-31-m2-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-31-read2" aria-live="polite"></dl>
+          <figcaption>El área sombreada es <i>d</i>₁(<i>f<sub>n</sub></i>, <i>f<sub>m</sub></i>): el triángulo de base |1/<i>n</i> − 1/<i>m</i>| y altura 1, como en el dibujo del <code>.typ</code> (que usa <i>n</i> = 4, <i>m</i> = 10).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">d) El límite no es continuo</p>
+          <p>Sin embargo, esta sucesión tampoco converge en el espacio métrico que estamos considerando. El límite de esta sucesión es la función
+            $$f(x) = \begin{cases} 0, & \text{si } 0 \le x \le 1/2, \\ 1, & \text{si } 1/2 \lt x \le 1, \end{cases}$$
+            que no es una función continua.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">d) $f_n \to f$ en $d_1$</p>
+          <p>Probemos que efectivamente las funciones $f_n$ convergen a $f$ en la distancia 1. Para esto, analicemos cómo es la distancia de $f_n$ a $f$.</p>
+          <p>Como vimos antes, la distancia $d_1(f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $\varepsilon \gt 0$, podemos encontrar un $n_0$ tal que
+            $$d_1(f_n, f) = \frac12 \cdot \frac1n \lt \varepsilon, \quad \text{para todo } n \ge n_0.$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-31-c3" aria-label="La función escalón f y una f_n, con el triángulo entre ellas cuya área es d1(f_n, f)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-31-n3"><i>n</i></label><input type="range" id="ejp3-31-n3" min="3" max="40" value="4"><output id="ejp3-31-n3-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-31-read3" aria-live="polite"></dl>
+          <figcaption>En negro, el escalón <i>f</i> (vale 0 en 1/2, círculo lleno abajo, hueco arriba); en naranja, <i>f<sub>n</sub></i>. El triángulo sombreado tiene base 1/<i>n</i> y altura 1.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== 32 ===== -->
+  <article class="ej" id="ejp3-32" data-short="32" data-title="Espacios completos y no completos" data-topics="completitud">
+    <div class="ej-head">
+      <span class="tag">32</span>
+      <h3>Espacios completos y no completos</h3>
+      <span class="src">Ejemplo 4.56 de las notas</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <ol class="items">
+          <li>$(\mathbb{Q}, |\cdot|)$ no es <span class="ref" data-ref="def-4.55">completo</span>. Por ejemplo, podríamos tomar $x_n = 3{,}14159\dots$ los primeros $n$ dígitos del número $\pi$. Tenemos que $(x_n) \subseteq \mathbb{Q}$, y $x_n \to \pi$. Como la sucesión es convergente en $\mathbb{R}$, sabemos que debe ser de Cauchy (<span class="ref" data-ref="teo-4.54">Teorema 4.54 b</span>). Sin embargo, su límite no pertenece a $\mathbb{Q}$, lo cual nos dice que $\mathbb{Q}$ no puede ser completo.</li>
+          <li>Sea $(M, \delta)$ un conjunto con la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. Como vimos en los ejemplos anteriores (<a href="#ejp3-30">Ejemplos 30</a> y <a href="#ejp3-31">31</a>), las sucesiones de Cauchy son las eventualmente constantes y estas son convergentes. Esto nos dice que el espacio sí es completo.</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp3-32-c1" aria-label="Truncamientos decimales de pi, racionales, acercándose a pi en una recta que se amplía"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp3-32-n">dígitos <i>n</i></label><input type="range" id="ejp3-32-n" min="1" max="9" value="3"><output id="ejp3-32-n-o"></output></div>
+        </div>
+        <dl class="read" id="ejp3-32-read" aria-live="polite"></dl>
+        <figcaption>La recta muestra una ventana alrededor de π que se achica con <i>n</i>: los puntos son <i>x</i>₁, …, <i>x<sub>n</sub></i>, todos racionales (decimales finitos). π, en rojo, es el único punto que falta en ℚ.</figcaption>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== BLOQUE 6 ===================== -->
+<section class="bloque" id="ejp3-b6">
+  <h2><span class="bn">Bloque 6</span>Completitud: probarla, heredarla y caracterizarla</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b>
+    <p>Un espacio es completo (<span class="ref" data-ref="def-4.55">Definición 4.55</span>) si toda sucesión de Cauchy converge <b>adentro</b> del espacio. Los seis ejemplos de la clase del 01/10 cubren las tres maniobras que piden los <a class="xg" data-guia="p3" data-ej="14">Ejercicios 14</a>, <a class="xg" data-guia="p3" data-ej="15">15</a> y <a class="xg" data-guia="p3" data-ej="16">16</a> de la Práctica 3: (i) probar completitud «a mano», coordenada a coordenada, controlando que el límite candidato quede en el espacio y que la convergencia sea en la métrica del espacio y no sólo coordenada a coordenada (<a href="#ejp3-c5-1">C5-1</a>, que es el <span class="ref" data-ref="cor-4.58">Corolario 4.58</span> con infinitas coordenadas); (ii) heredar la completitud a un subconjunto cerrado y usarla para decidir si conjuntos concretos son completos (<a href="#ejp3-c5-2">C5-2</a>, <a href="#ejp3-c5-6">C5-6</a>); (iii) caracterizarla sin bolas, por sucesiones, en una métrica rara (<a href="#ejp3-c5-3">C5-3</a>) o a través del encaje de cerrados, que es el recíproco del Ejercicio 16 (<a href="#ejp3-c5-5">C5-5</a>). <a href="#ejp3-c5-4">C5-4</a> es una aplicación de $d(x, F)$ (<a class="xg" data-guia="p3" data-ej="10">Ejercicio 10</a>) que se usa de paso.</p>
+  </div>
+
+  <!-- ===== C5-1 ===== -->
+  <article class="ej" id="ejp3-c5-1" data-short="C5-1" data-title="Las sucesiones acotadas con d∞ forman un espacio completo" data-topics="completitud,sucesiones">
+    <div class="ej-head">
+      <span class="tag">C5-1</span>
+      <h3>Las sucesiones acotadas con $d_\infty$ forman un espacio completo</h3>
+      <span class="src">Clase 5 · Ejercicio 1</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a> <a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
+    </div>
+    <div class="enun"><p>Probar que $X = \{a \in \mathbb{R}^{\mathbb{N}} : a \text{ es acotada}\}$ es <span class="ref" data-ref="def-4.55">completo</span> con $d_\infty(a, b) = \sup_{k \in \mathbb{N}} |a_k - b_k|$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Límite coordenada a coordenada, y después dos cosas más: que es acotado y que la convergencia es uniforme en $k$.</em> Una sucesión $(a_n)_n \subseteq X$ es una «matriz infinita» $a_n = (a_{n 1}, a_{n 2}, \dots)$. Que sea de Cauchy para $d_\infty$ obliga a cada columna $(a_{n k})_n$ a ser de Cauchy en $\mathbb{R}$, así que tiene límite $\tilde{a}_k$. El candidato es $\tilde{a} = (\tilde{a}_k)_k$, y quedan dos cosas: que $\tilde{a}$ es acotada (porque una Cauchy está dentro de una bola, y esa cota se hereda al límite) y que $d_\infty(a_n, \tilde{a}) \to 0$. Lo segundo es el punto delicado: la convergencia de cada columna da un $n$ «grande» que depende de $k$, y hay infinitas columnas. Se esquiva con la condición de Cauchy: se fija un $n_0$ <b>uniforme</b> y se pasa al límite en $m$ dentro de $|a_{n_0 k} - a_{m k}| \lt \varepsilon'$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Cada columna es de Cauchy en $\mathbb{R}$</p>
+          <p>Sea $(a_n)_n \subseteq X$ <span class="ref" data-ref="def-4.51">de Cauchy</span>: para todo $\varepsilon \gt 0$ existe $n_0$ tal que $d_\infty(a_n, a_m) \lt \varepsilon$ si $n, m \ge n_0$. Entonces, para cada $i$ y $n, m \ge n_0$,
+            $$\begin{aligned} |a_{n i} - a_{m i}| &\le \sup_{k \in \mathbb{N}} |a_{n k} - a_{m k}| \\ &= d_\infty(a_n, a_m) \lt \varepsilon, \qquad (*) \end{aligned}$$
+            así que $(a_{n i})_n$ es de Cauchy en $\mathbb{R}$ y, como <span class="ref" data-ref="teo-4.57">$\mathbb{R}$ es completo</span>, existe $\tilde{a}_i = \lim_n a_{n i}$. Sea $\tilde{a} = (\tilde{a}_k)_k$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\tilde{a} \in X$</p>
+          <p>Primero, una Cauchy está en una bola: existe $n_0$ con $d(a_n, a_m) \lt 1$ para $n, m \ge n_0$, y entonces $d(a_1, a_n) \le d(a_1, a_{n_0}) + d(a_{n_0}, a_n) \lt d(a_1, a_{n_0}) + 1$ para $n \ge n_0$; agrandando con los finitos $n \lt n_0$, hay $M \gt 0$ con $(a_n)_n \subseteq B(a_1, M)$. Entonces, para todo $n$ y $k$,
+            $$\begin{aligned} |a_{n k}| &\le |a_{n k} - a_{1 k}| + |a_{1 k}| \\ &\le M + \sup_{k \in \mathbb{N}} |a_{1 k}| =: \tilde{M}, \end{aligned}$$
+            donde el último supremo es finito porque $a_1 \in X$. Como $a_{n k} \to \tilde{a}_k$, por <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span> $|\tilde{a}_k| \le \tilde{M}$ para todo $k$: $\tilde{a}$ es acotada.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$a_n \to \tilde{a}$ en $d_\infty$</p>
+          <p>Dado $\varepsilon' \gt 0$, sea $n_0$ el de $(*)$. Para $n \ge n_0$,
+            $$d_\infty(a_n, \tilde{a}) \le \underbrace{d_\infty(a_n, a_{n_0})}_{(1)} + \underbrace{d_\infty(a_{n_0}, \tilde{a})}_{(2)}.$$
+            $(1) \lt \varepsilon'$ por $(*)$. Para $(2)$: por $(*)$, $|a_{n_0 k} - a_{m k}| \lt \varepsilon'$ para todo $k$ y todo $m \ge n_0$; haciendo $m \to +\infty$ con $k$ fijo, $|a_{n_0 k} - \tilde{a}_k| \le \varepsilon'$ para todo $k$, y tomando supremo en $k$, $(2) \le \varepsilon'$. Luego $d_\infty(a_n, \tilde{a}) \lt 2 \varepsilon'$ para todo $n \ge n_0$; con $\varepsilon' = \varepsilon / 2$ queda $d_\infty(a_n, \tilde{a}) \lt \varepsilon$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-1-c1" aria-label="Las coordenadas k de una sucesión acotada a_n y del límite ã, con la banda ã ± ε en todas las coordenadas a la vez"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c5-1-n"><i>n</i></label><input type="range" id="ejp3-c5-1-n" min="1" max="30" value="2"><output id="ejp3-c5-1-n-o"></output></div>
+            <div class="slider"><label for="ejp3-c5-1-eps">ε</label><input type="range" id="ejp3-c5-1-eps" min="5" max="100" value="30"><output id="ejp3-c5-1-eps-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c5-1-read" aria-live="polite"></dl>
+          <figcaption>Cada elemento de <i>X</i> se dibuja como una sucesión <i>k</i> ↦ <i>a<sub>nk</sub></i> (sólo <i>k</i> ≤ 40). Los grises son ã<sub><i>k</i></sub>; los naranjas, <i>a<sub>nk</sub></i> = ã<sub><i>k</i></sub> + cos(<i>k</i>)/<i>n</i> (valores elegidos para el dibujo). <i>d</i><sub>∞</sub>(<i>a<sub>n</sub></i>, ã) &lt; ε pide que <i>todas</i> las coordenadas caigan en la banda a la vez.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C5-2 ===== -->
+  <article class="ej" id="ejp3-c5-2" data-short="C5-2" data-title="Completo si y sólo si cerrado, y dos conjuntos de R²" data-topics="completitud,topologia">
+    <div class="ej-head">
+      <span class="tag">C5-2</span>
+      <h3>Completo si y sólo si cerrado, y dos conjuntos de $\mathbb{R}^2$</h3>
+      <span class="src">Clase 5 · Ejercicio 2</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a> <a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico completo.</p>
+      <ol class="items">
+        <li>Probar que $A \subseteq E$ es completo si y sólo si $A$ es cerrado.</li>
+        <li>En $E = (\mathbb{R}^2, d_2)$, decidir si $A = \{(x, y) : \exists\, n \in \mathbb{N} \text{ con } y = x^n\}$ y $B = \{(x, y) : x^2 + y^2 = 1\}$ son completos.</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Un punto de la clausura es límite de una sucesión de $A$, que es de Cauchy; y para los ejemplos, mirar sólo si son cerrados.</em> La vuelta de (a) es el <a class="xg" data-guia="p3" data-ej="15">Ejercicio 15</a> de la Práctica 3. Para la ida, si $a \in \overline{A}$ hay $(a_n)_n \subseteq A$ con $a_n \to a$; convergente implica Cauchy, y la completitud de $A$ obliga al límite a estar en $A$. Con (a), en un espacio completo «completo» es lo mismo que «cerrado»: para $A$ basta exhibir un punto de $\overline{A} \setminus A$ (la sucesión $(1/2, 1/2^n)$ se cae al eje $x$), y para $B$ basta pasar al límite en la ecuación $x_n^2 + y_n^2 = 1$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Completo $\iff$ cerrado</p>
+          <p>$\Leftarrow)$ <a class="xg" data-guia="p3" data-ej="15">Ejercicio 15</a> de la Práctica 3. $\Rightarrow)$ Sea $a \in \overline{A}$ y <span class="ref" data-ref="prop-4.46">$(a_n)_n \subseteq A$ con $a_n \to a$</span>. Entonces $(a_n)_n$ es <span class="ref" data-ref="teo-4.54">de Cauchy en $E$</span>, y por lo tanto también en $A$ (la distancia es la misma). Como $A$ es completo, converge en $A$; por <span class="ref" data-ref="ext-unicidad-limite-metrico">unicidad del límite</span>, $a \in A$. Luego $\overline{A} = A$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">b) $A$ no es completo</p>
+          <p>$A$ es la unión de los gráficos de $y = x^n$, $n \in \mathbb{N}$, que pasan todos por $(0,0)$ y $(1,1)$ y en $(0,1)$ se aplastan contra el eje $x$. Tomemos $(x_n, y_n) = (1/2, 1/2^n) \in A$: converge a $(1/2, 0) \in \overline{A}$, pero $(1/2, 0) \notin A$ porque $0 \ne (1/2)^n$ para todo $n$. Así que $A$ no es cerrado y, por (a), <b>no es completo</b>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-2-c1" aria-label="Gráficos de y = x^n que se aplastan contra el eje x en (0, 1), con los puntos (1/2, 1/2^n) cayendo a (1/2, 0)"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c5-2-N"><i>n</i> ≤</label><input type="range" id="ejp3-c5-2-N" min="1" max="25" value="5"><output id="ejp3-c5-2-N-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c5-2-read" aria-live="polite"></dl>
+          <figcaption>Los gráficos de <i>y</i> = <i>x<sup>n</sup></i> para 0 ≤ <i>x</i> ≤ 1,2, con <i>n</i> hasta el valor del control, y la circunferencia <i>B</i> punteada. Los puntos naranjas (1/2, 1/2<sup><i>n</i></sup>) bajan hacia (1/2, 0), marcado en rojo: está en la clausura de <i>A</i> pero no en <i>A</i>.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) $B$ es completo</p>
+          <p>Para $B$, veamos $\overline{B} \subseteq B$: si $(x_n, y_n) \in B$ y $(x_n, y_n) \to (x, y)$, entonces $x_n \to x$, $y_n \to y$ y, por <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span>, $x^2 + y^2 = \lim (x_n^2 + y_n^2) = 1$, es decir $(x, y) \in B$. Luego $B$ es cerrado y, como <span class="ref" data-ref="cor-4.58">$(\mathbb{R}^2, d_2)$ es completo</span>, <b>$B$ es completo</b>.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C5-3 ===== -->
+  <article class="ej" id="ejp3-c5-3" data-short="C5-3" data-title="La métrica d(x,y) = |x| + |y| para x ≠ y: es métrica, es completa, no es equivalente a la usual" data-topics="completitud,metricas">
+    <div class="ej-head">
+      <span class="tag">C5-3</span>
+      <h3>La métrica $d(x, y) = |x| + |y|$ para $x \ne y$: es métrica, es completa, no es equivalente a la usual</h3>
+      <span class="src">Clase 5 · Ejercicio 3</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a> <a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $d : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ dada por $d(x, y) = 0$ si $x = y$ y $d(x, y) = |x| + |y|$ si $x \ne y$.</p>
+      <ol class="items">
+        <li>Probar que $d$ es una <span class="ref" data-ref="def-4.1">métrica</span> en $\mathbb{R}$.</li>
+        <li>Probar que $(\mathbb{R}, d)$ es completo.</li>
+        <li>¿Es $d$ <span class="ref" data-ref="ext-metricas-equivalentes">equivalente</span> a la métrica usual de $\mathbb{R}$?</li>
+      </ol></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>En esta métrica, dos puntos distintos «pasan por el $0$»; una Cauchy o se va a $0$ o se vuelve constante.</em> Para la triangular sólo hay que repasar los casos según qué puntos coinciden: cuando los tres son distintos queda $|x| + |y| \le |x| + 2 |z| + |y|$. Para la completitud, la clave es que $d(a_n, a_m) \lt \varepsilon$ con $a_n \ne a_m$ fuerza $|a_n| \lt \varepsilon$: si la sucesión toma infinitos valores, una subsucesión de términos distintos tiende a $0$ y arrastra a toda la Cauchy; si toma finitos valores, alguno se repite infinitas veces y la Cauchy se vuelve eventualmente constante. Para (c), lejos del $0$ los puntos están aislados: $B(1, 1) = \{1\}$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">a) Es métrica</p>
+          <p>$d \ge 0$, y $d(x, y) = 0$ si y sólo si $x = y$ (pues $|x| + |y| = 0$ sólo si $x = y = 0$); la simetría es evidente. Triangular: sean $x, y, z$. Si $x = y$ es $0 \le d(x, z) + d(z, y)$. Si $x \ne y$ y $z = x$ (o $z = y$) es $d(x, y) \le 0 + d(x, y)$. Si son distintos dos a dos,
+            $$\begin{aligned} d(x, y) &= |x| + |y| \le |x| + |z| + |z| + |y| \\ &= d(x, z) + d(z, y). \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">b) Es completo</p>
+          <p>Sea $(a_n)_n$ <span class="ref" data-ref="def-4.51">de Cauchy</span>: dado $\varepsilon \gt 0$ hay $n_0$ con $d(a_n, a_m) \lt \varepsilon$ para $n, m \ge n_0$; en particular, si además $a_n \ne a_m$, $|a_n| + |a_m| \lt \varepsilon$.</p>
+          <ul class="items">
+            <li>Si $\{a_n : n \in \mathbb{N}\}$ es infinito, hay una subsucesión $(a_{n_k})_k$ de términos distintos dos a dos, que sigue siendo de Cauchy; para $k, k' \ge k_0$ vale $|a_{n_k}| + |a_{n_{k'}}| \lt \varepsilon$, luego $|a_{n_k}| \lt \varepsilon$ para $k \ge k_0$, es decir $a_{n_k} \to 0$ (en $d$, pues $d(a_{n_k}, 0) = |a_{n_k}|$). Una Cauchy con una subsucesión convergente converge (<span class="ref" data-ref="teo-4.54">Teorema 4.54 c</span>): $a_n \to 0$.</li>
+            <li>Si $\{a_n : n \in \mathbb{N}\}$ es finito, digamos $\{a_{n_1}, \dots, a_{n_k}\}$, entonces $\mathbb{N} = \bigcup_{i=1}^k \{n : a_n = a_{n_i}\}$, y alguno de esos conjuntos es infinito: hay una subsucesión constante igual a $a_{n_i}$, que converge, y de nuevo por el <span class="ref" data-ref="teo-4.54">Teorema 4.54 c</span>, $a_n \to a_{n_i}$.</li>
+          </ul>
+          <p>En cualquier caso $(a_n)_n$ converge: $(\mathbb{R}, d)$ es completo.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">c) No es equivalente a la usual</p>
+          <p>No. Por (b), las únicas sucesiones convergentes tienden a $0$ o son eventualmente constantes, así que lejos del $0$ el espacio es «discreto»: si $x \ne 1$, $d(x, 1) = |x| + 1 \gt 1$, luego $B_d(1, 1) = \{1\}$ es abierto en $(\mathbb{R}, d)$ pero no en $(\mathbb{R}, |\cdot|)$. Las métricas no definen los mismos abiertos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-3-c1" aria-label="La bola B_d(x, r) en la recta: sólo el punto x si r es menor o igual que |x|, y x más un intervalo centrado en 0 si r es mayor"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c5-3-r">radio <i>r</i></label><input type="range" id="ejp3-c5-3-r" min="5" max="250" value="100"><output id="ejp3-c5-3-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c5-3-read" aria-live="polite"></dl>
+          <figcaption>Arrastrá el centro <i>x</i>. Para <i>y</i> ≠ <i>x</i>, <i>d</i>(<i>x</i>, <i>y</i>) &lt; <i>r</i> quiere decir |<i>y</i>| &lt; <i>r</i> − |<i>x</i>|: la bola es {<i>x</i>} más el intervalo (−(<i>r</i> − |<i>x</i>|), <i>r</i> − |<i>x</i>|) alrededor del 0, que es vacío si <i>r</i> ≤ |<i>x</i>|. Con <i>x</i> = 1 y <i>r</i> = 1 queda {1}.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C5-4 ===== -->
+  <article class="ej" id="ejp3-c5-4" data-short="C5-4" data-title="Un cerrado es intersección numerable de los abiertos {d(x,F) < 1/n}" data-topics="topologia">
+    <div class="ej-head">
+      <span class="tag">C5-4</span>
+      <h3>Un cerrado es intersección numerable de los abiertos $\{d(x, F) \lt 1/n\}$</h3>
+      <span class="src">Clase 5 · Ejercicio 4</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico y $F \subseteq E$ cerrado. Probar que
+      $$F = \bigcap_{n \in \mathbb{N}} \{x \in E : d(x, F) \lt 1/n\}.$$</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>La inclusión difícil fabrica una sucesión de $F$ que converge a $x$.</em> Si $x \in F$, $d(x, F) = 0$ y está en todos los conjuntos. Recíprocamente, $d(x, F) \lt 1/n$ para todo $n$ da, por definición de ínfimo, puntos $y_n \in F$ con $d(x, y_n) \lt 1/n$; entonces $y_n \to x$ y, como $F$ es cerrado, $x \in F$ (<span class="ref" data-ref="cor-4.47">Corolario 4.47</span>). Cada $\{d(x, F) \lt 1/n\}$ es abierto por el <a class="xg" data-guia="p3" data-ej="10">Ejercicio 10</a> (d).</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\subseteq$</p>
+          <p>$\subseteq)$ Si $x \in F$, $d(x, F) = \inf\{d(x, y) : y \in F\} = 0$ porque $d(x, x) = 0$, así que $x$ está en todos los conjuntos.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\supseteq$</p>
+          <p>$\supseteq)$ Sea $x$ con $d(x, F) \lt 1/n$ para todo $n$. Como $d(x, F)$ es un ínfimo, para cada $n$ existe $y_n \in F$ con $d(x, y_n) \lt 1/n$. Entonces $y_n \to x$, y como $(y_n)_n \subseteq F$ y $F$ es cerrado, <span class="ref" data-ref="cor-4.47">$x \in F$</span>.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-4-c1" aria-label="Un cerrado F del plano y el entorno abierto {d(x, F) menor que 1/n}, que se achica sobre F al crecer n"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c5-4-n"><i>n</i></label><input type="range" id="ejp3-c5-4-n" min="1" max="12" value="2"><output id="ejp3-c5-4-n-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c5-4-read" aria-live="polite"></dl>
+          <figcaption>En ℝ², <i>F</i> = un cuadrado cerrado unido a un segmento (elegido para el dibujo). La zona sombreada es {<i>d</i>(<i>x</i>, <i>F</i>) &lt; 1/<i>n</i>}. Arrastrá <i>x</i>: si está fuera de <i>F</i>, a partir de algún <i>n</i> deja de estar en la zona; el punto naranja es el <i>y</i> ∈ <i>F</i> más cercano.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C5-5 ===== -->
+  <article class="ej" id="ejp3-c5-5" data-short="C5-5" data-title="Si todo encaje de cerrados acotados con diámetro → 0 tiene intersección no vacía, el espacio es completo" data-topics="completitud">
+    <div class="ej-head">
+      <span class="tag">C5-5</span>
+      <h3>Si todo encaje de cerrados acotados con diámetro $\to 0$ tiene intersección no vacía, el espacio es completo</h3>
+      <span class="src">Clase 5 · Ejercicio 5</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Sea $(E, d)$ un espacio métrico tal que para <b>toda</b> sucesión $(A_n)_n$ de subconjuntos cerrados, <span class="ref" data-ref="def-4.8">acotados</span> y no vacíos con $A_{n+1} \subseteq A_n$ y $\lim_n \operatorname{diam}(A_n) = 0$ se tiene $\bigcap_n A_n \ne \emptyset$. Probar que $E$ es completo.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Encajar las clausuras de las colas de la sucesión de Cauchy.</em> Es el recíproco del <a class="xg" data-guia="p3" data-ej="16">Ejercicio 16</a>. Dada una Cauchy $(a_n)_n$, la condición de Cauchy con $\varepsilon = 1/k$ da índices $n_1 \le n_2 \le \dots$ tales que la cola $\{a_n : n \ge n_k\}$ tiene <span class="ref" data-ref="def-4.9">diámetro</span> $\le 1/k$. Sus clausuras $A_k$ son cerradas, no vacías, encajadas, y conservan el diámetro (<a class="xg" data-guia="p3" data-ej="7">Ejercicio 7</a> de la Práctica 3), así que la hipótesis da un $a \in \bigcap A_k$. Que $a_n \to a$ sale por el absurdo: una subsucesión que se mantenga a distancia $\ge \varepsilon$ de $a$ no cabe en un $A_k$ de diámetro $\lt \varepsilon / 2$ que contiene a $a$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Las clausuras de las colas</p>
+          <p>Sea $(a_n)_n$ de Cauchy. Elegimos inductivamente $n_1 \le n_2 \le \dots$ con $d(a_n, a_m) \lt 1/k$ para $n, m \ge n_k$, y definimos $A_k = \overline{\{a_n : n \ge n_k\}}$. Entonces, para todo $k$: $A_k$ es cerrado y no vacío; $\operatorname{diam} \{a_n : n \ge n_k\} \le 1/k$ y, por el <a class="xg" data-guia="p3" data-ej="7">Ejercicio 7</a> de la Práctica 3, $\operatorname{diam}(A_k) \le 1/k$ (en particular $A_k$ es acotado); y $A_{k+1} \subseteq A_k$ porque $\{a_n : n \ge n_{k+1}\} \subseteq \{a_n : n \ge n_k\}$ y <span class="ref" data-ref="ext-clausura-monotona">la clausura es monótona</span>. Así $\operatorname{diam}(A_k) \to 0$ y, por hipótesis, existe $a \in \bigcap_k A_k$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-5-c1" aria-label="Una sucesión de Cauchy en el plano, la cola desde n_k resaltada y un disco de diámetro 1/k que la contiene"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp3-c5-5-k"><i>k</i></label><input type="range" id="ejp3-c5-5-k" min="1" max="8" value="1"><output id="ejp3-c5-5-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp3-c5-5-read" aria-live="polite"></dl>
+          <figcaption>En ℝ², <i>a<sub>n</sub></i> = <i>p</i> + (cos <i>n</i>, sen <i>n</i>)·0,4/<i>n</i> (valores elegidos para el dibujo; en ℝ² la intersección existe, el dibujo sólo muestra el encaje). Los puntos azules son la cola {<i>a<sub>n</sub></i> : <i>n</i> ≥ <i>n<sub>k</sub></i>}; el círculo punteado tiene diámetro 1/<i>k</i> y la contiene. Las colas anteriores quedan en gris.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$a_n \to a$, por el absurdo</p>
+          <p>Veamos que $a_n \to a$. Si no, hay $\varepsilon \gt 0$ y una subsucesión con $d(a_{n_j}, a) \ge \varepsilon$ para todo $j$. Tomemos $k$ con $2/k \lt \varepsilon$. Como $a \in A_k = \overline{\{a_n : n \ge n_k\}}$, hay $m \ge n_k$ con $d(a, a_m) \lt 1/k$; y como $n_j \to +\infty$, hay $j_0$ con $n_{j_0} \ge n_k$, de modo que $a_{n_{j_0}}, a_m \in A_k$. Entonces
+            $$\begin{aligned} \varepsilon &\le d(a_{n_{j_0}}, a) \le d(a_{n_{j_0}}, a_m) + d(a_m, a) \\ &\lt \operatorname{diam}(A_k) + \frac1k \le \frac2k \lt \varepsilon, \end{aligned}$$
+            absurdo. Luego $a_n \to a$ y $E$ es completo.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== C5-6 ===== -->
+  <article class="ej" id="ejp3-c5-6" data-short="C5-6" data-title="Completo si y sólo si toda bola cerrada es completa" data-topics="completitud">
+    <div class="ej-head">
+      <span class="tag">C5-6</span>
+      <h3>Completo si y sólo si toda bola cerrada es completa</h3>
+      <span class="src">Clase 5 · Ejercicio 6</span>
+      <span class="topics"><a class="tag topic" href="#tema-completitud">completitud</a></span>
+    </div>
+    <div class="enun"><p>Probar que $(E, d)$ es completo si y sólo si toda bola cerrada $\overline{B}(x, r) = \{y : d(x, y) \le r\}$ es completa.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Una Cauchy es acotada, así que vive en una bola cerrada.</em> La ida es el <a class="xg" data-guia="p3" data-ej="15">Ejercicio 15</a> de la Práctica 3 (las bolas cerradas son cerradas, <a class="xg" data-guia="p3" data-ej="4">Ejercicio 4</a> (d)). Para la vuelta, la condición de Cauchy con $\varepsilon = 1$ encierra a toda la sucesión en una bola cerrada centrada en $a_1$ (<span class="ref" data-ref="teo-4.54">Teorema 4.54 a</span>); por hipótesis esa bola es completa, así que la sucesión converge ahí, y por lo tanto en $E$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$\Rightarrow$</p>
+          <p>$\Rightarrow)$ Por el <a class="xg" data-guia="p3" data-ej="15">Ejercicio 15</a> de la Práctica 3, ya que $\overline{B}(x, r)$ es cerrada (<a class="xg" data-guia="p3" data-ej="4">Ejercicio 4</a> (d)).</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\Leftarrow$</p>
+          <p>$\Leftarrow)$ Sea $(a_n)_n \subseteq E$ de Cauchy. Es acotada (<span class="ref" data-ref="teo-4.54">Teorema 4.54 a</span>): existe $M \gt 0$ con $(a_n)_n \subseteq \overline{B}(a_1, M)$. Por hipótesis $\overline{B}(a_1, M)$ es completo, así que $(a_n)_n$ converge a un punto de $\overline{B}(a_1, M)$, y como la distancia es la misma, converge en $(E, d)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp3-c5-6-c1" aria-label="Una sucesión de Cauchy en el plano encerrada en la bola cerrada de centro a1 y radio M"></canvas>
+          <dl class="read" id="ejp3-c5-6-read" aria-live="polite"></dl>
+          <figcaption>En ℝ², una Cauchy elegida para el dibujo (una espiral que se cierra sobre un punto). El disco es <i>B̄</i>(<i>a</i>₁, <i>M</i>) con <i>M</i> = máx<sub><i>n</i></sub> <i>d</i>(<i>a</i>₁, <i>a<sub>n</sub></i>): toda la sucesión, y su límite, quedan adentro.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+</section>
