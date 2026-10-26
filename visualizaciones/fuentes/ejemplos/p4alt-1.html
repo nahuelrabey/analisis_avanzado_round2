@@ -49,9 +49,9 @@
         <div class="step-text">
           <p class="step-title">Primera demostración ($\varepsilon$–$\delta$, pág. 60)</p>
           <p>Sea $\varepsilon \gt 0$ y $x \in X$, y llamemos $h = f \circ g$ e $y_0 = g(x)$. Como $f$ es continua, podemos encontrar $\delta_1 \gt 0$ (que depende de $\varepsilon$ y de $y_0$) con
-            $$\sigma(f(y_0), f(y)) \lt \varepsilon \quad \text{siempre que} \quad \rho(y_0, y) \lt \delta_1 .$$
+            $$\begin{aligned} &\sigma(f(y_0), f(y)) \lt \varepsilon \\ &\text{siempre que} \quad \rho(y_0, y) \lt \delta_1 . \end{aligned}$$
             Como $g$ es continua, podemos encontrar $\delta_2 \gt 0$ tal que
-            $$\rho(y_0, g(t)) \lt \delta_1 \quad \text{siempre que} \quad d(x, t) \lt \delta_2 .$$
+            $$\begin{aligned} &\rho(y_0, g(t)) \lt \delta_1 \\ &\text{siempre que} \quad d(x, t) \lt \delta_2 . \end{aligned}$$
             Tomando $y = g(t)$ en la primera desigualdad, tenemos entonces $\sigma(h(x), h(t)) \lt \varepsilon$ siempre que $d(x, t) \lt \delta_2$, como se quería.</p>
         </div>
         <figure class="viz">
@@ -169,7 +169,7 @@
       <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Sea $k := \mathbb{R}$ o $\mathbb{C}$ (con la métrica usual, y $k \times k$ con $d_\infty$). Pruebe que las funciones
-      $$\begin{aligned} + : k \times k &\to k, & (x, y) &\mapsto x + y, \\ m : k \times k &\to k, & (x, y) &\mapsto x y, \\ \operatorname{inv} : k \setminus \{0\} &\to k \setminus \{0\}, & x &\mapsto x^{-1} \end{aligned}$$
+      $$\begin{gathered} + : k \times k \to k, \quad (x, y) \mapsto x + y, \\ m : k \times k \to k, \quad (x, y) \mapsto x y, \\ \operatorname{inv} : k \setminus \{0\} \to k \setminus \{0\}, \quad x \mapsto x^{-1} \end{gathered}$$
       son continuas. Concluya que la suma, el producto y el cociente de funciones continuas $f : X \to k$ y $g : X \to k$ son funciones continuas (por supuesto, el dominio del cociente de $f$ por $g$ es $X \setminus g^{-1}(0)$).</p></div>
     <div class="nota"><b>Nota 3.15 de la fuente</b>como la función identidad $\operatorname{id} : k \to k$ y las funciones constantes $c_a : k \to k$ ($a \in k$) son continuas, una consecuencia directa del ejercicio anterior es que las funciones racionales $P/Q : A \to k$, donde $P$ y $Q$ son polinomios con coeficientes en $k$ y $A = k \setminus Q^{-1}(0)$, son continuas.</div>
     <div class="nota"><b>Nota</b>la fuente deja el ejercicio sin resolución. La conclusión sobre $f + g$, $f g$ y $f / g$ sale de la Proposición 3.9 (<a href="#ejp4alt-o2-1-prop">O2-1</a>): por ejemplo $f + g = + \circ (f, g)$, y $(f, g) : X \to k \times k$ es continua porque lo son sus coordenadas (Proposición 3.11 de la fuente, que es el ejemplo <span class="ref" data-ref="ext-ejemplo-c6-1">C6-1</span> de <code>ejemplos/p4.typ</code>). Esta es la pieza que falta en <code>apuntes.typ</code> para justificar en una línea que $x^2 + y^2$ y $(x^2 y) / ((1 / 2) x^2 + (x - 1)^2 y^2)$ son continuas fuera de los puntos problemáticos (<a class="xg" data-guia="p4" data-ej="1">Ej. 1 de la Práctica 4</a>), y que $h = d(x, A) / (d(x, A) + d(x, B))$ es continua (<a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>).</div>
@@ -251,7 +251,7 @@
       <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Pruebe que la función $f : \mathbb{R}^2 \to \mathbb{R}$ definida por
-      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 & \text{si } x \ge y, \\[6pt] \dfrac{\begin{gathered}(x - y)^3 - 3 (x - y)^2 \\ {} + 2 x^2 + 2 y^2 + 2\end{gathered}}{x^2 + y^2 + 1} & \text{si } x \le y \end{cases}$$
+      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 \\ \qquad \text{si } x \ge y, \\[6pt] \dfrac{(x - y)^3 - 3 (x - y)^2 + 2 x^2 + 2 y^2 + 2}{x^2 + y^2 + 1} \\ \qquad \text{si } x \le y \end{cases}$$
       es continua.</p></div>
     <div class="ej-grid">
       <div class="estrategia"><b>Idea</b><p>La fuente no resuelve el ejercicio, pero lo ubica inmediatamente después de la Proposición 3.16: los semiplanos $C_1 = \{(x, y) : x \ge y\}$ y $C_2 = \{(x, y) : x \le y\}$ son cerrados, cubren $\mathbb{R}^2$, y sobre cada uno $f$ coincide con una función racional (continua por la Nota 3.15, <a href="#ejp4alt-o2-2">O2-2</a>). Lo único que hay que controlar es que ambas fórmulas coincidan sobre la recta $x = y$, para que $f$ esté bien definida: allí la primera vale $2$ y la segunda vale $(2 x^2 + 2 y^2 + 2) / (x^2 + y^2 + 1) = 2$.</p></div>
@@ -350,7 +350,7 @@
     <div class="enun">
       <ol class="items">
         <li>Sea $f : \mathbb{R}^2 \to \mathbb{R}$ un polinomio, es decir,
-          $$\begin{aligned} f(x, y) &= \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x^j y^k \\ &= a_{00} + a_{10} x + a_{01} y + a_{20} x^2 \\ &\quad + a_{11} x y + a_{02} y^2 + \cdots + a_{0d} y^d, \end{aligned}$$
+          $$\begin{aligned} f(x, y) &= \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x^j y^k \\ &= a_{00} + a_{10} x + a_{01} y \\ &\quad + a_{20} x^2 + a_{11} x y + a_{02} y^2 \\ &\quad + \cdots + a_{0d} y^d, \end{aligned}$$
           para algún $d \in \mathbb{N}$ (el grado) y $a_{jk} \in \mathbb{R}$. Entonces $f$ es continua.</li>
         <li>(Ejercicio 7.5.2) Sea $f : \mathbb{R}^2 \to \mathbb{R}$ con $f(0, 0) = 0$ y $f(x, y) = \dfrac{x y}{x^2 + y^2}$ si $(x, y) \neq (0, 0)$. Probar que para cada $x$ fijo la función $y \mapsto f(x, y)$ es continua, que para cada $y$ fijo la función $x \mapsto f(x, y)$ es continua, pero que $f$ no es continua.</li>
       </ol></div>
@@ -359,7 +359,7 @@
         <div class="step-text">
           <p class="step-title">a) Por sucesiones y álgebra de límites</p>
           <p>Sea $((x_n, y_n))_{n \in \mathbb{N}}$ una sucesión en $\mathbb{R}^2$ que converge a $(x, y) \in \mathbb{R}^2$. Ya probamos que esto significa $\lim_{n \to \infty} x_n = x$ y $\lim_{n \to \infty} y_n = y$. Por la Proposición 2.2.5 de la fuente (álgebra de límites de sucesiones en $\mathbb{R}$),
-            $$\begin{aligned} \lim_{n \to \infty} f(x_n, y_n) &= \lim_{n \to \infty} \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x_n^j y_n^k \\ &= \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x^j y^k = f(x, y). \end{aligned}$$
+            $$\begin{aligned} &\lim_{n \to \infty} f(x_n, y_n) \\ &\quad = \lim_{n \to \infty} \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x_n^j y_n^k \\ &\quad = \sum_{j=0}^{d} \sum_{k=0}^{d-j} a_{jk} x^j y^k = f(x, y). \end{aligned}$$
             Luego $f$ es continua en $(x, y)$ y, como $(x, y)$ era arbitrario, $f$ es continua en todas partes. Análogamente, un polinomio en $n$ variables es continuo. $\square$</p>
         </div>
       </div>
@@ -401,7 +401,7 @@
         <div class="step-text">
           <p class="step-title">(i) Elegir $\delta = \min(\delta_1, \delta_2)$</p>
           <p>Sea $(x, y) \in \mathbb{R}^2$. Dado $\varepsilon \gt 0$, podemos encontrar $\delta_1 \gt 0$ con $|f(x) - f(s)| \lt \varepsilon / 2$ siempre que $|x - s| \lt \delta_1$, y $\delta_2 \gt 0$ con $|g(y) - g(t)| \lt \varepsilon / 2$ siempre que $|y - t| \lt \delta_2$. Si ponemos $\delta = \min(\delta_1, \delta_2)$, entonces $\|(x, y) - (s, t)\|_2 \lt \delta$ implica
-            $$|x - s| \lt \delta \le \delta_1 \quad \text{y} \quad |y - t| \lt \delta \le \delta_2,$$</p>
+            $$\begin{aligned} &|x - s| \lt \delta \le \delta_1 \quad \text{y} \\ &|y - t| \lt \delta \le \delta_2, \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">
@@ -428,7 +428,7 @@
       <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Si $f : X \times Y \to Z$ es continua, entonces es continua en cada variable por separado: para cada $c \in X$, $y \mapsto f(c, y)$ es continua, y análogamente $x \mapsto f(x, c')$ (Ej. 9.4 de la fuente). El recíproco es falso. Sea $f : \mathbb{R}^2 \to \mathbb{R}$ dada por
-      $$f(x, y) = \begin{cases} \dfrac{x y}{x^2 + y^2} & \text{si } (x, y) \neq (0, 0), \\[4pt] 0 & \text{si } (x, y) = (0, 0). \end{cases}$$
+      $$f(x, y) = \begin{cases} \dfrac{x y}{x^2 + y^2} \\ \qquad \text{si } (x, y) \neq (0, 0), \\[4pt] 0 \qquad \text{si } (x, y) = (0, 0). \end{cases}$$
       Probar que $f(x, c')$ es continua para todo $c' \in \mathbb{R}$, pero $f$ no es continua como función de dos variables.</p></div>
     <div class="steps">
       <div class="step">
@@ -441,7 +441,7 @@
         <div class="step-text">
           <p class="step-title">No continua: la diagonal</p>
           <p>Pero $f$ no es continua como función de dos variables: encontramos que
-            $$f(x, x) = \begin{cases} \dfrac{x^2}{x^2 + x^2} = 1/2 & \text{si } x \neq 0, \\[4pt] 0 & \text{si } x = 0, \end{cases}$$
+            $$f(x, x) = \begin{cases} \frac{x^2}{x^2 + x^2} = 1/2 & \text{si } x \neq 0, \\[4pt] 0 & \text{si } x = 0, \end{cases}$$
             así que vemos que $f$ no es continua aplicándola a la sucesión $(1, 1), (1/2, 1/2), (1/3, 1/3), \dots \in \mathbb{R}^2$ (que converge a $(0, 0)$ mientras $f$ vale constantemente $1/2$ y $f(0, 0) = 0$). Mirando el gráfico se ve el problema en el origen.</p>
         </div>
         <figure class="viz">
@@ -517,9 +517,9 @@
         <div class="step-text">
           <p class="step-title">1.3.b. Límites radiales en coordenadas polares</p>
           <p>Llegaríamos a lo mismo con otra notación. Para $\rho \gt 0$ y $\theta \in \mathbb{R}$,
-            $$\begin{aligned} &f(\rho \cos \theta, \rho \sin \theta) = \frac{\rho^2 \cos \theta \sin \theta}{\rho^2}, \quad \text{luego} \\ &\lim_{\rho \to 0} f(\rho \cos \theta, \rho \sin \theta) = \cos \theta \sin \theta. \end{aligned}$$
+            $$\begin{aligned} &f(\rho \cos \theta, \rho \sin \theta) = \frac{\rho^2 \cos \theta \sin \theta}{\rho^2}, \\ &\text{luego} \\ &\lim_{\rho \to 0} f(\rho \cos \theta, \rho \sin \theta) = \cos \theta \sin \theta. \end{aligned}$$
             Existen todos los límites radiales de $f$ en el origen, pero no coinciden (para $\theta = 0$ vale $0$ y para $\theta = \pi / 4$ vale $1/2$): $f$ no tiene límite en el origen. En cuanto a $g$ y $h$,
-            $$\begin{aligned} g(\rho \cos \theta, \rho \sin \theta) &= \frac{\rho \cos^2 \theta \sin \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \quad \text{y} \\ h(\rho \cos \theta, \rho \sin \theta) &= \frac{\rho \cos \theta \sin^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta}, \end{aligned}$$
+            $$g(\rho \cos \theta, \rho \sin \theta) = \frac{\rho \cos^2 \theta \sin \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta}$$ y $$h(\rho \cos \theta, \rho \sin \theta) = \frac{\rho \cos \theta \sin^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta},$$
             y ambos tienden a $0$ cuando $\rho \to 0$, para todo $\theta$: existen todos los límites radiales de $g$ y $h$ y coinciden.</p>
         </div>
       </div>
@@ -529,7 +529,7 @@
           <p>Para $(x, y) \neq (0, 0)$ se tiene claramente
             $$|g(x, y)| = \frac{x^2 |y|}{x^2 + y^4} \le |y|,$$
             de donde $\lim_{(x, y) \to (0, 0)} g(x, y) = 0$. Por tanto $g$ es continua en todo punto de $\mathbb{R}^2$. Nótese que el estudio de los límites radiales y direccionales de $g$ no era necesario: la acotación da directamente la existencia del límite. Una acotación similar se podría haber adivinado, de forma más mecánica, a partir del cálculo en polares: para todo $\rho \gt 0$ y $\theta \in \mathbb{R}$,
-            $$\begin{aligned} |g(\rho \cos \theta, \rho \sin \theta)| &= \frac{\rho |\sin \theta| \cos^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \\ &\le \rho \frac{\cos^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \le \rho . \end{aligned}$$
+            $$\begin{aligned} &|g(\rho \cos \theta, \rho \sin \theta)| \\ &\quad = \frac{\rho |\sin \theta| \cos^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \\ &\quad \le \rho \frac{\cos^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \le \rho . \end{aligned}$$
             Es decir, tomando $k(\rho) = \rho$ se tiene $|g(\rho \cos \theta, \rho \sin \theta)| \le k(\rho)$ para todo $\theta$ y todo $\rho \gt 0$, con $\lim_{\rho \to 0} k(\rho) = 0$, de donde el límite de $g$ en el origen es $0$. Un intento de acotación análogo para $h$ no daría resultado.</p>
         </div>
       </div>
@@ -616,7 +616,7 @@
       <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Estudiar la continuidad del campo escalar $f : \mathbb{R}^2 \to \mathbb{R}$ definido por
-      $$f(x, y) = \begin{cases} \dfrac{y \log(1 + x^2)}{x^2 + y^2} & \text{si } (x, y) \neq (0, 0), \\[4pt] 0 & \text{si } x = y = 0. \end{cases}$$</p></div>
+      $$f(x, y) = \begin{cases} \dfrac{y \log(1 + x^2)}{x^2 + y^2} \\ \qquad \text{si } (x, y) \neq (0, 0), \\[4pt] 0 \qquad \text{si } x = y = 0. \end{cases}$$</p></div>
     <div class="steps">
       <div class="step">
         <div class="step-text">
@@ -628,7 +628,7 @@
         <div class="step-text">
           <p class="step-title">3.b. La función auxiliar $\varphi$</p>
           <p>Para el origen, recordamos que $\lim_{x \to 0} \frac{\log(1 + x^2)}{x^2} = 1$, luego la función $\varphi : \mathbb{R} \to \mathbb{R}$ definida por
-            $$\varphi(x) = \frac{\log(1 + x^2)}{x^2} \quad (x \neq 0), \qquad \varphi(0) = 1$$
+            $$\begin{aligned} \varphi(x) &= \frac{\log(1 + x^2)}{x^2} \quad (x \neq 0), \\ \varphi(0) &= 1 \end{aligned}$$
             es continua en el origen. Por definición de $\varphi$ se tiene $\log(1 + x^2) = x^2 \varphi(x)$ para todo $x \neq 0$, igualdad obvia también para $x = 0$. Esto permite escribir
             $$\begin{aligned} &f(x, y) = \frac{y x^2}{x^2 + y^2} \cdot \varphi(x) \\ &\forall (x, y) \in \mathbb{R}^2 \setminus \{(0, 0)\}, \qquad (1) \end{aligned}$$
             y ya sabemos que
@@ -639,7 +639,7 @@
         <div class="step-text">
           <p class="step-title">3.b. La acotación</p>
           <p>Por otra parte, claramente
-            $$\left|\frac{x^2 y}{x^2 + y^2}\right| \le |y| \quad \forall (x, y) \in \mathbb{R}^2 \setminus \{(0, 0)\},$$
+            $$\begin{aligned} &\left|\frac{x^2 y}{x^2 + y^2}\right| \le |y| \\ &\forall (x, y) \in \mathbb{R}^2 \setminus \{(0, 0)\}, \end{aligned}$$
             de donde
             $$\lim_{(x, y) \to (0, 0)} \frac{x^2 y}{x^2 + y^2} = 0. \qquad (3)$$
             En vista de (1), (2) y (3), $\lim_{(x, y) \to (0, 0)} f(x, y) = 0 = f(0, 0)$, luego $f$ es continua en el origen.</p>
@@ -682,7 +682,7 @@
         <div class="step-text">
           <p class="step-title">Con $\delta = 1$</p>
           <p>Para ver que $f$ es continua en $x$, sea $\varepsilon \gt 0$ y tomemos $\delta = 1$. Entonces
-            $$\begin{aligned} d_X(x, y) \lt \delta &\Longrightarrow x = y \\ &\Longrightarrow d_Y(f(x), f(y)) = d_Y(f(x), f(x)) \\ &\qquad\;\; = 0 \lt \varepsilon. \end{aligned}$$
+            $$\begin{aligned} d_X(x, y) \lt \delta &\Longrightarrow x = y \\ &\Longrightarrow d_Y(f(x), f(y)) \\ &\qquad = d_Y(f(x), f(x)) \\ &\qquad = 0 \lt \varepsilon. \end{aligned}$$
             $\square$</p>
         </div>
         <figure class="viz">
@@ -789,9 +789,9 @@
         <div class="step-text">
           <p class="step-title">Item 2: las proyecciones son abiertas</p>
           <p>Las proyecciones son abiertas porque
-            $$\begin{aligned} p_X(B^{X \times Y}((x, y), r)) &= p_X(B^X(x, r) \times B^Y(y, r)) \\ &= B^X(x, r) \end{aligned}$$
+            $$\begin{aligned} &p_X(B^{X \times Y}((x, y), r)) \\ &\quad = p_X(B^X(x, r) \times B^Y(y, r)) \\ &\quad = B^X(x, r) \end{aligned}$$
             y
-            $$\begin{aligned} p_Y(B^{X \times Y}((x, y), r)) &= p_Y(B^X(x, r) \times B^Y(y, r)) \\ &= B^Y(y, r) \end{aligned}$$
+            $$\begin{aligned} &p_Y(B^{X \times Y}((x, y), r)) \\ &\quad = p_Y(B^X(x, r) \times B^Y(y, r)) \\ &\quad = B^Y(y, r) \end{aligned}$$
             para todo $r \gt 0$ y cada $(x, y) \in X \times Y$.</p>
         </div>
         <figure class="viz">
@@ -1108,7 +1108,7 @@
         <div class="step-text">
           <p class="step-title">Como preimagen</p>
           <p>El conjunto dado se puede expresar como
-            $$A = \{x \in X : -r \lt f(x) \lt r\} = f^{-1}((-r, r)).$$
+            $$\begin{aligned} A &= \{x \in X : -r \lt f(x) \lt r\} \\ &= f^{-1}((-r, r)). \end{aligned}$$
             Como $(-r, r)$ es abierto en $\mathbb{R}$, su preimagen es abierta en $X$ por continuidad (Teorema 1.7 de la fuente: $f$ es continua si y sólo si $f^{-1}(U)$ es abierto en $X$ para todo $U$ abierto en $Y$; <span class="ref" data-ref="teo-5.9">Teo. 5.9</span> del apunte). $\square$</p>
         </div>
         <figure class="viz">
@@ -1149,7 +1149,7 @@
           <p>Si $\lambda = 0$ el resultado es directo, pues la función $h = f + \lambda g = f$ es continua de acuerdo al enunciado. Supongamos entonces $\lambda \neq 0$. Sea $x \in X$ y $\varepsilon \gt 0$. Como $f$ y $g$ son continuas en $x$, se tendrá que existen $\delta_1, \delta_2 \gt 0$ tales que
             $$\begin{aligned} d(x, y) \lt \delta_1 &\Rightarrow |f(x) - f(y)| \lt \frac{\varepsilon}{2}, \\ d(x, y) \lt \delta_2 &\Rightarrow |g(x) - g(y)| \lt \frac{\varepsilon}{2 |\lambda|}. \end{aligned}$$
             Por lo tanto, definiendo $\delta := \min\{\delta_1, \delta_2\}$ se tendrá
-            $$\begin{aligned} d(x, y) \lt \delta \Rightarrow{} & |f(x) + \lambda g(x) - f(y) - \lambda g(y)| \\ & \le |f(x) - f(y)| + |\lambda| |g(x) - g(y)| \\ & \lt \varepsilon, \end{aligned}$$
+            $$\begin{aligned} & d(x, y) \lt \delta \Rightarrow \\ & |f(x) + \lambda g(x) - f(y) - \lambda g(y)| \\ & \quad \le |f(x) - f(y)| \\ & \qquad + |\lambda| |g(x) - g(y)| \lt \varepsilon, \end{aligned}$$
             concluyendo así que $f + \lambda g$ es continua en $x$.</p>
         </div>
       </div>
@@ -1177,8 +1177,8 @@
       <div class="step">
         <div class="step-text">
           <p class="step-title">c) Interior y clausura</p>
-          <p>Como $A^* := \{x \in X : f(x) - g(x) \gt \alpha\} = (f - g)^{-1}((\alpha, +\infty))$, $f - g$ es una función continua y $(\alpha, +\infty)$ es un conjunto abierto en $\mathbb{R}$, se tiene que $A^*$ es abierto que además está contenido en $A$. Por lo tanto $A^* \subseteq A^{\circ}$ pues $A^{\circ}$ es <span class="ref" data-ref="prop-4.21">el conjunto abierto más grande contenido en $A$</span> (la fuente cita su Ejercicio 1.11).</p>
-          <p>Similarmente, observamos que $B^* := \{x \in X : f(x) + g(x) \le \beta\} = (f + g)^{-1}((-\infty, \beta])$ es un conjunto cerrado, por ser $f + g$ una función continua y $(-\infty, \beta]$ un conjunto cerrado en $\mathbb{R}$. Como $B \subseteq B^*$ se deduce $\overline{B} \subseteq B^*$ (la clausura es el menor cerrado que contiene a $B$). $\square$</p>
+          <p>Como $A^* := \{x \in X : f(x) - g(x) \gt \alpha\}$ $= (f - g)^{-1}((\alpha, +\infty))$, $f - g$ es una función continua y $(\alpha, +\infty)$ es un conjunto abierto en $\mathbb{R}$, se tiene que $A^*$ es abierto que además está contenido en $A$. Por lo tanto $A^* \subseteq A^{\circ}$ pues $A^{\circ}$ es <span class="ref" data-ref="prop-4.21">el conjunto abierto más grande contenido en $A$</span> (la fuente cita su Ejercicio 1.11).</p>
+          <p>Similarmente, observamos que $B^* := \{x \in X : f(x) + g(x) \le \beta\}$ $= (f + g)^{-1}((-\infty, \beta])$ es un conjunto cerrado, por ser $f + g$ una función continua y $(-\infty, \beta]$ un conjunto cerrado en $\mathbb{R}$. Como $B \subseteq B^*$ se deduce $\overline{B} \subseteq B^*$ (la clausura es el menor cerrado que contiene a $B$). $\square$</p>
         </div>
       </div>
     </div>
@@ -1206,7 +1206,7 @@
         <figcaption>Con <i>X</i> = ℝ (se ve la ventana [0, 6]) y las funciones elegidas <i>f</i>(<i>x</i>) = 1 + 0,8 sen(1,4<i>x</i>) (azul) y <i>g</i>(<i>x</i>) = 0,15<i>x</i> + 0,3 (naranja). Arrastrá <i>x</i>₀ sobre el eje. Las dos tiras de abajo son <i>g</i><sup>−1</sup>((−∞, <i>y</i>)) y <i>f</i><sup>−1</sup>((<i>y</i>, +∞)); la tercera, en verde, su intersección, que contiene a <i>x</i>₀ y queda dentro de <i>U</i> (sombreado claro).</figcaption>
       </figure>
     </div>
-    <div class="nota"><b>Nota</b>la fuente enuncia el resultado para $Y$ con la topología del orden; en ese caso agrega: "si $(g(x_0), f(x_0)) = \emptyset$, entonces $g^{-1}((-\infty, f(x_0))) \cap f^{-1}((g(x_0), +\infty))$ es un entorno de $x_0$ contenido en $U$", caso que no ocurre en $\mathbb{R}$. Como consecuencia (Ejemplo 8.22, pág. 15), $A_1 = \{f \le g\}$ y $A_2 = \{g \le f\}$ son cerrados, lo que da el <a class="xg" data-guia="p4" data-ej="4">Ej. 4 de la Práctica 4</a>: $\{f = g\} = A_1 \cap A_2$ es cerrado y $\{f \neq g\} = \{f \gt g\} \cup \{g \gt f\}$ es abierto (para $f, g$ a valores reales; el caso general del Ej. 4 se hace con <a href="#ejp4alt-o14-12">O14-12</a> (iv)). Alternativa sin indicación: $U = (f - g)^{-1}((0, +\infty))$ si se dispone del álgebra de funciones continuas.</div>
+    <div class="nota"><b>Nota</b>la fuente enuncia el resultado para $Y$ con la topología del orden; en ese caso agrega: "si $(g(x_0), f(x_0)) = \emptyset$, entonces $g^{-1}((-\infty, f(x_0)))$ $\cap\, f^{-1}((g(x_0), +\infty))$ es un entorno de $x_0$ contenido en $U$", caso que no ocurre en $\mathbb{R}$. Como consecuencia (Ejemplo 8.22, pág. 15), $A_1 = \{f \le g\}$ y $A_2 = \{g \le f\}$ son cerrados, lo que da el <a class="xg" data-guia="p4" data-ej="4">Ej. 4 de la Práctica 4</a>: $\{f = g\} = A_1 \cap A_2$ es cerrado y $\{f \neq g\} = \{f \gt g\} \cup \{g \gt f\}$ es abierto (para $f, g$ a valores reales; el caso general del Ej. 4 se hace con <a href="#ejp4alt-o14-12">O14-12</a> (iv)). Alternativa sin indicación: $U = (f - g)^{-1}((0, +\infty))$ si se dispone del álgebra de funciones continuas.</div>
     <p class="cita"><b>Fuente</b>: S. Chavan, <i>MTH304 Topology: notes and problems</i> (IIT Kanpur), Exercise 8.14, pág. 14. <a href="https://home.iitk.ac.in/~chavan/topology_mth304.pdf">URL</a>. Acceso: página del docente en IIT Kanpur; sin licencia explícita.</p>
     <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>, <a class="xg" data-guia="p4" data-ej="5">5</a></p>
   </article>
@@ -1226,7 +1226,7 @@
         <div class="step-text">
           <p class="step-title">$h$ es continua</p>
           <p>Sea $h : A \to \mathbb{R}$ definida para cada $x \in A$ por $h(x) = d'(f(x), g(x))$. Veamos que $h$ es una función continua en $A$. Para esto, sean $\varepsilon \gt 0$ y $a \in A$. Como $f$ y $g$ son continuas en $a$, existe $\delta \gt 0$ tal que si $d(x, a) \lt \delta$, entonces $d'(f(x), f(a)) \lt \varepsilon / 2$ y $d'(g(x), g(a)) \lt \varepsilon / 2$. Luego, si $d(x, a) \lt \delta$, entonces
-            $$\begin{aligned} |h(x) - h(a)| &= |d'(f(x), g(x)) - d'(f(a), g(a))| \\ &\le d'(f(x), g(a)) + d'(g(x), g(a)) \\ &\lt \varepsilon / 2 + \varepsilon / 2 = \varepsilon, \end{aligned}$$
+            $$\begin{aligned} &|h(x) - h(a)| \\ &\quad = |d'(f(x), g(x)) - d'(f(a), g(a))| \\ &\quad \le d'(f(x), g(a)) + d'(g(x), g(a)) \\ &\quad \lt \varepsilon / 2 + \varepsilon / 2 = \varepsilon, \end{aligned}$$
             por lo que $\lim_{x \to a} h(x) = h(a)$. Por el ítem 2 del Teorema 5.3 de la fuente, $h$ es continua en cada $a \in A$, concluyéndose así que $h$ es continua en $A$.</p>
         </div>
       </div>
@@ -1234,7 +1234,7 @@
         <div class="step-text">
           <p class="step-title">$B$ es la preimagen de $\{0\}$</p>
           <p>Ahora, como $\{0\}$ es cerrado de $\mathbb{R}$ y $h$ es continua en $A$, por el ítem 3 del Teorema 5.11 de la fuente (la preimagen de un cerrado por una función continua es cerrada; es el <span class="ref" data-ref="ejap-5.10">Ej. 5.10</span> del apunte), tenemos que $h^{-1}(\{0\})$ es cerrado de $A$, es decir
-            $$\begin{aligned} h^{-1}(\{0\}) &= \{x \in A : d'(f(x), g(x)) = 0\} \\ &= \{x \in A : f(x) = g(x)\} \end{aligned}$$
+            $$\begin{aligned} &h^{-1}(\{0\}) \\ &\quad = \{x \in A : d'(f(x), g(x)) = 0\} \\ &\quad = \{x \in A : f(x) = g(x)\} \end{aligned}$$
             es cerrado de $A$.</p>
         </div>
         <figure class="viz">
@@ -1249,7 +1249,7 @@
     </div>
     <div class="nota"><b>Nota</b>la segunda línea de la cadena está mal escrita en la fuente (dice $d'(f(x), g(a))$, que no está controlado por la hipótesis); lo correcto, y lo que el argumento usa, es
       $$\begin{aligned} &|d'(f(x), g(x)) - d'(f(a), g(a))| \\ &\quad \le d'(f(x), f(a)) + d'(g(x), g(a)), \end{aligned}$$
-      que sale de aplicar dos veces la desigualdad triangular: $d'(f(x), g(x)) \le d'(f(x), f(a)) + d'(f(a), g(a)) + d'(g(a), g(x))$ y simétricamente. Con esa corrección la cota $\lt \varepsilon$ es la que afirma la fuente. Además $\delta$ se toma como el mínimo de los dos $\delta$ que dan $f$ y $g$ (la fuente lo da por sobreentendido). El complemento $A \setminus B = \{f \neq g\}$ es entonces abierto, que es la otra mitad del <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>.</div>
+      que sale de aplicar dos veces la desigualdad triangular: $d'(f(x), g(x)) \le d'(f(x), f(a))$ $+ d'(f(a), g(a)) + d'(g(a), g(x))$ y simétricamente. Con esa corrección la cota $\lt \varepsilon$ es la que afirma la fuente. Además $\delta$ se toma como el mínimo de los dos $\delta$ que dan $f$ y $g$ (la fuente lo da por sobreentendido). El complemento $A \setminus B = \{f \neq g\}$ es entonces abierto, que es la otra mitad del <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>.</div>
     <p class="cita"><b>Fuente</b>: D. Herrera Carrasco, F. Macías Romero y L. A. Guerrero Méndez, <i>La magia de los espacios métricos</i> (FCFM, BUAP, 2025), Lema 5.21, págs. 125–126 del libro (134–135 del PDF). <a href="https://www.fcfm.buap.mx/assets/docs/publicaciones/La_magia_de_los_espacios_metricos.pdf">URL</a>. Acceso: "DR © Benemérita Universidad Autónoma de Puebla", ISBN 978-607-2637-10-8; sin licencia Creative Commons explícita.</p>
     <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a></p>
   </article>

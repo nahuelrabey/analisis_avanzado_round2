@@ -218,8 +218,8 @@ PP.register(function cinta() {
   const last = n + 1;
   let tot = 0; const sizes = [];
   for (let j = 1; j <= last; j++) { sizes.push(blockSize(j)); tot += blockSize(j); }
-  const { ctx, w, h } = PP.canvas("ejp2-a156a-c2", 0.42);
-  const l = 14, r = 14, y0 = 46, th = 30;
+  const { ctx, w, h } = PP.canvas("ejp2-a156a-c2", 0.4);
+  const l = 14, r = 14, y0 = 40, th = 26;
   const Xp = (k) => l + k / tot * (w - l - r);
   let acc = 0;
   sizes.forEach((sz, i) => {
@@ -232,9 +232,27 @@ PP.register(function cinta() {
   const xm = Xp(pos - 0.5);
   PP.path(ctx, [[xm, y0 - 14], [xm, y0 + th]], C("--accent"), 2.5);
   PP.dot(ctx, xm, y0 - 14, 4, C("--accent"));
-  PP.label(ctx, frac(p, q) + " en el lugar " + pos, clamp(xm, l + 60, w - r - 60), y0 - 20, C("--accent"), "center", "bottom", 12);
-  PP.label(ctx, "1", Xp(0), h - 10, C("--muted"), "left", "bottom", 10);
-  PP.label(ctx, "lugar " + tot, Xp(tot), h - 10, C("--muted"), "right", "bottom", 10);
+  PP.label(ctx, frac(p, q) + " en el lugar " + pos, clamp(xm, l + 60, w - r - 120), y0 - 20, C("--accent"), "center", "bottom", 12);
+  // zoom del bloque Aₙ alrededor de p/q
+  const elems = [];
+  for (let pp = 1; pp < n; pp++) if (gcd(pp, n - pp) === 1) { elems.push(pp + "/" + (n - pp)); elems.push("−" + pp + "/" + (n - pp)); }
+  const show = Math.min(elems.length, w < 420 ? 5 : 7);
+  const st = clamp(idx - Math.floor(show / 2), 0, elems.length - show);
+  const yz = y0 + th + 52, gap = 6;
+  const bw = Math.min(64, (w - l - r - 40) / show - gap);
+  const zx0 = (w - show * (bw + gap)) / 2;
+  const segA = Xp(before), segB = Xp(before + blockSize(n));
+  PP.path(ctx, [[segA, y0 + th], [zx0, yz - 12]], C("--muted"), 1, [3, 3]);
+  PP.path(ctx, [[segB, y0 + th], [zx0 + show * (bw + gap) - gap, yz - 12]], C("--muted"), 1, [3, 3]);
+  for (let i = 0; i < show; i++) {
+    const e = st + i, x = zx0 + i * (bw + gap), sel = e === idx;
+    PP.rect(ctx, x, yz - 12, bw, 24, sel ? C("--accent") : C("--rule"), sel ? C("--area") : null);
+    PP.label(ctx, elems[e], x + bw / 2, yz, sel ? C("--ink") : C("--muted"), "center", "middle", Math.min(12, bw / 3.6));
+    PP.label(ctx, String(before + e + 1), x + bw / 2, yz + 16, sel ? C("--accent") : C("--muted"), "center", "top", 9.5);
+  }
+  if (st > 0) PP.label(ctx, "…", zx0 - 4, yz, C("--muted"), "right", "middle", 12);
+  if (st + show < elems.length) PP.label(ctx, "…", zx0 + show * (bw + gap), yz, C("--muted"), "left", "middle", 12);
+  PP.label(ctx, "lugar " + tot + " →", Xp(tot), y0 - 4, C("--muted"), "right", "bottom", 10);
   PP.read("ejp2-a156a-read2", [
     ["fracción", p0 + "/" + q0 + (g > 1 ? " = " + p + "/" + q + " (irreducible)" : " (ya irreducible)")],
     ["bloque", "A" + sub(n) + "  (p + q = " + n + ")"],
@@ -488,7 +506,7 @@ PP.register(function finalConst() {
   const tup = seq.slice(0, k - 1).map(neg);
   PP.read("ejp2-c24-read3", [
     ["sucesión", seq.slice(0, 10).map(neg).join(", ") + ", …"],
-    ["en A_{a,k}", "a = " + neg(a) + ", k = " + k],
+    ["en Aₐ,ₖ", "a = " + neg(a) + ", k = " + k],
     ["tupla en ℤ" + sup(k - 1), k === 1 ? "( ) (ℤ⁰ tiene un solo elemento)" : "(" + tup.join(", ") + ")", "good"],
   ]);
 }, ["ejp2-c24-kk", "ejp2-c24-aa"]);
@@ -506,7 +524,7 @@ PP.register(function capas() {
   const n = PP.val("ejp2-a158-n");
   PP.out("ejp2-a158-n-o", String(n));
   const B = conjB();
-  const { ctx, w, h } = PP.canvas("ejp2-a158-c1", 0.42);
+  const { ctx, w, h } = PP.canvas("ejp2-a158-c1", 0.34);
   const T = PP.frame(w, h, { x0: 0, x1: 1.08, y0: 0, y1: 1 }, { l: 14, r: 14, t: 26, b: 30 });
   PP.rect(ctx, T.X(1 / n), T.Y(1), T.X(1.08) - T.X(1 / n), T.Y(0) - T.Y(1), null, C("--band"));
   PP.path(ctx, [[T.X(0), T.Y(0.35)], [T.X(1.08), T.Y(0.35)]], C("--muted"), 1);
@@ -540,10 +558,10 @@ PP.register(function arquimedes() {
   const x = B[j - 1];
   const n = Math.floor(1 / x) + 1;
   PP.out("ejp2-a158-j-o", nomB(j));
-  const { ctx, w, h } = PP.canvas("ejp2-a158-c2", 0.42);
+  const { ctx, w, h } = PP.canvas("ejp2-a158-c2", 0.3);
   const hi = Math.min(1.08, 2.2 * x);
   const T = PP.frame(w, h, { x0: 0, x1: hi, y0: 0, y1: 1 }, { l: 14, r: 14, t: 20, b: 30 });
-  const y0 = T.Y(0.4);
+  const y0 = T.Y(0.5);
   PP.path(ctx, [[T.X(0), y0], [T.X(hi), y0]], C("--muted"), 1);
   PP.label(ctx, "0", T.X(0), y0 + 8, C("--muted"), "center", "top", 10);
   for (let m = 1; m <= 3 * n; m++) {
@@ -554,7 +572,6 @@ PP.register(function arquimedes() {
   }
   PP.rect(ctx, T.X(1 / n), y0 - 10, T.X(hi) - T.X(1 / n), 20, null, C("--band"));
   PP.label(ctx, "1/" + n, T.X(1 / n), y0 + 16, C("--accent"), "center", "top", 11);
-  if (n > 1 && 1 / (n - 1) <= hi) PP.label(ctx, "1/" + (n - 1), T.X(1 / (n - 1)), y0 + 16, C("--muted"), "center", "top", 10);
   PP.dot(ctx, T.X(x), y0, 6, C("--seq2"));
   PP.label(ctx, "x = " + nomB(j), T.X(x), y0 - 16, C("--seq2"), "center", "bottom", 12);
   PP.read("ejp2-a158-read2", [
@@ -653,7 +670,7 @@ PP.register(function raicesDib() {
   const n = PP.val("ejp2-a159-n"), H = PP.val("ejp2-a159-H");
   PP.out("ejp2-a159-n-o", String(n)); PP.out("ejp2-a159-H-o", String(H));
   const { list } = raicesGrado(n, 4);
-  const rowH = 34;
+  const rowH = Math.max(34, 130 / H);
   const el = document.getElementById("ejp2-a159-c2");
   const W = el.clientWidth || 480;
   const { ctx, w, h } = PP.canvas(el, (H * rowH + 50) / W);
@@ -779,9 +796,9 @@ PP.register(function pegar() {
   PP.read("ejp2-prop2-read1", [
     ["f en A", A.map((x) => x + "↦" + P.f[x - 1]).join(", ")],
     ["g en B", Bs.map((x) => x + "↦" + gv(x)).join(", ")],
-    dis ? ["φ_{f,g}", pegada.map((v, i) => (i + 1) + "↦" + v).join(", ") + "  (función ✓)", "good"]
-      : conflict ? ["φ_{f,g}(3)", "f(3) = " + P.f[2] + " ≠ g(3) = " + gv(3) + ": no es función", "bad"]
-        : ["φ_{f,g}(3)", "f(3) = g(3) = " + P.f[2] + ": esta vez zafa, pero otro par falla"],
+    dis ? ["φ(f, g)", pegada.map((v, i) => (i + 1) + "↦" + v).join(", ") + "  (función ✓)", "good"]
+      : conflict ? ["φ(f, g)(3)", "f(3) = " + P.f[2] + " ≠ g(3) = " + gv(3) + ": no es función", "bad"]
+        : ["φ(f, g)(3)", "f(3) = g(3) = " + P.f[2] + ": esta vez zafa, pero otro par falla"],
   ]);
 }, ["ejp2-prop2-par", "input[name=\"ejp2-prop2-dis\"]"]);
 
@@ -904,9 +921,9 @@ PP.register(function cadena() {
   const ks = KS[+PP.radio("ejp2-c32-ks")];
   const seq = [a];
   ks.forEach((k) => seq.push(seq[seq.length - 1] * k));
-  const { ctx, w, h } = PP.canvas("ejp2-c32-c3", 0.4);
+  const { ctx, w, h } = PP.canvas("ejp2-c32-c3", 0.3);
   const n = seq.length, l = 8, r = 8;
-  const slot = (w - l - r) / n, bw = Math.min(54, slot * 0.72), y = h * 0.6, bh = 34;
+  const slot = (w - l - r) / n, bw = Math.min(54, slot * 0.72), y = h * 0.5, bh = 34;
   seq.forEach((v, i) => {
     const cx = l + (i + 0.5) * slot;
     PP.rect(ctx, cx - bw / 2, y - bh / 2, bw, bh, C(i === 0 ? "--seq2" : "--accent"), C(i === 0 ? "--area2" : "--area"));
@@ -918,7 +935,7 @@ PP.register(function cadena() {
       PP.label(ctx, "×" + ks[i], (cx + nx) / 2, y - bh / 2 - 6, C("--seq3"), "center", "bottom", 12);
     }
   });
-  PP.label(ctx, "a₁ = a", l + 0.5 * slot, 12, C("--seq2"), "center", "middle", 11);
+  PP.label(ctx, "a₁ = a", l + 0.5 * slot, y - bh / 2 - 6, C("--seq2"), "center", "bottom", 11);
   PP.read("ejp2-c32-read3", [
     ["(aₘ)", seq.join(", ") + ", …"],
     ["aₙ | aₙ₊₁", "sí ✓"],
@@ -1010,6 +1027,7 @@ function entornos() {
   PP.path(ctx, [[T.X(x - eps), T.Y(0.95)], [T.X(x - eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
   PP.path(ctx, [[T.X(x + eps), T.Y(0.95)], [T.X(x + eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
   [x - eps / 2, x + eps / 2].forEach((v) => PP.path(ctx, [[T.X(v), T.Y(0.85)], [T.X(v), T.Y(0.75)]], C("--accent"), 1.5));
+  PP.label(ctx, "x ± εₓ/2", T.X(x + eps / 2) + 4, T.Y(0.8), C("--accent"), "left", "middle", 10);
   PP.label(ctx, "x − εₓ", T.X(x - eps) + 3, T.Y(0.95), C("--accent"), "left", "top", 10);
   PP.label(ctx, "x + εₓ", T.X(x + eps) - 3, T.Y(0.95), C("--accent"), "right", "top", 10);
   const yi = T.Y(0.55);
@@ -1024,7 +1042,7 @@ function entornos() {
   const okIn = Math.abs(x - q) < r, okSub = q - r >= x - eps - 1e-12 && q + r <= x + eps + 1e-12;
   PP.read("ejp2-c34-read1", [
     ["x, εₓ", PP.fmt(x, 4) + ", " + PP.fmt(eps, 2)],
-    ["q", qp + "/" + qd + "   (|x − q| = " + PP.fmt(Math.abs(x - q), 4) + " < εₓ/2)"],
+    ["q", frac(qp, qd) + "   (|x − q| = " + PP.fmt(Math.abs(x - q), 4) + " < εₓ/2)"],
     ["r", (rr ? rr[0] + "/" + rr[1] : PP.fmt(r, 4)) + "   (entre |x − q| y εₓ/2 = " + PP.fmt(eps / 2, 4) + ")"],
     ["x ∈ (q − r, q + r)", okIn ? "sí ✓" : "no", okIn ? "good" : "bad"],
     ["(q − r, q + r) ⊆ entorno", okSub ? "sí ✓" : "no", okSub ? "good" : "bad"],

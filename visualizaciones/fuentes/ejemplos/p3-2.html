@@ -15,13 +15,13 @@
       <span class="src">Ejemplo 4.24 de las notas</span>
       <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
     </div>
-    <div class="enun"><p>Sea $(M, d) = (\mathbb{R}^2, d_2)$ y sea $E = B((0,0), 1) = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \lt 1\}$. Veamos que $\overline{E} = B[(0,0), 1]$.</p></div>
+    <div class="enun"><p>Sea $(M, d) = (\mathbb{R}^2, d_2)$ y sea $$\begin{aligned} E &= B((0,0), 1) \\ &= \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \lt 1\}. \end{aligned}$$ Veamos que $\overline{E} = B[(0,0), 1]$.</p></div>
     <div class="estrategia"><b>Estrategia</b><p><em>Doble contención por la recta que une al centro con el punto.</em> Para ver que $B[(0,0),1] \subseteq \overline{E}$, hay que probar que todo punto del borde $x^2+y^2=1$ es <span class="ref" data-ref="def-4.22">de adherencia</span>. La idea es acercarse a ese punto <b>desde adentro</b> de $E$, siguiendo la recta que lo une con el origen: los puntos $(t x, t y)$ con $t$ cercano a $1$ (pero menor) están en $E$ y a la vez arbitrariamente cerca de $(x,y)$.</p></div>
     <div class="steps">
       <div class="step">
         <div class="step-text">
           <p class="step-title">Los puntos de $B[(0,0),1]$</p>
-          <p>Veamos que $\overline{E} = \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \le 1\} = B[(0,0), 1]$. Para esto, veamos la doble contención.</p>
+          <p>Veamos que $$\begin{aligned} \overline{E} &= \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 \le 1\} \\ &= B[(0,0), 1]. \end{aligned}$$ Para esto, veamos la doble contención.</p>
           <p>Supongamos que $(x, y) \in B[(0,0), 1]$. Si $x^2 + y^2 \lt 1$, tenemos que $(x, y) \in E$ y por lo tanto pertenece a su clausura. Si $x^2 + y^2 = 1$ (es decir, $(x, y)$ está en el borde del círculo), lo que tenemos que probar es que para todo radio $r \gt 0$, $B((x,y), r) \cap E \ne \emptyset$.</p>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <p>Para encontrar un punto que pertenezca a la intersección de las bolas lo que podemos hacer es pensar en la recta que une al $(0,0)$ con $(x,y)$. Gráficamente, podemos ver que vamos a tener un elemento en esa recta que pertenece a la intersección. Analíticamente, esto lo podemos escribir de la siguiente manera: consideremos los elementos $(t x, t y)$, con $t \in \mathbb{R}$. Para que un elemento de esta recta pertenezca a $E$, debemos tener
             $$(t x)^2 + (t y)^2 = t^2 (x^2 + y^2) = t^2 \lt 1,$$
             es decir, nos alcanza con que $|t| \lt 1$. Para que este elemento además pertenezca a la bola $B((x,y), r)$, deberíamos tener
-            $$\begin{aligned} d_2((t x, t y), (x, y)) &= \sqrt{(t x - x)^2 + (t y - y)^2} \\ &= \sqrt{(t-1)^2 (x^2+y^2)} = |t - 1| \lt r. \end{aligned}$$</p>
+            $$\begin{aligned} &d_2((t x, t y), (x, y)) \\ &\quad = \sqrt{(t x - x)^2 + (t y - y)^2} \\ &\quad = \sqrt{(t-1)^2 (x^2+y^2)} \\ &\quad = |t - 1| \lt r. \end{aligned}$$</p>
           <p>Esto nos dice que si queremos que un elemento de la pinta $(t x, t y)$ pertenezca a la intersección lo que estamos buscando es un $t \in \mathbb{R}$ que simultáneamente cumpla que $|t| \lt 1$ y $|1-t| \lt r$. Esto no es difícil de conseguir, podríamos por ejemplo fijar $t = 1 - r/2$, y este número cumple las dos condiciones que queríamos. Esto nos termina de probar que $B[(0,0), 1] \subseteq \overline{E}$.</p>
         </div>
         <figure class="viz">
@@ -133,7 +133,7 @@
           <ul class="items">
             <li><span class="ref" data-ref="def-4.11">$E^{\circ}$</span> $= (0,1)$.</li>
             <li><span class="ref" data-ref="def-4.22">$\overline{E}$</span> $= [0,1] \cup \{2\}$.</li>
-            <li><span class="ref" data-ref="def-4.33">$E'$</span> $= [0,1]$: cuando tomamos $B(2, 1/2) = (2 - 1/2, 2 + 1/2) = (3/2, 5/2)$, vemos que $B(2,1/2) \cap E = \{2\}$, y por lo tanto $2 \in \overline{E}$ pero $2 \notin E'$.</li>
+            <li><span class="ref" data-ref="def-4.33">$E'$</span> $= [0,1]$: cuando tomamos $B(2, 1/2) = (2 - 1/2, 2 + 1/2)$ $= (3/2, 5/2)$, vemos que $B(2,1/2) \cap E = \{2\}$, y por lo tanto $2 \in \overline{E}$ pero $2 \notin E'$.</li>
           </ul>
           <p>La clausura y el conjunto derivado no son iguales, como vemos en este ejemplo. Sin embargo, por definición sabemos que $E' \subseteq \overline{E}$, dado que la condición que le pedimos a punto de acumulación es más fuerte que la que le pedimos a punto de adherencia.</p>
         </div>
@@ -296,7 +296,7 @@
         <div class="step-text">
           <p class="step-title">$E$ no es abierto</p>
           <p>Tenemos que $a \in E$, pero <span class="ref" data-ref="def-4.11">$a \notin E^{\circ}$</span>. En efecto, para todo $r \gt 0$,
-            $$B(a,r) \cap E^c = (a-r,a+r) \cap [a,b)^c \ne \emptyset,$$
+            $$\begin{aligned} B(a,r) \cap E^c &= (a-r,a+r) \cap [a,b)^c \\ &\ne \emptyset, \end{aligned}$$
             ya que $a - r/2 \in B(a,r) \cap [a,b)^c$ (está a la izquierda de $a$, así que no pertenece a $E$).</p>
         </div>
         <figure class="viz">
@@ -333,21 +333,21 @@
       <span class="src">Clase 15/09</span>
       <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
     </div>
-    <div class="enun"><p>Sea $(\mathbb{R}^2, d_2)$ y $E = B[(0,0), 1] = \{(x,y) \in \mathbb{R}^2 : d_2((x,y),(0,0)) \le 1\}$. Veamos que $E$ es cerrado.</p></div>
+    <div class="enun"><p>Sea $(\mathbb{R}^2, d_2)$ y $$\begin{aligned} E = B[(0,0), 1] = \{&(x,y) \in \mathbb{R}^2 : \\ &d_2((x,y),(0,0)) \le 1\}. \end{aligned}$$ Veamos que $E$ es cerrado.</p></div>
     <div class="estrategia"><b>Estrategia</b><p><em>Acotar la distancia al origen por $r + 1$ para todo $r \gt 0$, y después hacer $r \to 0^+$.</em> La inclusión $E \subseteq \overline{E}$ vale siempre. Para la otra, si $(x,y) \in \overline{E}$, para todo $r \gt 0$ hay un punto de $E$ en $B((x,y),r)$, y la desigualdad triangular da una cota de $d_2((x,y),(0,0))$ que depende de $r$. Como esa cota vale para <b>todo</b> $r \gt 0$ y el lado izquierdo no depende de $r$, tomando $r \to 0^+$ se concluye $d_2((x,y),(0,0)) \le 1$.</p></div>
     <div class="steps">
       <div class="step">
         <div class="step-text">
           <p class="step-title">Un punto de $E$ en cada bola</p>
           <p>Como $E \subseteq \overline{E}$ <span class="ref" data-ref="obs-4.23">vale siempre</span>, falta ver $\overline{E} \subseteq E$. Sea $(x,y) \in \overline{E}$: por <span class="ref" data-ref="def-4.22">definición</span>, para todo $r \gt 0$ existe $(\tilde{x}, \tilde{y}) \in B((x,y),r) \cap E$, es decir
-            $$d_2((\tilde{x},\tilde{y}),(x,y)) \lt r \quad \text{y} \quad d_2((\tilde{x},\tilde{y}),(0,0)) \le 1.$$</p>
+            $$\begin{aligned} &d_2((\tilde{x},\tilde{y}),(x,y)) \lt r \quad \text{y} \\ &d_2((\tilde{x},\tilde{y}),(0,0)) \le 1. \end{aligned}$$</p>
         </div>
       </div>
       <div class="step has-viz">
         <div class="step-text">
           <p class="step-title">Desigualdad triangular</p>
           <p>Por desigualdad triangular,
-            $$\begin{aligned} d_2((x,y),(0,0)) &\le d_2((x,y),(\tilde{x},\tilde{y})) + d_2((\tilde{x},\tilde{y}),(0,0)) \\ &\lt r + 1. \end{aligned}$$</p>
+            $$\begin{aligned} d_2((x,y),(0,0)) &\le d_2((x,y),(\tilde{x},\tilde{y})) \\ &\quad + d_2((\tilde{x},\tilde{y}),(0,0)) \\ &\lt r + 1. \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <canvas id="ejp3-15-09-3-c1" aria-label="Disco cerrado E, un punto P con su bola B(P, r), un punto de E en esa bola y la circunferencia de radio r + 1"></canvas>
@@ -376,13 +376,13 @@
       <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-supremo">supremo</a></span>
     </div>
     <div class="enun"><p>Sea $E \subseteq \mathbb{R}$ acotado, en $(\mathbb{R}, |\cdot|)$. Veamos que $\sup(E), \inf(E) \in \overline{E}$.</p></div>
-    <div class="estrategia"><b>Estrategia</b><p><em>Todo entorno del supremo agarra algún punto de $E$, por ser la menor cota superior.</em> Recordemos que $\overline{E} = \{x \in \mathbb{R} : \forall r \gt 0,\ B(x,r) \cap E \ne \emptyset\}$. Dado $r \gt 0$, hay que hallar un punto de $E$ en $B(\sup(E), r) = (\sup(E) - r, \sup(E) + r)$. Como $\sup(E) - r$ es menor que la <b>menor</b> cota superior de $E$, ya no puede ser cota superior, así que debe existir $e \in E$ con $e \gt \sup(E) - r$; y automáticamente $e \le \sup(E) \lt \sup(E) + r$.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Todo entorno del supremo agarra algún punto de $E$, por ser la menor cota superior.</em> Recordemos que $\overline{E} = \{x \in \mathbb{R} : \forall r \gt 0,\ B(x,r) \cap E \ne \emptyset\}$. Dado $r \gt 0$, hay que hallar un punto de $E$ en $B(\sup(E), r)$ $= (\sup(E) - r, \sup(E) + r)$. Como $\sup(E) - r$ es menor que la <b>menor</b> cota superior de $E$, ya no puede ser cota superior, así que debe existir $e \in E$ con $e \gt \sup(E) - r$; y automáticamente $e \le \sup(E) \lt \sup(E) + r$.</p></div>
     <div class="steps">
       <div class="step has-viz">
         <div class="step-text">
           <p class="step-title">$\sup(E) \in \overline{E}$</p>
           <p>Sea $r \gt 0$. Como $\sup(E) - r \lt \sup(E)$ y $\sup(E)$ es <span class="ref" data-ref="def-2">la menor cota superior</span> de $E$, el número $\sup(E) - r$ no puede ser cota superior de $E$. Por lo tanto existe $e \in E$ tal que
-            $$e \in (\sup(E) - r, \sup(E)) \subseteq B(\sup(E), r),$$
+            $$\begin{aligned} e &\in (\sup(E) - r, \sup(E)) \\ &\subseteq B(\sup(E), r), \end{aligned}$$
             es decir, $e \in B(\sup(E), r) \cap E$. Como $r \gt 0$ era arbitrario, $\sup(E) \in \overline{E}$.</p>
         </div>
         <figure class="viz">
@@ -448,7 +448,7 @@
         <div class="step-text">
           <p class="step-title">Caso $d(y,x) \lt r$</p>
           <p>Sea $\varepsilon = r - d(x,y) \gt 0$. Como $y \in \overline{S(x,r)}$, existe $z \in B(y,\varepsilon) \cap S(x,r)$. Entonces
-            $$\begin{aligned} r = d(x,z) &\le d(x,y) + \underbrace{d(y,z)}_{\lt \varepsilon} \lt d(x,y) + \varepsilon \\ &= d(x,y) + r - d(x,y) = r, \end{aligned}$$
+            $$\begin{aligned} r = d(x,z) &\le d(x,y) + \underbrace{d(y,z)}_{\lt \varepsilon} \\ &\lt d(x,y) + \varepsilon \\ &= d(x,y) + r - d(x,y) = r, \end{aligned}$$
             es decir $r \lt r$, absurdo.</p>
         </div>
         <figure class="viz">
@@ -481,7 +481,7 @@
       $$A = \left\{m + \frac{1}{n+1} : m, n \in \mathbb{N}\right\}.$$
       Hallar $A^{\circ}$ y $\overline{A}$, en $(\mathbb{R}, d)$ con $d(x,y) = |x-y|$.</p></div>
     <div class="estrategia"><b>Estrategia</b><p><em>Racimos de puntos que se acumulan sobre cada natural, viniendo desde la derecha.</em> Notemos que $A \subseteq \mathbb{R}_{\gt 0}$ y $A \subseteq \mathbb{Q}$. Fijado $m \in \mathbb{N}$, al variar $n \in \mathbb{N}$ se obtiene la sucesión
-      $$m + \tfrac{1}{2}, \quad m + \tfrac{1}{3}, \quad m + \tfrac{1}{4}, \quad \dots, \quad m + \tfrac{1}{n+1} \to m,$$
+      $$\begin{aligned} &m + \tfrac{1}{2}, \quad m + \tfrac{1}{3}, \quad m + \tfrac{1}{4}, \quad \dots, \\ &m + \tfrac{1}{n+1} \to m, \end{aligned}$$
       que decrece estrictamente hacia $m$ sin alcanzarlo nunca. Es decir, $A$ es una unión de racimos de puntos que se acumulan sobre cada natural $m$, acercándose desde la derecha.</p></div>
     <div class="steps">
       <div class="step">
@@ -496,8 +496,8 @@
           <p><b>Clausura: $\overline{A} = A \cup \mathbb{N}$.</b> Veamos primero que $A \cup \mathbb{N} \subseteq \overline{A}$.</p>
           <ul class="items">
             <li>$A \subseteq \overline{A}$ vale siempre.</li>
-            <li>$\mathbb{N} \subseteq \overline{A}$: sea $m \in \mathbb{N}$; veamos que $m$ es punto de adherencia de $A$. Sea $r \gt 0$; queremos ver que $B(m,r) \cap A = (m-r, m+r) \cap A \ne \emptyset$. Por <span class="ref" data-ref="prop-1">arquimedianidad</span>, existe $k \in \mathbb{N}$ tal que $1/k \lt r$. Entonces
-              $$m - r \lt m \lt m + \frac{1}{k+1} \lt m + \frac{1}{k} \lt m + r,$$
+            <li>$\mathbb{N} \subseteq \overline{A}$: sea $m \in \mathbb{N}$; veamos que $m$ es punto de adherencia de $A$. Sea $r \gt 0$; queremos ver que $B(m,r) \cap A$ $= (m-r, m+r) \cap A \ne \emptyset$. Por <span class="ref" data-ref="prop-1">arquimedianidad</span>, existe $k \in \mathbb{N}$ tal que $1/k \lt r$. Entonces
+              $$\begin{aligned} m - r \lt m &\lt m + \frac{1}{k+1} \\ &\lt m + \frac{1}{k} \lt m + r, \end{aligned}$$
               donde $m + 1/(k+1) \lt m + 1/k$ porque $k+1 \gt k$, y $m + 1/k \lt m+r$ porque $1/k \lt r$. El punto $m + 1/(k+1)$ pertenece a $A$ (tomando el índice $k$ en su definición), y por la cadena de desigualdades pertenece también a $(m-r, m+r)$. Luego $(m-r,m+r) \cap A \ne \emptyset$, es decir, $m \in \overline{A}$.</li>
           </ul>
         </div>
@@ -528,7 +528,7 @@
       <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a> <a class="tag topic" href="#tema-sucesiones">sucesiones</a></span>
     </div>
     <div class="enun"><p>Sea $(E,d)$ un espacio métrico y sea $(a_n)_{n \in \mathbb{N}} \subseteq E$ tal que $a_n \to a$. Sea $A = \{a_n : n \in \mathbb{N}\}$ (la imagen de la sucesión, sin el orden). Probar que $A' = \{a\}$ o $A' = \emptyset$.</p></div>
-    <div class="estrategia"><b>Estrategia</b><p><em>Si hay algún punto de acumulación, tiene que ser el límite.</em> Recordemos que <span class="ref" data-ref="def-4.33">$A' = \{x \in E : \forall r \gt 0,\ B(x,r) \cap (A \setminus \{x\}) \ne \emptyset\}$</span>. La idea es suponer que $A' \ne \emptyset$, tomar $b \in A'$ arbitrario, y ver que necesariamente $b = a$. Si $b \ne a$, la distancia $\lambda = d(b,a) \gt 0$ da margen para construir un radio $r$ demasiado chico como para que $B(b,r)$ agarre algún término de la sucesión distinto de $b$: los términos con $n$ grande están todos cerca de $a$ (lejos de $b$), y de los finitos términos con $n$ chico se puede achicar $r$ para esquivarlos a todos.</p></div>
+    <div class="estrategia"><b>Estrategia</b><p><em>Si hay algún punto de acumulación, tiene que ser el límite.</em> Recordemos que <span class="ref" data-ref="def-4.33">$A' = \{x \in E : \forall r \gt 0,$ $B(x,r) \cap (A \setminus \{x\}) \ne \emptyset\}$</span>. La idea es suponer que $A' \ne \emptyset$, tomar $b \in A'$ arbitrario, y ver que necesariamente $b = a$. Si $b \ne a$, la distancia $\lambda = d(b,a) \gt 0$ da margen para construir un radio $r$ demasiado chico como para que $B(b,r)$ agarre algún término de la sucesión distinto de $b$: los términos con $n$ grande están todos cerca de $a$ (lejos de $b$), y de los finitos términos con $n$ chico se puede achicar $r$ para esquivarlos a todos.</p></div>
     <div class="steps">
       <div class="step">
         <div class="step-text">
@@ -542,12 +542,12 @@
         <div class="step-text">
           <p class="step-title">El radio $r$</p>
           <p>Tomemos
-            $$r = \min\big(\{d(b, a_n) : n \lt n_0,\ a_n \ne b\} \cup \{\lambda/2\}\big) \gt 0$$
+            $$\begin{aligned} r = \min\big(&\{d(b, a_n) : n \lt n_0,\ a_n \ne b\} \\ &\cup \{\lambda/2\}\big) \gt 0 \end{aligned}$$
             (el mínimo de un conjunto finito de números positivos, así que $r \gt 0$). Veamos que $B(b,r) \cap (A \setminus \{b\}) = \emptyset$, lo cual contradice que $b \in A'$:</p>
           <ul class="items">
             <li>Si $n \lt n_0$ y $a_n \ne b$, entonces $d(b, a_n) \ge r$ por construcción de $r$, así que $a_n \notin B(b,r)$.</li>
             <li>Si $n \ge n_0$ y $a_n \ne b$: si además $a_n \in B(b,r)$, es decir $d(a_n,b) \lt r \le \lambda/2$, por desigualdad triangular
-              $$\lambda = d(a,b) \le d(a, a_n) + d(a_n, b) \lt \lambda/2 + \lambda/2 = \lambda,$$
+              $$\begin{aligned} \lambda = d(a,b) &\le d(a, a_n) + d(a_n, b) \\ &\lt \lambda/2 + \lambda/2 = \lambda, \end{aligned}$$
               absurdo. Luego $a_n \notin B(b,r)$.</li>
           </ul>
         </div>
@@ -610,7 +610,7 @@
         <div class="step-text">
           <p class="step-title">Puntos aislados: todos los de $A$</p>
           <p>Dados $a = 1/n+1/m \ne b = 1/n'+1/m'$ en $A$,
-            $$\begin{aligned} |a-b| &= \left|\frac{n'm m' + n m m' - n n' m' - n m n'}{n n' m m'}\right| \\ &\ge \frac{1}{n n' m m'}, \end{aligned}$$
+            $$\begin{aligned} |a-b| &= \left|\tfrac{n'm m' + n m m' - n n' m' - n m n'}{n n' m m'}\right| \\ &\ge \frac{1}{n n' m m'}, \end{aligned}$$
             porque el numerador es un entero no nulo. Tomando $r \lt 1/(n n' m m')$, $B(a,r) \cap A = \{a\}$.</p>
           <p class="nota"><b>Nota de esta versión</b>La cota $1/(n n' m m')$ depende de $b$ (de $n'$ y $m'$), así que no da un radio que sirva para todos los $b$ a la vez. Y no todos los puntos de $A$ son aislados: $1/k = 1/(2k) + 1/(2k) \in A$ y $1/k + 1/m \to 1/k$ con $1/k + 1/m \in A \setminus \{1/k\}$, así que cada $1/k$ es un punto de $A$ que es de acumulación. Los aislados son los de $A \setminus \{1/k : k \in \mathbb{N}\}$, y $A' \cap A = \{1/k : k \in \mathbb{N}\}$. El <code>.typ</code> no lo señala.</p>
         </div>
@@ -642,7 +642,7 @@
         <div class="step-text">
           <p class="step-title">Interior: $A^{\circ} = A$</p>
           <p>Ya vale $A^{\circ} \subseteq A$. Sea $a=(a_1,a_2) \in A$, es decir $a_2 \gt a_1$. Con <span class="ref" data-ref="def-distancias-en-rrn">$d_\infty(a,(x,y)) = \sup\{|a_1-x|,|a_2-y|\}$</span>, tomamos $r=\frac{1}{2}(a_2-a_1) \gt 0$. Si $(x,y) \in B_\infty(a,r)$, es decir $|x-a_1| \lt r$, $|y-a_2| \lt r$, entonces
-            $$\begin{aligned} y-x &= (y-a_2)+(a_2-a_1)+(a_1-x) \\ &\gt (a_2-a_1)-2r \\ &= (a_2-a_1)-(a_2-a_1) = 0, \end{aligned}$$
+            $$\begin{aligned} y-x &= (y-a_2)+(a_2-a_1) \\ &\quad +(a_1-x) \\ &\gt (a_2-a_1)-2r \\ &= (a_2-a_1)-(a_2-a_1) = 0, \end{aligned}$$
             así que $y \gt x$, es decir $(x,y) \in A$. Luego $B_\infty(a,r) \subseteq A$, y como $d_2$ y $d_\infty$ son <span class="ref" data-ref="ext-metricas-equivalentes">equivalentes</span>, también hay una $d_2$-bola contenida en $A$.</p>
         </div>
         <figure class="viz">
@@ -686,7 +686,7 @@
       <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a></span>
     </div>
     <div class="enun"><p>En $(\mathbb{R}^2,d_2)$, sea
-      $$\begin{aligned} A &= \{(x,y) \in \mathbb{R}^2 : y=m x \text{ para algún } m \in \mathbb{Z}\} \\ &= \bigcup_{m \in \mathbb{Z}} \{(x,y):y=m x\} \end{aligned}$$
+      $$\begin{aligned} A &= \{(x,y) \in \mathbb{R}^2 : y=m x \\ &\qquad \text{para algún } m \in \mathbb{Z}\} \\ &= \bigcup_{m \in \mathbb{Z}} \{(x,y):y=m x\} \end{aligned}$$
       (unión infinita de rectas por el origen, todas cerradas). Calcular $\overline{A}$.</p></div>
     <div class="estrategia"><b>Estrategia</b><p><em>Las rectas se «acumulan» sobre el eje $y$ cuando la pendiente crece.</em> Si una sucesión de puntos de $A$ converge con abscisas $x_n$ que no tienden a $0$, la pendiente $m_n=y_n/x_n$ converge a un número real y, al ser entera, debe ser eventualmente constante —entonces el límite cae en la misma recta. Pero si $x_n \to 0$, la pendiente puede «escaparse» a $\pm\infty$ y el límite es cualquier punto del eje $y$: por eso aparece todo el eje $y$ en la clausura, no sólo el origen.</p></div>
     <div class="steps">
@@ -755,7 +755,7 @@
         <div class="step-text">
           <p class="step-title">a) $A$ abierto</p>
           <p>Sea $x=a+b \in A+B$. Como $A$ es <span class="ref" data-ref="def-4.14">abierto</span>, existe $r \gt 0$ con $B(a,r) \subseteq A$. Si $y \in B(x,r)$, entonces
-            $$d(x,y) = \|a+b-y\| = \|a-(y-b)\| \lt r,$$
+            $$\begin{aligned} d(x,y) &= \|a+b-y\| \\ &= \|a-(y-b)\| \lt r, \end{aligned}$$
             así que $y-b \in B(a,r) \subseteq A$, y por lo tanto $y=(y-b)+b \in A+B$. Luego $B(x,r) \subseteq A+B$.</p>
         </div>
         <figure class="viz">
@@ -836,7 +836,7 @@
           <p>$\Leftarrow)$ Tomemos $T=E \setminus U$. La hipótesis da
             $$U \cap \overline{E \setminus U} \subseteq \overline{U \cap (E \setminus U)} = \overline{\emptyset} = \emptyset,$$
             es decir $\overline{E \setminus U} \cap U = \emptyset$. Entonces
-            $$\begin{aligned} \overline{E \setminus U} &= (\overline{E \setminus U} \cap U) \cup (\overline{E \setminus U} \cap (E \setminus U)) \\ &= \overline{E \setminus U} \cap (E \setminus U) \subseteq E \setminus U, \end{aligned}$$
+            $$\begin{aligned} \overline{E \setminus U} &= (\overline{E \setminus U} \cap U) \\ &\quad \cup (\overline{E \setminus U} \cap (E \setminus U)) \\ &= \overline{E \setminus U} \cap (E \setminus U) \\ &\subseteq E \setminus U, \end{aligned}$$
             así que $E \setminus U$ es cerrado (la otra inclusión vale siempre), es decir <span class="ref" data-ref="teo-4.29">$U$ es abierto</span>.</p>
         </div>
       </div>
@@ -955,7 +955,7 @@
         <div class="step-text">
           <p class="step-title">b) $d_\infty$: convergencia uniforme</p>
           <p>Recordemos que <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">$d_\infty(f_n, f) = \sup_{x \in [a,b]} |f_n(x) - f(x)|$</span>. Tenemos que $f_n \to f$ en este espacio si para todo $\varepsilon \gt 0$ existe un $n_0 \in \mathbb{N}$ tal que si $n \ge n_0$ se tiene que
-            $$|f_n(x) - f(x)| \lt \varepsilon \quad \textbf{para todo } x \in [a, b].$$</p>
+            $$\begin{aligned} &|f_n(x) - f(x)| \lt \varepsilon \\ &\textbf{para todo } x \in [a, b]. \end{aligned}$$</p>
           <p>Esto es lo que vamos a llamar <span class="ref" data-ref="ext-convergencia-uniforme"><b>convergencia uniforme</b></span> de las funciones $f_n$ y es una de las nociones de convergencia en espacio de funciones que vamos a explorar más adelante.</p>
         </div>
         <figure class="viz">
@@ -985,8 +985,13 @@
           <li>Sea $(x_n)_{n \in \mathbb{N}} = (1/n) \subseteq (\mathbb{R}, |\cdot|)$. Probar que $(x_n)_{n \in \mathbb{N}}$ es <span class="ref" data-ref="def-4.51">de Cauchy</span>.</li>
           <li>Sea $(x_n)_{n \in \mathbb{N}} = (1/n) \subseteq ((0, 1], |\cdot|)$. ¿Es de Cauchy? ¿Converge en este espacio métrico?</li>
           <li>Sea $(M, \delta)$ un espacio métrico con la <span class="ref" data-ref="ext-metrica-discreta">métrica discreta</span>. ¿Cómo son las sucesiones de Cauchy en este espacio?</li>
-          <li><p>Consideremos en $(C([0, 1]), d_1)$ la sucesión de funciones $f_n$ definidas de la siguiente forma:
-            $$f_n(x) = \begin{cases} 0, & \text{si } 0 \le x \le \frac12 - \frac1n, \\ \text{segmento que une} \\ \quad (\frac12 - \frac1n, 0) \text{ y } (\frac12, 1), & \text{si } \frac12 - \frac1n \le x \le \frac12, \\ 1, & \text{si } \frac12 \le x \le 1. \end{cases}$$
+          <li><p>Consideremos en $(C([0, 1]), d_1)$ la sucesión de funciones $f_n$ definidas de la siguiente forma: $f_n(x) =$</p>
+            <ul class="items">
+              <li>$0$, si $0 \le x \le \frac12 - \frac1n$;</li>
+              <li>segmento que une los puntos $(\frac12 - \frac1n, 0)$ y $(\frac12, 1)$, si $\frac12 - \frac1n \le x \le \frac12$;</li>
+              <li>$1$, si $\frac12 \le x \le 1$.</li>
+            </ul>
+            <p>
             Para que esta sucesión tenga sentido la definimos con $n \ge 3$ (para completar la sucesión, podemos tomar los primeros dos términos de la sucesión como $f_1 = f_2 = 0$).</p>
             <p>¿Es $(f_n)$ de Cauchy? ¿Converge en $(C([0, 1]), d_1)$?</p></li>
         </ol>
@@ -1004,7 +1009,7 @@
         <div class="step-text">
           <p class="step-title">a) $1/n$ es de Cauchy en $\mathbb{R}$</p>
           <p>Sea $\varepsilon \gt 0$. Queremos encontrar un $n_0$ tal que si $n, m \ge n_0$ se tiene que $|1/n - 1/m| \lt \varepsilon$. Si $n, m \ge n_0$ tenemos
-            $$\left|\frac1n - \frac1m\right| \le \frac1n + \frac1m \le \frac1{n_0} + \frac1{n_0} = \frac2{n_0} \lt \varepsilon$$
+            $$\begin{aligned} \left|\frac1n - \frac1m\right| &\le \frac1n + \frac1m \le \frac1{n_0} + \frac1{n_0} \\ &= \frac2{n_0} \lt \varepsilon \end{aligned}$$
             si elegimos $n_0 \gt 2/\varepsilon$.</p>
           <p>Más adelante vamos a ver que <span class="ref" data-ref="teo-4.54">toda sucesión convergente es de Cauchy</span>, con lo cual vamos a poder decir que esta sucesión es de Cauchy porque converge en $\mathbb{R}$. Sin embargo, notemos que la definición de sucesión de Cauchy no depende de la existencia del $0$ en este espacio métrico.</p>
         </div>
@@ -1042,8 +1047,8 @@
         <div class="step-text">
           <p class="step-title">d) $(f_n)$ es de Cauchy en $d_1$</p>
           <p>Veamos que esta sucesión es de Cauchy. Para esto, tenemos que entender cómo son las distancias entre dos términos de la sucesión. Sean $f_n$ y $f_m$ dos elementos de la sucesión, y supongamos que $m \gt n$. Recordemos que la <span class="ref" data-ref="def-distancias-en-espacios-de-funciones">distancia 1</span> entre funciones representa el área atrapada entre las dos funciones. Gráficamente tendremos algo así (ver el dibujo).</p>
-          <p>El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n) = 1/n - 1/m$ y altura $1$, entonces el área es $A = \frac12 (1/n - 1/m) \cdot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $\varepsilon \gt 0$,
-            $$d_1(f_n, f_m) \le \frac12 \left|\frac1n - \frac1m\right| \lt \varepsilon, \quad \text{para todo } n, m \ge n_0.$$</p>
+          <p>El cálculo de esta área no es tan difícil de realizar dado que lo que tenemos es un triángulo de base $(1/2 - 1/m) - (1/2 - 1/n)$ $= 1/n - 1/m$ y altura $1$, entonces el área es $A = \frac12 (1/n - 1/m) \cdot 1$. Como vimos antes, si $n_0$ es lo suficientemente grande, podemos lograr que dado $\varepsilon \gt 0$,
+            $$\begin{aligned} &d_1(f_n, f_m) \le \frac12 \left|\frac1n - \frac1m\right| \lt \varepsilon, \\ &\text{para todo } n, m \ge n_0. \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <canvas id="ejp3-31-c2" aria-label="Las funciones f_n y f_m y el triángulo entre sus rampas, cuya área es d1(f_n, f_m)"></canvas>
@@ -1068,7 +1073,7 @@
           <p class="step-title">d) $f_n \to f$ en $d_1$</p>
           <p>Probemos que efectivamente las funciones $f_n$ convergen a $f$ en la distancia 1. Para esto, analicemos cómo es la distancia de $f_n$ a $f$.</p>
           <p>Como vimos antes, la distancia $d_1(f_n, f)$ la podemos calcular como el área del triángulo que se forma entre los gráficos de estas dos funciones. Dado $\varepsilon \gt 0$, podemos encontrar un $n_0$ tal que
-            $$d_1(f_n, f) = \frac12 \cdot \frac1n \lt \varepsilon, \quad \text{para todo } n \ge n_0.$$</p>
+            $$\begin{aligned} &d_1(f_n, f) = \frac12 \cdot \frac1n \lt \varepsilon, \\ &\text{para todo } n \ge n_0. \end{aligned}$$</p>
         </div>
         <figure class="viz">
           <canvas id="ejp3-31-c3" aria-label="La función escalón f y una f_n, con el triángulo entre ellas cuya área es d1(f_n, f)"></canvas>
@@ -1138,7 +1143,7 @@
       <div class="step">
         <div class="step-text">
           <p class="step-title">$\tilde{a} \in X$</p>
-          <p>Primero, una Cauchy está en una bola: existe $n_0$ con $d(a_n, a_m) \lt 1$ para $n, m \ge n_0$, y entonces $d(a_1, a_n) \le d(a_1, a_{n_0}) + d(a_{n_0}, a_n) \lt d(a_1, a_{n_0}) + 1$ para $n \ge n_0$; agrandando con los finitos $n \lt n_0$, hay $M \gt 0$ con $(a_n)_n \subseteq B(a_1, M)$. Entonces, para todo $n$ y $k$,
+          <p>Primero, una Cauchy está en una bola: existe $n_0$ con $d(a_n, a_m) \lt 1$ para $n, m \ge n_0$, y entonces $d(a_1, a_n) \le d(a_1, a_{n_0}) + d(a_{n_0}, a_n)$ $\lt d(a_1, a_{n_0}) + 1$ para $n \ge n_0$; agrandando con los finitos $n \lt n_0$, hay $M \gt 0$ con $(a_n)_n \subseteq B(a_1, M)$. Entonces, para todo $n$ y $k$,
             $$\begin{aligned} |a_{n k}| &\le |a_{n k} - a_{1 k}| + |a_{1 k}| \\ &\le M + \sup_{k \in \mathbb{N}} |a_{1 k}| =: \tilde{M}, \end{aligned}$$
             donde el último supremo es finito porque $a_1 \in X$. Como $a_{n k} \to \tilde{a}_k$, por <span class="ref" data-ref="prop-6-algebra-de-limites">álgebra de límites</span> $|\tilde{a}_k| \le \tilde{M}$ para todo $k$: $\tilde{a}$ es acotada.</p>
         </div>
