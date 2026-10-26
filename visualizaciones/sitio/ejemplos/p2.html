@@ -2300,7 +2300,7 @@ function entornos() {
   PP.path(ctx, [[T.X(x - eps), T.Y(0.95)], [T.X(x - eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
   PP.path(ctx, [[T.X(x + eps), T.Y(0.95)], [T.X(x + eps), T.Y(0.05)]], C("--accent"), 1.2, [4, 3]);
   [x - eps / 2, x + eps / 2].forEach((v) => PP.path(ctx, [[T.X(v), T.Y(0.85)], [T.X(v), T.Y(0.75)]], C("--accent"), 1.5));
-  PP.label(ctx, "x ± εₓ/2", T.X(x + eps / 2) + 4, T.Y(0.8), C("--accent"), "left", "middle", 10);
+  PP.label(ctx, "x ± εₓ/2", T.X(x - eps / 2) - 4, T.Y(0.8), C("--accent"), "right", "middle", 10);
   PP.label(ctx, "x − εₓ", T.X(x - eps) + 3, T.Y(0.95), C("--accent"), "left", "top", 10);
   PP.label(ctx, "x + εₓ", T.X(x + eps) - 3, T.Y(0.95), C("--accent"), "right", "top", 10);
   const yi = T.Y(0.55);
@@ -2315,8 +2315,8 @@ function entornos() {
   const okIn = Math.abs(x - q) < r, okSub = q - r >= x - eps - 1e-12 && q + r <= x + eps + 1e-12;
   PP.read("ejp2-c34-read1", [
     ["x, εₓ", PP.fmt(x, 4) + ", " + PP.fmt(eps, 2)],
-    ["q", frac(qp, qd) + "   (|x − q| = " + PP.fmt(Math.abs(x - q), 4) + " < εₓ/2)"],
-    ["r", (rr ? rr[0] + "/" + rr[1] : PP.fmt(r, 4)) + "   (entre |x − q| y εₓ/2 = " + PP.fmt(eps / 2, 4) + ")"],
+    ["q", frac(qp, qd) + "  (|x − q| = " + PP.fmt(Math.abs(x - q), 4) + ")"],
+    ["r", (rr ? frac(rr[0], rr[1]) : PP.fmt(r, 4)) + "  (< εₓ/2 = " + PP.fmt(eps / 2, 4) + ")"],
     ["x ∈ (q − r, q + r)", okIn ? "sí ✓" : "no", okIn ? "good" : "bad"],
     ["(q − r, q + r) ⊆ entorno", okSub ? "sí ✓" : "no", okSub ? "good" : "bad"],
   ]);

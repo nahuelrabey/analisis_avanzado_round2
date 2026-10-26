@@ -915,7 +915,7 @@
         <div class="step-text">
           <p class="step-title">Un punto de la intersección sobre la recta</p>
           <p>Para encontrar un punto que pertenezca a la intersección de las bolas lo que podemos hacer es pensar en la recta que une al $(0,0)$ con $(x,y)$. Gráficamente, podemos ver que vamos a tener un elemento en esa recta que pertenece a la intersección. Analíticamente, esto lo podemos escribir de la siguiente manera: consideremos los elementos $(t x, t y)$, con $t \in \mathbb{R}$. Para que un elemento de esta recta pertenezca a $E$, debemos tener
-            $$(t x)^2 + (t y)^2 = t^2 (x^2 + y^2) = t^2 \lt 1,$$
+            $$\begin{aligned} (t x)^2 + (t y)^2 &= t^2 (x^2 + y^2) \\ &= t^2 \lt 1, \end{aligned}$$
             es decir, nos alcanza con que $|t| \lt 1$. Para que este elemento además pertenezca a la bola $B((x,y), r)$, deberíamos tener
             $$\begin{aligned} &d_2((t x, t y), (x, y)) \\ &\quad = \sqrt{(t x - x)^2 + (t y - y)^2} \\ &\quad = \sqrt{(t-1)^2 (x^2+y^2)} \\ &\quad = |t - 1| \lt r. \end{aligned}$$</p>
           <p>Esto nos dice que si queremos que un elemento de la pinta $(t x, t y)$ pertenezca a la intersección lo que estamos buscando es un $t \in \mathbb{R}$ que simultáneamente cumpla que $|t| \lt 1$ y $|1-t| \lt r$. Esto no es difícil de conseguir, podríamos por ejemplo fijar $t = 1 - r/2$, y este número cumple las dos condiciones que queríamos. Esto nos termina de probar que $B[(0,0), 1] \subseteq \overline{E}$.</p>
@@ -976,7 +976,7 @@
         <div class="step-text">
           <p class="step-title">Ningún $z \in B(y,t)$ está en $B[x,r]$</p>
           <p>Ahora sigamos con el ejemplo. Recordemos que estábamos intentando probar que $B(y, t) \cap B[x, r] = \emptyset$. Sea $z \in B(y, t)$, y veamos que no puede pasar que $z \in B[x, r]$, es decir, probemos que $d(z, x) \gt r$:
-            $$\begin{aligned} d(z, x) &\ge d(x, y) - d(z, y) \gt d(x, y) - t \\ &= d(x, y) - (d(x, y) - r) = r, \end{aligned}$$
+            $$\begin{aligned} d(z, x) &\ge d(x, y) - d(z, y) \\ &\gt d(x, y) - t \\ &= d(x, y) - (d(x, y) - r) \\ &= r, \end{aligned}$$
             que es lo que queríamos ver.</p>
         </div>
       </div>
@@ -1182,7 +1182,7 @@
         <div class="step-text">
           <p class="step-title">$E$ no es abierto</p>
           <p>Tenemos que $a \in E$, pero <span class="ref" data-ref="def-4.11">$a \notin E^{\circ}$</span>. En efecto, para todo $r \gt 0$,
-            $$\begin{aligned} B(a,r) \cap E^c &= (a-r,a+r) \cap [a,b)^c \\ &\ne \emptyset, \end{aligned}$$
+            $$\begin{aligned} &B(a,r) \cap E^c \\ &\quad = (a-r,a+r) \cap [a,b)^c \ne \emptyset, \end{aligned}$$
             ya que $a - r/2 \in B(a,r) \cap [a,b)^c$ (está a la izquierda de $a$, así que no pertenece a $E$).</p>
         </div>
         <figure class="viz">
@@ -1197,7 +1197,7 @@
         <div class="step-text">
           <p class="step-title">$E$ no es cerrado</p>
           <p>Tenemos que $b \in \overline{E}$, pero $b \notin E$. En efecto, para todo $r \gt 0$,
-            $$B(b,r) \cap E = (b-r,b+r) \cap [a,b) \ne \emptyset,$$
+            $$\begin{aligned} &B(b,r) \cap E \\ &\quad = (b-r,b+r) \cap [a,b) \ne \emptyset, \end{aligned}$$
             ya que $b - r/2 \in B(b,r) \cap E$ (tomando $r$ suficientemente chico para que además $b - r/2 \gt a$).</p>
         </div>
         <figure class="viz">
@@ -1334,7 +1334,7 @@
         <div class="step-text">
           <p class="step-title">Caso $d(y,x) \lt r$</p>
           <p>Sea $\varepsilon = r - d(x,y) \gt 0$. Como $y \in \overline{S(x,r)}$, existe $z \in B(y,\varepsilon) \cap S(x,r)$. Entonces
-            $$\begin{aligned} r = d(x,z) &\le d(x,y) + \underbrace{d(y,z)}_{\lt \varepsilon} \\ &\lt d(x,y) + \varepsilon \\ &= d(x,y) + r - d(x,y) = r, \end{aligned}$$
+            $$\begin{aligned} r = d(x,z) &\le d(x,y) + \underbrace{d(y,z)}_{\lt \varepsilon} \\ &\lt d(x,y) + \varepsilon \\ &= d(x,y) + r - d(x,y) \\ &= r, \end{aligned}$$
             es decir $r \lt r$, absurdo.</p>
         </div>
         <figure class="viz">
@@ -1351,7 +1351,7 @@
       </div>
     </div>
     <div class="nota"><b>Otra forma del primer caso (guía de la práctica)</b>La versión de la guía evita el paso de simetría del primer caso: define directamente $\varepsilon = d(x,y) - r$ (en vez de $\varepsilon = d(y,x) - r$), con lo cual $r + \varepsilon = d(x,y)$ de entrada, y la cadena
-      $$d(x,y) \le d(x,z) + d(z,y) \lt r + \varepsilon = d(x,y)$$
+      $$\begin{aligned} d(x,y) &\le d(x,z) + d(z,y) \\ &\lt r + \varepsilon = d(x,y) \end{aligned}$$
       da la contradicción $d(x,y) \lt d(x,y)$ directamente, sin necesitar invocar $d(x,y) = d(y,x)$.</div>
   </article>
 
@@ -2022,7 +2022,7 @@
         <div class="step-text">
           <p class="step-title">Cada columna es de Cauchy en $\mathbb{R}$</p>
           <p>Sea $(a_n)_n \subseteq X$ <span class="ref" data-ref="def-4.51">de Cauchy</span>: para todo $\varepsilon \gt 0$ existe $n_0$ tal que $d_\infty(a_n, a_m) \lt \varepsilon$ si $n, m \ge n_0$. Entonces, para cada $i$ y $n, m \ge n_0$,
-            $$\begin{aligned} |a_{n i} - a_{m i}| &\le \sup_{k \in \mathbb{N}} |a_{n k} - a_{m k}| \\ &= d_\infty(a_n, a_m) \lt \varepsilon, \qquad (*) \end{aligned}$$
+            $$\begin{aligned} |a_{n i} - a_{m i}| &\le \sup_{k \in \mathbb{N}} |a_{n k} - a_{m k}| \\ &= d_\infty(a_n, a_m) \\ &\lt \varepsilon, \qquad (*) \end{aligned}$$
             así que $(a_{n i})_n$ es de Cauchy en $\mathbb{R}$ y, como <span class="ref" data-ref="teo-4.57">$\mathbb{R}$ es completo</span>, existe $\tilde{a}_i = \lim_n a_{n i}$. Sea $\tilde{a} = (\tilde{a}_k)_k$.</p>
         </div>
       </div>
@@ -2038,7 +2038,7 @@
         <div class="step-text">
           <p class="step-title">$a_n \to \tilde{a}$ en $d_\infty$</p>
           <p>Dado $\varepsilon' \gt 0$, sea $n_0$ el de $(*)$. Para $n \ge n_0$,
-            $$d_\infty(a_n, \tilde{a}) \le \underbrace{d_\infty(a_n, a_{n_0})}_{(1)} + \underbrace{d_\infty(a_{n_0}, \tilde{a})}_{(2)}.$$
+            $$\begin{aligned} d_\infty(a_n, \tilde{a}) &\le \underbrace{d_\infty(a_n, a_{n_0})}_{(1)} \\ &\quad + \underbrace{d_\infty(a_{n_0}, \tilde{a})}_{(2)}. \end{aligned}$$
             $(1) \lt \varepsilon'$ por $(*)$. Para $(2)$: por $(*)$, $|a_{n_0 k} - a_{m k}| \lt \varepsilon'$ para todo $k$ y todo $m \ge n_0$; haciendo $m \to +\infty$ con $k$ fijo, $|a_{n_0 k} - \tilde{a}_k| \le \varepsilon'$ para todo $k$, y tomando supremo en $k$, $(2) \le \varepsilon'$. Luego $d_\infty(a_n, \tilde{a}) \lt 2 \varepsilon'$ para todo $n \ge n_0$; con $\varepsilon' = \varepsilon / 2$ queda $d_\infty(a_n, \tilde{a}) \lt \varepsilon$.</p>
         </div>
         <figure class="viz">
@@ -2118,7 +2118,7 @@
         <div class="step-text">
           <p class="step-title">a) Es métrica</p>
           <p>$d \ge 0$, y $d(x, y) = 0$ si y sólo si $x = y$ (pues $|x| + |y| = 0$ sólo si $x = y = 0$); la simetría es evidente. Triangular: sean $x, y, z$. Si $x = y$ es $0 \le d(x, z) + d(z, y)$. Si $x \ne y$ y $z = x$ (o $z = y$) es $d(x, y) \le 0 + d(x, y)$. Si son distintos dos a dos,
-            $$\begin{aligned} d(x, y) &= |x| + |y| \le |x| + |z| + |z| + |y| \\ &= d(x, z) + d(z, y). \end{aligned}$$</p>
+            $$\begin{aligned} d(x, y) &= |x| + |y| \\ &\le |x| + |z| + |z| + |y| \\ &= d(x, z) + d(z, y). \end{aligned}$$</p>
         </div>
       </div>
       <div class="step">
@@ -2213,7 +2213,7 @@
         <div class="step-text">
           <p class="step-title">$a_n \to a$, por el absurdo</p>
           <p>Veamos que $a_n \to a$. Si no, hay $\varepsilon \gt 0$ y una subsucesión con $d(a_{n_j}, a) \ge \varepsilon$ para todo $j$. Tomemos $k$ con $2/k \lt \varepsilon$. Como $a \in A_k = \overline{\{a_n : n \ge n_k\}}$, hay $m \ge n_k$ con $d(a, a_m) \lt 1/k$; y como $n_j \to +\infty$, hay $j_0$ con $n_{j_0} \ge n_k$, de modo que $a_{n_{j_0}}, a_m \in A_k$. Entonces
-            $$\begin{aligned} \varepsilon &\le d(a_{n_{j_0}}, a) \le d(a_{n_{j_0}}, a_m) + d(a_m, a) \\ &\lt \operatorname{diam}(A_k) + \frac1k \le \frac2k \lt \varepsilon, \end{aligned}$$
+            $$\begin{aligned} \varepsilon &\le d(a_{n_{j_0}}, a) \\ &\le d(a_{n_{j_0}}, a_m) + d(a_m, a) \\ &\lt \operatorname{diam}(A_k) + \frac1k \le \frac2k \lt \varepsilon, \end{aligned}$$
             absurdo. Luego $a_n \to a$ y $E$ es completo.</p>
         </div>
       </div>

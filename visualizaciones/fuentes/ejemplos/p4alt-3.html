@@ -532,7 +532,7 @@
             <circle cx="107" cy="111" r="2" class="sv-fill-accent"/>
             <circle cx="110" cy="109" r="4" class="sv-fill-bg sv-ok"/>
             <text x="44" y="70" class="sv-label-accent">x<tspan baseline-shift="sub" font-size="10">k</tspan></text>
-            <text x="78" y="160" class="sv-label-ok">f⁻¹(z)</text>
+            <text x="116" y="132" class="sv-label-ok">f⁻¹(z)</text>
             <circle cx="232" cy="72" r="4" class="sv-fill-seq2"/>
             <circle cx="250" cy="140" r="4" class="sv-fill-seq2"/>
             <circle cx="268" cy="92" r="3.5" class="sv-fill-seq2"/>
@@ -720,10 +720,10 @@
         <figure class="viz">
           <canvas id="ejp4alt-o2-6-c1" aria-label="Valores de f sobre racionales de 0, 1 y dos sucesiones de racionales, por debajo y por encima de x, cuyas imágenes convergen al mismo valor g de x"></canvas>
           <div class="ctrl">
-            <div class="slider"><label for="ejp4alt-o2-6-n"><i>n</i></label><input type="range" id="ejp4alt-o2-6-n" min="1" max="40" value="4"><output id="ejp4alt-o2-6-n-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o2-6-n"><i>n</i></label><input type="range" id="ejp4alt-o2-6-n" min="1" max="14" value="4"><output id="ejp4alt-o2-6-n-o"></output></div>
           </div>
           <dl class="read" id="ejp4alt-o2-6-r1" aria-live="polite"></dl>
-          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>A</i> = ℚ ∩ [0, 1] y <i>f</i>(<i>q</i>) = <i>q</i>² (los puntos grises son algunos <i>f</i>(<i>q</i>) con denominador ≤ 14). El punto <i>x</i> = 1/√2 no está en <i>A</i>. En azul, <i>x<sub>k</sub></i> = ⌊10<i>k x</i>⌋/(10<i>k</i>), racionales por debajo de <i>x</i>; en naranja, <i>x</i>′<sub><i>k</i></sub> = ⌈10<i>k x</i>⌉/(10<i>k</i>), por encima (<i>k</i> ≤ <i>n</i>). Las dos sucesiones de imágenes van al mismo valor, el círculo verde.</figcaption>
+          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>A</i> = ℚ ∩ [0, 1] y <i>f</i>(<i>q</i>) = <i>q</i>² (los puntos grises son algunos <i>f</i>(<i>q</i>) con denominador ≤ 14). El punto <i>x</i> = 1/√2 no está en <i>A</i>. En azul, <i>x<sub>k</sub></i> = ⌊2<sup><i>k</i></sup><i>x</i>⌋/2<sup><i>k</i></sup>, racionales por debajo de <i>x</i>; en naranja, <i>x</i>′<sub><i>k</i></sub> = ⌈2<sup><i>k</i></sup><i>x</i>⌉/2<sup><i>k</i></sup>, por encima (<i>k</i> ≤ <i>n</i>; los que caen en la ventana). Las dos sucesiones de imágenes van al mismo valor, el círculo verde.</figcaption>
         </figure>
       </div>
       <div class="step">
@@ -786,7 +786,7 @@
             <div class="slider"><label for="ejp4alt-o6-9-n"><i>n</i></label><input type="range" id="ejp4alt-o6-9-n" min="1" max="12" value="3"><output id="ejp4alt-o6-9-n-o"></output></div>
           </div>
           <dl class="read" id="ejp4alt-o6-9-r1" aria-live="polite"></dl>
-          <figcaption>Con (<i>a</i>, <i>b</i>) = (0, 1) y dos sucesiones elegidas para el dibujo: <i>x<sub>k</sub></i> = 1/(2π<i>k</i> + π/2) (azul) e <i>y<sub>k</sub></i> = 1/(2π<i>k</i> − π/2) (naranja), <i>k</i> ≤ <i>n</i>, las dos con límite 0. Con <i>x</i> sen(1/<i>x</i>) las imágenes van al mismo valor y aparece <i>L<sub>a</sub></i> (círculo verde). Con sen(1/<i>x</i>) se quedan en 1 y −1: <i>L</i>₁ ≠ <i>L</i>₂. Con 1/<i>x</i> ni siquiera son de Cauchy (el gráfico se corta arriba).</figcaption>
+          <figcaption>Con (<i>a</i>, <i>b</i>) = (0, 1) y dos sucesiones elegidas para el dibujo: <i>x<sub>k</sub></i> = 1/(2π<i>k</i> + π/2) (azul) e <i>y<sub>k</sub></i> = 1/(2π<i>k</i> − π/2) (naranja), <i>k</i> ≤ <i>n</i>, las dos con límite 0; se dibuja el tramo (0, 0,5]. Con <i>x</i> sen(1/<i>x</i>) las imágenes van al mismo valor y aparece <i>L<sub>a</sub></i> (círculo verde). Con sen(1/<i>x</i>) se quedan en 1 y −1: <i>L</i>₁ ≠ <i>L</i>₂. Con 1/<i>x</i> ni siquiera son de Cauchy (el gráfico se corta arriba).</figcaption>
         </figure>
       </div>
       <div class="step">
@@ -841,27 +841,27 @@
             Como $g(a_n) \to f(x)$ y $g(b_n) \to f(y)$, se tiene $d(g(a_n), g(b_n)) \to d(f(x), f(y))$, y concluimos $d(f(x), f(y)) \le \varepsilon/2 \lt \varepsilon$.</p>
         </div>
         <figure class="viz">
-          <svg viewBox="0 0 360 200" role="img" aria-label="Dos puntos x e y a distancia menor que delta tercios, con bolas de radio delta tercios que contienen a a sub n y b sub n">
-            <circle cx="120" cy="100" r="62" class="sv-accent sv-dash"/>
-            <circle cx="120" cy="100" r="62" class="sv-area"/>
-            <circle cx="240" cy="100" r="62" class="sv-seq2 sv-dash"/>
-            <circle cx="240" cy="100" r="62" class="sv-area2"/>
-            <circle cx="120" cy="100" r="5" class="sv-fill-ok"/>
-            <circle cx="240" cy="100" r="5" class="sv-fill-ok"/>
-            <text x="120" y="122" text-anchor="middle" class="sv-label-ok">x</text>
-            <text x="240" y="122" text-anchor="middle" class="sv-label-ok">y</text>
-            <path d="M120 100 L240 100" class="sv-ok"/>
-            <text x="180" y="94" text-anchor="middle" class="sv-muted">&lt; δ/3</text>
-            <circle cx="82" cy="70" r="4.5" class="sv-fill-accent"/>
-            <text x="74" y="62" text-anchor="end" class="sv-label-accent">aₙ</text>
-            <circle cx="282" cy="140" r="4.5" class="sv-fill-seq2"/>
-            <text x="290" y="156" class="sv-label-seq2">bₙ</text>
-            <path d="M82 70 L282 140" class="sv-ink sv-dash"/>
-            <text x="195" y="150" text-anchor="middle" class="sv-text">d(aₙ, bₙ) &lt; δ</text>
-            <path d="M120 100 L120 38" class="sv-accent"/>
-            <text x="126" y="58" class="sv-label-accent">δ/3</text>
-            <text x="20" y="190" class="sv-muted">B(x, δ/3)</text>
-            <text x="340" y="190" text-anchor="end" class="sv-muted">B(y, δ/3)</text>
+          <svg viewBox="0 0 360 210" role="img" aria-label="Dos puntos x e y a distancia menor que delta tercios, con bolas de radio delta tercios que contienen a a sub n y b sub n">
+            <circle cx="150" cy="100" r="70" class="sv-area"/>
+            <circle cx="210" cy="100" r="70" class="sv-area2"/>
+            <circle cx="150" cy="100" r="70" class="sv-accent sv-dash"/>
+            <circle cx="210" cy="100" r="70" class="sv-seq2 sv-dash"/>
+            <path d="M150 100 L150 30" class="sv-accent"/>
+            <text x="144" y="52" text-anchor="end" class="sv-label-accent">δ/3</text>
+            <path d="M150 100 L210 100" class="sv-ok"/>
+            <text x="180" y="92" text-anchor="middle" class="sv-muted">&lt; δ/3</text>
+            <circle cx="150" cy="100" r="5" class="sv-fill-ok"/>
+            <circle cx="210" cy="100" r="5" class="sv-fill-ok"/>
+            <text x="150" y="120" text-anchor="middle" class="sv-label-ok">x</text>
+            <text x="210" y="120" text-anchor="middle" class="sv-label-ok">y</text>
+            <path d="M98 72 L268 138" class="sv-ink sv-dash"/>
+            <circle cx="98" cy="72" r="4.5" class="sv-fill-accent"/>
+            <text x="90" y="66" text-anchor="end" class="sv-label-accent">aₙ</text>
+            <circle cx="268" cy="138" r="4.5" class="sv-fill-seq2"/>
+            <text x="276" y="154" class="sv-label-seq2">bₙ</text>
+            <text x="180" y="200" text-anchor="middle" class="sv-text">d(aₙ, bₙ) &lt; δ</text>
+            <text x="12" y="200" class="sv-muted">B(x, δ/3)</text>
+            <text x="348" y="200" text-anchor="end" class="sv-muted">B(y, δ/3)</text>
           </svg>
           <figcaption>Por qué alcanza con δ/3: <i>a<sub>n</sub></i> está a menos de δ/3 de <i>x</i>, <i>b<sub>n</sub></i> a menos de δ/3 de <i>y</i>, y <i>x</i>, <i>y</i> a menos de δ/3 entre sí. La raya punteada suma los tres tramos y queda por debajo de δ, que es lo que pide la continuidad uniforme de <i>g</i>.</figcaption>
         </figure>

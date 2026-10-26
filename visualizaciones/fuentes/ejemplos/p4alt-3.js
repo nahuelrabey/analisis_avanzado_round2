@@ -28,6 +28,7 @@ function curve(ctx, T, f, xs, n, color, width, dash) {
   flush();
 }
 const lin = (a, b) => (s) => a + (b - a) * s;
+const f3 = (v) => PP.fmt(Math.abs(v) < 5e-4 ? 0 : v, 3);
 
 /* Marco con la misma escala en x y en y. */
 function eqFrame(w, h, x0, x1, y0, pad) {
@@ -253,7 +254,7 @@ PP.register(function o612() {
   PP.label(ctx, "[0, P]", T.X(P / 2), T.p.t + 2, C("--accent"), "center", "top", 11);
   PP.read(ID + "o6-12-r1", [
     ["P", PP.fmt(P, 1)],
-    ["f(x), f(x + P)", PP.fmt(y0, 3) + ", " + PP.fmt(f(x0 + P), 3), "good"],
+    ["f(x), f(x + P)", f3(y0) + ", " + f3(f(x0 + P)), "good"],
   ]);
 }, [ID + "o6-12-P", ID + "o6-12-x"]);
 
@@ -309,7 +310,7 @@ PP.register(function o149() {
     PP.path(ctx, [[T.p.l - 4, T.Y(y)], [T.p.l + 4, T.Y(y)]], C("--seq2"), 1.5);
   }
   PP.label(ctx, "1/n", T.X(1 / Math.min(N, 3)) + 4, T.Y(0) - 6, C("--accent"), "left", "bottom", 11);
-  PP.label(ctx, "−log n", T.p.l + 8, T.Y(-Math.log(N)), C("--seq2"), "left", "middle", 11);
+  PP.label(ctx, "−log n", T.X(1 / N) + 10, T.Y(-Math.log(N)) + 2, C("--seq2"), "left", "top", 11);
   PP.read(ID + "o14-9-r1", [
     ["x_N = 1/N", PP.fmt(1 / N, 4)],
     ["log(x_N) = −log N", PP.fmt(-Math.log(N), 3), "bad"],
@@ -321,7 +322,7 @@ PP.register(function o39() {
   const t = PP.val(ID + "o3-9-t") / 10, N = PP.val(ID + "o3-9-N");
   PP.out(ID + "o3-9-t-o", PP.fmt(t, 1));
   PP.out(ID + "o3-9-N-o", String(N));
-  const { ctx, w, h } = PP.canvas(ID + "o3-9-c1", 0.5);
+  const { ctx, w, h } = PP.canvas(ID + "o3-9-c1", 0.4);
   const T = eqFrame(w, h, -4.7, 4.7, -0.55, { l: 10, r: 10, t: 10, b: 10 });
   const s = T.X(1) - T.X(0);
   const f = (u) => [4 * u / (4 + u * u), 2 - 8 / (4 + u * u)];
@@ -360,7 +361,7 @@ const z310 = (n) => [1.5 + 0.9 * Math.pow(-1, n) / n, 1 + 0.7 / n];
 function drawO310() {
   const N = PP.val(ID + "o3-10-N");
   PP.out(ID + "o3-10-N-o", String(N));
-  const { ctx, w, h } = PP.canvas(ID + "o3-10-c1", 0.62);
+  const { ctx, w, h } = PP.canvas(ID + "o3-10-c1", 0.5);
   const T = eqFrame(w, h, 0, 4, -0.1, { l: 10, r: 10, t: 10, b: 10 });
   o310.T = T;
   const [px, py] = o310.x;
@@ -408,7 +409,8 @@ PP.register(function o26() {
   });
   let xa = 0, xb = 0;
   for (let k = 1; k <= n; k++) {
-    xa = Math.floor(10 * k * x) / (10 * k); xb = Math.ceil(10 * k * x) / (10 * k);
+    const q = Math.pow(2, k);
+    xa = Math.floor(q * x) / q; xb = Math.ceil(q * x) / q;
     const last = k === n, r = last ? 5.5 : 3.5;
     if (xa >= 0.5) PP.dot(ctx, T.X(xa), T.Y(f(xa)), r, C("--accent"));
     if (xb <= 0.9) PP.dot(ctx, T.X(xb), T.Y(f(xb)), r, C("--seq2"));
@@ -428,12 +430,12 @@ PP.register(function o69() {
   const mode = PP.radio(ID + "o6-9-f") || "xs", n = PP.val(ID + "o6-9-n");
   PP.out(ID + "o6-9-n-o", String(n));
   const F = { xs: (x) => x * Math.sin(1 / x), s: (x) => Math.sin(1 / x), inv: (x) => 1 / x }[mode];
-  const box = mode === "inv" ? { x0: -0.03, x1: 1, y0: -1, y1: 30 } : mode === "s" ? { x0: -0.03, x1: 1, y0: -1.35, y1: 1.35 } : { x0: -0.03, x1: 1, y0: -0.6, y1: 1.0 };
+  const box = mode === "inv" ? { x0: -0.015, x1: 0.5, y0: -1, y1: 30 } : mode === "s" ? { x0: -0.015, x1: 0.5, y0: -1.35, y1: 1.35 } : { x0: -0.015, x1: 0.5, y0: -0.45, y1: 0.6 };
   const { ctx, w, h } = PP.canvas(ID + "o6-9-c1", 0.66);
   const T = PP.frame(w, h, box, { l: 40, r: 14, t: 14, b: 28 });
   PP.axes(ctx, T, { xLabel: "x", yLabel: "" });
   clipped(ctx, T, () => {
-    curve(ctx, T, F, (u) => 1 / (1 + 499 * u), 6000, C("--ink"), 1.1);
+    curve(ctx, T, F, (u) => 1 / (2 + 498 * u), 6000, C("--ink"), 1.1);
     if (mode === "s") {
       PP.path(ctx, [[T.p.l, T.Y(1)], [T.w - T.p.r, T.Y(1)]], C("--accent"), 1, [4, 4]);
       PP.path(ctx, [[T.p.l, T.Y(-1)], [T.w - T.p.r, T.Y(-1)]], C("--seq2"), 1, [4, 4]);
@@ -447,13 +449,14 @@ PP.register(function o69() {
   }
   if (mode === "xs") {
     PP.circle(ctx, T.X(0), T.Y(0), 6, C("--ok"), null, null, 2);
-    PP.label(ctx, "L_a = 0", T.X(0) + 9, T.Y(0) + 6, C("--ok"), "left", "top", 12);
+    PP.label(ctx, "Lₐ = 0", T.X(0) + 6, T.Y(-0.3), C("--ok"), "left", "middle", 12);
+    PP.path(ctx, [[T.X(0) + 4, T.Y(-0.27)], [T.X(0) + 1, T.Y(0) + 7]], C("--ok"), 1);
   } else if (mode === "s") {
     PP.label(ctx, "L₁ = 1", T.w - T.p.r - 4, T.Y(1) - 3, C("--accent"), "right", "bottom", 12);
     PP.label(ctx, "L₂ = −1", T.w - T.p.r - 4, T.Y(-1) + 3, C("--seq2"), "right", "top", 12);
   }
   const fx = F(xk(n)), fy = F(yk(n));
-  const concl = { xs: ["L₁ = L₂ = 0", "existe L_a", "good"], s: ["L₁ = 1 ≠ −1 = L₂", "no existe L_a", "bad"], inv: ["f(xₙ) → ∞", "no es de Cauchy", "bad"] }[mode];
+  const concl = { xs: ["L₁ = L₂ = 0", "existe Lₐ", "good"], s: ["L₁ = 1 ≠ −1 = L₂", "no existe Lₐ", "bad"], inv: ["f(xₙ) → ∞", "no es de Cauchy", "bad"] }[mode];
   PP.read(ID + "o6-9-r1", [
     ["xₙ, f(xₙ)", PP.fmt(xk(n), 4) + ", " + PP.fmt(fx, 4)],
     ["yₙ, f(yₙ)", PP.fmt(yk(n), 4) + ", " + PP.fmt(fy, 4)],
@@ -474,7 +477,7 @@ PP.register(function o312() {
   let lo = Infinity, hi = -Infinity;
   for (let i = 1; i <= 20000; i++) { const t = d * i / 20000, y = f(t); lo = Math.min(lo, y); hi = Math.max(hi, y); }
   PP.path(ctx, [[T.X(0) - 6, T.Y(lo)], [T.X(0) - 6, T.Y(hi)]], C("--ok"), 5);
-  PP.label(ctx, "f((0, δ))", T.X(0) - 2, T.p.t + 2, C("--ok"), "left", "top", 11);
+  PP.label(ctx, "f((0, δ))", T.X(0) - 2, T.Y(-1) + 5, C("--ok"), "left", "top", 11);
   for (let n = 1; n <= 80; n++) {
     const tn = 1 / (n * Math.PI), sn = 1 / (Math.PI / 2 + 2 * n * Math.PI);
     if (tn < d) PP.dot(ctx, T.X(tn), T.Y(0), 3, C("--seq2"));
@@ -507,7 +510,7 @@ PP.register(function o67() {
   const a = xk(n), b = yk(n);
   PP.path(ctx, [[T.X(a), T.Y(1)], [T.X(b), T.Y(-1)]], C("--fail"), 1.6, [4, 3]);
   PP.circle(ctx, T.X(0), T.Y(0), 6, C("--ink"), C("--bg"), null, 1.6);
-  PP.label(ctx, "c = 0 ∉ (0, 1]", T.X(0) + 9, T.Y(0) + 4, C("--ink"), "left", "top", 11);
+  PP.label(ctx, "c = 0 ∉ (0, 1]", T.X(0) + 2, T.Y(-1.2), C("--ink"), "left", "middle", 11);
   PP.label(ctx, "xₙ", T.X(a), T.Y(1) - 8, C("--accent"), "center", "bottom", 12);
   PP.label(ctx, "yₙ", T.X(b), T.Y(-1) + 8, C("--seq2"), "center", "top", 12);
   PP.read(ID + "o6-7-r1", [
