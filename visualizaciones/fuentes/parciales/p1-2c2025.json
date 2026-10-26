@@ -139,7 +139,7 @@
   "enunciado": "<p>Sea $(M, d)$ un espacio métrico, $E \\subseteq M$ un subconjunto. Un punto $x \\in M$ se dice <b>de adherencia</b> de $E$ si para todo radio $r \\gt 0$ se tiene que $B(x, r) \\cap E \\neq \\emptyset$.</p><p>Al conjunto de todos los puntos de adherencia de $E$ lo llamamos la <b>clausura</b> de $E$ y lo denotamos $\\overline{E}$. Es decir,</p><p>$$\\overline{E} = \\{x \\in M : \\text{para todo } r \\gt 0,\\ B(x, r) \\cap E \\neq \\emptyset\\}.$$</p>",
   "fuente": "apuntes.typ"
  },
- "ext-monotonia-clausura": {
+ "ext-clausura-monotona": {
   "tipo": "Resultado",
   "numero": "",
   "titulo": "Monotonía de la clausura",

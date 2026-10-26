@@ -90,7 +90,7 @@
   "enunciado": "<p>Un espacio métrico $K$ se dice <b>compacto</b> si para toda sucesión $(x_n)_{n \\in \\mathbb{N}} \\subseteq K$ existe alguna subsucesión $(x_{n_k})_{k \\in \\mathbb{N}}$ convergente a algún $x \\in K$.</p><p>Un subconjunto $K \\subseteq E$ de un espacio métrico es compacto si lo es con la métrica inducida: toda sucesión de $K$ tiene una subsucesión que converge a un punto <i>de $K$</i>.</p>",
   "fuente": "Definición del curso (clases/compactos.typ, Clase 7); todavía no está en apuntes.typ"
  },
- "ext-espacio-banach": {
+ "ext-espacio-de-banach": {
   "tipo": "Definición",
   "numero": "",
   "titulo": "Espacio de Banach",

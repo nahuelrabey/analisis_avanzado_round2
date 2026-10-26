@@ -248,7 +248,7 @@
   <div class="ej-head"><span class="tag">Ej. 16</span><h3>Una contracción sin punto fijo</h3>
     <span class="topics"><a class="tag topic" href="../index.html#tema-completitud">completitud</a><a class="tag topic" href="../index.html#tema-continuidad">continuidad</a></span></div>
   <div class="ej-grid">
-    <div class="enun"><p>Sea $E = \mathbb{R} \setminus \{0\}$, con la distancia usual de $\mathbb{R}$. Sea $f : E \to E$ dada por $f(x) = \frac{1}{3} x$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span> pero no tiene <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>. ¿Qué falla del <span class="ref" data-ref="ext-teorema-banach">Teorema de Banach</span>?</p></div>
+    <div class="enun"><p>Sea $E = \mathbb{R} \setminus \{0\}$, con la distancia usual de $\mathbb{R}$. Sea $f : E \to E$ dada por $f(x) = \frac{1}{3} x$. Pruebe que $f$ es una <span class="ref" data-ref="ext-contraccion">contracción</span> pero no tiene <span class="ref" data-ref="ext-punto-fijo">punto fijo</span>. ¿Qué falla del <span class="ref" data-ref="ext-punto-fijo-banach">Teorema de Banach</span>?</p></div>
     <figure class="viz">
       <canvas id="guiap5-ej16-c" aria-label="Gráfico de f igual a x sobre 3 en la recta sin el cero, junto a la diagonal"></canvas>
       <figcaption>El gráfico de <i>f</i>(<i>x</i>) = <i>x</i>/3 sobre <i>E</i> = ℝ ∖ {0} (azul) y la diagonal <i>y</i> = <i>x</i> (punteada). El círculo vacío y el hueco en el eje marcan que 0 ∉ <i>E</i>.</figcaption>
@@ -427,12 +427,12 @@
   "enunciado": "<p>Sea $f : E \\to E$ una función. Un punto $x \\in E$ es un <b>punto fijo<\/b> de $f$ si $f(x) = x$.<\/p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
  },
- "ext-teorema-banach": {
+ "ext-punto-fijo-banach": {
   "tipo": "Teorema",
   "numero": "",
   "titulo": "Punto fijo de Banach",
-  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo no vacío y sea $f : E \\to E$ una contracción. Entonces $f$ tiene un único punto fijo $x^* \\in E$. Además, para cualquier $x_0 \\in E$, la sucesión $x_{n+1} = f(x_n)$ converge a $x^*$.<\/p>",
-  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+  "enunciado": "<p>Sea $(E, d)$ un espacio métrico completo y $f : E \\to E$ una <b>contracción<\/b>, es decir, existe $0 \\le \\alpha \\lt 1$ tal que $d(f(x), f(y)) \\le \\alpha\\, d(x, y)$ para todo $x, y \\in E$. Entonces $f$ tiene un único punto fijo $a \\in E$ ($f(a) = a$). Además, para cualquier $x \\in E$, la sucesión $x_n = f^n(x)$ converge a $a$.<\/p>",
+  "fuente": "Resultado de la cursada; no está enunciado en apuntes.typ (guias/p5.typ lo da por conocido)"
  },
  "ext-teorema-bolzano": {
   "tipo": "Teorema",

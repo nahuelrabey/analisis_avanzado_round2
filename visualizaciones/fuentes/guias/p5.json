@@ -118,7 +118,7 @@
   "enunciado": "<p>Sea $f : E \\to E$ una función. Un punto $x \\in E$ es un <b>punto fijo</b> de $f$ si $f(x) = x$.</p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
  },
- "ext-teorema-banach": {
+ "ext-punto-fijo-banach": {
   "tipo": "Teorema",
   "numero": "",
   "titulo": "Punto fijo de Banach",
