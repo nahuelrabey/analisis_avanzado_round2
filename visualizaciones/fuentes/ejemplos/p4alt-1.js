@@ -337,7 +337,7 @@ PP.register(function o14_2() {
     PP.path(ctx, [[T.X(a), T.p.t], [T.X(a), T.h - T.p.b]], C("--muted"), 1.5, [5, 4]);
     plotFn(ctx, T, (x) => (Math.abs(x - a) < 1e-9 ? NaN : f(x, -a)), a - 1, a + 1, C("--accent"), 2.5, null, 1600);
     ctx.restore();
-    PP.label(ctx, "x = a", T.X(a) + 4, T.p.t + 2, C("--muted"), "left", "top", 12);
+    PP.label(ctx, "x = a", T.X(a) - 4, T.p.t + 2, C("--muted"), "right", "top", 12);
     PP.read(id + "-read", [
       ["a", fmt(a, 2)],
       ["f(a + 0.1, −a)", fmt(f(a + 0.1, -a), 2)],
@@ -403,11 +403,11 @@ PP.register(function o14_3() {
       PP.path(ctx, [[T.X(b), T.Y(st.y - r)], [T.X(b), y0]], C("--muted"), 1, [3, 3]);
       segment(ctx, T, a, b, y0, C("--seq2"), false);
       PP.dot(ctx, T.X(st.x), T.Y(st.y), 6, C("--panel"), C("--ink"));
-      PP.label(ctx, "p_X(B) = (x − r, x + r)", T.X(st.x), y0 + 16, C("--seq2"), "center", "top", 12);
+      PP.label(ctx, "proyección: (x − r, x + r)", T.X(st.x), y0 + 16, C("--seq2"), "center", "top", 12);
       PP.read(id + "-read", [
         ["centro (x, y)", `(${fmt(st.x, 2)}, ${fmt(st.y, 2)})`],
         ["B((x, y), r)", `(${fmt(a, 2)}, ${fmt(b, 2)}) × (${fmt(st.y - r, 2)}, ${fmt(st.y + r, 2)})`],
-        ["p_X(B)", `(${fmt(a, 2)}, ${fmt(b, 2)})`, "good"],
+        ["proyección de B", `(${fmt(a, 2)}, ${fmt(b, 2)})`, "good"],
       ]);
     } else {
       clip(ctx, T);
@@ -420,7 +420,7 @@ PP.register(function o14_3() {
       PP.label(ctx, "proyección (0, ∞)", T.X(1.6), y0 + 16, C("--seq2"), "left", "top", 12);
       PP.read(id + "-read", [
         ["conjunto", "{(x, y) : x > 0, y = 1/x}"],
-        ["p_X del conjunto", "(0, ∞)"],
+        ["proyección", "(0, ∞)"],
         ["¿0 ∈ (0, ∞)?", "no", "bad"],
       ]);
     }
@@ -485,7 +485,7 @@ function preimageDraw(id, salto) {
       PP.label(ctx, "g((−1, 1)) = [0, 1)", xA + 8, T.Y(1) - 4, C("--ok"), "left", "bottom", 12);
     }
     const desc = !ok ? "∅ (a ≥ b)" : (rs.length || pts.length)
-      ? rs.map((r) => `(${fmt(r.a, 3)}, ${fmt(r.b, 3)})`).concat(pts.map((x) => `{${fmt(x, 0)}}`)).join(" ∪ ")
+      ? rs.map((r) => `(${fmt(r.a, 3)}, ${fmt(r.b, 3)})`).concat(pts.map(() => "{0}")).join(" ∪ ")
       : "∅";
     const rows = [["V", ok ? `(${fmt(a, 2)}, ${fmt(b, 2)})` : "∅"], [salto ? "f⁻¹(V)" : "g⁻¹(V)", desc]];
     if (salto) rows.push(["¿abierto?", pts.length ? "no: 0 está aislado" : "sí", pts.length ? "bad" : "good"]);
@@ -605,7 +605,7 @@ PP.register(function o6_4() {
   ctx.stroke();
   ctx.restore();
   const lbl = { cero: "{f = 0} = f⁻¹({0})", ge: "{f ≥ 0} = f⁻¹([0, ∞))", gt: "{f > 0} = f⁻¹((0, ∞))" }[mode];
-  PP.label(ctx, lbl, T.p.l + 6, T.p.t + 4, C("--ink"), "left", "top", 12);
+  PP.label(ctx, lbl, T.p.l + 16, T.p.t + 4, C("--ink"), "left", "top", 12);
   PP.read(id + "-read", [
     ["conjunto", lbl],
     ["preimagen de", { cero: "{0}, cerrado de ℝ", ge: "[0, ∞), cerrado de ℝ", gt: "(0, ∞), abierto de ℝ" }[mode]],

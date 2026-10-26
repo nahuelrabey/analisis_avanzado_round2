@@ -3057,7 +3057,7 @@
             <circle cx="107" cy="111" r="2" class="sv-fill-accent"/>
             <circle cx="110" cy="109" r="4" class="sv-fill-bg sv-ok"/>
             <text x="44" y="70" class="sv-label-accent">x<tspan baseline-shift="sub" font-size="10">k</tspan></text>
-            <text x="78" y="160" class="sv-label-ok">f⁻¹(z)</text>
+            <text x="116" y="132" class="sv-label-ok">f⁻¹(z)</text>
             <circle cx="232" cy="72" r="4" class="sv-fill-seq2"/>
             <circle cx="250" cy="140" r="4" class="sv-fill-seq2"/>
             <circle cx="268" cy="92" r="3.5" class="sv-fill-seq2"/>
@@ -3245,10 +3245,10 @@
         <figure class="viz">
           <canvas id="ejp4alt-o2-6-c1" aria-label="Valores de f sobre racionales de 0, 1 y dos sucesiones de racionales, por debajo y por encima de x, cuyas imágenes convergen al mismo valor g de x"></canvas>
           <div class="ctrl">
-            <div class="slider"><label for="ejp4alt-o2-6-n"><i>n</i></label><input type="range" id="ejp4alt-o2-6-n" min="1" max="40" value="4"><output id="ejp4alt-o2-6-n-o"></output></div>
+            <div class="slider"><label for="ejp4alt-o2-6-n"><i>n</i></label><input type="range" id="ejp4alt-o2-6-n" min="1" max="14" value="4"><output id="ejp4alt-o2-6-n-o"></output></div>
           </div>
           <dl class="read" id="ejp4alt-o2-6-r1" aria-live="polite"></dl>
-          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>A</i> = ℚ ∩ [0, 1] y <i>f</i>(<i>q</i>) = <i>q</i>² (los puntos grises son algunos <i>f</i>(<i>q</i>) con denominador ≤ 14). El punto <i>x</i> = 1/√2 no está en <i>A</i>. En azul, <i>x<sub>k</sub></i> = ⌊10<i>k x</i>⌋/(10<i>k</i>), racionales por debajo de <i>x</i>; en naranja, <i>x</i>′<sub><i>k</i></sub> = ⌈10<i>k x</i>⌉/(10<i>k</i>), por encima (<i>k</i> ≤ <i>n</i>). Las dos sucesiones de imágenes van al mismo valor, el círculo verde.</figcaption>
+          <figcaption>Ejemplo elegido para el dibujo: <i>X</i> = [0, 1], <i>A</i> = ℚ ∩ [0, 1] y <i>f</i>(<i>q</i>) = <i>q</i>² (los puntos grises son algunos <i>f</i>(<i>q</i>) con denominador ≤ 14). El punto <i>x</i> = 1/√2 no está en <i>A</i>. En azul, <i>x<sub>k</sub></i> = ⌊2<sup><i>k</i></sup><i>x</i>⌋/2<sup><i>k</i></sup>, racionales por debajo de <i>x</i>; en naranja, <i>x</i>′<sub><i>k</i></sub> = ⌈2<sup><i>k</i></sup><i>x</i>⌉/2<sup><i>k</i></sup>, por encima (<i>k</i> ≤ <i>n</i>; los que caen en la ventana). Las dos sucesiones de imágenes van al mismo valor, el círculo verde.</figcaption>
         </figure>
       </div>
       <div class="step">
@@ -3311,7 +3311,7 @@
             <div class="slider"><label for="ejp4alt-o6-9-n"><i>n</i></label><input type="range" id="ejp4alt-o6-9-n" min="1" max="12" value="3"><output id="ejp4alt-o6-9-n-o"></output></div>
           </div>
           <dl class="read" id="ejp4alt-o6-9-r1" aria-live="polite"></dl>
-          <figcaption>Con (<i>a</i>, <i>b</i>) = (0, 1) y dos sucesiones elegidas para el dibujo: <i>x<sub>k</sub></i> = 1/(2π<i>k</i> + π/2) (azul) e <i>y<sub>k</sub></i> = 1/(2π<i>k</i> − π/2) (naranja), <i>k</i> ≤ <i>n</i>, las dos con límite 0. Con <i>x</i> sen(1/<i>x</i>) las imágenes van al mismo valor y aparece <i>L<sub>a</sub></i> (círculo verde). Con sen(1/<i>x</i>) se quedan en 1 y −1: <i>L</i>₁ ≠ <i>L</i>₂. Con 1/<i>x</i> ni siquiera son de Cauchy (el gráfico se corta arriba).</figcaption>
+          <figcaption>Con (<i>a</i>, <i>b</i>) = (0, 1) y dos sucesiones elegidas para el dibujo: <i>x<sub>k</sub></i> = 1/(2π<i>k</i> + π/2) (azul) e <i>y<sub>k</sub></i> = 1/(2π<i>k</i> − π/2) (naranja), <i>k</i> ≤ <i>n</i>, las dos con límite 0; se dibuja el tramo (0, 0,5]. Con <i>x</i> sen(1/<i>x</i>) las imágenes van al mismo valor y aparece <i>L<sub>a</sub></i> (círculo verde). Con sen(1/<i>x</i>) se quedan en 1 y −1: <i>L</i>₁ ≠ <i>L</i>₂. Con 1/<i>x</i> ni siquiera son de Cauchy (el gráfico se corta arriba).</figcaption>
         </figure>
       </div>
       <div class="step">
@@ -3366,27 +3366,27 @@
             Como $g(a_n) \to f(x)$ y $g(b_n) \to f(y)$, se tiene $d(g(a_n), g(b_n)) \to d(f(x), f(y))$, y concluimos $d(f(x), f(y)) \le \varepsilon/2 \lt \varepsilon$.</p>
         </div>
         <figure class="viz">
-          <svg viewBox="0 0 360 200" role="img" aria-label="Dos puntos x e y a distancia menor que delta tercios, con bolas de radio delta tercios que contienen a a sub n y b sub n">
-            <circle cx="120" cy="100" r="62" class="sv-accent sv-dash"/>
-            <circle cx="120" cy="100" r="62" class="sv-area"/>
-            <circle cx="240" cy="100" r="62" class="sv-seq2 sv-dash"/>
-            <circle cx="240" cy="100" r="62" class="sv-area2"/>
-            <circle cx="120" cy="100" r="5" class="sv-fill-ok"/>
-            <circle cx="240" cy="100" r="5" class="sv-fill-ok"/>
-            <text x="120" y="122" text-anchor="middle" class="sv-label-ok">x</text>
-            <text x="240" y="122" text-anchor="middle" class="sv-label-ok">y</text>
-            <path d="M120 100 L240 100" class="sv-ok"/>
-            <text x="180" y="94" text-anchor="middle" class="sv-muted">&lt; δ/3</text>
-            <circle cx="82" cy="70" r="4.5" class="sv-fill-accent"/>
-            <text x="74" y="62" text-anchor="end" class="sv-label-accent">aₙ</text>
-            <circle cx="282" cy="140" r="4.5" class="sv-fill-seq2"/>
-            <text x="290" y="156" class="sv-label-seq2">bₙ</text>
-            <path d="M82 70 L282 140" class="sv-ink sv-dash"/>
-            <text x="195" y="150" text-anchor="middle" class="sv-text">d(aₙ, bₙ) &lt; δ</text>
-            <path d="M120 100 L120 38" class="sv-accent"/>
-            <text x="126" y="58" class="sv-label-accent">δ/3</text>
-            <text x="20" y="190" class="sv-muted">B(x, δ/3)</text>
-            <text x="340" y="190" text-anchor="end" class="sv-muted">B(y, δ/3)</text>
+          <svg viewBox="0 0 360 210" role="img" aria-label="Dos puntos x e y a distancia menor que delta tercios, con bolas de radio delta tercios que contienen a a sub n y b sub n">
+            <circle cx="150" cy="100" r="70" class="sv-area"/>
+            <circle cx="210" cy="100" r="70" class="sv-area2"/>
+            <circle cx="150" cy="100" r="70" class="sv-accent sv-dash"/>
+            <circle cx="210" cy="100" r="70" class="sv-seq2 sv-dash"/>
+            <path d="M150 100 L150 30" class="sv-accent"/>
+            <text x="144" y="52" text-anchor="end" class="sv-label-accent">δ/3</text>
+            <path d="M150 100 L210 100" class="sv-ok"/>
+            <text x="180" y="92" text-anchor="middle" class="sv-muted">&lt; δ/3</text>
+            <circle cx="150" cy="100" r="5" class="sv-fill-ok"/>
+            <circle cx="210" cy="100" r="5" class="sv-fill-ok"/>
+            <text x="150" y="120" text-anchor="middle" class="sv-label-ok">x</text>
+            <text x="210" y="120" text-anchor="middle" class="sv-label-ok">y</text>
+            <path d="M98 72 L268 138" class="sv-ink sv-dash"/>
+            <circle cx="98" cy="72" r="4.5" class="sv-fill-accent"/>
+            <text x="90" y="66" text-anchor="end" class="sv-label-accent">aₙ</text>
+            <circle cx="268" cy="138" r="4.5" class="sv-fill-seq2"/>
+            <text x="276" y="154" class="sv-label-seq2">bₙ</text>
+            <text x="180" y="200" text-anchor="middle" class="sv-text">d(aₙ, bₙ) &lt; δ</text>
+            <text x="12" y="200" class="sv-muted">B(x, δ/3)</text>
+            <text x="348" y="200" text-anchor="end" class="sv-muted">B(y, δ/3)</text>
           </svg>
           <figcaption>Por qué alcanza con δ/3: <i>a<sub>n</sub></i> está a menos de δ/3 de <i>x</i>, <i>b<sub>n</sub></i> a menos de δ/3 de <i>y</i>, y <i>x</i>, <i>y</i> a menos de δ/3 entre sí. La raya punteada suma los tres tramos y queda por debajo de δ, que es lo que pide la continuidad uniforme de <i>g</i>.</figcaption>
         </figure>
@@ -4324,7 +4324,7 @@ PP.register(function o14_2() {
     PP.path(ctx, [[T.X(a), T.p.t], [T.X(a), T.h - T.p.b]], C("--muted"), 1.5, [5, 4]);
     plotFn(ctx, T, (x) => (Math.abs(x - a) < 1e-9 ? NaN : f(x, -a)), a - 1, a + 1, C("--accent"), 2.5, null, 1600);
     ctx.restore();
-    PP.label(ctx, "x = a", T.X(a) + 4, T.p.t + 2, C("--muted"), "left", "top", 12);
+    PP.label(ctx, "x = a", T.X(a) - 4, T.p.t + 2, C("--muted"), "right", "top", 12);
     PP.read(id + "-read", [
       ["a", fmt(a, 2)],
       ["f(a + 0.1, −a)", fmt(f(a + 0.1, -a), 2)],
@@ -4390,11 +4390,11 @@ PP.register(function o14_3() {
       PP.path(ctx, [[T.X(b), T.Y(st.y - r)], [T.X(b), y0]], C("--muted"), 1, [3, 3]);
       segment(ctx, T, a, b, y0, C("--seq2"), false);
       PP.dot(ctx, T.X(st.x), T.Y(st.y), 6, C("--panel"), C("--ink"));
-      PP.label(ctx, "p_X(B) = (x − r, x + r)", T.X(st.x), y0 + 16, C("--seq2"), "center", "top", 12);
+      PP.label(ctx, "proyección: (x − r, x + r)", T.X(st.x), y0 + 16, C("--seq2"), "center", "top", 12);
       PP.read(id + "-read", [
         ["centro (x, y)", `(${fmt(st.x, 2)}, ${fmt(st.y, 2)})`],
         ["B((x, y), r)", `(${fmt(a, 2)}, ${fmt(b, 2)}) × (${fmt(st.y - r, 2)}, ${fmt(st.y + r, 2)})`],
-        ["p_X(B)", `(${fmt(a, 2)}, ${fmt(b, 2)})`, "good"],
+        ["proyección de B", `(${fmt(a, 2)}, ${fmt(b, 2)})`, "good"],
       ]);
     } else {
       clip(ctx, T);
@@ -4407,7 +4407,7 @@ PP.register(function o14_3() {
       PP.label(ctx, "proyección (0, ∞)", T.X(1.6), y0 + 16, C("--seq2"), "left", "top", 12);
       PP.read(id + "-read", [
         ["conjunto", "{(x, y) : x > 0, y = 1/x}"],
-        ["p_X del conjunto", "(0, ∞)"],
+        ["proyección", "(0, ∞)"],
         ["¿0 ∈ (0, ∞)?", "no", "bad"],
       ]);
     }
@@ -4472,7 +4472,7 @@ function preimageDraw(id, salto) {
       PP.label(ctx, "g((−1, 1)) = [0, 1)", xA + 8, T.Y(1) - 4, C("--ok"), "left", "bottom", 12);
     }
     const desc = !ok ? "∅ (a ≥ b)" : (rs.length || pts.length)
-      ? rs.map((r) => `(${fmt(r.a, 3)}, ${fmt(r.b, 3)})`).concat(pts.map((x) => `{${fmt(x, 0)}}`)).join(" ∪ ")
+      ? rs.map((r) => `(${fmt(r.a, 3)}, ${fmt(r.b, 3)})`).concat(pts.map(() => "{0}")).join(" ∪ ")
       : "∅";
     const rows = [["V", ok ? `(${fmt(a, 2)}, ${fmt(b, 2)})` : "∅"], [salto ? "f⁻¹(V)" : "g⁻¹(V)", desc]];
     if (salto) rows.push(["¿abierto?", pts.length ? "no: 0 está aislado" : "sí", pts.length ? "bad" : "good"]);
@@ -4592,7 +4592,7 @@ PP.register(function o6_4() {
   ctx.stroke();
   ctx.restore();
   const lbl = { cero: "{f = 0} = f⁻¹({0})", ge: "{f ≥ 0} = f⁻¹([0, ∞))", gt: "{f > 0} = f⁻¹((0, ∞))" }[mode];
-  PP.label(ctx, lbl, T.p.l + 6, T.p.t + 4, C("--ink"), "left", "top", 12);
+  PP.label(ctx, lbl, T.p.l + 16, T.p.t + 4, C("--ink"), "left", "top", 12);
   PP.read(id + "-read", [
     ["conjunto", lbl],
     ["preimagen de", { cero: "{0}, cerrado de ℝ", ge: "[0, ∞), cerrado de ℝ", gt: "(0, ∞), abierto de ℝ" }[mode]],
@@ -5492,6 +5492,7 @@ function curve(ctx, T, f, xs, n, color, width, dash) {
   flush();
 }
 const lin = (a, b) => (s) => a + (b - a) * s;
+const f3 = (v) => PP.fmt(Math.abs(v) < 5e-4 ? 0 : v, 3);
 
 /* Marco con la misma escala en x y en y. */
 function eqFrame(w, h, x0, x1, y0, pad) {
@@ -5717,7 +5718,7 @@ PP.register(function o612() {
   PP.label(ctx, "[0, P]", T.X(P / 2), T.p.t + 2, C("--accent"), "center", "top", 11);
   PP.read(ID + "o6-12-r1", [
     ["P", PP.fmt(P, 1)],
-    ["f(x), f(x + P)", PP.fmt(y0, 3) + ", " + PP.fmt(f(x0 + P), 3), "good"],
+    ["f(x), f(x + P)", f3(y0) + ", " + f3(f(x0 + P)), "good"],
   ]);
 }, [ID + "o6-12-P", ID + "o6-12-x"]);
 
@@ -5773,7 +5774,7 @@ PP.register(function o149() {
     PP.path(ctx, [[T.p.l - 4, T.Y(y)], [T.p.l + 4, T.Y(y)]], C("--seq2"), 1.5);
   }
   PP.label(ctx, "1/n", T.X(1 / Math.min(N, 3)) + 4, T.Y(0) - 6, C("--accent"), "left", "bottom", 11);
-  PP.label(ctx, "−log n", T.p.l + 8, T.Y(-Math.log(N)), C("--seq2"), "left", "middle", 11);
+  PP.label(ctx, "−log n", T.X(1 / N) + 10, T.Y(-Math.log(N)) + 2, C("--seq2"), "left", "top", 11);
   PP.read(ID + "o14-9-r1", [
     ["x_N = 1/N", PP.fmt(1 / N, 4)],
     ["log(x_N) = −log N", PP.fmt(-Math.log(N), 3), "bad"],
@@ -5785,7 +5786,7 @@ PP.register(function o39() {
   const t = PP.val(ID + "o3-9-t") / 10, N = PP.val(ID + "o3-9-N");
   PP.out(ID + "o3-9-t-o", PP.fmt(t, 1));
   PP.out(ID + "o3-9-N-o", String(N));
-  const { ctx, w, h } = PP.canvas(ID + "o3-9-c1", 0.5);
+  const { ctx, w, h } = PP.canvas(ID + "o3-9-c1", 0.4);
   const T = eqFrame(w, h, -4.7, 4.7, -0.55, { l: 10, r: 10, t: 10, b: 10 });
   const s = T.X(1) - T.X(0);
   const f = (u) => [4 * u / (4 + u * u), 2 - 8 / (4 + u * u)];
@@ -5824,7 +5825,7 @@ const z310 = (n) => [1.5 + 0.9 * Math.pow(-1, n) / n, 1 + 0.7 / n];
 function drawO310() {
   const N = PP.val(ID + "o3-10-N");
   PP.out(ID + "o3-10-N-o", String(N));
-  const { ctx, w, h } = PP.canvas(ID + "o3-10-c1", 0.62);
+  const { ctx, w, h } = PP.canvas(ID + "o3-10-c1", 0.5);
   const T = eqFrame(w, h, 0, 4, -0.1, { l: 10, r: 10, t: 10, b: 10 });
   o310.T = T;
   const [px, py] = o310.x;
@@ -5872,7 +5873,8 @@ PP.register(function o26() {
   });
   let xa = 0, xb = 0;
   for (let k = 1; k <= n; k++) {
-    xa = Math.floor(10 * k * x) / (10 * k); xb = Math.ceil(10 * k * x) / (10 * k);
+    const q = Math.pow(2, k);
+    xa = Math.floor(q * x) / q; xb = Math.ceil(q * x) / q;
     const last = k === n, r = last ? 5.5 : 3.5;
     if (xa >= 0.5) PP.dot(ctx, T.X(xa), T.Y(f(xa)), r, C("--accent"));
     if (xb <= 0.9) PP.dot(ctx, T.X(xb), T.Y(f(xb)), r, C("--seq2"));
@@ -5892,12 +5894,12 @@ PP.register(function o69() {
   const mode = PP.radio(ID + "o6-9-f") || "xs", n = PP.val(ID + "o6-9-n");
   PP.out(ID + "o6-9-n-o", String(n));
   const F = { xs: (x) => x * Math.sin(1 / x), s: (x) => Math.sin(1 / x), inv: (x) => 1 / x }[mode];
-  const box = mode === "inv" ? { x0: -0.03, x1: 1, y0: -1, y1: 30 } : mode === "s" ? { x0: -0.03, x1: 1, y0: -1.35, y1: 1.35 } : { x0: -0.03, x1: 1, y0: -0.6, y1: 1.0 };
+  const box = mode === "inv" ? { x0: -0.015, x1: 0.5, y0: -1, y1: 30 } : mode === "s" ? { x0: -0.015, x1: 0.5, y0: -1.35, y1: 1.35 } : { x0: -0.015, x1: 0.5, y0: -0.45, y1: 0.6 };
   const { ctx, w, h } = PP.canvas(ID + "o6-9-c1", 0.66);
   const T = PP.frame(w, h, box, { l: 40, r: 14, t: 14, b: 28 });
   PP.axes(ctx, T, { xLabel: "x", yLabel: "" });
   clipped(ctx, T, () => {
-    curve(ctx, T, F, (u) => 1 / (1 + 499 * u), 6000, C("--ink"), 1.1);
+    curve(ctx, T, F, (u) => 1 / (2 + 498 * u), 6000, C("--ink"), 1.1);
     if (mode === "s") {
       PP.path(ctx, [[T.p.l, T.Y(1)], [T.w - T.p.r, T.Y(1)]], C("--accent"), 1, [4, 4]);
       PP.path(ctx, [[T.p.l, T.Y(-1)], [T.w - T.p.r, T.Y(-1)]], C("--seq2"), 1, [4, 4]);
@@ -5911,13 +5913,14 @@ PP.register(function o69() {
   }
   if (mode === "xs") {
     PP.circle(ctx, T.X(0), T.Y(0), 6, C("--ok"), null, null, 2);
-    PP.label(ctx, "L_a = 0", T.X(0) + 9, T.Y(0) + 6, C("--ok"), "left", "top", 12);
+    PP.label(ctx, "Lₐ = 0", T.X(0) + 6, T.Y(-0.3), C("--ok"), "left", "middle", 12);
+    PP.path(ctx, [[T.X(0) + 4, T.Y(-0.27)], [T.X(0) + 1, T.Y(0) + 7]], C("--ok"), 1);
   } else if (mode === "s") {
     PP.label(ctx, "L₁ = 1", T.w - T.p.r - 4, T.Y(1) - 3, C("--accent"), "right", "bottom", 12);
     PP.label(ctx, "L₂ = −1", T.w - T.p.r - 4, T.Y(-1) + 3, C("--seq2"), "right", "top", 12);
   }
   const fx = F(xk(n)), fy = F(yk(n));
-  const concl = { xs: ["L₁ = L₂ = 0", "existe L_a", "good"], s: ["L₁ = 1 ≠ −1 = L₂", "no existe L_a", "bad"], inv: ["f(xₙ) → ∞", "no es de Cauchy", "bad"] }[mode];
+  const concl = { xs: ["L₁ = L₂ = 0", "existe Lₐ", "good"], s: ["L₁ = 1 ≠ −1 = L₂", "no existe Lₐ", "bad"], inv: ["f(xₙ) → ∞", "no es de Cauchy", "bad"] }[mode];
   PP.read(ID + "o6-9-r1", [
     ["xₙ, f(xₙ)", PP.fmt(xk(n), 4) + ", " + PP.fmt(fx, 4)],
     ["yₙ, f(yₙ)", PP.fmt(yk(n), 4) + ", " + PP.fmt(fy, 4)],
@@ -5938,7 +5941,7 @@ PP.register(function o312() {
   let lo = Infinity, hi = -Infinity;
   for (let i = 1; i <= 20000; i++) { const t = d * i / 20000, y = f(t); lo = Math.min(lo, y); hi = Math.max(hi, y); }
   PP.path(ctx, [[T.X(0) - 6, T.Y(lo)], [T.X(0) - 6, T.Y(hi)]], C("--ok"), 5);
-  PP.label(ctx, "f((0, δ))", T.X(0) - 2, T.p.t + 2, C("--ok"), "left", "top", 11);
+  PP.label(ctx, "f((0, δ))", T.X(0) - 2, T.Y(-1) + 5, C("--ok"), "left", "top", 11);
   for (let n = 1; n <= 80; n++) {
     const tn = 1 / (n * Math.PI), sn = 1 / (Math.PI / 2 + 2 * n * Math.PI);
     if (tn < d) PP.dot(ctx, T.X(tn), T.Y(0), 3, C("--seq2"));
@@ -5971,7 +5974,7 @@ PP.register(function o67() {
   const a = xk(n), b = yk(n);
   PP.path(ctx, [[T.X(a), T.Y(1)], [T.X(b), T.Y(-1)]], C("--fail"), 1.6, [4, 3]);
   PP.circle(ctx, T.X(0), T.Y(0), 6, C("--ink"), C("--bg"), null, 1.6);
-  PP.label(ctx, "c = 0 ∉ (0, 1]", T.X(0) + 9, T.Y(0) + 4, C("--ink"), "left", "top", 11);
+  PP.label(ctx, "c = 0 ∉ (0, 1]", T.X(0) + 2, T.Y(-1.2), C("--ink"), "left", "middle", 11);
   PP.label(ctx, "xₙ", T.X(a), T.Y(1) - 8, C("--accent"), "center", "bottom", 12);
   PP.label(ctx, "yₙ", T.X(b), T.Y(-1) + 8, C("--seq2"), "center", "top", 12);
   PP.read(ID + "o6-7-r1", [
