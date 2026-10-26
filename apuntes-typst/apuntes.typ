@@ -1911,6 +1911,19 @@ La demostración se deduce directamente del resultado anterior y la dejamos de e
   Sea $(M, d)$ un espacio métrico, y $E subset.eq M$ un subconjunto. Decimos que $E$ es _denso_ en $M$ si $overline(E) = M$.
 ]
 
+#observacion[Densidad vía bolas y vía abiertos][][
+  Sea $(M, d)$ un espacio métrico y $E subset.eq M$. Son equivalentes:
+  + $E$ es denso en $M$.
+  + Para todo $x in M$ y todo $r > 0$, $B(x, r) inter E != nothing$.
+  + Todo abierto no vacío $A subset.eq M$ cumple $A inter E != nothing$.
+
+  / (1 $<=>$ 2): Es leer la definición. $overline(E) = M$ dice que todo $x in M$ es punto de adherencia de $E$, y por la Definición 4.22 eso es exactamente (2).
+  / (2 $==>$ 3): Sea $A subset.eq M$ abierto no vacío y sea $x in A$. Como $A$ es abierto, $x$ es punto interior de $A$ (Definiciones 4.14 y 4.11): existe $r > 0$ tal que $B(x, r) subset.eq A$. Por (2), $B(x, r) inter E != nothing$, y como $B(x, r) subset.eq A$, también $A inter E != nothing$.
+  / (3 $==>$ 2): Toda bola $B(x, r)$ es un abierto (Ejemplo 4.16 b), desafío de la Práctica 3) no vacío, porque contiene a $x$. Por (3), $B(x, r) inter E != nothing$.
+
+  Intuitivamente, un denso "está en todos lados": no hay ninguna zona abierta de $M$, por chica que sea, donde $E$ no tenga puntos. La versión (3) es la que mejor se lleva con la continuidad, que habla de preimágenes de abiertos (Teorema 5.9): por ejemplo, para ver que la imagen de un denso por una función continua y sobreyectiva es densa, alcanza con ver que corta a todo abierto no vacío.
+]
+
 #teorema[Extensión de funciones uniformemente continuas desde un denso][5.22][
   Sea $(M, d)$, $(N, d')$ dos espacios métricos, $E subset.eq M$ un conjunto denso, $(N, d')$ completo y sea $f : E -> N$ una función uniformemente continua. Entonces existe una función $tilde(f) : M -> N$ uniformemente continua tal que $tilde(f)|_E = f$ (es decir, $tilde(f)(x) = f(x)$ para todo $x in E$).
 ]

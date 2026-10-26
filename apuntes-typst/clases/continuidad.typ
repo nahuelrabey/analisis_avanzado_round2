@@ -283,6 +283,37 @@ _Obs_: si $f : E -> F$ es Lipschitz entonces $f$ es uniformemente continua. Pero
   $(star)$ Como $2 pi n sin(1/n) = 2 pi sin(1/n) / (1/n) -> 2 pi$, tenemos que $abs(f(x_n) - f(y_n)) -> 2 pi$, y en consecuencia existe $epsilon > 0$ tal que $abs(f(x_n) - f(y_n)) >= epsilon$ para todo $n$ suficientemente grande. #align(right)[$square$]
 
   _Nota_: el manuscrito no explicita qué par de funciones multiplica en el contraejemplo: $x sin(x)$ es el producto de $op("id")_RR$ (uniformemente continua, no acotada) por $sin$ (uniformemente continua y acotada, Ejemplo 5 a)). En la última igualdad desaparece la barra de valor absoluto porque $sin(1/n) > 0$ para todo $n >= 1$, así que la expresión entre barras es $-(pi + 2 pi n + 1/n) sin(1/n)$ y su módulo es la suma escrita.
+
+  _Nota_: el límite $n sin(1/n) -> 1$ no está probado en las guías anteriores. Sale por valor medio, como en el Ejemplo 5 a): para cada $n >= 1$ existe $c_n in (0, 1/n)$ tal que
+  $
+  sin(1/n) = sin(1/n) - sin(0) = cos(c_n) dot (1/n - 0).
+  $
+  Multiplicando ambos lados por $n$, el factor $1/n$ se cancela:
+  $
+  n sin(1/n) = n dot cos(c_n) dot 1/n = cos(c_n).
+  $
+  Como $0 < c_n < 1/n$, se tiene $c_n -> 0$, y por continuidad del coseno $cos(c_n) -> cos(0) = 1$. Luego $2 pi n sin(1/n) -> 2 pi$.
+
+  _Nota_: en $(star)$ alcanza con que el límite sea *positivo*. Sea $a_n = abs(f(x_n) - f(y_n))$, con $a_n -> 2 pi > 0$. Usando $epsilon = pi$ como tolerancia en la definición de límite, existe $N$ tal que para todo $n >= N$
+  $
+  abs(a_n - 2 pi) < pi ==> a_n > 2 pi - pi = pi = epsilon.
+  $
+  (Sirve cualquier $epsilon in (0, 2 pi)$.) Que valga sólo para $n$ suficientemente grande no es un problema (ver la observación siguiente). Lo esencial es el signo del límite: si $a_n -> 0$, ningún $epsilon > 0$ acota a $a_n$ por debajo y el argumento no funciona.
+]
+#observacion[De "$n$ suficientemente grande" a "para todo $n$"][
+  El criterio con sucesiones pide $abs(f(x_n) - f(y_n)) >= epsilon$ *para todo* $n$, pero en $(star)$ lo obtuvimos sólo para $n >= N$. Hay dos formas de cerrar la brecha.
+
+  *1. Reindexar.* Descartamos los primeros términos: sean
+  $
+  x'_k = x_(N + k), quad y'_k = y_(N + k), quad k >= 0.
+  $
+  Entonces $abs(x'_k - y'_k) -> 0$ (una cola de una sucesión que tiende a $0$ también tiende a $0$) y $abs(f(x'_k) - f(y'_k)) = a_(N + k) >= epsilon$ para *todo* $k$, porque $N + k >= N$. El $N$ no forma parte de la definición: es la herramienta que da el límite para saber desde dónde empezar. Esto sirve siempre que $a_n$ tienda a algo positivo, aunque no sepamos acotar los primeros términos.
+
+  *2. Acotar directamente.* Por la nota anterior, $n sin(1/n) = cos(c_n)$ con $c_n in (0, 1/n) subset.eq (0, 1]$. Como el coseno es decreciente en $[0, pi]$ y $1 < pi$, se tiene $cos(c_n) >= cos(1) > 0$. Descartando los sumandos positivos $pi sin(1/n)$ y $1/n sin(1/n)$, para todo $n >= 1$
+  $
+  a_n = (pi + 2 pi n + 1/n) sin(1/n) >= 2 pi n sin(1/n) = 2 pi cos(c_n) >= 2 pi cos(1).
+  $
+  Tomando $epsilon = 2 pi cos(1) approx 3.39$, la desigualdad vale para todo $n$ sin reindexar. Es más directo, pero exige encontrar una cota que valga para todos los términos.
 ]
 
 #ejemplo[Pegado de continuidad uniforme en $[0, a]$ y $[a, +infinity)$ (Clase 6 · Ejemplo 7)][C6-7][
@@ -294,7 +325,43 @@ _Obs_: si $f : E -> F$ es Lipschitz entonces $f$ es uniformemente continua. Pero
 
   - Si $x, y in [0, a]$, existe $delta_1 > 0$ tal que $abs(x - y) < delta_1$ implica que $abs(f(x) - f(y)) < epsilon'$.
   - Si $x, y in [a, +infinity)$, existe $delta_2 > 0$ tal que $abs(x - y) < delta_2$ implica que $abs(f(x) - f(y)) < epsilon'$.
-  - Sea $x in [0, a]$, $y in [a, +infinity)$. _(Dibujo: la semirrecta desde $0$, con $x$ a la izquierda de $a$ a distancia $< delta_1$ e $y$ a la derecha de $a$ a distancia $< delta_2$.)_
+  - Sea $x in [0, a]$, $y in [a, +infinity)$.
+
+    #block(breakable: false, width: 100%)[#align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        let azul = rgb("#1e3a8a")
+        let rojo = rgb("#b91c1c")
+        let (a, d1, d2, x, y) = (5, 2, 2.4, 3.7, 6.1)
+
+        // Tramos donde valen las cotas de cada lado.
+        rect((a - d1, -0.12), (a, 0.12), fill: azul.lighten(80%), stroke: none)
+        rect((a, -0.12), (a + d2, 0.12), fill: rojo.lighten(80%), stroke: none)
+
+        // Semirrecta desde 0.
+        line((0, 0), (10, 0), mark: (end: ">"), stroke: 0.8pt)
+        for (p, l) in ((0, $0$), (a, $a$)) {
+          line((p, -0.15), (p, 0.15), stroke: 0.8pt)
+          content((p, -0.25), anchor: "north", text(size: 9pt, l))
+        }
+
+        // Distancias a a: menos que delta_1 a izquierda, menos que delta_2 a derecha.
+        line((a - d1, 0.45), (a, 0.45), mark: (start: "|", end: "|"), stroke: 0.7pt + azul)
+        content((a - d1 / 2, 0.55), anchor: "south", text(size: 9pt, fill: azul, $delta_1$))
+        line((a, 0.45), (a + d2, 0.45), mark: (start: "|", end: "|"), stroke: 0.7pt + rojo)
+        content((a + d2 / 2, 0.55), anchor: "south", text(size: 9pt, fill: rojo, $delta_2$))
+
+        // Los puntos x <= a <= y.
+        circle((x, 0), radius: 0.07, fill: azul, stroke: none)
+        content((x, -0.25), anchor: "north", text(size: 9pt, fill: azul, $x$))
+        circle((y, 0), radius: 0.07, fill: rojo, stroke: none)
+        content((y, -0.25), anchor: "north", text(size: 9pt, fill: rojo, $y$))
+
+        // Distancia entre x e y.
+        line((x, -0.85), (y, -0.85), mark: (start: "|", end: "|"), stroke: 0.7pt)
+        content(((x + y) / 2, -0.95), anchor: "north", text(size: 9pt, $abs(x - y) < delta$))
+      })
+    ]]
 
     La idea es que si $x$ e $y$ están muy cerca, estarán cerca de $a$, y si $abs(x - a) < delta_1$ entonces $abs(f(x) - f(a)) < epsilon'$ y similarmente $abs(y - a) < delta_2$, entonces $abs(f(y) - f(a)) < epsilon'$, por lo tanto $f(x)$ y $f(y)$ estarán muy cerca entre sí. Formalmente, sea $delta < min{delta_1, delta_2}$. Supongamos que $abs(x - y) < delta$. Como $x <= a <= y$, tenemos que
     $
@@ -306,9 +373,9 @@ _Obs_: si $f : E -> F$ es Lipschitz entonces $f$ es uniformemente continua. Pero
     abs(f(x) - f(y)) <= underbrace(abs(f(x) - f(a)), < epsilon' " por " (1)) + underbrace(abs(f(a) - f(y)), < epsilon' " por " (2)) < 2 epsilon'.
     $
 
-  Tomando $epsilon' < 2 epsilon$, concluimos. #align(right)[$square$]
+  Tomando $epsilon' <= epsilon \/ 2$, se tiene $abs(f(x) - f(y)) < 2 epsilon' <= epsilon$ y concluimos. #align(right)[$square$]
 
-  _Nota_: el manuscrito cierra con "tomando $epsilon' < 2 epsilon$"; para que $2 epsilon' <= epsilon$ hay que tomar $epsilon' <= epsilon \/ 2$. En el párrafo de la idea escribe "$abs(x - a) < delta$ entonces $abs(f(x) - f(a)) < epsilon$" mezclando $delta$ con $delta_1$ y $epsilon$ con $epsilon'$; la versión formal de abajo es la correcta.
+  _Nota_: el manuscrito cierra con "tomando $epsilon' < 2 epsilon$", que no alcanza: sólo da $abs(f(x) - f(y)) < 4 epsilon$. Para que $2 epsilon' <= epsilon$ hay que tomar $epsilon' <= epsilon \/ 2$, como arriba. En el párrafo de la idea escribe "$abs(x - a) < delta$ entonces $abs(f(x) - f(a)) < epsilon$" mezclando $delta$ con $delta_1$ y $epsilon$ con $epsilon'$; la versión formal de abajo es la correcta.
 ]
 
 #ejemplo[Pegado de continuidad uniforme en $A union B$ con $d(A, B) > 0$ (Clase 6 · Ejemplo 8)][C6-8][
@@ -320,7 +387,37 @@ _Obs_: si $f : E -> F$ es Lipschitz entonces $f$ es uniformemente continua. Pero
   - si $x, y in A$ y $d(x, y) < delta_A$ entonces $d'(f(x), f(y)) < epsilon'$;
   - si $x, y in B$ y $d(x, y) < delta_B$ entonces $d'(f(x), f(y)) < epsilon'$.
 
-  _(Dibujo: dos intervalos $A$ y $B$ separados por una brecha de longitud $d(A, B)$; para $x in A$, $y in B$ se marca $d(x, y) >= d(A, B)$.)_ Notemos que si $d(A, B) > 0$ entonces $overline(A) inter overline(B) = emptyset$ (es el contrarrecíproco del ejercicio 11 c), $overline(A) inter overline(B) != emptyset ==> d(A, B) = 0$).
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let azul = rgb("#1e3a8a")
+      let rojo = rgb("#b91c1c")
+      let (a1, a2, b1, b2, x, y) = (0.5, 3.5, 6, 9.5, 2.2, 7.6)
+
+      // Los conjuntos A y B, separados por una brecha.
+      line((0, 0), (10, 0), stroke: 0.5pt + gray)
+      line((a1, 0), (a2, 0), stroke: 3pt + azul.lighten(50%))
+      line((b1, 0), (b2, 0), stroke: 3pt + rojo.lighten(50%))
+      content(((a1 + a2) / 2, 0.25), anchor: "south", text(size: 9pt, fill: azul, $A$))
+      content(((b1 + b2) / 2, 0.25), anchor: "south", text(size: 9pt, fill: rojo, $B$))
+
+      // La brecha entre A y B mide d(A, B).
+      line((a2, 0.45), (b1, 0.45), mark: (start: "|", end: "|"), stroke: 0.7pt)
+      content(((a2 + b1) / 2, 0.55), anchor: "south", text(size: 9pt, $d(A, B)$))
+
+      // Los puntos x in A, y in B.
+      circle((x, 0), radius: 0.07, fill: azul, stroke: none)
+      content((x, -0.25), anchor: "north", text(size: 9pt, fill: azul, $x$))
+      circle((y, 0), radius: 0.07, fill: rojo, stroke: none)
+      content((y, -0.25), anchor: "north", text(size: 9pt, fill: rojo, $y$))
+
+      // Distancia entre x e y.
+      line((x, -0.85), (y, -0.85), mark: (start: "|", end: "|"), stroke: 0.7pt)
+      content(((x + y) / 2, -0.95), anchor: "north", text(size: 9pt, $d(x, y) >= d(A, B)$))
+    })
+  ]]
+
+  Notemos que si $d(A, B) > 0$ entonces $overline(A) inter overline(B) = emptyset$ (es el contrarrecíproco de la Práctica 3, ejercicio 11 c), $overline(A) inter overline(B) != emptyset ==> d(A, B) = 0$).
 
   La idea es que si tomamos $delta > 0$ muy pequeño, no puede pasar que $d(x, y) < delta$ con $x in A$, $y in B$. Si tomamos $delta < min{delta_A, delta_B, d(A, B)}$, si $x in A$, $y in B$, $d(x, y) < delta$, entonces
   $
