@@ -414,7 +414,7 @@ PP.register(function o8_1() {
   const lam = PP.val("ejp4alt-o8-1-l") / 100;
   PP.out("ejp4alt-o8-1-l-o", F(lam, 2));
   const { ctx, w, h } = PP.canvas("ejp4alt-o8-1-c1", 0.66);
-  const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -0.6, y1: 1.6 }, { l: 34, r: 12, t: 12, b: 28 });
+  const T = PP.frame(w, h, { x0: 0, x1: 1, y0: -0.2, y1: 1 }, { l: 34, r: 12, t: 12, b: 28 });
   PP.axes(ctx, T, { xTicks: 5, yTicks: 5 });
   const f1 = (y) => 0.3 * Math.sin(2 * Math.PI * y) + 0.2, f2 = () => 0, k = (x, y) => Math.cos(3 * (x - y)), g = () => 0.5;
   const M = 300;
@@ -464,3 +464,263 @@ PP.register(function o8_1() {
   draggable("ejp4alt-o7-7-c1", () => T, (px, py, T) => nearest([["a", st.a, 0], ["b", st.b, 0]], px, py, T, 34),
     (id, x) => { st[id] = clamp(x, -0.8, 4.8); }, draw);
 })();
+
+
+/* ===================== Bloque 8 ===================== */
+const dist = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1]);
+/* Punto del segmento [p, q] más cercano a z. */
+function projSeg(z, p, q) {
+  const vx = q[0] - p[0], vy = q[1] - p[1], L = vx * vx + vy * vy;
+  const t = L ? clamp(((z[0] - p[0]) * vx + (z[1] - p[1]) * vy) / L, 0, 1) : 0;
+  return [p[0] + t * vx, p[1] + t * vy];
+}
+
+/* O7-1: |d(x, a) − d(x0, a)| ≤ d(x, x0) en el plano. */
+(() => {
+  const st = { a: [-1.6, -0.6], x0: [0.9, 0.9], x: [1.9, 0.1] };
+  let T = null;
+  function draw() {
+    const { ctx, w, h } = PP.canvas("ejp4alt-o7-1-c1", 0.66);
+    T = fitFrame(w, h, 0.2, 0.1, 6.4, 4.2);
+    const { a, x0, x } = st, ra = dist(x0, a), rb = dist(x, a), pxu = T.X(1) - T.X(0);
+    PP.circle(ctx, T.X(a[0]), T.Y(a[1]), ra * pxu, C("--accent"), null, [5, 4], 1.3);
+    PP.circle(ctx, T.X(a[0]), T.Y(a[1]), rb * pxu, C("--seq2"), null, [5, 4], 1.3);
+    PP.path(ctx, [[T.X(a[0]), T.Y(a[1])], [T.X(x0[0]), T.Y(x0[1])]], C("--accent"), 1.5);
+    PP.path(ctx, [[T.X(a[0]), T.Y(a[1])], [T.X(x[0]), T.Y(x[1])]], C("--seq2"), 1.5);
+    PP.path(ctx, [[T.X(x0[0]), T.Y(x0[1])], [T.X(x[0]), T.Y(x[1])]], C("--fail"), 3);
+    [["a", a, C("--ink")], ["x₀", x0, C("--accent")], ["x", x, C("--seq2")]].forEach(([lab, p, col]) => {
+      PP.dot(ctx, T.X(p[0]), T.Y(p[1]), 6, col);
+      PP.label(ctx, lab, T.X(p[0]) + 8, T.Y(p[1]) - 6, col, "left", "bottom", 13);
+    });
+    const diff = Math.abs(rb - ra), dxx = dist(x, x0);
+    PP.read("ejp4alt-o7-1-read", [
+      ["d(x, a), d(x₀, a)", F(rb, 3) + ", " + F(ra, 3)],
+      ["|d(x, a) − d(x₀, a)|", F(diff, 3)],
+      ["d(x, x₀)", F(dxx, 3)],
+      ["|d_a(x) − d_a(x₀)| ≤ d(x, x₀)", diff <= dxx + 1e-12 ? "sí" : "no", diff <= dxx + 1e-12 ? "good" : "bad"],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable("ejp4alt-o7-1-c1", () => T, (px, py, T) => nearest([["a", ...st.a], ["x0", ...st.x0], ["x", ...st.x]], px, py, T, 30),
+    (id, xx, yy, T) => { st[id] = [clamp(xx, T.box.x0, T.box.x1), clamp(yy, T.box.y0, T.box.y1)]; }, draw);
+})();
+
+/* O10-3: B(y, ε) con ε = d(x, y) − r queda fuera de la bola cerrada B[x, r]. */
+(() => {
+  const st = { y: [2.3, 1.1] };
+  let T = null;
+  function draw() {
+    const r = PP.val("ejp4alt-o10-3-r") / 10;
+    PP.out("ejp4alt-o10-3-r-o", F(r, 1));
+    const { ctx, w, h } = PP.canvas("ejp4alt-o10-3-c1", 0.66);
+    T = fitFrame(w, h, 0.4, 0, 7, 5);
+    const x = [0, 0], y = st.y, pxu = T.X(1) - T.X(0), dxy = dist(x, y), eps = dxy - r;
+    PP.circle(ctx, T.X(0), T.Y(0), r * pxu, C("--seq2"), C("--area2"), null, 2);
+    PP.label(ctx, "B[x, r]", T.X(0), T.Y(-r) + 6, C("--seq2"), "center", "top", 12);
+    PP.dot(ctx, T.X(0), T.Y(0), 4, C("--seq2"));
+    PP.label(ctx, "x", T.X(0) + 6, T.Y(0) - 4, C("--seq2"), "left", "bottom", 12);
+    if (eps > 0) {
+      PP.circle(ctx, T.X(y[0]), T.Y(y[1]), eps * pxu, C("--accent"), C("--band"), [5, 4], 2);
+      const u = [y[0] / dxy, y[1] / dxy];
+      PP.path(ctx, [[T.X(u[0] * r), T.Y(u[1] * r)], [T.X(y[0]), T.Y(y[1])]], C("--accent"), 2);
+      PP.path(ctx, [[T.X(0), T.Y(0)], [T.X(u[0] * r), T.Y(u[1] * r)]], C("--seq2"), 1.2, [3, 3]);
+      PP.label(ctx, "ε", T.X((u[0] * r + y[0]) / 2) - 4, T.Y((u[1] * r + y[1]) / 2) - 4, C("--accent"), "right", "bottom", 13);
+    }
+    PP.dot(ctx, T.X(y[0]), T.Y(y[1]), 6, eps > 0 ? C("--accent") : C("--fail"));
+    PP.label(ctx, "y", T.X(y[0]) + 8, T.Y(y[1]) - 6, eps > 0 ? C("--accent") : C("--fail"), "left", "bottom", 13);
+    PP.read("ejp4alt-o10-3-read", eps > 0 ? [
+      ["d(x, y)", F(dxy, 3)],
+      ["ε = d(x, y) − r", F(eps, 3), "good"],
+      ["B(y, ε) ⊆ A", "sí", "good"],
+    ] : [["d(x, y) ≤ r", F(dxy, 3) + " ≤ " + F(r, 1), "bad"], ["y ∈ A", "no: arrastralo afuera", "bad"]]);
+  }
+  PP.register(draw, ["ejp4alt-o10-3-r"]);
+  draggable("ejp4alt-o10-3-c1", () => T, (px, py, T) => nearest([["y", ...st.y]], px, py, T, 40),
+    (id, xx, yy, T) => { st.y = [clamp(xx, T.box.x0, T.box.x1), clamp(yy, T.box.y0, T.box.y1)]; }, draw);
+})();
+
+/* O2-8, definición: d(x, A) con A = disco abierto ∪ segmento. */
+(() => {
+  const st = { x: [1.5, 1.4] };
+  const c = [-1, 0.4], R = 1.1, p = [0.7, -1.3], q = [2.5, -0.3];
+  let T = null;
+  function draw() {
+    const { ctx, w, h } = PP.canvas("ejp4alt-o2-8-c1", 0.66);
+    T = fitFrame(w, h, 0.5, 0, 6, 4);
+    const pxu = T.X(1) - T.X(0), x = st.x;
+    PP.circle(ctx, T.X(c[0]), T.Y(c[1]), R * pxu, C("--ok"), C("--okband"), [5, 4], 1.8);
+    PP.path(ctx, [[T.X(p[0]), T.Y(p[1])], [T.X(q[0]), T.Y(q[1])]], C("--ok"), 4);
+    PP.label(ctx, "A", T.X(c[0]), T.Y(c[1]), C("--ok"), "center", "middle", 14);
+    const dc = dist(x, c), dDisc = Math.max(0, dc - R), sp = projSeg(x, p, q), dSeg = dist(x, sp);
+    const dd = Math.min(dDisc, dSeg);
+    let np;
+    if (dDisc <= dSeg) np = dc > R ? [c[0] + (x[0] - c[0]) * R / dc, c[1] + (x[1] - c[1]) * R / dc] : x; else np = sp;
+    if (dd > 0) {
+      PP.path(ctx, [[T.X(x[0]), T.Y(x[1])], [T.X(np[0]), T.Y(np[1])]], C("--accent"), 2, [5, 4]);
+      if (dDisc <= dSeg) PP.circle(ctx, T.X(np[0]), T.Y(np[1]), 4, C("--accent"), C("--bg"), null, 2);
+      else PP.dot(ctx, T.X(np[0]), T.Y(np[1]), 4, C("--accent"));
+    }
+    PP.dot(ctx, T.X(x[0]), T.Y(x[1]), 6, C("--accent"));
+    PP.label(ctx, "x", T.X(x[0]) + 8, T.Y(x[1]) - 6, C("--accent"), "left", "bottom", 13);
+    const att = dd === 0 ? (dc < R ? "x ∈ A" : "sí") : (dDisc <= dSeg ? "no: el punto más cercano está en el borde del disco, fuera de A" : "sí, en el segmento");
+    PP.read("ejp4alt-o2-8-read1", [
+      ["d(x, A)", F(dd, 3)],
+      ["¿el ínfimo se alcanza en A?", att],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable("ejp4alt-o2-8-c1", () => T, (px, py, T) => nearest([["x", ...st.x]], px, py, T, 40),
+    (id, xx, yy, T) => { st.x = [clamp(xx, T.box.x0, T.box.x1), clamp(yy, T.box.y0, T.box.y1)]; }, draw);
+})();
+
+/* O2-8, proposición: x ↦ d(x, A) en ℝ y el cono de pendiente 1. */
+(() => {
+  const st = { p: -0.3 };
+  const dA = (x) => Math.min(x < -2 ? -2 - x : x > -1 ? x + 1 : 0, Math.abs(x - 0.5), x <= 1.5 ? 1.5 - x : x >= 2.5 ? x - 2.5 : 0);
+  let T = null;
+  function draw() {
+    const { ctx, w, h } = PP.canvas("ejp4alt-o2-8-c2", 0.62);
+    T = PP.frame(w, h, { x0: -3.2, x1: 3.6, y0: -0.35, y1: 1.6 }, { l: 30, r: 12, t: 12, b: 28 });
+    PP.axes(ctx, T, { xTicks: 7, yTicks: 4 });
+    const p = st.p, dp = dA(p);
+    const top = [], bot = [];
+    for (let i = 0; i <= 120; i++) { const x = T.box.x0 + (T.box.x1 - T.box.x0) * i / 120; top.push([T.X(x), T.Y(dp + Math.abs(x - p))]); bot.unshift([T.X(x), T.Y(dp - Math.abs(x - p))]); }
+    ctx.save(); ctx.beginPath(); ctx.rect(T.p.l, T.p.t, w - T.p.l - T.p.r, h - T.p.t - T.p.b); ctx.clip();
+    PP.path(ctx, top.concat(bot), C("--accent"), 1, [4, 4], true, C("--band"));
+    ctx.restore();
+    PP.path(ctx, [[T.X(-2), T.Y(0)], [T.X(-1), T.Y(0)]], C("--ok"), 5);
+    PP.dot(ctx, T.X(0.5), T.Y(0), 4.5, C("--ok"));
+    PP.path(ctx, [[T.X(1.5), T.Y(0)], [T.X(2.5), T.Y(0)]], C("--ok"), 5);
+    PP.circle(ctx, T.X(1.5), T.Y(0), 4.5, C("--ok"), C("--bg"), null, 2);
+    PP.circle(ctx, T.X(2.5), T.Y(0), 4.5, C("--ok"), C("--bg"), null, 2);
+    PP.label(ctx, "A", T.X(-1.5), T.Y(0) + 6, C("--ok"), "center", "top", 12);
+    plotFn(ctx, T, dA, T.box.x0, T.box.x1, C("--ink"), 2.4, null, 700);
+    PP.path(ctx, [[T.X(p), T.Y(0)], [T.X(p), T.Y(dp)]], C("--accent"), 1, [3, 3]);
+    PP.dot(ctx, T.X(p), T.Y(dp), 6, C("--accent"));
+    let worst = -Infinity; for (let i = 0; i <= 600; i++) { const x = T.box.x0 + (T.box.x1 - T.box.x0) * i / 600; worst = Math.max(worst, Math.abs(dA(x) - dp) - Math.abs(x - p)); }
+    PP.read("ejp4alt-o2-8-read2", [
+      ["x₀, d(x₀, A)", F(p, 2) + ", " + F(dp, 3)],
+      ["máx (|d(x, A) − d(x₀, A)| − |x − x₀|)", F(Math.max(0, worst), 4) + " ≤ 0", "good"],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable("ejp4alt-o2-8-c2", () => T, (px, py, T) => (Math.abs(T.X(st.p) - px) < 40 ? "p" : null),
+    (id, xx, yy, T) => { st.p = clamp(xx, T.box.x0, T.box.x1); }, draw);
+})();
+
+/* O4-4: B(A, 1/k) como unión de bolas B(y, 1/k), y ∈ A. */
+PP.register(function o4_4() {
+  const k = PP.val("ejp4alt-o4-4-k"), r = 1 / k;
+  PP.out("ejp4alt-o4-4-k-o", String(k));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o4-4-c1", 0.66);
+  const T = fitFrame(w, h, 0.4, 0.1, 5.6, 3.6);
+  const pxu = T.X(1) - T.X(0), pts = [];
+  const step = Math.min(0.02, r / 4);
+  for (let t = 0; t <= 1 + 1e-9; t += step / 2) pts.push([-2 + 2 * t, -1]);
+  for (let t = 0; t <= Math.PI + 1e-9; t += step) pts.push([1 + Math.cos(Math.PI - t), 0.2 + Math.sin(Math.PI - t)]);
+  pts.push([2.6, -0.9]);
+  ctx.save(); ctx.beginPath();
+  pts.forEach(([x, y]) => { ctx.moveTo(T.X(x) + r * pxu, T.Y(y)); ctx.arc(T.X(x), T.Y(y), r * pxu, 0, Math.PI * 2); });
+  ctx.fillStyle = C("--area"); ctx.fill("nonzero"); ctx.restore();
+  PP.path(ctx, [[T.X(-2), T.Y(-1)], [T.X(0), T.Y(-1)]], C("--ok"), 3);
+  const arc = []; for (let t = 0; t <= 60; t++) arc.push([T.X(1 + Math.cos(Math.PI - Math.PI * t / 60)), T.Y(0.2 + Math.sin(Math.PI - Math.PI * t / 60))]);
+  PP.path(ctx, arc, C("--ok"), 3);
+  PP.dot(ctx, T.X(2.6), T.Y(-0.9), 4, C("--ok"));
+  PP.label(ctx, "A", T.X(-1), T.Y(-1) + 8, C("--ok"), "center", "top", 13);
+  PP.label(ctx, "B(A, 1/" + k + ")", T.X(-1.9), T.Y(-1 + r) - 4, C("--accent"), "left", "bottom", 12);
+  PP.read("ejp4alt-o4-4-read", [
+    ["r = 1/k", F(r, 4)],
+    ["bolas dibujadas", String(pts.length)],
+  ]);
+}, ["ejp4alt-o4-4-k"]);
+
+/* O2-9: ζ = d(x, C) / (d(x, C) + d(x, D)) en ℝ; U y V. */
+PP.register(function o2_9() {
+  const hh = -1.5 + PP.val("ejp4alt-o2-9-g") / 10, showUV = document.getElementById("ejp4alt-o2-9-uv").checked;
+  PP.out("ejp4alt-o2-9-g-o", F(hh, 1));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o2-9-c1", 0.62);
+  const T = PP.frame(w, h, { x0: -3.6, x1: 3.6, y0: -0.62, y1: 1.2 }, { l: 30, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: 7, yTicks: 4 });
+  const dI = (x, a, b) => (x < a ? a - x : x > b ? x - b : 0);
+  const dC = (x) => Math.min(dI(x, -3, -1.5), dI(x, 2.5, 3)), dD = (x) => dI(x, hh, 1.5);
+  const z = (x) => dC(x) / (dC(x) + dD(x));
+  PP.path(ctx, [[T.p.l, T.Y(0.5)], [w - T.p.r, T.Y(0.5)]], C("--muted"), 1, [4, 4]);
+  PP.label(ctx, "1/2", w - T.p.r - 2, T.Y(0.5) - 3, C("--muted"), "right", "bottom", 11);
+  [[-3, -1.5], [2.5, 3]].forEach(([a, b]) => PP.path(ctx, [[T.X(a), T.Y(0)], [T.X(b), T.Y(0)]], C("--ok"), 5));
+  PP.path(ctx, [[T.X(hh), T.Y(0)], [T.X(1.5), T.Y(0)]], C("--seq2"), 5);
+  PP.label(ctx, "C", T.X(-2.25), T.Y(0) - 6, C("--ok"), "center", "bottom", 12);
+  PP.label(ctx, "C", T.X(2.75), T.Y(0) - 6, C("--ok"), "center", "bottom", 12);
+  PP.label(ctx, "D", T.X((hh + 1.5) / 2), T.Y(0) - 6, C("--seq2"), "center", "bottom", 12);
+  plotFn(ctx, T, z, T.box.x0, T.box.x1, C("--ink"), 2.4, null, 800);
+  PP.label(ctx, "ζ", T.X(0.9), T.Y(1) - 4, C("--ink"), "left", "bottom", 13);
+  if (showUV) {
+    const N = 400; let prev = null, start = T.box.x0;
+    const band = (a, b, isU) => { const yy = isU ? -0.3 : -0.48; PP.path(ctx, [[T.X(a), T.Y(yy)], [T.X(b), T.Y(yy)]], isU ? C("--accent") : C("--seq2"), 6); };
+    for (let i = 0; i <= N; i++) {
+      const x = T.box.x0 + (T.box.x1 - T.box.x0) * i / N, v = z(x), s = v < 0.5 ? "U" : v > 0.5 ? "V" : "0";
+      if (prev !== null && s !== prev) { if (prev !== "0") band(start, x, prev === "U"); start = x; }
+      if (prev === null) start = x;
+      prev = s;
+    }
+    if (prev !== "0") band(start, T.box.x1, prev === "U");
+    PP.label(ctx, "U", T.p.l + 2, T.Y(-0.3) - 4, C("--accent"), "left", "bottom", 11);
+    PP.label(ctx, "V", T.X(hh) - 4, T.Y(-0.48), C("--seq2"), "right", "middle", 11);
+  }
+  PP.read("ejp4alt-o2-9-read", [
+    ["D = [h, 1.5] con h", F(hh, 1)],
+    ["ζ en C, ζ en D", "0, 1"],
+    ["d(C, D)", F(Math.min(hh + 1.5, 1), 2)],
+  ]);
+}, ["ejp4alt-o2-9-g", "ejp4alt-o2-9-uv"]);
+
+/* O12-3: U = {d_E − d_F < 0}, V = {d_E − d_F > 0} en el plano. */
+(() => {
+  const st = { p: [0.9, -1.1], q: [1.7, 1.2] };
+  const c = [-1.3, 0.1], R = 0.8;
+  let T = null;
+  function draw() {
+    const { ctx, w, h } = PP.canvas("ejp4alt-o12-3-c1", 0.66);
+    T = fitFrame(w, h, 0.2, 0, 6, 4, { l: 0, r: 0, t: 0, b: 0 });
+    const cell = 4, colU = C("--area"), colV = C("--area2");
+    const dE = (z) => Math.max(0, dist(z, c) - R), dF = (z) => dist(z, projSeg(z, st.p, st.q));
+    for (let py = 0; py < h; py += cell) for (let px = 0; px < w; px += cell) {
+      const z = [T.iX(px + cell / 2), T.iY(py + cell / 2)], s = dE(z) - dF(z);
+      ctx.fillStyle = s < 0 ? colU : colV; ctx.fillRect(px, py, cell, cell);
+    }
+    PP.circle(ctx, T.X(c[0]), T.Y(c[1]), R * (T.X(1) - T.X(0)), C("--accent"), C("--accent"), null, 2);
+    PP.label(ctx, "E", T.X(c[0]), T.Y(c[1]), C("--bg"), "center", "middle", 14);
+    PP.path(ctx, [[T.X(st.p[0]), T.Y(st.p[1])], [T.X(st.q[0]), T.Y(st.q[1])]], C("--seq2"), 4);
+    PP.dot(ctx, T.X(st.p[0]), T.Y(st.p[1]), 6, C("--seq2"));
+    PP.dot(ctx, T.X(st.q[0]), T.Y(st.q[1]), 6, C("--seq2"));
+    PP.label(ctx, "F", T.X((st.p[0] + st.q[0]) / 2) + 10, T.Y((st.p[1] + st.q[1]) / 2), C("--seq2"), "left", "middle", 14);
+    PP.label(ctx, "U", 10, 10, C("--accent"), "left", "top", 14);
+    PP.label(ctx, "V", w - 10, 10, C("--seq2"), "right", "top", 14);
+    let meet = false; for (let i = 0; i <= 50; i++) { const t = i / 50; if (dist([st.p[0] + t * (st.q[0] - st.p[0]), st.p[1] + t * (st.q[1] - st.p[1])], c) <= R) meet = true; }
+    PP.read("ejp4alt-o12-3-read", meet ? [["E ∩ F", "≠ ∅: separá el segmento del disco", "bad"]] : [
+      ["E ⊆ U (ahí d_E = 0 y d_F > 0)", "sí", "good"],
+      ["F ⊆ V (ahí d_F = 0 y d_E > 0)", "sí", "good"],
+    ]);
+  }
+  PP.register(draw, []);
+  draggable("ejp4alt-o12-3-c1", () => T, (px, py, T) => nearest([["p", ...st.p], ["q", ...st.q]], px, py, T, 30),
+    (id, xx, yy, T) => { st[id] = [clamp(xx, T.box.x0 + 0.1, T.box.x1 - 0.1), clamp(yy, T.box.y0 + 0.1, T.box.y1 - 0.1)]; }, draw);
+})();
+
+/* O2-10: las ramas y = 1/x e y = −1/x, a distancia 2/x en la abscisa x. */
+PP.register(function o2_10() {
+  const x = PP.val("ejp4alt-o2-10-x") / 10;
+  PP.out("ejp4alt-o2-10-x-o", F(x, 1));
+  const { ctx, w, h } = PP.canvas("ejp4alt-o2-10-c1", 0.66);
+  const T = PP.frame(w, h, { x0: -0.2, x1: 6.3, y0: -3.2, y1: 3.2 }, { l: 30, r: 12, t: 12, b: 28 });
+  PP.axes(ctx, T, { xTicks: 6, yTicks: 6 });
+  plotFn(ctx, T, (t) => 1 / t, 0.3, 6.3, C("--accent"), 2.4);
+  plotFn(ctx, T, (t) => -1 / t, 0.3, 6.3, C("--seq2"), 2.4);
+  PP.label(ctx, "y = 1/x", T.X(0.45), T.Y(2.6), C("--accent"), "left", "middle", 12);
+  PP.label(ctx, "y = −1/x", T.X(0.45), T.Y(-2.6), C("--seq2"), "left", "middle", 12);
+  PP.path(ctx, [[T.X(x), T.Y(1 / x)], [T.X(x), T.Y(-1 / x)]], C("--fail"), 2.5);
+  PP.dot(ctx, T.X(x), T.Y(1 / x), 5, C("--accent"));
+  PP.dot(ctx, T.X(x), T.Y(-1 / x), 5, C("--seq2"));
+  PP.read("ejp4alt-o2-10-read", [
+    ["d((x, 1/x), (x, −1/x)) = 2/x", F(2 / x, 4)],
+  ]);
+}, ["ejp4alt-o2-10-x"]);

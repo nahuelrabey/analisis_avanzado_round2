@@ -883,8 +883,8 @@ const PARES_B = [
 ];
 PP.register(function enumeracion() {
   const P = PARES_B[+PP.radio("ejp2-c32-par")];
-  const M = 20;
   const { ctx, w, h } = PP.canvas("ejp2-c32-c2", 0.5);
+  const M = w < 420 ? 14 : 20;
   const L = 22, R = 8, cw = (w - L - R) / M;
   const rows = [{ f: P.B, y: h * 0.33, name: "B" }, { f: P.Bt, y: h * 0.78, name: "B̃" }];
   let m = 0;

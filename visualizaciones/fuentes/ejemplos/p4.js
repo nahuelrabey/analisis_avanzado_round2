@@ -186,7 +186,7 @@ viz({ c: "34-c", r: "34-r", aspect: 1.35, range: { e: "34-e" }, radio: { m: "34-
     L.fn((x) => x * x, C.muted, 1.6);
     L.fn((x) => x * x, C.accent, 3, 1 - d, 1 + d, 80);
     L.dot(1, 1, C.accent, 4.5);
-    L.text("f(x) = x²", 1.5, 2.6, C.muted);
+    L.text("f(x) = x²", 1.25, 2.6, C.muted, "right");
     L.text("1 ± ε", 0.04, 1 + e, C.accent, "left", "bottom", 4, -2);
     L.text("δ", 1 + d, 0.05, C.seq2, "left", "bottom", 4);
     return [["ε", fmt(e, 2)], ["δ = √(1+ε) − 1", fmt(d)], ["achicar ε", "obliga a achicar δ"]];
@@ -326,7 +326,7 @@ viz({ c: "c9-2-1-c2", r: "c9-2-1-r2", aspect: 1.15, range: { n: "c9-2-1-n" } }, 
   for (let j = 1; j < s.n; j++) { const q = pn(j); T.dot(q[0], q[1], C.rule, 2.5); }
   const q = pn(s.n);
   T.dot(1, 1, C.ok, 5, true); T.dot(q[0], q[1], C.seq2, 5);
-  T.text("pₙ", q[0], q[1], C.seq2, "left", "top", 6, 3); T.text("(1, 1)", 1, 1, C.ok, "right", "bottom", -8, -4);
+  T.text("pₙ", q[0], q[1], C.seq2, "right", "top", -6, 3); T.text("(1, 1)", 1, 1, C.ok, "right", "bottom", -8, -4);
   return [["f(pₙ)", fmt(phi(q[0]) - q[1]) + " ≥ 0", "good"], ["f(1, 1)", "0 ≥ 0: el límite está en A", "good"]];
 });
 
@@ -549,7 +549,7 @@ viz({ c: "39-c3", r: "39-r3", aspect: 1.05, range: { x: "39-t" } }, (ctx, W, H, 
   B.fn((t) => t * dinf, C.ink, 1.2, 0, 1, 2, [5, 4]);
   B.axes({ xt: [0.5, 1], yt: [[dinf, "d∞"]] });
   B.text("F(f)", 0.99, at(Ff, 0.99), C.accent, "right", "bottom", 0, -3); B.text("F(g)", 0.99, at(Fg, 0.99), C.seq2, "right", "top", 0, 3);
-  B.text("x·d∞", 0.62, 0.62 * dinf, C.ink, "right", "bottom", -4, -2);
+  B.text("punteada: x·d∞(f, g)", 0.02, 0.65, C.ink, "left", "top");
   const gap = Math.abs(at(Ff, x) - at(Fg, x));
   B.seg(x, at(Ff, x), x, at(Fg, x), C.fail, 3);
   B.dot(x, at(Ff, x), C.accent, 4); B.dot(x, at(Fg, x), C.seq2, 4);
@@ -583,7 +583,7 @@ viz({ c: "c6-6-c", r: "c6-6-r", aspect: 1.2, range: { n: "c6-6-n" } }, (ctx, W, 
   T.fn(f, C.ink, 2.2);
   T.seg(xn, f(xn), xn + 3, f(xn), C.muted, 1, [3, 3]); T.seg(yn, f(yn), xn + 3, f(yn), C.muted, 1, [3, 3]);
   const gap = Math.abs(f(yn) - f(xn));
-  T.vbrace(xn + 2.6, f(xn), f(yn), C.fail, fmt(gap, 2));
+  T.vbrace(xn + 2.98, f(xn), f(yn), C.fail, fmt(gap, 2));
   T.dot(xn, f(xn), C.seq2, 5); T.dot(yn, f(yn), C.seq2, 5);
   return [["|xₙ − yₙ| = 1/n", fmt(1 / n)], ["|f(xₙ) − f(yₙ)|", fmt(gap) + " → 2π ≈ 6.283", "bad"]];
 });
@@ -591,7 +591,7 @@ viz({ c: "c6-6-c", r: "c6-6-r", aspect: 1.2, range: { n: "c6-6-n" } }, (ctx, W, 
 /* C6-7: pegado en a = 1. */
 viz({ c: "c6-7-c", r: "c6-7-r", aspect: 1.2, range: { x: "c6-7-x", h: "c6-7-h" } }, (ctx, W, H, s) => {
   const a = 1, f = (t) => (t <= 1 ? 2 * Math.sqrt(t) : 2 + 0.6 * Math.sin(2 * (t - 1)));
-  const T = plot(ctx, full(W, H, { l: 30, r: 58, t: 14, b: 26 }), [0, 2], [0, 3]);
+  const T = plot(ctx, full(W, H, { l: 30, r: 86, t: 14, b: 26 }), [0, 2], [0, 3]);
   const x = s.x, y = x + s.h;
   T.vband(0, a, C.band); T.vband(a, 2, C.okband);
   T.axes({ xt: [[x, "x"], [a, "a"], [y, "y"]], yt: [1, 2, 3] });
@@ -602,7 +602,7 @@ viz({ c: "c6-7-c", r: "c6-7-r", aspect: 1.2, range: { x: "c6-7-x", h: "c6-7-h" }
   if (cross) {
     for (const t of [x, a, y]) T.seg(t, f(t), 2.05, f(t), C.muted, 1, [2, 3]);
     T.vbrace(2.02, f(x), f(a), C.accent, fmt(Math.abs(f(x) - f(a)), 2));
-    T.vbrace(2.14, f(a), f(y), C.ok, fmt(Math.abs(f(a) - f(y)), 2));
+    T.vbrace(2.2, f(a), f(y), C.ok, fmt(Math.abs(f(a) - f(y)), 2));
   }
   T.dot(x, f(x), C.seq2, 5); T.dot(y, f(y), C.seq2, 5); T.dot(a, f(a), C.ink, 4, true);
   if (!cross) return [["x, y", "en el mismo trozo [0, a]"]];
@@ -611,7 +611,7 @@ viz({ c: "c6-7-c", r: "c6-7-r", aspect: 1.2, range: { x: "c6-7-x", h: "c6-7-h" }
 
 /* C6-8: brecha d(A, B) = 0.8 y la regla δ. */
 viz({ c: "c6-8-c", r: "c6-8-r", aspect: 1.5, range: { d: "c6-8-d" } }, (ctx, W, H, s) => {
-  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 44 }), [-0.2, 3.7], [-0.6, 3]);
+  const T = plot(ctx, full(W, H, { l: 30, r: 14, t: 14, b: 44 }), [-0.2, 3.7], [-0.85, 3]);
   const fA = (x) => 1 + 0.5 * Math.sin(3 * x), fB = (x) => 2.4 - 0.3 * (x - 2);
   T.rect(0, -0.12, 1.2, 0.12, C.band, C.accent); T.rect(2, -0.12, 3.4, 0.12, C.okband, C.ok);
   T.axes({ xt: [0, [1.2, "1.2"], 2, [3.4, "3.4"]], yt: [1, 2, 3] });
@@ -619,8 +619,8 @@ viz({ c: "c6-8-c", r: "c6-8-r", aspect: 1.5, range: { d: "c6-8-d" } }, (ctx, W, 
   T.text("A", 0.6, 0.15, C.accent, "center", "bottom"); T.text("B", 2.7, 0.15, C.ok, "center", "bottom");
   T.hbrace(1.2, 2, -0.12, C.muted, "d(A, B) = 0.8");
   const ok = s.d <= 0.8;
-  T.seg(1.2, -0.45, 1.2 + s.d, -0.45, ok ? C.ok : C.fail, 4);
-  T.text("δ", 1.2 + s.d, -0.45, ok ? C.ok : C.fail, "left", "middle", 6);
+  T.seg(1.2, -0.68, 1.2 + s.d, -0.68, ok ? C.ok : C.fail, 4);
+  T.text("δ", 1.2 + s.d, -0.68, ok ? C.ok : C.fail, "left", "middle", 6);
   return [["δ ≤ d(A, B)", ok ? "sí: d(x, y) < δ deja a x, y en la misma pieza" : "no: hay x ∈ A, y ∈ B con d(x, y) < δ", ok ? "good" : "bad"]];
 });
 
@@ -645,7 +645,7 @@ viz({ c: "38-c", r: "38-r", aspect: 2.2, range: { n: "38-n" } }, (ctx, W, H, s) 
   T.vband(x, x + 1 / n, C.band);
   T.axes({ xt: [[x, "x"], [x + 1 / n, "x + 1/n"]] });
   T.seg(x, -1, x, 1, C.accent, 1, [3, 3]); T.seg(x + 1 / n, -1, x + 1 / n, 1, C.accent, 1, [3, 3]);
-  T.dot(x, 0, C.ink, 5, true);
+  T.dot(x, 0, C.ink, 3.5, true);
   T.dot(q, 0.4, C.ok, 5); T.text(`${Math.ceil(n * x)}/${n} ∈ ℚ`, q, 0.4, C.ok, "center", "bottom", 0, -8);
   T.dot(z, -0.4, C.seq2, 5); T.text("zₙ ∈ 𝕀", z, -0.4, C.seq2, "center", "top", 0, 8);
   return [["x = √2 − 1", fmt(x, 6)], ["racional, distancia a x", fmt(q - x, 6)], ["zₙ = x + 1/(2n), distancia", fmt(z - x, 6)]];
@@ -727,7 +727,8 @@ viz({ c: "40-c1", r: "40-r1", aspect: 1.3, range: { x: "40-x" } }, (ctx, W, H, s
 viz({ c: "40-c2", r: "40-r2", aspect: 1.25, range: { n: "40-n" } }, (ctx, W, H, s) => {
   const n = s.n, top = 0.36 * (H - 20);
   const T = plot(ctx, { x: 20, y: 12, w: W - 40, h: top - 12 }, [-0.12, 1.08], [-1, 1]);
-  T.axes({ xt: [[0, "x"], [1, "x + 1"]] });
+  T.seg(-0.12, 0, 1.08, 0, C.muted, 1.2);
+  T.text("x", 0, 0, C.ink, "center", "top", 0, 8, UIs); T.text("x + 1", 1, 0, C.muted, "center", "top", 0, 8, UIs);
   T.text("(ℝ, |·|)", -0.1, 1, C.muted, "left", "top");
   for (let k = 1; k <= n; k++) T.dot(1 / k, 0, k === n ? C.seq2 : C.rule, k === n ? 5 : 3);
   T.dot(0, 0, C.ink, 5, true);
@@ -744,16 +745,16 @@ viz({ c: "40-c2", r: "40-r2", aspect: 1.25, range: { n: "40-n" } }, (ctx, W, H, 
 });
 
 /* 41: la isometría x ↦ x + 1. */
-viz({ c: "41-c", r: "41-r", aspect: 1.6, range: { x: "41-x", y: "41-y" } }, (ctx, W, H, s) => {
+viz({ c: "41-c", r: "41-r", aspect: 1.35, range: { x: "41-x", y: "41-y" } }, (ctx, W, H, s) => {
   const x = s.x, y = s.y, fx = x + 1, fy = y + 1;
   const T = plot(ctx, full(W, H, { l: 18, r: 18, t: 18, b: 18 }), [-0.3, 6.6], [0, 1]);
-  const yt = 0.78, yb = 0.22;
+  const yt = 0.74, yb = 0.2;
   T.seg(0, yt, 6.6, yt, C.muted, 1.4); T.seg(0, yb, 6.6, yb, C.muted, 1.4);
   T.seg(1, yb, 6.6, yb, C.ok, 6);
   for (const t of [0, 1, 2, 3, 4, 5, 6]) { T.seg(t, yt - 0.025, t, yt + 0.025, C.muted, 1); T.seg(t, yb - 0.025, t, yb + 0.025, C.muted, 1); T.text(String(t), t, yb, C.muted, "center", "top", 0, 8, UIs); }
   T.dot(0, yt, C.muted, 3.5); T.dot(0, yb, C.muted, 3.5); T.dot(1, yb, C.ok, 4.5);
-  T.text("dominio ℝ≥0", -0.25, yt, C.muted, "left", "bottom", 0, -10);
-  T.text("llegada ℝ≥0;  Im(f) = [1, ∞)", -0.25, yb, C.ok, "left", "bottom", 0, -10);
+  T.text("dominio ℝ≥0", -0.25, yt, C.muted, "left", "bottom", 0, -28);
+  T.text("llegada ℝ≥0;  Im(f) = [1, ∞)", -0.25, yb, C.ok, "left", "bottom", 0, -28);
   for (const [a, b, lab] of [[x, fx, "x"], [y, fy, "y"]]) {
     arrow(ctx, T.X(a), T.Y(yt) + 6, T.X(b), T.Y(yb) - 7, C.seq2, 1.2);
     T.dot(a, yt, C.accent, 5); T.text(lab, a, yt, C.accent, "center", "bottom", 0, -7);

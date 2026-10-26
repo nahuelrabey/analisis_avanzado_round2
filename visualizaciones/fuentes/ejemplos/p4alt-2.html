@@ -684,3 +684,525 @@
     <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="9">Ej. 9</a> (a), <a class="xg" data-guia="p4" data-ej="10">10</a>, <a class="xg" data-guia="p4" data-ej="11">11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
   </article>
 </section>
+
+
+<section class="bloque" id="ejp4alt-b8">
+  <h2><span class="bn">Bloque 8</span>Distancia a un punto y a un conjunto; lema de Urysohn</h2>
+  <div class="desbloquea"><b>Qué desbloquea</b><p>$d(\cdot, x_0)$ y $d(\cdot, A)$ son 1-Lipschitz, $d(x, A) = 0$ si y sólo si $x \in \overline{A}$, y el cociente $d(x, A) / (d(x, A) + d(x, B))$ separa cerrados disjuntos: son los <a class="xg" data-guia="p4" data-ej="10">Ejercicios 10</a> y <a class="xg" data-guia="p4" data-ej="11">11</a> completos. Al final, cerrados disjuntos a distancia cero y cuándo la distancia es positiva (contexto del <a class="xg" data-guia="p4" data-ej="16">Ejercicio 16</a>).</p></div>
+
+  <!-- O7-1 -->
+  <article class="ej" id="ejp4alt-o7-1" data-short="O7-1" data-title="d_a(x) = d(x, a) es continua, y de hecho 1-Lipschitz" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O7-1</span>
+      <h3>$d_a(x) = d(x, a)$ es continua, y de hecho $1$-Lipschitz</h3>
+      <span class="src">Tyson, Ej. 3.5</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $(X, d)$ un espacio métrico y fijemos $a \in X$. Definimos $d_a : X \to \mathbb{R}$ por $d_a(x) := d(x, a)$. Entonces $d_a$ es <span class="ref" data-ref="def-5.4">continua</span> en todo $x_0 \in X$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$\delta = \varepsilon$</p>
+          <p>Fijamos $x_0$ y $\varepsilon \gt 0$, y elegimos $\delta = \varepsilon$. Si $d(x, x_0) \lt \delta = \varepsilon$, entonces
+            $$\begin{aligned} |d_a(x) - d_a(x_0)| &= |d(x, a) - d(x_0, a)| \\ &\le d(x, x_0) \lt \delta = \varepsilon, \end{aligned}$$
+            donde usamos la <span class="ref" data-ref="def-4.1">desigualdad triangular</span>. $\square$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o7-1-c1" aria-label="Tres puntos del plano a, x0 y x, arrastrables, con las distancias d(x, a), d(x0, a) y d(x, x0)"></canvas>
+          <dl class="read" id="ejp4alt-o7-1-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i><sub>2</sub>) (elección del dibujo). Arrastrá <i>a</i>, <i>x</i><sub>0</sub> y <i>x</i>. Los círculos centrados en <i>a</i> pasan por <i>x</i><sub>0</sub> y por <i>x</i>: la diferencia de sus radios es |<i>d</i>(<i>x</i>, <i>a</i>) − <i>d</i>(<i>x</i><sub>0</sub>, <i>a</i>)|, y nunca supera el segmento <i>d</i>(<i>x</i>, <i>x</i><sub>0</sub>).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Una forma fuerte de continuidad</p>
+          <p>“Así, para todo espacio métrico $(X, d)$ tenemos garantizada una provisión abundante de funciones continuas a valores reales: las funciones $d_a : X \to \mathbb{R}$ para cada $a \in X$. Más aún, estas funciones satisfacen una forma fuerte de continuidad”: la desigualdad $|d_a(x) - d_a(y)| \le d(x, y)$ dice que las $d_a$ son $1$-<span class="ref" data-ref="def-5.24">Lipschitz</span> (Def. 3.6 de la fuente).</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>es p4 <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a> y la mitad de p4 <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a>. La desigualdad $|d(x, a) - d(x_0, a)| \le d(x, x_0)$ es la “desigualdad triangular invertida”; la fuente no la deriva, sólo dice “usamos la desigualdad triangular”.</div>
+    <p class="cita"><i>Fuente</i>: J. Tyson, <i>MATH 424 Honors Real Analysis, Lecture notes: Functions between metric spaces</i> (Univ. of Illinois Urbana-Champaign, primavera 2026), Ejemplo 3.5 y Def. 3.6, pág. 2 del PDF. <a href="http://publish.illinois.edu/jeremy-tyson/files/2026/05/functions.pdf">URL</a>. Acceso: publicado en la web del docente; sin licencia explícita en el documento.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O10-3 -->
+  <article class="ej" id="ejp4alt-o10-3" data-short="O10-3" data-title="El complemento de la bola cerrada es abierto, a mano" data-topics="topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">O10-3</span>
+      <h3>$\{y : d(x, y) \gt r\}$ es abierto (complemento de la bola cerrada), a mano</h3>
+      <span class="src">Karageorgis, T2–1</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Sea $(X, d)$ un espacio métrico. Dados $x \in X$ y $r \gt 0$, probar que $A = \{y \in X : d(x, y) \gt r\}$ es <span class="ref" data-ref="def-4.14">abierto</span> en $X$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">El radio $\varepsilon = d(x, y) - r$</p>
+          <p>Sea $y \in A$ y notemos que $\varepsilon = d(x, y) - r$ es positivo. Afirmamos que $B(y, \varepsilon)$ está contenida en $A$. En efecto,
+            $$\begin{aligned} z \in B(y, \varepsilon) &\Longrightarrow d(z, y) \lt \varepsilon \\ &\Longrightarrow d(z, y) + r \lt \varepsilon + r \\ &\qquad = d(x, y) \le d(x, z) + d(z, y) \\ &\Longrightarrow r \lt d(x, z) \\ &\Longrightarrow z \in A. \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o10-3-c1" aria-label="La bola cerrada de centro x y radio r, un punto y afuera arrastrable y la bola de radio d(x, y) − r alrededor de y, que no toca la bola cerrada"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o10-3-r"><i>r</i></label><input type="range" id="ejp4alt-o10-3-r" min="5" max="25" value="12"><output id="ejp4alt-o10-3-r-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o10-3-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i><sub>2</sub>) (elección del dibujo). El disco sombreado es la bola cerrada <i>B</i>[<i>x</i>, <i>r</i>], el complemento de <i>A</i>. Arrastrá <i>y</i>: la bola <i>B</i>(<i>y</i>, ε) con ε = <i>d</i>(<i>x</i>, <i>y</i>) − <i>r</i> queda en <i>A</i>, tangente al borde.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$A$ es abierto</p>
+          <p>Esto muestra que $B(y, \varepsilon) \subseteq A$, y por lo tanto $A$ es abierto. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>$A$ es el complemento de la <span class="ref" data-ref="def-4.5">bola cerrada</span> $\{y : d(x, y) \le r\}$, así que esto prueba que las bolas cerradas son cerradas, como pide p4 <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>, pero <strong>sin</strong> pasar por la continuidad de $d(\cdot, x)$: es la prueba directa que el ejercicio pide “rehacer” con <a href="#ejp4alt-o7-1">O7-1</a> y <span class="ref" data-ref="ejap-5.10">Ej. 5.10</span> ($A = d_x^{-1}((r, +\infty))$).</div>
+    <p class="cita"><i>Fuente</i>: P. Karageorgis, <i>MA2223 – Tutorial solutions, Part 1</i> (TCD), T2–1, pág. 3 del PDF. <a href="https://www.maths.tcd.ie/~pete/ma2223/tut_sol1.pdf">URL</a>. Acceso: publicado en la web del docente; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a></p>
+  </article>
+
+  <!-- O2-7: proposición -->
+  <article class="ej" id="ejp4alt-o2-7-prop" data-short="Prop." data-title="La distancia de dos puntos a un tercero" data-topics="metricas,continuidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>La distancia de dos puntos a un tercero</h3>
+      <span class="src">Guccione, Prop. 1.2, items 2 y 3</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Para cada espacio métrico $X$:</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li>$|d(x, u) - d(y, u)| \le d(x, y)$ para todo $x, y, u \in X$.</li>
+        <li>$|d(x, u) - d(y, v)| \le d(x, y) + d(u, v)$ para todo $x, y, u, v \in X$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1)</p>
+          <p>Basta observar que, debido a la <span class="ref" data-ref="def-4.1">desigualdad triangular y la simetría de la distancia</span>,
+            $$\begin{aligned} &d(x, u) - d(y, u) \le d(x, y) \quad \text{y} \\ &d(y, u) - d(x, u) \le d(y, x) = d(x, y). \end{aligned}$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2)</p>
+          <p>Esto vale porque
+            $$\begin{aligned} &|d(x, u) - d(y, v)| \\ &= |d(x, u) - d(y, u) + d(y, u) - d(y, v)| \\ &\le |d(x, u) - d(y, u)| + |d(y, u) - d(y, v)| \\ &= |d(x, u) - d(y, u)| + |d(u, y) - d(v, y)| \\ &\le d(x, y) + d(u, v), \end{aligned}$$
+            debido a que $|a + b| \le |a| + |b|$ para todo $a, b \in \mathbb{R}$, a la simetría de la distancia y al item 1.</p>
+        </div>
+      </div>
+    </div>
+    <p class="cita"><i>Fuente</i>: la del ejemplo <a href="#ejp4alt-o2-7">O2-7</a>, que sigue.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O2-7: ejemplo -->
+  <article class="ej" id="ejp4alt-o2-7" data-short="O2-7" data-title="La función distancia d : X × X → R≥0 es Lipschitz" data-topics="metricas,continuidad">
+    <div class="ej-head">
+      <span class="tag">O2-7</span>
+      <h3>La función distancia $d : X \times X \to \mathbb{R}_{\ge 0}$ es Lipschitz</h3>
+      <span class="src">Guccione, Ejemplo 3.55 y Nota 3.56</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Recordemos (Definición 3.50 de la fuente) que $f : X \to Y$ es <em>de <span class="ref" data-ref="def-5.24">Lipschitz</span></em> si existe una constante $K \ge 0$ tal que $d(f(x), f(x')) \le K d(x, x')$ para todo $x, x' \in X$; el mínimo $K$ que satisface esta condición es la <em>constante de Lipschitz</em> de $f$, y $f$ es una <em>función corta</em> (o no expansiva) si su constante de Lipschitz es menor o igual que $1$.</p>
+      <p>Para todo espacio métrico $X$, la función distancia $d : X \times X \to \mathbb{R}_{\ge 0}$ es una función de Lipschitz, donde $X \times X$ se considera con la métrica $d_\infty((x, x'), (y, y')) = \max(d(x, y), d(x', y'))$.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">La cota $2$</p>
+          <p>Por las propiedades triangular y simétrica de $d$ y el item 2 de la <a href="#ejp4alt-o2-7-prop">Proposición 1.2</a>,
+            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') \\ &\le 2 \max(d(x, y), d(x', y')) \\ &= 2 d_\infty((x, x'), (y, y')) \end{aligned}$$
+            para todo $x, x', y, y' \in X$.</p>
+        </div>
+      </div>
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Nota 3.56 de la fuente: la constante es $2$ con $d_\infty$, $1$ con $d_1$</p>
+          <p>La cuenta anterior muestra que $2$ es una cota superior de la constante de Lipschitz de $d$. Para $\mathbb{R}$ esta constante es $2$, como puede comprobarse tomando $x = 0$, $x' = 2$ e $y = y' = 1$. Por supuesto, el hecho de que la máxima constante de Lipschitz para las funciones distancia sea $2$ se debe a que estamos considerando a $X \times X$ provisto de la distancia $d_\infty$. Si lo consideramos provisto con la distancia $d_1$, entonces $d$ es una función corta, porque (nota [2] del capítulo)
+            $$\begin{aligned} &|d(x, x') - d(y, y')| \\ &\le |d(x, x') - d(x, y')| + |d(x, y') - d(y, y')| \\ &\le d(x, y) + d(x', y') = d_1((x, x'), (y, y')). \end{aligned}$$</p>
+        </div>
+        <figure class="viz">
+          <svg viewBox="0 0 360 190" role="img" aria-label="En la recta, los puntos x = 0, y = y' = 1 y x' = 2: d(x, x') = 2, d(y, y') = 0 y la distancia d infinito entre los pares es 1">
+            <line x1="20" y1="70" x2="340" y2="70" class="sv-axis"/>
+            <line x1="60" y1="64" x2="60" y2="76" class="sv-axis"/><text x="60" y="94" text-anchor="middle" class="sv-muted">0</text>
+            <line x1="180" y1="64" x2="180" y2="76" class="sv-axis"/><text x="180" y="94" text-anchor="middle" class="sv-muted">1</text>
+            <line x1="300" y1="64" x2="300" y2="76" class="sv-axis"/><text x="300" y="94" text-anchor="middle" class="sv-muted">2</text>
+            <circle cx="60" cy="70" r="6" class="sv-fill-accent"/><text x="60" y="54" text-anchor="middle" class="sv-label-accent">x</text>
+            <circle cx="300" cy="70" r="6" class="sv-fill-accent"/><text x="300" y="54" text-anchor="middle" class="sv-label-accent">x′</text>
+            <circle cx="180" cy="70" r="6" class="sv-fill-seq2"/><text x="180" y="54" text-anchor="middle" class="sv-label-seq2">y = y′</text>
+            <line x1="60" y1="30" x2="300" y2="30" class="sv-accent"/>
+            <line x1="60" y1="24" x2="60" y2="36" class="sv-accent"/><line x1="300" y1="24" x2="300" y2="36" class="sv-accent"/>
+            <text x="180" y="22" text-anchor="middle" class="sv-label-accent">d(x, x′) = 2,  d(y, y′) = 0</text>
+            <line x1="60" y1="118" x2="180" y2="118" class="sv-seq3"/><text x="120" y="136" text-anchor="middle" class="sv-label-seq3">d(x, y) = 1</text>
+            <line x1="180" y1="118" x2="300" y2="118" class="sv-seq2"/><text x="240" y="136" text-anchor="middle" class="sv-label-seq2">d(x′, y′) = 1</text>
+            <text x="180" y="166" text-anchor="middle" class="sv-text">|2 − 0| = 2 = 2·máx(1, 1) = 2·d∞</text>
+            <text x="180" y="184" text-anchor="middle" class="sv-muted">y con d₁: 2 = 1 + 1, constante 1</text>
+          </svg>
+          <figcaption>El ejemplo de la fuente en la recta: el par (<i>x</i>, <i>x</i>′) = (0, 2) y el par (<i>y</i>, <i>y</i>′) = (1, 1). Las distancias valen 2 y 0, y los pares están a <i>d</i><sub>∞</sub> = 1: la cota 2 se alcanza. Con <i>d</i><sub>1</sub> los pares están a 1 + 1 = 2.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>en el PDF la primera desigualdad aparece escrita con la notación de norma $\|d(x, x') - d(y, y')\|$ en lugar de valor absoluto; es un detalle tipográfico de la fuente, los valores son reales. Fijando $y' = x'$ se obtiene $|d(x, x') - d(y, x')| \le d(x, y)$: la función $x \mapsto d(x, x_0)$ es corta, que es la parte “$d(\cdot, x_0)$ es Lipschitz” del <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a> de la Práctica 4 (y, en particular, es continua, <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>).</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Proposición 1.2 (pág. 11 del PDF, 2 del apunte), Definición 3.50, Ejemplo 3.55 y Nota 3.56 (pág. 73 del PDF, 64 del apunte), nota [2] del Capítulo 3 (pág. 80 del PDF, 71 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O2-8: definición -->
+  <article class="ej" id="ejp4alt-o2-8-def" data-short="Def." data-title="Distancia de un punto a un conjunto" data-topics="metricas,topologia">
+    <div class="ej-head">
+      <span class="tag">Def.</span>
+      <h3>Distancia de un punto a un conjunto</h3>
+      <span class="src">Guccione, Def. 1.39</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun"><p>La distancia de un punto $x$ de un espacio métrico $X$ a un subconjunto $A$ de $X$ es, por definición, el elemento
+        $$d(x, A) := \inf_{y \in A} d(x, y)$$
+        de $[0, \infty]$ (con $d(x, \varnothing) = \infty$).</p></div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o2-8-c1" aria-label="Un conjunto A del plano y un punto x arrastrable con el segmento que realiza la distancia d(x, A)"></canvas>
+        <dl class="read" id="ejp4alt-o2-8-read1" aria-live="polite"></dl>
+        <figcaption>En (ℝ², <i>d</i><sub>2</sub>), con <i>A</i> = un disco abierto unión un segmento (elección del dibujo). Arrastrá <i>x</i>. El segmento punteado va al punto de la clausura de <i>A</i> más cercano: su largo es el ínfimo <i>d</i>(<i>x</i>, <i>A</i>). Si <i>x</i> se acerca al borde del disco, el ínfimo no se alcanza en <i>A</i> (el borde no está en <i>A</i>).</figcaption>
+      </figure>
+    </div>
+    <p class="cita"><i>Fuente</i>: la del ejemplo <a href="#ejp4alt-o2-8">O2-8</a>, más abajo.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O2-8: proposición -->
+  <article class="ej" id="ejp4alt-o2-8-prop" data-short="Prop." data-title="d(·, A) es 1-Lipschitz, y d(x, A) = 0 caracteriza la clausura" data-topics="metricas,topologia,continuidad">
+    <div class="ej-head">
+      <span class="tag">Prop.</span>
+      <h3>$d(\cdot, A)$ es $1$-Lipschitz, y $d(x, A) = 0$ caracteriza la clausura</h3>
+      <span class="src">Guccione, Prop. 1.52 y Prop. 2.61</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>$|d(x, A) - d(y, A)| \le d(x, y)$ para todo $x, y \in X$ y todo subconjunto no vacío $A$ de $X$.</li>
+        <li>Para todo $A \subseteq X$ y cada $x \in X$: $x \in \overline{A}$ si y sólo si $B(x, r) \cap A \neq \varnothing$ para todo $r \gt 0$, si y sólo si $d(x, A) = 0$.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">1)</p>
+          <p>Por la definición de $d(x, A)$ y la propiedad triangular de $d$, sabemos que
+            $$\begin{aligned} d(x, A) \le d(x, z) &\le d(x, y) + d(y, z) \\ &\text{para todo } z \in A. \end{aligned}$$
+            Así que $d(x, A) - d(x, y)$ es una cota inferior de $\{d(y, z) : z \in A\}$. Por lo tanto
+            $$d(x, A) - d(x, y) \le \inf\{d(y, z) : z \in A\} = d(y, A)$$
+            o, lo que es equivalente,
+            $$d(x, A) - d(y, A) \le d(x, y).$$
+            Por simetría, $d(y, A) - d(x, A) \le d(x, y)$ y, en consecuencia, $|d(x, A) - d(y, A)| \le d(x, y)$, como queremos.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-8-c2" aria-label="Gráfico de x ↦ d(x, A) en la recta para un conjunto A unión de intervalos y un punto, con el cono de pendiente 1 en un punto arrastrable"></canvas>
+          <dl class="read" id="ejp4alt-o2-8-read2" aria-live="polite"></dl>
+          <figcaption>En ℝ con <i>A</i> = [−2, −1] ∪ {0.5} ∪ (1.5, 2.5) (en verde; elección del dibujo). La curva es <i>x</i> ↦ <i>d</i>(<i>x</i>, <i>A</i>). Arrastrá el punto: el gráfico entero queda dentro del cono de pendientes ±1 que sale de él, que es el ítem 1. La curva se anula justo en la clausura de <i>A</i>, también en 1.5 y 2.5, que no están en <i>A</i> (ítem 2).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2)</p>
+          <p>La fuente dice que la equivalencia entre “$B(x, r) \cap A \neq \varnothing$ para todo $r \gt 0$” y “$d(x, A) = 0$” es evidente, y en la nota [5] del capítulo la justifica así: $B(x, r) \cap A \neq \varnothing$ para todo $r \gt 0$ si y sólo si $x$ tiene puntos de $A$ arbitrariamente cerca o, equivalentemente, si y sólo si $d(x, A) = \inf_{y \in A} d(x, y) = 0$. La equivalencia con $x \in \overline{A}$ es la definición de clausura (<span class="ref" data-ref="def-4.22">Def. 4.22</span> de <code>apuntes.typ</code>).</p>
+        </div>
+      </div>
+    </div>
+    <p class="cita"><i>Fuente</i>: la del ejemplo <a href="#ejp4alt-o2-8">O2-8</a>, que sigue.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O2-8: ejemplo -->
+  <article class="ej" id="ejp4alt-o2-8" data-short="O2-8" data-title="x ↦ d(x, A) es una función corta; toda función de Lipschitz es uniformemente continua" data-topics="continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O2-8</span>
+      <h3>$x \mapsto d(x, A)$ es una función corta; toda función de Lipschitz es uniformemente continua</h3>
+      <span class="src">Guccione, Ejemplo 3.57 y Prop. 3.51</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <ol class="items" style="list-style-type: decimal">
+        <li>Para cada subconjunto $A$ de $X$, la función $f : X \to \mathbb{R}$ definida por $f(x) := d(x, A)$ es una función corta (de <span class="ref" data-ref="def-5.24">Lipschitz</span> con constante $\le 1$).</li>
+        <li>Toda función de Lipschitz es <span class="ref" data-ref="def-5.14">uniformemente continua</span>.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">1. Es una función corta</p>
+          <p>Es una función corta porque
+            $$\begin{aligned} &|d(x, A) - d(y, A)| \le d(x, y) \\ &\text{para todo } x, y \in X, \end{aligned}$$
+            por la <a href="#ejp4alt-o2-8-prop">Proposición 1.52</a>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2. Lipschitz $\Longrightarrow$ uniformemente continua</p>
+          <p>Supongamos que $f : X \to Y$ es de Lipschitz con constante de Lipschitz $K$. Entonces dado $\varepsilon \gt 0$, basta tomar $\delta := \varepsilon / K$ para conseguir que
+            $$\begin{aligned} &d(f(x), f(x')) \le K d(x, x') \lt K \delta = \varepsilon \\ &\text{para todo } x, x' \in X \text{ con } d(x, x') \lt \delta. \end{aligned}$$
+            Esto prueba que $f$ es uniformemente continua, como afirmamos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente supone implícitamente $K \gt 0$ en $\delta := \varepsilon / K$ (si $K = 0$ la función es constante y cualquier $\delta$ sirve). Los items 1 y 2 juntos son el <a class="xg" data-guia="p4" data-ej="12">Ej. 12</a> de la Práctica 4 para $d(\cdot, A)$; con el item 2 de la proposición anterior sale el <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a> (b): si $A$ es cerrado, $\overline{A} = A$, así que $d(x, A) = 0$ si y sólo si $x \in A$, es decir $d(x, A) \gt 0$ para todo $x \notin A$. La fuente usa también $x \mapsto d(x, A)$ para probar que $A^\circ = \{x : d(x, X \setminus A) \gt 0\}$ (nota [1] del Capítulo 2, pág. 62 del PDF).</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Definición 1.39 (pág. 28 del PDF), Proposición 1.52 (pág. 30 del PDF, 21 del apunte), Proposición 2.61 y nota [5] del Capítulo 2 (págs. 57 y 62 del PDF), Proposición 3.51 (pág. 73 del PDF) y Ejemplo 3.57 (pág. 74 del PDF, 65 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+
+  <!-- O4-4 -->
+  <article class="ej" id="ejp4alt-o4-4" data-short="O4-4" data-title="Entornos B(A, r) de un conjunto; todo cerrado es intersección numerable de abiertos" data-topics="topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">O4-4</span>
+      <h3>Entornos de un conjunto $B(A, r) = \{d(\cdot, A) \lt r\}$; todo cerrado es intersección numerable de abiertos</h3>
+      <span class="src">Gajardo, Ej. resuelto E6 a)</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $(X, d)$ un espacio métrico y $A \subseteq X$. Dado $r \gt 0$, considere $B(A, r) := \{x \in X : d(x, A) \lt r\}$.</p>
+      <ol class="items" style="list-style-type: decimal">
+        <li>Pruebe que
+          $$B(A, r) = \bigcup_{y \in A} B(y, r).$$</li>
+        <li>Demuestre que si $A$ es <span class="ref" data-ref="def-4.27">cerrado</span>, entonces $A = \bigcap_{k \in \mathbb{N}} B(A, 1/k)$, y concluya que todo conjunto cerrado es una intersección numerable de conjuntos abiertos.</li>
+      </ol>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">1) $B(A, r)$ es abierto, y las dos inclusiones</p>
+          <p>De <a href="#ejp4alt-o2-8">O2-8</a> se tiene que la función $d(\cdot, A) : X \to \mathbb{R}$ es continua. En consecuencia, los conjuntos $B(A, r) = d(\cdot, A)^{-1}((-\infty, r))$ son abiertos (preimagen de un abierto de $\mathbb{R}$; <span class="ref" data-ref="teo-5.9">Teo. 5.9</span> de <code>apuntes.typ</code>). Sea ahora $x \in B(A, r)$. Se tiene entonces que $d(x, A) \lt r$, por lo que existirá $y \in A$ tal que $d(x, y) \lt r$, lo que nos permite concluir que $x \in \bigcup_{y \in A} B(y, r)$. Por otro lado, si $x \in \bigcup_{y \in A} B(y, r)$, existirá $y \in A$ tal que $d(x, A) \le d(x, y) \lt r$, concluyendo que $x \in B(A, r)$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o4-4-c1" aria-label="Un conjunto A del plano y su entorno B(A, r) dibujado como unión de bolas de radio r centradas en puntos de A"></canvas>
+          <div class="ctrl">
+            <div class="slider"><label for="ejp4alt-o4-4-k"><i>r</i> = 1/<i>k</i>, <i>k</i></label><input type="range" id="ejp4alt-o4-4-k" min="1" max="20" value="2"><output id="ejp4alt-o4-4-k-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o4-4-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i><sub>2</sub>) con <i>A</i> cerrado: un segmento, un arco y un punto (elección del dibujo). Lo sombreado es <i>B</i>(<i>A</i>, 1/<i>k</i>), pintado como unión de bolas <i>B</i>(<i>y</i>, 1/<i>k</i>) con <i>y</i> ∈ <i>A</i> (ítem 1). Al subir <i>k</i> los entornos se cierran sobre <i>A</i> (ítem 2).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2) $A \subseteq \bigcap_k B(A, 1/k)$</p>
+          <p>Observar que para todo conjunto $A$ y $r \gt 0$, se tiene que $A \subseteq B(A, r)$, por lo tanto
+            $$A \subseteq \bigcap_{k \in \mathbb{N}} B(A, 1/k).$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">2) La otra inclusión</p>
+          <p>Si $x \in \bigcap_{k \in \mathbb{N}} B(A, 1/k)$, entonces $d(x, A) \lt 1/k$ para todo $k \in \mathbb{N}$, por lo tanto $d(x, A) = 0$. Esto implica que $x \in \overline{A}$ (<a href="#ejp4alt-o2-8">O2-8</a>), pero si $A$ es cerrado, entonces $x \in A$, probando así la igualdad deseada. Como cada $B(A, 1/k)$ es abierto por 1), todo cerrado es intersección numerable de abiertos. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>con $A = \{x_0\}$ se recupera $B(A, r) = B(x_0, r)$ y la prueba de que las bolas abiertas son abiertas vía la continuidad de $d(\cdot, x_0)$ (<a class="xg" data-guia="p4" data-ej="10">Ej. 10</a> de la práctica). El resultado 2) es el lado “$G_\delta$” de los cerrados; la fuente lo usa después en el teorema de Baire.</div>
+    <p class="cita"><i>Fuente</i>: P. Gajardo Adaro, <i>Análisis I</i> (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E6) a), págs. 60–61 del PDF. <a href="https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf">URL</a>. Acceso: web del departamento, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="10">Ej. 10</a>, <a class="xg" data-guia="p4" data-ej="11">11</a></p>
+  </article>
+
+  <!-- O2-9 -->
+  <article class="ej" id="ejp4alt-o2-9" data-short="O2-9" data-title="Lema de Urysohn para espacios métricos y separación de cerrados disjuntos" data-topics="continuidad,topologia,metricas">
+    <div class="ej-head">
+      <span class="tag">O2-9</span>
+      <h3>Lema de Urysohn para espacios métricos y separación de cerrados disjuntos</h3>
+      <span class="src">Guccione, Teo. 3.19 y Corolarios 3.20–3.22</span>
+      <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun">
+      <p>Decimos que una función continua $f : X \to [0, 1]$ <em>separa</em> dos subconjuntos disjuntos $A$ y $B$ de $X$ si $f$ vale cero sobre $A$ y uno sobre $B$ (Definición 3.18). El siguiente resultado muestra que para cada par de cerrados disjuntos hay una función continua que los separa.</p>
+      <p><b>Teorema 3.19.</b> Supongamos que $C$ y $D$ son subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span> y no vacíos de un espacio métrico $X$ tales que $C \cap D = \varnothing$. Entonces la función $\zeta_{C, D} : X \to [0, 1]$, dada por
+        $$\zeta_{C, D}(x) := \frac{d(x, C)}{d(x, C) + d(x, D)},$$
+        está bien definida, es continua, se anula sobre $C$ y vale $1$ sobre $D$.</p>
+      <p><b>Corolario 3.20.</b> Fijados un cerrado $C$ y un abierto $U$ de $X$ con $C \subseteq U$, existe una función continua $f : X \to [0, 1]$ tal que $f|_C = 1$ y $f|_{X \setminus U} = 0$.</p>
+      <p><b>Corolario 3.21.</b> Fijados un punto $x \in X$ y un entorno abierto $U$ de $x$, existe una función continua $f : X \to [0, 1]$ tal que $f(x) = 1$ y $f|_{X \setminus U} = 0$.</p>
+      <p><b>Corolario 3.22.</b> Fijados subconjuntos cerrados y no vacíos $C$ y $D$ de un espacio métrico $X$ tales que $C \cap D = \varnothing$, existen abiertos disjuntos $U$ y $V$ de $X$ tales que $C \subseteq U$ y $D \subseteq V$.</p>
+    </div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">Teorema 3.19</p>
+          <p>Por la Proposición 2.61 (item 2 de la <a href="#ejp4alt-o2-8-prop">proposición de O2-8</a>), como $C$ y $D$ son cerrados disjuntos,
+            $$d(x, C) + d(x, D) \gt 0 \quad \text{para todo } x \in X.$$
+            Además, es claro que $0 \le \zeta_{C, D}(x) \le 1$ para todo $x$. Por lo tanto, la función $\zeta_{C, D}$ está bien definida. Para probar que es continua es suficiente notar que es <span class="ref" data-ref="ext-algebra-continuas">cociente de funciones reales que lo son</span>. Por último, es claro que $\zeta_{C, D}$ vale cero sobre $C$ y uno sobre $D$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o2-9-c1" aria-label="Gráfico de la función de Urysohn zeta en la recta: vale 0 en C, 1 en D y está entre 0 y 1 en el resto"></canvas>
+          <div class="ctrl">
+            <label class="check"><input type="checkbox" id="ejp4alt-o2-9-uv" checked> <span>mostrar <i>U</i> y <i>V</i> (Corolario 3.22)</span></label>
+            <div class="slider"><label for="ejp4alt-o2-9-g">hueco</label><input type="range" id="ejp4alt-o2-9-g" min="2" max="30" value="12"><output id="ejp4alt-o2-9-g-o"></output></div>
+          </div>
+          <dl class="read" id="ejp4alt-o2-9-read" aria-live="polite"></dl>
+          <figcaption>En ℝ con <i>C</i> = [−3, −1.5] ∪ [2.5, 3] (verde) y <i>D</i> = [<i>h</i>, 1.5] (naranja), donde el control mueve el borde <i>h</i> (elección del dibujo). La curva es ζ<sub><i>C</i>,<i>D</i></sub>. Con la casilla marcada, abajo se ven <i>U</i> = ζ<sup>−1</sup>((−∞, 1/2)) y <i>V</i> = ζ<sup>−1</sup>((1/2, ∞)).</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Corolarios 3.20 y 3.21</p>
+          <p><em>Corolario 3.20.</em> Aplíquese el Teorema 3.19 con $D = X \setminus U$.</p>
+          <p><em>Corolario 3.21.</em> Esto es una consecuencia inmediata del corolario anterior, porque los puntos son cerrados.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Corolario 3.22</p>
+          <p>Se puede tomar $U := \zeta_{C, D}^{-1}((-\infty, 1/2))$ y $V := \zeta_{C, D}^{-1}((1/2, \infty))$, donde $\zeta_{C, D}$ es la función introducida en el Teorema 3.19.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>(i) En el enunciado del Corolario 3.20 la fuente escribe “$f|_D = 1$”, pero el conjunto que debe valer $1$ es $C$ (no hay ningún $D$ en el enunciado); es una errata, y aquí se transcribió como $f|_C = 1$. Además, al aplicar el Teorema 3.19 con $D = X \setminus U$, la función $\zeta_{C, D}$ vale $0$ sobre $C$ y $1$ sobre $X \setminus U$, así que para obtener $f|_C = 1$ y $f|_{X \setminus U} = 0$ hay que tomar $f = 1 - \zeta_{C, D}$ (o $\zeta_{D, C}$); la fuente no lo aclara. También hace falta $X \setminus U \neq \varnothing$ para que el teorema se aplique tal cual; si $U = X$, basta $f \equiv 1$. (ii) “Cociente de funciones reales continuas es continua” es el Ejercicio 3.14 de la fuente (<a href="#ejp4alt-o2-2">O2-2</a>); que $d(\cdot, C)$ y $d(\cdot, D)$ son continuas es el Ejemplo 3.57 (<a href="#ejp4alt-o2-8">O2-8</a>). (iii) En el Corolario 3.22, $U$ y $V$ son abiertos por ser preimágenes de abiertos por una función continua (<span class="ref" data-ref="teo-5.9">Teo. 5.9</span> de <code>apuntes.typ</code>), son disjuntos porque las semirrectas lo son, y $C \subseteq U$, $D \subseteq V$ porque $\zeta_{C, D}$ vale $0$ en $C$ y $1$ en $D$. Esto es el <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a> (c) y (d) de la Práctica 4.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Definición 3.18, Teorema 3.19 y Corolarios 3.20–3.22, pág. 68 del PDF (59 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a> (c) (d)</p>
+  </article>
+
+  <!-- O12-3 -->
+  <article class="ej" id="ejp4alt-o12-3" data-short="O12-3" data-title="Separar cerrados disjuntos con d_E − d_F" data-topics="topologia,continuidad,metricas">
+    <div class="ej-head">
+      <span class="tag">O12-3</span>
+      <h3>Separar cerrados disjuntos con $d_E - d_F$</h3>
+      <span class="src">Wilson, Cor. 2.2.5</span>
+      <span class="topics"><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-continuidad">continuidad</a><a class="tag topic" href="#tema-metricas">metricas</a></span>
+    </div>
+    <div class="enun"><p>Si $(X, d)$ es un espacio métrico y $E, F$ son subconjuntos <span class="ref" data-ref="def-4.27">cerrados</span> y disjuntos de $X$, entonces existen subconjuntos <span class="ref" data-ref="def-4.14">abiertos</span> y disjuntos $U$ y $V$ tales que $E \subseteq U$ y $F \subseteq V$.</p></div>
+    <div class="steps">
+      <div class="step has-viz">
+        <div class="step-text">
+          <p class="step-title">$U$ y $V$ separan</p>
+          <p>Consideremos las funciones $d_E$ y $d_F$; por el Lema 2.2.4 (misma demostración en <a href="#ejp4alt-o2-8">O2-8</a>), ambas funciones son <span class="ref" data-ref="def-5.14">uniformemente continuas</span> y, por el Teorema 1.0.26 (está en O2-8), $d_E(x) = 0$ si y sólo si $x \in \overline{E} = E$, y $d_F(x) = 0$ si y sólo si $x \in \overline{F} = F$. Definimos
+            $$\begin{aligned} U &= \{z \in X : d_E(z) - d_F(z) \lt 0\} \quad \text{y} \\ V &= \{z \in X : d_E(z) - d_F(z) \gt 0\}. \end{aligned}$$
+            Obviamente $U$ y $V$ son conjuntos disjuntos, y si $x \in E$ entonces $x \notin F$ y por lo tanto $d_E(x) = 0$ y $d_F(x) \gt 0$; esto implica que $d_E(x) - d_F(x) \lt 0$, o sea $x \in U$. En forma semejante, si $x \in F$ entonces $x \notin E$ y por lo tanto $d_F(x) = 0$ y $d_E(x) \gt 0$; esto implica que $d_E(x) - d_F(x) \gt 0$, o sea $x \in V$. Por lo tanto $E \subseteq U$ y $F \subseteq V$.</p>
+        </div>
+        <figure class="viz">
+          <canvas id="ejp4alt-o12-3-c1" aria-label="Dos cerrados disjuntos E y F del plano y las regiones U donde d_E es menor que d_F y V donde es mayor"></canvas>
+          <dl class="read" id="ejp4alt-o12-3-read" aria-live="polite"></dl>
+          <figcaption>En (ℝ², <i>d</i><sub>2</sub>) con <i>E</i> un disco cerrado y <i>F</i> un segmento cerrado (elección del dibujo); arrastrá los extremos del segmento. La región azul es <i>U</i> = {<i>d<sub>E</sub></i> − <i>d<sub>F</sub></i> &lt; 0} y la naranja, <i>V</i> = {<i>d<sub>E</sub></i> − <i>d<sub>F</sub></i> &gt; 0}; la línea que las separa es {<i>d<sub>E</sub></i> = <i>d<sub>F</sub></i>}, que no está en ninguna.</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">$U$ y $V$ son abiertos</p>
+          <p>Finalmente, el Teorema 2.1.5 de la fuente (si $f, g : X \to \mathbb{R}$ son continuas en $a$, entonces $f \pm g$ es continua en $a$; la fuente lo deja como tarea) implica que la función $d_E - d_F : (X, d) \to (\mathbb{R}, |\cdot|)$ es continua, y la caracterización de continuidad por preimágenes de abiertos (<span class="ref" data-ref="teo-5.9">Teo. 5.9</span> del apunte) implica que
+            $$\begin{aligned} U &= (d_E - d_F)^{-1}((-\infty, 0)) \quad \text{y} \\ V &= (d_E - d_F)^{-1}((0, \infty)) \end{aligned}$$
+            son conjuntos abiertos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>las citas internas de la fuente están desfasadas: dice “Teorema 1.18” donde corresponde el Teorema 1.0.26 (está en O2-8) y “Teorema 1.26” donde corresponde el Corolario 2.1.4 de las mismas notas ($f$ continua $\Longleftrightarrow$ $f^{-1}(V)$ abierto para todo $V$ abierto, que es el Teo. 5.9 del apunte); arriba se citan los correctos. La fuente asume tácitamente $E, F \neq \emptyset$. Es una alternativa al lema de Urysohn del <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>: en vez de $h = d_A / (d_A + d_B)$ usa el signo de $d_A - d_B$, con lo que no hace falta el cociente ni el álgebra de continuas más allá de la resta.</div>
+    <p class="cita"><i>Fuente</i>: R. G. Wilson, <i>Notas de Análisis</i> (Depto. de Matemáticas, UAM-Iztapalapa, 2005), Corolario 2.2.5, pág. 20 del PDF. <a href="http://mat.izt.uam.mx/mat/documentos/notas%20de%20clase/NotasdeAnalisis.pdf">URL</a>. Acceso: notas de clase publicadas en la web del Departamento de Matemáticas de la UAM-Iztapalapa; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a></p>
+  </article>
+
+  <!-- O2-10 -->
+  <article class="ej" id="ejp4alt-o2-10" data-short="O2-10" data-title="Distancias concretas entre conjuntos; cerrados disjuntos a distancia cero" data-topics="metricas,topologia">
+    <div class="ej-head">
+      <span class="tag">O2-10</span>
+      <h3>Distancias concretas entre conjuntos; cerrados disjuntos a distancia cero</h3>
+      <span class="src">Guccione, Ejemplos 1.43–1.45</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="ej-grid">
+      <div class="enun">
+        <p>La distancia entre dos subconjuntos $A$ y $B$ de $X$ es $d(A, B) := \inf_{a \in A, b \in B} d(a, b)$ (Definición 1.40), y $d(x, A) = d(\{x\}, A)$.</p>
+        <ol class="items" style="list-style-type: decimal">
+          <li>En $\mathbb{R}$, provisto de la métrica usual,
+            $$\begin{aligned} &d(0, [1, 2]) = d(0, (1, 2]) = 1 \quad \text{y} \\ &d((0, 1], (1, 2)) = d(\mathbb{Q}, \mathbb{R} \setminus \mathbb{Q}) \\ &\qquad = d(0, (0, 1]) = 0. \end{aligned}$$
+            El último ejemplo muestra que la distancia de un punto a un conjunto puede ser cero sin que el punto pertenezca al conjunto.</li>
+          <li>En $(\mathbb{R}^2, d_2)$,
+            $$\begin{aligned} d(\mathbb{R} \times \{0\}, \{(x, y) \in \mathbb{R}^2 : y = x^2 + 1\}) &= 1, \\ d(\mathbb{R} \times \{0\}, \{(x, y) \in \mathbb{R}^2 : y \gt x^2 + 1\}) &= 1 \end{aligned}$$
+            y
+            $$\begin{aligned} d(&\{(x, 1/x) : x \in (0, \infty)\}, \\ &\{(x, -1/x) : x \in (0, \infty)\}) = 0. \end{aligned}$$</li>
+          <li>En un espacio métrico <span class="ref" data-ref="ext-metrica-discreta">discreto</span> $X$, para cada par de subconjuntos no vacíos $A$ y $B$ de $X$,
+            $$d(A, B) = \begin{cases} 0 & \text{si } A \cap B \neq \varnothing, \\ 1 & \text{si } A \cap B = \varnothing. \end{cases}$$</li>
+        </ol>
+      </div>
+      <figure class="viz">
+        <canvas id="ejp4alt-o2-10-c1" aria-label="Las ramas y = 1/x e y = −1/x para x positivo y el segmento vertical entre ellas, que se achica"></canvas>
+        <div class="ctrl">
+          <div class="slider"><label for="ejp4alt-o2-10-x"><i>x</i></label><input type="range" id="ejp4alt-o2-10-x" min="5" max="60" value="12"><output id="ejp4alt-o2-10-x-o"></output></div>
+        </div>
+        <dl class="read" id="ejp4alt-o2-10-read" aria-live="polite"></dl>
+        <figcaption>El tercer ejemplo del ítem 2: las dos ramas son cerradas en ℝ² y disjuntas. El segmento vertical une (<i>x</i>, 1/<i>x</i>) con (<i>x</i>, −1/<i>x</i>) y mide 2/<i>x</i>: al mover <i>x</i> hacia la derecha se hace tan chico como se quiera.</figcaption>
+      </figure>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente sólo enuncia los valores, sin cuentas. El tercer ejemplo del item 2 da dos cerrados disjuntos de $\mathbb{R}^2$ (las dos ramas de hipérbola) con $d(A, B) = 0$: por eso en el lema de Urysohn (<a href="#ejp4alt-o2-9">O2-9</a>) la hipótesis correcta es $C \cap D = \varnothing$ y no $d(C, D) \gt 0$, y por eso en el <a class="xg" data-guia="p4" data-ej="16">Ej. 16</a> de la Práctica 4 la condición $d(A, B) = 0$ no obliga a que $\overline{A} \cap \overline{B} \neq \varnothing$.</div>
+    <p class="cita"><i>Fuente</i>: J. A. Guccione y J. J. Guccione, <i>Espacios Métricos</i> (FCEN-UBA, 2017), Definición 1.40 y Ejemplos 1.43, 1.44 y 1.45, págs. 28–29 del PDF (19–20 del apunte). <a href="https://cms.dm.uba.ar/academico/materias/2docuat2018/calculo_avanzado/2017/apunte.pdf">URL</a>. Acceso: web de la materia; copia permitida sin fines de lucro (ver portada).</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+
+  <!-- O4-3 -->
+  <article class="ej" id="ejp4alt-o4-3" data-short="O4-3" data-title="A compacto y B cerrado: disjuntos si y sólo si d(A, B) es positiva" data-topics="compacidad,metricas,topologia">
+    <div class="ej-head">
+      <span class="tag">O4-3</span>
+      <h3>$A$ compacto y $B$ cerrado: $A \cap B = \varnothing \Longleftrightarrow d(A, B) \gt 0$</h3>
+      <span class="src">Gajardo, Ej. resuelto E4 b)</span>
+      <span class="topics"><a class="tag topic" href="#tema-compacidad">compacidad</a><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a></span>
+    </div>
+    <div class="enun"><p>Para dos conjuntos no vacíos $A, B \subseteq X$ se define
+      $$\begin{aligned} d(A, B) &:= \inf\{d(a, b) : a \in A, b \in B\} \\ &= \inf_{b \in B} d(b, A) = \inf_{a \in A} d(a, B), \end{aligned}$$
+      donde $d(\cdot, A)$ y $d(\cdot, B)$ son las funciones distancia a los conjuntos $A$ y $B$ respectivamente. Si $A$ es <span class="ref" data-ref="ext-compacto">compacto</span> y $B$ es <span class="ref" data-ref="def-4.27">cerrado</span>, demuestre que $A \cap B = \varnothing$ si y sólo si $d(A, B) \gt 0$.</p></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $A \cap B \neq \varnothing$: Alternativa 1</p>
+          <p>Si $A \cap B \neq \varnothing$, mostremos que $d(A, B) = 0$.</p>
+          <p><em>Alternativa 1</em>: Sea $\overline{x} \in A \cap B$. Entonces $d(\overline{x}, A) = 0$, pues $A$ es un conjunto cerrado (<a href="#ejp4alt-o2-8">O2-8</a>) y, por lo tanto,
+            $$0 \le d(A, B) = \inf_{b \in B} d(b, A) \le d(\overline{x}, A) = 0.$$</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $A \cap B \neq \varnothing$: Alternativa 2</p>
+          <p><em>Alternativa 2</em>: Sea $\overline{x} \in A \cap B$. Entonces $\inf\{d(a, b) : a \in A, b \in B\} \le d(\overline{x}, \overline{x})$, luego $0 \le d(A, B) \le 0$, por lo tanto $d(A, B) = 0$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $d(A, B) = 0$: Alternativa 1</p>
+          <p>Supongamos ahora $d(A, B) = 0$ y mostremos $A \cap B \neq \varnothing$.</p>
+          <p><em>Alternativa 1</em>: Por definición del ínfimo, para cada $k \in \mathbb{N}$ existen $a_k \in A$ y $b_k \in B$ tales que
+            $$0 \le d(a_k, b_k) \le d(A, B) + \frac{1}{k} = \frac{1}{k}.$$
+            Como $A$ es un conjunto compacto, existe $\overline{a} \in A$ y una subsucesión $(a_{k_j})_{j \in \mathbb{N}}$ tal que $a_{k_j} \to \overline{a}$. Se tendrá además que $b_{k_j} \to \overline{a}$ pues
+            $$\begin{aligned} d(b_{k_j}, \overline{a}) &\le d(b_{k_j}, a_{k_j}) + d(a_{k_j}, \overline{a}) \\ &\le \frac{1}{k_j} + d(a_{k_j}, \overline{a}) \to 0. \end{aligned}$$
+            Como $A$ y $B$ son conjuntos cerrados, y recordando que $a_{k_j} \in A$ y $b_{k_j} \in B$, se tendrá entonces $\lim_{j \to +\infty} a_{k_j} = \overline{a} \in A$ y $\lim_{j \to +\infty} b_{k_j} = \overline{a} \in B$, concluyendo $\overline{a} \in A \cap B$ y, por lo tanto, $A \cap B \neq \varnothing$.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-text">
+          <p class="step-title">Si $d(A, B) = 0$: Alternativa 2</p>
+          <p><em>Alternativa 2</em>: Sabemos que $d(\cdot, B) : X \to \mathbb{R}$ es una función continua (<a href="#ejp4alt-o2-8">O2-8</a>) y como $A$ es compacto, entonces $d(\cdot, B)$ alcanza un mínimo en $A$ (la fuente cita su Corolario 3.1.4: <span class="ref" data-ref="ext-weierstrass">una función continua sobre un compacto alcanza mínimo y máximo</span>). Sea $a_0 \in A$ tal que
+            $$d(a_0, B) = \inf_{a \in A} d(a, B).$$
+            Tenemos que $B$ es cerrado y $d(a_0, B) = 0$, por lo tanto $a_0 \in B$ (<a href="#ejp4alt-o2-8">O2-8</a>), luego $A \cap B \neq \varnothing$. $\square$</p>
+        </div>
+      </div>
+    </div>
+    <div class="nota"><b>Nota</b>la fuente usa que un compacto es cerrado y que toda sucesión en un compacto tiene subsucesión convergente (su definición de compacidad es por recubrimientos; la equivalencia secuencial es su Teorema 2.3.2). Nada de esto está en <code>apuntes.typ</code> todavía. La relación con el <a class="xg" data-guia="p4" data-ej="16">Ej. 16</a> de la práctica: allí $d(A, B) = 0$ <em>no</em> exige $A \cap B \neq \varnothing$ (por ejemplo $A = \mathbb{N}$, $B = \{n + 1/n : n \ge 2\}$, ambos cerrados, disjuntos, con $d(A, B) = 0$); este ejercicio muestra que con $A$ compacto sí.</div>
+    <p class="cita"><i>Fuente</i>: P. Gajardo Adaro, <i>Análisis I</i> (UTFSM, versión marzo 2021), Ejercicios resueltos de la Parte 1, (E4) b), págs. 57–58 del PDF. <a href="https://matematica.usm.cl/wp-content/uploads/2018/09/analisis1_utfsm_202103.pdf">URL</a>. Acceso: web del departamento, sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="11">Ej. 11</a>, <a class="xg" data-guia="p4" data-ej="16">16</a></p>
+  </article>
+
+  <!-- O14-12 -->
+  <article class="ej" id="ejp4alt-o14-12" data-short="O14-12" data-title="Ejercicios propuestos sobre d(x, A), la diagonal y {f = g}" data-topics="metricas,topologia,continuidad">
+    <div class="ej-head">
+      <span class="tag">O14-12</span>
+      <h3>Ejercicios propuestos sobre $d(x, A)$, la diagonal y $\{f = g\}$</h3>
+      <span class="src">Payá, Apuntes 02, 03 y 05, ejercicios</span>
+      <span class="topics"><a class="tag topic" href="#tema-metricas">metricas</a><a class="tag topic" href="#tema-topologia">topologia</a><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
+    </div>
+    <div class="enun">
+      <p>Sea $E$ un espacio métrico con distancia $d$ y $A \subseteq E$ no vacío; se define $d(x, A) = \inf\{d(x, a) : a \in A\}$.</p>
+      <ol class="items" style="list-style-type: lower-roman">
+        <li>(Apuntes 02, Ej. 2.12.4) Probar que $\overline{A} = \{x \in E : d(x, A) = 0\}$.</li>
+        <li>(Apuntes 03, Ej. 3.9.4) Probar la <span class="ref" data-ref="def-5.4">continuidad</span> de $f : E \to \mathbb{R}$, $f(x) = d(x, A)$.</li>
+        <li>(Apuntes 05, Ej. 5.8.6) Probar que $f(x) = d(x, A)$ es no expansiva: $|d(x, A) - d(y, A)| \le d(x, y)$.</li>
+        <li>(Apuntes 03, Ej. 3.9.5) En el espacio producto $E \times E$, probar que para todo $r \ge 0$ el conjunto $\{(x, y) \in E \times E : d(x, y) \lt r\}$ es abierto y $\{(x, y) : d(x, y) \le r\}$ es cerrado. En particular, la diagonal $\Delta(E) = \{(x, x) : x \in E\}$ es cerrada. Deducir que, si $F$ es otro espacio métrico y $f, g : E \to F$ son continuas, entonces $\{x \in E : f(x) = g(x)\}$ es un subconjunto cerrado de $E$.</li>
+        <li>(Apuntes 03, Ej. 3.9.6) Si $f : E \to F$ es continua, su gráfica $\operatorname{Gr} f = \{(x, f(x)) : x \in E\}$ es cerrada en $E \times F$.</li>
+        <li>(Apuntes 05, Ej. 5.8.4) ¿Qué se puede afirmar sobre la composición de dos funciones <span class="ref" data-ref="def-5.14">uniformemente continuas</span>?</li>
+      </ol>
+    </div>
+    <div class="estrategia"><b>Indicaciones</b><p>La fuente no resuelve estos ejercicios. Para (iv): $\{(x, y) : d(x, y) \lt r\} = d^{-1}((-\infty, r))$ y $\{(x, y) : d(x, y) \le r\} = d^{-1}((-\infty, r])$, con $d : E \times E \to \mathbb{R}$ continua (<a href="#ejp4alt-o2-7">O2-7</a>); luego $\{f = g\} = (f, g)^{-1}(\Delta(F))$, donde $(f, g) : E \to F \times F$ es continua por serlo sus componentes (Apuntes 03, §3.6, pág. 8). Para (v): $\operatorname{Gr} f = (\operatorname{id}, f)^{-1}(\Delta(F))$. (Indicaciones del transcriptor, coherentes con lo que la fuente desarrolla en §3.5–3.6.)</p></div>
+    <p class="cita"><i>Fuente</i>: R. Payá Albert, <i>Análisis Matemático I</i> (UGR, 2024-25): Tema 2, §2.12 Ejercicio 4, pág. 14 del PDF (26 impresa); Tema 3, §3.9 Ejercicios 4, 5 y 6, pág. 12 del PDF (38 impresa); Tema 5, §5.8 Ejercicios 4 y 6, pág. 10 del PDF (60 impresa). <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_02.pdf">URL 02</a>, <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_03.pdf">URL 03</a>, <a href="https://www.ugr.es/~rpaya/documentos/AnalisisI/2024_25/Apuntes_05.pdf">URL 05</a>. Acceso: web del docente en la UGR; sin licencia explícita.</p>
+    <p class="cita">Práctica 4: <a class="xg" data-guia="p4" data-ej="4">Ej. 4</a>, <a class="xg" data-guia="p4" data-ej="11">11</a>, <a class="xg" data-guia="p4" data-ej="12">12</a></p>
+  </article>
+</section>

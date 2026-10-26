@@ -1,4 +1,11 @@
 {
+ "def-4.1": {
+  "tipo": "Definición",
+  "numero": "4.1",
+  "titulo": "Métrica y Espacio Métrico",
+  "enunciado": "<p>Una métrica en un conjunto $M$ es una función $d : M \\times M \\to \\mathbb{R}$ que cumple las siguientes propiedades para todo $x, y, z \\in M$:</p><p>(i) $d(x, y) \\ge 0$ para todo $x, y \\in M$.<br>(ii) $d(x, y) = 0$ si y sólo si $x = y$.<br>(iii) $d(x, y) = d(y, x)$ para todo $x, y \\in M$ (Simetría).<br>(iv) $d(x, z) \\le d(x, y) + d(y, z)$ para todo $x, y, z \\in M$ (Desigualdad triangular).</p><p>El par $(M, d)$ se denomina <em>espacio métrico</em>.</p>",
+  "fuente": "apuntes.typ"
+ },
  "def-4.14": {
   "tipo": "Definición",
   "numero": "4.14",
@@ -76,12 +83,26 @@
   "enunciado": "<p>Sea $f : (M, d) \\to (N, d')$ una función. Entonces $f$ es continua si y sólo si $f^{-1}(F) \\subseteq M$ es cerrado para todo $F \\subseteq N$ cerrado.</p>",
   "fuente": "Ejercicio 5.10 de las notas de la materia. <code>apuntes.typ</code> lo cita (Teorema 5.13, Observación 5.12) sin caja propia; el enunciado es el que esas citas usan: la versión del Teorema 5.9 con cerrados."
  },
+ "ext-algebra-continuas": {
+  "tipo": "Proposición",
+  "numero": "",
+  "titulo": "Álgebra de funciones continuas a valores reales",
+  "enunciado": "<p>Si $f, g : (M, d) \\to \\mathbb{R}$ son continuas en $x$, entonces $f \\pm g$ y $f g$ son continuas en $x$, y si $g(x) \\neq 0$ también $f / g$ es continua en $x$.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
  "ext-compacto": {
   "tipo": "Definición",
   "numero": "",
   "titulo": "Conjunto compacto",
   "enunciado": "<p>Un subconjunto $K$ de un espacio métrico es <b>compacto</b> si de todo cubrimiento de $K$ por abiertos se puede extraer un subcubrimiento finito. En espacios métricos equivale a ser <b>secuencialmente compacto</b>: toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$.</p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-metrica-discreta": {
+  "tipo": "Definición",
+  "numero": "",
+  "titulo": "Métrica discreta",
+  "enunciado": "<p>En un conjunto $M$, la <b>métrica discreta</b> es $$\\delta(x, y) = \\begin{cases} 0 & \\text{si } x = y, \\\\ 1 & \\text{si } x \\neq y. \\end{cases}$$ Para $r \\le 1$, $B(x, r) = \\{x\\}$: todo subconjunto es abierto.</p>",
+  "fuente": "Definición del curso (Práctica 3); <code>apuntes.typ</code> la usa sin caja propia."
  },
  "ext-normado": {
   "tipo": "Definición",
@@ -109,6 +130,13 @@
   "numero": "",
   "titulo": "Espacio separable",
   "enunciado": "<p>Un espacio métrico $(X, d)$ es <b>separable</b> si tiene un subconjunto contable (finito o numerable) y denso.</p>",
+  "fuente": "Definición del curso; todavía no está en apuntes.typ"
+ },
+ "ext-weierstrass": {
+  "tipo": "Teorema",
+  "numero": "",
+  "titulo": "Continua en un compacto alcanza máximo y mínimo",
+  "enunciado": "<p>Si $K$ es compacto no vacío y $f : K \\to \\mathbb{R}$ es continua, existen $a, b \\in K$ con $f(a) \\le f(x) \\le f(b)$ para todo $x \\in K$.</p>",
   "fuente": "Definición del curso; todavía no está en apuntes.typ"
  },
  "prop-3.9": {

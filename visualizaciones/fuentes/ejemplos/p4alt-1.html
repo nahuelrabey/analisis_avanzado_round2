@@ -251,7 +251,7 @@
       <span class="topics"><a class="tag topic" href="#tema-continuidad">continuidad</a></span>
     </div>
     <div class="enun"><p>Pruebe que la función $f : \mathbb{R}^2 \to \mathbb{R}$ definida por
-      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 \\ \qquad \text{si } x \ge y, \\[6pt] \dfrac{(x - y)^3 - 3 (x - y)^2 + 2 x^2 + 2 y^2 + 2}{x^2 + y^2 + 1} \\ \qquad \text{si } x \le y \end{cases}$$
+      $$f(x, y) := \begin{cases} x^2 - 2 x y + y^2 + 2 \\ \qquad \text{si } x \ge y, \\[6pt] \dfrac{\begin{gathered}(x - y)^3 - 3 (x - y)^2 \\ {} + 2 x^2 + 2 y^2 + 2\end{gathered}}{x^2 + y^2 + 1} \\ \qquad \text{si } x \le y \end{cases}$$
       es continua.</p></div>
     <div class="ej-grid">
       <div class="estrategia"><b>Idea</b><p>La fuente no resuelve el ejercicio, pero lo ubica inmediatamente después de la Proposición 3.16: los semiplanos $C_1 = \{(x, y) : x \ge y\}$ y $C_2 = \{(x, y) : x \le y\}$ son cerrados, cubren $\mathbb{R}^2$, y sobre cada uno $f$ coincide con una función racional (continua por la Nota 3.15, <a href="#ejp4alt-o2-2">O2-2</a>). Lo único que hay que controlar es que ambas fórmulas coincidan sobre la recta $x = y$, para que $f$ esté bien definida: allí la primera vale $2$ y la segunda vale $(2 x^2 + 2 y^2 + 2) / (x^2 + y^2 + 1) = 2$.</p></div>
@@ -408,7 +408,7 @@
         <div class="step-text">
           <p class="step-title">(i) La cota</p>
           <p>de modo que $|f(x) - f(s)| \lt \varepsilon / 2$ y $|g(y) - g(t)| \lt \varepsilon / 2$, de donde
-            $$\begin{aligned} &\|(f(x), g(y)) - (f(s), g(t))\|_2 \\ &\quad \le \|(f(x), 0) - (f(s), 0)\|_2 \\ &\qquad + \|(0, g(y)) - (0, g(t))\|_2 \\ &\quad = |f(x) - f(s)| + |g(y) - g(t)| \lt \varepsilon, \end{aligned}$$
+            $$\begin{aligned} &\|(f(x), g(y)) - (f(s), g(t))\|_2 \\ &\le \|(f(x), 0) - (f(s), 0)\|_2 \\ &\quad + \|(0, g(y)) - (0, g(t))\|_2 \\ &= |f(x) - f(s)| + |g(y) - g(t)| \lt \varepsilon, \end{aligned}$$
             como se quería.</p>
         </div>
       </div>
@@ -442,7 +442,7 @@
           <p class="step-title">No continua: la diagonal</p>
           <p>Pero $f$ no es continua como función de dos variables: encontramos que
             $$f(x, x) = \begin{cases} \frac{x^2}{x^2 + x^2} = 1/2 & \text{si } x \neq 0, \\[4pt] 0 & \text{si } x = 0, \end{cases}$$
-            así que vemos que $f$ no es continua aplicándola a la sucesión $(1, 1), (1/2, 1/2), (1/3, 1/3), \dots \in \mathbb{R}^2$ (que converge a $(0, 0)$ mientras $f$ vale constantemente $1/2$ y $f(0, 0) = 0$). Mirando el gráfico se ve el problema en el origen.</p>
+            así que vemos que $f$ no es continua aplicándola a la sucesión $(1, 1), (1/2, 1/2),$ $(1/3, 1/3), \dots \in \mathbb{R}^2$ (que converge a $(0, 0)$ mientras $f$ vale constantemente $1/2$ y $f(0, 0) = 0$). Mirando el gráfico se ve el problema en el origen.</p>
         </div>
         <figure class="viz">
           <canvas id="ejp4alt-o17-5-c" aria-label="Mapa de colores de xy sobre x cuadrado más y cuadrado en el cuadrado [-1, 1] al cuadrado, con los puntos (1/k, 1/k) sobre la diagonal"></canvas>
@@ -493,7 +493,7 @@
             luego existen todos los límites direccionales de $f$ en el origen, pero no coinciden: para $\lambda = 1$ el límite direccional es $1/2$, pero es $0$ para $\lambda = 0$. Por tanto, $f$ no tiene límite en el origen. El estudio de $f$ está concluido: es continua en todo punto de $\mathbb{R}^2 \setminus \{(0, 0)\}$ y no tiene límite, luego no es continua, en el origen.</p>
           <p>Para $g$ y $h$, con $\lambda \in \mathbb{R}$ y $x \in \mathbb{R} \setminus \{0\}$,
             $$\begin{aligned} g(x, \lambda x) &= \frac{\lambda x}{1 + \lambda^4 x^2} \quad \text{y} \\ h(x, \lambda x) &= \frac{\lambda^2 x}{1 + \lambda^4 x^2}, \end{aligned}$$
-            de donde $\lim_{x \to 0} g(x, \lambda x) = \lim_{x \to 0} h(x, \lambda x) = 0$ para todo $\lambda \in \mathbb{R}$: los límites direccionales no dan nueva información.</p>
+            de donde $\lim_{x \to 0} g(x, \lambda x)$ $= \lim_{x \to 0} h(x, \lambda x) = 0$ para todo $\lambda \in \mathbb{R}$: los límites direccionales no dan nueva información.</p>
         </div>
         <figure class="viz">
           <canvas id="ejp4alt-o14-1-c" aria-label="Mapa de colores de la función elegida cerca del origen, con un camino hacia el origen: una recta y = lambda x o la parábola x = y al cuadrado"></canvas>
@@ -519,7 +519,7 @@
           <p>Llegaríamos a lo mismo con otra notación. Para $\rho \gt 0$ y $\theta \in \mathbb{R}$,
             $$\begin{aligned} &f(\rho \cos \theta, \rho \sin \theta) = \frac{\rho^2 \cos \theta \sin \theta}{\rho^2}, \\ &\text{luego} \\ &\lim_{\rho \to 0} f(\rho \cos \theta, \rho \sin \theta) = \cos \theta \sin \theta. \end{aligned}$$
             Existen todos los límites radiales de $f$ en el origen, pero no coinciden (para $\theta = 0$ vale $0$ y para $\theta = \pi / 4$ vale $1/2$): $f$ no tiene límite en el origen. En cuanto a $g$ y $h$,
-            $$g(\rho \cos \theta, \rho \sin \theta) = \frac{\rho \cos^2 \theta \sin \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta}$$ y $$h(\rho \cos \theta, \rho \sin \theta) = \frac{\rho \cos \theta \sin^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta},$$
+            $$\begin{aligned} &g(\rho \cos \theta, \rho \sin \theta) \\ &\quad = \frac{\rho \cos^2 \theta \sin \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta} \end{aligned}$$ y $$\begin{aligned} &h(\rho \cos \theta, \rho \sin \theta) \\ &\quad = \frac{\rho \cos \theta \sin^2 \theta}{\cos^2 \theta + \rho^2 \sin^4 \theta}, \end{aligned}$$
             y ambos tienden a $0$ cuando $\rho \to 0$, para todo $\theta$: existen todos los límites radiales de $g$ y $h$ y coinciden.</p>
         </div>
       </div>
@@ -892,7 +892,7 @@
       <div class="step">
         <div class="step-text">
           <p class="step-title">Preimágenes sí, imágenes no</p>
-          <p>Todas las preimágenes calculadas son abiertas en $\mathbb{R}$. De hecho, como todo abierto de $\mathbb{R}$ es unión de intervalos abiertos, este cálculo muestra que la preimagen de todo abierto es abierta, en acuerdo con el Teorema 3.21 de la fuente (<span class="ref" data-ref="teo-5.9">Teo. 5.9</span> del apunte) y con la continuidad de $x^2$. "Por otro lado, $g((-1, 1)) = \{x^2 : -1 \lt x \lt 1\} = [0, 1)$ no es un conjunto abierto en $\mathbb{R}$. Por eso es importante que en el Teorema 3.21 se consideren preimágenes y no imágenes." $\square$</p>
+          <p>Todas las preimágenes calculadas son abiertas en $\mathbb{R}$. De hecho, como todo abierto de $\mathbb{R}$ es unión de intervalos abiertos, este cálculo muestra que la preimagen de todo abierto es abierta, en acuerdo con el Teorema 3.21 de la fuente (<span class="ref" data-ref="teo-5.9">Teo. 5.9</span> del apunte) y con la continuidad de $x^2$. "Por otro lado, $g((-1, 1)) = \{x^2 : -1 \lt x \lt 1\}$ $= [0, 1)$ no es un conjunto abierto en $\mathbb{R}$. Por eso es importante que en el Teorema 3.21 se consideren preimágenes y no imágenes." $\square$</p>
         </div>
       </div>
     </div>
