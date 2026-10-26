@@ -979,7 +979,7 @@
         <div class="step-text">
           <p class="step-title">$f$ no es continua en $c$</p>
           <p>Ahora mostramos que $f$ no es continua en $c$. Estimamos
-            $$\begin{aligned} &|f(x_{n_k}) - f(c)| \\ &= |f(x_{n_k}) - f(y_{n_k}) + f(y_{n_k}) - f(c)| \\ &\ge |f(x_{n_k}) - f(y_{n_k})| - |f(y_{n_k}) - f(c)| \\ &\ge \varepsilon - |f(y_{n_k}) - f(c)|. \end{aligned}$$
+            $$\begin{aligned} &|f(x_{n_k}) - f(c)| \\ &= |f(x_{n_k}) - f(y_{n_k}) \\ &\qquad + f(y_{n_k}) - f(c)| \\ &\ge |f(x_{n_k}) - f(y_{n_k})| \\ &\qquad - |f(y_{n_k}) - f(c)| \\ &\ge \varepsilon - |f(y_{n_k}) - f(c)|. \end{aligned}$$
             En otras palabras,
             $$\begin{aligned} &|f(x_{n_k}) - f(c)| \\ &\quad + |f(y_{n_k}) - f(c)| \ge \varepsilon. \end{aligned}$$
             Al menos una de las sucesiones $(f(x_{n_k}))_{k \in \mathbb{N}}$ o $(f(y_{n_k}))_{k \in \mathbb{N}}$ no puede converger a $f(c)$: si no, el lado izquierdo tendería a cero mientras el derecho es positivo. Luego <span class="ref" data-ref="teo-5.7">$f$ no es continua en $c$</span>. $\square$</p>
