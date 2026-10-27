@@ -51,7 +51,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   inset: (x: 6pt, y: 4pt),
 
   [*\#*], [*Bloque*], [*Desbloquea*],
-  [1], [Compacidad por definición (sucesiones)], [p5: Ej. 1; conceptual para Ej. 6, 7],
+  [1], [Compacidad por definición (sucesiones)], [p5: Ej. 1, 6; conceptual para Ej. 7],
   [2], [Compactos y cerrados], [p5: Ej. 4, 5],
   [3], [Productos de compactos], [p5: Ej. 3; conceptual para Ej. 9],
   [4], [Cerrado y acotado no alcanza: bolas en espacios de funciones], [p5: Ej. 10],
@@ -70,7 +70,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 1 · Compacidad por definición (sucesiones)
 
 #sublema(titulo: "Qué desbloquea")[
-  Un espacio métrico $K$ es *compacto* si toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$. El *Ejercicio 1* de la Práctica 5 pide probar _por definición_ que $K = {0} union {1 \/ n : n in NN}$ es compacto: es exactamente el ejemplo de este bloque con $x_n = 1 \/ n$ y $x = 0$. La maniobra a aprender es cómo tratar una sucesión arbitraria $(y_n)_n$ del conjunto, que *no* tiene por qué ser una subsucesión de $(x_n)_n$: se separa según tome finitos o infinitos valores. Esa misma partición resuelve el *Ejercicio 6* (compactos de un espacio discreto) y es la base del *Ejercicio 7* (unión finita de compactos: alguno de los finitos compactos contiene infinitos términos).
+  Un espacio métrico $K$ es *compacto* si toda sucesión en $K$ tiene una subsucesión que converge a un punto de $K$. El *Ejercicio 1* de la Práctica 5 pide probar _por definición_ que $K = {0} union {1 \/ n : n in NN}$ es compacto: es exactamente el ejemplo de este bloque con $x_n = 1 \/ n$ y $x = 0$. La maniobra a aprender es cómo tratar una sucesión arbitraria $(y_n)_n$ del conjunto, que *no* tiene por qué ser una subsucesión de $(x_n)_n$: se separa según tome finitos o infinitos valores. El *Ejercicio 6* (compactos de un espacio discreto) es el Ejemplo 6.2 (pestaña `42`): los finitos son compactos y los infinitos no. La partición finitos/infinitos valores es también la base del *Ejercicio 7* (unión finita de compactos: alguno de los finitos compactos contiene infinitos términos).
 ]
 
 #ejemplo[Una sucesión convergente junto con su límite es un compacto (Clase 7 · Ejercicio 2)][C7-2][
@@ -93,6 +93,25 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Corrección al manuscrito")[
   El original pide $n_k >= n_(k - 1)$ y $K_k >= K_(k - 1)$; para que $(x_(K_k))_k$ sea una subsucesión de $(x_n)_n$ hace falta $K_k > K_(k - 1)$, estricto. Como los $y_(n_k)$ se eligen con valores distintos dos a dos, los $K_k$ son distintos y se los puede tomar estrictamente crecientes, que es lo que se escribió arriba. El absurdo final también necesita observar que los términos anteriores a la cola son finitos: el original sólo dice que la cola "está incluida en un complemento finito".
+]
+
+#ejemplo[Un intervalo cerrado, un infinito con la métrica discreta y un conjunto finito (Ejemplo 6.2)][42][
+  #set enum(numbering: "a)")
+  + $K = [a, b] subset.eq (RR, abs(dot))$ es compacto.
+  + Sea $(M, delta)$ un espacio con la métrica discreta y sea $K subset.eq M$ un subconjunto infinito. Entonces $K$ no puede ser compacto.
+  + Si $(M, d)$ es un espacio métrico cualquiera y $K subset.eq M$ es un conjunto finito, entonces $K$ es compacto.
+]
+
+#resolucion[
+  *a)* Para ver esto, tomemos $(x_n)_(n in NN) subset.eq K$. Como $a <= x_n <= b$ para todo $n in NN$, tenemos que $x_n$ admite una subsucesión convergente (probarlo como ejercicio --- para esto, ver la demostración del Teorema 4.57).
+
+  *b)* Como $K$ es infinito, existe una sucesión $(x_n)_(n in NN) subset.eq K$ tal que $x_n != x_m$ para todo $n != m in NN$. Como $delta(x_n, x_m) = 1$ para todo $n != m in NN$, vemos que $(x_n)_(n in NN)$ no admite subsucesiones de Cauchy y por lo tanto, no admite subsucesiones convergentes.
+
+  *c)* Si $(x_n)_(n in NN) subset.eq K$ es una sucesión, entonces $(x_n)$ tiene que tomar el mismo valor infinitas veces (porque $K$ es finito). Pero esto es lo mismo que decir que $(x_n)$ tiene una subsucesión $(x_(n_k))$ constante y por lo tanto convergente.
+]
+
+#sublema(titulo: "Detalle que el apunte omite")[
+  En *a)*, la definición de compacto pide además que el límite $x$ de la subsucesión esté en $K$. Eso sale de que $a <= x_(n_k) <= b$ para todo $k$ y las desigualdades no estrictas se preservan al tomar límite: $a <= x <= b$. En *b)*, juntando con *c)*: en un espacio discreto los compactos son exactamente los subconjuntos finitos, que es el *Ejercicio 6* de la Práctica 5.
 ]
 
 #v(10pt)
@@ -164,7 +183,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 4 · Cerrado y acotado no alcanza: bolas en espacios de funciones
 
 #sublema(titulo: "Qué desbloquea")[
-  En $RR^n$ compacto equivale a cerrado y acotado (Heine--Borel). El *Ejercicio 10* de la Práctica 5 muestra que en $(C[0, 1], d_oo)$ eso falla: la bola cerrada $overline(B)(f_0, 1)$ es cerrada y acotada pero no compacta. La técnica es exhibir una sucesión en la bola cuyos términos están a distancia $>= 1$ dos a dos: entonces ninguna subsucesión es de Cauchy, y en particular ninguna converge. El ejemplo de este bloque hace exactamente eso en $C(RR, [0, 1])$ con las funciones $f_S$ que valen $0$ en $S subset.eq NN$ y $1$ en $NN without S$; para el Ejercicio 10 hay que fabricar en $[0, 1]$ una familia con la misma propiedad (por ejemplo, "picos" de altura $1$ con soportes disjuntos). El enunciado principal del ejemplo (no hay un denso numerable) es un resultado sobre densidad, pero su construcción es la que importa acá, y la nota del docente al final la convierte en la no compacidad de la bola cerrada.
+  En $RR^n$ compacto equivale a cerrado y acotado (Heine--Borel). El *Ejercicio 10* de la Práctica 5 muestra que en $(C[0, 1], d_oo)$ eso falla: la bola cerrada $overline(B)(f_0, 1)$ es cerrada y acotada pero no compacta. La técnica es exhibir una sucesión en la bola cuyos términos están a distancia $>= 1$ dos a dos: entonces ninguna subsucesión es de Cauchy, y en particular ninguna converge. El ejemplo de este bloque hace exactamente eso en $C(RR, [0, 1])$ con las funciones $f_S$ que valen $0$ en $S subset.eq NN$ y $1$ en $NN without S$; para el Ejercicio 10 hay que fabricar en $[0, 1]$ una familia con la misma propiedad (por ejemplo, "picos" de altura $1$ con soportes disjuntos). El enunciado principal del ejemplo (no hay un denso numerable) es un resultado sobre densidad, pero su construcción es la que importa acá, y la nota del docente al final la convierte en la no compacidad de la bola cerrada. El Ejemplo 6.6 (pestaña `43`) es la versión más limpia del mismo truco, en el espacio de sucesiones eventualmente nulas: los "vectores canónicos" $a^m$ están todos a distancia $1$ entre sí.
 ]
 
 #ejemplo[$C(RR, [0, 1])$ con $d_oo$ no tiene un subconjunto denso numerable, y su bola cerrada unitaria no es compacta (Clase 8 · Ejercicio 3)][C8-3][
@@ -193,6 +212,38 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   La misma idea muestra que $overline(B)(0, 1)$ _no es compacta_. Si $S_n = {n}$ y $f_n = f_(S_n)$, entonces $(f_n)_n subset.eq overline(B)(0, 1)$ (las $f_n$ toman valores en $[0, 1]$) y no admite subsucesiones convergentes: si $(f_(n_k))_k$ es una subsucesión, por $(*)$, para $k != k'$,
   $ norm(f_(n_k) - f_(n_(k'))) _oo = norm(f_(S_(n_k)) - f_(S_(n_(k'))))_oo >= 1, $
   así que no puede ser de Cauchy, y por lo tanto tampoco convergente. Es el mismo mecanismo que pide el Ejercicio 10 de la Práctica 5 para $overline(B)(f_0, 1)$ en $(C[0, 1], d_oo)$.
+]
+
+#ejemplo[La bola cerrada unitaria de las sucesiones eventualmente nulas con $d_oo$ es cerrada y acotada pero no compacta (Ejemplo 6.6)][43][
+  Sea
+  $ M = {(a_n)_(n in NN) subset.eq RR : "existe un " n_0 " tal que " a_n = 0 " para todo " n >= n_0}, $
+  el conjunto de las sucesiones de números reales que se hacen eventualmente $0$. Definamos en $M$ la distancia $d_oo (a, b) = max_(n in NN) abs(a_n - b_n)$. Notemos que esta distancia está bien definida porque tanto $a$ como $b$ tienen finitos términos distintos de cero. Como ejercicio, probá que $(M, d_oo)$ es un espacio métrico.
+
+  Consideremos en $M$ el conjunto $K = {(a_n)_(n in NN) in M : abs(a_n) <= 1 "para todo " n in NN}$. Notemos que $K = B[0, 1]$, donde por $0$ entendemos a la sucesión que es constantemente $0$. Por lo tanto, $K$ es cerrado y acotado en este espacio métrico (las bolas cerradas siempre son cerradas y acotadas).
+
+  Sin embargo, $K$ no es compacto.
+]
+
+#resolucion[
+  Tomemos en $K$ la sucesión $(a^m)_(m in NN)$ definida como
+  $ a_n^m = cases(1 quad & "si " n = m, 0 quad & "si " n != m.) $
+  Es decir, $(a^m)$ es la sucesión
+  $
+    a^1 & = (1, 0, 0, dots) \
+    a^2 & = (0, 1, 0, dots) \
+    a^3 & = (0, 0, 1, 0, dots) \
+    a^4 & = (0, 0, 0, 1, 0, dots) \
+        & dots.v
+  $
+  Observemos que $d_oo (a^k, a^m) = 1$ para todo $k != m$ (porque tienen el $1$ en lugares distintos), lo cual nos dice que $(a^m)_(m in NN)$ no admite subsucesiones convergentes (porque no admite subsucesiones de Cauchy).
+]
+
+#observacion[Qué mirar en el Ejemplo 6.6][
+  En el espacio $M$ de las sucesiones eventualmente nulas con la distancia $d_oo$, el conjunto cerrado, acotado y no compacto es $K = B[0, 1]$, no $M$: el espacio $M$ ni siquiera es acotado, porque $b^N = (N, 0, 0, dots) in M$ cumple $d_oo (b^N, 0) = N$. La sucesión testigo $(a^m)_(m in NN)$, con $a_n^m = 1$ si $n = m$ y $0$ si no, vive en $K$ y cumple $d_oo (a^k, a^m) = 1$ para todo $k != m$.
+
+  - *Por qué ninguna subsucesión es de Cauchy.* Una subsucesión es $(a^(m_j))_(j in NN)$ con $m_1 < m_2 < dots$. Los términos $a^(m_j)$ y $a^(m_l)$ no son dos subsucesiones distintas, sino los términos en las posiciones $j$ y $l$ de la misma subsucesión. Si $j != l$, entonces $m_j != m_l$, y por lo tanto $d_oo (a^(m_j), a^(m_l)) = 1$. Con $epsilon = 1 / 2$ ningún $J$ sirve, porque $d_oo (a^(m_J), a^(m_(J + 1))) = 1$. Como toda sucesión convergente es de Cauchy, ninguna subsucesión converge, y $K$ no es compacto. Lo que se usa es que los índices de una subsucesión sean distintos: si se pudieran repetir, $a^1, a^1, dots$ sería de Cauchy.
+  - *La sucesión tampoco converge*, porque es subsucesión de sí misma (con $m_j = j$). La vuelta es falsa: $(-1)^n$ no converge pero tiene subsucesiones convergentes. Por eso, para negar la compacidad hace falta que _ninguna_ subsucesión converja.
+  - *Moraleja*: en general vale compacto $==>$ cerrado y acotado (Proposición 6.3), pero no la vuelta. Heine-Borel (Teorema 6.5) es propio de $(RR^m, d_2)$.
 ]
 
 #v(10pt)

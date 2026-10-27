@@ -2008,3 +2008,98 @@ En particular, una isometría es siempre una función Lipschitz de constante $1$
     $ d(f^(-1)(z), f^(-1)(w)) = d(x, y) = d'(f(x), f(y)) = d'(z, w), $
     lo que nos dice que $f^(-1)$ es también una isometría y por lo tanto continua (y Lipschitz).
 ]
+
+#definicion[Compacto][6.1][
+  Sea $(M, d)$ un espacio métrico, $K subset.eq M$ un subconjunto. Decimos que $K$ es _compacto_ si para toda sucesión $(x_n)_(n in NN) subset.eq K$ existe una subsucesión $(x_(n_k))_(k in NN)$ y $x in K$ tal que $lim_(k -> infinity) x_(n_k) = x$.
+]
+
+#proposicion[Todo compacto es cerrado y acotado][6.3][
+  Sea $K subset.eq (M, d)$ un compacto. Entonces $K$ es cerrado y acotado.
+]
+#demostracion[
+  - Cerrado: Sea $x in overline(K)$. Por un resultado anterior, sabemos que existe $(x_n)_(n in NN) subset.eq K$ tal que $x_n -> x$. Como $K$ es compacto, sabemos que debe existir una subsucesión $(x_(n_k))_(k in NN)$ y un elemento $y in K$ tal que $x_(n_k) -> y$. Por otro lado $x_(n_k)$ tiene que tener el mismo límite que $x_n$, dado que ya sabíamos que la sucesión entera converge. Esto nos dice que $x = y$ y en particular, que $x in K$ como queríamos ver.
+
+  - Acotado: recordemos que un conjunto es acotado si para cada elemento $x in K$, existe una constante $C$ tal que $K subset.eq B(x, C)$. Supongamos que $K$ no es acotado y elijamos $x_1 in K$ cualquier elemento. Entonces, como $K$ no es acotado, sabemos que $K subset.eq.not B(x_1, 1)$. Esto nos dice que debe existir un elemento $x_2 in K$ tal que $d(x_1, x_2) >= 1$.
+
+    Razonando de la misma manera, como sabemos que $K subset.eq.not B(x_1, 2)$, debe existir $x_3 in K$ tal que $d(x_1, x_3) >= 2$.
+
+    Recursivamente podemos elegir $x_n in K$ tal que $d(x_1, x_n) >= n - 1$.
+
+    Como $K$ es compacto, sabemos que debe existir una subsucesión $(x_(n_k))_(k in NN)$ y $x in K$ tal que $lim_(k -> infinity) x_(n_k) = x$. Veamos que esto nos genera un absurdo.
+
+    Consideremos la función $f : M -> RR$, $f(y) = d(x_1, y)$. Como esta función es continua (es un ejercicio de la guía), tenemos que $f(x_(n_k)) -> f(x) = d(x_1, x) in RR$. Pero por definición de la función $f$ y por como elegimos $x_n$, tenemos que
+    $ f(x_(n_k)) = d(x_1, x_(n_k)) >= n_k - 1 -> infinity quad "cuando " k -> infinity. $
+    Pero entonces tenemos que $f(x_(n_k)) -> infinity$ y $f(x_(n_k)) -> f(x) in RR$. Esto es absurdo.
+
+  _Nota_: el "resultado anterior" del primer ítem es la Proposición 4.46 (clausura vía sucesiones). En el segundo ítem, la definición usual de acotado pide que _exista_ algún $x$ y una constante $C$ con $K subset.eq B(x, C)$; para $K != nothing$ es equivalente a la versión "para cada $x in K$" (si $K subset.eq B(x, C)$ y $z in K$, entonces $K subset.eq B(z, 2 C)$ por desigualdad triangular). Por último, $n_k - 1 -> infinity$ porque los índices de una subsucesión son estrictamente crecientes, así que $n_k >= k$.
+]
+
+#observacion[Cerrado y acotado no alcanza para ser compacto][
+  En general, un conjunto cerrado y acotado no necesariamente va a ser compacto (vamos a ver ejemplos después). Sin embargo, cuando nuestro espacio métrico es $(RR^m, d_2)$ esto sí va a ser cierto.
+]
+
+#teorema[Heine-Borel][6.5][
+  Sea $K subset.eq (RR^m, d_2)$ un conjunto cerrado y acotado. Entonces $K$ es compacto.
+]
+#demostracion[
+  Empecemos por el caso $m = 1$, es decir, $K subset.eq (RR, abs(dot))$. Sea $(x_n)_(n in NN) subset.eq K$. Como $K$ es acotado, tenemos que $(x_n)_(n in NN)$ es una sucesión acotada. Sabemos que entonces $(x_n)$ admite una subsucesión convergente $x_(n_k) -> x$. Como $K$ es cerrado y $(x_(n_k)) subset.eq K$ tenemos que $x in K$. Esto nos dice que $K$ es compacto.
+
+  Sea $m > 1$ y tomemos $x_n = (x_n^1, x_n^2, dots, x_n^m) in RR^m$ una sucesión en $K$. Como $K$ es acotado, por definición tenemos que $d_2(x_n, x_1) <= C$ para todo $n in NN$. Entonces
+  $
+    abs(x_n^i - x_1^i) = sqrt((x_n^i - x_1^i)^2) <= sqrt(sum_(i = 1)^m (x_n^i - x_1^i)^2) = d_2(x_n, x_1) <= C quad "para todo " n in NN.
+  $
+  Esto nos dice que si miramos la sucesión que se forma tomando la coordenada $i$ (para cualquier $i = 1, dots, m$) es una sucesión acotada.
+
+  Como esto pasa para cualquier $i$, en particular pasa cuando $i = 1$. Como la sucesión $(x_n^1)_(n in NN)$ es una sucesión acotada, sabemos que existe una subsucesión $(x_(n_(k_1))^1)_(k_1 in NN)$ tal que $x_(n_(k_1))^1 -> x^1 in RR$.
+
+  Podemos hacer lo mismo con las otras coordenadas. Como $(x_(n_(k_1))^2)_(k_1 in NN) subset.eq RR$ es una sucesión acotada, sabemos que existe $(x_(n_(k_(1_(k_2))))^2)_(k_2 in NN)$ tal que $x_(n_(k_(1_(k_2))))^2 -> x^2$. Recursivamente podemos ir tomando subsubsucesión de subsubsucesión de forma tal que, al terminar con todas las coordenadas, tengamos una subsucesión $(x_(n_k))_(k in NN)$ tal que
+  $ x_(n_k)^i -> x^i quad "para todo " i = 1, dots, m. $
+  Por el ejercicio anterior, esto nos dice que si $x = (x^1, dots, x^m)$ entonces $x_(n_k) -> x$ en distancia $d_2$.
+
+  Finalmente, como $K$ es cerrado, sabemos que $x$ debe estar en $K$ y esto nos dice que $K$ es compacto como queríamos ver.
+
+  _Nota_: que toda sucesión acotada de $RR$ tenga una subsucesión convergente (Bolzano-Weierstrass) es lo que se usa en la demostración del Teorema 4.57. El "ejercicio anterior" es el Ejercicio 6.4 b), guardado en `desafios/p5.typ`. Que $x in K$ sale de la caracterización de cerrado por sucesiones (Proposición 4.46). En la desigualdad, la $i$ del lado izquierdo está fija y la de la suma es la variable de suma: conviene pensarla con otra letra, $sum_(j = 1)^m (x_n^j - x_1^j)^2$.
+]
+
+
+#proposicion[Un cerrado dentro de un compacto es compacto][6.7][
+  Sea $(M, d)$ un espacio métrico y sea $K subset.eq M$ un conjunto compacto. Sea $F subset.eq K$ un subconjunto cerrado. Entonces $F$ es también compacto.
+]
+#demostracion[
+  Sea $(x_n)_(n in NN) subset.eq F$ una sucesión. Como $F subset.eq K$ y $K$ es compacto, sabemos que existe una subsucesión $(x_(n_k))_(k in NN) subset.eq F$ y $x in K$ tal que $x_(n_k) -> x$ cuando $k -> infinity$. Pero como $F$ es cerrado, tenemos que $x in F$ y por lo tanto $F$ es compacto.
+
+  _Nota_: el paso "$F$ cerrado, luego $x in F$" es la caracterización de cerrado por sucesiones (Proposición 4.46): si una sucesión _con términos en $F$_ converge a $x$, entonces $x in F$. La compacidad de $K$ solo garantiza $x in K$; es la clausura de $F$ la que impide que el límite se escape. Directo: si $x in.not F$, entonces $x in M without F$, que es abierto, así que existe $r > 0$ con $B(x, r) subset.eq M without F$. A partir de algún $k$ tenemos $x_(n_k) in B(x, r)$, es decir, $x_(n_k) in.not F$. Absurdo. Sin la hipótesis de cerrado falla: en $(0, 1]$, la sucesión $1 / n -> 0 in.not (0, 1]$.
+]
+
+#proposicion[Uniones finitas e intersecciones arbitrarias de compactos][6.8][
+  Sea $(M, d)$ un espacio métrico y sean ${K_i}_(i in I)$ subconjuntos compactos. Entonces
+
+  + $union.big_(i = 1)^m K_i$ es compacto (unión finita de compactos es compacto).
+  + $inter.big_(i in I) K_i$ es compacto (intersección arbitraria de compactos es compacto).
+]
+#demostracion[
+  + Sea $(x_n)_(n in NN) subset.eq union.big_(i = 1)^m K_i$ una sucesión. Como los $K_i$ son finitos, debe existir uno que contenga infinitos términos de la sucesión. Es decir que debe existir un $i_0$ y una subsucesión $(x_(n_k))_(k in NN) subset.eq K_(i_0)$. Como este conjunto es compacto, existe una subsucesión $(x_(n_(k_j)))_(j in NN)$ y $x in K_(i_0)$ tal que $x_(n_(k_j)) -> x$. Pero $x in union.big_(i = 1)^m K_i$ y por lo tanto este conjunto es compacto.
+
+  + Como cada $K_i$ es compacto, por lo que vimos anteriormente $K_i$ es cerrado. Como sabemos que intersección arbitraria de cerrados es un cerrado, tenemos que $inter.big_(i in I) K_i$ es también cerrado. Además, $inter.big_(i in I) K_i subset.eq K_(i_0)$ ($i_0$ un índice cualquiera) que es compacto y por la proposición anterior esto nos dice que $inter.big_(i in I) K_i$ es compacto.
+
+  _Nota_: en el primer ítem, "los $K_i$ son finitos" quiere decir que hay finitos conjuntos ($m$ de ellos), no que cada $K_i$ tenga finitos elementos. Es un argumento de palomar: infinitos índices $n$ repartidos en $m$ conjuntos. Además, $(x_(n_(k_j)))_j$ sigue siendo subsucesión de $(x_n)$, porque $n_(k_1) < n_(k_2) < dots$. Con infinitos conjuntos el resultado falla: $K_n = {n} subset.eq RR$ es compacto, pero $union.big_(n in NN) K_n = NN$ no es acotado. En el segundo ítem, "lo que vimos anteriormente" es la Proposición 6.3, la "proposición anterior" es la 6.7, y hace falta $I != nothing$ para poder elegir $i_0$.
+]
+
+#observacion[La unión infinita de compactos puede no ser compacta][6.9][
+  Tal como ocurría con las proposiciones similares que probamos de abiertos y cerrados (ver los teoremas 4.18 y 4.31), veamos que si tomamos infinitos conjuntos compactos ${K_i}$ entonces su unión podría no ser compacto.
+
+  Sean $K_i = [1 / i, 1] subset.eq (RR, abs(dot))$. Entonces $K_i$ es compacto para todo $i in NN$ (es un intervalo cerrado) y sin embargo
+  $ union.big_(i = 1)^infinity K_i = (0, 1], $
+  que no es compacto (porque no es cerrado).
+
+  _Nota_: cada $K_i$ es compacto por Heine-Borel (Teorema 6.5), porque es cerrado y acotado en $RR$. La unión da $(0, 1]$ porque todo $x in (0, 1]$ cumple $x >= 1 / i$ para algún $i$ (arquimedianidad), mientras que $0$ no está en ningún $K_i$. Que $(0, 1]$ no es cerrado se ve con la sucesión $1 / n -> 0 in.not (0, 1]$, y por la Proposición 6.3 no puede ser compacto. Lo que falla respecto de la Proposición 6.8 es el argumento de palomar: con infinitos conjuntos, cada término de la sucesión puede caer en un $K_i$ distinto.
+]
+
+#proposicion[Todo espacio métrico compacto es completo][6.10][
+  Sea $(M, d)$ un espacio métrico compacto. Entonces $M$ es completo.
+]
+#demostracion[
+  Sea $(x_n)_(n in NN)$ una sucesión de Cauchy. Como $M$ es compacto, tenemos que existe una subsucesión $(x_(n_k))$ convergente. Pero como $(x_n)$ es de Cauchy, esto nos dice que la sucesión entera es convergente.
+
+  _Nota_: el último paso es el Teorema 4.54 c): una sucesión de Cauchy con una subsucesión convergente converge, y al mismo límite. La compacidad garantiza además que ese límite está en $M$, que es lo que pide la definición de completo.
+]
