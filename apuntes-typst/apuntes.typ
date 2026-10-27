@@ -2103,3 +2103,103 @@ En particular, una isometría es siempre una función Lipschitz de constante $1$
 
   _Nota_: el último paso es el Teorema 4.54 c): una sucesión de Cauchy con una subsucesión convergente converge, y al mismo límite. La compacidad garantiza además que ese límite está en $M$, que es lo que pide la definición de completo.
 ]
+
+#definicion[Cubrimiento por abiertos][6.11][
+  Sea $(M, d)$ un espacio métrico y sea $K subset.eq M$ un conjunto. Decimos que ${U_i}_(i in I)$ es un _cubrimiento por abiertos_ si los $U_i$ son todos conjuntos abiertos y $K subset.eq union.big_(i in I) U_i$.
+
+  Dado un cubrimiento por abiertos ${U_i}_(i in I)$ de $K$, un _subcubrimiento_ es una subfamilia de estos tal que siga cubriendo a $K$. Es decir, un subcubrimiento es ${U_i}_(i in J)$ tal que $J subset.eq I$ y $K subset.eq union.big_(i in J) U_i$.
+]
+
+#teorema[Caracterizaciones de compacidad][6.13][
+  Sea $(M, d)$ un espacio métrico y sea $K subset.eq M$. Entonces son equivalentes:
+
+  + $K$ es compacto.
+  + Todo subconjunto infinito de $K$ tiene un punto de acumulación en $K$.
+  + Todo cubrimiento por abiertos admite un subcubrimiento finito.
+]
+#demostracion[
+  Vamos a probar $1 <=> 2$ y $3 => 2$. La otra implicación la vamos a tomar como cierta, porque su prueba excede los métodos que vemos en esta materia.
+
+  - ($1 => 2$) Sea $L subset.eq K$ un subconjunto infinito. Como $L$ es infinito, por lo que vimos en el capítulo de cardinalidad, sabemos que existe una sucesión $(x_n)_(n in NN) subset.eq L$ (porque $L$ contiene un subconjunto numerable). Como $K$ es compacto, sabemos que existe un $x in K$ y una subsucesión $(x_(n_k))_(k in NN)$ tal que $x_(n_k) -> x$. Pero esto nos dice que $x$ es un punto de acumulación, por la Proposición 4.46.
+
+  - ($2 => 1$) Sea $(x_n)_(n in NN)$ una sucesión en $K$. Para ver que $K$ es compacto, tenemos que probar que existe una subsucesión y un $x in K$ tal que $x_(n_k) -> x$.
+
+    Consideremos a la sucesión como conjunto:
+    $ L = {x_n : n in NN} subset.eq K. $
+    Entonces hay dos opciones para $L$: o es finito o es infinito. Si $L$ es finito, tenemos que la sucesión $(x_n)$ debe tomar infinitas veces el mismo valor (de lo contrario el conjunto no podría ser finito). Pero si $(x_n)$ toma infinitas veces el mismo valor, podemos elegir como subsucesión todos los términos donde la sucesión toma ese valor y lo que tenemos es una subsucesión $(x_(n_k))$ constante y por lo tanto convergente.
+
+    Si $L$ es infinito, por lo que estamos suponiendo, debe existir $x in K$ tal que $x$ es punto de acumulación de $L$. Veamos cómo construir una subsucesión a partir de esto.
+
+    Como $x$ es punto de acumulación, tomando $epsilon = 1$, tenemos que $B(x, 1) inter L$ contiene infinitos elementos. Entonces debe existir un $x_(n_1) in B(x, 1) inter L$. Vamos a iterar este proceso de la siguiente manera: como $x$ es punto de acumulación, tomando $epsilon = 1 / 2$, tenemos que $B(x, 1 / 2) inter L$ contiene infinitos elementos. Pero esto nos dice que deben haber infinitos términos de la sucesión $(x_n)$ en $B(x, 1 / 2)$. Como hay infinitos términos, debe existir un índice $n_2 > n_1$ tal que $x_(n_2) in B(x, 1 / 2)$ (recordemos que para tener una subsucesión necesitamos que los índices sean crecientes). Recursivamente podemos seguir este procedimiento y tomamos en el paso $k$ un índice $n_k > n_(k - 1)$ tal que $x_(n_k) in B(x, 1 / k)$. Finalmente,
+    $ x_(n_k) in B(x, 1 / k) => d(x, x_(n_k)) < 1 / k -> 0 quad "cuando " k -> infinity, $
+    y por lo tanto $x_(n_k) -> x$ como queríamos ver.
+
+  - ($3 => 2$) Sea $L subset.eq K$ un subconjunto infinito y supongamos que $L$ no tiene puntos de acumulación en $K$. Esto significa que si $x in K$ entonces $x$ *no* es punto de acumulación de $L$ y por lo tanto debe existir un radio $r_x > 0$ tal que $\#(B(x, r_x) inter L) < infinity$ (de hecho, se podría elegir un radio tal que este cardinal sea $<= 1$: pensar por qué). Consideremos el cubrimiento por abiertos $U_x = B(x, r_x)$. Entonces
+    $ K subset.eq union.big_(x in K) B(x, r_x), $
+    y por hipótesis sabemos que este cubrimiento debe admitir un subcubrimiento finito. Es decir, que deben existir $x_1, x_2, dots, x_n in K$ tal que
+    $ K subset.eq union.big_(i = 1)^n B(x_i, r_(x_i)). $
+    Finalmente, como $L subset.eq K$, tenemos que
+    $ L = L inter K = union.big_(i = 1)^n L inter B(x_i, r_(x_i)). $
+    Mirando los cardinales de cada conjunto vemos que
+    $ \# L <= sum_(i = 1)^n \#(L inter B(x_i, r_(x_i))) < infinity, $
+    dado que es una suma finita de cardinales finitos. Esto es absurdo, dado que estábamos suponiendo que $L$ es infinito.
+
+  _Nota_: en ($1 => 2$), para aplicar la Proposición 4.46 b) hace falta una sucesión de $L$ con términos distintos de $x$ que converja a $x$. Por eso conviene elegir $(x_n)$ con términos distintos dos a dos (se puede, porque $L$ es infinito): a lo sumo un $x_(n_k)$ coincide con $x$, y sacándolo queda una sucesión de $L without {x}$ que converge a $x$, así que $x in L'$. En ($2 => 1$), el paso "infinitos elementos de $L$ en la bola $arrow$ infinitos términos de $(x_n)$ en la bola" usa que cada elemento de $L$ es algún $x_n$: elementos distintos vienen de índices distintos, así que hay índices arbitrariamente grandes. La implicación que no se prueba es $2 => 3$ (equivalentemente, $1 => 3$).
+]
+
+#teorema[La imagen continua de un compacto es compacta][6.14][
+  Sea $f : (M, d) -> (N, d')$ una función continua y sea $K subset.eq M$ un compacto. Entonces $f(K) subset.eq N$ es compacto.
+]
+#demostracion[
+  Veamos que dado un cubrimiento por abiertos de $f(K)$ podemos extraer un subcubrimiento finito. Sea ${V_i}_(i in I)$ un cubrimiento por abiertos de $f(K) subset.eq N$. Como $f$ es continua, sabemos que $f^(-1)(V_i) subset.eq M$ es un conjunto abierto. Además como
+  $ f(K) subset.eq union.big_(i in I) V_i, $
+  tenemos que
+  $ K subset.eq f^(-1)(f(K)) subset.eq union.big_(i in I) f^(-1)(V_i). $
+  Esto nos dice que ${f^(-1)(V_i)}_(i in I)$ es un cubrimiento por abiertos de $K$ (cubren $K$ y son abiertos). Como $K$ es compacto, este cubrimiento admite un subcubrimiento finito. Es decir, existen $i = 1, dots, n$ tal que
+  $ K subset.eq union.big_(i = 1)^n f^(-1)(V_i). $
+  Finalmente, si le aplicamos $f$ a todo esto
+  $ f(K) subset.eq union.big_(i = 1)^n f(f^(-1)(V_i)) subset.eq union.big_(i = 1)^n V_i, $
+  con lo cual encontramos un subcubrimiento finito de $f(K)$ y por lo tanto $f(K)$ es compacto.
+
+  _Nota_: la prueba usa el Teorema 6.13 en las dos direcciones: $K$ compacto da subcubrimientos finitos ($1 => 3$, la implicación que se toma como cierta), y que $f(K)$ tenga subcubrimientos finitos da que es compacto ($3 => 2 => 1$). Que $f^(-1)(V_i)$ sea abierto es la caracterización de continuidad por abiertos (Teorema 5.9). "Existen $i = 1, dots, n$" es un abuso de notación: son finitos índices $i_1, dots, i_n in I$, renombrados. La última inclusión usa $f(f^(-1)(V)) subset.eq V$, que vale para cualquier función.
+]
+
+#observacion[Sobre la demostración anterior][6.15][
+  + En la demostración anterior usamos el Ejercicio 5.3.
+  + La demostración anterior se puede hacer usando la definición de compacidad por sucesiones. Hacerla como ejercicio.
+
+  _Nota_: el Ejercicio 5.3 (desafío de la Práctica 4) es el de las inclusiones $A subset.eq f^(-1)(f(A))$ (ítem a), usado con $A = K$) y $f(f^(-1)(B)) subset.eq B$ (ítem b), usado con $B = V_i$).
+]
+
+#corolario[Una continua a valores reales en un compacto alcanza máximo y mínimo][6.16][
+  Sea $K subset.eq (M, d)$ un compacto y sea $f : K -> RR$ continua. Entonces $f$ alcanza máximo y mínimo.
+]
+#demostracion[
+  Por el teorema anterior, como $K$ es compacto y $f$ es continua, sabemos que $f(K) subset.eq RR$ es compacto. Como esto es un subconjunto de $RR$, sabemos que $f(K)$ debe ser cerrado y acotado. Esto nos dice que $f(K)$ tiene máximo y mínimo: existen $a = min f(K)$ y $b = max f(K)$. Como $a, b in f(K)$, deben existir $x, y in K$ tal que $f(x) = a$ y $f(y) = b$.
+
+  _Nota_: "cerrado y acotado" sale de la Proposición 6.3. Hace falta $K != nothing$: entonces $f(K)$ es no vacío y acotado, así que tiene supremo $b$ (completitud de $RR$), y $b in overline(f(K)) = f(K)$ porque hay puntos de $f(K)$ arbitrariamente cerca de $b$. Lo mismo con el ínfimo $a$.
+]
+
+#teorema[Una continua en un compacto es uniformemente continua][6.17][
+  Sea $f : (M, d) -> (N, d')$ una función continua y $M$ compacto. Entonces $f$ es uniformemente continua.
+]
+#demostracion[
+  Para ver que $f$ es uniformemente continua, por la Proposición 5.18, nos alcanza con ver que dadas dos sucesiones $(x_n)_(n in NN)$ e $(y_n)_(n in NN) subset.eq M$ tal que $d(x_n, y_n) -> 0$ se tiene que $d'(f(x_n), f(y_n)) -> 0$.
+
+  Supongamos que esto no ocurre (es decir, veamos que $f$ es uniformemente continua por el absurdo). Es decir, existen dos sucesiones tal que $d(x_n, y_n) -> 0$ pero $d'(f(x_n), f(y_n)) arrow.not 0$.
+
+  Como $d'(f(x_n), f(y_n)) arrow.not 0$, por definición debe existir un $epsilon > 0$ y una subsucesión tal que $d'(f(x_(n_k)), f(y_(n_k))) >= epsilon$ para todo $k in NN$.
+
+  Como $M$ es compacto, para la sucesión $(x_(n_k))$ debe existir una subsucesión convergente. Es decir, existe una subsucesión $(x_(n_(k_j)))$ y un $x in M$ tal que $x_(n_(k_j)) -> x$. Entonces
+  $ d(y_(n_(k_j)), x) <= d(y_(n_(k_j)), x_(n_(k_j))) + d(x_(n_(k_j)), x) -> 0 quad "cuando " j -> infinity. $
+  Es decir, la sucesión $(y_(n_(k_j)))$ también converge a $x$. Como $f$ es continua, tenemos que
+  $ f(x_(n_(k_j))) -> f(x) quad "y" quad f(y_(n_(k_j))) -> f(x). $
+  Esto nos dice que
+  $
+    epsilon & <= d'(f(x_(n_(k_j))), f(y_(n_(k_j)))) \
+    & <= d'(f(x_(n_(k_j))), f(x)) + d'(f(x), f(y_(n_(k_j)))) -> 0
+  $
+  cuando $j -> infinity$. Esto es absurdo.
+
+  _Nota_: "por definición" en el tercer párrafo es la negación de $a_n -> 0$ para $a_n = d'(f(x_n), f(y_n)) >= 0$: existe $epsilon > 0$ tal que $a_n >= epsilon$ para infinitos $n$, y esos índices, ordenados, forman la subsucesión. El término $d(y_(n_(k_j)), x_(n_(k_j))) -> 0$ porque es una subsucesión de $d(x_n, y_n) -> 0$. Que $f(x_(n_(k_j))) -> f(x)$ es la caracterización de continuidad por sucesiones.
+]

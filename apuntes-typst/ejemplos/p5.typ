@@ -57,6 +57,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [4], [Cerrado y acotado no alcanza: bolas en espacios de funciones], [p5: Ej. 10],
   [5], [Compacidad y funciones continuas: encajes de compactos], [p5: Ej. 11, 13 (usa el Ej. 5)],
   [6], [Compacidad y punto fijo], [p5: Ej. 14--19 (conceptual)],
+  [7], [Cubrimientos por abiertos], [conceptual (Definición 6.11)],
 )
 
 #v(4pt)
@@ -329,6 +330,71 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   En $(2)$, la desigualdad "$d(f(x), f(y)) < d(x, y)$" necesita $x != y$, pero los límites $x$ e $y$ de las subsucesiones pueden coincidir; en ese caso $(2)$ y $(3)$ dicen $0 <= 0$ y no hay absurdo. (El manuscrito además escribe la hipótesis como "para todo $x, y in K$", que en $x = y$ es imposible.) Y el resultado intermedio es falso en general: $f(x) = sin x$ en $K = [0, 1]$ cumple $abs(sin x - sin y) < abs(x - y)$ para $x != y$, pero $abs(sin x - sin 0) \/ abs(x - 0) -> 1$ cuando $x -> 0^+$, así que no hay ningún $alpha < 1$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, de modo que el máximo de $F$ es $0$, no negativo.
 
   La conclusión del ejercicio sí es cierta (es el teorema de Edelstein): el camino estándar, que no está en el manuscrito, es minimizar la función continua $x |-> d(x, f(x))$ en el compacto $K$ y ver que el mínimo tiene que valer $0$. La unicidad sí sale como en Banach: dos puntos fijos distintos $a != b$ darían $d(a, b) = d(f(a), f(b)) < d(a, b)$.
+]
+
+#v(10pt)
+
+== Bloque 7 · Cubrimientos por abiertos
+
+#sublema(titulo: "Qué desbloquea")[
+  La Definición 6.11 de `apuntes.typ` introduce los *cubrimientos por abiertos* y los *subcubrimientos*. El ejemplo de este bloque fija las ideas con dos cubrimientos de intervalos de $RR$: en $(0, 1)$ se puede descartar infinitos abiertos y seguir cubriendo, pero no quedarse con finitos; en $[0, 1]$, en cambio, alcanza con *finitos*, porque un abierto que contiene al $0$ ya absorbe a todos los $U_n$ salvo finitos. Es la antesala de la caracterización de compacidad por cubrimientos. Ningún ejercicio de `guias/p5.typ` pide trabajar con cubrimientos, así que el bloque es conceptual.
+]
+
+#ejemplo[Cubrimientos por abiertos de $(0, 1)$ y de $[0, 1]$ (Ejemplo 6.12)][44][
+  #set enum(numbering: "a)")
+  + Sea $K = (0, 1) subset.eq (RR, abs(dot))$ y sean $U_n = (1 \/ n, 1)$ con $n in NN$. Entonces los $U_n$ forman un cubrimiento por abiertos de $K$, y ${U_(2 k)}_(k in NN)$ es un subcubrimiento.
+  + Sea $K = [0, 1] subset.eq (RR, abs(dot))$ y sean $U_n = (1 \/ n, 1)$ con $n in NN$. Esto no es un cubrimiento de $K$, pero agregando $(-epsilon, epsilon)$ y $(1 - epsilon, 1 + epsilon)$ sí, y además se puede extraer un subcubrimiento _finito_.
+]
+
+#resolucion[
+  *a)* Los $U_n$ son todos abiertos y
+  $ (0, 1) = union.big_(n in NN) U_n = union.big_(n = 1)^infinity (1 / n, 1), $
+  por lo tanto tenemos un cubrimiento por abiertos.
+
+  Si sacamos algunos, por ejemplo si tomamos ${U_(2 k)}_(k in NN)$ (es decir, nos quedamos con los abiertos de índice par) entonces tenemos un subcubrimiento, dado que
+  $ (0, 1) = union.big_(k = 1)^infinity (1 / (2 k), 1). $
+
+  *b)* Los $U_n$ no forman un cubrimiento de $K$: el $0$ y el $1$ no están en ninguno de estos abiertos. Para tener un cubrimiento, tomemos $epsilon > 0$ y agreguemos los abiertos $(-epsilon, epsilon)$ (que cubre al $0$) y $(1 - epsilon, 1 + epsilon)$ (que cubre al $1$). Entonces la familia ${(-epsilon, epsilon), (1 - epsilon, 1 + epsilon), U_n : n in NN}$ es un cubrimiento por abiertos.
+
+  Notemos que tenemos muchos abiertos redundantes. Como $epsilon > 0$, a partir de algún $n_0$ voy a tener que $1 \/ n_0 < epsilon$ y por lo tanto los intervalos $(1 \/ n, 1)$ no van a agregar ningún punto nuevo que no esté cubierto por los intervalos $(-epsilon, epsilon)$ y $(1 \/ n_0, 1)$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let rojo = rgb("#dc2626")
+      let azul = rgb("#2563eb")
+      // Recta real
+      line((-3.5, 0), (7.5, 0), stroke: 0.8pt, mark: (end: ">"))
+      content((7.9, 0), $RR$)
+      // K = [0, 1], con 0 en x = 0 y 1 en x = 6
+      line((0, 0), (6, 0), stroke: 2pt + azul)
+      content((0, 0.05), text(fill: azul, size: 13pt)[$[$])
+      content((6, 0.05), text(fill: azul, size: 13pt)[$]$])
+      content((3, -0.45), text(fill: azul)[$K$])
+      content((0, -0.85), $0$)
+      content((6, -0.85), $1$)
+      // (-ε, ε)
+      line((-1.2, 0.9), (1.2, 0.9), stroke: 1pt + rojo)
+      content((-1.2, 0.9), text(fill: rojo, size: 13pt)[$($])
+      content((1.2, 0.9), text(fill: rojo, size: 13pt)[$)$])
+      content((0, 1.3), text(fill: rojo, size: 8pt)[$(-epsilon, epsilon)$])
+      content((-1.2, -0.4), text(size: 8pt)[$-epsilon$])
+      content((1.2, -0.4), text(size: 8pt)[$epsilon$])
+      line((1.2, 0), (1.2, 0.9), stroke: (paint: luma(150), dash: "dotted", thickness: 0.5pt))
+      // (1/n_0, 1)
+      line((0.6, 2.0), (6, 2.0), stroke: 1pt + rojo)
+      content((0.6, 2.0), text(fill: rojo, size: 13pt)[$($])
+      content((6, 2.0), text(fill: rojo, size: 13pt)[$)$])
+      content((3.3, 2.4), text(fill: rojo, size: 8pt)[$(1 \/ n_0, 1)$])
+      line((0.6, 0), (0.6, 2.0), stroke: (paint: luma(150), dash: "dotted", thickness: 0.5pt))
+      content((0.6, -0.4), text(size: 8pt)[$1 \/ n_0$])
+    })
+  ]
+
+  Esto me dice que puedo tomar un subcubrimiento _finito_: podemos tomar el subcubrimiento
+  $ {(-epsilon, epsilon), (1 - epsilon, 1 + epsilon), U_n : n = 1, dots, n_0}, $
+  y tenemos que
+  $ [0, 1] = (-epsilon, epsilon) union (1 - epsilon, 1 + epsilon) union union.big_(n = 1)^(n_0) U_n. $
 ]
 
 #v(12pt)
