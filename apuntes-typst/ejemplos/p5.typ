@@ -37,7 +37,7 @@
 
 Los ejemplos están agrupados por *técnica*, no por orden de transcripción, y los bloques siguen el orden en que la guía los necesita. Cada bloque abre con la nota de qué ejercicios de `guias/p5.typ` desbloquea.
 
-La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) --- `C7-1` es el Ejercicio 1 de `clases/compactos.typ` y `C8-1` el Ejercicio 1 de `clases/punto_fijo.typ` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_.
+La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) --- `C7-1` es el Ejercicio 1 de `clases/compactos.typ` y `C8-1` el Ejercicio 1 de `clases/punto_fijo.typ` ---, *`{día}-{mes}/{n}`* es el ejemplo $n$ de una clase de 2026 cargado directo de los apuntes del pizarrón (`27-10/1` es el primero de la clase del 27/10/2026), y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_.
 
 #v(6pt)
 
@@ -291,6 +291,91 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   El original escribe "sea $K = inter_n f(A_n)$" y a renglón seguido usa $K = inter_(n = 1)^(+oo) A_n$; con la primera definición la cadena de igualdades no cierra. La definición correcta, que es la que se usó arriba, es $K = inter_(n >= 1) f^n (X)$. (Las dos intersecciones coinciden al final, pero eso es lo que se está probando.)
 ]
 
+#ejemplo[Una función continua y periódica es uniformemente continua (Clase del 27/10/2026 · Ejemplo 2)][27-10/2][
+  Una función $f : RR -> RR$ se dice _periódica_ si
+  $ exists T > 0 "tal que" forall x in RR, quad f(x + T) = f(x). $
+
+  Sea $f : RR -> RR$ continua y periódica. Probar que $f$ es uniformemente continua.
+]
+
+#estrategia[Ojo: uniformemente continua en cada pedazo no alcanza][
+  $f(x) = x^2$ es uniformemente continua en el intervalo $[k, k + 1]$ con $k in ZZ$, porque $[k, k + 1]$ es compacto y $x^2$ es continua, entonces es uniformemente continua en ese compacto (Teorema 6.17). ¡Pero! No es uniformemente continua en
+  $ RR = union.big_(k in ZZ) [k, k + 1]. $
+]
+
+#resolucion[
+  En particular, $f$ también "se repite hacia atrás": aplicando la definición en el punto $x - T$,
+  $ f(x) = f((x - T) + T) = f(x - T) quad "para todo " x in RR. $
+  Más en general,
+  $ f(x + k T) = f(x) quad "para todo " x in RR, k in ZZ, $
+  que se ve por inducción (no hace falta demostrarlo en el ejercicio).
+
+  Sea $epsilon > 0$. Queremos ver que existe $delta > 0$ tal que
+  $ forall x, y in RR, quad abs(x - y) < delta => abs(f(x) - f(y)) < epsilon. $
+
+  Como $f|_([0, T])$ (la restricción de $f$ al intervalo $[0, T]$) es uniformemente continua, pues $[0, T]$ es compacto (Teorema 6.17), entonces
+  $ exists delta_0 > 0 "tal que" forall x, y in [0, T], quad abs(x - y) < delta_0 => abs(f(x) - f(y)) < epsilon / 2. $
+
+  Una observación antes de seguir: los intervalos $[k, k + 1)$ con $k in ZZ$ parten a la recta,
+  $ RR = union.big_(k in ZZ) [k, k + 1). $
+  Si $x in RR$, aplicando esto a $x / T$ existe $k in ZZ$ tal que
+  $ k <= x / T < k + 1 => k T <= x < (k + 1) T. $
+  Es decir, también los intervalos de largo $T$ parten a la recta:
+  $ RR = union.big_(k in ZZ) [k T, (k + 1) T). $
+
+  Tomo $delta = min{delta_0, T}$. Sean $x, y in RR$ con $abs(x - y) < delta$. Por la observación, existe $k in ZZ$ tal que $x - k T in [0, T)$. Llamemos
+  $ tilde(x) = x - k T, quad tilde(y) = y - k T. $
+  Notemos que $abs(tilde(x) - tilde(y)) = abs(x - y) < delta$, y que $f(tilde(x)) = f(x)$, $f(tilde(y)) = f(y)$ por la periodicidad. Así que alcanza con ver que $abs(f(tilde(x)) - f(tilde(y))) < epsilon$.
+
+  _(Paso reconstruido.)_ Podemos suponer $x <= y$ (si no, intercambiamos los roles de $x$ e $y$, que no cambia ni $abs(x - y)$ ni $abs(f(x) - f(y))$). Entonces $0 <= tilde(x) <= tilde(y) < tilde(x) + delta <= tilde(x) + T < 2 T$, es decir, $tilde(y) in [0, 2 T)$.
+
+  Tenemos dos casos:
+
+  + $tilde(y) in [0, T]$. Como $tilde(x), tilde(y) in [0, T]$ y $abs(tilde(x) - tilde(y)) < delta <= delta_0$,
+    $ abs(f(tilde(x)) - f(tilde(y))) < epsilon / 2 < epsilon. $
+
+  + $tilde(y) in.not [0, T]$, es decir, $tilde(y) in (T, 2 T)$. Entonces $tilde(x) < T < tilde(y)$, y el punto $T$ queda entre los dos:
+    $ tilde(x) < T < tilde(y) < tilde(x) + T < 2 T. $
+    #block(breakable: false, width: 100%)[#align(center)[
+      #cetz.canvas({
+        import cetz.draw: *
+        let rojo = rgb("#dc2626")
+        let azul = rgb("#2563eb")
+        let gris = luma(120)
+        line((-0.6, 0), (8.8, 0), stroke: 0.8pt, mark: (end: ">"))
+        content((9.1, 0), $RR$)
+        // [0, T] resaltado
+        line((0, 0), (4, 0), stroke: 2.5pt + azul.lighten(60%))
+        content((2, 0.45), text(fill: azul, size: 8pt)[$[0, T]$])
+        for (xx, l) in ((0, $0$), (4, $T$), (6.6, $tilde(x) + T$), (8, $2 T$)) {
+          line((xx, -0.12), (xx, 0.12), stroke: 0.8pt)
+          content((xx, -0.45), text(size: 9pt, l))
+        }
+        for (xx, l) in ((2.6, $tilde(x)$), (5.2, $tilde(y)$)) {
+          circle((xx, 0), radius: 0.07, fill: rojo, stroke: none)
+          content((xx, -0.45), text(fill: rojo, size: 9pt, l))
+        }
+        // |x~ - y~| < delta
+        bezier((2.6, 0.15), (5.2, 0.15), (3.9, 1.0), stroke: 0.7pt + rojo)
+        content((3.9, 0.85), text(fill: rojo, size: 8pt)[$< delta <= delta_0$])
+        // y~ trasladado un período
+        circle((1.2, 0), radius: 0.07, fill: gris, stroke: none)
+        content((1.2, -0.45), text(fill: gris, size: 9pt)[$tilde(y) - T$])
+        bezier((5.2, -0.75), (1.2, -0.75), (3.2, -1.6), stroke: (paint: gris, dash: "dashed", thickness: 0.7pt), mark: (end: ">"))
+        content((3.2, -1.45), text(fill: gris, size: 8pt)[$- T$])
+      })
+    ]]
+    Por un lado, $T, tilde(x) in [0, T]$ y $abs(tilde(x) - T) <= abs(tilde(x) - tilde(y)) < delta_0$, así que
+    $ abs(f(tilde(x)) - f(T)) < epsilon / 2. $
+    Por otro lado, $tilde(y)$ no está en $[0, T]$, pero $tilde(y) - T$ sí, y $abs((tilde(y) - T) - 0) <= abs(tilde(y) - tilde(x)) < delta_0$. Usando la periodicidad, $f(T) = f(0)$ y $f(tilde(y)) = f(tilde(y) - T)$, así que
+    $ abs(f(T) - f(tilde(y))) = abs(f(0) - f(tilde(y) - T)) < epsilon / 2. $
+    Por lo tanto
+    $ abs(f(tilde(x)) - f(tilde(y))) & <= abs(f(tilde(x)) - f(T)) + abs(f(T) - f(tilde(y))) \
+      & < epsilon / 2 + epsilon / 2 = epsilon. $
+
+  En los dos casos, $abs(f(x) - f(y)) = abs(f(tilde(x)) - f(tilde(y))) < epsilon$, y como $delta$ no depende de $x$ ni de $y$, $f$ es uniformemente continua.
+]
+
 #v(10pt)
 
 == Bloque 6 · Compacidad y punto fijo
@@ -395,6 +480,150 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ {(-epsilon, epsilon), (1 - epsilon, 1 + epsilon), U_n : n = 1, dots, n_0}, $
   y tenemos que
   $ [0, 1] = (-epsilon, epsilon) union (1 - epsilon, 1 + epsilon) union union.big_(n = 1)^(n_0) U_n. $
+]
+
+#ejemplo[Un compacto dentro de un abierto: un mismo radio para todos los puntos (Clase del 27/10/2026 · Ejemplo 1)][27-10/1][
+  Sean $(E, d)$ un espacio métrico y $K subset.eq E$ compacto. Si $U subset.eq E$ es abierto tal que $K subset.eq U$, probar que
+  $ exists r > 0 : forall x in K, quad B(x, r) subset.eq U. $
+]
+
+#estrategia[Dos trampas: un radio que depende del punto, y el ínfimo de los radios][
+  Lo importante del enunciado es que el radio tiene que valer *para todo* $x in K$.
+
+  Una primera idea (que *no funciona*): sea $x in K subset.eq U$. Como $x$ está en un abierto, existe $r > 0$ tal que $B(x, r) subset.eq U$. El problema es que elegimos $r > 0$ a partir de $x$, y nosotros queremos un $r$ que funcione *para todo* $x in K$. Lo que obtuvimos es en realidad un $r_x$: un radio distinto para cada punto. Es decir, tenemos $forall x in K, exists r_x > 0$, y el ejercicio pide invertir los cuantificadores: $exists r > 0, forall x in K$.
+
+  Una vez que tenemos los $r_x$, uno estaría tentado a tomar
+  $ r = inf {r_x / 2 : x in K}, $
+  que tampoco funciona, porque _podría_ ser $0$. Como no tenemos control sobre la forma en la que se generan los $r_x$, esto no vale, ya que un radio debe ser mayor que $0$.
+
+  La salida es usar la compacidad para quedarse con *finitos* radios, y tomar el mínimo.
+]
+
+#resolucion[
+  Reescribamos lo anterior haciendo explícita la dependencia del radio:
+  $ forall x in K, exists r_x > 0 "tal que" B(x, r_x / 2) subset.eq B(x, r_x) subset.eq U. $
+  Para cubrir a $K$ serviría cualquier radio (cada $x$ está en su propia bola), pero nos conviene usar $r_x / 2$: la otra mitad es el margen que vamos a necesitar al final. Entonces
+  $ K subset.eq union.big_(x in K) B(x, r_x / 2). $
+
+  Como $K$ es compacto y ${B(x, r_x / 2)}_(x in K)$ es un cubrimiento por abiertos de $K$, sabemos que existe un subcubrimiento finito (Teorema 6.13, $1 => 3$). Por lo tanto, existen $x_1, x_2, dots, x_N in K$ tales que
+  $ K subset.eq union.big_(i = 1)^N B(x_i, r_(x_i) / 2) subset.eq U. $
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let rojo = rgb("#dc2626")
+      let azul = rgb("#2563eb")
+      let verde = rgb("#059669")
+      // Intervalo abierto (a, b) a altura h, con su centro marcado
+      let intervalo(a, b, h, color) = {
+        line((a, h), (b, h), stroke: 1pt + color)
+        content((a, h), text(fill: color, size: 12pt)[$($])
+        content((b, h), text(fill: color, size: 12pt)[$)$])
+        line(((a + b) / 2, 0), ((a + b) / 2, h), stroke: (paint: luma(170), dash: "dotted", thickness: 0.5pt))
+        circle(((a + b) / 2, 0), radius: 0.06, fill: black, stroke: none)
+      }
+      // U = (-1, 9.5)
+      line((-1.8, 0), (10.3, 0), stroke: 0.8pt, mark: (end: ">"))
+      line((-1, -0.05), (9.5, -0.05), stroke: 5pt + verde.lighten(70%))
+      content((-1, 0), text(fill: verde, size: 12pt)[$($])
+      content((9.5, 0), text(fill: verde, size: 12pt)[$)$])
+      content((9.5, -0.5), text(fill: verde)[$U$])
+      // K = [0, 8]
+      line((0, 0), (8, 0), stroke: 2pt + azul)
+      content((0, 0.03), text(fill: azul, size: 12pt)[$[$])
+      content((8, 0.03), text(fill: azul, size: 12pt)[$]$])
+      content((4.75, -0.5), text(fill: azul)[$K$])
+      // B(x_i, r_(x_i) / 2), alternando alturas
+      intervalo(-0.5, 0.5, 0.6, rojo)
+      intervalo(0.4, 2.6, 1.1, rojo)
+      intervalo(2.3, 4.7, 0.6, rojo)
+      intervalo(4.5, 7.5, 1.1, rojo)
+      intervalo(7.25, 8.75, 0.6, rojo)
+      content((0, -0.5), text(size: 8pt)[$x_1$])
+      content((1.5, -0.5), text(size: 8pt)[$x_2$])
+      content((3.5, -0.5), text(size: 8pt)[$x_3$])
+      content((6, -0.5), text(size: 8pt)[$x_4$])
+      content((8, -0.5), text(size: 8pt)[$x_5$])
+      content((3.5, 1.45), text(fill: rojo, size: 8pt)[$B(x_i, r_(x_i) \/ 2)$])
+    })
+  ]
+  En la recta: finitos intervalos $B(x_i, r_(x_i) / 2)$ alcanzan para cubrir $K$. Cada uno tiene un radio distinto, y $r$ es la mitad del más chico de los $r_(x_i)$.
+
+  Ahora sí, tomamos
+  $ r = min_(1 <= i <= N) {r_(x_i) / 2}. $
+  A diferencia del ínfimo de la trampa, este es un mínimo sobre *finitos* números positivos, así que $r > 0$.
+
+  Sea $x in K$. Queremos ver que $B(x, r) subset.eq U$. Dado $y in B(x, r)$, si bien no sabemos si $y in K$, sabemos que $x in K$. Como $x in K$, existe $1 <= j <= N$ tal que
+  $ x in B(x_j, r_(x_j) / 2). $
+  Por la desigualdad triangular,
+  $ d(y, x_j) <= d(y, x) + d(x, x_j). $
+  Como $y in B(x, r)$, tenemos $d(y, x) < r <= r_(x_j) / 2$; y como $x in B(x_j, r_(x_j) / 2)$, tenemos $d(x, x_j) < r_(x_j) / 2$. Entonces
+  $ d(y, x_j) < r_(x_j) / 2 + r_(x_j) / 2 = r_(x_j). $
+  Por lo tanto $y in B(x_j, r_(x_j)) subset.eq U$. Como $y in B(x, r)$ era arbitrario, $B(x, r) subset.eq U$; y como $x in K$ era arbitrario, el mismo $r$ sirve para todo $x in K$.
+
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let rojo = rgb("#dc2626")
+      let azul = rgb("#2563eb")
+      let verde = rgb("#059669")
+      let xj = (0, 0)
+      let x = (0.7, 0)
+      let y = (1.1, 0.69)
+      // U
+      circle((0.2, 0), radius: (3.3, 2.7), fill: verde.lighten(88%), stroke: 0.8pt + verde)
+      content((3.0, 2.0), text(fill: verde)[$U$])
+      // B(x_j, r_(x_j)) y B(x_j, r_(x_j) / 2)
+      circle(xj, radius: 2, stroke: (paint: rojo, dash: "dashed", thickness: 0.8pt))
+      circle(xj, radius: 1, stroke: 1pt + rojo)
+      content((0, 2.3), text(fill: rojo, size: 8pt)[$B(x_j, r_(x_j))$])
+      content((-0.3, -1.3), text(fill: rojo, size: 8pt)[$B(x_j, r_(x_j) \/ 2)$])
+      // B(x, r)
+      circle(x, radius: 0.9, stroke: 1pt + azul, fill: azul.transparentize(80%))
+      content((1.05, -0.55), text(fill: azul, size: 7pt)[$B(x, r)$])
+      // Segmentos de la desigualdad triangular
+      line(xj, x, stroke: 0.9pt)
+      line(x, y, stroke: 0.9pt)
+      line(xj, y, stroke: (paint: black, dash: "dotted", thickness: 0.9pt))
+      for (pt, l, d) in ((xj, $x_j$, (-0.2, -0.25)), (x, $x$, (0.05, -0.25)), (y, $y$, (0.2, 0.1))) {
+        circle(pt, radius: 0.05, fill: black, stroke: none)
+        content((pt.at(0) + d.at(0), pt.at(1) + d.at(1)), text(size: 9pt, l))
+      }
+    })
+  ]]
+  $ underbrace(d(x, x_j) < r_(x_j) / 2, "porque " x in B(x_j, r_(x_j) / 2)) quad quad underbrace(d(y, x) < r <= r_(x_j) / 2, "porque " y in B(x, r)) $
+  En el plano: $x$ cae en la bola chica de algún centro $x_j$, y $y$ está a menos de $r <= r_(x_j) \/ 2$ de $x$. Las dos mitades suman $r_(x_j)$, así que $y$ no puede salirse de la bola grande $B(x_j, r_(x_j)) subset.eq U$.
+]
+
+#sublema(titulo: "Por qué hace falta la compacidad (agregado)")[
+  Sin compacidad el resultado falla, y el ínfimo de los radios efectivamente da $0$. Tomemos $K = U = (0, 1) subset.eq (RR, abs(dot))$: $U$ es abierto y $K subset.eq U$, pero $K$ no es compacto. Para cada $x in K$, el radio más grande con $B(x, r_x) subset.eq U$ es $r_x = min{x, 1 - x}$, y
+  $ inf_(x in K) r_x = 0. $
+  No hay ningún $r > 0$ uniforme: si $0 < x < r$, entonces $B(x, r)$ contiene puntos negativos, que no están en $U$.
+
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let rojo = rgb("#dc2626")
+      let azul = rgb("#2563eb")
+      line((-0.8, 0), (9, 0), stroke: 0.8pt, mark: (end: ">"))
+      line((0, 0), (8, 0), stroke: 2pt + azul)
+      content((0, 0.03), text(fill: azul, size: 12pt)[$($])
+      content((8, 0.03), text(fill: azul, size: 12pt)[$)$])
+      content((0, -0.5), $0$)
+      content((8, -0.5), $1$)
+      content((5.5, -0.5), text(fill: azul)[$K = U$])
+      // B(x, r_x) con r_x = x, para x = 1/2, 1/4, 1/10, 1/25
+      for (i, (xx, lbl)) in ((4, $1 \/ 2$), (2, $1 \/ 4$), (0.8, $1 \/ 10$), (0.32, $1 \/ 25$)).enumerate() {
+        let h = 0.5 + 0.45 * i
+        line((0.03, h), (2 * xx - 0.03, h), stroke: 1pt + rojo)
+        content((0, h), text(fill: rojo, size: 10pt)[$($])
+        content((2 * xx, h), text(fill: rojo, size: 10pt)[$)$])
+        circle((xx, h), radius: 0.05, fill: rojo, stroke: none)
+        content((2 * xx + 0.25, h), text(fill: rojo, size: 7pt)[$x = lbl$], anchor: "west")
+      }
+    })
+  ]
+  Cuanto más cerca de $0$ está $x$, más chico tiene que ser $r_x$ para que $B(x, r_x)$ no se salga de $U$: los radios se achican hasta $0$.
 ]
 
 #v(12pt)

@@ -95,6 +95,8 @@ Preservar siempre todo el contenido existente.
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
+- **`{día}-{mes}/{n}`** (`27-10/1`): ejemplo de una clase de 2026 que el usuario pasa directo (foto o dictado de sus apuntes del pizarrón), sin transcribir la clase en `clases/`. La fecha es la de la clase, y `{n}` numera los ejemplos de esa clase en el orden en que se cargan. El título termina en `(Clase del 27/10/2026 · Ejemplo 1)`. Como no hay archivo de origen, lo que el usuario anotó es la única fuente: los pasos que falten o no cierren se marcan como agregados o como corrección, no se rellenan en silencio.
+
 - **`O{fuente}-{k}`** (`O1-3`, `O14-2`): ejemplo o ejercicio resuelto tomado de un apunte universitario de *acceso abierto* ajeno a la materia, transcripto en `apuntes-typst/ejemplos/p{N}_alternativos.typ` ("Ejemplos alternativos --- Práctica N") (un archivo por guía, hermano de `ejemplos/p{N}.typ`, con la misma estructura de bloques). El número `{fuente}` es fijo por documento; la tabla fuente $arrow$ documento (autor, institución, URL, licencia o declaración de acceso) está en el encabezado de ese archivo, y la referencia precisa (sección, ejercicio, página del PDF) va al pie de cada ejemplo. Regla de fidelidad: se transcribe la resolución *de la fuente* (traducida y con la notación del curso); si la fuente sólo da el enunciado o una pista, no se inventa resolución. Numeración vigente:
 
   | `O` | fuente |
