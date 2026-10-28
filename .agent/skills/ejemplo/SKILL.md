@@ -92,10 +92,22 @@ Preservar siempre todo el contenido existente.
   | `C7-*` | `compactos.typ` | compacidad por sucesiones: productos finitos, `{x_n} ∪ {x}`, cerrado ⟺ `K ∩ F` compacto (notas tipeadas "Clase AA — Compactos", octubre de 2025) |
   | `C8-*` | `punto_fijo.typ` | punto fijo en un compacto, encajes de compactos, `C(ℝ,[0,1])` sin denso numerable, Banach vía la esfera unitaria, operadores lineales y sucesiones nulas (clase del 11/11/2025; los Ej. 4 y 5 van a `ejemplos/p6.typ`) |
   | `C9-*` | `continuidad_operaciones_densos.typ` | suma y producto de continuas, proyecciones de `ℝⁿ`, polinomios continuos, `GL_n(ℝ)` abierto, continuas y densos, `f(x+y) = f(x)f(y)` (clase del 07/10/2025, apunte tipeado de Mateo Mauri; los sufijos siguen la numeración por sección del apunte: `C9-2.2` es el Problema 2.2, y como hay Lema 3.1 y Problema 3.1, el problema lleva `C9-3.1b`) |
+  | `C10-*` | `conjuntos_medibles.typ` | σ-álgebra de nulos y conulos, borelianos, medida de uniones, números sin el dígito 4, cerrado de medida 1 (clase del 11/11/2025) |
+  | `C11-*` | `funciones_medibles.typ` | preimágenes, `g∘f`, conjunto de convergencia, `f'` medible, acotación fuera de medida `< ε`, `∫ f(tx)` (clase del 18/11/2025) |
 
   Al transcribir una clase nueva: crear `clases/{tema}.typ` con el comentario de cabecera que fija su número de clase, y agregar la fila acá. El título del ejemplo termina en `(Clase 1 · Ejemplo 1.2)`.
 
-- **`{día}-{mes}/{n}`** (`27-10/1`): ejemplo de una clase de 2026 que el usuario pasa directo (foto o dictado de sus apuntes del pizarrón), sin transcribir la clase en `clases/`. La fecha es la de la clase, y `{n}` numera los ejemplos de esa clase en el orden en que se cargan. El título termina en `(Clase del 27/10/2026 · Ejemplo 1)`. Como no hay archivo de origen, lo que el usuario anotó es la única fuente: los pasos que falten o no cierren se marcan como agregados o como corrección, no se rellenan en silencio.
+- **`{día}-{mes}/{n}`** (`27-10/1`): ejemplo de una clase práctica de 2026. El título termina en `(Clase del 27/10/2026 · Ejemplo 1)`. Hay dos orígenes:
+  - **Pizarrón**: el usuario lo pasa directo (foto o dictado de sus apuntes), sin archivo de clase. `{n}` numera los ejemplos de esa clase en el orden en que se cargan. Lo que el usuario anotó es la única fuente: los pasos que falten o no cierren se marcan como agregados o como corrección, no se rellenan en silencio.
+  - **Apunte tipeado de la cátedra**: se transcribe en `apuntes-typst/clases/2026/{MMDD}_{tema}.typ` (una clase por archivo; la cabecera declara fecha, fuente y tags), y `{n}` es el número del ejercicio en el apunte, **salvo choque**: si la fecha ya tiene tags de pizarrón, los del apunte continúan la numeración y la cabecera del archivo lo dice (`15-09/7` es el Ejercicio 1 de `0915_espacios_metricos_1.typ`). Tabla actual:
+
+    | fecha | archivo en `clases/2026/` | tags | contenido |
+    |---|---|---|---|
+    | 27/08 | `0827_subsucesiones_monotonas.typ` | `27-08/1..3` | subsucesión creciente divergente, hacia `sup A_m`, toda sucesión tiene subsucesión monótona |
+    | 01/09 | `0901_cardinalidad_1.typ` | `01-09/1..2` | `A×C ∼ B×D`, `A^C ∼ B^D`, `P(A) ∼ P(B)`; `ℕ^d`, `ℚ`, `P(ℚ) ∼ ℕ^ℕ ∼ ℚ^ℚ` |
+    | 15/09 | `0915_espacios_metricos_1.typ` | `15-09/7..8` (`1..6` son de pizarrón) | `D_f = d(f(x),f(y))` con `f` inyectiva, `mín{1, d}` con bolas y diámetros |
+    | 17/09 | `0917_abiertos_cerrados.typ` | `17-09/1..5` | `(A×B)° = A°×B°`, clausura por sucesiones, clausura de `{(1/n, 1/m)}` (Ej. 2 y 3 sin solución) |
+    | 29/09 | `0929_repaso.typ` | `29-09/1..4` | `D_f` sobre `A`, `(0,1]` con `abs(1/x − 1/y)`, subconjuntos de `ℕ^ℕ`, máximo y mínimo de métricas |
 
 - **`O{fuente}-{k}`** (`O1-3`, `O14-2`): ejemplo o ejercicio resuelto tomado de un apunte universitario de *acceso abierto* ajeno a la materia, transcripto en `apuntes-typst/ejemplos/p{N}_alternativos.typ` ("Ejemplos alternativos --- Práctica N") (un archivo por guía, hermano de `ejemplos/p{N}.typ`, con la misma estructura de bloques). El número `{fuente}` es fijo por documento; la tabla fuente $arrow$ documento (autor, institución, URL, licencia o declaración de acceso) está en el encabezado de ese archivo, y la referencia precisa (sección, ejercicio, página del PDF) va al pie de cada ejemplo. Regla de fidelidad: se transcribe la resolución *de la fuente* (traducida y con la notación del curso); si la fuente sólo da el enunciado o una pista, no se inventa resolución. Numeración vigente:
 
@@ -123,6 +135,6 @@ Preservar siempre todo el contenido existente.
 
   Al cargar un ítem nuevo de una fuente abierta: si repite con la misma demostración algo que ya está en `ejemplos/p{N}.typ` o en el archivo de alternativos, no se carga; si da otra demostración o un contraejemplo distinto, sí. Los ítems descartados y la teoría que las fuentes usan y `apuntes.typ` no tiene se registran en `apuntes-agente/p{N}-teoria-faltante-y-fuentes.md`.
 
-Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
+Los ejemplos de clase **sí se copian** a `ejemplos/p{N}.typ` --- el tag y el título mantienen la trazabilidad al archivo de origen, que no se borra. Cuando se transcriba una clase nueva con contenido resuelto, volcar sus ejemplos en el archivo de la guía que corresponda y ubicarlos en su bloque. Un ejercicio que ya está cargado con otro tag (misma técnica y enunciado) **no se duplica**: se carga sólo lo que agrega, o se deja un `#sublema` de una línea debajo del ejemplo existente que remita a la clase. Si la guía todavía no tiene archivo de ejemplos, se crea (ver sec. 1).
 
 Los tags de pestaña son **globales**: no se reinician por archivo, y las guías citan los ejemplos por tag.

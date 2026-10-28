@@ -51,7 +51,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   inset: (x: 6pt, y: 4pt),
 
   [*\#*], [*Bloque*], [*Desbloquea*],
-  [1], [Cardinalidad], [p2: Ej. 1, 4, 8, 9 (c), 14, 16, 17 (a)],
+  [1], [Cardinalidad], [p2: Ej. 1, 4, 8, 9 (c), 13, 14, 16, 17 (a)],
 )
 
 #v(4pt)
@@ -66,6 +66,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   El *Ejercicio 1* de la Práctica 2 (cardinalidad de subconjuntos de $ZZ$, múltiplos y productos) requiere construir biyecciones o inyecciones explícitas. La partición de $NN$ en pares e impares para coordinar con $ZZ$ es el modelo fundamental para entrelazar conjuntos o cubrir signos opuestos. El uso del Teorema de Cantor-Schröeder-Bernstein y la codificación con factores primos ($2^n 3^m$) desbloquea el producto cartesiano de conjuntos numerables. Por último, transportar una función con las biyecciones dadas ($h |-> g compose h compose f^(-1)$) es la herramienta detrás de los *Ejercicios 8* y *9 (c)*, donde hay que coordinar conjuntos de funciones y partes de un conjunto.
+
+  Las clases prácticas de 2026 agregan tres piezas. El Ejemplo 01-09/1 (transportar $tilde.op$ a productos, conjuntos de funciones y partes, con las dos estrategias para probar que una función es biyectiva) es directamente el *Ejercicio 9 (c)* y el modelo del *Ejercicio 14*. El Ejemplo 01-09/2 (codificación por primos $product p_k^(n_k)$, función característica con valores $1$ y $2$, gráfico de una función) da $NN^d tilde.op NN$, $QQ tilde.op NN$ y $NN^NN tilde.op cal(P)(NN)$, que sirven para los *Ejercicios 1 (c)-(d)* y *14*. El Ejemplo 29-09/3 (seis subconjuntos de $NN^NN$ apretados con una sola inyección en sucesiones de primos) es la plantilla de los *Ejercicios 13* y *16*.
 ]
 
 #ejemplo[Coordinabilidad de $NN$ con los pares, con $ZZ$ y con $QQ^+$ (Ejemplo 3.3)][13][
@@ -491,6 +493,58 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   donde el paso del medio es exactamente este resultado, aplicado con la biyección dada $A -> B$ y con $op("id")_({0, 1})$ del otro lado.
 ]
 
+#sublema(titulo: "La clase del 01/09/2026 lo prueba igual")[
+  El Ejercicio 1 (b) de la clase práctica del 01/09/2026 (`clases/2026/0901_cardinalidad_1.typ`) es este mismo enunciado, escrito como $A^C tilde.op B^D$ a partir de biyecciones $phi : A -> B$ y $psi : C -> D$, y lo resuelve por el mismo camino: inversas explícitas $T(f) = phi compose f compose psi^(-1)$ y $L(g) = phi^(-1) compose g compose psi$, verificando las dos composiciones $L compose T = op("id")_(A^C)$ y $T compose L = op("id")_(B^D)$. No se vuelve a cargar: el Ejemplo 01-09/1 (b) remite acá.
+]
+
+#ejemplo[Transportar $tilde.op$ a productos, conjuntos de funciones y partes (Clase del 01/09/2026 · Ejemplo 1)][01-09/1][
+  Sean $A$, $B$, $C$ y $D$ conjuntos no vacíos tales que $A tilde.op B$ y $C tilde.op D$. Probar lo siguiente:
+
+  #set enum(numbering: "(a)")
+  + $A times C tilde.op B times D$.
+  + $A^C tilde.op B^D$.
+  + $cal(P)(A) tilde.op cal(P)(B)$.
+]
+
+#estrategia[Dos maneras de probar que una función es biyectiva][
+  Las tres biyecciones se fabrican con las que ya tenemos, $phi : A -> B$ y $psi : C -> D$: aplicándolas coordenada a coordenada en (a), componiendo con ellas en (b) y tomando imagen directa en (c). Lo que la clase quiere mostrar es que, una vez propuesta la función $T$, hay dos estrategias para ver que es biyectiva:
+
+  - probar que $T$ es inyectiva y sobreyectiva;
+  - definir una candidata a inversa $L$ y verificar *las dos* composiciones, $L compose T = op("id")$ y $T compose L = op("id")$.
+
+  En (a) se usa la primera; en (b) y (c), la segunda. Para la segunda, la candidata aparece "desarmando" la fórmula de $T$: donde $T$ aplica $phi$, $L$ aplica $phi^(-1)$.
+]
+
+#resolucion[
+  Por hipótesis, existen funciones biyectivas $phi : A -> B$ y $psi : C -> D$.
+
+  *(a) $A times C tilde.op B times D$.* Buscamos una función biyectiva de $A times C$ a $B times D$. Definimos
+  $ T : A times C -> B times D, quad T(a, c) := (phi(a), psi(c)) quad forall (a, c) in A times C. $
+
+  _$T$ es inyectiva:_ sean $(a, c)$ y $(x, y)$ en $A times C$ tales que $T(a, c) = T(x, y)$. Por definición de $T$, $(phi(a), psi(c)) = (phi(x), psi(y))$, luego $phi(a) = phi(x)$ y $psi(c) = psi(y)$. Como $phi$ y $psi$ son ambas inyectivas, se sigue que $a = x$ y $c = y$, es decir $(a, c) = (x, y)$.
+
+  _$T$ es sobreyectiva:_ dado $(b, d) in B times D$, buscamos $(a, c) in A times C$ tal que $T(a, c) = (b, d)$. Mirando la fórmula que define $T$, proponemos $a := phi^(-1)(b)$ y $c := psi^(-1)(d)$. Entonces
+  $ T(a, c) = (phi(a), psi(c)) = ((phi compose phi^(-1))(b), (psi compose psi^(-1))(d)) = (b, d). $
+
+  Luego $T$ es biyectiva y $A times C tilde.op B times D$. La clase deja como ejercicio rehacerlo con la segunda estrategia, chequeando que $L(b, d) := (phi^(-1)(b), psi^(-1)(d))$ es la inversa de $T$.
+
+  *(b) $A^C tilde.op B^D$.* Es el ejemplo anterior (*Transportar funciones*, pestaña `Prop`), con $phi$ y $psi$ como biyecciones dadas: la clase lo prueba con la segunda estrategia, vía $T(f) := phi compose f compose psi^(-1)$ y $L(g) := phi^(-1) compose g compose psi$, verificando $L compose T = op("id")_(A^C)$ y $T compose L = op("id")_(B^D)$ exactamente como está escrito allá.
+
+  *(c) $cal(P)(A) tilde.op cal(P)(B)$.* Nuevamente definimos $T : cal(P)(A) -> cal(P)(B)$ y $L : cal(P)(B) -> cal(P)(A)$ y vemos que son inversas una de la otra. Para cada $E in cal(P)(A)$ y cada $V in cal(P)(B)$,
+  $ T(E) &:= {phi(e) : e in E}, \
+    L(V) &:= {phi^(-1)(v) : v in V}. $
+
+  Como $phi$ es una función de $A$ a $B$, para cada subconjunto $E$ de $A$ el conjunto $T(E)$ es un subconjunto de $B$ (es decir, $T(E) in cal(P)(B)$), así que $T$ está bien definida como función de $cal(P)(A)$ a $cal(P)(B)$; intercambiando los roles de $A$ y $B$, lo mismo vale para $L$. Ahora bien, dado $E subset.eq A$,
+  $ (L compose T)(E) = L({phi(e) : e in E}) = {(phi^(-1) compose phi)(e) : e in E} = {e : e in E} = E, $
+  y razonando de la misma manera, $(T compose L)(V) = V$ para todo $V subset.eq B$. Concluimos que $T$ y $L$ son inversas recíprocas, y por lo tanto biyectivas. Esto prueba que $cal(P)(A) tilde.op cal(P)(B)$.
+
+  _Nota:_ en (c) el apunte de la cátedra cambia la letra de la biyección $A -> B$ (escribe $phi.alt$ en lugar de la $phi$ fijada al comienzo); es la misma función y acá se mantiene $phi$.
+]
+
+#sublema(titulo: "Dónde se usa")[
+  El ítem (c) *es* el Ejercicio 9 (c) de la Práctica 2, probado sin pasar por ${0,1}^A$. El ítem (a) es el que hace funcionar el Ejercicio 14: $cal(P)(NN) times cal(P)(NN)$, $[0,1) times [0,1)$ y $RR^k$ se reducen a productos de conjuntos ya coordinados con $RR$. Y las dos estrategias de la clase son las que se repiten en todo el bloque: el Ejemplo C3-2 verifica las dos composiciones con una inversa explícita, y el Ejemplo C2-4 (a) prueba inyectividad y sobreyectividad.
+]
+
 #ejemplo[Pegar funciones sobre dominios disjuntos: $C^A times C^B tilde.op C^(A union B)$][Prop][
   Sean $A, B, C$ conjuntos no vacíos tales que $A inter B = nothing$. Probar que
   $ C^A times C^B tilde.op C^(A union B). $
@@ -556,6 +610,115 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Verificadas las dos composiciones, $phi$ es biyectiva con $phi^(-1) = psi$.
 
   Observemos que la hipótesis $A inter B = nothing$ no reaparece en ningún paso de esta segunda resolución: se gastó entera en que $phi$ estuviera bien definida. La construcción de $psi$ y las dos verificaciones valen para $A$ y $B$ cualesquiera --- lo que falla sin disjunción es el punto de partida.
+]
+
+#ejemplo[Codificar con primos y encajar $NN^NN$ entre $cal(P)(NN)$ y $cal(P)(NN times NN)$ (Clase del 01/09/2026 · Ejemplo 2)][01-09/2][
+  Probar que:
+
+  #set enum(numbering: "(i)")
+  + $NN times NN tilde.op NN$ y $QQ tilde.op NN$.
+  + $cal(P)(NN times NN) tilde.op cal(P)(NN)$.
+  + $\# cal(P)(NN) <= \# NN^NN <= \# cal(P)(NN times NN)$.
+
+  Concluir que $cal(P)(QQ) tilde.op cal(P)(NN) tilde.op NN^NN tilde.op QQ^NN tilde.op QQ^QQ$.
+
+  _Sugerencia:_ usar el Ejemplo 01-09/1 y el Teorema de Cantor-Schröeder-Bernstein.
+]
+
+#estrategia[Primos para bajar a $NN$, una función característica y un gráfico para encajar][
+  Todo el ejercicio es Cantor-Schröeder-Bernstein con inyecciones baratas, y vale la pena tener a mano cuáles son:
+
+  - *De $NN^d$ hacia $NN$:* fijados $d$ primos distintos, $(n_1, dots, n_d) |-> product_(k=1)^d p_k^(n_k)$ es inyectiva por la unicidad de la factorización. Es el $2^n 3^m$ del Ejemplo 14 con $d$ coordenadas. Y $QQ$ se mete adentro de $NN^3$: numerador, denominador y una tercera coordenada que guarda el signo.
+  - *De $cal(P)(NN)$ hacia $NN^NN$:* a cada $A subset.eq NN$ se le asigna su función característica, pero con valores $1$ y $2$ para que caiga en $NN^NN$.
+  - *De $NN^NN$ hacia $cal(P)(NN times NN)$:* a cada función se le asigna su *gráfico* ${(n, f(n)) : n in NN}$, que es un subconjunto de $NN times NN$.
+
+  Con esto $NN^NN$ queda apretado entre $cal(P)(NN)$ y $cal(P)(NN times NN)$, que son coordinables entre sí por (ii), y el resto es transportar con el Ejemplo 01-09/1. Es una manera de calcular $\# NN^NN$ que no usa la ley exponencial (comparar con el ítem (a) del Ejemplo C3-2, que viene más abajo): junto con $\# cal(P)(NN) = frak(c)$ (Ejercicio 10 (b) de la Práctica 2) da $\# NN^NN = frak(c)$.
+]
+
+#resolucion[
+  *(i)* Veamos primero que dado $d >= 2$ se tiene $NN tilde.op NN^d$ (sólo hace falta el caso $d = 2$ para este ejercicio, pero es de interés ver el caso general). Por el Teorema de Cantor-Schröeder-Bernstein, alcanza con encontrar funciones inyectivas $phi : NN -> NN^d$ y $psi : NN^d -> NN$. Para la primera, definimos
+  $ phi(n) := (n, 1, dots, 1) in NN^d; $
+  la clase deja como ejercicio demostrar que $phi$ es inyectiva.
+
+  Para la segunda, sea ${p_1, dots, p_d}$ un conjunto de $d$ números naturales primos distintos, y definimos
+  $ psi(n_1, dots, n_d) := product_(k=1)^d p_k^(n_k). $
+  Veamos que $psi$ es inyectiva: si $psi(n_1, dots, n_d) = psi(l_1, dots, l_d)$, entonces
+  $ product_(k=1)^d p_k^(n_k) = product_(k=1)^d p_k^(l_k), $
+  y por la unicidad de la descomposición en primos se sigue que $n_k = l_k$ para todo $1 <= k <= d$, es decir, $(n_1, dots, n_d) = (l_1, dots, l_d)$. Por Cantor-Schröeder-Bernstein, $NN tilde.op NN^d$.
+
+  Nuevamente por Cantor-Schröeder-Bernstein y por lo recién visto, para ver que $NN tilde.op QQ$ alcanza con ver que $\# NN <= \# QQ$ y $\# QQ <= \# NN^3$. Para lo primero, $J : NN -> QQ$, $J(n) = n$, es claramente inyectiva. Para definir una función inyectiva $T : QQ -> NN^3$, notemos que si $q in QQ_(> 0)$ existen dos naturales coprimos únicos $n, m in NN$ con $q = m/n$, y si $q in QQ_(< 0)$ existen dos naturales coprimos únicos $n, m in NN$ con $q = -m/n$. Podemos entonces definir, para $m, n in NN$ coprimos,
+  $ T(m/n) := (n, m, 1), quad T(-m/n) := (n, m, 2), quad T(0) := (1, 1, 3). $
+  Como todo racional se escribe de forma única como $m/n$, o como $-m/n$ con $n$ y $m$ naturales coprimos, o es cero, $T$ está bien definida.
+
+  $T$ es inyectiva: si $T(x) = T(y)$, sean $a, b, c in NN$ tales que $T(x) = (a, b, c) = T(y)$.
+  - Si $c = 3$, debe ser $x = y = 0$, porque por definición la tercera coordenada de $T(q)$ es $3$ si y sólo si $q = 0$.
+  - Si $c = 2$, por definición de $T$ existen $m_1, n_1$ naturales coprimos y $m_2, n_2$ naturales coprimos con $x = -m_1/n_1$ e $y = -m_2/n_2$. Como $T(x) = T(y)$, se sigue que $m_1 = m_2$ y $n_1 = n_2$, así que $x = y$.
+  - Si $c = 1$, de la misma manera existen $m_1, n_1$ y $m_2, n_2$ naturales coprimos con $x = m_1/n_1$ e $y = m_2/n_2$, y de $T(x) = T(y)$ se sigue $m_1 = m_2$ y $n_1 = n_2$, así que $x = y$.
+
+  Como hemos considerado todos los casos posibles ($c$ sólo puede ser $1$, $2$ o $3$), $T$ es inyectiva y $\# QQ <= \# NN^3$. Como $NN^3 tilde.op NN$ y $\# NN <= \# QQ$, por Cantor-Schröeder-Bernstein $NN tilde.op QQ$.
+
+  _Nota:_ el apunte anuncia "$\# QQ = \# NN^3$", pero lo que efectivamente prueba (y lo único que hace falta) es la desigualdad $\# QQ <= \# NN^3$.
+
+  *(ii)* Por (i), $NN times NN tilde.op NN$. Luego, por el Ejemplo 01-09/1 (c), $cal(P)(NN times NN) tilde.op cal(P)(NN)$.
+
+  *(iii)* Para ver que $\# cal(P)(NN) <= \# NN^NN$ definimos $T : cal(P)(NN) -> NN^NN$: para cada $A subset.eq NN$, $T(A)$ es la función de $NN$ a $NN$ dada por
+  $ T(A)(n) := cases(
+    1 & "si" n in A,
+    2 & "si" n in.not A.
+  ) $
+  Como para cada $A in cal(P)(NN)$ la función $T(A)$ es un elemento de $NN^NN$, $T$ es una función de $cal(P)(NN)$ a $NN^NN$. Veamos que es inyectiva: supongamos que $A, B subset.eq NN$ cumplen $T(A) = T(B)$. Si $n in A$, entonces $T(A)(n) = 1$, por lo tanto $T(B)(n) = 1$, lo que implica $n in B$. Hemos probado $A subset.eq B$; la prueba de $B subset.eq A$ es el mismo razonamiento intercambiando los roles de $A$ y $B$. Luego $T$ es inyectiva y $\# cal(P)(NN) <= \# NN^NN$.
+
+  Veamos ahora que $\# NN^NN <= \# cal(P)(NN times NN)$. Definimos la función que envía cada $f in NN^NN$ a su gráfico,
+  $ L(f) := {(n, f(n)) : n in NN} in cal(P)(NN times NN). $
+  $L$ es inyectiva: supongamos que $L(f) = L(g)$ y fijemos $k in NN$. Tenemos $(k, f(k)) in L(f)$ por definición de $L$, luego $(k, f(k)) in L(g) = {(n, g(n)) : n in NN}$, es decir, existe $n in NN$ con $(k, f(k)) = (n, g(n))$. Esto implica $n = k$, y entonces $f(k) = g(k)$. Como $k$ era arbitrario, $f = g$. Esto prueba que $\# NN^NN <= \# cal(P)(NN times NN)$.
+
+  *Conclusión.* Aplicamos el Ejemplo 01-09/1: como $QQ tilde.op NN$, entonces $cal(P)(QQ) tilde.op cal(P)(NN)$ (ítem (c)) y $NN^NN tilde.op QQ^NN tilde.op QQ^QQ$ (ítem (b)). Resta ver que $cal(P)(NN) tilde.op NN^NN$, pero esto se sigue de
+  $ \# cal(P)(NN) <= \# NN^NN <= \# cal(P)(NN times NN) = \# cal(P)(NN), $
+  donde la última igualdad es (ii), y del Teorema de Cantor-Schröeder-Bernstein.
+]
+
+#ejemplo[Subconjuntos de $NN^NN$: coprimos, primos y crecientes (Clase del 29/09/2026 · Ejemplo 3)][29-09/3][
+  Consideremos los siguientes subconjuntos de $NN^NN$ (acá $n perp m$ significa que $n$ y $m$ son coprimos):
+  $ A_1 &:= {(a_n)_(n in NN) : a_n perp a_m quad forall n, m in NN : n != m}; \
+    A_2 &:= {(a_n)_(n in NN) : a_n "es primo" quad forall n in NN}; \
+    A_3 &:= {(a_n)_(n in NN) : a_n < a_(n+1) quad forall n in NN}; \
+    A_4 &:= A_1 inter A_2; quad A_5 := A_1 inter A_3; quad A_6 := A_2 inter A_3. $
+  Calcular el cardinal de los conjuntos $A_j$ para cada $1 <= j <= 6$.
+]
+
+#estrategia[Un solo sándwich para los seis: apretar al más chico][
+  Todos son subconjuntos de $NN^NN$, así que la cota superior $\# A_j <= \# NN^NN$ sale gratis. La observación que ahorra trabajo es que el más chico de los seis, $A_6$, está contenido en todos los demás: una sucesión de primos distintos es automáticamente de coprimos. Entonces alcanza con *una sola* inyección $NN^NN -> A_6$ para que, por Cantor-Schröeder-Bernstein, los seis queden con el cardinal de $NN^NN$.
+
+  La inyección se arma con una sucesión creciente de primos $(p_k)_k$ y *sumas parciales*: $(a_n)_n |-> (p_(a_1), p_(a_1 + a_2), dots)$. Las sumas parciales garantizan índices estrictamente crecientes (por eso cae en $A_3$) y se recuperan los $a_n$ restando sumas consecutivas (por eso es inyectiva). Es el mismo esquema de los ítems (b) y (c) del Ejemplo C3-2 y del Ejemplo C3-3: cota superior por inclusión en $NN^NN$, cota inferior por una codificación.
+]
+
+#resolucion[
+  Como todos estos conjuntos son subconjuntos del conjunto de todas las sucesiones de números naturales (es decir, de $NN^NN$), se tiene que para todo $1 <= j <= 6$,
+  $ \# A_j <= \# NN^NN. quad (1) $
+  Esto nos da una cota superior.
+
+  Notemos también que si $(a_n)_(n in NN) in A_6$, entonces para cada $n, m in NN$ con $n != m$ se tiene $a_n != a_m$, y como tanto $a_n$ como $a_m$ son primos, son coprimos entre sí. Luego $A_6 = A_2 inter A_3 subset.eq A_1$, lo que implica que $A_6 = A_1 inter A_2 inter A_3$, y entonces
+  $ \# A_6 <= \# A_j quad forall 1 <= j <= 6. quad (2) $
+  Considerando (1) y (2), y el Teorema de Cantor-Schröeder-Bernstein, si probamos que $\# NN^NN <= \# A_6$ podremos concluir que todos estos conjuntos tienen el mismo cardinal, que es el de $NN^NN$.
+
+  Buscamos entonces una función inyectiva $phi : NN^NN -> A_6$. Sea $(p_k)_(k in NN)$ una sucesión estrictamente creciente de números naturales primos (pueden ser todos los primos o no; lo que importa es que sea estrictamente creciente y que sean primos). Dada una sucesión de naturales $(a_n)_(n in NN)$, $phi((a_n)_(n in NN))$ es la sucesión cuyo término $m$-ésimo es $p_(sum_(n=1)^m a_n)$:
+  $ (a_1, a_2, a_3, dots) limits(-->)_phi (p_(a_1), p_(a_1 + a_2), p_(a_1 + a_2 + a_3), dots). $
+
+  _$phi$ toma valores en $A_6$:_ para todo $m in NN$,
+  $ (phi((a_n)_(n in NN)))_m = p_(sum_(n=1)^m a_n) < p_(sum_(n=1)^(m+1) a_n) = (phi((a_n)_(n in NN)))_(m+1), $
+  así que $phi((a_n)_(n in NN))$ es estrictamente creciente y pertenece a $A_3$. Además, por construcción todos sus términos son primos, luego pertenece a $A_2$. Por lo tanto $phi((a_n)_(n in NN)) in A_6$.
+
+  _$phi$ es inyectiva:_ supongamos que $phi((a_n)_(n in NN)) = phi((b_n)_(n in NN))$. Por definición, para todo $m in NN$,
+  $ p_(sum_(n=1)^m a_n) = p_(sum_(n=1)^m b_n). quad (3) $
+  Tomando $m = 1$ en (3) se tiene $p_(a_1) = p_(b_1)$, y por lo tanto $a_1 = b_1$ (la sucesión $(p_k)_k$ es estrictamente creciente, luego inyectiva). Para el paso inductivo, supongamos que existe $m_0$ tal que $a_n = b_n$ para todo $1 <= n <= m_0$. Tomando $m_0 + 1$ en (3) obtenemos
+  $ p_(sum_(n=1)^(m_0 + 1) a_n) = p_(sum_(n=1)^(m_0 + 1) b_n), quad "y entonces" quad sum_(n=1)^(m_0 + 1) a_n = sum_(n=1)^(m_0 + 1) b_n, $
+  lo que junto con la hipótesis inductiva implica $a_(m_0 + 1) = b_(m_0 + 1)$. Hemos probado inductivamente que $(a_n)_(n in NN) = (b_n)_(n in NN)$, y por lo tanto $phi$ es inyectiva. Se sigue que $\# NN^NN <= \# A_6$, como buscábamos.
+
+  Esto nos dice que el cardinal de cada $A_j$, $1 <= j <= 6$, es igual al de $NN^NN$. Como $NN^NN tilde.op cal(P)(NN)$ (Ejemplo 01-09/2) y $cal(P)(NN) tilde.op RR$ (Ejercicio 10 (b) de la Práctica 2), concluimos que $\# A_j = frak(c)$ para todo $1 <= j <= 6$.
+]
+
+#sublema(titulo: "Dónde se usa")[
+  La plantilla "cota superior por inclusión en $NN^NN$, cota inferior por una inyección $NN^NN -> A$ (o $RR -> A$)" es la de los Ejercicios 13 y 16 de la Práctica 2. Para el 13, conviene recordar que las sucesiones estrictamente crecientes de $A_3$ son exactamente las enumeraciones crecientes de los subconjuntos infinitos de $NN$ (Ejemplo C3-2 (b)).
 ]
 
 #ejemplo[Ley exponencial y el cardinal de $NN^NN$ y sus subconjuntos (Clase 3 · Ejercicio 2)][C3-2][

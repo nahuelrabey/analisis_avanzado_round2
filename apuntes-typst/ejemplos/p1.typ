@@ -471,6 +471,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   *Cierre con el Ejercicio 13.* El Ejemplo C1-6, al final del bloque, es la versión espejada de este ejercicio: en vez de construir una sucesión creciente que suba hasta el supremo vía la caracterización $epsilon$ (eso ya está resuelto en `apuntes.typ` y en el Bloque 4), construye por recursión y densidad una sucesión de racionales *decreciente* hacia un $x in RR$ cualquiera, y recién identifica el límite invocando el Teorema de sucesiones monótonas acotadas y pasaje al límite en la desigualdad de la construcción --- las dos herramientas que este bloque acaba de instalar con 12, C1-2 y C2-1.
 
+  *Clase del 27/08/2026 (27-08/1, 27-08/2 y 27-08/3).* Son la versión de cátedra de los Ejercicios *14* y *13*, y comparten una plantilla que conviene aprender de memoria: listar las condiciones --- (a) índices crecientes, (b) valores crecientes, (c) límite ---, fijar una meta cómoda para (c) ($a_(n_k) > k$ o $a_(n_k) > s_m - 1/k$) y elegir cada índice nuevo como el *mínimo* de un conjunto no vacío de naturales, pidiendo que el término supere al máximo de todos los anteriores para que el índice avance solo. 27-08/1 es el *Ejercicio 14* completo, e incluye la única divergencia a $+oo$ probada *por definición* (el "para todo $M > 0$") de todo el repositorio, que es lo que también piden el 9 (b)--(d) y el 12 (b). 27-08/2 es el *Ejercicio 13* aplicado a la cola $A_m$, con la sucesión obligada además a respetar el orden de los índices. 27-08/3 junta los dos y agrega el caso restante (todas las colas tienen máximo $arrow.r$ subsucesión decreciente): *toda sucesión tiene una subsucesión monótona*, que con el Teorema de sucesiones monótonas acotadas es el "acotada $arrow.r$ hay subsucesión convergente" que usa C2-3.
+
   *Series.* Los dos ejemplos `Serie` del final aplican el bloque a la sucesión de sumas parciales $S_n$: $sum (-1)^k$ no converge porque $S_n$ tiene dos subsucesiones con límites distintos, y la geométrica se resuelve encontrando una fórmula cerrada para $S_n$ y tomando límite con álgebra de límites.
 ]
 
@@ -754,6 +756,157 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Entonces $q = x$.
 ]
 
+#ejemplo[Sin cota superior $arrow.r.double$ subsucesión estrictamente creciente que diverge a $+oo$ (Clase del 27/08/2026 · Ejemplo 1)][27-08/1][
+  Sea $(a_n)_(n in NN)$ una sucesión de números reales que no tiene cota superior. Probar que $(a_n)_(n in NN)$ tiene una subsucesión estrictamente creciente que diverge a $+oo$.
+]
+
+#estrategia[Tres condiciones que vigilar, una meta cómoda para la divergencia y el truco del máximo de los primeros términos][
+  Es el *Ejercicio 14* de la guía con un extra: la subsucesión sale además estrictamente creciente. Hay que elegir índices $n_1 < n_2 < dots$ vigilando tres cosas a la vez: (a) que los índices crezcan (si no, no es subsucesión), (b) que los valores crezcan, (c) que diverja. Para (c) conviene fijarse una meta concreta, $a_(n_k) > k$, que después da el "para todo $M > 0$" por arquimedianidad. Para (a) y (b) juntas, el truco es pedir que el término nuevo supere a *todos* los $a_1, dots, a_(n_k)$: un término por encima de $op("máx") {a_l : 1 <= l <= n_k}$ no puede tener índice $<= n_k$, así que automáticamente $n_(k+1) > n_k$. Lo único que se usa de la hipótesis es que ningún número es cota superior, o sea que siempre hay un término que supera a cualquier umbral. Elegir cada índice como el *mínimo* de un conjunto no vacío de naturales es lo que deja la sucesión bien definida.
+]
+
+#resolucion[
+  Buscamos $(a_(n_k))_(k in NN)$ que cumpla las siguientes condiciones:
+
+  - *Condición (a):* para todo $k in NN$, $n_k < n_(k+1)$. Esto dice que $(a_(n_k))_(k in NN)$ es una subsucesión.
+  - *Condición (b):* para todo $k in NN$, $a_(n_k) < a_(n_(k+1))$. Esto dice que $(a_(n_k))_(k in NN)$ es estrictamente creciente.
+  - *Condición (c):* para todo $M > 0$, existe $k_M$ tal que si $k >= k_M$, entonces $a_(n_k) > M$. Esto dice que $(a_(n_k))_(k in NN)$ diverge a $+oo$ (también se usa la expresión sinónima "tiende a $+oo$").
+
+  Para obtener la Condición (c), vamos a construir $(a_(n_k))_(k in NN)$ de manera que
+  $ a_(n_k) > k quad forall k in NN. quad (1) $
+  Esta no es la única manera de obtener la Condición (c): podríamos pedir $a_(n_k) > sqrt(k)$ o $a_(n_k) > k + 1$, etc., pero $(1)$ es una manera conveniente.
+
+  *Primer índice.* Lo que sabemos es que $(a_n)_(n in NN)$ no tiene cota superior; esto significa que para todo $M > 0$ existe $n(M)$ tal que $a_(n(M)) > M$. Entonces podemos empezar tomando $n_1$ tal que $a_(n_1) > 1$. Aunque podemos simplemente decir esto sin decir "quién" es $n_1$, para concretar definimos
+  $ n_1 := op("mín") {n in NN : a_n > 1}. $
+  El mínimo existe porque ${n in NN : a_n > 1}$ es un conjunto de números naturales, no vacío porque $(a_n)_(n in NN)$ no tiene cota superior.
+
+  *Segundo índice.* Para que se cumpla que $a_(n_2) > a_(n_1)$ y $a_(n_2) > 2$, podríamos elegir $n_2$ de manera que
+  $ a_(n_2) > op("máx") {2, a_(n_1)}. quad (2) $
+  Sin embargo, esto no garantizaría que $n_2 > n_1$, y queremos una subsucesión, es decir, la Condición (a). Una manera de lograrlo es tomar, en lugar de $(2)$ (para concretar, pero hay otras maneras de elegir),
+  $ n_2 := op("mín") {n in NN : a_n > op("máx") {2, op("máx") {a_k : 1 <= k <= n_1}}}. quad (3) $
+  Este número está bien definido porque el conjunto ${n in NN : a_n > op("máx") {2, op("máx") {a_k : 1 <= k <= n_1}}}$ es un conjunto no vacío de naturales: como $(a_n)_(n in NN)$ no tiene cota superior, en particular $op("máx") {2, op("máx") {a_k : 1 <= k <= n_1}}$ no es cota superior de la sucesión, así que para algún $n in NN$, $a_n$ es más grande que ese número.
+
+  ¿Por qué $(3)$ sí alcanza para garantizar que $n_2 > n_1$? Porque para cualquier $1 <= n <= n_1$ se tiene
+  $ a_n <= op("máx") {a_k : 1 <= k <= n_1} < a_(n_2), $
+  y como no puede ser que $a_(n_2) < a_(n_2)$, $n_2$ no es ninguno de los $n$ con $1 <= n <= n_1$. Resumiendo, hemos encontrado $n_2$ tal que
+  $ n_2 > n_1, quad a_(n_2) > a_(n_1), quad a_(n_2) > 2. $
+
+  *Paso recursivo.* Usamos la misma idea: tenemos $a_(n_1) > 1$, y supongamos que para un cierto $k in NN_(>= 2)$ se cumple que para cada $1 <= j <= k - 1$,
+  $ n_(j+1) > n_j, quad a_(n_(j+1)) > a_(n_j), quad a_(n_(j+1)) > j + 1 quad (4) $
+  (en otras palabras, hemos construido los primeros $k$ elementos de nuestra sucesión de manera que se cumpla lo que buscamos). Entonces tomamos
+  $ n_(k+1) := op("mín") {n in NN : a_n > op("máx") {k + 1, op("máx") {a_l : 1 <= l <= n_k}}}. $
+  Esta elección hace que $(4)$ valga también para $j = k$. Recursivamente, hemos construido $(a_(n_k))_(k in NN)$ de manera que valgan (a), (b) y $(1)$, lo que concluye el ejercicio.
+
+  *Por qué $(1)$ garantiza la Condición (c)* (Observación 3 de la clase; no hace falta, pero es la divergencia *por definición*). Dado $M > 0$, el conjunto ${k in NN : k > M}$ es no vacío por arquimedianidad. Como es un conjunto de números naturales, tiene un mínimo, al que llamamos $k_M$. Para cada $k >= k_M$,
+  $ a_(n_k) > k >= k_M > M. $
+  Esto prueba, por definición, que $a_(n_k) -->_(k -> oo) +oo$.
+
+  _Nota_: en el apunte original, en $(3)$ y en la definición de $n_(k+1)$ falta una llave de cierre (se escribe `}}` donde hacen falta tres); acá las llaves están balanceadas.
+]
+
+#sublema(titulo: "La definición recursiva, de una vez (Observación 1 de la clase)")[
+  No hacía falta elegir $n_2$ "a mano": se hizo así para que se viera más claramente qué se hacía. Alcanza con definir $(n_k)_(k in NN)$ directamente por
+  $
+    n_1 &:= op("mín") {n in NN : a_n > 1}; \
+    n_(k+1) &:= op("mín") {n in NN : a_n > op("máx") {k + 1, op("máx") {a_l : 1 <= l <= n_k}}} quad forall k in NN.
+  $
+]
+
+#sublema(titulo: "El mínimo es opcional (Observación 2 de la clase)")[
+  Elegir el mínimo es una manera conveniente de dejar la sucesión *definida* (todo conjunto no vacío de naturales tiene mínimo), pero no hacía falta. Se puede decir simplemente: tomamos $n_1$ tal que $a_(n_1) > 1$ y, recursivamente, tomamos $n_(k+1)$ de manera que $a_(n_(k+1)) > op("máx") {k + 1, op("máx") {a_l : 1 <= l <= n_k}}$.
+]
+
+#ejemplo[Una cola $A_m$ sin máximo da una subsucesión estrictamente creciente hacia $op("sup") A_m$ (Clase del 27/08/2026 · Ejemplo 2)][27-08/2][
+  Sea $(a_n)_(n in NN)$ una sucesión de números reales que tiene cota superior. Para cada $m in NN$ sea
+  $ A_m := {a_n : n >= m}. $
+  Probar que si existe $m in NN$ tal que el conjunto $A_m$ no tiene máximo, entonces $(a_n)_(n in NN)$ tiene una subsucesión estrictamente creciente.
+
+  _Sugerencia_: tomar $m in NN$ tal que $A_m$ no tiene máximo, sea $s_m := op("sup")(A_m)$, y pensar cómo construir una subsucesión estrictamente creciente que converja a $s_m$.
+]
+
+#estrategia[El Ejercicio 13 sobre la cola $A_m$, con la meta $a_(n_k) > s_m - 1/k$ en vez de $a_(n_k) > k$][
+  Es el *Ejercicio 13* de la guía aplicado al conjunto $A = A_m$ (acotado superiormente, no vacío y sin máximo), con el agregado de que los elementos elegidos tienen que respetar el orden de los índices. La plantilla es la del Ejemplo 27-08/1 --- condiciones (a), (b), (c); meta cómoda para (c); índice nuevo = mínimo de un conjunto no vacío --- cambiando el motor: acá lo que garantiza que el conjunto sea no vacío es que *ningún* número menor que $s_m$ y *ningún* elemento de $A_m$ es cota superior de $A_m$ (lo primero porque $s_m$ es la menor cota superior, lo segundo porque $A_m$ no tiene máximo). Por eso el umbral $op("máx") {s_m - 1/(k+1), op("máx") {a_j : m <= j <= n_k}}$ nunca es cota superior y siempre hay un término de la cola que lo supera. La meta $a_(n_k) > s_m - 1/k$ reemplaza a $a_(n_k) > k$ y da la convergencia a $s_m$ por definición.
+]
+
+#resolucion[
+  Tomamos $m in NN$ tal que $A_m$ no tiene máximo. Como $A_m subset.eq A_1$ y $A_1$ tiene cota superior (por hipótesis, ya que esto es equivalente a que la sucesión $(a_n)_(n in NN)$ tenga cota superior), $A_m$ tiene cota superior. Luego $A_m$ tiene supremo, al que llamamos $s_m$. Vamos a construir una subsucesión $(a_(n_k))_(k in NN)$ que converja a $s_m$, siguiendo la sugerencia. Para esto nos hace falta que se cumplan:
+
+  - *Condición (a):* para todo $k in NN$, $n_k < n_(k+1)$ (es una subsucesión).
+  - *Condición (b):* para todo $k in NN$, $a_(n_k) < a_(n_(k+1))$ (es estrictamente creciente).
+  - *Condición (c):* para todo $epsilon > 0$, existe $k_epsilon$ tal que si $k >= k_epsilon$, entonces $abs(a_(n_k) - s_m) < epsilon$ (converge a $s_m$).
+
+  Para obtener la Condición (c), vamos a construir $(a_(n_k))_(k in NN)$ de manera que
+  $ a_(n_k) > s_m - 1/k quad forall k in NN. quad (5) $
+  Esta no es la única manera de obtener la Condición (c): podríamos pedir $a_(n_k) > s_m - 1/sqrt(k)$, etc., pero $(5)$ es una manera conveniente.
+
+  _Nota_: el apunte escribe "$a_(n_k) > 1 - 1/sqrt(k)$"; por el contexto (comparar con $(5)$), la alternativa que se quiere sugerir es $a_(n_k) > s_m - 1/sqrt(k)$.
+
+  *Primer índice.* Como $s_m$ es la menor cota superior de $A_m$, $s_m - 1$ no es cota superior de $A_m$, así que existe $x in A_m$ tal que $x > s_m - 1$. Por lo tanto podemos definir
+  $ n_1 := op("mín") {n in NN_(>= m) : a_n > s_m - 1}, $
+  y se tiene $a_(n_1) > s_m - 1$.
+
+  *Segundo índice.* Puesto que $A_m$ no tiene máximo y su menor cota superior es $s_m$, el número
+  $ op("máx") {s_m - 1/2, op("máx") {a_n : m <= n <= n_1}} $
+  no es cota superior de $A_m$ (es el máximo de finitos números que no lo son: $s_m - 1/2 < s_m$, y cada $a_n$ con $n >= m$ es un elemento de $A_m$, que no tiene máximo). Luego existe $x in A_m$ que lo supera, y podemos definir
+  $ n_2 := op("mín") {n in NN_(>= m) : a_n > op("máx") {s_m - 1/2, op("máx") {a_n : m <= n <= n_1}}}. $
+  Como
+  $ a_(n_2) > op("máx") {s_m - 1/2, op("máx") {a_n : m <= n <= n_1}} >= a_n quad forall m <= n <= n_1, $
+  se tiene $n_2 > n_1$ (porque no puede ser que $a_(n_2) > a_(n_2)$). Además, por construcción, $a_(n_2) > a_(n_1)$ y $a_(n_2) > s_m - 1/2$.
+
+  *Paso recursivo.* Como en el Ejemplo 27-08/1: tenemos $a_(n_1) > s_m - 1$, y supongamos que para un cierto $k in NN_(>= 2)$ se cumple que para $1 <= j <= k - 1$
+  $ n_(j+1) > n_j, quad a_(n_(j+1)) > a_(n_j), quad a_(n_(j+1)) > s_m - 1/(j+1) quad (6) $
+  (hemos construido los primeros $k$ elementos de nuestra sucesión de manera que se cumpla lo pedido). Entonces definimos
+  $ n_(k+1) := op("mín") {n in NN_(>= m) : a_n > op("máx") {s_m - 1/(k+1), op("máx") {a_j : m <= j <= n_k}}}. $
+  Esta elección hace que $(6)$ valga también para $j = k$. Recursivamente, hemos construido $(a_(n_k))_(k in NN)$ de manera que valgan (a), (b) y $(5)$, lo que termina la construcción pedida.
+
+  _Nota_: el apunte escribe "$s_(k+1) - 1/(k+1)$" en la definición de $n_(k+1)$; el supremo en juego es siempre el de $A_m$, así que debe decir $s_m - 1/(k+1)$ (es lo que hace falta para $(5)$ con $k + 1$).
+
+  _Nota (corrección nuestra, no de la cátedra)_: el apunte toma los máximos sobre $1 <= n <= n_1$ y $1 <= j <= n_k$, y busca $n in NN$ sin restringir a $n >= m$; pero si algún término anterior a $m$ es grande ese máximo *sí* puede ser cota superior de $A_m$ y el conjunto quedar vacío (p. ej. $a_1 = 5$, $a_n = 1 - 1/n$ para $n >= 2$, $m = 2$: no hay $a_n > 5$). Acá los máximos corren sobre índices $>= m$, que es lo que el argumento "no es cota superior porque $A_m$ no tiene máximo" realmente usa.
+
+  *Por qué $(5)$ garantiza la Condición (c)* (Observación 5 de la clase; no hace falta, pero es la convergencia *por definición*). Dado $epsilon > 0$, el conjunto ${k in NN : 1/k < epsilon}$ es no vacío por arquimedianidad. Como es un conjunto de números naturales, tiene un mínimo, digamos $k_epsilon$. Para cada $k >= k_epsilon$, como $a_(n_k) in A_m$ y $s_m$ es cota superior de $A_m$,
+  $ abs(s_m - a_(n_k)) = s_m - a_(n_k) < 1/k <= 1/k_epsilon < epsilon. $
+  Esto prueba, por definición, que $a_(n_k) -->_(k -> oo) s_m$.
+]
+
+#sublema(titulo: "Alternativa sin pasar por el supremo (Observación 4 de la clase; queda como ejercicio)")[
+  Construimos una subsucesión que converge al supremo de $A_m$ porque lo sugería la clase, pero el enunciado sólo pedía que fuera estrictamente creciente. Queda como ejercicio verificar que, si no nos interesa que tienda a $s_m$, la siguiente alternativa también está bien definida y cumple lo pedido:
+  $
+    n_1 &:= 1; \
+    n_(k+1) &:= op("mín") {n in NN_(>= m) : a_n > op("máx") {a_j : 1 <= j <= n_k}} quad forall k in NN.
+  $
+  _Ojo_: con el mismo contraejemplo de la Nota anterior ($a_1 = 5$, $m = 2$) el conjunto de la derecha queda vacío; la verificación pedida requiere arrancar en $n_1 := m$ y tomar el máximo sobre $m <= j <= n_k$, igual que arriba. No está resuelta acá.
+]
+
+#ejemplo[Toda sucesión tiene una subsucesión monótona (Clase del 27/08/2026 · Ejemplo 3)][27-08/3][
+  Sea $(a_n)_(n in NN)$ una sucesión de números reales. Probar que $(a_n)_(n in NN)$ tiene una subsucesión monótona (es decir, o bien tiene una subsucesión creciente, o bien tiene una subsucesión decreciente).
+
+  _Sugerencia_: considerar los siguientes casos.
+  - *Caso 1:* se cumplen las hipótesis del Ejemplo 27-08/1.
+  - *Caso 2:* se cumplen las hipótesis del Ejemplo 27-08/2.
+  - *Caso 3:* no se cumplen ni las hipótesis del 27-08/1 ni las del 27-08/2.
+]
+
+#estrategia[Los dos ejemplos anteriores cubren dos casos; en el tercero, los máximos de las colas bajan solos][
+  Los Ejemplos 27-08/1 y 27-08/2 ya dan una subsucesión creciente si la sucesión no está acotada superiormente, o si lo está pero alguna cola $A_m$ no tiene máximo. Lo que queda es el caso en que *todas* las colas tienen máximo: como $A_(m+1) subset.eq A_m$, los máximos de las colas sólo pueden bajar, y entonces basta ir tomando el (primer) índice donde cada cola alcanza su máximo, reiniciando la cola justo después del índice anterior. Es el lema que, combinado con el Teorema de sucesiones monótonas acotadas, da "toda sucesión acotada tiene una subsucesión convergente", el hecho que usa el Ejemplo C2-3.
+]
+
+#resolucion[
+  Sigamos la sugerencia. Si $(a_n)_(n in NN)$ es no acotada superiormente, entonces por el Ejemplo 27-08/1 tiene una subsucesión creciente. Si $(a_n)_(n in NN)$ es acotada superiormente y existe $m in NN$ tal que $A_m$ no tiene máximo, entonces por el Ejemplo 27-08/2 tiene una subsucesión creciente.
+
+  ¿Qué caso falta considerar? Aquel en que $(a_n)_(n in NN)$ es acotada superiormente y, para todo $m in NN$, $A_m$ tiene máximo. En este caso vamos a construir una subsucesión decreciente.
+
+  Primero, notemos que para todo $m in NN$, $A_(m+1) subset.eq A_m$, y por lo tanto $op("máx") (A_(m+1)) <= op("máx") (A_m)$. Como $A_1$ tiene máximo, existe algún $n in NN$ tal que $a_n = op("máx") (A_1)$, así que podemos definir
+  $ n_1 := op("mín") {n in NN : a_n = op("máx") (A_1)}. $
+  Ahora queremos $n_2 > n_1$ tal que $a_(n_2) <= a_(n_1)$. Dado que $A_(n_1 + 1)$ tiene máximo, podemos definir
+  $ n_2 := op("mín") {n in NN_(>= n_1 + 1) : a_n = op("máx") (A_(n_1 + 1))}. $
+  Como $a_(n_1)$ es el máximo de $A_1$, $a_(n_2)$ es el máximo de $A_(n_1 + 1)$ y $A_(n_1 + 1) subset.eq A_1$, se tiene $a_(n_2) <= a_(n_1)$. Además, $n_2 > n_1$ por cómo lo elegimos. En general, para $k >= 2$, definimos
+  $ n_(k+1) := op("mín") {n in NN_(>= n_k + 1) : a_n = op("máx") (A_(n_k + 1))}. $
+  Por construcción, $n_(k+1) > n_k$ para todo $k in NN$. Ya vimos que $a_(n_1) >= a_(n_2)$. Para cada $k >= 2$, como $a_(n_(k+1))$ es el máximo de $A_(n_k + 1)$ mientras que $a_(n_k)$ es el máximo de $A_(n_(k-1) + 1)$, y $A_(n_(k-1) + 1) supset.eq A_(n_k + 1)$ (porque $n_k > n_(k-1)$), se tiene $a_(n_(k+1)) <= a_(n_k)$. Luego, para todo $k in NN$,
+  $ n_(k+1) > n_k quad "y" quad a_(n_(k+1)) <= a_(n_k). $
+  En otras palabras, hemos construido una subsucesión $(a_(n_k))_(k in NN)$ decreciente. Como ya consideramos todos los casos posibles y en cada uno $(a_n)_(n in NN)$ tiene una subsucesión monótona, esto completa la solución.
+
+  *Por qué acá no hace falta el truco del máximo de los primeros términos* (Observación 6 de la clase). A diferencia de los dos ejemplos anteriores, para elegir $n_2$ no consideramos el máximo de los $a_n$ con $1 <= n <= n_1$: estamos tomando el máximo de $A_(n_1 + 1)$, así que de entrada va a haber un $n >= n_1 + 1$ donde $a_n$ alcance ese máximo. Lo mismo pasa con la elección de $n_(k+1)$ para cada $k >= 2$.
+]
+
 #ejemplo[La serie de $a_n = (-1)^n$ no converge][Serie][
   Sea $(a_n)_(n in NN)$ dada por $a_n = (-1)^n$. ¿Converge $sum_(k=1)^oo a_k$?
 ]
@@ -796,10 +949,9 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #v(8pt)
 
 #sublema(titulo: "Huecos frente a la Práctica 1")[
-  Con los 17 ejemplos del apunte y los 19 de clase, quedan sólo dos técnicas sin ningún ejemplo trabajado en todo el repositorio. Cuando aparezca una en clase, cargala con `/ejemplo` en el bloque indicado:
+  Con los 17 ejemplos del apunte, los 19 de clase y los tres de la clase del 27/08/2026, queda sólo una técnica sin ningún ejemplo trabajado en todo el repositorio. Cuando aparezca en clase, cargala con `/ejemplo` en el bloque indicado:
 
   #set enum(numbering: "1.")
-  + *Divergencia a $plus.minus oo$ por definición* --- *Ej. 9 (b)--(d)*, *Ej. 12 (b)*, y la segunda mitad del *Ej. 14*. De `apuntes.typ` sólo está la definición, y ninguna demostración usa el cuantificador "para todo $M > 0$": lo más cerca que hay es el Ejemplo C1-4, que invoca $a_m -> +oo$ sin probarlo por definición. → Bloque 6 o bloque nuevo.
   + *Punto fijo vía supremo* --- el ejercicio del anexo de p1 (edición 2025). Sin material de ningún tipo. → Bloque 1 o bloque nuevo.
 ]
 
@@ -816,6 +968,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   - *Ej. 10* → Desafío 2.14 (a)--(c), resuelto: mismo truco de tomar $epsilon = (ell_1 - ell_2)/2$.
   - *Ej. 11* → el Ejemplo C1-1.2 es el caso concreto; en general, la demostración del álgebra de límites, ítem c, *caso $b = 0$*: $abs(a_n b_n) <= M abs(b_n)$ es el argumento completo.
   - *Ej. 12 (a)* → Proposición 8 (monótona creciente y acotada converge), en versión espejo.
-  - *Ej. 13* → la demostración de la *Equivalencia del supremo 2* construye $a_n$ con $s - 1/n < a_n <= s$; el Desafío "Ejercicio 2.19" agrega que se la puede tomar estrictamente creciente.
+  - *Ej. 13* → la demostración de la *Equivalencia del supremo 2* construye $a_n$ con $s - 1/n < a_n <= s$; el Desafío "Ejercicio 2.19" agrega que se la puede tomar estrictamente creciente; el Ejemplo 27-08/2 es la construcción completa, sobre la cola $A_m$.
+  - *Ej. 14* → el Ejemplo 27-08/1, completo y con la divergencia a $+oo$ probada por definición; para el 9 (b)--(d) y el 12 (b) es el único modelo del cuantificador "para todo $M > 0$".
   - *Ej. 16 (a)* → el Ejemplo 9 (partición por paridad) más la demostración de unicidad del límite (elegir $op("máx")(n_1, n_2)$).
 ]

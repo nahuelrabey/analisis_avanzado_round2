@@ -51,12 +51,12 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   inset: (x: 6pt, y: 4pt),
 
   [*\#*], [*Bloque*], [*Desbloquea*],
-  [1], [Métricas: verificar los axiomas], [p3: Ej. 1, 2],
-  [2], [Topología en espacios métricos: puntos interiores y abiertos], [p3: Ej. 3 (a), 4],
-  [3], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7],
+  [1], [Métricas: verificar los axiomas], [p3: Ej. 1, 2; Ej. 7 y 12 (b) vía 15-09/8],
+  [2], [Topología en espacios métricos: puntos interiores y abiertos], [p3: Ej. 3 (a), 4; Ej. 6 (a) en producto (17-09/1)],
+  [3], [Clausura, cerrados, conjunto derivado y frontera], [p3: Ej. 3, 4 (a--b, d), 7; Ej. 10 (c) vía 17-09/4],
   [4], [Caracterizaciones y estabilidad de abiertos y cerrados], [p3: Ej. 9; conceptual para Ej. 5, 12],
   [5], [Sucesiones en espacios métricos], [p3: Ej. 13 (intro)],
-  [6], [Completitud: probarla, heredarla y caracterizarla], [p3: Ej. 14, 15, 16; conceptual para Ej. 10, 12],
+  [6], [Completitud: probarla, heredarla y caracterizarla], [p3: Ej. 14, 15, 16 (modelo: 29-09/2); conceptual para Ej. 10, 12],
 )
 
 #v(4pt)
@@ -71,6 +71,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   El *Ejercicio 1* de la Práctica 3 pide probar que varios espacios son métricos, y el *Ejercicio 2* decidir cuáles de unas funciones dadas lo son. Los ejemplos de este bloque cubren el repertorio completo de maniobras: reducir la lista de axiomas a verificar, tratar una métrica definida por casos, trabajar con supremos de funciones, truncar una métrica existente, y verificar paso a paso la métrica discreta y la métrica del máximo ($d_oo$) en $RR^n$. Constituyen los modelos directos para los ítems (d), (e) y (f) del Ejercicio 1 y para el Ejercicio 11.
+
+  De la clase del 15/09 se agregan, al final del bloque, dos maniobras más: transportar una métrica por una función inyectiva, $D_f (x,y) = d(f(x), f(y))$ (15-09/7, con el contraejemplo de que la sobreyectividad no alcanza; su ítem (ii) da una lectura directa del Ejercicio 2 (c), $abs(x^2 - y^2) = D_f$ con $f(x) = x^2$), y comparar bolas y diámetros de $d$ con los de la truncada $op("mín"){1, d}$ (15-09/8, que completa a C3-8 y prepara los Ejercicios 7 y 12 (b)). La clase del 29/09 cierra con el máximo de finitas métricas (29-09/4), cuya desigualdad triangular es la misma de $d_oo$, y con el contraejemplo de tres puntos para el mínimo: es el modelo de cómo *refutar* que algo es métrica en el Ejercicio 2.
 ]
 
 #ejemplo[Dos axiomas alcanzan para tener una métrica (Clase 3 · Ejercicio 5)][C3-5][
@@ -499,6 +501,121 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   *Conclusión:* como la dirección (1) falla, $d_oo$ y $d_1$ *no* son equivalentes: hay bolas de $d_1$ que no contienen ninguna bola de $d_oo$. Sí vale que la topología de $d_oo$ es *más fina* que la de $d_1$ (toda bola de $d_oo$ contiene una bola de $d_1$, pero no al revés).
 ]
 
+#ejemplo[Transportar una métrica por una función inyectiva: $D_f (x, y) = d(f(x), f(y))$ (Clase del 15/09/2026 · Ejemplo 7)][15-09/7][
+  Sea $n in NN$, $f : RR^n -> RR^n$ una función inyectiva, y sea $d : RR^n times RR^n -> [0, +infinity)$ una métrica en $RR^n$. Definimos
+  $ D_f (x, y) := d(f(x), f(y)) quad forall x, y in RR^n. $
+  #set enum(numbering: "(i)")
+  + Probar que $D_f$ es una métrica.
+  + Probar que el resultado no vale si reemplazamos "inyectiva" por "sobreyectiva" en el enunciado.
+]
+
+#estrategia[Los axiomas de $D_f$ son los de $d$ leídos en $f(x), f(y)$; la inyectividad sólo hace falta para la separación][
+  Positividad, simetría y desigualdad triangular se heredan de $d$ sin tocar $f$: basta escribir cada axioma de $d$ en los puntos $f(x), f(y), f(z)$. El único lugar donde entra la hipótesis es $D_f (x, y) = 0 => x = y$: $d$ sólo garantiza $f(x) = f(y)$, y es la inyectividad la que cierra. Por eso, si $f$ no es inyectiva, $D_f$ se anula en un par $x != y$ y no es métrica. Para (ii) alcanza entonces con fabricar una $f : RR^n -> RR^n$ sobreyectiva pero no inyectiva, y eso se consigue con una biyección $RR^n without {0} -> RR^n$ (existe porque son coordinables) extendida al $0$ con cualquier valor.
+]
+
+#resolucion[
+  *(i)* Para ver que $D_f$ es una métrica, hay que probar lo siguiente:
+  #set enum(numbering: "(1)")
+  + $D_f (x, y) >= 0$ para todo $x, y in RR^n$.
+  + $D_f (x, y) = 0$ si y sólo si $x = y$.
+  + Para todos $x, y in RR^n$, se tiene que $D_f (x, y) = D_f (y, x)$.
+  + Para todos $x, y, z in RR^n$, se tiene que $D_f (x, y) <= D_f (x, z) + D_f (y, z)$.
+
+  (1) vale porque $d$ es una distancia, y por lo tanto es no negativa.
+
+  (2) Si $x = y$, entonces $D_f (x, y) = d(f(x), f(x)) = 0$. Por otra parte, si $D_f (x, y) = 0$, entonces $f(x) = f(y)$ (porque $d$ es una métrica). Como $f$ es inyectiva, se sigue que $x = y$.
+
+  (3) Sean $x, y in RR^n$. Como $d$ es una métrica, $D_f (x, y) = d(f(x), f(y)) = d(f(y), f(x)) = D_f (y, x)$.
+
+  (4) Sean $x, y, z in RR^n$. Nuevamente, usando que $d$ es una distancia,
+  $ D_f (x, y) = d(f(x), f(y)) <= d(f(x), f(z)) + d(f(z), f(y)) = D_f (x, z) + D_f (z, y). $
+
+  *(ii)* Si $f$ no es inyectiva, entonces existen $x, y in RR^n$ tales que $x != y$ pero $f(x) = f(y)$. Esto implica que $D_f (x, y) = 0$, y por lo tanto $D_f$ no es una métrica. Luego, para probar que el resultado no vale para funciones sobreyectivas, es suficiente con probar que existe $f : RR^n -> RR^n$ sobreyectiva pero no inyectiva. Como $RR^n without {0}$ es coordinable con $RR^n$, existe $g : RR^n without {0} -> RR^n$ biyectiva. Fijamos cualquier $z in RR^n$ y definimos $f : RR^n -> RR^n$ como
+  $ f(x) := cases(
+    g(x) & " si " x != 0\,,
+    z & " si " x = 0.
+  ) $
+  Como $g$ es sobreyectiva, existe $y in RR^n without {0}$ tal que $f(y) = g(y) = z = f(0)$, y entonces $f$ no es inyectiva. Por otra parte, como $g$ es sobreyectiva, también lo es $f$.
+]
+
+#sublema(titulo: "Observaciones de la clase, y la repetición del 29/09")[
+  En (i) se puede reemplazar $RR^n$ por cualquier conjunto no vacío $X$; en (ii), por cualquier conjunto infinito (la clase deja como ejercicio ver qué pasa si $X$ es finito). Además, (ii) prueba la recíproca de (i): si $D_f$ es una métrica, entonces $f$ es inyectiva. La clase del 29/09 (`clases/2026/0929_repaso.typ`, Ejercicio 1, tag 29-09/1, optativo) repite el ítem (i) con la misma demostración para $f : A -> A$ inyectiva, con $A subset.eq X$ no vacío y $(X, d)$ un espacio métrico cualquiera, y lo usa para probar que $D(x, y) = abs(1\/x - 1\/y)$ es métrica en $(0, 1]$ (Ejemplo 29-09/2, Bloque 6).
+]
+
+#ejemplo[Bolas y diámetros para la métrica truncada $tilde(d) = op("mín"){1, d}$ (Clase del 15/09/2026 · Ejemplo 8)][15-09/8][
+  Sea $(X, d)$ un espacio métrico y $tilde(d) : X times X -> [0, +infinity)$, $tilde(d) (x, y) := op("mín") {1, d(x, y)}$, que es una métrica (Ejemplo C3-8). Probar que
+  #set enum(numbering: "(i)", start: 2)
+  + Para todo $x in X$ y todo $r > 0$, $B_d (x, r) subset.eq B_(tilde(d)) (x, r)$.
+  + Sea $0 < r <= 1$. Entonces $B_d (x, r) = B_(tilde(d)) (x, r)$.
+  + Para todo $x in X$ y todo $r > 0$, se tiene que $B_(tilde(d)) (x, op("mín") {r, 1}) subset.eq B_d (x, r)$.
+  + Sea $r > 1$. Supongamos que $X = RR$ y $d$ es el módulo. Calcular el diámetro de la bola abierta $B_(tilde(d)) (0, r)$ en el espacio métrico $(RR, tilde(d))$ y en el espacio métrico $(RR, d)$.
+]
+
+#estrategia[Por debajo de $1$, $tilde(d)$ y $d$ coinciden; por encima, $tilde(d)$ se queda clavada en $1$][
+  Como $tilde(d) <= d$ siempre, toda $d$-bola entra en la $tilde(d)$-bola del mismo radio: eso es (ii). La igualdad (iii) vale para radios $r <= 1$ porque la condición $op("mín") {1, d(x, y)} < r <= 1$ obliga a que el mínimo sea $d(x, y)$; y (iv) es (iii) aplicada al radio $op("mín") {r, 1}$, seguida de que las bolas crecen con el radio. Para (v): en cuanto $r > 1$ la $tilde(d)$-bola ya es todo $RR$ (ninguna $tilde(d)$-distancia supera $1$), así que la pregunta es el diámetro de $RR$ medido con cada métrica, $infinity$ con el módulo y $1$ con $tilde(d)$. Moraleja: $d$ y $tilde(d)$ tienen las mismas bolas de radio $<= 1$, pero el diámetro de un conjunto (y su acotación) depende de la métrica.
+]
+
+#resolucion[
+  Recordemos que $op("diam")_d (A) := sup_(x, y in A) d(x, y)$ es el diámetro de $A$ respecto de $d$, que es un real no negativo o $infinity$.
+
+  *(ii)* Dados $x in X$, $r > 0$ e $y in B_d (x, r)$, se tiene que
+  $ tilde(d) (x, y) = op("mín") {1, d(x, y)} <= d(x, y) < r, $
+  así que $y in B_(tilde(d)) (x, r)$.
+
+  *(iii)* Por (ii), ya tenemos una inclusión. Probemos la otra: sea $y in B_(tilde(d)) (x, r)$. Entonces
+  $ op("mín") {1, d(x, y)} < r <= 1. $
+  Se sigue que $op("mín") {1, d(x, y)} = d(x, y)$. Por lo tanto, $d(x, y) = tilde(d) (x, y) < r$, lo que implica que $y in B_d (x, r)$, y concluye la prueba de la inclusión que faltaba.
+
+  *(iv)* Fijemos $x in X$ y $r > 0$. Como $0 < op("mín") {r, 1} <= 1$, aplicando (iii) obtenemos
+  $ B_(tilde(d)) (x, op("mín") {r, 1}) = B_d (x, op("mín") {r, 1}) subset.eq B_d (x, r). $
+
+  *(v)* Notemos que en este caso, para todo $x in RR$ se tiene que $tilde(d) (x, 0) <= 1 < r$. Por lo tanto $B_(tilde(d)) (0, r) = RR$. Entonces
+  $ op("diam")_d (B_(tilde(d)) (0, r)) = op("diam")_d (RR) = sup_(x, y in RR) abs(x - y) = infinity. $
+  Por otra parte,
+  $ op("diam")_(tilde(d)) (B_(tilde(d)) (0, r)) = op("diam")_(tilde(d)) (RR) = sup_(x, y in RR) op("mín") {1, abs(x - y)} = 1. $
+
+  _Nota_: en el apunte la primera igualdad de (v) tiene un paréntesis de más; lo que se calcula es $op("diam")_d (B_(tilde(d)) (0, r))$.
+]
+
+#sublema(titulo: "El ítem (i) y la prueba de la clase")[
+  El ítem (i) del apunte (que $tilde(d)$ es métrica) es el Ejemplo C3-8 de este bloque y no se repite. La clase del 15/09 organiza la desigualdad triangular por el *lado derecho*: si alguno de $tilde(d) (x, z)$, $tilde(d) (z, y)$ vale $1$, entonces $tilde(d) (x, y) <= 1 <= tilde(d) (x, z) + tilde(d) (z, y)$; si no, los dos mínimos son los propios valores y $tilde(d) (x, y) <= d(x, y) <= d(x, z) + d(z, y)$. Es más corto que separar por el lado izquierdo como en C3-8, y esquiva el desliz que allí se corrige.
+]
+
+#ejemplo[El máximo de finitas métricas es una métrica; el mínimo, no (Clase del 29/09/2026 · Ejemplo 4)][29-09/4][
+  Sea $X$ un conjunto, $n in NN$, y sean $D_1, dots, D_n$ métricas sobre $X$. Definimos $D : X times X -> RR_(>= 0)$ por medio de la fórmula
+  $ D(x, y) := op("máx", limits: #true)_(1 <= j <= n) {D_j (x, y)}. $
+  #set enum(numbering: "(i)")
+  + Probar que $D$ es una métrica.
+  + Si cambiamos el máximo por el mínimo en la definición de $D$, ¿sigue funcionando el argumento del punto anterior para probar que es una métrica? Ejercicio optativo (más difícil): determinar si, tomando el mínimo, $D$ es una métrica.
+]
+
+#estrategia[Para la triangular del máximo, fijar el índice donde se alcanza; para el mínimo, buscar un contraejemplo chico][
+  Positividad, separación y simetría del máximo salen de que cada $D_j$ las tiene (para la separación alcanza con $D >= D_1$). La triangular es la misma maniobra que en $d_oo$ (Ejemplo 17): se elige el $k$ donde $D(x, y) = D_k (x, y)$, se usa la triangular de $D_k$ y después cada $D_k (dot.c, dot.c)$ se agranda al máximo. Con el mínimo ese paso se rompe: el mínimo de la izquierda no tiene por qué ser menor que la suma de dos mínimos tomados en índices posiblemente distintos. Pero "el argumento no funciona" no prueba nada: hay que exhibir $X$, $D_1$, $D_2$ y tres puntos donde la triangular falle. Con $X = {1, 2, 3}$ y $D_1 = abs(dot.c)$, se diseña $D_2$ para que mantenga $D_2 (1, 3) = 2$ y achique $D_2 (1, 2)$, agrandando $D_2 (2, 3)$ para que $D_2$ siga siendo métrica.
+]
+
+#resolucion[
+  *(i)* Hay que ver: (1) $D >= 0$; (2) $D(x, y) = 0$ si y sólo si $x = y$; (3) $D(x, y) = D(y, x)$; (4) $D(x, y) <= D(x, z) + D(z, y)$.
+
+  $D >= 0$ porque es el máximo de funciones no negativas. Por otra parte, $D >= D_1$; luego, si $D(x, y) = 0$, entonces $D_1 (x, y) = 0$, lo que implica $x = y$ porque $D_1$ es una métrica. Y si $x = y$, entonces $D_j (x, y) = 0$ para todo $1 <= j <= n$, así que $D(x, y) = 0$. Esto prueba (1) y (2). Para (3),
+  $ D(x, y) = op("máx", limits: #true)_(1 <= j <= n) {D_j (x, y)} = op("máx", limits: #true)_(1 <= j <= n) {D_j (y, x)} = D(y, x), $
+  usando para la segunda igualdad que las $D_j$ son métricas.
+
+  Resta ver (4). Dados $x, y, z in X$, sea $1 <= k <= n$ tal que $D(x, y) = D_k (x, y)$ (es decir, dados $x$ e $y$, elegimos el $k$ donde se alcanza el máximo). Entonces
+  $ D(x, y) = D_k (x, y) <= D_k (x, z) + D_k (z, y) <= D(x, z) + D(z, y). $
+
+  _Nota_: la fuente escribe "$D >= d_1$"; se refiere a $D >= D_1$, la primera de las métricas $D_j$.
+
+  *(ii)* Argumentos similares muestran que (1), (2) y (3) siguen valiendo para el mínimo (queda como ejercicio). Pero el argumento de (4) ya no funciona: no tenemos un máximo sino un mínimo, y no tendría en principio por qué ser menor que la suma de los mínimos. Esto, sin embargo, no alcanza para probar que $D$ no es métrica, porque no muestra que no haya otro argumento que sí funcione: hace falta un contraejemplo.
+
+  Tomamos $n = 2$ y $X = {1, 2, 3}$. Sea $D_1 (x, y) = abs(x - y)$, la restricción a $X$ de la métrica usual de $RR$. Notemos que $D_1 (1, 3) = 2 = D_1 (1, 2) + D_1 (2, 3)$. Buscamos entonces que $D_2$ mantenga la distancia entre $1$ y $3$ pero reduzca una de las otras; al hacerlo hay que agrandar la restante para garantizar que $D_2$ siga siendo métrica. Por ejemplo,
+  $ D_2 (1, 3) := 2, quad D_2 (1, 2) := 1/2, quad D_2 (2, 3) := 2. $
+  $D_2$ es una métrica (queda como ejercicio de la clase demostrarlo; también, que con $D_2 (2, 3) = 1$ no lo sería: el menor valor admisible para $D_2 (2, 3)$ es $3\/2$ y el mayor es $5\/2$, y fuera de ese rango falla la desigualdad triangular).
+
+  Tomando mínimo se tiene $D(1, 3) = 2$, $D(1, 2) = 1\/2$ y $D(2, 3) = 1$, y entonces
+  $ D(1, 3) = 2 > 1/2 + 1 = D(1, 2) + D(2, 3), $
+  así que no se cumple la desigualdad triangular y $D$ no es una métrica. Esto prueba que, si queremos obtener una métrica, no podemos reemplazar el máximo por el mínimo en la definición de $D$.
+]
+
 #v(10pt)
 
 == Bloque 2 · Topología en espacios métricos: puntos interiores y abiertos
@@ -507,6 +624,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Desbloquea directamente el *Ejercicio 3 (a)* de la Práctica 3 (hallar el interior de $[0, 1]$) y el *Ejercicio 4* (probar que conjuntos son abiertos exhibiendo el radio de la bola contenida).
 
   La maniobra clave para un punto interior $x$ es elegir el radio como la distancia mínima al borde, $r = min(x - a, b - x)$, lo cual garantiza tanto que $r > 0$ como que la bola abierta $B(x, r)$ no se sale del conjunto.
+
+  El último ejemplo del bloque, 17-09/1 (interior de un producto $A times B$ con la métrica suma), está cargado sólo con el enunciado y la observación de la clase sobre cómo *no* elegir el radio ($r = r_1 + r_2$ falla); es la versión en producto del Ejercicio 6 (a), $(A inter B)^circle = A^circle inter B^circle$, y descansa en la misma idea de elegir bien $r$.
 ]
 
 #ejemplo[Interior del intervalo cerrado: $[0, 1]^circle = (0, 1)$ (Ejemplo 4.13)][20][
@@ -669,6 +788,24 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   *$A$ no es cerrado.* La sucesión $f_n(x)=x\/n$ está en $A$ (es inyectiva), pero $d_infinity(f_n,0) <= 1/n -> 0$, así que $f_n -> 0$ y la función nula no es inyectiva.
 ]
 
+#ejemplo[Interior de un producto con la métrica suma: $(A times B)^circle = A^circle times B^circle$ (Clase del 17/09/2026 · Ejemplo 1)][17-09/1][
+  Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. En $X times Y$ consideremos la métrica
+  $ d((x_1, y_1), (x_2, y_2)) = d_1 (x_1, x_2) + d_2 (y_1, y_2). $
+  Sean $A subset.eq X$ y $B subset.eq Y$. Probar que $(A times B)^circle = A^circle times B^circle$. Deducir que, si $A$ y $B$ son abiertos, entonces $A times B$ es abierto en $X times Y$.
+]
+
+#estrategia[En la inclusión $supset.eq$ el radio no es $r_1 + r_2$: hay que elegirlo con cuidado][
+  Si $(a, b) in A^circle times B^circle$, hay radios $r_1, r_2 > 0$ con $B_(d_1) (a, r_1) subset.eq A$ y $B_(d_2) (b, r_2) subset.eq B$, y hay que fabricar un único $r > 0$ con $B_d ((a, b), r) subset.eq A times B$. Una tentación frecuente es tomar $r = r_1 + r_2$, imitando la forma de la métrica. El siguiente ejemplo de la clase muestra que esa elección *no* funciona.
+
+  Sea $X = Y = RR$ con $d_1 = d_2 = abs(dot.c)$, de modo que $d((x_1, y_1), (x_2, y_2)) = abs(x_1 - x_2) + abs(y_1 - y_2)$. Tomemos
+  $ A = (-1, 1), quad B = (-2, 2), quad (a, b) = (0, 0), quad r_1 = 1, quad r_2 = 2. $
+  Se cumple $B_(d_1) (0, 1) = (-1, 1) subset.eq A$ y $B_(d_2) (0, 2) = (-2, 2) subset.eq B$, así que $r_1$ y $r_2$ son radios admisibles en cada coordenada. Sin embargo, con $r_1 + r_2 = 3$ el punto $p = (3\/2, 0)$ cumple
+  $ d(p, (0, 0)) = abs(3/2) + abs(0) = 3/2 < 3, $
+  o sea $p in B_d ((0, 0), r_1 + r_2)$, pero $3\/2 in.not A = (-1, 1)$ y por lo tanto $p in.not A times B$. Es decir, $B_d ((0, 0), r_1 + r_2) subset.eq.not A times B$.
+
+  (El apunte de la clase deja el ejercicio sin resolver; sólo trae esta observación.)
+]
+
 #v(10pt)
 #line(length: 100%, stroke: 0.5pt + luma(150))
 #v(8pt)
@@ -686,6 +823,13 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   reusa con la desigualdad triangular "al revés". Los tres últimos son el mismo par de
   conjuntos ($(0,1) union {2}$) recorrido con las cuatro nociones --- interior, clausura,
   derivado y frontera --- y después generalizado a $ZZ$, $(0,1)$ y $QQ$.
+
+  Al final del bloque, de la clase del 17/09, se agregan la *caracterización sucesional de la
+  clausura* (17-09/4: $x in overline(A)$ si y sólo si $x$ es límite de una sucesión de $A$), que
+  es la herramienta con la que se calculan las clausuras del Ejercicio 3 (g)--(h) y se prueba el
+  Ejercicio 10 (c), y su aplicación completa a ${(1\/n, 1\/m)}$ en $RR^2$ con la métrica suma
+  (17-09/5), hermano bidimensional del 15-09/6 y de C4-1: candidato, sucesiones explícitas para
+  una inclusión y análisis de los índices para la otra.
 ]
 
 #ejemplo[Clausura de la bola unitaria en $(RR^2, d_2)$ (Ejemplo 4.24)][24][
@@ -914,7 +1058,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
     - $partial QQ = RR$: si $x in RR$ y $r > 0$, el intervalo $(x-r,x+r)$ interseca tanto a $QQ$ como a $QQ^c$ (cualquier intervalo abierto contiene números racionales e irracionales).
 ]
 
-#ejemplo[$[a,b]$ es cerrado (Clase 15/09)][15/09-1][
+#ejemplo[$[a,b]$ es cerrado (Clase del 15/09/2026 · Ejemplo 1)][15-09/1][
   Sea $(RR, abs(dot.c))$ y $E = [a,b]$. Veamos que $E$ es cerrado.
 ]
 
@@ -922,7 +1066,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Un conjunto es cerrado si $overline(E) = E$. La inclusión $E subset.eq overline(E)$ vale siempre, para cualquier conjunto, así que sólo falta probar $overline(E) subset.eq E$.
 ]
 
-#ejemplo[$[a,b)$ no es cerrado ni es abierto (Clase 15/09)][15/09-2][
+#ejemplo[$[a,b)$ no es cerrado ni es abierto (Clase del 15/09/2026 · Ejemplo 2)][15-09/2][
   Sea $(RR, abs(dot.c))$ y $E = [a,b)$. Veamos que $E$ no es abierto y que tampoco es cerrado.
 ]
 
@@ -936,7 +1080,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   ya que $b - r/2 in B(b,r) inter E$ (tomando $r$ suficientemente chico para que además $b - r/2 > a$).
 ]
 
-#ejemplo[La bola cerrada es cerrada, vía $r arrow 0^+$ (Clase 15/09)][15/09-3][
+#ejemplo[La bola cerrada es cerrada, vía $r arrow 0^+$ (Clase del 15/09/2026 · Ejemplo 3)][15-09/3][
   Sea $(RR^2, d_2)$ y $E = B[(0,0), 1] = {(x,y) in RR^2 : d_2((x,y),(0,0)) <= 1}$. Veamos que $E$ es cerrado.
 ]
 
@@ -954,7 +1098,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Como esto vale para todo $r > 0$, tomando $r -> 0^+$ concluimos que $d_2((x,y),(0,0)) <= 1$, es decir, $(x,y) in E$.
 ]
 
-#ejemplo[Supremo e ínfimo de un conjunto acotado están en su clausura (Clase 15/09)][15/09-4][
+#ejemplo[Supremo e ínfimo de un conjunto acotado están en su clausura (Clase del 15/09/2026 · Ejemplo 4)][15-09/4][
   Sea $E subset.eq RR$ acotado, en $(RR, abs(dot.c))$. Veamos que $op("sup")(E), op("ínf")(E) in overline(E)$.
 ]
 
@@ -971,10 +1115,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   Dos ejemplos concretos de esta observación:
   - $E = {1/n : n in NN}$: tenemos $0 = op("ínf")(E) in overline(E)$, aunque $0 in.not E$.
-  - $E = [a, b)$ (Ejemplo 15/09-2): tenemos $b in overline(E)$ porque $b = op("sup")(E)$, lo cual explica directamente por qué $b in overline(E) without E$.
+  - $E = [a, b)$ (Ejemplo 15-09/2): tenemos $b in overline(E)$ porque $b = op("sup")(E)$, lo cual explica directamente por qué $b in overline(E) without E$.
 ]
 
-#ejemplo[La esfera $S(x,r)$ es un conjunto cerrado (Clase 15/09)][15/09-5][
+#ejemplo[La esfera $S(x,r)$ es un conjunto cerrado (Clase del 15/09/2026 · Ejemplo 5)][15-09/5][
   Sea $(X, d)$ un espacio métrico. Dados $x in X$ y $r > 0$, definimos la esfera
   $ S(x,r) = {y in X : d(y,x) = r}. $
   Probar que $S(x,r)$ es cerrado.
@@ -1004,7 +1148,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   da la contradicción $d(x,y) < d(x,y)$ directamente, sin necesitar invocar $d(x,y) = d(y,x)$.
 ]
 
-#ejemplo[Interior y clausura de $A = {m + 1/(n+1) : m, n in NN}$ (Clase 15/09)][15/09-6][
+#ejemplo[Interior y clausura de $A = {m + 1/(n+1) : m, n in NN}$ (Clase del 15/09/2026 · Ejemplo 6)][15-09/6][
   Sea $A subset.eq RR$ definido como
   $ A = {m + 1/(n+1) : m, n in NN}. $
   Hallar $A^circle$ y $overline(A)$, en $(RR, d)$ con $d(x,y) = abs(x-y)$.
@@ -1103,7 +1247,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   *Frontera: $partial A = overline(A) without A^circle = {0} union {1/n : n in NN}$* (Ejercicio 9 de la Práctica 3).
 
-  _Comparar con el Ejemplo 15/09-6_: mismo tipo de análisis para $A = {m+1/(n+1)}$, donde había quedado pendiente $overline(A) subset.eq A union NN$; el argumento de Bolzano-Weierstrass de acá se adapta a ese caso.
+  _Comparar con el Ejemplo 15-09/6_: mismo tipo de análisis para $A = {m+1/(n+1)}$, donde había quedado pendiente $overline(A) subset.eq A union NN$; el argumento de Bolzano-Weierstrass de acá se adapta a ese caso.
 ]
 
 #ejemplo[Interior, clausura, aislados, acumulación y frontera de $A = {(x,y) in RR^2 : y > x}$ (Clase 4 · Ejercicio 2)][C4-2][
@@ -1152,6 +1296,67 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Si $x_n -> 0$: entonces $(x,y)=(0,y) in A union {(0,y):y!=0}$.
 
   $supset.eq)$ Dado $(0,y)$ con $y!=0$, la sucesión $(y\/m, y) in A$ (pues $y = m dot (y\/m)$) converge a $(0,y)$.
+]
+
+#ejemplo[Caracterización sucesional de la clausura (Clase del 17/09/2026 · Ejemplo 4)][17-09/4][
+  Sea $(X, d)$ un espacio métrico y sea $A subset.eq X$. Probar que
+  $ x in overline(A) quad <==> quad "existe una sucesión" (x_n)_(n in NN) subset.eq A "tal que" x_n -> x. $
+]
+
+#estrategia[La ida elige un punto de $A$ en cada bola $B(x, 1\/n)$; la vuelta usa un solo término de la sucesión][
+  Es la versión "clausura" del Ejemplo C4-5 (caracterización sucesional de los abiertos). Para $=>$, la definición de adherencia da $B(x, 1\/n) inter A != emptyset$ para cada $n$, y elegir un $x_n$ en cada una fabrica la sucesión; $d(x_n, x) < 1\/n$ la hace converger por sándwich. Para $arrow.l.double$ no hace falta toda la sucesión: dado $epsilon > 0$, *un* término $x_(n_0)$ con $d(x_(n_0), x) < epsilon$ ya está en $B(x, epsilon) inter A$.
+]
+
+#resolucion[
+  $arrow.l.double)$ Supongamos que existe $(x_n)_(n in NN) subset.eq A$ con $x_n -> x$. Por definición de convergencia de una sucesión en un espacio métrico, dado $epsilon > 0$ existe $n_0 in NN$ tal que $d(x_(n_0), x) < epsilon$, o sea $x_(n_0) in B(x, epsilon)$. Como además $x_(n_0) in A$, se tiene $B(x, epsilon) inter A != emptyset$. Como $epsilon > 0$ era arbitrario, $x in overline(A)$.
+
+  $=>)$ Supongamos $x in overline(A)$. Para cada $n in NN$, tomando $epsilon = 1\/n$ obtenemos $B(x, 1\/n) inter A != emptyset$, de modo que podemos elegir
+  $ x_n in B(x, 1\/n) inter A. $
+  Por construcción $(x_n)_(n in NN) subset.eq A$ y
+  $ 0 <= d(x_n, x) < 1/n -->_(n -> infinity) 0, $
+  así que, por el criterio del sándwich, $d(x_n, x) -> 0$, es decir $x_n -> x$.
+]
+
+#ejemplo[Clausura de ${(1\/n, 1\/m)}$ en $RR^2$ con la métrica suma (Clase del 17/09/2026 · Ejemplo 5)][17-09/5][
+  Sea $(RR^2, d)$ con $d((x_1, y_1), (x_2, y_2)) = abs(x_1 - x_2) + abs(y_1 - y_2)$, y consideremos el conjunto
+  $ A = {(1/n, 1/m) : n, m in NN} subset.eq RR^2. $
+  Calcular la clausura $overline(A)$.
+]
+
+#estrategia[Sólo con el Ejemplo 17-09/4: candidato, sucesiones explícitas para $supset.eq$ y análisis de índices para $subset.eq$][
+  Un punto está en la clausura si y sólo si es límite de una sucesión de puntos de $A$. Entonces: se propone el candidato $C = A union {(1\/n, 0)} union {(0, 1\/m)} union {(0, 0)}$, se verifica $C subset.eq overline(A)$ exhibiendo sucesiones explícitas, y $overline(A) subset.eq C$ analizando qué límites puede tener una sucesión genérica $(1\/n_k, 1\/m_k)$ de $A$. La herramienta que lo hace manejable es que en esta métrica *convergencia = convergencia coordenada a coordenada*, y para cada coordenada la sucesión de índices $(n_k)$ o bien no está acotada (y una subsucesión manda la coordenada a $0$) o bien toma finitos valores (y una subsucesión constante la clava en $1\/n$). Comparar con el Ejemplo C4-1, donde el mismo análisis se hace con Bolzano-Weierstrass.
+]
+
+#resolucion[
+  Llamemos
+  $ C = A union {(1/n, 0) : n in NN} union {(0, 1/m) : m in NN} union {(0, 0)}. $
+
+  _Herramienta_: en $(RR^2, d)$ vale
+  $ abs(x_k - x) <= d((x_k, y_k), (x, y)) = abs(x_k - x) + abs(y_k - y), \
+    abs(y_k - y) <= d((x_k, y_k), (x, y)), $
+  de donde $(x_k, y_k) -> (x, y)$ si y sólo si $x_k -> x$ e $y_k -> y$. Es decir: _convergencia en $d$ = convergencia coordenada a coordenada_.
+
+  *Afirmamos que $overline(A) = C$.*
+
+  $(supset.eq)$ Por el Ejemplo 17-09/4, alcanza con exhibir, para cada punto de $C$, una sucesión contenida en $A$ que converja a él.
+  - Si $p in A$, tomamos la sucesión constante $x_k = p$. Luego $A subset.eq overline(A)$.
+  - Fijado $n in NN$, la sucesión $(1/n, 1/k)_(k in NN) subset.eq A$ cumple $(1/n, 1/k) -> (1/n, 0)$, porque $d((1/n, 1/k), (1/n, 0)) = 0 + 1/k -> 0$.
+  - Simétricamente, fijado $m in NN$, la sucesión $(1/k, 1/m)_(k in NN) subset.eq A$ converge a $(0, 1/m)$, ya que la distancia vale $1/k -> 0$.
+  - La sucesión diagonal $(1/k, 1/k)_(k in NN) subset.eq A$ converge a $(0, 0)$, pues $d((1/k, 1/k), (0, 0)) = 2/k -> 0$.
+  Por lo tanto $C subset.eq overline(A)$.
+
+  $(subset.eq)$ Sea $(x, y) in overline(A)$. Por el Ejemplo 17-09/4 existe una sucesión contenida en $A$ que converge a $(x, y)$; escribámosla como
+  $ (1/n_k, 1/m_k) -->_(k -> infinity) (x, y), quad n_k, m_k in NN. $
+  Por la herramienta, esto equivale a $1/n_k -> x$ y $1/m_k -> y$. Veamos que necesariamente $x in {0} union {1/n : n in NN}$, distinguiendo dos casos según la sucesión de índices $(n_k)_(k in NN) subset.eq NN$:
+  - $(n_k)$ _no está acotada_. Entonces hay una subsucesión $n_(k_j) -> infinity$, luego $1/n_(k_j) -> 0$. Como toda subsucesión de una sucesión convergente converge al mismo límite, $x = 0$.
+  - $(n_k)$ _está acotada_. Entonces $(n_k)$ toma finitos valores, así que algún valor $n in NN$ se repite infinitas veces: hay una subsucesión constante $n_(k_j) = n$, es decir $1/n_(k_j) = 1/n$ para todo $j$. Pasando al límite, $x = 1/n$.
+  El mismo argumento aplicado a $(m_k)$ da $y in {0} union {1/m : m in NN}$. Combinando ambas coordenadas, las cuatro posibilidades son
+  $ (x, y) = (1/n, 1/m) in A, quad (x, y) = (1/n, 0), quad (x, y) = (0, 1/m), quad (x, y) = (0, 0), $
+  y en todos los casos $(x, y) in C$. Por lo tanto $overline(A) subset.eq C$.
+
+  En resumen,
+  $ overline(A) &= A union {(1/n, 0)}_(n in NN) union {(0, 1/m)}_(m in NN) union {(0, 0)} \
+    &= ({0} union {1/n}_(n in NN)) times ({0} union {1/m}_(m in NN)). $
 ]
 
 #v(10pt)
@@ -1468,6 +1673,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   Un espacio es completo (Definición 4.55) si toda sucesión de Cauchy converge *adentro* del espacio. Los seis ejemplos de la clase del 01/10 cubren las tres maniobras que piden los *Ejercicios 14, 15 y 16* de la Práctica 3: (i) probar completitud "a mano", coordenada a coordenada, controlando que el límite candidato quede en el espacio y que la convergencia sea en la métrica del espacio y no sólo coordenada a coordenada (C5-1, que es el Corolario 4.58 con infinitas coordenadas); (ii) heredar la completitud a un subconjunto cerrado y usarla para decidir si conjuntos concretos son completos (C5-2, C5-6); (iii) caracterizarla sin bolas, por sucesiones, en una métrica rara (C5-3) o a través del encaje de cerrados, que es el recíproco del Ejercicio 16 (C5-5). C5-4 es una aplicación de $d(x, F)$ (Ejercicio 10) que se usa de paso.
+
+  El Ejemplo 29-09/2, al final del bloque, va acá y no en el Bloque 5 porque, aunque sus ítems (i)--(ii) son de métricas y de sucesiones, la técnica que carga es la de (iii)--(iv): transportar la condición de Cauchy de una métrica a otra que la domina ($D >= d$) para pedirle prestado el límite a $RR$, y después verificar que ese límite queda *dentro* del espacio. Es el esqueleto del Ejercicio 14 (completitud de $(RR^n, d_1)$, $(RR^n, d_2)$ y $(RR^n, d_oo)$ a través de las desigualdades del Ejercicio 12) y, frente al Ejercicio 15, muestra que dos métricas con las mismas sucesiones convergentes pueden diferir en completitud.
 ]
 
 #ejemplo[Las sucesiones acotadas con $d_oo$ forman un espacio completo (Clase 5 · Ejercicio 1)][C5-1][
@@ -1577,4 +1784,63 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $=>)$ Por el Ejercicio 15 de la Práctica 3, ya que $overline(B)(x, r)$ es cerrada (Ejercicio 4 (d)).
 
   $arrow.l.double)$ Sea $(a_n)_n subset.eq E$ de Cauchy. Es acotada (Teorema 4.54 a): existe $M > 0$ con $(a_n)_n subset.eq overline(B)(a_1, M)$. Por hipótesis $overline(B)(a_1, M)$ es completo, así que $(a_n)_n$ converge a un punto de $overline(B)(a_1, M)$, y como la distancia es la misma, converge en $(E, d)$.
+]
+
+#ejemplo[$(0, 1]$ con $abs(x - y)$ no es completo, pero con $abs(1\/x - 1\/y)$ sí (Clase del 29/09/2026 · Ejemplo 2)][29-09/2][
+  Sea $X = (0, 1] subset.eq RR$. Definimos en $X times X$ las siguientes funciones con valores en $RR_(>= 0)$:
+  $ d(x, y) := abs(x - y), quad D(x, y) := abs(1/x - 1/y) $
+  ($d$ es simplemente la restricción a $X$ de la métrica inducida por el módulo). Probar que:
+  #set enum(numbering: "(i)")
+  + $D$ es una métrica.
+  + La convergencia en $(X, d)$ es la misma que en $(X, D)$. En otras palabras, si $(a_n)_(n in NN) subset.eq X$ es una sucesión y $a in X$, entonces $a_n -> a$ en $(X, d)$ si y sólo si $a_n -> a$ en $(X, D)$.
+  + $(X, d)$ no es un espacio métrico completo.
+  + $(X, D)$ es un espacio métrico completo.
+]
+
+#estrategia[$D >= d$ transporta las Cauchy de $D$ a las de $RR$; lo que $D$ agrega es que el límite no puede ser $0$][
+  (i) es gratis: $D = D_f$ con $f(x) = 1\/x$ inyectiva (Ejemplo 15-09/7). En (ii) la vuelta sale de la desigualdad $D(x, y) = abs(x - y)\/(x y) >= abs(x - y) = d(x, y)$; la ida necesita controlar el denominador $a a_n$ lejos de $0$, y para eso se usa la propia convergencia: desde un $n_0$ en adelante, $a_n > a\/2$. (iii) es la sucesión $1\/n$, de Cauchy en $RR$ y por lo tanto en $(X, d)$, cuyo único límite posible es $0 in.not X$. Para (iv), una Cauchy de $(X, D)$ es Cauchy para el módulo (por $D >= d$), así que tiene un límite $x in [0, 1]$ en $RR$; el punto es descartar $x = 0$, y eso lo hace la condición de Cauchy en $D$ con $epsilon = 1$: $abs(1\/x_n - 1\/x_(n_0)) <= 1$ da una cota inferior positiva $x_n >= x_(n_0)\/(1 + x_(n_0))$. Después, (ii) convierte la convergencia en $d$ en convergencia en $D$.
+]
+
+#resolucion[
+  *(i)* La función $f(x) := 1\/x$ es inyectiva de $(0, +infinity)$ en $(0, +infinity)$. Luego, por el Ejemplo 15-09/7 (en la versión del 29/09, para $f : A -> A$ con $A = (0, +infinity)$), si definimos $tilde(D) : (0, +infinity) times (0, +infinity) -> RR_(>= 0)$ como $tilde(D) (x, y) := abs(1/x - 1/y)$, entonces $tilde(D)$ es una métrica. Restringiendo esta métrica a $(0, 1] times (0, 1]$ obtenemos la $D$ del enunciado, y por lo tanto $D$ es una métrica sobre $(0, 1]$. Queda como ejercicio de la clase dar una solución alternativa, probando "a mano" que $D$ es una métrica.
+
+  _Nota_: la fuente dice "métrica sobre $[0, 1)$"; es un desliz, el conjunto es $X = (0, 1]$.
+
+  *(ii)* Supongamos primero que $a_n -> a$ en $(X, d)$, es decir $abs(a_n - a) -> 0$. Queremos ver que $abs(1\/a_n - 1\/a) -> 0$. Tomando denominador común $a a_n$,
+  $ abs(1/a_n - 1/a) = abs(a_n - a)/(a a_n). quad (1) $
+  Ya sabemos que el numerador tiende a cero. Para ver que el cociente lo hace, hay que asegurarse de que el denominador esté alejado de cero. Usamos la convergencia: existe $n_0$ tal que si $n >= n_0$, entonces $abs(a - a_n) < a\/2$. Por lo tanto, si $n >= n_0$, $a - a_n <= abs(a - a_n) < a\/2$, lo que implica $a_n > a\/2$. Luego,
+  $ abs(a_n - a)/(a a_n) = 1/a_n dot.c 1/a dot.c abs(a_n - a) <= 2/a dot.c 1/a dot.c abs(a_n - a) = 2/a^2 abs(a_n - a), $
+  lo que combinado con (1) da
+  $ D(a, a_n) = abs(1/a_n - 1/a) <= 2/a^2 abs(a_n - a) quad forall n >= n_0. quad (2) $
+  Ya sacamos el $a_n$ del denominador, y ahora sí podemos usar directamente que el numerador tiende a cero: fijado $epsilon > 0$, existe $n_1 in NN$ tal que $abs(a_n - a) < (a^2 epsilon)\/2$ para todo $n >= n_1$. De esto y (2),
+  $ D(a, a_n) <= 2/a^2 abs(a_n - a) < epsilon quad forall n >= op("máx") {n_0, n_1}. $
+  Hemos probado que $a_n -> a$ en $(X, D)$. $quad (3)$
+
+  La vuelta es más fácil. Para todo $x, y in X$,
+  $ D(x, y) = abs(1/x - 1/y) = abs(x - y)/(x y) >= abs(x - y) = d(x, y). quad (4) $
+  Luego, dado $epsilon > 0$, si $a_n -> a$ en $(X, D)$ podemos tomar $n_0$ tal que $D(a_n, a) < epsilon$ para $n >= n_0$, y entonces por (4) resulta $d(a_n, a) < epsilon$. Esto completa (ii).
+
+  *(iii)* Tenemos que encontrar una sucesión de Cauchy que no sea convergente. Proponemos $x_n := 1\/n$. Como toda sucesión convergente es de Cauchy (en cualquier espacio métrico) y $x_n -> 0$ en $(RR, abs(dot.c))$, $(x_n)$ es de Cauchy en $RR$: dado $epsilon > 0$, existe $n_0$ tal que $abs(x_n - x_m) < epsilon$ si $n, m >= n_0$. Pero esto es lo mismo que ser de Cauchy en $(X, d)$, por definición de $d$. Veamos que no converge, por el absurdo: supongamos que existe $x in X$ con $x_n -> x$ en $(X, d)$, es decir $abs(x_n - x) -> 0$. Como también $abs(x_n) -> 0$,
+  $ 0 <= x = abs(x - x_n + x_n) <= abs(x - x_n) + abs(x_n) -->_(n -> infinity) 0. $
+  Se sigue que $x = 0$, lo que es absurdo porque $x in (0, 1]$.
+
+  *(iv)* Sea $(x_n)_(n in NN)$ una sucesión de Cauchy en $(X, D)$. También es de Cauchy en $RR$ con el módulo: dado $epsilon > 0$, tomemos $n_0$ tal que $D(x_n, x_m) < epsilon$ si $n, m >= n_0$; por (4), también $abs(x_n - x_m) < epsilon$. Como $(RR, abs(dot.c))$ es completo, existe $x in RR$ tal que
+  $ abs(x - x_n) -->_(n -> infinity) 0. quad (5) $
+  Como $0 <= x_n <= 1$ para todo $n$, tomando límite $0 <= x <= 1$. Para completar la demostración de que $(x_n)$ converge en $(X, D)$ tenemos que probar dos cosas: (a) $x in X$; (b) $x_n -> x$ en $(X, D)$.
+
+  Veamos (a), por el absurdo. Si $x in.not X$, como $x in [0, 1]$ y $X = (0, 1]$, es $x = 0$, es decir $x_n -> 0$ en $(RR, abs(dot.c))$. Ahora bien, $(x_n)$ es de Cauchy en $(X, D)$, así que en particular existe $n_0 in NN$ tal que $D(x_n, x_m) <= 1$ si $n, m >= n_0$. Tomando $m = n_0$,
+  $ abs(1/x_n - 1/x_(n_0)) <= 1 quad forall n >= n_0. $
+  Esto implica que, para todo $n >= n_0$,
+  $ 1/x_n = abs(1/x_n - 1/x_(n_0) + 1/x_(n_0)) <= abs(1/x_n - 1/x_(n_0)) + 1/x_(n_0) = (1 + x_(n_0))/x_(n_0) $
+  (podemos sacar el módulo porque son números positivos). Se deduce que
+  $ x_(n_0)/(1 + x_(n_0)) <= x_n quad forall n >= n_0, $
+  lo que es absurdo porque $x_n -> 0$.
+
+  Ahora (b): como $x in X$ y la convergencia en $(X, d)$ es la misma que en $(X, D)$ (por (ii)), alcanza con ver que $x_n -> x$ en $(X, d)$. Pero esto es exactamente (5).
+
+  _Nota_: la fuente nombra a la sucesión de (iv) $(a_n)$ al presentarla y después la llama $(x_n)$; acá se usa $(x_n)$ desde el principio.
+]
+
+#sublema(titulo: "Para qué sirve")[
+  $d$ y $D$ tienen las *mismas sucesiones convergentes* en $(0, 1]$ (ítem (ii)) y, por el Ejemplo C4-8, definen los mismos abiertos; sin embargo una es completa y la otra no. La completitud no es una propiedad de los abiertos sino de la métrica: no se puede decidir mirando sólo qué sucesiones convergen, hay que mirar cuáles son de Cauchy. (Esta lectura es nuestra; la clase no la explicita.)
 ]
