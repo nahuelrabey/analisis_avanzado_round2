@@ -37,7 +37,7 @@
 
 Los ejemplos están agrupados por *técnica*, no por orden de transcripción, y los bloques siguen el orden en que la guía los necesita. Cada bloque abre con la nota de qué ejercicios de `guias/p6.typ` desbloquea.
 
-La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) --- `C8-4` es el Ejercicio 4 de `clases/punto_fijo.typ` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_.
+La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `notas_materia.pdf` (con su numeración por capítulo entre paréntesis en el título), *`C{clase}-{ejemplo}`* es un ejercicio resuelto en clase, transcrito en `clases/` (un archivo por tema; la tabla clase $arrow$ archivo está en la skill `ejemplo`) --- `C8-4` es el Ejercicio 4 de `clases/punto_fijo.typ`, la clase del 11/11/2025; los Ejercicios 1 a 3 de esa misma clase (punto fijo en compactos, $f(inter.big A_n) = inter.big f(A_n)$, $C(RR, [0, 1])$ sin denso numerable) viven en `ejemplos/p5.typ` como `C8-1` a `C8-3` --- y *`A{sección}`* es un resultado o ejercicio de Abbott, _Understanding Analysis_.
 
 #v(6pt)
 
@@ -51,8 +51,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   inset: (x: 6pt, y: 4pt),
 
   [*\#*], [*Bloque*], [*Desbloquea*],
-  [1], [Completitud en espacios normados], [p6: Ej. 6, 7 (conceptual)],
-  [2], [Operadores lineales: continuidad y acotación], [p6: Ej. 8, 9, 12],
+  [1], [Completitud en espacios normados], [p6: Ej. 5 (a); conceptual para Ej. 2, 6 (a), 7],
+  [2], [Operadores lineales: continuidad y acotación], [p6: Ej. 8 (usa (c) $<==>$ (f)), 12; conceptual para Ej. 9, 10, 11, 13 (b)],
 )
 
 #v(4pt)
@@ -66,7 +66,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 1 · Completitud en espacios normados
 
 #sublema(titulo: "Qué desbloquea")[
-  En un espacio normado, la completitud se puede chequear sobre la esfera unitaria $S = {x : norm(x) = 1}$: si toda sucesión de Cauchy de $S$ converge, el espacio es de Banach. La técnica es *normalizar* una sucesión de Cauchy que no tiende a $0$ y controlar el error con la desigualdad $abs(norm(x_n) - norm(x_m)) <= norm(x_n - x_m)$. Sirve como modelo para el *Ejercicio 6* (completitud de $ell^oo$) y el *Ejercicio 7* de la Práctica 6, y repasa el Ejercicio 15 de la Práctica 3 (cerrado de completo es completo).
+  En un espacio normado, la completitud se puede chequear sobre la esfera unitaria $S = {x : norm(x) = 1}$: si toda sucesión de Cauchy de $S$ converge, el espacio es de Banach. La técnica es *normalizar* una sucesión de Cauchy que no tiende a $0$ y controlar el error con la desigualdad $abs(norm(x_n) - norm(x_m)) <= norm(x_n - x_m)$. Prepara el *Ejercicio 5 (a)* (decidir si $(RR_n [t], norm(dot.c)_infinity)$ y $(RR_n [t], norm(dot.c)_1)$ son de Banach: alcanza con mirar sucesiones de Cauchy de polinomios de norma $1$), da el lenguaje para el *Ejercicio 6 (a)* y el *Ejercicio 7*, donde las sucesiones interesantes viven en la esfera o en la bola cerrada de $ell^infinity$, y la desigualdad anterior es la que se usa en el *Ejercicio 2* para hablar de bolas. La ida repasa el Ejercicio 15 de la Práctica 3 (cerrado de completo es completo).
 ]
 
 #ejemplo[$E$ es de Banach si y sólo si toda sucesión de Cauchy en la esfera unitaria converge (Clase 8 · Ejercicio 4)][C8-4][
@@ -75,6 +75,10 @@ $
 S = {x in E : norm(x) = 1}.
 $
 Probar que $E$ es un espacio de Banach si y sólo si toda sucesión de Cauchy $(x_n)_(n >= 1) subset.eq S$ converge.
+]
+
+#estrategia[Normalizar una sucesión de Cauchy que no tiende a cero][
+  La ida es gratis: $S$ es cerrado en un completo. Para la vuelta, dada $(x_n)_n$ de Cauchy en $E$, se la empuja a $S$ dividiendo por la norma, $y_n = x_n \/ norm(x_n)$. Para eso hace falta que $norm(x_n)$ no se acerque a $0$ (si $x_n -> 0$ no hay nada que probar) y que $(y_n)_n$ siga siendo de Cauchy: ambas cosas salen de que $(norm(x_n))_n$ es de Cauchy en $RR$, luego converge a un $L > 0$. Una vez que $y_n -> y in S$, se recupera $x_n -> L y$. De paso queda la desigualdad $abs(norm(x) - norm(y)) <= norm(x - y)$: la norma es $1$-lipschitz, así que $x_n -> x$ implica $norm(x_n) -> norm(x)$.
 ]
 
 #resolucion[
@@ -97,8 +101,10 @@ $
 y el segundo término se puede hacer menor a $epsilon > 0$ para todo $n, m$ suficientemente grande, porque $(x_n)_n$ es de Cauchy. Por lo tanto $(norm(x_n))_n$ converge, porque $RR$ es completo; digamos $norm(x_n) -> L$. Además, $L != 0$; caso contrario, $norm(x_n) -> 0$ equivale a decir que $x_n -> 0$. Como $norm(x_n) >= 0$, $L > 0$. Entonces existen $n_0 in NN$ y $delta > 0$ tales que $norm(x_n) >= delta$ para todo $n >= n_0$. Por lo tanto, podemos _normalizar_ $(x_n)_n$. Para todo $n >= n_0$ definimos $y_n = x_n \/ norm(x_n)$. Se tiene que
 $
 norm(y_n - y_m) &= norm(x_n / norm(x_n) - x_m / norm(x_m)) = norm((norm(x_m) dot.c x_n - x_m dot.c norm(x_n)) / (norm(x_n) dot.c norm(x_m))) \
-&<= 1 / (norm(x_n) dot.c norm(x_m)) [ norm(norm(x_m) dot.c x_n - L dot.c x_n) + norm(L x_n - L x_m) + norm(L x_m - x_m dot.c norm(x_n)) ] \
-&<= 1 / (norm(x_n) dot.c norm(x_m)) [ abs(norm(x_m) - L) dot.c norm(x_n) + norm(x_n - x_m) dot.c L + abs(L - norm(x_n)) dot.c norm(x_m) ].
+&<= 1 / (norm(x_n) dot.c norm(x_m)) [ norm(norm(x_m) dot.c x_n - L dot.c x_n) + norm(L x_n - L x_m) \
+& quad quad + norm(L x_m - x_m dot.c norm(x_n)) ] \
+&<= 1 / (norm(x_n) dot.c norm(x_m)) [ abs(norm(x_m) - L) dot.c norm(x_n) + norm(x_n - x_m) dot.c L \
+& quad quad + abs(L - norm(x_n)) dot.c norm(x_m) ].
 $
 Como $norm(x_n) -> L != 0$, el lado derecho tiende a $0$. Por lo tanto $(y_n)_(n >= n_0)$ es de Cauchy. Como $S$ es completo, $y_n -> y$ con $y in S$. Pero entonces $y_n = x_n \/ norm(x_n) -> y$ implica que $x_n$ converge a $L dot.c y$, ya que para todo $n >= n_0$,
 $
@@ -114,11 +120,15 @@ _Nota_: "el lado derecho tiende a $0$" en la cota de $norm(y_n - y_m)$ quiere de
 == Bloque 2 · Operadores lineales: continuidad y acotación
 
 #sublema(titulo: "Qué desbloquea")[
-  Para un operador lineal, continuidad equivale a mandar acotados en acotados (*Ejercicio 8* de la Práctica 6). Este ejemplo agrega otra caracterización por sucesiones nulas, con el truco de reescalar $x_n$ por $sqrt(n) norm(x_n)$ para fabricar una sucesión que tiende a $0$ con imágenes no acotadas. Es la herramienta para refutar continuidad en el *Ejercicio 12* (el operador derivada) y complementa las fórmulas del *Ejercicio 9*.
+  Para un operador lineal, continuidad equivale a mandar acotados en acotados (*Ejercicio 8* de la Práctica 6). Este ejemplo agrega otra caracterización por sucesiones nulas, con el truco de reescalar $x_n$ por $sqrt(n) norm(x_n)$ para fabricar una sucesión que tiende a $0$ con imágenes no acotadas. Se divide por la norma para ganar control del tamaño y por $sqrt(n)$ para que la sucesión tienda a $0$ sin que $T$ deje de explotar. Es la herramienta para refutar continuidad en el *Ejercicio 12* (para ver que la derivación $delta p = p'$ no es continua en $(RR[t], norm(dot.c)_infinity)$ basta exhibir $p_n -> 0$ con $norm(p'_n)_infinity$ no acotada) y complementa las fórmulas del *Ejercicio 9*; en los *Ejercicios 10, 11 y 13 (b)*, acotar $norm(T x)$ por una constante por $norm(x)$ es lo mismo que probar la continuidad. La resolución de clase *usa* el Ejercicio 8 (en la forma "manda acotados en acotados $<==>$ continua"), así que conviene tener ese ejercicio hecho antes de leerla.
 ]
 
 #ejemplo[$T$ lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas (Clase 8 · Ejercicio 5)][C8-5][
   Sean $E, F$ espacios normados. Sea $T : E -> F$ una transformación lineal. Probar que $T$ es continua si y sólo si para toda sucesión $(x_n)_(n >= 1)$ en $E$ que tiende a $0$, $(T(x_n))_n$ es acotada.
+]
+
+#estrategia[Fabricar una sucesión nula donde $T$ explote][
+  La ida es inmediata: continuidad en $0$ más linealidad dan $T(x_n) -> 0$, y las convergentes son acotadas. Para la vuelta se pasa por el Ejercicio 8: alcanza con ver que $T$ manda acotados en acotados. Si un acotado $A$ tiene $T(A)$ no acotado, se eligen $x_n in A$ con $norm(T(x_n)) >= n$; el problema es que $(x_n)_n$ no tiene por qué tender a $0$. Se la reescala: dividir por $norm(x_(n_k))$ la normaliza y dividir además por $sqrt(n_k)$ la hace tender a $0$, mientras que $norm(T(y_k))$ crece como $sqrt(n_k)$.
 ]
 
 #resolucion[

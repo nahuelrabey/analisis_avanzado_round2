@@ -39,7 +39,11 @@ que es absurdo. Entonces existe $0 <= alpha < 1$ tal que $d(f(x), f(y)) < alpha 
 
 _Nota (del docente)_: la prueba anterior se basó en probar que $F : K times K -> RR$, $F(x, y) = d(f(x), f(y)) - d(x, y)$ tiene un máximo negativo. Esto sale de que $K times K$ es compacto con $d_infinity$, y para esta métrica, $F$ es continua.
 
-_Nota_: el argumento tiene un hueco en el paso de $(2)$ a $(3)$, y el resultado intermedio es falso tal como está enunciado. En $(2)$, "$d(f(x), f(y)) < d(x, y)$" necesita $x != y$; pero los límites $x$ e $y$ de las subsucesiones pueden coincidir, y en ese caso $(2)$ y $(3)$ dicen $0 <= 0$, sin absurdo. (Además el límite de $(2)$ se toma a lo largo de $j$ y el de $(3)$ a lo largo de $n$: el segundo también debe tomarse sobre la subsucesión $n_(k_j)$.) De hecho, no siempre existe un $alpha < 1$: $f(x) = sin(x)$ en $K = [0, 1]$ cumple $abs(sin x - sin y) < abs(x - y)$ para $x != y$, pero $abs(sin x - sin 0) \/ abs(x - 0) -> 1$ cuando $x -> 0$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, así que el máximo de $F$ es $0$ y no negativo. La conclusión del ejercicio (existencia y unicidad del punto fijo) sí es cierta, pero necesita otro camino (el estándar es minimizar la función continua $x |-> d(x, f(x))$ en el compacto $K$), que no está en el manuscrito.
+_Nota_: el argumento tiene un hueco en el paso de $(2)$ a $(3)$, y el resultado intermedio es falso tal como está enunciado. En $(2)$, "$d(f(x), f(y)) < d(x, y)$" necesita $x != y$; pero los límites $x$ e $y$ de las subsucesiones pueden coincidir, y en ese caso $(2)$ y $(3)$ dicen $0 <= 0$, sin absurdo. (Además, el lado izquierdo de $(2)$ es en realidad $lim_(j -> +infinity) d(f(x_(n_(k_j))), f(y_(n_(k_j))))$, que el manuscrito escribe sin el límite; y el límite de $(2)$ se toma a lo largo de $j$ y el de $(3)$ a lo largo de $n$: el segundo también debe tomarse sobre la subsucesión $n_(k_j)$.) De hecho, no siempre existe un $alpha < 1$: $f(x) = sin(x)$ en $K = [0, 1]$ cumple $abs(sin x - sin y) < abs(x - y)$ para $x != y$, pero $abs(sin x - sin 0) \/ abs(x - 0) -> 1$ cuando $x -> 0$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, así que el máximo de $F$ es $0$ y no negativo. La conclusión del ejercicio (existencia y unicidad del punto fijo) sí es cierta, pero necesita otro camino (el estándar es minimizar la función continua $x |-> d(x, f(x))$ en el compacto $K$), que no está en el manuscrito. En detalle (deducción propia): sea $g(x) = d(x, f(x))$, continua, y sea $x_0 in K$ un punto donde $g$ alcanza su mínimo. Si $x_0$ no fuera fijo, $x_1 = f(x_0) != x_0$ cumpliría
+$
+g(x_1) = d(f(x_0), f(x_1)) < d(x_0, x_1) = g(x_0),
+$
+contra la minimalidad. La unicidad sale directamente de la hipótesis: si $a != b$ fueran fijos, $d(a, b) = d(f(a), f(b)) < d(a, b)$.
 
 _Ejercicio 2_: Sean $X$ e $Y$ espacios métricos y sea $f : X -> Y$ continua.
 
@@ -66,15 +70,15 @@ _Nota_: el Ejercicio 5 de la Práctica 5 se aplica dentro del compacto $A_1$ (lo
 
 b) Sea $A_n = f^n (X)$. Como $f$ es continua y $X$ compacto, para todo $n$, $A_n$ es compacto. Además, $f(X) subset.eq X$, por lo tanto para todo $n$,
 $
-A_(n + 1) = f^(n + 1) (X) = f^n (f(X)) subset.eq f^n (X) = A_n.
+A_(n + 1) = f^(n + 1) (X) = (f^n compose f)(X) subset.eq f^n (X) = A_n.
 $
 Por el ítem (a), $inter.big_n f(A_n) = f(inter.big_n A_n)$. Sea $K = inter.big_n f(A_n)$. Lo que probamos es que $inter.big_n f(A_n) = f(K)$. Por otro lado,
 $
-inter.big_n f(A_n) = inter.big_n f(f^n (X)) = inter.big_n f^(n + 1) (X) = inter.big_(n = 2)^(+infinity) A_n =^((*)) inter.big_(n = 1)^(+infinity) A_n = K,
+inter.big_n f(A_n) = inter.big_n (f compose f^n)(X) = inter.big_n f^(n + 1) (X) = inter.big_(n = 2)^(+infinity) A_n =^((*)) inter.big_(n = 1)^(+infinity) A_n = K,
 $
 donde $(*)$ es porque $inter.big_(n = 1)^(+infinity) A_n subset.eq inter.big_(n = 2)^(+infinity) A_n$ por definición, y $inter.big_(n = 2)^(+infinity) A_n subset.eq inter.big_(n = 1)^(+infinity) A_n = A_1 inter inter.big_(n = 2)^(+infinity) A_n$ ya que $A_n subset.eq A_1$ para todo $n$. Resta ver que $K$ es compacto. Los $A_n$ son cerrados no vacíos y $A_n supset.eq A_(n + 1)$ para todo $n$. Por el Ejercicio 5 de la Práctica 5, $K != emptyset$. Además es compacto, porque es cerrado y está contenido en un compacto. Concluimos que $K$ cumple lo que pide el ejercicio. #align(right)[#square()]
 
-_Nota_: el manuscrito define "$K = inter.big_n f(A_n)$" pero a continuación usa $K = inter.big_(n = 1)^(+infinity) A_n$ (y es con esta definición que "$inter.big_n f(A_n) = f(K)$" es el ítem (a) y que la cadena de igualdades cierra). La definición correcta es $K = inter.big_(n >= 1) A_n = inter.big_(n >= 1) f^n (X)$.
+_Nota_: el manuscrito define "$K = inter.big_n f(A_n)$" pero a continuación usa $K = inter.big_(n = 1)^(+infinity) A_n$ (es con esta definición que "$inter.big_n f(A_n) = f(K)$" es el ítem (a)). Las dos definiciones coinciden, porque la cadena de igualdades muestra justamente $inter.big_n f(A_n) = inter.big_n A_n$; el problema es sólo de orden en la presentación. Lo más limpio es definir $K = inter.big_(n >= 1) A_n = inter.big_(n >= 1) f^n (X)$; entonces el ítem (a) y la cadena dan $f(K) = f(inter.big_n A_n) = inter.big_n f(A_n) = K$, que es el paso final que el manuscrito deja implícito.
 
 _Ejercicio 3_: Sea $C(RR, [0, 1]) = {f : RR -> [0, 1] : f "es continua"}$, con $d_infinity$. Probar que no existe un subconjunto denso numerable en $C(RR, [0, 1])$.
 
@@ -98,7 +102,7 @@ Construyamos una familia de abiertos ${U_i}_(i in I)$ de $C(RR, [0, 1])$ que cum
 
 Concluimos que $C(RR, [0, 1])$ no admite un subconjunto denso contable. #align(right)[#square()]
 
-_Nota_: para $S = emptyset$ o $S = NN$ uno de los dos cerrados es vacío y el Ejercicio 11 no aplica tal cual, pero sirven las constantes $f_emptyset equiv 1$ y $f_NN equiv 0$. Que las bolas $U_S$ son disjuntas sale de $(*)$ y la desigualdad triangular: si $g in U_S inter U_(S')$, entonces $norm(f_S - f_(S'))_infinity < 1 \/ 2 + 1 \/ 2 = 1$. El manuscrito no explicita la prueba del Lema; es la del Ejercicio 17 de la Práctica 2: cada $U_i$ contiene algún $y in Y$ (densidad), y la asignación $i |-> y$ es inyectiva por ser los $U_i$ disjuntos.
+_Nota_: en (I) el manuscrito es ambiguo entre "$\# U_i > 1$" y "$\# U_i >= 1$" (la raya se confunde con el renglón); lo que se usa es $U_i != emptyset$. Para $S = emptyset$ o $S = NN$ uno de los dos cerrados es vacío y el Ejercicio 11 no aplica tal cual, pero sirven las constantes $f_emptyset equiv 1$ y $f_NN equiv 0$. Que las bolas $U_S$ son disjuntas sale de $(*)$ y la desigualdad triangular: si $g in U_S inter U_(S')$, entonces $norm(f_S - f_(S'))_infinity < 1 \/ 2 + 1 \/ 2 = 1$. El manuscrito no explicita la prueba del Lema; es la del Ejercicio 17 de la Práctica 2: cada $U_i$ contiene algún $y in Y$ (densidad), y la asignación $i |-> y$ es inyectiva por ser los $U_i$ disjuntos.
 
 _Nota (del docente)_: la misma idea del ejercicio anterior muestra que $overline(B)(0, 1)$ _no es compacta_. Si definimos $S_n = {n}$, $f_n = f_(S_n)$, entonces $(f_n)_n subset.eq overline(B)(0, 1)$ y no admite subsucesiones convergentes, pues si $(f_(n_k))_k$ es una subsucesión de $(f_n)_n$, por $(*)$, para $k != k'$,
 $
@@ -144,7 +148,7 @@ norm(x_n - L dot.c y) &<= norm(x_n - x_n / norm(x_n) dot.c L) + norm(x_n / norm(
 $
 y el lado derecho tiende a $0$. Concluimos que $(x_n)_n$ es convergente. #align(right)[#square()]
 
-_Nota_: "el lado derecho tiende a $0$" en la cota de $norm(y_n - y_m)$ quiere decir: dado $epsilon > 0$, los tres sumandos del corchete son $< epsilon$ para $n, m$ grandes (por $norm(x_n) -> L$ y la condición de Cauchy), y el factor $1 \/ (norm(x_n) norm(x_m)) <= 1 \/ delta^2$ está acotado. "Como $S$ es completo" es la hipótesis: toda Cauchy en $S$ converge, y el límite queda en $S$ porque $S$ es cerrado.
+_Nota_: "el lado derecho tiende a $0$" en la cota de $norm(y_n - y_m)$ quiere decir: dado $epsilon > 0$, los tres sumandos del corchete son $< epsilon$ para $n, m$ grandes (por $norm(x_n) -> L$ y la condición de Cauchy), y el factor $1 \/ (norm(x_n) norm(x_m)) <= 1 \/ delta^2$ está acotado. "Como $S$ es completo" es la hipótesis: toda Cauchy en $S$ converge, y el límite queda en $S$ porque $S$ es cerrado. Los factores $abs(1 - L \/ norm(x_n))$ y $abs((norm(x_n) - L) \/ norm(x_n))$ el manuscrito los escribe con barras dobles; son valores absolutos en $RR$.
 
 _Ejercicio 5_: Sean $E, F$ espacios normados. Sea $T : E -> F$ una transformación lineal. Probar que $T$ es continua si y sólo si para toda sucesión $(x_n)_(n >= 1)$ en $E$ que tiende a $0$, $(T(x_n))_n$ es acotada.
 

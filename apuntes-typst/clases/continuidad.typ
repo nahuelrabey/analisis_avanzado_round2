@@ -16,7 +16,7 @@ $
 #sublema(titulo: [$d_infinity$ es una métrica en $X times Y$])[
   Notemos que $d_infinity$ es una métrica:
 
-  - $d_infinity ((x, y), (x', y')) = 0$ si y sólo si $d_1 (x, x') = 0$ y $d_2 (y, y') = 0$. Como $d_1, d_2$ son métricas, $d_1 (x, x') = 0$ si $x = x'$ y $d_2 (y, y') = 0$ si $y = y'$. Concluimos que $d_infinity ((x, y), (x', y')) = 0$ si $(x, y) = (x', y')$.
+  - $d_infinity ((x, y), (x', y')) = 0$ si y sólo si $d_1 (x, x') = 0$ y $d_2 (y, y') = 0$. Como $d_1, d_2$ son métricas, $d_1 (x, x') = 0$ si y sólo si $x = x'$ y $d_2 (y, y') = 0$ si y sólo si $y = y'$. Concluimos que $d_infinity ((x, y), (x', y')) = 0$ si y sólo si $(x, y) = (x', y')$.
 
   - $d_infinity ((x, y), (x', y')) = d_infinity ((x', y'), (x, y))$ (por simetría de $d_1, d_2$).
 

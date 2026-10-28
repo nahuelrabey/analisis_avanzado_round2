@@ -55,7 +55,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [2], [Compactos y cerrados], [p5: Ej. 4, 5],
   [3], [Productos de compactos], [p5: Ej. 3; conceptual para Ej. 9],
   [4], [Cerrado y acotado no alcanza: bolas en espacios de funciones], [p5: Ej. 10],
-  [5], [Compacidad y funciones continuas: encajes de compactos], [p5: Ej. 11, 13 (usa el Ej. 5)],
+  [5], [Compacidad y funciones continuas: encajes de compactos], [p5: Ej. 11, 13 (usa el Ej. 5); conceptual para Ej. 2, 8, 9, 12],
   [6], [Compacidad y punto fijo], [p5: Ej. 14--19 (conceptual)],
   [7], [Cubrimientos por abiertos], [conceptual (Definición 6.11)],
 )
@@ -85,7 +85,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #resolucion[
   Vamos por definición. Sea $(y_n)_n subset.eq {x_n : n in NN} union {x}$ una sucesión. Queremos ver que $(y_n)_n$ admite alguna subsucesión convergente en el conjunto. Dividimos en dos casos.
 
-  *Si $(y_n)_n$ toma sólo finitos valores* ${y_(j_1), y_(j_2), dots, y_(j_m)}$, entonces alguno de estos valores debe ocurrir infinitas veces: hay algún $j_i$ tal que para todo $k$ existe $n_k >= k$ con $y_(n_k) = y_(j_i)$. Tomando la subsucesión $(y_(n_k))_k$, que es constante, se obtiene lo pedido.
+  *Si $(y_n)_n$ toma sólo finitos valores* ${y_(j_1), y_(j_2), dots, y_(j_m)}$, entonces alguno de estos valores debe ocurrir infinitas veces: hay algún $j_i$ tal que para todo $k$ existe $n_k >= k$, $n_k > n_(k - 1)$ (para que sea subsucesión), con $y_(n_k) = y_(j_i)$; esto es posible porque el valor $y_(j_i)$ aparece infinitas veces. Tomando la subsucesión $(y_(n_k))_k$, que es constante, se obtiene lo pedido.
 
   *Si $(y_n)_n$ toma infinitos valores distintos*, inductivamente para cada $k$ hay algún $n_k >= k$, $n_k > n_(k - 1)$, tal que $y_(n_k) = x_(K_k)$ para cierto $K_k >= k$, $K_k > K_(k - 1)$. Esto termina el problema: $(y_(n_k))_k$ es una subsucesión de $(y_n)_n$, pero además es una subsucesión de $(x_n)_n$, y una subsucesión de una sucesión convergente es convergente. Más aún, $y_(n_k) -> x$, que está en nuestro conjunto.
 
@@ -93,7 +93,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #sublema(titulo: "Corrección al manuscrito")[
-  El original pide $n_k >= n_(k - 1)$ y $K_k >= K_(k - 1)$; para que $(x_(K_k))_k$ sea una subsucesión de $(x_n)_n$ hace falta $K_k > K_(k - 1)$, estricto. Como los $y_(n_k)$ se eligen con valores distintos dos a dos, los $K_k$ son distintos y se los puede tomar estrictamente crecientes, que es lo que se escribió arriba. El absurdo final también necesita observar que los términos anteriores a la cola son finitos: el original sólo dice que la cola "está incluida en un complemento finito".
+  El original pide $n_k >= n_(k - 1)$ y $K_k >= K_(k - 1)$; para que $(x_(K_k))_k$ sea una subsucesión de $(x_n)_n$ hace falta $K_k > K_(k - 1)$, estricto. Como los $y_(n_k)$ se eligen con valores distintos dos a dos, los $K_k$ son distintos y se los puede tomar estrictamente crecientes, que es lo que se escribió arriba. El absurdo final también necesita observar que los términos anteriores a la cola son finitos: el original sólo dice que la cola "está incluida en un complemento finito". En el caso de finitos valores, el original mezcla los índices ("para todo $k$ existe $n >= k$ tal que $y_(n_k) = y_(j_i)$"); lo que se quiere decir es lo que se escribió arriba, eligiendo los $n_k$ estrictamente crecientes.
 ]
 
 #ejemplo[Un intervalo cerrado, un infinito con la métrica discreta y un conjunto finito (Ejemplo 6.2)][42][
@@ -120,7 +120,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 2 · Compactos y cerrados
 
 #sublema(titulo: "Qué desbloquea")[
-  Dos hechos se usan todo el tiempo: un compacto es cerrado, y un cerrado dentro de un compacto es compacto. El *Ejercicio 4* de la Práctica 5 (intersección de una familia de cerrados en la que al menos uno es compacto) es exactamente la "ida" del ejemplo de este bloque; la "vuelta" muestra cómo se *caracteriza* a los cerrados por medio de los compactos, y de paso enseña la táctica de probar un "para todo $K$" por contrarrecíproco, construyendo el compacto $K$ que falla. El compacto que se construye es el del Bloque 1. El *Ejercicio 5* (compacidad $<==>$ encajes de cerrados no vacíos tienen intersección no vacía) usa la misma caracterización de cerrado por sucesiones, y es la herramienta que después usa el Bloque 5.
+  Dos hechos se usan todo el tiempo: un compacto es cerrado, y un cerrado dentro de un compacto es compacto. El *Ejercicio 4* de la Práctica 5 (intersección de una familia de cerrados en la que al menos uno es compacto) es exactamente la "ida" del ejemplo de este bloque; la "vuelta" muestra cómo se *caracteriza* a los cerrados por medio de los compactos, y de paso enseña la táctica de probar un "para todo $K$" por contrarrecíproco, construyendo el compacto $K$ que falla. El compacto que se construye es el del Bloque 1, y la construcción es el modelo para _negar_ compacidad: basta exhibir una sucesión del conjunto cuyas subsucesiones convergen todas a un punto que *no* está en el conjunto. El *Ejercicio 5* (compacidad $<==>$ encajes de cerrados no vacíos tienen intersección no vacía) usa la misma caracterización de cerrado por sucesiones, y es la herramienta que después usa el Bloque 5.
 ]
 
 #ejemplo[$F$ es cerrado si y sólo si $K inter F$ es compacto para todo compacto $K$ (Clase 7 · Ejercicio 3)][C7-3][
@@ -140,7 +140,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #sublema(titulo: "Detalle que el manuscrito omite")[
-  La clase anota "la ida es un ejercicio de la guía (?)": es el Ejercicio 4 de la Práctica 5. Para la última afirmación se usa la unicidad del límite (toda subsucesión de $(x_n)_n$ converge al mismo punto, que no está en $K inter F$); en particular ningún valor $x_n$ se repite infinitas veces, porque si no ese valor sería el límite, y el límite no está en $F$.
+  La clase anota "la ida es un ejercicio de la guía (?)": es el Ejercicio 4 de la Práctica 5. La igualdad $K inter F = {x_n : n in NN}$ usa que $(x_n)_n subset.eq F$ y que $lim x_n in.not F$. Para la última afirmación se usa la unicidad del límite (toda subsucesión de $(x_n)_n$ converge al mismo punto, que no está en $K inter F$); en particular ningún valor $x_n$ se repite infinitas veces, porque si no ese valor sería el límite, y el límite no está en $F$.
 ]
 
 #v(10pt)
@@ -253,6 +253,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   La imagen continua de un compacto es compacta, y por lo tanto cerrada. Con eso y el *Ejercicio 5* de la Práctica 5 (en un compacto, todo encaje decreciente de cerrados no vacíos tiene intersección no vacía) el ejemplo de este bloque prueba que $f$ "conmuta" con intersecciones decrecientes de compactos, y de ahí fabrica un compacto invariante $K = inter_n f^n (X)$. La maniobra central --- tomar $x_n in A_n$ con $f(x_n) = y$, extraer una subsucesión convergente en $A_1$ y ver que el límite queda en *todos* los $A_n$ porque cada cola de la subsucesión vive en $A_n$ cerrado --- es la que piden el *Ejercicio 11* (una función continua y positiva en un compacto está acotada lejos de $0$) y el *Ejercicio 13* (biyección continua desde un compacto es homeomorfismo: la imagen de un cerrado es compacta, luego cerrada). También cierra la "vuelta" pendiente del Bloque 3.
+
+  El mismo principio (imagen continua de compacto es compacta, luego cerrada y acotada) es el que está detrás del *Ejercicio 2* (un compacto no vacío de $RR$ es cerrado y acotado, así que contiene a su supremo y a su ínfimo) y del *Ejercicio 8* ($d(x, dot.c)$ es continua, así que su imagen del compacto $K$ es un compacto de $RR$ y tiene mínimo). La cuenta con colas sirve también para el *Ejercicio 9*: se toma una sucesión que realice el ínfimo de $hat(d)(A, B)$ y se pasa al límite en el compacto $A$. El *Ejercicio 12* usa la misma idea en versión "compacto más colas controladas". El ítem (b) es además un primer contacto con las iteradas $f^n$ que aparecen en el *Ejercicio 17*.
 ]
 
 #ejemplo[$f$ continua conmuta con intersecciones decrecientes de compactos; compacto invariante $f(K) = K$ (Clase 8 · Ejercicio 2)][C8-2][
@@ -288,7 +290,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #sublema(titulo: "Corrección al manuscrito")[
-  El original escribe "sea $K = inter_n f(A_n)$" y a renglón seguido usa $K = inter_(n = 1)^(+oo) A_n$; con la primera definición la cadena de igualdades no cierra. La definición correcta, que es la que se usó arriba, es $K = inter_(n >= 1) f^n (X)$. (Las dos intersecciones coinciden al final, pero eso es lo que se está probando.)
+  El original escribe "sea $K = inter_n f(A_n)$. Lo que probamos es que $inter_n f(A_n) = f(K)$", pero el ítem (a) da $inter_n f(A_n) = f(inter_n A_n)$, no $f(K)$: con esa definición, $f(K) = K$ no sale directamente. La cuenta igual se puede cerrar: la cadena de igualdades muestra $K = inter_n f(A_n) = inter_n A_n$, y recién entonces el ítem (a) da $f(K) = f(inter_n A_n) = inter_n f(A_n) = K$; el manuscrito deja implícito este último paso. Arriba se definió directamente $K = inter_(n >= 1) f^n (X)$, que evita el rodeo.
 ]
 
 #ejemplo[Una función continua y periódica es uniformemente continua (Clase del 27/10/2026 · Ejemplo 2)][27-10/2][
@@ -381,7 +383,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 6 · Compacidad y punto fijo
 
 #sublema(titulo: "Qué desbloquea")[
-  El ejemplo de este bloque termina invocando el *teorema de punto fijo de Banach* (una contracción de un espacio métrico completo tiene un único punto fijo), que `guias/p5.typ` da por conocido pero no enuncia ni demuestra: los *Ejercicios 15, 16 y 17* de la Práctica 5 lo usan o preguntan qué falla cuando no se cumplen sus hipótesis, y el *Ejercicio 14* es la observación de que el conjunto de puntos fijos de una continua es cerrado. El único ejercicio de punto fijo anterior en las guías era el Ej. 7 de la Práctica 1 de 2025 (anexo de `guias/p1.typ`), que es de otra naturaleza (monotonía, sin métrica). Lo que sí enseña este ejemplo, y sirve para los *Ejercicios 18 y 19*, es la conexión compacidad $arrow$ punto fijo: en un compacto, "achicar distancias" alcanza, aunque el argumento del manuscrito para conseguir una constante $alpha < 1$ tiene un hueco (ver la corrección al final).
+  El ejemplo de este bloque termina invocando el *teorema de punto fijo de Banach* (una contracción de un espacio métrico completo tiene un único punto fijo), que `guias/p5.typ` da por conocido pero no enuncia ni demuestra: los *Ejercicios 15, 16 y 17* de la Práctica 5 lo usan o preguntan qué falla cuando no se cumplen sus hipótesis, y el *Ejercicio 14* es la observación de que el conjunto de puntos fijos de una continua es cerrado. El único ejercicio de punto fijo anterior en las guías era el Ej. 7 de la Práctica 1 de 2025 (anexo de `guias/p1.typ`), que es de otra naturaleza (monotonía, sin métrica). Lo que sí enseña este ejemplo, y sirve para los *Ejercicios 18 y 19*, es la conexión compacidad $arrow$ punto fijo: en un compacto, "achicar distancias" alcanza, aunque el argumento del manuscrito para conseguir una constante $alpha < 1$ tiene un hueco (ver la corrección al final). La idea que sí funciona es la de esa corrección: *minimizar $g(x) = d(x, f(x))$ en un compacto* y ver que el mínimo es $0$; en el Ejercicio 18, $g(x) = d_2 (x, f(x))$ es continua en el compacto $overline(B)(0, M)$ y su ínfimo ahí es $0$. Como contraste con el *Ejercicio 16* ($f(x) = x \/ 3$ en $RR without {0}$, contracción en un espacio no completo): en este ejemplo no hay contracción, pero sí compacidad (que implica completitud).
 ]
 
 #ejemplo[En un compacto, una función que achica distancias tiene un único punto fijo (Clase 8 · Ejercicio 1)][C8-1][
@@ -397,7 +399,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ d(f(x_n), f(y_n)) >= (1 - 1/n) d(x_n, y_n). quad (1) $
   Como $K$ es compacto, existe $(x_(n_k))_k$ convergente en $K$. De nuevo usamos la compacidad para hallar $(y_(n_(k_j)))_j$ convergente en $K$; en particular $(x_(n_(k_j)))_j$ converge en $K$. Sean $x, y in K$ con $x_(n_(k_j)) -> x$, $y_(n_(k_j)) -> y$. Como
   $ d(f(x_(n_(k_j))), f(y_(n_(k_j)))) &<= d(f(x_(n_(k_j))), f(x)) + d(f(x), f(y)) + d(f(y), f(y_(n_(k_j)))) \
-    &< d(x_(n_(k_j)), x) + d(f(x), f(y)) + d(y, y_(n_(k_j))), $
+    &<= d(x_(n_(k_j)), x) + d(f(x), f(y)) + d(y, y_(n_(k_j))), $
   tomando límite concluimos que
   $ lim_(j -> oo) d(f(x_(n_(k_j))), f(y_(n_(k_j)))) <= d(f(x), f(y)) < d(x, y). quad (2) $
   Por otro lado, de $(1)$ sale que
@@ -412,9 +414,11 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #sublema(titulo: [Corrección al manuscrito: el argumento tiene un hueco, y el $alpha < 1$ no siempre existe])[
-  En $(2)$, la desigualdad "$d(f(x), f(y)) < d(x, y)$" necesita $x != y$, pero los límites $x$ e $y$ de las subsucesiones pueden coincidir; en ese caso $(2)$ y $(3)$ dicen $0 <= 0$ y no hay absurdo. (El manuscrito además escribe la hipótesis como "para todo $x, y in K$", que en $x = y$ es imposible.) Y el resultado intermedio es falso en general: $f(x) = sin x$ en $K = [0, 1]$ cumple $abs(sin x - sin y) < abs(x - y)$ para $x != y$, pero $abs(sin x - sin 0) \/ abs(x - 0) -> 1$ cuando $x -> 0^+$, así que no hay ningún $alpha < 1$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, de modo que el máximo de $F$ es $0$, no negativo.
+  En $(2)$, la desigualdad "$d(f(x), f(y)) < d(x, y)$" necesita $x != y$, pero los límites $x$ e $y$ de las subsucesiones pueden coincidir; en ese caso $(2)$ y $(3)$ dicen $0 <= 0$ y no hay absurdo. (El manuscrito además escribe la hipótesis como "para todo $x, y in K$", que en $x = y$ es imposible.) Y el resultado intermedio es falso en general: $f(x) = sin x$ en $K = [0, 1]$ cumple $abs(sin x - sin y) < abs(x - y)$ para $x != y$, pero $abs(sin x - sin 0) \/ abs(x - 0) -> 1$ cuando $x -> 0^+$, así que no hay ningún $alpha < 1$. Otro, con la cuenta a la vista: $f(x) = x - x^2 \/ 2$ en $K = [0, 1]$ cumple $abs(f(x) - f(y)) = abs(x - y) (1 - (x + y) \/ 2) < abs(x - y)$ para $x != y$, pero el factor $1 - (x + y) \/ 2$ tiende a $1$ cuando $x, y -> 0$. Lo mismo le pasa a la nota del docente: $F(x, x) = 0$, de modo que el máximo de $F$ es $0$, no negativo. (Detalle menor: en la cadena de desigualdades antes de $(2)$, el segundo paso es "$<=$" y no "$<$", porque la hipótesis estricta sólo vale para puntos distintos y puede ser $x_(n_(k_j)) = x$, $y_(n_(k_j)) = y$; así quedó escrito arriba.)
 
-  La conclusión del ejercicio sí es cierta (es el teorema de Edelstein): el camino estándar, que no está en el manuscrito, es minimizar la función continua $x |-> d(x, f(x))$ en el compacto $K$ y ver que el mínimo tiene que valer $0$. La unicidad sí sale como en Banach: dos puntos fijos distintos $a != b$ darían $d(a, b) = d(f(a), f(b)) < d(a, b)$.
+  La conclusión del ejercicio sí es cierta (es el teorema de Edelstein): el camino estándar, que no está en el manuscrito, es minimizar la función continua $g(x) = d(x, f(x))$ en el compacto $K$ ($f$ es continua porque $d(f(x), f(y)) <= d(x, y)$) y ver que el mínimo tiene que valer $0$. Si el punto de mínimo $x_0$ no fuera fijo, el punto $x_1 = f(x_0) != x_0$ cumpliría
+  $ g(x_1) = d(x_1, f(x_1)) = d(f(x_0), f(x_1)) < d(x_0, x_1) = g(x_0), $
+  absurdo. La unicidad sí sale como en Banach: dos puntos fijos distintos $a != b$ darían $d(a, b) = d(f(a), f(b)) < d(a, b)$.
 ]
 
 #v(10pt)
@@ -633,5 +637,5 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #sublema(titulo: "Huecos frente a la Práctica 5")[
   Sin ejemplo transcripto todavía: el *Ej. 2* (un compacto de $RR$ tiene máximo y mínimo), el *Ej. 8* (la distancia a un compacto se realiza), el *Ej. 9* ($hat(d)(A, B) > 0$ para compacto y cerrado disjuntos), el *Ej. 12* (continuidad uniforme en $RR$ con límites nulos en $plus.minus oo$) y, salvo por la conexión conceptual del Bloque 6, todo el tramo de *punto fijo* (Ej. 14--19): en particular no hay ningún ejemplo de verificar que una función es una contracción (Ej. 15) ni de usar iteradas $f^n$ (Ej. 17).
 
-  Los Ejercicios 4 y 5 de `clases/punto_fijo.typ` (`C8-4`: un normado es Banach si y sólo si las Cauchy de la esfera unitaria convergen; `C8-5`: una transformación lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas) no son de compacidad: pertenecen a completitud (Práctica 3, Ej. 14--16) y a operadores lineales (Práctica 6, Ej. 8), y quedan en el archivo de clase hasta que exista `ejemplos/p6.typ`.
+  Los Ejercicios 4 y 5 de `clases/punto_fijo.typ` (`C8-4`: un normado es Banach si y sólo si las Cauchy de la esfera unitaria convergen; `C8-5`: una transformación lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas) no son de compacidad: pertenecen a completitud (Práctica 3, Ej. 14--16) y a operadores lineales (Práctica 6, Ej. 8), y están cargados en `ejemplos/p6.typ`.
 ]

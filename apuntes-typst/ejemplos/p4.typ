@@ -54,9 +54,9 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
   [*\#*], [*Bloque*], [*Desbloquea*],
   [1], [Imagen y preimagen de conjuntos], [conceptual para p4],
-  [2], [Continuidad por definición ($epsilon$--$delta$)], [p4: Ej. 1],
+  [2], [Continuidad por definición ($epsilon$--$delta$)], [p4: Ej. 1; conceptual para Ej. 3],
   [3], [Continuidad por sucesiones y por preimágenes de abiertos], [p4: Ej. 1 (a), 4, 5],
-  [4], [Continuidad en productos y proyecciones], [p4: Ej. 1 (a), 4, 5],
+  [4], [Continuidad en productos y proyecciones], [p4: Ej. 1 (a), 4, 5 y la pregunta "¿cambia algo con $d_1$ o $d_infinity$?" de Ej. 1 y 5; conceptual para Ej. 6],
   [5], [Funciones Lipschitz], [p4: Ej. 9, 12],
   [6], [Continuidad uniforme: ejemplos, contraejemplos y pegado], [p4: Ej. 13, 14, 15, 16],
   [7], [Conjuntos densos], [p4: Ej. 2, 7, 8],
@@ -89,7 +89,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 2 · Continuidad por definición ($epsilon$--$delta$)
 
 #sublema(titulo: "Qué desbloquea")[
-  Leer la Definición 5.4 en casos concretos: ver que en $RR$ y en $RR^n$ recupera la continuidad de Análisis 1, y que en un punto aislado cualquier función es continua (alcanza con tomar $delta$ igual al radio que aísla al punto). Es el modelo para decidir continuidad en el *Ejercicio 1* de la Práctica 4.
+  Leer la Definición 5.4 en casos concretos: ver que en $RR$ y en $RR^n$ recupera la continuidad de Análisis 1, y que en un punto aislado cualquier función es continua (alcanza con tomar $delta$ igual al radio que aísla al punto). Es el modelo para decidir continuidad en el *Ejercicio 1* de la Práctica 4, y el *Ejercicio 3* (si $f(x_0) > 0$, $f$ es positiva en una bola alrededor de $x_0$) es la primera manipulación de la definición.
 ]
 
 #ejemplo[Continuidad en $RR$, en puntos aislados, en $NN$ y en $RR^n$ (Ejemplo 5.5)][34][
@@ -117,11 +117,11 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 #sublema(titulo: "Qué desbloquea")[
   Usar las caracterizaciones de continuidad en vez de la definición: el Teorema 5.7 (sucesiones) para probar que una función es continua, y el Teorema 5.9 (preimágenes de abiertos) para probar que un conjunto es abierto escribiéndolo como preimagen de un abierto por una función continua. Es el modelo de los *Ejercicios 4 y 5* de la Práctica 4.
 
-  La clase del 07/10 (`C9-*`) arma la herramienta para no hacer cuentas: suma y producto de continuas son continuas (C9-1.1, por sucesiones y álgebra de límites), las proyecciones $pi_i : RR^n -> RR$ son continuas para $d_oo$ (C9-1.2; el único paso es $abs(x^i_k - x^i) <= d_oo$, que también vale con $d_1$ y $d_2$), y por lo tanto todo *polinomio en varias variables* es continuo (C9-1.6). Con eso, C9-2.1 lee un conjunto del plano como ${f >= 0} = f^(-1)([0, +oo))$ (modelo del *Ejercicio 5*), y C9-2.2 generaliza el Ejemplo 5.11 a $op("GL")_n (RR)$ viendo que $det$ es un polinomio en las entradas.
+  La clase del 07/10 (`C9-*`) arma la herramienta para no hacer cuentas: suma y producto de continuas son continuas (C9-1.1, por sucesiones y álgebra de límites), las proyecciones $pi_i : RR^n -> RR$ son continuas para $d_oo$ (C9-1.2; el único paso es $abs(x^i_k - x^i) <= d_oo$, que también vale con $d_1$ y $d_2$: ése es el "no cambia nada" que piden los Ejercicios 1 y 5 al reemplazar $d_2$ por $d_1$ o $d_oo$), y por lo tanto todo *polinomio en varias variables* es continuo (C9-1.6). Con eso, C9-2.1 lee un conjunto del plano como ${f >= 0} = f^(-1)([0, +oo))$ (modelo del *Ejercicio 5*), y C9-2.2 generaliza el Ejemplo 5.11 a $op("GL")_n (RR)$ viendo que $det$ es un polinomio en las entradas.
 
   La clase define: $P : RR^n -> RR$ es un *polinomio en varias variables* si puede escribirse como
   $ P(x_1, dots, x_n) = sum_(e_1 + dots.c + e_n <= r) a_((e_1, dots, e_n)) x_1^(e_1) dots.c x_n^(e_n) $
-  para algún $r in NN$ (Definición 1.4); por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5).
+  para algún $r in NN$ (Definición 1.4); por ejemplo $P(x, y, z) = x^4 + x y z^2 + x y + z^2 - y + 18$ (Ejemplo 1.5). El Ejemplo 1.3 de la clase ($pi_2 (x, y, z) = y$ es continua) queda en la fuente como ejercicio y es el caso particular del Lema 1.2, así que no se carga aparte.
 ]
 
 #ejemplo[Continuidad del determinante y $G l_2(RR)$ abierto (Ejemplo 5.11)][36][
@@ -314,7 +314,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 == Bloque 4 · Continuidad en productos y proyecciones
 
 #sublema(titulo: "Qué desbloquea")[
-  Trabajar en $X times Y$ con $d_infinity ((x, y), (x', y')) = max{d_1 (x, x'), d_2 (y, y')}$: las proyecciones $pi_1, pi_2$ son continuas y abiertas (pero no cerradas), una función a valores en el producto es continua si y sólo si lo son sus dos coordenadas, y una sucesión converge en $X times Y$ si y sólo si converge coordenada a coordenada. Es lo que está detrás del *Ejercicio 1 (a)* (una función de dos variables se evalúa en sucesiones $(x_n, y_n)$ que convergen coordenada a coordenada), del *Ejercicio 4* (la función $x |-> (f(x), g(x))$ es continua a valores en $E' times E'$) y del *Ejercicio 5* (las coordenadas $x, y, z$ de $RR^n$ son proyecciones continuas, y con ellas se arman las funciones cuya preimagen es el conjunto).
+  Trabajar en $X times Y$ con $d_infinity ((x, y), (x', y')) = max{d_1 (x, x'), d_2 (y, y')}$: las proyecciones $pi_1, pi_2$ son continuas y abiertas (pero no cerradas), una función a valores en el producto es continua si y sólo si lo son sus dos coordenadas, y una sucesión converge en $X times Y$ si y sólo si converge coordenada a coordenada. Es lo que está detrás del *Ejercicio 1 (a)* (una función de dos variables se evalúa en sucesiones $(x_n, y_n)$ que convergen coordenada a coordenada), del *Ejercicio 4* (la función $x |-> (f(x), g(x))$ es continua a valores en $N times N$; compuesta con $d' : N times N -> RR$, que es continua porque $abs(d'(a, b) - d'(a', b')) <= d'(a, a') + d'(b, b')$, da $x |-> d'(f(x), g(x))$, y ${f != g}$ es la preimagen del abierto $(0, +oo)$) y del *Ejercicio 5* (las coordenadas $x, y, z$ de $RR^n$ son proyecciones continuas, y con ellas se arman las funciones cuya preimagen es el conjunto).
 ]
 
 #definicion[Función abierta y función cerrada][
@@ -327,12 +327,25 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   _Nota_: esta definición no figura en `notas_materia.pdf` ni en el manuscrito de la clase, que la usa sin enunciarla; la agregó el agente.
 ]
 
+#sublema(titulo: [$d_infinity$ en $X times Y$ es una métrica])[
+  Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos y, para $p = (x_p, y_p)$, $q = (x_q, y_q) in X times Y$, sea $d_infinity (p, q) = max{d_1 (x_p, x_q), d_2 (y_p, y_q)}$. La clase del 23/10 verifica que es una métrica: vale $0$ si y sólo si $d_1 (x_p, x_q) = 0$ y $d_2 (y_p, y_q) = 0$, o sea $p = q$; es simétrica porque $d_1$ y $d_2$ lo son; y para la triangular, dado $w = (x_w, y_w) in X times Y$, de $d_1 (x_p, x_q) <= d_1 (x_p, x_w) + d_1 (x_w, x_q)$ sale
+  $
+    d_1 (x_p, x_q) &<= max{d_1 (x_p, x_w), d_2 (y_p, y_w)} + max{d_1 (x_w, x_q), d_2 (y_w, y_q)} \
+    &= d_infinity (p, w) + d_infinity (w, q),
+  $
+  lo mismo para $d_2 (y_p, y_q)$, y tomando máximo de los dos lados izquierdos queda $d_infinity (p, q) <= d_infinity (p, w) + d_infinity (w, q)$.
+]
+
 #ejemplo[Proyecciones de $X times Y$ y continuidad coordenada a coordenada (Clase 6 · Ejemplo 1)][C6-1][
   Sean $(X, d_1)$ e $(Y, d_2)$ espacios métricos. Pensamos a $X times Y$ con $d_infinity$.
 
   #set enum(numbering: "a)")
   + Probar que $pi_1 : X times Y -> X$, $(x, y) |-> x$, y $pi_2 : X times Y -> Y$, $(x, y) |-> y$ son continuas y abiertas, pero pueden *no ser cerradas*.
   + Sea $(Z, delta)$ un espacio métrico y sea $f : Z -> X times Y$ una aplicación. Probar que $f$ es continua si y sólo si $f_1 = pi_1 compose f$ y $f_2 = pi_2 compose f$ lo son.
+]
+
+#estrategia[La bola de $d_infinity$ es un "cuadrado" cuya sombra es una bola; la hipérbola $x y = 1$ se proyecta sobre $RR without {0}$][
+  Continuidad: $d_1 (x_q, x_p) <= d_infinity (q, p)$, así que $delta = epsilon$ sirve. Abierta: alcanza con bolas (todo abierto es unión de bolas y $pi_1$ respeta uniones), y la bola $B(p, r)$ de $d_infinity$ es ${q : d_1 (x_q, x_p) < r " y " d_2 (y_q, y_p) < r}$, cuya proyección es exactamente $B(x_p, r)$. No cerrada: hace falta un cerrado $F$ cuyas segundas coordenadas se escapen; la hipérbola $x y = 1$ es cerrada (preimagen de ${1}$ por un polinomio) y su proyección es $RR without {0}$. Para b), la ida es composición de continuas; la vuelta, por sucesiones, usa que $d_infinity (f(z_n), f(z_0))$ es el máximo de las dos distancias coordenada a coordenada, cada una chica a partir de su $n_i$.
 ]
 
 #resolucion[
@@ -346,7 +359,7 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $
   d_1 (x_q, x_p) <= max{d_1 (x_q, x_p), d_2 (y_q, y_p)} = d_infinity (q, p), quad (*)
   $
-  si $delta < epsilon$ garantizamos $(*)$.
+  si $delta <= epsilon$ garantizamos lo pedido gracias a $(*)$.
 
   Para ver que $pi_1$ es abierta, tenemos que ver que *para todo abierto $U subset.eq X times Y$, $pi_1 (U)$ es abierto*. Lo hacemos en dos pasos: primero para bolas y después para abiertos cualesquiera.
 
@@ -450,17 +463,23 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 ]
 
 #observacion[Convergencia en $X times Y$ es convergencia coordenada a coordenada][
-  De 1 b) sale que en $X times Y$ con $d_infinity$, la sucesión $(x_n, y_n) -> (x, y)$ si y sólo si $x_n -> x$ e $y_n -> y$, tomando $f : X times Y -> X times Y$, $f(x, y) = op("id")_(X times Y) (x, y) = (x, y)$, es decir $f_1 (x, y) = x$, $f_2 (x, y) = y$ (observación del docente). Lo que realmente se usa es el *argumento* de la demostración de b): dado $(x_n, y_n) -> (x, y)$, la desigualdad $d_1 (x_n, x) <= d_infinity ((x_n, y_n), (x, y))$ da $x_n -> x$, y recíprocamente el $max$ de dos cantidades que tienden a $0$ tiende a $0$.
+  De 1 b) sale que en $X times Y$ con $d_infinity$, la sucesión $(x_n, y_n) -> (x, y)$ si y sólo si $x_n -> x$ e $y_n -> y$, tomando $f : X times Y -> X times Y$, $f(x, y) = op("id")_(X times Y) (x, y) = (x, y)$, es decir $f_1 (x, y) = x$, $f_2 (x, y) = y$ (observación del docente). Lo que realmente se usa es el *argumento* de la demostración de b): dado $(x_n, y_n) -> (x, y)$, la desigualdad $d_1 (x_n, x) <= d_infinity ((x_n, y_n), (x, y))$ da $x_n -> x$, y recíprocamente el $max$ de dos cantidades que tienden a $0$ tiende a $0$. Es lo que usa C9-1.2 en $RR^n$, y lo que responde la pregunta "¿cambia algo con $d_1$ o $d_infinity$?" de los Ejercicios 1 y 5.
+
+  El ejemplo de la hipérbola es, además, el modelo del *Ejercicio 6* de la guía: una continua puede mandar un cerrado a un no cerrado (y, como en la Observación 5.12, un abierto a un no abierto).
 ]
 
 == Bloque 5 · Funciones Lipschitz
 
 #sublema(titulo: "Qué desbloquea")[
-  Recordar que $f : (E, d) -> (E', d')$ es *Lipschitz* si existe $M > 0$ tal que $d'(f(x), f(y)) <= M d(x, y)$ para todo $x, y in E$, y que Lipschitz implica uniformemente continua (la vuelta es falsa: $x sin(1 \/ x)$ en $[-1, 1]$). Las herramientas son el teorema del valor medio (derivada acotada $==>$ Lipschitz), la negación cuantificada de "Lipschitz" para construir contraejemplos con sucesiones, y la acotación de integrales por el supremo para operadores en $C([0, 1])$. Es el modelo del *Ejercicio 12* (probar que $d(x, x_0)$ y $d(x, A)$ son Lipschitz) y ayuda en el *Ejercicio 9* (funcionales de $C([0, 1])$ con $d_infinity$ y $d_1$).
+  Recordar que $f : (M, d) -> (N, d')$ es *Lipschitz* si existe $M > 0$ tal que $d'(f(x), f(y)) <= M d(x, y)$ para todo $x, y in M$, y que Lipschitz implica uniformemente continua (la vuelta es falsa: $x sin(1 \/ x)$ en $[-1, 1]$). Las herramientas son el teorema del valor medio (derivada acotada $==>$ Lipschitz), la negación cuantificada de "Lipschitz" para construir contraejemplos con sucesiones, y la acotación de integrales por el supremo para operadores en $C([0, 1])$. Es el modelo del *Ejercicio 12* (probar que $d(x, x_0)$ y $d(x, A)$ son Lipschitz) y ayuda en el *Ejercicio 9* (funcionales de $C([0, 1])$ con $d_infinity$ y $d_1$).
 ]
 
 #ejemplo[Derivada acotada implica Lipschitz (Clase 6 · Ejemplo 2)][C6-2][
   Sea $f : (a, b) -> RR$ derivable, con derivada acotada. Probar que $f$ es Lipschitz.
+]
+
+#estrategia[Teorema del valor medio][
+  Para $x < y$ en $(a, b)$, el teorema del valor medio da $c in (x, y)$ con $f(x) - f(y) = f'(c)(x - y)$; tomando módulo y usando $abs(f'(c)) <= M$ queda la desigualdad de Lipschitz con la cota de la derivada como constante.
 ]
 
 #resolucion[
@@ -498,6 +517,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   + Probar que $f$ no es Lipschitz en ningún intervalo que contenga al $0$.
 
   _Nota_: el manuscrito escribe "$0$ si $f(0) = 0$" en la segunda rama; es "$0$ si $x = 0$".
+]
+
+#estrategia[Para a), $abs(x sin(1 \/ x)) <= abs(x)$; para b), picos consecutivos de $sin$ en $pi \/ 2 + 2 pi n$ y $3 pi \/ 2 + 2 pi n$][
+  La continuidad en $0$ es el sándwich $abs(f(x)) <= abs(x)$, así que $delta = epsilon$. Para negar Lipschitz hace falta, para cada $M$, un par de puntos con cociente incremental mayor que $M$: se eligen $x_n, y_n$ donde $sin(1 \/ x)$ vale $1$ y $-1$ respectivamente, de modo que $abs(f(x_n) - f(y_n)) = x_n + y_n$, y se compara con $abs(x_n - y_n)$; el cociente resulta $2 + 4 n -> +infinity$.
 ]
 
 #resolucion[
@@ -544,6 +567,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Decidir si $Psi$ es Lipschitz.
 ]
 
+#estrategia[Acotar la integral del módulo por el supremo del módulo][
+  $d_1 (Psi(f), Psi(g)) = integral_0^1 abs(x) abs(f(x) - g(x)) dif x$; como $abs(x) <= 1$ en $[0, 1]$ y $abs(f(x) - g(x)) <= d_infinity (f, g)$ para todo $x$, la integral queda acotada por $d_infinity (f, g)$. Constante de Lipschitz $M = 1$.
+]
+
 #resolucion[
   Dadas $f, g in C([0, 1])$, planteamos
   $
@@ -554,6 +581,12 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Entonces $Psi$ es Lipschitz. #align(right)[$square$]
 
   _Nota_: en 4), en particular vemos que es uniformemente continua.
+]
+
+#sublema(titulo: "Para qué sirve")[
+  El *Ejercicio 9* de la Práctica 4 estudia la evaluación $cal(E)(f) = f(0)$ y la integral $cal(I)(f) = integral_0^1 f$ en $C([0, 1])$. La cuenta de C6-4, $integral_0^1 abs(h) <= sup abs(h)$, es decir $d_1 <= d_infinity$, es la que hace continua a $cal(I)$ para $d_infinity$, y la que responde el ítem (c): la identidad $(C([0, 1]), d_infinity) -> (C([0, 1]), d_1)$ es Lipschitz de constante $1$, así que toda $cal(F)$ continua para $d_1$ lo es para $d_infinity$ (es la composición de $cal(F)$ con esa identidad); la respuesta a (c) es que no.
+
+  Lo que la clase no hace (y la guía sí pide) es la refutación para $cal(E)$ con $d_1$: hay que fabricar $f_n in C([0, 1])$ con $integral_0^1 abs(f_n) -> 0$ pero $f_n (0)$ lejos de $0$.
 ]
 
 #ejemplo[$cos(x)$, $sqrt(x)$ en $[1, +infinity)$ y la integral en $(C([0, 1]), d_infinity)$ son Lipschitz; $sqrt(x)$ en $[0, +infinity)$ no (Ejemplo 5.26)][39][
@@ -594,6 +627,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #sublema(titulo: "Qué desbloquea")[
   Decidir continuidad uniforme: por la vía positiva (Lipschitz vía valor medio, o un $delta$ que no depende del punto) y por la negativa (dos sucesiones $(x_n)_n, (y_n)_n$ con $abs(x_n - y_n) -> 0$ pero $abs(f(x_n) - f(y_n)) >= epsilon$). Además, dos resultados de "pegado": si $f$ es uniformemente continua en dos piezas que se tocan en un punto, o en dos piezas a distancia positiva, lo es en la unión. Es el modelo de los *Ejercicios 13, 14, 15 y 16* de la Práctica 4 (contraejemplos con $1 \/ x$ y $sin(1 \/ x)$, continuidad uniforme y sucesiones de Cauchy, acotada y no uniformemente continua, $d(A, B) = 0 ==> d'(f(A), f(B)) = 0$).
+
+  En detalle: el esquema de refutación de C6-5 b) (y el de C6-3 b), con picos de $sin$ cada vez más apretados) es el que necesitan el *Ejercicio 13 (b)* ($sin(1 \/ x)$ en $(0, 1)$) y el *15 (a)*; el camino de C6-5 a) (Lipschitz por valor medio) es el del *15 (b)*, una función no acotada y uniformemente continua. Los *Ejercicios 14 y 16* usan la observación común a todas estas resoluciones: el $delta$ de la continuidad uniforme no depende del punto, así que sirve para pares $(x_n, y_n)$ que se mueven. El pegado (C6-7, C6-8) sirve para el *Ejercicio 13 (a)* ($1 \/ x$ sí es uniformemente continua en $[epsilon, +infinity)$, por derivada acotada como en C6-2, y la pregunta es qué se rompe al acercarse al $0$) y para construir por tramos el ejemplo del *15 (b)*. C6-8 es además el telón de fondo del *Ejercicio 16*: lo que una uniformemente continua no puede hacer es separar dos conjuntos que están a distancia cero.
 ]
 
 #ejemplo[$sin(x)$ es uniformemente continua en $RR$; $x^2$ no lo es en $(0, +infinity)$ (Clase 6 · Ejemplo 5)][C6-5][
@@ -601,6 +636,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   #set enum(numbering: "a)")
   + $f : RR -> RR$, $f(x) = sin(x)$.
   + $f : (0, +infinity) -> RR$, $f(x) = x^2$.
+]
+
+#estrategia[Para probar, Lipschitz; para refutar, dos sucesiones que se acercan pero cuyas imágenes no][
+  a) $abs(sin x - sin y) = abs(cos c) abs(x - y) <= abs(x - y)$ por el valor medio: Lipschitz con $M = 1$, luego uniformemente continua. b) El problema está en el infinito, donde la pendiente de $x^2$ crece: $x_n = n$, $y_n = n + 1 \/ n$ están a distancia $1 \/ n -> 0$ pero $y_n^2 - x_n^2 = 2 + 1 \/ n^2 > 2$.
 ]
 
 #resolucion[
@@ -627,6 +666,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #ejemplo[Producto de uniformemente continuas y acotadas (Clase 6 · Ejemplo 6)][C6-6][
   Sean $(X, d)$ un espacio métrico y $f, g : X -> RR$ uniformemente continuas y acotadas. Probar que $f dot g$ es uniformemente continua. Mostrar que el producto de funciones uniformemente continuas puede no serlo *incluso si una de ellas está acotada*. [Sugerencia: $f(x) = x sin(x)$.]
+]
+
+#estrategia[Sumar y restar $f(y) g(x)$, y acotar cada factor que sobra][
+  $abs(f(x) g(x) - f(y) g(y)) <= abs(g(x)) abs(f(x) - f(y)) + abs(f(y)) abs(g(x) - g(y))$: las cotas $M_1, M_2$ controlan los factores $abs(g(x))$, $abs(f(y))$ y los $delta$ de $f$ y $g$ controlan los incrementos. Sin acotación, $x sin(x)$ falla: en $x_n = pi + 2 pi n$ vale $0$ y en $y_n = x_n + 1 \/ n$ vale cerca de $-2 pi$.
 ]
 
 #resolucion[
@@ -697,6 +740,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Sea $f : [0, +infinity) -> RR$. Supongamos que existe $a > 0$ tal que $f|_([0, a])$ y $f|_([a, +infinity))$ son uniformemente continuas. Probar que $f$ es uniformemente continua.
 ]
 
+#estrategia[El caso mixto $x <= a <= y$ pasa por $f(a)$][
+  Si $x, y$ caen en el mismo tramo, sirve el $delta$ de ese tramo. Si $x < a < y$ y $abs(x - y) < delta <= min{delta_1, delta_2}$, entonces $x$ e $y$ están ambos a distancia $< delta$ de $a$ (porque $a$ está entre ellos), así que $abs(f(x) - f(a))$ y $abs(f(y) - f(a))$ son chicos y se suma con la triangular.
+]
+
 #resolucion[
   Sea $epsilon > 0$. Queremos ver que existe $delta > 0$ tal que $abs(x - y) < delta$ implica que $abs(f(x) - f(y)) < epsilon$.
 
@@ -757,6 +804,10 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
 
 #ejemplo[Pegado de continuidad uniforme en $A union B$ con $d(A, B) > 0$ (Clase 6 · Ejemplo 8)][C6-8][
   Sean $(X, d)$, $(Y, d')$ espacios métricos y $f : X -> Y$. Supongamos que $X = A union B$, con $A, B$ tales que $d(A, B) > 0$. Si $f|_A$ y $f|_B$ son uniformemente continuas, entonces $f$ es uniformemente continua.
+]
+
+#estrategia[Un $delta$ menor que $d(A, B)$ no deja pares mixtos][
+  Si $x in A$, $y in B$, entonces $d(x, y) >= d(A, B)$; así que con $delta < min{delta_A, delta_B, d(A, B)}$, todo par con $d(x, y) < delta$ cae dentro de $A$ o dentro de $B$, y ahí manda el $delta$ del tramo correspondiente. Comparar con C6-7, donde los tramos se tocan y el caso mixto hay que tratarlo.
 ]
 
 #resolucion[
