@@ -99,6 +99,12 @@ Preservar siempre todo el contenido existente.
 
 - **`{día}-{mes}/{n}`** (`27-10/1`): ejemplo de una clase práctica de 2026. El título termina en `(Clase del 27/10/2026 · Ejemplo 1)`. Hay dos orígenes:
   - **Pizarrón**: el usuario lo pasa directo (foto o dictado de sus apuntes), sin archivo de clase. `{n}` numera los ejemplos de esa clase en el orden en que se cargan. Lo que el usuario anotó es la única fuente: los pasos que falten o no cierren se marcan como agregados o como corrección, no se rellenan en silencio.
+    - **Formato de la marca:** cada corrección o paso agregado va en su propio renglón con `#comentario[...]` (de `utils.typ`: centrado, en cursiva y entre paréntesis), *antes* del párrafo que corrige o agrega, y ese párrafo va después ya corregido. Nunca como `_(...)_` en línea, a mitad de una frase:
+      ```typst
+      #comentario[Corrección: el pizarrón dice $i_0 in E$.]
+
+      Como $x in K$, existe $i_0 in I$ tal que $x in U_(i_0)$. ...
+      ```
   - **Apunte tipeado de la cátedra**: se transcribe en `apuntes-typst/clases/2026/{MMDD}_{tema}.typ` (una clase por archivo; la cabecera declara fecha, fuente y tags), y `{n}` es el número del ejercicio en el apunte, **salvo choque**: si la fecha ya tiene tags de pizarrón, los del apunte continúan la numeración y la cabecera del archivo lo dice (`15-09/7` es el Ejercicio 1 de `0915_espacios_metricos_1.typ`). Tabla actual:
 
     | fecha | archivo en `clases/2026/` | tags | contenido |

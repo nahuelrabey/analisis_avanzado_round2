@@ -2203,3 +2203,166 @@ En particular, una isometría es siempre una función Lipschitz de constante $1$
 
   _Nota_: "por definición" en el tercer párrafo es la negación de $a_n -> 0$ para $a_n = d'(f(x_n), f(y_n)) >= 0$: existe $epsilon > 0$ tal que $a_n >= epsilon$ para infinitos $n$, y esos índices, ordenados, forman la subsucesión. El término $d(y_(n_(k_j)), x_(n_(k_j))) -> 0$ porque es una subsucesión de $d(x_n, y_n) -> 0$. Que $f(x_(n_(k_j))) -> f(x)$ es la caracterización de continuidad por sucesiones.
 ]
+
+#teorema[Teorema fundamental del cálculo][6.18][
+  Sea $f : [a, b] -> RR$ una función continua. Sea
+  $ F(x) = integral_a^x f(t) dif t, quad x in [a, b]. $
+  Entonces $F$ es uniformemente continua en $[a, b]$, derivable en $(a, b)$ y vale que $F'(x) = f(x)$ para todo $x in (a, b)$.
+]
+#demostracion[
+  Veamos primero que $F$ es uniformemente continua. Como $f$ es continua en $[a, b]$, sabemos que $f$ alcanza máximo y mínimo en el intervalo. En particular, existe una cota $M > 0$ tal que $abs(f(x)) <= M$ para todo $x in [a, b]$. Tenemos que si $x, y in [a, b]$,
+  $
+    abs(F(x) - F(y)) & = abs(integral_a^x f(t) dif t - integral_a^y f(t) dif t) = abs(integral_x^y f(t) dif t) \
+    & <= integral_x^y abs(f(t)) dif t <= M dot abs(x - y).
+  $
+  Usando esta cota, vemos que para $epsilon > 0$, si elegimos $0 < delta < epsilon \/ M$, tenemos que si $x, y$ tal que $abs(x - y) < delta$ entonces $abs(F(x) - F(y)) < epsilon$. Es decir, $F$ es uniformemente continua.
+
+  Veamos ahora que $F$ es derivable y calculemos su derivada. Para esto, fijemos un $x in (a, b)$ y recordemos que
+  $ F'(x) = lim_(h -> 0) (F(x + h) - F(x)) / h. $
+  Veamos que para todo $epsilon > 0$ podemos encontrar $delta > 0$ tal que si $abs(h) < delta$ entonces
+  $ abs((F(x + h) - F(x)) / h - f(x)) < epsilon. $
+  Tomemos primero $h > 0$. Tenemos que
+  $
+    abs(1 / h [F(x + h) - F(x)] - f(x)) & = abs(1 / h [integral_a^(x + h) f(t) dif t - integral_a^x f(t) dif t] - f(x)) \
+    & = abs(1 / h integral_x^(x + h) f(t) dif t - 1 / h integral_x^(x + h) f(x) dif t) \
+    & = abs(1 / h integral_x^(x + h) (f(t) - f(x)) dif t) \
+    & <= 1 / h integral_x^(x + h) abs(f(t) - f(x)) dif t.
+  $
+  Como $f$ es continua en $x$, sabemos que existe un $delta > 0$ tal que si $abs(x - y) < delta$, se tiene que $abs(f(x) - f(y)) < epsilon$. Elegimos este $delta$ y tomemos $0 < h < delta$. Entonces, si $x <= t <= x + h$, tenemos que $abs(x - t) < delta$. Por la cuenta que hicimos arriba,
+  $
+    abs(1 / h [F(x + h) - F(x)] - f(x)) & <= 1 / h integral_x^(x + h) abs(f(t) - f(x)) dif t \
+    & < 1 / h integral_x^(x + h) epsilon dif t = epsilon
+  $
+  como queríamos ver.
+
+  El mismo argumento se puede repetir si $h < 0$ y por lo tanto probamos que $F$ es derivable y que $F'(x) = f(x)$.
+
+  _Nota_: la cota $M$ sale del Corolario 6.16 aplicado a $abs(f)$ en el compacto $[a, b]$ (se puede tomar $M > 0$ sumando $1$ si hiciera falta). En la primera cuenta se supone $x <= y$ sin pérdida de generalidad, para que $integral_x^y abs(f(t)) dif t$ tenga sentido como cota; si $y < x$ se intercambian los roles. Para $h < 0$ (con $x + h >= a$) se escribe $F(x + h) - F(x) = -integral_(x + h)^x f(t) dif t$ y la misma cuenta da $abs(1 / h [F(x + h) - F(x)] - f(x)) <= 1 / abs(h) integral_(x + h)^x abs(f(t) - f(x)) dif t < epsilon$. Como $x in (a, b)$ es interior, para $abs(h)$ chico $x + h in [a, b]$ y $F(x + h)$ está definida.
+
+  _Nota_ (por qué $x <= t <= x + h$ da $abs(x - t) < delta$): $t$ es la variable de integración de $integral_x^(x + h) abs(f(t) - f(x)) dif t$, así que los únicos valores de $t$ que intervienen son los del intervalo de integración; como $h > 0$, eso es $x <= t <= x + h$. Para acotar la integral alcanza con acotar el integrando en esos $t$. Por otro lado, el $y$ de la continuidad es un punto genérico: _para todo_ $y$ con $abs(x - y) < delta$ vale $abs(f(x) - f(y)) < epsilon$. Acá se aplica a $y = t$, y hay que verificar $abs(x - t) < delta$. Restando $x$ en $x <= t <= x + h$ queda $0 <= t - x <= h$, así que
+  $ abs(x - t) = t - x <= h < delta. $
+  Es decir, $[x, x + h]$ es un intervalo de largo $h$ que empieza en $x$, y si $h < delta$ queda entero dentro de la zona donde los puntos están a menos de $delta$ de $x$. Esa es la razón para elegir $h < delta$: todo el intervalo de integración cae donde la continuidad garantiza $abs(f(t) - f(x)) < epsilon$.
+]
+
+#corolario[Regla de Barrow][6.19][
+  Sea $f : [a, b] -> RR$ una función continua en $[a, b]$ y sea $g : [a, b] -> RR$ una primitiva de $f$ (es decir, una función que cumple que $g'(x) = f(x)$ para todo $x in (a, b)$). Entonces se cumple que
+  $ integral_a^b f(t) dif t = g(b) - g(a). $
+]
+#comentario[Falta una hipótesis: $g$ tiene que ser continua en $[a, b]$. Si no, $F - g$ es constante en $(a, b)$ pero no necesariamente en $a$ y $b$, y la demostración evalúa justo ahí. Por ejemplo, $f = 0$ y $g = 0$ en $[a, b)$ con $g(b) = 1$ cumple $g' = f$ en $(a, b)$, pero $integral_a^b f(t) dif t = 0 != 1 = g(b) - g(a)$]
+#demostracion[
+  Consideremos la función
+  $ F(x) = integral_a^x f(t) dif t. $
+  Por el TFC, sabemos que $F$ es derivable en $(a, b)$ y vale que $F'(x) = f(x)$ para todo $x in (a, b)$. Como $g$ también lo cumple, vemos que
+  $ (F - g)'(x) = F'(x) - g'(x) = f(x) - f(x) = 0 $
+  para todo $x in (a, b)$. Esto nos dice que la función $F - g$ es constante. Es decir, existe una constante $c in RR$ tal que $F(x) - g(x) = c$. Evaluando en $x = a$,
+  $ c = F(a) - g(a) = integral_a^a f(t) dif t - g(a) = -g(a), $
+  lo que me dice que $F(x) - g(x) = -g(a)$. Evaluando en $x = b$ vemos que
+  $ F(b) - g(b) = integral_a^b f(t) dif t - g(b) = -g(a). $
+  Despejando esta igualdad llegamos a la fórmula que queríamos.
+
+  _Nota_: que $F - g$ sea constante sale del teorema del valor medio: si $h = F - g$ es continua en $[a, b]$ y derivable en $(a, b)$ con $h' = 0$, para $a <= x < y <= b$ existe $xi in (x, y)$ con $h(y) - h(x) = h'(xi)(y - x) = 0$. Para $F$ la continuidad en $[a, b]$ la da el TFC; para $g$ hay que pedirla (ver el comentario de arriba). Con eso $F - g$ es constante en todo $[a, b]$, incluidos los extremos donde se evalúa.
+]
+
+#definicion[Punto fijo][6.20][
+  Sea $(M, d)$ un espacio métrico y $f : M -> M$ una función. Un punto $x_0 in M$ se dice _punto fijo_ de $f$ si $f(x_0) = x_0$.
+]
+
+#definicion[Contracción][6.22][
+  Sea $f : (M, d) -> (N, d')$ una función. Decimos que $f$ es una _contracción_ si existe $0 < alpha < 1$ tal que
+  $ d'(f(x), f(y)) <= alpha thin d(x, y) quad "para todo" x, y in M. $
+]
+
+#observacion[Una contracción es uniformemente continua][6.23][
+  Por definición, una contracción es siempre una función Lipschitz (con constante $alpha$) y por lo tanto es uniformemente continua.
+]
+
+#teorema[Teorema del punto fijo de Banach][6.25][
+  Sea $(M, d)$ un espacio métrico completo y sea $f : M -> M$ una contracción. Entonces $f$ tiene un único punto fijo.
+]
+#demostracion[
+  Sea $x_0 in M$ cualquier punto. Si $x_0$ es un punto fijo ya terminamos. Si $x_0$ no es un punto fijo, sabemos que $f(x_0) != x_0$. Vamos a construir una sucesión y vamos a probar que esta sucesión converge a un punto fijo. Lo hacemos de la siguiente manera:
+  $ x_1 = f(x_0), quad x_2 = f(x_1), quad x_3 = f(x_2), quad dots, quad x_n = f(x_(n - 1)), quad dots $
+  Veamos primero que la sucesión $(x_n)_(n in NN)$ es convergente. Como $M$ es completo, nos alcanza con ver que $(x_n)$ es de Cauchy. Veamos primero qué pasa con dos términos consecutivos de la sucesión.
+  $
+    d(x_1, x_2) & = d(f(x_0), f(x_1)) <= alpha thin d(x_0, x_1). \
+    d(x_2, x_3) & = d(f(x_1), f(x_2)) <= alpha thin d(x_1, x_2) <= alpha^2 thin d(x_0, x_1).
+  $
+  Recursivamente vemos que
+  $
+    d(x_n, x_(n + 1)) & = d(f(x_(n - 1)), f(x_n)) <= alpha thin d(x_(n - 1), x_n) \
+    & <= alpha^2 thin d(x_(n - 2), x_(n - 1)) <= dots.c <= alpha^n thin d(x_0, x_1).
+  $
+  Para probar que la sucesión es de Cauchy no nos alcanza con mirar la distancia entre términos sucesivos: tenemos que acotar la distancia entre dos términos cualesquiera. Veamos que podemos hacer esto. Sean $n, m$ dos índices. Como son dos números naturales, sabemos que debe ser uno más grande que otro. Supongamos que $m > n$. Entonces $m = n + k$, con $k in NN$. Tenemos que
+  $
+    d(x_n, x_(n + k)) & <= d(x_n, x_(n + 1)) + d(x_(n + 1), x_(n + 2)) + dots.c + d(x_(n + k - 1), x_(n + k)) \
+    & <= alpha^n thin d(x_1, x_0) + alpha^(n + 1) thin d(x_1, x_0) + dots.c + alpha^(n + k - 1) d(x_1, x_0) \
+    & = alpha^n thin d(x_1, x_0) dot sum_(i = 0)^(k - 1) alpha^i <= alpha^n thin d(x_1, x_0) dot sum_(i = 0)^infinity alpha^i \
+    & = alpha^n thin d(x_1, x_0) 1 / (1 - alpha).
+  $
+  Mirando los extremos de la cuenta anterior, tenemos que
+  $ d(x_n, x_(n + k)) <= alpha^n / (1 - alpha) thin d(x_1, x_0) quad "para todo" k in NN. $
+
+  #comentario[Corrección: el texto elige $n_0$ con $alpha^(n_0) <= (1 - alpha) epsilon \/ d(x_1, x_0)$, y eso sólo da $alpha^(n_0) \/ (1 - alpha) dot d(x_1, x_0) <= epsilon$, no el $< epsilon$ con el que cierra. Alcanza con elegir $n_0$ con desigualdad estricta, que existe porque $alpha^n -> 0$ y el lado derecho es positivo.]
+
+  Como $alpha < 1$, sabemos que $alpha^n -> 0$ cuando $n -> infinity$. Ahora sí estamos listos para probar que la sucesión es de Cauchy. Dado $epsilon > 0$, tomemos $n_0 in NN$ tal que
+  $ alpha^(n_0) < (1 - alpha) epsilon / d(x_1, x_0). $
+  Entonces si $n, m >= n_0$ (y suponiendo que $m > n$), tenemos que
+  $ d(x_n, x_m) <= alpha^n / (1 - alpha) thin d(x_1, x_0) <= alpha^(n_0) / (1 - alpha) thin d(x_1, x_0) < epsilon $
+  como queríamos ver. Concluimos que la sucesión es de Cauchy y por lo tanto convergente.
+
+  Veamos ahora que la sucesión converge a un punto fijo. Sea $x^* = lim_(n -> infinity) x_n$. Como $f$ es continua (es Lipschitz), tenemos que $f(x_n) -> f(x^*)$. Pero $f(x_n) = x_(n + 1)$, con lo cual tenemos que $x_(n + 1) -> f(x^*)$. Por unicidad del límite, tenemos que $f(x^*) = x^*$.
+
+  Finalmente, nos queda ver que este punto fijo es único. Para esto, supongamos que $x^*$ e $y^*$ son dos puntos fijos distintos y veamos que esto es absurdo:
+  $ d(x^*, y^*) = d(f(x^*), f(y^*)) <= alpha thin d(x^*, y^*) < d(x^*, y^*), $
+  lo cual es absurdo. Concluimos que $f$ tiene un único punto fijo como queríamos ver.
+
+  _Nota_: se puede dividir por $d(x_1, x_0)$ porque $x_0$ no es punto fijo, así que $d(x_1, x_0) = d(f(x_0), x_0) > 0$. La primera desigualdad de la cadena larga es la desigualdad triangular aplicada $k - 1$ veces, y la segunda usa la cota de términos consecutivos y la simetría $d(x_0, x_1) = d(x_1, x_0)$. La serie geométrica converge a $1 \/ (1 - alpha)$ porque $0 < alpha < 1$, y como todos sus términos son positivos, la suma parcial hasta $k - 1$ es menor o igual que la serie completa. En la cuenta final, $alpha^n <= alpha^(n_0)$ porque $n >= n_0$ y $0 < alpha < 1$. En la unicidad, la última desigualdad estricta usa $alpha < 1$ y $d(x^*, y^*) > 0$.
+]
+
+#observacion[El teorema de Banach da un algoritmo con estimación del error][6.26][
+  El teorema anterior nos da un algoritmo para encontrar el punto fijo de la función: tomamos la sucesión $x_n = f(x_(n - 1))$ empezando la iteración en cualquier lado.
+
+  Además, nos dice cómo estimar el error de nuestra aproximación. Vimos que si $m > n$
+  $ d(x_n, x_m) <= alpha^n / (1 - alpha) thin d(x_1, x_0). $
+  Tomando límite en $m -> infinity$ arriba, nos sale
+  $ d(x_n, x^*) <= alpha^n / (1 - alpha) thin d(x_1, x_0), $
+  con $alpha, x_0, x_1$ valores que conocemos desde que comenzamos nuestro algoritmo.
+
+  Este mecanismo iterativo tiene consecuencias prácticas inmediatas: en ciencia de datos, algoritmos como EM (Expectation-Maximization) o ciertas variantes de descenso por gradiente pueden interpretarse como iteraciones de una contracción, y tanto la convergencia como la velocidad de convergencia garantizadas por Banach respaldan teóricamente su comportamiento. Más aún, la demostración del teorema es en sí misma constructiva: el punto fijo no es un objeto abstracto cuya existencia se deduce indirectamente, sino el límite explícito de una sucesión que puede computarse.
+
+  _Nota_: el paso al límite en $m$ usa que la distancia es continua: si $x_m -> x^*$, entonces $abs(d(x_n, x_m) - d(x_n, x^*)) <= d(x_m, x^*) -> 0$, así que $d(x_n, x_m) -> d(x_n, x^*)$. Como el lado derecho de la desigualdad no depende de $m$, la cota pasa al límite.
+]
+
+La condición de que $f$ sea una contracción se puede flexibilizar un poco. En cambio, tenemos que pedirle algo más al espacio métrico en sí: vamos a necesitar que sea compacto.
+
+#teorema[Punto fijo en compactos][6.27][
+  Sea $f : (M, d) -> (M, d)$ una función continua que cumple
+  $ d(f(x), f(y)) < d(x, y) quad "para todo" x != y in M, $
+  con $M$ compacto. Entonces $f$ tiene un único punto fijo.
+]
+#demostracion[
+  Definimos
+  $ A = {d(x, f(x)) : x in M} subset.eq RR. $
+  Como $A$ está acotado inferiormente (porque las distancias son siempre no negativas), sabemos que este conjunto debe tener ínfimo. Sea $i = inf A$. Si vemos que $i = min A$ (es decir, existe un $x^* in M$ tal que $d(x^*, f(x^*)) = i$) y además vemos que $i = 0$, entonces probamos que hay un punto fijo.
+
+  Para ver esto, consideremos $(x_n)_(n in NN)$ una sucesión en $M$ tal que $d(x_n, f(x_n)) -> i$ (recordemos que existe por equivalencia de ínfimo). Como $M$ es compacto, sabemos que existe una subsucesión $(x_(n_k))$ y $x^* in M$ tal que $x_(n_k) -> x^*$. Como $f$ es continua, sabemos que también $f(x_(n_k)) -> f(x^*)$. Entonces
+  $
+    abs(d(x_(n_k), f(x_(n_k))) - d(x^*, f(x^*))) <= & abs(d(x_(n_k), f(x_(n_k))) - d(x_(n_k), f(x^*))) \
+    & + abs(d(x_(n_k), f(x^*)) - d(x^*, f(x^*))),
+  $
+  por la desigualdad triangular para el módulo. Pero si ahora usamos la desigualdad triangular "al revés" que ya habíamos usado en el Ejemplo 4.28, podemos acotar
+  $
+    abs(d(x_(n_k), f(x_(n_k))) - d(x^*, f(x^*))) <= & abs(d(x_(n_k), f(x_(n_k))) - d(x_(n_k), f(x^*))) \
+    & + abs(d(x_(n_k), f(x^*)) - d(x^*, f(x^*))) \
+    <= & d(f(x_(n_k)), f(x^*)) + d(x_(n_k), x^*) -> 0.
+  $
+  Es decir, que $d(x_(n_k), f(x_(n_k))) -> d(x^*, f(x^*))$ por un lado y por el otro, por ser subsucesión de una sucesión convergente, tenemos que $d(x_(n_k), f(x_(n_k))) -> i$. Probamos entonces que $i = d(x^*, f(x^*))$, es decir, vimos que el ínfimo es un mínimo.
+
+  Veamos ahora que $i = 0$, es decir que $x^*$ es un punto fijo. Supongamos que no lo es, es decir que $f(x^*) = y != x^*$. Entonces
+  $ d(y, f(y)) = d(f(x^*), f(y)) < d(x^*, y) = d(x^*, f(x^*)) = i. $
+  Esto nos dice que encontramos un elemento del conjunto $A$ que es menor estricto de su ínfimo, lo cual es absurdo.
+
+  Finalmente, nos queda probar que $x^*$ es el único punto fijo. Esto es muy parecido a la demostración anterior y lo dejamos como ejercicio.
+
+  _Nota_: para que $A$ tenga ínfimo hace falta además $A != nothing$, es decir $M != nothing$ (si $M = nothing$ el enunciado es falso: no hay ningún punto). La desigualdad triangular "al revés" es $abs(d(a, b) - d(a, c)) <= d(b, c)$: con $a = x_(n_k)$, $b = f(x_(n_k))$, $c = f(x^*)$ acota el primer término por $d(f(x_(n_k)), f(x^*))$, y con los roles $d(x_(n_k), c)$ y $d(x^*, c)$ acota el segundo por $d(x_(n_k), x^*)$. Los dos tienden a $0$ por la continuidad de $f$ y porque $x_(n_k) -> x^*$. En el absurdo, la desigualdad estricta usa la hipótesis con $x^* != y$. La unicidad, que el texto deja como ejercicio, sale como en Banach: si $x^* != y^*$ fueran dos puntos fijos, $d(x^*, y^*) = d(f(x^*), f(y^*)) < d(x^*, y^*)$, absurdo. A diferencia de Banach, acá no hay constante $alpha < 1$ (ver la corrección al Ejemplo C8-1 en `ejemplos/p5.typ`): lo que reemplaza a la contracción es la compacidad, que permite realizar el ínfimo de $x |-> d(x, f(x))$.
+]

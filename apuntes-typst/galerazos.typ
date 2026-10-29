@@ -103,6 +103,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-10],
   [Derivada acotada: el valor medio fabrica la constante de Lipschitz],
   [Hay que probar que una $f$ derivable en un intervalo de $RR$ es Lipschitz o uniformemente continua],
+
+  [G-11],
+  [$<=$ prueba la cota; $<$ prueba que no se alcanza],
+  [Hay que ver que un supremo (o ínfimo) *no* es máximo (o mínimo) sobre un conjunto que no es cerrado],
 )
 
 #v(8pt)
@@ -1464,3 +1468,102 @@ Las cotas de las filas sin referencia a la guía son cuentas propias.
   una de derivada acotada, por ejemplo $f(x) = x$ ($f' = 1$).
 - `desafios/p4.typ`, Bloque 5 --- el Ejercicio 5.25 (Lipschitz $==>$ uniformemente continua) es
   el paso que convierte este galerazo en continuidad uniforme.
+
+#v(8pt)
+== Galerazo 11 · $<=$ prueba la cota; $<$ prueba que no se alcanza
+
+#disparador[
+  En el ítem (d) de `27-10/3` se prueba que en $(0, 1)$ vale $abs(x - y) = y - x <= 1 - 0 = 1$, y
+  después se afirma que $abs(x - y) != 1$ para todo $x, y in (0, 1)$. ¿Cómo lo hecho en el
+  ejercicio nos muestra eso?
+]
+
+#galerazo[G-11][
+  Para ver que un supremo $s$ *no es máximo* hay que probar tres cosas distintas: que $s$ es cota
+  superior ($<=$), que hay una sucesión del conjunto que tiende a $s$ (y entonces es el supremo), y
+  que *ningún* elemento vale $s$ ($<$ estricto). La cota con $<=$ no alcanza para lo último:
+  vale igual en el conjunto cerrado, donde el supremo sí se alcanza. El $<$ sale de que los
+  extremos *no pertenecen* al conjunto.
+]
+
+=== La señal
+
+El ejercicio pide un contraejemplo de la forma "el supremo (o ínfimo) existe pero no se alcanza",
+casi siempre para mostrar que una hipótesis de compacidad (o de cerrado) es necesaria. El
+conjunto que aparece es *abierto en algún extremo*: $(0, 1)$, $(0, 1]$, $[0, +infinity)$ con una
+función que se acerca a una asíntota.
+
+#sublema(titulo: "Traducción")[
+  *"El sup no se alcanza"* $==>$ *"para todo elemento, desigualdad estricta"*. La cota que usa
+  "$1$ es cota superior de $K$" ($y <= 1$) da $<=$; la que usa "$1 in.not K$" ($y < 1$) da $<$.
+]
+
+=== Por qué funciona
+
+Una cota escrita con $<=$ usa sólo que el conjunto está *dentro* de $[0, 1]$, y por eso es
+igual de cierta para $[0, 1]$, donde $abs(0 - 1) = 1$ sí se alcanza. Una cuenta que no distingue
+entre $(0, 1)$ y $[0, 1]$ no puede probar algo que es cierto en uno y falso en el otro. Lo que
+los distingue es que en $(0, 1)$ las cotas son estrictas: si $x < y$ están en $(0, 1)$, entonces
+$x > 0$ e $y < 1$, y sumando dos desigualdades estrictas
+$ y - x < 1 - 0 = 1. $
+
+Las tres piezas, en el caso de $op("diam")(0, 1)$:
++ *Cota:* $abs(x - y) <= 1$ $==>$ $op("diam")(0, 1) <= 1$.
++ *Sucesión:* $abs(x_n - y_n) = 1 - 2 \/ n -> 1$ con $x_n = 1 - 1 \/ n$, $y_n = 1 \/ n$ ($n >= 2$)
+  $==>$ $op("diam")(0, 1) = 1$ (Proposición "Equivalencia del supremo 2" de `apuntes.typ`).
++ *Estricta:* $abs(x - y) < 1$ para todo par $==>$ el diámetro no se alcanza.
+
+Es la otra cara de G-8: sobre un compacto el supremo de una continua *siempre* se alcanza, así
+que para que la desigualdad estricta pueda valer, el conjunto tiene que no ser compacto (en
+$RR$: no cerrado o no acotado).
+
+=== La familia entera
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#table(
+  columns: (1.3fr, 0.6fr, 1.6fr),
+  align: (left + horizon, center + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 5pt),
+
+  [*Qué no se alcanza*], [*Valor*], [*Desigualdad estricta*],
+
+  [$sup (0, 1)$],
+  [$1$],
+  [$x < 1$ para todo $x in (0, 1)$],
+
+  [$op("diam")(0, 1)$ (`27-10/3 (d)`)],
+  [$1$],
+  [$y - x < 1$, porque $y < 1$ y $x > 0$],
+
+  [$d(0, (0, 1]) = inf_(a in (0, 1]) abs(a)$],
+  [$0$],
+  [$abs(a) = a > 0$ para todo $a in (0, 1]$],
+
+  [$sup_(x >= 0) x \/ (1 + x)$],
+  [$1$],
+  [$x < 1 + x$, así que $x \/ (1 + x) < 1$],
+)
+
+Las filas sin referencia son cuentas propias; en cada una la sucesión que tiende al valor es la
+obvia ($1 - 1 \/ n$, $1 \/ n$, $n$).
+
+=== Cómo inventarlo de cero
+
++ *Probá la cota con $<=$:* es la parte fácil, y da que el supremo es a lo sumo el valor candidato.
++ *Fabricá la sucesión:* elementos del conjunto que se acerquen al candidato. Con la cota, eso
+  da que el candidato *es* el supremo.
++ *Preguntate qué punto haría falta para alcanzarlo:* en $(0, 1)$, el par $(0, 1)$. Ese punto
+  tiene que estar fuera del conjunto; si no, el contraejemplo está mal elegido.
++ *Rehacé la cota de 1 usando que ese punto no está:* cambiar "$y <= 1$" por "$y < 1$" (porque
+  $1 in.not K$) y propagar la desigualdad estricta.
+
+=== Dónde se usa
+
+- `ejemplos/p5: 27-10/3 (d)` --- el diámetro de $(0, 1)$ es $1$ y no se alcanza: (c) necesita
+  compacidad.
+- G-8 --- es su contracara: con compacidad y continuidad el supremo sí es máximo.
+- `p5: Ej. 2` y `p5: Ej. 8` --- para ver que las hipótesis de compacidad son necesarias, el
+  contraejemplo natural es un intervalo abierto, y se prueba con este esquema.

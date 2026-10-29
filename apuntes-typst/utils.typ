@@ -108,6 +108,11 @@
   #text(size: 9.5pt)[#cuerpo]
 ]
 
+/// Comentario editorial (corrección o paso agregado): centrado, en cursiva y entre paréntesis.
+/// Va en su propio renglón, antes del párrafo que corrige.
+/// Uso: #comentario[Corrección: el pizarrón dice ...]
+#let comentario(cuerpo) = align(center, text(style: "italic")[(#cuerpo)])
+
 /// Caja destacada para lemas auxiliares o justificaciones técnicas intermedias.
 /// Uso: #sublema(titulo: "Lema auxiliar")[Texto...]
 #let sublema(titulo: "Detalle técnico", cuerpo) = block(

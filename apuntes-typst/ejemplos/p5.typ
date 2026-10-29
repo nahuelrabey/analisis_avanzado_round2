@@ -1,5 +1,21 @@
 #import "@preview/frame-it:2.0.0": *
 #import "../utils.typ": *
+#import "@preview/cetz:0.4.0"
+#import "@preview/cetz-plot:0.1.2": plot
+
+// Recuadro rojo para lo que el profesor marca como muy importante.
+#let importante(cuerpo) = block(
+  fill: rgb("#fef2f2"),
+  stroke: 1.2pt + rgb("#dc2626"),
+  inset: (x: 12pt, y: 10pt),
+  radius: 4pt,
+  width: 100%,
+  breakable: false,
+)[
+  #text(weight: "bold", size: 9.5pt, fill: rgb("#b91c1c"))[Importante] \
+  #v(2pt)
+  #cuerpo
+]
 
 #show figure.where(kind: "frame"): set figure(numbering: none)
 #show figure.where(kind: "frame"): set block(breakable: true)
@@ -55,8 +71,8 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   [2], [Compactos y cerrados], [p5: Ej. 4, 5],
   [3], [Productos de compactos], [p5: Ej. 3; conceptual para Ej. 9],
   [4], [Cerrado y acotado no alcanza: bolas en espacios de funciones], [p5: Ej. 10],
-  [5], [Compacidad y funciones continuas: encajes de compactos], [p5: Ej. 11, 13 (usa el Ej. 5); conceptual para Ej. 2, 8, 9, 12],
-  [6], [Compacidad y punto fijo], [p5: Ej. 14--19 (conceptual)],
+  [5], [Compacidad y funciones continuas: encajes de compactos], [p5: Ej. 3, 11, 13 (usa el Ej. 5); conceptual para Ej. 2, 8, 9, 12],
+  [6], [Compacidad y punto fijo], [p5: Ej. 15 (29-10/1, 46), 19 (45); conceptual para Ej. 14, 16--18],
   [7], [Cubrimientos por abiertos], [conceptual (Definición 6.11)],
 )
 
@@ -329,7 +345,9 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   $ tilde(x) = x - k T, quad tilde(y) = y - k T. $
   Notemos que $abs(tilde(x) - tilde(y)) = abs(x - y) < delta$, y que $f(tilde(x)) = f(x)$, $f(tilde(y)) = f(y)$ por la periodicidad. Así que alcanza con ver que $abs(f(tilde(x)) - f(tilde(y))) < epsilon$.
 
-  _(Paso reconstruido.)_ Podemos suponer $x <= y$ (si no, intercambiamos los roles de $x$ e $y$, que no cambia ni $abs(x - y)$ ni $abs(f(x) - f(y))$). Entonces $0 <= tilde(x) <= tilde(y) < tilde(x) + delta <= tilde(x) + T < 2 T$, es decir, $tilde(y) in [0, 2 T)$.
+  #comentario[Paso reconstruido.]
+
+  Podemos suponer $x <= y$ (si no, intercambiamos los roles de $x$ e $y$, que no cambia ni $abs(x - y)$ ni $abs(f(x) - f(y))$). Entonces $0 <= tilde(x) <= tilde(y) < tilde(x) + delta <= tilde(x) + T < 2 T$, es decir, $tilde(y) in [0, 2 T)$.
 
   Tenemos dos casos:
 
@@ -378,6 +396,140 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   En los dos casos, $abs(f(x) - f(y)) = abs(f(tilde(x)) - f(tilde(y))) < epsilon$, y como $delta$ no depende de $x$ ni de $y$, $f$ es uniformemente continua.
 ]
 
+#sublema(titulo: "Tarea: rehacerlo con [0, 2T], sin casos")[
+  *Comentario del docente.* En lugar de usar la continuidad uniforme en $[0, T]$, es más fácil (aunque parezca contraintuitivo) usarla en $[0, 2 T]$: así no hace falta separar en casos.
+
+  *Cómo encararlo:*
+  + Cambiar el compacto: $f|_([0, 2 T])$ es uniformemente continua (Teorema 6.17). Sacar el $delta_0$ directamente para $epsilon$; ¿sigue haciendo falta el $epsilon \/ 2$?
+  + Mantener $delta = min{delta_0, T}$. Pensar qué papel cumple ahora la condición $delta <= T$: es la que reemplaza al caso 2.
+  + Trasladar por un múltiplo de $T$ el *menor* de los dos puntos a $[0, T)$, y verificar que el otro cae en $[0, 2 T)$.
+  + Para comparar: ¿qué hacía el caso 2 de la resolución de arriba (pasar por el punto $T$, desigualdad triangular) que ahora no hace falta? ¿Por qué con un período de "colchón" alcanza?
+]
+
+#ejemplo[El conjunto de distancias de un compacto de $RR$ es compacto (Clase del 27/10/2026 · Ejemplo 3)][27-10/3][
+  Sea $K subset.eq RR$ un conjunto compacto y sea
+  $ Delta = {abs(x - y) : x, y in K}. $
+  Probar que:
+  + $g : (RR^2, d_2) -> (RR, abs(dot))$, $g(x, y) = abs(x - y)$, es continua.
+  + $Delta$ es compacto.
+  + Existen $x_0, y_0 in K$ tales que $d(x_0, y_0) = op("diam")(K)$.
+  + Ver que (c) no se cumple si $K$ es solamente acotado.
+]
+
+#resolucion[
+  *a)* Sean $f : RR^2 -> RR$, $f(x, y) = x - y$, y $h : RR -> RR$, $h(t) = abs(t)$. Entonces $g = h compose f$. La función $f$ es continua por ser un polinomio (`C9-1.6`, en `ejemplos/p4.typ`), y $h$ es continua (ver abajo). Como la composición de funciones continuas es continua, $g$ es continua.
+
+  #comentario[Paso agregado: el pizarrón lo da por "trivial".]
+
+  $h$ es continua porque es 1-Lipschitz. Para todo $t, s in RR$,
+  $ abs(t) = abs((t - s) + s) <= abs(t - s) + abs(s) => abs(t) - abs(s) <= abs(t - s), $
+  e intercambiando los roles de $t$ y $s$, $abs(s) - abs(t) <= abs(t - s)$. Por lo tanto
+  $ abs(abs(t) - abs(s)) <= abs(t - s), $
+  y dado $epsilon > 0$ alcanza con tomar $delta = epsilon$.
+
+  *b)* Por definición de $Delta$,
+  $ Delta = g(K times K). $
+  Si $K times K$ es compacto en $(RR^2, d_2)$, como $g$ es continua por (a) y la imagen continua de un compacto es compacta (Teorema 6.14), $Delta$ es compacto.
+
+  #comentario[Paso agregado: el pizarrón dice "$K times K$ también es compacto" sin aclarar la métrica, y $g$ está definida en $(RR^2, d_2)$.]
+
+  Veamos que $K times K$ es cerrado y acotado en $(RR^2, d_2)$; por Heine-Borel (Teorema 6.5) eso alcanza. Como $K$ es compacto en $RR$, es cerrado y acotado (Proposición 6.3).
+  - _Acotado._ Existe $M > 0$ con $K subset.eq [-M, M]$. Si $(x, y) in K times K$,
+    $ d_2 ((x, y), (0, 0)) = sqrt(x^2 + y^2) <= sqrt(2) M. $
+  - _Cerrado._ Sea $(x_n, y_n)_(n in NN) subset.eq K times K$ con $(x_n, y_n) -> (x, y)$ en $d_2$. Como
+    $ abs(x_n - x) <= sqrt((x_n - x)^2 + (y_n - y)^2) = d_2 ((x_n, y_n), (x, y)) -> 0, $
+    resulta $x_n -> x$, y como $K$ es cerrado, $x in K$. Lo mismo para $y_n -> y$, así que $y in K$. Entonces $(x, y) in K times K$.
+
+  Por lo tanto $K times K$ es compacto, y $Delta$ también.
+
+  #comentario[Corrección: hace falta $K != emptyset$, que el pizarrón no dice. Si $K = emptyset$, no hay puntos $x_0, y_0$ que elegir.]
+
+  *c)* Sea entonces $K != emptyset$. Como $K$ es compacto, es acotado (Proposición 6.3), y por definición de diámetro (Definición 4.9), con la métrica usual de $RR$,
+  $ op("diam")(K) = sup {d(x, y) : x, y in K} = sup_(x, y in K) abs(x - y) = sup Delta. $
+
+  Como $Delta subset.eq RR$ es compacto (por b) y no vacío, tiene máximo, es decir, $sup Delta in Delta$. Entonces existen $x_0, y_0 in K$ tales que
+  $ abs(x_0 - y_0) = max_(x, y in K) abs(x - y) = sup_(x, y in K) abs(x - y) = op("diam")(K), $
+  donde la segunda igualdad es porque, si el máximo existe, coincide con el supremo (Definición 3).
+
+  #comentario[Paso agregado: el pizarrón usa "$Delta$ compacto en $RR$ $=>$ tiene máximo" sin justificarlo; es el Ejercicio 2 de la Práctica 5.]
+
+  Como $Delta$ es compacto, es cerrado y acotado (Proposición 6.3). Como es acotado y no vacío, existe $s = sup Delta in RR$. Por la equivalencia del supremo con sucesiones (Proposición "Equivalencia del supremo 2" de `apuntes.typ`, que construye $a_n in Delta$ con $s - 1 / n < a_n <= s$), existe $(a_n) subset.eq Delta$ con $a_n -> s$. Como $Delta$ es cerrado y $(a_n) subset.eq Delta$, resulta $s in Delta$, es decir, $s = max Delta$.
+
+  *d)* Sea $K = (0, 1)$, que es acotado. Veamos que
+  $ sup_(x, y in K) abs(x - y) = 1. $
+  Si $x, y in K$, tomando $x < y$ sin pérdida de generalidad, entonces
+  $ abs(x - y) = y - x <= 1 - 0 = 1, $
+  sabiendo que $1$ es cota superior de $K$ y $0$ es cota inferior de $K$. Es decir, $1$ es cota superior de $Delta$.
+
+  #comentario[Corrección: el pizarrón indexa en $n in NN$, pero $x_1 = 0$ e $y_1 = 1$ no están en $(0, 1)$; hay que empezar en $n = 2$.]
+
+  Podemos construir $(x_n)_(n >= 2), (y_n)_(n >= 2) subset.eq (0, 1)$ tales que
+  $ x_n = 1 - 1 / n, quad y_n = 1 / n. $
+
+  #comentario[Paso agregado: que el supremo es $1$ es la Proposición "Equivalencia del supremo 2" de `apuntes.typ`: $1$ es cota superior de $Delta$ y la sucesión $abs(x_n - y_n) in Delta$ tiende a $1$.]
+
+  De esta forma
+  $ abs(x_n - y_n) = 1 - 2 / n -> 1, $
+  así que ninguna cota superior de $Delta$ puede ser menor que $1$. Es decir,
+  $ op("diam")(K) = sup_(x, y in K) abs(x - y) = 1. $
+
+  Y además
+  $ abs(x - y) != 1 quad "para todo " x, y in (0, 1). $
+
+  #comentario[Paso agregado: esto no sale de la cota $y - x <= 1$, sino de que es estricta; ver G-11 en `galerazos.typ`.]
+
+  Si $x < y$ están en $(0, 1)$, entonces $y < 1$ y $x > 0$, así que $y - x < 1 - 0 = 1$. Por lo tanto no existen $x_0, y_0 in K$ con $abs(x_0 - y_0) = op("diam")(K)$, y (c) falla.
+
+  _Por qué falla:_ $(0, 1)$ es acotado pero no cerrado. El supremo de $Delta = [0, 1)$ existe, pero no se alcanza: es exactamente el paso de (c) donde se usaba que $Delta$ es cerrado.
+]
+
+#sublema(titulo: [Dato de color: dos caminos para "$K times K$ es compacto"])[
+  El Bloque 3 (`C7-1`) prueba que un producto finito de compactos es compacto con $d_oo$, no con $d_2$. Para pasar a $d_2$ hay dos caminos:
+  + *Heine-Borel* (el de arriba): en $(RR^2, d_2)$, compacto equivale a cerrado y acotado, y $K times K$ hereda las dos cosas de $K$.
+  + *Métricas equivalentes*: $d_oo <= d_2 <= sqrt(2) d_oo$ en $RR^2$, así que una sucesión converge con $d_2$ si y sólo si converge con $d_oo$ (al mismo límite). Como la compacidad se define por sucesiones, $K times K$ es compacto con $d_2$ si y sólo si lo es con $d_oo$, y eso es `C7-1`.
+
+  En la materia se usa más Heine-Borel; las métricas equivalentes vienen de materias anteriores y casi no se nombran.
+
+  El mismo esquema ($Delta = g(K times K)$, con $g$ continua) resuelve el *Ejercicio 3* de la Práctica 5, cambiando $g$ por $(x, y) |-> x + y$ y $(x, y) |-> x y$.
+]
+
+#ejemplo[Si las preimágenes de compactos son compactas, $f$ es cerrada (Clase del 27/10/2026 · Ejemplo 5)][27-10/5][
+  Sea $f : (M, d) -> (N, d')$ continua tal que
+  $ f^(-1) (K) subset.eq M "es compacto para todo" K subset.eq N "compacto". $
+  Probar que $f$ es cerrada, es decir, que $f(F)$ es cerrado para todo $F subset.eq M$ cerrado.
+
+  #comentario[En el pizarrón es el Ejercicio 3, con $f : (E, d) -> (E', d')$ y $K'$. Acá se usan $M$ y $N$ para no confundir $E'$ con el conjunto derivado.]
+]
+
+#resolucion[
+  Dado $F subset.eq M$ cerrado, quiero ver que $f(F) subset.eq N$ es cerrado. Es decir, si $(y_n) subset.eq f(F)$ es tal que $y_n -> y$, entonces $y in f(F)$.
+
+  Para cada $n$, como $y_n in f(F)$, existe $x_n in F$ tal que $y_n = f(x_n)$; así $(x_n) subset.eq F$.
+
+  Tomando
+  $ K = {y_n : n in NN} union {y}, $
+  que, por el ejercicio anterior (`27-10/4`), sabemos que es compacto, entonces $f^(-1) (K) subset.eq M$ es compacto y además $(x_n) subset.eq f^(-1) (K)$.
+
+  #comentario[Agregados: por qué $(x_n) subset.eq f^(-1) (K)$, y el orden del argumento con los límites, que en el pizarrón aparece mezclado.]
+
+  Lo segundo es porque $f(x_n) = y_n in K$ para todo $n$. Entonces existe $(x_(n_k)) subset.eq f^(-1) (K)$ tal que
+  $ x_(n_k) -> x in f^(-1) (K). $
+  Por un lado, como $f$ es continua, $f(x_(n_k)) -> f(x)$. Por otro lado, $f(x_(n_k)) = y_(n_k)$, y toda subsucesión de $(y_n)$ tiende a $y$. Por unicidad del límite,
+  $ y = f(x) in K. $
+
+  Además $(x_(n_k)) subset.eq F$, que es cerrado, y $x_(n_k) -> x$; por lo tanto $x in F$. Es decir,
+  $ y = f(x) in f(F). $
+]
+
+#sublema(titulo: "Dónde entra cada hipótesis (agregado)")[
+  - *La compacidad de las preimágenes* da el candidato: los $x_n$ no tienen por qué converger, pero viven en el compacto $f^(-1) (K)$, así que una subsucesión converge a algún $x$.
+  - *$F$ cerrado* garantiza que ese $x$ está en $F$.
+  - *$f$ continua* lleva el límite de los $x_(n_k)$ al de los $y_(n_k)$, y da $f(x) = y$.
+  - *`27-10/4`* es lo que fabrica un compacto de $N$ a partir de la sucesión $(y_n)$: sin él no habría a qué conjunto aplicarle la hipótesis.
+
+  Es la misma maniobra del *Ejercicio 13* de la Práctica 5 (una biyección continua desde un compacto es homeomorfismo): ahí también hay que ver que la imagen de un cerrado es cerrada, sólo que la compacidad viene de que el dominio entero es compacto.
+]
+
 #v(10pt)
 
 == Bloque 6 · Compacidad y punto fijo
@@ -419,6 +571,359 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   La conclusión del ejercicio sí es cierta (es el teorema de Edelstein): el camino estándar, que no está en el manuscrito, es minimizar la función continua $g(x) = d(x, f(x))$ en el compacto $K$ ($f$ es continua porque $d(f(x), f(y)) <= d(x, y)$) y ver que el mínimo tiene que valer $0$. Si el punto de mínimo $x_0$ no fuera fijo, el punto $x_1 = f(x_0) != x_0$ cumpliría
   $ g(x_1) = d(x_1, f(x_1)) = d(f(x_0), f(x_1)) < d(x_0, x_1) = g(x_0), $
   absurdo. La unicidad sí sale como en Banach: dos puntos fijos distintos $a != b$ darían $d(a, b) = d(f(a), f(b)) < d(a, b)$.
+]
+
+#ejemplo[Teorema de punto fijo: una única raíz de $x^3 - 3x + 1$ en $[0, 1 \/ 2]$ (Clase del 29/10/2026 · Ejemplo 1)][29-10/1][
+  Sea $f : RR -> RR$ dada por $f(x) = x^3 - 3x + 1$. Veamos que $f$ tiene una única raíz en $[0, 1 \/ 2]$.
+]
+
+#resolucion[
+  _Observación._ Para ver que hay una raíz no hace falta usar punto fijo. De hecho, podemos ver que tiene al menos una raíz, pues
+  $ f(0) = 1 > 0 quad "y" quad f(1 \/ 2) = 1 / 8 - 3 / 2 + 1 = -3 / 8 < 0. $
+
+  #comentario[Agregado: el paso que falta es el teorema de Bolzano (valores intermedios). Como $f$ es continua en $[0, 1 \/ 2]$ y cambia de signo entre los extremos, existe $c in (0, 1 \/ 2)$ con $f(c) = 0$.]
+
+  #comentario[El pizarrón dice "al menos una raíz simple". El cambio de signo sólo da existencia: no dice que la raíz sea única ni que sea simple (multiplicidad $1$). La unicidad sale del párrafo siguiente.]
+
+  Se puede resolver sólo usando el teorema de Bolzano: $f$ es continua y además es un polinomio de grado $3$.
+
+  #comentario[Corrección: el pizarrón dice que "en el intervalo es positiva". En $[0, 1 \/ 2]$ la función pasa de positiva ($f(0) = 1$) a negativa ($f(1 \/ 2) = -3 \/ 8$), y lo que importa es el patrón de signos $-, +, -, +$ de izquierda a derecha.]
+
+  Probamos que en un número muy negativo la función es negativa, en $0$ es positiva, en $1 \/ 2$ es negativa y en un número muy positivo es positiva. Por Bolzano, hay una raíz en cada uno de los tres tramos donde cambia el signo. Como $f$ es de grado $3$, tiene tres raíces como máximo: son exactamente esas, y en el intervalo $[0, 1 \/ 2]$ hay una sola raíz.
+
+  #comentario[Agregado: valores concretos para "muy negativo" y "muy positivo". Sirven $-2$ y $2$:
+  $ f(-2) = -8 + 6 + 1 = -1 < 0, quad f(2) = 8 - 6 + 1 = 3 > 0. $
+  Los tres tramos son $(-2, 0)$, $(0, 1 \/ 2)$ y $(1 \/ 2, 2)$, disjuntos, y sólo el del medio está en $[0, 1 \/ 2]$ (en los extremos $f$ no se anula).]
+
+  *Con punto fijo.* Reescribimos la ecuación:
+  $
+    x^3 - 3x + 1 = 0 & <=> x^3 + 1 = 3x \
+    & <=> 1 / 3 (x^3 + 1) = x.
+  $
+
+  #comentario[Corrección: el pizarrón vuelve a llamar $f$ a la función nueva; acá la llamamos $g$ para no confundirla con $f(x) = x^3 - 3x + 1$. Al final de la clase el profesor se dio cuenta de que había usado el mismo nombre para las dos.]
+
+  Llamamos $g(x) = 1 / 3 (x^3 + 1)$. Las raíces de $f$ son los puntos fijos de $g$, así que buscamos un punto fijo de $g$ en $[0, 1 \/ 2]$.
+
+  Recordemos el teorema de punto fijo: funciones contractivas en un completo, o funciones continuas en un compacto. La función tiene que mandar el dominio "adentro" de sí mismo.
+
+  #comentario[Agregado: "mandar el dominio adentro de sí mismo" quiere decir $g(X) subset.eq X$, es decir, $g : X -> X$. Sin eso el teorema no tiene sentido: un punto fijo $x = g(x)$ tiene que estar en $X$, y la prueba de Banach itera $x_(n + 1) = g(x_n)$, que necesita que cada $x_n$ siga en $X$. En este ejemplo hay que verificar $g([0, 1 \/ 2]) subset.eq [0, 1 \/ 2]$.]
+
+  #comentario[Corrección: "continuas en un compacto" no alcanza en general. La rotación de un ángulo $theta in (0, 2 pi)$ en la circunferencia $S^1$ es continua y manda el compacto $S^1$ en sí mismo, pero no tiene puntos fijos. Lo que sí vale es el caso de un intervalo: toda $g : [a, b] -> [a, b]$ continua tiene un punto fijo (Ejercicio 19 de la Práctica 5; sale de aplicar Bolzano a $g(x) - x$). Esta versión da existencia pero no unicidad. En un compacto general, la versión con unicidad pide $d(g(x), g(y)) < d(x, y)$ para $x != y$ (Ejemplo C8-1, en el Bloque 6).]
+
+  Notemos que $[0, 1 \/ 2]$ es completo y compacto (cerrado y acotado en $RR$), por lo tanto podemos usar las dos versiones del punto fijo.
+
+  Veamos si $g([0, 1 \/ 2]) subset.eq [0, 1 \/ 2]$.
+
+  Podríamos buscar mínimos y máximos en $[0, 1 \/ 2]$ usando derivadas y Weierstrass, pero quizás no podemos derivar, o no es algo "trivial". Vamos con otro acercamiento: acotamos "a lo bestia".
+
+  $
+    0 <= x <= 1 / 2 & <=> 0 <= x^3 <= 1 / 8 && "(" x |-> x^3 "es creciente)" \
+    & <=> 1 <= x^3 + 1 <= 1 / 8 + 1 = 9 / 8 && "(sumamos " 1 ")" \
+    & <=> 1 / 3 <= 1 / 3 (x^3 + 1) <= 3 / 8 && "(multiplicamos por " 1 \/ 3 ")".
+  $
+
+  Luego, vemos que
+  $ g([0, 1 \/ 2]) subset.eq [1 / 3, 3 / 8] subset.eq [0, 1 / 2]. $
+
+  #comentario[Agregado: "ambas funciones" son los dos lados de $1 / 3 (x^3 + 1) = x$, es decir $y = g(x)$ e $y = x$. Un punto fijo de $g$ es una abscisa donde se cortan el gráfico de $g$ y la diagonal $y = x$. La franja es horizontal: para $x in [0, 1 \/ 2]$, el gráfico de $g$ queda entre las rectas $y = 1 \/ 3$ e $y = 3 \/ 8$.]
+
+  El profesor comenta: la idea es encontrar la "intersección" entre ambas funciones. Por la acotación bruta que vimos antes, $g$ vive en la franja $[1 \/ 3, 3 \/ 8]$.
+  
+  #figure(
+    cetz.canvas({
+      plot.plot(
+        size: (7, 7),
+        x-min: 0, x-max: 0.55,
+        y-min: 0, y-max: 0.55,
+        x-tick-step: none,
+        y-tick-step: none,
+        x-ticks: ((1 / 3, $1/3$), (3 / 8, $3/8$), (0.5, $1/2$)),
+        y-ticks: ((1 / 3, $1/3$), (3 / 8, $3/8$), (0.5, $1/2$)),
+        x-label: $x$,
+        y-label: $y$,
+        axis-style: "school-book",
+        legend: "inner-north-west",
+        {
+          plot.add-fill-between(
+            domain: (0, 0.5),
+            x => 1 / 3,
+            x => 3 / 8,
+            style: (fill: rgb("#fde68a"), stroke: none),
+            label: [franja $[1 \/ 3, 3 \/ 8]$],
+          )
+          plot.add(
+            ((0, 0.5), (0.5, 0.5), (0.5, 0)),
+            style: (stroke: (paint: rgb("#94a3b8"), dash: "dashed", thickness: 0.7pt)),
+          )
+          plot.add(
+            domain: (0, 0.55),
+            x => x,
+            style: (stroke: rgb("#2563eb") + 1.2pt),
+            label: $y = x$,
+          )
+          plot.add(
+            domain: (0, 0.5),
+            samples: 100,
+            x => (x * x * x + 1) / 3,
+            style: (stroke: rgb("#c026d3") + 1.6pt),
+            label: $y = g(x)$,
+          )
+          plot.add(
+            ((0.3473, 0.3473),),
+            mark: "o",
+            mark-size: 0.12,
+            style: (stroke: none),
+            mark-style: (fill: black, stroke: black),
+          )
+        },
+      )
+    }),
+    supplement: [Figura],
+    caption: [Agregado: el gráfico de $g$ en $[0, 1 \/ 2]$ queda dentro de la franja horizontal $1 \/ 3 <= y <= 3 \/ 8$, y la diagonal $y = x$ la atraviesa. El punto fijo es el corte, $x^* approx 0.347$.],
+  )
+
+  Veamos si $g$ es contractiva:
+  $
+    abs(g(x) - g(y)) & = abs(1 / 3 (x^3 + 1) - 1 / 3 (y^3 + 1)) \
+    & = 1 / 3 abs(x^3 - y^3).
+  $
+
+  Notemos que $x^3 - y^3 = (x - y)(x^2 + x y + y^2)$. Por lo tanto,
+  $ abs(g(x) - g(y)) = 1 / 3 abs(x - y) abs(x^2 + x y + y^2). $
+
+  Como $x, y in [0, 1 \/ 2]$, los tres términos de $x^2 + x y + y^2$ son no negativos y cada uno es a lo sumo $1 \/ 4$:
+  $ x^2 <= 1 / 4, quad x y <= 1 / 2 dot 1 / 2 = 1 / 4, quad y^2 <= 1 / 4. $
+  Entonces $0 <= x^2 + x y + y^2 <= 3 \/ 4$, y
+  $
+    abs(g(x) - g(y)) & <= 1 / 3 (1 / 4 + 1 / 4 + 1 / 4) abs(x - y) \
+    & = 1 / 4 abs(x - y).
+  $
+  Como $1 \/ 4 < 1$, $g$ es contractiva.
+
+  #comentario[Agregado: la continuidad no es una hipótesis aparte de Banach: una contractiva es Lipschitz y, por lo tanto, (uniformemente) continua. Lo que Banach pide es $g : X -> X$, $X$ completo y $g$ contractiva.]
+
+  Por teorema del punto fijo ($g : [0, 1 \/ 2] -> [0, 1 \/ 2]$ continua, $[0, 1 \/ 2]$ completo y $g$ contractiva en $[0, 1 \/ 2]$), existe un único punto fijo de $g$ en $[0, 1 \/ 2]$.
+
+  #comentario[Agregado: la conclusión para el problema original. Como los puntos fijos de $g$ son exactamente las raíces de $f(x) = x^3 - 3x + 1$, $f$ tiene una única raíz en $[0, 1 \/ 2]$.]
+
+  #importante[El profesor señala como un elemento muy importante entender a fondo el teorema de punto fijo, porque su demostración te muestra _cómo usar el teorema_.]
+
+  #comentario[Agregado: una lectura posible. La demostración de Banach es constructiva: desde cualquier $x_0 in [0, 1 \/ 2]$, la sucesión $x_(n + 1) = g(x_n)$ converge al punto fijo $x^*$, con $abs(x_n - x^*) <= alpha^n \/ (1 - alpha) dot abs(x_1 - x_0)$, donde $alpha = 1 \/ 4$ es la constante de contracción. Así, además de probar que la raíz existe y es única, la prueba da una forma de aproximarla con error controlado.]
+]
+
+#ejemplo[Achica distancias pero no tiene puntos fijos: $ln(e^x + 1)$ en $RR$ (Clase del 29/10/2026 · Ejemplo 2)][29-10/2][
+  #comentario[Corrección: la desigualdad estricta sólo puede valer para $x != y$ (si $x = y$ ambos lados son $0$).]
+
+  Sea $f : RR -> RR$ dada por $f(x) = ln(e^x + 1)$. Probar que $abs(f(x) - f(y)) < abs(x - y)$ para $x != y$, pero $f$ no tiene puntos fijos.
+]
+
+#resolucion[
+  #comentario[Agregado: este es el contraste con el Ejemplo C8-1 (Bloque 6): ahí, en un compacto, "achicar distancias" ($d(f(x), f(y)) < d(x, y)$ para $x != y$) alcanza para tener un único punto fijo. Acá $RR$ es completo, pero sin compacidad esa hipótesis no alcanza; y tampoco es Banach, porque no hay una constante $alpha < 1$ uniforme. Ver también el Ejercicio 16 de la Práctica 5.]
+
+  Notemos que $RR$ es completo, es cerrado, pero _no es compacto_.
+
+  _Propuesta de un alumno, que se explora:_ probamos derivando, usando el teorema del valor medio.
+
+  $ abs(f(x) - f(y)) = abs(f'(c)) abs(x - y) $
+  para algún $c$ entre $x$ e $y$, con
+  $ f'(x) = e^x / (e^x + 1). $
+
+  Notemos que $f'(x) < 1$ para todo $x in RR$. Entonces, para $x != y$,
+  $ abs(f(x) - f(y)) = abs(f'(c)) abs(x - y) < abs(x - y). $
+
+  #comentario[Agregado: lo que dice este "pero" es que no hay una constante $alpha < 1$ con $abs(f'(c)) <= alpha$ para todo $c$: el supremo de $f'$ es $1$. Así que $f$ achica distancias pero no es contractiva en el sentido de Banach, y el teorema no se puede aplicar.]
+
+  Pero
+  $ e^c / (e^c + 1) = 1 / (1 + e^(-c)) -> 1 quad "cuando" c -> +infinity. $
+
+  ¿Hay punto fijo? Supongamos que $f(x) = x$. Entonces
+  $
+    f(x) = x & <=> ln(e^x + 1) = x \
+    & <=> e^(ln(e^x + 1)) = e^x \
+    & <=> e^x + 1 = e^x \
+    & <=> 1 = 0.
+  $
+
+  No hay punto fijo.
+
+  #comentario[Agregado: la cuenta. $f(1) = ln(e + 1) approx 1.31 > 1$, así que $f(1) in.not [0, 1]$.]
+
+  Notemos que si a esta función la encerramos en un cerrado, supongamos $[0, 1]$, no entra en el mismo intervalo. Es decir,
+  $ f([0, 1]) subset.not [0, 1]. $
+
+  _Moraleja_: acotando el dominio podría encontrar un $c$, PERO sabemos que no hay ningún punto fijo. Entonces, ¿dónde falla? La imagen me va a caer siempre fuera del dominio acotado que elija.
+
+  #comentario[Agregado: por qué falla siempre. Como $e^x + 1 > e^x$ y $ln$ es creciente, $f(x) = ln(e^x + 1) > ln(e^x) = x$ para todo $x$: el gráfico de $f$ queda estrictamente arriba de la diagonal. En cualquier $[a, b]$, entonces, $f(b) > b$ y $f([a, b]) subset.not [a, b]$. Ese es el papel del "$+1$". Lo que acotar sí da es la constante: en $[a, b]$, $f' <= f'(b) < 1$ porque $f'$ es creciente. Así que $f$ es contractiva en $[a, b]$, pero no manda $[a, b]$ en sí mismo, y Banach no se puede aplicar.]
+
+  ¿Dónde se rompe? En $ln(e^x + 1)$: este "$+1$" me rompe todo.
+
+  #figure(
+    cetz.canvas({
+      plot.plot(
+        size: (8, 6),
+        x-min: -3, x-max: 2.5,
+        y-min: -0.5, y-max: 2.8,
+        x-tick-step: 1,
+        y-tick-step: 1,
+        x-label: $x$,
+        y-label: $y$,
+        axis-style: "school-book",
+        legend: "inner-north-west",
+        {
+          plot.add-fill-between(
+            domain: (0, 1),
+            x => 0,
+            x => 1,
+            style: (fill: rgb("#fde68a"), stroke: (paint: rgb("#d97706"), dash: "dashed", thickness: 0.7pt)),
+            label: [caja $[0, 1] times [0, 1]$],
+          )
+          plot.add(
+            domain: (-3, 2.5),
+            x => x,
+            style: (stroke: rgb("#2563eb") + 1.2pt),
+            label: $y = x$,
+          )
+          plot.add(
+            domain: (-3, 2.5),
+            samples: 150,
+            x => calc.ln(calc.exp(x) + 1),
+            style: (stroke: rgb("#c026d3") + 1.6pt),
+            label: $y = ln(e^x + 1)$,
+          )
+          plot.add(
+            ((1, 1), (1, calc.ln(calc.e + 1))),
+            style: (stroke: (paint: rgb("#dc2626"), dash: "dotted", thickness: 1pt)),
+          )
+          plot.add(
+            ((1, calc.ln(calc.e + 1)),),
+            mark: "o",
+            mark-size: 0.12,
+            style: (stroke: none),
+            mark-style: (fill: rgb("#dc2626"), stroke: rgb("#dc2626")),
+          )
+        },
+      )
+    }),
+    supplement: [Figura],
+    caption: [Agregado: el gráfico de $f$ queda siempre estrictamente arriba de la diagonal, así que nunca la corta (no hay punto fijo); se le pega cuando $x -> +infinity$, porque $f(x) - x = ln(1 + e^(-x)) -> 0$. En la caja $[0, 1] times [0, 1]$, el punto rojo $(1, f(1)) approx (1, 1.31)$ se escapa por arriba: $f([0, 1]) subset.not [0, 1]$. Lo mismo pasa con cualquier caja $[a, b] times [a, b]$, en el borde derecho.],
+  )
+]
+
+#ejemplo[Puntos fijos en $RR$ y toda continua de $[0, 1]$ en $[0, 1]$ tiene un punto fijo (Ejemplo 6.21)][45][
+  + Si pensamos en funciones $f : RR -> RR$, tenemos que $x$ es punto fijo si $f(x) = x$, es decir, si el gráfico de $f$ corta a la recta $y = x$. Por ejemplo, la función $f(x) = e^x$ no tiene puntos fijos.
+  + Sea $f : [0, 1] -> [0, 1]$ una función continua. Entonces $f$ tiene un punto fijo.
+]
+
+#resolucion[
+  #comentario[Agregado: por qué $e^x$ no tiene puntos fijos. Para todo $x in RR$ vale $e^x >= 1 + x > x$, así que el gráfico de $e^x$ queda estrictamente arriba de la diagonal y nunca la corta.]
+
+  #figure(
+    cetz.canvas({
+      plot.plot(
+        size: (7, 6),
+        x-min: -6, x-max: 6,
+        y-min: -3, y-max: 6,
+        x-tick-step: 2,
+        y-tick-step: 2,
+        x-label: $x$,
+        y-label: $f(x)$,
+        axis-style: "school-book",
+        legend: "inner-north-west",
+        {
+          plot.add(
+            domain: (-3, 4),
+            x => x,
+            style: (stroke: (paint: gray, dash: "dashed", thickness: 1pt)),
+            label: $y = x$,
+          )
+          plot.add(
+            domain: (-6, 1.75),
+            samples: 150,
+            x => calc.exp(x),
+            style: (stroke: rgb("#2563eb") + 1.6pt),
+            label: $f(x) = e^x$,
+          )
+        },
+      )
+    }),
+    supplement: [Figura],
+    caption: [El gráfico de $e^x$ no corta a la recta $y = x$: no hay puntos fijos.],
+  )
+
+  *b)* Consideremos la función $g(x) = f(x) - x$ y observemos que es una función continua. Si $f(0) != 0$, entonces $g(0) > 0$ (porque $f(0)$ llega al $[0, 1]$). Razonando de igual manera, si $f(1) != 1$, entonces $g(1) < 0$ (porque $f(1) < 1$). Tenemos entonces que $g$ es una función continua tal que $g(0) > 0$ y $g(1) < 0$. Por el Teorema de Bolzano, existe $c in (0, 1)$ tal que $g(c) = 0$ y por lo tanto $f(c) = c$.
+
+  #comentario[Agregado: los casos que el texto deja implícitos. Si $f(0) = 0$ o $f(1) = 1$, ese extremo ya es un punto fijo y no hace falta Bolzano. Si no, como $f(0) in [0, 1]$ y $f(0) != 0$, vale $f(0) > 0$; y como $f(1) in [0, 1]$ y $f(1) != 1$, vale $f(1) < 1$. La hipótesis $f([0, 1]) subset.eq [0, 1]$ se usa exactamente acá.]
+
+  #figure(
+    cetz.canvas({
+      plot.plot(
+        size: (6, 6),
+        x-min: 0, x-max: 1.15,
+        y-min: 0, y-max: 1.15,
+        x-tick-step: none,
+        y-tick-step: none,
+        x-ticks: ((0.5, $c$), (1, $1$)),
+        y-ticks: ((0.5, $f(c)$), (1, $1$)),
+        x-label: $x$,
+        y-label: $y$,
+        axis-style: "school-book",
+        {
+          plot.add(
+            domain: (0, 1.1),
+            x => x,
+            style: (stroke: (paint: gray, dash: "dashed", thickness: 1pt)),
+            label: $y = x$,
+          )
+          plot.add(
+            domain: (0, 1),
+            samples: 100,
+            x => 0.8 - 0.6 * x - 1.2 * x * (x - 0.5) * (1 - x),
+            style: (stroke: rgb("#2563eb") + 1.6pt),
+            label: $f$,
+          )
+          plot.add(
+            ((0.5, 0), (0.5, 0.5), (0, 0.5)),
+            style: (stroke: (paint: rgb("#dc2626"), dash: "dotted", thickness: 1pt)),
+          )
+          plot.add(
+            ((0.5, 0.5),),
+            mark: "o",
+            mark-size: 0.12,
+            style: (stroke: none),
+            mark-style: (fill: rgb("#dc2626"), stroke: rgb("#dc2626")),
+          )
+        },
+      )
+    }),
+    supplement: [Figura],
+    caption: [Una $f : [0, 1] -> [0, 1]$ continua corta a la diagonal en un punto $c$ con $f(c) = c$.],
+  )
+
+  Observemos que en este resultado no estamos diciendo que el punto fijo sea único: podría ser que $f$ tenga incluso infinitos puntos fijos.
+
+  #comentario[Agregado: este es el *Ejercicio 19* de la Práctica 5 con $[a, b] = [0, 1]$. Para $[a, b]$ la prueba es la misma, aplicando Bolzano a $g(x) = f(x) - x$ en $[a, b]$. Por ejemplo, $f(x) = x$ tiene infinitos puntos fijos: todos los de $[0, 1]$.]
+]
+
+#ejemplo[Una contracción y una que achica distancias sin ser contracción (Ejemplo 6.24)][46][
+  + Sea $f : [1, +infinity) -> RR$ la función $f(x) = x^(1 \/ 3)$. Entonces $f$ es contractiva.
+  + Sea $f : [0, 1 \/ 2) -> RR$ la función $f(x) = x^2$. Entonces $f$ no es una contracción.
+]
+
+#resolucion[
+  #comentario[Agregado: el $z$ de las dos cuentas sale del teorema del valor medio: para $x != y$ existe $z$ estrictamente entre $x$ e $y$ con $f(x) - f(y) = f'(z)(x - y)$. En a) $f'(z) = 1 / 3 z^(-2 \/ 3)$; en b) $f'(z) = 2z$.]
+
+  *a)* Tenemos que
+  $ abs(f(x) - f(y)) = 1 / 3 abs(z)^(-2 \/ 3) abs(x - y) <= 1 / 3 abs(x - y). $
+  Entonces $f$ es contractiva con constante $alpha = 1 \/ 3$.
+
+  #comentario[Agregado: la desigualdad usa que $z >= 1$, porque $z$ está entre $x, y in [1, +infinity)$. Entonces $abs(z)^(2 \/ 3) >= 1$ y $abs(z)^(-2 \/ 3) <= 1$.]
+
+  *b)* Tenemos que
+  $ abs(f(x) - f(y)) = 2z abs(x - y) < abs(x - y). $
+  Como $z in (0, 1 \/ 2)$, podemos acotar $2z < 1$. Sin embargo, no podemos encontrar un $alpha < 1$ tal que $2z <= alpha$ para todo $z in (0, 1 \/ 2)$. Esto nos dice que $f$ *no* es una contracción.
+
+  #comentario[Agregado: por qué no hay $alpha$, sin pasar por $z$. Para $x != y$, $abs(f(x) - f(y)) \/ abs(x - y) = x + y$, y tomando $x, y$ cerca de $1 \/ 2$ ese cociente se acerca a $1$ tanto como se quiera. Si existiera $alpha < 1$ con $abs(f(x) - f(y)) <= alpha abs(x - y)$, sería $x + y <= alpha$ para todos esos pares, y eso es falso. Es el mismo fenómeno que $ln(e^x + 1)$ en el Ejemplo 29-10/2 y que $sin x$ en la corrección del C8-1: achicar distancias no alcanza para ser una contracción. La desigualdad estricta vale para $x != y$.]
 ]
 
 #v(10pt)
@@ -630,12 +1135,160 @@ La pestaña dice de dónde viene cada ejemplo: un *número* es el ejemplo de `no
   Cuanto más cerca de $0$ está $x$, más chico tiene que ser $r_x$ para que $B(x, r_x)$ no se salga de $U$: los radios se achican hasta $0$.
 ]
 
+#ejemplo[Una sucesión convergente junto con su límite es compacta, por cubrimientos (Clase del 27/10/2026 · Ejemplo 4)][27-10/4][
+  Sea $(x_n)_(n in NN) subset.eq (E, d)$ con $x_n -> x$, y sea
+  $ K = {x_n : n in NN} union {x}. $
+  Probar que $K$ es compacto.
+]
+
+#estrategia[Una bola alrededor de $x$ se traga casi toda la sucesión][
+  "La idea es que puedo agrupar casi todo en una bola alrededor de $x$, y dejar finitos elementos de la sucesión afuera."
+
+  #block(breakable: false, width: 100%)[#align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+      let rojo = rgb("#dc2626")
+      let azul = rgb("#2563eb")
+      rect((0, 0), (8, 4.2), stroke: 0.6pt + luma(150))
+      content((7.6, 3.85), text(size: 9pt)[$E$])
+      // B(x, epsilon) subset U_(i_0)
+      circle((5.6, 1.9), radius: 1.25, fill: azul.lighten(85%), stroke: 0.8pt + azul)
+      content((5.6, 3.4), text(fill: azul, size: 8pt)[$B(x, epsilon) subset.eq U_(i_0)$])
+      circle((5.6, 1.9), radius: 0.06, fill: black, stroke: none)
+      content((5.85, 1.75), text(size: 9pt)[$x$])
+      // los primeros términos, afuera
+      for (p, l) in (((0.9, 3.2), $x_1$), ((1.6, 0.8), $x_2$), ((2.7, 2.9), $x_3$), ((3.6, 1.1), $x_(n_0 - 1)$)) {
+        circle(p, radius: 0.06, fill: rojo, stroke: none)
+        content((p.at(0) + 0.1, p.at(1) - 0.3), text(fill: rojo, size: 8pt, l))
+      }
+      // la cola, adentro de la bola
+      for p in ((4.75, 2.3), (5.0, 1.4), (6.3, 2.5), (6.15, 1.35), (5.3, 2.35), (5.85, 2.25), (5.45, 1.7), (5.75, 2.0)) {
+        circle(p, radius: 0.045, fill: azul, stroke: none)
+      }
+      content((5.6, 0.45), text(fill: azul, size: 8pt)[$x_n$, $n >= n_0$])
+    })
+  ]]
+  Afuera de la bola quedan sólo $x_1, dots, x_(n_0 - 1)$, y para cada uno alcanza con *un* abierto del cubrimiento.
+]
+
+#resolucion[
+  Sea ${U_i}_(i in I)$ un cubrimiento de $K$ por abiertos, es decir,
+  $ K subset.eq union.big_(i in I) U_i. $
+
+  Quiero ver que existen $i_1, dots, i_N in I$ tales que
+  $ K subset.eq union.big_(t = 1)^N U_(i_t). $
+
+  Como $x in K$, existe $i_0 in I$ tal que $x in U_(i_0)$. Como $U_(i_0)$ es abierto, existe $epsilon > 0$ tal que
+  $ B(x, epsilon) subset.eq U_(i_0). $
+
+  Como $x_n -> x$, para ese $epsilon$ existe $n_0 in NN$ tal que
+  $ x_n in B(x, epsilon) quad "para todo " n >= n_0. $
+
+  Para $x_1, x_2, dots, x_(n_0 - 1)$ tomo $U_(i_1)$ tal que $x_1 in U_(i_1)$, $U_(i_2)$ tal que $x_2 in U_(i_2)$, y así hasta llegar a $U_(i_(n_0 - 1))$ tal que $x_(n_0 - 1) in U_(i_(n_0 - 1))$. Existen porque cada $x_k in K subset.eq union_(i in I) U_i$.
+
+  Entonces
+  $ K subset.eq U_(i_0) union U_(i_1) union dots.c union U_(i_(n_0 - 1)), $
+  porque $x$ y los $x_n$ con $n >= n_0$ están en $B(x, epsilon) subset.eq U_(i_0)$, y cada $x_k$ con $k < n_0$ está en $U_(i_k)$. Si $n_0 = 1$, alcanza con $U_(i_0)$. Es un subcubrimiento finito, y como el cubrimiento era arbitrario, $K$ es compacto.
+]
+
+#resolucion[
+  *Otra forma de resolver: por sucesiones.* Sea $(y_n)_(n in NN) subset.eq K$. Quiero ver que existe una subsucesión $(y_(n_k))_(k in NN)$ tal que $y_(n_k) -> y in K$.
+
+  Tenemos dos casos: o bien ${y_n : n in NN}$ es finito, o bien es infinito.
+
+  *Si es finito*, el conjunto de valores de la sucesión es un subconjunto finito de $K$:
+  $ {y_n : n in NN} subset.eq {x_(m_1), x_(m_2), dots, x_(m_r)} union {x}. $
+
+  Entonces existe $y in K$ que se repite infinitas veces. Si cada elemento se repitiera finitas veces, la sucesión tendría finitos términos: $NN$ sería la unión de los finitos conjuntos ${n : y_n = v}$, con $v$ recorriendo los finitos valores, cada uno finito. ¡Absurdo!
+
+  Es decir, existen $n_1 < n_2 < dots.c$ tales que $y_(n_k) = y$ para todo $k in NN$. La subsucesión $(y_(n_k))_(k in NN)$ es constante, así que converge a $y in K$.
+
+  *Si es infinito*, vamos a construir una subsucesión de $(y_n)$ que sea *también* una subsucesión de $(x_n)$.
+
+  Existe $n_1$ tal que $y_(n_1) = x_(k_1)$ para algún $k_1 in NN$.
+
+  Existe $n_2 > n_1$ tal que $y_(n_2) = x_(k_2)$ con $k_2 > k_1$.
+
+  Puedo hacer esto, pues ${y_n : n in NN}$ es infinito. Si no pudiera hacerlo, entonces
+  $ y_n in {x_1, x_2, dots, x_(k_1)} union {x} quad "para todo " n > n_1, $
+  lo cual es absurdo, pues ${y_n : n > n_1}$ es infinito.
+
+  Elegidos $n_1 < dots.c < n_(j - 1)$ y $k_1 < dots.c < k_(j - 1)$, existe $n_j > n_(j - 1)$ con $y_(n_j) = x_(k_j)$ y $k_j > k_(j - 1)$: si no, $y_n in {x_1, dots, x_(k_(j - 1))} union {x}$ para todo $n > n_(j - 1)$, que es finito, y la cola ${y_n : n > n_(j - 1)}$ es infinita. Absurdo.
+
+  Así, tomamos
+  $ (y_(n_j))_(j in NN) = (x_(k_j))_(j in NN), $
+  subsucesión de $(x_n)$. Por lo tanto, como toda subsucesión de una sucesión convergente converge al mismo límite,
+  $ y_(n_j) -> x in K. $
+
+  En los dos casos $(y_n)$ tiene una subsucesión que converge a un punto de $K$, y como $(y_n)$ era arbitraria, $K$ es compacto.
+]
+
+#sublema(titulo: "Qué se demostró en el caso finito (agregado)")[
+  *El objetivo.* Por sucesiones, $K$ es compacto si _toda_ sucesión de $K$ tiene una subsucesión que converge a un punto de $K$. La sucesión $(y_n)$ no es $(x_n)$: es cualquier sucesión con términos en $K$. Por ejemplo, $y_n = x_1, x, x_1, x, dots$ no converge (salta entre dos valores), pero sus términos impares forman la constante $x_1$, y los pares la constante $x$.
+
+  *El caso finito* es el de una sucesión que usa sólo finitos valores distintos, como esa. La idea es quedarse con un valor que aparezca infinitas veces y armar la subsucesión con esas posiciones: queda constante, y una sucesión constante converge a su valor, que está en $K$.
+
+  *Para qué sirve el absurdo.* Para armar esa subsucesión hace falta que algún valor aparezca _infinitas_ veces: con un valor que aparece tres veces no se arma una subsucesión. El absurdo lo garantiza con el principio del palomar: infinitos términos ($y_1, y_2, y_3, dots$) repartidos en finitos valores obligan a que algún valor reciba infinitos.
+
+  #align(center)[
+    #table(
+      columns: 2,
+      align: (left, left),
+      stroke: 0.4pt + luma(180),
+      inset: (x: 6pt, y: 4pt),
+      [*paso*], [*qué se prueba*],
+      [absurdo], [algún valor $y$ aparece infinitas veces],
+      [elegir sus posiciones], [hay $n_1 < n_2 < dots.c$ con $y_(n_k) = y$],
+      [conclusión], [$(y_(n_k))$ es constante, converge a $y in K$],
+    )
+  ]
+
+  En este caso no se usó que $x_n -> x$. Eso lo usa el caso infinito: ahí la sucesión pasa por infinitos $x_m$ distintos, y la idea es extraer una subsucesión de $(x_n)$, que converge a $x$.
+]
+
+#sublema(titulo: "Qué se demostró en el caso infinito (agregado)")[
+  *El plan.* Ya sabemos que $(x_n)$ converge a $x$, y que toda subsucesión de $(x_n)$ también. Si logramos que los términos elegidos de $(y_n)$ *sean* términos de $(x_n)$ y *en orden* (con índices $k_1 < k_2 < dots.c$), la subsucesión de $(y_n)$ es una subsucesión de $(x_n)$ disfrazada, y converge a $x$ gratis.
+
+  *Por qué hacen falta dos condiciones.* Cada elección pide $n_j > n_(j - 1)$ (para que sea subsucesión de $(y_n)$) y $k_j > k_(j - 1)$ (para que sea subsucesión de $(x_n)$). Sin la segunda, podría salir algo como $y_(n_1) = x_5$, $y_(n_2) = x_3$, $y_(n_3) = x_5$, ..., que no es subsucesión de $(x_n)$.
+
+  *Un ejemplo concreto.* Sea $x_n = 1 \/ n -> 0$, así que $K = {1, 1 \/ 2, 1 \/ 3, dots} union {0}$, y sea
+  $ (y_n) = 1 / 5, thin 1 / 2, thin 1 / 6, thin 1 / 3, thin 1 / 7, thin 1 / 4, thin 1 / 8, thin dots $
+  (los términos impares son $y_(2 m - 1) = 1 \/ (m + 4) = x_(m + 4)$ y los pares $y_(2 m) = 1 \/ (m + 1) = x_(m + 1)$). Toma infinitos valores. Se elige:
+  - $y_1 = 1 \/ 5 = x_5$: $n_1 = 1$, $k_1 = 5$.
+  - Siguiente término con $k > 5$: $y_2 = x_2$ no sirve, $y_3 = 1 \/ 6 = x_6$ sí: $n_2 = 3$, $k_2 = 6$.
+  - Siguiente con $k > 6$: $y_4 = x_3$ no, $y_5 = 1 \/ 7 = x_7$ sí: $n_3 = 5$, $k_3 = 7$.
+  Queda $(y_(n_j)) = x_5, x_6, x_7, dots$, que es una subsucesión de $(x_n)$, y converge a $0 in K$. Los términos que se saltean ($x_2, x_3, dots$) son los que "vuelven atrás" en el índice $k$.
+
+  *La justificación de la elección.* Se pregunta: ¿qué pasaría si no se pudiera elegir el paso siguiente? Que *todos* los términos de ahí en adelante caen en ${x_1, dots, x_(k_(j - 1))} union {x}$, que son finitos puntos. Pero la cola de la sucesión toma infinitos valores (sacar finitos términos no le quita infinitud a los valores), y infinitos valores no entran en un conjunto finito. Absurdo: entonces la elección siempre se puede hacer.
+
+  #align(center)[
+    #table(
+      columns: 2,
+      align: (left, left),
+      stroke: 0.4pt + luma(180),
+      inset: (x: 6pt, y: 4pt),
+      [*paso*], [*qué se prueba*],
+      [absurdo], [siempre hay un término más adelante que es un $x_k$ con $k$ más grande],
+      [elegir uno por paso], [$n_1 < n_2 < dots.c$ y $k_1 < k_2 < dots.c$ con $y_(n_j) = x_(k_j)$],
+      [conclusión], [$(x_(k_j))$ es subsucesión de $(x_n)$, así que $y_(n_j) = x_(k_j) -> x in K$],
+    )
+  ]
+]
+
+#sublema(titulo: "Otra forma del caso infinito: con bolas (agregado)")[
+  Se puede evitar la doble familia de índices con la misma idea que la prueba por cubrimientos. Fuera de cualquier bola $B(x, r)$ hay finitos puntos de $K$: como $x_m -> x$, existe $m_0$ con $K without B(x, r) subset.eq {x_1, dots, x_(m_0 - 1)}$. Y toda cola ${y_n : n > N}$ toma infinitos valores. Entonces, elegido $n_(j - 1)$, algún término de la cola ${y_n : n > n_(j - 1)}$ cae en $B(x, 1 \/ j)$: existe $n_j > n_(j - 1)$ con $d(y_(n_j), x) < 1 \/ j$. Así $y_(n_j) -> x$, controlando un solo índice. La sucesión no puede esquivar las bolas para siempre: afuera sólo tiene finitos lugares adonde ir.
+]
+
+#sublema(titulo: "Comparación con C7-2")[
+  La prueba por sucesiones del pizarrón es la misma que la de `C7-2` (Bloque 1). Por cubrimientos el argumento es mucho más corto: no hay casos ni pelea con los índices, y toda la dificultad se concentra en que *un solo abierto* (el que contiene al límite) absorbe a toda la cola.
+]
+
 #v(12pt)
 #line(length: 100%, stroke: 0.5pt + luma(150))
 #v(8pt)
 
 #sublema(titulo: "Huecos frente a la Práctica 5")[
-  Sin ejemplo transcripto todavía: el *Ej. 2* (un compacto de $RR$ tiene máximo y mínimo), el *Ej. 8* (la distancia a un compacto se realiza), el *Ej. 9* ($hat(d)(A, B) > 0$ para compacto y cerrado disjuntos), el *Ej. 12* (continuidad uniforme en $RR$ con límites nulos en $plus.minus oo$) y, salvo por la conexión conceptual del Bloque 6, todo el tramo de *punto fijo* (Ej. 14--19): en particular no hay ningún ejemplo de verificar que una función es una contracción (Ej. 15) ni de usar iteradas $f^n$ (Ej. 17).
+  Sin ejemplo transcripto todavía: el *Ej. 8* (la distancia a un compacto se realiza), el *Ej. 9* ($hat(d)(A, B) > 0$ para compacto y cerrado disjuntos), el *Ej. 12* (continuidad uniforme en $RR$ con límites nulos en $plus.minus oo$) y casi todo el tramo de *punto fijo* (Ej. 14, 16--18): los modelos de verificar que una función es (o no es) una contracción (Ej. 15) son los Ejemplos *29-10/1* y *46* (Bloque 6), el Ej. 19 tiene su modelo en el Ejemplo *45* (caso $[0, 1]$), y no hay ningún ejemplo de usar iteradas $f^n$ (Ej. 17).
 
   Los Ejercicios 4 y 5 de `clases/punto_fijo.typ` (`C8-4`: un normado es Banach si y sólo si las Cauchy de la esfera unitaria convergen; `C8-5`: una transformación lineal es continua si y sólo si manda sucesiones nulas en sucesiones acotadas) no son de compacidad: pertenecen a completitud (Práctica 3, Ej. 14--16) y a operadores lineales (Práctica 6, Ej. 8), y están cargados en `ejemplos/p6.typ`.
 ]
