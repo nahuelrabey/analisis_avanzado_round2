@@ -91,6 +91,7 @@ OTRAS = [
     ("integral_lipschitz", "La integral es Lipschitz", "El Ejemplo 5.26 c) dibujado."),
     ("proyecciones_producto", "Proyecciones en un producto", "Proyecciones de X × Y con d∞: abiertas y no cerradas."),
     ("heine_borel", "Heine–Borel paso a paso", "La demostración del Teorema 6.5: Bolzano–Weierstrass coordenada por coordenada, con la tira de sub-subsucesiones."),
+    ("punto_fijo_banach", "Punto fijo de Banach", "El Teorema 6.25 corriendo: telaraña con las cotas de la demostración, una contracción del plano y qué falla sin cada hipótesis."),
     ("ejemplos_p4", "Ejemplos de continuidad", "Los ejemplos de la Práctica 4 con dibujos interactivos (página original)."),
 ]
 

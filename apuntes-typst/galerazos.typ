@@ -107,6 +107,10 @@ variantes de la misma familia y cómo reconstruirla de cero si uno se la olvidó
   [G-11],
   [$<=$ prueba la cota; $<$ prueba que no se alcanza],
   [Hay que ver que un supremo (o ínfimo) *no* es máximo (o mínimo) sobre un conjunto que no es cerrado],
+
+  [G-12],
+  [Multiplicar por $alpha$ y restar: la geométrica se telescopea],
+  [Hay una suma donde cada término es el anterior por el mismo $alpha$, y necesito su valor o una cota],
 )
 
 #v(8pt)
@@ -1567,3 +1571,140 @@ obvia ($1 - 1 \/ n$, $1 \/ n$, $n$).
 - G-8 --- es su contracara: con compacidad y continuidad el supremo sí es máximo.
 - `p5: Ej. 2` y `p5: Ej. 8` --- para ver que las hipótesis de compacidad son necesarias, el
   contraejemplo natural es un intervalo abierto, y se prueba con este esquema.
+
+#v(8pt)
+
+== Galerazo 12 · Multiplicar por $alpha$ y restar: la geométrica se telescopea
+
+#disparador[
+  En la demostración del teorema de punto fijo de Banach (Teorema 6.25) aparece
+  $sum_(i = 0)^oo alpha^i$ y se reemplaza directamente por $1 \/ (1 - alpha)$. ¿Por qué esa suma
+  infinita tiende a $1 \/ (1 - alpha)$?
+]
+
+#galerazo[G-12][
+  Una suma infinita es, por definición, el límite de sus sumas parciales
+  $S_N = 1 + alpha + dots.c + alpha^N$. Multiplicar $S_N$ por $alpha$ corre todos los términos un
+  lugar; al restar se cancela todo menos el primero y el último, y queda
+  $(1 - alpha) S_N = 1 - alpha^(N + 1)$. Como $alpha^(N + 1) -> 0$ si $0 <= alpha < 1$, sale
+  $S_N -> 1 \/ (1 - alpha)$.
+]
+
+=== La señal
+
+Hay una suma, finita o infinita, en la que *cada término es el anterior multiplicado por el
+mismo número* $alpha$: $alpha^n + alpha^(n + 1) + alpha^(n + 2) + dots.c$, o
+$c + c alpha + c alpha^2 + dots.c$. En la materia aparece sobre todo al encadenar la desigualdad
+triangular cuando cada salto es a lo sumo $alpha$ veces el anterior, como pasa con las iteraciones de
+una contracción.
+
+#sublema(titulo: "Traducción")[
+  *"Cada término es $alpha$ veces el anterior"* $==>$ *"multiplico la suma por $alpha$, resto, y
+  se cancela todo el medio"*.
+]
+
+=== Por qué funciona
+
+Se trabaja siempre con la suma *truncada*, que es un número, y recién al final se pasa al límite.
+Sea $S_N = sum_(i = 0)^N alpha^i$. Escribiendo $S_N$ y, debajo, $alpha S_N$:
+$
+  S_N & = 1 + alpha + alpha^2 + dots.c + alpha^N, \
+  alpha S_N & = alpha + alpha^2 + dots.c + alpha^N + alpha^(N + 1).
+$
+Los términos $alpha, alpha^2, dots, alpha^N$ están en las dos líneas. Al restar se cancelan, y
+sólo sobreviven el primero de arriba y el último de abajo:
+$ S_N - alpha S_N = 1 - alpha^(N + 1), quad "es decir," quad S_N = (1 - alpha^(N + 1)) / (1 - alpha) quad (alpha != 1). $
+
+Ahora el límite. Si $0 < alpha < 1$, $alpha^(N + 1) -> 0$ (es el Ejemplo `12` de
+`ejemplos/p1.typ`; si $alpha = 0$ es trivial). Por álgebra de límites (Proposición 6 de
+`apuntes.typ`),
+$ sum_(i = 0)^oo alpha^i = lim_(N -> oo) S_N = (1 - 0) / (1 - alpha) = 1 / (1 - alpha). $
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+    let u = 6.5
+    let fuerte = rgb("#c026d3")
+    let suave = rgb("#f0abfc")
+    let x = 0
+    for k in range(6) {
+      let w = calc.pow(0.5, k)
+      rect((x * u, 0), ((x + w) * u, 0.55), fill: if calc.even(k) { fuerte } else { suave }, stroke: white + 0.6pt)
+      if k < 4 {
+        content(((x + w / 2) * u, -0.32), text(8pt)[#(($1$, $1 \/ 2$, $1 \/ 4$, $1 \/ 8$).at(k))])
+      }
+      x = x + w
+    }
+    rect((x * u, 0), (2 * u, 0.55), stroke: (paint: fuerte, dash: "dashed", thickness: 0.6pt))
+    line((0, 0.85), (2 * u, 0.85), stroke: rgb("#475569") + 0.6pt, mark: (start: "|", end: "|"))
+    content((u, 1.15), text(8pt)[total: $1 \/ (1 - alpha) = 2$])
+    line((x * u, 0.27), (2 * u + 0.5, 0.27), stroke: fuerte + 0.5pt)
+    content((2 * u + 0.6, 0.27), anchor: "west", text(8pt, fill: fuerte)[falta $alpha^6 \/ (1 - alpha)$])
+  }),
+  kind: image,
+  supplement: none,
+  numbering: none,
+  caption: [Con $alpha = 1 \/ 2$: las piezas $1, 1/2, 1/4, dots$ llenan un segmento de largo
+    $1 \/ (1 - alpha) = 2$. Después de $N + 1$ piezas falta exactamente
+    $1/(1 - alpha) - S_N = alpha^(N + 1) \/ (1 - alpha)$, que tiende a $0$. Con $alpha = 1 \/ 2$
+    eso es la última pieza puesta: cada pieza tapa la mitad de lo que faltaba.],
+)
+
+Las dos cosas que usa la demostración de Banach salen de la fórmula de $S_N$:
+
+- *La suma finita está por debajo de la infinita.* Como $alpha^(N + 1) >= 0$ y $1 - alpha > 0$,
+  $ S_N = (1 - alpha^(N + 1)) / (1 - alpha) <= 1 / (1 - alpha) quad "para todo" N. $
+  Es el paso $sum_(i = 0)^(k - 1) alpha^i <= sum_(i = 0)^oo alpha^i$ de la demostración, y no
+  necesita pasar al límite.
+- *La cola.* Sacando $alpha^n$ de factor común (cada $alpha^(n + i)$ es $alpha^n alpha^i$),
+  $ sum_(i = n)^oo alpha^i = alpha^n sum_(i = 0)^oo alpha^i = alpha^n / (1 - alpha). $
+  Es la cota $alpha^n \/ (1 - alpha) dot d(x_1, x_0)$ de la demostración y de la
+  Observación 6.26.
+
+=== La familia entera
+
+#show table.cell.where(y: 0): set text(fill: white, weight: "bold", size: 8.5pt)
+
+#table(
+  columns: (1.3fr, 1.1fr, 1fr),
+  align: (left + horizon, left + horizon, left + horizon),
+  fill: (x, y) => if y == 0 { rgb("#86198f") } else if calc.even(y) { rgb("#fdf4ff") } else { white },
+  stroke: 0.4pt + rgb("#e9d5ff"),
+  inset: (x: 6pt, y: 5pt),
+
+  [*Suma*], [*Valor*], [*Vale si*],
+
+  [$sum_(i = 0)^oo alpha^i$], [$1 / (1 - alpha)$], [$abs(alpha) < 1$],
+  [$sum_(i = 0)^(k - 1) alpha^i$ (finita)], [$(1 - alpha^k) / (1 - alpha)$], [$alpha != 1$],
+  [$sum_(i = n)^oo alpha^i$ (cola)], [$alpha^n / (1 - alpha)$], [$abs(alpha) < 1$],
+  [$sum_(i = 1)^oo alpha^i$], [$alpha / (1 - alpha)$], [$abs(alpha) < 1$],
+  [$sum_(i = 0)^oo (1 \/ 2)^i$], [$2$], [],
+  [$sum_(i = 0)^oo (-1 \/ 2)^i$], [$1 / (1 + 1 \/ 2) = 2 / 3$], [],
+  [$sum_(i = 0)^oo alpha^i$ con $alpha >= 1$], [diverge: $S_N >= N + 1$], [],
+)
+
+Todas salen de la misma cuenta: el valor es *primer término sobre $1 - alpha$*. Las filas con
+$alpha$ negativo usan que $abs(alpha^N) = abs(alpha)^N -> 0$ si $abs(alpha) < 1$, y la de
+$alpha >= 1$ usa que cada término es $alpha^i >= 1$. Estas dos justificaciones son razonamiento
+propio, no están en las notas. En la materia sólo hace falta $0 < alpha < 1$.
+
+=== Cómo inventarlo de cero
+
++ *Truncá.* Escribí $S_N = 1 + alpha + dots.c + alpha^N$, que es un número. Con la suma
+  infinita no se puede restar término a término hasta saber que converge.
++ *Multiplicá por $alpha$* y escribí el resultado debajo, corrido un lugar.
++ *Restá.* Sobreviven el primero de arriba y el último de abajo: $(1 - alpha) S_N = 1 - alpha^(N + 1)$.
++ *Despejá* $S_N$ (hace falta $alpha != 1$).
++ *Mandá $N -> oo$* con $alpha^(N + 1) -> 0$. Si sólo necesitás una cota, no hace falta el
+  límite: $S_N <= 1 \/ (1 - alpha)$ ya sale de la fórmula.
+
+=== Dónde se usa
+
+- `apuntes.typ`, Teorema 6.25 (Banach) --- la cota
+  $d(x_n, x_(n + k)) <= alpha^n \/ (1 - alpha) dot d(x_1, x_0)$ usa la cola y la cota de la
+  suma finita, y de ahí sale que la sucesión es de Cauchy. La Observación 6.26 es la misma cota con
+  $k -> oo$.
+- `ejemplos/p1: Serie` --- la misma cuenta con $r$ en lugar de $alpha$ (multiplicando por
+  $r - 1$ en vez de $1 - r$). `ejemplos/p1: 12` prueba que $r^n -> 0$.
+- `p5: Ej. 15--17` --- usan Banach, y con él la estimación del error $alpha^n \/ (1 - alpha)$.
+- `visualizaciones/punto_fijo_banach.html`, Sección 1, paso 2.

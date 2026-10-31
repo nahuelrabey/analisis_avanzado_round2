@@ -1,0 +1,814 @@
+<title>Punto fijo de Banach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["$", "$"]], displayMath: [["$$", "$$"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+  /* Layout: el Teorema 6.25 en tres dibujos. 1) la iteración en la recta (telaraña) con la tabla y el gráfico logarítmico de las cotas de la demostración; 2) la misma idea en el plano: nubes de puntos que se encogen a la mitad en cada paso; 3) qué falla si se saca cada hipótesis. Misma familia visual que «Heine–Borel paso a paso». */
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #1a2130;
+    --muted: #5a6478;
+    --rule: #d9dde6;
+    --accent: #3647b8;
+    --band: rgba(54, 71, 184, 0.08);
+    --area: rgba(54, 71, 184, 0.20);
+    --seq2: #b0532a;
+    --seq3: #0f7a6f;
+    --seq4: #8a3fa0;
+    --ok: #1d8556;
+    --fail: #c23a30;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+      --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+      --seq2: #f0a070; --seq3: #4fd1c0; --seq4: #d08ae6; --ok: #4cc38a; --fail: #ff6f63;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11141b; --panel: #181c25; --ink: #e5e8ef; --muted: #9aa3b5; --rule: #2b3140;
+    --accent: #8f9cff; --band: rgba(143, 156, 255, 0.13); --area: rgba(143, 156, 255, 0.26);
+    --seq2: #f0a070; --seq3: #4fd1c0; --seq4: #d08ae6; --ok: #4cc38a; --fail: #ff6f63;
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.2rem 4rem;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: grid; gap: 2.4rem; }
+  .eyebrow { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.1; margin: 0 0 0.9rem; font-weight: 600; text-wrap: balance; }
+  h2 { font-size: 1.5rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+  h2 .bn { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; margin-bottom: 0.15rem; }
+  h3 { font-size: 1.15rem; line-height: 1.3; margin: 0 0 0.5rem; font-weight: 600; text-wrap: balance; }
+  p { margin: 0 0 0.8rem; }
+  .intro { max-width: 72ch; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: 0.1rem; }
+
+  .ladder { display: flex; flex-wrap: wrap; gap: 0.35rem 0.25rem; list-style: none; padding: 0; margin: 0.4rem 0 0; font-family: var(--font-ui); font-size: 0.86rem; }
+  .ladder li { display: flex; align-items: center; gap: 0.25rem; }
+  .ladder li + li::before { content: "→"; color: var(--muted); margin-right: 0.15rem; }
+  .ladder a { display: inline-block; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.22rem 0.75rem; background: var(--panel); }
+  .ladder a:hover { border-color: var(--accent); color: var(--accent); }
+  .ladder a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .enun { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin: 0 0 0.9rem; max-width: 76ch; }
+  .enun .lbl { font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.2rem; }
+  .enun p:last-child { margin-bottom: 0; }
+
+  .block { display: grid; gap: 1.2rem; scroll-margin-top: 1rem; }
+  .unlock { max-width: 78ch; color: var(--muted); margin: 0; }
+  .ex { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; min-width: 0; }
+  .ex > * { min-width: 0; }
+  .ex-grid { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+  @media (max-width: 900px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .viz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; font-family: var(--font-ui); font-size: 0.88rem; min-width: 0; margin: 0; }
+  .viz canvas { width: 100%; display: block; border-radius: 6px; background: var(--bg); }
+  canvas.sq { aspect-ratio: 1 / 1; touch-action: none; cursor: crosshair; }
+  canvas.wide { aspect-ratio: 2 / 1; }
+  canvas.mini { aspect-ratio: 1 / 1; width: 100%; display: block; border-radius: 6px; background: var(--bg); }
+  .viz figcaption { color: var(--muted); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.5; }
+
+  .ctrl { display: grid; gap: 0.5rem; font-family: var(--font-ui); font-size: 0.88rem; }
+  .slider { display: grid; grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr) 4.4rem; align-items: center; gap: 0.6rem; }
+  .slider label { color: var(--muted); }
+  .slider output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+  .slider[hidden] { display: none !important; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .pills legend { color: var(--muted); font-size: 0.8rem; padding: 0; margin-bottom: 0.25rem; float: left; width: 100%; }
+  .pills label { cursor: pointer; border: 1px solid var(--rule); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.85rem; position: relative; }
+  .pills input { position: absolute; opacity: 0; pointer-events: none; }
+  .pills label:has(input:checked) { border-color: var(--accent); background: var(--band); color: var(--accent); }
+  .pills label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  button { font-family: var(--font-ui); font-size: 0.86rem; color: var(--accent); background: var(--panel); border: 1px solid var(--accent); border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer; }
+  button:hover { background: var(--band); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.15rem 0.9rem; font-family: var(--font-mono); font-size: 0.82rem; font-variant-numeric: tabular-nums; margin: 0; }
+  .read dt { color: var(--muted); font-family: var(--font-ui); }
+  .read dd { margin: 0; overflow-wrap: anywhere; }
+  .nw { white-space: nowrap; }
+  .good { color: var(--ok); }
+  .bad { color: var(--fail); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 0.35rem; }
+  .sw { display: inline-block; width: 1.4rem; height: 0; border-top: 2px solid currentColor; }
+  .sw.dash { border-top-style: dashed; }
+  .sw.dot { width: 0.55rem; height: 0.55rem; border: 0; border-radius: 50%; background: currentColor; }
+
+  .tbl-wrap { overflow: auto; max-height: 21rem; border: 1px solid var(--rule); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-family: var(--font-mono); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 0.3rem 0.6rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th { position: sticky; top: 0; background: var(--panel); font-family: var(--font-body); font-weight: 400; color: var(--muted); z-index: 1; }
+  th:first-child, td:first-child { text-align: center; }
+  tr.cur td { background: var(--band); color: var(--accent); }
+  td.pair { border-left: 1px dashed var(--rule); }
+
+  .proof-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1.4rem 2rem; margin: 0; padding: 0; list-style: none; counter-reset: paso; }
+  .proof-map li { min-width: 0; line-height: 1.65; }
+  .proof-map mjx-container[display="true"] { margin: 0.5rem 0 !important; }
+  .proof-map li { border-top: 2px solid var(--rule); padding: 0.6rem 0 0; font-size: 0.96rem; counter-increment: paso; }
+  .proof-map li::before { content: "Paso " counter(paso); display: block; font-family: var(--font-ui); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+  .proof-map b { font-weight: 600; }
+
+  .fails { gap: 0; padding-block: 0.4rem; }
+  .fail-row { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 1.4rem; align-items: start; padding-block: 1.1rem; border-top: 1px solid var(--rule); }
+  .fail-row:first-child { border-top: 0; }
+  @media (max-width: 640px) { .fail-row { grid-template-columns: minmax(0, 1fr); gap: 0.7rem; } .fail-row canvas { max-width: 320px; } }
+  .fail-text { max-width: 68ch; min-width: 0; }
+  .fail-text h3 .k { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fail); font-weight: 600; }
+  .fail-text p { margin: 0 0 0.5rem; }
+  .fail-text .src { font-family: var(--font-ui); font-size: 0.82rem; color: var(--muted); margin: 0.2rem 0 0; }
+
+  .ref { color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; border-radius: 3px; }
+  .ref:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #popup {
+    position: fixed; z-index: 50; max-width: min(440px, calc(100vw - 32px));
+    background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(10, 15, 30, 0.22); padding: 0.75rem 0.9rem; font-size: 0.97rem; line-height: 1.5;
+  }
+  #popup .pop-title { font-family: var(--font-ui); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  #popup p { margin: 0 0 0.4rem; }
+  #popup p:last-child { margin: 0; }
+  #popup .psrc { font-family: var(--font-ui); font-size: 0.8rem; color: var(--muted); }
+  .offscreen { position: absolute; left: -10000px; top: 0; width: 420px; visibility: hidden; }
+
+  footer { color: var(--muted); font-family: var(--font-ui); font-size: 0.85rem; max-width: 78ch; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<main class="page">
+  <header>
+    <p class="eyebrow">Análisis Avanzado · Capítulo 6 · Teorema 6.25</p>
+    <h1>El teorema del punto fijo de Banach</h1>
+    <div class="enun">
+      <p class="lbl">Teorema 6.25</p>
+      <p>Sea $(M, d)$ un espacio métrico <span class="ref" tabindex="0" data-ref="completo">completo</span> y sea $f : M \to M$ una <span class="ref" tabindex="0" data-ref="contraccion">contracción</span>, es decir, existe $0 &lt; \alpha &lt; 1$ con $d(f(x), f(y)) \le \alpha\, d(x, y)$ para todo <span class="nw">$x, y \in M$.</span> Entonces $f$ tiene un único <span class="ref" tabindex="0" data-ref="puntofijo">punto fijo</span>.</p>
+    </div>
+    <p class="intro">La demostración es un algoritmo: se arranca en cualquier <span class="nw">$x_0$,</span> se itera $x_{n} = f(x_{n-1})$ y se ve que la sucesión es <span class="ref" tabindex="0" data-ref="cauchy">de Cauchy</span> porque los saltos se achican como una geométrica. Abajo está ese algoritmo corriendo, con cada cota de la demostración a la vista. Pasá el mouse (o tocá) sobre las palabras <span class="ref" tabindex="0" data-ref="banach">subrayadas así</span> para ver el enunciado que se usa.</p>
+    <ul class="ladder">
+      <li><a href="#recta">1 · La iteración en la recta</a></li>
+      <li><a href="#plano">2 · En el plano: todo se encoge</a></li>
+      <li><a href="#hipotesis">3 · Sin alguna hipótesis</a></li>
+    </ul>
+  </header>
+
+  <section class="block" id="recta" aria-labelledby="h-recta">
+    <h2 id="h-recta"><span class="bn">Sección 1</span>La iteración en la recta</h2>
+    <p class="unlock">En $\mathbb{R}$ un <span class="ref" tabindex="0" data-ref="puntofijo">punto fijo</span> es un cruce del gráfico de $f$ con la diagonal <span class="nw">$y = x$.</span> La iteración se dibuja como una telaraña: subir (o bajar) hasta el gráfico da <span class="nw">$f(x_k)$,</span> ir horizontal hasta la diagonal lo convierte en el siguiente punto <span class="nw">$x_{k+1}$.</span> Arrastrá sobre el dibujo para mover <span class="nw">$x_0$.</span></p>
+
+    <div class="ex">
+      <div class="ex-grid">
+        <figure class="viz">
+          <canvas id="cv-web" class="sq" role="img" aria-label="Diagrama de telaraña de la iteración x_n = f(x_(n-1)) en el cuadrado [0,1] por [0,1]"></canvas>
+          <figcaption id="cap-web"></figcaption>
+        </figure>
+
+        <div class="ctrl">
+          <fieldset class="pills">
+            <legend>Contracción de $[0, 1]$ en $[0, 1]$</legend>
+            <label><input type="radio" name="fn" value="cos" checked> cos x</label>
+            <label><input type="radio" name="fn" value="cuad"> (x² + 1)/4</label>
+            <label><input type="radio" name="fn" value="afin"> a·x + (1 − a)/2</label>
+          </fieldset>
+          <p id="fn-why" style="margin:0;font-family:var(--font-body);font-size:0.97rem"></p>
+          <div class="slider" id="row-a" hidden>
+            <label for="sl-a">pendiente $a$</label>
+            <input type="range" id="sl-a" min="-0.95" max="0.95" step="0.05" value="0.8">
+            <output id="out-a" for="sl-a"></output>
+          </div>
+          <div class="slider">
+            <label for="sl-x0">punto inicial $x_0$</label>
+            <input type="range" id="sl-x0" min="0" max="1" step="0.005" value="0.05">
+            <output id="out-x0" for="sl-x0"></output>
+          </div>
+          <div class="slider">
+            <label for="sl-n">pasos $n$</label>
+            <input type="range" id="sl-n" min="0" max="20" step="1" value="4">
+            <output id="out-n" for="sl-n"></output>
+          </div>
+          <div class="btns">
+            <button type="button" id="bt-step">Un paso más</button>
+            <button type="button" id="bt-play">Reproducir</button>
+            <button type="button" id="bt-reset">Volver a $n = 0$</button>
+          </div>
+          <dl class="read" id="rd-web"></dl>
+        </div>
+      </div>
+
+      <div class="ex-grid">
+        <figure class="viz">
+          <canvas id="cv-log" class="wide" role="img" aria-label="Distancias de la demostración en escala logarítmica en función de k"></canvas>
+          <ul class="legend">
+            <li style="color:var(--seq3)"><span class="sw dot"></span><span class="nw">$d(x_k, x_{k+1})$,</span> salto real</li>
+            <li style="color:var(--seq3)"><span class="sw dash"></span>$\alpha^k d(x_0, x_1)$</li>
+            <li style="color:var(--accent)"><span class="sw dot"></span><span class="nw">$d(x_k, x^*)$,</span> error real</li>
+            <li style="color:var(--seq2)"><span class="sw dash"></span><span class="nw">$\frac{\alpha^k}{1-\alpha} d(x_1, x_0)$,</span> cota</li>
+          </ul>
+          <figcaption>Escala logarítmica en el eje vertical: una geométrica $\alpha^k$ es una recta de pendiente <span class="nw">$\log_{10}\alpha$.</span> Cada punto queda por debajo de su recta punteada, que es lo que prueba la demostración. La línea horizontal es el $\varepsilon$ elegido abajo.</figcaption>
+        </figure>
+
+        <div class="ctrl">
+          <div class="tbl-wrap">
+            <table aria-describedby="h-recta">
+              <thead><tr>
+                <th>$k$</th><th>$x_k$</th>
+                <th class="pair">$d(x_k, x_{k+1})$</th><th>$\le \alpha^k d(x_0, x_1)$</th>
+                <th class="pair">$d(x_k, x^*)$</th><th>$\le \frac{\alpha^k}{1-\alpha} d(x_1, x_0)$</th>
+              </tr></thead>
+              <tbody id="tb"></tbody>
+            </table>
+          </div>
+          <fieldset class="pills">
+            <legend>El $n_0$ de la demostración para</legend>
+            <label><input type="radio" name="eps" value="1e-2"> ε = 10⁻²</label>
+            <label><input type="radio" name="eps" value="1e-4" checked> ε = 10⁻⁴</label>
+            <label><input type="radio" name="eps" value="1e-6"> ε = 10⁻⁶</label>
+          </fieldset>
+          <dl class="read" id="rd-eps"></dl>
+        </div>
+      </div>
+
+      <ol class="proof-map">
+        <li><b>Saltos consecutivos.</b> Por ser <span class="ref" tabindex="0" data-ref="contraccion">contracción</span>, $$\begin{aligned} d(x_k, x_{k+1}) &amp;= d(f(x_{k-1}), f(x_k)) \\ &amp;\le \alpha\, d(x_{k-1}, x_k) \\ &amp;\le \dots \le \alpha^k d(x_0, x_1). \end{aligned}$$ Son las columnas 3 y 4 de la tabla.</li>
+        <li><b>Telescopio y geométrica.</b> Por la <span class="ref" tabindex="0" data-ref="triangular">desigualdad triangular</span>, $$\begin{aligned} d(x_n, x_{n+k}) &amp;\le \sum_{i=n}^{n+k-1} d(x_i, x_{i+1}) \\ &amp;\le \sum_{i=n}^{n+k-1} \alpha^i d(x_1, x_0) \\ &amp;\le \frac{\alpha^n}{1-\alpha}\, d(x_1, x_0) \end{aligned}$$ (la última por la <span class="ref" tabindex="0" data-ref="geometrica">serie geométrica</span>), sin importar <span class="nw">$k$.</span> Por eso es <span class="ref" tabindex="0" data-ref="cauchy">de Cauchy</span>.</li>
+        <li><b>Completitud.</b> $M$ <span class="ref" tabindex="0" data-ref="completo">completo</span> da el <span class="ref" tabindex="0" data-ref="convergencia">límite</span> <span class="nw">$x^*$.</span> Haciendo $m = n + k \to \infty$ en la cota del paso 2 sale la <span class="ref" tabindex="0" data-ref="obs626">Observación 6.26</span>: $$d(x_n, x^*) \le \frac{\alpha^n}{1-\alpha}\, d(x_1, x_0),$$ que son las columnas 5 y 6.</li>
+        <li><b>Es fijo y es único.</b> $f$ es <span class="ref" tabindex="0" data-ref="obs623">continua</span>, así que $$x_{n+1} = f(x_n) \to f(x^*)$$ por la <span class="ref" tabindex="0" data-ref="contsuc">caracterización por sucesiones</span>, y por <span class="ref" tabindex="0" data-ref="unicidad">unicidad del límite</span> <span class="nw">$f(x^*) = x^*$.</span> Probá otro <span class="nw">$x_0$:</span> el límite no cambia, porque dos fijos distintos darían $$\begin{aligned} d(x^*, y^*) &amp;= d(f(x^*), f(y^*)) \\ &amp;\le \alpha\, d(x^*, y^*) &lt; d(x^*, y^*). \end{aligned}$$</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="plano" aria-labelledby="h-plano">
+    <h2 id="h-plano"><span class="bn">Sección 2</span>En el plano: todo se encoge</h2>
+    <p class="unlock">El teorema no habla de gráficos ni de derivadas: sólo de distancias. Acá $M = \mathbb{R}^2$ con <span class="nw">$d_2$,</span> que es <span class="ref" tabindex="0" data-ref="completo">completo</span>, y
+      <span class="nw">$f(x, y) = \left(\tfrac12 \cos y - 0.2,\ \tfrac12 \sin x + 0.3\right)$.</span>
+      Es una <span class="ref" tabindex="0" data-ref="contraccion">contracción</span> con <span class="nw">$\alpha = \tfrac12$:</span> por el <span class="ref" tabindex="0" data-ref="valormedio">valor medio</span>, $\lvert \cos y - \cos y' \rvert \le \lvert y - y' \rvert$ y <span class="nw">$\lvert \sin x - \sin x' \rvert \le \lvert x - x' \rvert$,</span> así que <span class="nw">$d_2(f(p), f(q))^2 \le \tfrac14\, d_2(p, q)^2$.</span></p>
+
+    <div class="ex">
+      <div class="ex-grid">
+        <figure class="viz">
+          <canvas id="cv-plane" class="sq" role="img" aria-label="Nube de puntos del cuadrado y sus imágenes por f, que se encogen hacia el punto fijo"></canvas>
+          <figcaption>La nube gris es una grilla del cuadrado <span class="nw">$[-2, 2]^2$.</span> La nube de color es su imagen por <span class="nw">$f^k$,</span> y el círculo tiene radio $\alpha^k R$ alrededor de <span class="nw">$x^*$,</span> con $R$ la mayor distancia de la grilla a <span class="nw">$x^*$.</span> Como <span class="nw">$d(f^k(p), x^*) = d(f^k(p), f^k(x^*)) \le \alpha^k d(p, x^*)$,</span> la nube nunca sale del círculo. Tocá el dibujo para largar una órbita desde ese punto.</figcaption>
+        </figure>
+        <div class="ctrl">
+          <div class="slider">
+            <label for="sl-k">iteraciones $k$</label>
+            <input type="range" id="sl-k" min="0" max="8" step="1" value="1">
+            <output id="out-k" for="sl-k"></output>
+          </div>
+          <div class="btns">
+            <button type="button" id="bt-orb">Agregar órbitas al azar</button>
+            <button type="button" id="bt-clear">Borrar órbitas</button>
+          </div>
+          <dl class="read" id="rd-plane"></dl>
+          <p style="font-family:var(--font-body);font-size:0.97rem;margin:0">Lo que hay que mirar es la unicidad. Todas las órbitas, salgan de donde salgan, terminan en el mismo <span class="nw">$x^*$.</span> Una <span class="ref" tabindex="0" data-ref="contraccion">contracción</span> no puede tener dos atractores: dos puntos fijos distintos tendrían que quedar a distancia <span class="nw">$d(x^*, y^*) \le \tfrac12\, d(x^*, y^*)$.</span></p>
+          <p style="font-family:var(--font-body);font-size:0.97rem;margin:0">El diámetro de la nube se divide por dos en cada paso: <span class="nw">$\operatorname{diam} f^k(S) \le \alpha^k \operatorname{diam} S$.</span> La demostración usa exactamente eso, aplicado a dos puntos consecutivos de la órbita.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="hipotesis" aria-labelledby="h-hip">
+    <h2 id="h-hip"><span class="bn">Sección 3</span>¿Qué pasa si falta una hipótesis?</h2>
+    <p class="unlock">Cada dibujo saca una de las hipótesis y deja las otras. La iteración arranca en el punto hueco y hace 14 pasos.</p>
+    <div class="ex fails">
+      <article class="fail-row">
+        <canvas id="cv-f1" class="mini" role="img" aria-label="Telaraña de ln(e^x + 1), que se escapa hacia la derecha"></canvas>
+        <div class="fail-text">
+          <h3><span class="k">Sin un $\alpha &lt; 1$ que sirva para todos</span></h3>
+          <p>$f(x) = \ln(e^x + 1)$ en $\mathbb{R}$ achica distancias: $\lvert f(x) - f(y) \rvert &lt; \lvert x - y \rvert$ si <span class="nw">$x \ne y$.</span> Pero no es una <span class="ref" tabindex="0" data-ref="contraccion">contracción</span>, porque $f'(x) \to 1$ y ningún $\alpha &lt; 1$ sirve para todos los pares.</p>
+          <p>No hay punto fijo. El gráfico queda siempre arriba de la diagonal, y la órbita se va a $+\infty$ con pasos cada vez más cortos.</p>
+          <p class="src">Ejemplo 29-10/2 de <code>ejemplos/p5.typ</code>. Lo mismo pasa con $x^2$ en el Ejemplo 6.24 b).</p>
+        </div>
+      </article>
+      <article class="fail-row">
+        <canvas id="cv-f2" class="mini" role="img" aria-label="Telaraña de x/3 en (0,1], que converge a 0, punto que no está en M"></canvas>
+        <div class="fail-text">
+          <h3><span class="k">$M$ no completo</span></h3>
+          <p>$f(x) = x/3$ en $M = (0, 1]$ es <span class="ref" tabindex="0" data-ref="contraccion">contracción</span> con <span class="nw">$\alpha = 1/3$.</span> La órbita es <span class="ref" tabindex="0" data-ref="cauchy">de Cauchy</span>, como dice la demostración, pero su límite $0$ no está en <span class="nw">$M$.</span></p>
+          <p>Sin <span class="ref" tabindex="0" data-ref="completo">completitud</span> la sucesión no tiene dónde converger.</p>
+          <p class="src">Ejercicio 16 de la Práctica 5, que lo plantea en <span class="nw">$\mathbb{R} \setminus \{0\}$.</span></p>
+        </div>
+      </article>
+      <article class="fail-row">
+        <canvas id="cv-f3" class="mini" role="img" aria-label="Telaraña de 1 - x en [0,1], que oscila entre dos valores"></canvas>
+        <div class="fail-text">
+          <h3><span class="k">$\alpha = 1$</span></h3>
+          <p>$f(x) = 1 - x$ en $[0, 1]$ es una <span class="ref" tabindex="0" data-ref="isometria">isometría</span>. Tiene un punto fijo, <span class="nw">$x = 1/2$,</span> pero el algoritmo no lo encuentra.</p>
+          <p>La órbita salta para siempre entre $x_0$ y <span class="nw">$1 - x_0$,</span> siempre a la misma distancia.</p>
+          <p class="src">Con <span class="nw">$\alpha = 1$,</span> la cota $d(x_k, x_{k+1}) \le \alpha^k d(x_0, x_1)$ no dice nada.</p>
+        </div>
+      </article>
+      <article class="fail-row">
+        <canvas id="cv-f4" class="mini" role="img" aria-label="Telaraña de x/2 + 1, que sale del cuadrado [0,1] por [0,1]"></canvas>
+        <div class="fail-text">
+          <h3><span class="k">$f$ no manda $M$ en $M$</span></h3>
+          <p>$f(x) = x/2 + 1$ en $M = [0, 1]$ cumple la desigualdad con <span class="nw">$\alpha = 1/2$,</span> pero <span class="nw">$f(1) = 3/2 \notin M$.</span></p>
+          <p>La órbita sale de la caja sombreada en el primer paso y converge a <span class="nw">$2$,</span> que no está en <span class="nw">$M$.</span></p>
+          <p class="src">Por eso el enunciado pide <span class="nw">$f : M \to M$:</span> si no, no se puede iterar.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>Fuente: Teorema 6.25 y Observación 6.26 de las notas de la materia (<code>apuntes-typst/apuntes.typ</code>). Las funciones de ejemplo de las secciones 1 y 2 son del agente. Los números de la tabla se calculan en el navegador con doble precisión.</footer>
+</main>
+
+<div id="popup" role="tooltip" hidden></div>
+
+<div class="offscreen" id="refs" aria-hidden="true">
+  <div data-key="banach">
+    <div class="pop-title">Teorema 6.25 · Punto fijo de Banach</div>
+    <p>Sea $(M, d)$ un espacio métrico completo y sea $f : M \to M$ una contracción. Entonces $f$ tiene un único punto fijo.</p>
+    <p class="psrc">Así se ven los popups: el enunciado tal como está en <code>apuntes.typ</code>.</p>
+  </div>
+  <div data-key="puntofijo">
+    <div class="pop-title">Definición 6.20 · Punto fijo</div>
+    <p>Sea $(M, d)$ un espacio métrico y $f : M \to M$ una función. Un punto $x_0 \in M$ se dice <i>punto fijo</i> de $f$ si <span class="nw">$f(x_0) = x_0$.</span></p>
+  </div>
+  <div data-key="contraccion">
+    <div class="pop-title">Definición 6.22 · Contracción</div>
+    <p>Sea $f : (M, d) \to (N, d')$ una función. Decimos que $f$ es una <i>contracción</i> si existe $0 &lt; \alpha &lt; 1$ tal que $$d'(f(x), f(y)) \le \alpha\, d(x, y) \quad \text{para todo } x, y \in M.$$</p>
+    <p class="psrc">El $\alpha$ es el mismo para todos los pares: por eso «achicar distancias» (<span class="nw">$d(f(x), f(y)) &lt; d(x, y)$)</span> no alcanza.</p>
+  </div>
+  <div data-key="completo">
+    <div class="pop-title">Definición 4.55 · Espacio métrico completo</div>
+    <p>Sea $(M, d)$ un espacio métrico. Decimos que $M$ es <b>completo</b> si toda sucesión de Cauchy tiene límite en <span class="nw">$M$.</span></p>
+    <p class="psrc">En la demostración se usa una sola vez: para pasar de «$(x_n)$ es de Cauchy» a «existe $x^* = \lim x_n$ en $M$».</p>
+  </div>
+  <div data-key="cauchy">
+    <div class="pop-title">Definición 4.51 · Sucesión de Cauchy</div>
+    <p>Decimos que $(x_n)_{n \in \mathbb{N}} \subseteq M$ es <i>de Cauchy</i> si para todo $\varepsilon &gt; 0$ existe un $n_0 \in \mathbb{N}$ tal que $$d(x_n, x_m) &lt; \varepsilon \quad \text{para todo } n, m \ge n_0.$$</p>
+    <p class="psrc">Hay que acotar $d(x_n, x_m)$ para <i>cualquier</i> par de índices grandes, no sólo para consecutivos: por eso la demostración suma el telescopio.</p>
+  </div>
+  <div data-key="convergencia">
+    <div class="pop-title">Definición 4.42 · Convergencia</div>
+    <p>$(x_n)$ <b>converge</b> a $x \in M$ (<span class="nw">$x_n \to x$)</span> si para todo $\varepsilon &gt; 0$ existe $n_0 \in \mathbb{N}$ tal que $d(x_n, x) &lt; \varepsilon$ para todo <span class="nw">$n \ge n_0$.</span></p>
+  </div>
+  <div data-key="triangular">
+    <div class="pop-title">Definición 4.1 (iv) · Desigualdad triangular</div>
+    <p>$d(x, z) \le d(x, y) + d(y, z)$ para todo <span class="nw">$x, y, z \in M$.</span></p>
+    <p class="psrc">Aplicada $k - 1$ veces: <span class="nw">$d(x_n, x_{n+k}) \le d(x_n, x_{n+1}) + \dots + d(x_{n+k-1}, x_{n+k})$.</span></p>
+  </div>
+  <div data-key="geometrica">
+    <div class="pop-title">Serie geométrica</div>
+    <p>Si <span class="nw">$0 \le \alpha &lt; 1$,</span> entonces <span class="nw">$\displaystyle\sum_{i=0}^{\infty} \alpha^i = \frac{1}{1 - \alpha}$,</span> y como los términos son positivos, toda suma parcial es <span class="nw">$\le \dfrac{1}{1-\alpha}$.</span></p>
+    <p class="psrc">No tiene número en <code>apuntes.typ</code>: la usa la demostración del Teorema 6.25 y la justifica su nota final.</p>
+  </div>
+  <div data-key="obs626">
+    <div class="pop-title">Observación 6.26 · Estimación del error</div>
+    <p>Si <span class="nw">$m &gt; n$,</span> <span class="nw">$d(x_n, x_m) \le \dfrac{\alpha^n}{1 - \alpha}\, d(x_1, x_0)$.</span> Tomando límite en <span class="nw">$m \to \infty$:</span> $$d(x_n, x^*) \le \frac{\alpha^n}{1 - \alpha}\, d(x_1, x_0),$$ con $\alpha, x_0, x_1$ valores que conocemos desde que comenzamos el algoritmo.</p>
+    <p class="psrc">Es la columna 6 de la tabla y la recta naranja del gráfico logarítmico.</p>
+  </div>
+  <div data-key="obs623">
+    <div class="pop-title">Observación 6.23 · Una contracción es uniformemente continua</div>
+    <p>Por definición, una contracción es siempre una función Lipschitz (con constante <span class="nw">$\alpha$)</span> y por lo tanto es uniformemente continua.</p>
+    <p class="psrc">Lipschitz $\Rightarrow$ uniformemente continua $\Rightarrow$ continua (Observación 5.28).</p>
+  </div>
+  <div data-key="contsuc">
+    <div class="pop-title">Teorema 5.7 · Continuidad por sucesiones</div>
+    <p>$f : (M, d) \to (N, d')$ es continua en $x$ si y sólo si para toda sucesión $(x_n) \subseteq M$ con $x_n \to x$ se tiene que <span class="nw">$f(x_n) \to f(x)$.</span></p>
+    <p class="psrc">Acá con <span class="nw">$x = x^*$:</span> como <span class="nw">$x_n \to x^*$,</span> <span class="nw">$f(x_n) = x_{n+1} \to f(x^*)$.</span></p>
+  </div>
+  <div data-key="unicidad">
+    <div class="pop-title">Unicidad del límite</div>
+    <p>Si $x_n \to x$ y $x_n \to y$ en un espacio métrico, entonces <span class="nw">$x = y$:</span> para todo <span class="nw">$\varepsilon &gt; 0$,</span> $d(x, y) \le d(x, x_n) + d(x_n, y) &lt; \varepsilon$ con $n$ grande.</p>
+    <p class="psrc"><code>apuntes.typ</code> la enuncia para $\mathbb{R}$ (Proposición 5); en un espacio métrico la prueba es la misma con $d$ en lugar de <span class="nw">$\lvert \cdot \rvert$.</span> Se usa con <span class="nw">$(x_{n+1})$,</span> que tiende a $x^*$ y a <span class="nw">$f(x^*)$.</span></p>
+  </div>
+  <div data-key="valormedio">
+    <div class="pop-title">Derivada acotada implica Lipschitz</div>
+    <p>Si $f : \mathbb{R} \to \mathbb{R}$ es derivable, por el teorema del valor medio $\lvert f(x) - f(y) \rvert = \lvert f'(z) \rvert\, \lvert x - y \rvert$ con $z$ entre $x$ e <span class="nw">$y$.</span> Si <span class="nw">$\lvert f' \rvert \le C$,</span> $f$ es Lipschitz de constante <span class="nw">$C$.</span></p>
+    <p class="psrc">Observación sin número, después de la Definición 5.24. Con $C &lt; 1$ y <span class="nw">$f(M) \subseteq M$,</span> es una contracción.</p>
+  </div>
+  <div data-key="isometria">
+    <div class="pop-title">Definición 5.33 · Isometría</div>
+    <p>$f : (M, d) \to (N, d')$ es una <i>isometría</i> si $d'(f(x), f(y)) = d(x, y)$ para todo <span class="nw">$x, y \in M$.</span></p>
+    <p class="psrc">Es Lipschitz de constante <span class="nw">$1$:</span> el caso límite <span class="nw">$\alpha = 1$,</span> que la definición de contracción excluye.</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const val = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fx = (v, d = 4) => (Math.abs(v) < 0.5 * Math.pow(10, -d) ? 0 : v).toFixed(d).replace("-", "−");
+  const fe = (v) => {
+    if (v === 0) return "0";
+    if (v >= 1e-3) return v.toFixed(4);
+    const [m, e] = v.toExponential(2).split("e");
+    return m + "·10" + String(+e).replace("-", "⁻").replace(/\d/g, (c) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[c]);
+  };
+  const SUB = "₀₁₂₃₄₅₆₇₈₉";
+  const sub = (n) => String(n).replace(/\d/g, (c) => SUB[c]);
+
+  let C = {};
+  function colors() {
+    const cs = getComputedStyle(document.documentElement), g = (k) => cs.getPropertyValue(k).trim();
+    C = { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), accent: g("--accent"), band: g("--band"), area: g("--area"),
+          seq2: g("--seq2"), seq3: g("--seq3"), seq4: g("--seq4"), ok: g("--ok"), fail: g("--fail"), bg: g("--bg"), panel: g("--panel"),
+          mono: g("--font-mono"), ui: g("--font-ui") };
+  }
+  // Ajusta el canvas a su tamaño en pantalla; devuelve contexto y medidas en px CSS.
+  function setup(cv) {
+    const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    return { ctx, w, h };
+  }
+  function frame(w, h, pad, xr, yr) {
+    const W = w - pad.l - pad.r, H = h - pad.t - pad.b;
+    return {
+      sx: (x) => pad.l + (x - xr[0]) / (xr[1] - xr[0]) * W,
+      sy: (y) => pad.t + H - (y - yr[0]) / (yr[1] - yr[0]) * H,
+      ix: (px) => xr[0] + (px - pad.l) / W * (xr[1] - xr[0]),
+      iy: (py) => yr[0] + (pad.t + H - py) / H * (yr[1] - yr[0]),
+      pad, W, H,
+    };
+  }
+  function dot(ctx, x, y, r, fill, stroke) {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI);
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke(); }
+  }
+
+  // Telaraña genérica (secciones 1 y 3).
+  function cobweb(ctx, F, o) {
+    const { f, xr, yr, x0, steps, box, fixed, holeAt, curStep } = o;
+    const { sx, sy, pad, W, H } = F;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(pad.l, pad.t, W, H); ctx.clip();
+    if (box) {
+      ctx.fillStyle = C.band; ctx.strokeStyle = C.rule; ctx.lineWidth = 1;
+      ctx.fillRect(sx(box[0]), sy(box[1]), sx(box[1]) - sx(box[0]), sy(box[0]) - sy(box[1]));
+      ctx.strokeRect(sx(box[0]), sy(box[1]), sx(box[1]) - sx(box[0]), sy(box[0]) - sy(box[1]));
+    }
+    // ejes
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 1;
+    ctx.beginPath();
+    if (yr[0] <= 0 && yr[1] >= 0) { ctx.moveTo(sx(xr[0]), sy(0)); ctx.lineTo(sx(xr[1]), sy(0)); }
+    if (xr[0] <= 0 && xr[1] >= 0) { ctx.moveTo(sx(0), sy(yr[0])); ctx.lineTo(sx(0), sy(yr[1])); }
+    ctx.stroke();
+    // diagonal
+    ctx.setLineDash([5, 4]); ctx.strokeStyle = C.muted; ctx.beginPath();
+    const lo = Math.max(xr[0], yr[0]), hi = Math.min(xr[1], yr[1]);
+    ctx.moveTo(sx(lo), sy(lo)); ctx.lineTo(sx(hi), sy(hi)); ctx.stroke(); ctx.setLineDash([]);
+    // gráfico de f
+    ctx.strokeStyle = C.accent; ctx.lineWidth = 2.2; ctx.beginPath();
+    const d = o.dom || xr;
+    for (let i = 0; i <= 240; i++) {
+      const x = d[0] + (d[1] - d[0]) * i / 240, y = f(x);
+      i ? ctx.lineTo(sx(x), sy(y)) : ctx.moveTo(sx(x), sy(y));
+    }
+    ctx.stroke();
+    // telaraña
+    let x = x0;
+    const pts = [x0];
+    ctx.lineWidth = 1.4;
+    for (let k = 0; k < steps; k++) {
+      const y = f(x);
+      ctx.strokeStyle = C.seq2; ctx.globalAlpha = curStep !== undefined && k === curStep - 1 ? 1 : 0.75;
+      ctx.beginPath();
+      ctx.moveTo(sx(x), sy(k === 0 ? (yr[0] <= 0 && yr[1] >= 0 ? 0 : yr[0]) : x));
+      ctx.lineTo(sx(x), sy(y)); ctx.lineTo(sx(y), sy(y)); ctx.stroke();
+      x = y; pts.push(x);
+    }
+    ctx.globalAlpha = 1;
+    if (fixed !== undefined && fixed !== null) dot(ctx, sx(fixed), sy(fixed), 5, C.ok);
+    if (holeAt !== undefined) dot(ctx, sx(holeAt), sy(holeAt), 5, C.panel, C.fail);
+    ctx.restore();
+    // puntos sobre el eje x
+    const y0 = yr[0] <= 0 && yr[1] >= 0 ? sy(0) : sy(yr[0]);
+    pts.forEach((p, k) => {
+      if (p < xr[0] || p > xr[1]) return;
+      const last = k === pts.length - 1;
+      dot(ctx, sx(p), y0, k === 0 ? 4.5 : last ? 4 : 2.6, k === 0 ? C.panel : last ? C.seq2 : C.seq2, k === 0 ? C.seq2 : null);
+    });
+    return pts;
+  }
+  function ticks(ctx, F, xs, ys, xlab = "x", ylab = "y") {
+    const { sx, sy, pad, W, H } = F;
+    ctx.fillStyle = C.muted; ctx.font = `11px ${C.mono}`;
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    xs.forEach(([v, s]) => ctx.fillText(s, sx(v), pad.t + H + 5));
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    ys.forEach(([v, s]) => ctx.fillText(s, pad.l - 6, sy(v)));
+    ctx.font = `italic 12px ${C.mono}`; ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+    ctx.fillText(xlab, pad.l + W, pad.t + H - 3);
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText(ylab, pad.l + 4, pad.t + 2);
+  }
+
+  /* ---------- Sección 1 ---------- */
+  const S = { fn: "cos", a: 0.8, x0: 0.05, n: 4, eps: 1e-4 };
+  const PRESETS = {
+    cos: { f: Math.cos, alpha: Math.sin(1),
+      why: "En [0, 1], |f′(x)| = |sen x| ≤ sen 1, así que α = sen 1 ≈ 0.841. Además cos manda [0, 1] en [cos 1, 1] ⊂ [0, 1]." },
+    cuad: { f: (x) => (x * x + 1) / 4, alpha: 0.5,
+      why: "f′(x) = x/2 ≤ 1/2 en [0, 1], así que α = 1/2, y f manda [0, 1] en [1/4, 1/2]. El punto fijo es 2 − √3 ≈ 0.268." },
+    afin: null,
+  };
+  function current() {
+    if (S.fn === "afin") {
+      const a = S.a;
+      return { f: (x) => a * x + (1 - a) / 2, alpha: Math.abs(a),
+        why: `Pendiente a = ${fx(a, 2)}: α = |a| = ${fx(Math.abs(a), 2)} y el punto fijo es 1/2. Con a < 0 la telaraña es una espiral; con a > 0, una escalera.` };
+    }
+    return PRESETS[S.fn];
+  }
+  function compute() {
+    const P = current();
+    let xs = [S.x0];
+    for (let k = 0; k < 21; k++) xs.push(P.f(xs[k]));
+    let z = S.x0;
+    for (let k = 0; k < 4000; k++) z = P.f(z);
+    return { ...P, xs, xstar: z, d01: Math.abs(xs[1] - xs[0]) };
+  }
+
+  function drawWeb() {
+    const R = compute(), cv = $("cv-web"), { ctx, w, h } = setup(cv);
+    const F = frame(w, h, { l: 34, r: 12, t: 12, b: 26 }, [0, 1], [0, 1]);
+    cv._F = F;
+    const pts = cobweb(ctx, F, { f: R.f, xr: [0, 1], yr: [0, 1], x0: S.x0, steps: S.n, fixed: R.xstar, curStep: S.n });
+    ticks(ctx, F, [[0, "0"], [0.5, "0.5"], [1, "1"]], [[0.5, "0.5"], [1, "1"]]);
+    // etiqueta de x*
+    ctx.fillStyle = C.ok; ctx.font = `600 12px ${C.ui}`; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("x*", F.sx(R.xstar) + 7, F.sy(R.xstar) - 4);
+    const xn = R.xs[S.n];
+    $("cap-web").textContent = `Telaraña de ${S.n} pasos desde x₀ = ${fx(S.x0, 3)}. El punto verde es el punto fijo x* ≈ ${fx(R.xstar, 6)}; los puntos naranjas sobre el eje son x₀, x₁, …, x${sub(S.n)}.`;
+    const err = Math.abs(xn - R.xstar), bound = Math.pow(R.alpha, S.n) / (1 - R.alpha) * R.d01;
+    $("rd-web").innerHTML =
+      `<dt>α</dt><dd>${fx(R.alpha, 4)}</dd>` +
+      `<dt>x${sub(S.n)}</dt><dd>${fx(xn, 8)}</dd>` +
+      `<dt>x*</dt><dd>${fx(R.xstar, 8)}</dd>` +
+      `<dt>error real</dt><dd>${fe(err)}</dd>` +
+      `<dt>cota 6.26</dt><dd class="${err <= bound + 1e-15 ? "good" : "bad"}">${fe(bound)} ${err <= bound + 1e-15 ? "✓ error ≤ cota" : "✗"}</dd>`;
+    return R;
+  }
+
+  function drawLog(R) {
+    const cv = $("cv-log"), { ctx, w, h } = setup(cv);
+    const N = 20, ymin = -10, ymax = 1;
+    const F = frame(w, h, { l: 44, r: 12, t: 10, b: 24 }, [0, N], [ymin, ymax]);
+    const L = (v) => Math.max(ymin, Math.min(ymax, v > 0 ? Math.log10(v) : ymin));
+    // grilla
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1;
+    for (let e = ymin; e <= ymax; e += 2) { ctx.beginPath(); ctx.moveTo(F.sx(0), F.sy(e)); ctx.lineTo(F.sx(N), F.sy(e)); ctx.stroke(); }
+    // banda de k <= n
+    ctx.fillStyle = C.band; ctx.fillRect(F.sx(0), F.pad.t, F.sx(S.n) - F.sx(0), F.H);
+    // epsilon
+    ctx.strokeStyle = C.fail; ctx.setLineDash([2, 3]); ctx.beginPath();
+    ctx.moveTo(F.sx(0), F.sy(Math.log10(S.eps))); ctx.lineTo(F.sx(N), F.sy(Math.log10(S.eps))); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.fail; ctx.font = `11px ${C.mono}`; ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+    ctx.fillText("ε", F.sx(N) - 2, F.sy(Math.log10(S.eps)) - 2);
+    const line = (fn, color) => {
+      ctx.strokeStyle = color; ctx.lineWidth = 1.6; ctx.setLineDash([6, 4]); ctx.beginPath();
+      for (let k = 0; k <= N; k++) { const y = F.sy(L(fn(k))); k ? ctx.lineTo(F.sx(k), y) : ctx.moveTo(F.sx(k), y); }
+      ctx.stroke(); ctx.setLineDash([]);
+    };
+    const dots = (fn, color, r) => {
+      for (let k = 0; k <= N; k++) { const v = fn(k); if (v <= 0) continue; dot(ctx, F.sx(k), F.sy(L(v)), r, color); }
+    };
+    line((k) => Math.pow(R.alpha, k) * R.d01, C.seq3);
+    line((k) => Math.pow(R.alpha, k) / (1 - R.alpha) * R.d01, C.seq2);
+    dots((k) => Math.abs(R.xs[k + 1] - R.xs[k]), C.seq3, 2.6);
+    dots((k) => Math.abs(R.xs[k] - R.xstar), C.accent, 3);
+    ticks(ctx, F, [[0, "0"], [5, "5"], [10, "10"], [15, "15"], [20, "20"]],
+      [[0, "1"], [-2, "10⁻²"], [-4, "10⁻⁴"], [-6, "10⁻⁶"], [-8, "10⁻⁸"], [-10, "10⁻¹⁰"]], "k", "");
+  }
+
+  function fillTable(R) {
+    let rows = "";
+    for (let k = 0; k <= S.n; k++) {
+      const jump = Math.abs(R.xs[k + 1] - R.xs[k]), geo = Math.pow(R.alpha, k) * R.d01;
+      const err = Math.abs(R.xs[k] - R.xstar), bd = geo / (1 - R.alpha);
+      rows += `<tr${k === S.n ? ' class="cur"' : ""}><td>${k}</td><td>${fx(R.xs[k], 6)}</td>` +
+        `<td class="pair">${fe(jump)}</td><td>${fe(geo)}</td><td class="pair">${fe(err)}</td><td>${fe(bd)}</td></tr>`;
+    }
+    $("tb").innerHTML = rows;
+    const wrap = $("tb").closest(".tbl-wrap"); wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  function fillEps(R) {
+    const eps = S.eps;
+    let n0;
+    if (R.d01 === 0) n0 = 0;
+    else n0 = Math.max(0, Math.floor(Math.log(eps * (1 - R.alpha) / R.d01) / Math.log(R.alpha)) + 1);
+    let first = 0, z = S.x0;
+    while (Math.abs(z - R.xstar) >= eps && first < 5000) { z = R.f(z); first++; }
+    $("rd-eps").innerHTML =
+      `<dt>condición</dt><dd>α^n₀ &lt; (1 − α)·ε / d(x₁, x₀)</dd>` +
+      `<dt>n₀ de la prueba</dt><dd>${n0}</dd>` +
+      `<dt>alcanza en realidad</dt><dd>n = ${first}</dd>` +
+      `<dt>lectura</dt><dd style="font-family:var(--font-body);font-size:0.95rem">${R.d01 === 0 ? "x₀ ya es el punto fijo: d(x₁, x₀) = 0." :
+        `La cota garantiza error &lt; ε desde n₀ = ${n0} sin conocer x*. El error real cruza antes (${first} ≤ ${n0}) porque la cota es para el peor caso.`}</dd>`;
+  }
+
+  function renderRecta() {
+    $("out-a").textContent = fx(S.a, 2);
+    $("out-x0").textContent = fx(S.x0, 3);
+    $("out-n").textContent = S.n;
+    $("row-a").hidden = S.fn !== "afin";
+    const R = drawWeb();
+    $("fn-why").textContent = R.why;
+    drawLog(R); fillTable(R); fillEps(R);
+  }
+
+  document.querySelectorAll('input[name="fn"]').forEach((el) => el.addEventListener("change", () => { S.fn = val("fn"); renderRecta(); }));
+  document.querySelectorAll('input[name="eps"]').forEach((el) => el.addEventListener("change", () => { S.eps = +val("eps"); renderRecta(); }));
+  $("sl-a").addEventListener("input", (e) => { S.a = +e.target.value; if (Math.abs(S.a) < 1e-9) S.a = 0; renderRecta(); });
+  $("sl-x0").addEventListener("input", (e) => { S.x0 = +e.target.value; renderRecta(); });
+  $("sl-n").addEventListener("input", (e) => { S.n = +e.target.value; renderRecta(); });
+  const setN = (n) => { S.n = Math.max(0, Math.min(20, n)); $("sl-n").value = S.n; renderRecta(); };
+  $("bt-step").addEventListener("click", () => setN(S.n + 1));
+  $("bt-reset").addEventListener("click", () => { stop(); setN(0); });
+  let timer = null;
+  const stop = () => { if (timer) { clearInterval(timer); timer = null; $("bt-play").textContent = "Reproducir"; } };
+  $("bt-play").addEventListener("click", () => {
+    if (timer) return stop();
+    if (S.n >= 20) setN(0);
+    $("bt-play").textContent = "Pausa";
+    timer = setInterval(() => { if (S.n >= 20) return stop(); setN(S.n + 1); }, reduced ? 900 : 550);
+  });
+  // arrastrar para mover x0
+  const web = $("cv-web");
+  let dragging = false;
+  const moveX0 = (ev) => {
+    const F = web._F; if (!F) return;
+    const r = web.getBoundingClientRect();
+    const x = Math.max(0, Math.min(1, F.ix(ev.clientX - r.left)));
+    S.x0 = Math.round(x * 200) / 200; $("sl-x0").value = S.x0; renderRecta();
+  };
+  web.addEventListener("pointerdown", (ev) => { dragging = true; web.setPointerCapture(ev.pointerId); moveX0(ev); });
+  web.addEventListener("pointermove", (ev) => { if (dragging) moveX0(ev); });
+  web.addEventListener("pointerup", () => { dragging = false; });
+  web.addEventListener("pointercancel", () => { dragging = false; });
+
+  /* ---------- Sección 2 ---------- */
+  const g = (p) => [0.5 * Math.cos(p[1]) - 0.2, 0.5 * Math.sin(p[0]) + 0.3];
+  const ALPHA2 = 0.5, VIEW = [-2.3, 2.3];
+  let P2 = [0.3, 0.3];
+  for (let i = 0; i < 200; i++) P2 = g(P2);
+  const grid = [];
+  for (let i = 0; i <= 24; i++) for (let j = 0; j <= 24; j++) grid.push([-2 + 4 * i / 24, -2 + 4 * j / 24]);
+  const Rmax = Math.max(...grid.map((p) => Math.hypot(p[0] - P2[0], p[1] - P2[1])));
+  const clouds = [grid];
+  for (let k = 1; k <= 8; k++) clouds.push(clouds[k - 1].map(g));
+  let orbits = [];
+  let K = 1;
+  const ORB_COLORS = () => [C.seq2, C.seq4, C.seq3, C.fail, C.accent, C.ok];
+
+  function orbitFrom(p) { const o = [p]; for (let i = 0; i < 12; i++) o.push(g(o[o.length - 1])); return o; }
+
+  function drawPlane() {
+    const cv = $("cv-plane"), { ctx, w, h } = setup(cv);
+    const F = frame(w, h, { l: 30, r: 10, t: 10, b: 24 }, VIEW, VIEW);
+    cv._F = F;
+    // ejes
+    ctx.strokeStyle = C.rule; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(F.sx(VIEW[0]), F.sy(0)); ctx.lineTo(F.sx(VIEW[1]), F.sy(0));
+    ctx.moveTo(F.sx(0), F.sy(VIEW[0])); ctx.lineTo(F.sx(0), F.sy(VIEW[1])); ctx.stroke();
+    // cuadrado original
+    ctx.strokeStyle = C.muted; ctx.setLineDash([4, 4]);
+    ctx.strokeRect(F.sx(-2), F.sy(2), F.sx(2) - F.sx(-2), F.sy(-2) - F.sy(2)); ctx.setLineDash([]);
+    const px = (F.sx(1) - F.sx(0));
+    // nubes anteriores, tenues
+    for (let k = 0; k <= K; k++) {
+      const cur = k === K;
+      ctx.fillStyle = k === 0 ? C.muted : C.accent;
+      ctx.globalAlpha = cur ? 0.85 : 0.18;
+      const r = cur ? 2 : 1.4;
+      clouds[k].forEach((p) => { ctx.beginPath(); ctx.arc(F.sx(p[0]), F.sy(p[1]), r, 0, 2 * Math.PI); ctx.fill(); });
+    }
+    ctx.globalAlpha = 1;
+    // círculo alpha^K R
+    ctx.strokeStyle = C.seq2; ctx.lineWidth = 1.6; ctx.setLineDash([6, 4]);
+    ctx.beginPath(); ctx.arc(F.sx(P2[0]), F.sy(P2[1]), Math.pow(ALPHA2, K) * Rmax * px, 0, 2 * Math.PI); ctx.stroke(); ctx.setLineDash([]);
+    // órbitas
+    const cols = ORB_COLORS();
+    orbits.forEach((o, i) => {
+      ctx.strokeStyle = cols[i % cols.length]; ctx.lineWidth = 1.5; ctx.beginPath();
+      o.forEach((p, j) => (j ? ctx.lineTo(F.sx(p[0]), F.sy(p[1])) : ctx.moveTo(F.sx(p[0]), F.sy(p[1]))));
+      ctx.stroke();
+      o.forEach((p, j) => dot(ctx, F.sx(p[0]), F.sy(p[1]), j === 0 ? 4 : 2.4, j === 0 ? C.panel : cols[i % cols.length], j === 0 ? cols[i % cols.length] : null));
+    });
+    dot(ctx, F.sx(P2[0]), F.sy(P2[1]), 5, C.ok);
+    ctx.fillStyle = C.ok; ctx.font = `600 12px ${C.ui}`; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("x*", F.sx(P2[0]) + 7, F.sy(P2[1]) - 4);
+    ticks(ctx, F, [[-2, "−2"], [0, "0"], [2, "2"]], [[-2, "−2"], [2, "2"]]);
+
+    const cl = clouds[K];
+    let diam = 0;
+    for (let i = 0; i < cl.length; i += 3) for (let j = i + 1; j < cl.length; j += 3) diam = Math.max(diam, Math.hypot(cl[i][0] - cl[j][0], cl[i][1] - cl[j][1]));
+    const maxd = Math.max(...cl.map((p) => Math.hypot(p[0] - P2[0], p[1] - P2[1])));
+    $("out-k").textContent = K;
+    $("rd-plane").innerHTML =
+      `<dt>x*</dt><dd>(${fx(P2[0], 5)}, ${fx(P2[1], 5)})</dd>` +
+      `<dt>radio αᵏR</dt><dd>${fe(Math.pow(ALPHA2, K) * Rmax)}</dd>` +
+      `<dt>máx d(fᵏ(p), x*)</dt><dd class="good">${fe(maxd)} ✓ ≤ radio</dd>` +
+      `<dt>diámetro de la nube</dt><dd>≈ ${fe(diam)}</dd>`;
+  }
+  $("sl-k").addEventListener("input", (e) => { K = +e.target.value; drawPlane(); });
+  $("bt-orb").addEventListener("click", () => {
+    for (let i = 0; i < 3; i++) orbits.push(orbitFrom([VIEW[0] + Math.random() * 4.4, VIEW[0] + Math.random() * 4.4]));
+    orbits = orbits.slice(-6); drawPlane();
+  });
+  $("bt-clear").addEventListener("click", () => { orbits = []; drawPlane(); });
+  $("cv-plane").addEventListener("pointerdown", (ev) => {
+    const cv = $("cv-plane"), F = cv._F, r = cv.getBoundingClientRect();
+    orbits.push(orbitFrom([F.ix(ev.clientX - r.left), F.iy(ev.clientY - r.top)]));
+    orbits = orbits.slice(-6); drawPlane();
+  });
+  orbits = [orbitFrom([-1.9, 1.7]), orbitFrom([1.8, -1.6])];
+
+  /* ---------- Sección 3 ---------- */
+  function drawFails() {
+    const pad = { l: 26, r: 8, t: 8, b: 20 };
+    {
+      const { ctx, w, h } = setup($("cv-f1"));
+      const F = frame(w, h, pad, [-2, 7], [-2, 7]);
+      cobweb(ctx, F, { f: (x) => Math.log(Math.exp(x) + 1), xr: [-2, 7], yr: [-2, 7], x0: -1.5, steps: 14 });
+      ticks(ctx, F, [[0, "0"], [5, "5"]], [[5, "5"]]);
+    }
+    {
+      const { ctx, w, h } = setup($("cv-f2"));
+      const F = frame(w, h, pad, [-0.1, 1.05], [-0.1, 1.05]);
+      cobweb(ctx, F, { f: (x) => x / 3, xr: [-0.1, 1.05], yr: [-0.1, 1.05], dom: [0, 1], x0: 0.95, steps: 14, box: [0, 1], holeAt: 0 });
+      ticks(ctx, F, [[0, "0"], [1, "1"]], [[1, "1"]]);
+    }
+    {
+      const { ctx, w, h } = setup($("cv-f3"));
+      const F = frame(w, h, pad, [-0.05, 1.05], [-0.05, 1.05]);
+      cobweb(ctx, F, { f: (x) => 1 - x, xr: [-0.05, 1.05], yr: [-0.05, 1.05], dom: [0, 1], x0: 0.15, steps: 14, box: [0, 1], fixed: 0.5 });
+      ticks(ctx, F, [[0, "0"], [0.5, "½"], [1, "1"]], [[1, "1"]]);
+    }
+    {
+      const { ctx, w, h } = setup($("cv-f4"));
+      const F = frame(w, h, pad, [-0.2, 2.4], [-0.2, 2.4]);
+      cobweb(ctx, F, { f: (x) => x / 2 + 1, xr: [-0.2, 2.4], yr: [-0.2, 2.4], dom: [-0.2, 2.4], x0: 0.2, steps: 14, box: [0, 1], holeAt: 2 });
+      ticks(ctx, F, [[0, "0"], [1, "1"], [2, "2"]], [[1, "1"], [2, "2"]]);
+    }
+  }
+
+  // ---------- popups ----------
+  const popup = $("popup");
+  let pinned = null;
+  function showPopup(el) {
+    const src = document.querySelector(`#refs [data-key="${el.dataset.ref}"]`);
+    if (!src) return;
+    popup.innerHTML = src.innerHTML;
+    popup.hidden = false;
+    const r = el.getBoundingClientRect(), pw = popup.offsetWidth, ph = popup.offsetHeight;
+    const px = Math.min(Math.max(16, r.left), window.innerWidth - pw - 16);
+    let py = r.bottom + 8;
+    if (py + ph > window.innerHeight - 12) py = Math.max(12, r.top - ph - 8);
+    popup.style.left = px + "px"; popup.style.top = py + "px";
+  }
+  function hidePopup() { popup.hidden = true; pinned = null; }
+  document.querySelectorAll(".ref").forEach((el) => {
+    el.setAttribute("role", "button");
+    el.addEventListener("mouseenter", () => showPopup(el));
+    el.addEventListener("mouseleave", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("focus", () => showPopup(el));
+    el.addEventListener("blur", () => { if (pinned !== el) hidePopup(); });
+    el.addEventListener("click", (e) => { e.stopPropagation(); if (pinned === el) hidePopup(); else { pinned = el; showPopup(el); } });
+  });
+  document.addEventListener("click", (e) => { if (!popup.contains(e.target)) hidePopup(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hidePopup(); });
+  window.addEventListener("scroll", () => { if (!pinned) hidePopup(); }, { passive: true });
+
+  function renderAll() { colors(); renderRecta(); drawPlane(); drawFails(); }
+  renderAll();
+  let rt = null;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 120); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderAll);
+  new MutationObserver(renderAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderAll);
+})();
+</script>
